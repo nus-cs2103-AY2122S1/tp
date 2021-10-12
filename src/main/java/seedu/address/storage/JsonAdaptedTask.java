@@ -73,7 +73,7 @@ public class JsonAdaptedTask {
 
         final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
 
-        final Task task = new Task(modelName, modelDeadline, modelUniqueId);
+        Task task = new Task(modelName, modelDeadline, modelUniqueId);
         modelUniqueId.setOwner(task);
         return task;
     }

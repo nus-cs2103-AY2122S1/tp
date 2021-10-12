@@ -12,6 +12,18 @@ import seedu.address.model.task.Task;
  */
 public class UniqueId {
     /**
+     * The default owner of {@code UniqueId} that have no owner assigned to it.
+     */
+    private static final HasUniqueId DEFAULT_OWNER = new HasUniqueId() {
+        @Override
+        public UniqueId getId() {
+            return DEFAULT_ID;
+        }
+    };
+
+    public static final UniqueId DEFAULT_ID = UniqueId.generateId("00000000-0000-0000-0000-000000000000");
+
+    /**
      * The owner of the id. It can be a task or a student.
      */
     private HasUniqueId owner;
@@ -24,7 +36,7 @@ public class UniqueId {
     }
 
     private UniqueId(String id) {
-        this.owner = null;
+        this.owner = DEFAULT_OWNER;
         this.id = UUID.fromString(id);
     }
 
@@ -71,9 +83,8 @@ public class UniqueId {
 
         UniqueId otherId = (UniqueId) other;
 
-        if (this.owner == null || otherId.owner == null) {
-            return this.id.equals(otherId.id);
-        }
+        // should not call this.owner.equals(otherId.owner), otherwise it will cause
+        // StackOverflowException when running Task#equals since it also checks if the ids are equal!
         return this.id.equals(otherId.id);
     }
 

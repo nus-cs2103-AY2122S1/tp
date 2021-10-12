@@ -2,11 +2,14 @@ package seedu.address.model.id;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.id.UniqueId.DEFAULT_ID;
 import static seedu.address.testutil.TypicalObjects.ALICE;
 import static seedu.address.testutil.TypicalTasks.REPORT_1;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,6 +43,11 @@ public class UniqueIdTest {
 
         assertEquals(task, taskId.getOwner());
         assertEquals(student, studentId.getOwner());
+
+        // test for DEFAULT_OWNER
+        UniqueId noOnwerId1 = UniqueId.generateId(UUID.randomUUID().toString());
+        UniqueId noOnwerId2 = UniqueId.generateId(UUID.randomUUID().toString());
+        assertEquals(noOnwerId1.getOwner(), noOnwerId2.getOwner());
     }
 
     @Test

@@ -5,10 +5,11 @@ import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Task;
 
+import static seedu.address.model.id.UniqueId.DEFAULT_ID;
+
 public class TaskBuilder {
     public static final String DEFAULT_NAME = "Homework 1";
-    public static final String DEFAULT_DEADLINE = "2000-01-01";
-    public static final String DEFAULT_ID = "00000000-0000-0000-0000-000000000000";
+    public static final String DEFAULT_DEADLINE = "2000-01-01";;
 
     private Name name;
     private Deadline deadline;
@@ -20,7 +21,7 @@ public class TaskBuilder {
     public TaskBuilder() {
         this.name = new Name(DEFAULT_NAME);
         this.deadline = new Deadline(DEFAULT_DEADLINE);
-        this.uniqueId = UniqueId.generateId(DEFAULT_ID);
+        this.uniqueId = DEFAULT_ID;
     }
 
     /**
