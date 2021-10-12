@@ -85,6 +85,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code ids} into a {@code Set<UniqueId>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignedTaskIds(String ... assignedTaskIds) {
+        this.assignedTaskIds = SampleDataUtil.getUniqueIdSet(assignedTaskIds);
+        return this;
+    }
+
+    /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
     public PersonBuilder withAddress(String address) {
