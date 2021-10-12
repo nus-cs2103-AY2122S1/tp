@@ -175,5 +175,19 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
+    /**
+     * Updates {@code model}'s filtered list to show only the persons in {@code persons} in the
+     * {@code model}'s address book.
+     */
+    public static void showPersons(Model model, Person... persons) {
+        final String[] queries = new String[persons.length];
+
+        for (int i = 0; i < persons.length; ++i) {
+            queries[i] = persons[i].getName().fullName.split("\\s+")[0];
+        }
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries)));
+
+        assertEquals(persons.length, model.getFilteredPersonList().size());
+    }
 
 }
