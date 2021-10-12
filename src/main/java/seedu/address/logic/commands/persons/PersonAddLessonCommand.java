@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,7 +20,10 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Person;
 
-public class AddLessonToPersonCommand extends Command {
+/**
+ * Adds a lesson to a specified person in the address book
+ */
+public class PersonAddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "-al";
 
@@ -31,7 +35,7 @@ public class AddLessonToPersonCommand extends Command {
             + "[" + PREFIX_END_TIME + "HH:MM END TIME] "
             + "[" + PREFIX_DAY + "DAY] ";
 
-    public static final String OVERLAPPING_LESSON = "Lesson overlaps with current lessons!";
+    public static final String CANNOT_ATTEND = "Lesson overlaps with current lessons!";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_SUCCESS = "Lesson added: %1$s";
 
@@ -39,12 +43,12 @@ public class AddLessonToPersonCommand extends Command {
     private final Lesson lessonToAdd;
 
     /**
-     * Constructs a {@code AddLessonToPersonCommand}
+     * Constructs a {@code PersonAddLessonCommand}
      *
      * @param index of the person in the filtered person list to edit
      * @param lessonToAdd lesson to add to the person at index
      */
-    public AddLessonToPersonCommand(Index index, Lesson lessonToAdd) {
+    public PersonAddLessonCommand(Index index, Lesson lessonToAdd) {
         requireNonNull(index);
         requireNonNull(lessonToAdd);
 
@@ -62,11 +66,12 @@ public class AddLessonToPersonCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        NoOverlapLessonList newList = personToEdit.getLessonsList();
 
-        if (newList.doesLessonOverlap(lessonToAdd)) {
-            throw new CommandException(OVERLAPPING_LESSON);
+        if (!personToEdit.canAttendLesson(lessonToAdd)) {
+            throw new CommandException(CANNOT_ATTEND);
         }
+
+        NoOverlapLessonList newList = personToEdit.getLessonsList();
         newList = newList.addLesson(lessonToAdd);
         Person newPerson = personToEdit.updateLessonsList(newList);
 
@@ -79,4 +84,20 @@ public class AddLessonToPersonCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPerson));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof PersonAddLessonCommand)) {
+            return false;
+        }
+        PersonAddLessonCommand that = (PersonAddLessonCommand) o;
+        return index.equals(that.index) && lessonToAdd.equals(that.lessonToAdd);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, lessonToAdd);
+    }
 }

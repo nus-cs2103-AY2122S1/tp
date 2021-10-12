@@ -10,8 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.TUESDAY;
 import static seedu.address.logic.parser.CliSyntax.WEDNESDAY;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -48,6 +50,25 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a space separated string into a list of Indexes
+     * @param oneBasedindexes spaced separated string of valid Index nums
+     * @return a List of Indexes specified by the input
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseAllIndex(String oneBasedindexes) throws ParseException {
+        String trimmedIndexes = oneBasedindexes.trim();
+        String[] splittedIndexes = trimmedIndexes.split(" ");
+        List<Index> list = new ArrayList<>(splittedIndexes.length);
+        for (int i = 0; i < splittedIndexes.length; i++) {
+            if (!StringUtil.isNonZeroUnsignedInteger(splittedIndexes[i])) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            list.add(Index.fromOneBased(Integer.parseInt(splittedIndexes[i])));
+        }
+        return list;
     }
 
     /**
@@ -176,7 +197,7 @@ public class ParserUtil {
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         subject = subject.trim();
-        if (!Subject.isValidName(subject)) {
+        if (!Subject.isValidSubject(subject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
         return new Subject(subject);

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessonsList = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -39,7 +41,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("uniqueId") String uniqueId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("lessonsList") List<JsonAdaptedLesson> lessonsList) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.phone = phone;
@@ -47,6 +50,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (lessonsList != null) {
+            this.lessonsList.addAll(lessonsList);
         }
     }
 
@@ -61,6 +67,9 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        lessonsList.addAll(source.getLessonsList().getLessons().stream()
+                .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
     }
 
@@ -108,7 +117,17 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        final NoOverlapLessonList lessonsList = new NoOverlapLessonList();
+
+        final List<Lesson> modelLessonsList = new ArrayList<>();
+        for (JsonAdaptedLesson l : lessonsList) {
+            modelLessonsList.add(l.toModelType());
+        }
+
+        if (NoOverlapLessonList.doAnyLessonsOverlap(modelLessonsList)) {
+            throw new IllegalValueException(NoOverlapLessonList.LESSON_OVERLAP);
+        }
+
+        NoOverlapLessonList lessonsList = NoOverlapLessonList.of(modelLessonsList);
 
         if (uniqueId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
