@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.Model.displayType;
+import seedu.address.model.Model.DisplayType;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
@@ -39,7 +39,7 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
-    public displayType getDisplayType() {
+    public DisplayType getDisplayType() {
         return model.getDisplayType();
     }
 

@@ -3,36 +3,43 @@
   "students" : [ {
     "name" : "Alice Pauline",
     "email" : "alice@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ "owesMoney", "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   }, {
     "name" : "George Best",
     "email" : "anna@example.com",
+    "studentNumber" : "A0000000B",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   } ],

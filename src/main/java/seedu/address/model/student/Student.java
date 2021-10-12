@@ -18,6 +18,7 @@ public class Student {
     // Identity fields
     private final Name name;
     private final Email email;
+    private final StudentNumber studentNumber;
 
     // Data fields
     private final Attendance attendance;
@@ -28,10 +29,11 @@ public class Student {
      * Every field must be present and not null.
      * Constructor for a new Person object
      */
-    public Student(Name name, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, email, tags);
+    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags) {
+        requireAllNonNull(name, email, studentNumber, tags);
         this.name = name;
         this.email = email;
+        this.studentNumber = studentNumber;
         this.tags.addAll(tags);
         this.attendance = new Attendance();
         this.participation = new Participation();
@@ -40,10 +42,11 @@ public class Student {
     /**
      * Constructor for a re-stored Person object
      */
-    public Student(Name name, Email email, Set<Tag> tags, Attendance attendance) {
-        requireAllNonNull(name, email, tags, attendance);
+    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags, Attendance attendance) {
+        requireAllNonNull(name, email, studentNumber, tags, attendance);
         this.name = name;
         this.email = email;
+        this.studentNumber = studentNumber;
         this.tags.addAll(tags);
         this.attendance = attendance;
         this.participation = new Participation();
@@ -55,6 +58,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public StudentNumber getStudentNumber() {
+        return studentNumber;
     }
 
     public Attendance getAttendance() {
@@ -103,6 +110,7 @@ public class Student {
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getEmail().equals(getEmail())
+                && otherStudent.getStudentNumber().equals((getStudentNumber()))
                 && otherStudent.getTags().equals(getTags())
                 && otherStudent.getAttendance().equals(getAttendance());
     }
@@ -110,7 +118,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, attendance);
+        return Objects.hash(name, email, tags, attendance, studentNumber);
     }
 
     @Override
@@ -119,6 +127,8 @@ public class Student {
         builder.append(getName())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Student Number: ")
+                .append(getStudentNumber())
                 .append("; Attendance: ")
                 .append(getAttendance())
                 .append("; Participation: ")

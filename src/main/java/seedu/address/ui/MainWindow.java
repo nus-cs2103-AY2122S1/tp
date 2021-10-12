@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import static seedu.address.model.Model.displayType.STUDENTS;
-import static seedu.address.model.Model.displayType.TASKS;
+import static seedu.address.model.Model.DisplayType.STUDENTS;
+import static seedu.address.model.Model.DisplayType.TASKS;
 
 import java.util.logging.Logger;
 

@@ -2,11 +2,13 @@
   "students": [ {
     "name": "Alice Pauline",
     "email": "alice@example.com",
+    "studentNumber": "A0000000B",
     "tagged": [ "friends" ],
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   }, {
     "name": "Alice Pauline",
     "email": "pauline@example.com",
+    "studentNumber": "A0000000B",
     "tagged": [ "friends" ],
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
