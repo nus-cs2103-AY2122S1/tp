@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getWeeklyTaskList() {
+        return model.getWeeklyTaskList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getUniFyFilePath();
     }

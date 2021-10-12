@@ -12,6 +12,7 @@ import javafx.scene.layout.Region;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.UniFy;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.TaskContainsDatePredicate;
 
 
 public class DailyPanel extends UiPart<Region> {
@@ -34,7 +35,7 @@ public class DailyPanel extends UiPart<Region> {
         // create new task list here based on date
         // add a taskList make operation
         // below is placeholder
-        taskListView.setItems(dailyTaskList);
+        taskListView.setItems(dailyTaskList.filtered(new TaskContainsDatePredicate(date)));
         taskListView.setCellFactory(listView -> new DailyPanel.DailyViewCell());
     }
 

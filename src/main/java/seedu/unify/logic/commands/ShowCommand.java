@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
+import seedu.unify.model.task.WeeklyTracker;
 
 /**
  * Adds a task to the Uni-Fy app.
@@ -18,7 +19,7 @@ public class ShowCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "1";
 
-    public static final String MESSAGE_SUCCESS = "Week X is shown";
+    public static final String MESSAGE_SUCCESS = "Week %s is shown";
     public static final String MESSAGE_DUPLICATE_TASK = "This Week is already being shown";
 
     private final int weekNumber;
@@ -33,7 +34,9 @@ public class ShowCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        WeeklyTracker.setWeek(weekNumber);
+        model.updateWeeklyTaskList(weekNumber);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, String.valueOf(weekNumber)));
     }
 
     @Override
