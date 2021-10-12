@@ -41,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setNationality(person.getNationality());
         descriptor.setTutorialGroup(person.getTutorialGroup());
         descriptor.setSocialHandle(person.getSocialHandle());
+        descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }
 
