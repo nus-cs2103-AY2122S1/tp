@@ -15,10 +15,8 @@ public class Status {
         FINISHED
     }
 
-    public static final String[] VALID_STATUS_STRING = {"towatch", "watching", "finished"};
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Status should only be one of 'towatch', 'watching' or 'finished'";
+    public static final String[] VALID_STATUS_STRING = {"towatch", "t", "watching", "w", "finished", "f"};
+    public static final String MESSAGE_CONSTRAINTS = "Status should only be one of 'towatch', 'watching' or 'finished'";
 
     public final WatchStatus status;
 
@@ -51,9 +49,9 @@ public class Status {
         case TOWATCH:
             return VALID_STATUS_STRING[0];
         case WATCHING:
-            return VALID_STATUS_STRING[1];
-        case FINISHED:
             return VALID_STATUS_STRING[2];
+        case FINISHED:
+            return VALID_STATUS_STRING[4];
         default:
             assert false : "Invalid watch status";
             return null;
@@ -69,10 +67,13 @@ public class Status {
 
     private WatchStatus parseWatchStatus(String status) {
         switch(status.toLowerCase()) {
+        case "t":
         case "towatch":
             return WatchStatus.TOWATCH;
+        case "w":
         case "watching":
             return WatchStatus.WATCHING;
+        case "f":
         case "finished":
             return WatchStatus.FINISHED;
         default:

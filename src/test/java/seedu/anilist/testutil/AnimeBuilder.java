@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.tag.Tag;
 import seedu.anilist.model.util.SampleDataUtil;
 
@@ -14,16 +15,17 @@ import seedu.anilist.model.util.SampleDataUtil;
 public class AnimeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
 
     private Name name;
     private Set<Tag> tags;
+    private Status status;
 
     /**
      * Creates a {@code AnimeBuilder} with the default details.
      */
     public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
+        status = new Status("watching");
         tags = new HashSet<>();
     }
 
@@ -32,6 +34,7 @@ public class AnimeBuilder {
      */
     public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
+        status = animeToCopy.getStatus();
         tags = new HashSet<>(animeToCopy.getTags());
     }
 
@@ -44,6 +47,14 @@ public class AnimeBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Anime} that we are building.
+     */
+    public AnimeBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Anime} that we are building.
      */
     public AnimeBuilder withTags(String ... tags) {
@@ -52,7 +63,7 @@ public class AnimeBuilder {
     }
 
     public Anime build() {
-        return new Anime(name, tags);
+        return new Anime(name, status, tags);
     }
 
 }
