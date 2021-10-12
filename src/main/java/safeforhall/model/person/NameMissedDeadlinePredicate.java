@@ -19,7 +19,7 @@ public class NameMissedDeadlinePredicate implements Predicate<Person> {
     /**
      * Tests if the given {@code Person} object's FET or Collection Date is due before the given date.
      *
-     * @return true if the person's lastDate added by 1 week falls before the given date
+     * @return true if the person's deadline is due before the given date
      */
     @Override
     public boolean test(Person person) {

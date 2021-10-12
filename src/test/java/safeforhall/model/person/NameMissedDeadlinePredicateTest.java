@@ -42,5 +42,8 @@ public class NameMissedDeadlinePredicateTest {
 
         predicate = new NameMissedDeadlinePredicate("f", new LastDate("10-10-2021"));
         assertFalse(predicate.test(new PersonBuilder().withFet("14-10-2021").build()));
+
+        predicate = new NameMissedDeadlinePredicate("f", new LastDate("21-10-2021"));
+        assertFalse(predicate.test(new PersonBuilder().withFet("14-10-2021").build()));
     }
 }
