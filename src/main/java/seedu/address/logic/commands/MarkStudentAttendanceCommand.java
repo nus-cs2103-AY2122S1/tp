@@ -15,7 +15,7 @@ import seedu.address.model.student.Student;
 /**
  * Marks the attendance (present/absent) of an existing student in the student list.
  */
-public class MarkStudentCommand extends Command {
+public class MarkStudentAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
@@ -36,7 +36,7 @@ public class MarkStudentCommand extends Command {
     /**
      * @param index of the student in the filtered student list to mark attendance
      */
-    public MarkStudentCommand(Index index, int week) {
+    public MarkStudentAttendanceCommand(Index index, int week) {
         requireNonNull(index);
         requireNonNull(week);
 
@@ -70,12 +70,12 @@ public class MarkStudentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkStudentCommand)) {
+        if (!(other instanceof MarkStudentAttendanceCommand)) {
             return false;
         }
 
         // state check
-        MarkStudentCommand e = (MarkStudentCommand) other;
+        MarkStudentAttendanceCommand e = (MarkStudentAttendanceCommand) other;
         return index.equals(e.index);
     }
 }

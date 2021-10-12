@@ -2,8 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.displayType.STUDENTS;
-import static seedu.address.model.Model.displayType.TASKS;
+import static seedu.address.model.Model.DisplayType.STUDENTS;
+import static seedu.address.model.Model.DisplayType.TASKS;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Task> filteredTasks;
-    private Model.displayType displayType;
+    private DisplayType displayType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -85,7 +85,7 @@ public class ModelManager implements Model {
 
     //=========== AddressBook ================================================================================
 
-    public Model.displayType getDisplayType() {
+    public DisplayType getDisplayType() {
         return displayType;
     }
 
