@@ -16,9 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -56,8 +54,7 @@ public class TypicalStudents {
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB)
             .withGroup(VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
 
-    //TODO GroupBuilder in the future?
-    public static final Group GROUPCS2103T = new Group(new GroupName("CS2103T"), new Description("hi"));
+    public static final Group GROUPCS2103T = new GroupBuilder().withSampleStudents().build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
