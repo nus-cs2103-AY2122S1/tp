@@ -57,7 +57,10 @@ public class TypicalStudents {
             .withGroup(VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
 
     //TODO GroupBuilder in the future?
-    public static final Group GROUPCS2103T = new Group(new GroupName("CS2103T"), new Description("hi"));
+    public static final Group GROUPCS2103T =
+            new Group(new GroupName("CS2103T"), new Description("A Software engineering module"));
+    public static final Group GROUPCS2101 =
+            new Group(new GroupName("CS2101"), new Description("An effective communication module"));
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -84,6 +87,6 @@ public class TypicalStudents {
     }
 
     public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(List.of(GROUPCS2103T));
+        return new ArrayList<>(Arrays.asList(GROUPCS2103T, GROUPCS2101));
     }
 }
