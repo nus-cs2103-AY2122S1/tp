@@ -58,6 +58,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
+        lessonsList = personToCopy.getLessonsList();
     }
 
     /**

@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
 
@@ -37,7 +38,7 @@ public class Person implements HasUniqueId {
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id);
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -52,7 +53,7 @@ public class Person implements HasUniqueId {
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId);
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList);
         this.id = uniqueId;
         uniqueId.setOwner(this);
         this.name = name;
@@ -60,7 +61,6 @@ public class Person implements HasUniqueId {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.assignedTaskIds.addAll(assignedTaskIds);
         this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
@@ -102,6 +102,16 @@ public class Person implements HasUniqueId {
 
     public NoOverlapLessonList getLessonsList() {
         return lessonsList;
+    }
+
+    /**
+     * Check if person can attend lesson
+     *
+     * @param lesson lesson to check
+     * @return true if person can attend the lesson
+     */
+    public boolean canAttendLesson(Lesson lesson) {
+        return !lessonsList.doesLessonOverlap(lesson);
     }
 
     /**
