@@ -49,6 +49,8 @@ public class TaskBuilder {
         return this;
     }
 
-    public Task build() { return new Task(taskDescription, tags); }
+    public Task build() {
+        return new Task(taskDescription, tags);
+    }
 
 }
