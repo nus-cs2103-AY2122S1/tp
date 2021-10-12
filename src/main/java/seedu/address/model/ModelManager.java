@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -22,7 +24,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private FilteredList<Person> filteredPersons;
     private final FilteredList<Person> personToView;
 
     /**
@@ -145,6 +147,18 @@ public class ModelManager implements Model {
             currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
         }
         filteredPersons.setPredicate(predicate.and(currentPredicate));
+    }
+
+    @Override
+    public void sortFilteredPersonList(Comparator<Person> sorter) {
+        requireNonNull(sorter);
+        ArrayList<Person> tempList = new ArrayList<>();
+        filteredPersons.forEach(person -> tempList.add(person));
+        tempList.sort(sorter);
+        ObservableList<Person> sortedData = FXCollections.observableArrayList();
+        tempList.stream().forEach(person -> sortedData.add(person));
+        FilteredList<Person> tempPersonList = new FilteredList(sortedData);
+        filteredPersons = tempPersonList;
     }
 
     //=========== Person To View List Accessors =============================================================

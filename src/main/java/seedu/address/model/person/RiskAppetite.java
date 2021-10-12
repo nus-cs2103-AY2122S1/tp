@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import org.jetbrains.annotations.NotNull;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -46,4 +48,6 @@ public class RiskAppetite implements OptionalPersonStringField {
     public int hashCode() {
         return value.hashCode();
     }
+
+
 }

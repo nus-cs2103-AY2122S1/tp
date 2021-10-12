@@ -18,6 +18,7 @@ import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.comparators.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -171,7 +172,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String disposableIncome} into an {@code disposableIncome}.
+     * Parses a {@code String disposableIncome} into an {@code DisposableIncome}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code DisposableIncome} is invalid.
@@ -183,6 +184,21 @@ public class ParserUtil {
             throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
         }
         return new DisposableIncome(trimmedDisposableIncome);
+    }
+
+    /**
+     * Parses a {@code String sortDirection} into an {@code SortDirection}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
+        requireNonNull(sortDirection);
+        String trimmedSortDirection = sortDirection.trim();
+        if (!SortDirection.isValidDirection(trimmedSortDirection)) {
+            throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
+        }
+        return new SortDirection(trimmedSortDirection);
     }
 
     /**

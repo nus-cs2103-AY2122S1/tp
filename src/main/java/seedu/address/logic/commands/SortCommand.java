@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Sorts all persons in address book whose according to the specified attribute in either ascending or descending
@@ -16,18 +24,24 @@ public class SortCommand extends Command {
             + "Parameters: <attribute>/{ASC/DESC}\n"
             + "Example: " + COMMAND_WORD + " ra/ ASC";
 
+    public String MESSAGE_SUCCESS;
 
+    private final Comparator<Person> sorter;
 
-    public SortCommand() {
+    private final String field;
+
+    public SortCommand(Comparator<Person> sorter, String field) {
+        this.sorter = sorter;
+        this.field = field;
+        this.MESSAGE_SUCCESS = "list sorted by " + field;
 
     }
 
     @Override
     public CommandResult execute(Model model) {
-
-
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+        requireNonNull(model);
+        model.sortFilteredPersonList(sorter);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override
