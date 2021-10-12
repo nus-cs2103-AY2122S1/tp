@@ -2,13 +2,15 @@ package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.function.Predicate;
 
@@ -25,9 +27,9 @@ import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandTest {
@@ -40,13 +42,19 @@ public class AddFriendCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Friend validFriend = new FriendBuilder().build();
-        CommandResult commandResult = new AddFriendCommand(validFriend).execute(modelStub);
-        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS, validFriend), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFriend), modelStub.personsAdded);
+        Friend validFriendBobId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_BOB).build();
+
+        CommandResult commandResult = new AddFriendCommand(validFriendBobId).execute(modelStub);
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendBobId),
+                commandResult.getFeedbackToUser());
+        assertEquals(Collections.singletonList(validFriendBobId), modelStub.personsAdded);
+
+        Friend validFriendAmyId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_AMY).build();
+        CommandResult commandResultAddAnother = new AddFriendCommand(validFriendAmyId).execute(modelStub);
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendAmyId),
+                commandResultAddAnother.getFeedbackToUser());
+        assertEquals(Arrays.asList(validFriendBobId, validFriendAmyId), modelStub.personsAdded);
     }
-
-
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
@@ -54,7 +62,7 @@ public class AddFriendCommandTest {
         AddFriendCommand addFriendCommand = new AddFriendCommand(validFriend);
         ModelStub modelStub = new ModelStubWithPerson(validFriend);
 
-        assertThrows(CommandException.class, AddFriendCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddFriendCommand.MESSAGE_DUPLICATE_FRIEND_ID, () ->
                 addFriendCommand.execute(modelStub));
     }
 
@@ -66,20 +74,20 @@ public class AddFriendCommandTest {
         AddFriendCommand addBobCommand = new AddFriendCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddFriendCommand addAliceCommandCopy = new AddFriendCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommandCopy, addAliceCommand);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addBobCommand, addAliceCommand);
     }
 
     /**

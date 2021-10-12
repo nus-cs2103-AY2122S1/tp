@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.ParserUtil.areFlagsPresent;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,7 +27,7 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, FLAG_GAME_OLD);
 
-        if (!arePrefixesPresent(argMultimap, FLAG_GAME_OLD)) {
+        if (!areFlagsPresent(argMultimap, FLAG_GAME_OLD)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 

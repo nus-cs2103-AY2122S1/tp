@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,7 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -28,11 +26,13 @@ public class ParserUtil {
      * Private constructor to hide implicit public constructor since
      * {@code ParserUtil} is a utility class.
      */
-    private ParserUtil() {}
+    private ParserUtil() {
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -52,11 +52,11 @@ public class ParserUtil {
     public static FriendId parseFriendId(String friendId) throws ParseException {
         requireNonNull(friendId);
         String trimmedName = friendId.trim();
-        if (!FriendId.isValidFriendId(trimmedName)) {
-            throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
-        } else if (friendId.contains(FLAG_FRIEND_NAME.toString().trim())) {
-            // TODO set a different message if preferred
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendId.MESSAGE_CONSTRAINTS));
+        System.out.println(trimmedName);
+        if (friendId.isBlank()) {
+            throw new ParseException(FriendId.MESSAGE_EMPTY_FRIEND_ID);
+        } else if (!FriendId.isValidFriendId(trimmedName)) {
+            throw new ParseException(FriendId.MESSAGE_INVALID_CHARACTERS);
         }
         return new FriendId(trimmedName);
     }
@@ -124,7 +124,7 @@ public class ParserUtil {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
+    public static boolean areFlagsPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
         return Stream.of(flags).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

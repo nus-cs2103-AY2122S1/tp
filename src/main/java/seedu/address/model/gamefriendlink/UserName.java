@@ -1,4 +1,4 @@
-package seedu.address.model.friend.gamefriendlink;
+package seedu.address.model.gamefriendlink;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

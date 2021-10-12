@@ -17,10 +17,11 @@ import seedu.address.model.friend.Friend;
  */
 public class TypicalFriends {
 
+    // TODO: Yu Zher - write tests with game friend links included
     public static final Friend ALICE = new FriendBuilder().withFriendName("Alice Pauline").withFriendId("94351253")
-            .withGames("CSGO").build();
+            .withGameFriendLinks().build();
     public static final Friend BENSON = new FriendBuilder().withFriendName("Benson Meier").withFriendId("98765432")
-            .withGames("CSGO", "Valorant").build();
+            .withGameFriendLinks().build();
     public static final Friend CARL = new FriendBuilder().withFriendName("Carl Kurz").withFriendId("95352563")
             .build();
     public static final Friend DANIEL = new FriendBuilder().withFriendName("Daniel Meier").withFriendId("87652533")

@@ -25,5 +25,4 @@ public class CliSyntax {
     public static final Flag FLAG_FRIEND_SPACE = new Flag("--friend ");
 
 
-
 }

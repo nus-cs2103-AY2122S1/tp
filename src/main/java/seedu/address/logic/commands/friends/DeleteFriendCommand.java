@@ -25,6 +25,7 @@ public class DeleteFriendCommand extends Command {
 
     /**
      * Command to delete a friend using the unique FRIEND_ID.
+     *
      * @param friendId The friend id to identify the friend to be deleted.
      */
     public DeleteFriendCommand(FriendId friendId) {
@@ -47,13 +48,13 @@ public class DeleteFriendCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteFriendCommand // instanceof handles nulls
-                && friendToDeleteId.equals(((DeleteFriendCommand) other).friendToDeleteId)); // state
-                // check
+                && friendToDeleteId.equals(((DeleteFriendCommand) other).friendToDeleteId)); // state check
     }
 
     /**
      * Finds and returns a friend if the friendId is found inside the list.
-     * @param list The list to search for the friend.
+     *
+     * @param list     The list to search for the friend.
      * @param friendId The friendId used to search for the friend.
      * @return The friend with the friend id.
      * @throws CommandException Thrown when no friend with the friendId is found inside the list.

@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of gitGud friends data.
  */
 public interface ReadOnlyFriendsList {
 

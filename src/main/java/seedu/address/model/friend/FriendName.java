@@ -1,6 +1,5 @@
 package seedu.address.model.friend;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,7 +7,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class FriendName {
-
+    // constants
+    public static final FriendName DEFAULT_FRIEND_NAME = new FriendName("No name assigned");
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
@@ -26,9 +26,12 @@ public class FriendName {
      * @param name A valid friend's name.
      */
     public FriendName(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        if (name == null) {
+            fullName = DEFAULT_FRIEND_NAME.fullName;
+        } else {
+            checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+            fullName = name;
+        }
     }
 
     /**

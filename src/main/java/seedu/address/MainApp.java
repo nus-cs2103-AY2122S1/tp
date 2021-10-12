@@ -25,7 +25,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.FriendsListStorage;
+import seedu.address.storage.GamesListStorage;
 import seedu.address.storage.JsonFriendsListStorage;
+import seedu.address.storage.JsonGamesListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -58,8 +60,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        FriendsListStorage friendsListStorage = new JsonFriendsListStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(friendsListStorage, userPrefsStorage);
+        FriendsListStorage friendsListStorage = new JsonFriendsListStorage(userPrefs.getFriendsListFilePath());
+        GamesListStorage gamesListStorage = new JsonGamesListStorage(userPrefs.getGamesListFilePath());
+        storage = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -76,27 +79,41 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyFriendsList> addressBookOptional;
+        Optional<ReadOnlyFriendsList> readOnlyFriendsList;
         ReadOnlyFriendsList initialFriendData;
+        ReadOnlyGamesList initialGameData = loadInitialGameData();
+        // TODO: FIX POSSIBLE GAME AND FRIEND UNSYNC ACROSS LINK
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            readOnlyFriendsList = storage.readFriendsList();
+            if (readOnlyFriendsList.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a sample friend's list");
             }
-            initialFriendData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFriendsList);
+            initialFriendData = readOnlyFriendsList.orElseGet(SampleDataUtil::getSampleFriendsList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty friends list.");
             initialFriendData = new FriendsList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty friends list.");
             initialFriendData = new FriendsList();
         }
 
-        // TODO - Kevin
-        // Read and load initialGameData
-        ReadOnlyGamesList initialGameData = new GamesList();
-
         return new ModelManager(initialFriendData, initialGameData, userPrefs);
+    }
+
+    private ReadOnlyGamesList loadInitialGameData() {
+        try {
+            Optional<ReadOnlyGamesList> readOnlyGamesList = storage.readGamesList();
+            if (readOnlyGamesList.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a empty game's list");
+            }
+            return readOnlyGamesList.orElse(new GamesList());
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty friends list.");
+            return new GamesList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty friends list.");
+            return new GamesList();
+        }
     }
 
     private void initLogging(Config config) {

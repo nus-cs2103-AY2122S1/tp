@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -30,10 +31,10 @@ public class CommandTestUtil {
     public static final String VALID_GAME_ID_CSGO = "CSGO";
     public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
 
-    public static final String FRIEND_ID_DESC_AMY = " " + VALID_FRIEND_ID_AMY;
-    public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
-    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
+    public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
+    public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
+    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
     public static final String GAME_DESC_AMY = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
     public static final String GAME_DESC_BOB = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
 
@@ -43,12 +44,13 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  --name";
+    public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditFriendDescriptor DESC_AMY;
     public static final EditCommand.EditFriendDescriptor DESC_BOB;
 
+    // TODO: check if these are still needed for edit command
     static {
         DESC_AMY = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_AMY)
                 .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_ID_APEX_LEGENDS).build();

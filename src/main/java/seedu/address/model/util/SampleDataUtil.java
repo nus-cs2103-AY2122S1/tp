@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +9,7 @@ import seedu.address.model.ReadOnlyFriendsList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -17,17 +18,17 @@ public class SampleDataUtil {
     public static Friend[] getSampleFriends() {
         return new Friend[] {
             new Friend(new FriendId("AlexY123"), new FriendName("Alex Yeoh"),
-                getGameSet("Valorant", "Minecraft")),
-            new Friend(new FriendId("BernieSanders"), new FriendName("Bernice Yu"),
-                getGameSet("Rocket League", "Doom")),
-            new Friend(new FriendId("ChickenTender"), new FriendName("Charlotte Oliveiro"),
-                getGameSet("Halo", "Valorant")),
-            new Friend(new FriendId("Davidz"), new FriendName("David Li"),
-                getGameSet("Apex Legends")),
-            new Friend(new FriendId("II3"), new FriendName("Irfan Ibrahim"),
-                getGameSet("CSGO")),
-            new Friend(new FriendId("RoyJoy"), new FriendName("Roy Balakrishnan"),
-                getGameSet("Valorant", "CSGO"))
+                    getGameFriendLinkSet()), new Friend(
+                        new FriendId("BernieSanders"), new FriendName("Bernice Yu"),
+                    getGameFriendLinkSet()), new Friend(
+                        new FriendId("ChickenTender"), new FriendName("Charlotte Oliveiro"),
+                    getGameFriendLinkSet()), new Friend(
+                        new FriendId("Davidz"), new FriendName("David Li"),
+                    getGameFriendLinkSet()), new Friend(
+                        new FriendId("II3"), new FriendName("Irfan Ibrahim"),
+                    getGameFriendLinkSet()), new Friend(
+                        new FriendId("RoyJoy"), new FriendName("Roy Balakrishnan"),
+                    getGameFriendLinkSet())
         };
     }
 
@@ -40,13 +41,10 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a GameFriendLink set containing the list of strings given.
      */
-    public static Set<GameFriendLink> getGameSet(String... strings) {
-        //        return Arrays.stream(strings)
-        //                .map(Game)
-        //                .collect(Collectors.toSet());
-        return new HashSet<>();
+    public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {
+        return new HashSet<>(Arrays.asList(gameFriendLinks));
     }
 
 }

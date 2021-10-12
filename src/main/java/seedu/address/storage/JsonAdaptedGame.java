@@ -15,7 +15,7 @@ class JsonAdaptedGame {
     private final String gameName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedGame} with the given gameName {@code String}.
      */
     @JsonCreator
     public JsonAdaptedGame(String gameName) {
@@ -23,7 +23,7 @@ class JsonAdaptedGame {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Game} into this class for Jackson use.
      */
     public JsonAdaptedGame(Game sourceInstance) {
         gameName = sourceInstance.getGameId().value;
@@ -35,9 +35,9 @@ class JsonAdaptedGame {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted game object into the model's {@code Game} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Game.
      */
     public Game toModelType() throws IllegalValueException {
         if (!GameId.isValidGameId(gameName)) {

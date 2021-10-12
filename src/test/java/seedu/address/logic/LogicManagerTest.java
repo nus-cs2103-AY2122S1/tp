@@ -22,9 +22,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.storage.JsonFriendsListStorage;
+import seedu.address.storage.JsonGamesListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.FriendBuilder;
@@ -40,10 +42,11 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonFriendsListStorage addressBookStorage =
-                new JsonFriendsListStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonFriendsListStorage friendsListStorage =
+                new JsonFriendsListStorage(temporaryFolder.resolve("friendsList.json"));
+        JsonGamesListStorage gamesListStorage = new JsonGamesListStorage(temporaryFolder.resolve("gamesList.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -72,11 +75,13 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonFriendsListStorage addressBookStorage =
-                new JsonFriendsListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonFriendsListStorage friendsListStorage =
+                new JsonFriendsListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionFriendsList.json"));
+        JsonGamesListStorage gamesListStorage =
+                new JsonGamesListIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionGamesList.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -153,7 +158,8 @@ public class LogicManagerTest {
     }
 
     /**
-     * A stub class to throw an {@code IOException} when the save method is called.
+     * A stub class for {@code JsonFriendsListIoExceptionThrowingStub} to throw an {@code IOException}
+     * when the save method is called.
      */
     private static class JsonFriendsListIoExceptionThrowingStub extends JsonFriendsListStorage {
         private JsonFriendsListIoExceptionThrowingStub(Path filePath) {
@@ -161,7 +167,22 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyFriendsList addressBook, Path filePath) throws IOException {
+        public void saveFriendsList(ReadOnlyFriendsList friendsList, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class for {@code JsonGamesListIoExceptionThrowingStub} to throw an {@code IOException}
+     * when the save method is called.
+     */
+    private static class JsonGamesListIoExceptionThrowingStub extends JsonGamesListStorage {
+        private JsonGamesListIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveGamesList(ReadOnlyGamesList friendsList, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

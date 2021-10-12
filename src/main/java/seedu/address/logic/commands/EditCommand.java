@@ -20,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Edits the details of an existing friend in the address book.
@@ -50,7 +50,7 @@ public class EditCommand extends Command {
     private final EditFriendDescriptor editFriendDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editFriendDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditFriendDescriptor editFriendDescriptor) {
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
 
         FriendId updatedFriendId = editFriendDescriptor.getFriendId().orElse(friendToEdit.getFriendId());
         FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getName());
-        Set<GameFriendLink> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGames());
+        Set<GameFriendLink> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGameFriendLinks());
 
         return new Friend(updatedFriendId, updatedFriendName, updatedGames);
     }
@@ -123,7 +123,8 @@ public class EditCommand extends Command {
         private FriendId friendId;
         private Set<GameFriendLink> games;
 
-        public EditFriendDescriptor() {}
+        public EditFriendDescriptor() {
+        }
 
         /**
          * Copy constructor.

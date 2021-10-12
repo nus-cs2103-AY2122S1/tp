@@ -24,9 +24,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonFriendsListStorage addressBookStorage = new JsonFriendsListStorage(getTempFilePath("ab"));
+        JsonFriendsListStorage friendsListStorage = new JsonFriendsListStorage(getTempFilePath("ab"));
+        JsonGamesListStorage gamesListStorage = new JsonGamesListStorage(getTempFilePath("cd"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -55,14 +56,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
         FriendsList original = getTypicalFriendsList();
-        storageManager.saveAddressBook(original);
-        ReadOnlyFriendsList retrieved = storageManager.readAddressBook().get();
+        storageManager.saveFriendsList(original);
+        ReadOnlyFriendsList retrieved = storageManager.readFriendsList().get();
         assertEquals(original, new FriendsList(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getFriendsListFilePath());
     }
 
 }

@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class FriendId {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Friend IDs should be unique for each friend in the friend's list.";
+    public static final String MESSAGE_EMPTY_FRIEND_ID =
+            "Friend ID cannot be empty.";
+    public static final String MESSAGE_INVALID_CHARACTERS = "FriendID provided must be a single word and only contain "
+            + "alphanumeric characters.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
     public final String value;
 
@@ -21,7 +23,7 @@ public class FriendId {
      */
     public FriendId(String friendId) {
         requireNonNull(friendId);
-        checkArgument(isValidFriendId(friendId), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidFriendId(friendId), MESSAGE_INVALID_CHARACTERS);
         value = friendId;
     }
 
