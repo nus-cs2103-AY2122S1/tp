@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.PAddCommand;
+import seedu.address.logic.commands.PaddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.member.Address;
 import seedu.address.model.member.Email;
@@ -20,23 +20,23 @@ import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
 
 /**
- * Parses input arguments and creates a new PAddCommand object
+ * Parses input arguments and creates a new PaddCommand object
  */
-public class PAddCommandParser implements Parser<PAddCommand> {
+public class PaddCommandParser implements Parser<PaddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the PAddCommand
-     * and returns an PAddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the PaddCommand
+     * and returns an PaddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public PAddCommand parse(String args) throws ParseException {
+    public PaddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_POSITION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -47,7 +47,7 @@ public class PAddCommandParser implements Parser<PAddCommand> {
 
         Member member = new Member(name, phone, email, address, positionList);
 
-        return new PAddCommand(member);
+        return new PaddCommand(member);
     }
 
     /**

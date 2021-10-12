@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -91,6 +92,12 @@ public interface Model {
      * {@code event} must not already exist in the address book.
      */
     void addEvent(Event event);
+
+    /**
+     * Adds members to the given event.
+     * {@code event} must already exist in the address book.
+     */
+    void addEventMembers(Event event, Set<Member> memberSet);
 
     /**
      * Replaces the given member {@code target} with {@code editedMember}.
