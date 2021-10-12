@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.commons.util.TagUtil.EditPersonDescriptor;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 
 import java.util.Set;
 import java.util.stream.Collectors;

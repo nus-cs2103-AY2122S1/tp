@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.commons.util.TagUtil.EditPersonDescriptor;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
