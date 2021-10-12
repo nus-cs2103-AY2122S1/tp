@@ -1,11 +1,12 @@
 package seedu.address.model.module.student;
 
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
-
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Student in the TAB.
@@ -60,6 +61,14 @@ public class Student {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    /**
+     * Returns true if this student has {@code task} exists in the task list.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return taskList.contains(task);
     }
 
     /**

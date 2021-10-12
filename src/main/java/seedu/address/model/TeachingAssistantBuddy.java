@@ -10,7 +10,7 @@ import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
+//import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the TAB level.
@@ -21,7 +21,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     private final UniqueModuleList modules;
     private final UniqueStudentList students;
-    private final UniqueTaskList tasks;
+    //private final UniqueTaskList tasks;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -33,7 +33,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     {
         modules = new UniqueModuleList();
         students = new UniqueStudentList();
-        tasks = new UniqueTaskList();
+        //tasks = new UniqueTaskList();
     }
 
     public TeachingAssistantBuddy() {}
@@ -64,13 +64,13 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         this.students.setStudents(students);
     }
 
-    /**
-     * Replaces the contents of the task list with {@code tasks}.
-     * {@code persons} must not contain duplicate tasks.
-     */
-    public void setTasks(List<Task> tasks) {
-        this.tasks.setTasks(tasks);
-    }
+    ///**
+    //* Replaces the contents of the task list with {@code tasks}.
+    //* {@code persons} must not contain duplicate tasks.
+    //*/
+    //public void setTasks(List<Task> tasks) {
+    //this.tasks.setTasks(tasks);
+    //}
 
     /**
      * Resets the existing data of this {@code TeachingAssistantBuddy} with {@code newData}.
@@ -78,7 +78,8 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public void resetData(ReadOnlyTeachingAssistantBuddy newData) {
         requireNonNull(newData);
         setStudents(newData.getStudentList());
-        setTasks(newData.getTaskList());
+        setModules(newData.getModuleList());
+        //setTasks(newData.getTaskList());
     }
 
     //// student-level operations
@@ -99,13 +100,13 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         return students.contains(student);
     }
 
-    /**
-     * Returns true if a student with the same identity as {@code student} exists in TAB.
-     */
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return tasks.contains(task);
-    }
+    ///**
+    //* Returns true if a student with the same identity as {@code student} exists in TAB.
+    //*/
+    //public boolean hasTask(Task task) {
+    //requireNonNull(task);
+    //return tasks.contains(task);
+    //}
 
     /**
      * Adds a module to TAB.
@@ -124,11 +125,11 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-     * Adds a task to TAB.
-     * The task must not already exist in TAB.
-     */
-    public void addTask(Task task) {
-        tasks.add(task);
+    * Adds a task to TAB.
+    * The task must not already exist in TAB.
+    */
+    public void addTask(Module module, Task task) {
+        module.addTask(task);
     }
 
     /**
@@ -154,16 +155,16 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         students.setStudent(target, editedStudent);
     }
 
-    /**
-     * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the TAB.
-     * The task identity of {@code editedTask} must not be the same
-     * as another existing task in the module.
-     */
-    public void setTask(Task target, Task editedTask) {
-        requireNonNull(editedTask);
-        tasks.setTask(target, editedTask);
-    }
+    ///**
+    //* Replaces the given task {@code target} in the list with {@code editedTask}.
+    //* {@code target} must exist in the TAB.
+    //* The task identity of {@code editedTask} must not be the same
+    //* as another existing task in the module.
+    //*/
+    //public void setTask(Task target, Task editedTask) {
+    //requireNonNull(editedTask);
+    //tasks.setTask(target, editedTask);
+    //}
 
     /**
      * Removes {@code key} from this {@code TeachingAssistantBuddy}.
@@ -181,13 +182,13 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         students.remove(key);
     }
 
-    /**
-     * Removes {@code key} from this {@code TeachingAssistantBuddy}.
-     * {@code key} must exist in TAB.
-     */
-    public void removeTask(Task key) {
-        tasks.remove(key);
-    }
+    ///**
+    //* Removes {@code key} from this {@code TeachingAssistantBuddy}.
+    //* {@code key} must exist in TAB.
+    //*/
+    //public void removeTask(Task key) {
+    //tasks.remove(key);
+    //}
 
     //// util methods
 
@@ -208,10 +209,10 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
 
-    @Override
-    public ObservableList<Task> getTaskList() {
-        return tasks.asUnmodifiableObservableList();
-    }
+    //@Override
+    //public ObservableList<Task> getTaskList() {
+    //return tasks.asUnmodifiableObservableList();
+    //}
 
     @Override
     public boolean equals(Object other) {

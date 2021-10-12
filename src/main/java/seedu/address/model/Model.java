@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -95,4 +96,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Adds a task to the given module.
+     * {@code task} must not already exist in the module.
+     * @param module The module to receive the task.
+     * @param task The task to be added.
+     */
+    void addTask(Module module, Task task);
 }

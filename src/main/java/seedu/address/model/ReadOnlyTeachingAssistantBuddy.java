@@ -22,9 +22,9 @@ public interface ReadOnlyTeachingAssistantBuddy {
      */
     ObservableList<Student> getStudentList();
 
-    /**
-     * Returns an unmodifiable view of the tasks list.
-     * This list will not contain any duplicate tasks.
-     */
-    ObservableList<Task> getTaskList();
+    ///**
+    //* Returns an unmodifiable view of the tasks list.
+    //* This list will not contain any duplicate tasks.
+    //*/
+    //ObservableList<Task> getTaskList();
 }

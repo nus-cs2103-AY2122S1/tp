@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -126,6 +127,12 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         teachingAssistantBuddy.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public void addTask(Module module, Task task) {
+        requireAllNonNull(module, task);
+        teachingAssistantBuddy.addTask(module, task);
     }
 
     //=========== Filtered Person List Accessors =============================================================

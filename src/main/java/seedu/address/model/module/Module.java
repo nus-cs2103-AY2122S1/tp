@@ -157,6 +157,22 @@ public class Module {
         student.addTask(task);
     }
 
+    /**
+     * Returns true if this module has task {@code task} exists in it.
+     */
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return tasks.contains(task);
+    }
+
+    /**
+     * Replaces the contents of the task list with {@code tasks}.
+     * {@code persons} must not contain duplicate tasks.
+     */
+    public void setTasks(List<Task> tasks) {
+        this.tasks.setTasks(tasks);
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
