@@ -7,6 +7,8 @@ import static seedu.fast.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.util.TagUtil;
+
 public class TagTest {
 
     @Test
@@ -56,6 +58,31 @@ public class TagTest {
         //invalid term
         String INVALID_TAG_TERM = "big fat";
         assertThrows(IllegalArgumentException.class, () -> Tag.createTag(INVALID_TAG_TERM));
+    }
+
+    @Test
+    public void setPriority() {
+        //individual cases for each PriorityTag
+        assertTrue(Tag.setPriority(PriorityTag.HighPriority.NAME) == PriorityTag.HighPriority.PRIORITY);
+        assertTrue(Tag.setPriority(PriorityTag.MediumPriority.NAME) == PriorityTag.MediumPriority.PRIORITY);
+        assertTrue(Tag.setPriority(PriorityTag.LowPriority.NAME) == PriorityTag.LowPriority.PRIORITY);
+
+        //case for a normal tag
+        assertTrue(Tag.setPriority("test") == TagUtil.NO_PRIORITY);
+    }
+
+    @Test
+    public void getPriority() {
+        //individual cases for each PriorityTag
+        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.HighPriority.TERM)
+                .getPriority() == PriorityTag.HighPriority.PRIORITY);
+        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.MediumPriority.TERM)
+                .getPriority() == PriorityTag.MediumPriority.PRIORITY);
+        assertTrue(Tag.createTag(PriorityTag.PRIORITY_TAG_PREFIX + PriorityTag.LowPriority.TERM)
+                .getPriority() == PriorityTag.LowPriority.PRIORITY);
+
+        //case for a normal tag
+        assertTrue(new Tag("test").getPriority() == TagUtil.NO_PRIORITY);
     }
 
 }
