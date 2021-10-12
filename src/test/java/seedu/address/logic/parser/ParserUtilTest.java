@@ -18,6 +18,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SUPPLY_TYPE = "Chicken & Beef";
+    private static final String INVALID_DELIVERY_DETAILS = "Monday 2-4 pm";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SUPPLY_TYPE = "Chicken and Beef";
+    private static final String VALID_DELIVERY_DETAILS = "Every Monday 2pm";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +198,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSupplyType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSupplyType((String) null));
+    }
+
+    @Test
+    public void parseSupplyType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSupplyType(INVALID_SUPPLY_TYPE));
+    }
+
+    @Test
+    public void parseSupplyType_validValueWithoutWhitespace_returnsName() throws Exception {
+        SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
+        assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(VALID_SUPPLY_TYPE));
+    }
+
+    @Test
+    public void parseSupplyType_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String supplyTypeWithWhitespace = WHITESPACE + VALID_SUPPLY_TYPE + WHITESPACE;
+        SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
+        assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(supplyTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryDetails_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryDetails((String) null));
+    }
+
+    @Test
+    public void parseDeliveryDetails_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDetails(INVALID_DELIVERY_DETAILS));
+    }
+
+    @Test
+    public void parseDeliveryDetails_validValueWithoutWhitespace_returnsName() throws Exception {
+        DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
+        assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(VALID_DELIVERY_DETAILS));
+    }
+
+    @Test
+    public void parseDeliveryDetails_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String deliveryDetailsWithWhitespace = WHITESPACE + VALID_DELIVERY_DETAILS + WHITESPACE;
+        DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
+        assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(deliveryDetailsWithWhitespace));
     }
 }
