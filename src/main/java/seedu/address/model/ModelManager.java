@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.task.Task;
 
@@ -103,6 +104,12 @@ public class ModelManager implements Model {
         teachingAssistantBuddy.removeModule(target);
     }
 
+    @Override
+    public boolean hasModule(ModuleName moduleName) {
+        requireNonNull(moduleName);
+        return teachingAssistantBuddy.hasModule(moduleName);
+    }
+
     /**
      * @param student
      * @return true if current teachingAssistantBuddy has specified student
@@ -130,9 +137,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTask(Module module, Task task) {
-        requireAllNonNull(module, task);
-        teachingAssistantBuddy.addTask(module, task);
+    public void addTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        teachingAssistantBuddy.addTask(moduleName, task);
+    }
+
+    @Override
+    public boolean hasTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(moduleName, task);
+        return teachingAssistantBuddy.hasTask(moduleName, task);
     }
 
     //=========== Filtered Person List Accessors =============================================================

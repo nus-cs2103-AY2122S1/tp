@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.UniqueStudentList;
@@ -87,9 +89,14 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     /**
      * Returns true if a module with the same identity as {@code module} exists in TAB.
      */
-    public boolean hasModule(Module module) {
+    public boolean hasModule(ModuleName module) {
         requireNonNull(module);
-        return modules.contains(module);
+        for (Module m : modules) {
+            if (m.getName().equals(module)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -100,13 +107,18 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
         return students.contains(student);
     }
 
-    ///**
-    //* Returns true if a student with the same identity as {@code student} exists in TAB.
-    //*/
-    //public boolean hasTask(Task task) {
-    //requireNonNull(task);
-    //return tasks.contains(task);
-    //}
+    /**
+    * Returns true if the given module has the given task {@code task}.
+    */
+    public boolean hasTask(ModuleName moduleName, Task task) {
+        requireAllNonNull(task);
+        for (Module m : modules) {
+            if (m.getName().equals(moduleName)) {
+                return m.hasTask(task);
+            }
+        }
+        return false;
+    }
 
     /**
      * Adds a module to TAB.
@@ -125,11 +137,15 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     }
 
     /**
-    * Adds a task to TAB.
+    * Adds a task to a module in TAB.
     * The task must not already exist in TAB.
     */
-    public void addTask(Module module, Task task) {
-        module.addTask(task);
+    public void addTask(ModuleName moduleName, Task task) {
+        for (Module m : modules) {
+            if (m.getName().equals(moduleName)) {
+                m.addTask(task);
+            }
+        }
     }
 
     /**
