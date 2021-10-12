@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -180,6 +181,30 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(HOON, IDA), modelWithHoonIda.getFilteredPersonList());
     }
 
+    @Test
+    public void execute_zeroLevelOfEducationKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate = prepareLevelOfEducationPredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleLevelOfEducationKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate =
+                prepareLevelOfEducationPredicate("Masters University");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
+    }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
@@ -207,5 +232,12 @@ public class FindCommandTest {
      */
     private RoleContainsKeywordsPredicate prepareRolePredicate(String userInput) {
         return new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code PhoneContainsKeywordsPredicate}.
+     */
+    private LevelOfEducationContainsKeywordsPredicate prepareLevelOfEducationPredicate(String userInput) {
+        return new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
