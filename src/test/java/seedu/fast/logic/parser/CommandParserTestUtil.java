@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.fast.logic.commands.Command;
 import seedu.fast.logic.parser.exceptions.ParseException;
-import seedu.fast.logic.parser.exceptions.HelpParseException;
 
 /**
  * Contains helper methods for testing command parsers.

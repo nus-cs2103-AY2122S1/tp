@@ -1,10 +1,6 @@
 package seedu.fast.logic.parser;
 
-import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_HELP_COMMAND_FORMAT;
-
 import seedu.fast.logic.commands.HelpCommand;
-import seedu.fast.logic.parser.exceptions.HelpParseException;
-import seedu.fast.logic.parser.ParserUtil;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
 
@@ -15,7 +11,6 @@ public class HelpCommandParser implements Parser<HelpCommand> {
     public HelpCommand parse(String args) {
         return new HelpCommand(args); //Since none of the inputs are valid, we can return the arg.
     }
-
 
 
 }

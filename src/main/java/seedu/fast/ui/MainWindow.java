@@ -15,7 +15,6 @@ import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.logic.Logic;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
-import seedu.fast.logic.parser.HelpCommandParser;
 import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
@@ -185,7 +184,8 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.fast.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException, HelpParseException {
+    private CommandResult executeCommand(String commandText) throws
+        CommandException, ParseException, HelpParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());

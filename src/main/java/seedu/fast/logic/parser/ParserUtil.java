@@ -27,11 +27,12 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-            "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -133,7 +134,7 @@ public class ParserUtil {
      * Parses {@code String tagName} and returns the corresponding priority tag name.
      */
     public static String parsePriorityTag(String tagName) {
-        switch(tagName) {
+        switch (tagName) {
         case PriorityTag.LowPriority.COMMAND:
             return PriorityTag.LowPriority.NAME;
         case PriorityTag.MediumPriority.COMMAND:
@@ -148,12 +149,12 @@ public class ParserUtil {
      * Parses {@code String command} and returns the corresponding help command.
      */
     public static String matchArgs(String command) {
-            for (String s : COMMAND_LIST) {
-                if (s.equals(command)) {
-                    return s;
-                }
+        for (String s : COMMAND_LIST) {
+            if (s.equals(command)) {
+                return s;
             }
-            return "";
+        }
+        return "";
     }
 
     /**
@@ -163,7 +164,7 @@ public class ParserUtil {
      * @return The args of the help command, or "" if there is no or invalid args.
      * @throws HelpParseException if help is not followed by a valid arg
      */
-    public static String parseHelp(String commandText) throws HelpParseException{
+    public static String parseHelp(String commandText) throws HelpParseException {
 
         // if there are no args
         if (commandText.split(" ").length == 1) {
@@ -179,7 +180,7 @@ public class ParserUtil {
 
         } else { // if the arg does not match a given command, throw exception
             throw new HelpParseException(
-                    String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
     }
