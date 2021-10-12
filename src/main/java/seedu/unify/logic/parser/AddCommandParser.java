@@ -10,9 +10,9 @@ import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
-import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 
