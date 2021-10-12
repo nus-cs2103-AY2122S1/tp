@@ -65,7 +65,7 @@ public class TaskTabParser {
         case FindTaskCommand.COMMAND_WORD:
             return new FindTaskCommandParser().parse(arguments);
 
-        case ListPeopleCommand.COMMAND_WORD:
+        case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
 
         case ClearTaskCommand.COMMAND_WORD:
