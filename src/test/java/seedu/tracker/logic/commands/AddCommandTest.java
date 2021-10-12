@@ -20,6 +20,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserPrefs;
+import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 
@@ -120,6 +121,16 @@ public class AddCommandTest {
         @Override
         public ReadOnlyModuleTracker getModuleTracker() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCurrentSemester(AcademicCalendar academicCalendar) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public AcademicCalendar getCurrentSemester() {
+            return null;
         }
 
         @Override

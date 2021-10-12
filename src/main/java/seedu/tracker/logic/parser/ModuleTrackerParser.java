@@ -6,7 +6,18 @@ import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.tracker.logic.commands.*;
+import seedu.tracker.logic.commands.AddCommand;
+import seedu.tracker.logic.commands.ClearCommand;
+import seedu.tracker.logic.commands.Command;
+import seedu.tracker.logic.commands.DeleteCommand;
+import seedu.tracker.logic.commands.EditCommand;
+import seedu.tracker.logic.commands.ExitCommand;
+import seedu.tracker.logic.commands.FindCommand;
+import seedu.tracker.logic.commands.HelpCommand;
+import seedu.tracker.logic.commands.InfoCommand;
+import seedu.tracker.logic.commands.ListCommand;
+import seedu.tracker.logic.commands.SetCommand;
+import seedu.tracker.logic.commands.TakeCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
