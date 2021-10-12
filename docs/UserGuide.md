@@ -108,12 +108,12 @@ edit 1 n/John t/TA
 
 ## Find a Contact - `find`
 
-Finds an existing contact using the given string or tag.
+Finds an existing contact by name(s), tag(s), or telegram handle(s).
 
 Format 1: 
 
 ```
-find <STRING>
+find <NAME>
 ```
 
 Example 1:
@@ -132,6 +132,18 @@ Example 2:
 
 ```
 find friends
+```
+
+Format 3: 
+
+```
+find @<TELEGRAM>
+```
+
+Example 3:
+
+```
+find @alex_1 bobx2
 ```
 
 <h3 id = "Show"> </h3>
@@ -233,6 +245,7 @@ A: Please **strictly** follow the command format to avoid such issues.
 | Edit a Contact | edit \<INDEX> [n/\<NAME>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Find a Contact (by Name) | find \<STRING> |
 | Find a Contact (by Tag) | find t/\<TAG> |
+| Find a Contact (by Telegram Handle) | find @\<TELEGRAM> |
 | Show a Contact (by Name)| show \<NAME> |
 | Show a Contact (by Index) | show \<INDEX> |
 | Import Contacts | import filename.JSON |
