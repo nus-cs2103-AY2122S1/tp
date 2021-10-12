@@ -23,6 +23,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
+            "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "PriorityTag", "Misc"};
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -136,6 +139,27 @@ public class ParserUtil {
             return PriorityTag.HighPriority.NAME;
         //It is guaranteed that the default case will always be a high priority tag instance.
         }
+    }
+
+    public static String parseHelp(String command) {
+            for (String s : COMMAND_LIST) {
+                if (s.equals(command)) {
+                    return s;
+                }
+            }
+            return "";
+    }
+
+    public static String capitaliseFirstLetters(String inputString) {
+        String[] words = inputString.split(" ");
+        StringBuilder capitalisedWordsBuilder = new StringBuilder();
+
+        // Capitalise the start of each word in the args
+        for (String s : words) {
+            // Capitalises the first letter of the word
+            capitalisedWordsBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
+        }
+        return capitalisedWordsBuilder.toString();
     }
 
 }

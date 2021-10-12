@@ -25,6 +25,7 @@ import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.HelpCommandParser;
+import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
@@ -35,7 +36,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t09-4.github.io/tp/";
     public static final String HELP_MESSAGE = "View our user guide: " + USERGUIDE_URL;
-    public static final String[] COMMAND_LIST = HelpCommandParser.COMMAND_LIST;
+    public static final String[] COMMAND_LIST = ParserUtil.COMMAND_LIST;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -165,7 +166,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus(String command) {
         getRoot().requestFocus();
-        if (HelpCommandParser.isCommandWord(command)) {
+        if (!ParserUtil.parseHelp(command).equals("")) {
             commandList.getSelectionModel().select(command);
             commandInstruction.setText(showCommandUsage(command));
         } else {
