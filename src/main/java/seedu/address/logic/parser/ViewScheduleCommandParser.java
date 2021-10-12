@@ -20,9 +20,11 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  */
 public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
 
+    private static final ParseException NO_FIELD_EXCEPTION =
+            new ParseException(ViewScheduleCommand.HELP_MESSAGE);
+
     @Override
     public ViewScheduleCommand parse(String userInput) throws ParseException {
-        //currently defined for name prefix, undefined behaviour
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
@@ -30,7 +32,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
         if (argMultimap.isEmpty()) {
             throw new ParseException(ViewScheduleCommand.HELP_MESSAGE);
         }
-        PersonContainsFieldsPredicate predicate = testByAllFields(userInput);
+        PersonContainsFieldsPredicate predicate = testByAllFields(userInput, NO_FIELD_EXCEPTION);
         return new ViewScheduleCommand(predicate);
     }
 }
