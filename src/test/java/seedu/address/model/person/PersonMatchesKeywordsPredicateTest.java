@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_LEVEL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ACAD_STREAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -9,10 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,11 +46,15 @@ public class PersonMatchesKeywordsPredicateTest {
     @Test
     public void test_oneFieldMatchesKeywords_returnsFalse() {
 
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicate();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withName("Alice Tan")
+                .build();
 
         // Only one matching keyword
-        predicate.setNameKeywords(List.of("Alice", "Tan"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Lee").build()));
+
+        // Field is empty
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withParentEmail("gmail").build();
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice Lee").withParentEmail().build()));
     }
 
     @Test
@@ -104,11 +109,13 @@ public class PersonMatchesKeywordsPredicateTest {
     public void test_multipleFieldsAllMatchKeywords_returnsTrue() {
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withName("Alice")
                 .withAddress("clementi").withPhone("9876").withEmail("gmail").withParentPhone("5555")
-                .withParentEmail("john").withTags("Math", "paid").build();
+                .withParentEmail("john").withSchool("Dunman").withAcadStream("ip").withAcadLevel("y2")
+                .withTags("Math", "paid").build();
 
         // Default condition is set to match all
         Person person = new PersonBuilder().withName("Alice Tan").withAddress("Clementi Road").withPhone("98765432")
                 .withEmail("alice@gmail.com").withParentPhone("99995555").withParentEmail("john.tan@gmail.com")
+                .withSchool("Dunman High School").withAcadStream("IP").withAcadLevel("Y2")
                 .withTags("Math", "paid").build();
         assertTrue(predicate.test(person));
 
@@ -118,31 +125,75 @@ public class PersonMatchesKeywordsPredicateTest {
     }
 
     @Test
+    public void test_multipleFieldsAllMatchKeywords_returnsFalse() {
+        // Does not match at least one keyword
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withEmail("alice") // match
+                .withTags("Math", "paid") // match
+                .withAcadLevel("Y3") // not match
+                .withCondition(FindCondition.ALL).build();
+
+        Person person = new PersonBuilder().withName("Alice Tan")
+                .withEmail("alice@gmail.com") // match
+                .withTags("Math", "paid") // match
+                .withAcadLevel("Y2") // not match
+                .build();
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
     public void test_multipleFieldsAnyMatchKeywords_returnsTrue() {
+        // Match at least one keyword
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName("Alice Tan") // not match
                 .withAddress("clementi") // match
                 .withCondition(FindCondition.ANY).build();
 
         Person person = new PersonBuilder().withName("John").withAddress("Clementi Road").build();
-        predicate.setCondition(FindCondition.ANY);
         assertTrue(predicate.test(person));
     }
 
     @Test
+    public void test_multipleFieldsAnyMatchKeywords_returnsFalse() {
+        // Does not match any keyword
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName("Alice Tan") // not match
+                .withParentPhone("98765432") // not match
+                .withCondition(FindCondition.ANY).build();
+
+        Person person = new PersonBuilder().withName("John").withPhone("99887766").build();
+        assertFalse(predicate.test(person));
+    }
+
+    @Test
     public void test_multipleFieldsNoneMatchKeywords_returnsTrue() {
+        // Match none keywords
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName("Alice Tan").withAddress("clementi").withPhone("9876").withEmail("gmail")
-                .withParentPhone("5555").withParentEmail("john").withTags("Math", "paid").build();
+                .withParentPhone("5555").withParentEmail("john")
+                .withSchool("Dunman High School").withAcadStream("IP").withAcadLevel("Y2")
+                .withTags("Math", "paid").withCondition(FindCondition.NONE).build();
 
-        // Default condition is set to match none
         Person person = new PersonBuilder().withName("John").withAddress("Yishun ave").withPhone("99998888")
                 .withEmail("john@nus.edu.sg").withParentPhone("988665544").withParentEmail("benny@gmail.com")
+                .withSchool("Yishun Secondary").withAcadStream("express").withAcadLevel("s4")
                 .withTags("Science", "unpaid").build();
 
-        // Explicitly set condition to match none
-        predicate.setCondition(FindCondition.NONE);
         assertTrue(predicate.test(person));
+    }
+
+    @Test
+    public void test_multipleFieldsNoneMatchKeywords_returnsFalse() {
+        // Match at least one keyword
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName("Alice Tan") // not match
+                .withAddress("yishun") // not match
+                .withSchool("town") // match
+                .withCondition(FindCondition.NONE).build();
+
+        Person person = new PersonBuilder().withName("John Tan").withAddress("Clementi ave")
+                .withSchool("New Town").build();
+        assertFalse(predicate.test(person));
     }
 
     @Test
@@ -155,6 +206,9 @@ public class PersonMatchesKeywordsPredicateTest {
                 .withParentPhone(VALID_PARENT_PHONE_AMY)
                 .withParentEmail(VALID_PARENT_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
+                .withSchool(VALID_SCHOOL_AMY)
+                .withAcadStream(VALID_ACAD_STREAM_AMY)
+                .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         PersonMatchesKeywordsPredicate secondPredicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName(VALID_NAME_BOB).build();
@@ -170,6 +224,9 @@ public class PersonMatchesKeywordsPredicateTest {
                 .withParentPhone(VALID_PARENT_PHONE_AMY)
                 .withParentEmail(VALID_PARENT_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
+                .withSchool(VALID_SCHOOL_AMY)
+                .withAcadStream(VALID_ACAD_STREAM_AMY)
+                .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 

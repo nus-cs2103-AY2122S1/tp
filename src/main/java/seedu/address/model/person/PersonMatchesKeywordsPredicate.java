@@ -22,6 +22,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     private List<String> parentPhoneKeywords;
     private List<String> parentEmailKeywords;
     private List<String> addressKeywords;
+    private List<String> schoolKeywords;
+    private List<String> acadStreamKeywords;
+    private List<String> acadLevelKeywords;
     private List<String> tagKeywords;
 
     private FindCondition condition = FindCondition.ALL; // default find condition is match all
@@ -32,8 +35,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      * @return True if at least one field is searched.
      */
     public boolean isAnyFieldSearched() {
-        return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords, parentPhoneKeywords,
-                parentEmailKeywords, addressKeywords, tagKeywords);
+        return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords,
+                parentPhoneKeywords, parentEmailKeywords, addressKeywords,
+                schoolKeywords, acadStreamKeywords, acadLevelKeywords, tagKeywords);
     }
 
     /**
@@ -100,6 +104,33 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Sets keywords to match with a Person's school.
+     *
+     * @param keywords School keywords to find.
+     */
+    public void setSchoolKeywords(List<String> keywords) {
+        this.schoolKeywords = keywords;
+    }
+
+    /**
+     * Sets keywords to match with a Person's academic stream.
+     *
+     * @param keywords Academic stream keywords to find.
+     */
+    public void setAcadStreamKeywords(List<String> keywords) {
+        this.acadStreamKeywords = keywords;
+    }
+
+    /**
+     * Sets keywords to match with a Person's academic level.
+     *
+     * @param keywords Academic level keywords to find.
+     */
+    public void setAcadLevelKeywords(List<String> keywords) {
+        this.acadLevelKeywords = keywords;
+    }
+
+    /**
      * Sets tag keywords to match with a Person's tags.
      *
      * @param keywords Phone keywords to find.
@@ -155,6 +186,27 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      */
     public Optional<List<String>> getAddressKeywords() {
         return Optional.ofNullable(addressKeywords);
+    }
+
+    /**
+     * Returns optional school keywords.
+     */
+    public Optional<List<String>> getSchoolKeywords() {
+        return Optional.ofNullable(schoolKeywords);
+    }
+
+    /**
+     * Returns optional academic stream keywords.
+     */
+    public Optional<List<String>> getAcadStreamKeywords() {
+        return Optional.ofNullable(acadStreamKeywords);
+    }
+
+    /**
+     * Returns optional academic level keywords.
+     */
+    public Optional<List<String>> getAcadLevelKeywords() {
+        return Optional.ofNullable(acadLevelKeywords);
     }
 
     /**
@@ -232,6 +284,33 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns a {@code Predicate} that tests that a {@code Person}'s {@code School} matches the keywords given.
+     *
+     * @return A predicate that tests a person's school.
+     */
+    private Predicate<Person> getSchoolMatchPredicate() {
+        return person -> isMatch(schoolKeywords, person.getSchool().value);
+    }
+
+    /**
+     * Returns a {@code Predicate} that tests that a {@code Person}'s {@code AcadStream} matches the keywords given.
+     *
+     * @return A predicate that tests a person's academic stream.
+     */
+    private Predicate<Person> getAcadStreamMatchPredicate() {
+        return person -> isMatch(acadStreamKeywords, person.getAcadStream().value);
+    }
+
+    /**
+     * Returns a {@code Predicate} that tests that a {@code Person}'s {@code AcadLevel} matches the keywords given.
+     *
+     * @return A predicate that tests a person's academic level.
+     */
+    private Predicate<Person> getAcadLevelMatchPredicate() {
+        return person -> isMatch(acadLevelKeywords, person.getAcadLevel().value);
+    }
+
+    /**
      * Returns a {@code List<Predicate<Person>>} that tests if each keyword matches a {@code Person}'s {@code Tag}s.
      *
      * @return A predicate that tests a person's tags.
@@ -274,6 +353,15 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         }
         if (getAddressKeywords().isPresent()) {
             predicates.add(getAddressMatchPredicate());
+        }
+        if (getSchoolKeywords().isPresent()) {
+            predicates.add(getSchoolMatchPredicate());
+        }
+        if (getAcadStreamKeywords().isPresent()) {
+            predicates.add(getAcadStreamMatchPredicate());
+        }
+        if (getAcadLevelKeywords().isPresent()) {
+            predicates.add(getAcadLevelMatchPredicate());
         }
         if (getTagKeywords().isPresent()) {
             predicates.addAll(getTagsMatchPredicates());
@@ -354,7 +442,9 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
                 && getParentPhoneKeywords().equals(p.getParentPhoneKeywords())
                 && getParentEmailKeywords().equals(p.getParentEmailKeywords())
                 && getAddressKeywords().equals(p.getAddressKeywords())
-                && getTagKeywords().equals(p.getTagKeywords())
+                && getSchoolKeywords().equals(p.getSchoolKeywords())
+                && getAcadStreamKeywords().equals(p.getAcadStreamKeywords())
+                && getAcadLevelKeywords().equals(p.getAcadLevelKeywords())
                 && getCondition().equals(p.getCondition());
     }
 

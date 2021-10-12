@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withName("Amy bob").withAddress("street").withTags("friend", "paid")
+                .withName("Amy bob").withAddress("street").withAcadLevel("s3").withTags("friend", "paid")
                 .withCondition(FindCommand.FindCondition.ANY).build();
         String details = PersonUtil.getPersonMatchesKeywordsPredicateDetails(predicate);
         FindCommand command = (FindCommand) parser.parseCommand(

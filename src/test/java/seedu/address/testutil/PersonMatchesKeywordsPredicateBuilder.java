@@ -75,18 +75,34 @@ public class PersonMatchesKeywordsPredicateBuilder {
     }
 
     /**
-     * Sets the tag keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     * Sets the school keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
      */
-    public PersonMatchesKeywordsPredicateBuilder withTags(String... keywords) {
-        predicate.setTagKeywords(Arrays.asList(keywords));
+    public PersonMatchesKeywordsPredicateBuilder withSchool(String keywords) {
+        predicate.setSchoolKeywords(parseKeywords(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the academic stream keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withAcadStream(String keywords) {
+        predicate.setAcadStreamKeywords(parseKeywords(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the academic level keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
+     */
+    public PersonMatchesKeywordsPredicateBuilder withAcadLevel(String keywords) {
+        predicate.setAcadLevelKeywords(parseKeywords(keywords));
         return this;
     }
 
     /**
      * Sets the tag keywords of the {@code PersonMatchesKeywordsPredicate} that we are building.
      */
-    public PersonMatchesKeywordsPredicateBuilder withTags(List<String> keywords) {
-        predicate.setTagKeywords(keywords);
+    public PersonMatchesKeywordsPredicateBuilder withTags(String... keywords) {
+        predicate.setTagKeywords(Arrays.asList(keywords));
         return this;
     }
 

@@ -113,6 +113,12 @@ public class PersonUtil {
                 sb.append(PREFIX_PARENT_EMAIL).append(String.join(" ", keywords)).append(" "));
         predicate.getAddressKeywords().ifPresent(keywords ->
                 sb.append(PREFIX_ADDRESS).append(String.join(" ", keywords)).append(" "));
+        predicate.getSchoolKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_SCHOOL).append(String.join(" ", keywords)).append(" "));
+        predicate.getAcadStreamKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_ACAD_STREAM).append(String.join(" ", keywords)).append(" "));
+        predicate.getAcadLevelKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_ACAD_LEVEL).append(String.join(" ", keywords)).append(" "));
         if (predicate.getTagKeywords().isPresent()) {
             List<String> tags = predicate.getTagKeywords().get();
             if (!tags.isEmpty()) {

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
@@ -8,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -27,12 +30,14 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_FIND_CONDITION);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_FIND_CONDITION, PREFIX_NAME,
+                PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL, PREFIX_ADDRESS,
+                PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL, PREFIX_TAG);
 
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -57,6 +62,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             predicate.setAddressKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SCHOOL).isPresent()) {
+            predicate.setSchoolKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_SCHOOL).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ACAD_STREAM).isPresent()) {
+            predicate.setAcadStreamKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_ACAD_STREAM).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ACAD_LEVEL).isPresent()) {
+            predicate.setAcadLevelKeywords(ParserUtil.parseKeywords(argMultimap.getValue(PREFIX_ACAD_LEVEL).get()));
         }
 
         Optional<List<String>> tagsKeywords = parseTagsForFind(argMultimap.getAllValues(PREFIX_TAG));

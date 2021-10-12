@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
@@ -8,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
@@ -28,20 +31,23 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_PARENT_PHONE + "PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
             + "[" + PREFIX_TAG + "TAG]...";
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_FIND_CONDITION + "any "
-            + PREFIX_NAME + "John Tan "
-            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_NAME + "Alex Yeo "
+            + PREFIX_ADDRESS + "Aljunied "
+            + PREFIX_SCHOOL + "nyjc "
             + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of the "
