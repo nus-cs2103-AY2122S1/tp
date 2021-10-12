@@ -49,7 +49,8 @@ public class RevenueCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 this.revenue.addRevenue(personToEdit.getRevenue()),
-                personToEdit.getAddress(), personToEdit.getTags(), personToEdit.getNote(),
+                personToEdit.getAddress(), personToEdit.getTags(),
+                personToEdit.getInsurances(), personToEdit.getNote(),
                 personToEdit.getAppointment());
 
         if (!editedPerson.getRevenue().isValidResultingRevenue()) {

@@ -9,12 +9,14 @@ import java.util.Set;
 
 import seedu.address.commons.core.Money;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.RevenueCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -144,6 +146,34 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String insurance} into an {@code Insurance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code insurance} is invalid.
+     */
+    public static Insurance parseInsurance(String insurance) throws ParseException {
+        requireNonNull(insurance);
+        String trimmedInsurance = insurance.trim();
+        try {
+            return Insurance.of(trimmedInsurance);
+        } catch (IllegalValueException exception) {
+            throw new ParseException(Insurance.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code Collection<String> insurances} into a {@code Set<Insurance>}.
+     */
+    public static Set<Insurance> parseInsurances(Collection<String> insurances) throws ParseException {
+        requireNonNull(insurances);
+        final Set<Insurance> insuranceSet = new HashSet<>();
+        for (String insuranceName : insurances) {
+            insuranceSet.add(parseInsurance(insuranceName));
+        }
+        return insuranceSet;
     }
 
     /**

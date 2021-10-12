@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.Money;
@@ -14,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -34,6 +36,7 @@ class JsonAdaptedPerson {
     private final String revenue;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedInsurance> insurances = new ArrayList<>();
     private final String appointment;
     private final String note;
 
@@ -41,11 +44,12 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("revenue") String revenue,
-            @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("note") String note,
-            @JsonProperty("appointment") String appointment) {
+            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("insurances") List<JsonAdaptedInsurance> insurances,
+            @JsonProperty("note") String note, @JsonProperty("appointment") String appointment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +57,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (insurances != null) {
+            this.insurances.addAll(insurances);
         }
         this.note = note;
         this.appointment = appointment;
@@ -70,6 +77,9 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        insurances.addAll(source.getInsurances().stream()
+                .map(JsonAdaptedInsurance::new)
+                .collect(Collectors.toList()));
         note = source.getNote().value;
         appointment = source.getAppointment().getValue();
     }
@@ -83,6 +93,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Insurance> personInsurances = new ArrayList<>();
+        for (JsonAdaptedInsurance insurance : insurances) {
+            personInsurances.add(insurance.toModelType());
         }
 
         if (name == null) {
@@ -125,6 +140,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Insurance> modelInsurances = new HashSet<>(personInsurances);
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
@@ -137,8 +153,8 @@ class JsonAdaptedPerson {
         }
         final Appointment modelAppointment = new Appointment(appointment);
 
-        return new Person(modelName, modelPhone, modelEmail, modelRevenue, modelAddress, modelTags, modelNote,
-         modelAppointment);
+        return new Person(modelName, modelPhone, modelEmail, modelRevenue, modelAddress, modelTags,
+                modelInsurances, modelNote, modelAppointment);
     }
 
 }

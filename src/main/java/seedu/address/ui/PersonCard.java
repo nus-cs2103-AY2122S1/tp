@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private FlowPane insurances;
+    @FXML
     private Label revenue;
     @FXML
     private Label note;
@@ -62,6 +64,9 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getInsurances().stream()
+                .forEach(insurance -> insurances.getChildren().add(
+                        new Label(insurance.getType().getTypeName())));
         note.setText(person.getNote().value);
         meeting.setText("Meeting: " + person.getAppointment().getValue());
     }

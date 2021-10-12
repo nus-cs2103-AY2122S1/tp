@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -38,6 +40,9 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        person.getInsurances().stream().forEach(
+            i -> sb.append(PREFIX_TAG + i.getType().getTypeName() + " ")
+        );
         return sb.toString();
     }
 
@@ -54,9 +59,18 @@ public class PersonUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+        if (descriptor.getInsurances().isPresent()) {
+            Set<Insurance> insurances = descriptor.getInsurances().get();
+            if (insurances.isEmpty()) {
+                sb.append(PREFIX_INSURANCE).append(" ");
+            } else {
+                insurances.forEach(i -> sb.append(PREFIX_INSURANCE)
+                        .append(i.getType().getTypeName()).append(" "));
             }
         }
 

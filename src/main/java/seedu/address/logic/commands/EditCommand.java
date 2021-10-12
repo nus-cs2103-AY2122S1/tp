@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -104,11 +105,13 @@ public class EditCommand extends Command {
         Revenue originalRevenue = personToEdit.getRevenue();
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Insurance> updatedInsurances = editPersonDescriptor.getInsurances()
+                .orElse(personToEdit.getInsurances());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Appointment originalAppointment = personToEdit.getAppointment();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, originalRevenue,
-                updatedAddress, updatedTags, updatedNote, originalAppointment);
+        return new Person(updatedName, updatedPhone, updatedEmail, originalRevenue, updatedAddress,
+                updatedTags, updatedInsurances, updatedNote, originalAppointment);
     }
 
     @Override
@@ -140,6 +143,7 @@ public class EditCommand extends Command {
         private Revenue revenue;
         private Address address;
         private Set<Tag> tags;
+        private Set<Insurance> insurances;
         private Note note;
 
         public EditPersonDescriptor() {}
@@ -155,6 +159,7 @@ public class EditCommand extends Command {
             setRevenue(toCopy.revenue);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setInsurances(toCopy.insurances);
             setNote(toCopy.note);
         }
 
@@ -222,6 +227,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code insurances} to this object's {@code insurances}.
+         * A defensive copy of {@code insurances} is used internally.
+         */
+        public void setInsurances(Set<Insurance> insurances) {
+            this.insurances = (insurances != null) ? new HashSet<>(insurances) : null;
+        }
+
+        /**
+         * Returns an unmodifiable insurance set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code insurances} is null.
+         */
+        public Optional<Set<Insurance>> getInsurances() {
+            return (insurances != null)
+                    ? Optional.of(Collections.unmodifiableSet(insurances)) : Optional.empty();
+        }
         public void setNote(Note note) {
             this.note = note;
         }
@@ -251,6 +273,7 @@ public class EditCommand extends Command {
                     && getRevenue().equals(e.getRevenue())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
+                    && getInsurances().equals(e.getInsurances())
                     && getNote().equals(e.getNote());
         }
     }

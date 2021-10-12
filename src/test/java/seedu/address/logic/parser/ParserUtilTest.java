@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INSURANCE = "Money";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_INSURANCE_1 = "Life";
+    private static final String VALID_INSURANCE_2 = "Health";
+    private static final String VALID_INSURANCE_ANY_CAPS = "gENEraL";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +197,53 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseInsurance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurance(null));
+    }
+
+    @Test
+    public void parseInsurance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurance(INVALID_INSURANCE));
+    }
+
+    @Test
+    public void parseInsurance_validValue_returnsTag() throws Exception {
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_1);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_1));
+    }
+
+    @Test
+    public void parseInsurance_validValueAnyCaps_returnsTag() throws Exception {
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_ANY_CAPS);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_ANY_CAPS));
+    }
+
+    @Test
+    public void parseInsurances_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurances(null));
+    }
+
+    @Test
+    public void parseInsurances_collectionWithInvalidInsurances_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurances(
+                Arrays.asList(VALID_INSURANCE_1, INVALID_INSURANCE)));
+    }
+
+    @Test
+    public void parseInsurances_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseInsurances(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseInsurances_collectionWithValidInsurances_returnsInsuranceSet() throws Exception {
+        Set<Insurance> actualInsuranceSet = ParserUtil.parseInsurances(
+                Arrays.asList(VALID_INSURANCE_1, VALID_INSURANCE_2));
+        Set<Insurance> expectedInsuranceSet = new HashSet<Insurance>(
+                Arrays.asList(Insurance.of(VALID_INSURANCE_1), Insurance.of(VALID_INSURANCE_2)));
+
+        assertEquals(expectedInsuranceSet, actualInsuranceSet);
     }
 }
