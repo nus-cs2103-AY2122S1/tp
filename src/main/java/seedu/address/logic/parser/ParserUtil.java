@@ -14,6 +14,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Mod;
+import seedu.address.model.tag.Status;
 
 
 /**
@@ -109,7 +110,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses a {@code String StudentId} into a {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code StudentId} is invalid.
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
@@ -118,5 +122,23 @@ public class ParserUtil {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(trimmedID);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseGroupStatus(String status) throws ParseException {
+        if (status != null) {
+            String trimmedStatus = status.trim();
+            if (!Status.isValidStatus(trimmedStatus)) {
+                throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+            }
+            return Status.parseStatusForFilter(trimmedStatus);
+        } else {
+            return null;
+        }
     }
 }

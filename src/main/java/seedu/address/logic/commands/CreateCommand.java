@@ -52,6 +52,7 @@ public class CreateCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
+            System.out.println("here");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
