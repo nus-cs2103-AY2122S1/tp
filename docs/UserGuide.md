@@ -390,25 +390,6 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-<<<<<<< HEAD
-<<<<<<< HEAD
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-=======
-**Add** |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [t/TAG]…​` <br><br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 sch/DHS lvl/Y1 t/cousin`
-**Clear** |`clear`
-**Delete** |`delete INDEX`<br><br> e.g., `delete 3`
-**Edit** |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [sch/SCHOOL] [stream/STREAM] [lvl/ACAD_LEVEL] [r/REMARK] [t/TAG]…​`<br><br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** |`find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** |`list`
-**Help** |`help`
->>>>>>> master
-=======
 **Help** | `help`
 **Add Student** | `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARKS] [t/TAG]…`<br><br> e.g. `add n/James Ho a/123, Clementi Rd, 1234665 p/22224444 e/jamesho@example.com pp/33335555 pe/danielho@example.com sch/DHS lvl/Y1 f/50 r/retainee t/cousin`
 **View Student** | `view INDEX`
@@ -425,4 +406,3 @@ Action | Format, Examples
 **Undo** | `undo`
 **Redo** | `redo`
 **Exit** | `exit`
->>>>>>> master
