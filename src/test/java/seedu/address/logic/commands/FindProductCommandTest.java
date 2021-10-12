@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalProducts.IPHONE;
 import static seedu.address.testutil.TypicalProducts.IPAD;
+import static seedu.address.testutil.TypicalProducts.IPHONE;
 import static seedu.address.testutil.TypicalProducts.MACBOOK;
 import static seedu.address.testutil.TypicalProducts.getTypicalAddressBook;
 
