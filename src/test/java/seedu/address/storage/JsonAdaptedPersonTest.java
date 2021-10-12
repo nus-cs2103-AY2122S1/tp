@@ -149,7 +149,7 @@ public class JsonAdaptedPersonTest {
         List<JsonAdaptedLesson> overlappingLessons = Arrays.asList(new JsonAdaptedLesson(MON_10_12_BIOLOGY),
                 new JsonAdaptedLesson(MON_11_13_MATH));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_ID, VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_ADDRESS, VALID_TAGS, overlappingLessons);
+                VALID_ADDRESS, VALID_TAGS, VALID_ASSIGNED_TASK_IDS, overlappingLessons);
         assertThrows(IllegalValueException.class, NoOverlapLessonList.LESSON_OVERLAP, person::toModelType);
     }
 
