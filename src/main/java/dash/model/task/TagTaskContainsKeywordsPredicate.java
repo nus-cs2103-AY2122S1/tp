@@ -8,7 +8,7 @@ import dash.commons.util.StringUtil;
 import dash.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Task}'s {@code TaskDescription} matches any of the keywords given.
  */
 public class TagTaskContainsKeywordsPredicate implements Predicate<Task> {
     private final List<String> keywords;
