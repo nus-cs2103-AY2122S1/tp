@@ -31,9 +31,9 @@ import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddGroupCommandTest {
+    private static final String NEW_GROUP = "X01X";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final String NEW_GROUP = "X01X";
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
@@ -72,7 +72,7 @@ public class AddGroupCommandTest {
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(amyNameDescriptor));
 
         // Expected model should have the new group with the student allocated to it
-        Group completeGroup =  new GroupBuilder().withName(NEW_GROUP).withStudents(AMY).build();
+        Group completeGroup = new GroupBuilder().withName(NEW_GROUP).withStudents(AMY).build();
         expectedModel.addGroup(completeGroup);
 
         // Expected model's student should have the new group
@@ -108,8 +108,8 @@ public class AddGroupCommandTest {
                 .withName(randomName).build();
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(descriptorForNonExistentStudent));
 
-        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_NONEXISTENT_STUDENT, randomName),
-                () -> command.execute(model));
+        assertThrows(CommandException.class,
+                String.format(AddGroupCommand.MESSAGE_NONEXISTENT_STUDENT, randomName), () -> command.execute(model));
     }
 
     @Test
@@ -122,8 +122,8 @@ public class AddGroupCommandTest {
 
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(descriptorForNonExistentStudent));
 
-        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_NONEXISTENT_STUDENT, randomId),
-                () -> command.execute(model));
+        assertThrows(CommandException.class,
+                String.format(AddGroupCommand.MESSAGE_NONEXISTENT_STUDENT, randomId), () -> command.execute(model));
     }
 
     @Test
@@ -141,7 +141,8 @@ public class AddGroupCommandTest {
 
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(amyNameDescriptor, amyIdDescriptor));
 
-        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT_IN_GROUP, AMY.getName()), () -> command.execute(model));
+        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT_IN_GROUP,
+                AMY.getName()), () -> command.execute(model));
     }
 
     @Test void execute_ambiguousStudentName_throwsCommandException() {
@@ -159,7 +160,8 @@ public class AddGroupCommandTest {
 
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(johnDoeNameDescriptor));
 
-        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT, duplicatedName), () -> command.execute(model));
+        assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT,
+                duplicatedName), () -> command.execute(model));
     }
 
     @Test
