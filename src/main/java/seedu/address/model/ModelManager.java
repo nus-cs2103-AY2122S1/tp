@@ -174,9 +174,6 @@ public class ModelManager implements Model {
     @Override
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
-        //        target.markTaskComplete();
-//        Task newTask = target;
-//        newTask.markTaskComplete();
         TaskName name = target.getName();
         Deadline deadline = target.getDeadline();
         Set<Tag> tags = target.getTags();
