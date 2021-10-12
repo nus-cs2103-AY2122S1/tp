@@ -36,10 +36,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
-import seedu.address.model.member.Address;
-import seedu.address.model.member.Email;
-import seedu.address.model.member.Name;
-import seedu.address.model.member.Phone;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.member.Address;
+import seedu.address.model.data.member.Email;
+import seedu.address.model.data.member.Phone;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 

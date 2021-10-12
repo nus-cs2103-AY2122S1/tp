@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 
 /**
  * An UI component that displays information of a {@code Member}.

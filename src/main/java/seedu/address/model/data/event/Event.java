@@ -1,4 +1,4 @@
-package seedu.address.model.event;
+package seedu.address.model.data.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -8,17 +8,18 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.member.Member;
+import seedu.address.model.data.Data;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.member.Member;
 
 /**
- * Represents an Event in the address book.
+ * Represents an Event in the Ailurus.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event extends Data {
     /**
      * Identity fields
      */
-    private final EventName name;
     private final EventDate date;
 
     /**
@@ -31,9 +32,9 @@ public class Event {
      * for participants.
      * Every field must be present and not null.
      */
-    public Event(EventName name, EventDate date) {
-        requireAllNonNull(name, date);
-        this.name = name;
+    public Event(Name name, EventDate date) {
+        super(name);
+        requireAllNonNull(date);
         this.date = date;
     }
 
@@ -42,9 +43,9 @@ public class Event {
      * for participants.
      * Every field must be present and not null.
      */
-    public Event(EventName name, EventDate date, Set<Member> participants) {
-        requireAllNonNull(name, date);
-        this.name = name;
+    public Event(Name name, EventDate date, Set<Member> participants) {
+        super(name);
+        requireAllNonNull(date);
         this.date = date;
         for (Member m : participants) {
             this.participants.put(m, false);
@@ -56,16 +57,11 @@ public class Event {
      * {@code Map<Member, Boolean>} for participants.
      * Every field must be present and not null.
      */
-    public Event(EventName name, EventDate date, Map<Member, Boolean> participants) {
-        requireAllNonNull(name, date);
-        this.name = name;
+    public Event(Name name, EventDate date, Map<Member, Boolean> participants) {
+        super(name);
+        requireAllNonNull(date);
         this.date = date;
         this.participants.putAll(participants);
-    }
-
-
-    public EventName getName() {
-        return name;
     }
 
     public EventDate getDate() {
@@ -156,13 +152,15 @@ public class Event {
      * @param otherEvent is the event to be compared with
      * @return true if both Events have the same name and date
      */
-    public boolean isSameTypeOfEvent(Event otherEvent) {
+    @Override
+    public boolean isSameType(Data otherEvent) {
         if (otherEvent == this) {
             return true;
+        } else if (otherEvent instanceof Event) {
+            Event other = (Event) otherEvent;
+            return other.getName().equals(getName()) && other.getDate().equals(getDate());
         }
-
-        return otherEvent != null
-                && otherEvent.getName().equals(getName()) && otherEvent.getDate().equals(getDate());
+        return false;
     }
 
     /**
@@ -194,7 +192,7 @@ public class Event {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(name, date, participants);
+        return Objects.hash(getName(), date, participants);
     }
 
     /**
@@ -204,6 +202,6 @@ public class Event {
      */
     @Override
     public String toString() {
-        return String.format("%s; Date: %s", name, date);
+        return String.format("%s; Date: %s", getName(), date);
     }
 }

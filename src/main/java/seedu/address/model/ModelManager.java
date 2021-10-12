@@ -12,8 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 
 /**

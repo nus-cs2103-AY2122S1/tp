@@ -1,4 +1,4 @@
-package seedu.address.model.event;
+package seedu.address.model.data.event;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -9,20 +9,20 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.event.exceptions.DuplicateEventException;
-import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.exceptions.DuplicateEventException;
+import seedu.address.model.data.event.exceptions.EventNotFoundException;
+import seedu.address.model.data.member.Member;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
- * A event is considered unique by comparing using {@code Event#isSameTypeOfEvent(Event)}. As such, adding and updating
- * of events uses Event#isSameTypeOfEvent(Event) for equality so as to ensure that the event being added or updated is
+ * A event is considered unique by comparing using {@code Event#isSameType(Event)}. As such, adding and updating
+ * of events uses Event#isSameType(Event) for equality so as to ensure that the event being added or updated is
  * unique in terms of identity in the UniqueEventList. However, the removal of a event uses Event#equals(Object) so
  * as to ensure that the event with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Event#isSameTypeOfEvent(Event)
+ * @see Event#isSameType(seedu.address.model.data.Data)
  */
 public class UniqueEventList implements Iterable<Event> {
 
@@ -38,7 +38,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTypeOfEvent);
+        return internalList.stream().anyMatch(toCheck::isSameType);
     }
 
     /**
@@ -87,7 +87,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new EventNotFoundException();
         }
 
-        if (!target.isSameTypeOfEvent(editedEvent) && contains(editedEvent)) {
+        if (!target.isSameType(editedEvent) && contains(editedEvent)) {
             throw new DuplicateEventException();
         }
 
@@ -166,7 +166,7 @@ public class UniqueEventList implements Iterable<Event> {
     private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {
             for (int j = i + 1; j < events.size(); j++) {
-                if (events.get(i).isSameTypeOfEvent(events.get(j))) {
+                if (events.get(i).isSameType(events.get(j))) {
                     return false;
                 }
             }

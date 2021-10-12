@@ -1,10 +1,12 @@
-package seedu.address.model.member;
+package seedu.address.model.data.member;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.data.Name;
 
 public class NameTest {
 

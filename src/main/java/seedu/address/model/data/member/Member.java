@@ -1,4 +1,4 @@
-package seedu.address.model.member;
+package seedu.address.model.data.member;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -7,17 +7,18 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.data.Data;
+import seedu.address.model.data.Name;
 import seedu.address.model.position.Position;
 import seedu.address.model.task.TaskList;
 
 /**
- * Represents a Member in the address book.
+ * Represents a Member in the Ailurus.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Member {
+public class Member extends Data {
 
     // Identity fields
-    private final Name name;
     private final Phone phone;
     private final Email email;
 
@@ -30,8 +31,8 @@ public class Member {
      * Every field must be present and not null.
      */
     public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions) {
-        requireAllNonNull(name, phone, email, address, positions);
-        this.name = name;
+        super(name);
+        requireAllNonNull(phone, email, address, positions);
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -42,17 +43,13 @@ public class Member {
      * Constructs a member with tasks.
      */
     public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions, TaskList taskList) {
-        requireAllNonNull(name, phone, email, address, positions, taskList);
-        this.name = name;
+        super(name);
+        requireAllNonNull(phone, email, address, positions, taskList);
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.positions.addAll(positions);
         this.taskList.setTasks(taskList);
-    }
-
-    public Name getName() {
-        return name;
     }
 
     public Phone getPhone() {
@@ -87,13 +84,14 @@ public class Member {
      * Returns true if both members have the same name.
      * This defines a weaker notion of equality between two members.
      */
-    public boolean isSameMember(Member otherMember) {
+    @Override
+    public boolean isSameType(Data otherMember) {
         if (otherMember == this) {
             return true;
+        } else if (otherMember instanceof Member) {
+            return otherMember.getName().equals(getName());
         }
-
-        return otherMember != null
-                && otherMember.getName().equals(getName());
+        return false;
     }
 
     /**
@@ -122,7 +120,7 @@ public class Member {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, positions);
+        return Objects.hash(getName(), phone, email, address, positions);
     }
 
     @Override
