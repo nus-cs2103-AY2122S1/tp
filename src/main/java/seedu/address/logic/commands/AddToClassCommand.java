@@ -31,7 +31,8 @@ public class AddToClassCommand extends Command {
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
     private static final String MESSAGE_CLASS_IS_FULL = "The following students are not "
             + "added due to class limit: ";
-    private static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not found in the address book: ";
+    private static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not "
+            + "found in the address book: ";
     private static final String MESSAGE_NO_STUDENT_ADDED = "No student has been added.";
     private Index studentIndex;
     private Index classIndex;
