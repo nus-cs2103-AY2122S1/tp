@@ -1,6 +1,5 @@
 package seedu.address.model.util;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +8,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Address;
-import seedu.address.model.member.Email;
-import seedu.address.model.member.Member;
-import seedu.address.model.member.Name;
-import seedu.address.model.member.Phone;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.event.EventDate;
+import seedu.address.model.data.member.Address;
+import seedu.address.model.data.member.Email;
+import seedu.address.model.data.member.Member;
+import seedu.address.model.data.member.Phone;
 import seedu.address.model.position.Position;
 import seedu.address.model.task.Task;
 
@@ -24,22 +24,28 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
-            new Member(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Member(new seedu.address.model.data.Name("Alex Yeoh"), new Phone("87438807"),
+                new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getPositionSet("friends")),
-            new Member(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Member(new seedu.address.model.data.Name("Bernice Yu"), new Phone("99272758"),
+                new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getPositionSet("colleagues", "friends")),
-            new Member(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Member(new seedu.address.model.data.Name("Charlotte Oliveiro"), new Phone("93210283"),
+                new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getPositionSet("neighbours")),
-            new Member(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Member(new seedu.address.model.data.Name("David Li"), new Phone("91031282"),
+                new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getPositionSet("family")),
-            new Member(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Member(new seedu.address.model.data.Name("Irfan Ibrahim"), new Phone("92492021"),
+                new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getPositionSet("classmates")),
-            new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Member(new seedu.address.model.data.Name("Roy Balakrishnan"), new Phone("92624417"),
+                new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getPositionSet("colleagues"))
         };
@@ -51,10 +57,12 @@ public class SampleDataUtil {
             sampleAb.addMember(sampleMember);
         }
         Set<Member> set = new HashSet<>();
-        set.add(new Member(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+        set.add(new Member(new seedu.address.model.data.Name("Roy Balakrishnan"), new Phone("92624417"),
+                        new Email("royb@example.com"),
                         new Address("Blk 45 Aljunied Street 85, #11-31"),
                         getPositionSet("colleagues")));
-        sampleAb.addEvent(new Event("GenshinTime", LocalDate.parse("2021-10-11"), set));
+        sampleAb.addEvent(new Event(new Name("Freshmen Orientation Camp Project"), new EventDate("11/07/2021"),
+                        set));
         return sampleAb;
     }
 

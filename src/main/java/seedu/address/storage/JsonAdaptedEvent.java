@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.event.EventDate;
+import seedu.address.model.data.member.Member;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -42,7 +42,7 @@ public class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName();
+        name = source.getName().fullName;
         date = source.getDate().toString();
         participants = new ArrayList<>();
         attendanceList = new ArrayList<>();
@@ -67,18 +67,20 @@ public class JsonAdaptedEvent {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, "NAME"));
         }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelEventName = new Name(name);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, "DATE"));
         }
-        try {
-            LocalDate.parse(date);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Not valid date");
+        if (!EventDate.isValidEventDate(date)) {
+            throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
         }
-        final LocalDate modelDate = LocalDate.parse(date);
+        final EventDate modelEventDate = new EventDate(date);
 
-        return new Event(name, modelDate, map);
+        return new Event(modelEventName, modelEventDate, map);
     }
 
 }

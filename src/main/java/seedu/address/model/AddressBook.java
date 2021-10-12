@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.member.Member;
-import seedu.address.model.member.UniqueMemberList;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.event.UniqueEventList;
+import seedu.address.model.data.member.Member;
+import seedu.address.model.data.member.UniqueMemberList;
 
 /**
  * Wraps all data at the address-book level
@@ -118,6 +119,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event e) {
         events.add(e);
+    }
+
+    /**
+     * Adds members to an event to the Ailurus.
+     * The event must already exist in the Ailurus.
+     *
+     * @param target is the event to be modified
+     * @param memberSet is the member list to be added
+     */
+    public void addEventMembers(Event target, Set<Member> memberSet) {
+        events.addMembers(target, memberSet);
     }
 
     /**
