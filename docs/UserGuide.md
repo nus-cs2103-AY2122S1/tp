@@ -106,15 +106,15 @@ Examples:
 * `module delete CS2103, A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
 * `module delete CS2100, A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
 
-### Delete module from TAB: `module delete`
+### Delete module from TAB: `delete module`
 
 Deletes the specified module from TAB
 
-Format: `module delete <module name>`
+Format: `delete module m/module_name`
 
 Examples:
-* `module delete CS2103`: Deletes module CS2103 from TAB
-* `module delete CS2100`: Deletes module CS2100 from TAB
+* `delete module m/CS2103`: Deletes module CS2103 from TAB
+* `delete module m/CS2100`: Deletes module CS2100 from TAB
 
 ### Create a new student: `student add`
 

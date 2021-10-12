@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTeachingAssistantBuddy;
 import seedu.address.model.TeachingAssistantBuddy;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 
 /**
  * An Immutable TeachingAssistantBuddy that is serializable to JSON format.
