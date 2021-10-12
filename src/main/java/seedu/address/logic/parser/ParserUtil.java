@@ -42,13 +42,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static seedu.address.model.data.Name parseName(String name) throws ParseException {
+    public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!seedu.address.model.data.Name.isValidName(trimmedName)) {
-            throw new ParseException(seedu.address.model.data.Name.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.data.Name(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**
