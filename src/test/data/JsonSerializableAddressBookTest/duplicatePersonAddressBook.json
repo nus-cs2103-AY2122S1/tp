@@ -1,19 +1,21 @@
 {
-  "persons": [
-    {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "alice@example.com",
-      "note": "",
-      "tagged": [
-        "friends"
-      ]
-    },
-    {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "pauline@example.com",
-      "note": ""
-    }
-  ]
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "note" : "",
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  }, {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "pauline@example.com",
+    "note" : "",
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  } ],
+  "superGroups" : [ ],
+  "subGroups" : [ ]
 }
