@@ -18,14 +18,17 @@ public class AddressContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("10 Dummy Residence");
         List<String> secondPredicateKeywordList = Arrays.asList("10 Dummy Residence", "13 Dummy Residence");
 
-        AddressContainsKeywordsPredicate firstPredicate = new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
-        AddressContainsKeywordsPredicate secondPredicate = new AddressContainsKeywordsPredicate(secondPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicate = new AddressContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate secondPredicate = new AddressContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        AddressContainsKeywordsPredicate firstPredicateCopy = new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicateCopy = new AddressContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +44,8 @@ public class AddressContainsKeywordsPredicateTest {
     @Test
     public void test_addressContainsKeywords_returnsTrue() {
         // One keyword
-        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(Collections.singletonList("10"));
+        AddressContainsKeywordsPredicate predicate = new AddressContainsKeywordsPredicate(
+                Collections.singletonList("10"));
         assertTrue(predicate.test(new PersonBuilder().withAddress("10 Dummy Residence").build()));
 
         // Multiple keywords
