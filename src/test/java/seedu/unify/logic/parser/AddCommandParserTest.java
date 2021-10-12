@@ -38,33 +38,6 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Task expectedTask = new TaskBuilder(BOB).withTag(VALID_TAG_FRIEND).build();
-
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + TIME_DESC_BOB
-                + DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
-
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + TIME_DESC_BOB
-                + DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
-
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + TIME_DESC_AMY + TIME_DESC_BOB
-                + DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
-
-        // multiple dates - last date accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + TIME_DESC_BOB + DATE_DESC_AMY
-                + DATE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedTask));
-
-        // multiple tags - all accepted
-        Task expectedTaskMultipleTags = new TaskBuilder(BOB).withTag(VALID_TAG_HUSBAND)
-                .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + TIME_DESC_BOB + DATE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedTaskMultipleTags));
-    }
-
-    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
