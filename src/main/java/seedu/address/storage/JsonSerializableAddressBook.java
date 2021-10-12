@@ -114,7 +114,7 @@ class JsonSerializableAddressBook {
         for (String jsonLessonCode : jsonLessonCodes) {
             boolean hasFoundLesson = false;
             for (Lesson lesson : lessonList) {
-                if (lesson.getLessonCode().equals(jsonLessonCode)) {
+                if (jsonLessonCode.equals(lesson.getLessonCode().value)) {
                     lesson.addStudent(student);
                     hasFoundLesson = true;
                     break;
