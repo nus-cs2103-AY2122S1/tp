@@ -14,6 +14,8 @@ import seedu.address.model.game.Game;
 
 public class FriendMainCard extends UiPart<Region> {
     private static final String FXML = "FriendMainCard.fxml";
+    private static final String FRIEND_TITLE = "%s \n Friend ID: %s";
+
     private final Logger logger = LogsCenter.getLogger(FriendMainCard.class);
 
     @FXML
@@ -22,11 +24,8 @@ public class FriendMainCard extends UiPart<Region> {
     @FXML
     private ListView<Game> gameListView;
 
-    private final static String FRIEND_TITLE = "%s \n Friend ID: %s";
-
-
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code FriendMainCard} with the given {@Code Friend} and {@code ObservableList}.
      */
     public FriendMainCard(Friend friend, ObservableList<Game> gameList) {
         super(FXML);
@@ -36,7 +35,7 @@ public class FriendMainCard extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Game} using a {@code GameCard}.
      */
     class GameListViewCell extends ListCell<Game> {
         @Override

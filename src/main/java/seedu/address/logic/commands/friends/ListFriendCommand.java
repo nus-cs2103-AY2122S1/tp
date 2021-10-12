@@ -45,7 +45,13 @@ public class ListFriendCommand extends Command {
                     (FriendIdContainsKeywordPredicate) predicate;
             model.updateFilteredFriendsList(friendIdContainsKeywordPredicate);
             //TODO: get the actual friend being listed if only one friend
-            return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
+            if (model.getFilteredFriendsList().size() == 1) {
+                return new CommandResult(getMessageSuccess(), CommandType.FRIEND_GET,
+                        model.getFilteredFriendsList().get(0));
+            } else {
+                return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
+            }
+
         }
         // ListCommand initialized with unknown predicate
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);
