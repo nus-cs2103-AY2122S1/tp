@@ -26,6 +26,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_HELP_ARG_1 = "add";
+    private static final String INVALID_HELP_ARG_2 = "archive";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +35,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_HELP_ARG_1 = "Add";
+    private static final String VALID_HELP_ARG_2 = "";
+
+    private static final String SAMPLE_STRING = "the quick brown fox jumped over the lazy dog";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -192,5 +199,45 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseHelp_withSmallLetters_success() {
+        String actual = ParserUtil.parseHelp(INVALID_HELP_ARG_1);
+        String expected = "";
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseHelp_withBigLetters_success() {
+        String actual = ParserUtil.parseHelp(VALID_HELP_ARG_1);
+        String expected = "Add";
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseHelp_noInput_success() {
+        String actual = ParserUtil.parseHelp(VALID_HELP_ARG_2);
+        String expected = "";
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseHelp_invalidInput_success() {
+        String actual = ParserUtil.parseHelp(INVALID_HELP_ARG_2);
+        String expected = "";
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void capitaliseFirstLetters_success() {
+        String actual = ParserUtil.capitaliseFirstLetters(SAMPLE_STRING);
+        String expected = "The Quick Brown Fox Jumped Over The Lazy Dog";
+
+        assertEquals(expected, actual);
     }
 }

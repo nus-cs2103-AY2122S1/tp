@@ -222,7 +222,7 @@ public class HelpWindow extends UiPart<Stage> {
             return SORT_COMMAND_USAGE;
         case "Tag" :
             return TAG_USAGE;
-        case "PriorityTag" :
+        case "Priority Tag" :
             return PRIORITY_TAG_USAGE;
         case "Misc":
             return "Coming soon!";
