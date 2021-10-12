@@ -53,11 +53,16 @@ public class StudentTest {
     }
 
     @Test
+    public void createClone() {
+        Student expectedStudent = new PersonBuilder().build();
+        assertEquals(expectedStudent, expectedStudent);
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Student aliceCopy = new PersonBuilder(ALICE).build();
-        Student alice = ALICE;
-        assertEquals(alice, aliceCopy);
+        assertEquals(ALICE, aliceCopy);
 
         // same object -> returns true
         assertEquals(ALICE, ALICE);
