@@ -95,4 +95,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    boolean hasModule(Module module);
+
+    void addModule(Module module);
+
+    //todo later versions: deleteModule and setModule
 }

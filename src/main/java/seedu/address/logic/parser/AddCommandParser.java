@@ -11,6 +11,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddModuleCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,20 +27,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        String command = args.split(" ")[0];
-
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(args.trim());
-
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+        String command = args.split(" ")[0];
 
         final String commandWord = "add " + matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-
         switch (commandWord) {
         case AddModuleCommand.COMMAND_WORD:
-            return null; // to be implemented
+            return new AddModuleCommandParser().parse(arguments);
         case AddTaskCommand.COMMAND_WORD:
             return null; //to be implemented
         case AddStudentCommand.COMMAND_WORD:

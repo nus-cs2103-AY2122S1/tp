@@ -128,6 +128,18 @@ public class ModelManager implements Model {
         teachingAssistantBuddy.setStudent(target, editedStudent);
     }
 
+    @Override
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return teachingAssistantBuddy.hasModule(module);
+    }
+
+    @Override
+    public void addModule(Module module) {
+        requireNonNull(module);
+        teachingAssistantBuddy.addModule(module);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
