@@ -55,6 +55,19 @@ public class ParserUtil {
         }
         return new ClientId(trimmedId);
     }
+    /**
+     * Parses {@code clientId} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static Index parseClientIndex(String clientId) throws ParseException {
+        String trimmedIndex = clientId.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Index.fromZeroBased(Integer.parseInt(trimmedIndex));
+    }
 
     /**
      * Parses a {@code String name} into a {@code Name}.
