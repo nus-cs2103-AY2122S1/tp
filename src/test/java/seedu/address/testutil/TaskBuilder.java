@@ -20,6 +20,7 @@ public class TaskBuilder {
     private TaskName taskName;
     private Deadline taskDeadline;
     private Set<Tag> tags;
+    private boolean isDone;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -28,6 +29,7 @@ public class TaskBuilder {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
         this.taskDeadline = new Deadline(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
+        this.isDone = false;
     }
 
     /**
@@ -36,7 +38,8 @@ public class TaskBuilder {
     public TaskBuilder(Task taskToCopy) {
         this.taskName = taskToCopy.getName();
         this.taskDeadline = taskToCopy.getDeadline();
-        tags = new HashSet<>(taskToCopy.getTags());
+        this.tags = new HashSet<>(taskToCopy.getTags());
+        this.isDone = taskToCopy.checkIsDone();
     }
 
     /**

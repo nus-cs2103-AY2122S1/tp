@@ -6,6 +6,7 @@ import static seedu.address.model.Model.displayType.STUDENTS;
 import static seedu.address.model.Model.displayType.TASKS;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,7 +15,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -170,8 +174,15 @@ public class ModelManager implements Model {
     @Override
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
-        target.markTaskComplete();
-
+        //        target.markTaskComplete();
+//        Task newTask = target;
+//        newTask.markTaskComplete();
+        TaskName name = target.getName();
+        Deadline deadline = target.getDeadline();
+        Set<Tag> tags = target.getTags();
+        Task newTask = new Task(name, deadline, tags);
+        newTask.markTaskComplete();
+        addressBook.setTask(target, newTask);
     }
 
     //=========== Filtered Student List Accessors =============================================================
