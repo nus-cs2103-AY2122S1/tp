@@ -1,9 +1,9 @@
 package seedu.address.storage;
 
-import seedu.address.model.id.UniqueId;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
+import seedu.address.model.id.UniqueId;
 
 /**
  * Jackson-friendly version of {@link UniqueId}.
