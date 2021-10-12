@@ -31,6 +31,16 @@ public class LevelOfEducation {
         Education(String educationLevel) {
             this.educationLevel = educationLevel;
         }
+
+        public static String combined() {
+            StringBuilder regex = new StringBuilder("(?i)\\b(?:");
+            for (Education education: Education.values()) {
+                regex.append(education.educationLevel);
+                regex.append("|");
+            }
+            regex.append("\\w+)\\b");
+            return regex.toString();
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS =
