@@ -13,7 +13,7 @@ import seedu.address.model.task.Task;
 /**
  * Adds a student to the address book.
  */
-public class AddTaskCommand extends Command {
+public class AddTaskCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "add task";
 
