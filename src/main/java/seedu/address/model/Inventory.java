@@ -108,7 +108,7 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Makes transaction of the item.
+     * Makes transaction of the item and update inventory accordingly.
      *
      * @return Number of items actually consumed in the transaction.
      */
@@ -117,7 +117,7 @@ public class Inventory implements ReadOnlyInventory {
 
         int transactedQuantity = 0;
         for (Item item : items.asUnmodifiableObservableList()) {
-            if (item.equals(toTransact)) {
+            if (item.isSameItem(toTransact)) {
                 transactedQuantity = Math.min(item.getCount(), toTransact.getCount());
                 if (transactedQuantity == item.getCount()) {
                     items.remove(item);
