@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final UniFy uniFy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredTask;
 
     /**
      * Initializes a ModelManager with the given uniFy and userPrefs.
@@ -34,7 +34,7 @@ public class ModelManager implements Model {
 
         this.uniFy = new UniFy(uniFy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.uniFy.getTaskList());
+        filteredTask = new FilteredList<>(this.uniFy.getTaskList());
     }
 
     public ModelManager() {
@@ -120,13 +120,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
-        return filteredTasks;
+        return filteredTask;
     }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
+        filteredTask.setPredicate(predicate);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return uniFy.equals(other.uniFy)
                 && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                && filteredTask.equals(other.filteredTask);
     }
 
 }
