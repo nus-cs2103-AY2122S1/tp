@@ -80,19 +80,15 @@ public class ImportCommandParser {
         if (csvTags != null) {
             isTagColumnPresent = true;
         }
-
         if (csvNames == null) {
             throw new ParseException("Name column is missing");
         }
-
         if (csvPhones == null) {
             throw new ParseException("Phone Number column is missing");
         }
-
         if (csvEmails == null) {
             throw new ParseException("Email column is missing");
         }
-
         if (csvAddresses == null) {
             throw new ParseException("Address column is missing");
         }
@@ -101,14 +97,11 @@ public class ImportCommandParser {
     private void parseColumns() {
         int i = 0;
 
-        try {
-            while (i < csvParser.size()) {
+        while (i < csvParser.size()) {
+            try {
                 names.add(ParserUtil.parseName(csvNames.get(i)));
-
                 phones.add(ParserUtil.parsePhone(csvPhones.get(i)));
-
                 emails.add(ParserUtil.parseEmail(csvEmails.get(i)));
-
                 addresses.add(ParserUtil.parseAddress(csvAddresses.get(i)));
 
                 List<String> inputtedTags = new ArrayList<>();
@@ -118,11 +111,10 @@ public class ImportCommandParser {
                 }
 
                 tags.add(ParserUtil.parseTags(inputtedTags));
-
-                i++;
+            } catch (ParseException e) {
+                wronglyFormattedEntries.add("Row" + (i + 2) + " : " + e.getLocalizedMessage());
             }
-        } catch (ParseException e) {
-            wronglyFormattedEntries.add("Row" + (i + 1) + " : " + e.getLocalizedMessage());
+            i++;
         }
 
     }
