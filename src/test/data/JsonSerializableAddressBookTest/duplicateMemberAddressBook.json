@@ -2,11 +2,11 @@
   "members": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "availability": "Mon Tue Wed Thu Fri Sat Sun"
+    "availability": "mon"
   }, {
     "name": "Alice Pauline",
     "phone": "94343423",
-    "availability": "Mon Tue Wed Thu Fri Sat Sun"
+    "availability": "mon"
   } ],
   "facilities": []
 }

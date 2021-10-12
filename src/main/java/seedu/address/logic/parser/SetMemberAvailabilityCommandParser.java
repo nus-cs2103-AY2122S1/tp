@@ -42,8 +42,8 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
                     SetMemberAvailabilityCommand.MESSAGE_USAGE), ive);
         }
 
-        String availability = argMultimap.getValue(PREFIX_AVAILABILITY).orElse("");
+        Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
 
-        return new SetMemberAvailabilityCommand(indices, new Availability(availability));
+        return new SetMemberAvailabilityCommand(indices, availability);
     }
 }

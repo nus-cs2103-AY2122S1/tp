@@ -3,7 +3,7 @@
   "members" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "availability": "Mon Tue Wed Thu Fri Sat Sun"
+    "availability": ""
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",

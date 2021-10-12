@@ -1,11 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
+
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -26,6 +25,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
+        sb.append(PREFIX_AVAILABILITY + person.getAvailability().values + " ");
 
         return sb.toString();
     }

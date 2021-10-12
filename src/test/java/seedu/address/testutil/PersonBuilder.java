@@ -12,7 +12,7 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_AVAILABILITY = "Mon";
+    public static final String DEFAULT_AVAILABILITY = "mon";
 
     private Name name;
     private Phone phone;

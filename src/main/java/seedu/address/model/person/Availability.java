@@ -2,11 +2,19 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a Person's availability in the address book.
  * Guarantees: immutable; is always valid
  */
 public class Availability {
+
+    public static final String[] DAYS = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Availability should be given as the abbreviated names of days(mon tue wed thu fri sat sun)";
 
     public final String values;
 
@@ -18,6 +26,19 @@ public class Availability {
     public Availability(String availability) {
         requireNonNull(availability);
         values = availability;
+    }
+
+    /**
+     * Returns true if a given availability is valid.
+     */
+    public static boolean isValidAvailability(List<String> test) {
+        List<String> days = Arrays.asList(DAYS);
+        for (String day : test) {
+            if (!days.contains(day)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
