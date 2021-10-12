@@ -32,10 +32,10 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFriendsList(predicate);
-        Friend friend = new Friend(new FriendId("--add"), new FriendName("No name assigned"));
+        Friend friend = new Friend(new FriendId("bobiscool"), new FriendName("Bob"));
         return new CommandResult(
                 // TODO: get the actual friend
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredFriendsList().size()),
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1),
                 CommandType.FRIEND_GET, friend);
     }
 
