@@ -48,7 +48,7 @@ import seedu.address.testutil.PersonMatchesKeywordsPredicateBuilder;
 public class FindCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
 
     private FindCommandParser parser = new FindCommandParser();
 
@@ -92,36 +92,35 @@ public class FindCommandParserTest {
 
         // invalid tag keyword followed by valid tag
         assertParseFailure(parser, " " + PREFIX_TAG + " " + PREFIX_TAG + "math ",
-            FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+                FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
 
         // valid tag keyword followed by invalid condition
         assertParseFailure(parser, " " + PREFIX_TAG + "math " + PREFIX_FIND_CONDITION + "invalid",
-            FindCommand.MESSAGE_CONDITION_CONSTRAINTS);
+                FindCommand.MESSAGE_CONDITION_CONSTRAINTS);
 
         // invalid condition followed by invalid tag keyword
         // invalid keyword takes precedence
         assertParseFailure(parser, " " + PREFIX_FIND_CONDITION + "invalid " + PREFIX_TAG + " ",
-            FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+                FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
 
         // invalid condition followed with no fields
         // Missing fields takes precedence
         assertParseFailure(parser, " " + PREFIX_FIND_CONDITION + "invalid ",
-            FindCommand.MESSAGE_FIELD_REQUIRED);
+                FindCommand.MESSAGE_FIELD_REQUIRED);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = PHONE_DESC_BOB + TAG_DESC_HUSBAND
-            + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
-            + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + FIND_COND_DESC_ALL;
+        String userInput = PHONE_DESC_BOB + TAG_DESC_HUSBAND + PARENT_EMAIL_DESC_AMY + PARENT_PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + FIND_COND_DESC_ALL;
 
         PersonMatchesKeywordsPredicate
-            predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ALL)
-            .withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-            .withAddress(VALID_ADDRESS_AMY)
-            .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ALL)
+                .withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
+                .withAddress(VALID_ADDRESS_AMY)
+                .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -131,10 +130,8 @@ public class FindCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         String userInput = PHONE_DESC_BOB + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        PersonMatchesKeywordsPredicate predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_FRIEND)
-                .build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_FRIEND).build();
 
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -144,25 +141,21 @@ public class FindCommandParserTest {
     public void parse_condition_success() {
         // Match all
         String userInput = FIND_COND_DESC_ALL + NAME_DESC_AMY + TAG_DESC_FRIEND;
-        PersonMatchesKeywordsPredicate
-            predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ALL)
-                .withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withCondition(FindCondition.ALL).withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match any
         userInput = FIND_COND_DESC_ANY + NAME_DESC_AMY + TAG_DESC_FRIEND;
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ANY)
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ANY)
                 .withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match none
         userInput = FIND_COND_DESC_NONE + NAME_DESC_AMY + TAG_DESC_FRIEND;
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.NONE)
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.NONE)
                 .withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -171,8 +164,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-            new FindCommand(new PersonMatchesKeywordsPredicateBuilder().withName("Alice Bob").build());
+        FindCommand expectedFindCommand = new FindCommand(new PersonMatchesKeywordsPredicateBuilder()
+                .withName("Alice Bob").build());
         assertParseSuccess(parser, " n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -182,44 +175,38 @@ public class FindCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        PersonMatchesKeywordsPredicate predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withName(VALID_NAME_AMY).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName(VALID_NAME_AMY).build();
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, NAME_DESC_AMY, expectedCommand);
 
         // phone
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_AMY).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, PHONE_DESC_AMY, expectedCommand);
 
         // email
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withEmail(VALID_EMAIL_AMY).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, EMAIL_DESC_AMY, expectedCommand);
 
         // parent phone
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withParentPhone(VALID_PARENT_PHONE_AMY).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withParentPhone(VALID_PARENT_PHONE_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, PARENT_PHONE_DESC_AMY, expectedCommand);
 
         // parent email
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withParentEmail(VALID_PARENT_EMAIL_AMY).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withParentEmail(VALID_PARENT_EMAIL_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, PARENT_EMAIL_DESC_AMY, expectedCommand);
 
         // address
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withAddress(VALID_ADDRESS_AMY).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, ADDRESS_DESC_AMY, expectedCommand);
 
         // tags
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withTags(VALID_TAG_FRIEND).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, TAG_DESC_FRIEND, expectedCommand);
     }
@@ -227,11 +214,11 @@ public class FindCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         String userInput = PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + FIND_COND_DESC_NONE
-            + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-            + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + FIND_COND_DESC_ANY + TAG_DESC_HUSBAND;
+                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
+                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + FIND_COND_DESC_ANY + TAG_DESC_HUSBAND;
 
-        PersonMatchesKeywordsPredicate predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_BOB)
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .withCondition(FindCondition.ANY)
@@ -245,15 +232,14 @@ public class FindCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         String userInput = INVALID_PHONE_DESC + PHONE_DESC_BOB;
-        PersonMatchesKeywordsPredicate predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_BOB).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withPhone(VALID_PHONE_BOB).build();
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB + PHONE_DESC_BOB;
-        predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);

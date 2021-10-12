@@ -58,9 +58,9 @@ public class AddressBookParserTest {
     public void parseCommand_ladd() throws Exception {
         Lesson lesson = SampleDataUtil.getSampleLesson();
         LessonAddCommand command = (LessonAddCommand) parser.parseCommand(
-            LessonUtil.getLessonAddCommand(
-                INDEX_FIRST_PERSON.getOneBased(),
-                lesson));
+                LessonUtil.getLessonAddCommand(
+                        INDEX_FIRST_PERSON.getOneBased(),
+                        lesson));
         LessonAddCommand other = new LessonAddCommand(INDEX_FIRST_PERSON, lesson);
         assertEquals(other, command);
     }
@@ -82,12 +82,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        PersonMatchesKeywordsPredicate predicate =
-            new PersonMatchesKeywordsPredicateBuilder().withName("Amy bob").withAddress("street")
-                .withTags("friend", "paid").withCondition(FindCommand.FindCondition.ANY).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName("Amy bob").withAddress("street").withTags("friend", "paid")
+                .withCondition(FindCommand.FindCondition.ANY).build();
         String details = PersonUtil.getPersonMatchesKeywordsPredicateDetails(predicate);
         FindCommand command = (FindCommand) parser.parseCommand(
-            FindCommand.COMMAND_WORD + " " + details);
+                FindCommand.COMMAND_WORD + " " + details);
         assertEquals(new FindCommand(predicate), command);
     }
 
@@ -105,8 +105,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), () -> parser
+                        .parseCommand(""));
     }
 
     @Test

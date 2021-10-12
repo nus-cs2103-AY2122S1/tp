@@ -33,7 +33,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
      */
     public boolean isAnyFieldSearched() {
         return CollectionUtil.isAnyNonNull(nameKeywords, phoneKeywords, emailKeywords, parentPhoneKeywords,
-            parentEmailKeywords, addressKeywords, tagKeywords);
+                parentEmailKeywords, addressKeywords, tagKeywords);
     }
 
     /**
@@ -207,7 +207,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     /**
      * Returns a {@code Predicate} that tests that a {@code Person}'s parent {@code Phone} matches the keywords given.
      *
-     * @return A predicate that tests a person's phone number.
+     * @return A predicate that tests a person's parent phone number.
      */
     private Predicate<Person> getParentPhoneMatchPredicate() {
         return person -> isMatch(parentPhoneKeywords, person.getParentPhone().value);
@@ -216,7 +216,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     /**
      * Returns a {@code Predicate} that tests that a {@code Person}'s parent {@code Email} matches the keywords given.
      *
-     * @return A predicate that tests a person's email.
+     * @return A predicate that tests a person's parent email.
      */
     private Predicate<Person> getParentEmailMatchPredicate() {
         return person -> isMatch(parentEmailKeywords, person.getParentEmail().value);
@@ -260,7 +260,6 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
         if (getNameKeywords().isPresent()) {
             predicates.add(getNameMatchPredicate());
         }
-        ;
         if (getPhoneKeywords().isPresent()) {
             predicates.add(getPhoneMatchPredicate());
         }
@@ -322,6 +321,7 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         List<Predicate<Person>> predicates = getPredicates();
+        assert condition != null;
         switch (condition) {
         case ALL:
             return matchAll(predicates).test(person);
@@ -349,13 +349,13 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
 
         PersonMatchesKeywordsPredicate p = (PersonMatchesKeywordsPredicate) other;
         return getNameKeywords().equals(p.getNameKeywords())
-            && getPhoneKeywords().equals(p.getPhoneKeywords())
-            && getEmailKeywords().equals(p.getEmailKeywords())
-            && getParentPhoneKeywords().equals(p.getParentPhoneKeywords())
-            && getParentEmailKeywords().equals(p.getParentEmailKeywords())
-            && getAddressKeywords().equals(p.getAddressKeywords())
-            && getTagKeywords().equals(p.getTagKeywords())
-            && getCondition().equals(p.getCondition());
+                && getPhoneKeywords().equals(p.getPhoneKeywords())
+                && getEmailKeywords().equals(p.getEmailKeywords())
+                && getParentPhoneKeywords().equals(p.getParentPhoneKeywords())
+                && getParentEmailKeywords().equals(p.getParentEmailKeywords())
+                && getAddressKeywords().equals(p.getAddressKeywords())
+                && getTagKeywords().equals(p.getTagKeywords())
+                && getCondition().equals(p.getCondition());
     }
 
 }

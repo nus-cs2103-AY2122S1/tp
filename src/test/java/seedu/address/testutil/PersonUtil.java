@@ -51,9 +51,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_FEE + person.getFee().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
@@ -93,18 +91,18 @@ public class PersonUtil {
     public static String getPersonMatchesKeywordsPredicateDetails(PersonMatchesKeywordsPredicate predicate) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_FIND_CONDITION).append(predicate.getCondition()).append(" ");
-        predicate.getNameKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_NAME).append(String.join(" ", keywords)).append(" "));
-        predicate.getPhoneKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_PHONE).append(String.join(" ", keywords)).append(" "));
-        predicate.getEmailKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_EMAIL).append(String.join(" ", keywords)).append(" "));
-        predicate.getParentPhoneKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_PARENT_PHONE).append(String.join(" ", keywords)).append(" "));
-        predicate.getParentEmailKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_PARENT_EMAIL).append(String.join(" ", keywords)).append(" "));
-        predicate.getAddressKeywords()
-            .ifPresent(keywords -> sb.append(PREFIX_ADDRESS).append(String.join(" ", keywords)).append(" "));
+        predicate.getNameKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_NAME).append(String.join(" ", keywords)).append(" "));
+        predicate.getPhoneKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_PHONE).append(String.join(" ", keywords)).append(" "));
+        predicate.getEmailKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_EMAIL).append(String.join(" ", keywords)).append(" "));
+        predicate.getParentPhoneKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_PARENT_PHONE).append(String.join(" ", keywords)).append(" "));
+        predicate.getParentEmailKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_PARENT_EMAIL).append(String.join(" ", keywords)).append(" "));
+        predicate.getAddressKeywords().ifPresent(keywords ->
+                sb.append(PREFIX_ADDRESS).append(String.join(" ", keywords)).append(" "));
         if (predicate.getTagKeywords().isPresent()) {
             List<String> tags = predicate.getTagKeywords().get();
             if (!tags.isEmpty()) {

@@ -37,12 +37,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        PersonMatchesKeywordsPredicate
-            firstPredicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withName(VALID_NAME_AMY).build();
-        PersonMatchesKeywordsPredicate
-            secondPredicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withName(VALID_NAME_BOB).build();
+        PersonMatchesKeywordsPredicate firstPredicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName(VALID_NAME_AMY).build();
+        PersonMatchesKeywordsPredicate secondPredicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName(VALID_NAME_BOB).build();
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -67,9 +65,8 @@ public class FindCommandTest {
     @Test
     public void execute_oneField_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        PersonMatchesKeywordsPredicate
-            predicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withName(KEYWORD_MATCHING_MEIER).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withName(KEYWORD_MATCHING_MEIER).build();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -80,9 +77,8 @@ public class FindCommandTest {
     public void execute_multipleFieldsAllCondition_multiplePersonsFound() {
         // Default condition
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        PersonMatchesKeywordsPredicate
-            predicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withAddress("ave").withTags("friends").build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
+                .withTags("friends").build();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -90,8 +86,8 @@ public class FindCommandTest {
 
         // Match all condition
         expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        predicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withAddress("ave").withTags("friends").withCondition(FindCommand.FindCondition.ALL).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave").withTags("friends")
+                .withCondition(FindCommand.FindCondition.ALL).build();
         command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -102,8 +98,8 @@ public class FindCommandTest {
     public void execute_multipleFieldsAnyCondition_multiplePersonsFound() {
         // Match any condition
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withAddress("ave").withTags("friends").withCondition(FindCommand.FindCondition.ANY).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
+                .withTags("friends").withCondition(FindCommand.FindCondition.ANY).build();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -114,8 +110,8 @@ public class FindCommandTest {
     public void execute_multipleFieldsNoneCondition_multiplePersonsFound() {
         // Match none condition
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-            .withAddress("ave").withTags("friends").withCondition(FindCommand.FindCondition.NONE).build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
+                .withTags("friends").withCondition(FindCommand.FindCondition.NONE).build();
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

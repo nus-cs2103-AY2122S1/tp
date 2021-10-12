@@ -25,48 +25,48 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
-        + "[" + PREFIX_NAME + "NAME] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_PHONE + "PHONE] "
-        + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_PARENT_PHONE + "PHONE] "
-        + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_TAG + "TAG]...";
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_PARENT_PHONE + "PHONE] "
+            + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TAG + "TAG]...";
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
-        + PREFIX_FIND_CONDITION + "any "
-        + PREFIX_NAME + "John Tan "
-        + PREFIX_ADDRESS + "Clementi "
-        + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
+            + PREFIX_FIND_CONDITION + "any "
+            + PREFIX_NAME + "John Tan "
+            + PREFIX_ADDRESS + "Clementi "
+            + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of the "
-        + "specified keywords (case-insensitive).\n"
-        + "You can specify one of these find conditions: 'all' / 'any' / 'none'\n"
-        + "It indicates that a student is only considered a match when all, any or none of the the fields "
-        + "which you are searching for match their keywords. The default is 'all'.\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Example: " + COMMAND_EXAMPLE;
+            + "specified keywords (case-insensitive).\n"
+            + "You can specify one of these find conditions: 'all' / 'any' / 'none'\n"
+            + "It indicates that a student is only considered a match when all, any or none of the the fields "
+            + "which you are searching for match their keywords. The default is 'all'.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_FIELD_REQUIRED = "You must provide at least one parameter to find.\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Example: " + COMMAND_EXAMPLE;
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_CONDITION_CONSTRAINTS = "Find condition should take on one of these values: "
-        + "all / any / none";
+            + "all / any / none";
 
     public static final String MESSAGE_KEYWORD_CONSTRAINTS = "Keyword cannot be empty.";
 
     public static final String MESSAGE_TAG_KEYWORD_CONSTRAINTS = "Tag can only take one keyword. "
-        + "To search for multiple tags, use multiple t/ \n"
-        + "Example: find t/unpaid t/zoom";
+            + "To search for multiple tags, use multiple t/ \n"
+            + "Example: find t/unpaid t/zoom";
 
     private final Predicate<Person> predicate;
 
     /**
      * Creates a FindCommand to find persons that match the given predicate.
      *
-     * @param predicate
+     * @param predicate Person predicate to filter the list of persons with.
      */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
@@ -77,14 +77,14 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-            String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof FindCommand // instanceof handles nulls
-            && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof FindCommand // instanceof handles nulls
+                && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 
     /**
@@ -113,7 +113,7 @@ public class FindCommand extends Command {
 
         @Override
         public String toString() {
-            return this.name().toLowerCase();
+            return name().toLowerCase();
         }
     }
 }

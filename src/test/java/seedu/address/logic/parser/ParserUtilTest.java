@@ -40,7 +40,7 @@ public class ParserUtilTest {
     private static final String INVALID_DATE = "32 Dec 2021";
     private static final String INVALID_SUBJECT = "^%123";
     private static final String INVALID_HOMEWORK = "this string contains more than 50 characters"
-        + "and is far too long to be accepted as a homework description string";
+            + "and is far too long to be accepted as a homework description string";
 
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -349,8 +349,7 @@ public class ParserUtilTest {
     public void parseIndividualPieceOfHomework_validValueWithoutWhitespace_returnsHomework()
         throws Exception {
         Homework expectedHomework = new Homework(VALID_HOMEWORK_1);
-        assertEquals(
-            expectedHomework,
+        assertEquals(expectedHomework,
             ParserUtil.parseIndividualPieceOfHomework(VALID_HOMEWORK_1));
     }
 
@@ -360,7 +359,7 @@ public class ParserUtilTest {
         String homeworkWithWhitespace = WHITESPACE + VALID_HOMEWORK_1 + WHITESPACE;
         Homework expectedHomework = new Homework(VALID_HOMEWORK_1);
         assertEquals(expectedHomework,
-            ParserUtil.parseIndividualPieceOfHomework(homeworkWithWhitespace));
+                ParserUtil.parseIndividualPieceOfHomework(homeworkWithWhitespace));
     }
 
     @Test
@@ -371,7 +370,7 @@ public class ParserUtilTest {
     @Test
     public void parseHomeworkList_collectionWithInvalidHomeworks_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
-            .parseHomeworkList(Arrays.asList(VALID_HOMEWORK_1, INVALID_HOMEWORK)));
+                .parseHomeworkList(Arrays.asList(VALID_HOMEWORK_1, INVALID_HOMEWORK)));
     }
 
     @Test
@@ -383,9 +382,9 @@ public class ParserUtilTest {
     public void parseHomeworkList_collectionWithValidHomeworks_returnsHomeworkSet()
         throws Exception {
         Set<Homework> actualHomeworkSet = ParserUtil.parseHomeworkList(
-            Arrays.asList(VALID_HOMEWORK_1, VALID_HOMEWORK_2));
+                Arrays.asList(VALID_HOMEWORK_1, VALID_HOMEWORK_2));
         Set<Homework> expectedHomeworkSet = new HashSet<Homework>(
-            Arrays.asList(new Homework(VALID_HOMEWORK_1), new Homework(VALID_HOMEWORK_2)));
+                Arrays.asList(new Homework(VALID_HOMEWORK_1), new Homework(VALID_HOMEWORK_2)));
 
         assertEquals(expectedHomeworkSet, actualHomeworkSet);
     }
@@ -416,19 +415,19 @@ public class ParserUtilTest {
     public void parseKeywords_validKeywords_returnsKeywordStringList() throws Exception {
         // split by whitespace
         assertEquals(Arrays.asList(VALID_KEYWORD_1, VALID_KEYWORD_2),
-            ParserUtil.parseKeywords(VALID_KEYWORD_1 + WHITESPACE + VALID_KEYWORD_2));
+                ParserUtil.parseKeywords(VALID_KEYWORD_1 + WHITESPACE + VALID_KEYWORD_2));
     }
 
     @Test
     public void parseTagKeyword_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil
-            .parseTagKeyword(null));
+                .parseTagKeyword(null));
     }
 
     @Test
     public void parseTagKeyword_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
-            .parseTagKeyword(WHITESPACE));
+                .parseTagKeyword(WHITESPACE));
     }
 
     @Test
@@ -450,7 +449,7 @@ public class ParserUtilTest {
     @Test
     public void parseTagKeywords_collectionWithInvalidKeyword_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
-            .parseTagKeywords(Arrays.asList(VALID_KEYWORD_1, WHITESPACE)));
+                .parseTagKeywords(Arrays.asList(VALID_KEYWORD_1, WHITESPACE)));
     }
 
     @Test
@@ -460,7 +459,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseFindCondition_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseFindCondition((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseFindCondition(null));
     }
 
     @Test
