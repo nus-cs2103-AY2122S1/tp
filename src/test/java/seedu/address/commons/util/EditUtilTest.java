@@ -37,29 +37,35 @@ class EditUtilTest {
 
     @Test
     public void isAnyFieldEdited_true() {
-        EditPersonDescriptor test;
-        test = new EditPersonDescriptor();
+        EditPersonDescriptor editPersonDescriptor;
 
-        test.setAddress(new Address(VALID_ADDRESS_AMY));
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setAddress(new Address(VALID_ADDRESS_AMY));
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
 
-        test.setBirthday(new Birthday(VALID_BIRTHDAY_AMY));
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setBirthday(new Birthday(VALID_BIRTHDAY_AMY));
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
 
-        test.setEmail(new Email(VALID_EMAIL_AMY));
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setEmail(new Email(VALID_EMAIL_AMY));
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
 
-        test.setName(new Name(VALID_NAME_AMY));
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setName(new Name(VALID_NAME_AMY));
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
 
+        editPersonDescriptor = new EditPersonDescriptor();
         Set<Tag> testTags = new HashSet<>();
         testTags.add(new Tag(VALID_TAG_FRIEND));
-        test.setTags(testTags);
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor.setTags(testTags);
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
 
-        test.setPhone(new Phone(VALID_PHONE_AMY));
-        assertTrue(test.isAnyFieldEdited());
+        editPersonDescriptor = new EditPersonDescriptor();
+        editPersonDescriptor.setPhone(new Phone(VALID_PHONE_AMY));
+        assertTrue(editPersonDescriptor.isAnyFieldEdited());
     }
+
     @Test
     public void isAnyFieldEdited_false() {
         EditPersonDescriptor test = new EditPersonDescriptor();
