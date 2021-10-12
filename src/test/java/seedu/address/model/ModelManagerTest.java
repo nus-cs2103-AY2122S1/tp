@@ -117,6 +117,8 @@ public class ModelManagerTest {
 
     @Test
     public void getDisplayTaskList_modifyList_throwsUnsupportedOperationException() {
+        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
+        modelManager.updateDisplayTaskList(Arrays.asList(taskList));
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getDisplayTaskList().remove(0));
     }
 
