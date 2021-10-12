@@ -18,7 +18,9 @@ public class ImportCommand extends Command {
     public static final String COMMAND_WORD = "import";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Imports the json file identified into the ProfBook.";
+            + ": Imports the json file identified into the ProfBook.\n"
+            + "Parameters: FILEPATH\n"
+            + "Example: import students.json";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Import command not implemented yet";
 
