@@ -15,10 +15,8 @@ public class WeeklyPanel extends UiPart<Region> {
 
     private static final String FXML = "WeeklyPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
-    private Logic logic;
     // add date to be passed down from Weekly Panel
     private Date[] dateRange;
-
 
     @FXML
     private Label weekLabel;
@@ -29,7 +27,7 @@ public class WeeklyPanel extends UiPart<Region> {
     /**
      * Creates a {@code WeeklyPanel} with the given {@code ObservableList}.
      */
-    public WeeklyPanel(Date date) {
+    public WeeklyPanel(Logic logic, Date date) {
         super(FXML);
         weekLabel.setText(date.toString());
         // must include an increment operation to either
@@ -38,7 +36,7 @@ public class WeeklyPanel extends UiPart<Region> {
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
             VBox placeHolderVBox = new VBox();
-            DailyPanel dailyPanel = new DailyPanel(date, indexToDay(i));
+            DailyPanel dailyPanel = new DailyPanel(logic, date, indexToDay(i));
             placeHolderVBox.getChildren().add(dailyPanel.getRoot());
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");

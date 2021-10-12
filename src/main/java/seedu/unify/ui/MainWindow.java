@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // pass in date into weeklyPanel constructor instead of
         // a taskList. Currently placeholder
-        weeklyPanel = new WeeklyPanel(new Date("2020-10-10"));
+        weeklyPanel = new WeeklyPanel(logic, new Date("2020-10-10"));
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }
 
