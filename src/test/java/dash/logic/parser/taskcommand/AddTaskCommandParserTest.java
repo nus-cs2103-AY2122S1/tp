@@ -71,8 +71,8 @@ public class AddTaskCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid task description
         CommandParserTestUtil.assertParseFailure(parser,
-                CommandTestUtil.INVALID_TASK_DESC +
-                        CommandTestUtil.TAG_DESC_UNGRADED, TaskDescription.MESSAGE_CONSTRAINTS);
+                CommandTestUtil.INVALID_TASK_DESC
+                        + CommandTestUtil.TAG_DESC_UNGRADED, TaskDescription.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         CommandParserTestUtil.assertParseFailure(parser,
