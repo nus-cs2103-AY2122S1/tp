@@ -1,4 +1,4 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import static dash.logic.commands.CommandTestUtil.DESC_AMY;
 import static dash.logic.commands.CommandTestUtil.DESC_BOB;

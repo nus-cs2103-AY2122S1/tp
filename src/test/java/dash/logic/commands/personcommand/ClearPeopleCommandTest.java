@@ -1,10 +1,9 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import static dash.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import dash.logic.commands.personcommand.ClearPeopleCommand;
 import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.ModelManager;

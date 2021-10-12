@@ -1,10 +1,10 @@
-package dash.logic.parser;
+package dash.logic.parser.personcommand;
 
 import org.junit.jupiter.api.Test;
 
 import dash.commons.core.Messages;
 import dash.logic.commands.personcommand.DeletePersonCommand;
-import dash.logic.parser.personcommand.DeletePersonCommandParser;
+import dash.logic.parser.CommandParserTestUtil;
 import dash.testutil.TypicalIndexes;
 
 /**
