@@ -98,6 +98,7 @@ Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYM
 
 * Find command must take at least 1 prefix input.
 * Find command can only take 1 input for each prefix.
+* If you input multiple of the same prefix, only the last prefix will be used for the search of that category.
 * Input for each prefix can contain multiple search terms separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 * Inputs are **case-insensitive**
 
