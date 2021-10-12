@@ -3,11 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -59,6 +63,35 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "F1"; // grade should start with 'S' or 'P'
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_SUBJECT_SCIENCE = "Science";
+    public static final String VALID_SUBJECT_MATHS = "Maths";
+    public static final String VALID_GRADE_SCIENCE = "S1";
+    public static final String VALID_GRADE_MATHS = "S2";
+    public static final String VALID_LESSONTIME_SCIENCE = "1200";
+    public static final String VALID_LESSONTIME_MATHS = "1300";
+    public static final String VALID_DAYOFWEEK_SCIENCE = "Wed";
+    public static final String VALID_DAYOFWEEK_MATHS = "Fri";
+    public static final String VALID_PRICE_SCIENCE = "100.0";
+    public static final String VALID_PRICE_MATHS = "120.0";
+
+    public static final String SUBJECT_DESC_SCIENCE = " " + PREFIX_SUBJECT + VALID_SUBJECT_SCIENCE;
+    public static final String SUBJECT_DESC_MATHS = " " + PREFIX_SUBJECT + VALID_SUBJECT_MATHS;
+    public static final String GRADE_DESC_SCIENCE = " " + PREFIX_GRADE + VALID_GRADE_SCIENCE;
+    public static final String GRADE_DESC_MATHS = " " + PREFIX_GRADE + VALID_GRADE_MATHS;
+    public static final String LESSONTIME_DESC_SCIENCE = " " + PREFIX_TIME + VALID_LESSONTIME_SCIENCE;
+    public static final String LESSONTIME_DESC_MATHS = " " + PREFIX_TIME + VALID_LESSONTIME_MATHS;
+    public static final String DAYOFWEEK_DESC_SCIENCE = " " + PREFIX_DAY + VALID_DAYOFWEEK_SCIENCE;
+    public static final String DAYOFWEEK_DESC_MATHS = " " + PREFIX_DAY + VALID_DAYOFWEEK_MATHS;
+    public static final String PRICE_DESC_SCIENCE = " " + PREFIX_COST + VALID_PRICE_SCIENCE;
+    public static final String PRICE_DESC_MATHS = " " + PREFIX_COST + VALID_PRICE_MATHS;
+
+    public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Science101*";
+    public static final String INVALID_LESSONTIME_DESC = " " + PREFIX_TIME + "12:00";
+    public static final String INVALID_LESSONTIME_ODD_TIME_DESC = " " + PREFIX_TIME + "0100";
+    public static final String INVALID_DAYOFWEEK_DESC = " " + PREFIX_DAY + "SadDay";
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_COST + "-1.0";
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
