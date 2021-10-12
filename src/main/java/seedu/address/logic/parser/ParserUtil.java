@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -22,6 +23,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_SUBSTRING = "Substring does not exist.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -124,7 +126,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String birthday} into a {@code Set<Tag>}.
+     * Parses {@code String birthday} into a {@code Birthday}.
      */
     public static Birthday parseBirthday(String birthday) throws ParseException {
         if (birthday == null) {
@@ -138,5 +140,19 @@ public class ParserUtil {
             throw new ParseException(Birthday.MESSAGE_INVALID_DATE);
         }
         return new Birthday(trimmedBirthday);
+    }
+
+    /**
+     * Parses {@code String} of arguments to retrieve index of start of {@code String} of substring.
+     *
+     * @throws ParseException if the given {@code substring} is not found in {@code args}.
+     */
+    public static int getIndexOfSubstring(String args, String substring) throws ParseException {
+        requireAllNonNull(args, substring);
+        int indexOfStartOfSubstring = args.indexOf(substring);
+        if (indexOfStartOfSubstring == -1) {
+            throw new ParseException(MESSAGE_INVALID_SUBSTRING);
+        }
+        return indexOfStartOfSubstring;
     }
 }
