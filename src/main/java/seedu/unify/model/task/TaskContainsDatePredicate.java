@@ -1,9 +1,6 @@
 package seedu.unify.model.task;
 
-import java.util.List;
 import java.util.function.Predicate;
-
-import seedu.unify.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Task}'s {@code Name} matches any of the keywords given.
