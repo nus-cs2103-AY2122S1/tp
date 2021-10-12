@@ -52,6 +52,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label outstandingFee;
     @FXML
+    private Label school;
+    @FXML
+    private Label acadStream;
+    @FXML
+    private Label acadLevel;
+    @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
@@ -66,18 +72,76 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText("Phone: " + person.getPhone().value);
-        email.setText("Email: " + person.getEmail().value);
-        parentPhone.setText("Parent Phone: " + person.getParentPhone().value);
-        parentEmail.setText("Parent Email: " + person.getParentEmail().value);
         address.setText("Address: " + person.getAddress().value);
-        outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
-        remark.setText("Remarks: " + person.getRemark().value);
-        person.getTags().stream()
-            .sorted(Comparator.comparing(tag -> tag.tagName))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        setLessonListView(person.getLessons());
 
+        if (person.getPhone().isEmpty()) {
+            phone.setManaged(false);
+        } else {
+            phone.setText("Phone: " + person.getPhone().value);
+        }
+
+        if (person.getEmail().isEmpty()) {
+            email.setManaged(false);
+        } else {
+            email.setText("Email: " + person.getEmail().value);
+        }
+
+        if (person.getParentPhone().isEmpty()) {
+            parentPhone.setManaged(false);
+        } else {
+            parentPhone.setText("Parent Phone: " + person.getParentPhone().value);
+        }
+
+        if (person.getParentEmail().isEmpty()) {
+            parentEmail.setManaged(false);
+        } else {
+            parentEmail.setText("Parent Email: " + person.getParentEmail().value);
+        }
+
+        if (person.getSchool().isEmpty()) {
+            school.setManaged(false);
+        } else {
+            school.setText("School: " + person.getSchool().value);
+        }
+
+        if (person.getAcadStream().isEmpty()) {
+            acadStream.setManaged(false);
+        } else {
+            acadStream.setText("Academic Stream: " + person.getAcadStream().value);
+        }
+
+        if (person.getAcadLevel().isEmpty()) {
+            acadLevel.setVisible(false);
+            acadLevel.setManaged(false);
+        } else {
+            acadLevel.setText("Academic Level: " + person.getAcadLevel().value);
+        }
+
+        if (person.getRemark().isEmpty()) {
+            remark.setManaged(false);
+        } else {
+            remark.setText("Remark: " + person.getRemark().value);
+        }
+
+        if (person.getFee().isEmpty()) {
+            outstandingFee.setManaged(false);
+        } else {
+            outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
+        }
+
+        if (person.getTags().isEmpty()) {
+            tags.setManaged(false);
+        } else {
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        }
+
+        if (person.getLessons().isEmpty()) {
+            lessonListView.setManaged(false);
+        } else {
+            setLessonListView(person.getLessons());
+        }
     }
 
     private void setLessonListView(Set<Lesson> lessons) {

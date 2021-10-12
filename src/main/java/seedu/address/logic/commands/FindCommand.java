@@ -12,9 +12,13 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Find Student";
+
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "KEYWORD [MORE_KEYWORDS]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " alice bob charlie";
 

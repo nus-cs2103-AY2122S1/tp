@@ -26,6 +26,9 @@ public class Person {
     private final Phone parentPhone;
     private final Email parentEmail;
     private final Address address;
+    private final School school;
+    private final AcadStream acadStream;
+    private final AcadLevel acadLevel;
     private final Remark remark;
     private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
@@ -34,16 +37,20 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
-                  Address address, Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
-        requireAllNonNull(name, phone, email, address, remark, tags, lessons);
+                  Address address, School school, AcadStream acadStream, AcadLevel acadLevel,
+                  Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
+        requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
+                school, acadStream, acadLevel, outstandingFee, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
         this.address = address;
+        this.school = school;
+        this.acadStream = acadStream;
+        this.acadLevel = acadLevel;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
@@ -72,6 +79,18 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public AcadStream getAcadStream() {
+        return acadStream;
+    }
+
+    public AcadLevel getAcadLevel() {
+        return acadLevel;
     }
 
     public Fee getFee() {
@@ -160,6 +179,9 @@ public class Person {
                 && otherPerson.getParentPhone().equals(getParentPhone())
                 && otherPerson.getParentEmail().equals(getParentEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getSchool().equals(getSchool())
+                && otherPerson.getAcadStream().equals(getAcadStream())
+                && otherPerson.getAcadLevel().equals(getAcadLevel())
                 && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
@@ -169,31 +191,54 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, parentPhone, parentEmail, address,
+                school, acadStream, acadLevel, outstandingFee, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Parent Phone: ")
-                .append(getParentPhone())
-                .append("; Parent Email: ")
-                .append(getParentEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Outstanding Fees: ")
-                .append(getFee())
-                .append("; Remark: ")
-                .append(getRemark());
+        builder.append(getName()).append("; \nAddress: ").append(getAddress());
+
+        if (!getPhone().isEmpty()) {
+            builder.append("; \nPhone: ").append(getPhone());
+        }
+
+        if (!getEmail().isEmpty()) {
+            builder.append("; \nEmail: ").append(getEmail());
+        }
+
+        if (!getParentPhone().isEmpty()) {
+            builder.append("; \nParent Phone: ").append(getParentPhone());
+        }
+
+        if (!getParentEmail().isEmpty()) {
+            builder.append("; \nParent Email: ").append(getParentEmail());
+        }
+
+        if (!getSchool().isEmpty()) {
+            builder.append("; \nSchool: ").append(getSchool());
+        }
+
+        if (!getAcadStream().isEmpty()) {
+            builder.append("; \nAcademic Stream: ").append(getAcadStream());
+        }
+
+        if (!getAcadLevel().isEmpty()) {
+            builder.append("; \nAcademic Level: ").append(getAcadLevel());
+        }
+
+        if (!getFee().isEmpty()) {
+            builder.append("; \nOutstanding Fees: ").append(getFee());
+        }
+
+        if (!getRemark().isEmpty()) {
+            builder.append("; \nRemark: ").append(getRemark());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("; \nTags: ");
             tags.forEach(builder::append);
         }
         return builder.toString();

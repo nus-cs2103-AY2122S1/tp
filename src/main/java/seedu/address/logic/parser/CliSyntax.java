@@ -16,6 +16,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
+    /* Prefix for academic details */
+    public static final Prefix PREFIX_SCHOOL = new Prefix("sch/");
+    public static final Prefix PREFIX_ACAD_STREAM = new Prefix("stream/");
+    public static final Prefix PREFIX_ACAD_LEVEL = new Prefix("lvl/");
+
     /* Prefix definitions for lesson */
     public static final Prefix PREFIX_RECURRING = new Prefix("recurring/");
     public static final Prefix PREFIX_DATE = new Prefix("date/");

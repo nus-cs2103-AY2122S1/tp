@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -19,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +37,9 @@ class JsonAdaptedPerson {
     private final String parentPhone;
     private final String parentEmail;
     private final String address;
+    private final String school;
+    private final String acadStream;
+    private final String acadLevel;
     private final String outstandingFee;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -46,6 +52,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
+                             @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
+                             @JsonProperty("acadLevel") String acadLevel,
                              @JsonProperty("outstanding fee") String outstandingFee,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
@@ -56,6 +64,9 @@ class JsonAdaptedPerson {
         this.parentPhone = parentPhone;
         this.parentEmail = parentEmail;
         this.address = address;
+        this.school = school;
+        this.acadStream = acadStream;
+        this.acadLevel = acadLevel;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         if (tagged != null) {
@@ -73,10 +84,12 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-
         parentPhone = source.getParentPhone().value;
         parentEmail = source.getParentEmail().value;
         address = source.getAddress().value;
+        school = source.getSchool().value;
+        acadStream = source.getAcadStream().value;
+        acadLevel = source.getAcadLevel().value;
         outstandingFee = source.getFee().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
@@ -151,6 +164,26 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (school == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, School.class.getSimpleName()));
+        }
+        final School modelSchool = new School(school);
+
+        if (acadStream == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadStream.class.getSimpleName()));
+        }
+        final AcadStream modelAcadStream = new AcadStream(acadStream);
+
+        if (acadLevel == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadLevel.class.getSimpleName()));
+        }
+        if (!AcadLevel.isValidAcadLevel(acadLevel)) {
+            throw new IllegalValueException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
+
         if (outstandingFee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
         }
@@ -166,7 +199,7 @@ class JsonAdaptedPerson {
         final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
-                modelAddress, modelFee, modelRemark, modelTags, modelLessons);
+                modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelFee, modelRemark, modelTags,
+                modelLessons);
     }
-
 }

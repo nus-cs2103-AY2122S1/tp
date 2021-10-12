@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
@@ -9,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -24,6 +27,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -31,6 +36,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,18 +44,25 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends UndoableCommand {
 
+    public static final String COMMAND_ACTION = "Edit Student";
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_PARENT_PHONE + "PHONE] "
-            + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -120,6 +133,9 @@ public class EditCommand extends UndoableCommand {
         Phone updatedParentPhone = editPersonDescriptor.getParentPhone().orElse(personToEdit.getParentPhone());
         Email updatedParentEmail = editPersonDescriptor.getParentEmail().orElse(personToEdit.getParentEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        School updatedSchool = editPersonDescriptor.getSchool().orElse(personToEdit.getSchool());
+        AcadStream updatedAcadStream = editPersonDescriptor.getAcadStream().orElse(personToEdit.getAcadStream());
+        AcadLevel updatedAcadLevel = editPersonDescriptor.getAcadLevel().orElse(personToEdit.getAcadLevel());
         Fee updatedFee = editPersonDescriptor.getFee().orElse(personToEdit.getFee());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -127,7 +143,8 @@ public class EditCommand extends UndoableCommand {
         Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-                updatedAddress, updatedFee, updatedRemark, updatedTags, updatedLessons);
+                updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedFee, updatedRemark,
+                updatedTags, updatedLessons);
     }
 
     @Override
@@ -178,6 +195,9 @@ public class EditCommand extends UndoableCommand {
         private Email email;
         private Email parentEmail;
         private Address address;
+        private School school;
+        private AcadStream acadStream;
+        private AcadLevel acadLevel;
         private Fee outstandingFee;
         private Remark remark;
         private Set<Tag> tags;
@@ -196,6 +216,9 @@ public class EditCommand extends UndoableCommand {
             setEmail(toCopy.email);
             setParentEmail(toCopy.parentEmail);
             setAddress(toCopy.address);
+            setSchool(toCopy.school);
+            setAcadStream(toCopy.acadStream);
+            setAcadLevel(toCopy.acadLevel);
             setFee(toCopy.outstandingFee);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
@@ -207,7 +230,7 @@ public class EditCommand extends UndoableCommand {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, parentPhone, parentEmail, address,
-                    outstandingFee, remark, tags);
+                    school, acadStream, acadLevel, outstandingFee, remark, tags);
         }
 
         public void setName(Name name) {
@@ -256,6 +279,30 @@ public class EditCommand extends UndoableCommand {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setSchool(School school) {
+            this.school = school;
+        }
+
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+
+        public void setAcadStream(AcadStream acadStream) {
+            this.acadStream = acadStream;
+        }
+
+        public Optional<AcadStream> getAcadStream() {
+            return Optional.ofNullable(acadStream);
+        }
+
+        public void setAcadLevel(AcadLevel acadLevel) {
+            this.acadLevel = acadLevel;
+        }
+
+        public Optional<AcadLevel> getAcadLevel() {
+            return Optional.ofNullable(acadLevel);
         }
 
         public void setRemark(Remark remark) {
@@ -325,6 +372,9 @@ public class EditCommand extends UndoableCommand {
                     && getParentPhone().equals(e.getParentPhone())
                     && getParentEmail().equals(e.getParentEmail())
                     && getAddress().equals(e.getAddress())
+                    && getSchool().equals(e.getSchool())
+                    && getAcadStream().equals(e.getAcadStream())
+                    && getAcadLevel().equals(e.getAcadLevel())
                     && getFee().equals(e.getFee())
                     && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags())

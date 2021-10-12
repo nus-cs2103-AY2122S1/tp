@@ -51,6 +51,16 @@ public class Email {
         return test.isEmpty() || test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if email value is empty.
+     *
+     * @return True if email value is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
+
     @Override
     public String toString() {
         return value;
