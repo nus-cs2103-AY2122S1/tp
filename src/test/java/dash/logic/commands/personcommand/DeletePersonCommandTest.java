@@ -27,8 +27,8 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST);
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -49,10 +49,10 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST);
 
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST);
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -65,9 +65,9 @@ public class DeletePersonCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
@@ -79,14 +79,14 @@ public class DeletePersonCommandTest {
 
     @Test
     public void equals() {
-        DeletePersonCommand deleteFirstCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        DeletePersonCommand deleteSecondCommand = new DeletePersonCommand(TypicalIndexes.INDEX_SECOND_PERSON);
+        DeletePersonCommand deleteFirstCommand = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST);
+        DeletePersonCommand deleteSecondCommand = new DeletePersonCommand(TypicalIndexes.INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeletePersonCommand deleteFirstCommandCopy = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeletePersonCommand deleteFirstCommandCopy = new DeletePersonCommand(TypicalIndexes.INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

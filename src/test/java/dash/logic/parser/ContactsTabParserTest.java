@@ -52,8 +52,8 @@ public class ContactsTabParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
-                DeletePersonCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeletePersonCommand(TypicalIndexes.INDEX_FIRST_PERSON), command);
+                DeletePersonCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST.getOneBased());
+        assertEquals(new DeletePersonCommand(TypicalIndexes.INDEX_FIRST), command);
     }
 
     @Test
@@ -61,9 +61,9 @@ public class ContactsTabParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
-                + TypicalIndexes.INDEX_FIRST_PERSON.getOneBased() + " "
+                + TypicalIndexes.INDEX_FIRST.getOneBased() + " "
                 + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditPersonCommand(TypicalIndexes.INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditPersonCommand(TypicalIndexes.INDEX_FIRST, descriptor), command);
     }
 
     @Test
