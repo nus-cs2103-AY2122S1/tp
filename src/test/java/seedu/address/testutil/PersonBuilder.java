@@ -9,6 +9,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,14 +22,18 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REVIEW = "Great place";
     public static final String DEFAULT_CATEGORY_CODE = "att";
+    public static final String DEFAULT_RATING = "5";
 
     private CategoryCode category;
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Review review;
     private Set<Tag> tags;
+    private Rating rating;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +44,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        review = new Review(DEFAULT_REVIEW);
         tags = new HashSet<>();
+        rating = new Rating(DEFAULT_RATING);
     }
 
     /**
@@ -50,7 +58,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        review = personToCopy.getReview();
         tags = new HashSet<>(personToCopy.getTags());
+        rating = personToCopy.getRating();
     }
 
     /**
@@ -101,8 +111,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Rating} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRating(String rating) {
+        this.rating = new Rating(rating);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Review} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withReview(String review) {
+        this.review = new Review(review);
+        return this;
+    }
+
     public Person build() {
-        return new Person(category, name, phone, email, address, tags);
+        return new Person(category, name, phone, email, address, review, tags, rating);
     }
 
 }
