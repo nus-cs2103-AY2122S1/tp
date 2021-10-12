@@ -26,6 +26,7 @@ import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -141,7 +142,33 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(keywords)));
+                    ArrayList<String> validInputs = new ArrayList<>();
+                    int i = 0;
+                    boolean isValidInput = false;
+                    while (i < keywords.length) {
+                        if (LevelOfEducation.Education.combined().toLowerCase().contains(keywords[i].toLowerCase())) {
+                            isValidInput = true;
+                            validInputs.add(keywords[i]);
+                            System.out.println(validInputs.get(validInputs.size()-1));
+                        }
+                        if (keywords[i].equalsIgnoreCase("School") && (validInputs.size()>1)) {
+                            if ((keywords[i-1].equalsIgnoreCase("Middle"))
+                                    || (keywords[i-1].equalsIgnoreCase("High"))) {
+                                int size = validInputs.size();
+                                validInputs.remove(size-1);
+                                String a = validInputs.get(size-2);
+                                String b = a + " School";
+                                validInputs.remove(size-2);
+                                validInputs.add(b);
+                                System.out.println(validInputs.get(size-2));
+                            }
+                        }
+                        i++;
+                    }
+                    if (!isValidInput) {
+                        throw new ParseException(LevelOfEducation.MESSAGE_CONSTRAINTS);
+                    }
+                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(validInputs));
                 }
             }
 
