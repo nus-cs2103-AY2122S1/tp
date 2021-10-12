@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -79,7 +80,7 @@ public class ModelManager implements Model {
         userPrefs.setInventoryFilePath(inventoryFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Inventory ================================================================================
 
     @Override
     public void setInventory(ReadOnlyInventory inventory) {
@@ -113,6 +114,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedItem);
 
         inventory.setItem(target, editedItem);
+    }
+
+    @Override
+    public void sortItems(Comparator<Item> comparator) {
+        requireNonNull(comparator);
+        inventory.sortItems(comparator);
     }
 
     //=========== Filtered Item List Accessors =============================================================

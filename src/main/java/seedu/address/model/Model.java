@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -75,6 +76,12 @@ public interface Model {
      * The item identity of {@code editedItem} must not be the same as another existing item in the inventory.
      */
     void setItem(Item target, Item editedItem);
+
+    /**
+     * Sorts the item list using the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void sortItems(Comparator<Item> comparator);
 
     /**
      * Sets the current order of the model.
