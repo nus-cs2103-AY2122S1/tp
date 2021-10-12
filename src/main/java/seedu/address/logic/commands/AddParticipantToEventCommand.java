@@ -77,7 +77,6 @@ public class AddParticipantToEventCommand extends Command {
             throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
         }
 
-        // add participant
         selectedEvent.addParticipant(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,

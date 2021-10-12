@@ -31,6 +31,11 @@ public class TypicalEvents {
             new EventDate("2021-10-5"), new EventTime("0800"));
     public static final Event CODE_FOR_SANITY = new Event(new EventName("Code For Sanity"),
             new EventDate("2021-8-10"), new EventTime("0000"));
+    public static final Event SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION = new Event(new EventName("Sleep"),
+            new EventDate("2021-09-18"), new EventTime("1002"), true,
+            Collections.singletonList(new ParticipantBuilder().build()));
+    public static final Event SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION = new Event(new EventName("Sleep again"),
+            new EventDate("2021-09-18"));
 
     private TypicalEvents() {}
 
