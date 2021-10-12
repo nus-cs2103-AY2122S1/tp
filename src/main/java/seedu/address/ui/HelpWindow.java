@@ -28,7 +28,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Select the table cell(s) and press CTRL + C or CMD + C to copy.\n"
-            + "Refer to the user guide:\n" + USERGUIDE_URL;
+            + "You may sort the rows alphabetically by clicking the right end of each column header.\n"
+            + "Refer to the user guide: " + USERGUIDE_URL;
     public static final String TEXT_COLOR = "424874";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);

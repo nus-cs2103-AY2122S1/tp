@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600.0" minWidth="600.0" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="625.0" minWidth="600.0" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -35,26 +35,26 @@
                      <Insets />
                   </opaqueInsets>
                </TableView>
-            <HBox alignment="CENTER" layoutX="1.0" layoutY="536.0" minHeight="90.0" minWidth="550.0" style="-fx-background-color: A6B1E150;">
+            <HBox alignment="CENTER" layoutX="1.0" layoutY="536.0" minHeight="125.0" minWidth="550.0" style="-fx-background-color: A6B1E150;">
               <children>
-                <Label fx:id="helpMessage" text="Label" textFill="#424874" wrapText="true" HBox.hgrow="ALWAYS">
+                <Label fx:id="helpMessage" minWidth="400.0" text="Label" textFill="#424874" wrapText="true" HBox.hgrow="ALWAYS">
                     <padding>
-                       <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                       <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
                     </padding>
-                </Label>
-                <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" textFill="WHITE" wrapText="true">
-                        <font>
-                           <Font name="Open Sans SemiBold" size="14.0" />
-                        </font>
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
                         <HBox.margin>
                            <Insets left="15.0" />
                         </HBox.margin>
+                </Label>
+                <Button fx:id="copyButton" maxHeight="35.0" maxWidth="90.0" minHeight="35.0" minWidth="90.0" mnemonicParsing="false" onAction="#copyUrl" prefHeight="35.0" prefWidth="90.0" text="Copy URL" textFill="WHITE" wrapText="true">
+                        <font>
+                           <Font name="Open Sans SemiBold" size="14.0" />
+                        </font>
                         <padding>
                            <Insets bottom="7.0" left="12.0" right="12.0" top="7.0" />
-                        </padding></Button>
+                        </padding>
+                        <HBox.margin>
+                           <Insets left="15.0" right="15.0" />
+                        </HBox.margin></Button>
               </children>
               <opaqueInsets>
                 <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
