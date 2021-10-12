@@ -59,7 +59,7 @@ public class CommandTestUtil {
     public static final String INVALID_NATIONALITY_DESC = " "
             + PREFIX_NATIONALITY; // empty string not allowed for nationality
     public static final String INVALID_TUTORIAL_GROUP_DESC = " "
-            + PREFIX_TUTORIAL_GROUP + "B"; // 'B' not allowed in tutorial groups
+            + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

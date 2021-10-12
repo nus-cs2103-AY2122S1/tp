@@ -3,11 +3,8 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-
-
 /**
- * Tests that a {@code Person}'s {@code Phone} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Nationality} matches any of the keywords given.
  */
 public class NationalityContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
@@ -19,7 +16,8 @@ public class NationalityContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getNationality().value, keyword));
+                .anyMatch(keyword -> person.getNationality().value.toLowerCase()
+                .contains(keyword.toLowerCase()));
     }
 
     @Override

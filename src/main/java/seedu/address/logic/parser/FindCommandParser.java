@@ -75,12 +75,16 @@ public class FindCommandParser implements Parser<FindCommand> {
             predicateList.add(new TagContainsKeywordsPredicate(tagKeywords));
         }
 
-        if (predicateList.size() != 0) {
+        switch (predicateList.size()) {
+        case (0):
+            throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        case (1):
+            return new FindCommand(predicateList.get(0));
+        default:
             MultiplePredicates predicate = new MultiplePredicates(predicateList);
             return new FindCommand(predicate);
         }
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 }
 
