@@ -6,6 +6,6 @@ import java.io.IOException;
 /**
  * File Chooser Interface.
  */
-public interface FileChooser {
-    File chooseFile() throws IOException;
+public interface FileSelector {
+    File selectFile() throws IOException;
 }

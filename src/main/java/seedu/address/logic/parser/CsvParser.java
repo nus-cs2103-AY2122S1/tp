@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.CsvFileChooser;
+import seedu.address.ui.CsvFileSelector;
 
 /**
  * Parses CSV files for import function.
@@ -25,12 +25,12 @@ public class CsvParser {
     /**
      * Constructs instance of CsvParser and parses the provided file.
      *
-     * @param csvFileChooser csvFileChooser to choose csv file to be parsed.
+     * @param csvFileSelector csvFileSelector to choose csv file to be parsed.
      * @throws ParseException if csv file is empty or cannot be read.
      */
-    public CsvParser(CsvFileChooser csvFileChooser) throws ParseException {
+    public CsvParser(CsvFileSelector csvFileSelector) throws ParseException {
         try {
-            br = new BufferedReader(new FileReader(csvFileChooser.chooseFile()));
+            br = new BufferedReader(new FileReader(csvFileSelector.selectFile()));
             data = new HashMap<>();
             parse();
         } catch (IOException e) {
