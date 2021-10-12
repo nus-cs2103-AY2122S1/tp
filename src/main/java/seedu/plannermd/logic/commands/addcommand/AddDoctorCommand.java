@@ -17,8 +17,8 @@ public class AddDoctorCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a doctor to PlannerMD "
             + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_PHONE + "PHONE " + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS " + "[" + PREFIX_TAG + "TAG]... " + "Example: "
-            + COMMAND_WORD + " "
+            + PREFIX_ADDRESS + "ADDRESS " + PREFIX_BIRTH_DATE + "BIRTH_DATE "
+            + "[" + PREFIX_TAG + "TAG]... " + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe " + PREFIX_PHONE + "98765432 " + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 " + PREFIX_BIRTH_DATE + "31/09/2021 " + PREFIX_TAG
             + "friends " + PREFIX_TAG + "owesMoney";
