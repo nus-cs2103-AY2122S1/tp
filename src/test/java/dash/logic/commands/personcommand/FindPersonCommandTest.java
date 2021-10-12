@@ -15,7 +15,11 @@ import dash.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import dash.model.Model;
 import dash.model.ModelManager;
 import dash.model.UserPrefs;
+import dash.model.person.AddressContainsKeywordsPredicate;
+import dash.model.person.EmailContainsKeywordsPredicate;
 import dash.model.person.NameContainsKeywordsPredicate;
+import dash.model.person.PhoneContainsKeywordsPredicate;
+import dash.model.person.TagPersonContainsKeywordsPredicate;
 import dash.model.task.TaskList;
 import dash.testutil.TypicalPersons;
 
@@ -31,21 +35,34 @@ public class FindPersonCommandTest {
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        PhoneContainsKeywordsPredicate secondPredicate =
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("91852273"));
+        EmailContainsKeywordsPredicate thirdPredicate =
+                new EmailContainsKeywordsPredicate(Collections.singletonList("validemail@server.com"));
+        AddressContainsKeywordsPredicate fourthPredicate =
+                new AddressContainsKeywordsPredicate(Collections.singletonList("Random Address"));
+        TagPersonContainsKeywordsPredicate fifthPredicate =
+                new TagPersonContainsKeywordsPredicate(Collections.singletonList("roommate"));
 
         FindPersonDescriptor firstFindPersonDescriptor = new FindPersonDescriptor();
         firstFindPersonDescriptor.setName(Collections.singletonList("first"));
+        firstFindPersonDescriptor.setPhone(Collections.singletonList("91852273"));
+        firstFindPersonDescriptor.setEmail(Collections.singletonList("validemail@server.com"));
+        firstFindPersonDescriptor.setAddress(Collections.singletonList("Random Address"));
+        firstFindPersonDescriptor.setTags(Collections.singletonList("roommate"));
 
         FindPersonDescriptor secondFindPersonDescriptor = new FindPersonDescriptor();
         secondFindPersonDescriptor.setName(Collections.singletonList("second"));
-
         // same object -> returns true
         assertTrue(firstFindPersonDescriptor.equals(firstFindPersonDescriptor));
 
         // same values -> returns true
         FindPersonDescriptor findFirstFindPersonDescriptorCopy = new FindPersonDescriptor();
         findFirstFindPersonDescriptorCopy.setName(Collections.singletonList("first"));
+        findFirstFindPersonDescriptorCopy.setPhone(Collections.singletonList("91852273"));
+        findFirstFindPersonDescriptorCopy.setEmail(Collections.singletonList("validemail@server.com"));
+        findFirstFindPersonDescriptorCopy.setAddress(Collections.singletonList("Random Address"));
+        findFirstFindPersonDescriptorCopy.setTags(Collections.singletonList("roommate"));
         assertTrue(firstFindPersonDescriptor.equals(findFirstFindPersonDescriptorCopy));
 
         // different types -> returns false
