@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -97,12 +98,15 @@ public class ParserUtil {
     }
 
     /**
-     * Temporary implementation.
+     * Parses a string to return a ClassCode
+     * @param classCode String of classCode
+     * @return ClassCode
+     * @throws ParseException
      */
-    public static String parseClassCode(String classCode) throws ParseException {
+    public static ClassCode parseClassCode(String classCode) throws ParseException {
         requireNonNull(classCode);
-        String trimmedClassCode = classCode.trim();
-        return trimmedClassCode;
+        String trimmedRemark = classCode.trim();
+        return new ClassCode(trimmedRemark);
     }
 
     /**

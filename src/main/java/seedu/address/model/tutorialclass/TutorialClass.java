@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -14,7 +15,7 @@ import seedu.address.model.tag.Tag;
 public class TutorialClass {
 
     // Class Fields
-    private final String classCode;
+    private final ClassCode classCode;
     private final Schedule schedule;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -23,13 +24,13 @@ public class TutorialClass {
      * @param schedule Class Schedule.
      * @param tags Optional tags.
      */
-    public TutorialClass(String classCode, Schedule schedule, Set<Tag> tags) {
+    public TutorialClass(ClassCode classCode, Schedule schedule, Set<Tag> tags) {
         this.classCode = classCode;
         this.schedule = schedule;
         this.tags.addAll(tags);
     }
 
-    public String getClassCode() {
+    public ClassCode getClassCode() {
         return classCode;
     }
 
