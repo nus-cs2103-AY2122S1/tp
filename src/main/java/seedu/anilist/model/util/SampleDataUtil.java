@@ -16,12 +16,12 @@ import seedu.anilist.model.tag.Tag;
 public class SampleDataUtil {
     public static Anime[] getSampleAnime() {
         return new Anime[] {
-            new Anime(new Name("Alex Yeoh"), getTagSet("friends")),
-            new Anime(new Name("Bernice Yu"), getTagSet("colleagues", "friends")),
-            new Anime(new Name("Charlotte Oliveiro"), getTagSet("neighbours")),
-            new Anime(new Name("David Li"), getTagSet("family")),
-            new Anime(new Name("Irfan Ibrahim"), getTagSet("classmates")),
-            new Anime(new Name("Roy Balakrishnan"), getTagSet("colleagues"))
+            new Anime(new Name("Asobi Asobase"), getTagSet("comedy")),
+            new Anime(new Name("BLEACH"), getTagSet("adventure", "supernatural")),
+            new Anime(new Name("Charlotte"), getTagSet("supernatural")),
+            new Anime(new Name("Darling in the Franxx"), getTagSet("mecha")),
+            new Anime(new Name("Haikyuu!!: To the Top"), getTagSet("sports")),
+            new Anime(new Name("Steins;Gate 0"), getTagSet("science fiction"))
         };
     }
 
