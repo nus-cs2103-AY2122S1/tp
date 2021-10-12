@@ -40,7 +40,7 @@ public class Assessment implements Information {
         this.assessment.replace(assessmentName, grade);
     }
 
-    private String getAssessmentGrade(String assessmentName) {
+    public String getAssessmentGrade(String assessmentName) {
         Integer grade = this.assessment.get(assessmentName);
         return grade == -1 ? "NA" : grade.toString();
     }
