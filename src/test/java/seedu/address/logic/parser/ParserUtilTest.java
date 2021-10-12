@@ -19,9 +19,6 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskID;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -201,46 +198,6 @@ public class ParserUtilTest {
                 Arrays.asList(new Position(VALID_POSITION_1), new Position(VALID_POSITION_2)));
 
         assertEquals(expectedPositionSet, actualPositionSet);
-    }
-
-    @Test
-    public void parseMemberID_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseMemberID(INVALID_MEMBER_ID));
-    }
-
-    @Test
-    public void parseMemberID_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MemberID.MESSAGE_CONSTRAINTS, ()
-                -> ParserUtil.parseMemberID(Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseMemberID_validInput_success() throws Exception {
-        // No whitespaces
-        assertEquals(new MemberID("1"), ParserUtil.parseMemberID("1"));
-
-        // Leading and trailing whitespaces
-        assertEquals(new MemberID("1"), ParserUtil.parseMemberID("  1  "));
-    }
-
-    @Test
-    public void parseTaskID_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTaskID(INVALID_TASK_ID));
-    }
-
-    @Test
-    public void parseTaskID_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, TaskID.MESSAGE_CONSTRAINTS, ()
-                -> ParserUtil.parseTaskID(Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseTaskID_validInput_success() throws Exception {
-        // No whitespaces
-        assertEquals(new TaskID("1"), ParserUtil.parseTaskID("1"));
-
-        // Leading and trailing whitespaces
-        assertEquals(new TaskID("1"), ParserUtil.parseTaskID("  1  "));
     }
 
     @Test

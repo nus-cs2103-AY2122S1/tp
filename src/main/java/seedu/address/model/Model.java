@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.member.Member;
-import seedu.address.model.task.MemberID;
 import seedu.address.model.task.Task;
 
 /**

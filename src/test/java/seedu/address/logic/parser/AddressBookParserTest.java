@@ -13,14 +13,22 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PAddCommand;
+import seedu.address.logic.commands.TAddCommand;
+import seedu.address.logic.commands.TDelCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.member.Member;
 import seedu.address.model.member.NameContainsKeywordsPredicate;
-import seedu.address.model.task.MemberID;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskID;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.MemberUtil;
@@ -39,7 +47,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add_task() throws Exception {
-        MemberID validMemberID = new MemberID("1");
+        Index validMemberID = Index.fromOneBased(1);
         Task validTask = new Task("do homework");
         TAddCommand command = (TAddCommand) parser.parseCommand(TaskUtil.getTAddCommand(validTask, validMemberID));
         assertEquals(new TAddCommand(validMemberID, validTask), command);
@@ -47,8 +55,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_del_task() throws Exception {
-        MemberID validMemberID = new MemberID("1");
-        TaskID validTaskID = new TaskID("1");
+        Index validMemberID = Index.fromOneBased(1);
+        Index validTaskID = Index.fromOneBased(1);
         TDelCommand command = (TDelCommand) parser.parseCommand(TaskUtil.getTDelCommand(validTaskID, validMemberID));
         assertEquals(new TDelCommand(validMemberID, validTaskID), command);
     }

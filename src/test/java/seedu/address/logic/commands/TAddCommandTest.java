@@ -1,24 +1,30 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.MemberBuilder;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TaskListManager;
+import seedu.address.model.event.Event;
+import seedu.address.model.member.Member;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.MemberBuilder;
 
 class TAddCommandTest {
 
@@ -29,7 +35,7 @@ class TAddCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        MemberID validMemberID = new MemberID("1");
+        Index validMemberID = Index.fromOneBased(1);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
@@ -42,7 +48,7 @@ class TAddCommandTest {
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        MemberID validMemberID = new MemberID("1");
+        Index validMemberID = Index.fromOneBased(1);
         Task duplicateTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
@@ -55,7 +61,7 @@ class TAddCommandTest {
 
     @Test
     public void equals() {
-        MemberID validMemberID = new MemberID("1");
+        Index validMemberID = Index.fromOneBased(1);
         Task validTask1 = new Task("Do homework");
         Task validTask2 = new Task("Write a poem");
         Member validMember = new MemberBuilder().build();
@@ -240,11 +246,11 @@ class TAddCommandTest {
         private final Task task;
         private final AddressBook addressBook;
 
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, MemberID memberID) {
+        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
             ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(Integer.parseInt(memberID.toString()) - 1);
+            this.member = members.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
         }
@@ -272,11 +278,11 @@ class TAddCommandTest {
         private final TaskListManager taskListManager;
 
 
-        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, MemberID memberID) {
+        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
             ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(Integer.parseInt(memberID.toString()) - 1);
+            this.member = members.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskListManager();

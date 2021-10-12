@@ -1,24 +1,32 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskID;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.MemberBuilder;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TaskListManager;
+import seedu.address.model.event.Event;
+import seedu.address.model.member.Member;
+import seedu.address.model.task.Task;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.MemberBuilder;
+
 
 class TDelCommandTest {
     @Test
@@ -28,8 +36,8 @@ class TDelCommandTest {
 
     @Test
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
-        MemberID validMemberID = new MemberID("1");
-        TaskID validTaskID = new TaskID("1");
+        Index validMemberID = Index.fromOneBased(1);
+        Index validTaskID = Index.fromOneBased(1);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
@@ -44,8 +52,8 @@ class TDelCommandTest {
 
     @Test
     public void execute_taskNotPresent_throwsTaskNotFoundException() {
-        MemberID validMemberID = new MemberID("1");
-        TaskID validTaskID = new TaskID("1");
+        Index validMemberID = Index.fromOneBased(1);
+        Index validTaskID = Index.fromOneBased(1);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
@@ -59,9 +67,9 @@ class TDelCommandTest {
     //TODO
     @Test
     void equals() {
-        MemberID validMemberID = new MemberID("1");
-        TaskID validTaskID1 = new TaskID("1");
-        TaskID validTaskID2 = new TaskID("2");
+        Index validMemberID = Index.fromOneBased(1);
+        Index validTaskID1 = Index.fromOneBased(1);
+        Index validTaskID2 = Index.fromOneBased(2);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TDelCommand tDelCommand1 = new TDelCommand(validMemberID, validTaskID1);
@@ -246,11 +254,11 @@ class TDelCommandTest {
         private final TaskListManager taskListManager;
 
 
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, MemberID memberID) {
+        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
             ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(Integer.parseInt(memberID.toString()) - 1);
+            this.member = members.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskListManager();
@@ -296,11 +304,11 @@ class TDelCommandTest {
         private final TaskListManager taskListManager;
 
 
-        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, MemberID memberID) {
+        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
             ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(Integer.parseInt(memberID.toString()) - 1);
+            this.member = members.get(memberID.getZeroBased());
             this.taskListManager = new TaskListManager();
         }
 

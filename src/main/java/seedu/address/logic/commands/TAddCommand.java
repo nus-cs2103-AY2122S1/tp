@@ -1,15 +1,15 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.member.Member;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.member.Member;
+import seedu.address.model.task.Task;
 
 /**
  * Adds a task to the task list of a person.
@@ -28,13 +28,13 @@ public class TAddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list of the member";
 
-    public  final MemberID targetMemberID;
+    public final Index targetMemberID;
     public final Task toAdd;
 
     /**
      * Creates an TAddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
-    public TAddCommand(MemberID memberID, Task task) {
+    public TAddCommand(Index memberID, Task task) {
         requireNonNull(memberID);
         requireNonNull(task);
         targetMemberID = memberID;
@@ -46,7 +46,7 @@ public class TAddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getAddressBook().getMemberList();
-        Member targetMember = members.get(Integer.parseInt(targetMemberID.toString()) - 1);
+        Member targetMember = members.get(targetMemberID.getZeroBased());
 
         if (model.hasTask(targetMember, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);

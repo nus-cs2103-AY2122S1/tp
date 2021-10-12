@@ -1,19 +1,26 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.TAddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
 
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.TAddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Task;
 
 /**
  * Parses input arguments and creates a new TAddCommand object
  */
 public class TAddCommandParser implements Parser<TAddCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the TAddCommand
+     * and returns an TAddCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public TAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
@@ -25,7 +32,7 @@ public class TAddCommandParser implements Parser<TAddCommand> {
         }
 
         Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASKNAME).get());
-        MemberID memberID = ParserUtil.parseMemberID(argMultimap.getValue(PREFIX_MEMBER_ID).get());
+        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
 
         return new TAddCommand(memberID, task);
     }

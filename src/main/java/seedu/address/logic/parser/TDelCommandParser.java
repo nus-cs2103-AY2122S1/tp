@@ -1,21 +1,25 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.TAddCommand;
-import seedu.address.logic.commands.TDelCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.MemberID;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskID;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.TDelCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new TDelCommand object
  */
 public class TDelCommandParser implements Parser<TDelCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the TDelCommand
+     * and returns an TDelCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public TDelCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
@@ -26,8 +30,8 @@ public class TDelCommandParser implements Parser<TDelCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TDelCommand.MESSAGE_USAGE));
         }
 
-        TaskID taskID = ParserUtil.parseTaskID(argMultimap.getValue(PREFIX_TASK_ID).get());
-        MemberID memberID = ParserUtil.parseMemberID(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
+        Index taskID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_ID).get());
+        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
 
         return new TDelCommand(memberID, taskID);
     }
