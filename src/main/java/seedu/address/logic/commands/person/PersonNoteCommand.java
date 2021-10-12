@@ -1,13 +1,11 @@
 package seedu.address.logic.commands.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.executors.exceptions.ExecuteException;
 import seedu.address.logic.executors.person.PersonNoteExecutor;
-import seedu.address.model.person.Note;
 
 /**
  *
@@ -17,22 +15,19 @@ public class PersonNoteCommand extends PersonCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified "
             + "by the index number used in the last person listing. "
-            + "Existing notes will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_NOTE + "[NOTE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NOTE + "Likes to swim.";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     private final PersonNoteExecutor executor;
 
     /**
      * @param index Index of the person to edit note for.
-     * @param note New note to be updated to.
+     *
      */
-    public PersonNoteCommand(Index index, Note note) {
+    public PersonNoteCommand(Index index) {
         super(index);
-        requireAllNonNull(index, note);
-        this.executor = new PersonNoteExecutor(index, note);
+        requireAllNonNull(index);
+        this.executor = new PersonNoteExecutor(index);
     }
 
     @Override

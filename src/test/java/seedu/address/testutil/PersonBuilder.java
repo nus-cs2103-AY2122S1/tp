@@ -21,6 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Why is her last name Bee tho?";
+    public static final String DEFAULT_NOTE_DATE = "Thu., 11/02/2022";
 
     private Name name;
     private Phone phone;
@@ -37,7 +38,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        note = new Note(DEFAULT_NOTE);
+        note = new Note(DEFAULT_NOTE, DEFAULT_NOTE_DATE);
         tags = new HashSet<>();
         superGroups = new HashSet<>();
         subGroups = new HashSet<>();
@@ -107,8 +108,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withNote(String note) {
-        this.note = new Note(note);
+    public PersonBuilder withNote(String note, String noteSavedDate) {
+        this.note = new Note(note, noteSavedDate);
         return this;
     }
 

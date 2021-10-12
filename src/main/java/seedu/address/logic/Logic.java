@@ -25,6 +25,15 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException, ExecuteException;
 
+
+    /**
+     * Executes instruction to save note of the person.
+     *
+     * @param person The person with yet to edit notes.
+     * @param editedPerson The person with newly edited notes.
+     * @throws CommandException
+     */
+    void executeSaveNote(Person person, Person editedPerson) throws CommandException;
     /**
      * Returns the AddressBook.
      *

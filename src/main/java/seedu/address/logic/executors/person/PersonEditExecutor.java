@@ -147,7 +147,6 @@ public class PersonEditExecutor extends PersonExecutor {
         public void setNote(Note note) {
             this.note = note;
         }
-
         public Optional<Note> getNote() {
             return Optional.ofNullable(note);
         }

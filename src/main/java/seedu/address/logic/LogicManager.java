@@ -55,6 +55,22 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    /**
+     * Executes command to save Note of Person.
+     * @param person The person with yet to edit notes.
+     * @param editedPerson The person with newly edited notes.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    public void executeSaveNote(Person person, Person editedPerson) throws CommandException {
+        model.setPerson(person, editedPerson);
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+    }
+
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();

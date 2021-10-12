@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
+
+
 /**
  * Represents the result of a command execution.
  */
@@ -21,13 +25,21 @@ public class CommandResult {
      */
     private final boolean exit;
 
+    /** The note should be shown for the respective user. */
+    private final boolean showNote;
+
+    private final Person person;
+
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showNote, Person person, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
+        this.showNote = showNote;
         this.exit = exit;
+        this.person = person;
     }
 
     /**
@@ -35,7 +47,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -46,8 +58,16 @@ public class CommandResult {
         return showHelp;
     }
 
+    public boolean isShowNote() {
+        return showNote;
+    }
+
     public boolean isExit() {
         return exit;
+    }
+
+    public Person person() {
+        return person;
     }
 
     @Override
@@ -64,6 +84,7 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
+                && showNote == otherCommandResult.showNote
                 && exit == otherCommandResult.exit;
     }
 

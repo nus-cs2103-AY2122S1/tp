@@ -71,6 +71,10 @@ public class Person implements Unique<Person> {
     public Note getNote() {
         return note;
     }
+    public String getNoteSavedDate() {
+        return note.getSavedDate();
+    }
+
 
     public void addSuperGroup(SuperGroup superGroup) {
         superGroups.add(superGroup.toString());
@@ -144,15 +148,20 @@ public class Person implements Unique<Person> {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Note: ")
-                .append(getNote());
+                .append(getEmail());
 
+        String noteSavedDate = note.getSavedDate();
+        if (!noteSavedDate.isEmpty()) {
+            builder.append("; Last Edited: ")
+                    .append(getNoteSavedDate());
+        }
         Set<Tag> tags = getTags();
+
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
         return builder.toString();
     }
 

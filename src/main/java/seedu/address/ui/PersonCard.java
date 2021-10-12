@@ -38,7 +38,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label note;
+    private Label noteLastSaved;
     @FXML
     private Label groups;
     @FXML
@@ -56,7 +56,11 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        note.setText(person.getNote().value);
+        if (!person.getNoteSavedDate().isEmpty()) {
+            noteLastSaved.setText(person.getNoteSavedDate());
+        } else {
+            noteLastSaved.setManaged(false);
+        }
         groups.setText(Arrays.toString(person.getSuperGroups().toArray()));
         subGroups.setText(Arrays.toString(person.getSubGroups().toArray()));
         person.getTags().stream()

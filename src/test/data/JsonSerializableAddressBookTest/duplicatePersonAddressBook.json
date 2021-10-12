@@ -4,6 +4,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "note" : "",
+    "noteDate" : "",
     "tagged": [ "friends" ],
     "superGroups" : [ ],
     "subGroups" : [ ]
@@ -12,6 +13,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "note" : "",
+    "noteDate" : "",
     "tagged": [ "friends" ],
     "superGroups" : [ ],
     "subGroups" : [ ]

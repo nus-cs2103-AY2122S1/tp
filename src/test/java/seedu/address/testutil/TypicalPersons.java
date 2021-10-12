@@ -26,12 +26,12 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withNote("She lives in the Wonderland.")
+            .withNote("She lives in the Wonderland.", "Thu., 11/11/2011")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withNote("He is Ben's son.")
+            .withNote("He is Ben's son.", "Fri, 11/11/2010")
             .withTags("owesMoney", "friends")
             .withSuperGroups("Orbital", "CS2103")
             .withSubGroups("Orbital_Group1").build();
