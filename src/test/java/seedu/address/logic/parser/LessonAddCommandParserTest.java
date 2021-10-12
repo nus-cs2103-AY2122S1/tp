@@ -24,6 +24,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalLessons.PAST_MAKEUP_LESSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
@@ -34,8 +35,8 @@ import seedu.address.testutil.LessonBuilder;
 
 public class LessonAddCommandParserTest {
 
+    private static final int FIRST_PERSON = INDEX_FIRST_PERSON.getOneBased();
     private LessonAddCommandParser parser = new LessonAddCommandParser();
-    private int FIRST_PERSON = INDEX_FIRST_PERSON.getOneBased();
 
     @Test
     public void parse_allFieldsPresent_success() {
