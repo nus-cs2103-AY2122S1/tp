@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane employeeListPanelPlaceHolder;
+    private StackPane personTypePlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -116,18 +116,13 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
-        // take in personList as children
-        //        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-
-        personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot()); // take in employeeList as children
-
-        //        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
-
-        // only this line doesn't work
-        //        employeeListPanelPlaceHolder.getChildren().add(employeeListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        PersonType personType = new PersonType("Person");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
