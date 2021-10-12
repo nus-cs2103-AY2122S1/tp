@@ -1,9 +1,9 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import dash.logic.commands.personcommand.AddPersonCommand;
+import dash.logic.commands.CommandTestUtil;
 import dash.model.Model;
 import dash.model.ModelManager;
 import dash.model.UserPrefs;

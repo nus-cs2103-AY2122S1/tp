@@ -1,11 +1,11 @@
-package dash.logic.parser;
+package dash.logic.parser.personcommand;
 
 import org.junit.jupiter.api.Test;
 
 import dash.commons.core.Messages;
 import dash.logic.commands.CommandTestUtil;
 import dash.logic.commands.personcommand.AddPersonCommand;
-import dash.logic.parser.personcommand.AddPersonCommandParser;
+import dash.logic.parser.CommandParserTestUtil;
 import dash.model.person.Address;
 import dash.model.person.Email;
 import dash.model.person.Name;

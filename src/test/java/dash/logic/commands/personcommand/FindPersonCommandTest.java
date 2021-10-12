@@ -1,4 +1,4 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import static dash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +11,6 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import dash.commons.core.Messages;
-import dash.logic.commands.personcommand.FindPersonCommand;
 import dash.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import dash.model.Model;
 import dash.model.ModelManager;

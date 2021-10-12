@@ -1,4 +1,4 @@
-package dash.logic.parser;
+package dash.logic.parser.personcommand;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import dash.commons.core.Messages;
 import dash.logic.commands.personcommand.FindPersonCommand;
 import dash.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
-import dash.logic.parser.personcommand.FindPersonCommandParser;
+import dash.logic.parser.CommandParserTestUtil;
 
 public class FindPersonCommandParserTest {
 
