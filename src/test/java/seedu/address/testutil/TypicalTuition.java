@@ -18,6 +18,7 @@ public class TypicalTuition {
     public static final Student CARL = TypicalPersons.CARL;
     public static final Lesson SCIENCE_P2 = TypicalLessons.SCIENCE_P2;
     public static final Lesson MATH_S2 = TypicalLessons.MATH_S2;
+    public static final Lesson PHYSICS_S2 = TypicalLessons.PHYSICS_S2;
 
     private TypicalTuition() {} //prevents instantiation
 
@@ -31,7 +32,7 @@ public class TypicalTuition {
         List<Student> students = getTypicalPersons();
         List<Lesson> lessons = getTypicalLessons();
         lessons.get(INDEX_SECOND_LESSON.getZeroBased())
-                .addStudent(students.get(INDEX_SECOND_PERSON.getZeroBased()));
+                .addStudent(students.get(INDEX_SECOND_PERSON.getZeroBased())); //BENSON enrolled in MATH_S2 lesson
 
         for (Student student : students) {
             ab.addPerson(student);
@@ -43,7 +44,7 @@ public class TypicalTuition {
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone()));
+        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone(), PHYSICS_S2));
     }
 
     public static List<Student> getTypicalPersons() {
