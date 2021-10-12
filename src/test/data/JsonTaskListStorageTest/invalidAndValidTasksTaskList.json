@@ -1,0 +1,8 @@
+{
+  "tasks" : [ {
+      "description" : "Valid Task"
+    }, {
+      "description" : "",
+      "tagged" : [ "task with invalid tag!" ]
+    } ]
+}
