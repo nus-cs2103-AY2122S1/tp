@@ -184,7 +184,25 @@ Retrieve list of all folders created
 
 Format: `ls -folders`
 
+### Locating folders by name: `find -folders`
+
+Finds folders whose names contain any of the given keywords.
+
+Format: `find -folders KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `cs2103` will match `CS2103`
+* The order of the keywords does not matter. e.g. `Team Project CS2103` will match `CS2103 Team Project`
+* Only the folder name is searched.
+* Partial words will be matched e.g. `CS` will match `CS2103` and `CS2101`.
+* Folders matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `CS2103 Team Project` will return `CS2103`, `Team Project`
+
+Examples:
+* `find -folders CS` returns `CS2103` and `CS2101`
+* `find -folders CS2103 Team Project` returns `CS2103`, `Team Project`
+
 ### Adding contacts to folder: `echo`
+
 To organize and group contacts into an arbitrary folder
 Format: `echo CONTACT_INDEX >> FOLDER_NAME`
 - `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
@@ -225,11 +243,11 @@ Action | Format, Examples
 **Clear contacts** | `rm -contacts`
 **Delete contact** | `rm INDEX`<br> e.g., `rm 3`
 **Edit contact** | `vim INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]` <br> e.g., `vim 2 -n James Lee -e jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `ls -contacts`
+**Find contact** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List contacts** | `ls -contacts`
 **Help** | `help`
-**View folders** | `ls -folders`
 **Create folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
 **Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
-
+**Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
+**List folders** | `ls -folders`
