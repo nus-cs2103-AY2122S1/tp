@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.facility.exceptions.DuplicateFacilityException;
+import seedu.address.testutil.FacilityBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueFacilityListTest {
@@ -104,5 +106,61 @@ public class UniqueFacilityListTest {
         uniqueFacilityList.resetFacilities();
         UniqueFacilityList expectedUniqueFacilityList = new UniqueFacilityList();
         assertEquals(expectedUniqueFacilityList, uniqueFacilityList);
+    }
+
+    @Test
+    public void setFacility_nullTargetFacility_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilityList
+                .setFacility(null, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1));
+    }
+
+    @Test
+    public void setFacility_nullEditedFacility_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilityList
+                .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, null));
+    }
+
+    @Test
+    public void setFacility_targetFacilityNotInList_throwsFacilityNotFoundException() {
+        assertThrows(FacilityNotFoundException.class, () -> uniqueFacilityList
+                .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1));
+    }
+
+    @Test
+    public void setFacility_editedFacilityIsSameFacility_success() {
+        uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        uniqueFacilityList
+                .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        UniqueFacilityList expectedUniqueFacilityList = new UniqueFacilityList();
+        expectedUniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        assertEquals(expectedUniqueFacilityList, uniqueFacilityList);
+    }
+
+    @Test
+    public void setFacility_editedFacilityHasSameParameter_success() {
+        uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        Facility editedFacil = new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build();
+        uniqueFacilityList.setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, editedFacil);
+        UniqueFacilityList expectedUniqueFacilityList = new UniqueFacilityList();
+        expectedUniqueFacilityList.add(editedFacil);
+        assertEquals(expectedUniqueFacilityList, uniqueFacilityList);
+    }
+
+    @Test
+    public void setFacility_editedFacilityHasDifferentParameter_success() {
+        uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        uniqueFacilityList
+                .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_SPORT_HALL_5_COURT_1);
+        UniqueFacilityList expectedUniqueFacilityList = new UniqueFacilityList();
+        expectedUniqueFacilityList.add(KENT_RIDGE_SPORT_HALL_5_COURT_1);
+        assertEquals(expectedUniqueFacilityList, uniqueFacilityList);
+    }
+
+    @Test
+    public void setFacility_editedFacilityHasNonUniqueParameter_throwsDuplicateFacilityException() {
+        uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
+        uniqueFacilityList.add(KENT_RIDGE_SPORT_HALL_5_COURT_1);
+        assertThrows(DuplicateFacilityException.class, () -> uniqueFacilityList
+                .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_SPORT_HALL_5_COURT_1));
     }
 }

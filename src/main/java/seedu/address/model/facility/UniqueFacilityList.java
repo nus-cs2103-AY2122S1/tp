@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 
 
 
@@ -38,6 +38,26 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Replaces the facility {@code target} in the list with {@code editedFacility}.
+     * {@code target} must exist in the list.
+     * The facility parameter of {@code editedFacility} must not be the same as another existing facility in the list.
+     */
+    public void setFacility(Facility target, Facility editedFacility) {
+        requireAllNonNull(target, editedFacility);
+
+        int index = facilityList.indexOf(target);
+        if (index == -1) {
+            throw new FacilityNotFoundException();
+        }
+
+        if (!target.isSameFacility(editedFacility) && contains(editedFacility)) {
+            throw new DuplicateFacilityException();
+        }
+
+        facilityList.set(index, editedFacility);
     }
 
     /**
@@ -73,7 +93,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void setFacilities(List<Facility> facilities) {
         requireAllNonNull(facilities);
         if (!facilitiesAreUnique(facilities)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateFacilityException();
         }
 
         facilityList.setAll(facilities);

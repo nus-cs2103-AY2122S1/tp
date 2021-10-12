@@ -75,6 +75,13 @@ Adds a facility to the facility list.
 
 Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
 
+
+<div markdown="block" class="alert alert-info">
+   
+**:information_source: Note:** Facilities with the same `NAME` and `LOCATION` are considered duplicates and cannot exist in the facility list together
+   
+</div>
+
 * `TIME` specifies the start time and is to be inputted in the format HH:MM
 * `CAPACITY` specifies the maximum allowed people in the facility
 * All fields are required
@@ -115,6 +122,21 @@ Examples:
 * `listf` followed by `deletef 2` deletes the 2nd person in the facility list
 * `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the findf command
 
+### Editing a facility: `editf`
+
+Edits an existing facility from the facility list.
+
+Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]
+* Edits the facility at the specified `INDEX`
+* `INDEX` refers to the index number shown in the displayed facility list
+* `INDEX` **must be a positive integer** 1, 2, 3… 
+* At least one of the optional fields must be provided
+* Existing values will be updated to the input values
+
+Examples:
+* `editf 1 n/Court 5` edits the name of the 1st facility to be `Court 5`
+* `editf 2 n/Court 20 l/University Sports Hall` edits the name and location of the 2nd facility to be `Court 20` and `University Sports Hall` respectively
+
 ### Adding a member: `addm`
 
 Adds a member to the members list
@@ -122,6 +144,12 @@ Adds a member to the members list
 Format: `addm n/NAME p/PHONE_NUMBER [d/DAYS]`
 * `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
 * Members added without availability will have an empty list of days
+
+<div markdown="block" class="alert alert-info">
+   
+**:information_source: Note:** Members with the same `NAME` are considered duplicates and cannot exist in the member list together
+   
+</div>
 
 Examples:
 * `addm n/John p/91234567 d/Mon d/Tues` adds John to the member list and indicates his availability on Monday and Tuesday
