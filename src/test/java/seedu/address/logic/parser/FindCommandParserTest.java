@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -27,7 +28,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -73,9 +75,15 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleEmptyPrefixInput = " n/ e/ p/ r/";
+        String emptyLevelOfEducationPrefixInput = " l/";
+        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(emptyLevelOfEducationPrefixInput,
+                PREFIX_LEVEL_OF_EDUCATION);
+        findDescriptor = new FindDescriptor(argMultimap);
+        assertTrue(findDescriptor.getPredicates().isEmpty());
+
+        String multipleEmptyPrefixInput = " n/ e/ p/ r/ l/";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleEmptyPrefixInput,
-                PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE);
+                PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_LEVEL_OF_EDUCATION);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
@@ -102,9 +110,15 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleBlankPrefixInput = " n/   e/   p/   r/  ";
+        String blankLevelOfEducationPrefixInput = " l/  ";
+        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(blankLevelOfEducationPrefixInput,
+                PREFIX_LEVEL_OF_EDUCATION);
+        findDescriptor = new FindDescriptor(argMultimap);
+        assertTrue(findDescriptor.getPredicates().isEmpty());
+
+        String multipleBlankPrefixInput = " n/   e/   p/   r/   l/   ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleBlankPrefixInput,
-                PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE);
+                PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_LEVEL_OF_EDUCATION);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
