@@ -22,7 +22,6 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_EMAIL + "EMAIL "
             + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS "
             + CliSyntax.PREFIX_FACULTY + "FACULTY "
-            //TODO
             + CliSyntax.PREFIX_FETDATE + "LAST FET DATE "
             + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE \n"
 
@@ -33,9 +32,8 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_EMAIL + "johnd@example.com "
             + CliSyntax.PREFIX_VACCSTATUS + "T "
             + CliSyntax.PREFIX_FACULTY + "SoC "
-            //TODO
-            + CliSyntax.PREFIX_FETDATE + "TODO "
-            + CliSyntax.PREFIX_COLLECTIONDATE + "TODO ";
+            + CliSyntax.PREFIX_FETDATE + "20-10-2021 "
+            + CliSyntax.PREFIX_COLLECTIONDATE + "23-10-2021 ";
 
     public static final String MESSAGE_SUCCESS = "New resident added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This resident already exists in the address book";

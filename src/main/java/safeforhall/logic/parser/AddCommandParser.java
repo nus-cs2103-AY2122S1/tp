@@ -16,6 +16,7 @@ import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
@@ -36,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY,
-                        PREFIX_FETDATE, PREFIX_COLLECTIONDATE);
+                        PREFIX_FETDATE, PREFIX_COLLECTIONDATE, PREFIX_FETDATE, PREFIX_COLLECTIONDATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY)
@@ -50,8 +51,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
         VaccStatus vaccStatus = ParserUtil.parseVaccStatus(argMultimap.getValue(PREFIX_VACCSTATUS).get());
         Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
+        LastDate lastFetDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FETDATE).get());
+        LastDate lastCollectionDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_COLLECTIONDATE).get());
 
-        Person person = new Person(name, room, phone, email, vaccStatus, faculty, null, null);
+        Person person = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
         return new AddCommand(person);
     }
 

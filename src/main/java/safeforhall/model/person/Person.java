@@ -23,12 +23,12 @@ public class Person {
     private final LastDate lastCollectionDate;
 
     /**
-     * Every field must be present and only last 3 can be null.
+     * Every field must be present and only last 2 can be null.
      */
     public Person(Name name, Room room, Phone phone, Email email, VaccStatus vaccStatus,
                     Faculty faculty, LastDate lastFetDate, LastDate lastCollectionDate) {
-        // Optionals: faculty, lastFetDate, lastCollectionDate
-        requireAllNonNull(name, room, phone, email, vaccStatus);
+        // Optionals: lastFetDate, lastCollectionDate
+        requireAllNonNull(name, room, phone, email, vaccStatus, faculty);
         this.name = name;
         this.room = room;
         this.phone = phone;
@@ -102,7 +102,9 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getRoom().equals(getRoom())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail());
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getVaccStatus().equals(getVaccStatus())
+                && otherPerson.getFaculty().equals(getFaculty());
     }
 
     @Override
@@ -125,6 +127,10 @@ public class Person {
                 .append(getVaccStatus())
                 .append("; Faculty: ")
                 .append(getFaculty());
+                /*.append("; Last Fet Date: ")
+                .append(getLastFetDate())
+                .append("; Last Collection Date: ")
+                .append(getLastCollectionDate());*/
 
         return builder.toString();
     }
