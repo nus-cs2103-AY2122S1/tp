@@ -12,7 +12,7 @@ import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * Adds a student to the address book.
+ * Adds a student to the academy directory.
  */
 public class AddCommand extends Command {
 
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
             + "* `add n/Aaron Tan t/@sausage e/e0123456@u.nus.edu p/90312311`\n"
             + "* `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the academy directory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the academy directory";
 
     private final Student toAdd;
 

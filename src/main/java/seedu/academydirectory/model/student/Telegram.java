@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's Telegram handle in the address book.
+ * Represents a Student's Telegram handle in the academy directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
  */
 public class Telegram implements Information {
@@ -26,7 +26,7 @@ public class Telegram implements Information {
     /**
      * Constructs an {@code Telegram}.
      *
-     * @param telegram A valid telegram address.
+     * @param telegram A valid telegram handle.
      */
     public Telegram(String telegram) {
         requireNonNull(telegram);

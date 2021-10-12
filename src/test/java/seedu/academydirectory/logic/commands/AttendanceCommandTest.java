@@ -72,13 +72,13 @@ public class AttendanceCommandTest {
     }
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of academy directory
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         Index outOfBoundIndex = INDEX_SECOND_STUDENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of academy directory list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAcademyDirectory().getStudentList().size());
         ArrayList<Index> indexArrayListOutOfBounds = new ArrayList<>();
         indexArrayListOutOfBounds.add(outOfBoundIndex);

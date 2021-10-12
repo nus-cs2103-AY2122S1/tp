@@ -12,7 +12,7 @@ import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AcademyDirectory data in local storage.
  */
 public class StorageManager implements Storage {
 

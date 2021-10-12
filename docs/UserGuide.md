@@ -110,7 +110,7 @@ Examples:
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in the academy directory.
 
 Format: `list`
 
@@ -162,7 +162,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the academy directory.
 
 Format: `clear`
 

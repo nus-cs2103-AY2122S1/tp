@@ -15,7 +15,7 @@ import seedu.academydirectory.commons.util.JsonUtil;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access AcademyDirectory data stored as a json file on the hard disk.
  */
 public class JsonAcademyDirectoryStorage implements AcademyDirectoryStorage {
 
@@ -45,14 +45,14 @@ public class JsonAcademyDirectoryStorage implements AcademyDirectoryStorage {
     public Optional<ReadOnlyAcademyDirectory> readAcademyDirectory(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAcademyDirectory> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableAcademyDirectory> jsonAcademyDirectory = JsonUtil.readJsonFile(
                 filePath, JsonSerializableAcademyDirectory.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonAcademyDirectory.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonAcademyDirectory.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,8 +60,8 @@ public class JsonAcademyDirectoryStorage implements AcademyDirectoryStorage {
     }
 
     @Override
-    public void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook) throws IOException {
-        saveAcademyDirectory(addressBook, filePath);
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory) throws IOException {
+        saveAcademyDirectory(academyDirectory, filePath);
     }
 
     /**
@@ -69,12 +69,12 @@ public class JsonAcademyDirectoryStorage implements AcademyDirectoryStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory, Path filePath) throws IOException {
+        requireNonNull(academyDirectory);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAcademyDirectory(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableAcademyDirectory(academyDirectory), filePath);
     }
 
 }

@@ -17,7 +17,7 @@ import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the academy directory data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -27,13 +27,13 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given academyDirectory and userPrefs.
      */
     public ModelManager(ReadOnlyAcademyDirectory academyDirectory, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(academyDirectory, userPrefs);
 
-        logger.fine("Initializing with address book: " + academyDirectory + " and user prefs " + userPrefs);
+        logger.fine("Initializing with academy directory: " + academyDirectory + " and user prefs " + userPrefs);
 
         this.academyDirectory = new AcademyDirectory(academyDirectory);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -79,11 +79,11 @@ public class ModelManager implements Model {
         userPrefs.setAcademyDirectoryFilePath(academyDirectoryFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== AcademyDirectory ================================================================================
 
     @Override
-    public void setAcademyDirectory(ReadOnlyAcademyDirectory addressBook) {
-        this.academyDirectory.resetData(addressBook);
+    public void setAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory) {
+        this.academyDirectory.resetData(academyDirectory);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedAcademyDirectory}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {

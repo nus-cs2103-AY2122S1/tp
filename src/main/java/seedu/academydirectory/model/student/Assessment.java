@@ -3,7 +3,7 @@ package seedu.academydirectory.model.student;
 import java.util.HashMap;
 
 /**
- * Represents a Student's assessment in the address book.
+ * Represents a Student's assessment in the academy directory.
  */
 public class Assessment implements Information {
 
