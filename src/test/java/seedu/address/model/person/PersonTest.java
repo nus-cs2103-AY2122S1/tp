@@ -18,8 +18,12 @@ public class PersonTest {
 
     @Test
     public void constructor_null_throwsException() {
-        assertThrows(NullPointerException.class, () -> new Person(new Name(null), new Phone("92929292")));
-        assertThrows(NullPointerException.class, () -> new Person(new Name("Alice"), new Phone(null)));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name(null), new Phone("92929292"), new Availability("Mon")));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name("Alice"), new Phone(null), new Availability("Mon")));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name("Alice"), new Phone("92929292"), new Availability(null)));
     }
 
     @Test
