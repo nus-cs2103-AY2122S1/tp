@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 public class Day {
 
@@ -41,7 +43,7 @@ public class Day {
 
     @Override
     public String toString() {
-        return value.name();
+        return value.getDisplayName(TextStyle.FULL, Locale.US);
     }
 
     @Override
