@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEXES (positive integers, separated by a space)\n"
             + "Example: " + COMMAND_WORD + " 1 2 3";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted People: \n%1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Residents: \n%1$s";
 
     private final ArrayList<Index> targetIndexArray;
 

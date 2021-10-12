@@ -1,15 +1,18 @@
 package safeforhall.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+//import java.util.Set;
+//import java.util.stream.Collectors;
+//import java.util.stream.Stream;
 
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
 import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.tag.Tag;
+import safeforhall.model.person.Room;
+import safeforhall.model.person.VaccStatus;
+//import safeforhall.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -34,6 +37,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setName(person.getName());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setRoom(person.getRoom());
+        descriptor.setFaculty(person.getFaculty());
+        //TODO: lastfetdate and lastcollectiondate
+
         // descriptor.setAddress(person.getAddress());
         // descriptor.setTags(person.getTags());
     }
@@ -63,14 +70,38 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Room} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRoom(String room) {
+        descriptor.setRoom(new Room(room));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Faculty} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withFaculty(String faculty) {
+        descriptor.setFaculty(new Faculty(faculty));
+        return this;
+    }
+
+    /**
+     * Sets the {@code VaccStatus} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withVaccStatus(String vaccStatus) {
+        descriptor.setVaccStatus(new VaccStatus(vaccStatus));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
-        return this;
-    }
+    //public EditPersonDescriptorBuilder withTags(String... tags) {
+    //    Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+    //    descriptor.setTags(tagSet);
+    //    return this;
+    //}
 
     public EditPersonDescriptor build() {
         return descriptor;

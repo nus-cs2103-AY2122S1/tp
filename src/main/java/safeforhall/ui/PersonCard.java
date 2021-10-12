@@ -49,6 +49,10 @@ public class PersonCard extends UiPart<Region> {
     private VBox deadlineContainer;
     @FXML
     private VBox statusContainer;
+    @FXML
+    private Label lastfetdate;
+    @FXML
+    private Label lastcollectiondate;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,7 +66,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         faculty.setText(person.getFaculty().faculty);
-
+        lastfetdate.setText(person.getLastFetDate().date);
+        lastcollectiondate.setText(person.getLastCollectionDate().date);
+  
         if (person.hasMissedDeadline()) {
             this.getRoot().setStyle("-fx-background-color: #8B0000;");
             Label textBox = new Label("Late by:");

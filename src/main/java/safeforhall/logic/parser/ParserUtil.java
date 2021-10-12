@@ -21,6 +21,7 @@ import safeforhall.model.person.VaccStatus;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_NO_INDEX_INPUT = "Missing residents' index(es).";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -44,6 +45,11 @@ public class ParserUtil {
     public static ArrayList<Index> parseIndexes(String... indexes) throws ParseException {
         ArrayList<Index> indexArray = new ArrayList<>();
         for (String i : indexes) {
+            try {
+                Integer.parseInt(i);
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_NO_INDEX_INPUT);
+            }
             if (!StringUtil.isNonZeroUnsignedInteger(i)) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
             }
@@ -51,6 +57,7 @@ public class ParserUtil {
         }
         return indexArray;
     }
+
 
     /**
      * Parses a {@code String name} into a {@code Name}.
