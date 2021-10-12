@@ -21,8 +21,38 @@ class LessonDeleteCommandParserTest {
     }
 
     @Test
+    public void parse_emptyString_throwsParseException() {
+        assertParseFailure(parser, "",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_negativeArgs_throwsParseException() {
+        assertParseFailure(parser, "-2 1",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_singleArg_throwsParseException() {
+        assertParseFailure(parser, "2 ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_aboveTwoIndicesParseException() {
+        assertParseFailure(parser, "1 2 3 4 5",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a 1",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArgs2_throwsParseException() {
+        assertParseFailure(parser, "a abdag",
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonDeleteCommand.MESSAGE_USAGE));
     }
 }
