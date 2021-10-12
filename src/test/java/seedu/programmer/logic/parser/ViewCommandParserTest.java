@@ -49,11 +49,11 @@ public class ViewCommandParserTest {
     public void parse_validArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
         ViewCommand expectedViewCommand =
-                new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice Bob")));
         assertParseSuccess(parser, " -n Alice Bob", expectedViewCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " -n \n Alice \n \t Bob  \t", expectedViewCommand);
+        // multiple leading and trailing whitespaces before and after keywords
+        assertParseSuccess(parser, " -n \n Alice Bob  \t", expectedViewCommand);
     }
 
 }
