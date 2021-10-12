@@ -23,8 +23,8 @@ class DeleteTaskCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Task taskToDelete = model.getFilteredTaskList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        Task taskToDelete = model.getFilteredTaskList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
@@ -45,10 +45,10 @@ class DeleteTaskCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showTaskAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showTaskAtIndex(model, TypicalIndexes.INDEX_FIRST);
 
-        Task taskToDelete = model.getFilteredTaskList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        Task taskToDelete = model.getFilteredTaskList().get(TypicalIndexes.INDEX_FIRST.getZeroBased());
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
@@ -61,9 +61,9 @@ class DeleteTaskCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        CommandTestUtil.showTaskAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showTaskAtIndex(model, TypicalIndexes.INDEX_FIRST);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of task list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTaskList().getObservableTaskList().size());
 
@@ -75,14 +75,14 @@ class DeleteTaskCommandTest {
 
     @Test
     public void equals() {
-        DeleteTaskCommand deleteFirstCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST_PERSON);
-        DeleteTaskCommand deleteSecondCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_SECOND_PERSON);
+        DeleteTaskCommand deleteFirstCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST);
+        DeleteTaskCommand deleteSecondCommand = new DeleteTaskCommand(TypicalIndexes.INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteTaskCommand deleteFirstCommandCopy = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST_PERSON);
+        DeleteTaskCommand deleteFirstCommandCopy = new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

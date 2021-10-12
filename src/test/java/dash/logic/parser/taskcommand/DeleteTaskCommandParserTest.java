@@ -13,7 +13,7 @@ class DeleteTaskCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteTaskCommand() {
         CommandParserTestUtil.assertParseSuccess(parser, "1",
-                new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST_PERSON));
+                new DeleteTaskCommand(TypicalIndexes.INDEX_FIRST));
     }
 
     @Test
