@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,8 +24,15 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
+            "Number of people is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
+            "Date time should be in the format of " + DATE_TIME_FORMATTER.toString();
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -35,6 +45,28 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code numIfPeople} into an a non-zero unsigned integer and returns it.
+     * Leading and trailing whitespaces will be trimmed
+     * @param numOfPeople number of people as a string
+     * @return number of people as an integer
+     * @throws ParseException if the specified number of people is invalid (not non-zero unsigned integer).
+     */
+    public static int parseNumberOfPeople(String numOfPeople) throws ParseException {
+        int result;
+
+        try {
+            result = Integer.parseInt(numOfPeople.trim());
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_PEOPLE);
+        }
+
+        if (result <= 0) {
+            throw new ParseException(MESSAGE_INVALID_NUMBER_OF_PEOPLE);
+        }
+        return result;
     }
 
     /**
@@ -152,5 +184,22 @@ public class ParserUtil {
             throw new ParseException(DeliveryDetails.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDetails(trimmedDeliveryDetails);
+    }
+    
+    /**
+     * Parses {@code dateTime} into a {@code LocalDateTime object}
+     * @throws ParseException if {@code dateTime} is of invalid format
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+
+        LocalDateTime result;
+        try {
+            result = LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException dtpe) {
+            throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
+        }
+        return result;
     }
 }

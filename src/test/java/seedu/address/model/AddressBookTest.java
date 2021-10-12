@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -104,6 +105,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Supplier> getSupplierList() {
             return suppliers;
+        }
+      
+        @Override
+        public ObservableList<Reservation> getReservationList() {
+            return null;
         }
     }
 

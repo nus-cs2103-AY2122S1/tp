@@ -2,10 +2,13 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE_TIME_FORMAT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_NUMBER_OF_PEOPLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -60,6 +63,33 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseNumberOfPeople_nonZeroUnsignedInteger_success() throws Exception {
+        assertEquals(1, ParserUtil.parseNumberOfPeople("1"));
+        assertEquals(1, ParserUtil.parseNumberOfPeople("   1  "));
+    }
+
+    @Test
+    public void parseNumberOfPeople_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople(" a"));
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople("-1 "));
+    }
+
+    @Test
+    public void parseDateTime_validDateTime_success() throws Exception {
+        LocalDateTime expected = LocalDateTime.parse("2021-11-11 2000", ParserUtil.DATE_TIME_FORMATTER);
+        assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 2000   "));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_failure() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_DATE_TIME_FORMAT, ()
+            -> ParserUtil.parseDateTime("11-11-2021 2000"));
     }
 
     @Test
