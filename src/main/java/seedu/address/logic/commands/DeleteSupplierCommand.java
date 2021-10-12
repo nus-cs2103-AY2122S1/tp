@@ -22,7 +22,7 @@ public class DeleteSupplierCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Supplier: %1$s";
+    public static final String MESSAGE_DELETE_SUPPLIER_SUCCESS = "Deleted Supplier: %1$s";
 
     private final Index targetIndex;
 
@@ -41,7 +41,7 @@ public class DeleteSupplierCommand extends Command {
 
         Supplier supplierToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSupplier(supplierToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, supplierToDelete),
+        return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, supplierToDelete),
                 false, false, false, true);
     }
 
