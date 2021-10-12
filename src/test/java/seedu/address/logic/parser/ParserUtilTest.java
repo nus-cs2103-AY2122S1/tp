@@ -19,6 +19,9 @@ import seedu.address.model.member.Email;
 import seedu.address.model.member.Name;
 import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
+import seedu.address.model.task.MemberID;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskID;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -26,6 +29,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_POSITION = "#friend";
+    private static final String INVALID_TASK_NAME = "";
+    private static final String INVALID_TASK_ID = "abc";
+    private static final String INVALID_MEMBER_ID = "abc";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +39,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_POSITION_1 = "friend";
     private static final String VALID_POSITION_2 = "neighbour";
+    private static final String VALID_TASK_NAME = "write a poem";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -194,5 +201,68 @@ public class ParserUtilTest {
                 Arrays.asList(new Position(VALID_POSITION_1), new Position(VALID_POSITION_2)));
 
         assertEquals(expectedPositionSet, actualPositionSet);
+    }
+
+    @Test
+    public void parseMemberID_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMemberID(INVALID_MEMBER_ID));
+    }
+
+    @Test
+    public void parseMemberID_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MemberID.MESSAGE_CONSTRAINTS, ()
+                -> ParserUtil.parseMemberID(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseMemberID_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(new MemberID("1"), ParserUtil.parseMemberID("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(new MemberID("1"), ParserUtil.parseMemberID("  1  "));
+    }
+
+    @Test
+    public void parseTaskID_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskID(INVALID_TASK_ID));
+    }
+
+    @Test
+    public void parseTaskID_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, TaskID.MESSAGE_CONSTRAINTS, ()
+                -> ParserUtil.parseTaskID(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseTaskID_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(new TaskID("1"), ParserUtil.parseTaskID("1"));
+
+        // Leading and trailing whitespaces
+        assertEquals(new TaskID("1"), ParserUtil.parseTaskID("  1  "));
+    }
+
+    @Test
+    public void parseTask_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask((String) null));
+    }
+
+    @Test
+    public void parsTask_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_TASK_NAME));
+    }
+
+    @Test
+    public void parseTask_validValueWithoutWhitespace_returnsName() throws Exception {
+        Name expectedName = new Name(VALID_TASK_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(VALID_TASK_NAME));
+    }
+
+    @Test
+    public void parseTask_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_TASK_NAME + WHITESPACE;
+        Name expectedName = new Name(VALID_TASK_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 }

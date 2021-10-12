@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import seedu.address.commons.util.StringUtil;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -27,7 +29,7 @@ public class TaskID {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidTaskID(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return StringUtil.isNonZeroUnsignedInteger(test);
     }
 
     @Override
