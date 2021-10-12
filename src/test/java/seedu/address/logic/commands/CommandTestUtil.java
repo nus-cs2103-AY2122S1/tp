@@ -58,10 +58,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withEmail(VALID_EMAIL_AMY).withGroup(
-                        VALID_GROUP_NAME_AMY, GROUP_NAME_DESC_AMY).build();
+                        VALID_GROUP_NAME_AMY, VALID_DESC_AMY).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB).withGroup(
-                        VALID_GROUP_NAME_BOB, GROUP_NAME_DESC_BOB).build();
+                        VALID_GROUP_NAME_BOB, VALID_DESC_BOB).build();
     }
 
     /**
