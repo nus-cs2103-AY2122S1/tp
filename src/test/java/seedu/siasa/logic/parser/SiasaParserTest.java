@@ -19,7 +19,6 @@ import seedu.siasa.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
-import seedu.siasa.logic.commands.ListCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.person.NameContainsKeywordsPredicate;
 import seedu.siasa.model.person.Person;
@@ -86,11 +85,13 @@ public class SiasaParserTest {
     }
      */
 
+    /*
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
+     */
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
