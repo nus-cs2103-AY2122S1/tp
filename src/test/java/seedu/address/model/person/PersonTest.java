@@ -81,6 +81,10 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different revenue -> returns false
+        editedAlice = new PersonBuilder(ALICE).withRevenue("100.21").build();
+        assertFalse(ALICE.equals(editedAlice));
+
         // different address -> returns false
         editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));

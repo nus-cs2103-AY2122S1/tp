@@ -195,27 +195,24 @@ Examples:
 * `schedule 3 m/05-Feb-2022 15:30`
 * `schedule 5 m/05-Dec-2021 20:00`
 
-### Adding Revenue: `revenue`
+### Adding Revenue: `revenue` [coming soon]
 
 Adds revenue earned from an existing person in the address book.
 
-Format: `revenue INDEX r/AMOUNT`
+Format: `revenue AMOUNT`
 
-* Adds to the revenue earned from an existing person specified by `INDEX` in the address book by the given `AMOUNT`.
-The amount refers to the amount of revenue that the user earn from an existing person in S$. The amount can be **any
-float number of up to 2 decimal places 100, 250.11, 50000, ...**
-* The index refers to the index number shown in the displayed person list.
-* The index must be **a positive integer 1, 2, 3, ...**
+* Adds to the revenue earned from an existing person in the address book by the given `AMOUNT`. The amount refers to the
+amount of revenue that the user earn from an existing person in S$. The amount can be **any float number of up to 2 
+decimal places 100, 250.11, 50000, ...**
 * Existing value will be updated with the current value added to the `AMOUNT` given.
 * Default value for revenue of a person will be 0 when he/she is added to the address book.
 * Revenue of an existing person in the address book should never be **negative**.
 
 Examples:
-* `revenue 1 r/100.95` will update the revenue of first person in the contact list to be `100.95`. (Assuming revenue of
-the first person in the contact list was 0).
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` (Assuming Betsy Crowe is
-the second person in the contact list) followed by `revenue 2 r/350` and followed by `revenue 2 r/-100.11` will update the 
-revenue of Betsy Crowe to be `249.89`.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` followed by `revenue 100.95`
+will update the revenue of John Doe to be `100.95`.
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal` followed by
+`revenue 350` and followed by `revenue -100.11` will update the revenue of Betsy Crowe to be `249.89`.
 
 
 ### Exiting the program : `exit`

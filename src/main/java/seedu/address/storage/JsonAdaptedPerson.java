@@ -9,13 +9,17 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import seedu.address.commons.core.Money;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,21 +32,27 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String email;
+    private final String revenue;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedClaim> claims = new ArrayList<>();
+    private final String appointment;
+    private final String note;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("email") String email, @JsonProperty("revenue") String revenue,
+            @JsonProperty("address") String address,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("note") String note,
+            @JsonProperty("appointment") String appointment,
             @JsonProperty("claims") List<JsonAdaptedClaim> claims) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.revenue = revenue;
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -50,6 +60,8 @@ class JsonAdaptedPerson {
         if (claims != null) {
             this.claims.addAll(claims);
         }
+        this.note = note;
+        this.appointment = appointment;
     }
 
     /**
@@ -59,10 +71,13 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        revenue = String.valueOf(source.getRevenue().value.getInDollars());
         address = source.getAddress().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        note = source.getNote().value;
+        appointment = source.getAppointment().getValue();
         claims.addAll(source.getClaims().stream()
                 .map(JsonAdaptedClaim::new)
                 .collect(Collectors.toList()));
@@ -108,6 +123,13 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        final Revenue modelRevenue;
+        if (revenue == null) {
+            modelRevenue = new Revenue(new Money(0));
+        } else {
+            modelRevenue = new Revenue(new Money(Float.parseFloat(revenue)));
+        }
+
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -118,7 +140,20 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Claim> modelClaims = new HashSet<>(personClaims);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelClaims);
+
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+        final Note modelNote = new Note(note);
+
+
+        if (!Appointment.isValidMeetingTime(appointment)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
+
+        return new Person(modelName, modelPhone, modelEmail, modelRevenue, modelAddress, modelTags, modelNote,
+         modelAppointment, modelClaims);
     }
 
 }

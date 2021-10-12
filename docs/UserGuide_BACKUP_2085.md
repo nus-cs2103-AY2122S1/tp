@@ -201,11 +201,17 @@ Adds revenue earned from an existing person in the address book.
 
 Format: `revenue INDEX r/AMOUNT`
 
+<<<<<<< HEAD
+* Adds to the revenue earned from an existing person in the address book by the given `AMOUNT`. The amount refers to the
+amount of revenue that the user earn from an existing person in S$. The amount can be **any float number of up to 2
+decimal places 100, 250.11, 50000, ...**
+=======
 * Adds to the revenue earned from an existing person specified by `INDEX` in the address book by the given `AMOUNT`.
 The amount refers to the amount of revenue that the user earn from an existing person in S$. The amount can be **any
 float number of up to 2 decimal places 100, 250.11, 50000, ...**
 * The index refers to the index number shown in the displayed person list.
 * The index must be **a positive integer 1, 2, 3, ...**
+>>>>>>> master
 * Existing value will be updated with the current value added to the `AMOUNT` given.
 * Default value for revenue of a person will be 0 when he/she is added to the address book.
 * Revenue of an existing person in the address book should never be **negative**.

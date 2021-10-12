@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.Money;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.tag.Tag;
 
@@ -22,28 +24,46 @@ public class Person {
     private final Email email;
 
     // Data fields
+    private final Revenue revenue;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Claim> claims = new HashSet<>();
+    private final Note note;
+    private final Appointment appointment;
 
     /**
-     * Every field must be present and not null.
+     * Every field except revenue must be present and not null. Revenue will be set to 0 by default if not stated.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Claim> claims) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Note note,
+                  Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, address, note, tags, claims);
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.revenue = new Revenue(new Money(0));
         this.address = address;
         this.tags.addAll(tags);
+        this.note = note;
+        this.appointment = appointment;
         this.claims.addAll(claims);
     }
 
     /**
-     * Overridden constructor with empty set as the default value for claims
+     * Every field for this case is provided and hence a revenue value will be tagged to the person.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        this(name, phone, email, address, tags, new HashSet<>());
+    public Person(Name name, Phone phone, Email email, Revenue revenue, Address address, Set<Tag> tags,
+                  Note note, Appointment appointment, Set<Claim> claims) {
+        requireAllNonNull(name, phone, email, address, note, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.revenue = revenue;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.note = note;
+        this.appointment = appointment;
+        this.claims.addAll(claims);
     }
 
     /**
@@ -51,11 +71,13 @@ public class Person {
      */
     public Person(Person previousPerson, Set<Claim> claims) {
         this(previousPerson.name,
-             previousPerson.phone,
-             previousPerson.email,
-             previousPerson.address,
-             previousPerson.tags,
-             claims);
+                previousPerson.phone,
+                previousPerson.email,
+                previousPerson.address,
+                previousPerson.tags,
+                previousPerson.note,
+                previousPerson.appointment,
+                claims);
     }
 
     public Name getName() {
@@ -70,8 +92,20 @@ public class Person {
         return email;
     }
 
+    public Revenue getRevenue() {
+        return revenue;
+    }
+
     public Address getAddress() {
         return address;
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
     }
 
     /**
@@ -117,15 +151,17 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getRevenue().equals(getRevenue())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getClaims().equals(getClaims());
+                && otherPerson.getClaims().equals(getClaims())
+                && otherPerson.getNote().equals(getNote());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, claims);
+        return Objects.hash(name, phone, email, revenue, address, tags, note, claims);
     }
 
     @Override
@@ -136,8 +172,14 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; Revenue: ")
+                .append(getRevenue())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Note: ")
+                .append(getNote())
+                .append("; Meeting: ")
+                .append(getAppointment());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
