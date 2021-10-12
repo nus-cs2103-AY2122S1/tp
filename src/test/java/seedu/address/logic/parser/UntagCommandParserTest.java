@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -79,7 +80,7 @@ public class UntagCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND;
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_HUSBAND).build();
         UntagCommand expectedCommand = new UntagCommand(targetIndex, descriptor);
 
@@ -91,7 +92,7 @@ public class UntagCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
 
-        UntagCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         UntagCommand expectedCommand = new UntagCommand(targetIndex, descriptor);
 
