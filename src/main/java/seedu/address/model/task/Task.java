@@ -1,15 +1,19 @@
 package seedu.address.model.task;
 
+
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.module.ModuleName;
 
 /**
  * Represents a Task of a TeachingAssistantBuddy in the TAB.
  */
 public class Task {
 
-    private final Module module;
+    private final ModuleName module;
     private final String name;
     private final String deadline;
     private boolean isComplete;
@@ -20,7 +24,7 @@ public class Task {
      * @param name The Name of this Task.
      * @param deadline The Deadline of this Task.
      */
-    public Task(Module module, String name, String deadline) {
+    public Task(ModuleName module, String name, String deadline) {
         requireAllNonNull(module, name, deadline);
         this.module = module;
         this.name = name;
@@ -29,7 +33,7 @@ public class Task {
     }
 
     public String getModule() {
-        return this.module.getName();
+        return this.module.toString();
     }
 
     public String getName() {
