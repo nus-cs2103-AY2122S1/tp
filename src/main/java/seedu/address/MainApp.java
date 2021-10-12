@@ -33,6 +33,8 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
+import static seedu.address.model.util.SampleDataUtil.getSampleGamesList;
+
 /**
  * Runs the application.
  */
@@ -95,6 +97,7 @@ public class MainApp extends Application {
         // TODO - Kevin
         // Read and load initialGameData
         ReadOnlyGamesList initialGameData = new GamesList();
+        initialGameData = getSampleGamesList();
 
         return new ModelManager(initialFriendData, initialGameData, userPrefs);
     }

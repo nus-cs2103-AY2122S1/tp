@@ -4,11 +4,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.ReadOnlyFriendsList;
+import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -29,6 +33,22 @@ public class SampleDataUtil {
             new Friend(new FriendId("RoyJoy"), new FriendName("Roy Balakrishnan"),
                 getGameSet("Valorant", "CSGO"))
         };
+    }
+
+    public static Game[] getSampleGames() {
+        return new Game[] {
+                new Game(new GameId("CSGO")),
+                new Game(new GameId("Valorant")),
+                new Game(new GameId("LeagueofLegends")),
+        };
+    }
+
+    public static ReadOnlyGamesList getSampleGamesList() {
+        GamesList sampleAb = new GamesList();
+        for (Game sampleGame : getSampleGames()) {
+            sampleAb.addGame(sampleGame);
+        }
+        return sampleAb;
     }
 
     public static ReadOnlyFriendsList getSampleFriendsList() {
