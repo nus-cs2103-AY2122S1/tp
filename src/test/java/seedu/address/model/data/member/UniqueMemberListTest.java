@@ -1,4 +1,4 @@
-package seedu.address.model.member;
+package seedu.address.model.data.member;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,8 +15,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.member.exceptions.DuplicateMemberException;
-import seedu.address.model.member.exceptions.MemberNotFoundException;
+import seedu.address.model.data.member.exceptions.DuplicateMemberException;
+import seedu.address.model.data.member.exceptions.MemberNotFoundException;
 import seedu.address.testutil.MemberBuilder;
 
 public class UniqueMemberListTest {

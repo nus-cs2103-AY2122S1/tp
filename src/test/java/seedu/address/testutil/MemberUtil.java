@@ -10,7 +10,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.PaddCommand;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.position.Position;
 
 /**

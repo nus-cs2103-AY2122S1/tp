@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EaddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.event.EventDate;
 
 /**
  * Parses input arguments and creates a new EaddCommand object
@@ -35,7 +35,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EaddCommand.MESSAGE_USAGE));
         }
 
-        EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         EventDate date = ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get());
         Set<Index> indexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER));
 

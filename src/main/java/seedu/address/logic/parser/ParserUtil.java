@@ -9,12 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.EventDate;
-import seedu.address.model.event.EventName;
-import seedu.address.model.member.Address;
-import seedu.address.model.member.Email;
-import seedu.address.model.member.Name;
-import seedu.address.model.member.Phone;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.event.EventDate;
+import seedu.address.model.data.member.Address;
+import seedu.address.model.data.member.Email;
+import seedu.address.model.data.member.Phone;
 import seedu.address.model.position.Position;
 
 /**
@@ -130,13 +129,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static EventName parseEventName(String name) throws ParseException {
+    public static Name parseEventName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!EventName.isValidName(trimmedName)) {
-            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new EventName(trimmedName);
+        return new Name(trimmedName);
     }
 
     /**

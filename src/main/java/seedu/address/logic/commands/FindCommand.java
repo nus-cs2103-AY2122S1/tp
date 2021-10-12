@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.member.NameContainsKeywordsPredicate;
+import seedu.address.model.data.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all members in address book whose name contains any of the argument keywords.
