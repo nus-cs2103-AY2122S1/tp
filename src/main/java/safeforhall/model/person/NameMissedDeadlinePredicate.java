@@ -23,6 +23,10 @@ public class NameMissedDeadlinePredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
+        return getDeadlinePeriod(person) > 0;
+    }
+
+    public long getDeadlinePeriod(Person person) {
         LastDate currentPersonLastDate;
         LocalDate deadline;
         if (keyword.equals("f")) {
@@ -31,7 +35,6 @@ public class NameMissedDeadlinePredicate implements Predicate<Person> {
             currentPersonLastDate = person.getLastCollectionDate();
         }
         deadline = currentPersonLastDate.getDeadline();
-        long period = ChronoUnit.DAYS.between(deadline, date);
-        return period > 0;
+        return ChronoUnit.DAYS.between(deadline, date);
     }
 }
