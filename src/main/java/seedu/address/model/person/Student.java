@@ -107,7 +107,12 @@ public class Student {
      * Remove lesson from student instance.
      */
     public void unenrollFromLesson(Lesson lesson) {
-        lessons.remove(lesson);
+        for (Lesson l : lessons) {
+            if (l.isSameLesson(lesson)) {
+                lessons.remove(l);
+                break;
+            }
+        }
     }
 
     /**

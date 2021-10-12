@@ -268,6 +268,16 @@ public class Lesson {
     public void removeStudent(Student student) {
         requireNonNull(student);
         checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student, this));
+        Student toUnenroll = null;
+        for (Student s : students) {
+            if (s.isSamePerson(student)) {
+                toUnenroll = s;
+                break;
+            }
+        }
+        if (toUnenroll != null) {
+            students.remove(toUnenroll);
+        }
         students.remove(student);
         student.unenrollFromLesson(this);
     }
@@ -403,5 +413,15 @@ public class Lesson {
     @Override
     public String toString() {
         return getLessonCode();
+    }
+
+    /**
+     * todo
+     */
+    public void removeAll() {
+        while (!students.isEmpty()) {
+            Student currStudent = students.get(0);
+            this.removeStudent(currStudent);
+        }
     }
 }

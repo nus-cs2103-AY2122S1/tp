@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -60,11 +61,12 @@ public class UnenrollCommand extends Command {
                     studentToUnenroll.getName(),
                     lesson));
         }
+
         Student newStudent = Student.createClone(studentToUnenroll); // todo consider cloneable
         lesson.removeStudent(newStudent);
         model.setPerson(studentToUnenroll, newStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
     }
 
