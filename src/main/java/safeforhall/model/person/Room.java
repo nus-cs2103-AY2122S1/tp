@@ -35,7 +35,8 @@ public class Room {
     public Room(String room) {
         requireNonNull(room);
         checkArgument(isValidRoom(room), MESSAGE_CONSTRAINTS);
-        this.room = room;
+        // Converts the first character to upper case
+        this.room = room.toUpperCase();
     }
 
     /**
