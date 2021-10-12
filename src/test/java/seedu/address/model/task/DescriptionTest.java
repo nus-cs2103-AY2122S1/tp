@@ -27,17 +27,17 @@ public class DescriptionTest {
         assertThrows(NullPointerException.class, () -> seedu.address.model.person.Name.isValidName(null));
 
         // invalid name
-        assertFalse(Description.isValidName("")); // empty string
-        assertFalse(Description.isValidName(" ")); // spaces only
-        assertFalse(Description.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Description.isValidName("Report *")); // contains non-alphanumeric characters
+        assertFalse(Description.isValidDescription("")); // empty string
+        assertFalse(Description.isValidDescription(" ")); // spaces only
+        assertFalse(Description.isValidDescription("^")); // only non-alphanumeric characters
+        assertFalse(Description.isValidDescription("Report *")); // contains non-alphanumeric characters
 
         // valid name
-        assertTrue(Description.isValidName("homework")); // alphabets only
-        assertTrue(Description.isValidName("12345")); // numbers only
-        assertTrue(Description.isValidName("cs2103 report")); // alphanumeric characters
-        assertTrue(Description.isValidName("CS2103 Report")); // with capital letters
-        assertTrue(Description.isValidName("A very very long task name")); // long names
+        assertTrue(Description.isValidDescription("homework")); // alphabets only
+        assertTrue(Description.isValidDescription("12345")); // numbers only
+        assertTrue(Description.isValidDescription("cs2103 report")); // alphanumeric characters
+        assertTrue(Description.isValidDescription("CS2103 Report")); // with capital letters
+        assertTrue(Description.isValidDescription("A very very long task name")); // long names
     }
 
     @Test

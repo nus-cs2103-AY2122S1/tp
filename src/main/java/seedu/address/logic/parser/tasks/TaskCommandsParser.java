@@ -8,12 +8,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.persons.AddLessonToPersonCommand;
-import seedu.address.logic.commands.persons.AddPersonCommand;
-import seedu.address.logic.commands.persons.DeletePersonCommand;
-import seedu.address.logic.commands.persons.EditPersonCommand;
-import seedu.address.logic.commands.persons.FindPersonCommand;
-import seedu.address.logic.commands.persons.ViewPersonCommand;
 import seedu.address.logic.commands.tasks.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
