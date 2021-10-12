@@ -53,8 +53,11 @@ public class SupplierCommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String SUPPLY_TYPE_DESC_CHICKEN = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
-    public static final String SUPPLY_TYPE_DESC_BEEF = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
+    public static final String SUPPLY_TYPE_DESC_AMY = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
+    public static final String SUPPLY_TYPE_DESC_BOB = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
+    public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_DAILY;
+    public static final String DELIVERY_DETAILS_DESC_BOB =
+            " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_MONTHLY;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
