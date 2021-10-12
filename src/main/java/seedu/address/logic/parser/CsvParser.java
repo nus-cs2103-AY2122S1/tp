@@ -10,12 +10,15 @@ import java.util.Map;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.CsvFileSelector;
+import seedu.address.ui.exceptions.FileSelectorException;
 
 /**
  * Parses CSV files for import function.
  */
 public class CsvParser {
-    public static final String MESSAGE_CSV_FILE_IS_EMPTY = "Failed!\nCsv file is empty";
+    public static final String MESSAGE_CSV_FILE_IS_EMPTY = "Failed!"
+            + System.lineSeparator()
+            + "Csv file is empty";
     public static final String MESSAGE_FILE_UNREADABLE = "File could not be read";
 
     private final BufferedReader br;
@@ -35,6 +38,8 @@ public class CsvParser {
             parse();
         } catch (IOException e) {
             throw new ParseException(MESSAGE_FILE_UNREADABLE);
+        } catch (FileSelectorException e) {
+            throw new ParseException(e.getMessage());
         }
     }
 

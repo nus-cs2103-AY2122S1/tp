@@ -73,4 +73,14 @@ public class TypicalPersons {
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    public static List<String> getTypicalNames() {
+        return new ArrayList<>(Arrays.asList("Alice Pauline",
+                "Benson Meier",
+                "Carl Kurz",
+                "Daniel Meier",
+                "Elle Meyer",
+                "Fiona Kunz",
+                "George Best"));
+    }
 }
