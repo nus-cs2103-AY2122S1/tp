@@ -48,7 +48,7 @@ public class ParserUtil {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
 
-        if (trimmedFilePath != null && !FileUtil.isValidPath(trimmedFilePath)) {
+        if (!FileUtil.isValidPath(trimmedFilePath)) {
             throw new ParseException(MESSAGE_INVALID_FILEPATH);
         }
         return Paths.get(trimmedFilePath);
