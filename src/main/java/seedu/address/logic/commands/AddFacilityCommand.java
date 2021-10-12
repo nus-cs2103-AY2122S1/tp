@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.facility.Facility;
 
@@ -26,6 +27,7 @@ public class AddFacilityCommand extends Command {
             + PREFIX_TIME + "1130 "
             + PREFIX_CAPACITY + "5 ";
     public static final String MESSAGE_SUCCESS = "New facility added: %1$s";
+    public static final String MESSAGE_DUPLICATE_FACILITY = "This facility already exists in the facility list.";
 
     private final Facility facility;
 
@@ -40,8 +42,13 @@ public class AddFacilityCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasFacility(facility)) {
+            throw new CommandException(MESSAGE_DUPLICATE_FACILITY);
+        }
+
         model.addFacility(facility);
         return new CommandResult(String.format(MESSAGE_SUCCESS, facility));
     }
