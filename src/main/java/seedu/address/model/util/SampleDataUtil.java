@@ -31,12 +31,21 @@ public class SampleDataUtil {
         };
     }
 
+    private static Group[] getSampleGroups() {
+        return new Group[]{
+                new Group(new GroupName("CS2103T"), new Description("test")),
+                new Group(new GroupName("CS2101"), new Description("test"))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }
+        for (Group sampleGroup : getSampleGroups()) {
+            sampleAb.addGroup(sampleGroup);
+        }
         return sampleAb;
     }
-
 }
