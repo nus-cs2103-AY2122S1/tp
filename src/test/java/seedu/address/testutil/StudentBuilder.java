@@ -77,6 +77,15 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code GroupName} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withGroup(Group group) {
+        this.group = new Group(new GroupName(group.getGroupName().toString()),
+                new Description(group.getDescription().toString()));
+        return this;
+    }
+
+    /**
      * Builds a student
      * @return built student
      */
