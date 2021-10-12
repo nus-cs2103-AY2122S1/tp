@@ -31,21 +31,28 @@ public class TypicalObjects {
             .withPhone("94351253")
             .withTags("friends")
             .withLessonsList((new NoOverlapLessonList()).addLesson(MON_10_12_BIOLOGY))
+            .withId("05404585-7339-4fb4-9899-c470e0068829")
             .build();
+
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withId("99f5ad00-6e1b-49c8-98d8-5ae3459bb262").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withId("984c2915-9d24-4931-917c-03b98c621f39").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withId("559ab00a-ce9a-4799-be3d-a126290707b1").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michegan ave").build();
+            .withEmail("werner@example.com").withAddress("michegan ave")
+            .withId("25706097-cc50-4832-b972-2a115f08f26f").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo")
+            .withId("bcf3308b-6813-4482-96e4-7eae771e78f4").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withEmail("anna@example.com").withAddress("4th street").build();
+            .withEmail("anna@example.com").withAddress("4th street")
+            .withId("f4907d65-ffdb-4041-ae04-5165214eec67").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -62,7 +69,8 @@ public class TypicalObjects {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    public static final Task REPORT_1 = new TaskBuilder().withName("Report 1").withDeadline("2021-10-10").build();
+    public static final Task REPORT_1 = new TaskBuilder().withName("Report 1")
+            .withUniqueId("f31648db-5619-4bad-99d2-87367a2b5f28").withDeadline("2021-10-10").build();
 
     private TypicalObjects() {} // prevents instantiation
 

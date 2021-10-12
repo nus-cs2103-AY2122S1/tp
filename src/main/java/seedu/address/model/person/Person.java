@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.id.HasUniqueId;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.tag.Tag;
@@ -15,10 +17,11 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements HasUniqueId {
 
     // Identity fields
     private final Name name;
+    private final UniqueId id;
     private final Phone phone;
     private final Email email;
 
@@ -32,7 +35,23 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags, lessonsList);
+        this.id = UniqueId.generateId(this);
+        requireAllNonNull(name, phone, email, address, tags, id, lessonsList);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.lessonsList = lessonsList;
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  NoOverlapLessonList lessonsList) {
+        requireAllNonNull(name, phone, email, address, tags, uniqueId, lessonsList);
+        this.id = uniqueId;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +72,10 @@ public class Person {
         return email;
     }
 
+    public UniqueId getId() {
+        return id;
+    }
+
     public Address getAddress() {
         return address;
     }
@@ -69,17 +92,23 @@ public class Person {
         return lessonsList;
     }
 
-    public Person updateLessonsList(NoOverlapLessonList newList) {
-        return new Person(name, phone, email, address, tags, newList);
-    }
-
     /**
-     * Lesson to check with
+     * Check if person can attend lesson
+     *
      * @param lesson lesson to check
      * @return true if person can attend the lesson
      */
     public boolean canAttendLesson(Lesson lesson) {
         return !lessonsList.doesLessonOverlap(lesson);
+    }
+  
+     * Immutable way of updating the lessons list. Note that the id will be re-generated.
+     *
+     * @param newLessonsList to change to
+     * @return new Person instance with the updated lessons list
+     */
+    public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
+        return new Person(id, name, phone, email, address, tags, newLessonsList);
     }
 
     /**
@@ -96,7 +125,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
+     * Returns true if both persons have the same id.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -110,6 +139,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+        // TODO: make the following code only compare the object id. You will have to face some tedious test fail.
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
@@ -121,7 +151,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, lessonsList);
+        return Objects.hash(name, id, phone, email, address, tags, lessonsList);
     }
 
     @Override

@@ -1,5 +1,6 @@
 {
   "persons": [ {
+    "uniqueId": "1fa10824-5708-490b-973d-96d78d47d720",
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
