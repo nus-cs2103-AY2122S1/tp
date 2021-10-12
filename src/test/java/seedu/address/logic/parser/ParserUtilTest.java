@@ -38,10 +38,15 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
-    private static final String FACILITY_NAME = "Court";
-    private static final String FACILITY_LOCATION = "University Hall";
-    private static final String FACILITY_TIME = "11:30";
-    private static final String FACILITY_CAPACITY = "5";
+    private static final String INVALID_FACILITY_NAME = "Cour+";
+    private static final String INVALID_FACILITY_LOCATION = "University H@ll";
+    private static final String INVALID_FACILITY_TIME = "555";
+    private static final String INVALID_FACILITY_CAPACITY = "Z";
+
+    private static final String VALID_FACILITY_NAME = "Court";
+    private static final String VALID_FACILITY_LOCATION = "University Hall";
+    private static final String VALID_FACILITY_TIME = "1130";
+    private static final String VALID_FACILITY_CAPACITY = "5";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -71,15 +76,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseFacilityName_valueWithoutWhiteSpace_returnsFacilityName() {
-        FacilityName name = new FacilityName(FACILITY_NAME);
-        assertEquals(name, ParserUtil.parseFacilityName(FACILITY_NAME));
+    public void parseFacilityName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFacilityName(INVALID_FACILITY_NAME));
     }
 
     @Test
-    public void parseFacilityName_valueWithWhiteSpace_returnsTrimmedName() {
-        FacilityName name = new FacilityName(FACILITY_NAME);
-        assertEquals(name, ParserUtil.parseFacilityName(WHITESPACE + FACILITY_NAME + WHITESPACE));
+    public void parseFacilityName_valueWithoutWhiteSpace_returnsFacilityName() throws Exception {
+        FacilityName name = new FacilityName(VALID_FACILITY_NAME);
+        assertEquals(name, ParserUtil.parseFacilityName(VALID_FACILITY_NAME));
+    }
+
+    @Test
+    public void parseFacilityName_valueWithWhiteSpace_returnsTrimmedName() throws Exception {
+        FacilityName name = new FacilityName(VALID_FACILITY_NAME);
+        assertEquals(name, ParserUtil.parseFacilityName(WHITESPACE + VALID_FACILITY_NAME + WHITESPACE));
     }
 
     @Test
@@ -88,15 +98,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseLocation_valueWithoutWhiteSpace_returnsLocation() {
-        Location location = new Location(FACILITY_LOCATION);
-        assertEquals(location, ParserUtil.parseLocation(FACILITY_LOCATION));
+    public void parseLocation_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLocation(INVALID_FACILITY_LOCATION));
     }
 
     @Test
-    public void parseLocation_valueWithWhiteSpace_returnsTrimmedLocation() {
-        Location location = new Location(FACILITY_LOCATION);
-        assertEquals(location, ParserUtil.parseLocation(WHITESPACE + FACILITY_LOCATION + WHITESPACE));
+    public void parseLocation_valueWithoutWhiteSpace_returnsLocation() throws Exception {
+        Location location = new Location(VALID_FACILITY_LOCATION);
+        assertEquals(location, ParserUtil.parseLocation(VALID_FACILITY_LOCATION));
+    }
+
+    @Test
+    public void parseLocation_valueWithWhiteSpace_returnsTrimmedLocation() throws Exception {
+        Location location = new Location(VALID_FACILITY_LOCATION);
+        assertEquals(location, ParserUtil.parseLocation(WHITESPACE + VALID_FACILITY_LOCATION + WHITESPACE));
     }
 
     @Test
@@ -105,15 +120,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTime_valueWithoutWhiteSpace_returnsTime() {
-        Time time = new Time(FACILITY_TIME);
-        assertEquals(time, ParserUtil.parseTime(FACILITY_TIME));
+    public void parseTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime(INVALID_FACILITY_TIME));
     }
 
     @Test
-    public void parseTime_valueWithWhiteSpace_returnsTrimmedTime() {
-        Time time = new Time(FACILITY_TIME);
-        assertEquals(time, ParserUtil.parseTime(WHITESPACE + FACILITY_TIME + WHITESPACE));
+    public void parseTime_valueWithoutWhiteSpace_returnsTime() throws Exception {
+        Time time = new Time(VALID_FACILITY_TIME);
+        assertEquals(time, ParserUtil.parseTime(VALID_FACILITY_TIME));
+    }
+
+    @Test
+    public void parseTime_valueWithWhiteSpace_returnsTrimmedTime() throws Exception {
+        Time time = new Time(VALID_FACILITY_TIME);
+        assertEquals(time, ParserUtil.parseTime(WHITESPACE + VALID_FACILITY_TIME + WHITESPACE));
     }
 
     @Test
@@ -122,16 +142,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCapacity_valueWithoutWhiteSpace_returnsCapacity() {
-        Capacity capacity = new Capacity(FACILITY_CAPACITY);
-        assertEquals(capacity, ParserUtil.parseCapacity(FACILITY_CAPACITY));
+    public void parseCapacity_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCapacity(INVALID_FACILITY_CAPACITY));
     }
 
     @Test
-    public void parseLocation_valueWithWhiteSpace_returnsTrimmedCapacity() {
-        Capacity capacity = new Capacity(FACILITY_CAPACITY);
-        assertEquals(capacity, ParserUtil.parseCapacity(WHITESPACE + FACILITY_CAPACITY + WHITESPACE));
+    public void parseCapacity_valueWithoutWhiteSpace_returnsCapacity() throws Exception {
+        Capacity capacity = new Capacity(VALID_FACILITY_CAPACITY);
+        assertEquals(capacity, ParserUtil.parseCapacity(VALID_FACILITY_CAPACITY));
     }
+
+    @Test
+    public void parseCapacity_valueWithWhiteSpace_returnsTrimmedCapacity() throws Exception {
+        Capacity capacity = new Capacity(VALID_FACILITY_CAPACITY);
+        assertEquals(capacity, ParserUtil.parseCapacity(WHITESPACE + VALID_FACILITY_CAPACITY + WHITESPACE));
+    }
+
+
 
     @Test
     public void parseName_null_throwsNullPointerException() {
