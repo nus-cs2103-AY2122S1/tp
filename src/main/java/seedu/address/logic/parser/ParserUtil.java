@@ -141,7 +141,7 @@ public class ParserUtil {
     /**
      * Replaces the long form prefixes in the argument with their respective short forms.
      */
-    public static String longToShortFormPrefixConverter(String args) {
+    public static String mapPrefixesToShortForm(String args) {
         return args.replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NAME), PREFIX_NAME.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_ADDRESS), PREFIX_ADDRESS.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_EMAIL), PREFIX_EMAIL.getPrefix())
