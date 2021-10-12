@@ -22,16 +22,16 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Availability EMPTY_AVAILABILITY = new Availability("");
+    public static final Availability SAMPLE_AVAILABILITY = new Availability("MON WED FRI");
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), EMPTY_AVAILABILITY),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), EMPTY_AVAILABILITY),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), EMPTY_AVAILABILITY),
-            new Person(new Name("David Li"), new Phone("91031282"), EMPTY_AVAILABILITY),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), EMPTY_AVAILABILITY),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), EMPTY_AVAILABILITY)
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), SAMPLE_AVAILABILITY),
+            new Person(new Name("David Li"), new Phone("91031282"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), SAMPLE_AVAILABILITY)
         };
     }
 
