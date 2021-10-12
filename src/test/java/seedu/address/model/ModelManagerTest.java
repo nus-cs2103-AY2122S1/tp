@@ -14,8 +14,11 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +97,30 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getDisplayTaskList_success() {
+        Task[] taskList = {};
+        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
+        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
+                mockObservableList);
+        assertEquals(modelManager.getDisplayTaskList(), mockUnmodifiableObservableList);
+    }
+
+    @Test
+    public void updateDisplayTaskList_success() {
+        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
+        modelManager.updateDisplayTaskList(Arrays.asList(taskList));
+        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
+        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
+                mockObservableList);
+        assertEquals(modelManager.getDisplayTaskList(), mockUnmodifiableObservableList);
+    }
+
+    @Test
+    public void getDisplayTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getDisplayTaskList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -120,6 +147,17 @@ public class ModelManagerTest {
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different displayTaskList -> returns false
+        Task firstTask = new Task("transfer $100");
+        Task secondTask = new Task("transfer $101");
+        Task[] taskListOne = {firstTask, secondTask};
+        Task[] taskListTwo = {secondTask, firstTask};
+        ModelManager mockModelManager = new ModelManager(addressBook, userPrefs);
+        mockModelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        mockModelManager.updateDisplayTaskList(Arrays.asList(taskListOne));
+        modelManager.updateDisplayTaskList(Arrays.asList(taskListTwo));
+        assertFalse(modelManager.equals(mockModelManager));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
