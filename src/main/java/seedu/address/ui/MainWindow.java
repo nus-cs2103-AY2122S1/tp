@@ -255,6 +255,7 @@ public class MainWindow extends UiPart<Stage> {
         if (friendMainCard == null) {
             addFriendMainCardToFriendsPlaceholder(commandResult);
         } else if (!friendMainCard.getCurrentFriend().equals(commandResult.getFriendToGet())) {
+            removeFriendMainCardFromFriendsPlaceholder();
             addFriendMainCardToFriendsPlaceholder(commandResult);
         }
     }
@@ -269,6 +270,7 @@ public class MainWindow extends UiPart<Stage> {
         if (gameMainCard == null) {
             addGameMainCardToGamesPlaceholder(commandResult);
         } else if (!gameMainCard.getCurrentGame().equals(commandResult.getGameToGet())) {
+            removeGameMainCardFromGamesPlaceholder();
             addGameMainCardToGamesPlaceholder(commandResult);
         }
     }
