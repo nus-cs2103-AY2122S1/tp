@@ -3,8 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
-import static seedu.address.model.lesson.Lesson.parseStringToDayOfWeek;
+import static seedu.address.model.lesson.LessonTime.TIME_FORMATTER;
+import static seedu.address.model.lesson.LessonTime.parseStringToDay;
+import static seedu.address.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
+import static seedu.address.model.lesson.Price.isValidPrice;
+import static seedu.address.model.lesson.Subject.SUBJECT_MESSAGE_CONSTRAINTS;
+import static seedu.address.model.lesson.Subject.isValidSubject;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -18,7 +22,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.EnrollCommand;
 import seedu.address.logic.commands.UnenrollCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Price;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -119,7 +124,7 @@ public class ParserUtil {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
         if (!Grade.isValidGrade(grade)) {
-            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Grade.GRADE_MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);
     }
@@ -170,11 +175,8 @@ public class ParserUtil {
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
         String cleanedDay = StringUtil.capitalize(day.trim());
-        try {
-            return parseStringToDayOfWeek(cleanedDay);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(MESSAGE_INVALID_DAY);
-        }
+        return parseStringToDay(cleanedDay)
+                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_DAY));
     }
 
     /**
@@ -190,7 +192,7 @@ public class ParserUtil {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE, pe));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
@@ -228,15 +230,15 @@ public class ParserUtil {
      * @param args Subject
      * @throws ParseException if the given {@code subject} is invalid
      */
-    public static String parseSubjectArgs(String args) throws ParseException {
+    public static Subject parseSubjectArgs(String args) throws ParseException {
         requireNonNull(args);
         String trimmedSubject = args.trim();
 
-        if (!Lesson.isValidSubject(trimmedSubject)) {
-            throw new ParseException(Lesson.SUBJECT_MESSAGE_CONSTRAINTS);
+        if (!isValidSubject(trimmedSubject)) {
+            throw new ParseException(SUBJECT_MESSAGE_CONSTRAINTS);
         }
 
-        return trimmedSubject;
+        return new Subject(args);
     }
 
     /**
@@ -245,21 +247,20 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code cost} is invalid
      */
-    public static double parseCostArgs(String args) throws ParseException {
+    public static Price parseCostArgs(String args) throws ParseException {
         requireNonNull(args);
         String trimmedCost = args.trim();
         double cost;
 
         try {
-            cost = Double.parseDouble(args);
+            cost = Double.parseDouble(trimmedCost);
         } catch (NumberFormatException e) {
             throw new ParseException(MESSAGE_INVALID_COST_NOT_NUMBER);
         }
-
-        if (!Lesson.isValidPrice(cost)) {
-            throw new ParseException(Lesson.PRICE_MESSAGE_CONSTRAINT);
+        if (!isValidPrice(cost)) {
+            throw new ParseException(PRICE_MESSAGE_CONSTRAINT);
         }
 
-        return cost;
+        return new Price(cost);
     }
 }

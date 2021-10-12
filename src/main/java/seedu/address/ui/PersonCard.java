@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.person.Student;
 
 /**
@@ -17,7 +17,7 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String STRING_FORMAT_PARENT_CONTACT = "Parent's Contact: \t%s";
-    private static final String STRING_FORMAT_ADDRESS = "Address: \t\t\t%s";
+    private static final String STRING_FORMAT_ADDRESS = "Address: \t\t%s";
     private static final String STRING_FORMAT_EMAIL = "Email Address: \t%s";
     private static final String STRING_FORMAT_GRADE = "Grade: \t\t\t%s";
     private static final String STRING_FORMAT_LESSON = "Lesson(s): \t";
@@ -67,9 +67,9 @@ public class PersonCard extends UiPart<Region> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        lessons.setText(student.getLessons().stream()
-                .sorted(Comparator.comparing(Lesson::getLessonCode))
-                .map(Lesson::getLessonCode)
+        lessons.setText(student.getLessonCodes().stream()
+                .map(LessonCode::toString)
+                .sorted()
                 .reduce(STRING_FORMAT_LESSON, (l1, l2) -> l1 + '\t' + l2));
     }
 
