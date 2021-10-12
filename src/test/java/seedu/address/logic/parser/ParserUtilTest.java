@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.TelegramHandle;
@@ -16,9 +17,11 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM_HANDLE = "@rac";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_GROUP_NAME = "  ";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_TELEGRAM_HANDLE = "@rachel_walker";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_GROUP_NAME = "CS2103T";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -111,4 +114,27 @@ public class ParserUtilTest {
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
+    @Test
+    public void parseGroupName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupName((String) null));
+    }
+
+    @Test
+    public void parseGroupName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupName(INVALID_GROUP_NAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithoutWhitespace_returnsGroupName() throws Exception {
+        GroupName expectedGroupName = new GroupName(VALID_GROUP_NAME);
+        assertEquals(expectedGroupName, ParserUtil.parseGroupName(VALID_GROUP_NAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithWhitespace_returnsTrimmedGroupName() throws Exception {
+        String groupNameWithWhitespace = WHITESPACE + VALID_GROUP_NAME + WHITESPACE;
+        GroupName expectedGroupName = new GroupName(VALID_GROUP_NAME);
+        assertEquals(expectedGroupName, ParserUtil.parseGroupName(groupNameWithWhitespace));
+
+    }
 }
