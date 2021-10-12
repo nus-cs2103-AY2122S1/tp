@@ -19,8 +19,8 @@ public class LevelOfEducationContainsKeywordsPredicate implements Predicate<Pers
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil
-                        .containsWordIgnoreCase(person.getLevelOfEducation().levelOfEducation, keyword));
+                .anyMatch(keyword -> person.getLevelOfEducation().levelOfEducation.toLowerCase()
+                        .contains(keyword.toLowerCase()));
     }
 
     @Override
