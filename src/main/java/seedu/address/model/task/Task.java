@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class Task {
 
-    private final String module;
+    private final Module module;
     private final String name;
     private final String deadline;
     private boolean isComplete;
@@ -20,7 +20,7 @@ public class Task {
      * @param name The Name of this Task.
      * @param deadline The Deadline of this Task.
      */
-    public Task(String module, String name, String deadline) {
+    public Task(Module module, String name, String deadline) {
         requireAllNonNull(module, name, deadline);
         this.module = module;
         this.name = name;
@@ -29,7 +29,7 @@ public class Task {
     }
 
     public String getModule() {
-        return name;
+        return this.module.getName();
     }
 
     public String getName() {
