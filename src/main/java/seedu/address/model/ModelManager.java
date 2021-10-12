@@ -146,7 +146,9 @@ public class ModelManager implements Model {
     public boolean hasTask(ModuleName moduleName, Task task) {
         requireAllNonNull(moduleName, task);
         return teachingAssistantBuddy.hasTask(moduleName, task);
+    }
 
+    @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
         return teachingAssistantBuddy.hasModule(module);
