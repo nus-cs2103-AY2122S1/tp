@@ -1,14 +1,11 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.time.DayOfWeek;
-import java.time.LocalTime;
+import static seedu.address.testutil.TypicalTuition.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,23 +15,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Grade;
+import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.person.Student;
 
 public class EnrollCommandTest {
 
     private Model model;
-
-    private final Lesson testLessonOne = new Lesson("Science",
-            new Grade("P2"),
-            DayOfWeek.WEDNESDAY,
-            LocalTime.of(12, 30),
-            0.0);
-    private final Lesson testLessonTwo = new Lesson("Science",
-            new Grade("P2"),
-            DayOfWeek.WEDNESDAY,
-            LocalTime.of(12, 30),
-            0.0);
 
     @BeforeEach
     public void setUp() {
@@ -43,13 +29,15 @@ public class EnrollCommandTest {
 
     @Test
     public void execute_validEnrollment_success() throws CommandException {
-        String code = "Science-P2-Wed-1230";
-        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_PERSON, code);
+        LessonCode code = new LessonCode("Science-P2-Wed-1230");
+        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_PERSON, code.value);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Student studentToEnroll = expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        expectedModel.searchLessons(code).addStudent(studentToEnroll);
-        String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLessonOne);
+
+        Lesson testLesson = expectedModel.searchLessons(code).get();
+        testLesson.addStudent(studentToEnroll);
+        String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLesson);
 
         assertCommandSuccess(enrollCommand, model, expectedMessage, expectedModel);
     }
@@ -60,19 +48,19 @@ public class EnrollCommandTest {
         EnrollCommand enrollSecondCommand = new EnrollCommand(INDEX_SECOND_PERSON, "l/Science-P5-Wed-1230");
 
         // same object -> returns true
-        assertTrue(enrollFirstCommand.equals(enrollFirstCommand));
+        assertEquals(enrollFirstCommand, enrollFirstCommand);
 
         // same values -> returns true
         EnrollCommand enrollFirstCommandCopy = new EnrollCommand(INDEX_FIRST_PERSON, "l/Science-P5-Wed-1230");
-        assertTrue(enrollFirstCommand.equals(enrollFirstCommandCopy));
+        assertEquals(enrollFirstCommand, enrollFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(enrollFirstCommand.equals(1));
+        assertNotEquals(1, enrollFirstCommand);
 
         // null -> returns false
-        assertFalse(enrollFirstCommand.equals(null));
+        assertNotEquals(null, enrollFirstCommand);
 
         // different person -> returns false
-        assertFalse(enrollFirstCommand.equals(enrollSecondCommand));
+        assertNotEquals(enrollFirstCommand, enrollSecondCommand);
     }
 }

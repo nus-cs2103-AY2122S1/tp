@@ -25,7 +25,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_DAY + "DAY "
             + PREFIX_TIME + "START_TIME "
             + PREFIX_COST + "COST\n"
-            + "Example: " + "add-l s/Science g/P5 d/Wed t/1200 c/100";
+            + "Example: " + "add-l s/Science g/P5 d/Wed t/1200 c/10.50";
 
     public static final String MESSAGE_SUCCESS = "New lesson created: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TuitiONE";
