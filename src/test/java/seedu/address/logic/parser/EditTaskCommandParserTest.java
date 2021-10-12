@@ -83,7 +83,7 @@ public class EditTaskCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " "  + VALID_TASK_INDEX + VALID_TASK;
+        String userInput = targetIndex.getOneBased() + " " + VALID_TASK_INDEX + VALID_TASK;
         Index targetTaskIndex = INDEX_FIRST_TASK;
         Task editedTask = new Task(VALID_TASK_TASK1);
 
