@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
@@ -43,7 +44,8 @@ public class ListFriendCommand extends Command {
             FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
                     (FriendIdContainsKeywordPredicate) predicate;
             model.updateFilteredFriendsList(friendIdContainsKeywordPredicate);
-            return new CommandResult(getMessageSuccess());
+            //TODO: get the actual friend being listed if only one friend
+            return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
         }
         // ListCommand initialized with unknown predicate
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);

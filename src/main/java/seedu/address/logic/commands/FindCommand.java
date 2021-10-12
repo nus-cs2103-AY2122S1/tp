@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
 
 /**
@@ -29,8 +32,11 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFriendsList(predicate);
+        Friend friend = new Friend(new FriendId("--add"), new FriendName("No name assigned"));
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredFriendsList().size()));
+                // TODO: get the actual friend
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredFriendsList().size()),
+                CommandType.FRIEND_GET, friend);
     }
 
     @Override
