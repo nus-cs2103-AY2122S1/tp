@@ -2,14 +2,18 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalTuition.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,6 +45,37 @@ public class UnenrollCommandTest {
                 testLesson);
 
         assertCommandSuccess(unenrollCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidUnenrollment_failure() {
+        LessonCode code = new LessonCode("Physics-S2-Tue-0930");
+        Student alice = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()); //ALICE
+        Student benson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased()); //BENSON
+        Student carl = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased()); //CARL
+
+        String expectedMessageAlice = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
+                alice.getName(),
+                code);
+        String expectedMessageBenson = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
+                benson.getName(),
+                code);
+        String expectedMessageCarl = String.format(UnenrollCommand.MESSAGE_STUDENT_NOT_IN_LESSON,
+                carl.getName(),
+                code);
+
+        assertCommandFailure(new UnenrollCommand(INDEX_FIRST_PERSON, code.value), model, expectedMessageAlice);
+        assertCommandFailure(new UnenrollCommand(INDEX_SECOND_PERSON, code.value), model, expectedMessageBenson);
+        assertCommandFailure(new UnenrollCommand(INDEX_THIRD_PERSON, code.value), model, expectedMessageCarl);
+    }
+
+    @Test
+    public void execute_invalidUnenrollmentWrongIndex_failure() {
+        LessonCode code = new LessonCode("Mathematics-S2-Tue-0930");
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        UnenrollCommand unenrollCommand = new UnenrollCommand(outOfBoundIndex, code.value);
+
+        assertCommandFailure(unenrollCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
