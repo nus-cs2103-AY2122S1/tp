@@ -25,7 +25,7 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_ADD_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module";
-    public static final String MESSAGE_MODULE_NOT_FOUND= "This module is not found.";
+    public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found.";
 
     private final Task toAdd;
     private final ModuleName module;
