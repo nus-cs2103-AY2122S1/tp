@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Name;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 
 
@@ -50,12 +50,13 @@ public class JsonAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidName(name)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Description modelDescription = new Description(name);
 
         if (deadline == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -73,7 +74,7 @@ public class JsonAdaptedTask {
 
         final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
 
-        Task task = new Task(modelName, modelDeadline, modelUniqueId);
+        Task task = new Task(modelDescription, modelDeadline, modelUniqueId);
         modelUniqueId.setOwner(task);
         return task;
     }
