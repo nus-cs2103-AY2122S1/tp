@@ -6,7 +6,6 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
-import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.ALICE;
 import static seedu.unify.testutil.TypicalTasks.BOB;
 
@@ -16,11 +15,6 @@ import seedu.unify.testutil.TaskBuilder;
 
 public class TaskTest {
 
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Task task = new TaskBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> task.getTags().remove(0));
-    }
 
     @Test
     public void isSameTask() {
