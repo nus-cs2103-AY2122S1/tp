@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -31,16 +31,19 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
-//    @Test
-//    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-//        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-//        Student validStudent = new StudentBuilder().build();
-//
-//        CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
-//
-//        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
-//        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
-//    }
+    // TODO: fix test case
+    /*
+    @Test
+    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        Student validStudent = new StudentBuilder().build();
+
+        CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+    }
+    */
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
- import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
- import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
- import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
- import seedu.address.model.AddressBook;
+import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -33,69 +33,72 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-//        @Test
-//        public void execute_allFieldsSpecifiedUnfilteredList_success() {
-//            Student editedStudent = new StudentBuilder().build();
-//            EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
-//            EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
-//
-//            String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
-//
-//            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-//            expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-//
-//            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-//        }
+    // TODO: fix test case
+    /*
+    @Test
+    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+        Student editedStudent = new StudentBuilder().build();
+        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
 
-        @Test
-        public void execute_someFieldsSpecifiedUnfilteredList_success() {
-            Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
-            Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-            StudentBuilder studentInList = new StudentBuilder(lastStudent);
-            Student editedStudent = studentInList.withName(VALID_NAME_BOB)
-                  .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
-            EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                    .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
-            EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+    */
 
-            String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        Index indexLastStudent = Index.fromOneBased(model.getFilteredStudentList().size());
+        Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-            expectedModel.setStudent(lastStudent, editedStudent);
+        StudentBuilder studentInList = new StudentBuilder(lastStudent);
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
 
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        }
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).build();
+        EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
-        @Test
-        public void execute_noFieldSpecifiedUnfilteredList_success() {
-            EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, new EditStudentDescriptor());
-            Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-            String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(lastStudent, editedStudent);
 
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        }
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT, new EditStudentDescriptor());
+        Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
-        @Test
-        public void execute_filteredList_success() {
-            showStudentAtIndex(model, INDEX_FIRST_STUDENT);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
-            Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-            Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
-            EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
-                    new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-            String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-            expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+    @Test
+    public void execute_filteredList_success() {
+        showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-            assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-        }
+        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
+            new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
 
 
     @Test
@@ -114,7 +117,7 @@ public class EditCommandTest {
         // edit student in filtered list into a duplicate in address book
         Student studentInList = model.getAddressBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_STUDENT,
-                new EditStudentDescriptorBuilder(studentInList).build());
+            new EditStudentDescriptorBuilder(studentInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_STUDENT);
     }
@@ -141,7 +144,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
+            new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }

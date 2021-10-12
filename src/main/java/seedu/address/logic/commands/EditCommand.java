@@ -31,28 +31,28 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TELEGRAM_HANDLE + "@john_doe "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the index number used in the displayed student list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_NAME + "NAME] "
+        + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
+        + "[" + PREFIX_EMAIL + "EMAIL] "
+        + "[" + PREFIX_GROUP_NAME + "GROUP NAME] "
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_TELEGRAM_HANDLE + "@john_doe "
+        + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
     public static final String MESSAGE_GROUP_NONEXISTENT =
-            "The group indicated does not exist. Please create it first.";
+        "The group indicated does not exist. Please create it first.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index of the student in the filtered student list to edit
+     * @param index                 of the student in the filtered student list to edit
      * @param editStudentDescriptor details to edit the student with
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         TelegramHandle updatedTelegramHandle = editStudentDescriptor.getTelegramHandle()
-                .orElse(studentToEdit.getTelegramHandle());
+            .orElse(studentToEdit.getTelegramHandle());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Group updatedGroup = editStudentDescriptor.getGroup().orElse(studentToEdit.getGroup());
 
@@ -127,7 +127,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editStudentDescriptor.equals(e.editStudentDescriptor);
+            && editStudentDescriptor.equals(e.editStudentDescriptor);
     }
 
     /**
@@ -140,7 +140,8 @@ public class EditCommand extends Command {
         private Email email;
         private Group group;
 
-        public EditStudentDescriptor() {}
+        public EditStudentDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -208,9 +209,9 @@ public class EditCommand extends Command {
             EditStudentDescriptor e = (EditStudentDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getTelegramHandle().equals(e.getTelegramHandle())
-                    && getEmail().equals(e.getEmail())
-                    && getGroup().equals(e.getGroup());
+                && getTelegramHandle().equals(e.getTelegramHandle())
+                && getEmail().equals(e.getEmail())
+                && getGroup().equals(e.getGroup());
         }
     }
 }
