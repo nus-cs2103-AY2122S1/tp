@@ -54,7 +54,9 @@ public class Student {
         return address;
     }
 
-    public ClassCode getClassCode() { return classCode; }
+    public ClassCode getClassCode() {
+        return classCode;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

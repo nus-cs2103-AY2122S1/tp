@@ -9,7 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.ClassCode;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 
@@ -93,20 +97,17 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a string to return a ClassCode
+     * @param classCode String of classCode
+     * @return ClassCode
+     * @throws ParseException
+     */
     public static ClassCode parseClassCode(String classCode) throws ParseException {
         requireNonNull(classCode);
         String trimmedRemark = classCode.trim();
         return new ClassCode(trimmedRemark);
     }
-
-    /**
-     * Temporary implementation.
-     */
-//    public static String parseClassCode(String classCode) throws ParseException {
-//        requireNonNull(classCode);
-//        String trimmedClassCode = classCode.trim();
-//        return trimmedClassCode;
-//    }
 
     /**
      * Parses a {@code String schedule} into an {@code Schedule}.
