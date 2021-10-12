@@ -30,7 +30,13 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (!moduleCodes.isEmpty()) {
             Set<ModuleCode> moduleCodeSet;
-            moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
+            try {
+                moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
+            } catch (ParseException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage())
+                );
+            }
 
             List<String> stringListOfModuleCodes = moduleCodeSet.stream()
                     .map(moduleCode -> moduleCode.toString())
