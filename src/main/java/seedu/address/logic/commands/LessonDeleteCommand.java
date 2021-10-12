@@ -13,16 +13,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.AcadStream;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.School;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.util.PersonUtil;
 
 /**
  * Deletes a Lesson from an existing person in the address book.
@@ -89,24 +81,10 @@ public class LessonDeleteCommand extends Command {
                                              List<Lesson> updatedLessons, Lesson toRemove) {
         assert personToEdit != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Phone updatedParentPhone = personToEdit.getParentPhone();
-        Email updatedParentEmail = personToEdit.getParentEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        School updatedSchool = personToEdit.getSchool();
-        AcadStream updatedAcadStream = personToEdit.getAcadStream();
-        Fee updatedOutstandingFee = personToEdit.getFee();
-        Remark updatedRemark = personToEdit.getRemark();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
         updatedLessons.remove(toRemove);
         TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-                updatedAddress, updatedSchool, updatedAcadStream, updatedOutstandingFee,
-                updatedRemark, updatedTags, updatedLessonSet);
+        return PersonUtil.createdEditedPerson(personToEdit, updatedLessonSet);
     }
 
     @Override
