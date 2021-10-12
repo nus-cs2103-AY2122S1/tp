@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESCRIPTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ALLOC_DESCRIPTOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -150,10 +150,10 @@ public class AddAllocCommandTest {
 
     @Test
     public void equal() {
-        final AddAllocCommand standardCommand = new AddAllocCommand(ALLOC_DESC_AMY);
+        final AddAllocCommand standardCommand = new AddAllocCommand(ALLOC_DESCRIPTOR_AMY);
 
         // same values -> returns true
-        AllocDescriptor copyDescriptor = new AllocDescriptor(ALLOC_DESC_AMY);
+        AllocDescriptor copyDescriptor = new AllocDescriptor(ALLOC_DESCRIPTOR_AMY);
         AddAllocCommand commandWithSameValues = new AddAllocCommand(copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -167,6 +167,6 @@ public class AddAllocCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new AddAllocCommand(ALLOC_DESC_BOB));
+        assertNotEquals(standardCommand, new AddAllocCommand(ALLOC_DESCRIPTOR_BOB));
     }
 }

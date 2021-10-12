@@ -84,41 +84,41 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final AddAllocCommand.AllocDescriptor ALLOC_DESC_AMY;
-    public static final AddAllocCommand.AllocDescriptor ALLOC_DESC_BOB;
+    public static final AddAllocCommand.AllocDescriptor ALLOC_DESCRIPTOR_AMY;
+    public static final AddAllocCommand.AllocDescriptor ALLOC_DESCRIPTOR_BOB;
 
     static {
-        ALLOC_DESC_AMY = new AllocDescriptorBuilder()
+        ALLOC_DESCRIPTOR_AMY = new AllocDescriptorBuilder()
                 .withName(VALID_NAME_AMY)
                 .withGroup(VALID_GROUP_TUTORIAL).build();
-        ALLOC_DESC_BOB = new AllocDescriptorBuilder()
+        ALLOC_DESCRIPTOR_BOB = new AllocDescriptorBuilder()
                 .withId(VALID_ID_BOB)
                 .withGroup(VALID_GROUP_RECITATION).build();
     }
 
-    public static final AddScoreCommand.ScoreDescriptor SCORE_DESC_AMY;
-    public static final AddScoreCommand.ScoreDescriptor SCORE_DESC_BOB;
+    public static final AddScoreCommand.ScoreDescriptor SCORE_DESCRIPTOR_AMY;
+    public static final AddScoreCommand.ScoreDescriptor SCORE_DESCRIPTOR_BOB;
 
     static {
-        SCORE_DESC_AMY = new ScoreDescriptorBuilder()
+        SCORE_DESCRIPTOR_AMY = new ScoreDescriptorBuilder()
                 .withAssessment(VALID_ASSESSMENT_AMY)
                 .withName(VALID_NAME_AMY)
                 .withScore(VALID_SCORE_AMY).build();
-        SCORE_DESC_BOB = new ScoreDescriptorBuilder()
+        SCORE_DESCRIPTOR_BOB = new ScoreDescriptorBuilder()
                 .withAssessment(VALID_ASSESSMENT_BOB)
                 .withId(VALID_ID_BOB)
                 .withScore(VALID_SCORE_BOB).build();
     }
 
-    public static final EditCommand.EditStudentDescriptor EDIT_DESC_AMY;
-    public static final EditCommand.EditStudentDescriptor EDIT_DESC_BOB;
+    public static final EditCommand.EditStudentDescriptor EDIT_DESCRIPTOR_AMY;
+    public static final EditCommand.EditStudentDescriptor EDIT_DESCRIPTOR_BOB;
 
     static {
-        EDIT_DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+        EDIT_DESCRIPTOR_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withId(VALID_ID_AMY)
                 .withGroups(VALID_GROUP_TUTORIAL)
                 .withTags(VALID_TAG_FRIEND).build();
-        EDIT_DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        EDIT_DESCRIPTOR_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withId(VALID_ID_BOB)
                 .withGroups(VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();

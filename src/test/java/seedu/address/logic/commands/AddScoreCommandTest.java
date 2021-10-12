@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESCRIPTOR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESCRIPTOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSESSMENT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
@@ -171,10 +171,10 @@ public class AddScoreCommandTest {
 
     @Test
     public void equal() {
-        final AddScoreCommand standardCommand = new AddScoreCommand(SCORE_DESC_AMY);
+        final AddScoreCommand standardCommand = new AddScoreCommand(SCORE_DESCRIPTOR_AMY);
 
         // same values -> returns true
-        ScoreDescriptor copyDescriptor = new ScoreDescriptor(SCORE_DESC_AMY);
+        ScoreDescriptor copyDescriptor = new ScoreDescriptor(SCORE_DESCRIPTOR_AMY);
         AddScoreCommand commandWithSameValues = new AddScoreCommand(copyDescriptor);
         assertEquals(standardCommand, commandWithSameValues);
 
@@ -188,6 +188,6 @@ public class AddScoreCommandTest {
         assertNotEquals(standardCommand, new ClearCommand());
 
         // different descriptor -> returns false
-        assertNotEquals(standardCommand, new AddScoreCommand(SCORE_DESC_BOB));
+        assertNotEquals(standardCommand, new AddScoreCommand(SCORE_DESCRIPTOR_BOB));
     }
 }
