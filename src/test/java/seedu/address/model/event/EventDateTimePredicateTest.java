@@ -19,7 +19,7 @@ public class EventDateTimePredicateTest {
             new ArrayList<>(List.of("2020-11-12")));
 
     @Test
-    public void equals() {
+    public void testEquals() {
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
