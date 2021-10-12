@@ -55,6 +55,8 @@ public class SupplierBuilder {
         email = supplierToCopy.getEmail();
         address = supplierToCopy.getAddress();
         tags = new HashSet<>(supplierToCopy.getTags());
+        supplyType = supplierToCopy.getSupplyType();
+        deliveryDetails = supplierToCopy.getDeliveryDetails();
     }
 
     /**
