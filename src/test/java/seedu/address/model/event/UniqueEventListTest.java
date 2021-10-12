@@ -9,7 +9,9 @@ import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 class UniqueEventListTest {
 
     private final UniqueEventList uniqueEventList = new UniqueEventList();
+    private final UniqueEventList secondUniqueEventList = new UniqueEventList();
 
     @Test
     public void contains_nullEvent_throwsNullPointerException() {
@@ -130,5 +133,35 @@ class UniqueEventListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueEventList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void iterator_checkForNextInEmptyList_returnFalse() {
+        Iterator<Event> iterator = uniqueEventList.iterator();
+        assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void iterator_getNextInEmptyList_throwsError() {
+        Iterator<Event> iterator = uniqueEventList.iterator();
+        assertThrows(NoSuchElementException.class, iterator::next);
+    }
+
+    @Test
+    public void testEquals() {
+        secondUniqueEventList.add(SAMPLE_EVENT);
+
+        // same list
+        assertTrue(uniqueEventList.equals(uniqueEventList));
+
+        // null -> returns false
+        assertFalse(uniqueEventList.equals(null));
+
+        // second list contains event
+        assertFalse(uniqueEventList.equals(secondUniqueEventList));
+
+        // add same event to first list
+        uniqueEventList.add(SAMPLE_EVENT);
+        assertTrue(uniqueEventList.equals(secondUniqueEventList));
     }
 }
