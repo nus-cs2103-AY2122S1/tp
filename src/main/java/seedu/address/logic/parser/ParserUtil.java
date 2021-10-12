@@ -32,6 +32,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String REGEX_SURROUNDING_DOUBLE_QUOTE = "^\"|\"$";
+    // Matches word NOT surrounded by "double quotes"
     public static final String TEMPLATE_REGEX_REPLACEMENT_PATTERN = "(?<![\"'])((?i)%s)(?![\"'])";
 
     /**
@@ -115,11 +116,11 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String sanitisedTag = tag.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
-        if (!Tag.isValidTagName(sanitisedTag)) {
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(sanitisedTag);
+        return new Tag(trimmedTag);
     }
 
     /**
@@ -128,8 +129,11 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        for (String tagName : tags) { // {"tag1", "tag2,tag3"}
+            String[] tokenizedTags = tagName.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "").split(",");
+            for (String tag : tokenizedTags) {
+                tagSet.add(parseTag(tag));
+            }
         }
         return tagSet;
     }
@@ -137,7 +141,7 @@ public class ParserUtil {
     /**
      * Replaces the long form prefixes in the argument with their respective short forms.
      */
-    public static String longToShortFormArgumentConverter(String args) {
+    public static String longToShortFormPrefixConverter(String args) {
         return args.replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_NAME), PREFIX_NAME.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_ADDRESS), PREFIX_ADDRESS.getPrefix())
                 .replaceAll(replacePrefixRegexGenerator(LONG_PREFIX_EMAIL), PREFIX_EMAIL.getPrefix())
