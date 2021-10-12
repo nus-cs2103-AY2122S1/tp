@@ -160,7 +160,7 @@ public class EditCommandTest {
         assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertNotEquals(null, standardCommand);
+        assertNotEquals(standardCommand, null);
 
         // different types -> returns false
         assertNotEquals(standardCommand, new ClearCommand());
