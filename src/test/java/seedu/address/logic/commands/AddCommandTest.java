@@ -31,7 +31,7 @@ public class AddCommandTest {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
-    //TODO Fix test case
+    // TODO: fix test case
     /*
     @Test
     public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
@@ -43,7 +43,7 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
     }
-     */
+    */
 
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
