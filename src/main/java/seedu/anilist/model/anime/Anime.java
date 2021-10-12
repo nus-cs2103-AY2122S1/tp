@@ -100,13 +100,12 @@ public class Anime {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
-        builder.append(getStatus());
-
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+        builder.append(String.format("; (Status: %s)", getStatus()));
         return builder.toString();
     }
 
