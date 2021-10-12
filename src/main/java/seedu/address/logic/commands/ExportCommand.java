@@ -2,20 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.storage.JsonAddressBookStorage;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -43,13 +38,13 @@ public class ExportCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        AddressBook temp_data;
-        temp_data = new AddressBook();
-        temp_data.setPersons(lastShownList);
+        AddressBook tempData;
+        tempData = new AddressBook();
+        tempData.setPersons(lastShownList);
 
-        JsonAddressBookStorage temp_storage = new JsonAddressBookStorage(filePath);
+        JsonAddressBookStorage tempStorage = new JsonAddressBookStorage(filePath);
         try {
-            temp_storage.saveAddressBook(temp_data);
+            tempStorage.saveAddressBook(tempData);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
