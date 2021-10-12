@@ -13,7 +13,7 @@ public class FacilityBuilder {
 
     public static final String DEFAULT_FACILITY_NAME = "Court 1";
     public static final String DEFAULT_LOCATION = "Tampines Hub Badminton Hall";
-    public static final String DEFAULT_TIME = "17:00";
+    public static final String DEFAULT_TIME = "1700";
     public static final String DEFAULT_CAPACITY = "5";
 
     private FacilityName facilityName;
