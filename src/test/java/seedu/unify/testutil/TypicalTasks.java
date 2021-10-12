@@ -5,7 +5,6 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_AMY;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
 

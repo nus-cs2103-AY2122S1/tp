@@ -3,6 +3,7 @@ package seedu.unify.model.tag;
 import static seedu.unify.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.unify.model.task.Tag;
 
 public class TagTest {
