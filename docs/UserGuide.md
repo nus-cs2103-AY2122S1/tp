@@ -69,7 +69,7 @@ to help you with the installation. Follow the guide for your operation system fo
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
   
-* Items in curly brackets separated by pipe character `|` indicates that you must select one parameter from the list of choices.
+* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.
   e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
   
 * Items with `…` after them can be used multiple times including zero times.<br>
@@ -209,12 +209,14 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 
 **:information_source: Notes about the find command:**<br>
 
+* You can find students by all the fields except remark and fee.
+
 * The filter condition indicates that a student is only considered a match when `all`, `any` or `none`
   of the fields which you are searching for match the student.<br>
   e.g. 
-    * `find n/John t/math cond/all` will return students with both name `John` and tag `math`.
-    * `find n/John t/math cond/any` will return students with only name `John`, or only tag `math`, or both.
-    * `find n/John t/math cond/none` will return students without the name `John` or the tag `math`.
+    * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
+    * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
+    * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
 
 * The filter condition will not accept other arguments besides `all`, `any` and `none`.<br>
   e.g. `cond/every` will result in an error.
@@ -227,11 +229,11 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * You must provide at least one field to search.<br>
   e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
 
-* You must provide at least one keyword to search a field.<br>
+* You must provide at least one keyword to search for.<br>
   e.g. entering just `find n/ ` alone is not a valid command as the keyword is empty.
 
 * Tags must only have one keyword.<br>
-  e.g. `find t/zoom math` is invalid. To search multiple tags, you can do `find t/zoom t/math`.
+  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
   
 * The search is case-insensitive.<br>
   e.g. keyword `hans` will match `Hans`.
@@ -242,7 +244,7 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * The order of the keywords do not matter.<br>
   e.g. keyword `west jurong` will match `jurong west`.
   
-* All keywords need to match the field.<br>
+* A field needs to contain all specified keywords to be matched.<br>
   e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
 
 </div>
