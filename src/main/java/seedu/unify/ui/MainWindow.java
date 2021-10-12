@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.commons.core.LogsCenter;
+import seedu.unify.model.task.Date;
 import seedu.unify.logic.Logic;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
@@ -126,8 +127,9 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        // pass in date into weeklyPanel constructor instead of a taskList
-        weeklyPanel = new WeeklyPanel(logic.getFilteredTaskList());
+        // pass in date into weeklyPanel constructor instead of
+        // a taskList. Currently placeholder
+        weeklyPanel = new WeeklyPanel(Date new Date("2021-01-08"));
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }
 

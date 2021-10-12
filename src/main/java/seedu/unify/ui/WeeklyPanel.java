@@ -31,16 +31,16 @@ public class WeeklyPanel extends UiPart<Region> {
     /**
      * Creates a {@code WeeklyPanel} with the given {@code ObservableList}.
      */
-    public WeeklyPanel(ObservableList<Task> taskList) {
+    public WeeklyPanel(Date date) {
         super(FXML);
-        weekLabel.setText("11/10/2021"); // get date.toString
-
-
-
+        weekLabel.setText(date.toString());
+        // must include an increment operation to either
+        // 1) Set Date for Daily Panels
+        // 2) Form a date range and loop through to create Daily Panels
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
             VBox placeHolderVBox = new VBox();
-            DailyPanel dailyPanel = new DailyPanel(taskList, indexToDay(i));
+            DailyPanel dailyPanel = new DailyPanel(date, indexToDay(i));
             placeHolderVBox.getChildren().add(dailyPanel.getRoot());
             placeHolderVBox.setStyle("-fx-border-style: solid inside;"
                     + "-fx-border-width: 1;");

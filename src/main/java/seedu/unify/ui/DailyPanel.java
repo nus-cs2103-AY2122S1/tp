@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.unify.commons.core.LogsCenter;
+import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Task;
 
 
@@ -25,10 +26,13 @@ public class DailyPanel extends UiPart<Region> {
     /**
      * Creates a {@code TaskListPanel} with the given {@code ObservableList}.
      */
-    public DailyPanel(ObservableList<Task> taskList, String dayString) {
+    public DailyPanel(Date date, String dayString) {
         super(FXML);
         day.setText(dayString);
         // create new task list here based on date
+        // add a taskList make operation
+        // below is placeholder
+        ObservableList<Task> taskList = new
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new DailyPanel.DailyViewCell());
     }
