@@ -30,11 +30,11 @@ public class NoteWindow extends UiPart<Stage> {
     private static final int CENTER_X = (SCREEN_X - WIDTH) / 2;
     private static final int CENTER_Y = (SCREEN_Y - HEIGHT) / 2;
     private static final String FXML = "NoteWindow.fxml";
-    private static final Modifier ALT = KeyCombination.ALT_DOWN;
-    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, ALT);
-    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, ALT);
-    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, ALT);
-    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, ALT);
+    private static final Modifier CTRL = KeyCombination.SHORTCUT_DOWN;
+    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, CTRL);
+    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, CTRL);
+    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, CTRL);
+    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, CTRL);
 
     @FXML
     private TextArea noteTextArea;
@@ -53,6 +53,7 @@ public class NoteWindow extends UiPart<Stage> {
         this.person = person;
         this.logic = logic;
         getRoot().setTitle(person.getName().toString());
+        noteTextArea.setWrapText(true);
     }
 
     /**
@@ -131,8 +132,8 @@ public class NoteWindow extends UiPart<Stage> {
     }
 
     /**
-     * Reads user key event. Saves on pressing ALT + S. Exits on pressing ALT + W. Exits and saves on pressing
-     * ALT + Q. TimeStamps on the current line when ALT + T is pressed.
+     * Reads user key event. Saves on pressing CTRL + S. Exits on pressing CTRL + W. Exits and saves on pressing
+     * CTRL + Q. TimeStamps on the current line when CTRL + T is pressed.
      * @param event User key Event
      * @see seedu.address.logic.Logic#executeSaveNote(Person, Person)
      */
