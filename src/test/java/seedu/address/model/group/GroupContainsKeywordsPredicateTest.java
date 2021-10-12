@@ -10,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.StudentBuilder;
 
 public class GroupContainsKeywordsPredicateTest {
 
@@ -26,7 +25,8 @@ public class GroupContainsKeywordsPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        GroupContainsKeywordsPredicate firstPredicateCopy = new GroupContainsKeywordsPredicate(firstPredicateKeywordList);
+        GroupContainsKeywordsPredicate firstPredicateCopy =
+                new GroupContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +42,8 @@ public class GroupContainsKeywordsPredicateTest {
     @Test
     public void test_groupNameContainsKeywords_returnsTrue() {
         // One keyword
-        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(Collections.singletonList("CS2103T"));
+        GroupContainsKeywordsPredicate predicate =
+                new GroupContainsKeywordsPredicate(Collections.singletonList("CS2103T"));
         assertTrue(predicate.test(new GroupBuilder().withGroupName("CS2103T").build()));
 
         // Only one matching keyword
