@@ -13,9 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.siasa.logic.commands.AddCommand;
 import seedu.siasa.logic.commands.ClearCommand;
-import seedu.siasa.logic.commands.DeleteCommand;
 import seedu.siasa.logic.commands.EditCommand;
 import seedu.siasa.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.siasa.logic.commands.ExitCommand;
