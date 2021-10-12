@@ -6,8 +6,6 @@ import java.io.IOException;
 /**
  * File Chooser Interface.
  */
-public interface FileChooser {
-
-    File chooseFile(String defaultDirectory) throws IOException;
-
+public interface FileSelector {
+    File selectFile() throws IOException;
 }

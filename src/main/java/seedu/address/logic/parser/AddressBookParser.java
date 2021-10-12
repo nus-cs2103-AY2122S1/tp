@@ -17,7 +17,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.CsvFileChooser;
+import seedu.address.ui.CsvFileSelector;
 
 /**
  * Parses user input.
@@ -51,7 +51,7 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(
-                    new CsvParser(new CsvFileChooser()));
+                    new CsvParser(new CsvFileSelector("docs", "assets", "templates")));
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
