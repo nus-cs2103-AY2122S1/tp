@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -40,6 +43,8 @@ public class ModuleCard extends UiPart<Region> {
     private Label description;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane academicCalendar;
 
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
@@ -52,9 +57,21 @@ public class ModuleCard extends UiPart<Region> {
         title.setText(module.getTitle().value);
         mc.setText(String.valueOf(module.getMc().value));
         description.setText(module.getDescription().value);
+
+        if (module.hasAcademicCalendar()) {
+            academicCalendar.getChildren().add(new Label(getFormattedAcademicCalendar(module)));
+        }
+
         module.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private String getFormattedAcademicCalendar(Module module) {
+        AcademicCalendar academicCalendar = module.getAcademicCalendar();
+        AcademicYear year = academicCalendar.getAcademicYear();
+        Semester semester = academicCalendar.getSemester();
+        return String.format("y%ss%s", year, semester);
     }
 
     @Override

@@ -72,6 +72,31 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_someFieldsSpecifiedWithAcademicCalendarUnfilteredList_success() {
+        Index indexLastModule = Index.fromOneBased(model.getFilteredModuleList().size());
+        Module lastModule = model.getFilteredModuleList().get(indexLastModule.getZeroBased());
+
+        ModuleBuilder moduleInList = new ModuleBuilder(lastModule);
+        Module editedModule = moduleInList.withCode(VALID_CODE_CP3108A).withTitle(VALID_TITLE_CP3108A)
+                .withTags(VALID_TAG_CORE).withAcademicCalendar(3, 2).build();
+
+        Module moduleWithAcademicCal = moduleInList.withAcademicCalendar(3, 2).build();
+        Model modelToEdit = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        modelToEdit.setModule(lastModule, moduleWithAcademicCal);
+
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withCode(VALID_CODE_CP3108A)
+                .withTitle(VALID_TITLE_CP3108A).withTags(VALID_TAG_CORE).build();
+        EditCommand editCommand = new EditCommand(indexLastModule, descriptor);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        expectedModel.setModule(lastModule, editedModule);
+
+        assertCommandSuccess(editCommand, modelToEdit, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE, new EditModuleDescriptor());
         Module editedModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());

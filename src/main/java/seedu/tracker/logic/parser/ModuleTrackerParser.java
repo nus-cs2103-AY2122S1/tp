@@ -12,8 +12,10 @@ import seedu.tracker.logic.commands.Command;
 import seedu.tracker.logic.commands.DeleteCommand;
 import seedu.tracker.logic.commands.EditCommand;
 import seedu.tracker.logic.commands.ExitCommand;
+import seedu.tracker.logic.commands.FindCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
+import seedu.tracker.logic.commands.TakeCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,11 +54,14 @@ public class ModuleTrackerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case TakeCommand.COMMAND_WORD:
+            return new TakeCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        // case FindCommand.COMMAND_WORD:
-            // return new FindCommandParser().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
