@@ -1,13 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.*;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.*;
+import seedu.address.model.tag.*;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -20,23 +22,80 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_GROUP, PREFIX_TAG);
+
+        // catch case of empty input
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // TODO: handle each prefix separately, find command needs to take name, group, id predicate
-        // remove any blank inputs
-        String[] nameKeywords = trimmedArgs.split("\\s*-n\\s+");
-        List<String> nameKeywordsList = new ArrayList<>();
-        for (String keyword : nameKeywords) {
+        int count = 0;
+        String searchType = "";
+        String prefix = "";
+
+        // identify search input type
+        if (!argMultimap.getValue(PREFIX_NAME).isEmpty()) {
+            searchType = "NAME";
+            prefix = " -n ";
+            count++;
+        }
+
+        if (!argMultimap.getValue(PREFIX_ID).isEmpty()) {
+            searchType = "ID";
+            prefix = " -i ";
+            count++;
+        }
+
+        if (!argMultimap.getValue(PREFIX_GROUP).isEmpty()) {
+            searchType = "GROUP";
+            prefix = " -g ";
+            count++;
+        }
+
+        if (!argMultimap.getValue(PREFIX_TAG).isEmpty()) {
+            searchType = "TAG";
+            prefix = " -t ";
+            count++;
+        }
+
+        // catch case of more than one search input type
+        if (count != 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        int prefixIndex = args.indexOf(prefix, 0);
+        String searchTerm = args.substring(prefixIndex + 4).trim();
+
+        // separate all search inputs by spaces
+        String[] keywords = searchTerm.split("\\s+");
+        List<String> keywordsList = new ArrayList<>();
+        for (String keyword : keywords) {
             if (!keyword.isEmpty()) {
-                nameKeywordsList.add(keyword);
+                keywordsList.add(keyword);
             }
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(nameKeywordsList));
-    }
+        // execute according to search input type
+        switch(searchType) {
+        case "NAME":
+            return new FindCommand(new NameContainsKeywordsPredicate(keywordsList));
 
+        case "ID":
+            return new FindCommand(new IdContainsKeywordPredicate(keywordsList));
+
+        case "GROUP":
+            return new FindCommand(new GroupContainsKeywordPredicate(keywordsList));
+
+        case "TAG":
+            return new FindCommand(new TagContainsKeywordPredicate(keywordsList));
+
+        default:
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+    }
 }
