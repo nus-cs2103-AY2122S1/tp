@@ -83,33 +83,21 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Removes the equivalent person with matching client id from the list.
+     * Removes the equivalent person with matching client id and/or email from the list.
      * The person must exist in the list.
      */
     public Person removeByFields(ArrayList<Predicate> predicates) {
         requireAllNonNull(predicates);
-        FilteredList<Person> filteredList = internalList.filtered(x -> true);
-        ObservableList<Person> tempList = FXCollections.observableArrayList();
-        Person personToDelete = null;
-        for (int i = 0; i < predicates.size(); i++) {
-
-            Predicate<Person> predicate = predicates.get(i);
-            filteredList.setPredicate(predicate);
-            if (filteredList.size() < 1) {
-                throw new PersonNotFoundException();
-            } else if (i == predicates.size() - 1) {
-                personToDelete = filteredList.get(0);
-            }
-            ObservableList<Person> newTempList = FXCollections.observableArrayList();
-            for (int j = 0; j < filteredList.size(); j++) {
-                newTempList.add(filteredList.get(j));
-            }
-            tempList = newTempList;
-            filteredList = new FilteredList<>(tempList);
+        Predicate<Person> predicate = predicates.stream().reduce(x -> true, Predicate::and);
+        FilteredList<Person> filteredList = internalList.filtered(predicate);
+        if (filteredList.size() < 1) {
+            throw new PersonNotFoundException();
+        } else {
+            Person personToDelete = filteredList.get(0);
+            internalList.remove(personToDelete);
+            return personToDelete;
         }
 
-        internalList.remove(personToDelete);
-        return personToDelete;
 
     }
 

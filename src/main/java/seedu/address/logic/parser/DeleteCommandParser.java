@@ -42,18 +42,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     PREFIX_ADDRESS, PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET,
                     PREFIX_TAG);
 
-        if (((!arePrefixesPresent(argMultimap, PREFIX_CLIENTID)) && (!arePrefixesPresent(argMultimap, PREFIX_EMAIL)))
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!anyPrefixesPresent(argMultimap, PREFIX_CLIENTID, PREFIX_EMAIL) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         //Throws error if other fields are inputted
-        if (arePrefixesPresent(argMultimap, PREFIX_NAME) || arePrefixesPresent(argMultimap, PREFIX_PHONE)
-            || arePrefixesPresent(argMultimap, PREFIX_RISKAPPETITE)
-            || arePrefixesPresent(argMultimap, PREFIX_ADDRESS)
-            || arePrefixesPresent(argMultimap, PREFIX_DISPOSABLEINCOME)
-            || arePrefixesPresent(argMultimap, PREFIX_CURRENTPLAN)
-            || arePrefixesPresent(argMultimap, PREFIX_LASTMET)) {
+        if (anyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME,
+            PREFIX_CURRENTPLAN, PREFIX_LASTMET, PREFIX_ADDRESS)) {
             throw new ParseException(String.format(Messages.MESSAGE_TOO_MANY_FIELDS, DeleteCommand.MESSAGE_USAGE));
         }
 
@@ -80,6 +75,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if any of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

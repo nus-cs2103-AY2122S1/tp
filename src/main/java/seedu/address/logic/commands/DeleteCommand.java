@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the client id used in the displayed person list.\n"
+            + ": Deletes the person identified by the client id and/or email used in the displayed person list.\n"
             + "Parameters: "
             + PREFIX_CLIENTID + "CLIENT ID "
             + PREFIX_EMAIL + "EMAIL "

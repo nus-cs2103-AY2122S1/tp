@@ -29,7 +29,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validCLientIdUnfilteredList_success() {
+    public void execute_validClientIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(2);
         ArrayList<Predicate> predicates = new ArrayList<>();
         ClientId clientId = new ClientId(personToDelete.getClientId().value);
