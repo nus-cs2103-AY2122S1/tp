@@ -16,8 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,14 +41,16 @@ public class AddGroupCommandParserTest {
                 new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
         // 1 name and 1 ID - both accepted
-        Group expectedGroupWithStudents = new GroupBuilder()
-                .withName(VALID_GROUP_TUTORIAL)
-                .withStudents(AMY, BOB).build();
-        AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder().withId(VALID_ID_AMY).build();
-        AllocDescriptor descriptorWithBobName = new AllocDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        Group expectedGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
+        AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withId(VALID_ID_AMY).build();
+        AllocDescriptor descriptorWithBobName = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withName(VALID_NAME_BOB).build();
         List<AllocDescriptor> expectedMixedDescriptors = Arrays.asList(descriptorWithAmyId, descriptorWithBobName);
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL + ID_DESC_AMY + NAME_DESC_BOB,
-                new AddGroupCommand(expectedGroupWithStudents, expectedMixedDescriptors));
+                new AddGroupCommand(expectedGroup, expectedMixedDescriptors));
     }
 
     @Test
@@ -60,18 +60,24 @@ public class AddGroupCommandParserTest {
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL, new AddGroupCommand(expectedEmptyGroup, new ArrayList<>()));
 
         // only names - all accepted
-        Group expectedGroupWithStudents = new GroupBuilder()
-                .withName(VALID_GROUP_TUTORIAL)
-                .withStudents(AMY, BOB).build();
-        AllocDescriptor descriptorWithAmyName = new AllocDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        AllocDescriptor descriptorWithBobName = new AllocDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        Group expectedGroupWithStudents = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
+        AllocDescriptor descriptorWithAmyName = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withName(VALID_NAME_AMY).build();
+        AllocDescriptor descriptorWithBobName = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withName(VALID_NAME_BOB).build();
         List<AllocDescriptor> expectedNameDescriptors = Arrays.asList(descriptorWithAmyName, descriptorWithBobName);
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL + NAME_DESC_AMY + NAME_DESC_BOB,
                 new AddGroupCommand(expectedGroupWithStudents, expectedNameDescriptors));
 
         // only IDs - all accepted
-        AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder().withId(VALID_ID_AMY).build();
-        AllocDescriptor descriptorWithBobId = new AllocDescriptorBuilder().withId(VALID_ID_BOB).build();
+        AllocDescriptor descriptorWithAmyId = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withId(VALID_ID_AMY).build();
+        AllocDescriptor descriptorWithBobId = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withId(VALID_ID_BOB).build();
         List<AllocDescriptor> expectedIdDescriptors = Arrays.asList(descriptorWithAmyId, descriptorWithBobId);
         assertParseSuccess(parser, GROUP_DESC_TUTORIAL + ID_DESC_AMY + ID_DESC_BOB,
                 new AddGroupCommand(expectedGroupWithStudents, expectedIdDescriptors));
