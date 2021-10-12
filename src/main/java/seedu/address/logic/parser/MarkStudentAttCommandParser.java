@@ -5,20 +5,20 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.MarkStudentAttendanceCommand;
+import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new MarkStudentAttendanceCommand object
+ * Parses input arguments and creates a new MarkStudentAttCommand object
  */
-public class MarkStudentAttendanceCommandParser implements Parser<MarkStudentAttendanceCommand> {
+public class MarkStudentAttCommandParser implements Parser<MarkStudentAttCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkStudentAttendanceCommand
-     * and returns a MarkStudentAttendanceCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MarkStudentAttCommand
+     * and returns a MarkStudentAttCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public MarkStudentAttendanceCommand parse(String args) throws ParseException {
+    public MarkStudentAttCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
@@ -29,15 +29,15 @@ public class MarkStudentAttendanceCommandParser implements Parser<MarkStudentAtt
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkStudentAttendanceCommand.MESSAGE_USAGE), pe);
+                    MarkStudentAttCommand.MESSAGE_USAGE), pe);
         }
 
         if (argMultimap.getValue(PREFIX_WEEK).isPresent()) {
             int week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
-            return new MarkStudentAttendanceCommand(index, week);
+            return new MarkStudentAttCommand(index, week);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkStudentAttendanceCommand.MESSAGE_USAGE));
+                MarkStudentAttCommand.MESSAGE_USAGE));
     }
 }
