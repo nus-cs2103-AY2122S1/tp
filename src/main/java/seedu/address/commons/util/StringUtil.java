@@ -65,4 +65,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns the same string with the first letter capitalized.
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static String capitalizeFirstLetter(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    }
 }
