@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -22,6 +23,8 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Add Student";
+
     public static final String COMMAND_WORD = "add";
 
     public static final String COMMAND_PARAMETERS = PREFIX_NAME + "NAME "
@@ -32,9 +35,12 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LVL] "
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -45,6 +51,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SCHOOL + "Nan Chiau High School "
             + PREFIX_ACAD_STREAM + "Express "
+            + PREFIX_ACAD_LEVEL + "S1 "
             + PREFIX_FEE + "50 "
             + PREFIX_REMARK + "He owes me a dinner! "
             + PREFIX_TAG + "friends "
@@ -89,5 +96,10 @@ public class AddCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
                 && toAdd.equals(((AddCommand) other).toAdd));
+    }
+
+    @Override
+    public String toString() {
+        return "Add Command: " + toAdd;
     }
 }

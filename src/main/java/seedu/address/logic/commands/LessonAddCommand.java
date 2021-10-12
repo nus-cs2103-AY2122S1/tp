@@ -17,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -30,6 +31,8 @@ import seedu.address.model.tag.Tag;
 
 public class LessonAddCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Add Lesson";
+
     public static final String COMMAND_WORD = "ladd";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
@@ -38,6 +41,8 @@ public class LessonAddCommand extends Command {
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE_RECURRING_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_RECURRING + " "
@@ -95,6 +100,7 @@ public class LessonAddCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         School updatedSchool = personToEdit.getSchool();
         AcadStream updatedAcadStream = personToEdit.getAcadStream();
+        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
         Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
@@ -103,7 +109,7 @@ public class LessonAddCommand extends Command {
         lessons.add(lesson);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
-                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream,
+                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
                 updatedOutstandingFee, updatedRemark, updatedTags, lessons);
     }
 
