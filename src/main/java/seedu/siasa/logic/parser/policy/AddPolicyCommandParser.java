@@ -1,27 +1,27 @@
 package seedu.siasa.logic.parser.policy;
 
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.Address;
-import seedu.siasa.model.person.Email;
-import seedu.siasa.model.person.Name;
-import seedu.siasa.model.person.Person;
-import seedu.siasa.model.person.Phone;
 import seedu.siasa.logic.parser.ArgumentMultimap;
 import seedu.siasa.logic.parser.ArgumentTokenizer;
 import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.Prefix;
+import seedu.siasa.model.person.Address;
+import seedu.siasa.model.person.Email;
+import seedu.siasa.model.person.Name;
+import seedu.siasa.model.person.Person;
+import seedu.siasa.model.person.Phone;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Title;
@@ -40,9 +40,19 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
      */
     public AddPolicyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TITLE, PREFIX_EXPIRY, PREFIX_PRICE, PREFIX_COMMISSION, PREFIX_CLIENT_INDEX);
+                ArgumentTokenizer.tokenize(args,
+                        PREFIX_TITLE,
+                        PREFIX_EXPIRY,
+                        PREFIX_PRICE,
+                        PREFIX_COMMISSION,
+                        PREFIX_CLIENT_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_EXPIRY, PREFIX_PRICE, PREFIX_COMMISSION, PREFIX_CLIENT_INDEX)
+        if (!arePrefixesPresent(argMultimap,
+                PREFIX_TITLE,
+                PREFIX_EXPIRY,
+                PREFIX_PRICE,
+                PREFIX_COMMISSION,
+                PREFIX_CLIENT_INDEX)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE));
         }

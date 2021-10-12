@@ -6,9 +6,9 @@ import java.util.List;
 
 import seedu.siasa.commons.core.Messages;
 import seedu.siasa.commons.core.index.Index;
-import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.policy.Policy;
 

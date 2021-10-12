@@ -1,16 +1,16 @@
 package seedu.siasa.logic.commands.policy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_COMMISSION;
-import static seedu.siasa.logic.parser.CliSyntax.PREFIX_CLIENT_INDEX;
+import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
 
-import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.policy.Policy;
 

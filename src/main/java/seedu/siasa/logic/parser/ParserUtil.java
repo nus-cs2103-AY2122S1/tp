@@ -5,13 +5,15 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.commons.util.StringUtil;
 import seedu.siasa.logic.parser.exceptions.ParseException;
-import seedu.siasa.model.person.*;
+import seedu.siasa.model.person.Address;
+import seedu.siasa.model.person.Email;
+import seedu.siasa.model.person.Name;
+import seedu.siasa.model.person.Phone;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
 import seedu.siasa.model.policy.Price;

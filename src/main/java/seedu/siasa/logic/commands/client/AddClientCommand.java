@@ -7,9 +7,9 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 

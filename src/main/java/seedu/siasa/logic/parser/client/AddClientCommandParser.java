@@ -17,12 +17,12 @@ import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
-import seedu.siasa.model.tag.Tag;
 import seedu.siasa.logic.parser.ArgumentMultimap;
 import seedu.siasa.logic.parser.ArgumentTokenizer;
 import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.Prefix;
+import seedu.siasa.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

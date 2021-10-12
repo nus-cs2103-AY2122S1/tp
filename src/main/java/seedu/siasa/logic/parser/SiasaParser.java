@@ -18,9 +18,9 @@ import seedu.siasa.logic.commands.client.ListClientCommand;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
-import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.client.AddClientCommandParser;
 import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
+import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.policy.AddPolicyCommandParser;
 import seedu.siasa.logic.parser.policy.DeletePolicyCommandParser;
 
