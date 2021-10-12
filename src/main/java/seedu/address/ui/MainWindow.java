@@ -179,6 +179,17 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
     }
 
+    /**
+     * Displays the Employee list.
+     */
+    @FXML
+    public void handleShowEmployee() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Employee");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+    }
+
     void show() {
         primaryStage.show();
     }

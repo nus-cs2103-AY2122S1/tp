@@ -41,7 +41,6 @@ class JsonSerializableAddressBook {
         @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
         this.persons.addAll(persons);
         this.employees.addAll(employees);
-        this.persons.addAll(persons);
         this.suppliers.addAll(suppliers);
         this.reservations.addAll(reservations);
     }
