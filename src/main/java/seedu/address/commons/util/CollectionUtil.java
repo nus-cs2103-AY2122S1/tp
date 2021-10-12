@@ -38,6 +38,9 @@ public class CollectionUtil {
      * Returns true if two lists are equal, ignoring the order of elements within the list.
      */
     public static <T> boolean equalsIgnoreOrder(List<T> l1, List<T> l2) {
+        if (l1 == null || l2 == null) {
+            return l1 == l2;
+        }
         return l1.size() == l2.size()
                 && l1.stream().allMatch(l2::contains);
     }
