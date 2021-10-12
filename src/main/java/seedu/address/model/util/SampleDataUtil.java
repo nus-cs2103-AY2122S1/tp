@@ -11,9 +11,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Availability;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,37 +26,25 @@ public class SampleDataUtil {
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_AVAILABILITY,
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_AVAILABILITY,
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_AVAILABILITY,
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_AVAILABILITY,
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_AVAILABILITY,
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_AVAILABILITY,
-                getTagSet("colleagues"))
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), EMPTY_AVAILABILITY),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), EMPTY_AVAILABILITY),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), EMPTY_AVAILABILITY),
+            new Person(new Name("David Li"), new Phone("91031282"), EMPTY_AVAILABILITY),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), EMPTY_AVAILABILITY),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), EMPTY_AVAILABILITY)
         };
     }
 
     public static Facility[] getSampleFacilities() {
         return new Facility[] {
             new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
-                    new Time("11:30"), new Capacity("5")),
+                    new Time("1130"), new Capacity("5")),
             new Facility(new FacilityName("NUS Field 2"), new Location("Opp University Hall"),
-                    new Time("13:30"), new Capacity("8")),
+                    new Time("1330"), new Capacity("8")),
             new Facility(new FacilityName("Court 2"), new Location("University Sports Hall"),
-                    new Time("20:30"), new Capacity("10")),
+                    new Time("2030"), new Capacity("10")),
             new Facility(new FacilityName("Court 3"), new Location("University Sports Hall"),
-                    new Time("12:30"), new Capacity("6"))
+                    new Time("1230"), new Capacity("6"))
         };
     }
 
@@ -67,6 +53,11 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
+        for (Facility sampleFacility : getSampleFacilities()) {
+            sampleAb.addFacility(sampleFacility);
+        }
+
         return sampleAb;
     }
 

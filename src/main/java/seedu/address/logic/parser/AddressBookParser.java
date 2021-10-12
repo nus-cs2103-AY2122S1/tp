@@ -11,8 +11,9 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.DeleteFacilityCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
@@ -44,17 +45,21 @@ public class AddressBookParser {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
         case AddMemberCommand.COMMAND_WORD:
             return new AddMemberCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditMemberCommand.COMMAND_WORD:
+            return new EditMemberCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteMemberCommand.COMMAND_WORD:
+            return new DeleteMemberCommandParser().parse(arguments);
+
+        case DeleteFacilityCommand.COMMAND_WORD:
+            return new DeleteFacilityCommandParser().parse(arguments);
 
         case ClearMembersCommand.COMMAND_WORD:
             return new ClearMembersCommand();
