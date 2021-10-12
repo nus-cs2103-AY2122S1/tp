@@ -18,7 +18,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fee;
@@ -285,29 +284,6 @@ public class ParserUtilTest {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
-    }
-
-    @Test
-    public void parseTime_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTime((String) null));
-    }
-
-    @Test
-    public void parseTime_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTime(INVALID_TIME));
-    }
-
-    @Test
-    public void parseTime_validValueWithoutWhitespace_returnsTime() throws Exception {
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, ParserUtil.parseTime(VALID_TIME));
-    }
-
-    @Test
-    public void parseTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
-        String timeWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
-        Time expectedTime = new Time(VALID_TIME);
-        assertEquals(expectedTime, ParserUtil.parseTime(timeWithWhitespace));
     }
 
     @Test

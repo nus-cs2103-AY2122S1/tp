@@ -1,78 +1,81 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class LessonDeleteCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LessonDeleteCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_oneExistingLesson_success() {
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+        ModelStub modelStub = new ModelStubWithPerson(editedPerson);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        Lesson lessonToDelete = editedPerson.getLessons().stream()
+            .collect(Collectors.toList())
+            .get(INDEX_FIRST_LESSON.getZeroBased());
+        String expectedMessage = String.format(
+            LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);
+        Model expectedModel = new ModelStubWithPerson(firstPerson);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-    }
-
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertCommandSuccess(lessonDeleteCommand, modelStub, expectedMessage, expectedModel);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        LessonDeleteCommand deleteSampleLessonCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+            INDEX_FIRST_LESSON);
+        LessonDeleteCommand deleteSampleLessonCommand2 = new LessonDeleteCommand(INDEX_SECOND_PERSON,
+            INDEX_FIRST_LESSON);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        LessonDeleteCommand deleteSampleLessonCommandCopy = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+            INDEX_FIRST_LESSON);
+        assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(deleteSampleLessonCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(deleteSampleLessonCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(deleteSampleLessonCommand.equals(deleteSampleLessonCommand2));
     }
 
     /**
@@ -159,7 +162,7 @@ public class AddCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+        private Person person;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
@@ -171,30 +174,39 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+            this.person = editedPerson;
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<Person> predicate) {
+            return;
+        }
+
+        @Override
+        public ObservableList<Person> getFilteredPersonList() {
+            UniquePersonList list = new UniquePersonList();
+            list.add(this.person);
+            return list.asUnmodifiableObservableList();
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            // short circuit if same object
+            if (obj == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(obj instanceof ModelStubWithPerson)) {
+                return false;
+            }
+
+            // state check
+            return person.equals(((ModelStubWithPerson) obj).person);
+        }
+
     }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-    }
-
 }

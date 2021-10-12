@@ -22,6 +22,8 @@ import seedu.address.model.person.Person;
  */
 public class FindCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Find Student";
+
     public static final String COMMAND_WORD = "find";
 
     public static final String COMMAND_PARAMETERS = "[" + PREFIX_FIND_CONDITION + "{all | any | none}] "
@@ -33,6 +35,8 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PARENT_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_FIND_CONDITION + "any "

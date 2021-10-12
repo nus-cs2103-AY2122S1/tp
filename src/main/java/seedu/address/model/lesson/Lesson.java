@@ -2,17 +2,19 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 
 /**
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson implements Comparable<Lesson> {
+
     // Types of lesson
     private static final String RECURRING = "Recurring Lesson";
     private static final String MAKEUP = "Makeup Lesson";
@@ -45,12 +47,24 @@ public abstract class Lesson implements Comparable<Lesson> {
         return date;
     }
 
+    public LocalDate getLocalDate() {
+        return date.getLocalDate();
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return date.getDayOfWeek();
+    }
+
     public Subject getSubject() {
         return subject;
     }
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    public String getTypeOfLesson() {
+        return isRecurring() ? RECURRING : MAKEUP;
     }
 
     /**
@@ -67,6 +81,14 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @return True if it is a recurring lesson, false otherwise.
      */
     public abstract boolean isRecurring();
+
+    /**
+     * Returns true both lessons clash.
+     *
+     * @param otherLesson The other lesson to be compared with.
+     * @return True if and only if lessons clash.
+     */
+    public abstract boolean isClashing(Lesson otherLesson);
 
     public boolean isOver() {
         return getDate().isOver();

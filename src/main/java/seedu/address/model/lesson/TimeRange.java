@@ -3,77 +3,83 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
  * Represents a Lesson's TimeRange in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(Time, Time)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTimeRange(String)}
  */
 public class TimeRange implements Comparable<TimeRange> {
-    public static final String MESSAGE_CONSTRAINTS = "Lesson time range should adhere to the following constraints:\n"
-        + "1. End time cannot be earlier than start time.\n"
-        + "2. Lesson should be conducted between 8am and 10pm, inclusive";
+    public static final String MESSAGE_CONSTRAINTS = "Lesson time range should be formatted as HHmm-HHmm "
+        + "and adhere to the following constraints:\n"
+        + "1. Start time must be before end time.\n"
+        + "2. Lesson should be conducted between 8am and 10pm, inclusive.";
 
-    private static final Time DAY_START = new Time("08:00");
-    private static final Time DAY_END = new Time("22:00");
+    public static final String VALIDATION_REGEX = "^(([01]?[0-9]|2[0-3])[0-5][0-9])-(([01]?[0-9]|2[0-3])[0-5][0-9])";
 
-    private final Time start;
-    private final Time end;
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
+    private static final LocalTime DAY_START = LocalTime.of(8, 0, 0);
+    private static final LocalTime DAY_END = LocalTime.of(22, 0, 0);
+
+    public final String value;
+
+    private final LocalTime start;
+    private final LocalTime end;
 
     /**
      * Constructs a TimeRange object.
      *
-     * @param start Start of the range.
-     * @param end End of the range.
+     * @param value A valid time range.
      */
-    public TimeRange(Time start, Time end) {
-        requireNonNull(start);
-        requireNonNull(end);
-        this.start = start;
-        this.end = end;
-        checkArgument(isValidTimeRange(start, end), MESSAGE_CONSTRAINTS);
+    public TimeRange(String value) {
+        requireNonNull(value);
+        checkArgument(isValidTimeRange(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
+        String[] startEndTimes = value.split("-", 2);
+        start = LocalTime.parse(startEndTimes[0], DATE_TIME_FORMAT);
+        end = LocalTime.parse(startEndTimes[1], DATE_TIME_FORMAT);
     }
 
-    public Time getStart() {
+    public LocalTime getStart() {
         return start;
     }
 
-    public Time getEnd() {
+    public LocalTime getEnd() {
         return end;
+    }
+
+    public Duration getDuration() {
+        return Duration.between(start, end);
     }
 
     /**
      * Checks if the start is earlier than the end and
      * the range is between 8am and 10pm, inclusive.
      *
-     * @param start Start of the range.
-     * @param end End of the range.
+     * @param test The value to be tested.
      * @return True if start is earlier than or same time as end.
      */
-    public static boolean isValidTimeRange(Time start, Time end) {
-        return end.compareTo(start) >= 0
-            && start.compareTo(DAY_START) >= 0 // Same or later than 8am
-            && end.compareTo(DAY_END) <= 0; // Same or earlier than 10pm
-    }
-
-    /**
-     * Checks if the given start time is within the time range.
-     *
-     * @param time The time to be tested.
-     */
-    private boolean isStartClashing(Time time) {
-        return start.compareTo(time) <= 0 // same or later than start time
-            && end.compareTo(time) > 0; // earlier than end time
-    }
-
-    /**
-     * Checks if the given end time is within the time range.
-     *
-     * @param time The time to be tested.
-     */
-    private boolean isEndClashing(Time time) {
-        return start.compareTo(time) < 0 // later than start time
-            && end.compareTo(time) > 0; // earlier than end time
+    public static boolean isValidTimeRange(String test) {
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        String[] startEndTimes = test.split("-", 2);
+        if (startEndTimes.length < 2) { // There must be a '-'
+            return false;
+        }
+        try {
+            LocalTime startTime = LocalTime.parse(startEndTimes[0], DATE_TIME_FORMAT);
+            LocalTime endTime = LocalTime.parse(startEndTimes[1], DATE_TIME_FORMAT);
+            return endTime.compareTo(startTime) > 0 // End cannot be same or before start
+                    && startTime.compareTo(DAY_START) >= 0 // Same or later than 8am
+                    && endTime.compareTo(DAY_END) <= 0; // Same or earlier than 10pm
+        } catch (DateTimeParseException e) { // Double check even though regex already ensures values can be parsed
+            return false;
+        }
     }
 
     /**
@@ -82,12 +88,21 @@ public class TimeRange implements Comparable<TimeRange> {
      * @param other The TimeRange to be tested.
      */
     public boolean isClashing(TimeRange other) {
-        return isStartClashing(other.start) || isEndClashing(other.end);
+        if (start.compareTo(other.start) <= 0 && end.compareTo(other.end) >= 0) {
+            return true; // starts before other and ends after other
+        }
+        if (start.compareTo(other.start) > 0 && start.compareTo(other.end) < 0) {
+            return true; // start time is within the other time range
+        }
+        if (end.compareTo(other.start) > 0 && end.compareTo(other.end) < 0) {
+            return true; // end time is within the other time range
+        }
+        return false;
     }
 
     @Override
     public String toString() {
-        return start.toString() + " to " + end.toString();
+        return value;
     }
 
     @Override

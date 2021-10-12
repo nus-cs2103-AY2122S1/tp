@@ -25,8 +25,7 @@ public class LessonTest {
 
     /** Arbitrary constants for lesson */
     private static final String DATE = "14 Jan 2022";
-    private static final String START_TIME = "14:30";
-    private static final String END_TIME = "15:30";
+    private static final String TIME_RANGE = "1430-1530";
     private static final String SUBJECT = "Math";
     private static final Set<Homework> HOMEWORK = new HashSet<>();
 
@@ -36,7 +35,7 @@ public class LessonTest {
     public void updateDateWithWeek_validDateString_success() {
         String validOneWeekLaterDateString = "21 Jan 2022";
         Lesson lesson = new RecurringLesson(new Date(DATE),
-            new TimeRange(new Time(START_TIME), new Time(END_TIME)),
+            new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK);
         assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
@@ -92,6 +91,11 @@ public class LessonTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

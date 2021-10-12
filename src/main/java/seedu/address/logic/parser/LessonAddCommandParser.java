@@ -3,11 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -29,7 +28,7 @@ import seedu.address.model.lesson.TimeRange;
 /**
  * Parses input arguments and creates a new LessonAddCommand object.
  */
-public class LessonAddCommandParser {
+public class LessonAddCommandParser implements Parser<LessonAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the LessonAddCommand
      * and returns a LessonAddCommand object for execution.
@@ -38,10 +37,10 @@ public class LessonAddCommandParser {
     public LessonAddCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_START_TIME,
-                        PREFIX_END_TIME, PREFIX_SUBJECT, PREFIX_HOMEWORK);
+                ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                        PREFIX_SUBJECT, PREFIX_HOMEWORK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_SUBJECT)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME, PREFIX_SUBJECT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
         }
 
@@ -54,15 +53,7 @@ public class LessonAddCommandParser {
         }
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-
-        /* Parse time and check if range is valid.
-        Throws ParseException if either time is invalid
-        or if range is invalid.
-         */
-        String startTime = argMultimap.getValue(PREFIX_START_TIME).get();
-        String endTime = argMultimap.getValue(PREFIX_END_TIME).get();
-        TimeRange timeRange = ParserUtil.parseTimeRange(startTime, endTime);
-
+        TimeRange timeRange = ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());

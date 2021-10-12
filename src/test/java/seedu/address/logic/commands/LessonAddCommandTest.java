@@ -15,16 +15,15 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for LessonAddCommand.
@@ -36,17 +35,6 @@ public class LessonAddCommandTest {
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new LessonAddCommand(INDEX_FIRST_PERSON, null));
-    }
-
-    @Test
-    public void execute_duplicateLesson_throwsCommandException() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, SampleDataUtil.getSampleLesson());
-        ModelStub modelStub = new ModelStubWithPerson(editedPerson);
-
-        assertThrows(CommandException.class,
-                LessonAddCommand.MESSAGE_DUPLICATE_LESSON, () -> lessonAddCommand.execute(modelStub));
     }
 
     @Test
@@ -125,6 +113,11 @@ public class LessonAddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClashingLesson(Lesson lesson) {
             throw new AssertionError("This method should not be called.");
         }
 

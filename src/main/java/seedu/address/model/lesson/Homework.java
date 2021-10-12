@@ -52,7 +52,7 @@ public class Homework {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + description + ']';
+        return description;
     }
 
 }

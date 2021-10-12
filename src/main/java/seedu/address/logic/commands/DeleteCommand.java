@@ -15,12 +15,24 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Delete Student";
+
     public static final String COMMAND_WORD = "delete";
+
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer)";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
+
+    public static final String USER_TIP = "Try deleting a student using: \n"
+            + COMMAND_WORD + " " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
