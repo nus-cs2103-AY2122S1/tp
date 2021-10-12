@@ -1,56 +1,48 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.Module;
 
 /**
  * Adds a student to the address book.
  */
-public class AddModuleCommand extends Command {
+public class AddModuleCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_TYPE = "module";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
+    public static final String MESSAGE_USAGE = AddCommand.COMMAND_WORD + " " + COMMAND_TYPE
+            + ": Adds a module to TAB. "
             + "Parameters: "
-            + PREFIX_STUDENT_ID + "STUDENT ID "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_TELE_HANDLE + "TELE HANDLE "
-            + PREFIX_EMAIL + "EMAIL\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_ID + "A1234567A "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_TELE_HANDLE + "@johndoe "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_MODULE_NAME + "MODULE NAME "
+            + "Example: " + AddCommand.COMMAND_WORD + " " + COMMAND_TYPE
+            + PREFIX_MODULE_NAME + "CS2103 ";
 
-    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New module added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in TAB";
 
-    private final Student toAdd;
+    private final Module toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddModuleCommand(Student student) {
-        requireNonNull(student);
-        toAdd = student;
+    public AddModuleCommand(Module module) {
+        requireNonNull(module);
+        toAdd = module;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasModule(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
-        model.addStudent(toAdd);
+        model.addModule(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
