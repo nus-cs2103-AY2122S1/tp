@@ -2,10 +2,11 @@ package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.participant.Participant;
 
 /**
@@ -16,7 +17,7 @@ public class Event implements Comparable<Event> {
     public static final String COMPLETED = "Completed";
     public static final String UNCOMPLETED = "Uncompleted";
     private boolean isDone;
-    private ArrayList<Participant> participants = new ArrayList<>();
+    private ObservableList<Participant> participants = FXCollections.observableArrayList();
     private EventName eventName;
     private EventDate eventDate;
     private EventTime eventTime;
@@ -91,7 +92,7 @@ public class Event implements Comparable<Event> {
         return isDone;
     }
 
-    public List<Participant> getParticipants() {
+    public ObservableList<Participant> getParticipants() {
         return participants;
     }
 
