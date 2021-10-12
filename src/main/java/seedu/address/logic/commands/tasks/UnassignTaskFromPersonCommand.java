@@ -1,13 +1,5 @@
 package seedu.address.logic.commands.tasks;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -18,29 +10,36 @@ import seedu.address.model.id.UniqueId;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
-public class AssignTaskToPersonCommand extends Command {
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-    public static final String COMMAND_WORD = "-ass";
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a task to the person identified "
+public class UnassignTaskFromPersonCommand extends Command {
+
+    public static final String COMMAND_WORD = "-unass";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a task from the person identified "
             + "by the index numbers used in the displayed person list and the displayed task list. "
             + "Parameters: STUDENT INDEX (must be a positive integer) "
             + "TASK INDEX (must be a positive integer) ";
-
-    public static final String OVERLAPPING_TASK = "Task is already assigned to this student!";
+    public static final String MISSING_TASK = "Specified task is not assigned to this person";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-    public static final String MESSAGE_SUCCESS = "Task %1$s assigned to student %2$s";
+    public static final String MESSAGE_SUCCESS = "Task %1$s unassigned from student %2$s";
 
     private final Index personIndex;
     private final Index taskIndex;
 
     /**
-     * Constructs a {@code AssignTaskToPersonCommand}
+     * Constructs a {@code UnassignTaskFromPersonCommand}
      *
-     * @param personIndex of the person in the filtered person list to assign to
-     * @param taskIndex of the task in the filtered task list to assign
+     * @param personIndex of the person in the filtered person list to unassign from
+     * @param taskIndex of the task in the filtered task list to unassign
      */
-    public AssignTaskToPersonCommand(Index personIndex, Index taskIndex) {
+    public UnassignTaskFromPersonCommand(Index personIndex, Index taskIndex) {
         requireNonNull(personIndex);
         requireNonNull(taskIndex);
 
@@ -63,15 +62,15 @@ public class AssignTaskToPersonCommand extends Command {
         }
 
         Person personToEdit = lastShownPersonList.get(personIndex.getZeroBased());
-        Task taskToAssign = lastShownTaskList.get(taskIndex.getZeroBased());
+        Task taskToUnassign = lastShownTaskList.get(taskIndex.getZeroBased());
         Set<UniqueId> previousAssignedTaskSet = personToEdit.getAssignedTaskIds();
-        UniqueId taskId = taskToAssign.getId();
+        UniqueId taskId = taskToUnassign.getId();
 
-        if (previousAssignedTaskSet.contains(taskId)) {
-            throw new CommandException(OVERLAPPING_TASK);
+        if (!previousAssignedTaskSet.contains(taskId)) {
+            throw new CommandException(MISSING_TASK);
         }
         Set<UniqueId> newAssignedTaskSet = new HashSet<>(previousAssignedTaskSet);
-        newAssignedTaskSet.add(taskId);
+        newAssignedTaskSet.remove(taskId);
         Person newPerson = personToEdit.updateAssignedTaskIds(newAssignedTaskSet);
 
         if (!personToEdit.isSamePerson(newPerson) && model.hasPerson(newPerson)) {
@@ -81,7 +80,6 @@ public class AssignTaskToPersonCommand extends Command {
         model.setPerson(personToEdit, newPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAssign.getName(), newPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToUnassign.getName(), newPerson.getName()));
     }
-
 }
