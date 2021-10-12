@@ -46,6 +46,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Rectangle status;
     @FXML
+    private HBox informationContainer;
+    @FXML
+    private VBox deadlineContainer;
+    @FXML
     private VBox statusContainer;
 
     /**
@@ -59,8 +63,22 @@ public class PersonCard extends UiPart<Region> {
         room.setText(person.getRoom().room);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        vaccstatus.setText(person.getVaccStatus().vaccStatus);
         faculty.setText(person.getFaculty().faculty);
+
+        if (person.hasMissedDeadline()) {
+            this.getRoot().setStyle("-fx-background-color: #8B0000;");
+            Label textBox = new Label("Late by:");
+            int missedDates = person.getMissedDates();
+            Label date;
+            if (missedDates > 1) {
+                date = new Label(missedDates + " days");
+            } else {
+                date = new Label(missedDates + " day");
+            }
+            deadlineContainer.getChildren().add(textBox);
+            deadlineContainer.getChildren().add(date);
+        }
+
         if (person.getVaccStatus().vaccinated) {
             Image img = new Image("/images/vaccinated.png");
             Rectangle rec = new Rectangle(30, 30);

@@ -2,6 +2,8 @@ package safeforhall.model.person;
 
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -129,4 +131,26 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns true the person has missed any of his fet dates.
+     */
+    public boolean hasMissedDeadline() {
+        LastDate currentDate = new LastDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        NameMissedDeadlinePredicate checkFet = new NameMissedDeadlinePredicate("f", currentDate);
+        return checkFet.test(this);
+    }
+
+    /**
+     * Returns the number of days the person has missed any of his fet dates.
+     */
+    public int getMissedDates() {
+        LastDate currentDate = new LastDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        NameMissedDeadlinePredicate checkFet = new NameMissedDeadlinePredicate("f", currentDate);
+
+        if (this.hasMissedDeadline()) {
+            return (int) Math.abs(checkFet.getDeadlinePeriod(this));
+        } else {
+            return -1;
+        }
+    }
 }
