@@ -105,7 +105,7 @@ Prefix Input Specifications:
 
 ***Note***: Italicised word refers to a stored prefix value. e.g. *Name* could refer to the value `John` stored as a name in the application.
 * *Name* `n/`
-  * Each additional keyword for Name leads to a more **accommodating** search.
+  * Each additional keyword for *Name* leads to a more **accommodating** search.
   * A *Name* is considered matching if at least 1 keyword is equal to at least 1 word in the *Name*.
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee` 
@@ -122,7 +122,7 @@ and `marysue@gmail.com`.
 
 
 * *Contact Number* `p/`
-  * Each additional keyword for Email leads to a more **accommodating** search.
+  * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
   * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
   * For example:
     * A `99999999` input can only match with *Contact Number*s that are `99999999`.
@@ -130,7 +130,7 @@ and `marysue@gmail.com`.
 
 
 * *Role* `r/`
-  * Each additional keyword for Role leads to a more **restrictive** search
+  * Each additional keyword for *Role* leads to a more **restrictive** search
   * A *Role* is considered matching only if every single keyword is equal to at least 1 word in the *Role*.
   * For example:
     * A `Software` input can match with *Role*s such as `Software Engineer`, `Software` or `Software Developer`
@@ -139,7 +139,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 
 
 * *Level of Education* `l/`
-  * Each additional keyword for Level of Education leads to a more **accommodating** search.
+  * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
   * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
   * A *Level of Education* is considered matching only if at least 1 keyword is equal to at least 1 letter in the possible types of *Level of Education*
   * For example:
