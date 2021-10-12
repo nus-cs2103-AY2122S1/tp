@@ -31,6 +31,7 @@ public class CommandTestUtil {
 
     //TODO: add invalid category codes
     public static final String VALID_CATEGORY_CODE_ATT = "att";
+    public static final String VALID_CATEGORY_CODE_FNB = "fnb";
     public static final String VALID_CATEGORY_CODE_OTH = "oth";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -48,6 +49,7 @@ public class CommandTestUtil {
     public static final String VALID_RATING_BOB = "3";
 
     public static final String CATEGORY_DESC_ATT = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_ATT;
+    public static final String CATEGORY_DESC_FNB = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_FNB;
     public static final String CATEGORY_DESC_OTH = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_OTH;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -69,6 +71,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_CATEGORY_DESC = " " + PREFIX_CATEGORY_CODE + "abc"; // "abc" not a category code
     public static final String INVALID_RATING_DESC = " " + PREFIX_RATING + "4.5"; // only integers allowed in ratings
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

@@ -175,11 +175,15 @@ Category codes:
 * Accommodation :`c/acc`
 * Transport :`c/tpt`
 
-Format: `filter c/CATEGORY`
+Format: `filter c/CATEGORY...`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can filter contacts in one or many categories
+</div>
 
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts).
-* `filter c/acc` returns Mandarin Oriental and Hotel81 (all accommodation contacts)
+* `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts).
 
 
 ### Clearing all entries : `clear`

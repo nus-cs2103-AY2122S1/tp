@@ -54,6 +54,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Collection<String> codes} into a {@code Set<CategoryCode>}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Set<CategoryCode> parseCategories(Collection<String> codes) throws ParseException {
+        requireNonNull(codes);
+        final Set<CategoryCode> categoryCodes = new HashSet<>();
+        for (String code : codes) {
+            categoryCodes.add(parseCategory(code));
+        }
+        return categoryCodes;
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
