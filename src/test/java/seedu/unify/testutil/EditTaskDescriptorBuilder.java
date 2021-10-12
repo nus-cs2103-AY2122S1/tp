@@ -1,9 +1,5 @@
 package seedu.unify.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Date;
@@ -34,7 +30,7 @@ public class EditTaskDescriptorBuilder {
         descriptor.setName(task.getName());
         descriptor.setTime(task.getTime());
         descriptor.setDate(task.getDate());
-        descriptor.setTags(task.getTags());
+        descriptor.setTag(task.getTag());
     }
 
     /**
@@ -62,12 +58,10 @@ public class EditTaskDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
-     * that we are building.
+     * Sets the {@code Tag} of the {@code EditTaskDescriptor} that we are building.
      */
-    public EditTaskDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditTaskDescriptorBuilder withTag(String tag) {
+        descriptor.setTag(new Tag(tag));
         return this;
     }
 
