@@ -2,8 +2,12 @@ package safeforhall.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import safeforhall.model.person.Person;
 
 /**
@@ -39,6 +43,10 @@ public class PersonCard extends UiPart<Region> {
     private Label vaccstatus;
     @FXML
     private Label faculty;
+    @FXML
+    private Rectangle status;
+    @FXML
+    private VBox statusContainer;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,6 +61,14 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         vaccstatus.setText(person.getVaccStatus().vaccStatus);
         faculty.setText(person.getFaculty().faculty);
+        if (person.getVaccStatus().vaccinated) {
+            Image img = new Image("/images/vaccinated.png");
+            Rectangle rec = new Rectangle(30, 30);
+            rec.setArcHeight(10);
+            rec.setArcWidth(10);
+            rec.setFill(new ImagePattern(img));
+            statusContainer.getChildren().add(rec);
+        }
     }
 
     @Override
