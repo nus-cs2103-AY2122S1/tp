@@ -2,7 +2,6 @@ package seedu.unify.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -11,7 +10,6 @@ import javafx.scene.layout.VBox;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.logic.Logic;
 import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Task;
 
 public class WeeklyPanel extends UiPart<Region> {
 
