@@ -51,7 +51,7 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(
-                    new CsvParser(new CsvFileChooser()));
+                    new CsvParser(new CsvFileChooser("docs", "assets", "templates")));
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

@@ -15,7 +15,6 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = COMMAND_WORD;
-
     public static final String MESSAGE_SUCCESS = "Contacts added successfully";
 
     private List<Person> personsToAdd;
@@ -30,14 +29,11 @@ public class ImportCommand extends Command {
 
         for (int i = 0; i < personsToAdd.size(); i++) {
             Person person = personsToAdd.get(i);
-
             if (model.hasPerson(person)) {
                 continue;
             }
-
             model.addPerson(person);
         }
-
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

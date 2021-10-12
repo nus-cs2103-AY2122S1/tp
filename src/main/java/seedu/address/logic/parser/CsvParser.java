@@ -30,7 +30,7 @@ public class CsvParser {
      */
     public CsvParser(CsvFileChooser csvFileChooser) throws ParseException {
         try {
-            br = new BufferedReader(new FileReader(csvFileChooser.chooseFile("docs/assets/templates")));
+            br = new BufferedReader(new FileReader(csvFileChooser.chooseFile()));
             data = new HashMap<>();
             parse();
         } catch (IOException e) {
