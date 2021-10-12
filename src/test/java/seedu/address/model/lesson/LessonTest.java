@@ -5,11 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.LessonBuilder.DEFAULT_LESSON_CODE;
-import static seedu.address.testutil.LessonBuilder.DEFAULT_PRICE;
 
 import java.time.DayOfWeek;
-import java.util.stream.IntStream;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,36 +18,22 @@ import seedu.address.testutil.PersonBuilder;
 
 public class LessonTest {
 
-    private static final String[] DAY_SHORT_FORMS = new String[] {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
-    private static Lesson defaultLesson = LessonBuilder.getDefault();
+    private Lesson defaultLesson;
 
     @BeforeEach
     public void setUp() {
-        // reset defaultLesson
-        defaultLesson = LessonBuilder.getDefault();
+        defaultLesson = LessonBuilder.getDefault(); // reset defaultLesson
     }
 
-    //// constructor
+    @Test
+    public void constructor_validSubject_returnsSubject() {
+        Lesson sameLesson = LessonBuilder.getDefault();
+        assertEquals(defaultLesson, sameLesson);
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        // basic constructor
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null, 0.0));
-        // constructor based on lesson code
-        assertThrows(NullPointerException.class, () -> createFromCodeAndPrice(null, 0.0));
-    }
-
-    @Test
-    public void createLessonFromCode() {
-        Lesson createdLesson = Lesson.createFromCodeAndPrice(DEFAULT_LESSON_CODE, DEFAULT_PRICE);
-        assertEquals(defaultLesson, createdLesson);
-    }
-
-    //// local methods
-
-    @Test
-    public void getLessonCode() {
-        assertEquals(DEFAULT_LESSON_CODE, defaultLesson.getLessonCode());
+        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
     }
 
     @Test
@@ -57,15 +41,12 @@ public class LessonTest {
         // this -> true
         assertTrue(defaultLesson.isSameLesson(defaultLesson));
 
-        // null -> false
-        assertFalse(defaultLesson.isSameLesson(null));
-
         // new instance with same (default) lesson details -> true
         Lesson otherLesson = new LessonBuilder().build();
         assertTrue(defaultLesson.isSameLesson(otherLesson));
 
         // different lesson code -> false
-        Lesson differentLesson = new LessonBuilder().withSubject("Different").build();
+        Lesson differentLesson = new LessonBuilder().withSubject("Different").build(); // change subject to change code
         assertFalse(defaultLesson.isSameLesson(differentLesson));
     }
 
@@ -95,27 +76,7 @@ public class LessonTest {
     }
 
     @Test
-    public void hasOverlappedTiming() {
-        // exact same timing -> true
-        Lesson clashingLesson = LessonBuilder.getDefault();
-        assertTrue(defaultLesson.hasOverlappedTiming(clashingLesson));
-
-        // different day -> false
-        Lesson otherDayLesson = new LessonBuilder().withDayOfWeek(DayOfWeek.MONDAY).build();
-        assertFalse(defaultLesson.hasOverlappedTiming(otherDayLesson));
-
-        // start timing clashes -> true
-        Lesson startTimeClashLesson = new LessonBuilder().withStartTime(16, 0).build();
-        assertTrue(defaultLesson.hasOverlappedTiming(startTimeClashLesson));
-
-        // end timing clashes -> true
-        Lesson endTimeClashLesson = new LessonBuilder().withStartTime(14, 0).build();
-        assertTrue(defaultLesson.hasOverlappedTiming(endTimeClashLesson));
-
-        // same day and no clash in timing -> false
-        Lesson differentTimingLesson = new LessonBuilder().withStartTime(13, 0).build();
-        assertFalse(defaultLesson.hasOverlappedTiming(differentTimingLesson));
-    }
+    public void isAbleToUnenroll() {}
 
     @Test
     public void containsStudent() {
@@ -130,6 +91,9 @@ public class LessonTest {
     }
 
     @Test
+    public void addStudent() {}
+
+    @Test
     public void removeStudent() {
         Student toRemove = new PersonBuilder().build();
         // student not present
@@ -140,111 +104,53 @@ public class LessonTest {
         // student present and to remove
         defaultLesson.addStudent(toRemove);
         assertEquals(1, defaultLesson.getLessonSize());
-        assertEquals(1, toRemove.getLessons().size());
+        assertEquals(1, toRemove.getLessonCodes().size());
 
         defaultLesson.removeStudent(toRemove);
         assertEquals(0, defaultLesson.getLessonSize());
     }
 
-    //// static methods
+    @Test
+    public void removeAll() {}
 
     @Test
-    public void isValidSubject() {
-        // valid string
-        String valid = "Maths";
-        assertTrue(Lesson.isValidSubject(valid));
-
-        // non-alphanumeric string
-        String nonAlphanumeric = "~12P";
-        assertFalse(Lesson.isValidSubject(nonAlphanumeric));
-
-        // empty string
-        String empty = "";
-        assertFalse(Lesson.isValidSubject(empty));
-
-        // lengthy string
-        StringBuilder lengthyBuilder = new StringBuilder();
-        IntStream.range(0, MAXIMUM_SUBJECT_LENGTH + 1)
-                .forEach(num -> lengthyBuilder.append('a'));
-        assertFalse(Lesson.isValidSubject(lengthyBuilder.toString()));
-
-        // null string
-        assertFalse(Lesson.isValidSubject(null));
-    }
-
-    @Test
-    public void isValidPrice() {
-        // negative price
-        assertFalse(Lesson.isValidPrice(-0.9));
-        // valid (non-negative) price
-        assertTrue(Lesson.isValidPrice(0.9));
-        // free lesson
-        assertTrue(Lesson.isValidPrice(0));
-    }
-
-    @Test
-    public void isValidLessonCode() {
-        // null code
-        assertFalse(Lesson.isValidLessonCode(null));
-
-        // valid code
-        assertTrue(Lesson.isValidLessonCode(DEFAULT_LESSON_CODE));
-
-        // invalid code
-        String[] invalidCodes = new String[] {
-            "",
-            "S1-Wed-1500",
-            "Science-S1-Wed-15:00",
-            "Science-S1-Wednesday-15:00"
-        };
-        for (String code : invalidCodes) {
-            assertFalse(Lesson.isValidLessonCode(code));
-        }
-    }
-
-    @Test
-    public void parseStringToDayOfWeek() {
-        // null
-        assertThrows(NullPointerException.class, () -> Lesson.parseStringToDayOfWeek(null));
-
-        // invalid
-        String invalid = "";
-        assertThrows(IllegalArgumentException.class, () -> Lesson.parseStringToDayOfWeek(invalid));
-
-        // valid
-        for (int idx = 0; idx < DAY_SHORT_FORMS.length; idx++) {
-            assertEquals(DayOfWeek.of(idx + 1), Lesson.parseStringToDayOfWeek(DAY_SHORT_FORMS[idx]));
-        }
-    }
-
-    @Test
-    public void parseDayToString() {
-        // null
-        assertThrows(NullPointerException.class, () -> Lesson.parseDayToString(null));
-
-        // valid
-        for (int idx = 0; idx < DAY_SHORT_FORMS.length; idx++) {
-            assertEquals(DAY_SHORT_FORMS[idx], Lesson.parseDayToString(DayOfWeek.of(idx + 1)));
-        }
+    public void createClone() {
+        assertEquals(defaultLesson, defaultLesson.createClone());
     }
 
     @Test
     public void equals() {
-        // this
+        // this -> true
         assertEquals(defaultLesson, defaultLesson);
+
+        // null -> false
+        assertNotEquals(defaultLesson, null);
+
+        // different instance -> false
+        assertNotEquals(defaultLesson, 5);
+
+        // instance of but different params -> false
+        Lesson differentSubjectLesson = new LessonBuilder().withSubject("English").build();
+        assertNotEquals(defaultLesson, differentSubjectLesson);
+
+        Lesson differentGradeLesson = new LessonBuilder().withGrade("S3").build();
+        assertNotEquals(defaultLesson, differentGradeLesson);
+
+        Lesson differentLessonTimeLesson = new LessonBuilder()
+                .withLessonTime(new LessonTime(DayOfWeek.MONDAY, LocalTime.NOON)).build();
+        assertNotEquals(defaultLesson, differentLessonTimeLesson);
+
+        Lesson differentPriceLesson = new LessonBuilder().withPrice(13.9).build();
+        assertNotEquals(defaultLesson, differentPriceLesson);
+
+        Lesson lessonWithDifferentStudents = new LessonBuilder().build();
+        lessonWithDifferentStudents.addStudent(
+            new PersonBuilder().withGrade(defaultLesson.getGrade().value).build()
+        );
+        assertNotEquals(defaultLesson, lessonWithDifferentStudents);
 
         // same lesson but different instance
         Lesson sameLesson = LessonBuilder.getDefault();
         assertEquals(defaultLesson, sameLesson);
-
-        // null
-        assertNotEquals(defaultLesson, null);
-
-        // instance of but different params
-        Lesson otherLesson = new LessonBuilder().withGrade("S3").build();
-        assertNotEquals(defaultLesson, otherLesson);
-
-        // not Lesson
-        assertNotEquals(defaultLesson, new Object());
     }
 }

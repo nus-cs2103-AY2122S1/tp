@@ -175,11 +175,8 @@ public class ParserUtil {
     public static DayOfWeek parseDayOfWeek(String day) throws ParseException {
         requireNonNull(day);
         String cleanedDay = StringUtil.capitalize(day.trim());
-        DayOfWeek dayOfWeek = parseStringToDay(cleanedDay);
-        if (dayOfWeek == null) {
-            throw new ParseException(MESSAGE_INVALID_DAY);
-        }
-        return dayOfWeek;
+        return parseStringToDay(cleanedDay)
+                .orElseThrow(() -> new ParseException(MESSAGE_INVALID_DAY));
     }
 
     /**

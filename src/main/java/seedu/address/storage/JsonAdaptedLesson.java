@@ -90,23 +90,21 @@ public class JsonAdaptedLesson {
         }
         final Grade lessonGrade = new Grade(grade);
 
+        final DayOfWeek lessonDay = parseStringToDay(day)
+                .orElseThrow(() -> new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
+                        DayOfWeek.class.getSimpleName())));
         LocalTime lessonStart;
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LocalTime.class.getSimpleName()));
         }
         try {
-            lessonStart = LocalTime.parse(startTime, TIME_FORMATTER);
+            lessonStart = LocalTime.parse(startTime, TIME_FORMATTER); /// guarantees non-null outcome, else exception
         } catch (DateTimeParseException e) {
             throw new ParseException(String.format(INVALID_FIELD_MESSAGE_FORMAT, LocalTime.class.getSimpleName()));
         }
         if (!isValidTime(lessonStart)) {
             throw new IllegalValueException(TIME_MESSAGE_CONSTRAINTS);
-        }
-        final DayOfWeek lessonDay = parseStringToDay(day);
-        if (lessonDay == null) {
-            throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
-                    DayOfWeek.class.getSimpleName()));
         }
         final LessonTime lessonTime = new LessonTime(lessonDay, lessonStart);
 

@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
  * Represents a LessonTime for a Lesson in tuitiONE book.
@@ -17,13 +18,11 @@ import java.util.Locale;
 public class LessonTime {
 
     public static final long LESSON_PERIOD_IN_HOURS = 2;
-    public static final LocalTime BOUNDED_START_TIME = LocalTime.of(9, 0);
-    public static final LocalTime BOUNDED_END_TIME = LocalTime.of(21, 0).minusHours(LESSON_PERIOD_IN_HOURS);
+    public static final LocalTime BOUNDED_EARLIEST_START_TIME = LocalTime.of(9, 0);
+    public static final LocalTime BOUNDED_LATEST_START_TIME = LocalTime.of(21, 0).minusHours(LESSON_PERIOD_IN_HOURS);
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
-
     public static final String TIME_MESSAGE_CONSTRAINTS = String.format("Lesson can only be between %1$s to %2$s",
-            BOUNDED_START_TIME.format(TIME_FORMATTER), BOUNDED_END_TIME.format(TIME_FORMATTER));
-    public static final String DAY_MESSAGE_CONSTRAINT = "Day specified is not legitimate";
+            BOUNDED_EARLIEST_START_TIME.format(TIME_FORMATTER), BOUNDED_LATEST_START_TIME.format(TIME_FORMATTER));
 
     public final DayOfWeek dayOfWeek;
     public final LocalTime startTime;
@@ -51,9 +50,9 @@ public class LessonTime {
         if (testStart == null) {
             return false;
         }
-        return testStart.equals(BOUNDED_START_TIME)
-                || testStart.equals(BOUNDED_END_TIME)
-                || (testStart.isAfter(BOUNDED_START_TIME) && testStart.isBefore(BOUNDED_END_TIME));
+        return testStart.equals(BOUNDED_EARLIEST_START_TIME)
+                || testStart.equals(BOUNDED_LATEST_START_TIME)
+                || (testStart.isAfter(BOUNDED_EARLIEST_START_TIME) && testStart.isBefore(BOUNDED_LATEST_START_TIME));
     }
 
     /**
@@ -78,25 +77,25 @@ public class LessonTime {
     /**
      * Parses a {@code String day} into {@code DayOfWeek} if valid, else null.
      */
-    public static DayOfWeek parseStringToDay(String day) {
+    public static Optional<DayOfWeek> parseStringToDay(String day) {
         requireNonNull(day);
         switch (day) {
         case "Mon":
-            return DayOfWeek.MONDAY;
+            return Optional.of(DayOfWeek.MONDAY);
         case "Tue":
-            return DayOfWeek.TUESDAY;
+            return Optional.of(DayOfWeek.TUESDAY);
         case "Wed":
-            return DayOfWeek.WEDNESDAY;
+            return Optional.of(DayOfWeek.WEDNESDAY);
         case "Thu":
-            return DayOfWeek.THURSDAY;
+            return Optional.of(DayOfWeek.THURSDAY);
         case "Fri":
-            return DayOfWeek.FRIDAY;
+            return Optional.of(DayOfWeek.FRIDAY);
         case "Sat":
-            return DayOfWeek.SATURDAY;
+            return Optional.of(DayOfWeek.SATURDAY);
         case "Sun":
-            return DayOfWeek.SUNDAY;
+            return Optional.of(DayOfWeek.SUNDAY);
         default:
-            return null;
+            return Optional.empty();
         }
     }
 

@@ -82,18 +82,25 @@ public class Lesson {
     }
 
     /**
+     * Returns an unmodifiable set of student for equality checks.
+     */
+    public List<Student> getStudents() {
+        return students.stream().collect(Collectors.toUnmodifiableList());
+    }
+
+    /**
+     * Returns the number of students attending the lesson.
+     */
+    public int getLessonSize() {
+        return students.size();
+    }
+
+    /**
      * Returns true if both lessons have the same lesson code.
      * This defines a weaker notion of equality between two lessons.
      */
     public boolean isSameLesson(Lesson otherLesson) {
         return lessonCode.equals(otherLesson.lessonCode);
-    }
-
-    /**
-     * Returns an unmodifiable set of student for equality checks.
-     */
-    public List<Student> getStudents() {
-        return students.stream().collect(Collectors.toUnmodifiableList());
     }
 
     /**
@@ -112,7 +119,7 @@ public class Lesson {
             return false;
         }
         for (LessonCode code : student.getLessonCodes()) {
-            LessonTime time = LessonCode.getTimeFromCode(code);
+            LessonTime time = LessonCode.getLessonTimeFromCode(code);
             if (time.hasOverlappedTiming(lessonTime)) {
                 return false;
             }
@@ -132,24 +139,10 @@ public class Lesson {
     }
 
     /**
-     * Returns true if the lessons overlap in timing and day.
-     */
-    public boolean hasOverlappedTiming(Lesson otherLesson) {
-        return lessonTime.hasOverlappedTiming(otherLesson.lessonTime);
-    }
-
-    /**
      * Checks if Student is enrolled in this Lesson.
      */
     public boolean containsStudent(Student student) {
         return students.stream().anyMatch(s -> student.getName().equals(s.getName()));
-    }
-
-    /**
-     * Returns the number of students attending the lesson.
-     */
-    public int getLessonSize() {
-        return students.size();
     }
 
     /**

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 
 import seedu.address.model.person.Grade;
 
@@ -59,9 +60,9 @@ public class LessonCode {
         }
         try {
             // attempt to parse
-            LessonTime.parseStringToDay(testLessonParams[2]);
+            LessonTime.parseStringToDay(testLessonParams[2]).orElseThrow();
             LocalTime.parse(testLessonParams[3], LessonTime.TIME_FORMATTER);
-        } catch (IllegalArgumentException | DateTimeParseException e) {
+        } catch (IllegalArgumentException | DateTimeParseException | NoSuchElementException e) {
             return false;
         }
         return true;
@@ -70,10 +71,10 @@ public class LessonCode {
     /**
      * Provides the lesson time for a given lesson code.
      */
-    public static LessonTime getTimeFromCode(LessonCode code) {
+    public static LessonTime getLessonTimeFromCode(LessonCode code) {
         String[] lessonFields = code.value.split("-");
         return new LessonTime(
-                LessonTime.parseStringToDay(lessonFields[2]),
+                LessonTime.parseStringToDay(lessonFields[2]).orElseThrow(),
                 LocalTime.parse(lessonFields[3], LessonTime.TIME_FORMATTER)
         );
     }
