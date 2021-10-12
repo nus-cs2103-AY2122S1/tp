@@ -27,7 +27,7 @@ public class Faculty {
     public Faculty(String faculty) {
         requireNonNull(faculty);
         checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
-        this.faculty = faculty;
+        this.faculty = faculty.toUpperCase();
     }
 
     /**

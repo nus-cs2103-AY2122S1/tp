@@ -80,6 +80,13 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand, ViewCommand.MESSAGE_SUCCESS, model);
     }
 
+    @Test
+    public void execute_validFindCommand_success() throws Exception {
+        String findCommand = "find n/alice v/t";
+        assertCommandSuccess(findCommand,
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), model);
+    }
+
     // TODO: FIx after add command is done
     // @Test
     // public void execute_storageThrowsIoException_throwsCommandException() {
