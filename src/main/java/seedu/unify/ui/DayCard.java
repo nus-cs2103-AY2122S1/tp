@@ -29,24 +29,14 @@ public class DayCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
-    @FXML
-    private Label time;
-    @FXML
-    private Label date;
-    @FXML
-    private Label tag;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
      */
-    public DayCard(Task task, int displayedIndex) {
+    public DayCard(Task task) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
         name.setText(task.getName().taskName);
-        time.setText(task.getTime().value);
-        date.setText(task.getDate().value);
-        tag.setText(task.getTag().tagTaskName);
     }
 
     @Override

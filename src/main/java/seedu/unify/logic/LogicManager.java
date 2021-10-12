@@ -55,13 +55,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyUniFy getAddressBook() {
+    public ReadOnlyUniFy getUniFy() {
         return model.getUniFy();
     }
 
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ObservableList<Task> getWeeklyTaskList() {
+        return model.getWeeklyTaskList();
     }
 
     @Override

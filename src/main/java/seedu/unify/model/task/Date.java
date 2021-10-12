@@ -5,6 +5,11 @@ import static seedu.unify.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * Represents a Task's date in the Uni-fy app.
@@ -21,9 +26,13 @@ public class Date {
     /*
      * The date should follow the format YYYY-MM-DD.
      */
-    public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
+    public static final DateTimeFormatter LOCAL_DATE_FORMAT = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     public final String value;
+    public final LocalDate localDate;
+    public final Integer week;
 
     /**
      * Constructs a {@code Date}.
@@ -34,15 +43,19 @@ public class Date {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
+        localDate = LocalDate.parse(this.value, LOCAL_DATE_FORMAT);
+        week = localDate
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                .get(ChronoField.ALIGNED_WEEK_OF_YEAR);
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         try {
-            FORMAT.setLenient(false);
-            FORMAT.parse(test);
+            SIMPLE_DATE_FORMAT.setLenient(false);
+            SIMPLE_DATE_FORMAT.parse(test);
             return true;
         } catch (ParseException e) {
             return false;
@@ -66,4 +79,16 @@ public class Date {
         return value.hashCode();
     }
 
+    /**
+     * Parses date from string format into LocalDate format and returns it.
+     *
+     * @return The LocalDate representing the date.
+     */
+    public LocalDate getDate() {
+        return localDate;
+    }
+
+    public Integer getWeek() {
+        return week;
+    }
 }

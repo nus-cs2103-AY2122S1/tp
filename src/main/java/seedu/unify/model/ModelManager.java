@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.commons.core.LogsCenter;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.TaskBelongToWeekPredicate;
 
 /**
  * Represents the in-memory model of the unify data.
@@ -21,7 +22,8 @@ public class ModelManager implements Model {
 
     private final UniFy uniFy;
     private final UserPrefs userPrefs;
-    private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredTask;
+    private final FilteredList<Task> weeklyTasks;
 
     /**
      * Initializes a ModelManager with the given uniFy and userPrefs.
@@ -34,7 +36,8 @@ public class ModelManager implements Model {
 
         this.uniFy = new UniFy(uniFy);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredTasks = new FilteredList<>(this.uniFy.getTaskList());
+        filteredTask = new FilteredList<>(this.uniFy.getTaskList());
+        weeklyTasks = new FilteredList<>(filteredTask);
     }
 
     public ModelManager() {
@@ -120,13 +123,23 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Task> getFilteredTaskList() {
-        return filteredTasks;
+        return filteredTask;
+    }
+
+    @Override
+    public ObservableList<Task> getWeeklyTaskList() {
+        return weeklyTasks;
     }
 
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        filteredTasks.setPredicate(predicate);
+        filteredTask.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateWeeklyTaskList(Integer week) {
+        weeklyTasks.setPredicate(new TaskBelongToWeekPredicate(week));
     }
 
     @Override
@@ -145,7 +158,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return uniFy.equals(other.uniFy)
                 && userPrefs.equals(other.userPrefs)
-                && filteredTasks.equals(other.filteredTasks);
+                && filteredTask.equals(other.filteredTask);
     }
 
 }

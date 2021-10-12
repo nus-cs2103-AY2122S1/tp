@@ -15,6 +15,7 @@ import seedu.unify.logic.commands.ExitCommand;
 import seedu.unify.logic.commands.FindCommand;
 import seedu.unify.logic.commands.HelpCommand;
 import seedu.unify.logic.commands.ListCommand;
+import seedu.unify.logic.commands.ShowCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
 
 /**
@@ -55,6 +56,9 @@ public class AddressBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case ShowCommand.COMMAND_WORD:
+            return new ShowCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

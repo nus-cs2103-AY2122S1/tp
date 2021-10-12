@@ -1,23 +1,21 @@
 package seedu.unify.model.task;
 
-import java.util.List;
+import java.time.LocalDate;
 import java.util.function.Predicate;
-
-import seedu.unify.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Task}'s {@code Name} matches any of the keywords given.
  */
 public class TaskContainsDatePredicate implements Predicate<Task> {
-    private final Date date;
+    private final LocalDate date;
 
-    public TaskContainsDatePredicate(Date date) {
+    public TaskContainsDatePredicate(LocalDate date) {
         this.date = date;
     }
 
     @Override
     public boolean test(Task task) {
-        return task.getDate().equals(date);
+        return task.getDate().getDate().equals(date);
     }
 
     @Override
