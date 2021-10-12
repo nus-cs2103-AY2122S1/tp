@@ -29,6 +29,7 @@ public class TakeCommand extends Command {
             + PREFIX_ACADEMIC_YEAR + "YEAR "
             + PREFIX_SEMESTER + "SEMESTER "
             + "Example: " + COMMAND_WORD + " "
+            + "3 "
             + PREFIX_ACADEMIC_YEAR + "2 "
             + PREFIX_SEMESTER + "1 ";
 
