@@ -3,6 +3,7 @@ package seedu.programmer.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.programmer.testutil.Assert.assertThrows;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
@@ -45,8 +46,8 @@ public class ProgrammerErrorTest {
 
     @Test
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
-        // Two persons with the same identity fields
-        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
+        // Two persons with the same StudentId but different Name
+        Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
         ProgrammerErrorStub newData = new ProgrammerErrorStub(newStudents);
 
@@ -59,21 +60,21 @@ public class ProgrammerErrorTest {
     }
 
     @Test
-    public void hasStudent_personNotInProgrammerError_returnsFalse() {
+    public void hasStudent_studentNotInProgrammerError_returnsFalse() {
         assertFalse(programmerError.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_personInProgrammerError_returnsTrue() {
+    public void hasStudent_studentInProgrammerError_returnsTrue() {
         programmerError.addStudent(ALICE);
         assertTrue(programmerError.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_personWithSameIdentityFieldsInProgrammerError_returnsTrue() {
+    public void hasStudent_studentWithSameNameDifferentStudentId_returnsFalse() {
         programmerError.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
-        assertTrue(programmerError.hasStudent(editedAlice));
+        assertFalse(programmerError.hasStudent(editedAlice));
     }
 
     @Test
