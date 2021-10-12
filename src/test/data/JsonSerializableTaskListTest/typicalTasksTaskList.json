@@ -1,0 +1,16 @@
+{
+  "_comment": "TaskList save file which contains the same Task values as in TypicalTasks#getTypicalTaskList()",
+  "tasks": [ {
+    "description" : "Submit CS2100 Assignment by 23:59",
+    "tagged" : [ "homework" ]
+  }, {
+    "description" : "Catch up with ST2334 lectures",
+    "tagged" : [ ]
+  }, {
+    "description" : "Do PR review",
+    "tagged" : [ "groupwork" ]
+  }, {
+    "description" : "ST2334 quiz before Friday",
+    "tagged" : [ "quiz" ]
+  } ]
+}
