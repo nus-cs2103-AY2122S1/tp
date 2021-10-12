@@ -2,7 +2,7 @@ package seedu.unify.model.task;
 
 public class WeeklyTracker {
 
-    public static Integer week = 1;
+    private static Integer week = 1;
 
     public static void setWeek(Integer weekNumber) {
         week = weekNumber;

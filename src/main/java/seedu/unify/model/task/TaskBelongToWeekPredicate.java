@@ -6,13 +6,14 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Task}'s {@code Name} matches any of the keywords given.
  */
-
 public class TaskBelongToWeekPredicate implements Predicate<Task> {
     private final Integer week;
 
+    /**
+     * Create a TaskBelongToWeekPredicate.
+     */
     public TaskBelongToWeekPredicate(Integer week) {
         this.week = week;
-
     }
 
     @Override
