@@ -95,13 +95,13 @@ Edits an existing person in the address book.
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/TELEGRAM] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
 ```
-edit 1 n/John t/TA
+edit 1 n/John te/john_123 t/TA
 ```
 
 <h3 id = "Find"> </h3>
@@ -228,9 +228,9 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/<PHONE_NUMBER>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Delete a Contact | delete \<INDEX> |
-| Edit a Contact | edit \<INDEX> [n/\<NAME>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Edit a Contact | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Find a Contact (by Name) | find \<STRING> |
 | Find a Contact (by Tag) | find t/\<TAG> |
 | Show a Contact (by Name)| show \<NAME> |
