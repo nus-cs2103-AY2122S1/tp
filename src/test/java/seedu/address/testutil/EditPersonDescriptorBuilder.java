@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.SocialHandle;
 import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
@@ -40,6 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setNationality(person.getNationality());
         descriptor.setTutorialGroup(person.getTutorialGroup());
         descriptor.setSocialHandle(person.getSocialHandle());
+        descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
     }
 
@@ -88,6 +90,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withSocialHandle(String socialHandle) {
         descriptor.setSocialHandle(new SocialHandle(socialHandle));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRemark(String remark) {
+        descriptor.setRemark(new Remark(remark));
         return this;
     }
 

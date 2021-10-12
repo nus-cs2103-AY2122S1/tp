@@ -5,6 +5,7 @@
     "email": "hans@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@valid"
+    "socialHandle": "@valid",
+    "remark": "likes coding"
   } ]
 }
