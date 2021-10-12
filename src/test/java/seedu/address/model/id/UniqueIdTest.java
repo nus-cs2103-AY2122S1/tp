@@ -2,9 +2,7 @@ package seedu.address.model.id;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.id.UniqueId.DEFAULT_ID;
 import static seedu.address.testutil.TypicalObjects.ALICE;
 import static seedu.address.testutil.TypicalTasks.REPORT_1;
 

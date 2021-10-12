@@ -11,6 +11,8 @@ import seedu.address.model.task.Task;
  * A class that represents unique ids for tasks/students using UUID.
  */
 public class UniqueId {
+    public static final UniqueId DEFAULT_ID = UniqueId.generateId("00000000-0000-0000-0000-000000000000");
+
     /**
      * The default owner of {@code UniqueId} that have no owner assigned to it.
      */
@@ -20,8 +22,6 @@ public class UniqueId {
             return DEFAULT_ID;
         }
     };
-
-    public static final UniqueId DEFAULT_ID = UniqueId.generateId("00000000-0000-0000-0000-000000000000");
 
     /**
      * The owner of the id. It can be a task or a student.
