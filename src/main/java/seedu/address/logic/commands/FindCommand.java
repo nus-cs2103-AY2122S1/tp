@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         Friend friend = new Friend(new FriendId("bobiscool"), new FriendName("Bob"));
         return new CommandResult(
                 // TODO: get the actual friend
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 1),
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredFriendsList().size()),
                 CommandType.FRIEND_GET, friend);
     }
 
