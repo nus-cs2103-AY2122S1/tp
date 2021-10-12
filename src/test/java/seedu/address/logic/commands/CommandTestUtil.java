@@ -24,6 +24,7 @@ import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.AllocDescriptorBuilder;
+import seedu.address.testutil.ScoreDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -37,7 +38,7 @@ public class CommandTestUtil {
     public static final String VALID_ID_BOB = "E0639293";
     public static final String VALID_GROUP_TUTORIAL = "T08D";
     public static final String VALID_GROUP_RECITATION = "R07B";
-    public static final String VALID_ASSESSMENT_AMY = "P01";
+    public static final String VALID_ASSESSMENT_AMY = "P05";
     public static final String VALID_ASSESSMENT_BOB = "M01";
     public static final String VALID_SCORE_AMY = "100";
     public static final String VALID_SCORE_BOB = "66.6";
@@ -93,6 +94,20 @@ public class CommandTestUtil {
         ALLOC_DESC_BOB = new AllocDescriptorBuilder()
                 .withId(VALID_ID_BOB)
                 .withGroup(VALID_GROUP_RECITATION).build();
+    }
+
+    public static final AddScoreCommand.ScoreDescriptor SCORE_DESC_AMY;
+    public static final AddScoreCommand.ScoreDescriptor SCORE_DESC_BOB;
+
+    static {
+        SCORE_DESC_AMY = new ScoreDescriptorBuilder()
+                .withAssessment(VALID_ASSESSMENT_AMY)
+                .withName(VALID_NAME_AMY)
+                .withScore(VALID_SCORE_AMY).build();
+        SCORE_DESC_BOB = new ScoreDescriptorBuilder()
+                .withAssessment(VALID_ASSESSMENT_BOB)
+                .withId(VALID_ID_BOB)
+                .withScore(VALID_SCORE_BOB).build();
     }
 
     public static final EditCommand.EditStudentDescriptor EDIT_DESC_AMY;
