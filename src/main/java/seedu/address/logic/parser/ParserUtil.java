@@ -14,6 +14,7 @@ import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
 import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
@@ -50,6 +51,19 @@ public class ParserUtil {
             throw new ParseException(CategoryCode.MESSAGE_CONSTRAINTS);
         }
         return new CategoryCode(trimmedName);
+    }
+
+    /**
+     * Parses a {@code Collection<String> codes} into a {@code Set<CategoryCode>}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static Set<CategoryCode> parseCategories(Collection<String> codes) throws ParseException {
+        requireNonNull(codes);
+        final Set<CategoryCode> categoryCodes = new HashSet<>();
+        for (String code : codes) {
+            categoryCodes.add(parseCategory(code));
+        }
+        return categoryCodes;
     }
 
     /**
@@ -155,5 +169,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(trimmedRating);
     }
 }

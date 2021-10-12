@@ -7,7 +7,8 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "review": "- No Review -",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "rating": "5"
   }, {
     "category": "OTH",
     "name" : "Benson Meier",
@@ -15,7 +16,8 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "review": "Great",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "rating": "1"
   }, {
     "category": "COM",
     "name" : "Carl Kurz",
@@ -23,7 +25,8 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "review": "Horrible",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "rating": "3"
   }, {
     "category": "FNB",
     "name" : "Daniel Meier",
@@ -31,7 +34,8 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "review": "Average",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "rating": "4"
   }, {
     "category": "ACC",
     "name" : "Elle Meyer",
@@ -39,7 +43,8 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "review": "Passable",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "rating": "1"
   }, {
     "category": "ATT",
     "name" : "Fiona Kunz",
@@ -47,7 +52,8 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "review": "Bad",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "rating": "3"
   }, {
     "category": "OTH",
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "review": "Amazing",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "rating": "3"
   } ]
 }
