@@ -36,8 +36,12 @@ public class AssessmentBuilder {
     /**
      * Sets the {@code scores} of the {@code assessment} that we are building.
      */
-    public AssessmentBuilder withScores(Map<ID, Score> scores) {
-        this.scores = scores;
+    public AssessmentBuilder withScores(Map<String, String> scores) {
+        Map<ID, Score> scoresAdapted = new HashMap<>();
+        for (Map.Entry<String, String> score : scores.entrySet()) {
+            scoresAdapted.put(new ID(score.getKey()), new Score(score.getValue()));
+        }
+        this.scores = scoresAdapted;
         return this;
     }
 

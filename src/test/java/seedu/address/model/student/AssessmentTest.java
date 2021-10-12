@@ -2,8 +2,10 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAssessments.*;
+import static seedu.address.testutil.TypicalAssessments.PATH_1;
 
 import java.util.Map;
 
@@ -58,9 +60,9 @@ public class AssessmentTest {
 
     @Test
     public void isGraded_graded() {
-        ID id = new IdBuilder().build();
-        Score score = new ScoreBuilder().build();
-        Assessment assessment = new AssessmentBuilder().withScores(Map.of(id, score)).build();
+        ID id = new IdBuilder().withValue(VALID_ID_AMY).build();
+        Assessment assessment = new AssessmentBuilder()
+                .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
         assertTrue(() -> assessment.isGraded(id));
     }
 
@@ -74,7 +76,7 @@ public class AssessmentTest {
 
         // same name, different score list -> returns true
         Assessment editedPath1 = new AssessmentBuilder(PATH_1)
-                .withScores(Map.of(new IdBuilder().build(), new ScoreBuilder().build())).build();
+                .withScores(Map.of(VALID_ID_AMY, VALID_SCORE_AMY)).build();
         assertTrue(PATH_1.isSameAssessment(editedPath1));
 
         // different name, same score list -> returns false
