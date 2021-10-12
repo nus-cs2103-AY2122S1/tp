@@ -43,5 +43,8 @@
     "address" : "4th street",
     "tagged" : [ ]
   } ],
+  "suppliers": [
+
+  ],
   "reservations": []
 }

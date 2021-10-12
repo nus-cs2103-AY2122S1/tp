@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 
 /**
@@ -21,18 +22,21 @@ import seedu.address.model.reservation.Reservation;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
     private final List<JsonAdaptedReservation> reservations = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(
-            @JsonProperty("persons") List<JsonAdaptedPerson> persons,
-            @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
+                                       @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
         this.persons.addAll(persons);
+        this.suppliers.addAll(suppliers);
         this.reservations.addAll(reservations);
     }
 
@@ -43,6 +47,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
         reservations.addAll(
                 source.getReservationList().stream().map(JsonAdaptedReservation::new).collect(Collectors.toList()));
     }
@@ -61,6 +66,15 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
+
+        for (JsonAdaptedSupplier jsonAdaptedSupplier : suppliers) {
+            Supplier supplier = jsonAdaptedSupplier.toModelType();
+            if (addressBook.hasSupplier(supplier)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_SUPPLIER);
+            }
+            addressBook.addSupplier(supplier);
+        }
+
         for (JsonAdaptedReservation jsonAdaptedReservation: reservations) {
             Reservation reservation = jsonAdaptedReservation.toModelType();
             addressBook.addReservation(reservation);

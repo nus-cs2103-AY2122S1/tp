@@ -8,6 +8,8 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.person.supplier.UniqueSupplierList;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationList;
 
@@ -18,6 +20,7 @@ import seedu.address.model.reservation.ReservationList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueSupplierList suppliers;
     private final ReservationList reservations;
 
     /*
@@ -29,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        suppliers = new UniqueSupplierList();
         reservations = new ReservationList();
     }
 
@@ -57,12 +61,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the supplier list with {@code suppliers}.
+     * {@code persons} must not contain duplicate suppliers.
+     */
+    public void setSuppliers(List<Supplier> suppliers) {
+        this.suppliers.setSuppliers(suppliers);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setSuppliers(newData.getSupplierList());
         setReservations(newData.getReservationList());
     }
 
@@ -103,6 +116,43 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /// supplier level operations
+    /**
+     * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
+     */
+    public boolean hasSupplier(Supplier supplier) {
+        requireNonNull(supplier);
+        return suppliers.contains(supplier);
+    }
+
+    /**
+     * Adds a supplier to the address book.
+     * The supplier must not already exist in the address book.
+     */
+    public void addSupplier(Supplier s) {
+        suppliers.add(s);
+    }
+
+    /**
+     * Replaces the given supplier {@code target} in the list with {@code editedSupplier}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedSupplier} must not be the same as another existing supplier in the address
+     * book.
+     */
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
+        requireNonNull(editedSupplier);
+
+        suppliers.setSupplier(target, editedSupplier);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeSupplier(Supplier key) {
+        suppliers.remove(key);
+    }
+
     //// reservation-level operations
 
     /**
@@ -141,10 +191,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        // TODO: refine later
         return String.format(
-                "%d persons, %d reservations",
+                "%d persons\n%d suppliers\n%d reservations\n",
                 persons.asUnmodifiableObservableList().size(),
+                suppliers.asUnmodifiableObservableList().size(),
                 reservations.asUnmodifiableObservableList().size());
     }
 
@@ -154,6 +204,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Supplier> getSupplierList() {
+        return suppliers.asUnmodifiableObservableList();
+    }
+
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();
     }
@@ -163,11 +217,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons)
+                && suppliers.equals(((AddressBook) other).suppliers)
                 && reservations.equals(((AddressBook) other).reservations));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, reservations);
+        return Objects.hash(persons, suppliers, reservations);
     }
 }

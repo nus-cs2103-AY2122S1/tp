@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 
 /**
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Supplier> filteredSuppliers;
     private final FilteredList<Reservation> filteredReservations;
 
     /**
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
         filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
     }
 
@@ -98,8 +101,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSupplier(Supplier supplier) {
+        requireNonNull(supplier);
+        return addressBook.hasSupplier(supplier);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deleteSupplier(Supplier target) {
+        addressBook.removeSupplier(target);
     }
 
     @Override
@@ -109,10 +123,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSupplier(Supplier supplier) {
+        addressBook.addSupplier(supplier);
+        updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setSupplier(Supplier target, Supplier editedSupplier) {
+        requireAllNonNull(target, editedSupplier);
+
+        addressBook.setSupplier(target, editedSupplier);
     }
 
     @Override
@@ -159,6 +186,23 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Supplier List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Supplier} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Supplier> getFilteredSupplierList() {
+        return filteredSuppliers;
+    }
+
+    @Override
+    public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
+        requireAllNonNull(predicate);
+        filteredSuppliers.setPredicate(predicate);
+    }
+
     @Override
     public void updateFilteredReservationList(Predicate<Reservation> predicate) {
         requireNonNull(predicate);
@@ -181,7 +225,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredSuppliers.equals(other.filteredSuppliers);
     }
 
 }

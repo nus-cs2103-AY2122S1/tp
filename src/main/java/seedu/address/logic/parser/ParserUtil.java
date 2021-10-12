@@ -16,6 +16,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -155,6 +157,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String supplyType} into a {@code SupplyType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SupplyType parseSupplyType(String supplyType) throws ParseException {
+        requireNonNull(supplyType);
+        String trimmedSupplyType = supplyType.trim();
+        if (!SupplyType.isValidSupplyType(trimmedSupplyType)) {
+            throw new ParseException(SupplyType.MESSAGE_CONSTRAINTS);
+        }
+        return new SupplyType(trimmedSupplyType);
+    }
+
+    /**
+     * Parses a {@code String deliveryDetails} into a {@code DeliveryDetails}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static DeliveryDetails parseDeliveryDetails(String deliveryDetails) throws ParseException {
+        requireNonNull(deliveryDetails);
+        String trimmedDeliveryDetails = deliveryDetails.trim();
+        if (!DeliveryDetails.isValidDeliveryDetail(trimmedDeliveryDetails)) {
+            throw new ParseException(DeliveryDetails.MESSAGE_CONSTRAINTS);
+        }
+        return new DeliveryDetails(trimmedDeliveryDetails);
+    }
+
+    /**
      * Parses {@code dateTime} into a {@code LocalDateTime object}
      * @throws ParseException if {@code dateTime} is of invalid format
      */
@@ -168,7 +200,6 @@ public class ParserUtil {
         } catch (DateTimeParseException dtpe) {
             throw new ParseException(MESSAGE_INVALID_DATE_TIME_FORMAT);
         }
-
         return result;
     }
 }
