@@ -7,6 +7,10 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents a Task in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Task {
 
     private final TaskName name;
@@ -40,13 +44,25 @@ public class Task {
         return this.isDone ? "Completed" : "Pending";
     }
 
+    public boolean checkIsDone() {
+        return isDone;
+    }
+
     public void markTaskComplete() {
         this.isDone = true;
     }
 
     /**
-     * Returns true if both students have the same name.
-     * This defines a weaker notion of equality between two students.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns true if both Tasks have the same name.
+     * This defines a weaker notion of equality between two Task.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
@@ -54,8 +70,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline());
+                && otherTask.getName().equals(getName());
     }
 
     /**
@@ -74,21 +89,16 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline());
+                && otherTask.getDeadline().equals(getDeadline())
+                && otherTask.getTags().equals(getTags());
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
+
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline);
+        return Objects.hash(name, deadline, tags, isDone);
     }
 
     @Override
