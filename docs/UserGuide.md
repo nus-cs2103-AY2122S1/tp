@@ -273,7 +273,7 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 * Subject
 * Homework
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
 
 * The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
@@ -283,10 +283,10 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT
 
 Examples:
 
-* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 time/1500-1600 subject/Math`
+* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
   adds the recurring lesson to the 1st student in TAB.
 
-* `find john` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2`
+* `find john` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
