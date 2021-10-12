@@ -20,7 +20,21 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmploymentType;
+import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
+import seedu.address.model.person.ExpectedSalary;
+import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
+import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
+import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.RoleContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 

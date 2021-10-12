@@ -49,7 +49,7 @@
     "expectedSalary" : "5700",
     "levelOfEducation" : "Bachelors",
     "experience" : "4",
-    "tagged" : [ ]
+    "tagged" : [ "old" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
