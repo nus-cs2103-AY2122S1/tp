@@ -36,7 +36,7 @@ public class EventDateTimePredicateTest {
         // date and time present, different values -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
 
-        // only Event only date present  -> returns false
+        // one Event with date only  -> returns false
         assertFalse(firstPredicate.equals(thirdPredicate));
     }
 }
