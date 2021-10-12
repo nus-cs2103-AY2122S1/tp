@@ -133,10 +133,9 @@ public class UniqueFacilityList implements Iterable<Facility> {
     }
 
 
-
-     /**
-      * Returns true if {@code persons} contains only unique persons.
-      */
+    /**
+     * Returns true if {@code persons} contains only unique persons.
+     */
     private boolean facilitiesAreUnique(List<Facility> facilities) {
         for (int i = 0; i < facilities.size() - 1; i++) {
             for (int j = i + 1; j < facilities.size(); j++) {

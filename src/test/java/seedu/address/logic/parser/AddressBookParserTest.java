@@ -33,8 +33,8 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.FacilityBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
+import seedu.address.testutil.FacilityBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -55,7 +55,7 @@ public class AddressBookParserTest {
                 .withFacilityName("Court 1")
                 .withLocation("University Sports Hall")
                 .withCapacity("5")
-                .withTime("11:30").build();
+                .withTime("1130").build();
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
                 + "n/Court 1 l/University Sports Hall t/1130 c/5");
         assertEquals(new AddFacilityCommand(facility), command);
