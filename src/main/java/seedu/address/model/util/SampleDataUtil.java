@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -56,6 +57,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a unique id set containing the list of strings given.
+     */
+    public static Set<UniqueId> getUniqueIdSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(UniqueId::generateId)
                 .collect(Collectors.toSet());
     }
 
