@@ -95,25 +95,25 @@ Edits an existing person in the address book.
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/TELEGRAM] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
 ```
-edit 1 n/John t/TA
+edit 1 n/John te/john_123 t/TA
 ```
 
 <h3 id = "Find"> </h3>
 
 ## Find a Contact - `find`
 
-Finds an existing contact using the given string or tag.
+Finds an existing contact by name(s), tag(s), or telegram handle(s).
 
 Format 1: 
 
 ```
-find <STRING>
+find <NAME>
 ```
 
 Example 1:
@@ -132,6 +132,18 @@ Example 2:
 
 ```
 find friends
+```
+
+Format 3: 
+
+```
+find @<TELEGRAM>
+```
+
+Example 3:
+
+```
+find @alex_1 bobx2
 ```
 
 <h3 id = "Show"> </h3>
@@ -228,11 +240,12 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Contact | add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
-| Delete a Contact | delete <INDEX> |
-| Edit a Contact | edit <INDEX> [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>] |
+| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Delete a Contact | delete \<INDEX> |
+| Edit a Contact | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Find a Contact (by Name) | find \<STRING> |
 | Find a Contact (by Tag) | find t/\<TAG> |
+| Find a Contact (by Telegram Handle) | find @\<TELEGRAM> |
 | Show a Contact (by Name)| show \<NAME> |
 | Show a Contact (by Index) | show \<INDEX> |
 | Import Contacts | import filename.JSON |
