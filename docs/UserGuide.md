@@ -83,26 +83,27 @@ Examples:
 * `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
 * `module add CS2100, lab1`: Adds the task lab1 to module CS2100
 
-### Add student to a specific module: `module add student`
+### Add student to a specific module: `add student`
 
 Add a new student to the specified module
 Also automatically copies over the task list from the module to the student
 
-Format: `module add <module name>, <student name>`
+Format: `add student m/<module name> i/<student id> n/<student name> t/<student tele handle> e/<student email>`
 
 Examples:
-* `module add CS2103, A1234567A`: Adds student with id A1234567A to module CS2103
-* `module add CS2100, A7654321A`: Adds student with id A7654321A to module CS2100
+* `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`: Adds student with id 
+   A0123456A to module CS2103
+* `add student m/CS2100 i/A0123457A n/Amy t/@amylee e/amy@u.nus.edu`: Adds student with id A0123457A to module CS2100
 
-### Delete student from a specific module: `module delete student`
+### Delete student from a specific module: `delete student`
 
 Deletes the specified student from the specified module
 
-Format: `module delete <module name>, <student id>`
+Format: `delete student m/<module name> i/<student id>`
 
 Examples:
-* `module delete CS2103, A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
-* `module delete CS2100, A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
+* `delete student m/CS2103 i/A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
+* `delete student m/CS2100 i/A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
 
 ### Delete module from TAB: `module delete`
 
