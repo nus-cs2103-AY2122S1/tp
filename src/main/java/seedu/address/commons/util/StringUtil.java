@@ -12,6 +12,7 @@ import java.util.Random;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    private static final long DEFAULT_RANDOM_SEED = 10L;
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -69,14 +70,15 @@ public class StringUtil {
 
 
     /**
-     * Generates a random alphanumeric string with default length 10.
+     * Generates a random alphanumeric string with default length 10
+     * and the given random seed.
      * Credit to: https://www.baeldung.com/java-random-string
      */
-    public static String generateRandomString() {
+    public static String generateRandomString(long randomSeed) {
         final int leftLimit = 97; // letter 'a'
         final int rightLimit = 122; // letter 'z'
         int defaultLength = 10;
-        Random random = new Random();
+        Random random = new Random(randomSeed);
 
         String generatedString = random.ints(leftLimit, rightLimit + 1)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
@@ -85,5 +87,12 @@ public class StringUtil {
                 .toString();
 
         return generatedString;
+    }
+
+    /**
+     * Generates a random alphanumeric string with default random seed 10.
+     */
+    public static String generateRandomString() {
+        return generateRandomString(DEFAULT_RANDOM_SEED);
     }
 }
