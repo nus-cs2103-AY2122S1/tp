@@ -18,6 +18,8 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
   - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
+- [Controls](#controls)
+  - [Navigating Previously Entered Commands](#navigating-previously-entered-commands)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -224,6 +226,16 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+---
+
+## Controls
+
+In order to improve your experience when using the app, there are a few features that were added.
+
+### Navigating Previously Entered Commands
+
+Use the ↑ and ↓ arrow keys to navigate between previously entered commands.
 
 ---
 
