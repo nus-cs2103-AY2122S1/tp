@@ -44,7 +44,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_PROJECT = "project";
     public static final String VALID_TAG_UNGRADED = "ungraded";
-    public static final String VALID_TASK_DESCRIPTION = "Finish CS2103T tP";
+    public static final String VALID_TASK_DESCRIPTION_TP = "Finish CS2103T tP";
+    public static final String VALID_TASK_DESCRIPTION_TEST = "Study for CS2100 test";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -71,6 +72,7 @@ public class CommandTestUtil {
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
     public static final EditTaskCommand.EditTaskDescriptor DESC_CS2103T_TP;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_CS2100_TEST;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -79,8 +81,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-        DESC_CS2103T_TP = new EditTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION)
+        DESC_CS2103T_TP = new EditTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_TP)
                 .withTags(VALID_TAG_PROJECT).build();
+        DESC_CS2100_TEST = new EditTaskDescriptorBuilder().withTaskDescription(VALID_TASK_DESCRIPTION_TEST)
+                .withTags(VALID_TAG_UNGRADED).build();
     }
 
     /**

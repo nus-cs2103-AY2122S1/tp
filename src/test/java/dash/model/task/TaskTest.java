@@ -2,7 +2,7 @@ package dash.model.task;
 
 
 import static dash.logic.commands.CommandTestUtil.VALID_TAG_UNGRADED;
-import static dash.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION;
+import static dash.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_TP;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -39,7 +39,7 @@ public class TaskTest {
         assertFalse(TypicalTasks.ASSIGNMENT.equals(TypicalTasks.QUIZ));
 
         // different task description -> returns false
-        Task editedAssignment = new TaskBuilder(TypicalTasks.ASSIGNMENT).withTaskDescription(VALID_TASK_DESCRIPTION)
+        Task editedAssignment = new TaskBuilder(TypicalTasks.ASSIGNMENT).withTaskDescription(VALID_TASK_DESCRIPTION_TP)
                 .build();
         assertFalse(TypicalTasks.ASSIGNMENT.equals(editedAssignment));
 
