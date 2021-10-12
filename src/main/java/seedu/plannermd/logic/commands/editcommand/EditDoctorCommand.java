@@ -6,7 +6,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -41,7 +40,7 @@ public class EditDoctorCommand extends EditCommand {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_PHONE
             + "PHONE] " + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_ADDRESS + "ADDRESS] " + "[" + PREFIX_BIRTH_DATE
-            + "BIRTH_DATE] " + "[" + PREFIX_TAG + "TAG]..." + "[" + PREFIX_RISK + "RISK]\n" + "Example: "
+            + "BIRTH_DATE] " + "[" + PREFIX_TAG + "TAG]..." + "Example: "
             + COMMAND_WORD + " 1 " + PREFIX_PHONE + "91234567 " + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_DOCTOR_SUCCESS = "Edited Doctor: %1$s";
