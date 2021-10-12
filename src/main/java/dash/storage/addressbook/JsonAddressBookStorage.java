@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.addressbook;
 
 import static java.util.Objects.requireNonNull;
 

@@ -13,7 +13,7 @@ import dash.commons.exceptions.IllegalValueException;
 import dash.commons.util.FileUtil;
 import dash.commons.util.JsonUtil;
 import dash.model.task.TaskList;
-import dash.storage.JsonAddressBookStorage;
+import dash.storage.addressbook.JsonAddressBookStorage;
 
 /**
  * A class to access TaskList data stored as a json file on the hard disk.

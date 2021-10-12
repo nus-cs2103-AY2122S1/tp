@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.addressbook;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,6 +16,7 @@ import dash.model.person.Name;
 import dash.model.person.Person;
 import dash.model.person.Phone;
 import dash.model.tag.Tag;
+import dash.storage.JsonAdaptedTag;
 
 /**
  * Jackson-friendly version of {@link Person}.

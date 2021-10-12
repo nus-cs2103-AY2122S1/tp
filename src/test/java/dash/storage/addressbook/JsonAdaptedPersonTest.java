@@ -1,6 +1,6 @@
-package dash.storage;
+package dash.storage.addressbook;
 
-import static dash.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static dash.storage.addressbook.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import dash.model.person.Address;
 import dash.model.person.Email;
 import dash.model.person.Name;
 import dash.model.person.Phone;
+import dash.storage.JsonAdaptedTag;
 import dash.testutil.Assert;
 import dash.testutil.TypicalPersons;
 

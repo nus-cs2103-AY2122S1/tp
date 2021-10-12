@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.userprefs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

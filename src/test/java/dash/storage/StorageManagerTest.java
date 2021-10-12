@@ -13,7 +13,9 @@ import dash.commons.core.GuiSettings;
 import dash.model.AddressBook;
 import dash.model.ReadOnlyAddressBook;
 import dash.model.UserPrefs;
+import dash.storage.addressbook.JsonAddressBookStorage;
 import dash.storage.tasklist.JsonTaskListStorage;
+import dash.storage.userprefs.JsonUserPrefsStorage;
 import dash.testutil.TypicalPersons;
 
 public class StorageManagerTest {
