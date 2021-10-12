@@ -188,7 +188,7 @@ public class MainWindow extends UiPart<Stage> {
             JSONArray jsonData = getJsonData();
             File destinationFile = promptUserForDestination();
             writeJsonToCsv(jsonData, destinationFile);
-            Popup popup = createPopup("Your has been successfully downloaded to " + destinationFile + "!");
+            Popup popup = createPopup("Your student's data has been downloaded to " + destinationFile + "!");
             showPopupMessage(popup);
             logger.info("Data successfully downloaded as CSV.");
         } catch (Exception e) {
