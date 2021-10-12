@@ -42,6 +42,6 @@ public class BirthdayTest {
         // valid birthday
         assertTrue(Birthday.isValidFormat("19011999")); // valid date
         assertTrue(Birthday.isValidFormat("31121999")); // 31st December 1999
-        assertTrue(Birthday.isValidFormat("29022012")); // 29th Febuary leap year
+        assertTrue(Birthday.isValidFormat("29022012")); // 29th February leap year
     }
 }

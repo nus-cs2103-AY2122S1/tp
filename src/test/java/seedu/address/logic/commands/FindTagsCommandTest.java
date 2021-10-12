@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class FindTagsCommandTest {
     }
 
     @Test
-    public void execute_oneTags_noPersonFound() {
+    public void execute_oneTag_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         PersonTagsContainsTagsPredicate predicate = preparePredicate("sdfiojoij");
         FindTagsCommand command = new FindTagsCommand(predicate);
@@ -84,13 +85,23 @@ public class FindTagsCommandTest {
     }
 
     @Test
-    public void execute_multipleTag_onePersonFound() {
+    public void execute_multipleTags_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        PersonTagsContainsTagsPredicate predicate = preparePredicate("football");
+        FindTagsCommand command = new FindTagsCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleTags_multiplePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonTagsContainsTagsPredicate predicate = preparePredicate("friends owesMoney");
         FindTagsCommand command = new FindTagsCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**

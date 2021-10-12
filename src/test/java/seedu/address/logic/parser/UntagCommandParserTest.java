@@ -33,6 +33,9 @@ public class UntagCommandParserTest {
         // no index specified
         assertParseFailure(parser, TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
 
+        // no prefix specified
+        assertParseFailure(parser, "1" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+
         // no field specified
         assertParseFailure(parser, "1", UntagCommand.MESSAGE_NOT_REMOVED);
 

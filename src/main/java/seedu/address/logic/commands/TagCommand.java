@@ -83,9 +83,9 @@ public class TagCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Birthday updatedBirthday = personToEdit.getBirthday().orElse(null);
 
-        Set<Tag> updatedTags = new HashSet<Tag>();
+        Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(personToEdit.getTags());
-        updatedTags.addAll(editPersonDescriptor.getTags().orElse(new HashSet<Tag>()));
+        updatedTags.addAll(editPersonDescriptor.getTags().orElse(new HashSet<>()));
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
     }
 
