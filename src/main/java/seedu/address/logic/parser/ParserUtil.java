@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Description;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -84,8 +85,25 @@ public class ParserUtil {
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
-        // TODO: check if groupName is valid
+        if (!GroupName.isValidName(trimmedGroupName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
         return new GroupName(trimmedGroupName);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@Code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if given description is not valid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
 }

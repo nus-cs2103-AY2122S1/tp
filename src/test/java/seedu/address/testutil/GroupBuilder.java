@@ -1,19 +1,26 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Student;
+import seedu.address.model.util.SampleDataUtil;
+
 
 /**
- * A utility class to help with building Student objects.
+ * A utility class to help with building Group objects.
  */
 public class GroupBuilder {
 
     public static final String DEFAULT_GROUPNAME = "CS2103T";
-    public static final String DEFAULT_DESCRIPTION = "hi";
+    public static final String DEFAULT_DESCRIPTION = "software eng mod";
 
     private GroupName groupName;
     private Description description;
+    private Set<Student> students;
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -21,14 +28,16 @@ public class GroupBuilder {
     public GroupBuilder() {
         groupName = new GroupName(DEFAULT_GROUPNAME);
         description = new Description(DEFAULT_DESCRIPTION);
+        students = new HashSet<>();
     }
 
     /**
-     * Initializes the GroupBuilder with the data of {@code groupToCopy}.
+     * Intitialzes the GroupBuilder with the data of {@code groupToCopy}.
      */
     public GroupBuilder(Group groupToCopy) {
         groupName = groupToCopy.getGroupName();
         description = groupToCopy.getDescription();
+        students = groupToCopy.getStudents();
     }
 
     /**
@@ -48,11 +57,28 @@ public class GroupBuilder {
     }
 
     /**
+     * Sets the {@code Students} of the {@code Group} that we are building
+     * with sample students.
+     */
+    public GroupBuilder withSampleStudents() {
+        Student[] studentsArray = SampleDataUtil.getSampleStudents();
+        HashSet<Student> students = new HashSet<>();
+        for (Student student : studentsArray) {
+            students.add(student);
+        }
+        this.students = students;
+        return this;
+    }
+
+    /**
      * Builds a group
      * @return built group
      */
     public Group build() {
-        return new Group(groupName, description);
+        Group group = new Group(groupName, description);
+        for (Student student : students) {
+            group.addStudent(student);
+        }
+        return group;
     }
-
 }

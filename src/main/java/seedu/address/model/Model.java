@@ -14,6 +14,7 @@ import seedu.address.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
@@ -102,11 +103,11 @@ public interface Model {
     // */
     // void deleteGroup(Group target); //TODO to implement in 1.2b
 
-    ///**
-    // * Adds the given group.
-    // * {@code group} must not already exist in the address book.
-    // */
-    // void addGroup(Group group); //TODO to implement in 1.2b
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in the address book.
+     */
+    void addGroup(Group group); //TODO to implement in 1.2b
 
     ///**
     // * Replaces the given group {@code target} with {@code editedGroup}.

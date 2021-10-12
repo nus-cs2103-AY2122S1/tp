@@ -58,6 +58,9 @@ public class TypicalStudents {
             .withGroup(new GroupBuilder().withGroupName(VALID_GROUP_NAME_BOB).withDescription(VALID_DESC_BOB).build())
             .build();
 
+    public static final Group GROUPCS2103T = new GroupBuilder().withSampleStudents().build();
+
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalStudents() {} // prevents instantiation
