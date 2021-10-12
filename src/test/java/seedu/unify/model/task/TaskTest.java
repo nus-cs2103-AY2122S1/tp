@@ -6,7 +6,6 @@ import static seedu.unify.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.unify.logic.commands.CommandTestUtil.VALID_TIME_BOB;
-import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.ALICE;
 import static seedu.unify.testutil.TypicalTasks.BOB;
 
@@ -16,11 +15,6 @@ import seedu.unify.testutil.TaskBuilder;
 
 public class TaskTest {
 
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Task task = new TaskBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> task.getTags().remove(0));
-    }
 
     @Test
     public void isSameTask() {
@@ -32,7 +26,7 @@ public class TaskTest {
 
         // same name, all other attributes different -> returns true
         Task editedAlice = new TaskBuilder(ALICE).withTime(VALID_TIME_BOB)
-                .withDate(VALID_DATE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withDate(VALID_DATE_BOB).withTag(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameTask(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -80,7 +74,7 @@ public class TaskTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
-        editedAlice = new TaskBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new TaskBuilder(ALICE).withTag(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

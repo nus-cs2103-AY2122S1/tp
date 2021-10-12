@@ -6,16 +6,16 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.parser.exceptions.ParseException;
-import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -39,9 +39,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
 
-        Task task = new Task(name, time, date, tagList);
+        Task task = new Task(name, time, date, tag);
 
         return new AddCommand(task);
     }

@@ -3,11 +3,7 @@ package seedu.unify.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 import static seedu.unify.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.unify.logic.commands.CommandTestUtil.DATE_DESC_AMY;
-import static seedu.unify.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.unify.logic.commands.CommandTestUtil.TIME_DESC_AMY;
 import static seedu.unify.testutil.Assert.assertThrows;
-import static seedu.unify.testutil.TypicalTasks.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -16,7 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.ListCommand;
 import seedu.unify.logic.commands.exceptions.CommandException;
@@ -25,11 +20,9 @@ import seedu.unify.model.Model;
 import seedu.unify.model.ModelManager;
 import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.UserPrefs;
-import seedu.unify.model.task.Task;
 import seedu.unify.storage.JsonUniFyStorage;
 import seedu.unify.storage.JsonUserPrefsStorage;
 import seedu.unify.storage.StorageManager;
-import seedu.unify.testutil.TaskBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -65,25 +58,6 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    }
-
-    @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonUniFyIoExceptionThrowingStub
-        JsonUniFyStorage addressBookStorage =
-                new JsonUniFyIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
-
-        // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + TIME_DESC_AMY + DATE_DESC_AMY;
-        Task expectedTask = new TaskBuilder(AMY).withTags().build();
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addTask(expectedTask);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test

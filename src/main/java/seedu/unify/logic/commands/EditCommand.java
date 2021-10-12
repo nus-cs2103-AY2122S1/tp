@@ -7,23 +7,19 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.commons.util.CollectionUtil;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.model.Model;
-import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
-
 /**
  * Edits the details of an existing task in the Uni-Fy app.
  */
@@ -93,9 +89,9 @@ public class EditCommand extends Command {
         Name updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
         Time updatedTime = editTaskDescriptor.getTime().orElse(taskToEdit.getTime());
         Date updatedDate = editTaskDescriptor.getDate().orElse(taskToEdit.getDate());
-        Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        Tag updatedTag = editTaskDescriptor.getTag().orElse(taskToEdit.getTag());
 
-        return new Task(updatedName, updatedTime, updatedDate, updatedTags);
+        return new Task(updatedName, updatedTime, updatedDate, updatedTag);
     }
 
     @Override
@@ -124,7 +120,7 @@ public class EditCommand extends Command {
         private Name name;
         private Time time;
         private Date date;
-        private Set<Tag> tags;
+        private Tag tag;
 
         public EditTaskDescriptor() {}
 
@@ -136,14 +132,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setTime(toCopy.time);
             setDate(toCopy.date);
-            setTags(toCopy.tags);
+            setTag(toCopy.tag);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, time, date, tags);
+            return CollectionUtil.isAnyNonNull(name, time, date, tag);
         }
 
         public void setName(Name name) {
@@ -170,21 +166,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTag(Tag tag) {
+            this.tag = tag;
         }
 
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Tag> getTag() {
+            return Optional.ofNullable(tag);
         }
 
         @Override
@@ -205,7 +192,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getTime().equals(e.getTime())
                     && getDate().equals(e.getDate())
-                    && getTags().equals(e.getTags());
+                    && getTag().equals(e.getTag());
         }
     }
 }

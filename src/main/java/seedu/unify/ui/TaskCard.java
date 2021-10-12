@@ -1,16 +1,13 @@
 package seedu.unify.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.model.task.Task;
 
 /**
- * An UI component that displays information of a {@code Task}.
+ * A UI component that displays information of a {@code Task}.
  */
 public class TaskCard extends UiPart<Region> {
 
@@ -37,7 +34,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private FlowPane tags;
+    private Label tag;
+
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -49,9 +47,7 @@ public class TaskCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
-        task.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagTaskName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
+        tag.setText(task.getTag().tagTaskName);
     }
 
     @Override

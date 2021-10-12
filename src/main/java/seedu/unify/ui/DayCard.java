@@ -1,10 +1,7 @@
 package seedu.unify.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.model.task.Task;
@@ -37,7 +34,7 @@ public class DayCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
-    private FlowPane tags;
+    private Label tag;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -49,9 +46,7 @@ public class DayCard extends UiPart<Region> {
         name.setText(task.getName().taskName);
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
-        task.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagTaskName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagTaskName)));
+        tag.setText(task.getTag().tagTaskName);
     }
 
     @Override
