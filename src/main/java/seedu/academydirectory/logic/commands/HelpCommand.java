@@ -52,7 +52,7 @@ public class HelpCommand extends Command {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
         return new CommandResult(String.format(MESSAGE_HELP_SUCCESS, this.commandWord),
-                this.helpMessage, true, false);
+                this.helpMessage);
     }
 
     @Override

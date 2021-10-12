@@ -18,6 +18,7 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** What the message on the help window should be. */
     private final String helpContent;
 
     /**
@@ -34,11 +35,11 @@ public class CommandResult {
      * Alternative constructor of CommandResult, creating a {@code CommandResult}, this time taking
      * another help message in.
      */
-    public CommandResult(String feedbackToUser, String helpContent, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, String helpContent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.helpContent = helpContent;
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.helpContent = requireNonNull(helpContent);
+        this.showHelp = true;
+        this.exit = false;
     }
 
     /**
@@ -78,6 +79,7 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && helpContent.equals(otherCommandResult.helpContent)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
