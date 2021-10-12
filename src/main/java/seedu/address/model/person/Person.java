@@ -29,17 +29,17 @@ public class Person {
     private final Role role;
     private final Salary salary;
     private final Status status;
-    private final Set<Period> absentDates = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
 
+    private Set<Period> absentDates = new HashSet<>();
     private Schedule schedule;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, Salary salary, Status status, Set<Tag> tags) {
+                  Role role, Salary salary, Status status, Set<Tag> tags, Set<Period> absentDates) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -51,8 +51,10 @@ public class Person {
         this.tags.addAll(tags);
         this.schedule = new Schedule();
         this.fields.addAll(tags);
+        this.absentDates.addAll(absentDates);
         addToFieldSet(fields, name, phone, email, address, salary, status, role);
     }
+
 
 
 
@@ -92,6 +94,15 @@ public class Person {
     public boolean containsFields(List<Field> fields) {
         return this.fields.containsAll(fields);
     }
+
+    /**
+     * Marks this {@code period} when the {@code Person} was not working.
+     */
+    public Person mark(Period period) {
+        this.absentDates.add(period);
+        return this;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

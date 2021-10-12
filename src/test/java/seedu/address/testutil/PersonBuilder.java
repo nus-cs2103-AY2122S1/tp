@@ -51,6 +51,7 @@ public class PersonBuilder {
         role = Role.translateStringToRole(DEFAULT_ROLE);
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
+        absentDates = new HashSet<>();
     }
 
     /**
@@ -65,6 +66,7 @@ public class PersonBuilder {
         role = personToCopy.getRole();
         salary = personToCopy.getSalary();
         status = personToCopy.getStatus();
+        absentDates = personToCopy.getAbsentDates();
     }
 
     /**
@@ -142,7 +144,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, role, salary, status, tags);
+        return new Person(name, phone, email, address, role, salary, status, tags, absentDates);
     }
 
 }

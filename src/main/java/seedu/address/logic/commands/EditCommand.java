@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -169,9 +170,10 @@ public class EditCommand extends Command {
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(staffToEdit.getTags());
+        Set<Period> updatedPeriod = editPersonDescriptor.getPeriod().orElse(staffToEdit.getAbsentDates());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
-                updatedSalary, updatedStatus, updatedTags);
+                updatedSalary, updatedStatus, updatedTags, updatedPeriod);
     }
 
     @Override
@@ -205,6 +207,7 @@ public class EditCommand extends Command {
         private Salary salary;
         private Status status;
         private Set<Tag> tags;
+        private Set<Period> absentPeriods;
 
         public EditPersonDescriptor() {
         }
@@ -222,6 +225,7 @@ public class EditCommand extends Command {
             setSalary(toCopy.salary);
             setStatus(toCopy.status);
             setTags(toCopy.tags);
+            setPeriod(toCopy.absentPeriods);
         }
 
         /**
@@ -288,6 +292,26 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code periods} to this object's {@code periods}.
+         * A defensive copy of {@code periods is used internally.}
+         * @param periods
+         */
+        public void setPeriod(Set<Period> periods) {
+            this.absentPeriods = (periods != null) ? new HashSet<>(periods) : null;
+        }
+
+        /**
+         * Returns an unmodifiable period set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code period} is null.
+         */
+        public Optional<Set<Period>> getPeriod() {
+            return absentPeriods != null
+                    ? Optional.of(Collections.unmodifiableSet(absentPeriods))
+                    : Optional.empty();
+        }
+
+        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
@@ -326,7 +350,8 @@ public class EditCommand extends Command {
                     && getRole().equals(e.getRole())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getPeriod().equals(e.getPeriod());
         }
     }
 }
