@@ -63,8 +63,6 @@ public class TaskBuilder {
      * @return A {@code Task} object.
      */
     public Task build() {
-        Task task = new Task(description, deadline, uniqueId);
-        uniqueId.setOwner(task);
-        return task;
+        return new Task(description, deadline, uniqueId);
     }
 }

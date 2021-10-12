@@ -38,6 +38,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DAY = "Day is not recognized, it should be the short form of each day. "
             + String.format("%s,%s,%s for example.", MONDAY, WEDNESDAY, SATURDAY);
+    public static final String MESSAGE_INVALID_TWO_INDICES = "Exactly two non-zero unsigned integers expected";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -50,6 +51,34 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code twoIndices} string into an {@code Index[]} and returns it. Leading and trailing whitespaces will
+     * be trimmed.
+     * @param twoIndices spaced separated string of valid Index numbers
+     * @return an array of two Indexes specified by the input
+     * @throws ParseException if the specified indices are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseTwoIndices(String twoIndices) throws ParseException {
+        String trimmedTwoIndices = twoIndices.trim();
+        String[] wordArray = trimmedTwoIndices.split(" ");
+        if (wordArray.length != 2) {
+            throw new ParseException(MESSAGE_INVALID_TWO_INDICES);
+        }
+
+        String trimmedPersonIndex = wordArray[0].trim();
+        String trimmedTaskIndex = wordArray[1].trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedPersonIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedTaskIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        Index personIndex = Index.fromOneBased(Integer.parseInt(trimmedPersonIndex));
+        Index taskIndex = Index.fromOneBased(Integer.parseInt(trimmedTaskIndex));
+        return new Index[]{personIndex, taskIndex};
     }
 
     /**

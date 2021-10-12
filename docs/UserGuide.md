@@ -125,6 +125,7 @@ Adds a lesson to the specific student
 
 Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
+* Adds a lesson to the student specified by the `INDEX`.
 * `SUBJECT` takes in any input with at least one alphanumeric character.
 * `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
 * `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
@@ -133,6 +134,18 @@ Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
 
 * `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
   starting at 8am and ending at 9am on Mondays.
+
+### Deleting a lesson from a student: `student -dl` `[coming in v1.2]`
+
+Deletes a lesson from the specific student
+
+Format: `student -dl PERSON_INDEX LESSON_INDEX`
+
+* Specifies the student at `PERSON_INDEX`.
+* Deletes the specified lesson at `LESSON_INDEX` of the student specified.
+* Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+
+* `student -dl 1 1` deletes the first lesson from the first student.
 
 ### Deleting a student: `student -d` `[coming in v1.2]`
 

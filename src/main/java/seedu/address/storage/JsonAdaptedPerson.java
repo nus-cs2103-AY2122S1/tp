@@ -33,6 +33,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedUniqueId> assignedTaskIds = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessonsList = new ArrayList<>();
 
     /**
@@ -42,6 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("uniqueId") String uniqueId, @JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("assignedTaskIds") List<JsonAdaptedUniqueId> assignedTaskIds,
             @JsonProperty("lessonsList") List<JsonAdaptedLesson> lessonsList) {
         this.uniqueId = uniqueId;
         this.name = name;
@@ -50,6 +52,9 @@ class JsonAdaptedPerson {
         this.address = address;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (assignedTaskIds != null) {
+            this.assignedTaskIds.addAll(assignedTaskIds);
         }
         if (lessonsList != null) {
             this.lessonsList.addAll(lessonsList);
@@ -68,6 +73,9 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        assignedTaskIds.addAll(source.getAssignedTaskIds().stream()
+                .map(JsonAdaptedUniqueId::new)
+                .collect(Collectors.toList()));
         lessonsList.addAll(source.getLessonsList().getLessons().stream()
                 .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
@@ -82,6 +90,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<UniqueId> personAssignedTaskIds = new ArrayList<>();
+        for (JsonAdaptedUniqueId id : assignedTaskIds) {
+            personAssignedTaskIds.add(id.toModelType());
         }
 
         if (name == null) {
@@ -117,6 +130,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<UniqueId> modelAssignedTaskIds = new HashSet<>(personAssignedTaskIds);
 
         final List<Lesson> modelLessonsList = new ArrayList<>();
         for (JsonAdaptedLesson l : lessonsList) {
@@ -135,11 +149,8 @@ class JsonAdaptedPerson {
         }
         final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
 
-        Person person = new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, lessonsList);
-
-        modelUniqueId.setOwner(person);
-        return person;
+        return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList);
     }
 
 }

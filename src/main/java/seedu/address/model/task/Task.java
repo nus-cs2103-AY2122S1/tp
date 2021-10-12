@@ -39,6 +39,7 @@ public class Task implements HasUniqueId {
         this.description = description;
         this.deadline = deadline;
         this.id = id;
+        id.setOwner(this);
     }
 
     public Description getName() {
