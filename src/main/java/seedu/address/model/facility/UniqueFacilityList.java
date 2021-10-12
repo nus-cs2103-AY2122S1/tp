@@ -1,6 +1,7 @@
 package seedu.address.model.facility;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -10,14 +11,24 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+
 
 
 /**
  * Represents a list of facilities.
  */
 public class UniqueFacilityList implements Iterable<Facility> {
-    /** Remove when storage is implemented.*/
+
     private final ObservableList<Facility> facilityList = FXCollections.observableArrayList();
+
+    /**
+     * Returns true if the list contains an equivalent facility as the given argument.
+     */
+    public boolean contains(Facility toCheck) {
+        requireNonNull(toCheck);
+        return facilityList.stream().anyMatch(toCheck::isSameFacility);
+    }
 
     /**
      * Adds the specified facility to the facilityList.
@@ -27,6 +38,18 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Removes the specified facility from the facilityList.
+     *
+     * @param toRemove Facility to be removed.
+     */
+    public void remove(Facility toRemove) {
+        requireNonNull(toRemove);
+        if (!facilityList.remove(toRemove)) {
+            throw new FacilityNotFoundException();
+        }
     }
 
     @Override
@@ -41,6 +64,19 @@ public class UniqueFacilityList implements Iterable<Facility> {
      */
     public ObservableList<Facility> getObservableList() {
         return facilityList;
+    }
+
+    /**
+     * Replaces the contents of this list with {@code facilities}.
+     * {@code facilities} must not contain duplicate facilities.
+     */
+    public void setFacilities(List<Facility> facilities) {
+        requireAllNonNull(facilities);
+        if (!facilitiesAreUnique(facilities)) {
+            throw new DuplicatePersonException();
+        }
+
+        facilityList.setAll(facilities);
     }
 
     /**
@@ -97,9 +133,20 @@ public class UniqueFacilityList implements Iterable<Facility> {
     }
 
 
-    public void setFacilities(List<Facility> replacement) {
-        requireNonNull(replacement);
-        facilityList.setAll(replacement);
+
+     /**
+      * Returns true if {@code persons} contains only unique persons.
+      */
+    private boolean facilitiesAreUnique(List<Facility> facilities) {
+        for (int i = 0; i < facilities.size() - 1; i++) {
+            for (int j = i + 1; j < facilities.size(); j++) {
+                if (facilities.get(i).isSameFacility(facilities.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
 
     }
+
 }

@@ -6,6 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents a Facility's capacity.
  */
 public class Capacity {
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Capacity should only contain numbers and it should be at least 1 digit long";
+    public static final String VALIDATION_REGEX = "\\d+";
     public final String capacity;
 
     /**
@@ -28,6 +32,13 @@ public class Capacity {
     public boolean isWithinCapacity(int numberOfPerson) {
         Integer max = Integer.parseInt(capacity);
         return numberOfPerson <= max;
+    }
+
+    /**
+     * Returns true if a given string is a valid capacity.
+     */
+    public static boolean isValidCapacity(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

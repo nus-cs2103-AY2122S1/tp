@@ -13,6 +13,11 @@ import seedu.address.model.facility.exceptions.FacilityNotFoundException;
 
 public class UniqueFacilityListTest {
     public final UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
+    public final Facility facility = new Facility(
+            new FacilityName("Court 1"),
+            new Location("Kent Ridge Sports Hall"),
+            new Time("13:00"),
+            new Capacity("5"));
 
     @Test
     public void add_null_exceptionThrown() {
@@ -44,6 +49,22 @@ public class UniqueFacilityListTest {
 
         assertThrows(FacilityNotFoundException.class, () -> uniqueFacilityList
                 .replaceFacility(KENT_RIDGE_SPORT_HALL_5_COURT_1, editedFacility));
+    }
+
+    @Test
+    public void remove_nullFacility_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueFacilityList.remove(null));
+    }
+
+    @Test
+    public void remove_facilityDoesNotExist_throwsFacilityNotFoundException() {
+        assertThrows(FacilityNotFoundException.class, () -> uniqueFacilityList.remove(facility));
+    }
+
+    @Test
+    public void remove_existingFacility_removesFacility() {
+        uniqueFacilityList.add(facility);
+        uniqueFacilityList.remove(facility);
     }
 
     @Test

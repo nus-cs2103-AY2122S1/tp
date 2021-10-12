@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
+
 /**
  * The API of the Model component.
  */
@@ -68,6 +69,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given facility.
+     * The facility must exist in SportsPA.
+     */
+    void deleteFacility(Facility target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -100,14 +107,14 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
-     * Clears the contents of the facility list.
-     */
-    void resetFacilityList();
-
-    /**
      * Clears the contents of the member list.
      */
     void resetMemberList();
+
+    /**
+     * Clears the contents of the facility list.
+     */
+    void resetFacilityList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

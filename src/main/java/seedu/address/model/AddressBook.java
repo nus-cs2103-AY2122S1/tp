@@ -54,16 +54,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the facility list with {@code facilities}.
+     * {@code facilities} must not contain duplicate facilities.
      */
     public void setFacilities(List<Facility> facilities) {
         this.facilities.setFacilities(facilities);
-    }
-
-    /**
-     * Clears the contents of the facility list.
-     */
-    public void resetFacilityList() {
-        this.facilities.resetFacilities();
     }
 
     /**
@@ -74,12 +68,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Clears the contents of the facility list.
+     */
+    public void resetFacilityList() {
+        this.facilities.resetFacilities();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setFacilities(newData.getFacilityList());
         setPersons(newData.getPersonList());
+        setFacilities(newData.getFacilityList());
     }
 
     //// person-level operations
@@ -90,6 +91,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a facility with the same details as {@code facility} exists in the address book.
+     */
+    public boolean hasFacility(Facility facility) {
+        requireNonNull(facility);
+        return facilities.contains(facility);
     }
 
     /**
@@ -135,6 +144,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from SportsPA.
+     * {@code key} must exist in SportsPA.
+     */
+    public void removeFacility(Facility key) {
+        facilities.remove(key);
     }
 
     //// util methods

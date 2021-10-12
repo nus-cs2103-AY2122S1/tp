@@ -75,6 +75,20 @@ public class Facility {
     }
 
     /**
+     * Returns true if both name and location of the facilities are the same.
+     * This defines a weaker notion of equality between two facilities.
+     */
+    public boolean isSameFacility(Facility otherFacility) {
+        if (otherFacility == this) {
+            return true;
+        }
+
+        return otherFacility != null
+                && otherFacility.getName().equals(getName())
+                && otherFacility.getLocation().equals(getLocation());
+    }
+
+    /**
      * Returns true if both facilities have same identity
      * and field values.
      *

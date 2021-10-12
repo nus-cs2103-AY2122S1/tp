@@ -60,10 +60,14 @@ public class ParserUtil {
      *
      * @param name String to be parsed.
      * @return FacilityName object with specified name.
+     * @throws ParseException if given facility name is invalid.
      */
-    public static FacilityName parseFacilityName(String name) {
+    public static FacilityName parseFacilityName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
+        if (!FacilityName.isValidFacilityName(trimmedName)) {
+            throw new ParseException(FacilityName.MESSAGE_CONSTRAINTS);
+        }
         return new FacilityName(trimmedName);
     }
 
@@ -73,10 +77,14 @@ public class ParserUtil {
      *
      * @param location String to be parsed.
      * @return Location object with specified value.
+     * @throws ParseException if given location is invalid.
      */
-    public static Location parseLocation(String location) {
+    public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         String trimmedLocation = location.trim();
+        if (!Location.isValidLocation(trimmedLocation)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+        }
         return new Location(trimmedLocation);
     }
 
@@ -86,10 +94,14 @@ public class ParserUtil {
      *
      * @param time String to be parsed.
      * @return Time object with specified value.
+     * @throws ParseException if the given time is invalid.
      */
-    public static Time parseTime(String time) {
+    public static Time parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
+        if (!Time.isValidTime(trimmedTime)) {
+            throw new ParseException(Time.MESSAGE_CONSTRAINTS);
+        }
         return new Time(trimmedTime);
     }
 
@@ -99,10 +111,14 @@ public class ParserUtil {
      *
      * @param capacity String to be parsed.
      * @return Capacity object with specified value.
+     * @throws ParseException if given capacity is invalid.
      */
-    public static Capacity parseCapacity(String capacity) {
+    public static Capacity parseCapacity(String capacity) throws ParseException {
         requireNonNull(capacity);
         String trimmedCapacity = capacity.trim();
+        if (!Capacity.isValidCapacity(trimmedCapacity)) {
+            throw new ParseException(Capacity.MESSAGE_CONSTRAINTS);
+        }
         return new Capacity(trimmedCapacity);
     }
 
