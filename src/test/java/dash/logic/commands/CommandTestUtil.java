@@ -42,10 +42,19 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
     public static final String VALID_TAG_PROJECT = "project";
     public static final String VALID_TAG_UNGRADED = "ungraded";
+    public static final String VALID_TAG_QUIZ = "quiz";
+    public static final String VALID_TAG_GROUPWORK = "groupwork";
+    public static final String VALID_TAG_HOMEWORK = "homework";
+
     public static final String VALID_TASK_DESCRIPTION_TP = "Finish CS2103T tP";
     public static final String VALID_TASK_DESCRIPTION_TEST = "Study for CS2100 test";
+    public static final String VALID_TASK_DESCRIPTION_ASSIGNMENT = "Submit CS2100 Assignment by 23:59";
+    public static final String VALID_TASK_DESCRIPTION_LECTURE = "Catch up with ST2334 lectures";
+    public static final String VALID_TASK_DESCRIPTION_PR_REVIEW = "Do PR review";
+    public static final String VALID_TASK_DESCRIPTION_QUIZ = "ST2334 quiz before Friday";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,7 +66,16 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String TAG_DESC_PROJECT = " " + PREFIX_TAG + VALID_TAG_PROJECT;
+
+    public static final String TAG_DESC_UNGRADED = " " + PREFIX_TAG + VALID_TAG_UNGRADED;
+    public static final String TAG_DESC_QUIZ = " " + PREFIX_TAG + VALID_TAG_QUIZ;
+    public static final String TAG_DESC_GROUPWORK = " " + PREFIX_TAG + VALID_TAG_GROUPWORK;
+    public static final String TAG_DESC_HOMEWORK = " " + PREFIX_TAG + VALID_TAG_HOMEWORK;
+
+    public static final String TASK_DESC_ASSIGNMENT = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_ASSIGNMENT;
+    public static final String TASK_DESC_LECTURE = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_LECTURE;
+    public static final String TASK_DESC_PR_REVIEW = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_PR_REVIEW;
+    public static final String TASK_DESC_QUIZ = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_QUIZ;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
