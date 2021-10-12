@@ -32,7 +32,7 @@ class AddFacilityCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Facility facility = new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
-                new Time("11:30"), new Capacity("5"));
+                new Time("1130"), new Capacity("5"));
 
         assertParseSuccess(parser, NAME_DESC_COURT + LOCATION_DESC_COURT + TIME_DESC_COURT + CAPACITY_DESC_COURT,
                 new AddFacilityCommand(facility));
@@ -58,7 +58,7 @@ class AddFacilityCommandParserTest {
     @Test
     public void parse_fieldsMissing_exceptionThrown() {
         Facility facility = new Facility(new FacilityName("Court 1"), new Location("University Sports Hall"),
-                new Time("11:30"), new Capacity("5"));
+                new Time("1130"), new Capacity("5"));
 
         //missing name
         assertParseFailure(parser, LOCATION_DESC_COURT + TIME_DESC_COURT + CAPACITY_DESC_COURT,
