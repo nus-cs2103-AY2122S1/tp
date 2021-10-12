@@ -55,7 +55,7 @@ public class AddressBookParserTest {
     public void parseCommand_addFacility() throws ParseException {
         FacilityName name = new FacilityName("Court 1");
         Location location = new Location("University Sports Hall");
-        Time time = new Time("11:30");
+        Time time = new Time("1130");
         Capacity capacity = new Capacity("5");
         Facility facility = new Facility(name, location, time, capacity);
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
