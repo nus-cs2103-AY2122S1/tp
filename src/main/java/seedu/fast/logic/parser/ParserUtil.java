@@ -1,6 +1,7 @@
 package seedu.fast.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_HELP_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,6 +9,8 @@ import java.util.Set;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.StringUtil;
+import seedu.fast.logic.commands.HelpCommand;
+import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
@@ -144,13 +147,41 @@ public class ParserUtil {
     /**
      * Parses {@code String command} and returns the corresponding help command.
      */
-    public static String parseHelp(String command) {
+    public static String matchArgs(String command) {
             for (String s : COMMAND_LIST) {
                 if (s.equals(command)) {
                     return s;
                 }
             }
             return "";
+    }
+
+    /**
+     * Extracts the arguments from a help command.
+     *
+     * @param commandText The input text.
+     * @return The args of the help command, or "" if there is no or invalid args.
+     * @throws HelpParseException if help is not followed by a valid arg
+     */
+    public static String parseHelp(String commandText) throws HelpParseException{
+
+        // if there are no args
+        if (commandText.split(" ").length == 1) {
+            return "";
+        }
+
+        String arg = commandText.substring(HelpCommand.COMMAND_WORD.length());
+        String trimmedArgs = arg.trim();
+        String capitalisedArg = ParserUtil.capitaliseFirstLetters(trimmedArgs);
+
+        if (!ParserUtil.matchArgs(capitalisedArg).equals("")) {
+            return capitalisedArg;
+
+        } else { // if the arg does not match a given command, throw exception
+            throw new HelpParseException(
+                    String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
     }
 
     /**

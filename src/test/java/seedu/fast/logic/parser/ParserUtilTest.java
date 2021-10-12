@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
@@ -28,6 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_HELP_ARG_1 = "add";
     private static final String INVALID_HELP_ARG_2 = "archive";
+    private static final String INVALID_HELP_COMMAND_1 = "help archive";
+    private static final String INVALID_HELP_COMMAND_2 = "help random command";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -37,9 +40,12 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_HELP_ARG_1 = "Add";
     private static final String VALID_HELP_ARG_2 = "";
+    private static final String VALID_HELP_COMMAND_1 = "help help";
+    private static final String VALID_HELP_COMMAND_2 = "help priority tag";
+    private static final String VALID_HELP_COMMAND_OUTPUT_1 = "Help";
+    private static final String VALID_HELP_COMMAND_OUTPUT_2 = "Priority Tag";
 
     private static final String SAMPLE_STRING = "the quick brown fox jumped over the lazy dog";
-
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -202,32 +208,32 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHelp_withSmallLetters_success() {
-        String actual = ParserUtil.parseHelp(INVALID_HELP_ARG_1);
+    public void matchArgs_withSmallLetters_success() {
+        String actual = ParserUtil.matchArgs(INVALID_HELP_ARG_1);
         String expected = "";
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parseHelp_withBigLetters_success() {
-        String actual = ParserUtil.parseHelp(VALID_HELP_ARG_1);
+    public void matchArgs_withBigLetters_success() {
+        String actual = ParserUtil.matchArgs(VALID_HELP_ARG_1);
         String expected = "Add";
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parseHelp_noInput_success() {
-        String actual = ParserUtil.parseHelp(VALID_HELP_ARG_2);
+    public void matchArgs_noInput_success() {
+        String actual = ParserUtil.matchArgs(VALID_HELP_ARG_2);
         String expected = "";
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parseHelp_invalidInput_success() {
-        String actual = ParserUtil.parseHelp(INVALID_HELP_ARG_2);
+    public void matchArgs_invalidInput_success() {
+        String actual = ParserUtil.matchArgs(INVALID_HELP_ARG_2);
         String expected = "";
 
         assertEquals(expected, actual);
@@ -239,5 +245,29 @@ public class ParserUtilTest {
         String expected = "The Quick Brown Fox Jumped Over The Lazy Dog";
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseHelp_oneWordValidInput_success() throws HelpParseException {
+        String actual = ParserUtil.parseHelp(VALID_HELP_COMMAND_1);
+
+        assertEquals(VALID_HELP_COMMAND_OUTPUT_1, actual);
+    }
+
+    @Test
+    public void parseHelp_multipleWordsValidInput_success() throws HelpParseException {
+        String actual = ParserUtil.parseHelp(VALID_HELP_COMMAND_2);
+
+        assertEquals(VALID_HELP_COMMAND_OUTPUT_2, actual);
+    }
+
+    @Test
+    public void parseHelp_invalidInput1_success() {
+        assertThrows(HelpParseException.class, () -> ParserUtil.parseHelp(INVALID_HELP_COMMAND_1));
+    }
+
+    @Test
+    public void parseHelp_invalidInput2_success() {
+        assertThrows(HelpParseException.class, () -> ParserUtil.parseHelp(INVALID_HELP_COMMAND_2));
     }
 }

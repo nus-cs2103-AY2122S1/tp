@@ -24,7 +24,6 @@ import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
-import seedu.fast.logic.parser.HelpCommandParser;
 import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
@@ -166,7 +165,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void focus(String command) {
         getRoot().requestFocus();
-        if (!ParserUtil.parseHelp(command).equals("")) {
+        if (!ParserUtil.matchArgs(command).equals("")) {
             commandList.getSelectionModel().select(command);
             commandInstruction.setText(showCommandUsage(command));
         } else {

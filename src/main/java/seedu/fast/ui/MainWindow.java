@@ -16,6 +16,7 @@ import seedu.fast.logic.Logic;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.parser.HelpCommandParser;
+import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
@@ -191,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                String helpArg = HelpCommandParser.getArgs(commandText);
+                String helpArg = ParserUtil.parseHelp(commandText);
                 handleHelp(helpArg);
             }
 
