@@ -94,7 +94,6 @@ public class EmployeeTest {
 
         // different leaves -> return false
         editedAlice = new EmployeeBuilder(ALICE_EMPLOYEE).withLeaves(VALID_LEAVES_BOB).build();
-        System.out.println(ALICE_EMPLOYEE.getLeaves() + " bob : " + VALID_LEAVES_BOB);
         assertFalse(ALICE_EMPLOYEE.equals(editedAlice));
 
         // different salary -> return false

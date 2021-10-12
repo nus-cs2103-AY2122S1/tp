@@ -49,7 +49,6 @@ public class DeleteEmployeeCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        System.out.println(model.getFilteredEmployeeList().size());
         showEmployeeAtIndex(model, INDEX_FIRST_PERSON);
 
         Employee employeeToDelete = model.getFilteredEmployeeList().get(INDEX_FIRST_PERSON.getZeroBased());

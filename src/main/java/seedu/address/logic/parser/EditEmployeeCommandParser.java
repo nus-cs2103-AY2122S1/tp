@@ -73,7 +73,6 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEmployeeCommand.MESSAGE_NOT_EDITED);
         }
-        System.out.println("At least completed EditEmployeeCommand");
         return new EditEmployeeCommand(index, editEmployeeDescriptor);
     }
 
