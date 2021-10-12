@@ -1,5 +1,4 @@
 package seedu.address.storage;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -30,6 +32,8 @@ class JsonAdaptedPerson {
     private final String note;
     private final String noteDate;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<String> superGroups = new ArrayList<>();
+    private final List<String> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +41,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("note") String note,
-            @JsonProperty("noteDate") String noteDate, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("noteDate") String noteDate, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("superGroups") List<String> superGroups, @JsonProperty("subGroups") List<String> subGroups) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +51,8 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.superGroups.addAll(superGroups);
+        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -60,6 +67,8 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        superGroups.addAll(source.getSuperGroups());
+        subGroups.addAll(source.getSubGroups());
     }
 
     /**
@@ -106,8 +115,17 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note, noteDate);
 
+        if (!superGroups.stream().allMatch(SuperGroup::isValidGroupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!subGroups.stream().allMatch(SubGroup::isValidGroupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelNote, modelTags,
+                new HashSet<>(superGroups), new HashSet<>(subGroups));
     }
 
 }

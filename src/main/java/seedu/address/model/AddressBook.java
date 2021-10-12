@@ -2,11 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.UniqueList;
 
@@ -17,9 +18,11 @@ import seedu.address.model.util.UniqueList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueList<Person> persons;
-    private final UniqueList<Group> groups;
 
-    // @formatter:off
+    private HashMap<String, SuperGroup> superGroups;
+
+    private HashMap<String, SubGroup> subGroups;
+
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -29,7 +32,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniqueList<>();
-        groups = new UniqueList<>();
+        superGroups = new HashMap<>();
+        subGroups = new HashMap<>();
     }
 
     public AddressBook() {}
@@ -52,8 +56,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setItems(persons);
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups.setItems(groups);
+    /**
+     * Replaces the contents of the person list with {@code SuperGroups}.
+     * {@code SuperGroups} must not contain duplicate SuperGroups.
+     */
+    public void setSuperGroups(HashMap<String, SuperGroup> superGroups) {
+        this.superGroups = superGroups;
+    }
+
+    /**
+     * Replaces the contents of the person list with {@code SuperGroups}.
+     * {@code SuperGroups} must not contain duplicate SuperGroups.
+     */
+    public void setSubGroups(HashMap<String, SubGroup> subGroups) {
+        this.subGroups = subGroups;
     }
 
     /**
@@ -63,7 +79,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setGroups(newData.getGroupList());
+        setSuperGroups(newData.getSuperGroups());
+        setSubGroups(newData.getSubGroups());
     }
 
     //// person-level operations
@@ -77,14 +94,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
-     */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return groups.contains(group);
-    }
-
-    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -93,11 +102,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a group to the address book.
-     * The group must not already exist in the address book.
+     * Gets Person based on name.
      */
-    public void addGroup(Group group) {
-        groups.add(group);
+    public Person findPerson(String name) {
+        for (Person person: persons) {
+            if (person.getName().fullName.equals(name)) {
+                return person;
+            }
+        }
+        return null;
     }
 
     /**
@@ -112,17 +125,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given group {@code target} in the list with {@code editedGroup}.
-     * {@code target} must exist in the address book.
-     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
-     */
-    public void setGroup(Group target, Group editedGroup) {
-        requireNonNull(editedGroup);
-
-        groups.setItem(target, editedGroup);
-    }
-
-    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -130,20 +132,71 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// Group-level operations
+
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Adds superGroup into the AddressBook.
+     * @param sg the SuperGroup to be added into AddressBook.
      */
-    public void removeGroup(Group key) {
-        groups.remove(key);
+    public void addSuperGroup(SuperGroup sg) {
+        if (!superGroups.containsKey(sg.getName())) {
+            superGroups.put(sg.getName(), sg);
+        }
     }
+
+    public void deleteSuperGroup(SuperGroup sg) {
+        superGroups.remove(sg.getName());
+    }
+
+    /**
+     * Gets SuperGroup based on group name.
+     */
+    public SuperGroup findSuperGroup(String name) {
+        return superGroups.get(name);
+    }
+
+    /**
+     * Returns true if SuperGroup exists.
+     */
+    public boolean hasSubGroup(SubGroup subGroup) {
+        requireNonNull(subGroup);
+        return subGroups.containsKey(subGroup.toString());
+    }
+
+    /**
+     * Adds SubGroup into the AddressBook.
+     * @param subGroup the SuperGroup to be added into AddressBook.
+     */
+    public void addSubGroup(SubGroup subGroup) {
+        requireNonNull(subGroup);
+        subGroups.put(subGroup.toString(), subGroup);
+    }
+
+    public void deleteSubGroup(SubGroup subGroup) {
+        subGroups.remove(subGroup.toString());
+    }
+
+    /**
+     * Gets SuperGroup based on group name.
+     */
+    public SubGroup findSubGroup(String name) {
+        return subGroups.get(name);
+    }
+
+    /**
+     * Returns true if SuperGroup exists.
+     */
+    public boolean hasSuperGroup(SuperGroup superGroup) {
+        requireNonNull(superGroup);
+        return superGroups.containsKey(superGroup.getName());
+    }
+
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons, "
-                + groups.asUnmodifiableObservableList().size() + " groups";
+        return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 
@@ -153,20 +206,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Group> getGroupList() {
-        return groups.asUnmodifiableObservableList();
+    public HashMap<String, SuperGroup> getSuperGroups() {
+        return superGroups;
+    }
+
+    @Override
+    public HashMap<String, SubGroup> getSubGroups() {
+        return subGroups;
     }
 
     @Override
     public boolean equals(Object other) {
+        // TODO: Add Group
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons)
-                && groups.equals(((AddressBook) other).groups));
+                && persons.equals(((AddressBook) other).persons));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, groups);
+        return persons.hashCode();
     }
 }

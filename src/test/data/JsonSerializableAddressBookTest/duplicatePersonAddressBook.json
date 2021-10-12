@@ -5,12 +5,19 @@
     "email": "alice@example.com",
     "note" : "",
     "noteDate" : "",
-    "tagged": [ "friends" ]
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "note" : "",
-    "noteDate" : ""
-  } ]
+    "noteDate" : "",
+    "tagged": [ "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  } ],
+  "superGroups" : [ ],
+  "subGroups" : [ ]
 }

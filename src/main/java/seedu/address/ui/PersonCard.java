@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -39,6 +40,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label noteLastSaved;
     @FXML
+    private Label groups;
+    @FXML
+    private Label subGroups;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -56,6 +61,8 @@ public class PersonCard extends UiPart<Region> {
         } else {
             noteLastSaved.setManaged(false);
         }
+        groups.setText(Arrays.toString(person.getSuperGroups().toArray()));
+        subGroups.setText(Arrays.toString(person.getSubGroups().toArray()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

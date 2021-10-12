@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Unique;
 
@@ -24,6 +26,8 @@ public class Person implements Unique<Person> {
     // Data fields
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
+    private HashSet<String> superGroups = new HashSet<>();
+    private HashSet<String> subGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -35,6 +39,21 @@ public class Person implements Unique<Person> {
         this.email = email;
         this.note = note;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a person with groups and subgroups.
+     */
+    public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags,
+        HashSet<String> superGroups, HashSet<String> subGroups) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.note = note;
+        this.tags.addAll(tags);
+        this.superGroups = superGroups;
+        this.subGroups = subGroups;
     }
 
     public Name getName() {
@@ -54,6 +73,23 @@ public class Person implements Unique<Person> {
     }
     public String getNoteSavedDate() {
         return note.getSavedDate();
+    }
+
+
+    public void addSuperGroup(SuperGroup superGroup) {
+        superGroups.add(superGroup.toString());
+    }
+
+    public void addSubGroup(SubGroup subGroup) {
+        subGroups.add(subGroup.toString());
+    }
+
+    public HashSet<String> getSuperGroups() {
+        return superGroups;
+    }
+
+    public HashSet<String> getSubGroups() {
+        return subGroups;
     }
 
 

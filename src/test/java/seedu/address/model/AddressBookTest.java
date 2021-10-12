@@ -8,20 +8,19 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.exceptions.DuplicateItemException;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddressBookTest {
 
@@ -42,18 +41,6 @@ public class AddressBookTest {
         AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
-    }
-
-    @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<Group> newGroups = new ArrayList<>();
-        AddressBookStub newData = new AddressBookStub(newPersons, newGroups);
-
-        assertThrows(DuplicateItemException.class, () -> addressBook.resetData(newData));
     }
 
     @Test
@@ -90,9 +77,8 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<Group> groups = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Group> groups) {
+        AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 
@@ -102,8 +88,13 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Group> getGroupList() {
-            return groups;
+        public HashMap<String, SuperGroup> getSuperGroups() {
+            return null;
+        }
+
+        @Override
+        public HashMap<String, SubGroup> getSubGroups() {
+            return null;
         }
     }
 

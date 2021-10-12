@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.group.Group;
+import seedu.address.model.group.SubGroup;
+import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,7 +24,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Group> filteredGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +37,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
     }
 
     public ModelManager() {
@@ -98,19 +97,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return addressBook.hasGroup(group);
-    }
-
-    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-    }
-
-    @Override
-    public void deleteGroup(Group target) {
-        addressBook.removeGroup(target);
     }
 
     @Override
@@ -120,9 +108,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void createGroup(Group group) {
-        addressBook.addGroup(group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    public Person findPerson(String name) {
+        return addressBook.findPerson(name);
     }
 
     @Override
@@ -132,10 +119,44 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override public void setGroup(Group target, Group editedGroup) {
-        requireAllNonNull(target, editedGroup);
+    @Override
+    public boolean hasSuperGroup(SuperGroup superGroup) {
+        requireNonNull(superGroup);
+        return addressBook.hasSuperGroup(superGroup);
+    }
 
-        addressBook.setGroup(target, editedGroup);
+    @Override
+    public void addSuperGroup(SuperGroup superGroup) {
+        addressBook.addSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteSuperGroup(SuperGroup superGroup) {
+        addressBook.deleteSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public SuperGroup findSuperGroup(String name) {
+        return addressBook.findSuperGroup(name);
+    }
+
+    @Override
+    public SubGroup findSubGroup(String name) {
+        return addressBook.findSubGroup(name);
+    }
+
+    @Override
+    public void addSubGroup(SubGroup subGroup) {
+        addressBook.addSubGroup(subGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void deleteSubGroup(SubGroup subGroup) {
+        addressBook.deleteSubGroup(subGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -150,20 +171,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Group> getFilteredGroupList() {
-        return filteredGroups;
-    }
-
-    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFilteredGroupList(Predicate<Group> predicate) {
-        requireNonNull(predicate);
-        filteredGroups.setPredicate(predicate);
     }
 
     @Override

@@ -10,8 +10,13 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GroupCreateCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PersonAddGroupCommand;
+import seedu.address.logic.commands.PersonAddSubGroupCommand;
+import seedu.address.logic.commands.PersonRemoveGroupCommand;
+import seedu.address.logic.commands.PersonRemoveSubGroupCommand;
 import seedu.address.logic.commands.person.PersonCreateCommand;
 import seedu.address.logic.commands.person.PersonDeleteCommand;
 import seedu.address.logic.commands.person.PersonEditCommand;
@@ -75,6 +80,21 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case GroupCreateCommand.COMMAND_WORD:
+            return new GroupCreateCommandParser().parse(arguments);
+
+        case PersonAddGroupCommand.COMMAND_WORD:
+            return new PersonAddGroupCommandParser().parse(arguments);
+
+        case PersonAddSubGroupCommand.COMMAND_WORD:
+            return new PersonAddSubGroupCommandParser().parse(arguments);
+
+        case PersonRemoveGroupCommand.COMMAND_WORD:
+            return new PersonRemoveGroupCommandParser().parse(arguments);
+
+        case PersonRemoveSubGroupCommand.COMMAND_WORD:
+            return new PersonRemoveSubGroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
