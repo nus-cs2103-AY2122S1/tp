@@ -30,14 +30,14 @@
           </Menu>
         </MenuBar>
 
-              <VBox fx:id="personList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <VBox fx:id="animeList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
                <children>
                   <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                      <children>
-                   <StackPane fx:id="personListPanelPlaceholder" prefHeight="100.0" prefWidth="106.0" HBox.hgrow="ALWAYS" />
+                   <StackPane fx:id="animeListPanelPlaceholder" prefHeight="100.0" prefWidth="106.0" HBox.hgrow="ALWAYS" />
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
                                 <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
