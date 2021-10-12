@@ -239,7 +239,7 @@ public class PersonBuilder {
     /**
      * Builds a person with the specified information.
      *
-     * @return {@code Person} container the information given.
+     * @return {@code Person} containing the information given.
      */
     public Person build() {
         return new Person(name, phone, email, parentPhone, parentEmail,

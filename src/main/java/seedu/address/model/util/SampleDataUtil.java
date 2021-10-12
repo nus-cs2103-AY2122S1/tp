@@ -113,6 +113,15 @@ public class SampleDataUtil {
     }
 
     /**
+     * Returns a homework set containing the list of strings given.
+     */
+    public static Set<Homework> getHomeworkSet(String... strings) {
+        return Arrays.stream(strings)
+            .map(Homework::new)
+            .collect(Collectors.toSet());
+    }
+
+    /**
      * Returns a sample homework set.
      */
     public static Set<Homework> getSampleHomeworkSet() {
