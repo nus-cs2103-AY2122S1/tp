@@ -119,15 +119,15 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = viewAll
             ? fullPanel
             : minimalPanel;
-        statusbarPlaceholder.getChildren().clear();
-        statusbarPlaceholder.getChildren().add(studentListPanel.getRoot());
+        studentListPanelPlaceholder.getChildren().clear();
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        fillStudentCard(true); // TutorAid launches with full data view
+        fillStudentCard(false); // TutorAid launches with list view
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
