@@ -12,6 +12,7 @@ import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.personcommand.ListPeopleCommand;
 import dash.logic.commands.taskcommand.AddTaskCommand;
+import dash.logic.commands.taskcommand.ClearTaskCommand;
 import dash.logic.commands.taskcommand.DeleteTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
@@ -66,6 +67,9 @@ public class TaskTabParser {
 
         case ListPeopleCommand.COMMAND_WORD:
             return new ListTaskCommand();
+
+        case ClearTaskCommand.COMMAND_WORD:
+            return new ClearTaskCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
             return new SwitchTabContactsCommand(1);
