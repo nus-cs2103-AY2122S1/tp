@@ -32,7 +32,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
         if (argMultimap.isEmpty()) {
             throw new ParseException(ViewScheduleCommand.HELP_MESSAGE);
         }
-        PersonContainsFieldsPredicate predicate = testByAllFields(userInput, NO_FIELD_EXCEPTION);
+        PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
         return new ViewScheduleCommand(predicate);
     }
 }

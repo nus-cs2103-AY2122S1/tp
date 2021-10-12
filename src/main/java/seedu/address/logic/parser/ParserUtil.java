@@ -287,7 +287,7 @@ public class ParserUtil {
      */
     public static Period parsePeriod(Collection<String> periods) throws DateTimeParseException {
         LocalDate start = LocalDate.MAX;
-        LocalDate end = LocalDate.MAX;
+        LocalDate end = LocalDate.MIN;
 
         for (String periodName : periods) {
             if (start.isAfter(LocalDate.parse(periodName))) {
@@ -308,15 +308,9 @@ public class ParserUtil {
      * of the qualifiers of the predicate.
      * @throws ParseException Throws parse exception when the input is not something needed.
      */
-    public static PersonContainsFieldsPredicate testByAllFields(String args, ParseException e) throws ParseException {
-        requireNonNull(args);
+    public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
+        requireNonNull(argMultimap);
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
-        if (argMultimap.isEmpty()) {
-            throw e;
-        }
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME), ParserUtil::parseName);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone);
         predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail);

@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsFieldsPredicate;
@@ -15,14 +19,14 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": ";
 
-    private static final String DEFAULT_EXECUTION = "$1%s number of staff have been marked for the period $2%s\n"
-            + "$3%s";
+    private static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
+            + "%3$s";
 
-    private enum List {
+    private enum ToEdit {
         OBSERVED, INTERNAL
     }
 
-    private final List toModify;
+    private final ToEdit toModify;
     private Period period;
     private PersonContainsFieldsPredicate predicate;
     private Index index;
@@ -35,7 +39,7 @@ public class MarkCommand extends Command {
     public MarkCommand(PersonContainsFieldsPredicate predicate, Period period) {
         this.period = period;
         this.predicate = predicate;
-        this.toModify = List.INTERNAL;
+        this.toModify = ToEdit.INTERNAL;
     }
 
     /**
@@ -45,8 +49,9 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(Index index, Period period, PersonContainsFieldsPredicate predicate) {
         this.period = period;
-        this.toModify = List.OBSERVED;
+        this.toModify = ToEdit.OBSERVED;
         this.predicate = predicate;
+        this.index = index;
 
     }
 
@@ -65,10 +70,14 @@ public class MarkCommand extends Command {
         default:
             throw new CommandException(MESSAGE_USAGE);
         }
-        long total = toModify.stream()
-                .map(staff -> staff.mark(this.period))
-                .count();
-        return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, toModify));
+        int total = toModify.size();
+        for (Person p : toModify) {
+            p.mark(period);
+        }
+        List<Name> names = toModify.stream()
+                .map(staff -> staff.getName())
+                .collect(Collectors.toList());
+        return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, names));
 
 
 

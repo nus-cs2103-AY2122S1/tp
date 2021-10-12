@@ -50,7 +50,7 @@ class JsonAdaptedPerson {
             @JsonProperty("address") String address, @JsonProperty("role") String role,
             @JsonProperty("salary") String salary, @JsonProperty("status") String status,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule,
-            @JsonProperty("absent") List<JsonAdaptedPeriod> absentDates) {
+            @JsonProperty("absentDates") List<JsonAdaptedPeriod> absentDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
