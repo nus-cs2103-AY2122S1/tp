@@ -68,7 +68,8 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone());
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getAvailability().equals(getAvailability());
     }
 
     @Override
