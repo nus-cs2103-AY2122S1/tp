@@ -12,8 +12,9 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  * Class representing the command for marking a person as absent.
  */
 public class MarkCommand extends Command {
-    private static final String COMMAND_WORD = "mark";
-    private static final String MESSAGE_USAGE = COMMAND_WORD + ": ";
+    public static final String COMMAND_WORD = "mark";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": ";
+
     private static final String DEFAULT_EXECUTION = "$1%s number of staff have been marked for the period $2%s\n"
             + "$3%s";
 
@@ -42,9 +43,10 @@ public class MarkCommand extends Command {
      * at {@code index} during the execution of the command is not working during
      * {@code period}.
      */
-    public MarkCommand(Index index, Period period) {
+    public MarkCommand(Index index, Period period, PersonContainsFieldsPredicate predicate) {
         this.period = period;
         this.toModify = List.OBSERVED;
+        this.predicate = predicate;
 
     }
 
@@ -54,7 +56,8 @@ public class MarkCommand extends Command {
         switch (this.toModify) {
         case OBSERVED:
             Person modifiedStaff = model.getFilteredPersonList().get(index.getZeroBased());
-            toModify = model.getFilteredPersonList().filtered(p -> p.equals(modifiedStaff));
+            toModify = model.getFilteredPersonList().filtered(p -> p.equals(modifiedStaff))
+                .filtered(this.predicate);
             break;
         case INTERNAL:
             toModify = model.getFilteredPersonList().filtered(predicate);
