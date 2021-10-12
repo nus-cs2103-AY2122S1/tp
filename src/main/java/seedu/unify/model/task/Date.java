@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 
 /**
  * Represents a Task's date in the Uni-fy app.
@@ -29,6 +30,7 @@ public class Date {
 
     public final String value;
     public final LocalDate localDate;
+    public final Integer week;
 
     /**
      * Constructs a {@code Date}.
@@ -40,6 +42,7 @@ public class Date {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
         localDate = LocalDate.parse(this.value, LOCAL_DATE_FORMAT);
+        week = localDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
     }
 
     /**
@@ -79,5 +82,9 @@ public class Date {
      */
     public LocalDate getDate() {
         return localDate;
+    }
+
+    public Integer getWeek() {
+        return week;
     }
 }

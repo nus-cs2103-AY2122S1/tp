@@ -7,7 +7,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.UniqueTaskList;
-import seedu.unify.model.task.WeeklyTaskList;
 
 /**
  * Wraps all data at the unify level
@@ -94,9 +93,6 @@ public class UniFy implements ReadOnlyUniFy {
         tasks.remove(key);
     }
 
-    public WeeklyTaskList getWeeklyTaskList() {
-        return new WeeklyTaskList(getTaskList());
-    }
 
     //// util methods
 
