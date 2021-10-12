@@ -7,7 +7,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ASSESSMENT_COUNT_DESC_TYPICAL;
 import static seedu.address.logic.commands.CommandTestUtil.FILE_DESC_VALID_FILE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_DESC_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_COUNT_DESC_TYPICAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_CSV_PATH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPICAL_PERSONS_GROUP_COUNT;
@@ -16,13 +20,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -33,9 +40,12 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Group;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.AllocDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -48,6 +58,17 @@ public class AddressBookParserTest {
         Student student = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(student));
         assertEquals(new AddCommand(student), command);
+    }
+
+    @Test
+    public void parseCommand_addGroup() throws Exception {
+        Group group = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
+        AllocDescriptor descriptor = new AllocDescriptorBuilder()
+                .withGroup(VALID_GROUP_TUTORIAL)
+                .withName(VALID_NAME_AMY).build();
+        AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "
+                + GROUP_DESC_TUTORIAL + NAME_DESC_AMY);
+        assertEquals(new AddGroupCommand(group, Arrays.asList(descriptor)), command);
     }
 
     @Test
