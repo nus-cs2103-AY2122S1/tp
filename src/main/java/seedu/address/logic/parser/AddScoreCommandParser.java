@@ -37,13 +37,13 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
         AddScoreCommand.ScoreDescriptor scoreDescriptor = new ScoreDescriptor();
         scoreDescriptor.setAssessment(ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()));
-        scoreDescriptor.setScore(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             scoreDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             scoreDescriptor.setId(ParserUtil.parseID(argMultimap.getValue(PREFIX_ID).get()));
         }
+        scoreDescriptor.setScore(ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get()));
 
         return new AddScoreCommand(scoreDescriptor);
     }

@@ -2,12 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -55,12 +50,16 @@ public class CommandTestUtil {
     public static final int VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT = 2;
     public static final int VALID_TYPICAL_PERSONS_TAG_COUNT = 2;
 
+    public static final String ASSESSMENT_DESC_AMY = " " + PREFIX_ASSESSMENT + VALID_ASSESSMENT_AMY;
+    public static final String ASSESSMENT_DESC_BOB = " " + PREFIX_ASSESSMENT + VALID_ASSESSMENT_BOB;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String ID_DESC_AMY = " " + PREFIX_ID + VALID_ID_AMY;
     public static final String ID_DESC_BOB = " " + PREFIX_ID + VALID_ID_BOB;
     public static final String GROUP_DESC_TUTORIAL = " " + PREFIX_GROUP + VALID_GROUP_TUTORIAL;
     public static final String GROUP_DESC_RECITATION = " " + PREFIX_GROUP + VALID_GROUP_RECITATION;
+    public static final String SCORE_DESC_AMY = " " + PREFIX_SCORE + VALID_SCORE_AMY;
+    public static final String SCORE_DESC_BOB = " " + PREFIX_SCORE + VALID_SCORE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -75,7 +74,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "E0123"; // ID length too short
-    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in name
+    public static final String INVALID_GROUP_DESC = " " + PREFIX_GROUP + "05&"; // '&' not allowed in names
+    public static final String INVALID_ASSESSMENT_DESC = " " + PREFIX_ASSESSMENT + "P01&"; // '&' not allowed in name
+    public static final String INVALID_SCORE_DESC = " " + PREFIX_SCORE + "invalid0"; // only numbers
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GROUP_COUNT_DESC = " " + PREFIX_GROUP + "invalid1"; // only numbers allowed
     public static final String INVALID_ASSESSMENT_COUNT_DESC = " " + PREFIX_ASSESSMENT + "invalid2"; // only numbers
