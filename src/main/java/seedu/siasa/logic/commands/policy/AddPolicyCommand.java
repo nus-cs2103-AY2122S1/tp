@@ -7,7 +7,6 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_EXPIRY;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 
-
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;

@@ -4,9 +4,9 @@ import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.client.DeleteClientCommand;
-import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.ParserUtil;
+import seedu.siasa.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

@@ -11,17 +11,17 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.siasa.logic.commands.client.AddClientCommand;
+import seedu.siasa.logic.parser.ArgumentMultimap;
+import seedu.siasa.logic.parser.ArgumentTokenizer;
+import seedu.siasa.logic.parser.Parser;
+import seedu.siasa.logic.parser.ParserUtil;
+import seedu.siasa.logic.parser.Prefix;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.person.Address;
 import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
-import seedu.siasa.logic.parser.ArgumentMultimap;
-import seedu.siasa.logic.parser.ArgumentTokenizer;
-import seedu.siasa.logic.parser.Parser;
-import seedu.siasa.logic.parser.ParserUtil;
-import seedu.siasa.logic.parser.Prefix;
 import seedu.siasa.model.tag.Tag;
 
 /**

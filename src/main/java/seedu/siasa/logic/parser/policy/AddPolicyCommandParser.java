@@ -11,12 +11,12 @@ import java.util.HashSet;
 import java.util.stream.Stream;
 
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
-import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.ArgumentMultimap;
 import seedu.siasa.logic.parser.ArgumentTokenizer;
 import seedu.siasa.logic.parser.Parser;
 import seedu.siasa.logic.parser.ParserUtil;
 import seedu.siasa.logic.parser.Prefix;
+import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.person.Address;
 import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Name;
@@ -24,9 +24,9 @@ import seedu.siasa.model.person.Person;
 import seedu.siasa.model.person.Phone;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
-import seedu.siasa.model.policy.Title;
 import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Price;
+import seedu.siasa.model.policy.Title;
 
 /**
  * Parses input arguments and creates a new AddCommand object
