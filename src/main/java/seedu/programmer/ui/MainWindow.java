@@ -218,9 +218,14 @@ public class MainWindow extends UiPart<Stage> {
         final Popup popup = new Popup();
         popup.setAutoFix(true);
         popup.setHideOnEscape(true);
+
         Label label = new Label(message);
         label.getStylesheets().add("view/Styles.css");
         label.getStyleClass().add("popup");
+
+        // Hide popup when the user clicks on it
+        label.setOnMouseReleased(e -> popup.hide());
+
         popup.getContent().add(label);
         return popup;
     }
