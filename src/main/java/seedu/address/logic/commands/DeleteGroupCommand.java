@@ -45,6 +45,7 @@ public class DeleteGroupCommand extends Command {
         Group groupToDelete = model.getFilteredGroupList().get(0);
 
         model.deleteGroup(groupToDelete);
+        model.updateFilteredGroupList(p -> true);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
 
