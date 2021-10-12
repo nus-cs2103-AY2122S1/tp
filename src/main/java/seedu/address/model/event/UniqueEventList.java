@@ -3,10 +3,12 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
@@ -24,7 +26,8 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
  * @see Event#isSameEvent(Event)
  */
 public class UniqueEventList implements Iterable<Event> {
-    private final ObservableList<Event> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Event> internalList =
+            FXCollections.observableList(new ArrayList<>(), (Event e) -> new Observable[]{e.getParticipants()});
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
