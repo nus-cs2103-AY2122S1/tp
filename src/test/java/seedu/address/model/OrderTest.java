@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.UniqueItemList;
 
 class OrderTest {
 
@@ -18,6 +19,15 @@ class OrderTest {
     private Item milkWithNameOnly = new Item(new Name("Milk"), "Dummy ID", 15, new HashSet<>());
     private Item milkWithIdOnly = new Item(new Name("Dummy name"), "AS0123", 15, new HashSet<>());
 
+    @Test
+    public void equals_ordersWithSameInternalList_equal() {
+        Order order1 = new Order();
+        Order order2 = new Order();
+        order1.addItem(milk);
+        order2.addItem(milk);
+
+        assertEquals(order1, order2);
+    }
 
     @Test
     public void addItem_normalItem_itemAdded() {

@@ -116,6 +116,7 @@ public class Inventory implements ReadOnlyInventory {
                 } else {
                     items.setItem(item, item.updateCount(item.getCount() - transactedQuantity));
                 }
+                break;
             }
         }
 
