@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.addressbook;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -9,7 +9,9 @@ import dash.model.ReadOnlyAddressBook;
 import dash.model.ReadOnlyUserPrefs;
 import dash.model.UserPrefs;
 import dash.model.task.TaskList;
+import dash.storage.addressbook.AddressBookStorage;
 import dash.storage.tasklist.TaskListStorage;
+import dash.storage.userprefs.UserPrefsStorage;
 
 /**
  * API of the Storage component

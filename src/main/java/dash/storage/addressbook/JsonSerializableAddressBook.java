@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.addressbook;
 
 import java.util.ArrayList;
 import java.util.List;

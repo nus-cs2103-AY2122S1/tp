@@ -1,4 +1,4 @@
-package dash.storage;
+package dash.storage.userprefs;
 
 import java.io.IOException;
 import java.nio.file.Path;
