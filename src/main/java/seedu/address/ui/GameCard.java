@@ -28,8 +28,6 @@ public class GameCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label gameId;
-//    @FXML
-//    private Label GameName;
     @FXML
     private Label id;
     @FXML
@@ -43,9 +41,9 @@ public class GameCard extends UiPart<Region> {
         this.game = game;
         id.setText(displayedIndex + ". ");
         gameId.setText(game.getGameId().value);
-//        game.getGames().stream()
-//                .sorted(Comparator.comparing(game -> game.getGameId().value))
-//                .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
+        // game.getGames().stream()
+        // .sorted(Comparator.comparing(game -> game.getGameId().value))
+        // .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
     }
 
     @Override

@@ -55,7 +55,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox gameBox;
-    
+
     @FXML
     private StackPane gamesPlaceholder;
 
@@ -127,7 +127,7 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         friendListPanel = new FriendListPanel(logic.getFilteredFriendsList());
         showFriendList();
-        
+
         gameListPanel = new GameListPanel(logic.getFilteredGamesList());
 
         resultDisplay = new ResultDisplay();
@@ -232,12 +232,12 @@ public class MainWindow extends UiPart<Stage> {
             gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
         }
     }
-    
+
     private void addGameMainCardToGamesPlaceholder(CommandResult commandResult) {
         gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
         gamesPlaceholder.getChildren().add(gameMainCard.getRoot());
     }
-    
+
     private void removeGameMainCardFromGamesPlaceholder() {
         if (gameMainCard != null) {
             gamesPlaceholder.getChildren().removeAll(gameMainCard.getRoot());
@@ -341,7 +341,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case HELP:
                 // TODO temporarily invoke game list with "help" command
-//                handleHelp();
+                // handleHelp();
                 handleGameCommand(new CommandResult("sample feedback", CommandType.GAME_LIST));
                 break;
             case EXIT:
