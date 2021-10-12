@@ -24,10 +24,16 @@ public class TabMenu extends UiPart<Region> {
     private Tab tab2;
 
     @FXML
+    private Tab tab3;
+
+    @FXML
     private GridPane contactsContainerBox;
 
     @FXML
     private GridPane tasksContainerBox;
+
+    @FXML
+    private GridPane helpContainerBox;
 
     @FXML
     private VBox leftBox;
@@ -60,6 +66,15 @@ public class TabMenu extends UiPart<Region> {
      */
     public GridPane getTasksGridPane() {
         return tasksContainerBox;
+    }
+
+    /**
+     * Returns the {@code containerBox} object in the tasks tab.
+     *
+     * @return the containerBox object.
+     */
+    public GridPane getHelpGridPane() {
+        return helpContainerBox;
     }
 
     /**

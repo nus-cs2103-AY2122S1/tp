@@ -1,4 +1,4 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import static dash.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import dash.commons.core.Messages;
 import dash.commons.core.index.Index;
-import dash.logic.commands.personcommand.DeletePersonCommand;
+import dash.logic.commands.CommandTestUtil;
 import dash.model.Model;
 import dash.model.ModelManager;
 import dash.model.UserPrefs;

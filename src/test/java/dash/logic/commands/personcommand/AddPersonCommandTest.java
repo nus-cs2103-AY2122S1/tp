@@ -1,4 +1,4 @@
-package dash.logic.commands;
+package dash.logic.commands.personcommand;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import dash.commons.core.GuiSettings;
+import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
-import dash.logic.commands.personcommand.AddPersonCommand;
 import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.ReadOnlyAddressBook;

@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private TaskListPanel taskListPanel;
+    private HelpPanel helpPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private TabMenu tabMenu;
@@ -119,16 +120,18 @@ public class MainWindow extends UiPart<Stage> {
         tabMenu = new TabMenu();
         tabMenuPlaceholder.getChildren().add(tabMenu.getRoot());
 
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         tabMenu.getContactsGridPane().add(personListPanel.getRoot(), 0, 1);
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         tabMenu.getTasksGridPane().add(taskListPanel.getRoot(), 0, 1);
+        helpPanel = new HelpPanel(resultDisplay);
+        tabMenu.getHelpGridPane().add(helpPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -148,15 +151,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Switch to Help Tab
      */
-    @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        tabMenu.switchTab(2);
+        logic.setTabNumber(2);
     }
 
     /**

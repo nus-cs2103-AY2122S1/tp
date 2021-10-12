@@ -10,23 +10,12 @@ import dash.logic.commands.HelpCommand;
 import dash.logic.commands.SwitchTabContactsCommand;
 import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
-import dash.logic.commands.personcommand.ListPeopleCommand;
-import dash.logic.commands.taskcommand.AddTaskCommand;
-import dash.logic.commands.taskcommand.ClearTaskCommand;
-import dash.logic.commands.taskcommand.DeleteTaskCommand;
-import dash.logic.commands.taskcommand.EditTaskCommand;
-import dash.logic.commands.taskcommand.FindTaskCommand;
-import dash.logic.commands.taskcommand.ListTaskCommand;
 import dash.logic.parser.exceptions.ParseException;
-import dash.logic.parser.taskcommand.AddTaskCommandParser;
-import dash.logic.parser.taskcommand.DeleteTaskCommandParser;
-import dash.logic.parser.taskcommand.EditTaskCommandParser;
-import dash.logic.parser.taskcommand.FindTaskCommandParser;
 
 /**
  * Parses user input.
  */
-public class TaskTabParser {
+public class HelpTabParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -50,35 +39,17 @@ public class TaskTabParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddTaskCommand.COMMAND_WORD:
-            return new AddTaskCommandParser().parse(arguments);
-
-        case EditTaskCommand.COMMAND_WORD:
-            return new EditTaskCommandParser().parse(arguments);
-
-        case DeleteTaskCommand.COMMAND_WORD:
-            return new DeleteTaskCommandParser().parse(arguments);
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case FindTaskCommand.COMMAND_WORD:
-            return new FindTaskCommandParser().parse(arguments);
-
-        case ListPeopleCommand.COMMAND_WORD:
-            return new ListTaskCommand();
-
-        case ClearTaskCommand.COMMAND_WORD:
-            return new ClearTaskCommand();
-
         case SwitchTabContactsCommand.COMMAND_WORD:
-            return new SwitchTabContactsCommand(1);
+            return new SwitchTabContactsCommand(2);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
-            return new SwitchTabTasksCommand(1);
+            return new SwitchTabTasksCommand(2);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
-            return new SwitchTabHelpCommand(1);
+            return new SwitchTabHelpCommand(2);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

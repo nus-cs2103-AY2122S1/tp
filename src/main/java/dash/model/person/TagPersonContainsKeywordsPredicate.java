@@ -10,10 +10,10 @@ import dash.model.tag.Tag;
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
+public class TagPersonContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
+    public TagPersonContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -37,8 +37,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TagContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((TagContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof TagPersonContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((TagPersonContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }

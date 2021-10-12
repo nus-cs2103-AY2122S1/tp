@@ -8,6 +8,7 @@ import dash.logic.commands.Command;
 import dash.logic.commands.ExitCommand;
 import dash.logic.commands.HelpCommand;
 import dash.logic.commands.SwitchTabContactsCommand;
+import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.personcommand.AddPersonCommand;
 import dash.logic.commands.personcommand.ClearPeopleCommand;
@@ -69,14 +70,14 @@ public class ContactsTabParser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
         case SwitchTabContactsCommand.COMMAND_WORD:
             return new SwitchTabContactsCommand(0);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
             return new SwitchTabTasksCommand(0);
+
+        case SwitchTabHelpCommand.COMMAND_WORD:
+            return new SwitchTabHelpCommand(0);
 
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);

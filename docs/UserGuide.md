@@ -203,6 +203,7 @@ Action | Format
 **Delete** | `delete INDEX`
 **Find** | `find NAME`
 **Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+**Clear** | `clear`
 
 ### Tasks Tab
 

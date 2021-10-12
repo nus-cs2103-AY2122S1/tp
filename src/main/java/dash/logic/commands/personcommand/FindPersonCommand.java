@@ -17,7 +17,7 @@ import dash.model.person.EmailContainsKeywordsPredicate;
 import dash.model.person.NameContainsKeywordsPredicate;
 import dash.model.person.Person;
 import dash.model.person.PhoneContainsKeywordsPredicate;
-import dash.model.person.TagContainsKeywordsPredicate;
+import dash.model.person.TagPersonContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -78,7 +78,7 @@ public class FindPersonCommand extends Command {
         private PhoneContainsKeywordsPredicate phonePredicate;
         private AddressContainsKeywordsPredicate addressPredicate;
         private EmailContainsKeywordsPredicate emailPredicate;
-        private TagContainsKeywordsPredicate tagPredicate;
+        private TagPersonContainsKeywordsPredicate tagPredicate;
 
         public FindPersonDescriptor() {
         }
@@ -124,10 +124,10 @@ public class FindPersonCommand extends Command {
         }
 
         public void setTags(List<String> tagPredicate) {
-            this.tagPredicate = new TagContainsKeywordsPredicate(tagPredicate);
+            this.tagPredicate = new TagPersonContainsKeywordsPredicate(tagPredicate);
         }
 
-        public Optional<TagContainsKeywordsPredicate> getTags() {
+        public Optional<TagPersonContainsKeywordsPredicate> getTags() {
             return Optional.ofNullable(tagPredicate);
         }
 

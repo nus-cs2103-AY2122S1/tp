@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets top="5" right="10" bottom="5" left="10"/>
@@ -20,6 +21,7 @@
                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <Label text=" Contacts " styleClass="tabMenu-header-selected"/>
                         <Label text=" Tasks " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-unselected"/>
                     </HBox>
                 </children>
                 <columnConstraints>
@@ -38,10 +40,29 @@
                     <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
                         <Label text=" Contacts " styleClass="tabMenu-header-unselected"/>
                         <Label text=" Tasks " styleClass="tabMenu-header-selected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-unselected"/>
                     </HBox>
                 </children>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
+                    <RowConstraints vgrow="ALWAYS" fillHeight="true"/>
+                </rowConstraints>
+            </GridPane>
+        </Tab>
+        <Tab fx:id="tab3" text="Help">
+            <GridPane fx:id="helpContainerBox" VBox.vgrow="ALWAYS">
+                <children>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Label text=" Contacts " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Tasks " styleClass="tabMenu-header-unselected"/>
+                        <Label text=" Help " styleClass="tabMenu-header-selected"/>
+                    </HBox>
+                </children>
+                <columnConstraints>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="100"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>

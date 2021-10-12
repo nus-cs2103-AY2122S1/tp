@@ -144,6 +144,10 @@
     -fx-border-top-width: 1px;
 }
 
+.help-menu{
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
 .tabMenu-header-selected {
     -fx-background-color: derive(#1d1d1d, 30%);
     -fx-border-top-width: 1px;
@@ -223,6 +227,12 @@
 
 .menu .left-container {
     -fx-background-color: black;
+}
+
+.help-menu-text {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
 }
 
 /*
