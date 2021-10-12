@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.IdBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class GroupTest {
 
@@ -57,8 +58,8 @@ public class GroupTest {
 
     @Test
     public void hasStudent_included() {
-        ID id = new IdBuilder().build();
-        Group group = new GroupBuilder().withStudents(List.of(id)).build();
-        assertTrue(() -> group.hasStudent(id));
+        Student student = new PersonBuilder().build();
+        Group group = new GroupBuilder().withStudents(student).build();
+        assertTrue(() -> group.hasStudent(student.getId()));
     }
 }
