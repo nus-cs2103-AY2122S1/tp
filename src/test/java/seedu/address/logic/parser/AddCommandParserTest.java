@@ -141,7 +141,7 @@ public class AddCommandParserTest {
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INVALID_GRADE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Grade.MESSAGE_CONSTRAINTS);
+                + INVALID_GRADE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Grade.GRADE_MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

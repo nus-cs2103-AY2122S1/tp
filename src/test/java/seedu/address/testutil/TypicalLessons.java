@@ -8,16 +8,18 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonTime;
+import seedu.address.model.lesson.Price;
+import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Grade;
 
 public class TypicalLessons {
+
     // Test Lessons
-    public static final Lesson SCIENCE_P6 = new Lesson("Science", new Grade("P6"),
-            DayOfWeek.FRIDAY, LocalTime.NOON, 10.5);
-    public static final Lesson MATH_S4 = new Lesson("Math", new Grade("S4"),
-            DayOfWeek.THURSDAY, LocalTime.NOON, 13.0);
-    public static final Lesson ENGLISH_S2 = new Lesson("English", new Grade("S2"),
-            DayOfWeek.TUESDAY, LocalTime.NOON, 11.5);
+    public static final Lesson SCIENCE_P2 = new Lesson(new Subject("Science"), new Grade("P2"),
+            new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 30)), new Price(10.5));
+    public static final Lesson MATH_S2 = new Lesson(new Subject("Mathematics"), new Grade("S2"),
+            new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
 
     private TypicalLessons() {} //prevents instantiation
 
@@ -33,6 +35,6 @@ public class TypicalLessons {
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(SCIENCE_P6, MATH_S4, ENGLISH_S2));
+        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone()));
     }
 }

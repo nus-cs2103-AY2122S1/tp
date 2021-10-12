@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonCode;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Student;
 
 /**
@@ -172,16 +175,29 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Lesson searchLessons(String arg) {
+    public Optional<Student> searchStudents(Name arg) {
+        requireAllNonNull(arg);
+
+        ObservableList<Student> students = addressBook.getPersonList();
+        for (Student current : students) {
+            if (arg.equals(current.getName())) {
+                return Optional.of(current);
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Lesson> searchLessons(LessonCode arg) {
         requireAllNonNull(arg);
 
         ObservableList<Lesson> lessons = addressBook.getLessonList();
         for (Lesson current : lessons) {
             if (arg.equals(current.getLessonCode())) {
-                return current;
+                return Optional.of(current);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     @Override
@@ -190,12 +206,10 @@ public class ModelManager implements Model {
         if (obj == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(obj instanceof ModelManager)) {
             return false;
         }
-
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
