@@ -15,7 +15,7 @@
 #### Module add
 
 * Create a new module
-* Format: `module add m/<module name>`
+* Format: `add module m/<module name>`
 
 #### Module add task
 
@@ -25,7 +25,7 @@
 #### Module add student
 
 * Add a student to a specific module
-* Format: `module add <module name>, <student id>`
+* Format: `add student m/<module name> i/<student id> n/<student name> t/<tele_handle> e/<student email>`
 
 #### Module delete student
 
