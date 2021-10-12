@@ -76,7 +76,7 @@ public class AddressBookParser {
 
         case ViewGroupCommand.COMMAND_WORD :
             return new ViewGroupCommandParser().parse(arguments);
-            
+
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
