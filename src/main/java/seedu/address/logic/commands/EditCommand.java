@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -48,8 +48,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list or by the name identifier\n. "
-            + "[" + EDIT_PREFIX_INDEX + "INDEX] "
-            + "[" + EDIT_PREFIX_NAME + "NAME] should be used for the lookup"
+            + "[" + PREFIX_DASH_INDEX + "INDEX] "
+            + "[" + PREFIX_DASH_NAME + "NAME] should be used for the lookup"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "

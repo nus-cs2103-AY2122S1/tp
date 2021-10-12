@@ -16,7 +16,7 @@ public class MarkCommand extends Command {
     private static final String MESSAGE_USAGE = COMMAND_WORD + ": ";
     private static final String DEFAULT_EXECUTION = "$1%s number of staff have been marked for the period $2%s\n"
             + "$3%s";
-    
+
     private enum List {
         OBSERVED, INTERNAL
     }
