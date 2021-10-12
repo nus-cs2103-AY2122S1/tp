@@ -23,12 +23,12 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or priority tags \n"
-            + "and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]..."
+            + "and displays them as a list with index numbers.\n\n"
+            + "Parameters: \nKEYWORD [MORE_KEYWORDS]..."
             + " OR " + PriorityTag.PRIORITY_TAG_PREFIX
-            + "PRIORITY [MORE_PRIORITIES]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "PRIORITY [MORE_PRIORITIES]...\n\n"
+            + "Examples: \n" + COMMAND_WORD + " alice bob charlie\n"
+            + COMMAND_WORD + " "
             + PriorityTag.PRIORITY_TAG_PREFIX
             + PriorityTag.LowPriority.TERM + "\n";
 

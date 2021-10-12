@@ -26,30 +26,30 @@ public class AppointmentCommand extends Command {
     public static final String APPOINTMENT_DELETE_COMMAND = "del";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
-            + " by the index number used in the last person listing.\n"
-            + "Parameters (add): INDEX (must be a positive integer), "
+            + " by the index number used in the last person listing.\n\n"
+            + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
             + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd), "
-            + PREFIX_APPOINTMENT_TIME + "TIME (must be hh:mm (24-hour format)), "
-            + PREFIX_APPOINTMENT_VENUE + "VENUE (maximum 50 characters long)" + "\n"
-            + PREFIX_APPOINTMENT + "[DATE], "
-            + PREFIX_APPOINTMENT_TIME + "[TIME], "
-            + PREFIX_APPOINTMENT_VENUE + "[VENUE]" + "\n"
-            + "Note: Appointment Time and Appointment Venue are optional, can be excluded.\n"
-            + "Example 1: " + COMMAND_WORD + " 1 "
+            + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format)), "
+            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 50 characters long);" + "\n\n"
+
+            // + "Note: Appointment time and venue are optional.\n\n"
+            //not needed as using [] already represents optional, similar to add and edit commands
+
+            + "Examples: \n" + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "
             + PREFIX_APPOINTMENT_VENUE + "Orchard Central" + "\n"
-            + "Example 2: " + COMMAND_WORD + " 1 "
+            + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "19:00 \n"
-            + "Example 3: " + COMMAND_WORD + " 1 "
+            + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_VENUE + "Ion \n"
-            + "Example 4: " + COMMAND_WORD + " 1 "
+            + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 \n\n"
-            + "Parameters (delete): INDEX (must be a positive integer), "
+            + "Parameters (to delete an appointment): \nINDEX (must be a positive integer), "
             + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + "\n"
-            + "Example 5: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND;
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
