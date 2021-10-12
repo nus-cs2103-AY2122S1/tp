@@ -28,7 +28,6 @@ public class WelcomeWindow extends UiPart<Stage> {
 
     private final String tagLine = "TYPE. EXPLORE. CONNECT. ";
     private final double delayTime = (tagLine.length() * 5) + 100;
-
     private final Image appLogoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
     @FXML
@@ -66,7 +65,8 @@ public class WelcomeWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the closing of the WelcomeWindow created.
+     * Handles the closing of the WelcomeWindow created, and
+     * launching of the MainWindow.
      */
     public void close(MainWindow mainWindow) {
         PauseTransition delay = new PauseTransition(Duration.millis(delayTime * tagLine.length() + 100));
@@ -82,7 +82,7 @@ public class WelcomeWindow extends UiPart<Stage> {
      * in the WelcomeWindow.
      */
     public void fadeTransition() {
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(4000), appLogo);
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(4200), appLogo);
         fadeOut.setFromValue(0.0);
         fadeOut.setToValue(1.0);
         fadeOut.play();

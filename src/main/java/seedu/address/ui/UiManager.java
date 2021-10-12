@@ -38,16 +38,16 @@ public class UiManager implements Ui {
     public void start(Stage primaryStage) {
         logger.info("Starting UI...");
 
-        // Shows the Welcome Splash Screen.
-        welcomeWindow = new WelcomeWindow();
-
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
+
+            // Shows the Welcome Splash Screen.
+            welcomeWindow = new WelcomeWindow();
             welcomeWindow.start(mainWindow);
-            //mainWindow.show(); //This should be called before creating other UI parts
+
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
