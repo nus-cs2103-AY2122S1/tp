@@ -11,7 +11,7 @@ import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AnimeList} with sample data.
  */
 public class SampleDataUtil {
     public static Anime[] getSampleAnime() {
@@ -21,7 +21,7 @@ public class SampleDataUtil {
             new Anime(new Name("Charlotte"), getTagSet("supernatural")),
             new Anime(new Name("Darling in the Franxx"), getTagSet("mecha")),
             new Anime(new Name("Haikyuu!!: To the Top"), getTagSet("sports")),
-            //new Anime(new Name("Steins;Gate 0"), getTagSet("science fiction"))
+            new Anime(new Name("Steins;Gate 0"), getTagSet("science fiction"))
         };
     }
 
