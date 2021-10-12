@@ -23,6 +23,7 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.AllocDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -82,15 +83,27 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditStudentDescriptor DESC_AMY;
-    public static final EditCommand.EditStudentDescriptor DESC_BOB;
+    public static final AddAllocCommand.AllocDescriptor ALLOC_DESC_AMY;
+    public static final AddAllocCommand.AllocDescriptor ALLOC_DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+        ALLOC_DESC_AMY = new AllocDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withGroup(VALID_GROUP_TUTORIAL).build();
+        ALLOC_DESC_BOB = new AllocDescriptorBuilder()
+                .withId(VALID_ID_BOB)
+                .withGroup(VALID_GROUP_RECITATION).build();
+    }
+
+    public static final EditCommand.EditStudentDescriptor EDIT_DESC_AMY;
+    public static final EditCommand.EditStudentDescriptor EDIT_DESC_BOB;
+
+    static {
+        EDIT_DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withId(VALID_ID_AMY)
                 .withGroups(VALID_GROUP_TUTORIAL)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
+        EDIT_DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withId(VALID_ID_BOB)
                 .withGroups(VALID_GROUP_RECITATION)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
