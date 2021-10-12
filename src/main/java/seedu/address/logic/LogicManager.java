@@ -48,7 +48,7 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        if (!hasCreatedProfile() && !commandText.toLowerCase().startsWith("create")) {
+        if (!hasCreatedProfile() && !commandText.toLowerCase().startsWith("create") && !commandText.equals("list")) {
             throw new CommandException(PROFILE_NOT_CREATED_ERROR_MESSAGE + "\n" + CreateCommand.MESSAGE_USAGE);
         } else if (hasCreatedProfile() && commandText.toLowerCase().startsWith("create")) {
             throw new CommandException(PROFILE_CREATED_ERROR_MESSAGE + "\n" + EditCommand.MESSAGE_USAGE);

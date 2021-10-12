@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.StudentIdContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindIdCommand}.
  */
 public class FindIdCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

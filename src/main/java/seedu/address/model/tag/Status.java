@@ -1,14 +1,35 @@
 package seedu.address.model.tag;
 
+import java.util.stream.Stream;
+
 public enum Status {
-    NONE(0),
-    NEED_GROUP(1),
-    NEED_MEMBER(2);
+    NONE("G"),
+    NEED_GROUP("SG"),
+    NEED_MEMBER("SM");
 
-    private int status;
+    private String status;
 
-    Status(int s) {
+    Status(String s) {
         this.status = s;
+    }
+
+    /**
+     * Parses the status of the filter command.
+     *
+     * @param status The status specified in the filter command
+     * @return The {@code Status} group status.
+     */
+    public static Status parseStatusForFilter(String status) {
+        assert (status != null);
+        return Status.valueOf(status);
+    }
+
+    /**
+     * Returns true if a given string is a valid status.
+     */
+    public static boolean isValidStatus(String test) {
+        System.out.println(Status.NONE.toString());
+        return Stream.of(Status.values()).anyMatch(status -> status.toString().equalsIgnoreCase(test));
     }
 
     /**
@@ -28,22 +49,6 @@ public enum Status {
         } else {
             return Status.NONE;
         }
-    }
-
-    /**
-     * Converts an int into a Status.
-     *
-     * @param i the given int
-     * @return the matching Status.
-     */
-    public static Status parseStatusFromInt(int i) {
-        for (Status s : Status.values()) {
-            if (s.status == 1) {
-                return s;
-            }
-        }
-
-        return Status.NONE;
     }
 
     @Override

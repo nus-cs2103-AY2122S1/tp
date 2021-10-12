@@ -31,7 +31,7 @@ public class Person {
      */
     public Person(Name name, StudentId id, Phone phone, Email email,
                   boolean isFavourite, Set<Mod> mods, boolean isMyProfile) {
-        requireAllNonNull(name, id, phone, email, mods, isMyProfile);
+        requireAllNonNull(name, id, phone, email, mods);
         this.name = name;
         this.id = id;
         this.phone = phone;

@@ -70,7 +70,7 @@ public class PersonCard extends UiPart<Region> {
                         mods.getChildren().add(new Label(mod.modName));
                     } else if (mod.status.equals(Status.NEED_GROUP)) {
                         Label l = new Label(mod.modName);
-                        l.setStyle("-fx-background-color: red;");
+                        l.setStyle("-fx-background-color: #ff0000;");
                         mods.getChildren().add(l);
                     } else if (mod.status.equals(Status.NEED_MEMBER)) {
                         Label l = new Label(mod.modName);
