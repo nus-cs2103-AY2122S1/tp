@@ -47,11 +47,11 @@ public class CommandTestUtil {
 
     public static final String VALID_FACILITY_NAME_COURT = "Court 1";
     public static final String VALID_LOCATION_COURT = "University Sports Hall";
-    public static final String VALID_TIME_COURT = "11:30";
+    public static final String VALID_TIME_COURT = "1130";
     public static final String VALID_CAPACITY_COURT = "5";
     public static final String VALID_FACILITY_NAME_FIELD = "NUS Field 2";
     public static final String VALID_LOCATION_FIELD = "Opp University Hall";
-    public static final String VALID_TIME_FIELD = "13:30";
+    public static final String VALID_TIME_FIELD = "1330";
     public static final String VALID_CAPACITY_FIELD = "8";
 
     public static final String NAME_DESC_COURT = " " + PREFIX_NAME + VALID_FACILITY_NAME_COURT;

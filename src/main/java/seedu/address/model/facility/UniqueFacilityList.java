@@ -8,8 +8,11 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.facility.exceptions.DuplicateFacilityException;
 import seedu.address.model.facility.exceptions.FacilityNotFoundException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.Person;
+
 
 
 
@@ -36,6 +39,26 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void add(Facility facility) {
         requireNonNull(facility);
         facilityList.add(facility);
+    }
+
+    /**
+     * Replaces the facility {@code target} in the list with {@code editedFacility}.
+     * {@code target} must exist in the list.
+     * The facility parameter of {@code editedFacility} must not be the same as another existing facility in the list.
+     */
+    public void setFacility(Facility target, Facility editedFacility) {
+        requireAllNonNull(target, editedFacility);
+
+        int index = facilityList.indexOf(target);
+        if (index == -1) {
+            throw new FacilityNotFoundException();
+        }
+
+        if (!target.isSameFacility(editedFacility) && contains(editedFacility)) {
+            throw new DuplicateFacilityException();
+        }
+
+        facilityList.set(index, editedFacility);
     }
 
     /**
@@ -71,7 +94,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
     public void setFacilities(List<Facility> facilities) {
         requireAllNonNull(facilities);
         if (!facilitiesAreUnique(facilities)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateFacilityException();
         }
 
         facilityList.setAll(facilities);
@@ -92,6 +115,46 @@ public class UniqueFacilityList implements Iterable<Facility> {
     }
 
     /**
+     * Allocates members into the different facilities.
+     *
+     * @param members Members to be allocated.
+     */
+    public void allocateMembersToFacilities(FilteredList<Person> members) {
+        int index = 0;
+        for (Facility facility : facilityList) {
+            Facility toEdit = facility;
+            toEdit.clearAllocationList();
+
+            int facilityCount = 0;
+
+            while (toEdit.isWithinMaxCapacity(facilityCount + 1)
+                    && !(index > members.size() - 1)) {
+                toEdit.addPersonToFacility(members.get(index));
+                facilityCount++;
+                index++;
+            }
+            this.replaceFacility(facility, toEdit);
+        }
+    }
+
+    /**
+     * Replaces target Facility with edited Facility. Does not
+     * check for duplicates.
+     *
+     * @param target Facility to be replaced.
+     * @param editedFacility Facility replacing old one.
+     */
+    public void replaceFacility(Facility target, Facility editedFacility) {
+        int index = facilityList.indexOf(target);
+        if (index == -1) {
+            throw new FacilityNotFoundException();
+        }
+
+        facilityList.set(index, editedFacility);
+    }
+
+
+    /**
      * Returns true if {@code persons} contains only unique persons.
      */
     private boolean facilitiesAreUnique(List<Facility> facilities) {
@@ -103,6 +166,7 @@ public class UniqueFacilityList implements Iterable<Facility> {
             }
         }
         return true;
+
     }
 
 }

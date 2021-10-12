@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.EditFacilityCommand;
 import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -27,16 +28,16 @@ import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.Facility;
-import seedu.address.model.facility.FacilityName;
-import seedu.address.model.facility.Location;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
-import seedu.address.model.facility.Time;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditFacilityDescriptorBuilder;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
+import seedu.address.testutil.FacilityBuilder;
+import seedu.address.testutil.FacilityUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -53,13 +54,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addFacility() throws ParseException {
-        FacilityName name = new FacilityName("Court 1");
-        Location location = new Location("University Sports Hall");
-        Time time = new Time("11:30");
-        Capacity capacity = new Capacity("5");
-        Facility facility = new Facility(name, location, time, capacity);
+        Facility facility = new FacilityBuilder()
+                .withFacilityName("Court 1")
+                .withLocation("University Sports Hall")
+                .withCapacity("5")
+                .withTime("1130").build();
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
-                + "n/Court 1 l/University Sports Hall t/11:30 c/5");
+                + "n/Court 1 l/University Sports Hall t/1130 c/5");
         assertEquals(new AddFacilityCommand(facility), command);
     }
 
@@ -97,6 +98,16 @@ public class AddressBookParserTest {
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditMemberCommand(INDEX_FIRST, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_editf() throws Exception {
+        Facility facility = new FacilityBuilder().build();
+        EditFacilityCommand.EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder(facility).build();
+        EditFacilityCommand command = (EditFacilityCommand) parser.parseCommand(
+                EditFacilityCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " "
+                        + FacilityUtil.getEditFacilityDescriptorDetails(descriptor));
+        assertEquals(new EditFacilityCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -139,6 +150,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
         assertTrue(parser.parseCommand(
                 ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
+    }
+
+    @Test
+    public void parseCommand_split() throws Exception {
+        assertEquals(new SplitCommand("Mon"), parser.parseCommand(SplitCommand.COMMAND_WORD + " Mon"));
     }
 
     @Test
