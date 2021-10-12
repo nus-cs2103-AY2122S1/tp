@@ -36,8 +36,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label vaccstatus;
-    @FXML
     private Label faculty;
 
     /**
@@ -51,7 +49,6 @@ public class PersonCard extends UiPart<Region> {
         room.setText(person.getRoom().room);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        vaccstatus.setText(person.getVaccStatus().vaccStatus);
         faculty.setText(person.getFaculty().faculty);
     }
 
