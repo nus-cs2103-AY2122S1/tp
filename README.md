@@ -15,7 +15,7 @@
 #### Module add
 
 * Create a new module
-* Format: `module add <module name>`
+* Format: `module add m/<module name>`
 
 #### Module add task
 

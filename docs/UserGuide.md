@@ -63,15 +63,15 @@ Examples:
 * `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
 * `module add CS2100, lab1`: Adds the task lab1 to module CS2100
 
-### Creating a new module: `module add`
+### Creating a new module: `add module`
 
 Adds a new module to TAB
 
-Format: `module add <module name>`
+Format: `add module m/<module name>`
 
 Examples:
-* `module add CS2103`: Adds module CS2103 to TAB
-* `module add CS2100`: Adds module CS2100 to TAB
+* `module add m/CS2103`: Adds module CS2103 to TAB
+* `module add m/CS2100`: Adds module CS2100 to TAB
 
 ### Creating a new task for a specific module: `module add task`
 
