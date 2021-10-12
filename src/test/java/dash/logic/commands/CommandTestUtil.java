@@ -19,6 +19,8 @@ import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.person.NameContainsKeywordsPredicate;
 import dash.model.person.Person;
+import dash.model.task.DescriptionContainsKeywordsPredicate;
+import dash.model.task.Task;
 import dash.testutil.Assert;
 import dash.testutil.EditPersonDescriptorBuilder;
 
@@ -125,6 +127,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered task list to show only the task at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showTaskAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
+
+        Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
+        final String[] splitDesc = task.getTaskDescription().toString().split("\\s+");
+        model.updateFilteredTaskList(new DescriptionContainsKeywordsPredicate(Arrays.asList(splitDesc[0])));
+
+        assertEquals(1, model.getFilteredTaskList().size());
     }
 
 }
