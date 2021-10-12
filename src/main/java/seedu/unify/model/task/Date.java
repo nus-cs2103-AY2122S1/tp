@@ -23,9 +23,12 @@ public class Date {
     /*
      * The date should follow the format YYYY-MM-DD.
      */
-    public static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String DATE_PATTERN = "yyyy-MM-dd";
+    public static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
+    public static final DateTimeFormatter LOCAL_DATE_FORMAT = DateTimeFormatter.ofPattern(DATE_PATTERN);
 
     public final String value;
+    public final LocalDate localDate;
 
     /**
      * Constructs a {@code Date}.
@@ -36,6 +39,7 @@ public class Date {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
+        localDate = LocalDate.parse(this.value, LOCAL_DATE_FORMAT);
     }
 
     /**
@@ -43,8 +47,8 @@ public class Date {
      */
     public static boolean isValidDate(String test) {
         try {
-            FORMAT.setLenient(false);
-            FORMAT.parse(test);
+            SIMPLE_DATE_FORMAT.setLenient(false);
+            SIMPLE_DATE_FORMAT.parse(test);
             return true;
         } catch (ParseException e) {
             return false;
@@ -74,8 +78,6 @@ public class Date {
      * @return The LocalDate representing the date.
      */
     public LocalDate getDate() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(this.value, formatter);
-        return date;
+        return localDate;
     }
 }

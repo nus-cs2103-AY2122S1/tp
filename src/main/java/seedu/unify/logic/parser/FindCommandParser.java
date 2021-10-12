@@ -31,7 +31,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE);
         Predicate<Task> p = null;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            p = new TaskContainsDatePredicate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            p = new TaskContainsDatePredicate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()).getDate());
             trimmedArgs = args.split("d/")[0].trim();
         } else {
             trimmedArgs = args.trim();

@@ -16,7 +16,7 @@ import seedu.unify.logic.Logic;
 import seedu.unify.logic.commands.CommandResult;
 import seedu.unify.logic.commands.exceptions.CommandException;
 import seedu.unify.logic.parser.exceptions.ParseException;
-import seedu.unify.model.task.Date;
+import seedu.unify.model.UniFy;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -129,7 +129,8 @@ public class MainWindow extends UiPart<Stage> {
 
         // pass in date into weeklyPanel constructor instead of
         // a taskList. Currently placeholder
-        weeklyPanel = new WeeklyPanel(logic, new Date("2020-10-10"));
+        UniFy uniFy = new UniFy(logic.getUniFy());
+        weeklyPanel = new WeeklyPanel(uniFy.getWeeklyTaskList());
         weeklyPanelPlaceholder.getChildren().add(weeklyPanel.getRoot());
     }
 
