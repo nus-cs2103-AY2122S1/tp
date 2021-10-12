@@ -15,7 +15,7 @@ import seedu.anilist.commons.exceptions.IllegalValueException;
 import seedu.anilist.model.anime.Name;
 
 public class JsonAdaptedAnimeTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = " ";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
