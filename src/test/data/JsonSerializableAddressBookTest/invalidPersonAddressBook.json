@@ -4,7 +4,7 @@
     "phone": "94351253",
     "email": "invalid@email!3e",
     "address": "123, Jurong West Ave 6, #08-111",
-    "role": "floor",
+    "role": [ "floor" ],
     "salary": "900000",
     "status": "fulltime",
     "tagged": [ "friends" ],

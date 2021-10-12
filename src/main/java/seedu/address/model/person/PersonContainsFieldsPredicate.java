@@ -48,9 +48,6 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
         this.fields.add(field);
     }
 
-
-
-
     @Override
     public boolean test(Person person) {
         return person.containsFields(this.fields);

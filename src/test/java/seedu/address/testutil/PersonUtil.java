@@ -14,6 +14,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +38,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        sb.append(PREFIX_ROLE + person.getRole().getValue() + " ");
+        person.getRoles().stream().forEach(
+            s -> sb.append(PREFIX_ROLE + s.getValue() + " ")
+        );
         sb.append(PREFIX_SALARY + person.getSalary().toString() + " ");
         sb.append(PREFIX_STATUS + person.getStatus().getValue() + " ");
         person.getTags().stream().forEach(
@@ -55,13 +58,20 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.getValue()).append(" "));
+        if (descriptor.getRoles().isPresent()) {
+            Set<Role> roles = descriptor.getRoles().get();
+            if (roles.isEmpty()) {
+                sb.append(PREFIX_ROLE).append(" ");
+            } else {
+                roles.forEach(s -> sb.append(PREFIX_TAG).append(s.getValue()).append(" "));
+            }
+        }
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.toString()).append(" "));
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.getValue()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }

@@ -121,18 +121,12 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidRole_throwsIllegalValueException() {
+        List<JsonAdaptedRole> invalidRoles = new ArrayList<>(VALID_ROLES);
+        invalidRoles.add(new JsonAdaptedRole(INVALID_ROLE));
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_ROLE,
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidRoles,
                         VALID_SALARY, VALID_STATUS, VALID_TAGS, VALID_SCHEDULE);
         String expectedMessage = Role.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullRole_throwsIllegalValueException() {
-        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                null, VALID_SALARY, VALID_STATUS, VALID_TAGS, VALID_SCHEDULE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -179,5 +173,4 @@ public class JsonAdaptedPersonTest {
                         VALID_STATUS, invalidTags, VALID_SCHEDULE);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
-
 }
