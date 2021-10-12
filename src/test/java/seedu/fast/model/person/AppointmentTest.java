@@ -1,5 +1,6 @@
 package seedu.fast.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.testutil.Assert.assertThrows;
 
@@ -36,7 +37,7 @@ public class AppointmentTest {
 
         //correct format, valid date input
         Appointment validDateAppointment = new Appointment(VALID_DATE, Appointment.NO_TIME, Appointment.NO_VENUE);
-        assertTrue(validDateAppointment.convertDate().toString().equals(VALID_DATE_STRING));
+        assertFalse(validDateAppointment.convertDate().equals(DateUtil.MAX_DATE));
 
     }
 
