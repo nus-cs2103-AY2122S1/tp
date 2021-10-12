@@ -24,6 +24,7 @@ public class UiManager implements Ui {
 
     private Logic logic;
     private MainWindow mainWindow;
+    private WelcomeWindow welcomeWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
@@ -42,7 +43,11 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
-            mainWindow.show(); //This should be called before creating other UI parts
+
+            // Shows the Welcome Splash Screen.
+            welcomeWindow = new WelcomeWindow();
+            welcomeWindow.start(mainWindow);
+
             mainWindow.fillInnerParts();
 
         } catch (Throwable e) {
