@@ -20,6 +20,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.student.ContainsGroupNamePredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
+
 public class ViewGroupCommandTest {
 
     private Model model;

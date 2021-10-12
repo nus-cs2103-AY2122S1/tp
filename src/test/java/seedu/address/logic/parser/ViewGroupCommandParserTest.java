@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.ContainsGroupNamePredicate;
-import seedu.address.testutil.TypicalStudents;
+import seedu.address.testutil.TypicalGroups;
 
 public class ViewGroupCommandParserTest {
 
     private ViewGroupCommandParser parser = new ViewGroupCommandParser();
 
-    private Group group = TypicalStudents.GROUPCS2103T;
+    private Group group = TypicalGroups.TYPICAL_GROUP_CS2103T;
 
     private String validGroupName = group.getGroupName().toString();
 

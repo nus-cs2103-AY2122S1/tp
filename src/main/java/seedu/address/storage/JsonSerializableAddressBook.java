@@ -65,6 +65,9 @@ class JsonSerializableAddressBook {
         }
 
         ObservableList<Group> groupList = addressBook.getGroupList();
+        for (Group group : groupList) {
+            System.out.println(group);
+        }
 
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType(groupList);
