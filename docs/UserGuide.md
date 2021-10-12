@@ -79,7 +79,8 @@ Examples:
 - `addtoclass s/James,Felicia tc/2`
 
 #### Removing an existing student from a class: `remove`
-Format: `remove [INDEX_STUDENT] [INDEX_CLASS]`
+Removes an existing student from a tuition class using student INDEX.
+Format: `remove si/INDEX_STUDENT tc/INDEX_CLASS`
 
 #### Adding remarks to a student: `remark`
 Adds a remark to the identified student.
@@ -112,7 +113,7 @@ Action | Format
 ***Delete Student*** | `deletestudent [INDEX]`
 ***Delete Class*** | `deleteclass [INDEX]`
 ***Add Student to Class*** | `addtoclass si/INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
-***Remove Student from Class*** | `remove [INDEX_STUDENT] [INDEX_CLASS]`
+***Remove Student from Class*** | `remove si/INDEX_STUDENT tc/INDEX_CLASS`
 ***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
 ***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
 ***Exit*** | `exit`
