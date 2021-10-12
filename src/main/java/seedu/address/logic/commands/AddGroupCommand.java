@@ -49,6 +49,7 @@ public class AddGroupCommand extends Command {
      */
     public AddGroupCommand(Group group, List<AllocDescriptor> allocDescriptors) {
         requireNonNull(group);
+        requireNonNull(allocDescriptors);
         toAdd = group;
         this.allocDescriptors = new ArrayList<>(allocDescriptors);
     }
@@ -92,8 +93,20 @@ public class AddGroupCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddGroupCommand // instanceof handles nulls
-                && toAdd.equals(((AddGroupCommand) other).toAdd));
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddGroupCommand)) {
+            return false;
+        }
+
+        // state check
+        AddGroupCommand e = (AddGroupCommand) other;
+
+        return toAdd.equals(e.toAdd)
+                && allocDescriptors.equals(e.allocDescriptors);
     }
 }
