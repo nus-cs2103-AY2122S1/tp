@@ -138,7 +138,6 @@ public class ListCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
         validPeople.add(ALICE);
-        validPeople.add(CARL);
         validPeople.add(ELLE);
         assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
@@ -151,8 +150,6 @@ public class ListCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Person> validPeople = new ArrayList<>();
-        validPeople.add(ALICE);
-        validPeople.add(CARL);
         validPeople.add(GEORGE);
         assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
