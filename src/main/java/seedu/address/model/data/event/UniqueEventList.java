@@ -108,7 +108,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Set the members of the unique event list.
+     * Set the events of the unique event list.
      *
      * @param replacement is the unique event list to be set
      */
