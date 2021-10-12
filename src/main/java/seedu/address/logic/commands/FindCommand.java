@@ -21,9 +21,17 @@ public class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + COMMAND_WORD + " n/alice bob charlie";
 
     private final Predicate<Person> predicate;
+    private final String output;
 
-    public FindCommand(Predicate<Person> predicate) {
+    /**
+     * Takes in a Predicate and the output string to be displayed.
+     *
+     * @param predicate input Predicate
+     * @param output Output message
+     */
+    public FindCommand(Predicate<Person> predicate, String output) {
         this.predicate = predicate;
+        this.output = output;
     }
 
     @Override
@@ -31,7 +39,9 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                "Showing results for: " + '\n' + output + '\n'
+                        + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().size()));
     }
 
     @Override
