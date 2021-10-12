@@ -18,6 +18,7 @@ import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.ReadOnlyUserPrefs;
+import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.testutil.StudentBuilder;
 
@@ -114,6 +115,11 @@ public class AddCommandTest {
 
         @Override
         public void deleteStudent(Student target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<LabResult> showLabResultList(Student target) {
             throw new AssertionError("This method should not be called.");
         }
 

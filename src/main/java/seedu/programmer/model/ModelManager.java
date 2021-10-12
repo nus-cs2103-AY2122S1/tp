@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 
 
@@ -128,6 +130,12 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }
+
+    @Override
+    public ObservableList<LabResult> showLabResultList(Student target) {
+        return programmerError.showLabResultList(target);
+    }
+
 
     @Override
     public boolean equals(Object obj) {

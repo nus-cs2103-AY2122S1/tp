@@ -49,6 +49,14 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Get the student at the given index.
+     * The student must not already exist in the list.
+     */
+    public Student get(int index) {
+        return internalList.get(index);
+    }
+
+    /**
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.

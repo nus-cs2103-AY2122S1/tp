@@ -95,4 +95,32 @@ public class ParserUtil {
         return new Grade(trimmedGrade);
     }
 
+    //todo: for test use
+
+    public static int parseNumber(String index) {
+        if (index == null) {
+            return 1;
+        }
+        return Integer.parseInt(index.trim());
+    }
+    public static String parseTitle(String title) {
+        if (title == null) {
+            return " ";
+        }
+        return title.trim();
+    }
+
+    public static Double parseResult(String result) {
+        if (result == null) {
+            return 0.0;
+        }
+        return Double.parseDouble(result.trim());
+    }
+
+    public static Double parseTotal(String total) {
+        if (total == null) {
+            return 0.0;
+        }
+        return Double.parseDouble(total.trim());
+    }
 }

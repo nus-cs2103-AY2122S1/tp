@@ -16,6 +16,7 @@ import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
+import seedu.programmer.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -28,12 +29,15 @@ public class MainWindow extends UiPart<Stage> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
+    private Stage secondaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private LabResultListPanel labResultListPanel;
+    private StudentCard studentParticular;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -46,6 +50,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane labResultListPanelPlaceholder;
+
+    @FXML
+    private StackPane studentParticularPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -163,6 +173,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    public void handleShowResult(Student target) {
+        studentParticular = new StudentCard(target, 1);
+        studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+        labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
+        labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+    }
+
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
@@ -184,6 +202,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowResult()) {
+                handleShowResult(commandResult.getTarget());
             }
 
             return commandResult;
