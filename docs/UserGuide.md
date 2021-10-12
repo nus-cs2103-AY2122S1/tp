@@ -52,9 +52,6 @@ ________________________________________________________________________________
 * Items in square brackets are optional.<br>
   e.g `n/NAME p/PHONE_NUMBER [d/DAYS]` can be used as `n/Ben p/91111111 d/Mon` or as `n/John p/91111111`.
   
-* Items with …​ after them can be used any number of times, including zero.
-  e.g `setm INDEX d/DAY [d/DAY]…​` can be used as `setm 3 d/Mon`, `setm 3 d/Mon d/Tue`, etc.
-  
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
   
@@ -119,12 +116,13 @@ Examples:
 
 Adds a member to the members list
 
-Format: `addm n/NAME p/PHONE_NUMBER [d/DAYS]`
+Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
 * `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
 * Members added without availability will have an empty list of days
 
 Examples:
-* `addm n/John p/91234567 d/Mon d/Tues` adds John to the member list and indicates his availability on Monday and Tuesday
+* `addm n/John p/91234567 d/Mon Tue Fri` adds John to the member list and indicates his availability on Monday, Tuesday
+   and Friday.
 * `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default
 
 ### Listing all members: `listm`
@@ -166,16 +164,18 @@ Examples:
 
 Sets the availability of a given member.
 
-Format: `setm INDEX d/DAY [d/DAY]…​`
+Format: `setm INDEX/INDICES d/DAY(S)`
 
-* Sets the availability of the member at the specified `INDEX` to be the specified `DAY(s)`
+* Sets the availability of the member at the specified `INDEX/INDICES` to be the specified `DAY(s)`
 * Availability is defined as days of the week when member is free
-* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
-* The index refers to the index number shown in the displayed member list
-* The index **must be a positive integer** 1, 2, 3, …​
+* `DAY` **must be one of the following(case-insensitive):** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+* `DAYS` **must be separated by a single space** Mon Tue Wed
+* `INDEX` refers to the index number shown in the displayed member list
+* `INDICES` **must be positive integers** 1, 2, 3, …​
+* `INDICES` **must be separated by a single space** 1 2 3 …​
 
 Examples:
-* `listm` followed by `setm 5 d/Mon d/Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
+* `listm` followed by `setm 5 d/Mon Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
 * `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday
 
 ### Splitting members into facilities : `split`
@@ -242,5 +242,5 @@ Action | Format, Examples
 **Help**| `help`
 **List members**| `listm`
 **List facilities**| `listf`
-**Set member availability**| `setm INDEX d/DAY...` <br> eg.`setm 3 d/Tue d/Wed`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
 **Split members**| `split d/DAY` <br> eg. `split d/Mon`
