@@ -10,6 +10,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setReview(person.getReview());
         descriptor.setTags(person.getTags());
     }
 
@@ -72,12 +75,28 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Review} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withReview(String review) {
+        descriptor.setReview(new Review(review));
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rating} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRating(String rating) {
+        descriptor.setRating(new Rating(rating));
         return this;
     }
 

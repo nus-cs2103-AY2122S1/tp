@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -25,6 +27,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,7 +46,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REVIEW + "REVIEW] "
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_RATING + "RATING]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -99,9 +105,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Review updateReview = editPersonDescriptor.getReview().orElse(personToEdit.getReview());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Rating updatedRating = editPersonDescriptor.getRating().orElse(personToEdit.getRating());
 
-        return new Person(updatedCategoryCode, updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedCategoryCode, updatedName, updatedPhone,
+            updatedEmail, updatedAddress, updateReview, updatedTags, updatedRating);
     }
 
     @Override
@@ -132,7 +141,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Review review;
         private Set<Tag> tags;
+        private Rating rating;
 
         public EditPersonDescriptor() {}
 
@@ -146,14 +157,16 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setReview(toCopy.review);
             setTags(toCopy.tags);
+            setRating(toCopy.rating);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, review, tags, rating);
         }
 
         public void setCategoryCode(CategoryCode categoryCode) {
@@ -193,6 +206,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setReview(Review review) {
+            this.review = review;
+        }
+
+        public Optional<Review> getReview() {
+            return Optional.ofNullable(review);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -208,6 +229,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setRating(Rating rating) {
+            this.rating = rating;
+        }
+
+        public Optional<Rating> getRating() {
+            return Optional.ofNullable(rating);
         }
 
         @Override
@@ -227,8 +256,11 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
+                    && getCategoryCode().equals(e.getCategoryCode())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRating().equals(e.getRating())
+                    && getReview().equals(e.getReview())
                     && getTags().equals(e.getTags());
         }
     }

@@ -14,6 +14,8 @@ import seedu.address.model.person.CategoryCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Rating;
+import seedu.address.model.person.Review;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,6 +112,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String review} into an {@code Review}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code review} is invalid.
+     */
+    public static Review parseReview(String review) throws ParseException {
+        requireNonNull(review);
+        String trimmedReview = review.trim();
+        if (!Review.isValidReview(trimmedReview)) {
+            throw new ParseException(Review.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedReview.equals("")) {
+            trimmedReview = "- No Review -";
+        }
+        return new Review(trimmedReview);
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -149,5 +169,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        if (!Rating.isValidRating(trimmedRating)) {
+            throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
+        }
+        return new Rating(trimmedRating);
     }
 }
