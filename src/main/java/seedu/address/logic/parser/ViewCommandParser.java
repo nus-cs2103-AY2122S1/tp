@@ -9,8 +9,7 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  * Class representing the parser for the view command.
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
-
-    private static final ParseException NO_FIELD_EXCEPTION = new  ParseException(ViewCommand.HELP_MESSAGE);
+    private static final ParseException NO_FIELD_EXCEPTION = new ParseException(ViewCommand.HELP_MESSAGE);
 
     /**
      * Parser for the view command.
