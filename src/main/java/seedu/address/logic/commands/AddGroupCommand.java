@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.equalsIgnoreOrder;
 import static seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import static seedu.address.logic.commands.AddAllocCommand.createEditedStudent;
 import static seedu.address.logic.commands.AddAllocCommand.getAllocStudents;
@@ -107,6 +108,6 @@ public class AddGroupCommand extends Command {
         AddGroupCommand e = (AddGroupCommand) other;
 
         return toAdd.equals(e.toAdd)
-                && allocDescriptors.equals(e.allocDescriptors);
+                && equalsIgnoreOrder(allocDescriptors, e.allocDescriptors);
     }
 }

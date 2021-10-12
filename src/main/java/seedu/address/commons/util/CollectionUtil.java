@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -31,5 +32,13 @@ public class CollectionUtil {
      */
     public static boolean isAnyNonNull(Object... items) {
         return items != null && Arrays.stream(items).anyMatch(Objects::nonNull);
+    }
+
+    /**
+     * Returns true if two lists are equal, ignoring the order of elements within the list.
+     */
+    public static <T> boolean equalsIgnoreOrder(List<T> l1, List<T> l2) {
+        return l1.size() == l2.size()
+                && l1.stream().allMatch(l2::contains);
     }
 }

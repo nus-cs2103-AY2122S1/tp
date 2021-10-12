@@ -1,6 +1,7 @@
 package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.equalsIgnoreOrder;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -100,8 +101,7 @@ public class GroupList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupList // instanceof handles nulls
-                && groups.size() == ((GroupList) other).groups.size()
-                && groups.stream().allMatch(((GroupList) other)::contains)); // state check
+                && equalsIgnoreOrder(groups, ((GroupList) other).groups)); // state check
     }
 
     @Override
