@@ -2,9 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;
-import seedu.address.model.member.*;
+import seedu.address.model.member.Address;
+import seedu.address.model.member.Email;
+import seedu.address.model.member.Name;
+import seedu.address.model.member.Phone;
 import seedu.address.model.position.Position;
 
 /**
@@ -154,14 +154,14 @@ public class ParserUtil {
         return new EventDate(trimmedDate);
     }
 
+    /**
+     * Parses {@code indices} into a {@code Set<Index>} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     */
     public static Set<Index> parseIndices(Collection<String> indices) throws ParseException {
         requireNonNull(indices);
         final Set<Index> indexSet = new HashSet<>();
         for (String index : indices) {
-            String trimmedIndex = index.trim();
-            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
-            }
             indexSet.add(parseIndex(index));
         }
         return indexSet;

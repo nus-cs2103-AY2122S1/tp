@@ -68,7 +68,7 @@ public class UniqueMemberList implements Iterable<Member> {
         internalList.set(index, editedMember);
     }
 
-    /**w
+    /**
      * Removes the equivalent member from the list.
      * The member must exist in the list.
      */

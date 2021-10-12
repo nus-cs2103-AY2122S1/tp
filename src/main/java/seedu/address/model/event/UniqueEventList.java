@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
+import seedu.address.model.member.Member;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -51,6 +53,22 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a member to an event in the list.
+     * The event must already exist in the list.
+     *
+     * @param toModify is the event to be modified
+     * @param members is the member list to be added to event
+     */
+    public void addMembers(Event toModify, Set<Member> members) {
+        requireAllNonNull(toModify, members);
+        int index = internalList.indexOf(toModify);
+        if (index == -1) {
+            throw new EventNotFoundException();
+        }
+        internalList.get(index).addParticipants(members);
     }
 
     /**
