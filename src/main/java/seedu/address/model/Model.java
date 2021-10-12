@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 
 /**
  * The API of the Model component.
@@ -54,6 +54,12 @@ public interface Model {
     ReadOnlyTeachingAssistantBuddy getBuddy();
 
     /**
+     * Deletes the given module.
+     * The module must exist in the TAB.
+     */
+    void deleteModule(Module moduleToDelete);
+
+    /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
     boolean hasStudent(Student student);
@@ -80,6 +86,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered module list */
+    ObservableList<Module> getFilteredModuleList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.

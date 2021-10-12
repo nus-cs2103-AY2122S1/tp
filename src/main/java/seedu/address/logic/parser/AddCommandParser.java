@@ -9,9 +9,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddModuleCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -30,12 +31,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+        String command = args.split(" ")[0];
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = "add " + matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case AddModuleCommand.COMMAND_TYPE:
+        case AddModuleCommand.COMMAND_WORD:
             return new AddModuleCommandParser().parse(arguments);
+        case AddTaskCommand.COMMAND_WORD:
+            return null; //to be implemented
+        case AddStudentCommand.COMMAND_WORD:
+            return new AddStudentCommandParser().parse(arguments); //to be implemented
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

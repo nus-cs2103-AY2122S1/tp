@@ -5,49 +5,52 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a module identified using its name displayed in TAB.
  */
-public class DeleteModuleCommand extends Command {
+public class DeleteModuleCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete module";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the module identified by its name used in the displayed student list.\n"
+            + "Parameters: Module_Name (must be a string)\n"
+            + "Example: " + COMMAND_WORD + " m/CS2103";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
 
-    private final Index targetIndex;
+    private final ModuleName moduleName;
 
-    public DeleteModuleCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteModuleCommand(ModuleName moduleName) {
+        this.moduleName = moduleName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Module> lastShownList = model.getFilteredModuleList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        Module moduleToDelete;
+        for (Module module : lastShownList) {
+            if (module.getName().equals(moduleName)) {
+                moduleToDelete = module;
+                model.deleteModule(moduleToDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
+            }
+            ;
         }
-
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteModuleCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteModuleCommand) other).targetIndex)); // state check
+                && moduleName.equals(((DeleteModuleCommand) other).moduleName)); // state check
     }
 }

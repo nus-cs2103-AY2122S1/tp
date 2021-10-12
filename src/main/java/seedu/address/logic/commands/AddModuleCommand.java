@@ -12,6 +12,7 @@ import seedu.address.model.module.Module;
  */
 public class AddModuleCommand extends AddCommand {
 
+    public static final String COMMAND_WORD = "add module";
     public static final String COMMAND_TYPE = "module";
 
     public static final String MESSAGE_USAGE = AddCommand.COMMAND_WORD + " " + COMMAND_TYPE

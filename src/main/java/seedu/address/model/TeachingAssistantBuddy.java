@@ -7,8 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -17,6 +17,7 @@ import seedu.address.model.task.UniqueTaskList;
  * Duplicates are not allowed (by .isSameModule, .isSameStudent, and .isSameTask comparison)
  */
 public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
+
 
     private final UniqueModuleList modules;
     private final UniqueStudentList students;
@@ -155,7 +156,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the TAB.
      * The task identity of {@code editedTask} must not be the same
      * as another existing task in the module.
      */
@@ -205,6 +206,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
     }
+
 
     @Override
     public ObservableList<Task> getTaskList() {

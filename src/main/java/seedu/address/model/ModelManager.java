@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.student.Student;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final TeachingAssistantBuddy teachingAssistantBuddy;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given teachingAssistantBuddy and userPrefs.
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
         this.teachingAssistantBuddy = new TeachingAssistantBuddy(tab);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.teachingAssistantBuddy.getStudentList());
+        filteredModules = new FilteredList<>(this.teachingAssistantBuddy.getModuleList());
     }
 
     public ModelManager() {
@@ -90,6 +92,17 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Deletes the given module.
+     * The module must exist in the TAB.
+     *
+     * @param target
+     */
+    @Override
+    public void deleteModule(Module target) {
+        teachingAssistantBuddy.removeModule(target);
+    }
+
+    /**
      * @param student
      * @return true if current teachingAssistantBuddy has specified student
      */
@@ -136,6 +149,14 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the filtered module list
+     */
+    @Override
+    public ObservableList<Module> getFilteredModuleList() {
+        return filteredModules;
     }
 
     @Override

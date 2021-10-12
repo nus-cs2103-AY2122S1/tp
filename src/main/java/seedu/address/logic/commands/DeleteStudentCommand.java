@@ -1,53 +1,83 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
 
 /**
  * Deletes a student identified using it's displayed index from the address book.
  */
-public class DeleteStudentCommand extends Command {
+public class DeleteStudentCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "delete student";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the student identified by the student id from the module specified.\n"
+            + "Parameters: "
+            + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_STUDENT_ID + "STUDENT ID "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULE_NAME + "CS2103 "
+            + PREFIX_STUDENT_ID + "A1234567A ";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private StudentId studentId;
+    private ModuleName moduleName;
 
-    public DeleteStudentCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Deletes a student identified using its student ID from a module.
+     */
+    public DeleteStudentCommand(StudentId studentId, ModuleName moduleName) {
+        this.studentId = studentId;
+        this.moduleName = moduleName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
+        List<Module> lastShownList = model.getFilteredModuleList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Module module : lastShownList) {
+            if (module.getName().equals(moduleName)) {
+                return deleteStudentFromModule(module);
+            }
         }
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+    }
 
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete));
+    /**
+     * Deletes the student from the specified module.
+     *
+     * @param module The module the student will be deleted from.
+     * @return Statement indicating that the deletion is successful.
+     * @throws CommandException Exception thrown when student is not found.
+     */
+    public CommandResult deleteStudentFromModule(Module module) throws CommandException {
+        List<Student> studentList = module.getFilteredStudentList();
+        for (Student student : studentList) {
+            if (student.getStudentId().equals(studentId)) {
+                module.removeStudent(student);
+                return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentId));
+            }
+        }
+        throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, studentId));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteStudentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteStudentCommand) other).targetIndex)); // state check
+                && studentId.equals(((DeleteStudentCommand) other).studentId)); // state check
     }
 }
