@@ -39,23 +39,51 @@ class RoleContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_roleContainsKeywords_returnsTrue() {
-        // One keyword
+    public void test_roleContainsOnlyMatchingKeywords_returnsTrue() {
+        // One matching keyword against single term role
         RoleContainsKeywordsPredicate predicate =
                 new RoleContainsKeywordsPredicate(Collections.singletonList("Engineer"));
-        assertTrue(predicate.test(new PersonBuilder().withRole("Software Engineer").build()));
+        assertTrue(predicate.test(new PersonBuilder().withRole("Engineer").build()));
 
-        // Multiple matching keywords
+        // One matching keyword against multiple term role
+        predicate = new RoleContainsKeywordsPredicate(Collections.singletonList("Store"));
+        assertTrue(predicate.test(new PersonBuilder().withRole("Store Assistant").build()));
+
+        // All matching keywords against similar terms role
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Store", "Assistant"));
         assertTrue(predicate.test(new PersonBuilder().withRole("Store Assistant").build()));
 
-        // Only one matching keyword
-        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Store", "Manager"));
-        assertTrue(predicate.test(new PersonBuilder().withRole("Store Assistant").build()));
+        // All matching keywords against role with more terms
+        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Store", "Assistant"));
+        assertTrue(predicate.test(new PersonBuilder().withRole("Senior Store Assistant").build()));
 
-        // mixed-case keywords
+        // mixed-case and all matching keywords against similar terms role
         predicate = new RoleContainsKeywordsPredicate(Arrays.asList("stORe", "aSSistant"));
         assertTrue(predicate.test(new PersonBuilder().withRole("Store Assistant").build()));
+    }
+
+    @Test
+    public void test_roleContainsMismatchKeywords_returnsFalse() {
+        // One mismatching keyword against single term role
+        RoleContainsKeywordsPredicate predicate =
+                new RoleContainsKeywordsPredicate(Collections.singletonList("Cleaner"));
+        assertFalse(predicate.test(new PersonBuilder().withRole("Cook").build()));
+
+        // One mismatching keyword against multiple term role
+        predicate = new RoleContainsKeywordsPredicate(Collections.singletonList("Cleaner"));
+        assertFalse(predicate.test(new PersonBuilder().withRole("Senior Cook").build()));
+
+        // Multiple keywords with partial mismatch against similar term role
+        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Store", "Manager"));
+        assertFalse(predicate.test(new PersonBuilder().withRole("Store Assistant").build()));
+
+        // Multiple keywords with partial mismatch against role with more terms
+        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Store", "Manager"));
+        assertFalse(predicate.test(new PersonBuilder().withRole("Senior Store Assistant").build()));
+
+        // All mismatch keywords against multiple term role
+        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Restaurant", "Manager"));
+        assertFalse(predicate.test(new PersonBuilder().withRole("Senior Store Assistant").build()));
     }
 
     @Test
@@ -63,10 +91,6 @@ class RoleContainsKeywordsPredicateTest {
         // Zero keywords
         RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withRole("Cook").build()));
-
-        // Non-matching keyword
-        predicate = new RoleContainsKeywordsPredicate(Arrays.asList("Manager"));
-        assertFalse(predicate.test(new PersonBuilder().withRole("Dog Whisperer").build()));
 
         // Keywords match all other prefixes, but does not match role
         predicate = new RoleContainsKeywordsPredicate(
