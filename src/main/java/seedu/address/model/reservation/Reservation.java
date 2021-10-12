@@ -13,16 +13,16 @@ import seedu.address.model.person.Phone;
 public class Reservation {
     private Phone phone;
     private int numberOfPeople;
-    private LocalDateTime time;
+    private LocalDateTime dateTime;
 
     /**
      * Creates a reservation
      */
-    public Reservation(Phone phone, int numberOfPeople, LocalDateTime time) {
-        requireAllNonNull(phone, numberOfPeople, time);
+    public Reservation(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
+        requireAllNonNull(phone, numberOfPeople, dateTime);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     public Phone getPhone() {
@@ -33,8 +33,8 @@ public class Reservation {
         return numberOfPeople;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Reservation {
         Reservation that = (Reservation) o;
         return numberOfPeople == that.numberOfPeople
                 && phone.equals(that.phone)
-                && time.equals(that.time);
+                && dateTime.equals(that.dateTime);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Reservation {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(phone, numberOfPeople, time);
+        return Objects.hash(phone, numberOfPeople, dateTime);
     }
 
     /**
@@ -68,6 +68,6 @@ public class Reservation {
      */
     @Override
     public String toString() {
-        return String.format("Reservation{phone=%s, numberOfPeople=%s, time=%s}", phone, numberOfPeople, time);
+        return String.format("Reservation{phone=%s, numberOfPeople=%s, time=%s}", phone, numberOfPeople, dateTime);
     }
 }

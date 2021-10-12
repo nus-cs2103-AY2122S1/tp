@@ -7,6 +7,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +17,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,9 +27,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -78,6 +84,19 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_check() throws Exception {
+        String dateString = "2021-10-10";
+        String timeString = "1900";
+        LocalDate date = LocalDate.parse(dateString);
+        LocalTime time = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
+        EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
+
+        CheckCommand command = (CheckCommand) parser.parseCommand(
+                CheckCommand.COMMAND_WORD + " " + dateString + " " + timeString);
+        assertEquals(new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck)), command);
+    }
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -91,7 +110,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_reserve() throws Exception {
-        assertTrue(parser.parseCommand("reserve 2 p/98765432 at/11/11/2021 2030") instanceof ReserveCommand);
+        assertTrue(parser.parseCommand("reserve 2 p/98765432 at/2021-11-11 2030") instanceof ReserveCommand);
     }
 
     @Test

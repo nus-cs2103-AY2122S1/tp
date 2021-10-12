@@ -25,6 +25,7 @@ public class ReserveCommand extends Command {
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
+    public static final String MESSAGE_UNSUCCESSFUL = "Reservation already exist: %1$s";
 
     private Phone phone;
     private int numberOfPeople;
@@ -49,6 +50,9 @@ public class ReserveCommand extends Command {
         // TODO: Check the time whether can add or not
 
         Reservation reservation = new Reservation(phone, numberOfPeople, time);
+        if (model.hasReservation(reservation)) {
+            return new CommandResult(String.format(MESSAGE_UNSUCCESSFUL, reservation));
+        }
         model.addReservation(reservation);
         return new CommandResult(String.format(MESSAGE_SUCCESS, reservation));
     }

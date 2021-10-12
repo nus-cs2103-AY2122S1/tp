@@ -19,7 +19,7 @@ class ReserveCommandTest {
     private static final int DUMMY_NUMBER_OF_PEOPLE = 2;
     private static final Phone DUMMY_PHONE = new Phone("98765432");
     private static final LocalDateTime DUMMY_DATE_TIME =
-            LocalDateTime.parse("11/11/2021 2000", DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
+            LocalDateTime.parse("2021-11-11 2000", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
