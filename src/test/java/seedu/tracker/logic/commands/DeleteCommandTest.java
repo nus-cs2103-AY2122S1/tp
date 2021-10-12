@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.tracker.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
@@ -49,7 +49,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module personToDelete = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MODULE);
@@ -65,7 +65,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Index outOfBoundIndex = INDEX_SECOND_MODULE;
         // ensures that outOfBoundIndex is still in bounds of address book list

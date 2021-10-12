@@ -10,9 +10,14 @@ import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.logic.commands.ClearCommand;
 import seedu.tracker.logic.commands.Command;
 import seedu.tracker.logic.commands.DeleteCommand;
+import seedu.tracker.logic.commands.EditCommand;
 import seedu.tracker.logic.commands.ExitCommand;
+import seedu.tracker.logic.commands.FindCommand;
 import seedu.tracker.logic.commands.HelpCommand;
+import seedu.tracker.logic.commands.InfoCommand;
 import seedu.tracker.logic.commands.ListCommand;
+import seedu.tracker.logic.commands.SetCommand;
+import seedu.tracker.logic.commands.TakeCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,20 +50,29 @@ public class ModuleTrackerParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        // case EditCommand.COMMAND_WORD:
-            // return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case TakeCommand.COMMAND_WORD:
+            return new TakeCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        // case FindCommand.COMMAND_WORD:
-            // return new FindCommandParser().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SetCommand.COMMAND_WORD:
+            return new SetCommandParser().parse(arguments);
+
+        case InfoCommand.COMMAND_WORD:
+            return new InfoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

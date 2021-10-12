@@ -1,7 +1,7 @@
 package seedu.tracker.logic.commands;
 
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tracker.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.tracker.logic.commands.CommandTestUtil.showModuleAtIndex;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
@@ -33,7 +33,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

@@ -13,7 +13,7 @@ import seedu.tracker.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyModuleTracker_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,7 +21,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyModuleTracker_success() {
         Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
         expectedModel.setModuleTracker(new ModuleTracker());

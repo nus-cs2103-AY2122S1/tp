@@ -87,5 +87,30 @@ class ModuleTest {
         // different tags -> returns false
         editedCS2103T = new ModuleBuilder(CS2103T).withTags(VALID_TAG_UE).build();
         assertFalse(CS2103T.equals(editedCS2103T));
+
+
+    }
+
+    @Test
+    public void equals_withAcademicCalendar() {
+        int academicYear = 2;
+        int semester = 1;
+
+        //one module has academic calendar while the other doesn't -> false
+        Module editedCS2103T = new ModuleBuilder(CS2103T)
+                .withAcademicCalendar(academicYear, semester).build();
+        assertFalse(CS2103T.equals(editedCS2103T));
+
+        //different academic calendar value -> false
+        academicYear = 3;
+        Module secondEditedCS2103T = new ModuleBuilder(CS2103T)
+                .withAcademicCalendar(academicYear, semester).build();
+        assertFalse(editedCS2103T.equals(secondEditedCS2103T));
+
+        //same academic calendar value -> true
+        academicYear = 2;
+        Module thirdEditedCS2103T = new ModuleBuilder(CS2103T)
+                .withAcademicCalendar(academicYear, semester).build();
+        assertTrue(editedCS2103T.equals(thirdEditedCS2103T));
     }
 }

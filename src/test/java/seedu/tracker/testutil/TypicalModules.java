@@ -11,17 +11,14 @@ import seedu.tracker.model.module.Module;
  * A utility class containing a list of {@code Module} objects to be used in tests.
  */
 public class TypicalModules {
-
     public static final Module CS2103T = new ModuleBuilder().withCode("CS2103T")
             .withTitle("Software Engineering").withMc(4)
-            .withDescription("Covers the main areas of software development")
-            .withTags("core").build();
+            .withDescription("Covers the main areas of software development").build();
     public static final Module CS2101 = new ModuleBuilder().withCode("CS2101")
             .withTitle("Effective Communication for Computing Professionals")
-            .withDescription("equip students with the skills needed to communicate technical information")
-            .withTags("core").build();
+            .withDescription("equip students with the skills needed to communicate technical information").build();
     public static final Module GEQ1000 = new ModuleBuilder().withCode("GEQ1000").withTitle("Asking Questions")
-            .withDescription("introduces six dominant modes of questioning").withTags("GE").build();
+            .withDescription("introduces six dominant modes of questioning").build();
 
 
     private TypicalModules() {} // prevents instantiation

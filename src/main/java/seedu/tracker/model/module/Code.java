@@ -46,8 +46,8 @@ public class Code {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.tracker.model.module.Code // instanceof handles nulls
-                && value.equals(((seedu.tracker.model.module.Code) other).value)); // state check
+                || (other instanceof Code // instanceof handles nulls
+                && value.equals(((Code) other).value)); // state check
     }
 
     @Override

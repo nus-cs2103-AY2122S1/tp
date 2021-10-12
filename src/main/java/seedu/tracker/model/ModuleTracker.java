@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.UniqueModuleList;
 
@@ -15,6 +18,7 @@ import seedu.tracker.model.module.UniqueModuleList;
 public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
+    private AcademicCalendar currentSemester;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -24,6 +28,9 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
      *   among constructors.
      */
     {
+        AcademicYear defaultAcademicYear = new AcademicYear(1);
+        Semester defaultSemester = new Semester(1);
+        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
     }
 
@@ -38,6 +45,14 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     }
 
     //// list overwrite operations
+
+    public void setCurrentSemester(AcademicCalendar academicCalendar) {
+        this.currentSemester = academicCalendar;
+    }
+
+    public AcademicCalendar getCurrentSemester() {
+        return this.currentSemester;
+    }
 
     /**
      * Replaces the contents of the Module list with {@code modules}.

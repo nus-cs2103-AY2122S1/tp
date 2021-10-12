@@ -93,6 +93,7 @@ public class ModuleTrackerTest {
             this.modules.setAll(modules);
         }
 
+
         @Override
         public ObservableList<Module> getModuleList() {
             return modules;
