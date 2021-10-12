@@ -129,6 +129,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given facility {@code target} in the list with {@code editedFacility}.
+     * {@code target} must exist in SportsPA.
+     * The facility parameters of {@code editedFacility} must not be the same as another existing facility in SportsPA.
+     */
+    public void setFacility(Facility target, Facility editedFacility) {
+        requireNonNull(editedFacility);
+
+        facilities.setFacility(target, editedFacility);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
