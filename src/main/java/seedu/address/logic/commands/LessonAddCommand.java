@@ -127,10 +127,22 @@ public class LessonAddCommand extends UndoableCommand {
     }
 
     @Override
-    public void undo() {
+    protected void undo() {
         requireNonNull(model);
 
         model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError("The command has been successfully executed previously; "
+                    + "it should not fail now.");
+        }
     }
 
     @Override

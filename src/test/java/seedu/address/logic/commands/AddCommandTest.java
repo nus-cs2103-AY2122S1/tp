@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -36,7 +38,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = prepareAddCommandForPerson(validPerson, modelStub).execute();
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -45,10 +47,10 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
+                () -> prepareAddCommandForPerson(validPerson, modelStub).execute());
     }
 
     @Test
@@ -73,6 +75,16 @@ public class AddCommandTest {
 
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+    }
+
+    /**
+     * Generate an Add Command with respective dependencies set.
+     * UndoRedoStack not tested under Add Command thus UndoRedoStack is created within the method.
+     */
+    private AddCommand prepareAddCommandForPerson(Person person, Model model) {
+        AddCommand addCommandForPerson = new AddCommand(person);
+        addCommandForPerson.setDependencies(model, new UndoRedoStack());
+        return addCommandForPerson;
     }
 
     /**
@@ -113,6 +125,9 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addPersonAtIndex(Person person, Index index) { throw new AssertionError(("This method should not be called.")); }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

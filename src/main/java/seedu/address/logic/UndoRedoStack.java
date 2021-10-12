@@ -19,8 +19,8 @@ public class UndoRedoStack {
     }
 
     /**
-     * Add Command to Undo Stack if command is undoable
-     * @param command Command executed
+     * Add Command to Undo Stack if command is undoable.
+     * @param command Command executed.
      */
     public void pushUndoableCommand(Command command) {
         if (!(command instanceof UndoableCommand)) {
@@ -31,7 +31,7 @@ public class UndoRedoStack {
     }
 
     /**
-     * @return if there are commands to be undone
+     * @return If there are commands to be undone.
      */
     public boolean canUndo() {
         return !undoStack.empty();
@@ -41,5 +41,22 @@ public class UndoRedoStack {
         UndoableCommand toUndo = undoStack.pop();
         redoStack.push(toUndo);
         return toUndo;
+    }
+
+    /**
+     * Checks if there are any commands that can be redone.
+     * @return If there are commands to be redone.
+     */
+    public boolean canRedo() {
+        return !redoStack.empty();
+    }
+
+    /**
+     * Command that has been redone will be moved back to the undoStack so that command can be undone again.
+     */
+    public UndoableCommand popRedo() {
+        UndoableCommand toRedo = redoStack.pop();
+        undoStack.push(toRedo);
+        return toRedo;
     }
 }

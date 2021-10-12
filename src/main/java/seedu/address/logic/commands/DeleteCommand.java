@@ -55,10 +55,22 @@ public class DeleteCommand extends UndoableCommand {
     }
 
     @Override
-    public void undo() {
+    protected void undo() {
         requireNonNull(model);
 
         model.addPersonAtIndex(deletedPerson, targetIndex);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError("The command has been successfully executed previously; "
+                    + "it should not fail now.");
+        }
     }
 
     @Override

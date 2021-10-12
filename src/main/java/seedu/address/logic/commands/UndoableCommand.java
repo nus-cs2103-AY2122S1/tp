@@ -22,4 +22,5 @@ public abstract class UndoableCommand extends Command {
     }
 
     protected abstract void undo();
+    protected abstract void redo();
 }

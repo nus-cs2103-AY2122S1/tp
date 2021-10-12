@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -34,21 +36,21 @@ public class LessonAddCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonAddCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> prepareLessonAddCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void equals() {
-        LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
+        LessonAddCommand addSampleLessonCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON,
                 SampleDataUtil.getSampleLesson());
-        LessonAddCommand addSampleLessonCommand2 = new LessonAddCommand(INDEX_SECOND_PERSON,
+        LessonAddCommand addSampleLessonCommand2 = prepareLessonAddCommand(INDEX_SECOND_PERSON,
                 SampleDataUtil.getSampleLesson());
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
-        LessonAddCommand addSampleLessonCommandCopy = new LessonAddCommand(INDEX_FIRST_PERSON,
+        LessonAddCommand addSampleLessonCommandCopy = prepareLessonAddCommand(INDEX_FIRST_PERSON,
                 SampleDataUtil.getSampleLesson());
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
@@ -60,6 +62,15 @@ public class LessonAddCommandTest {
 
         // different person -> returns false
         assertFalse(addSampleLessonCommand.equals(addSampleLessonCommand2));
+    }
+
+    /**
+     * Generates a {@code LessonAddCommand} with parameters {@code index} and {@code lesson}.
+     */
+    private LessonAddCommand prepareLessonAddCommand(Index index, Lesson lesson) {
+        LessonAddCommand lessonAddCommand = new LessonAddCommand(index, lesson);
+        lessonAddCommand.setDependencies(model, new UndoRedoStack());
+        return lessonAddCommand;
     }
 
     /**
@@ -100,6 +111,9 @@ public class LessonAddCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addPersonAtIndex(Person person, Index index) { throw new AssertionError("This method should not be called."); }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

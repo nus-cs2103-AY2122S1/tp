@@ -55,7 +55,7 @@ public class AddCommand extends UndoableCommand {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final Person toAdd; //the person to be added, should not be modified in execution of command
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -81,10 +81,22 @@ public class AddCommand extends UndoableCommand {
      * To undo add student, delete added student
      */
     @Override
-    public void undo() {
+    protected void undo() {
         requireNonNull(model);
 
         model.deletePerson(toAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError("The command has been successfully executed previously; "
+                + "it should not fail now.");
+        }
     }
 
     @Override

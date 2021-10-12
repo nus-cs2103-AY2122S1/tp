@@ -6,24 +6,23 @@ import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
 
-public class UndoCommand extends Command {
-
-    public static final String COMMAND_WORD = "undo";
-
+public class RedoCommand extends Command {
+    public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the last Command that modified TAB data. \n";
+            + ": Redoes the last Command that has been undone. \n";
 
-    public static final String MESSAGE_SUCCESS = "Undo success!";
-    public static final String MESSAGE_FAILURE = "No commands to undo!";
+    public static final String MESSAGE_SUCCESS = "Redo success!";
+    public static final String MESSAGE_FAILURE = "No commands to redo!";
 
     @Override
     public CommandResult execute() throws CommandException {
         requireNonNull(undoRedoStack);
 
-        if (!undoRedoStack.canUndo()) {
+        if (!undoRedoStack.canRedo()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        undoRedoStack.popUndo().undo();
+
+        undoRedoStack.popRedo().redo();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

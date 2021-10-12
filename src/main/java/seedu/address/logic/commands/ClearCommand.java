@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
@@ -28,9 +29,20 @@ public class ClearCommand extends UndoableCommand {
     }
 
     @Override
-    public void undo() {
+    protected void undo() {
         requireNonNull(model);
 
         model.setAddressBook(previousAddressBook);
+    }
+
+    /**
+     * Redoes command.
+     * {@code previousAddressBook} becomes an empty address book.
+     */
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        executeUndoableCommand();
     }
 }
