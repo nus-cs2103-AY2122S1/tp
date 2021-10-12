@@ -9,6 +9,8 @@ import seedu.address.model.Model;
 public abstract class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add either a module, a student or a task\n"
             + "Parameters: Add_Type (can be module, student or task)\n"

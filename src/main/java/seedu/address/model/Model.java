@@ -115,4 +115,10 @@ public interface Model {
      * @return Whether the given module has the task or not.
      */
     boolean hasTask(ModuleName moduleName, Task task);
+
+    boolean hasModule(Module module);
+
+    void addModule(Module module);
+
+    //todo later versions: deleteModule and setModule
 }
