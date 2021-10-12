@@ -5,9 +5,11 @@ import static seedu.unify.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
+import java.time.temporal.TemporalAdjusters;
 
 /**
  * Represents a Task's date in the Uni-fy app.
@@ -42,7 +44,9 @@ public class Date {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         value = date;
         localDate = LocalDate.parse(this.value, LOCAL_DATE_FORMAT);
-        week = localDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+        week = localDate
+                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+                .get(ChronoField.ALIGNED_WEEK_OF_YEAR);
     }
 
     /**

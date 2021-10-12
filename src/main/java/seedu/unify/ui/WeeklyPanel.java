@@ -1,6 +1,8 @@
 package seedu.unify.ui;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.logging.Logger;
 
 import javafx.collections.ListChangeListener;
@@ -32,35 +34,33 @@ public class WeeklyPanel extends UiPart<Region> {
      */
     public WeeklyPanel(ObservableList<Task> weeklyTaskList) {
         super(FXML);
-        final Integer[] week = new Integer[1];
-        final LocalDate[] currentDay = new LocalDate[1];
-
-        // first run
-        week[0] = WeeklyTracker.getWeek();
-        weekLabel.setText("Week " + week[0]);
-        currentDay[0] = LocalDate.ofYearDay(2021, week[0] * 7 - 3);
+        Integer week;
+        LocalDate currentDay;
+        week = WeeklyTracker.getWeek();
+        weekLabel.setText("Week " + week);
+        currentDay = LocalDate.ofYearDay(2021, week * 7).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
         dailyHBox.getChildren().clear();
         for (int i = 0; i < 7; i++) {
             // these are just placeholders
-            DailyPanel dailyPanel = new DailyPanel(currentDay[0], weeklyTaskList);
-            currentDay[0] = currentDay[0].plusDays(1);
+            DailyPanel dailyPanel = new DailyPanel(currentDay, weeklyTaskList);
+            currentDay = currentDay.plusDays(1);
             dailyHBox.getChildren().add(dailyPanel.getRoot());
             dailyPanel.getRoot().setStyle("-fx-border-style: solid inside;" + "-fx-border-width: 1;");
             dailyHBox.widthProperty().addListener(e -> dailyPanel.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
         }
 
         weeklyTaskList.addListener((ListChangeListener<Task>) c -> {
-            week[0] = WeeklyTracker.getWeek();
-            weekLabel.setText("Week " + week[0]);
-            currentDay[0] = LocalDate.ofYearDay(2021, week[0] * 7 - 3);
+            Integer week1 = WeeklyTracker.getWeek();
+            weekLabel.setText("Week " + week1);
+            LocalDate currentDays = LocalDate.ofYearDay(2021, week1 * 7).with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
             dailyHBox.getChildren().clear();
             for (int i = 0; i < 7; i++) {
                 // these are just placeholders
-                DailyPanel dailyPanel = new DailyPanel(currentDay[0], weeklyTaskList);
-                currentDay[0] = currentDay[0].plusDays(1);
-                dailyHBox.getChildren().add(dailyPanel.getRoot());
-                dailyPanel.getRoot().setStyle("-fx-border-style: solid inside;" + "-fx-border-width: 1;");
-                dailyHBox.widthProperty().addListener(e -> dailyPanel.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
+                DailyPanel dailyPanel1 = new DailyPanel(currentDays, weeklyTaskList);
+                currentDays = currentDays.plusDays(1);
+                dailyHBox.getChildren().add(dailyPanel1.getRoot());
+                dailyPanel1.getRoot().setStyle("-fx-border-style: solid inside;" + "-fx-border-width: 1;");
+                dailyHBox.widthProperty().addListener(e -> dailyPanel1.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
             }
         });
 
