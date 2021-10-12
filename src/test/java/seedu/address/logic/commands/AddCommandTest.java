@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -140,8 +141,33 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasReservation(Reservation reservation) {
+            return false;
+        }
+
+        @Override
+        public void deleteReservation(Reservation target) {
+
+        }
+
+        @Override
+        public void addReservation(Reservation reservation) {
+
+        }
+
+        @Override
+        public void setReservation(Reservation target, Reservation editedReservation) {
+
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reservation> getFilteredReservationList() {
+            return null;
         }
 
         @Override
@@ -177,6 +203,11 @@ public class AddCommandTest {
         @Override
         public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReservationList(Predicate<Reservation> predicate) {
+
         }
     }
 
