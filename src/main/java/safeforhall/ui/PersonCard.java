@@ -68,7 +68,7 @@ public class PersonCard extends UiPart<Region> {
         faculty.setText(person.getFaculty().faculty);
         lastfetdate.setText(person.getLastFetDate().date);
         lastcollectiondate.setText(person.getLastCollectionDate().date);
-  
+
         if (person.hasMissedDeadline()) {
             this.getRoot().setStyle("-fx-background-color: #8B0000;");
             Label textBox = new Label("Late by:");
