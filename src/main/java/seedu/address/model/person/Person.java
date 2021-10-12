@@ -101,7 +101,8 @@ public class Person implements HasUniqueId {
     public boolean canAttendLesson(Lesson lesson) {
         return !lessonsList.doesLessonOverlap(lesson);
     }
-  
+
+    /**
      * Immutable way of updating the lessons list. Note that the id will be re-generated.
      *
      * @param newLessonsList to change to
