@@ -28,6 +28,8 @@ public class AddScoreCommandParser implements Parser<AddScoreCommand> {
 
         if (argMultimap.getValue(PREFIX_ASSESSMENT).isEmpty()
                 || argMultimap.getValue(PREFIX_SCORE).isEmpty()
+                || (argMultimap.getValue(PREFIX_NAME).isEmpty()
+                && argMultimap.getValue(PREFIX_ID).isEmpty())
                 || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScoreCommand.MESSAGE_USAGE));
