@@ -3,9 +3,13 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.history.History;
+import seedu.address.logic.history.Historyable;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final Historyable<Command> commandHistory;
 
     @FXML
     private TextField commandTextField;
@@ -27,26 +32,80 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandHistory = new History<>();
+        commandHistory.push(new Command(""));
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
     /**
-     * Handles the Enter button pressed event.
+     * Handles any key button pressed event.
+     *
+     * @param event The key pressed event.
      */
     @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        KeyCode keyCode = event.getCode();
+        switch (keyCode) {
+        case ENTER:
+            handleCommandEntered();
+            break;
+        case UP:
+        case DOWN:
+            handleNavigateHistory(keyCode);
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Handles the Enter button pressed event.
+     */
     private void handleCommandEntered() {
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
         }
 
+        commandHistory.pop();
+        commandHistory.restore();
+        commandHistory.push(new Command(commandText));
+        commandHistory.push(new Command(""));
+        commandTextField.setText("");
+
         try {
             commandExecutor.execute(commandText);
-            commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the Up button pressed event.
+     */
+    private void handleNavigateHistory(KeyCode keyCode) {
+        switch (keyCode) {
+        case UP:
+            Command previousCommand = commandHistory.back();
+            commandTextField.setText(previousCommand.getCommand());
+            commandTextField.end();
+            break;
+        case DOWN:
+            Command nextCommand = commandHistory.forward();
+            commandTextField.setText(nextCommand.getCommand());
+            commandTextField.end();
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Handles a key typed event.
+     */
+    @FXML
+    private void handleKeyTyped(KeyEvent event) {
+        Command editedCommand = new Command(commandTextField.getText());
+        commandHistory.setCurrentState(editedCommand);
     }
 
     /**
@@ -81,5 +140,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }
