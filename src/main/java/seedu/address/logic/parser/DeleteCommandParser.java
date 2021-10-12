@@ -46,7 +46,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         case DeleteTaskCommand.COMMAND_WORD:
             return null; //to be implemented
         case DeleteStudentCommand.COMMAND_WORD:
-            return null; //to be implemented
+            return new DeleteStudentCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
