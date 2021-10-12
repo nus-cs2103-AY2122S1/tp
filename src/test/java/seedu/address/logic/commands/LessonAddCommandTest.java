@@ -60,14 +60,13 @@ public class LessonAddCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person person = new PersonBuilder(firstPerson).withLessons(lesson).build();
 
-        Model modelCopy = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        modelCopy.setPerson(firstPerson, person);
+        model.setPerson(firstPerson, person);
 
         // Add a different lesson on the same time slot
         Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
         LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
-        assertCommandFailure(lessonAddCommand, modelCopy, LessonAddCommand.MESSAGE_CLASHING_LESSON);
+        assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
     }
 
     @Test
@@ -76,10 +75,9 @@ public class LessonAddCommandTest {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person person = new PersonBuilder(secondPerson).withLessons(lesson).build();
 
-        Model modelCopy = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        modelCopy.setPerson(secondPerson, person);
+        model.setPerson(secondPerson, person);
 
-        showPersonAtIndex(modelCopy, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
         /*
         Add a different lesson to the only person in the filtered list on a clashing time
         slot as the second person in the unfiltered list.
@@ -87,7 +85,7 @@ public class LessonAddCommandTest {
         Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
         LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
-        assertCommandFailure(lessonAddCommand, modelCopy, LessonAddCommand.MESSAGE_CLASHING_LESSON);
+        assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
     }
 
     @Test

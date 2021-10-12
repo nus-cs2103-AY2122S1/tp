@@ -1,28 +1,28 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.testutil.ModelStub;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class LessonDeleteCommandTest {
@@ -34,20 +34,53 @@ public class LessonDeleteCommandTest {
     }
 
     @Test
-    public void execute_oneExistingLesson_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
+    public void execute_validPersonWithoutExistingLessons_failure() {
         LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
-        ModelStub modelStub = new ModelStubWithPerson(editedPerson);
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
 
-        Lesson lessonToDelete = editedPerson.getLessons().stream()
-            .collect(Collectors.toList())
-            .get(INDEX_FIRST_LESSON.getZeroBased());
+    @Test
+    public void execute_validPersonWithAnExistingLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(firstPerson).withLessons(lesson).build();
+        model.setPerson(firstPerson, editedPerson);
+
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+
         String expectedMessage = String.format(
-            LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);
-        Model expectedModel = new ModelStubWithPerson(firstPerson);
+            LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lesson, editedPerson);
 
-        assertCommandSuccess(lessonDeleteCommand, modelStub, expectedMessage, expectedModel);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            firstPerson);
+
+        assertCommandSuccess(lessonDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        // filter list to show only the first person
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -73,57 +106,5 @@ public class LessonDeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteSampleLessonCommand.equals(deleteSampleLessonCommand2));
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            this.person = editedPerson;
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            return;
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            UniquePersonList list = new UniquePersonList();
-            list.add(this.person);
-            return list.asUnmodifiableObservableList();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            // short circuit if same object
-            if (obj == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(obj instanceof ModelStubWithPerson)) {
-                return false;
-            }
-
-            // state check
-            return person.equals(((ModelStubWithPerson) obj).person);
-        }
-
     }
 }

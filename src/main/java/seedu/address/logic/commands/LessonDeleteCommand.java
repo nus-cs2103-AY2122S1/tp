@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
 /**
- * Deletes a Lesson from an existing person in the address book.
+ * Contains integration tests (interaction with the Model) and unit tests for LessonDeleteCommand.
  */
 public class LessonDeleteCommand extends Command {
     public static final String COMMAND_WORD = "ldelete";
@@ -28,7 +28,6 @@ public class LessonDeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + "1";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
     private final Index index;
     private final Index lessonIndex;
@@ -64,10 +63,6 @@ public class LessonDeleteCommand extends Command {
 
         Person editedPerson = createEditedPerson(personToEdit, lessonList, toRemove);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, editedPerson));
@@ -77,8 +72,8 @@ public class LessonDeleteCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * Removes specified {@code Lesson} from the updatedLessons for this person.
      */
-    private static Person createEditedPerson(Person personToEdit,
-                                             List<Lesson> updatedLessons, Lesson toRemove) {
+    private static Person createEditedPerson(Person personToEdit, List<Lesson> updatedLessons,
+                                             Lesson toRemove) {
         assert personToEdit != null;
 
         updatedLessons.remove(toRemove);

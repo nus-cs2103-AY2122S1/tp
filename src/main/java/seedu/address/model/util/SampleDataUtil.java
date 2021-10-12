@@ -73,7 +73,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static Set<Lesson> getLessons(Lesson... lessons) {
+    public static Set<Lesson> getLessonSet(Lesson... lessons) {
         return Arrays.stream(lessons)
             .collect(Collectors.toSet());
     }
