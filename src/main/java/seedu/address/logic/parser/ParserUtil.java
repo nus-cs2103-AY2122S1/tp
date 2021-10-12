@@ -115,11 +115,11 @@ public class ParserUtil {
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
+        String sanitisedTag = tag.trim().replaceAll(REGEX_SURROUNDING_DOUBLE_QUOTE, "");
+        if (!Tag.isValidTagName(sanitisedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(sanitisedTag);
     }
 
     /**
