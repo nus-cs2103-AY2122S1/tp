@@ -14,16 +14,6 @@ public class UniqueId {
     public static final UniqueId DEFAULT_ID = UniqueId.generateId("00000000-0000-0000-0000-000000000000");
 
     /**
-     * The default owner of {@code UniqueId} that have no owner assigned to it.
-     */
-    private static final HasUniqueId DEFAULT_OWNER = new HasUniqueId() {
-        @Override
-        public UniqueId getId() {
-            return DEFAULT_ID;
-        }
-    };
-
-    /**
      * The owner of the id. It can be a task or a student.
      */
     private HasUniqueId owner;
@@ -36,7 +26,8 @@ public class UniqueId {
     }
 
     private UniqueId(String id) {
-        this.owner = DEFAULT_OWNER;
+        // create a default hasUniqueId for the id's temporary owner.
+        this.owner = () -> UniqueId.generateId(id);
         this.id = UUID.fromString(id);
     }
 
