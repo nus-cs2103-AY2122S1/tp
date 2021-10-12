@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.CS2103;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,22 @@ public class ClearCommandTest {
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_addressBookWithFolders_success() {
+        AddressBook addressBook = getTypicalAddressBook();
+        addressBook.addFolder(CS2103);
+        Model model = new ModelManager(addressBook, new UserPrefs());
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.addFolder(CS2103);
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setAddressBook(expectedAddressBook);
+
+        assertCommandSuccess(new ClearCommand(),
+                model,
+                new CommandResult(ClearCommand.MESSAGE_SUCCESS),
+                expectedModel);
     }
 
 }
