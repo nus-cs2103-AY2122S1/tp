@@ -35,6 +35,7 @@
                             <Label fx:id="name" styleClass="student_view_medium_label" />
                         </HBox>
                         <FlowPane fx:id="tags" hgap="5" />
+                        <Label fx:id="classCode" styleClass="student_view_small_label" />
                         <Label fx:id="phone" styleClass="student_view_small_label" />
                         <Label fx:id="address" styleClass="student_view_small_label" />
                         <Label fx:id="email" styleClass="student_view_small_label" />

@@ -32,6 +32,9 @@ public class StudentWindow extends UiPart<Stage> {
     private Label name;
 
     @FXML
+    private Label classCode;
+
+    @FXML
     private Label address;
 
     @FXML
@@ -82,6 +85,7 @@ public class StudentWindow extends UiPart<Stage> {
         logger.fine("Showing student information.");
         message.setText(VIEW_MESSAGE);
         name.setText(student.getName().fullName);
+        classCode.setText(student.getClassCode().value);
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         phone.setText(student.getPhone().value);
