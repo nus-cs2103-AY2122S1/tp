@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 
 import dash.logic.commands.ExitCommand;
 import dash.logic.commands.HelpCommand;
+import dash.logic.commands.SwitchTabContactsCommand;
 import dash.logic.commands.SwitchTabHelpCommand;
+import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.personcommand.AddPersonCommand;
 import dash.logic.commands.personcommand.ClearPeopleCommand;
 import dash.logic.commands.personcommand.DeletePersonCommand;
@@ -90,6 +92,28 @@ public class ContactsTabParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListPeopleCommand.COMMAND_WORD) instanceof ListPeopleCommand);
         assertTrue(parser.parseCommand(ListPeopleCommand.COMMAND_WORD + " 3") instanceof ListPeopleCommand);
+    }
+
+    @Test
+    public void parseCommand_switchTabContacts() throws Exception {
+        assertTrue(parser.parseCommand(SwitchTabContactsCommand.COMMAND_WORD)
+                instanceof SwitchTabContactsCommand);
+        assertTrue(parser.parseCommand(SwitchTabContactsCommand.COMMAND_WORD + " 3")
+                instanceof SwitchTabContactsCommand);
+    }
+
+    @Test
+    public void parseCommand_switchTabTasks() throws Exception {
+        assertTrue(parser.parseCommand(SwitchTabTasksCommand.COMMAND_WORD) instanceof SwitchTabTasksCommand);
+        assertTrue(parser.parseCommand(SwitchTabTasksCommand.COMMAND_WORD + " 3")
+                instanceof SwitchTabTasksCommand);
+    }
+
+    @Test
+    public void parseCommand_switchTabHelp() throws Exception {
+        assertTrue(parser.parseCommand(SwitchTabHelpCommand.COMMAND_WORD) instanceof SwitchTabHelpCommand);
+        assertTrue(parser.parseCommand(SwitchTabHelpCommand.COMMAND_WORD + " 3")
+                instanceof SwitchTabHelpCommand);
     }
 
     @Test
