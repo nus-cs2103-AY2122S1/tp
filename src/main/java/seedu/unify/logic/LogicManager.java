@@ -55,7 +55,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyUniFy getAddressBook() {
+    public ReadOnlyUniFy getUniFy() {
         return model.getUniFy();
     }
 
