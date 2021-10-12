@@ -196,7 +196,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public displayType getDisplayType() {
+        public DisplayType getDisplayType() {
             throw new AssertionError("This method should not be called.");
         }
     }
