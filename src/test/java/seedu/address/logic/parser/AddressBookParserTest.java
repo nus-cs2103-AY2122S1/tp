@@ -59,7 +59,7 @@ public class AddressBookParserTest {
         Capacity capacity = new Capacity("5");
         Facility facility = new Facility(name, location, time, capacity);
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
-                + "n/Court 1 l/University Sports Hall t/11:30 c/5");
+                + "n/Court 1 l/University Sports Hall t/1130 c/5");
         assertEquals(new AddFacilityCommand(facility), command);
     }
 
