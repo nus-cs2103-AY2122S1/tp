@@ -30,6 +30,12 @@ public class PersonTab extends UiPart<Region> {
     private TabPane personTab;
 
     @FXML
+    private Tab patientsTab;
+
+    @FXML
+    private Tab doctorsTab;
+
+    @FXML
     private StackPane patientListPanelPlaceholder;
 
     @FXML
@@ -41,6 +47,9 @@ public class PersonTab extends UiPart<Region> {
         this.logic = logic;
         selectionModel = personTab.getSelectionModel();
         initialiseTabPanels();
+
+        // Patients tab is shown by default on start up
+        doctorsTab.setDisable(true);
     }
 
     private void initialiseTabPanels() {
@@ -56,6 +65,8 @@ public class PersonTab extends UiPart<Region> {
      */
     public void setTabToPatient() {
         selectionModel.select(PATIENT_TAB);
+        patientsTab.setDisable(false);
+        doctorsTab.setDisable(true);
     }
 
     /**
@@ -63,5 +74,7 @@ public class PersonTab extends UiPart<Region> {
      */
     public void setTabToDoctor() {
         selectionModel.select(DOCTOR_TAB);
+        doctorsTab.setDisable(false);
+        patientsTab.setDisable(true);
     }
 }
