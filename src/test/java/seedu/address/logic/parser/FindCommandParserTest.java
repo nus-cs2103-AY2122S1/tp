@@ -72,10 +72,10 @@ public class FindCommandParserTest {
     public void parse_missingParts_failure() {
 
         // no fields specified
-        assertParseFailure(parser, " ", FindCommand.MESSAGE_FIELD_REQUIRED);
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
 
         // has condition but no fields to find
-        assertParseFailure(parser, " cond/all", FindCommand.MESSAGE_FIELD_REQUIRED);
+        assertParseFailure(parser, " cond/all", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -127,8 +127,7 @@ public class FindCommandParserTest {
 
         // invalid condition followed with no fields
         // Missing fields takes precedence
-        assertParseFailure(parser, " " + PREFIX_FIND_CONDITION + "invalid ",
-                FindCommand.MESSAGE_FIELD_REQUIRED);
+        assertParseFailure(parser, " " + PREFIX_FIND_CONDITION + "invalid ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

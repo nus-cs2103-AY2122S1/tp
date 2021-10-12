@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -50,15 +49,12 @@ public class FindCommand extends Command {
             + PREFIX_SCHOOL + "nyjc "
             + PREFIX_TAG + "unpaid " + PREFIX_TAG + "zoom";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of the "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose fields contain any of the "
             + "specified keywords (case-insensitive).\n"
             + "You can specify one of these find conditions: 'all' / 'any' / 'none'\n"
             + "It indicates that a student is only considered a match when all, any or none of the the fields "
             + "which you are searching for match their keywords. The default is 'all'.\n"
-            + "Parameters: " + COMMAND_PARAMETERS + "\n"
-            + "Example: " + COMMAND_EXAMPLE;
-
-    public static final String MESSAGE_FIELD_REQUIRED = "You must provide at least one parameter to find.\n"
+            + "Note: you must specify at least one parameter to find.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
@@ -70,6 +66,8 @@ public class FindCommand extends Command {
     public static final String MESSAGE_TAG_KEYWORD_CONSTRAINTS = "Tag can only take one keyword. "
             + "To search for multiple tags, use multiple t/ \n"
             + "Example: find t/unpaid t/zoom";
+
+    public static final String MESSAGE_FIND_RESULTS = "%1$d students found who %2$s";
 
     private final Predicate<Person> predicate;
 
@@ -86,8 +84,9 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        predicate.toString();
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(MESSAGE_FIND_RESULTS, model.getFilteredPersonList().size(), predicate));
     }
 
     @Override

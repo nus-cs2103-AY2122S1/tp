@@ -41,12 +41,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns the find condition.
+     */
+    public FindCondition getCondition() {
+        return condition;
+    }
+
+    /**
      * Sets find condition.
      *
      * @param condition Find condition
      */
     public void setCondition(FindCondition condition) {
         this.condition = condition;
+    }
+
+    /**
+     * Returns optional name keywords.
+     */
+    public Optional<List<String>> getNameKeywords() {
+        return Optional.ofNullable(nameKeywords);
     }
 
     /**
@@ -59,12 +73,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns optional phone keywords.
+     */
+    public Optional<List<String>> getPhoneKeywords() {
+        return Optional.ofNullable(phoneKeywords);
+    }
+
+    /**
      * Sets keywords to match with a Person's phone number.
      *
      * @param keywords Phone keywords to find.
      */
     public void setPhoneKeywords(List<String> keywords) {
         this.phoneKeywords = keywords;
+    }
+
+    /**
+     * Returns optional email keywords.
+     */
+    public Optional<List<String>> getEmailKeywords() {
+        return Optional.ofNullable(emailKeywords);
     }
 
     /**
@@ -77,12 +105,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns optional parent phone keywords.
+     */
+    public Optional<List<String>> getParentPhoneKeywords() {
+        return Optional.ofNullable(parentPhoneKeywords);
+    }
+
+    /**
      * Sets keywords to match with a Person's parent phone number.
      *
      * @param keywords Parent phone keywords to find.
      */
     public void setParentPhoneKeywords(List<String> keywords) {
         this.parentPhoneKeywords = keywords;
+    }
+
+    /**
+     * Returns optional parent email keywords.
+     */
+    public Optional<List<String>> getParentEmailKeywords() {
+        return Optional.ofNullable(parentEmailKeywords);
     }
 
     /**
@@ -95,12 +137,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns optional address keywords.
+     */
+    public Optional<List<String>> getAddressKeywords() {
+        return Optional.ofNullable(addressKeywords);
+    }
+
+    /**
      * Sets keywords to match with a Person's address.
      *
      * @param keywords Address keywords to find.
      */
     public void setAddressKeywords(List<String> keywords) {
         this.addressKeywords = keywords;
+    }
+
+    /**
+     * Returns optional school keywords.
+     */
+    public Optional<List<String>> getSchoolKeywords() {
+        return Optional.ofNullable(schoolKeywords);
     }
 
     /**
@@ -113,12 +169,26 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns optional academic stream keywords.
+     */
+    public Optional<List<String>> getAcadStreamKeywords() {
+        return Optional.ofNullable(acadStreamKeywords);
+    }
+
+    /**
      * Sets keywords to match with a Person's academic stream.
      *
      * @param keywords Academic stream keywords to find.
      */
     public void setAcadStreamKeywords(List<String> keywords) {
         this.acadStreamKeywords = keywords;
+    }
+
+    /**
+     * Returns optional academic level keywords.
+     */
+    public Optional<List<String>> getAcadLevelKeywords() {
+        return Optional.ofNullable(acadLevelKeywords);
     }
 
     /**
@@ -131,89 +201,19 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
+     * Returns optional tag keywords.
+     */
+    public Optional<List<String>> getTagKeywords() {
+        return Optional.ofNullable(tagKeywords);
+    }
+
+    /**
      * Sets tag keywords to match with a Person's tags.
      *
      * @param keywords Phone keywords to find.
      */
     public void setTagKeywords(List<String> keywords) {
         this.tagKeywords = keywords;
-    }
-
-    /**
-     * Returns the find condition.
-     */
-    public FindCondition getCondition() {
-        return condition;
-    }
-
-    /**
-     * Returns optional name keywords.
-     */
-    public Optional<List<String>> getNameKeywords() {
-        return Optional.ofNullable(nameKeywords);
-    }
-
-    /**
-     * Returns optional phone keywords.
-     */
-    public Optional<List<String>> getPhoneKeywords() {
-        return Optional.ofNullable(phoneKeywords);
-    }
-
-    /**
-     * Returns optional email keywords.
-     */
-    public Optional<List<String>> getEmailKeywords() {
-        return Optional.ofNullable(emailKeywords);
-    }
-
-    /**
-     * Returns optional parent phone keywords.
-     */
-    public Optional<List<String>> getParentPhoneKeywords() {
-        return Optional.ofNullable(parentPhoneKeywords);
-    }
-
-    /**
-     * Returns optional parent email keywords.
-     */
-    public Optional<List<String>> getParentEmailKeywords() {
-        return Optional.ofNullable(parentEmailKeywords);
-    }
-
-    /**
-     * Returns optional address keywords.
-     */
-    public Optional<List<String>> getAddressKeywords() {
-        return Optional.ofNullable(addressKeywords);
-    }
-
-    /**
-     * Returns optional school keywords.
-     */
-    public Optional<List<String>> getSchoolKeywords() {
-        return Optional.ofNullable(schoolKeywords);
-    }
-
-    /**
-     * Returns optional academic stream keywords.
-     */
-    public Optional<List<String>> getAcadStreamKeywords() {
-        return Optional.ofNullable(acadStreamKeywords);
-    }
-
-    /**
-     * Returns optional academic level keywords.
-     */
-    public Optional<List<String>> getAcadLevelKeywords() {
-        return Optional.ofNullable(acadLevelKeywords);
-    }
-
-    /**
-     * Returns optional tag keywords.
-     */
-    public Optional<List<String>> getTagKeywords() {
-        return Optional.ofNullable(tagKeywords);
     }
 
     /**
@@ -446,6 +446,46 @@ public class PersonMatchesKeywordsPredicate implements Predicate<Person> {
                 && getAcadStreamKeywords().equals(p.getAcadStreamKeywords())
                 && getAcadLevelKeywords().equals(p.getAcadLevelKeywords())
                 && getCondition().equals(p.getCondition());
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append("match " + condition.toString() + " of these keywords.");
+
+        if (getNameKeywords().isPresent()) {
+            builder.append("\nName: ").append(String.join(" ", getNameKeywords().get()));
+        }
+        if (getPhoneKeywords().isPresent()) {
+            builder.append("\nPhone: ").append(String.join(" ", getPhoneKeywords().get()));
+        }
+        if (getEmailKeywords().isPresent()) {
+            builder.append("\nEmail: ").append(String.join(" ", getEmailKeywords().get()));
+        }
+        if (getParentPhoneKeywords().isPresent()) {
+            builder.append("\nParent Phone: ").append(String.join(" ", getParentPhoneKeywords().get()));
+        }
+        if (getParentEmailKeywords().isPresent()) {
+            builder.append("\nParent Email: ").append(String.join(" ", getParentEmailKeywords().get()));
+        }
+        if (getAddressKeywords().isPresent()) {
+            builder.append("\nAddress: ").append(String.join(" ", getAddressKeywords().get()));
+        }
+        if (getSchoolKeywords().isPresent()) {
+            builder.append("\nSchool: ").append(String.join(" ", getSchoolKeywords().get()));
+        }
+        if (getAcadStreamKeywords().isPresent()) {
+            builder.append("\nAcademic Stream: ").append(String.join(" ", getAcadStreamKeywords().get()));
+        }
+        if (getAcadLevelKeywords().isPresent()) {
+            builder.append("\nAcademic Level: ").append(String.join(" ", getAcadLevelKeywords().get()));
+        }
+        if (getTagKeywords().isPresent()) {
+            builder.append("\nTags: ").append(String.join("; ", getTagKeywords().get()));
+        }
+
+        return builder.toString();
     }
 
 }

@@ -77,7 +77,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         tagsKeywords.ifPresent(predicate::setTagKeywords);
 
         if (!predicate.isAnyFieldSearched()) {
-            throw new ParseException(FindCommand.MESSAGE_FIELD_REQUIRED);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // Find condition is optional and defaults to match all fields
