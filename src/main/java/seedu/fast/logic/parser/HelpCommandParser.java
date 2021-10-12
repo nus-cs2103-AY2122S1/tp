@@ -1,6 +1,9 @@
 package seedu.fast.logic.parser;
 
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_HELP_COMMAND_FORMAT;
+
 import seedu.fast.logic.commands.HelpCommand;
+import seedu.fast.logic.parser.exceptions.HelpParseException;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
 
@@ -19,32 +22,28 @@ public class HelpCommandParser implements Parser<HelpCommand> {
      * Extracts the arguments from a help command.
      *
      * @param commandText The input text.
-     * @return The args of the help command, or "" if there is no args.
+     * @return The args of the help command, or "" if there is no or invalid args.
+     * @throws HelpParseException if help is not followed by a valid arg
      */
-    public static String getArgs(String commandText) {
+    public static String getArgs (String commandText) throws HelpParseException{
 
         // if there are no args
         if (commandText.split(" ").length == 1) {
             return "";
         }
 
-        String arg = commandText.substring(HelpCommand.COMMAND_WORD.length()).trim();
-        String[] args = arg.split(" ");
-        StringBuilder capitalisedArgBuilder = new StringBuilder();
+        String arg = commandText.substring(HelpCommand.COMMAND_WORD.length());
+        String trimmedArgs = arg.trim();
+        String capitalisedArg = capitaliseFirstLetters(trimmedArgs);
 
-        // Capitalise the start of each word in the args
-        for (String s : args) {
-            // Capitalises the first letter of the word
-            capitalisedArgBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
-        }
+            if (isCommandWord(capitalisedArg)) {
+                return capitalisedArg;
 
-        String capitalisedArg = capitalisedArgBuilder.toString();
-        if (isCommandWord(capitalisedArg)) {
-            return capitalisedArg;
+            } else { // if the arg does not match a given command, return ""
+                throw new HelpParseException(
+                        String.format(MESSAGE_INVALID_HELP_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            }
 
-        } else { // if the arg does not match a given command, return ""
-            return "";
-        }
     }
 
     /**
@@ -60,5 +59,17 @@ public class HelpCommandParser implements Parser<HelpCommand> {
             }
         }
         return false;
+    }
+
+    public static String capitaliseFirstLetters(String inputString) {
+        String[] words = inputString.split(" ");
+        StringBuilder capitalisedWordsBuilder = new StringBuilder();
+
+        // Capitalise the start of each word in the args
+        for (String s : words) {
+            // Capitalises the first letter of the word
+            capitalisedWordsBuilder.append(s.substring(0, 1).toUpperCase()).append(s.substring(1));
+        }
+        return capitalisedWordsBuilder.toString();
     }
 }
