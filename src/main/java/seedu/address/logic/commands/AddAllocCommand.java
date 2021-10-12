@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -107,10 +106,9 @@ public class AddAllocCommand extends Command {
      * Gets and returns a list of {@code Student} with matching identity specified in the {@code allocDescriptor}.
      */
     public static List<Student> getAllocStudents(List<Student> students, AllocDescriptor allocDescriptor) {
-        List<Student> allocStudents = students.stream()
+        return students.stream()
                 .filter(allocDescriptor.isAllocStudent())
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(allocStudents);
+                .collect(Collectors.toUnmodifiableList());
     }
 
     /**
