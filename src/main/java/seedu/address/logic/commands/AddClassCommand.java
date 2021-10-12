@@ -24,7 +24,8 @@ public class AddClassCommand extends Command {
             + "Parameters: NAME LIMIT COUNTER TIMESLOT STUDENT\n"
             + "Example: " + COMMAND_WORD + " n/Physics l/10 c/4 ts/Mon 11:00-14:00 s/Alex Yeoh";
 
-    private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The class limit has been exceeded.";
+    private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The following students are not "
+            + "added due to class limit: ";
 
     private static final String MESSAGE_TIMESLOT_FORMAT = "The format for time slot should be WWW HH:MM-HH:MM \n"
             + "Example: Mon 11:00-14:00";
@@ -41,10 +42,6 @@ public class AddClassCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        ArrayList<String> nowStudents = toAdd.getStudentList().getStudents();
-        ArrayList<String> newStudents = new ArrayList<>();
-        ArrayList<String> invalidStudents = new ArrayList<>();
-        ArrayList<Person> validStudentsAsPerson = new ArrayList<>();
         requireNonNull(model);
         Timeslot timeslot = toAdd.getTimeslot();
         if (!timeslot.isFormatCorrect()) {
@@ -54,23 +51,12 @@ public class AddClassCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CLASS);
         }
         int limit = toAdd.getLimit().getLimit();
-        for (String s: nowStudents) {
-            if (newStudents.size() >= limit) {
-                throw new CommandException(MESSAGE_CLASS_LIMIT_EXCEEDED);
-            }
-            Person person = new Person(new Name(s));
-            if (model.hasPerson(person)) {
-                newStudents.add(s);
-                validStudentsAsPerson.add(model.getSameNamePerson(person));
-            } else {
-                invalidStudents.add(s);
-            }
-        }
-        toAdd.changeStudents(newStudents);
+        ArrayList[] students = getStudents(model, toAdd.getStudentList().getStudents(), limit);
+        toAdd.changeStudents(students[0]);
         model.addTuition(toAdd);
-        addClassToStudent(toAdd, validStudentsAsPerson, model);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd
-                + "\n" + MESSAGE_STUDENT_NOT_FOUND + invalidStudents));
+        addClassToStudent(toAdd, students[2], model);
+        String message = this.getMessage(students[1], students[3]);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + "\n" + message);
     }
     private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Person> validStudentsAsPerson, Model model) {
         for (Person person: validStudentsAsPerson) {
@@ -79,6 +65,44 @@ public class AddClassCommand extends Command {
             person.addTag(new Tag(tuitionClass.getName().getName()));
             model.setPerson(studentToChange, person);
         }
+    }
+    private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents, int limit) {
+        ArrayList<String> newStudents = new ArrayList<>();
+        ArrayList<String> invalidStudents = new ArrayList<>();
+        ArrayList<Person> validStudentsAsPerson = new ArrayList<>();
+        ArrayList<String> notAddedStudent = new ArrayList<>();
+        for (String s: nowStudents) {
+            Person person = new Person(new Name(s));
+            if (!model.hasPerson(person)) {
+                invalidStudents.add(s);
+                continue;
+            }
+            if (newStudents.size() >= limit) {
+                //valid students not added due to limit exceeded.
+                notAddedStudent.add(s);
+                continue;
+            }
+            newStudents.add(s);
+            validStudentsAsPerson.add(model.getSameNamePerson(person));
+        }
+        ArrayList[] returnValue = new ArrayList[4];
+        returnValue[0] = newStudents;
+        returnValue[1] = invalidStudents;
+        returnValue[2] = validStudentsAsPerson;
+        returnValue[3] = notAddedStudent;
+        return returnValue;
+    }
+    private String getMessage(ArrayList<String> invalidStudents, ArrayList<String> notAdded) {
+        String message = "";
+        boolean hasInvalidStudent = invalidStudents.size() >= 1;
+        boolean hasNotAddedStudent = notAdded.size() >= 1;
+        if (hasInvalidStudent) {
+            message += MESSAGE_STUDENT_NOT_FOUND + invalidStudents;
+        }
+        if (hasNotAddedStudent) {
+            message += "\n" + MESSAGE_CLASS_LIMIT_EXCEEDED + notAdded;
+        }
+        return message;
     }
 }
 

@@ -30,8 +30,10 @@ Examples:
 
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
+The students to be added are optional. If the student the user intends to add is not present, or the class limit has 
+been exceeded, TutAssistor will alert names of these students.
 
-Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT s/NAME,NAME,NAME... [r/REMARK]`
+Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
 Examples:
 - `addclass n/Chemistry l/16 c/4 ts/Thu 15:00-17:00 s/Bernice Yu`
@@ -104,7 +106,7 @@ Format: `exit`
 Action | Format
 --------|------------------
 ***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
-***Add Class*** | `addclass l/limit t/time s/NAME,NAME,NAME... [r/REMARK] [t/TAG]…`
+***Add Class*** | `addclass l/limit t/time [s/NAME,NAME,NAME...] [r/REMARK] [t/TAG]…`
 ***View Student*** | `student [INDEX]`
 ***View Class*** | `class [INDEX]`
 ***Edit Student*** | `editstudent [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
