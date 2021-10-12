@@ -6,16 +6,7 @@ import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.tracker.logic.commands.AddCommand;
-import seedu.tracker.logic.commands.ClearCommand;
-import seedu.tracker.logic.commands.Command;
-import seedu.tracker.logic.commands.DeleteCommand;
-import seedu.tracker.logic.commands.EditCommand;
-import seedu.tracker.logic.commands.ExitCommand;
-import seedu.tracker.logic.commands.FindCommand;
-import seedu.tracker.logic.commands.HelpCommand;
-import seedu.tracker.logic.commands.ListCommand;
-import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.*;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,6 +56,12 @@ public class ModuleTrackerParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case SetCommand.COMMAND_WORD:
+            return new SetCommandParser().parse(arguments);
+
+        case InfoCommand.COMMAND_WORD:
+            return new InfoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
+import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -86,6 +87,16 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyModuleTracker getModuleTracker() {
         return moduleTracker;
+    }
+
+    @Override
+    public void setCurrentSemester(AcademicCalendar academicCalendar) {
+        this.moduleTracker.setCurrentSemester(academicCalendar);
+    }
+
+    @Override
+    public AcademicCalendar getCurrentSemester() {
+        return moduleTracker.getCurrentSemester();
     }
 
     @Override

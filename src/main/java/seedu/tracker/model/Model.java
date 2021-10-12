@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.tracker.commons.core.GuiSettings;
+import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -52,6 +53,10 @@ public interface Model {
     /** Returns the ModuleTracker */
     ReadOnlyModuleTracker getModuleTracker();
 
+    void setCurrentSemester(AcademicCalendar academicCalendar);
+
+    AcademicCalendar getCurrentSemester();
+
     /**
      * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.
      */
@@ -84,4 +89,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredModuleList(Predicate<Module> predicate);
+
 }
