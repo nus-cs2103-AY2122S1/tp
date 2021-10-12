@@ -8,6 +8,7 @@ import static safeforhall.testutil.TypicalPersons.ALICE;
 import static safeforhall.testutil.TypicalPersons.CARL;
 import static safeforhall.testutil.TypicalPersons.ELLE;
 import static safeforhall.testutil.TypicalPersons.FIONA;
+import static safeforhall.testutil.TypicalPersons.GEORGE;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
 import safeforhall.model.UserPrefs;
 import safeforhall.model.person.LastDate;
+import safeforhall.model.person.NameMissedDeadlinePredicate;
 import safeforhall.model.person.NameNearLastDatePredicate;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.TypicalPersons;
@@ -124,6 +126,31 @@ public class ListCommandTest {
         validPeople.add(ALICE);
         validPeople.add(CARL);
         validPeople.add(FIONA);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneLateFet() {
+        String expectedMessage = ListCommand.MESSAGE_SUCCESS_MISSED_FET;
+        NameMissedDeadlinePredicate predicate = new NameMissedDeadlinePredicate("f", new LastDate("17-10-2021"));
+        ListCommand command = new ListCommand("lf", new LastDate("17-10-2021"));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(ALICE);
+        validPeople.add(ELLE);
+        assertEquals(validPeople, expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneLateCollection() {
+        String expectedMessage = ListCommand.MESSAGE_SUCCESS_MISSED_ART;
+        NameMissedDeadlinePredicate predicate = new NameMissedDeadlinePredicate("c", new LastDate("10-10-2021"));
+        ListCommand command = new ListCommand("lc", new LastDate("10-10-2021"));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        List<Person> validPeople = new ArrayList<>();
+        validPeople.add(GEORGE);
         assertEquals(validPeople, expectedModel.getFilteredPersonList());
     }
 }

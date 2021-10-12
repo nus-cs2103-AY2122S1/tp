@@ -12,7 +12,7 @@ public class Faculty {
     public static final String MESSAGE_CONSTRAINTS = "Faculty can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the faculty must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
@@ -27,7 +27,7 @@ public class Faculty {
     public Faculty(String faculty) {
         requireNonNull(faculty);
         checkArgument(isValidFaculty(faculty), MESSAGE_CONSTRAINTS);
-        this.faculty = faculty;
+        this.faculty = faculty.toUpperCase();
     }
 
     /**

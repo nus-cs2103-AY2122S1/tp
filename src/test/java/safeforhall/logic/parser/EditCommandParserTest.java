@@ -44,11 +44,9 @@ import org.junit.jupiter.api.Test;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
-//import safeforhall.model.person.Address;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
-//import safeforhall.model.tag.Tag;
 import safeforhall.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {

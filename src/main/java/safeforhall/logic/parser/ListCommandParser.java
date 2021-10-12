@@ -24,6 +24,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         String keyword = argMultimap.getValue(CliSyntax.PREFIX_KEYWORD).get();
+        if (!isKeywordValid(argMultimap, keyword)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_LATE));
+        }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_DATE2).isEmpty()) {
             LastDate date = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE1).get());
@@ -41,5 +44,16 @@ public class ListCommandParser implements Parser<ListCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isKeywordValid(ArgumentMultimap argumentMultimap, String keyword) {
+        boolean normalKeywords = keyword.equals("c") || keyword.equals("f");
+        boolean lateKeywords = keyword.equals("lc") || keyword.equals("lf");
+        boolean emptyDate2 = argumentMultimap.getValue(CliSyntax.PREFIX_DATE2).isEmpty();
+        return normalKeywords || (lateKeywords && emptyDate2);
     }
 }

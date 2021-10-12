@@ -31,7 +31,6 @@
       <Label fx:id="room" styleClass="cell_small_label" text="\$room" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="vaccstatus" styleClass="cell_small_label" text="\$vaccstatus" />
       <Label fx:id="faculty" styleClass="cell_small_label" text="\$faculty" />
       <Label fx:id="lastfetdate" styleClass="cell_small_label" text="\$lastfetdate" />
       <Label fx:id="lastcollectiondate" styleClass="cell_small_label" text="\$lastcollectiondate" />

@@ -143,7 +143,6 @@ public class EditCommand extends Command {
         private Faculty faculty;
         private LastDate lastFetDate;
         private LastDate lastCollectionDate;
-        //private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -160,7 +159,6 @@ public class EditCommand extends Command {
             setFaculty(toCopy.faculty);
             setLastFetDate(toCopy.lastFetDate);
             setLastCollectionDate(toCopy.lastCollectionDate);
-            //setTags(toCopy.tags);
         }
 
         /**
