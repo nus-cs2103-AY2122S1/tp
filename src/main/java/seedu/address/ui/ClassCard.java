@@ -33,7 +33,7 @@ public class ClassCard extends UiPart<Region> {
         super(FXML);
         this.tutorialClass = tutorialClass;
         id.setText(displayedIndex + ". ");
-        classCode.setText(tutorialClass.getClassCode());
+        classCode.setText(tutorialClass.getClassCode().value);
         schedule.setText(tutorialClass.getSchedule().schedule);
         tutorialClass.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.student.Address;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
@@ -28,6 +29,7 @@ class JsonAdaptedStudent {
     private final String phone;
     private final String email;
     private final String address;
+    private final String classCode;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,11 +38,13 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
+                              @JsonProperty("classCode") String classCode,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.classCode = classCode;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +58,7 @@ class JsonAdaptedStudent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        classCode = source.getClassCode().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +107,14 @@ class JsonAdaptedStudent {
         }
         final Address modelAddress = new Address(address);
 
+        if (classCode == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ClassCode.class.getSimpleName()));
+        }
+        final ClassCode modelClassCode = new ClassCode(classCode);
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelClassCode, modelTags);
     }
 
 }
