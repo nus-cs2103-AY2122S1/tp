@@ -17,10 +17,10 @@ import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIAL_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIAL_HANDLE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -49,9 +49,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.SocialHandle;
 import seedu.address.model.person.TutorialGroup;
-import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -89,12 +89,17 @@ public class AddCommandParserTest {
 
         // multiple tutorial groups - last tutorial group accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_AMY
-                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_AMY + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_AMY + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple social handles - last social handle accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_AMY + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+
+        // multiple remarks - last remarks accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_AMY + REMARK_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
@@ -102,8 +107,8 @@ public class AddCommandParserTest {
                 .build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddCommand(expectedPersonMultipleTags));
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_HUSBAND
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
 
     @Test
@@ -142,6 +147,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + VALID_SOCIAL_HANDLE_BOB + REMARK_DESC_BOB, expectedMessage);
 
+        // missing remark prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + VALID_REMARK_BOB, expectedMessage);
+
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_NATIONALITY_BOB
                 + VALID_TUTORIAL_GROUP_BOB + VALID_SOCIAL_HANDLE_BOB + VALID_REMARK_BOB, expectedMessage);
@@ -178,6 +187,11 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + INVALID_SOCIAL_HANDLE_DESC + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, SocialHandle.MESSAGE_CONSTRAINTS);
+
+        // invalid remark
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + INVALID_REMARK_DESC
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Remark.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
