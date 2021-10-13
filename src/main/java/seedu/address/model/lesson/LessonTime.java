@@ -128,6 +128,8 @@ public class LessonTime {
 
     @Override
     public String toString() {
-        return "";
+        return '(' + parseDayToString(dayOfWeek) + ", "
+                + startTime.format(TIME_FORMATTER) + '-'
+                + endTime.format(TIME_FORMATTER) + ')';
     }
 }
