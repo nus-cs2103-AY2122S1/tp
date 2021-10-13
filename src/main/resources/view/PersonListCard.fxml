@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -27,7 +26,6 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-<!--      <FlowPane fx:id="tags" />-->
       <Label fx:id="room" styleClass="cell_small_label" text="\$room" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
@@ -35,5 +33,17 @@
       <Label fx:id="lastfetdate" styleClass="cell_small_label" text="\$lastfetdate" />
       <Label fx:id="lastcollectiondate" styleClass="cell_small_label" text="\$lastcollectiondate" />
     </VBox>
+    <HBox fx:id="informationContainer" alignment="CENTER_RIGHT" minHeight="105">
+      <VBox fx:id="deadlineContainer" alignment="CENTER">
+        <padding>
+          <Insets top="5" right="25" bottom="5" left="15" />
+        </padding>
+      </VBox>
+      <VBox fx:id="statusContainer" alignment="CENTER">
+        <padding>
+          <Insets top="5" right="25" bottom="5" left="15" />
+        </padding>
+      </VBox>
+    </HBox>
   </GridPane>
 </HBox>
