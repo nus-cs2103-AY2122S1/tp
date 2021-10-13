@@ -16,8 +16,8 @@ public class AddClassCommand extends Command {
     public static final String COMMAND_WORD = "addclass";
 
     public static final String MESSAGE_SUCCESS = "New tuition class added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CLASS = "This time slot has already been taken in the address book";
-    public static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not found in the address book: ";
+    public static final String MESSAGE_DUPLICATE_CLASS = "This time slot has already been taken";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not found: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
