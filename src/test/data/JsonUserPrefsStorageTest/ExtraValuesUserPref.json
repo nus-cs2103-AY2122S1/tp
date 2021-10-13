@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "friendsList.json"
+  "addressBookFilePath" : "data\\friendsList.json"
 }

@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "addressBookFilePath" : "friendsList.json"
+  "addressBookFilePath" : "data\\friendsList.json"
 }
