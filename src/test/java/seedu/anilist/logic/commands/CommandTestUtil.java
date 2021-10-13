@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
@@ -19,6 +20,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 import seedu.anilist.testutil.EpisodeDescriptorBuilder;
+import seedu.anilist.testutil.StatusDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -31,6 +33,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_SUPERHERO = "superhero";
     public static final String VALID_EPISODE_ONE = "1";
     public static final String VALID_EPISODE_TWO = "2";
+    public static final String VALID_STATUS_TOWATCH = "towatch";
+    public static final String VALID_STATUS_WATCHING = "watching";
 
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
@@ -38,12 +42,16 @@ public class CommandTestUtil {
     public static final String TAG_DESC_SUPERHERO = " " + PREFIX_TAG + VALID_TAG_SUPERHERO;
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
+    public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
+    public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // cannot be blank
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
         + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode
+    public static final String INVALID_STATUS_DESC_ALPHA = " " + PREFIX_STATUS + "TOWATCHINGG";
+    public static final String INVALID_STATUS_DESC_NUMERIC = " " + PREFIX_STATUS + "261";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -53,6 +61,9 @@ public class CommandTestUtil {
 
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ZERO;
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ONE;
+    public static final UpdateStatusCommand.StatusDescriptor DESC_TOWATCH;
+    public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING;
+    public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING_SHORTFORM;
 
     static {
         DESC_AKIRA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
@@ -61,6 +72,10 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
         DESC_EPISODE_ZERO = new EpisodeDescriptorBuilder().withEpisode("0").build();
         DESC_EPISODE_ONE = new EpisodeDescriptorBuilder().withEpisode("1").build();
+        DESC_TOWATCH = new StatusDescriptorBuilder().withStatus("towatch").build();
+        DESC_WATCHING = new StatusDescriptorBuilder().withStatus("watching").build();
+        DESC_WATCHING_SHORTFORM = new StatusDescriptorBuilder().withStatus("w").build();
+
     }
 
     /**

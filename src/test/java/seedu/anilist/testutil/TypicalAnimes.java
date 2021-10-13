@@ -17,16 +17,41 @@ import seedu.anilist.model.anime.Anime;
  */
 public class TypicalAnimes {
 
-    public static final Anime AOT = new AnimeBuilder().withName("Attack on Titan: The Final Season")
-            .withTags("action").build();
-    public static final Anime BRS = new AnimeBuilder().withName("Black Rock Shooter")
-            .withTags("fantasy", "action").build();
-    public static final Anime CSM = new AnimeBuilder().withName("Chainsaw Man").build();
-    public static final Anime DBZ = new AnimeBuilder().withName("Dragon Ball Z")
-            .withTags("action").build();
-    public static final Anime ELF = new AnimeBuilder().withName("Elfen Lied").build();
-    public static final Anime FSN = new AnimeBuilder().withName("Fate/stay night").build();
-    public static final Anime GS = new AnimeBuilder().withName("Goblin Slayer: Goblin's Crown").build();
+    public static final Anime AOT = new AnimeBuilder()
+            .withName("Attack on Titan: The Final Season")
+            .withEpisode("0")
+            .withTags("action")
+            .build();
+    public static final Anime BRS = new AnimeBuilder()
+            .withName("Black Rock Shooter")
+            .withEpisode("12")
+            .withStatus("F")
+            .withTags("fantasy", "action")
+            .build();
+    public static final Anime CSM = new AnimeBuilder()
+            .withName("Chainsaw Man")
+            .withStatus("T")
+            .build();
+    public static final Anime DBZ = new AnimeBuilder()
+            .withName("Dragon Ball Z")
+            .withStatus("T")
+            .withTags("action")
+            .build();
+    public static final Anime ELF = new AnimeBuilder()
+            .withName("Elfen Lied")
+            .withEpisode("21")
+            .build();
+    public static final Anime FSN = new AnimeBuilder()
+            .withName("Fate/stay night")
+            .withEpisode("24")
+            .withStatus("F")
+            .build();
+    public static final Anime GS = new AnimeBuilder()
+            .withName("Goblin Slayer: Goblin's Crown")
+            .withStatus("T")
+            .build();
+  
+    // Manually added
     public static final Anime HXH = new AnimeBuilder().withName("Hunter x Hunter (2011)").build();
     public static final Anime IDOL = new AnimeBuilder().withName("iDOLM@STER").build();
 

@@ -2,24 +2,38 @@
   "_comment": "AnimeList save file which contains the same Anime values as in TypicalAnimes#getTypicalAnimeList()",
   "anime" : [ {
     "name" : "Attack on Titan: The Final Season",
+    "episode" : "0",
+    "status" : "watching",
     "tagged" : [ "action" ]
   }, {
     "name" : "Black Rock Shooter",
+    "episode" : "12",
+    "status" : "finished",
     "tagged" : [ "fantasy", "action" ]
   }, {
     "name" : "Chainsaw Man",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ ]
   }, {
     "name" : "Dragon Ball Z",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ "action" ]
   }, {
     "name" : "Elfen Lied",
+    "episode" : "21",
+    "status" : "watching",
     "tagged" : [ ]
   }, {
     "name" : "Fate/stay night",
+    "episode" : "24",
+    "status" : "finished",
     "tagged" : [ ]
   }, {
     "name" : "Goblin Slayer: Goblin's Crown",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ ]
   } ]
 }

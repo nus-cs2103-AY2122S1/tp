@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.tag.Tag;
 import seedu.anilist.model.util.SampleDataUtil;
 
@@ -15,17 +16,21 @@ import seedu.anilist.model.util.SampleDataUtil;
 public class AnimeBuilder {
 
     public static final String DEFAULT_NAME = "Attack on Titan";
+    public static final String DEFAULT_EPISODE = "0";
+    public static final String DEFAULT_STATUS = "watching";
 
     private Name name;
     private Episode episode;
     private Set<Tag> tags;
+    private Status status;
 
     /**
      * Creates a {@code AnimeBuilder} with the default details.
      */
     public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
-        episode = new Episode("0");
+        episode = new Episode(DEFAULT_EPISODE);
+        status = new Status(DEFAULT_STATUS);
         tags = new HashSet<>();
     }
 
@@ -35,6 +40,7 @@ public class AnimeBuilder {
     public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
         episode = animeToCopy.getEpisode();
+        status = animeToCopy.getStatus();
         tags = new HashSet<>(animeToCopy.getTags());
     }
 
@@ -55,6 +61,14 @@ public class AnimeBuilder {
     }
 
     /**
+     * Sets the {@code Status} of the {@code Anime} that we are building.
+     */
+    public AnimeBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Anime} that we are building.
      */
     public AnimeBuilder withTags(String ... tags) {
@@ -63,7 +77,7 @@ public class AnimeBuilder {
     }
 
     public Anime build() {
-        return new Anime(name, episode, tags);
+        return new Anime(name, episode, status, tags);
     }
 
 }
