@@ -16,8 +16,8 @@ import java.util.Set;
 public abstract class Lesson implements Comparable<Lesson> {
 
     // Types of lesson
-    private static final String RECURRING = "Recurring Lesson";
-    private static final String MAKEUP = "Makeup Lesson";
+    private static final String RECURRING = "Recurring";
+    private static final String MAKEUP = "Makeup";
 
     // Time fields
     private final Date date;
