@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.BOB_EMPLOYEE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
+import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 import static seedu.address.testutil.TypicalSuppliers.AMY;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
@@ -100,6 +102,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReservation_nullReservation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addReservation(null));
+    }
+
+    @Test
     public void hasSupplier_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasSupplier(null));
     }
@@ -117,6 +124,11 @@ public class ModelManagerTest {
     @Test
     public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasEmployee(ALICE_EMPLOYEE));
+    }
+
+    @Test
+    public void hasReservation_reservationNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasReservation(ALICE_RESERVATION));
     }
 
     @Test
@@ -143,6 +155,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReservation_reservationInAddressBook_returnsTrue() {
+        modelManager.addReservation(ALICE_RESERVATION);
+        assertTrue(modelManager.hasReservation(ALICE_RESERVATION));
+    }
+
+    @Test
     public void hasSupplier_supplierInAddressBook_returnsTrue() {
         modelManager.addSupplier(AMY);
         assertTrue(modelManager.hasSupplier(AMY));
@@ -166,6 +184,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getFilteredReservationList().remove(0));
+    }
+
+    @Test
     public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
                 .getFilteredSupplierList().remove(0));
@@ -177,6 +201,7 @@ public class ModelManagerTest {
                 new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON)
                         .withCustomer(CUSTOMER_ALICE).withCustomer(CUSTOMER_BOB)
                         .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE)
+                        .withReservation(ALICE_RESERVATION).withReservation(BENSON_RESERVATION)
                         .withSupplier(AMY).withSupplier(BOB)
                         .build();
 
@@ -220,6 +245,10 @@ public class ModelManagerTest {
         String[] supplierKeywords = AMY.getName().fullName.split("\\s+");
         modelManager.updateFilteredSupplierList(
                 new SupplierNameContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredList for reservations -> returns false
+        modelManager.updateFilteredReservationList(res -> res.equals(ALICE_RESERVATION));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 import static seedu.address.testutil.TypicalSuppliers.AMY;
 import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
 
@@ -152,6 +153,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasReservation_nullReservation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasReservation(null));
+    }
+
+    @Test
     public void hasSupplier_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addressBook.hasSupplier(null));
     }
@@ -177,6 +183,11 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasReservation_reservationNOtInAddressBook_returnFalse() {
+        assertFalse(addressBook.hasReservation(ALICE_RESERVATION));
+    }
+
+    @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
@@ -198,6 +209,12 @@ public class AddressBookTest {
     public void hasSupplier_inAddressBook_returnsTrue() {
         addressBook.addSupplier(AMY);
         assertTrue(addressBook.hasSupplier(AMY));
+    }
+
+    @Test
+    public void hasReservation_reservationInAddressBook_returnsTrue() {
+        addressBook.addReservation(ALICE_RESERVATION);
+        assertTrue(addressBook.hasReservation(ALICE_RESERVATION));
     }
 
     @Test
@@ -253,6 +270,11 @@ public class AddressBookTest {
     @Test
     public void getSupplierList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getSupplierList().remove(0));
+    }
+
+    @Test
+    public void getReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getReservationList().remove(0));
     }
 
     /**
