@@ -27,7 +27,7 @@ public class MarkCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_NAME + "NAME"
             + PREFIX_DAY_SHIFT + "DATE" + " " + PREFIX_DAY_SHIFT + "DATE";
 
-    private static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
+    public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";
 
     private enum ToEdit {
