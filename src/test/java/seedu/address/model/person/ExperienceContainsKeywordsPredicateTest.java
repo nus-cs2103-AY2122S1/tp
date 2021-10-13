@@ -56,9 +56,10 @@ public class ExperienceContainsKeywordsPredicateTest {
                 new ExperienceContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withExperience("10").build()));
 
-        // Non-matching keyword
+        // entry less than keyword
         predicate = new ExperienceContainsKeywordsPredicate(Arrays.asList("3"));
-        assertFalse(predicate.test(new PersonBuilder().withExperience("10").build()));
+        assertFalse(predicate.test(new PersonBuilder().withExperience("1").build()));
+
 
         // Keywords match every other category except experience
         predicate = new ExperienceContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com",
@@ -66,7 +67,7 @@ public class ExperienceContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withRole("Cat Whisperer")
                 .withEmploymentType("Full time").withExpectedSalary("3000")
-                .withLevelOfEducation("High School").withExperience("10").withTags("friend")
+                .withLevelOfEducation("High School").withExperience("1").withTags("friend")
                 .build()));
     }
 }
