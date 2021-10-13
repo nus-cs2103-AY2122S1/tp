@@ -22,6 +22,8 @@ public class AddToFolderCommand extends Command {
             + COMMAND_WORD + " "
             + "3 >> CS2103";
 
+    public static final String MESSAGE_DUPLICATE_CONTACT = "Contact has already been added to this folder";
+    public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
     public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
 
     private final Index index;
@@ -34,7 +36,6 @@ public class AddToFolderCommand extends Command {
      */
     public AddToFolderCommand(Index index, FolderName folderName) {
         requireNonNull(index);
-
         this.index = index;
         this.folderName = folderName;
     }
@@ -47,6 +48,12 @@ public class AddToFolderCommand extends Command {
         }
 
         Person personToAdd = lastShownList.get(index.getZeroBased());
+
+        if (!model.hasFolderName(folderName)) {
+            throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
+        } else if (model.folderContainsPerson(personToAdd, folderName)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+        }
 
         model.addContactToFolder(personToAdd, folderName);
         return new CommandResult(String.format(MESSAGE_SUCCESS, folderName));

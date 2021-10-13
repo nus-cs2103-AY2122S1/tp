@@ -197,6 +197,16 @@ public class DeleteFolderCommandTest {
         public void addContactToFolder(Person target, FolderName name) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasFolderName(FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean folderContainsPerson(Person target, FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -110,6 +110,16 @@ public interface Model {
     public void addContactToFolder(Person target, FolderName name);
 
     /**
+     * Checks and returns true if folder already exists
+     */
+    boolean hasFolderName(FolderName name);
+
+    /**
+     * Checks and returns true if person has already been added to folder
+     */
+    boolean folderContainsPerson(Person target, FolderName name);
+
+    /**
      * Returns true if a folder with the same identity as {@code folder} exists in the address book.
      */
     boolean hasFolder(Folder folder);

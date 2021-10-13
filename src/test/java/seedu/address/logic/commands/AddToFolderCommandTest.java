@@ -171,6 +171,16 @@ public class AddToFolderCommandTest {
         }
 
         @Override
+        public boolean hasFolderName(FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean folderContainsPerson(Person target, FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFolder(Folder folder) {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,6 +196,7 @@ public class AddToFolderCommandTest {
      * A Model stub with one Person inside Folder.
      */
     private class ModelStubAcceptingPersonAdded extends AddToFolderCommandTest.ModelStub {
+
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList(new PersonBuilder().build());
 
         @Override
@@ -198,6 +209,18 @@ public class AddToFolderCommandTest {
         public void addContactToFolder(Person target, FolderName folderName) {
             requireAllNonNull(target, folderName);
             personsAdded.add(target);
+        }
+
+        @Override
+        public boolean folderContainsPerson(Person target, FolderName name) {
+            requireAllNonNull(target, name);
+            return false;
+        }
+
+        @Override
+        public boolean hasFolderName(FolderName folderName) {
+            requireNonNull(folderName);
+            return true;
         }
 
         @Override

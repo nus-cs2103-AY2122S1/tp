@@ -18,7 +18,7 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
     public AddToFolderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, new Prefix(""));
         List<String> allValues = argMultimap.getAllValues(new Prefix(""));
-        if (allValues.size() <= 1) {
+        if (allValues.size() <= 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToFolderCommand.MESSAGE_USAGE));
         }
         Index index = extractContactIndex(allValues);
@@ -35,12 +35,16 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
      */
     private FolderName extractFolderName(List<String> allValues) throws ParseException {
         StringBuilder stringBuilder = new StringBuilder();
+        if (!allValues.contains(">>")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToFolderCommand.MESSAGE_USAGE));
+        }
         for (int i = 1; i < allValues.size(); i++) {
             String curr = allValues.get(i).trim();
             if (!curr.equals(">>")) {
                 stringBuilder.append(" ").append(curr);
             }
         }
+
         return ParserUtil.parseFolderName(stringBuilder.toString());
     }
 

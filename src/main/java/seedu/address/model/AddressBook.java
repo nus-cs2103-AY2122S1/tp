@@ -118,6 +118,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Checks and returns true if folder already exists
+     */
+    public boolean hasFolderName(FolderName folderName) {
+        requireNonNull(folderName);
+        return folders.containsFolderName(folderName);
+    }
+
+    /**
+     * Checks and returns true if person has already been added to folder
+     */
+    public boolean folderContainsPerson(Person target, FolderName name) {
+        requireAllNonNull(target, name);
+        return folders.folderContainsPerson(target, name);
+    }
+
+    /**
      * Adds a folder to the address book.
      * The folder must not already exist in the address book.
      */

@@ -35,13 +35,27 @@ class AddToFolderParserTest {
     }
 
     @Test
+    public void parse_missingFolderName_failure() {
+        assertThrows(ParseException.class, () -> parser.parse(" 1 >> "));
+    }
+
+    @Test
+    public void parse_missingIndex_failure() {
+        assertThrows(ParseException.class, () -> parser.parse(" >> CS2103"));
+    }
+
+    @Test
+    public void parse_invalidSyntax_failure() {
+        assertThrows(ParseException.class, () -> parser.parse(" > CS2103"));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         assertThrows(ParseException.class, () -> parser.parse(" "));
     }
 
     @Test
     public void parse_nullValue_failure() {
-        CreateFolderCommandParser createFolderCommandParser = new CreateFolderCommandParser();
         assertThrows(NullPointerException.class, () -> parser.parse(null));
 
     }

@@ -49,6 +49,20 @@ public class Folder {
         return this.contacts;
     }
 
+    /**
+     * Checks if folder contains a specific person
+     * @param target
+     * @return true if person exists in folder
+     */
+    public boolean hasContact(Person target) {
+        for (Person contact: contacts) {
+            if (contact.equals(target)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addContacts(Person contact) {
         this.contacts.add(contact);
     }
