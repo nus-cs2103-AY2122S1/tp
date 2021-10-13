@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/staffd_icon.jpg" />
   </icons>
   <scene>
     <Scene>
@@ -26,54 +26,49 @@
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
-
-      <VBox fx:id="mainVbox" prefHeight="471.0" prefWidth="925.0">
-        <MenuBar fx:id="menuBar" prefHeight="75.0" prefWidth="932.0" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
-            <HBox fx:id="windowHbox" prefHeight="513.0" prefWidth="954.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-               <children>
-                  <VBox prefHeight="434.0" prefWidth="474.0" styleClass="pane-with-border">
-                     <children>
-                                      <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-                      <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                      </padding>
+            <VBox fx:id="mainVbox" prefHeight="471.0" prefWidth="925.0">
+                <MenuBar fx:id="menuBar" prefHeight="30.0" prefWidth="932.0" VBox.vgrow="NEVER">
+                    <Menu mnemonicParsing="false" text="File">
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                    </Menu>
+                </MenuBar>
+                <HBox fx:id="windowHbox" prefHeight="513.0" prefWidth="954.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                    <children>
+                          <StackPane fx:id="resultDisplayPlaceholder" alignment="TOP_LEFT" minHeight="100" prefHeight="423.0" prefWidth="257.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                              <padding>
+                                  <Insets bottom="5" left="10" right="10" top="5" />
+                              </padding>
+                          </StackPane>
+                        <TabPane prefHeight="322.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                            <tabs>
+                                <Tab closable="false" styleClass="dark" text="Staff View">
+                                    <content>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                                <VBox fx:id="personList" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <padding>
+                                                        <Insets bottom="10" left="10" right="10" top="10" />
+                                                    </padding>
+                                                    <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </TabPane>
+                    </children>
+                </HBox>
+                    <StackPane fx:id="commandBoxPlaceholder" prefHeight="40.0" prefWidth="264.0" styleClass="pane-with-border">
+                        <padding>
+                            <Insets bottom="5" left="10" right="10" top="5" />
+                        </padding>
                     </StackPane>
-                                      <StackPane fx:id="commandBoxPlaceholder" prefHeight="27.0" prefWidth="264.0" styleClass="pane-with-border">
-                      <padding>
-                        <Insets bottom="5" left="10" right="10" top="5" />
-                      </padding>
-                    </StackPane>
-                                      <StackPane fx:id="statusbarPlaceholder" prefHeight="17.0" prefWidth="472.0" VBox.vgrow="NEVER" />
-                     </children>
-                  </VBox>
-                  <TabPane prefHeight="322.0" prefWidth="193.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
-                    <tabs>
-                      <Tab closable="false" styleClass="dark" text="Staff View">
-                           <content>
-                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                 <children>
-                                                        <VBox fx:id="personList" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                  <padding>
-                                    <Insets bottom="10" left="10" right="10" top="10" />
-                                  </padding>
-                                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                                </VBox>
-                                 </children>
-                              </AnchorPane>
-                           </content>
-                      </Tab>
-                    </tabs>
-                  </TabPane>
-               </children>
-            </HBox>
-      </VBox>
-    </Scene>
-  </scene>
+                    <StackPane fx:id="statusbarPlaceholder" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="472.0" VBox.vgrow="NEVER" />
+            </VBox>
+        </Scene>
+    </scene>
 </fx:root>

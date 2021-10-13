@@ -35,11 +35,12 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
+
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
+  e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -51,42 +52,6 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 </div>
 
-## Basic management of Staff Details
-
-### Tag legend - `todo: standardize tags for all commands`
-
-|Tag|Description|
-|---|-----------|
-|n/|Name of Staff|
-|s/|Status (as a full-time/part-time worker)|
-|r/|Role (e.g. Cook, Staff Management)|
-|e/|Email|
-|a/|Address of Staff|
-
-### View a staff - `view`
-
-View the staff details of a single staff.
-
-Examples:
-
-`view n/Candice`\
-`view id/12345678`
-
-### Adding a staff - `add`
-
-Adds a staff to the stored information. The tags and information are optional and can be presented in any order.
-Upon creation of a staff, the system creates a staff ID for them which can be used to refer to them and access the system.
-
-Format:
-
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/Tag`
-
-Examples:
-
-`add n/Joe s/fulltime r/manager p/98765432 e/Joe@example.com a/John street, block 123, #01-01`\
-`add n/Candice s/parttime p/91234567 e/candice@example.com a/Newgate Prison`
-
-
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
@@ -95,24 +60,44 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+## Basic management of Staff Details
 
-[comment]: <> (### Adding a person: `add`)
 
-[comment]: <> (Adds a person to the address book.)
+### Tag legend - `todo: standardize tags for all commands`
 
-[comment]: <> (Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`)
+|Tag|Description|
+|---|-----------|
+|n/|Name|
+|s/|Status (as a full-time/part-time worker)|
+|r/|Role (e.g. Cook, Staff Management)|
+|a/|Address|
+|$/|Salary|
+|i/|Index|
+|e/|Email|
+|t/|Extra tags|
 
-[comment]: <> (<div markdown="span" class="alert alert-primary">:bulb: **Tip:**)
+### View a staff - `view`
 
-[comment]: <> (A person can have any number of tags &#40;including 0&#41;)
+View the staff details of a single staff.
 
-[comment]: <> (</div>)
+Examples:
 
-[comment]: <> (Examples:)
+`view n/Candice`\
+`view i/123`
 
-[comment]: <> (* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`)
+### Adding a staff - `add`
 
-[comment]: <> (* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`)
+* Adds a staff to the system. The tags and information are optional and can be presented in any order.
+* Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
+
+Format:
+
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [r/ROLE] [s/STATUS] [t/TAG...]`
+
+Examples:
+
+`add n/Joe s/fulltime r/manager p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
+`add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
 
 ### Listing all persons : `list`
 
@@ -127,18 +112,19 @@ Deletes the specified staff from the staff list.
 Formats:
 
 `delete n/name`\
-`delete id/ID`\
-`delete t/group`
+`delete i/index`\
+`delete r/role`\
+`delete s/status`
 
-* Deletes the staff(s) with the specified `NAME`, `TAG`, `INDEX`.
+* Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
-* If there are multiple staffs of the same name/tag group, Staff'd will prompt you again to be more specific.
 
 Examples:
 
 `delete n/Candice`\
-`delete id/12345678`\
-`delete t/cashiers`
+`delete i/12345678`\
+`delete r/cashiers`\
+`delete s/full-time`
 
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
 [comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)
@@ -149,30 +135,25 @@ Edits an existing staff in the Staff List.
 
 Formats:
 
-`edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
-`edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`\
-`edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+`edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`\
+`edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`
 
 
-* Edits the staff of the specified `NAME`, `INDEX`, or `ID`.
+* Edits the staff of the specified `NAME`, `INDEX`
 The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the staff will be removed i.e adding of tags is not cumulative.
-* You can remove all the staff’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 
 `edit -i 1 p/91234567 e/johndoe@example.com`\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
-`edit -n Candice p/12345678 e/noBOByouaretoochubby@tafclub.com`\
-`edit -id 12345678 n/Candice p/12345678 e/nobobyouaretoofat@tafclub.com`
+`edit -n Candice r/cook`
 
 |Tag|Name|Description|
 |---|----|-----------|
-|-n|Name|Contacts with the name will be edited.|
-|-i|ID|Contact with that id will be edited.|
-|-t|Tag|Contacts with that tag will be edited.|
+|-n|Name|Contact with the name will be edited.|
+|-i|Index|Contact with that index will be edited.|
 
 
 ### Locating persons by name: `find`
@@ -212,27 +193,23 @@ Format: `exit`
 
 ## Basic Management of Staff Schedules
 
-### Adding a staff's schedule: `addSchedule`
+### Adding a shift to staff's schedule: `addShift`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
 Formats:
 
-`addSchedule [n/name] [day-startTime-endTime]` \
-`addSchedule [id/ID] [day-startTime-endTime]` \
-`addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]` \
-`addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+`addShift n/name d/fullDayName-shiftNumber` \
+`addShift i/index d/fullDayName-shiftNumber`
 
 
-* There are two ways to identify the staff to add the time period to: by their name or by their staff ID.
-* Also, there are two types of time periods that can be added - recurring and non-recurring.
-* The default is a recurring schedule which will occur every week. For the addition of the non-recurring time periods,
-  the date which the staff works has to be specified.
+* There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
+* The `fulldayname` field required to specify shifts are not case sensitive.
 
 Examples:
 
-`addSchedule n/Candice Mon-0800-1200` \
-`addSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+`addShift n/Candice d/Monday-1` \
+`addShift i/1234 d/tuesday-0`
 
 ### View a staff schedule : `viewSchedule`
 
@@ -240,30 +217,28 @@ Views a specific staff’s schedule.
 
 Formats:
 
-`viewSchedlue [n/name]` \
-`viewSchedlue [id/ID]`
+`viewSchedlue n/name` \
+`viewSchedlue i/index`
 
 Examples:
 
 `viewSchedule n/Candice` \
-`viewSchedule id/12345678`
+`viewSchedule i/123`
 
 
 ### Deleting a staff schedule: `deleteSchedule`
 
-Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their name or by their staff ID. The deleted period must be the same as a period previously entered by the manager. If the period is a non-recurring period, the date must be specified.
+Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
 Formats:
 
-`deleteSchedule [n/name] [day-startTime-endTime]` \
-`deleteSchedule [id/ID] [day-startTime-endTime]`\
-`deleteSchedule [n/name] [t/nonrecurr]  [d/date] [startTime-endTime]` \
-`deleteSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+`deleteSchedule n/name d/fullDayName-shiftNumber` \
+`deleteSchedule i/index d/fullDayName-shiftNumber`
 
 Examples:
 
-`deleteSchedule n/Joe Mon-0800-1200` \
-`deleteSchedule id/12345678 t/nonrecurr d/2021-09-09 0800-1200`
+`deleteSchedule n/Joe d/tuesday-2` \
+`deleteSchedule i/1278 d/friday-1`
 
 ### Editing a staff schedule: `editSchedule`
 
@@ -271,13 +246,13 @@ Edits a staff schedule start and end date time. There are two ways to identify t
 
 Formats:
 
-`editSchedule [n/name] [old/day-startTime-endTime] [new/day-startTime-endTime]` \
-`editSchedule [id/ID] [old/day-startTime-endTime] [new/day-startTime-endTime]`
+`editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` \
+`editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
 Examples:
 
-`editSchedule n/Candice old/Mon-0800-1200 new/Mon-0900-1200` \
-`editSchedule n/12345678 old/Thurs-1200-1800 new/Thurs-1400-1700`
+`editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
+`editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
 
 ### Saving the data
@@ -309,15 +284,15 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**View** | `view n/name` <br> `view id/ID`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/Tag`
-**Delete** | `delete n/name` <br> `delete id/ID` <br> `delete t/group`
-**Edit** | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]` <br> `edit ID [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+**View** | `view n/name` <br> `view i/index`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [s/STATUS]`
+**Delete** | `delete n/name` <br> `delete i/index` <br> `delete r/role` <br> `delete s/status`
+**Edit** | `edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [s/STATUS]` <br> `edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [s/STATUS]`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedlue [n/name]` <br> `viewSchedlue [id/ID]`
-**Add staff schedule** | `addSchedule [n/name] [day-startTime-endTime]` <br> `addSchedule [id/ID] [day-startTime-endTime]` <br> `addSchedule [n/name] [t/nonrecurr] [d/date] [startTime-endTime]` <br> `addSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
-**Edit staff schedule** | `editSchedule [n/name] [old/day-startTime-endTime] [new/day-startTime-endTime]` <br> `editSchedule [id/ID] [old/day-startTime-endTime] [new/day-startTime-endTime]`
-**Delete staff schedule** | `deleteSchedule [n/name] [day-startTime-endTime]` <br> `deleteSchedule [id/ID] [day-startTime-endTime]` <br> `deleteSchedule [n/name] [t/nonrecurr]  [d/date] [startTime-endTime]` <br> `deleteSchedule [id/ID] [t/nonrecurr] [d/date] [startTime-endTime]`
+**View staff schedule** | `viewSchedlue n/name` <br> `viewSchedlue i/index`
+**Add staff schedule** | `addSchedule n/name d/fullDayName-shiftNumber` <br> `addSchedule i/index d/fullDayName-shiftNumber`
+**Edit staff schedule** | `editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editSchedule i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
+**Delete staff schedule** | `deleteSchedule n/name d/fullDayName-shiftNumber` <br> `deleteSchedule i/index d/fullDayName-shiftNumber`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`

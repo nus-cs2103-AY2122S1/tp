@@ -2,11 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,19 +25,35 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Role role;
+    private final Salary salary;
+    private final Status status;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Field> fields = new HashSet<>();
+
+    private Schedule schedule;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Role role, Salary salary, Status status, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.role = role;
+        this.salary = salary;
+        this.status = status;
         this.tags.addAll(tags);
+        this.schedule = new Schedule();
+        this.fields.addAll(tags);
+        Field.addToFieldSet(fields, name, phone, email, address, salary);
     }
+
+
+
 
     public Name getName() {
         return name;
@@ -48,8 +67,29 @@ public class Person {
         return email;
     }
 
+
     public Address getAddress() {
         return address;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public boolean containsFields(List<Field> fields) {
+        return this.fields.containsAll(fields);
     }
 
     /**
@@ -58,6 +98,21 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Add a shift to the staff's schedule.
+     *
+     * @param dayOfWeek The day of the shift.
+     * @param slot The time slot of the shift.
+     * @throws DuplicateShiftException throws when there is already a shift in the target slot.
+     */
+    public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+        schedule.addShift(dayOfWeek, slot);
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     /**
@@ -92,6 +147,9 @@ public class Person {
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
                 && otherStaff.getAddress().equals(getAddress())
+                && otherStaff.getRole().equals(getRole())
+                && otherStaff.getSalary().equals(getSalary())
+                && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags());
     }
 
@@ -110,7 +168,13 @@ public class Person {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Address: ")
-                .append(getAddress());
+                .append(getAddress())
+                .append("; Role: ")
+                .append(getRole())
+                .append("; Salary: ")
+                .append(getSalary())
+                .append("; Status: ")
+                .append(getStatus());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -119,5 +183,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

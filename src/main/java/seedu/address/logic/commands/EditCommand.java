@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -24,6 +29,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
+import seedu.address.model.person.Salary;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,16 +39,25 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    private enum Identifier {
+        INDEX, NAME
+    }
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+            + "by the index number used in the displayed person list or by the name identifier\n. "
+            + "[" + EDIT_PREFIX_INDEX + "INDEX] "
+            + "[" + EDIT_PREFIX_NAME + "NAME] should be used for the lookup"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_SALARY + "SALARY] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -50,12 +67,14 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
+    private Index index;
+    private Name name;
+    private final Identifier identifier;
     private final EditPersonDescriptor editStaffDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the person in the filtered person list to edit
+     * @param editStaffDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editStaffDescriptor) {
         requireNonNull(index);
@@ -63,10 +82,67 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editStaffDescriptor = new EditPersonDescriptor(editStaffDescriptor);
+        this.identifier = Identifier.INDEX;
     }
+
+    /**
+     * @param name                  of the person in the staffd database to edit.
+     * @param editStaffDescriptor   details to edit the person with
+     */
+    public EditCommand(Name name, EditPersonDescriptor editStaffDescriptor) {
+        requireNonNull(name);
+        requireNonNull(editStaffDescriptor);
+
+        this.editStaffDescriptor = editStaffDescriptor;
+        this.name = name;
+        this.identifier = Identifier.NAME;
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        switch(this.identifier) {
+        case INDEX:
+            return editBasedOnIndex(model);
+        case NAME:
+            return editBasedOnName(model);
+        default:
+            throw new CommandException(Messages.MESSAGE_INVALID_COMMAND_FORMAT);
+
+        }
+
+    }
+
+
+    private CommandResult editBasedOnName(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> underlyingList = model.getUnFilteredPersonList();
+        Optional<Person> person = underlyingList
+                .stream()
+                .filter(staff -> staff.getName().equals(this.name))
+                .findFirst();
+        if (!person.isPresent()) {
+            //if the person is not in the list
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_SEARCHED);
+        }
+        Person staffToEdit = person.get();
+        return editStaffOnModel(model, staffToEdit);
+
+
+    }
+
+    private CommandResult editStaffOnModel(Model model, Person staffToEdit) throws CommandException {
+        Person editedStaff = createEditedPerson(staffToEdit, editStaffDescriptor);
+        if (!staffToEdit.isSamePerson(editedStaff) && model.hasPerson(editedStaff)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        model.setPerson(staffToEdit, editedStaff);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedStaff));
+    }
+
+    private CommandResult editBasedOnIndex(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -75,15 +151,7 @@ public class EditCommand extends Command {
         }
 
         Person staffToEdit = lastShownList.get(index.getZeroBased());
-        Person editedStaff = createEditedPerson(staffToEdit, editStaffDescriptor);
-
-        if (!staffToEdit.isSamePerson(editedStaff) && model.hasPerson(editedStaff)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
-        model.setPerson(staffToEdit, editedStaff);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedStaff));
+        return editStaffOnModel(model, staffToEdit);
     }
 
     /**
@@ -97,9 +165,13 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(staffToEdit.getAddress());
+        Role updatedRole = editPersonDescriptor.getRole().orElse(staffToEdit.getRole());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
+        Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(staffToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
+                updatedSalary, updatedStatus, updatedTags);
     }
 
     @Override
@@ -129,6 +201,9 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Role role;
+        private Salary salary;
+        private Status status;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {
@@ -143,6 +218,9 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRole(toCopy.role);
+            setSalary(toCopy.salary);
+            setStatus(toCopy.status);
             setTags(toCopy.tags);
         }
 
@@ -185,6 +263,30 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setRole(Role role) {
+            this.role = role;
+        }
+
+        public Optional<Role> getRole() {
+            return Optional.ofNullable(role);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -221,6 +323,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getRole().equals(e.getRole())
+                    && getSalary().equals(e.getSalary())
+                    && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags());
         }
     }
