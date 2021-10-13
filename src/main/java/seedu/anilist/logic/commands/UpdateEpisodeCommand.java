@@ -112,7 +112,7 @@ public class UpdateEpisodeCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if episode is edited.
          */
         public boolean isEpisodeUpdated() {
             return episode != null;
