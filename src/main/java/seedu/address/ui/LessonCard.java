@@ -42,8 +42,8 @@ public class LessonCard extends UiPart<Region> {
         time.setText("Time: " + lesson.getTimeRange().toString());
         subject.setText("Subject: " + lesson.getSubject().toString());
         lesson.getHomework().stream()
-            .sorted(Comparator.comparing(homework -> homework.description))
-            .forEach(homework -> homeworkList.getChildren()
-                .add(new Label(homework + "\n")));
+                .sorted(Comparator.comparing(homework -> homework.description))
+                .forEach(homework -> homeworkList.getChildren()
+                        .add(new Label(homework + "\n")));
     }
 }
