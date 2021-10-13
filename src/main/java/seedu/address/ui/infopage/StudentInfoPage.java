@@ -55,7 +55,7 @@ public class StudentInfoPage extends InfoPage {
         this.student = student;
         this.name.setText(student.getName().fullName);
         this.phone.setText(student.getPhone().value);
-        this.remark.setText("Remarks:\n" + student.getRemark().value);
+        this.remark.setText("Remark: " + student.getRemark().value);
         this.address.setText(student.getAddress().value);
         this.email.setText(student.getEmail().value);
         student.getTags().stream()

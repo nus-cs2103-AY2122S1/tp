@@ -10,6 +10,6 @@
       <Label fx:id="studentCount" styleClass="cell_small_label" text="Current size" />
       <Label fx:id="timeSlot" styleClass="cell_small_label" text="Timeslot" />
       <Label fx:id="students" styleClass="cell_small_label" text="Students" />
-      <Label fx:id="notes" styleClass="cell_small_label" text="Notes" />
+      <Label fx:id="remark" styleClass="cell_small_label" text="Remark" />
    </children>
 </VBox>
