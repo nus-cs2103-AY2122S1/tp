@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.BOB_EMPLOYEE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
+import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,6 +97,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReservation_nullReservation_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addReservation(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
@@ -107,6 +114,11 @@ public class ModelManagerTest {
     @Test
     public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasEmployee(ALICE_EMPLOYEE));
+    }
+
+    @Test
+    public void hasReservation_reservationNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasReservation(ALICE_RESERVATION));
     }
 
     @Test
@@ -128,6 +140,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasReservation_reservationInAddressBook_returnsTrue() {
+        modelManager.addReservation(ALICE_RESERVATION);
+        assertTrue(modelManager.hasReservation(ALICE_RESERVATION));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -145,11 +163,19 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredReservationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getFilteredReservationList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook =
                 new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON)
                         .withCustomer(CUSTOMER_ALICE).withCustomer(CUSTOMER_BOB)
-                        .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE).build();
+                        .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE)
+                        .withReservation(ALICE_RESERVATION).withReservation(BENSON_RESERVATION)
+                        .build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -184,6 +210,10 @@ public class ModelManagerTest {
         String[] employeeKeywords = ALICE_EMPLOYEE.getName().fullName.split("\\s+");
         modelManager.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(
                 Arrays.asList(employeeKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // different filteredList for reservations -> returns false
+        modelManager.updateFilteredReservationList(res -> res.equals(ALICE_RESERVATION));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

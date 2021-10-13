@@ -317,6 +317,7 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredEmployees.equals(other.filteredEmployees)
-                && filteredSuppliers.equals(other.filteredSuppliers);
+                && filteredSuppliers.equals(other.filteredSuppliers)
+                && filteredReservations.equals(other.filteredReservations);
     }
 }
