@@ -129,19 +129,23 @@ Examples:
 
 Finds students who match the input keywords.
 
-Format: `search (-n <student_name> | -i <student_id> | -g <group_name>)`
+Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)`
 
-* Search for students by their name, NUSNET ID, or the group they belong in. 
+* Search for students by their name, NUSNET ID, tag, or the group they belong in. 
+Only one type of tag should be used for each search. 
+* To search with multiple keywords, separate keywords with spaces e.g. `search -g T02A R03C`
 * The search is case-insensitive. e.g `hans` will match `Hans`. 
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`. 
-* Only full words will be matched e.g. `Han` will not match `Hans`. 
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search). 
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* For search with name or tag, only full words will be matched e.g. `Han` will not match `Hans`.
+* For search with NUSNET ID or group name, partial search is supported e.g. `T02` will match `T02A` and `T02B`. 
 
 Examples:
 * `search -n John Doe`
 * `search -i E0123456`
-* `search -g T02B`
+* `search -g T02B R03C`
+* `search -g friends colleagues`
 
 
 ### Importing data: `import`
