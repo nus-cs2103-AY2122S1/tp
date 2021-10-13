@@ -2,8 +2,7 @@
 layout: page
 title: AniList v1.2
 ---
-
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![CI Status](https://github.com/AY2122S1-CS2103T-T10-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-T10-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T10-4/tp/branch/master/graph/badge.svg?token=4W8H8O9F76)](https://codecov.io/gh/AY2122S1-CS2103T-T10-4/tp)
 
 ![Ui](images/Ui.png)
