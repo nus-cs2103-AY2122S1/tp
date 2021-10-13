@@ -17,21 +17,21 @@ public class ShowCommand extends Command {
     public static final String HELP_MESSAGE = "### Show grades for an assessment:  `show`\n"
             + "Avengers will be able to view all students' grades for a particular assessment.\n"
             + "\n"
-            + "Format: `show as/ASSESSMENT`\n"
+            + "Format: `show ASSESSMENT`\n"
             + "\n"
             + "Record students' `GRADE` for the `ASSESSMENT`.\n"
             + "The input `ASSESSMENT` must be a valid assessment: RA1, MIDTERM, RA2, PE, FINAL.\n"
             + "\n"
             + "Example:\n"
-            + "* `show as/RA1`";
+            + "* `show RA1`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show students' grades for an assessment. "
             + "Parameters: "
-            + PREFIX_ASSESSMENT + "ASSESSMENT "
+            + "ASSESSMENT "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ASSESSMENT + "RA1 ";
+            + "RA1";
 
-    public static final String MESSAGE_SUCCESS = "Grades for %1$s:";
+    public static final String MESSAGE_SUCCESS = "Grades for %1$s displayed.";
 
     private final String assessment;
 
@@ -40,19 +40,50 @@ public class ShowCommand extends Command {
      * @param assessment The assessment's grades that will be displayed.
      */
     public ShowCommand(String assessment) {
-        this.assessment = assessment;
+        requireNonNull(assessment);
+        this.assessment = assessment.toUpperCase();
+    }
+
+    /**
+     * Return a String representation of the collated grades for a particular Assessment.
+     * @param students The students in the AcademyDirectory.
+     * @param assessment The specified Assessment.
+     * @return A String representation of the grades for a particular Assessment.
+     */
+    public static String displayResult(ObservableList<Student> students, String assessment) {
+        StringBuilder result = new StringBuilder();
+        result.append("Results for ").append(assessment).append("\n");
+        double totalMarks = 0;
+        for (Student student : students) {
+            String name = student.getName().fullName;
+            String grade = student.getAssessment().getAssessmentGrade(assessment);
+            totalMarks += grade.equals("NA") ? 0 : Integer.parseInt(grade);
+            result.append(name).append(": ").append(grade).append("\n");
+        }
+        String average = String.format("%.2f", totalMarks / (students.toArray().length));
+        result.append("\n").append("Average: ").append(average);
+        return result.toString();
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         ObservableList<Student> students = model.getFilteredStudentList();
-        StringBuilder result = new StringBuilder();
-        for (Student student : students) {
-            String name = student.getName().fullName;
-            String grade = student.getAssessment().getAssessmentGrade(assessment);
-            result.append(name).append(": ").append(grade).append("\n");
+        String result = displayResult(students, this.assessment);
+        return new CommandResult(result);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
-        return new CommandResult(result.toString());
+
+        if (!(other instanceof ShowCommand)) {
+            return false;
+        }
+
+        ShowCommand e = (ShowCommand) other;
+        return assessment.equals(e.assessment);
     }
 }
