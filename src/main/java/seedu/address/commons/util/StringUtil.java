@@ -119,4 +119,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isIntegerLargerThanValue(String s1, String s2) {
+        CollectionUtil.requireAllNonNull(s1, s2);
+        try {
+            int value1 = Integer.parseInt(s1);
+            int value2 = Integer.parseInt(s2);
+            return (value1 >= value2);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
