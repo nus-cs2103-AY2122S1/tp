@@ -9,7 +9,8 @@ import static seedu.anilist.commons.util.AppUtil.checkArgument;
  */
 public class Genre {
 
-    public static final String MESSAGE_CONSTRAINTS = "Genres names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Genres names should be alphanumeric with at most one space"
+            + "separating each word.";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}]+(?:[\\p{IsWhite_Space}][\\p{Alnum}]+)*";
 
     public final String genreName;

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
@@ -50,13 +51,13 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String genre} into a {@code Genre}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
      *
      * @throws ParseException if the given {@code genre} is invalid.
      */
     public static Genre parseGenre(String genre) throws ParseException {
         requireNonNull(genre);
-        String trimmedGenre = genre.trim();
+        String trimmedGenre = genre.trim().toLowerCase(Locale.ROOT);
         if (!Genre.isValidGenreName(trimmedGenre)) {
             throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
         }
@@ -88,5 +89,28 @@ public class ParserUtil {
             throw new ParseException(Episode.MESSAGE_CONSTRAINTS);
         }
         return new Episode(trimmedEpisode);
+    }
+
+
+    public static Action parseAction(String actionString) throws ParseException {
+        requireNonNull(actionString);
+        String trimmedActionLowerCase = actionString.trim().toLowerCase(Locale.ROOT);
+        Action result;
+        if (!Action.ADD.isValidAction(trimmedActionLowerCase)) {
+            throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedActionLowerCase));
+        }
+
+        switch (trimmedActionLowerCase) {
+        case "add" :
+            result = Action.ADD;
+            break;
+        case "delete" :
+            result = Action.DELETE;
+            break;
+        default:
+            result = Action.DEFAULT;
+        }
+
+        return result;
     }
 }

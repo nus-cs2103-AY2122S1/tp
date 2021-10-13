@@ -63,6 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (genres.isEmpty()) {
             return Optional.empty();
         }
+
         Collection<String> genreSet = genres.size() == 1 && genres.contains("") ? Collections.emptySet() : genres;
         return Optional.of(ParserUtil.parseGenres(genreSet));
     }

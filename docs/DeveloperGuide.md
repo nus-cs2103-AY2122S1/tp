@@ -252,6 +252,9 @@ The name of our app. Only used for package name.
 A list of Anime, also the overall structure of the data.
 I.e. the user data is stored as an instance of AnimeList in json format.
 
+### Genre
+Represents a genre of anime.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
