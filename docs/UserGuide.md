@@ -98,6 +98,7 @@ Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYM
 
 * Find command must take at least 1 prefix input.
 * Find command can only take 1 input for each prefix.
+* If you input multiple of the same prefix, only the last prefix will be used for the search of that category.
 * Input for each prefix can contain multiple search terms separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
 * Inputs are **case-insensitive**
 
@@ -108,8 +109,8 @@ Prefix Input Specifications:
   * Each additional keyword for *Name* leads to a more **accommodating** search.
   * A *Name* is considered matching if at least 1 keyword is equal to at least 1 word in the *Name*.
   * For example:
-    * A `John` input can match with *Name*s such as `John Tan` or `John Lee` 
-    * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`
+    * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
+    * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
 
 
 * *Email* `e/`
@@ -145,6 +146,34 @@ but not with *Role*s such as `Software` or `Software Developer`.
   * For example:
     * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
     * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
+
+
+* *Employment Type* `et/`
+  * Each additional keyword for Email leads to a more **accommodating** search, as long as all keywords are **valid**.
+  * A *Employment Type* is considered matching only if it starts with any of the keywords and all keywords are valid.
+  * For example:
+    * A `Full time` or `full time` or `full` input will match only with *Employment Type*s that are ```Full time```
+    * A ```Full part``` input will match with all *Employment Type*s that are ```Full time``` or ```Part time```
+    * A ```temp Intern``` input will match with all *Employment Type*s that are ```Temporary``` or ```Internship```
+    * A ```full time bob``` input will throw an exception as ```bob``` is not a term any of the *Employment Type*s start
+    with.
+
+
+* *Expected Salary* `p/`
+    * Each additional keyword for *Expected Salary* leads to a more **accommodating** search.
+    * An
+      *Expected Salary* is considered matching if at least 1 keyword is within `500` from at least 1 *Expected Salary*.
+    * For example:
+        * A `3000` input can match with *Expected Salary*s that range from `2500` to `3500` inclusive.
+        * A `2500 5000` input can match with *Expected Salary*s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
+
+
+* *Tag* `t/`
+    * Each additional keyword for *Tag* leads to a more **accommodating** search.
+    * A *Tag* is considered matching if at least 1 keyword is equals to at least 1 *Tag*.
+    * For example:
+        * An `old` input can match with applicants that have the *Tag* `old`
+        * An `experienced old` input can match with applicants that have the *Tag* `experienced`, or `old`, or both.
 
 
 Examples:
@@ -188,17 +217,21 @@ Advanced users are welcome to update data directly by editing that data file.
 Example of format of data for one applicant in applicants:
 
 ```JSON
-"persons" : [ {
- "name" : "Alice Yeoh",
- "phone" : "87438807",
- "email" : "alexyeoh@example.com",
- "role" : "Software Engineering",
- "employmentType" : "Full time",  
- "expectedSalary" : "3600",
- "levelOfEducation" : "High School",
- "experience" : "2",
- "tagged" : [ ]
-}]
+{
+  "persons": [
+    {
+      "name": "Alice Yeoh",
+      "phone": "87438807",
+      "email": "alexyeoh@example.com",
+      "role": "Software Engineering",
+      "employmentType": "Full time",
+      "expectedSalary": "3600",
+      "levelOfEducation": "High School",
+      "experience": "2",
+      "tagged": []
+    }
+  ]
+}
 ```
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RecruitIn will discard all data and start with an empty data file at the next run.
