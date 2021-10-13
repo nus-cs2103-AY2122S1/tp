@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tuition.TuitionClass;
@@ -22,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTuitionList tuitions;
+    private SortCommandParser.Order order;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -61,6 +63,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setTuition(List<TuitionClass> tuitionClasses) {
         this.tuitions.setTuitions(tuitionClasses);
+        if (this.order != null) {
+            this.tuitions.sort(order);
+        }
     }
 
     /**
@@ -71,14 +76,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setTuition(TuitionClass target, TuitionClass editedTuition) {
         requireNonNull(editedTuition);
         tuitions.setTuition(target, editedTuition);
-    }
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setTuitions(List<TuitionClass> tuitionClasses) {
-        this.tuitions.setTuitions(tuitionClasses);
+        if (this.order != null) {
+            this.tuitions.sort(order);
+        }
     }
 
     /**
@@ -189,6 +189,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTuition(TuitionClass t) {
         tuitions.add(t);
+        if (this.order != null) {
+            this.tuitions.sort(order);
+        }
     }
 
     /**
@@ -225,5 +228,14 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
         }
         return null;
+    }
+
+    /**
+     * Sorts the tuition class list and memorize the order prefered by the tutor.
+     * @param order the order the list is to be sorted with.
+     */
+    public void sort(SortCommandParser.Order order) {
+        this.order = order;
+        this.tuitions.sort(order);
     }
 }

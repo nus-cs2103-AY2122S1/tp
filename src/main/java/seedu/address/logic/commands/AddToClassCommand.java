@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -25,26 +26,28 @@ public class AddToClassCommand extends Command {
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + "[OR " + PREFIX_STUDENT + "STUDENT_NAME" + "] "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX"
-            + "\n" + "Example1: " + COMMAND_WORD + " si/3 tc/3"
-            + "\n" + "Example2: " + COMMAND_WORD + " s/Felicia,James tc/3";
+            + "\n" + "Example1: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 2 " + PREFIX_TUITION_CLASS + "2"
+            + "\n" + "Example2: " + COMMAND_WORD + " " + PREFIX_STUDENT + "Felicia,James " + PREFIX_TUITION_CLASS + "3";
     public static final String MESSAGE_SUCCESS = "New student %1$s added to class.";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
     private static final String MESSAGE_CLASS_IS_FULL = "The following students are not "
             + "added due to class limit: ";
+    private static final String MESSAGE_LIMIT_EXCEEDED = "These students cannot be added due to class limit. ";
     private static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not "
             + "found in the address book: ";
     private static final String MESSAGE_NO_STUDENT_ADDED = "No student has been added.";
-    private Index studentIndex;
+    private List<Index> studentIndex;
     private Index classIndex;
     private StudentList studentList;
     private boolean isUsingIndex;
+    private List<String> unfoundIndex = new ArrayList<>();
 
     /**
      * Constructor for AddToClass command using student index.
      * @param studentIndex index of student to be added.
      * @param classIndex index of class to be added to.
      */
-    public AddToClassCommand(Index studentIndex, Index classIndex) {
+    public AddToClassCommand(List<Index> studentIndex, Index classIndex) {
         this.classIndex = classIndex;
         this.studentIndex = studentIndex;
         this.isUsingIndex = true;
@@ -77,7 +80,7 @@ public class AddToClassCommand extends Command {
         }
         boolean isClassFull = tuitionClass.isFull();
         if (isClassFull) {
-            throw new CommandException(MESSAGE_CLASS_IS_FULL);
+            throw new CommandException(MESSAGE_LIMIT_EXCEEDED);
         }
         //checks whether the command is using index or names
         if (!isUsingIndex) {
@@ -108,8 +111,8 @@ public class AddToClassCommand extends Command {
                 }
                 continue;
             }
-            if (tuitionClass.getStudentList().getStudents().contains(studentName)) {
-                if (!existingStudent.contains(studentName)) {
+            if (validStudentNames.contains(studentName)) {
+                if (!existingStudent.contains(studentName) && !newStudents.contains(model.getSameNamePerson(person))) {
                     existingStudent.add(studentName);
                 }
                 continue;
@@ -130,7 +133,7 @@ public class AddToClassCommand extends Command {
         return returnValue;
     }
 
-    private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) throws CommandException {
+    private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) {
         ArrayList[] students = this.getStudent(studentList, model, tuitionClass);
         ArrayList<Person> newStudents = students[0];
         if (newStudents.size() == 0) {
@@ -147,7 +150,7 @@ public class AddToClassCommand extends Command {
             Person studentToAdd = person;
             Person studentToChange = person;
             studentToAdd.addClass(modifiedClass);
-            studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " "
+            studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " | "
                     + modifiedClass.getTimeslot().time));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
@@ -156,22 +159,17 @@ public class AddToClassCommand extends Command {
     }
 
     private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) throws CommandException {
-        Person studentToAdd = model.getStudent(studentIndex);
-        Person studentToChange = model.getStudent(studentIndex);
-
-        if (studentToAdd == null) {
-            throw new CommandException(Messages.MESSAGE_STUDENT_NOT_FOUND);
+        ArrayList<String> studentNames = new ArrayList<>();
+        for (Index index: studentIndex) {
+            Person student = model.getStudent(index);
+            if (student == null) {
+                this.unfoundIndex.add("Index " + index.getOneBased() + " ");
+            } else {
+                studentNames.add(student.getName().toString());
+            }
         }
-
-        TuitionClass modifiedClass = model.addToClass(tuitionClass, studentToAdd);
-        if (modifiedClass == null) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_EXISTS, studentToAdd.getName().toString()));
-        }
-        studentToAdd.addClass(modifiedClass);
-        studentToAdd.addTag(new Tag(modifiedClass.getName().getName()
-                + " " + modifiedClass.getTimeslot().time));
-        updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToAdd.getName().fullName, modifiedClass));
+        this.studentList = new StudentList(studentNames);
+        return executeStudentName(model, tuitionClass);
     }
 
     private String getMessage(ArrayList[] students) {
@@ -183,9 +181,9 @@ public class AddToClassCommand extends Command {
         boolean noStudentAdded = newStudents.size() == 0;
         boolean studentExists = students[4].size() > 0;
         String message = "";
-        String studentAdded = "";
+        ArrayList<String> studentAdded = new ArrayList<>();
         for (Person person: newStudents) {
-            studentAdded += person.getName().toString() + " ";
+            studentAdded.add(person.getName().toString());
         }
         if (noStudentAdded) {
             message += MESSAGE_NO_STUDENT_ADDED + "\n";
@@ -200,6 +198,9 @@ public class AddToClassCommand extends Command {
         }
         if (hasInvalidNames) {
             message += MESSAGE_STUDENT_NOT_FOUND + invalidStudentNames;
+        }
+        if (unfoundIndex.size() > 0) {
+            message += MESSAGE_STUDENT_NOT_FOUND + unfoundIndex;
         }
         return message;
     }

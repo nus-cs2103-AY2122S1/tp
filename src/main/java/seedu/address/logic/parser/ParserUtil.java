@@ -153,7 +153,24 @@ public class ParserUtil {
         return new ClassLimit(Integer.valueOf(trimmedLimit));
     }
 
-
+    /**
+     * Parses a {@code String order} into a trimmed string.
+     * @param order the intended sorting order input by user.
+     * @return an Order object.
+     */
+    public static SortCommandParser.Order parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (trimmedOrder.equals(SortCommandParser.Order.TIME.toString())) {
+            return SortCommandParser.Order.TIME;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.ASCENDING.toString())) {
+            return SortCommandParser.Order.ASCENDING;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.DESCENDING.toString())) {
+            return SortCommandParser.Order.DESCENDING;
+        } else {
+            throw new ParseException(SortCommandParser.Order.ORDER_CONSTRAINT);
+        }
+    }
 
     /**
      * Parses a {@code String className} into a {@code ClassName}.
