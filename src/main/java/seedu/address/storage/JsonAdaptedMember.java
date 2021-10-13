@@ -59,8 +59,8 @@ class JsonAdaptedMember {
     public JsonAdaptedMember(Member source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().get().value;
-        address = source.getAddress().get().value;
+        email = source.getEmail().isPresent() ? source.getEmail().get().value : null;
+        address = source.getAddress().isPresent() ? source.getAddress().get().value : null;
         attachedPositions.addAll(source.getPositions().stream()
                 .map(JsonAdaptedPosition::new)
                 .collect(Collectors.toList()));
