@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -270,33 +270,46 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                         | So that I can …​                                                 |
+| Priority | As a …​                                 | I want to …​                      | So that I can …​                                              |
 | -------- | ------------------------------------------ | ------------------------------------ | -----------------------------------------------------------------|
 | `* * *`  | Customer Service Officer                   | add a new student                    | keep track of student count and details                          |
-| `* * *`  | Customer Service Officer                   | Delete a student                     | keep track of student count and details                          |
-| `* * *`  | Customer Service Officer                   | Know the grade of the student’s      | schedule them into the right lessons (eg. P5 student to P5 lessons) |
-| `* * *`  | Customer Service Officer                   | Lookup a student in the database     | find out the student’s details                                   |
-| `* * *`  | Customer Service Officer                   | Know the lessons a student is enrolled in  | -obvious benefit-                                          |
-| `* * *`  | Customer Service Officer                   | Enrol students from a lesson         | I can keep track of student count and details in lessons         |
-| `* * *`  | Customer Service Officer                   | Unenroll students from a lesson      | keep track of student count and details in lessons               |
-| `* * *`  | Customer Service Officer                   | Know the parent’s contact            | call the parent if he is late or did not attend                  |
-| `* * *`  | Customer Service Officer                   | Know the address                     | send physical letters/ documents                                 |
-| `* * *`  | Customer Service Officer                   | Know the list of all other lessons   | check the status of other lessons                                |
-| `* *`    | Customer Service Officer                   | Update student’s address             | ensure the detail is updated to date                             |
-| `* *`    | Customer Service Officer                   | Update student’s number of lessons   | keep track of his/her schedule if it’s too packed                |
-| `* *`    | Customer Service Officer                   | Update student’s school              | -obvious benefit-                                                |
-| `* *`    | Customer Service Officer                   | Update student’s subjects taken      | keep track of their total tuition fees                           |
-| `* *`    | Customer Service Officer                   | Know how many students are in the lesson | help tutors plan resources accordingly for the lesson        |
-| `* *`    | Customer Service Officer                   | Know what time lessons start/end     | let parents/ teachers/ students know if they need to know lesson timings, or know of any clash in timings    |
-| `* *`    | Customer Service Officer                   | Know students' attendance            | inform teachers or find out why students are missing lessons     |
-| `* *`    | Customer Service Officer                   | Know how much a student has to pay in a month | remind the parents to pay punctually                    |
-| `* *`    | Customer Service Officer                   | Know the command format to enter.    | properly use the app                                             |
-| `*`      | Customer Service Officer                   | Update lesson timings                | keep track of changes in the lesson schedule                     |
-| `*`      | Customer Service Officer                   | Update student’s performance stats   | inform tuition teachers of their proficiency                     |
-| `*`      | Customer Service Officer                   | Know the lessons each teacher has    | remind them of their lessons                                     |
-| `*`      | Customer Service Officer                   | Leave remarks                        | make lessons more convenient for tutors and students in the case they are unable to make it for a specific lesson                 |
-| `*`      | Customer Service Officer                   | Know students performance stats      | update the teachers/ students if they need that information      |
-| `*`      | Customer Service Officer                   | Keep track of student’s outstanding payments | know who has paid and remind parents to pay if they have yet to complete payment |
+| `* * *`  | Customer Service Officer                   | delete a student                     | keep track of student count and details                          |
+| `* * *`  | Customer Service Officer                   | know a student's grade               | schedule them into the right lessons (eg. P5 student to P5 lessons) |
+| `* * *`  | Customer Service Officer                   | look up a student by their name      | find out the student’s details                                   |
+| `* * *`  | Customer Service Officer                   | know the lessons a student is enrolled in  | -obvious benefit-                                          |
+| `* * *`  | Customer Service Officer                   | enroll a students into a lesson      | keep track of student count and details in lessons               |
+| `* * *`  | Customer Service Officer                   | unenroll a student from a lesson     | keep track of student count and details in lessons               |
+| `* * *`  | Customer Service Officer                   | know the contact of a student’s parent | call the parent if he is late or did not attend                |
+| `* * *`  | Customer Service Officer                   | know a student's address             | send physical letters/ documents                                 |
+| `* * *`  | Customer Service Officer                   | know a student's grade               | keep track of a student's grade                                  |
+| `* * *`  | Customer Service Officer                   | know the email of a student’s parent | send emails to update the student                                |
+| `* * *`  | Customer Service Officer                   | know the list of all lessons         | check the status of other lessons                                |
+| `* * *`  | Customer Service Officer                   | add a new lesson                     | enroll students into the lesson                                  |
+| `* * *`  | Customer Service Officer                   | delete an existing lesson            | remove outdated lessons                                          |
+| `* * *`  | Customer Service Officer                   | know what time lessons start/end     | update relevant parties about the lesson timings                 |
+| `* *`    | Customer Service Officer                   | update a student’s address           | ensure the details are updated to date                           |
+| `* *`    | Customer Service Officer                   | update a student’s grade             | ensure the details are updated to date                           |
+| `* *`    | Customer Service Officer                   | update the contact of a student’s parent | ensure the details are updated to date                       |
+| `* *`    | Customer Service Officer                   | update the email of a student’s parent | ensure the details are updated to date                         |
+| `* *`    | Customer Service Officer                   | filter students by their grade       | categorise students by their grades                              |
+| `* *`    | Customer Service Officer                   | filter lessons by their grade        | categorise lessons by their grades                               |
+| `* *`    | Customer Service Officer                   | know how many students are in the lesson | help tutors plan resources accordingly for the lesson        |
+| `* *`    | Customer Service Officer                   | know the command format to enter     | learn to use the application                                     |
+| `* *`    | Customer Service Officer                   | know how much a student has to pay per week | remind the parents to pay punctually                      |
+| `* *`    | Customer Service Officer                   | leave remarks                        | make lessons more convenient for tutors and students in the case they are unable to make it for a specific lesson |
+| `*`      | Customer Service Officer                   | know a student's attendance          | inform teachers or find out why students are missing lessons     |
+| `*`      | Customer Service Officer                   | record a student's attendance        | keep track of student's attendance                               |
+| `*`      | Customer Service Officer                   | update details of existing lessons   | change the specifics of the lesson                               |
+| `*`      | Customer Service Officer                   | update a student’s performance stats | inform tuition teachers of their proficiency                     |
+| `*`      | Customer Service Officer                   | know the lessons each teacher has    | remind them of their lessons                                     |
+| `*`      | Customer Service Officer                   | add a teacher                        | keep track of their details                                      |
+| `*`      | Customer Service Officer                   | delete a teacher                     | delete irrelevant teachers                                       |
+| `*`      | Customer Service Officer                   | assign teachers to lessons           | keep track of their classes                                      |
+| `*`      | Customer Service Officer                   | know students performance stats      | update the teachers/ students if they need that information      |
+| `*`      | Customer Service Officer                   | keep track of student’s outstanding payments | know who has paid and remind parents to pay if they have yet to complete payment |
+| `*`      | Customer Service Officer                   | read excel sheet                     | import my pre-existing administrative details                    |
+| `*`      | Customer Service Officer                   | write to excel sheet                 | export my existing administrative details                        |
+
 
 ### Use cases
 
@@ -580,7 +593,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a student while all students are being shown
 
-    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+    1. Prerequisites: List all students using the `list` command. Multiple "Students" in the list.
 
     1. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
