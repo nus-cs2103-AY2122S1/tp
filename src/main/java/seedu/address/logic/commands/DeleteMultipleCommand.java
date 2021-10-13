@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a multiple people identified using the displayed index range from the address book.
+ * Deletes multiple people identified using the displayed index range from the address book.
  */
 public class DeleteMultipleCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
@@ -30,7 +30,7 @@ public class DeleteMultipleCommand extends Command {
     private final Index endIndex;
 
     /**
-     * Deletes multiple between the range of start index and end index both inclusive.
+     * Deletes multiple people between the range of start index and end index both inclusive.
      *
      * @param startIndex displayed index of first person to be deleted.
      * @param endIndex displayed index of last person to be deleted.
