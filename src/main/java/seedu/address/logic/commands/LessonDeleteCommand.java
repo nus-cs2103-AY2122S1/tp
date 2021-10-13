@@ -20,12 +20,22 @@ import seedu.address.model.util.PersonUtil;
  * Contains integration tests (interaction with the Model) and unit tests for LessonDeleteCommand.
  */
 public class LessonDeleteCommand extends Command {
+
+    public static final String COMMAND_ACTION = "Delete Lesson";
+
     public static final String COMMAND_WORD = "ldelete";
 
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+            + "LESSON_INDEX (must be a positive integer)";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the lesson identified by lesson index"
-            + " of the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer) LESSON_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "1";
+        + " of the student identified by the index number used in the displayed student list.\n"
+        + "Parameters: " + COMMAND_PARAMETERS + "\n"
+        + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
 

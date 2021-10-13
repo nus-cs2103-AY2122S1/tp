@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -44,6 +45,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setSchool(person.getSchool());
         descriptor.setAcadStream(person.getAcadStream());
+        descriptor.setAcadLevel(person.getAcadLevel());
         descriptor.setFee(person.getFee());
         descriptor.setRemark(person.getRemark());
         descriptor.setTags(person.getTags());
@@ -110,6 +112,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAcadStream(String acadStream) {
         descriptor.setAcadStream(new AcadStream(acadStream));
+        return this;
+    }
+
+    /**
+     * Sets the {@code AcadLevel} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withAcadLevel(String acadLevel) {
+        descriptor.setAcadLevel(new AcadLevel(acadLevel));
         return this;
     }
 

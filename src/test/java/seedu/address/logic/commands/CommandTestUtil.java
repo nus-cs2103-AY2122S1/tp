@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
@@ -54,6 +56,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHOOL_BOB = "Bob's School";
     public static final String VALID_ACAD_STREAM_AMY = "Amy stream";
     public static final String VALID_ACAD_STREAM_BOB = "Bob stream";
+    public static final String VALID_ACAD_LEVEL_AMY = "S1";
+    public static final String VALID_ACAD_LEVEL_BOB = "P6";
     public static final String VALID_FEE_AMY = "12345.67";
     public static final String VALID_FEE_BOB = "0.50";
     public static final String VALID_REMARK_AMY = "Amy loves sushi!";
@@ -77,12 +81,17 @@ public class CommandTestUtil {
     public static final String SCHOOL_DESC_BOB = " " + PREFIX_SCHOOL + VALID_SCHOOL_BOB;
     public static final String ACAD_STREAM_DESC_AMY = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_AMY;
     public static final String ACAD_STREAM_DESC_BOB = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_BOB;
+    public static final String ACAD_LEVEL_DESC_AMY = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_AMY;
+    public static final String ACAD_LEVEL_DESC_BOB = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_BOB;
     public static final String FEE_DESC_AMY = " " + PREFIX_FEE + VALID_FEE_AMY;
     public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String FIND_COND_DESC_ALL = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ALL;
+    public static final String FIND_COND_DESC_ANY = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ANY;
+    public static final String FIND_COND_DESC_NONE = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.NONE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "8765432a"; // 'a' not allowed in phones
@@ -92,10 +101,8 @@ public class CommandTestUtil {
     public static final String INVALID_PARENT_EMAIL_DESC =
             " " + PREFIX_PARENT_EMAIL + "bobparent.yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_SCHOOL_DESC = " " + PREFIX_SCHOOL
-            + "sch[]"; // square brackets not allowed for schools
-    public static final String INVALID_ACAD_STREAM_DESC = " " + PREFIX_ACAD_STREAM
-            + "a* stream"; // '*' not allowed for acad streams;
+    public static final String INVALID_ACAD_LEVEL_DESC = " " + PREFIX_ACAD_LEVEL
+            + "abcdefghijklmnopq"; // max 15 characters allowed for acad level
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
@@ -131,7 +138,9 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
-                .withSchool(VALID_SCHOOL_AMY).withAcadStream(VALID_ACAD_STREAM_AMY)
+                .withSchool(VALID_SCHOOL_AMY)
+                .withAcadStream(VALID_ACAD_STREAM_AMY)
+                .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withFee(VALID_FEE_AMY).withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
 
@@ -139,7 +148,9 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withParentPhone(VALID_PARENT_PHONE_BOB).withParentEmail(VALID_PARENT_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
-                .withSchool(VALID_SCHOOL_BOB).withAcadStream(VALID_ACAD_STREAM_BOB)
+                .withSchool(VALID_SCHOOL_BOB)
+                .withAcadStream(VALID_ACAD_STREAM_BOB)
+                .withAcadLevel(VALID_ACAD_LEVEL_BOB)
                 .withFee(VALID_FEE_BOB).withRemark(VALID_REMARK_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }

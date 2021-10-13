@@ -3,6 +3,7 @@ package seedu.address.model.util;
 import java.util.Set;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -36,12 +37,13 @@ public class PersonUtil {
         Address updatedAddress = personToEdit.getAddress();
         School updatedSchool = personToEdit.getSchool();
         AcadStream updatedAcadStream = personToEdit.getAcadStream();
+        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
         Fee updatedOutstandingFee = personToEdit.getFee();
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = personToEdit.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-            updatedAddress, updatedSchool, updatedAcadStream, updatedOutstandingFee,
-            updatedRemark, updatedTags, updatedLessons);
+                updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedOutstandingFee,
+                updatedRemark, updatedTags, updatedLessons);
     }
 }

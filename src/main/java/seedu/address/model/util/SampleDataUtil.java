@@ -9,6 +9,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -29,6 +30,7 @@ public class SampleDataUtil {
     public static final Email EMPTY_EMAIL = new Email("");
     public static final School EMPTY_SCHOOL = new School("");
     public static final AcadStream EMPTY_ACAD_STREAM = new AcadStream("");
+    public static final AcadLevel EMPTY_ACAD_LEVEL = new AcadLevel("");
     public static final Fee EMPTY_FEE = new Fee("");
     public static final Remark EMPTY_REMARK = new Remark("");
     public static final TreeSet<Lesson> EMPTY_LESSON_SET = new TreeSet<>();
@@ -38,32 +40,32 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
-                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, new Fee("50"),
+                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL, new Fee("50"),
                     EMPTY_REMARK, getTagSet("friends"), EMPTY_LESSON_SET),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     EMPTY_PHONE, EMPTY_EMAIL,
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, new Fee("80"),
+                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL, new Fee("80"),
                     EMPTY_REMARK, getTagSet("colleagues", "friends"), EMPTY_LESSON_SET),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                     EMPTY_PHONE, new Email("olivealice@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new School("NYJC"), EMPTY_ACAD_STREAM, EMPTY_FEE,
+                    new School("NYJC"), EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL, EMPTY_FEE,
                     EMPTY_REMARK, getTagSet("neighbours"), EMPTY_LESSON_SET),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                     new Phone("91009182"), EMPTY_EMAIL,
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_FEE,
+                    EMPTY_SCHOOL, EMPTY_ACAD_STREAM, EMPTY_ACAD_LEVEL, EMPTY_FEE,
                     new Remark("Weak at trigo"), getTagSet("family"), EMPTY_LESSON_SET),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     EMPTY_PHONE, EMPTY_EMAIL,
                     new Address("Blk 47 Tampines Street 20, #17-35"),
-                    EMPTY_SCHOOL, new AcadStream("NA"), EMPTY_FEE,
+                    EMPTY_SCHOOL, new AcadStream("NA"), new AcadLevel("s5"), EMPTY_FEE,
                     EMPTY_REMARK, getTagSet("classmates"), EMPTY_LESSON_SET),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                     EMPTY_PHONE, EMPTY_EMAIL,
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new School("DHS"), new AcadStream("IP"), new Fee("35"),
+                    new School("DHS"), new AcadStream("IP"), new AcadLevel("Y3"), new Fee("35"),
                     EMPTY_REMARK, getTagSet("colleagues"), EMPTY_LESSON_SET)
         };
     }
