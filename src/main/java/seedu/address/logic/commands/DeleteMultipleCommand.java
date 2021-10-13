@@ -19,8 +19,8 @@ public class DeleteMultipleCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a range of persons identified by the index number used in the displayed person list.\n"
-            + "Parameters: START_INDEX - END_INDEX (must be positive integers)\n"
+            + ": Deletes a range of people identified by the index numbers in the displayed person list.\n"
+            + "Parameters: START_INDEX - END_INDEX (must be positive integers, both inclusive)\n"
             + "Example: " + COMMAND_WORD + " 8 - 14";
 
     public static final String MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS = "Deleted Persons: ";
@@ -30,7 +30,7 @@ public class DeleteMultipleCommand extends Command {
     private final Index endIndex;
 
     /**
-     * Deletes persons between a range of start index and end index.
+     * Deletes multiple between the range of start index and end index both inclusive.
      *
      * @param startIndex displayed index of first person to be deleted.
      * @param endIndex displayed index of last person to be deleted.
@@ -42,8 +42,13 @@ public class DeleteMultipleCommand extends Command {
         this.endIndex = endIndex;
     }
 
-    private Boolean areValidIndexes(Index startIndex, Index endIndex) {
+    private boolean areValidIndexes(Index startIndex, Index endIndex) {
         return startIndex.getZeroBased() <= endIndex.getZeroBased();
+    }
+
+    private boolean haveEqualIndexes(DeleteMultipleCommand other) {
+        return startIndex.equals(other.startIndex)
+                && endIndex.equals(other.endIndex);
     }
 
     @Override
@@ -69,7 +74,6 @@ public class DeleteMultipleCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteMultipleCommand // instanceof handles nulls
-                && startIndex.equals(((DeleteMultipleCommand) other).startIndex)
-                && endIndex.equals(((DeleteMultipleCommand) other).endIndex)); // state check
+                    && haveEqualIndexes((DeleteMultipleCommand) other)); // both indexes are equal
     }
 }
