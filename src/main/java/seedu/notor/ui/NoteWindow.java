@@ -30,7 +30,7 @@ public class NoteWindow extends UiPart<Stage> {
     private static final int CENTER_X = (SCREEN_X - WIDTH) / 2;
     private static final int CENTER_Y = (SCREEN_Y - HEIGHT) / 2;
     private static final String FXML = "NoteWindow.fxml";
-    private static final Modifier CTRL = KeyCombination.SHORTCUT_DOWN;
+    private static final Modifier CTRL = KeyCombination.CONTROL_DOWN;
     private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, CTRL);
     private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, CTRL);
     private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, CTRL);
