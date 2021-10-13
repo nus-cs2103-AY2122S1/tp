@@ -79,7 +79,6 @@ public class Task {
         }
         Task task = (Task) other;
         boolean result = isDone == task.isDone && taskName.equals(task.taskName);
-        System.out.println(result);
         return result;
     }
 

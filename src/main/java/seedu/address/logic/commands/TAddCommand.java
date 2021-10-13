@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
 
@@ -8,7 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 
 /**
@@ -26,7 +27,6 @@ public class TAddCommand extends Command {
             + PREFIX_MEMBER_ID + " 2";
 
     public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list of the member";
 
     public final Index targetMemberID;
     public final Task toAdd;
@@ -35,8 +35,7 @@ public class TAddCommand extends Command {
      * Creates an TAddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
     public TAddCommand(Index memberID, Task task) {
-        requireNonNull(memberID);
-        requireNonNull(task);
+        requireAllNonNull(memberID, task);
         targetMemberID = memberID;
         toAdd = task;
     }
@@ -45,12 +44,8 @@ public class TAddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Member> members = model.getAddressBook().getMemberList();
+        ObservableList<Member> members = model.getFilteredMemberList();
         Member targetMember = members.get(targetMemberID.getZeroBased());
-
-        if (model.hasTask(targetMember, toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
         model.addTask(targetMember, toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName(), toAdd));

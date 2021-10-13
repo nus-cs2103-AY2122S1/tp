@@ -125,7 +125,6 @@ public class ParserUtil {
     }
 
     /**
-
      * Parses a {@code String name} into a {@code EventName}.
      * Leading and trailing whitespaces will be trimmed.
      *

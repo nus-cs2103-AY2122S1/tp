@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskList;
 
@@ -37,8 +39,7 @@ public class TDelCommand extends Command {
      * from the member with specified {@code MemberID}.
      */
     public TDelCommand(Index memberID, Index taskID) {
-        requireNonNull(memberID);
-        requireNonNull(taskID);
+        requireAllNonNull(memberID, taskID);
         targetMemberID = memberID;
         targetTaskID = taskID;
     }
@@ -47,17 +48,17 @@ public class TDelCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Member> members = model.getAddressBook().getMemberList();
-        System.out.println(members.toArray().length);
+        ObservableList<Member> members = model.getFilteredMemberList();
         int memberId = targetMemberID.getZeroBased();
+        if (targetMemberID.getZeroBased() >= members.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+        }
         Member targetMember = members.get(memberId);
-        System.out.println(targetMember.getName());
 
         int taskId = targetTaskID.getZeroBased();
         TaskList taskList = targetMember.getTaskList();
         ObservableList<Task> tasks = taskList.asUnmodifiableObservableList();
-        System.out.println(tasks.toArray().length);
-        if (tasks.size() <= taskId) {
+        if (targetTaskID.getZeroBased() >= tasks.size()) {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
         Task targetTask = tasks.get(targetTaskID.getZeroBased());

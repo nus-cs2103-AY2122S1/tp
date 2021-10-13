@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -22,8 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskListManager;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
@@ -258,16 +259,21 @@ class TDelCommandTest {
         private final Member member;
         private final Task task;
         private final TaskListManager taskListManager;
-
+        private final FilteredList<Member> filteredMembers;
 
         ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
-            ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(memberID.getZeroBased());
+            this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+            this.member = filteredMembers.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskListManager();
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return filteredMembers;
         }
 
         @Override
@@ -308,14 +314,19 @@ class TDelCommandTest {
         private final AddressBook addressBook;
         private final Member member;
         private final TaskListManager taskListManager;
-
+        private final FilteredList<Member> filteredMembers;
 
         ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
-            ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(memberID.getZeroBased());
+            this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+            this.member = filteredMembers.get(memberID.getZeroBased());
             this.taskListManager = new TaskListManager();
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return filteredMembers;
         }
 
         @Override

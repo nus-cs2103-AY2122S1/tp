@@ -10,19 +10,19 @@ import java.nio.file.Path;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskListManager;
-import seedu.address.model.event.Event;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.event.Event;
+import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
@@ -45,19 +45,6 @@ class TAddCommandTest {
 
         assertEquals(String.format(TAddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
                 commandResult.getFeedbackToUser());
-    }
-
-    @Test
-    public void execute_duplicateTask_throwsCommandException() {
-        Index validMemberID = Index.fromOneBased(1);
-        Task duplicateTask = new Task("Do homework");
-        Member validMember = new MemberBuilder().build();
-        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TAddCommand tAddCommand = new TAddCommand(validMemberID, duplicateTask);
-        ModelStub modelStub = new ModelStubWithTask(addressBook, duplicateTask, validMemberID);
-
-        assertThrows(CommandException.class, TAddCommand.MESSAGE_DUPLICATE_TASK, () ->
-                tAddCommand.execute(modelStub));
     }
 
     @Test
@@ -245,36 +232,6 @@ class TAddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single member with task.
-     */
-    private class ModelStubWithTask extends TAddCommandTest.ModelStub {
-        private final Member member;
-        private final Task task;
-        private final AddressBook addressBook;
-
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
-            this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
-            ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(memberID.getZeroBased());
-            requireNonNull(task);
-            this.task = task;
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return addressBook;
-        }
-
-        @Override
-        public boolean hasTask(Member member, Task task) {
-            requireNonNull(member);
-            requireNonNull(task);
-            return this.member.equals(member) && this.task.equals(task);
-        }
-    }
-
-    /**
      * A Model stub that always accept the member being added.
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
@@ -282,13 +239,14 @@ class TAddCommandTest {
         private final Member member;
         private final Task task;
         private final TaskListManager taskListManager;
+        private final FilteredList<Member> filteredMembers;
 
 
         ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
             this.addressBook = new AddressBook(addressBook);
             requireNonNull(memberID);
-            ObservableList<Member> members = addressBook.getMemberList();
-            this.member = members.get(memberID.getZeroBased());
+            this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
+            this.member = filteredMembers.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskListManager();
@@ -310,6 +268,11 @@ class TAddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return this.addressBook;
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return filteredMembers;
         }
 
         @Override
