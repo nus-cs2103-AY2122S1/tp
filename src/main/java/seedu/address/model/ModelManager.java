@@ -254,4 +254,10 @@ public class ModelManager implements Model {
         filteredPositions.setPredicate(predicate);
     }
 
+    //=========== Filtered Applicant List Accessors =============================================================
+    @Override
+    public Path getApplicantBookFilePath() {
+        return userPrefs.getApplicantBookFilePath();
+    }
+
 }
