@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Classmate;
+import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.TutorialClassBuilder;
@@ -100,8 +100,8 @@ public class AddClassCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyClassmate getClassmate() {
+            return new Classmate();
         }
     }
 }

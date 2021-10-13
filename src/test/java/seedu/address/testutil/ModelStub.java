@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -36,12 +36,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getClassmateFilePath() {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setClassmateFilePath(Path addressBookFilePath) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -56,12 +56,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook newData) {
+    public void setClassmate(ReadOnlyClassmate newData) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyClassmate getClassmate() {
         throw new AssertionError("This method should not be called.");
     }
 
