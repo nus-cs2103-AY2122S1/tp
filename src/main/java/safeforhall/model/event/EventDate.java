@@ -41,17 +41,10 @@ public class EventDate {
     }
 
     /**
-     * Converts the given {@code LastDate} to a {@code LocalDate}.
+     * Converts the given {@code EventDate} to a {@code LocalDate}.
      */
     public LocalDate toLocalDate() {
         return LocalDate.parse(eventDate, dateFormatter);
-    }
-
-    /**
-     * Adds the period of validity to the given {@code LastDate} to get the next deadline.
-     */
-    public LocalDate getDeadline() {
-        return LocalDate.parse(eventDate, dateFormatter).plusWeeks(LASTDATE_DEADLINE);
     }
 
     @Override

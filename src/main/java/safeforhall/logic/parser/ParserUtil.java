@@ -172,59 +172,59 @@ public class ParserUtil {
      * Parses a {@code String eventName} into a {@code EventName}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code eventName} is invalid.
      */
-    public static EventName parseEventName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!EventName.isValidEventName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static EventName parseEventName(String eventName) throws ParseException {
+        requireNonNull(eventName);
+        String trimmedEventName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedEventName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
         }
-        return new EventName(trimmedName);
+        return new EventName(trimmedEventName);
     }
 
     /**
-     * Parses a {@code String date} into a {@code LastDate}.
+     * Parses a {@code String eventDate} into a {@code EventDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code date} is invalid.
+     * @throws ParseException if the given {@code eventDate} is invalid.
      */
-    public static EventDate parseEventDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedDate = date.trim();
-        if (!EventDate.isValidEventDate(trimmedDate)) {
-            throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
+    public static EventDate parseEventDate(String eventDate) throws ParseException {
+        requireNonNull(eventDate);
+        String trimmedEventDate = eventDate.trim();
+        if (!EventDate.isValidEventDate(trimmedEventDate)) {
+            throw new ParseException(EventDate.MESSAGE_CONSTRAINTS);
         }
-        return new EventDate(trimmedDate);
+        return new EventDate(trimmedEventDate);
     }
 
     /**
-     * Parses a {@code String eventName} into a {@code EventName}.
+     * Parses a {@code String venue} into a {@code Venue}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code venue} is invalid.
      */
-    public static Venue parseVenue(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!EventName.isValidEventName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
         }
-        return new Venue(trimmedName);
+        return new Venue(trimmedVenue);
     }
 
     /**
-     * Parses a {@code String eventName} into a {@code EventName}.
+     * Parses a {@code String capacity} into a {@code Capacity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code capacity} is invalid.
      */
-    public static Capacity parseCapacity(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!EventName.isValidEventName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static Capacity parseCapacity(String capacity) throws ParseException {
+        requireNonNull(capacity);
+        String trimmedCapacity = capacity.trim();
+        if (!Capacity.isValidCapacity(trimmedCapacity)) {
+            throw new ParseException(Capacity.MESSAGE_CONSTRAINTS);
         }
-        return new Capacity(trimmedName);
+        return new Capacity(trimmedCapacity);
     }
 }

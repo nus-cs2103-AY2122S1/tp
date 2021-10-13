@@ -6,7 +6,11 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
-import safeforhall.model.event.*;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.Capacity;
+import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -49,8 +53,8 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
-        sampleAb.addEvent(new Event(new EventName("CCA"), new EventDate("12-01-2021"),
-                new Venue("A123"), new Capacity("3")));
+        sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("03-01-2021"),
+                new Venue("Gym"), new Capacity("5")));
         return sampleAb;
     }
 

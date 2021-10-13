@@ -29,7 +29,7 @@ public class EaddCommand extends Command {
     private final Event toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an EaddCommand to add the specified {@code Event}
      */
     public EaddCommand(Event event) {
         requireNonNull(event);

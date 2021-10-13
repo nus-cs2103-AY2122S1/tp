@@ -5,7 +5,7 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
 
 public class EventName {
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the name must not be a whitespace,
@@ -16,9 +16,9 @@ public class EventName {
     public final String eventName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code EventName}.
      *
-     * @param eventName A valid venue.
+     * @param eventName A valid event name.
      */
     public EventName(String eventName) {
         requireNonNull(eventName);
@@ -27,7 +27,7 @@ public class EventName {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid event name.
      */
     public static boolean isValidEventName(String test) {
         return test.matches(VALIDATION_REGEX);

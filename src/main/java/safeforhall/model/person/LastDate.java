@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class LastDate {
-    public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";
+    public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy format";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 

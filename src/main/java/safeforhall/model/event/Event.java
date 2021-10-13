@@ -1,7 +1,5 @@
 package safeforhall.model.event;
 
-import safeforhall.model.person.Person;
-
 import java.util.Objects;
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -45,7 +43,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both persons have the same name and room.
+     * Returns true if both events have the same name and date.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameEvent(Event otherEvent) {
@@ -54,9 +52,9 @@ public class Event {
         }
 
         return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName());
+                && otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getEventDate().equals(getEventDate());
     }
-
 
     @Override
     public int hashCode() {

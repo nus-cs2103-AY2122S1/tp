@@ -5,23 +5,23 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
 
 public class Capacity {
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{1,3}";
+            "Capacity should be between 1 and 999";
+    public static final String VALIDATION_REGEX = "\\d{1,3}"; // add check for capacity = 0
     public final String capacity;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs a {@code Capacity}.
      *
      * @param capacity A valid capacity.
      */
     public Capacity(String capacity) {
         requireNonNull(capacity);
-        // checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
         this.capacity = capacity;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid capacity.
      */
     public static boolean isValidCapacity(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -29,7 +29,7 @@ public class Capacity {
 
     @Override
     public String toString() {
-        return capacity.toString();
+        return capacity;
     }
 
     @Override

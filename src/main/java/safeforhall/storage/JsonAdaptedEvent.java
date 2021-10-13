@@ -23,7 +23,7 @@ class JsonAdaptedEvent {
     private final String capacity;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
@@ -37,7 +37,7 @@ class JsonAdaptedEvent {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
         eventName = source.getEventName().eventName;
@@ -47,9 +47,9 @@ class JsonAdaptedEvent {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Event} object.
+     * Converts this Jackson-friendly adapted event object into the model's {@code Event} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
         // EventName

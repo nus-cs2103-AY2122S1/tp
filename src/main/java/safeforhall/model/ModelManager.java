@@ -98,6 +98,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -112,12 +118,6 @@ public class ModelManager implements Model {
     public void addEvent(Event event) {
         addressBook.addEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-    }
-
-    @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return addressBook.hasEvent(event);
     }
 
     @Override

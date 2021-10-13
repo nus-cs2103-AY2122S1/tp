@@ -12,18 +12,17 @@ import safeforhall.model.event.exceptions.DuplicateEventException;
 import safeforhall.model.event.exceptions.EventNotFoundException;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.exceptions.DuplicatePersonException;
-import safeforhall.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
+ * An event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
+ * events uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
+ * unique in terms of identity in the UniqueEventList. However, the removal of an event uses Event#equals(Object) so
+ * as to ensure that the event with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Event#isSameEvent(Event)
  */
 public class UniqueEventList implements Iterable<Event> {
 
@@ -32,7 +31,7 @@ public class UniqueEventList implements Iterable<Event> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent event as the given argument.
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
@@ -40,8 +39,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an event to the list.
+     * The event must not already exist in the list.
      */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
@@ -52,9 +51,9 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
      */
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
@@ -72,8 +71,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent event from the list.
+     * The event must exist in the list.
      */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
@@ -88,8 +87,8 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code events}.
+     * {@code events} must not contain duplicate events.
      */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
@@ -125,7 +124,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code events} contains only unique events.
      */
     private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {

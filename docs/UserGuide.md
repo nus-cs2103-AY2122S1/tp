@@ -107,13 +107,13 @@ Examples:
 
 ### Retrieve a list of residents with their fet due : `list`
 
-Retrieve a list of residents whose ART collection or FET are due within the range of the current eventDate and the optional given eventDate.
+Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
 
 Format: `list [FLAG] [d/DATE]`
 
 * The flag can be either -f for fet or -c collection
-* The eventDate inputted has to be in `dd-mm-yyyy` format
-* The given Date must be a eventDate later than the current eventDate
+* The date inputted has to be in `dd-mm-yyyy` format
+* The given Date must be a date later than the current date
 
 Examples:
 * `list -f` retrieves a list of residents whose FET is due today

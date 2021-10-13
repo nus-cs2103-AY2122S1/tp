@@ -52,8 +52,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
      */
     public void setEvents(List<Event> events) {
         this.events.setEvents(events);
@@ -80,7 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an event with the same details as {@code event} exists in the address book.
      */
     public boolean hasEvent(Event event) {
         requireNonNull(event);
@@ -96,8 +96,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an event to the address book.
+     * The event must not already exist in the address book.
      */
     public void addEvent(Event e) {
         events.add(e);
