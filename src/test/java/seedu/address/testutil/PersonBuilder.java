@@ -51,7 +51,6 @@ public class PersonBuilder {
         role = Role.translateStringToRole(DEFAULT_ROLE);
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
-        absentDates = new HashSet<>();
     }
 
     /**
