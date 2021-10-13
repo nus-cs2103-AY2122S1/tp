@@ -17,6 +17,7 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
+
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
@@ -28,9 +29,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (moduleCodes.size() == 1) { //delete only accepts deleting 1 batch of module code at a time
             try {
-                List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
-                        .map(moduleCode -> moduleCode.toString())
-                        .collect(Collectors.toList());
+                List<String> stringListOfModuleCodes = getStringListOfModuleCode(moduleCodes);
                 ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
                 return new DeleteCommand(
                         new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
@@ -45,11 +44,16 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
                 return new DeleteCommand(start, end);
             } else {
-                Index index = ParserUtil.parseIndex(args);
-                return new DeleteCommand(index);
+                return new DeleteCommand(ParserUtil.parseIndex(args));
             }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
+    }
+
+    private List<String> getStringListOfModuleCode(List<String> moduleCodes) throws ParseException {
+        return ParserUtil.parseModuleCodes(moduleCodes).stream()
+                .map(moduleCode -> moduleCode.toString())
+                .collect(Collectors.toList());
     }
 }

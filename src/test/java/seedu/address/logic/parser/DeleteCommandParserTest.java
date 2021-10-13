@@ -12,10 +12,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
