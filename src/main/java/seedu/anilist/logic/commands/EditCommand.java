@@ -1,8 +1,8 @@
 package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 
 import java.util.Collections;
@@ -18,7 +18,7 @@ import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Edits the details of an existing anime in the anime list.
@@ -32,7 +32,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_GENRE + "GENRE]...\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_EDIT_ANIME_SUCCESS = "Edited Anime: %1$s";
@@ -83,9 +83,9 @@ public class EditCommand extends Command {
         assert animeToEdit != null;
 
         Name updatedName = editAnimeDescriptor.getName().orElse(animeToEdit.getName());
-        Set<Tag> updatedTags = editAnimeDescriptor.getTags().orElse(animeToEdit.getTags());
+        Set<Genre> updatedGenres = editAnimeDescriptor.getGenres().orElse(animeToEdit.getGenres());
 
-        return new Anime(updatedName, updatedTags);
+        return new Anime(updatedName, updatedGenres);
     }
 
     @Override
@@ -112,24 +112,24 @@ public class EditCommand extends Command {
      */
     public static class EditAnimeDescriptor {
         private Name name;
-        private Set<Tag> tags;
+        private Set<Genre> genres;
 
         public EditAnimeDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code genres} is used internally.
          */
         public EditAnimeDescriptor(EditAnimeDescriptor toCopy) {
             setName(toCopy.name);
-            setTags(toCopy.tags);
+            setGenres(toCopy.genres);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, tags);
+            return CollectionUtil.isAnyNonNull(name, genres);
         }
 
         public void setName(Name name) {
@@ -141,20 +141,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code genres} to this object's {@code genres}.
+         * A defensive copy of {@code genres} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setGenres(Set<Genre> genres) {
+            this.genres = (genres != null) ? new HashSet<>(genres) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable genre set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code genres} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Genre>> getGenres() {
+            return (genres != null) ? Optional.of(Collections.unmodifiableSet(genres)) : Optional.empty();
         }
 
         @Override
@@ -173,7 +173,7 @@ public class EditCommand extends Command {
             EditAnimeDescriptor e = (EditAnimeDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getTags().equals(e.getTags());
+                    && getGenres().equals(e.getGenres());
         }
     }
 }

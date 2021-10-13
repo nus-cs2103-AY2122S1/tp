@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.anilist.commons.exceptions.IllegalValueException;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Jackson-friendly version of {@link Anime}.
@@ -22,17 +22,17 @@ class JsonAdaptedAnime {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Anime's %s field is missing!";
 
     private final String name;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedGenre> genres = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedAnime} with the given Anime details.
      */
     @JsonCreator
     public JsonAdaptedAnime(@JsonProperty("name") String name,
-                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                            @JsonProperty("genres") List<JsonAdaptedGenre> genres) {
         this.name = name;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (genres != null) {
+            this.genres.addAll(genres);
         }
     }
 
@@ -41,8 +41,8 @@ class JsonAdaptedAnime {
      */
     public JsonAdaptedAnime(Anime source) {
         name = source.getName().fullName;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        genres.addAll(source.getGenres().stream()
+                .map(JsonAdaptedGenre::new)
                 .collect(Collectors.toList()));
     }
 
@@ -52,9 +52,9 @@ class JsonAdaptedAnime {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Anime.
      */
     public Anime toModelType() throws IllegalValueException {
-        final List<Tag> animeTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            animeTags.add(tag.toModelType());
+        final List<Genre> animeGenres = new ArrayList<>();
+        for (JsonAdaptedGenre genre : genres) {
+            animeGenres.add(genre.toModelType());
         }
 
         if (name == null) {
@@ -66,8 +66,8 @@ class JsonAdaptedAnime {
         final Name modelName = new Name(name);
 
 
-        final Set<Tag> modelTags = new HashSet<>(animeTags);
-        return new Anime(modelName, modelTags);
+        final Set<Genre> modelGenres = new HashSet<>(animeGenres);
+        return new Anime(modelName, modelGenres);
     }
 
 }

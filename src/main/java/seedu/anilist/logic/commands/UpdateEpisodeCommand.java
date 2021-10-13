@@ -15,7 +15,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 public class UpdateEpisodeCommand extends Command {
     public static final String COMMAND_WORD = "update";
@@ -73,9 +73,9 @@ public class UpdateEpisodeCommand extends Command {
 
         Name updatedName = animeToEdit.getName();
         Episode episode = episodeDescriptor.getEpisode().orElse(animeToEdit.getEpisode());
-        Set<Tag> updatedTags = animeToEdit.getTags();
+        Set<Genre> updatedGenres = animeToEdit.getGenres();
 
-        return new Anime(updatedName, episode, updatedTags);
+        return new Anime(updatedName, episode, updatedGenres);
     }
 
     @Override

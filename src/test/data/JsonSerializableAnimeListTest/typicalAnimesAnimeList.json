@@ -2,24 +2,24 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "anime" : [ {
     "name" : "Alice Pauline",
-    "tagged" : [ "friends" ]
+    "genres" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
-    "tagged" : [ "owesMoney", "friends" ]
+    "genres" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
-    "tagged" : [ ]
+    "genres" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "tagged" : [ "friends" ]
+    "genres" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
-    "tagged" : [ ]
+    "genres" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "tagged" : [ ]
+    "genres" : [ ]
   }, {
     "name" : "George Best",
-    "tagged" : [ ]
+    "genres" : [ ]
   } ]
 }

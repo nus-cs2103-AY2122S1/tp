@@ -25,7 +25,7 @@
               <Label fx:id="id" minWidth="-Infinity" styleClass="cell_big_label" />
               <Label fx:id="name" styleClass="cell_big_label" text="\$first" textOverrun="CLIP" wrapText="true" />
             </HBox>
-            <FlowPane fx:id="tags" />
+            <FlowPane fx:id="genres" />
           </VBox>
             <VBox maxWidth="100.0" minWidth="100.0" prefWidth="100.0" HBox.hgrow="NEVER">
                <children>

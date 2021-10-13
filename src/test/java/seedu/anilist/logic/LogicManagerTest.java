@@ -77,7 +77,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AKIRA;
-        Anime expectedAnime = new AnimeBuilder(AKIRA).withTags().build();
+        Anime expectedAnime = new AnimeBuilder(AKIRA).withGenres().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addAnime(expectedAnime);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

@@ -1,7 +1,7 @@
 {
   "anime": [ {
     "name": "Alice Pauline",
-    "tagged": [ "friends" ]
+    "genres": [ "friends" ]
   }, {
     "name": "Alice Pauline"
   } ]

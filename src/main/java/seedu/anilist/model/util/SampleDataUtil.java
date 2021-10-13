@@ -8,7 +8,7 @@ import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Contains utility methods for populating {@code AnimeList} with sample data.
@@ -16,15 +16,15 @@ import seedu.anilist.model.tag.Tag;
 public class SampleDataUtil {
     public static Anime[] getSampleAnime() {
         return new Anime[] {
-            new Anime(new Name("Asobi Asobase"), getTagSet("comedy")),
-            new Anime(new Name("BLEACH"), getTagSet("adventure", "supernatural")),
-            new Anime(new Name("Charlotte"), getTagSet("drama", "supernatural")),
-            new Anime(new Name("Darling in the Franxx"), getTagSet("action", "mecha", "science fiction")),
-            new Anime(new Name("Haikyuu!!: To the Top"), getTagSet("sports")),
+            new Anime(new Name("Asobi Asobase"), getGenreSet("comedy")),
+            new Anime(new Name("BLEACH"), getGenreSet("adventure", "supernatural")),
+            new Anime(new Name("Charlotte"), getGenreSet("drama", "supernatural")),
+            new Anime(new Name("Darling in the Franxx"), getGenreSet("action", "mecha", "science fiction")),
+            new Anime(new Name("Haikyuu!!: To the Top"), getGenreSet("sports")),
             new Anime(new Name("Higehiro: After Being Rejected, I Shaved and Took in a High School Runaway"),
-                    getTagSet("tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9",
-                            "tag10", "tag11", "tag12", "tag13", "tag14", "tag15")),
-            new Anime(new Name("Steins;Gate 0"), getTagSet("science fiction"))
+                    getGenreSet("genre1", "genre2", "genre3", "genre4", "genre5", "genre6", "genre7", "genre8",
+                            "genre9", "genre10", "genre11", "genre12", "genre13", "genre14", "genre15")),
+            new Anime(new Name("Steins;Gate 0"), getGenreSet("science fiction"))
         };
     }
 
@@ -37,11 +37,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a genre set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Genre> getGenreSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Genre::new)
                 .collect(Collectors.toSet());
     }
 

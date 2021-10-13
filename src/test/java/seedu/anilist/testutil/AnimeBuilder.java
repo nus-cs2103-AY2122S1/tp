@@ -6,7 +6,7 @@ import java.util.Set;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.util.SampleDataUtil;
 
 /**
@@ -18,7 +18,7 @@ public class AnimeBuilder {
 
     private Name name;
     private Episode episode;
-    private Set<Tag> tags;
+    private Set<Genre> genres;
 
     /**
      * Creates a {@code AnimeBuilder} with the default details.
@@ -26,7 +26,7 @@ public class AnimeBuilder {
     public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
         episode = new Episode("0");
-        tags = new HashSet<>();
+        genres = new HashSet<>();
     }
 
     /**
@@ -35,7 +35,7 @@ public class AnimeBuilder {
     public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
         episode = animeToCopy.getEpisode();
-        tags = new HashSet<>(animeToCopy.getTags());
+        genres = new HashSet<>(animeToCopy.getGenres());
     }
 
     /**
@@ -55,15 +55,15 @@ public class AnimeBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Anime} that we are building.
+     * Parses the {@code genres} into a {@code Set<Genre>} and set it to the {@code Anime} that we are building.
      */
-    public AnimeBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public AnimeBuilder withGenres(String ... genres) {
+        this.genres = SampleDataUtil.getGenreSet(genres);
         return this;
     }
 
     public Anime build() {
-        return new Anime(name, episode, tags);
+        return new Anime(name, episode, genres);
     }
 
 }

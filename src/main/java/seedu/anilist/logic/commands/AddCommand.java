@@ -1,8 +1,9 @@
 package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
+
 
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
@@ -18,11 +19,11 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an anime to the anime list. "
             + "Parameters: "
             + PREFIX_NAME + "ANIME "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_GENRE + "GENRE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Naruto "
-            + PREFIX_TAG + "Action "
-            + PREFIX_TAG + "Fantasy";
+            + PREFIX_GENRE + "Action "
+            + PREFIX_GENRE + "Fantasy";
 
     public static final String MESSAGE_SUCCESS = "New anime added: %1$s";
     public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list";

@@ -3,7 +3,7 @@ package seedu.anilist.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.ALICE;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
@@ -45,7 +45,7 @@ public class AnimeListTest {
     @Test
     public void resetData_withDuplicateAnimes_throwsDuplicateAnimeException() {
         // Two animes with the same identity fields
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        Anime editedAlice = new AnimeBuilder(ALICE).withGenres(VALID_GENRE_SHOUNEN)
                 .build();
         List<Anime> newAnimes = Arrays.asList(ALICE, editedAlice);
         AnimeListStub newData = new AnimeListStub(newAnimes);
@@ -72,7 +72,7 @@ public class AnimeListTest {
     @Test
     public void hasAnime_animeWithSameIdentityFieldsInAnimeList_returnsTrue() {
         animeList.addAnime(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        Anime editedAlice = new AnimeBuilder(ALICE).withGenres(VALID_GENRE_SHOUNEN)
                 .build();
         assertTrue(animeList.hasAnime(editedAlice));
     }

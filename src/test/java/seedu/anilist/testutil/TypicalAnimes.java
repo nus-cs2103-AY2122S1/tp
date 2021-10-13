@@ -1,9 +1,9 @@
 package seedu.anilist.testutil;
 
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,12 +17,12 @@ import seedu.anilist.model.anime.Anime;
  */
 public class TypicalAnimes {
 
-    public static final Anime ALICE = new AnimeBuilder().withName("Alice Pauline").withTags("friends").build();
+    public static final Anime ALICE = new AnimeBuilder().withName("Alice Pauline").withGenres("friends").build();
     public static final Anime BENSON = new AnimeBuilder().withName("Benson Meier")
-            .withTags("owesMoney", "friends").build();
+            .withGenres("owesMoney", "friends").build();
     public static final Anime CARL = new AnimeBuilder().withName("Carl Kurz").build();
     public static final Anime DANIEL = new AnimeBuilder().withName("Daniel Meier")
-            .withTags("friends").build();
+            .withGenres("friends").build();
     public static final Anime ELLE = new AnimeBuilder().withName("Elle Meyer").build();
     public static final Anime FIONA = new AnimeBuilder().withName("Fiona Kunz").build();
     public static final Anime GEORGE = new AnimeBuilder().withName("George Best").build();
@@ -33,9 +33,9 @@ public class TypicalAnimes {
 
     // Manually added - Anime's details found in {@code CommandTestUtil}
     public static final Anime AKIRA = new AnimeBuilder().withName(VALID_NAME_AKIRA)
-            .withTags(VALID_TAG_SUPERHERO).build();
+            .withGenres(VALID_GENRE_SUPERHERO).build();
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
-            .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
+            .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

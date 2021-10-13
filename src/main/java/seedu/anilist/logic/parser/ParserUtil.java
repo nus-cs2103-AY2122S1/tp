@@ -11,7 +11,7 @@ import seedu.anilist.commons.util.StringUtil;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -49,30 +49,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String genre} into a {@code Genre}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code genre} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Genre parseGenre(String genre) throws ParseException {
+        requireNonNull(genre);
+        String trimmedGenre = genre.trim();
+        if (!Genre.isValidGenreName(trimmedGenre)) {
+            throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Genre(trimmedGenre);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> genres} into a {@code Set<Genre>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Genre> parseGenres(Collection<String> genres) throws ParseException {
+        requireNonNull(genres);
+        final Set<Genre> genreSet = new HashSet<>();
+        for (String genreName : genres) {
+            genreSet.add(parseGenre(genreName));
         }
-        return tagSet;
+        return genreSet;
     }
 
     /**

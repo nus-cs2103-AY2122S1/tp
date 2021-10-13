@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Represents an Anime in the anime list.
@@ -20,26 +20,26 @@ public class Anime {
 
     // Data fields
     private final Episode episode;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Genre> genres = new HashSet<>();
 
     /**
      * Every field must be present and not null except Episode which defaults to 0.
      */
-    public Anime(Name name, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+    public Anime(Name name, Set<Genre> genres) {
+        requireAllNonNull(name, genres);
         this.name = name;
         this.episode = new Episode("0");
-        this.tags.addAll(tags);
+        this.genres.addAll(genres);
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Anime(Name name, Episode episode, Set<Tag> tags) {
-        requireAllNonNull(name, tags, episode);
+    public Anime(Name name, Episode episode, Set<Genre> genres) {
+        requireAllNonNull(name, genres, episode);
         this.name = name;
         this.episode = episode;
-        this.tags.addAll(tags);
+        this.genres.addAll(genres);
     }
 
     public Name getName() {
@@ -51,11 +51,11 @@ public class Anime {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable genre set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Genre> getGenres() {
+        return Collections.unmodifiableSet(genres);
     }
 
     /**
@@ -87,13 +87,13 @@ public class Anime {
 
         Anime otherAnime = (Anime) other;
         return otherAnime.getName().equals(getName())
-                && otherAnime.getTags().equals(getTags());
+                && otherAnime.getGenres().equals(getGenres());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, episode, tags);
+        return Objects.hash(name, episode, genres);
     }
 
     @Override
@@ -102,10 +102,10 @@ public class Anime {
         builder.append(getName());
         builder.append(String.format(" (%s)", getEpisode()));
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<Genre> genres = getGenres();
+        if (!genres.isEmpty()) {
+            builder.append("; Genres: ");
+            genres.forEach(builder::append);
         }
         return builder.toString();
     }
