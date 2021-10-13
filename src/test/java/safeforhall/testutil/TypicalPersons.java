@@ -34,16 +34,16 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withEmail("alice@example.com")
             .withVaccStatus("T")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("03-10-2021")
             .withCollection("03-10-2021")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRoom("A101")
-            .withEmail("johnd@example.com")
             .withPhone("98765432")
+            .withEmail("johnd@example.com")
             .withVaccStatus("T")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("12-10-2021")
             .withCollection("13-10-2021")
             .build();
@@ -52,7 +52,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withVaccStatus("F")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("10-10-2021")
             .withCollection("03-10-2021")
             .build();
@@ -61,7 +61,7 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withVaccStatus("T")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("12-10-2021")
             .withCollection("13-10-2021")
             .build();
@@ -70,7 +70,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withVaccStatus("F")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("05-10-2021")
             .withCollection("16-10-2021")
             .build();
@@ -79,7 +79,7 @@ public class TypicalPersons {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withVaccStatus("T")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("20-10-2021")
             .withCollection("04-10-2021")
             .build();
@@ -88,7 +88,7 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withVaccStatus("F")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("15-10-2021")
             .withCollection("01-10-2021")
             .build();
@@ -99,7 +99,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withRoom("A103")
             .withVaccStatus("T")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("15-10-2021")
             .withCollection("15-10-2021")
             .build();
@@ -108,7 +108,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withRoom("C200")
             .withVaccStatus("F")
-            .withFaculty("SOC")
+            .withFaculty("SoC")
             .withFet("20-10-2021")
             .withCollection("22-10-2021")
             .build();
