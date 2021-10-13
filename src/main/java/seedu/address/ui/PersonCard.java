@@ -145,7 +145,6 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void setLessonListView(Set<Lesson> lessons) {
-
         ObservableList<Lesson> lessonList = FXCollections.observableArrayList();
         lessons.forEach(lesson -> lessonList.add(lesson));
         lessonListView.setItems(lessonList);
