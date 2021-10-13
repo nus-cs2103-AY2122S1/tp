@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASSID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
 import static seedu.programmer.testutil.TypicalStudents.BOB;
 
@@ -26,8 +26,8 @@ public class StudentTest {
         assertFalse(ALICE.isSameStudent(null));
 
         // same name, all other attributes different -> returns false
-        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB)
-                                                       .withClassId(VALID_CLASSID_BOB)
+        Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB)
+                                                       .withClassId(VALID_CLASS_ID_BOB)
                                                        .withGrade(VALID_GRADE_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
@@ -68,11 +68,11 @@ public class StudentTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different phone -> returns false
-        editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different email -> returns false
-        editedAlice = new StudentBuilder(ALICE).withClassId(VALID_CLASSID_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withClassId(VALID_CLASS_ID_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
         // different programmer -> returns false

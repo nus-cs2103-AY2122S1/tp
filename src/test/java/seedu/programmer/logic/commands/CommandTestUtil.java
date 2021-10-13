@@ -27,26 +27,26 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_STUDENTID_AMY = "A0232134H";
-    public static final String VALID_STUDENTID_BOB = "A0232132B";
-    public static final String VALID_CLASSID_AMY = "B01";
-    public static final String VALID_CLASSID_BOB = "B02";
+    public static final String VALID_STUDENT_ID_AMY = "A0232134H";
+    public static final String VALID_STUDENT_ID_BOB = "A0232132B";
+    public static final String VALID_CLASS_ID_AMY = "B01";
+    public static final String VALID_CLASS_ID_BOB = "B02";
     public static final String VALID_GRADE_AMY = "A";
     public static final String VALID_GRADE_BOB = "D";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String STUDENTID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENTID_AMY;
-    public static final String STUDENTID_DESC_BOB = " " + PREFIX_STUDENT_ID + VALID_STUDENTID_BOB;
-    public static final String CLASSID_DESC_AMY = " " + PREFIX_CLASS_ID + VALID_CLASSID_AMY;
-    public static final String CLASSID_DESC_BOB = " " + PREFIX_CLASS_ID + VALID_CLASSID_BOB;
+    public static final String STUDENT_ID_DESC_AMY = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_AMY;
+    public static final String STUDENT_ID_DESC_BOB = " " + PREFIX_STUDENT_ID + VALID_STUDENT_ID_BOB;
+    public static final String CLASS_ID_DESC_AMY = " " + PREFIX_CLASS_ID + VALID_CLASS_ID_AMY;
+    public static final String CLASS_ID_DESC_BOB = " " + PREFIX_CLASS_ID + VALID_CLASS_ID_BOB;
     public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
     public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
 
     //todo
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_STUDENTID_DESC = " " + PREFIX_STUDENT_ID + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_CLASSID_DESC = " " + PREFIX_CLASS_ID + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_STUDENT_ID_DESC = " " + PREFIX_STUDENT_ID + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_CLASS_ID_DESC = " " + PREFIX_CLASS_ID + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE; // empty string not allowed for programmeres
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -57,9 +57,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withStudentId(VALID_STUDENTID_AMY).withClassId(VALID_CLASSID_AMY).withGrade(VALID_GRADE_AMY).build();
+                .withStudentId(VALID_STUDENT_ID_AMY).withClassId(VALID_CLASS_ID_AMY).withGrade(VALID_GRADE_AMY).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withStudentId(VALID_STUDENTID_BOB).withClassId(VALID_CLASSID_BOB).withGrade(VALID_GRADE_BOB).build();
+                .withStudentId(VALID_STUDENT_ID_BOB).withClassId(VALID_CLASS_ID_BOB).withGrade(VALID_GRADE_BOB).build();
     }
 
     /**
