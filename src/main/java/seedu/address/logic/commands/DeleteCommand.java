@@ -54,7 +54,7 @@ public class DeleteCommand extends UndoableCommand {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        this.deletedPerson = personToDelete;
+        deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
