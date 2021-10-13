@@ -26,10 +26,22 @@
     "lessonCodes" : [ ]
   } ],
   "lessons": [ {
-    "lessonCode" : "Science-P2-Wed-1230",
+    "subject" : "Science",
+    "grade" : "P2",
+    "startTime" : "1230",
+    "day" : "Wed",
     "price" : 10.5
   }, {
-    "lessonCode" : "Mathematics-S2-Tue-0930",
+    "subject" : "Mathematics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
     "price" : 15.3
-  }]
+  }, {
+    "subject" : "Physics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
+  } ]
 }

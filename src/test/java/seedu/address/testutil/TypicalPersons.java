@@ -25,6 +25,7 @@ import seedu.address.model.person.Student;
  */
 public class TypicalPersons {
 
+    // Test Lessons, direct copy from json equivalent
     public static final Student ALICE = new PersonBuilder().withName("Alice Pauline")
             .withPhone("94351253").withEmail("alice@example.com")
             .withAddress("123, Jurong West Ave 6, #08-111").withGrade("P2").withTags("friends")

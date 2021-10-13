@@ -22,6 +22,14 @@ import seedu.address.model.person.Grade;
 
 public class TypicalLessons {
 
+    // Test Lessons, direct copy from json equivalent
+    public static final Lesson SCIENCE_P2 = new Lesson(new Subject("Science"), new Grade("P2"),
+            new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 30)), new Price(10.5));
+    public static final Lesson MATH_S2 = new Lesson(new Subject("Mathematics"), new Grade("S2"),
+            new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
+    public static final Lesson PHYSICS_S2 = new Lesson(new Subject("Physics"), new Grade("S2"),
+            new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
+
     // Manually added - Lesson's details found in {@code CommandTestUtil}
     public static final Lesson MATHS = new LessonBuilder()
             .withSubject(VALID_SUBJECT_MATHS)
@@ -36,15 +44,6 @@ public class TypicalLessons {
             .withLessonTime(new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 00)))
             .withPrice(Double.parseDouble(VALID_PRICE_SCIENCE))
             .build();
-
-    // Test Lessons
-    public static final Lesson SCIENCE_P2 = new Lesson(new Subject("Science"), new Grade("P2"),
-            new LessonTime(DayOfWeek.WEDNESDAY, LocalTime.of(12, 30)), new Price(10.5));
-
-    public static final Lesson MATH_S2 = new Lesson(new Subject("Mathematics"), new Grade("S2"),
-            new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
-    public static final Lesson PHYSICS_S2 = new Lesson(new Subject("Physics"), new Grade("S2"),
-            new LessonTime(DayOfWeek.TUESDAY, LocalTime.of(9, 30)), new Price(15.3));
 
     private TypicalLessons() {} //prevents instantiation
 

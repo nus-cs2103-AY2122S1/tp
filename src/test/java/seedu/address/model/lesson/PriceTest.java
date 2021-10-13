@@ -53,4 +53,10 @@ public class PriceTest {
         Price otherPrice = new Price(DEFAULT_PRICE.value);
         assertEquals(DEFAULT_PRICE, otherPrice);
     }
+
+    @Test
+    public void toString_returnsCorrectFormat() {
+        String expected = String.format("%1$s %2$.2f", Price.CURRENCY, DEFAULT_PRICE.value);
+        assertEquals(expected, DEFAULT_PRICE.toString());
+    }
 }

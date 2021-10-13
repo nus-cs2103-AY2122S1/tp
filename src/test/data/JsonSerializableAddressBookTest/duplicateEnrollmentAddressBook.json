@@ -1,0 +1,18 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "grade" : "S1",
+    "tagged": [ "friends" ],
+    "lessonCodes" : [ "Science-S1-Wed-1230", "Science-S1-Wed-1230" ]
+  } ],
+  "lessons": [ {
+    "subject" : "Science",
+    "grade" : "S1",
+    "startTime" : "1230",
+    "day" : "Wed",
+    "price" : 10.5
+  } ]
+}
