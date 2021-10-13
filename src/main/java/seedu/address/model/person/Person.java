@@ -33,6 +33,7 @@ public class Person {
     private final Set<Field> fields = new HashSet<>();
 
     private Schedule schedule;
+    private int totalWeeklyWorkingHour;
 
     /**
      * Every field must be present and not null.
@@ -50,6 +51,7 @@ public class Person {
         this.tags.addAll(tags);
         this.schedule = new Schedule();
         this.fields.addAll(tags);
+        this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
         addToFieldSet(fields, name, phone, email, address, salary, status, role);
     }
 
@@ -110,11 +112,18 @@ public class Person {
      */
     public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
+
+    public int getTotalWeeklyWorkingHour() {
+        return totalWeeklyWorkingHour;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -151,7 +160,8 @@ public class Person {
                 && otherStaff.getRole().equals(getRole())
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
-                && otherStaff.getTags().equals(getTags());
+                && otherStaff.getTags().equals(getTags())
+                && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
     }
 
     @Override
