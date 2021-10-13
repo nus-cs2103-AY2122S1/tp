@@ -113,7 +113,7 @@ Examples:
 
 Fully view a client’s information in detail.
 
-Format: `view {client’s id number}`
+Format: `view {client’s id}`
 
 Example: `view 2` would be used to view client 2's information
 
@@ -124,7 +124,7 @@ attributes of a client, using the tag of the client’s attribute.
 
 * Multiple attributes could be changed with one command.
 
-Format: `update {Client’s id number} <attribute>/{changed value of attribute} ...`
+Format: `update {client’s id} <attribute>/{changed value of attribute} ...`
 
 Examples:
 
@@ -134,9 +134,10 @@ Examples:
 
 ### Delete particular contact : `delete`
 
-Deletes an existing client from the address book using any specified attribute to identify the client.
+Deletes an existing client from the address book using their either client id or email address identify the client. 
+Both attributes can be given together.
 
-Format: `delete <attribute>/{value}`
+Format: `delete <client id>/{client’s id} <email>/{email}`
 
 * Attributes would be limited to client id, email or both.
 
@@ -147,7 +148,7 @@ Examples:
 
 ### List all contacts : `list`
 
-Shows a list of all tasks in the list.
+Shows the full list of all clients in the address book.
 
 Format: `list`
 
@@ -246,9 +247,9 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Action | Format | Examples
 --------|---------|---------
 **Create** | `add <name>/{client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
-**View** | `view {client’s id number}` | view 123 |
-**Delete** | `delete <attribute>/{value}` | delete i/4  |
-**Edit** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
+**View** | `view {client’s id}` | view 123 |
+**Delete** | `delete <client id>/{client’s id} <email>/{email}` | delete i/4  |
+**Edit** | `update {client’s id} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
 **List** | `list` | - |
 **Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
 **Search** | `search [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * e/doe@gmail.com r/5 |
