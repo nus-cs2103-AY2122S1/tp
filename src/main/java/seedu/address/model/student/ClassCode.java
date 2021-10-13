@@ -3,7 +3,7 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Student's classcode in the address book.
+ * Represents a Student's classcode in the ClassMATE.
  * Guarantees: immutable.
  */
 

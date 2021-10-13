@@ -4,58 +4,47 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Student View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Student View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene>
             <stylesheets>
                 <URL value="@Fonts.css" />
-                <URL value="@HelpWindow.css" />
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
             </stylesheets>
-
-            <VBox>
-                <children>
-                    <Label fx:id="showMessage" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="studentName" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="studentAddress" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="studentEmail" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="studentPhone" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                    <Label fx:id="studentTags" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                </children>
-                <opaqueInsets>
-                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-                </opaqueInsets>
-                <padding>
-                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-                </padding>
-            </VBox>
+            <HBox fx:id="cardPane" prefHeight="181.0" prefWidth="291.0">
+                <GridPane HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="200" />
+                    </columnConstraints>
+                    <VBox alignment="CENTER_LEFT" minHeight="102.0" prefHeight="266.0" prefWidth="290.0" styleClass="grid-pane" GridPane.columnIndex="0">
+                        <padding>
+                            <Insets bottom="5" left="15" right="5" top="5" />
+                        </padding>
+                        <Label fx:id="message" styleClass="student_view_big_label" />
+                        <Label />
+                        <HBox alignment="CENTER_LEFT" spacing="5">
+                            <Label fx:id="name" styleClass="student_view_medium_label" />
+                        </HBox>
+                        <FlowPane fx:id="tags" hgap="5" />
+                        <Label fx:id="classCode" styleClass="student_view_small_label" />
+                        <Label fx:id="phone" styleClass="student_view_small_label" />
+                        <Label fx:id="address" styleClass="student_view_small_label" />
+                        <Label fx:id="email" styleClass="student_view_small_label" />
+                    </VBox>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </HBox>
         </Scene>
     </scene>
 </fx:root>

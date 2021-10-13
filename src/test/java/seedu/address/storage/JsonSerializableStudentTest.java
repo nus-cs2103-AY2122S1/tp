@@ -10,23 +10,23 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Classmate;
 import seedu.address.testutil.TypicalStudents;
 
 public class JsonSerializableStudentTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonSerializableStudentTest");
-    private static final Path TYPICAL_STUDENTS_FILE = TEST_DATA_FOLDER.resolve("typicalStudentsAddressBook.json");
-    private static final Path INVALID_STUDENT_FILE = TEST_DATA_FOLDER.resolve("invalidStudentAddressBook.json");
-    private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentAddressBook.json");
+    private static final Path TYPICAL_STUDENTS_FILE = TEST_DATA_FOLDER.resolve("typicalStudentsClassmate.json");
+    private static final Path INVALID_STUDENT_FILE = TEST_DATA_FOLDER.resolve("invalidStudentClassmate.json");
+    private static final Path DUPLICATE_STUDENT_FILE = TEST_DATA_FOLDER.resolve("duplicateStudentClassmate.json");
 
     @Test
     public void toModelType_typicalStudentsFile_success() throws Exception {
         JsonSerializableStudent dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableStudent.class).get();
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalStudentsAddressBook = TypicalStudents.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalStudentsAddressBook);
+        Classmate classmateFromFile = dataFromFile.toModelType();
+        Classmate typicalStudentsClassmate = TypicalStudents.getTypicalClassmate();
+        assertEquals(classmateFromFile, typicalStudentsClassmate);
     }
 
     @Test

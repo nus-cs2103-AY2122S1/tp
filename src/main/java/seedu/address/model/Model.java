@@ -45,22 +45,22 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' ClassMATE file path.
      */
-    Path getAddressBookFilePath();
+    Path getClassmateFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' ClassMATE file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setClassmateFilePath(Path classmateFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces ClassMATE data with the data in {@code classmate}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setClassmate(ReadOnlyClassmate classmate);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the Classmate */
+    ReadOnlyClassmate getClassmate();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the Classmate.
@@ -98,7 +98,7 @@ public interface Model {
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
      */
     void setStudent(Student target, Student editedStudent);

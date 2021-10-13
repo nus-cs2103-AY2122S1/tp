@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.Classmate;
 import seedu.address.model.student.Student;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical students.
+     * Returns an {@code Classmate} with all the typical students.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Classmate getTypicalClassmate() {
+        Classmate ab = new Classmate();
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }

@@ -14,7 +14,7 @@ import seedu.address.model.tutorialclass.UniqueTutorialClassList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Classmate implements ReadOnlyClassmate {
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
@@ -31,12 +31,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tutorialClasses = new UniqueTutorialClassList();
     }
 
-    public AddressBook() {}
+    public Classmate() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an Classmate using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Classmate(ReadOnlyClassmate toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -60,9 +60,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Classmate} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyClassmate newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -80,8 +80,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the ClassMATE.
+     * The student must not already exist in the ClassMATE.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -89,7 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
      */
     public void setStudent(Student target, Student editedStudent) {
@@ -99,8 +99,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code Classmate}.
+     * {@code key} must exist in the ClassMATE.
      */
     public void removeStudent(Student key) {
         students.remove(key);
@@ -109,7 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tutorialclass-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -117,8 +117,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the ClassMATE.
+     * The student must not already exist in the ClassMATE.
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
@@ -126,7 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
      */
     public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
@@ -136,8 +136,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code Classmate}.
+     * {@code key} must exist in the ClassMATE.
      */
     public void removeTutorialClass(TutorialClass key) {
         tutorialClasses.remove(key);
@@ -164,8 +164,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof Classmate // instanceof handles nulls
+                && students.equals(((Classmate) other).students));
     }
 
     @Override
