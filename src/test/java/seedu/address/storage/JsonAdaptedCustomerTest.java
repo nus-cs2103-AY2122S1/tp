@@ -26,7 +26,6 @@ public class JsonAdaptedCustomerTest {
     private static final String INVALID_ALLERGY = "#friend";
     private static final String INVALID_SPECIALREQUEST = "#friend";
 
-
     private static final String VALID_NAME = CUSTOMER_BENSON.getName().toString();
     private static final String VALID_PHONE = CUSTOMER_BENSON.getPhone().toString();
     private static final String VALID_EMAIL = CUSTOMER_BENSON.getEmail().toString();

@@ -17,8 +17,13 @@ import seedu.address.model.reservation.Reservation;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Customer> PREDICATE_SHOW_ALL_CUSTOMERS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Reservation> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
 
@@ -160,6 +165,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredCustomerList();
+
     /** Returns an unmodifiable view of the filtered employee list */
     ObservableList<Employee> getFilteredEmployeeList();
 

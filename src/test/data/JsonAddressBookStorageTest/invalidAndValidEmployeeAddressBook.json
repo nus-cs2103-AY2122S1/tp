@@ -2,6 +2,9 @@
   "persons": [
 
   ],
+  "customers": [
+
+  ],
   "employees": [ {
     "name": "Valid Employee",
     "phone": "9482424",

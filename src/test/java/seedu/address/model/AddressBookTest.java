@@ -77,6 +77,7 @@ public class AddressBookTest {
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
+
     @Test
     public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
         // Two customers with the same identity fields
@@ -145,6 +146,7 @@ public class AddressBookTest {
         addressBook.addCustomer(CUSTOMER_ALICE);
         assertTrue(addressBook.hasCustomer(CUSTOMER_ALICE));
     }
+
     @Test
     public void hasEmployee_inAddressBook_returnsTrue() {
         addressBookEmployee.addEmployee(ALICE_EMPLOYEE);
@@ -167,6 +169,7 @@ public class AddressBookTest {
                 .build();
         assertTrue(addressBook.hasCustomer(editedAlice));
     }
+
     @Test
     public void hasEmployee_employeeWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBookEmployee.addEmployee(ALICE_EMPLOYEE);
@@ -185,6 +188,7 @@ public class AddressBookTest {
     public void getCustomerList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getCustomerList().remove(0));
     }
+
     @Test
     public void getEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBookEmployee.getEmployeeList().remove(0));
@@ -216,6 +220,7 @@ public class AddressBookTest {
         public ObservableList<Customer> getCustomerList() {
             return customers;
         }
+
         @Override
         public ObservableList<Employee> getEmployeeList() {
             return employees;
