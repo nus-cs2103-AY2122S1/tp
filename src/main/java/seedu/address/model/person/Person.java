@@ -26,7 +26,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Role> roles;
+    private final Set<Role> roles = new HashSet<>();
     private final Salary salary;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
@@ -44,7 +44,11 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.roles = roles;
+        if(roles.isEmpty()) {
+            this.roles.add(Role.NO_ROLE);
+        } else {
+            this.roles.addAll(roles);
+        }
         this.salary = salary;
         this.status = status;
         this.tags.addAll(tags);
