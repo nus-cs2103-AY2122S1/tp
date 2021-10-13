@@ -48,17 +48,17 @@ public class TypeTest {
     @Test
     public void isEqualType() {
         Type type = new Type("student");
-        Type different_type = new Type("tutor");
-        Type same_type = new Type("student");
+        Type differentType = new Type("tutor");
+        Type sameType = new Type("student");
 
         // Different Type
-        assertFalse(type.equals(different_type));
+        assertFalse(type.equals(differentType));
 
         // Same Object
         assertTrue(type.equals(type));
 
         // Different Objects Same Type
-        assertTrue(type.equals(same_type));
+        assertTrue(type.equals(sameType));
     }
 
     @Test

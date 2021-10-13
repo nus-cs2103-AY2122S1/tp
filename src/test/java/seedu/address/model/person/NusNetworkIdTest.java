@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUS_NETWORK_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUS_NETWORK_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -48,17 +46,17 @@ public class NusNetworkIdTest {
     @Test
     public void isEqualNusNetworkId() {
         NusNetworkId nusNetworkId = new NusNetworkId("E1234567");
-        NusNetworkId different_nusNetworkId = new NusNetworkId("e0000000");
-        NusNetworkId same_nusNetworkId = new NusNetworkId("E1234567");
+        NusNetworkId differentNusNetworkId = new NusNetworkId("e0000000");
+        NusNetworkId sameNusNetworkId = new NusNetworkId("E1234567");
 
         // Different NusNetworkId
-        assertFalse(nusNetworkId.equals(different_nusNetworkId));
+        assertFalse(nusNetworkId.equals(differentNusNetworkId));
 
         // Same Object
         assertTrue(nusNetworkId.equals(nusNetworkId));
 
         // Different Objects Same NusNetworkId
-        assertTrue(nusNetworkId.equals(same_nusNetworkId));
+        assertTrue(nusNetworkId.equals(sameNusNetworkId));
     }
 
     @Test

@@ -41,17 +41,17 @@ public class AddressTest {
     @Test
     public void isEqualAddress() {
         Address address = new Address("Blk 456, Den Road, #01-355");
-        Address different_address = new Address("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA");
-        Address same_address = new Address("Blk 456, Den Road, #01-355");
+        Address differentAddress = new Address("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA");
+        Address sameAddress = new Address("Blk 456, Den Road, #01-355");
 
         // Different Address
-        assertFalse(address.equals(different_address));
+        assertFalse(address.equals(differentAddress));
 
         // Same Object
         assertTrue(address.equals(address));
 
         // Different Objects Same Address
-        assertTrue(address.equals(same_address));
+        assertTrue(address.equals(sameAddress));
     }
 
     @Test

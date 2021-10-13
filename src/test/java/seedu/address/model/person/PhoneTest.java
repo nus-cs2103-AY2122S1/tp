@@ -45,17 +45,17 @@ public class PhoneTest {
     @Test
     public void isEqualPhone() {
         Phone phone = new Phone("93121534");
-        Phone different_phone = new Phone("12345678");
-        Phone same_phone = new Phone("93121534");
+        Phone differentPhone = new Phone("12345678");
+        Phone samePhone = new Phone("93121534");
 
         // Different Phone
-        assertFalse(phone.equals(different_phone));
+        assertFalse(phone.equals(differentPhone));
 
         // Same Object
         assertTrue(phone.equals(phone));
 
         // Different Objects Same Phone
-        assertTrue(phone.equals(same_phone));
+        assertTrue(phone.equals(samePhone));
     }
 
     @Test

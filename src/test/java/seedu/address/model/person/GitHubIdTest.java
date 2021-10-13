@@ -48,17 +48,17 @@ public class GitHubIdTest {
     @Test
     public void isEqualGitHubId() {
         GitHubId gitHubId = new GitHubId("Siddharth-Sid");
-        GitHubId different_gitHubId = new GitHubId("siddharth");
-        GitHubId same_gitHubId = new GitHubId("Siddharth-Sid");
+        GitHubId differentGitHubId = new GitHubId("siddharth");
+        GitHubId sameGitHubId = new GitHubId("Siddharth-Sid");
 
         // Different GitHubId
-        assertFalse(gitHubId.equals(different_gitHubId));
+        assertFalse(gitHubId.equals(differentGitHubId));
 
         // Same Object
         assertTrue(gitHubId.equals(gitHubId));
 
         // Different Objects Same GitHubId
-        assertTrue(gitHubId.equals(same_gitHubId));
+        assertTrue(gitHubId.equals(sameGitHubId));
     }
 
     @Test

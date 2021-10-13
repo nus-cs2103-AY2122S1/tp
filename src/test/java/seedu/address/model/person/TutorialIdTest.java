@@ -45,17 +45,17 @@ public class TutorialIdTest {
     @Test
     public void isEqualTutorialId() {
         TutorialId tutorialId = new TutorialId("16");
-        TutorialId different_tutorialId = new TutorialId("00");
-        TutorialId same_tutorialId = new TutorialId("16");
+        TutorialId differentTutorialId = new TutorialId("00");
+        TutorialId sameTutorialId = new TutorialId("16");
 
         // Different TutorialId
-        assertFalse(tutorialId.equals(different_tutorialId));
+        assertFalse(tutorialId.equals(differentTutorialId));
 
         // Same Object
         assertTrue(tutorialId.equals(tutorialId));
 
         // Different Objects Same TutorialId
-        assertTrue(tutorialId.equals(same_tutorialId));
+        assertTrue(tutorialId.equals(sameTutorialId));
     }
 
     @Test

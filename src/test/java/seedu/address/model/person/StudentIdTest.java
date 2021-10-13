@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -48,17 +46,17 @@ public class StudentIdTest {
     @Test
     public void isEqualStudentId() {
         StudentId studentId = new StudentId("A1234567A");
-        StudentId different_studentId = new StudentId("A7654321A");
-        StudentId same_studentId = new StudentId("A1234567A");
+        StudentId differentStudentId = new StudentId("A7654321A");
+        StudentId sameStudentId = new StudentId("A1234567A");
 
         // Different StudentId
-        assertFalse(studentId.equals(different_studentId));
+        assertFalse(studentId.equals(differentStudentId));
 
         // Same Object
         assertTrue(studentId.equals(studentId));
 
         // Different Objects Same StudentId
-        assertTrue(studentId.equals(same_studentId));
+        assertTrue(studentId.equals(sameStudentId));
     }
 
     @Test

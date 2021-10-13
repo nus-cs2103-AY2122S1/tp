@@ -45,17 +45,17 @@ public class NameTest {
     @Test
     public void isEqualName() {
         Name name = new Name("peter jack");
-        Name different_name = new Name("David Roger Jackson Ray Jr 2nd");
-        Name same_name = new Name("peter jack");
+        Name differentName = new Name("David Roger Jackson Ray Jr 2nd");
+        Name sameName = new Name("peter jack");
 
         // Different Name
-        assertFalse(name.equals(different_name));
+        assertFalse(name.equals(differentName));
 
         // Same Object
         assertTrue(name.equals(name));
 
         // Different Objects Same Name
-        assertTrue(name.equals(same_name));
+        assertTrue(name.equals(sameName));
     }
 
     @Test

@@ -49,17 +49,17 @@ public class EmailTest {
     @Test
     public void isEqualEmail() {
         Email email = new Email("e1234567@u.nus.edu");
-        Email different_email = new Email("E7654321@u.nus.edu");
-        Email same_email = new Email("e1234567@u.nus.edu");
+        Email differentEmail = new Email("E7654321@u.nus.edu");
+        Email sameEmail = new Email("e1234567@u.nus.edu");
 
         // Different Email
-        assertFalse(email.equals(different_email));
+        assertFalse(email.equals(differentEmail));
 
         // Same Object
         assertTrue(email.equals(email));
 
         // Different Objects Same Email
-        assertTrue(email.equals(same_email));
+        assertTrue(email.equals(sameEmail));
     }
 
     @Test
