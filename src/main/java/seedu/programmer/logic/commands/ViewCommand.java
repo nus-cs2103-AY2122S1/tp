@@ -29,6 +29,10 @@ public class ViewCommand extends Command {
 
     private final StudentDetailContainsQueryPredicate predicate;
 
+    /**
+     * Initializes a a {@code ViewCommand} object with the {@code predicate} to test which students to be filtered.
+     * @param predicate that filters the list of students to be displayed.
+     */
     public ViewCommand(StudentDetailContainsQueryPredicate predicate) {
         this.predicate = predicate;
     }
@@ -58,16 +62,6 @@ public class ViewCommand extends Command {
         private String classId;
 
         public QueryStudentDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public QueryStudentDescriptor(ViewCommand.QueryStudentDescriptor toCopy) {
-            setName(toCopy.name);
-            setStudentId(toCopy.studentId);
-            setClassId(toCopy.classId);
-        }
 
         /**
          * Returns true if at least one field is edited.
@@ -119,6 +113,5 @@ public class ViewCommand extends Command {
                     && getStudentId().equals(e.getStudentId())
                     && getClassId().equals(e.getClassId());
         }
-
     }
 }

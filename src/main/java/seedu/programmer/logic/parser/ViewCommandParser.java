@@ -29,14 +29,26 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String trimmedNameArg = argMultimap.getValue(PREFIX_NAME).get().trim();
+            if (trimmedNameArg.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
             queryStudentDescriptor.setName(trimmedNameArg);
         }
         if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
             String trimmedSidArg = argMultimap.getValue(PREFIX_STUDENT_ID).get().trim();
+            if (trimmedSidArg.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
             queryStudentDescriptor.setStudentId(trimmedSidArg);
         }
         if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
             String trimmedCidArg = argMultimap.getValue(PREFIX_CLASS_ID).get().trim();
+            if (trimmedCidArg.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
             queryStudentDescriptor.setClassId(trimmedCidArg);
         }
 

@@ -10,12 +10,12 @@ import static seedu.programmer.testutil.TypicalStudents.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.model.student.NameContainsKeywordsPredicate;
+import seedu.programmer.logic.commands.ViewCommand;
+import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 import seedu.programmer.testutil.ProgrammerErrorBuilder;
 
 public class ModelManagerTest {
@@ -117,8 +117,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentProgrammerError, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        ViewCommand.QueryStudentDescriptor descriptor = new ViewCommand.QueryStudentDescriptor();
+        descriptor.setName(ALICE.getName().fullName);
+        modelManager.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
         assertFalse(modelManager.equals(new ModelManager(programmerError, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

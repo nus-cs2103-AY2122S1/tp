@@ -27,12 +27,12 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(phrase);
 
-        String preppedWord = phrase.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
+        String preppedPhrase = phrase.trim();
+        checkArgument(!preppedPhrase.isEmpty(), "Word parameter cannot be empty");
 
         String preppedSentence = sentence.toLowerCase();
 
-        return preppedSentence.contains(preppedWord.toLowerCase());
+        return preppedSentence.contains(preppedPhrase.toLowerCase());
     }
 
     /**
