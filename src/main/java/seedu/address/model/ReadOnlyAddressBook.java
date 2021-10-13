@@ -25,11 +25,15 @@ public interface ReadOnlyAddressBook {
      */
     void setClientCounter(String clientCounter);
 
+    /**
+     * Sets the target {@code target} in the addressBook to {@code editperson}.
+     */
     void setPerson(Person target, Person editedPerson);
-
+    
+    /**
+     * Returns the person with {@code clientId}
+     */
     Person getPerson(ClientId clientId);
-
-
 
     /**
      * Increments the clientCounter of the address book by 1 {@code clientCounter}.
