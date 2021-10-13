@@ -30,6 +30,8 @@ public class EditAnimeDescriptorBuilder {
     public EditAnimeDescriptorBuilder(Anime anime) {
         descriptor = new EditAnimeDescriptor();
         descriptor.setName(anime.getName());
+        descriptor.setEpisode(anime.getEpisode());
+        descriptor.setStatus(anime.getStatus());
         descriptor.setTags(anime.getTags());
     }
 

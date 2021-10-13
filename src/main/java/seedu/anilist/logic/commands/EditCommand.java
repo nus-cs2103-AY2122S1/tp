@@ -17,7 +17,9 @@ import seedu.anilist.commons.util.CollectionUtil;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.tag.Tag;
 
 /**
@@ -39,8 +41,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list.";
 
-    private final Index index;
-    private final EditAnimeDescriptor editAnimeDescriptor;
+    public final Index index;
+    public final EditAnimeDescriptor editAnimeDescriptor;
 
     /**
      * @param index of the anime in the filtered anime list to edit
@@ -83,9 +85,11 @@ public class EditCommand extends Command {
         assert animeToEdit != null;
 
         Name updatedName = editAnimeDescriptor.getName().orElse(animeToEdit.getName());
+        Episode episode = animeToEdit.getEpisode();
+        Status status = animeToEdit.getStatus();
         Set<Tag> updatedTags = editAnimeDescriptor.getTags().orElse(animeToEdit.getTags());
 
-        return new Anime(updatedName, updatedTags);
+        return new Anime(updatedName, episode, status, updatedTags);
     }
 
     @Override
@@ -112,6 +116,8 @@ public class EditCommand extends Command {
      */
     public static class EditAnimeDescriptor {
         private Name name;
+        private Episode episode;
+        private Status status;
         private Set<Tag> tags;
 
         public EditAnimeDescriptor() {}
@@ -122,6 +128,8 @@ public class EditCommand extends Command {
          */
         public EditAnimeDescriptor(EditAnimeDescriptor toCopy) {
             setName(toCopy.name);
+            setEpisode(toCopy.episode);
+            setStatus(toCopy.status);
             setTags(toCopy.tags);
         }
 
@@ -129,7 +137,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, tags);
+            return CollectionUtil.isAnyNonNull(name, episode, status, tags);
         }
 
         public void setName(Name name) {
@@ -155,6 +163,22 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setEpisode(Episode e) {
+            this.episode = e;
+        }
+
+        public Optional<Episode> getEpisode() {
+            return Optional.ofNullable(episode);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         @Override

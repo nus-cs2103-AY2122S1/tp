@@ -16,6 +16,8 @@ import seedu.anilist.model.util.SampleDataUtil;
 public class AnimeBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_EPISODE = "0";
+    public static final String DEFAULT_STATUS = "watching";
 
     private Name name;
     private Episode episode;
@@ -27,8 +29,8 @@ public class AnimeBuilder {
      */
     public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
-        episode = new Episode("0");
-        status = new Status("watching");
+        episode = new Episode(DEFAULT_EPISODE);
+        status = new Status(DEFAULT_STATUS);
         tags = new HashSet<>();
     }
 

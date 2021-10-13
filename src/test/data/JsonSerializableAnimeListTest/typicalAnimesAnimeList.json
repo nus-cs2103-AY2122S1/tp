@@ -2,24 +2,38 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "anime" : [ {
     "name" : "Alice Pauline",
+    "episode" : "2",
+    "status" : "watching",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
+    "episode" : "12",
+    "status" : "finished",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
+    "episode" : "21",
+    "status" : "watching",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
+    "episode" : "24",
+    "status" : "finished",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
+    "episode" : "0",
+    "status" : "towatch",
     "tagged" : [ ]
   } ]
 }

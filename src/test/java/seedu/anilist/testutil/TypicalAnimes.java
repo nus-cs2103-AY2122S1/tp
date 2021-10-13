@@ -17,15 +17,39 @@ import seedu.anilist.model.anime.Anime;
  */
 public class TypicalAnimes {
 
-    public static final Anime ALICE = new AnimeBuilder().withName("Alice Pauline").withTags("friends").build();
-    public static final Anime BENSON = new AnimeBuilder().withName("Benson Meier")
-            .withTags("owesMoney", "friends").build();
-    public static final Anime CARL = new AnimeBuilder().withName("Carl Kurz").build();
-    public static final Anime DANIEL = new AnimeBuilder().withName("Daniel Meier")
-            .withTags("friends").build();
-    public static final Anime ELLE = new AnimeBuilder().withName("Elle Meyer").build();
-    public static final Anime FIONA = new AnimeBuilder().withName("Fiona Kunz").build();
-    public static final Anime GEORGE = new AnimeBuilder().withName("George Best").build();
+    public static final Anime ALICE = new AnimeBuilder()
+            .withName("Alice Pauline")
+            .withEpisode("2")
+            .withTags("friends")
+            .build();
+    public static final Anime BENSON = new AnimeBuilder()
+            .withName("Benson Meier")
+            .withEpisode("12")
+            .withStatus("F")
+            .withTags("owesMoney", "friends")
+            .build();
+    public static final Anime CARL = new AnimeBuilder()
+            .withName("Carl Kurz")
+            .withStatus("T")
+            .build();
+    public static final Anime DANIEL = new AnimeBuilder()
+            .withName("Daniel Meier")
+            .withStatus("T")
+            .withTags("friends")
+            .build();
+    public static final Anime ELLE = new AnimeBuilder()
+            .withName("Elle Meyer")
+            .withEpisode("21")
+            .build();
+    public static final Anime FIONA = new AnimeBuilder()
+            .withName("Fiona Kunz")
+            .withEpisode("24")
+            .withStatus("F")
+            .build();
+    public static final Anime GEORGE = new AnimeBuilder()
+            .withName("George Best")
+            .withStatus("T")
+            .build();
 
     // Manually added
     public static final Anime HOON = new AnimeBuilder().withName("Hoon Meier").build();

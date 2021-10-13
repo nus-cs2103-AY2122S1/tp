@@ -13,6 +13,7 @@ import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.tag.Tag;
@@ -72,11 +73,12 @@ public class UpdateStatusCommand extends Command {
     private static Anime createUpdatedAnime(Anime animeToEdit, UpdateStatusCommand.StatusDescriptor statusDescriptor) {
         assert animeToEdit != null;
 
-        Name updatedName = animeToEdit.getName();
-        Status status = statusDescriptor.getStatus().orElse(animeToEdit.getStatus());
-        Set<Tag> updatedTags = animeToEdit.getTags();
+        Name name = animeToEdit.getName();
+        Episode episode = animeToEdit.getEpisode();
+        Status updatedStatus = statusDescriptor.getStatus().orElse(animeToEdit.getStatus());
+        Set<Tag> tags = animeToEdit.getTags();
 
-        return new Anime(updatedName, status, updatedTags);
+        return new Anime(name, episode, updatedStatus, tags);
     }
 
     @Override

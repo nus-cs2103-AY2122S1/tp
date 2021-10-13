@@ -37,28 +37,6 @@ public class Anime {
     }
 
     /**
-     * Every field must be present and not null except Episode which defaults to 0.
-     */
-    public Anime(Name name, Status status, Set<Tag> tags) {
-        requireAllNonNull(name, tags, status);
-        this.name = name;
-        this.episode = new Episode("0");
-        this.status = status;
-        this.tags.addAll(tags);
-    }
-
-    /**
-     * Every field must be present and not null except Status which defaults to "watching".
-     */
-    public Anime(Name name, Episode episode, Set<Tag> tags) {
-        requireAllNonNull(name, tags, episode);
-        this.name = name;
-        this.episode = episode;
-        this.status = new Status("watching");
-        this.tags.addAll(tags);
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Anime(Name name, Episode episode, Status status, Set<Tag> tags) {
