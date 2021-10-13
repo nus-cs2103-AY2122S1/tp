@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -183,10 +184,48 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_zeroEmploymentTypeKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate = prepareEmploymentTypePredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneEmploymentTypeKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate =
+                prepareEmploymentTypePredicate("Full time");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleEmploymentTypeKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate =
+                prepareEmploymentTypePredicate("Temporary internship");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_zeroExpectedSalaryKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
-        PhoneContainsKeywordsPredicate predicate = preparePhonePredicate(" ");
+        ExpectedSalaryWithinRangePredicate predicate = prepareExpectedSalaryPredicate(" ");
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
         expectedModel.updateFilteredPersonList(predicate);
@@ -270,6 +309,13 @@ public class FindCommandTest {
      */
     private RoleContainsKeywordsPredicate prepareRolePredicate(String userInput) {
         return new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code EmploymentTypeContainsKeywordsPredicate}.
+     */
+    private EmploymentTypeContainsKeywordsPredicate prepareEmploymentTypePredicate(String userInput) {
+        return new EmploymentTypeContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**

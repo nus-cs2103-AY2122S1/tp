@@ -142,8 +142,25 @@ public class FindCommandParser implements Parser<FindCommand> {
                     List<String> keywords = new ArrayList<>();
                     Pattern r = Pattern.compile(EmploymentType.Type.getRegex());
                     Matcher m = r.matcher(trimmedArg);
+
+                    ArrayList<String> terms = EmploymentType.Type.getTerms();
+
                     while (m.find()) {
-                        keywords.add(m.group());
+                        if (!m.group().isEmpty()) {
+                            boolean contains = false;
+                            for (String term: terms) {
+                                if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
+                                    contains = true;
+                                    break;
+                                }
+                            }
+
+                            if (!contains) {
+                                throw new ParseException(EmploymentType.FIND_MESSAGE_CONSTRAINTS);
+                            } else {
+                                keywords.add(m.group());
+                            }
+                        }
                     }
                     predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
                 }
