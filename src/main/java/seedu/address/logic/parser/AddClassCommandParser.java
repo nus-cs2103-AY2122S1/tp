@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
@@ -18,7 +17,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Counter;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
@@ -34,10 +32,9 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
     public AddClassCommand parse(String args) throws ParseException {
         boolean hasStudents = false;
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT,
-                        PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT, PREFIX_REMARK);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT,
-                PREFIX_COUNTER, PREFIX_TIMESLOT)
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT
+                        , PREFIX_TIMESLOT, PREFIX_STUDENT, PREFIX_REMARK);
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT, PREFIX_TIMESLOT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddClassCommand.MESSAGE_USAGE));
@@ -47,12 +44,11 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
         }
         ClassName name = ParserUtil.parseClassName(argMultimap.getValue(PREFIX_NAME).get());
         ClassLimit limit = ParserUtil.parseLimit(argMultimap.getValue(PREFIX_LIMIT).get());
-        Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
         StudentList student = hasStudents ? ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT))
                 : new StudentList(new ArrayList<>());
         Remark remark = ParserUtil.parseRemark(argMultimap.getOptionalValue(PREFIX_REMARK).get());
-        TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student, remark);
+        TuitionClass tuitionClass = new TuitionClass(name, limit, timeslot, student, remark);
 
         logger.info("AddClassCommandParser " + tuitionClass);
 
