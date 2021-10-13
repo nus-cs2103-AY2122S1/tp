@@ -1,4 +1,4 @@
-package seedu.siasa.logic.commands;
+package seedu.siasa.logic.commands.client;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -7,6 +7,8 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.siasa.logic.commands.Command;
+import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
@@ -14,11 +16,11 @@ import seedu.siasa.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddClientCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "addclient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the client list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -36,12 +38,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    public final Person toAdd;
+    private final Person toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddClientCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -61,7 +63,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddClientCommand // instanceof handles nulls
+                && toAdd.equals(((AddClientCommand) other).toAdd));
     }
 }
