@@ -76,7 +76,8 @@ public class TypicalPersons {
             .withEmploymentType("Full time")
             .withExpectedSalary("5700")
             .withLevelOfEducation("Bachelors")
-            .withExperience("4").build();
+            .withExperience("4")
+            .withTags("old").build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withPhone("9482427")
