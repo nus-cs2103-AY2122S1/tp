@@ -89,7 +89,6 @@ public class AcademyDirectoryParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            logger.info("Length " + arguments.length() + arguments);
             return new HelpCommandParser().parse(arguments);
 
         default:

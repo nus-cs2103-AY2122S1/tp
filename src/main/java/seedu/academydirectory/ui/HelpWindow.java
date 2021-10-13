@@ -1,6 +1,5 @@
 package seedu.academydirectory.ui;
 
-import java.io.File;
 import java.util.logging.Logger;
 
 import com.sandec.mdfx.MarkdownView;
@@ -27,10 +26,8 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_MESSAGE = "### User guide\n#### " + USERGUIDE_URL + "\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
-    private static final File USER_GUIDE = new File("docs/UserGuide.md");
     private static final String FXML = "HelpWindow.fxml";
     private static final String MARKDOWN_CSS = "/view/markdown.css";
-    private static final String SUMMARY_HEADER = "## Command summary";
 
     private static final int DEFAULT_WIDTH = 750;
     private static final int DEFAULT_HEIGHT = 400;
@@ -38,9 +35,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Button copyButton;
 
-    private Stage root;
-    private Label label;
-    private MarkdownView markdownView;
+    private final Stage root;
+    private final MarkdownView markdownView;
 
     /**
      * Creates a new HelpWindow.
@@ -51,6 +47,7 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         this.root = root;
         this.markdownView = new MarkdownView();
+        markdownView.getStylesheets().clear();
         markdownView.getStylesheets().add(MARKDOWN_CSS);
         setHelpMessage(Messages.GENERAL_HELP_MESSAGE);
     }
@@ -64,9 +61,16 @@ public class HelpWindow extends UiPart<Stage> {
 
 
     public void setHelpMessage(String helpMessage) {
-        logger.info(helpMessage);
-        label = new Label(HELP_MESSAGE + helpMessage);
+        wrapInMarkdown(helpMessage);
+        wrapInContainer(markdownView);
+    }
+
+    private void wrapInMarkdown(String helpMessage) {
+        Label label = new Label(HELP_MESSAGE + helpMessage);
         markdownView.mdStringProperty().bind(label.textProperty());
+    }
+
+    private void wrapInContainer(MarkdownView markdownView) {
         ScrollPane content = new ScrollPane(markdownView);
         content.setFitToWidth(true);
         HBox container = new HBox(content, copyButton);
