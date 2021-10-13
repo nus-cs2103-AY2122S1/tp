@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.anilist.model.tag.Tag;
 
 /**
- * Represents an Anime in the address book.
+ * Represents an Anime in the anime list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Anime {
@@ -19,25 +19,52 @@ public class Anime {
     private final Name name;
 
     // Data fields
+    private final Episode episode;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
-
+  
     /**
-     * Every field must be present and not null except Status which defaults to "watching".
+     * Every field must be present and not null 
+     * except Episode which defaults to 0,
+     * and Status which defaults to "watching".
      */
     public Anime(Name name, Set<Tag> tags) {
         requireAllNonNull(name, tags);
         this.name = name;
+        this.episode = new Episode("0");
         this.status = new Status("watching");
         this.tags.addAll(tags);
     }
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null except Episode which defaults to 0.
      */
     public Anime(Name name, Status status, Set<Tag> tags) {
-        requireAllNonNull(name, tags);
+        requireAllNonNull(name, tags, status);
         this.name = name;
+        this.episode = new Episode("0");
+        this.status = status;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null except Status which defaults to "watching".
+     */
+    public Anime(Name name, Episode episode, Set<Tag> tags) {
+        requireAllNonNull(name, tags, episode);
+        this.name = name;
+        this.episode = episode;
+        this.status = new Status("watching");
+        this.tags.addAll(tags);
+    }
+  
+     /**
+     * Every field must be present and not null.
+     */
+    public Anime(Name name, Episode episode, Status status, Set<Tag> tags) {
+        requireAllNonNull(name, tags, episode, status);
+        this.name = name;
+        this.episode = episode;
         this.status = status;
         this.tags.addAll(tags);
     }
@@ -46,6 +73,10 @@ public class Anime {
         return name;
     }
 
+    public Episode getEpisode() {
+        return episode;
+    }
+  
     public Status getStatus() {
         return status;
     }
@@ -93,13 +124,14 @@ public class Anime {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, status, tags);
+        return Objects.hash(name, episode, status, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
+        builder.append(String.format(" (%s)", getEpisode()));
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
