@@ -12,7 +12,7 @@ public class Messages {
 
     public static final String GENERAL_HELP_MESSAGE = "## Command summary\n"
             + "\n"
-            + "Action | Format, Examples\n"
+            + "Command name | Format, Examples\n"
             + "--------|------------------\n"
             + "**Add** | `add n/NAME [p/PHONE_NUMBER] e/EMAIL [t/TAG]…\u200B` <br> e.g., "
             + "`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`\n"
