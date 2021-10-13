@@ -44,11 +44,11 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_PARENT_PHONE + "91234567 "
             + PREFIX_PARENT_EMAIL + "jackd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_SCHOOL + "Nan Chiau High School "
             + PREFIX_ACAD_STREAM + "Express "
             + PREFIX_ACAD_LEVEL + "S1 "
@@ -57,7 +57,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "neighbour";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Note: at least one contact field must be present. \n"
             + "Example: " + COMMAND_EXAMPLE;
@@ -66,8 +66,9 @@ public class AddCommand extends Command {
             + COMMAND_WORD + " " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_CONTACT_REQUIRED = "This student must have at least one contact field!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in TAB!";
 
     private final Person toAdd;
 
