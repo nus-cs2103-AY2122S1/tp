@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.parser.Prefix;
 
 /**
@@ -37,7 +38,8 @@ public class InformationWantedFunction implements Function<Student, Optional<Inf
 
     @Override
     public Optional<Information> apply(Student student) {
-        if (name.isPresent() && name.filter(x -> x.equals(student.getName())).isEmpty()) {
+        if (name.isPresent() && name.filter(x -> StringUtil
+                .containsWordIgnoreCase(student.getName().fullName, x.fullName)).isEmpty()) {
             return Optional.empty();
         }
 
