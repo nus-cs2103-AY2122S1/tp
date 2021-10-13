@@ -9,22 +9,23 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddShiftCommand;
+import seedu.address.logic.commands.DeleteShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new AddShiftCommand object.
+ * Parses input arguments and creates a new DeleteShiftCommand object.
  */
-public class AddShiftCommandParser implements Parser<AddShiftCommand> {
+public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddShiftCommand
-     * and returns an AddShiftCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteShiftCommand
+     * and returns an DeleteShiftCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AddShiftCommand parse(String args) throws ParseException {
+    @Override
+    public DeleteShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_DAY_SHIFT, PREFIX_NAME);
@@ -38,8 +39,8 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
                 || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_INDEX)
                 && !arePrefixesPresent(argMultimap, PREFIX_NAME))
                 || (arePrefixesPresent(argMultimap, PREFIX_INDEX)
-                        && arePrefixesPresent(argMultimap, PREFIX_NAME))) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
+                && arePrefixesPresent(argMultimap, PREFIX_NAME))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteShiftCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -51,9 +52,11 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
             }
             shiftDayAndSlot = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteShiftCommand.MESSAGE_USAGE), pe);
         }
-        return new AddShiftCommand(index, name, shiftDayAndSlot);
+
+        return new DeleteShiftCommand(index, name, shiftDayAndSlot);
     }
 
     /**
