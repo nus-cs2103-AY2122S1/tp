@@ -120,14 +120,14 @@ public interface Model {
 
     /**
      * Gets Item with the same name.
-     * 
+     *
      * @param name The name of the item that wants to be searched
      * @return the Item with the same name.
      */
     Item getItemWithName(String name);
 
     /**
-     * Gets Item with the same name.
+     * Gets Item with the same id.
      *
      * @param id The name of the item that wants to be searched
      * @return the Item with the same name.
