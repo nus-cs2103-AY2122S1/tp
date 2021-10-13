@@ -115,10 +115,11 @@ Examples:
 
 #### Sorting tuition classes: `sort`
 Permanently sorts tuition class list according to time or alphabetical order.
+
 If the tutor does not exit TutAssistor, the list will be auto-sorted
 when adding and editing classes after the tutor sorted the list.
 
-Format: `sort o/ORDER`
+Format: `sort [o/ORDER]`
 
 Examples: (examples below are all possible usages of `sort`)
 - `sort` (without order being specified, TutAssistor will sort the list by time)

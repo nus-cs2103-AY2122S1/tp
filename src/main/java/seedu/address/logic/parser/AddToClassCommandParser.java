@@ -13,6 +13,9 @@ import seedu.address.logic.commands.AddToClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tuition.StudentList;
 
+/**
+ * Parses input arguments and creates a new AddToClassCommand object
+ */
 public class AddToClassCommandParser implements Parser<AddToClassCommand> {
 
     @Override
