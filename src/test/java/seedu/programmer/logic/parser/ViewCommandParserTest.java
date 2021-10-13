@@ -125,5 +125,6 @@ public class ViewCommandParserTest {
 
         // multiple leading and trailing whitespaces before and after keywords
         assertParseSuccess(parser, " -n \n Alice\t -cid \nB01 -sid A1234567X  ", expectedViewCommand);
+        assertParseSuccess(parser, " -n     Alice    -cid   B01  -sid   A1234567X   ", expectedViewCommand);
     }
 }
