@@ -56,6 +56,10 @@ public class Application {
         return status;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -112,4 +112,8 @@ public class Applicant {
                 + application;
     }
 
+    public String getApplicationSummary() {
+        return "Applied for: " + application.getPosition().getTitle() + "; Status: " + application.getStatus();
+    }
+
 }

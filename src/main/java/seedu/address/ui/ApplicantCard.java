@@ -48,7 +48,7 @@ public class ApplicantCard extends UiPart<Region> {
         phone.setText(applicant.getPhone().value);
         address.setText(applicant.getAddress().value);
         email.setText(applicant.getEmail().value);
-        application.setText(applicant.getApplication().toString());
+        application.setText(applicant.getApplicationSummary());
     }
 
     @Override
