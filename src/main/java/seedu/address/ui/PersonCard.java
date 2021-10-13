@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(staff.getAddress().value);
         email.setText(staff.getEmail().value);
         role.setText(staff.getRole().getValue());
-        salary.setText(staff.getSalary().toString());
+        salary.setText(staff.getSalary().convertToDollars());
         status.setText(staff.getStatus().getValue());
 
         staff.getTags().stream()
