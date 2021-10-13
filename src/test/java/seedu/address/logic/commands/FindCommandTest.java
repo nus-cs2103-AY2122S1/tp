@@ -199,15 +199,25 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneEmploymentTypeKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
         EmploymentTypeContainsKeywordsPredicate predicate =
                 prepareEmploymentTypePredicate("Full time");
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredPersonList());
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(ALICE, ELLE, IDA), modelWithHoonIda.getFilteredPersonList());
     }
 
     @Test
