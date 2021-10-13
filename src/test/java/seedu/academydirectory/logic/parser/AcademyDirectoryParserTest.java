@@ -86,7 +86,8 @@ public class AcademyDirectoryParserTest {
 
     @Test
     public void parseCommand_retrieve() throws Exception {
-        assertTrue(parser.parseCommand(RetrieveCommand.COMMAND_WORD + " " + PREFIX_EMAIL + " ") instanceof RetrieveCommand);
+        assertTrue(parser.parseCommand(RetrieveCommand.COMMAND_WORD + " " + PREFIX_EMAIL)
+                instanceof RetrieveCommand);
     }
 
     @Test

@@ -8,6 +8,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -69,7 +70,11 @@ public class RetrieveCommandTest {
                 .collect(Collectors.joining("\n"));
 
         RetrieveCommand command = new RetrieveCommand(function);
-        ObservableList<Information> actualResponse = model.getFilteredStudentListView(function);
+        ObservableList<Information> actualResponse = model.getFilteredStudentListView(function)
+                .stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedResponse, actualResponse);
     }
@@ -82,7 +87,11 @@ public class RetrieveCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         RetrieveCommand command = new RetrieveCommand(function);
-        ObservableList<Information> actualResponse = emptyModel.getFilteredStudentListView(function);
+        ObservableList<Information> actualResponse = emptyModel.getFilteredStudentListView(function)
+                .stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
         assertCommandSuccess(command, emptyModel, expectedMessage, emptyModel);
         assertEquals(FXCollections.observableArrayList(), actualResponse);
     }
