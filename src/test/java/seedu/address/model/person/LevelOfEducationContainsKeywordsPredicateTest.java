@@ -62,7 +62,7 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
 
         // Keywords match name, phone, and email, but does not match level of education
         predicate = new LevelOfEducationContainsKeywordsPredicate(Arrays
-                .asList("Alice", "12345", "alice@email.com", "Main", "Street"));
+                .asList("Alice", "12345", "alice@email.com"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withLevelOfEducation("PhD").build()));
     }

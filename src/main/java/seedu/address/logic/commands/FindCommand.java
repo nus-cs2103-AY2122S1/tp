@@ -21,7 +21,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) under their respected prefixes, "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: PREFIX/KEYWORDS [MORE_PREFIXES/MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " n/alice bob charlie a/serangoon";
+            + "Example: " + COMMAND_WORD + " n/alice bob charlie p/99999999";
 
     private final ArrayList<Predicate<Person>> predicates;
 
