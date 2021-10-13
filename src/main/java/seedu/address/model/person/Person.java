@@ -44,7 +44,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if(roles.isEmpty()) {
+        if (roles.isEmpty()) {
             this.roles.add(Role.NO_ROLE);
         } else {
             this.roles.addAll(roles);
