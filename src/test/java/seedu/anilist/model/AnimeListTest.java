@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.util.Arrays;
@@ -45,9 +45,9 @@ public class AnimeListTest {
     @Test
     public void resetData_withDuplicateAnimes_throwsDuplicateAnimeException() {
         // Two animes with the same identity fields
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        Anime editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN)
                 .build();
-        List<Anime> newAnimes = Arrays.asList(ALICE, editedAlice);
+        List<Anime> newAnimes = Arrays.asList(AOT, editedAot);
         AnimeListStub newData = new AnimeListStub(newAnimes);
 
         assertThrows(DuplicateAnimeException.class, () -> animeList.resetData(newData));
@@ -60,21 +60,21 @@ public class AnimeListTest {
 
     @Test
     public void hasAnime_animeNotInAnimeList_returnsFalse() {
-        assertFalse(animeList.hasAnime(ALICE));
+        assertFalse(animeList.hasAnime(AOT));
     }
 
     @Test
     public void hasAnime_animeInAnimeList_returnsTrue() {
-        animeList.addAnime(ALICE);
-        assertTrue(animeList.hasAnime(ALICE));
+        animeList.addAnime(AOT);
+        assertTrue(animeList.hasAnime(AOT));
     }
 
     @Test
     public void hasAnime_animeWithSameIdentityFieldsInAnimeList_returnsTrue() {
-        animeList.addAnime(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        animeList.addAnime(AOT);
+        Anime editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN)
                 .build();
-        assertTrue(animeList.hasAnime(editedAlice));
+        assertTrue(animeList.hasAnime(editedAot));
     }
 
     @Test

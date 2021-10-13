@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.testutil.TypicalAnimes.CARL;
-import static seedu.anilist.testutil.TypicalAnimes.ELLE;
-import static seedu.anilist.testutil.TypicalAnimes.FIONA;
+import static seedu.anilist.testutil.TypicalAnimes.CSM;
+import static seedu.anilist.testutil.TypicalAnimes.ELF;
+import static seedu.anilist.testutil.TypicalAnimes.FSN;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.util.Arrays;
@@ -50,12 +50,12 @@ public class FindCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different anime -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
+    public void execute_zeroKeywords_noAnimeFound() {
         String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
@@ -65,13 +65,13 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
+    public void execute_multipleKeywords_multipleAnimesFound() {
         String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = preparePredicate("Man Elfen night");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredAnimeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredAnimeList());
+        assertEquals(Arrays.asList(CSM, ELF, FSN), model.getFilteredAnimeList());
     }
 
     /**

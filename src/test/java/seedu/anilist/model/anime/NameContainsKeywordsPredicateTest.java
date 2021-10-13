@@ -34,41 +34,43 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different anime -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new AnimeBuilder().withName("Alice Bob").build()));
+        NameContainsKeywordsPredicate predicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("Attack"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Black").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new AnimeBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Attack", "Black"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Black").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new AnimeBuilder().withName("Alice Carol").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Black", "Chainsaw"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Chainsaw").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new AnimeBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Attack", "Black"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Black").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new AnimeBuilder().withName("Alice").build()));
+        assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new AnimeBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Chainsaw"));
+        assertFalse(predicate.test(new AnimeBuilder().withName("Black Rock Shooter").build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new AnimeBuilder().withName("Alice").build()));
+        // Keywords match tags, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("action", "adventure"));
+        assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan")
+                .withTags("action", "adventure").build()));
     }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
 import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 
 import org.junit.jupiter.api.Test;
@@ -21,56 +21,56 @@ public class AnimeTest {
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameAnime() {
         // same object -> returns true
-        assertTrue(ALICE.isSameAnime(ALICE));
+        assertTrue(AOT.isSameAnime(AOT));
 
         // null -> returns false
-        assertFalse(ALICE.isSameAnime(null));
+        assertFalse(AOT.isSameAnime(null));
 
         // same name, all other attributes different -> returns true
-        Anime editedAlice = new AnimeBuilder(ALICE)
+        Anime editedAot = new AnimeBuilder(AOT)
                 .withTags(VALID_TAG_SHOUNEN).build();
-        assertTrue(ALICE.isSameAnime(editedAlice));
+        assertTrue(AOT.isSameAnime(editedAot));
 
         // different name, all other attributes same -> returns false
-        editedAlice = new AnimeBuilder(ALICE).withName(VALID_NAME_BNHA).build();
-        assertFalse(ALICE.isSameAnime(editedAlice));
+        editedAot = new AnimeBuilder(AOT).withName(VALID_NAME_BNHA).build();
+        assertFalse(AOT.isSameAnime(editedAot));
 
         // name differs in case, all other attributes same -> returns false
-        Anime editedBob = new AnimeBuilder(BNHA).withName(VALID_NAME_BNHA.toLowerCase()).build();
-        assertFalse(BNHA.isSameAnime(editedBob));
+        Anime editedBnha = new AnimeBuilder(BNHA).withName(VALID_NAME_BNHA.toLowerCase()).build();
+        assertFalse(BNHA.isSameAnime(editedBnha));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BNHA + " ";
-        editedBob = new AnimeBuilder(BNHA).withName(nameWithTrailingSpaces).build();
-        assertFalse(BNHA.isSameAnime(editedBob));
+        editedBnha = new AnimeBuilder(BNHA).withName(nameWithTrailingSpaces).build();
+        assertFalse(BNHA.isSameAnime(editedBnha));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Anime aliceCopy = new AnimeBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Anime aotCopy = new AnimeBuilder(AOT).build();
+        assertTrue(AOT.equals(aotCopy));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(AOT.equals(AOT));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(AOT.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(AOT.equals(5));
 
         // different anime -> returns false
-        assertFalse(ALICE.equals(BNHA));
+        assertFalse(AOT.equals(BNHA));
 
         // different name -> returns false
-        Anime editedAlice = new AnimeBuilder(ALICE).withName(VALID_NAME_BNHA).build();
-        assertFalse(ALICE.equals(editedAlice));
+        Anime editedAot = new AnimeBuilder(AOT).withName(VALID_NAME_BNHA).build();
+        assertFalse(AOT.equals(editedAot));
 
         // different tags -> returns false
-        editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN).build();
-        assertFalse(ALICE.equals(editedAlice));
+        editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN).build();
+        assertFalse(AOT.equals(editedAot));
     }
 }

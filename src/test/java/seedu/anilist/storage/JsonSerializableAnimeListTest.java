@@ -20,7 +20,7 @@ public class JsonSerializableAnimeListTest {
     private static final Path DUPLICATE_ANIME_FILE = TEST_DATA_FOLDER.resolve("duplicateAnimeAnimeList.json");
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalAnimesFile_success() throws Exception {
         JsonSerializableAnimeList dataFromFile = JsonUtil.readJsonFile(TYPICAL_ANIMES_FILE,
                 JsonSerializableAnimeList.class).get();
         AnimeList animeListFromFile = dataFromFile.toModelType();
@@ -29,7 +29,7 @@ public class JsonSerializableAnimeListTest {
     }
 
     @Test
-    public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateAnimes_throwsIllegalValueException() throws Exception {
         JsonSerializableAnimeList dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ANIME_FILE,
                 JsonSerializableAnimeList.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAnimeList.MESSAGE_DUPLICATE_ANIME,

@@ -1,25 +1,25 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "AnimeList save file which contains the same Anime values as in TypicalAnimes#getTypicalAnimeList()",
   "anime" : [ {
-    "name" : "Alice Pauline",
-    "tagged" : [ "friends" ]
+    "name" : "Attack on Titan: The Final Season",
+    "tagged" : [ "action" ]
   }, {
-    "name" : "Benson Meier",
-    "tagged" : [ "owesMoney", "friends" ]
+    "name" : "Black Rock Shooter",
+    "tagged" : [ "fantasy", "action" ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "Chainsaw Man",
     "tagged" : [ ]
   }, {
-    "name" : "Daniel Meier",
-    "tagged" : [ "friends" ]
+    "name" : "Dragon Ball Z",
+    "tagged" : [ "action" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "Elfen Lied",
     "tagged" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "Fate/stay night",
     "tagged" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "Goblin Slayer: Goblin's Crown",
     "tagged" : [ ]
   } ]
 }

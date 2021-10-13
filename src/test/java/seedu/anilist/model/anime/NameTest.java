@@ -39,6 +39,6 @@ public class NameTest {
         assertTrue(Name.isValidName("BLEACH")); // with all capital letters
         // long names
         assertTrue(Name.isValidName("Higehiro: After Being Rejected, I Shaved and Took in a High School Runaway"));
-        assertTrue(Name.isValidName("Gintama'")); //name containing apostrophe
+        assertTrue(Name.isValidName("Gintama'")); // name containing apostrophe
     }
 }
