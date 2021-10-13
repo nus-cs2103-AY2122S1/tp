@@ -12,7 +12,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.EditStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
-
 /**
  * Parses input arguments and creates a new EditStudentCommand object
  */

@@ -43,11 +43,11 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         StudentName studentName = ParserUtil.parseStudentName(
                 argMultimap.getValue(PREFIX_STUDENT_NAME).get());
         Phone studentPhone = ParserUtil.parsePhone(
-                argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
+                argMultimap.getValue(PREFIX_STUDENT_PHONE).orElse(""));
         ParentName parentName = ParserUtil.parseParentName(
-                argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
+                argMultimap.getValue(PREFIX_PARENT_NAME).orElse(""));
         Phone parentPhone = ParserUtil.parsePhone(
-                argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
+                argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 

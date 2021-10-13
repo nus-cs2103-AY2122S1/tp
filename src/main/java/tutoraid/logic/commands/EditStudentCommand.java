@@ -23,7 +23,7 @@ import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing student in the address book.
  */
 public class EditStudentCommand extends Command {
 
@@ -43,7 +43,7 @@ public class EditStudentCommand extends Command {
             + PREFIX_PARENT_NAME + "Mrs Doe "
             + PREFIX_PARENT_PHONE + "91234567 ";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TutorAid";
 
@@ -51,8 +51,8 @@ public class EditStudentCommand extends Command {
     private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param targetIndex           of the person in the filtered person list to edit
-     * @param editStudentDescriptor details to edit the person with
+     * @param targetIndex of the student in the filtered student list to edit
+     * @param editStudentDescriptor details to edit the student with
      */
     public EditStudentCommand(Index targetIndex, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(targetIndex);
@@ -72,7 +72,7 @@ public class EditStudentCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Student editedStudent = createEditedPerson(studentToEdit, editStudentDescriptor);
+        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -84,10 +84,10 @@ public class EditStudentCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code studentToEdit}
+     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedPerson(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
         StudentName updatedStudentName = editStudentDescriptor.getStudentName().orElse(studentToEdit.getStudentName());
@@ -122,8 +122,8 @@ public class EditStudentCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the student with. Each non-empty field value will replace the
+     * corresponding field value of the student.
      */
     public static class EditStudentDescriptor {
         private StudentName studentName;
