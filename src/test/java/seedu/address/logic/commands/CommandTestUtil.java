@@ -19,8 +19,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
-import seedu.address.model.participant.ParticipantNameContainsKeywordsPredicate;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditParticipantDescriptorBuilder;
 
 /**

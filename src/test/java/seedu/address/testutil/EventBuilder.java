@@ -2,7 +2,6 @@ package seedu.address.testutil;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventDate;
 import seedu.address.model.event.EventName;

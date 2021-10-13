@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
@@ -56,8 +55,8 @@ class AddParticipantToEventCommandTest {
                 new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(), ListCommand.COMMAND_WORD),
-                () -> addParticipantToEventCommand.execute(modelStub));
+                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(),
+                        ListCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
     }
 
     @Test
@@ -71,8 +70,8 @@ class AddParticipantToEventCommandTest {
                 new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName, ListEventCommand.COMMAND_WORD),
-                () -> addParticipantToEventCommand.execute(modelStub));
+                String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName,
+                        ListEventCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
     }
 
     @Test
@@ -89,8 +88,8 @@ class AddParticipantToEventCommandTest {
                 new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
 
         assertThrows(CommandException.class,
-                Messages.showParticipantExists(validParticipant.getFullName()),
-                () -> addParticipantToEventCommand.execute(modelStub));
+                Messages.showParticipantExists(validParticipant.getFullName()), () ->
+                        addParticipantToEventCommand.execute(modelStub));
     }
 
     @Test

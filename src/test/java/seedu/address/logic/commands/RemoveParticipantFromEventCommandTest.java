@@ -15,10 +15,10 @@ import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
 import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
@@ -60,8 +60,8 @@ class RemoveParticipantFromEventCommandTest {
                 new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(), ListCommand.COMMAND_WORD),
-                () -> removeParticipantFromEventCommand.execute(modelStub));
+                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(),
+                        ListCommand.COMMAND_WORD), () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test
@@ -74,9 +74,10 @@ class RemoveParticipantFromEventCommandTest {
         RemoveParticipantFromEventCommand removeParticipantFromEventCommand =
                 new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
-        assertThrows(CommandException.class,
-                String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName, ListEventCommand.COMMAND_WORD),
-                () -> removeParticipantFromEventCommand.execute(modelStub));
+        String errorMessage = String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST,
+                eventName, ListEventCommand.COMMAND_WORD);
+
+        assertThrows(CommandException.class, errorMessage, () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test
@@ -90,9 +91,9 @@ class RemoveParticipantFromEventCommandTest {
         RemoveParticipantFromEventCommand removeParticipantFromEventCommand =
                 new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
-        assertThrows(CommandException.class,
-                String.format(MESSAGE_PARTICIPANT_NOT_IN_EVENT, validParticipant.getFullName()),
-                () -> removeParticipantFromEventCommand.execute(modelStub));
+        String errorMessage = String.format(MESSAGE_PARTICIPANT_NOT_IN_EVENT, validParticipant.getFullName());
+
+        assertThrows(CommandException.class, errorMessage, () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test

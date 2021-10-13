@@ -52,7 +52,8 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
 
-        Participant participantToDelete = model.getFilteredParticipantList().get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+        Participant participantToDelete = model.getFilteredParticipantList()
+                .get(INDEX_FIRST_PARTICIPANT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);

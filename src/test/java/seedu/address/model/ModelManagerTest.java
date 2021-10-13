@@ -125,7 +125,8 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALEX.getFullName().split("\\s+");
-        modelManager.updateFilteredParticipantList(new ParticipantNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredParticipantList(
+                new ParticipantNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
