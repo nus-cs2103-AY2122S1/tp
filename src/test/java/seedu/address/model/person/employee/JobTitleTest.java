@@ -2,6 +2,8 @@ package seedu.address.model.person.employee;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -35,6 +37,29 @@ public class JobTitleTest {
         assertTrue(JobTitle.isValidJobTitle("Junior Developer 2")); // alphanumeric characters
         assertTrue(JobTitle.isValidJobTitle("Account Manager")); // with capital letters
         assertTrue(JobTitle.isValidJobTitle("Senior Developer outsourced to GovTech as PM")); // long job titles
+    }
+
+    @Test
+    public void equals() {
+        JobTitle jobTitle = new JobTitle(VALID_JOBTITLE_AMY);
+
+        // same values -> returns true
+        JobTitle toCopy = new JobTitle(VALID_JOBTITLE_AMY);
+        assertTrue(jobTitle.equals(toCopy));
+
+        // same object -> returns true
+        assertTrue(jobTitle.equals(jobTitle));
+
+        // null -> returns false
+        assertFalse(jobTitle.equals(null));
+
+        // different type -> returns false
+        assertFalse(jobTitle.equals(5));
+
+        // different JobTitle -> returns false
+        JobTitle different = new JobTitle(VALID_JOBTITLE_BOB);
+        assertFalse(jobTitle.equals(different));
+
     }
 }
 

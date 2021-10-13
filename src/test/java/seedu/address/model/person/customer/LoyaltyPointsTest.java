@@ -2,6 +2,8 @@ package seedu.address.model.person.customer;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +38,28 @@ public class LoyaltyPointsTest {
         assertTrue(LoyaltyPoints.isValidLoyaltyPoints("9110")); // exactly 3 numbers
         assertTrue(LoyaltyPoints.isValidLoyaltyPoints("10000"));
         assertTrue(LoyaltyPoints.isValidLoyaltyPoints("124293842033123")); // long phone numbers
+    }
+
+    @Test
+    public void equals() {
+        LoyaltyPoints loyaltyPoints = new LoyaltyPoints(VALID_LP_AMY);
+
+        // same values -> returns true
+        LoyaltyPoints toCopy = new LoyaltyPoints(VALID_LP_AMY);
+        assertTrue(loyaltyPoints.equals(toCopy));
+
+        // same object -> returns true
+        assertTrue(loyaltyPoints.equals(loyaltyPoints));
+
+        // null -> returns false
+        assertFalse(loyaltyPoints.equals(null));
+
+        // different type -> returns false
+        assertFalse(loyaltyPoints.equals(5));
+
+        // different LoyaltyPoints -> returns false
+        LoyaltyPoints different = new LoyaltyPoints(VALID_LP_BOB);
+        assertFalse(loyaltyPoints.equals(different));
+
     }
 }

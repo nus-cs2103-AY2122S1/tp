@@ -52,5 +52,4 @@ public class AllergyTest {
         assertFalse(allergy.equals(different));
 
     }
-
 }
