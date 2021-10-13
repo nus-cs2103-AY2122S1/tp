@@ -6,7 +6,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.RenameCommand;
-import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 public class RenameCommandParser implements Parser<RenameCommand> {
@@ -34,7 +33,7 @@ public class RenameCommandParser implements Parser<RenameCommand> {
         }
 
         if (!nameDescriptor.isNameUpdated()) {
-            throw new ParseException(UpdateEpisodeCommand.MESSAGE_NOT_UPDATED);
+            throw new ParseException(RenameCommand.MESSAGE_NOT_RENAMED);
         }
 
         return new RenameCommand(index, nameDescriptor);

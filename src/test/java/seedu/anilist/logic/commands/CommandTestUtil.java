@@ -19,6 +19,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 import seedu.anilist.testutil.EpisodeDescriptorBuilder;
+import seedu.anilist.testutil.NameDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -40,6 +41,7 @@ public class CommandTestUtil {
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // cannot be blank
+    public static final String INVALID_NAME_DESC_NONASCII = " " + PREFIX_NAME + "中文";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
@@ -51,6 +53,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditAnimeDescriptor DESC_AKIRA;
     public static final EditCommand.EditAnimeDescriptor DESC_BNHA;
 
+    public static final RenameCommand.NameDescriptor DESC_NAME_AKIRA;
+    public static final RenameCommand.NameDescriptor DESC_NAME_BNHA;
+
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ZERO;
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ONE;
 
@@ -59,6 +64,8 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_SHOUNEN).build();
         DESC_BNHA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
                 .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
+        DESC_NAME_AKIRA = new NameDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
+        DESC_NAME_BNHA = new NameDescriptorBuilder().withName(VALID_NAME_BNHA).build();
         DESC_EPISODE_ZERO = new EpisodeDescriptorBuilder().withEpisode("0").build();
         DESC_EPISODE_ONE = new EpisodeDescriptorBuilder().withEpisode("1").build();
     }
