@@ -6,9 +6,9 @@ import seedu.address.model.tutorialclass.TutorialClass;
 //import seedu.address.model.tutorialclass.TutorialClass;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an ClassMATE
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyClassmate {
 
     /**
      * Returns an unmodifiable view of the students list.

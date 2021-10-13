@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalClassmate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,25 +24,25 @@ import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
 
-public class AddressBookTest {
+public class ClassmateTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Classmate classmate = new Classmate();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getStudentList());
+        assertEquals(Collections.emptyList(), classmate.getStudentList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> classmate.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyClassmate_replacesData() {
+        Classmate newData = getTypicalClassmate();
+        classmate.resetData(newData);
+        assertEquals(newData, classmate);
     }
 
     @Test
@@ -52,48 +52,48 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents, new ArrayList<>());
+        ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>());
 
-        assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateStudentException.class, () -> classmate.resetData(newData));
     }
 
     @Test
     public void hasStudent_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasStudent(null));
+        assertThrows(NullPointerException.class, () -> classmate.hasStudent(null));
     }
 
     @Test
-    public void hasStudent_studentNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasStudent(ALICE));
+    public void hasStudent_studentNotInClassmate_returnsFalse() {
+        assertFalse(classmate.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
-        assertTrue(addressBook.hasStudent(ALICE));
+    public void hasStudent_studentInClassmate_returnsTrue() {
+        classmate.addStudent(ALICE);
+        assertTrue(classmate.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addStudent(ALICE);
+    public void hasStudent_studentWithSameIdentityFieldsInClassmate_returnsTrue() {
+        classmate.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasStudent(editedAlice));
+        assertTrue(classmate.hasStudent(editedAlice));
     }
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> classmate.getStudentList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose students list can violate interface constraints.
+     * A stub ReadOnlyClassmate whose students list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ClassmateStub implements ReadOnlyClassmate {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<TutorialClass> tutorialClasses = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses) {
+        ClassmateStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses) {
             this.students.setAll(students);
             this.tutorialClasses.setAll(tutorialClasses);
         }
