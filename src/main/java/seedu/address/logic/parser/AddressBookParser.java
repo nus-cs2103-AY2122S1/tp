@@ -52,27 +52,7 @@ public class AddressBookParser {
             arguments = arguments + " ";
         }
 
-        boolean isTwoWordCommand = arguments.length() > 0
-                && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
-
-        if (isTwoWordCommand) {
-            commandWord = extractFullCommandWord(commandWord, arguments);
-            arguments = extractArguments(arguments);
-        }
-
         switch (commandWord) {
-
-        case AddAllocCommand.COMMAND_WORD:
-            return new AddAllocCommandParser().parse(arguments);
-
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case AddGroupCommand.COMMAND_WORD:
-            return new AddGroupCommandParser().parse(arguments);
-
-        case AddScoreCommand.COMMAND_WORD:
-            return new AddScoreCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -97,6 +77,36 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
+
+        default:
+            boolean isTwoWordCommand = arguments.length() > 0
+                    && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
+
+            if (isTwoWordCommand) {
+                return parseTwoWordCommand(commandWord, arguments);
+            } else {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+        }
+    }
+
+    private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
+        commandWord = extractFullCommandWord(commandWord, arguments);
+        arguments = extractArguments(arguments);
+
+        switch (commandWord) {
+
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
+
+        case AddAllocCommand.COMMAND_WORD:
+            return new AddAllocCommandParser().parse(arguments);
+
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
+        case AddScoreCommand.COMMAND_WORD:
+            return new AddScoreCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -128,7 +138,9 @@ public class AddressBookParser {
     private String extractFullCommandWord(String firstCommandWord, String arguments) {
         int argumentsIndex = arguments.indexOf("-");
         if (argumentsIndex == -1) {
-            return firstCommandWord + arguments;
+            String[] arr = arguments.split(" ", 3);
+            String firstWord = arr[1];
+            return firstCommandWord + " " + firstWord;
         }
         String fullCommandWord = firstCommandWord + arguments.substring(0, argumentsIndex - 1).stripTrailing();
         return fullCommandWord;
