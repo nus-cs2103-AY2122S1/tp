@@ -42,10 +42,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                         PREFIX_ADDRESS, PREFIX_RISKAPPETITE, PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN,
                         PREFIX_LASTMET, PREFIX_TAG);
         ClientId clientId;
-        Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            clientId = new ClientId(Integer.toString(index.getOneBased()));
+            clientId = ParserUtil.parseClientId(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
