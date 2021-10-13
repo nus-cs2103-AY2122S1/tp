@@ -15,6 +15,8 @@ import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.logic.Logic;
 import seedu.fast.logic.commands.CommandResult;
 import seedu.fast.logic.commands.exceptions.CommandException;
+import seedu.fast.logic.parser.ParserUtil;
+import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
 /**
@@ -65,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        helpWindow = new HelpWindow("");
     }
 
     public Stage getPrimaryStage() {
@@ -136,14 +138,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Handles the event for MainWindow.fxml
      */
     @FXML
     public void handleHelp() {
+        handleHelp("");
+    }
+
+    /**
+     * Opens the help window directly to the help page for command or focuses on it if it's already opened.
+     * Opens or focuses to the default help page if the command is invalid.
+     */
+    @FXML
+    public void handleHelp(String command) {
         if (!helpWindow.isShowing()) {
+            helpWindow = new HelpWindow(command);
             helpWindow.show();
         } else {
-            helpWindow.focus();
+            helpWindow.focus(command);
         }
     }
 
@@ -172,14 +184,16 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.fast.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    private CommandResult executeCommand(String commandText) throws
+        CommandException, ParseException, HelpParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                String helpArg = ParserUtil.parseHelp(commandText);
+                handleHelp(helpArg);
             }
 
             if (commandResult.isExit()) {
@@ -190,6 +204,11 @@ public class MainWindow extends UiPart<Stage> {
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        } catch (HelpParseException e) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            handleHelp(""); // opens a default help window
             throw e;
         }
     }

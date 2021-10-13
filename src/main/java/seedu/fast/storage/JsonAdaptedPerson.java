@@ -32,7 +32,9 @@ class JsonAdaptedPerson {
     private final String address;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final String appointment;
+    private final String appointmentDate;
+    private final String appointmentTime;
+    private final String appointmentVenue;
 
 
     /**
@@ -42,7 +44,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("appointment") String appointment) {
+            @JsonProperty("appointment date") String date, @JsonProperty("appointment time") String time,
+            @JsonProperty("appointment venue") String venue) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -51,7 +54,9 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.appointment = appointment;
+        this.appointmentDate = date;
+        this.appointmentTime = time;
+        this.appointmentVenue = venue;
     }
 
     /**
@@ -68,8 +73,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
-        appointment = source.getAppointment().getDate() + " " + source.getAppointment().getTime()
-                + " " + source.getAppointment().getVenue();
+        appointmentDate = source.getAppointment().getDate();
+        appointmentTime = source.getAppointment().getTime();
+        appointmentVenue = source.getAppointment().getVenue();
     }
 
     /**
@@ -124,7 +130,17 @@ class JsonAdaptedPerson {
                     Remark.class.getSimpleName()));
         }
 
-        if (appointment == null) {
+        if (appointmentDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
+        }
+
+        if (appointmentTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Appointment.class.getSimpleName()));
+        }
+
+        if (appointmentVenue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
         }
@@ -133,8 +149,8 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Appointment modelAppointment = new Appointment(appointment, Appointment.NO_TIME,
-                Appointment.NO_VENUE);
+        final Appointment modelAppointment = new Appointment(appointmentDate, appointmentTime,
+                appointmentVenue);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
                 modelAppointment);
