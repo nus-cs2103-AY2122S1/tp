@@ -66,7 +66,7 @@ public class DeleteLessonCommandTest {
         // null -> returns false
         assertFalse(deleteLessonFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different student -> returns false
         assertFalse(deleteLessonFirstCommand.equals(deleteLessonSecondCommand));
     }
 

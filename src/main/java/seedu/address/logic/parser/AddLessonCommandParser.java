@@ -19,7 +19,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Price;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Grade;
+import seedu.address.model.student.Grade;
 
 /**
  * Parses input arguments and creates a new AddLessonCommand object

@@ -8,7 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
-import seedu.address.model.person.Grade;
+import seedu.address.model.student.Grade;
 
 /**
  * Represents a LessonCode for a Lesson in tuitiONE book.

@@ -2,7 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 
 /**
  * Unmodifiable view of an address book
@@ -10,10 +10,10 @@ import seedu.address.model.person.Student;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the students list.
+     * This list will not contain any duplicate students.
      */
-    ObservableList<Student> getPersonList();
+    ObservableList<Student> getStudentList();
 
     /**
      * Returns list of lessons.

@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,10 +14,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonCode;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 
 /**
- * Unenrolls a person from a specified lesson.
+ * Unenrolls a student from a specified lesson.
  */
 public class UnenrollCommand extends Command {
 
@@ -54,9 +54,9 @@ public class UnenrollCommand extends Command {
         Optional<Lesson> lessonOptional = model.searchLessons(code);
         Lesson lesson = lessonOptional.orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE));
 
-        List<Student> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
         Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
 
@@ -68,8 +68,8 @@ public class UnenrollCommand extends Command {
 
         Student newStudent = studentToUnenroll.createClone();
         lesson.removeStudent(newStudent);
-        model.setPerson(studentToUnenroll, newStudent);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToUnenroll, newStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));

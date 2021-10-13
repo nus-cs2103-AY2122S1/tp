@@ -6,7 +6,7 @@ import static seedu.address.model.lesson.LessonTime.TIME_MESSAGE_CONSTRAINTS;
 import static seedu.address.model.lesson.LessonTime.parseDayToString;
 import static seedu.address.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
 import static seedu.address.model.lesson.Subject.SUBJECT_MESSAGE_CONSTRAINTS;
-import static seedu.address.model.person.Grade.GRADE_MESSAGE_CONSTRAINTS;
+import static seedu.address.model.student.Grade.GRADE_MESSAGE_CONSTRAINTS;
 import static seedu.address.storage.JsonAdaptedLesson.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Price;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Grade;
+import seedu.address.model.student.Grade;
 
 public class JsonAdaptedLessonTest {
 
