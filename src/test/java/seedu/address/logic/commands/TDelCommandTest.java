@@ -56,7 +56,6 @@ class TDelCommandTest {
     public void execute_taskNotPresent_throwsTaskNotFoundException() {
         Index validMemberID = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
-        Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TDelCommand tDelCommand = new TDelCommand(validMemberID, validTaskID);

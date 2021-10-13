@@ -30,7 +30,7 @@ public class TDelCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
-
+    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
     public final Index targetMemberID;
     public final Index targetTaskID;
 
@@ -51,7 +51,7 @@ public class TDelCommand extends Command {
         ObservableList<Member> members = model.getFilteredMemberList();
         int memberId = targetMemberID.getZeroBased();
         if (targetMemberID.getZeroBased() >= members.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_MEMBER_NOT_FOUND);
         }
         Member targetMember = members.get(memberId);
 
