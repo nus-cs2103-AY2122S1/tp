@@ -46,10 +46,10 @@ Examples:
 Provides a view of a student or class if an INDEX is provided. Otherwise, a full list is provided.
 
 #### Viewing a student: `student`
-Format: `student [INDEX]`
+Format: `student INDEX`
 
 #### Viewing a tuition class: `class`
-Format: `class [INDEX]`
+Format: `class INDEX`
 
 ### Editing students/tuition classes
 Edits a student’s information such as n/NAME, p/PHONE_NUMBER. 
@@ -66,10 +66,10 @@ Format: `editclass INDEX l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
 Deletes a student or a tuition class given INDEX.
 
 #### Deleting a student: `delete`
-Format: `delete [INDEX]`
+Format: `delete INDEX`
 
 #### Deleting a tuition class: `deleteclass`
-Format: `deleteclass [INDEX]`
+Format: `deleteclass INDEX`
 
 ### Adding/Removing an existing student from class
 Move a student to/from classes by adding or removing them.
@@ -102,20 +102,22 @@ Examples:
 #### Adding remarks to a student: `remark`
 Adds a remark to the identified student.
 
-Format: `remark [INDEX_STUDENT] r/REMARK`
+Format: `remark INDEX_STUDENT r/REMARK`
 
 Examples:
 - `remark 1 r/Haven't paid last week's fee`
 
 #### Adding remarks to a tuition class: `remarkclass`
-Format: `remarkclass [INDEX_CLASS] r/REMARK`
+Format: `remarkclass INDEX_CLASS r/REMARK`
 
 Examples:
 - `remarkclass 2 r/Math homework due Friday`
 
 #### Sorting tuition classes: `sort`
 Permanently sorts tuition class list according to time or alphabetical order.
-If the tutor does not exit TutAssistor, the list will be auto-sorted when adding and editing classes after the tutor sorted the list.
+
+If the tutor does not exit TutAssistor, the list will be auto-sorted
+when adding and editing classes after the tutor sorted the list.
 
 Format: `sort [o/ORDER]`
 
@@ -124,6 +126,10 @@ Examples: (examples below are all possible usages of `sort`)
 - `sort o/asc`
 - `sort o/desc`
 - `sort o/time`
+
+### Viewing help: `help`
+Shows a command summary and a link to the user guide. <br>
+![Ui](images/helpWindow.png)
 
 ### Exiting the app: `exit`
 Exits the program.<br>
@@ -135,17 +141,18 @@ Action | Format
 --------|------------------
 ***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 ***Add Class*** | `addclass l/limit t/time [s/NAME,NAME,NAME...] [r/REMARK] [t/TAG]…`
-***View Student*** | `student [INDEX]`
-***View Class*** | `class [INDEX]`
-***Edit Student*** | `editstudent [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
-***Edit Class*** | `editclass [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-***Delete Student*** | `deletestudent [INDEX]`
-***Delete Class*** | `deleteclass [INDEX]`
+***View Student*** | `student INDEX`
+***View Class*** | `class INDEX`
+***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
+***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+***Delete Student*** | `deletestudent INDEX`
+***Delete Class*** | `deleteclass INDEX`
 ***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
 ***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
-***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
-***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
+***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK`
+***Add Remarks to Class*** | `remarkclass INDEX_CLASS r/REMARK`
 ***Sort Tuition Class*** | `sort [o/ORDER]`
+***Help*** | `help`
 ***Exit*** | `exit`
 
 
