@@ -43,8 +43,8 @@ public class EmploymentType {
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "
             + "Full time, Part time, Temporary or Internship";
 
-    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for one or more of the"
-            + " following employment types: Full time, Part time, Temporary or Internship";
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for keywords that one or more of the"
+            + " following employment types: Full time, Part time, Temporary or Internship start with";
 
     public final String employmentType;
 
