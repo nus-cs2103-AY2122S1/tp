@@ -171,6 +171,9 @@ public class ParserUtil {
         requireNonNull(shiftDay);
         String trimmedStr = shiftDay.trim().toLowerCase();
         String[] strings = trimmedStr.split("-");
+        if (strings.length != 2) {
+            throw new ParseException(messageConstraints);
+        }
         switch (strings[0]) {
         case "monday":
         case "tuesday":

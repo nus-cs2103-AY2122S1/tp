@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
         staff.getRoles().stream()
                 .sorted(Comparator.comparing(Role::toString))
                 .forEach(role -> roles.getChildren().add(new Label(role.toString())));
-        salary.setText(staff.getSalary().toString());
+        salary.setText(staff.getSalary().convertToDollars());
         status.setText(staff.getStatus().getValue());
         staff.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
