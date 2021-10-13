@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
@@ -35,11 +36,19 @@ public class AddCommandIntegrationTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, validItem), expectedModel);
     }
 
-    //    @Test
-    //    public void execute_duplicateItem_throwsCommandException() {
-    //        Item itemInList = model.getInventory().getItemList().get(0);
-    //        assertCommandFailure(new AddCommand(itemInList), model, AddCommand.MESSAGE_DUPLICATE_ITEM);
-    //    }
-    // TODO: ACCOUNT FOR DUPLICATE ITEMS
+    @Test
+    public void execute_duplicateItem_throwsCommandException() {
+        Item itemInList = model.getInventory().getItemList().get(0);
+        Integer initialCount = itemInList.getCount();
+        AddCommand x = new AddCommand(itemInList);
+        try {
+            new AddCommand(itemInList).execute(model);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
+        Integer laterCount = model.getInventory().getItemList().get(0).getCount();
+
+        assertEquals(laterCount, initialCount * 2);
+    }
 }

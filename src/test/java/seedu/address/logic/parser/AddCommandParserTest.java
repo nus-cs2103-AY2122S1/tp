@@ -4,6 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_VALUE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -46,7 +48,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_DONUT + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED, new AddCommand(expectedItem));
 
-        // multiple phones - last id accepted
+        // multiple id - last id accepted
         assertParseSuccess(parser, NAME_DESC_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED, new AddCommand(expectedItem));
 
@@ -70,10 +72,13 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL, expectedMessage);
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL, expectedMessage);
 
-        // all prefixes missing
+        // count prefix missing
         assertParseFailure(parser, VALID_NAME_BAGEL + VALID_ID_BAGEL, expectedMessage);
+
+        // both name and id prefix missing
+        assertParseFailure(parser, COUNT_DESC_BAGEL, expectedMessage);
     }
 
     @Test
@@ -102,5 +107,13 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
                 + TAG_DESC_BAKED + TAG_DESC_POPULAR,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        // invalid count format
+        assertParseFailure(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_FORMAT + TAG_DESC_BAKED,
+                Messages.MESSAGE_INVALID_COUNT_FORMAT);
+
+        // invalid count value
+        assertParseFailure(parser, NAME_DESC_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_VALUE + TAG_DESC_BAKED,
+                Messages.MESSAGE_INVALID_COUNT_INTEGER);
     }
 }

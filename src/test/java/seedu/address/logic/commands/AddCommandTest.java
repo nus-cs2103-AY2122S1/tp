@@ -43,15 +43,17 @@ public class AddCommandTest {
     }
 
     //    @Test
-    //    public void execute_duplicateItem_throwsCommandException() {
+    //    public void execute_duplicateItem() throws CommandException {
+    //        ModelStub modelStub = new ModelStub();
     //        Item validItem = new ItemBuilder().build();
     //        AddCommand addCommand = new AddCommand(validItem);
-    //        ModelStub modelStub = new ModelStubWithItem(validItem);
     //
-    //        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_ITEM,
-    //        () -> addCommand.execute(modelStub));
+    //        Item validItemDouble = new ItemBuilder().withCount("10").build();
+    //        ModelStub modelStub2 = new ModelStubWithItem(validItemDouble);
+    //
+    //        addCommand.execute(modelStub);
     //    }
-    // TODO: TEST FOR DUPLICATE ITEMS
+    // TODO: Guys pls help i have no idea how to do the test for this
 
     @Test
     public void equals() {
