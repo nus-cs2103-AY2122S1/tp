@@ -106,6 +106,6 @@ class JsonAdaptedStudent {
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         final Attendance modelAttendance = new Attendance(studentAttendance);
 
-        return new Student(modelName, modelEmail, modelStudentNumber , modelTags, modelAttendance);
+        return new Student(modelName, modelEmail, modelStudentNumber, modelTags, modelAttendance);
     }
 }

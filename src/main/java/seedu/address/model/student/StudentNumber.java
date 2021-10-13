@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class StudentNumber {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Student number should start and end with a letter and contain 7 numbers";
 
@@ -38,7 +37,6 @@ public class StudentNumber {
     public static boolean isValidNumber(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {

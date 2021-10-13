@@ -111,8 +111,7 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getStudentNumber().equals((getStudentNumber()))
-                && otherStudent.getTags().equals(getTags())
-                && otherStudent.getAttendance().equals(getAttendance());
+                && otherStudent.getTags().equals(getTags());
     }
 
     @Override
@@ -128,11 +127,7 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Student Number: ")
-                .append(getStudentNumber())
-                .append("; Attendance: ")
-                .append(getAttendance())
-                .append("; Participation: ")
-                .append(getParticipation());
+                .append(getStudentNumber());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
