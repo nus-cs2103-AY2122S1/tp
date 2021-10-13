@@ -5,8 +5,6 @@ import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMA
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_GRADE;
 
-import java.util.stream.Stream;
-
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.exceptions.IllegalValueException;
 import seedu.academydirectory.logic.commands.GradeCommand;

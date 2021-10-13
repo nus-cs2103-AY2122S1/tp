@@ -1,12 +1,8 @@
 package seedu.academydirectory.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academydirectory.commons.core.Messages.MESSAGE_HELP_NOT_EXIST;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 
-import seedu.academydirectory.commons.exceptions.IllegalValueException;
-import seedu.academydirectory.logic.commands.EditCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
@@ -23,7 +19,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         String assessment;
         try {
             assessment = ParserUtil.parseAssessment(args).toUpperCase();
-        } catch(ParseException pe) {
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE), pe);
         }
 

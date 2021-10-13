@@ -1,7 +1,6 @@
 package seedu.academydirectory.logic.parser;
 
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
 

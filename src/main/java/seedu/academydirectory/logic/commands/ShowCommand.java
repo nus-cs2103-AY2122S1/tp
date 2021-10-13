@@ -1,7 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.model.Model;
