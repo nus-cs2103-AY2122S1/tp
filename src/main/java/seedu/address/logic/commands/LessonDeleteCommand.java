@@ -138,8 +138,7 @@ public class LessonDeleteCommand extends UndoableCommand {
         try {
             executeUndoableCommand();
         } catch (CommandException ce) {
-            throw new AssertionError("The command has been successfully executed previously; "
-                    + "it should not fail now.");
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
         }
     }
 

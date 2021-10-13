@@ -43,6 +43,7 @@ public class UndoRedoStack {
 
     /**
      * Gets the last executed UndoableCommand.
+     *
      * @return UndoableCommand
      */
     public UndoableCommand popUndo() {
@@ -53,6 +54,7 @@ public class UndoRedoStack {
 
     /**
      * Checks if there are any commands that can be redone.
+     *
      * @return If there are commands to be redone.
      */
     public boolean canRedo() {
