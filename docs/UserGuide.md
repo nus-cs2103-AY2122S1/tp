@@ -99,7 +99,7 @@ Examples:
 - `remove si/1 tc/1`
 - `remove si/1 2 3 4 tc/2`
 
-#### Adding remarks to a student: `remark`
+### Adding remarks to a student: `remark`
 Adds a remark to the identified student.
 
 Format: `remark [INDEX_STUDENT] r/REMARK`
@@ -107,13 +107,13 @@ Format: `remark [INDEX_STUDENT] r/REMARK`
 Examples:
 - `remark 1 r/Haven't paid last week's fee`
 
-#### Adding remarks to a tuition class: `remarkclass`
+### Adding remarks to a tuition class: `remarkclass`
 Format: `remarkclass [INDEX_CLASS] r/REMARK`
 
 Examples:
 - `remarkclass 2 r/Math homework due Friday`
 
-#### Sorting tuition classes: `sort`
+### Sorting tuition classes: `sort`
 Permanently sorts tuition class list according to time or alphabetical order.
 If the tutor does not exit TutAssistor, the list will be auto-sorted when adding and editing classes after the tutor sorted the list.
 

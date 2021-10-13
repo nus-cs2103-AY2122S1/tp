@@ -15,7 +15,8 @@ public class SortCommand extends Command {
             + ": Sort the tuition class list.\n"
             + "Parameters: [" + PREFIX_SORT_ORDER + "ORDER_TO_SORT] \n"
             + "ORDER_TO_SORT includes 'o/time', 'o/asc' (for ascending), and 'o/desc' (for descending)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SORT_ORDER + "time";
+            + "Example1: " + COMMAND_WORD + " " + PREFIX_SORT_ORDER + "asc\n"
+            + "Example2: " + COMMAND_WORD;
     private static final String MESSAGE_SORTED = "The tuition class list is now sorted by %1$s order";
     private SortCommandParser.Order order;
     public SortCommand(SortCommandParser.Order order) {
