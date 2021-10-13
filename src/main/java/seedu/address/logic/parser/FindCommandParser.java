@@ -185,34 +185,30 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String arg = argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get();
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    ArrayList<String> validInputs = new ArrayList<>();
-                    int i = 0;
-                    boolean isValidInput = false;
-                    while (i < keywords.length) {
-                        if (LevelOfEducation.Education.combined().toLowerCase().contains(keywords[i].toLowerCase())) {
-                            isValidInput = true;
-                            validInputs.add(keywords[i]);
-                            System.out.println(validInputs.get(validInputs.size()-1));
-                        }
-                        if (keywords[i].equalsIgnoreCase("School") && (validInputs.size()>1)) {
-                            if ((keywords[i-1].equalsIgnoreCase("Middle"))
-                                    || (keywords[i-1].equalsIgnoreCase("High"))) {
-                                int size = validInputs.size();
-                                validInputs.remove(size-1);
-                                String a = validInputs.get(size-2);
-                                String b = a + " School";
-                                validInputs.remove(size-2);
-                                validInputs.add(b);
-                                System.out.println(validInputs.get(size-2));
+                    List<String> keywords = new ArrayList<>();
+                    Pattern r = Pattern.compile(LevelOfEducation.Education.getRegex());
+                    Matcher m = r.matcher(trimmedArg);
+
+                    ArrayList<String> terms = LevelOfEducation.Education.getEducationLevels();
+
+                    while (m.find()) {
+                        if (!m.group().isEmpty()) {
+                            boolean contains = false;
+                            for (String term: terms) {
+                                if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
+                                    contains = true;
+                                    break;
+                                }
+                            }
+
+                            if (!contains) {
+                                throw new ParseException(LevelOfEducation.FIND_MESSAGE_CONSTRAINTS);
+                            } else {
+                                keywords.add(m.group());
                             }
                         }
-                        i++;
                     }
-                    if (!isValidInput) {
-                        throw new ParseException(LevelOfEducation.MESSAGE_CONSTRAINTS);
-                    }
-                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(validInputs));
+                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(keywords));
                 }
             }
 

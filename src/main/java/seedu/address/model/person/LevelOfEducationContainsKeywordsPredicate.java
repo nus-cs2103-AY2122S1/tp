@@ -20,7 +20,7 @@ public class LevelOfEducationContainsKeywordsPredicate implements Predicate<Pers
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword -> person.getLevelOfEducation().levelOfEducation.toLowerCase()
-                        .contains(keyword.toLowerCase()));
+                        .startsWith(keyword.toLowerCase()));
     }
 
     @Override
