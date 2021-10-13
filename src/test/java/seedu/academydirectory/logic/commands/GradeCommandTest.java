@@ -46,10 +46,9 @@ class GradeCommandTest {
         Model expectedModel = new ModelManager(new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
         assertCommandSuccess(addGradeCommand, model, expectedMessage, expectedModel);
-        model.getAcademyDirectory().getStudentList().get(0).setAssessment(new Assessment());
-        TypicalStudents.getTypicalStudents().get(0).setAssessment(new Assessment());
+
+        // reset model
         TypicalStudents.getTypicalAcademyDirectory().getStudentList().get(0).setAssessment(new Assessment());
-        model.getFilteredStudentList().get(0).setAssessment(new Assessment());
     }
 
     @Test
