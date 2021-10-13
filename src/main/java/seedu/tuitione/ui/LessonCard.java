@@ -17,7 +17,7 @@ public class LessonCard extends UiPart<Region> {
     private static final String FXML = "LessonListCard.fxml";
     private static final String STRING_FORMAT_SUBJECT = "Subject: \t%s";
     private static final String STRING_FORMAT_GRADE = "Grade: \t%s";
-    private static final String STRING_FORMAT_DAY = "Day: \t\t%s";
+    private static final String STRING_FORMAT_DAY = "Day: \t%s";
     private static final String STRING_FORMAT_TIME = "Time: \t%s - %s";
     private static final String STRING_FORMAT_PRICE = "Price: \t%s";
     /**

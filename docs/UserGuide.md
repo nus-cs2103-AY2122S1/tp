@@ -9,35 +9,35 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 * Table of Contents
 {:toc}
 
-[comment]: <> (--------------------------------------------------------------------------------------------------------------------)
+--------------------------------------------------------------------------------------------------------------------
 
-[comment]: <> (## Quick start)
+## Quick start
 
-[comment]: <> (1. Ensure you have Java `11` or above installed in your Computer.)
+1. Ensure you have Java `11` or above installed in your Computer.
 
-[comment]: <> (1. Download the latest `TuitiONE.jar` from [here]&#40;https://github.com/AY2122S1-CS2103T-F13-4/tp/releases&#41;.)
+1. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
-[comment]: <> (1. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.)
+1. Copy the file to the folder you want to use as the _home folder_ for your TuitiONE.
 
-[comment]: <> (1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>)
+1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. _Note how the app contains some sample data_.<br>
 
-[comment]: <> (   ![Ui]&#40;images/Ui.png&#41;)
+   ![Ui](images/Ui.png)
 
-[comment]: <> (1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>)
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-[comment]: <> (   Some example commands you can try:)
+   Some example commands you can try:
 
-[comment]: <> (   * **`list`** : Lists all contacts.)
+   * **`list`** : Lists all students.
 
-[comment]: <> (   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.)
+   * **`add`**`n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` : Adds a student named `John Doe` to the TuitiONE app.
 
-[comment]: <> (   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.)
+   * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
-[comment]: <> (   * **`clear`** : Deletes all contacts.)
+   * **`clear`** : Deletes all data (students and lessons).
 
-[comment]: <> (   * **`exit`** : Exits the app.)
+   * **`exit`** : Exits the app.
 
-[comment]: <> (1. Refer to the [Features]&#40;#features&#41; below for details of each command.)
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -240,3 +240,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`

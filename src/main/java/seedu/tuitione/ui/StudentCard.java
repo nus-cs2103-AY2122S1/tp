@@ -17,7 +17,7 @@ public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
     private static final String STRING_FORMAT_PARENT_CONTACT = "Parent's Contact: \t%s";
-    private static final String STRING_FORMAT_ADDRESS = "Address: \t\t\t%s";
+    private static final String STRING_FORMAT_ADDRESS = "Address: \t\t%s";
     private static final String STRING_FORMAT_EMAIL = "Email Address: \t%s";
     private static final String STRING_FORMAT_GRADE = "Grade: \t\t\t%s";
     private static final String STRING_FORMAT_LESSON = "Lesson(s): \t";
