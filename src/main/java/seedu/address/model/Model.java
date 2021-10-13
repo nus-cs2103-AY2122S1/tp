@@ -120,6 +120,7 @@ public interface Model {
 
     /**
      * Gets Item with the same name.
+     * 
      * @param name The name of the item that wants to be searched
      * @return the Item with the same name.
      */
@@ -127,6 +128,7 @@ public interface Model {
 
     /**
      * Gets Item with the same name.
+     *
      * @param id The name of the item that wants to be searched
      * @return the Item with the same name.
      */
