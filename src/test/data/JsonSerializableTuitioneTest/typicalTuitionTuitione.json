@@ -1,0 +1,47 @@
+{
+  "_comment": "Tuitione save file which contains the same Mixed values as in TypicalTuition#getTypicalTuitione()",
+  "students" : [ {
+    "name" : "Alice Pauline",
+    "phone" : "94351253",
+    "email" : "alice@example.com",
+    "address" : "123, Jurong West Ave 6, #08-111",
+    "grade" : "P2",
+    "tagged" : [ "friends" ],
+    "lessonCodes" : [ ]
+  }, {
+    "name" : "Benson Meier",
+    "phone" : "98765432",
+    "email" : "johnd@example.com",
+    "address" : "311, Clementi Ave 2, #02-25",
+    "grade" : "S2",
+    "tagged" : [ "owesMoney", "friends" ],
+    "lessonCodes" : [ "Mathematics-S2-Tue-0930" ]
+  }, {
+    "name" : "Carl Kurz",
+    "phone" : "95352563",
+    "email" : "heinz@example.com",
+    "address" : "wall street",
+    "grade" : "P6",
+    "tagged" : [ ],
+    "lessonCodes" : [ ]
+  } ],
+  "lessons": [ {
+    "subject" : "Science",
+    "grade" : "P2",
+    "startTime" : "1230",
+    "day" : "Wed",
+    "price" : 10.5
+  }, {
+    "subject" : "Mathematics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
+  }, {
+    "subject" : "Physics",
+    "grade" : "S2",
+    "startTime" : "0930",
+    "day" : "Tue",
+    "price" : 15.3
+  } ]
+}

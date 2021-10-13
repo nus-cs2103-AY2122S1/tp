@@ -1,0 +1,10 @@
+{
+  "students" : [ ],
+  "lessons" : [ {
+    "subject" : "Science!",
+    "grade" : "P2",
+    "startTime" : "1230",
+    "day" : "Thurs",
+    "price" : -10.5
+  } ]
+}
