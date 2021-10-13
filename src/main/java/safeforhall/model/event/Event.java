@@ -54,7 +54,8 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
-                && otherEvent.getEventDate().equals(getEventDate());
+                && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getVenue().equals(getVenue());
     }
 
     @Override
