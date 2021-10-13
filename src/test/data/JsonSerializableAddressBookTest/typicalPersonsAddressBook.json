@@ -6,8 +6,8 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "riskAppetite": "3",
-    "disposableIncome":  "300",
+    "riskAppetite": "2",
+    "disposableIncome":  "200",
     "last-met" : "07-10-2021",
     "current-plan" : "Prudential PRUShield",
     "tagged" : [ "friends" ]
@@ -17,10 +17,10 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "riskAppetite": "3",
+    "riskAppetite": "4",
     "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
-    "current-plan" : "Prudential PRUShield",
+    "last-met" : "08-10-2021",
+    "current-plan" : "Prudential PROLife",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "clientId": "2",
@@ -29,9 +29,9 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "riskAppetite": "3",
-    "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
-    "current-plan" : "Prudential PRUShield",
+    "disposableIncome":  "100",
+    "last-met" : "06-10-2021",
+    "current-plan" : "Aviva Shield",
     "tagged" : [ ]
   }, {
     "clientId": "3",
@@ -39,10 +39,10 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "riskAppetite": "3",
-    "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
-    "current-plan" : "Prudential PRUShield",
+    "riskAppetite": "1",
+    "disposableIncome":  "50000",
+    "last-met" : "02-10-2021",
+    "current-plan" : "Aviva Ace",
     "tagged" : [ "friends" ]
   }, {
     "clientId": "4",
@@ -50,10 +50,10 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "riskAppetite": "3",
-    "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
-    "current-plan" : "Prudential PRUShield",
+    "riskAppetite": "1",
+    "disposableIncome":  "4000",
+    "last-met" : "03-10-2021",
+    "current-plan" : "AIA Gold",
     "tagged" : [ ]
   }, {
     "clientId": "5",
@@ -62,8 +62,8 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "riskAppetite": "3",
-    "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
+    "disposableIncome":  "200",
+    "last-met" : "04-10-2021",
     "current-plan" : "Prudential PRUShield",
     "tagged" : [ ]
   }, {
@@ -72,10 +72,10 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "riskAppetite": "3",
-    "disposableIncome":  "300",
-    "last-met" : "07-10-2021",
-    "current-plan" : "Prudential PRUShield",
+    "riskAppetite": "5",
+    "disposableIncome":  "1",
+    "last-met" : "03-10-2021",
+    "current-plan" : "AIA Zero",
     "tagged" : [ ]
   } ]
 }

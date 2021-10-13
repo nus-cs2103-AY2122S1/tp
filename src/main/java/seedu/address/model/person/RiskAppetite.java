@@ -46,4 +46,6 @@ public class RiskAppetite implements OptionalPersonStringField {
     public int hashCode() {
         return value.hashCode();
     }
+
+
 }
