@@ -35,17 +35,19 @@ public class MarkCommandParser implements Parser<MarkCommand> {
             throw NO_FIELD_EXCEPTION;
         }
         Period period = parsePeriod(periods);
-        PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
-        if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-            return new MarkCommand(index, period, predicate);
-        }
         argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
         if (argMultimap.isEmpty()) {
-
+            throw NO_FIELD_EXCEPTION;
         }
+        PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
+
+        if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+            return new MarkCommand(index, period, predicate);
+        }
+
         return new MarkCommand(predicate, period);
 
     }

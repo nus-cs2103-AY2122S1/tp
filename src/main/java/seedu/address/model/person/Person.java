@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.tag.Tag;
@@ -102,6 +104,30 @@ public class Person {
         this.absentDates.add(period);
         return this;
     }
+
+
+    /**
+     * Removes the marking of {@code period} to mark that the person was working in
+     * this period.
+     */
+    public boolean unMark(Period period) {
+        requireNonNull(period);
+        List<Period> toRemove = getAbsentDates().stream()
+                .filter(p -> contained(p, period))
+                .collect(Collectors.toList());
+        this.getAbsentDates().removeAll(toRemove);
+        return toRemove.size() != 0;
+    }
+
+    //tests if period1 contains period2 or period2 contains period1
+    private static boolean contained(Period period1, Period period2) {
+        requireAllNonNull(period1, period2);
+        return period1.contains(period2)
+                || period2.contains(period1);
+    }
+
+
+
 
 
     /**
