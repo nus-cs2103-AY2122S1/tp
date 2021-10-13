@@ -100,14 +100,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        ImportCommand command = new ImportCommand(
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD
+                + FILE_DESC_VALID_FILE
+                + GROUP_COUNT_DESC_TYPICAL
+                + ASSESSMENT_COUNT_DESC_TYPICAL
+                + TAG_COUNT_DESC_TYPICAL);
+
+        assertEquals(new ImportCommand(
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(VALID_TYPICAL_PERSONS_CSV_PATH));
-        assertEquals(parser.parseCommand(ImportCommand.COMMAND_WORD + FILE_DESC_VALID_FILE
-                + GROUP_COUNT_DESC_TYPICAL + ASSESSMENT_COUNT_DESC_TYPICAL
-                + TAG_COUNT_DESC_TYPICAL), command);
+                Path.of(VALID_TYPICAL_PERSONS_CSV_PATH)), command);
     }
 
     @Test
