@@ -63,17 +63,17 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder()
-            .withStudentName(VALID_STUDENT_NAME_AMY)
-            .withStudentPhone(VALID_STUDENT_PHONE_AMY)
-            .withParentPhone(VALID_PARENT_PHONE_AMY)
-            .withParentName(VALID_PARENT_NAME_AMY)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_AMY)
+                .withStudentPhone(VALID_STUDENT_PHONE_AMY)
+                .withParentPhone(VALID_PARENT_PHONE_AMY)
+                .withParentName(VALID_PARENT_NAME_AMY)
+                .build();
         DESC_BOB = new EditStudentDescriptorBuilder()
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .withParentPhone(VALID_PARENT_PHONE_BOB)
-            .withParentName(VALID_PARENT_NAME_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+                .withParentPhone(VALID_PARENT_PHONE_BOB)
+                .withParentName(VALID_PARENT_NAME_BOB)
+                .build();
     }
 
     /**

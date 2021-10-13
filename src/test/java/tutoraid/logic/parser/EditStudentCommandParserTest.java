@@ -88,9 +88,9 @@ public class EditStudentCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1"
-                        + INVALID_STUDENT_NAME_DESC
-                        + INVALID_PARENT_PHONE_DESC
-                        + VALID_PARENT_NAME_AMY + VALID_STUDENT_PHONE_AMY,
+                + INVALID_STUDENT_NAME_DESC
+                + INVALID_PARENT_PHONE_DESC
+                + VALID_PARENT_NAME_AMY + VALID_STUDENT_PHONE_AMY,
                 Name.MESSAGE_CONSTRAINTS);
     }
 
