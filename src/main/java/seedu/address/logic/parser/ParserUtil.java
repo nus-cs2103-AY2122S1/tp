@@ -19,7 +19,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Counter;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 
@@ -154,18 +153,7 @@ public class ParserUtil {
         return new ClassLimit(Integer.valueOf(trimmedLimit));
     }
 
-    /**
-     * Parses a {@code String counter} into an {@code Counter}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     *
-     */
-    public static Counter parseCounter(String counter) {
-        requireNonNull(counter);
-        String trimmedCounter = counter.trim();
 
-        return new Counter(Integer.valueOf(trimmedCounter));
-    }
 
     /**
      * Parses a {@code String className} into a {@code ClassName}.
