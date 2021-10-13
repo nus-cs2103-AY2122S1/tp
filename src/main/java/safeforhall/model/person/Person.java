@@ -125,11 +125,11 @@ public class Person {
                 .append("; Vaccinated: ")
                 .append(getVaccStatus())
                 .append("; Faculty: ")
-                .append(getFaculty());
-        /*.append("; Last Fet Date: ")
-        .append(getLastFetDate())
-        .append("; Last Collection Date: ")
-        .append(getLastCollectionDate());*/
+                .append(getFaculty())
+                .append("; Last Fet Date: ")
+                .append(getLastFetDate())
+                .append("; Last Collection Date: ")
+                .append(getLastCollectionDate());
 
         return builder.toString();
     }

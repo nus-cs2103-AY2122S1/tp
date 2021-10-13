@@ -40,9 +40,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRoom(person.getRoom());
         descriptor.setFaculty(person.getFaculty());
         descriptor.setVaccStatus(person.getVaccStatus());
-        //TODO: lastfetdate and lastcollectiondate
-
-
+        descriptor.setLastFetDate(person.getLastFetDate());
+        descriptor.setLastCollectionDate(person.getLastCollectionDate());
     }
 
     /**

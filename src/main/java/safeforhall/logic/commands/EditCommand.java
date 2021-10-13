@@ -253,9 +253,9 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getRoom().equals(e.getRoom())
                     && getVaccStatus().equals(e.getVaccStatus())
-                    && getFaculty().equals(e.getFaculty());
-            /*&& getLastFetDate().equals(e.getLastFetDate())
-            && getLastCollectionDate().equals(e.getLastCollectionDate());*/
+                    && getFaculty().equals(e.getFaculty())
+                    && getLastFetDate().equals(e.getLastFetDate())
+                    && getLastCollectionDate().equals(e.getLastCollectionDate());
         }
     }
 }

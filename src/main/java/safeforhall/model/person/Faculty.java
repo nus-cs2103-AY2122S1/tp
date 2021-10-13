@@ -9,13 +9,14 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  */
 public class Faculty {
 
-    public static final String MESSAGE_CONSTRAINTS = "Faculty can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Faculty is a single word made up of alphabets " +
+            "and it should not be blank";
 
     /*
      * The first character of the faculty must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[A-Za-z]{2,}$";
 
     public final String faculty;
 
