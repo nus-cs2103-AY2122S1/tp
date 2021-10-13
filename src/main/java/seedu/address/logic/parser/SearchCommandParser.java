@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.GroupContainsKeywordsPredicate;
 import seedu.address.model.student.IdContainsKeywordsPredicate;
@@ -17,16 +17,16 @@ import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.TagContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new SearchCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class SearchCommandParser implements Parser<SearchCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SearchCommand
+     * and returns a SearchCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public SearchCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_GROUP, PREFIX_TAG);
@@ -34,7 +34,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // catch case of empty input
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
         int count = 0;
@@ -69,7 +69,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // catch case of more than one search input type
         if (count != 1) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
 
         int prefixIndex = args.indexOf(prefix, 0);
@@ -87,20 +87,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         // execute according to search input type
         switch(searchType) {
         case "NAME":
-            return new FindCommand(new NameContainsKeywordsPredicate(keywordsList));
+            return new SearchCommand(new NameContainsKeywordsPredicate(keywordsList));
 
         case "ID":
-            return new FindCommand(new IdContainsKeywordsPredicate(keywordsList));
+            return new SearchCommand(new IdContainsKeywordsPredicate(keywordsList));
 
         case "GROUP":
-            return new FindCommand(new GroupContainsKeywordsPredicate(keywordsList));
+            return new SearchCommand(new GroupContainsKeywordsPredicate(keywordsList));
 
         case "TAG":
-            return new FindCommand(new TagContainsKeywordsPredicate(keywordsList));
+            return new SearchCommand(new TagContainsKeywordsPredicate(keywordsList));
 
         default:
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
     }
 }
