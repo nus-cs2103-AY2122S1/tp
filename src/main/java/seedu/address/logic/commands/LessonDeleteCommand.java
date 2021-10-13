@@ -42,9 +42,9 @@ public class LessonDeleteCommand extends Command {
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 " + "1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the lesson identified by lesson index"
-        + " of the student identified by the index number used in the displayed student list.\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Example: " + COMMAND_EXAMPLE;
+            + " of the student identified by the index number used in the displayed student list.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
@@ -96,8 +96,7 @@ public class LessonDeleteCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * Removes specified {@code Lesson} from the updatedLessons for this person.
      */
-    private static Person createEditedPerson(Person personToEdit,
-                                             List<Lesson> updatedLessons, Lesson toRemove) {
+    private static Person createEditedPerson(Person personToEdit, List<Lesson> updatedLessons, Lesson toRemove) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -136,6 +135,6 @@ public class LessonDeleteCommand extends Command {
         // state check
         LessonDeleteCommand e = (LessonDeleteCommand) other;
         return index.equals(e.index)
-            && lessonIndex.equals(e.lessonIndex);
+                && lessonIndex.equals(e.lessonIndex);
     }
 }
