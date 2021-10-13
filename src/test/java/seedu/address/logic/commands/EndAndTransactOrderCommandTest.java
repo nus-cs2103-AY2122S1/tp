@@ -195,7 +195,7 @@ public class EndAndTransactOrderCommandTest {
         }
 
         @Override
-        public Item getItemWithId(String Id) {
+        public Item getItemWithId(String id) {
             throw new AssertionError("This method should not be called.");
         }
 
