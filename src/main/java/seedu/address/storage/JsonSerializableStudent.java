@@ -9,15 +9,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Classmate;
+import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Classmate that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "classmate")
 class JsonSerializableStudent {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
@@ -38,11 +38,11 @@ class JsonSerializableStudent {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyClassmate} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableStudent}.
      */
-    public JsonSerializableStudent(ReadOnlyAddressBook source) {
+    public JsonSerializableStudent(ReadOnlyClassmate source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         tutorialClasses.addAll(source
                 .getTutorialClassList()
@@ -52,27 +52,27 @@ class JsonSerializableStudent {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this ClassMATE into the model's {@code Classmate} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Classmate toModelType() throws IllegalValueException {
+        Classmate classmate = new Classmate();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
-            if (addressBook.hasStudent(student)) {
+            if (classmate.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            addressBook.addStudent(student);
+            classmate.addStudent(student);
         }
         for (JsonAdaptedTutorialClass jsonAdaptedTutorialClass : tutorialClasses) {
             TutorialClass tutorialClass = jsonAdaptedTutorialClass.toModelType();
-            if (addressBook.hasTutorialClass(tutorialClass)) {
+            if (classmate.hasTutorialClass(tutorialClass)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_CLASS);
             }
-            addressBook.addTutorialClass(tutorialClass);
+            classmate.addTutorialClass(tutorialClass);
         }
-        return addressBook;
+        return classmate;
     }
 
 }

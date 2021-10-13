@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Views a student identified using it's displayed index from the address book.
+ * Views a student identified using it's displayed index from the ClassMATE.
  */
 public class ViewStudentCommand extends Command {
 

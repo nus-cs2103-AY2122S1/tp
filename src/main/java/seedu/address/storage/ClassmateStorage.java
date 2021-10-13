@@ -5,41 +5,42 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Classmate;
+import seedu.address.model.ReadOnlyClassmate;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link Classmate}.
  */
 public interface ClassmateStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getClassmateFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns Classmate data as a {@link ReadOnlyClassmate}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyClassmate> readClassmate() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getClassmateFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyClassmate> readClassmate(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyClassmate} to the storage.
+     * @param classmate cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveClassmate(ReadOnlyClassmate classmate) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveClassmate(ReadOnlyClassmate)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveClassmate(ReadOnlyClassmate classmate, Path filePath) throws IOException;
 
 }
