@@ -61,7 +61,7 @@ public class UndoRedoStack {
     }
 
     /**
-     * Command that has been redone will be moved back to the undoStack so that command can be undone again.
+     * Moves the Command that has been redone to the undoStack so that command can be undone again.
      */
     public UndoableCommand popRedo() {
         UndoableCommand toRedo = redoStack.pop();
