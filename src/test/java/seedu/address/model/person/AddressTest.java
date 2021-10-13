@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -32,5 +36,27 @@ public class AddressTest {
         assertTrue(Address.isValidAddress("Blk 456, Den Road, #01-355"));
         assertTrue(Address.isValidAddress("-")); // one character
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+    }
+
+    @Test
+    public void isEqualAddress() {
+        Address address = new Address("Blk 456, Den Road, #01-355");
+        Address different_address = new Address("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA");
+        Address same_address = new Address("Blk 456, Den Road, #01-355");
+
+        // Different Address
+        assertFalse(address.equals(different_address));
+
+        // Same Object
+        assertTrue(address.equals(address));
+
+        // Different Objects Same Address
+        assertTrue(address.equals(same_address));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_ADDRESS_AMY.hashCode(), VALID_ADDRESS_AMY.hashCode());
+        assertNotEquals(VALID_ADDRESS_AMY.hashCode(), VALID_ADDRESS_BOB.hashCode());
     }
 }

@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +40,27 @@ public class TutorialIdTest {
 
         // valid TutorialId
         assertTrue(TutorialId.isValidTutorialId("16"));
+    }
+
+    @Test
+    public void isEqualTutorialId() {
+        TutorialId tutorialId = new TutorialId("16");
+        TutorialId different_tutorialId = new TutorialId("00");
+        TutorialId same_tutorialId = new TutorialId("16");
+
+        // Different TutorialId
+        assertFalse(tutorialId.equals(different_tutorialId));
+
+        // Same Object
+        assertTrue(tutorialId.equals(tutorialId));
+
+        // Different Objects Same TutorialId
+        assertTrue(tutorialId.equals(same_tutorialId));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_TUTORIAL_ID_AMY.hashCode(), VALID_TUTORIAL_ID_AMY.hashCode());
+        assertNotEquals(VALID_TUTORIAL_ID_AMY.hashCode(), VALID_TUTORIAL_ID_BOB.hashCode());
     }
 }

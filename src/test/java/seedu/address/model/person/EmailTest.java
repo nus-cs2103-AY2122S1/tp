@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -40,5 +44,27 @@ public class EmailTest {
         // valid email
         assertTrue(Email.isValidEmail("e1234567@u.nus.edu"));
         assertTrue(Email.isValidEmail("E1234567@u.nus.edu"));
+    }
+
+    @Test
+    public void isEqualEmail() {
+        Email email = new Email("e1234567@u.nus.edu");
+        Email different_email = new Email("E7654321@u.nus.edu");
+        Email same_email = new Email("e1234567@u.nus.edu");
+
+        // Different Email
+        assertFalse(email.equals(different_email));
+
+        // Same Object
+        assertTrue(email.equals(email));
+
+        // Different Objects Same Email
+        assertTrue(email.equals(same_email));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_EMAIL_AMY.hashCode(), VALID_EMAIL_AMY.hashCode());
+        assertNotEquals(VALID_EMAIL_AMY.hashCode(), VALID_EMAIL_BOB.hashCode());
     }
 }
