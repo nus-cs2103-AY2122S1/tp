@@ -46,11 +46,7 @@ public class EmailContainsKeywordsPredicateTest {
                 Collections.singletonList("test@123.com"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("test@123.com").build()));
 
-        // Multiple keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("test1@email.com", "test2@email.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("test1@email.com").build()));
-
-        // Only one matching email
+        // Multiple keywords with one matching email
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("test1@email.com", "test2@email.com"));
         assertTrue(predicate.test(new PersonBuilder().withEmail("test1@email.com").build()));
 

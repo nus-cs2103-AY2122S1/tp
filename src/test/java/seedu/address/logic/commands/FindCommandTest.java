@@ -27,11 +27,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
+import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -182,6 +185,83 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_zeroEmploymentTypeKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate = prepareEmploymentTypePredicate(" ");
+
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneEmploymentTypeKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate =
+                prepareEmploymentTypePredicate("Full time");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleEmploymentTypeKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        EmploymentTypeContainsKeywordsPredicate predicate =
+                prepareEmploymentTypePredicate("Temporary internship");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroExpectedSalaryKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExpectedSalaryWithinRangePredicate predicate = prepareExpectedSalaryPredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExpectedSalaryKeywords_multiplePersonDifferentSalariesFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExpectedSalaryWithinRangePredicate predicate =
+                prepareExpectedSalaryPredicate("2500");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleExpectedSalaryKeyword_multiplePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExpectedSalaryWithinRangePredicate predicate =
+                prepareExpectedSalaryPredicate("5000 3500 500");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_zeroLevelOfEducationKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
@@ -191,6 +271,29 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneLevelOfEducationKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate =
+                prepareLevelOfEducationPredicate("Masters");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(BENSON, IDA), modelWithHoonIda.getFilteredPersonList());
     }
 
     @Test
@@ -204,6 +307,30 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroTagKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        TagContainsKeywordsPredicate predicate = prepareTagPredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleTagKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        TagContainsKeywordsPredicate predicate = prepareTagPredicate("friends old");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, ELLE), model.getFilteredPersonList());
     }
 
     /**
@@ -235,9 +362,31 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code PhoneContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code EmploymentTypeContainsKeywordsPredicate}.
+     */
+    private EmploymentTypeContainsKeywordsPredicate prepareEmploymentTypePredicate(String userInput) {
+        return new EmploymentTypeContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code ExpectedSalaryWithinRangePredicate}.
+     */
+    private ExpectedSalaryWithinRangePredicate prepareExpectedSalaryPredicate(String userInput) {
+        return new ExpectedSalaryWithinRangePredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code LevelOfEducationContainsKeywordPredicate}.
      */
     private LevelOfEducationContainsKeywordsPredicate prepareLevelOfEducationPredicate(String userInput) {
         return new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+
+    /**
+     * Parses {@code userInput} into a {@code TagContainsKeywordPredicate}.
+     */
+    private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
+        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
