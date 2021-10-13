@@ -34,6 +34,8 @@ public class ApplicantCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label application;
 
     /**
      * Creates a {@code ApplicantCard} with the given {@code Applicant} and index to display.
@@ -46,6 +48,7 @@ public class ApplicantCard extends UiPart<Region> {
         phone.setText(applicant.getPhone().value);
         address.setText(applicant.getAddress().value);
         email.setText(applicant.getEmail().value);
+        application.setText(applicant.getApplication().toString());
     }
 
     @Override

@@ -80,8 +80,8 @@ public class Application {
     @Override
     public String toString() {
         return "Application: {"
-                + "Applicant: " + applicant
-                + ", Position: " + position
+                + "Applicant: " + applicant.getName()
+                + ", Position: " + position.getTitle()
                 + ", Status: " + status
                 + "}";
     }
@@ -91,5 +91,3 @@ public class Application {
      */
     public enum ApplicationStatus { PENDING, ACCEPTED, REJECTED }
 }
-
-
