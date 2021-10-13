@@ -43,19 +43,26 @@ public class EmploymentTypeContainsKeywordsPredicateTest {
 
     @Test
     public void test_employmentTypeContainsKeywords_returnsTrue() {
-        // One keyword
+        // One matching letter that starts with
         EmploymentTypeContainsKeywordsPredicate predicate =
-                new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("Full time"));
+                new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("F"));
         assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Full time").build()));
 
-        // Multiple keywords with only one matching keyword
-        predicate = new EmploymentTypeContainsKeywordsPredicate(Arrays.asList("Full time", "Part time"));
-        assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Full time").build()));
-
-        // Mixed-case keywords
-        predicate = new EmploymentTypeContainsKeywordsPredicate(Arrays.asList("fULL tImE", "iNtErNshiP"));
+        // One keyword
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("Internship"));
         assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Internship").build()));
 
+        // First word of a two word category
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("Part"));
+        assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Part time").build()));
+
+        // Both parts of a two word category
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("Part time"));
+        assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Part time").build()));
+
+        // Mixed-case keywords
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Collections.singletonList("iNteRnShiP"));
+        assertTrue(predicate.test(new PersonBuilder().withEmploymentType("Internship").build()));
     }
 
     @Test
@@ -63,21 +70,25 @@ public class EmploymentTypeContainsKeywordsPredicateTest {
         // Zero keywords
         EmploymentTypeContainsKeywordsPredicate predicate =
                 new EmploymentTypeContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withEmploymentType("Full time").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmploymentType("Temporary").build()));
+
+        // Keyword that is part of an employment type but does not start with it
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Arrays.asList("time"));
+        assertFalse(predicate.test(new PersonBuilder().withEmploymentType("Part time").build()));
 
         // Non-matching keyword
-        predicate = new EmploymentTypeContainsKeywordsPredicate(Arrays.asList("Part time"));
-        assertFalse(predicate.test(new PersonBuilder().withEmploymentType("Temporary").build()));
+        predicate = new EmploymentTypeContainsKeywordsPredicate(Arrays.asList("Temporary"));
+        assertFalse(predicate.test(new PersonBuilder().withEmploymentType("Internship").build()));
 
         // Keywords match name, phone, email, address, applied role, employment type, expected salary,
         // level of education, years of experience and tags, but does not match employment type
         predicate = new EmploymentTypeContainsKeywordsPredicate(
                 Arrays.asList("Alice", "12345", "alice@email.com",
-                              "Software", "Engineer", "Full time", "4000", "PhD", "5", "young"));
+                        "Software", "Engineer", "Full time", "4000", "PhD", "5", "young"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withRole("Software Engineer")
                 .withEmploymentType("Part time").withExpectedSalary("4000").withLevelOfEducation("PhD")
                 .withExperience("5").withTags("young").build()));
-
     }
+
 }
