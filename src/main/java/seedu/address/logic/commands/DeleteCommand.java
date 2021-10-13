@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,9 +31,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Person not found in list";
 
-    private final ArrayList<Predicate> predicates;
+    private final List<Predicate<Person>> predicates;
 
-    public DeleteCommand(ArrayList<Predicate> predicates) {
+    public DeleteCommand(List<Predicate<Person>> predicates) {
         this.predicates = predicates;
     }
 

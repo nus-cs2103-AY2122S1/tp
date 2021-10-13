@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validClientIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(2);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         ClientId clientId = new ClientId(personToDelete.getClientId().value);
         predicates.add(new PersonHasId(clientId));
 
@@ -48,7 +49,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validEmailUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(3);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         Email email = new Email(personToDelete.getEmail().value);
         predicates.add(new PersonHasEmail(email));
 
@@ -65,7 +66,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_validEmailAndClientIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(3);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         Email email = new Email(personToDelete.getEmail().value);
         predicates.add(new PersonHasEmail(email));
         ClientId clientId = new ClientId(personToDelete.getClientId().value);
@@ -83,7 +84,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidClientIdUnfilteredList_throwsCommandException() {
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         ClientId clientId = new ClientId("20");
         predicates.add(new PersonHasId(clientId));
         DeleteCommand deleteCommand = new DeleteCommand(predicates);
@@ -94,11 +95,11 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        ArrayList<Predicate> predicatesOne = new ArrayList<>();
+        List<Predicate<Person>> predicatesOne = new ArrayList<>();
         ClientId clientIdOne = new ClientId("1");
         predicatesOne.add(new PersonHasId(clientIdOne));
         DeleteCommand deleteFirstCommand = new DeleteCommand(predicatesOne);
-        ArrayList<Predicate> predicatesTwo = new ArrayList<>();
+        List<Predicate<Person>> predicatesTwo = new ArrayList<>();
         ClientId clientIdTwo = new ClientId("2");
         predicatesTwo.add(new PersonHasId(clientIdTwo));
         DeleteCommand deleteSecondCommand = new DeleteCommand(predicatesTwo);
@@ -107,7 +108,7 @@ public class DeleteCommandTest {
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        ArrayList<Predicate> predicatesTest = new ArrayList<>();
+        List<Predicate<Person>> predicatesTest = new ArrayList<>();
         ClientId clientIdTest = new ClientId("1");
         predicatesTest.add(new PersonHasId(clientIdTest));
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(predicatesTest);

@@ -63,7 +63,7 @@ public class AddCommandParserTest {
 
     @BeforeEach
     public void setUp() {
-        model.getAddressBook().setClientCounter("1");
+        model.getAddressBook().setClientCounter("9");
     }
 
     @Test
