@@ -15,7 +15,7 @@ public class UndoRedoStack {
     private Stack<UndoableCommand> redoStack;
 
     /**
-     * Constructor for UndoRedoStack to store Undoable commands
+     * Constructor for UndoRedoStack to store Undoable commands.
      */
     public UndoRedoStack() {
         undoStack = new Stack<>();
