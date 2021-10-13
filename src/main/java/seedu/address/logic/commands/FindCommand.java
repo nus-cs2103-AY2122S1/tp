@@ -15,7 +15,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
@@ -81,7 +80,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute() {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         predicate.toString();

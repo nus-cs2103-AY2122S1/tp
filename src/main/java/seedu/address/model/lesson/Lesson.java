@@ -90,18 +90,6 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     public abstract boolean isClashing(Lesson otherLesson);
 
-    public boolean isOver() {
-        return getDate().isOver();
-    }
-
-    /**
-     * Edit the date of the particular type of lesson.
-     *
-     * @param newDateString The date to be updated with.
-     * @return {@code Lesson} with the updated date.
-     */
-    public abstract Lesson updateDate(String newDateString);
-
     /**
      * Check if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.

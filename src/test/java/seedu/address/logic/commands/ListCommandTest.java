@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -29,7 +30,7 @@ public class ListCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(
-                new ListCommand(), model,
+                prepareListCommand(), model,
                 String.format(ListCommand.MESSAGE_SUCCESS, expectedModel.getFilteredPersonList().size()),
                 expectedModel);
     }
@@ -38,8 +39,17 @@ public class ListCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(
-                new ListCommand(), model,
+                prepareListCommand(), model,
                 String.format(ListCommand.MESSAGE_SUCCESS, expectedModel.getFilteredPersonList().size()),
                 expectedModel);
+    }
+
+    /**
+     * Generates a {@code ListCommand}.
+     */
+    private ListCommand prepareListCommand() {
+        ListCommand listCommand = new ListCommand();
+        listCommand.setDependencies(model, new UndoRedoStack());
+        return listCommand;
     }
 }

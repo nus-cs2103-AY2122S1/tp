@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -79,6 +80,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds a person to a specific index in address book.
+     * Called when undoing a Delete Command.
+     */
+    public void addPerson(Index index, Person p) {
+        persons.add(p, index);
     }
 
     /**

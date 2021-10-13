@@ -26,7 +26,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
@@ -43,7 +42,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Edit Student";
 
@@ -82,6 +81,8 @@ public class EditCommand extends Command {
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private Person personBeforeEdit;
+    private Person personAfterEdit;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -96,7 +97,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -104,19 +105,19 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        personBeforeEdit = lastShownList.get(index.getZeroBased());
+        personAfterEdit = createEditedPerson(personBeforeEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personBeforeEdit.isSamePerson(personAfterEdit) && model.hasPerson(personAfterEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
-        if (!editedPerson.hasContactField()) {
+        if (!personAfterEdit.hasContactField()) {
             throw new CommandException(MESSAGE_CONTACT_REQUIRED);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeEdit, personAfterEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, personAfterEdit));
     }
 
     /**
@@ -144,6 +145,24 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
                 updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedFee, updatedRemark,
                 updatedTags, updatedLessons);
+    }
+
+    @Override
+    public void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterEdit, personBeforeEdit);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
     }
 
     @Override
