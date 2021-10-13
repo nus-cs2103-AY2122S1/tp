@@ -1,7 +1,11 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
 
@@ -10,7 +14,8 @@ import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
  */
 public class NoOverlapLessonList implements Iterable<Lesson> {
 
-    private static final String MESSAGE_NO_LESSONS = "No lessons found";
+    public static final String LESSON_OVERLAP = "One or more lessons overlap";
+    public static final String MESSAGE_NO_LESSONS = "No lessons found";
 
     private final ArrayList<Lesson> lessonsList;
 
@@ -24,6 +29,41 @@ public class NoOverlapLessonList implements Iterable<Lesson> {
     private NoOverlapLessonList(ArrayList<Lesson> lessonsList) {
         this.lessonsList = lessonsList;
     }
+    /**
+     * Factory method that does the copying of lessons list
+     * @param lessonsList a list of Lessons
+     * @return an instance of NoOverlapLessonList with the specified lessons
+     */
+    public static NoOverlapLessonList of(List<Lesson> lessonsList) throws OverlappingLessonsException {
+        if (lessonsList == null || lessonsList.isEmpty()) {
+            return new NoOverlapLessonList();
+        }
+
+        ArrayList<Lesson> newList = new ArrayList<>(lessonsList);
+
+        if (doAnyLessonsOverlap(lessonsList)) {
+            throw new OverlappingLessonsException();
+        }
+
+        return new NoOverlapLessonList(newList);
+    }
+
+    /**
+     * Check if any lessons in a list overlaps
+     * @param toCheck List to check
+     * @return true if any lessons in the list overlaps
+     */
+    public static boolean doAnyLessonsOverlap(List<Lesson> toCheck) {
+        for (int i = 0; i < toCheck.size(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (toCheck.get(i).doLessonsOverlap(toCheck.get(j))) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /**
      * Adds a lesson to the lessons list, however the lesson must not overlap with current lessons
@@ -31,6 +71,7 @@ public class NoOverlapLessonList implements Iterable<Lesson> {
      * @throws OverlappingLessonsException if lesson overlaps
      */
     public NoOverlapLessonList addLesson(Lesson lesson) throws OverlappingLessonsException {
+        requireNonNull(lesson);
         if (doesLessonOverlap(lesson)) {
             throw new OverlappingLessonsException();
         }
@@ -76,6 +117,15 @@ public class NoOverlapLessonList implements Iterable<Lesson> {
         return false;
     }
 
+    /**
+     * Get lessons in a readonly format
+     * @return lessons in a readonly list
+     */
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessonsList);
+    }
+
+
     @Override
     public Iterator<Lesson> iterator() {
         return lessonsList.iterator();
@@ -106,8 +156,10 @@ public class NoOverlapLessonList implements Iterable<Lesson> {
             return MESSAGE_NO_LESSONS;
         }
         final StringBuilder builder = new StringBuilder();
+        int index = 1;
         for (Lesson l : lessonsList) {
-            builder.append(l.toString()).append(" ");
+            builder.append(index).append(". ").append(l.toString()).append(" ");
+            index++;
         }
         return builder.toString();
     }
