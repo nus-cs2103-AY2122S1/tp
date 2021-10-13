@@ -2,6 +2,7 @@ package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -44,6 +45,10 @@ public class Group {
 
     public void addStudent(Student student) {
         students.add(student);
+    }
+
+    public void addAllStudents(Collection<Student> students) {
+        this.students.addAll(students);
     }
 
     public void removeStudent(Student student) {
