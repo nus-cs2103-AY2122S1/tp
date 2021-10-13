@@ -15,30 +15,30 @@ public class PeriodTest {
     @Test
     public void test_contains_success() {
         //tests with local date time
-        Period same = new Period(TEST_DATE);
-        Period after = new Period(PAST_TEST_DATE, TEST_DATE);
-        Period before = new Period(TEST_DATE, BEFORE_TEST_DATE);
+        Period singleTestPeriod = new Period(TEST_DATE);
+        Period testPeriodAfterSingle = new Period(PAST_TEST_DATE, TEST_DATE);
+        Period testPeriodBeforeSingle = new Period(TEST_DATE, BEFORE_TEST_DATE);
         Period overLargePeriod = new Period(PAST_TEST_DATE, BEFORE_TEST_DATE);
-        assertTrue(same.contains(TEST_DATE));
+        assertTrue(singleTestPeriod.contains(TEST_DATE));
         assertTrue(overLargePeriod.contains(TEST_DATE));
         assertTrue(overLargePeriod.contains(PAST_TEST_DATE));
         assertTrue(overLargePeriod.contains(BEFORE_TEST_DATE));
 
         //tests with period
-        assertTrue(overLargePeriod.contains(after));
-        assertTrue(overLargePeriod.contains(before));
-        assertTrue(before.contains(same));
-        assertFalse(after.contains(overLargePeriod));
-        assertFalse(before.contains(after));
+        assertTrue(overLargePeriod.contains(testPeriodAfterSingle));
+        assertTrue(overLargePeriod.contains(testPeriodBeforeSingle));
+        assertTrue(testPeriodBeforeSingle.contains(singleTestPeriod));
+        assertFalse(testPeriodAfterSingle.contains(overLargePeriod));
+        assertFalse(testPeriodBeforeSingle.contains(testPeriodAfterSingle));
     }
 
     @Test
     public void test_contains_failure() {
-        Period after = new Period(PAST_TEST_DATE, TEST_DATE);
-        assertFalse(after.contains(BEFORE_TEST_DATE));
+        Period testPeriodAfterMid = new Period(PAST_TEST_DATE, TEST_DATE);
+        assertFalse(testPeriodAfterMid.contains(BEFORE_TEST_DATE));
 
-        Period before = new Period(TEST_DATE, BEFORE_TEST_DATE);
-        assertFalse(before.contains(PAST_TEST_DATE));
+        Period testPeriodBeforeMid = new Period(TEST_DATE, BEFORE_TEST_DATE);
+        assertFalse(testPeriodBeforeMid.contains(PAST_TEST_DATE));
 
 
 
@@ -49,16 +49,16 @@ public class PeriodTest {
 
     @Test
     public void equals() {
-        Period after = new Period(PAST_TEST_DATE, TEST_DATE);
-        Period before = new Period(TEST_DATE, BEFORE_TEST_DATE);
-        Period same = new Period(TEST_DATE);
-        Period another = new Period(TEST_DATE, TEST_DATE);
-        assertTrue(after.equals(after));
-        assertTrue(before.equals(before));
-        assertTrue(same.equals(same));
-        assertTrue(same.equals(another));
-        assertFalse(after.equals(before));
-        assertFalse(after.equals(same));
+        Period testPeriodAfterMid = new Period(PAST_TEST_DATE, TEST_DATE);
+        Period testPeriodBeforeMid = new Period(TEST_DATE, BEFORE_TEST_DATE);
+        Period testPeriodAtMid = new Period(TEST_DATE);
+        Period alternateMid = new Period(TEST_DATE, TEST_DATE);
+        assertTrue(testPeriodAfterMid.equals(testPeriodAfterMid));
+        assertTrue(testPeriodBeforeMid.equals(testPeriodBeforeMid));
+        assertTrue(testPeriodAtMid.equals(testPeriodAtMid));
+        assertTrue(testPeriodAtMid.equals(alternateMid));
+        assertFalse(testPeriodAfterMid.equals(testPeriodBeforeMid));
+        assertFalse(testPeriodAfterMid.equals(testPeriodAtMid));
     }
 
 }

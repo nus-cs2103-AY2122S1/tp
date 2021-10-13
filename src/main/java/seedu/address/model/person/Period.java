@@ -13,21 +13,21 @@ public class Period {
 
     private static final String DELIMITER = " ";
 
-    private LocalDate start;
-    private LocalDate end;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     /**
      * Constructs a {@code Period} with two {@code LocalDate},
      * order is not needed.
      */
-    public Period(LocalDate start, LocalDate end) {
+    public Period(LocalDate startDate, LocalDate endDate) {
         //to swap
-        if (start.isAfter(end)) {
-            this.start = end;
-            this.end = start;
+        if (startDate.isAfter(endDate)) {
+            this.startDate = endDate;
+            this.endDate = startDate;
         } else {
-            this.start = end;
-            this.end = end;
+            this.startDate = endDate;
+            this.endDate = endDate;
         }
 
     }
@@ -37,17 +37,21 @@ public class Period {
      * Constructs a {@code Period} with a single {@code date}.
      */
     public Period(LocalDate date) {
-        this.start = date;
-        this.end = date;
+        this.startDate = date;
+        this.endDate = date;
     }
 
     /**
      * Parses a {@code period} into a Period object.
      *
      * @throws DateTimeParseException when the input is invalid.
+     * @throws IllegalArgumentException when the input cannot be split.
      */
     public static Period transformStringToPeriod(String period) {
         String[] splitPeriod = period.split(DELIMITER);
+        if (splitPeriod.length != 2) {
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+        }
         return new Period(LocalDate.parse(splitPeriod[0]),
                 LocalDate.parse(splitPeriod[1]));
 
@@ -68,19 +72,19 @@ public class Period {
      * Returns true if {@code this} contains {@code period}.
      */
     public boolean contains(Period period) {
-        return this.contains(period.start)
-                && this.contains(period.end);
+        return this.contains(period.startDate)
+                && this.contains(period.endDate);
 
     }
 
     private boolean withinExclusively(LocalDate date) {
-        return (this.start.isBefore(date))
-                && (this.end.isAfter(date));
+        return (this.startDate.isBefore(date))
+                && (this.endDate.isAfter(date));
     }
 
     private boolean atDelimiters(LocalDate date) {
-        return this.start.isEqual(date)
-                || this.end.isEqual(date);
+        return this.startDate.isEqual(date)
+                || this.endDate.isEqual(date);
     }
 
 
@@ -107,7 +111,7 @@ public class Period {
 
     @Override
     public String toString() {
-        return this.start + DELIMITER + this.end;
+        return this.startDate + DELIMITER + this.endDate;
     }
 
     @Override
