@@ -1,10 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
