@@ -35,7 +35,6 @@ public class EmploymentType {
                 regex.append("|");
             }
             regex.append("\\w+)\\b");
-            System.out.println(regex.toString());
             return regex.toString();
         }
     }
