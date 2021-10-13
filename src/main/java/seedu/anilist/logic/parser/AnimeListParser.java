@@ -51,7 +51,7 @@ public class AnimeListParser {
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-            
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
@@ -75,7 +75,7 @@ public class AnimeListParser {
 
         case UpdateStatusCommand.COMMAND_WORD:
             return new UpdateStatusCommandParser().parse(arguments);
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

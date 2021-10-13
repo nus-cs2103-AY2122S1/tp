@@ -49,7 +49,7 @@ public class AnimeBuilder {
         this.name = new Name(name);
         return this;
     }
-      
+
     /**
      * Sets the {@code Name} of the {@code Anime} that we are building.
      */
@@ -57,7 +57,7 @@ public class AnimeBuilder {
         this.episode = new Episode(episode);
         return this;
     }
-  
+
     /**
      * Sets the {@code Status} of the {@code Anime} that we are building.
      */

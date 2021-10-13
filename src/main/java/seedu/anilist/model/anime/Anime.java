@@ -22,9 +22,9 @@ public class Anime {
     private final Episode episode;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
-  
+
     /**
-     * Every field must be present and not null 
+     * Every field must be present and not null
      * except Episode which defaults to 0,
      * and Status which defaults to "watching".
      */
@@ -57,8 +57,8 @@ public class Anime {
         this.status = new Status("watching");
         this.tags.addAll(tags);
     }
-  
-     /**
+
+    /**
      * Every field must be present and not null.
      */
     public Anime(Name name, Episode episode, Status status, Set<Tag> tags) {
@@ -76,7 +76,7 @@ public class Anime {
     public Episode getEpisode() {
         return episode;
     }
-  
+
     public Status getStatus() {
         return status;
     }
@@ -131,7 +131,7 @@ public class Anime {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
-        builder.append(String.format(" (%s)", getEpisode()));
+        builder.append(String.format(" (Episode: %s)", getEpisode()));
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

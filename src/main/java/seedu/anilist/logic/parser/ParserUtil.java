@@ -75,7 +75,7 @@ public class ParserUtil {
         }
         return tagSet;
     }
-  
+
     /**
      * Parses a {@code String episodeNumber} into a {@code Episode}.
      * Leading and trailing whitespaces will be trimmed.
@@ -90,7 +90,7 @@ public class ParserUtil {
         }
         return new Episode(trimmedEpisode);
     }
-  
+
     /**
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
