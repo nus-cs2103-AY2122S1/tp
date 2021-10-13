@@ -27,14 +27,18 @@ public class NameTest {
         // invalid name
         assertFalse(Name.isValidName("")); // empty string
         assertFalse(Name.isValidName(" ")); // spaces only
-        assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
-        assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
+        assertFalse(Name.isValidName(" Danshi Koukousei no Nichijou")); // starting with space
 
         // valid name
-        assertTrue(Name.isValidName("peter jack")); // alphabets only
+        assertTrue(Name.isValidName("Danshi Koukousei no Nichijou")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
-        assertTrue(Name.isValidName("peter the 2nd")); // alphanumeric characters
-        assertTrue(Name.isValidName("Capital Tan")); // with capital letters
-        assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
+        assertTrue(Name.isValidName(":;.'!")); // punctuation only
+        assertTrue(Name.isValidName("~!@#$%^&()+-=:;")); // ascii characters
+        assertTrue(Name.isValidName("3-gatsu no Lion")); // starting with numeric character containing punctuation
+        assertTrue(Name.isValidName("No. 6")); // starting with alphabet containing punctuation
+        assertTrue(Name.isValidName("BLEACH")); // with all capital letters
+        // long names
+        assertTrue(Name.isValidName("Higehiro: After Being Rejected, I Shaved and Took in a High School Runaway"));
+        assertTrue(Name.isValidName("Gintama'")); //name containing apostrophe
     }
 }
