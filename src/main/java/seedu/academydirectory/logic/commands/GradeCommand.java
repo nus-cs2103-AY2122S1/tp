@@ -71,7 +71,7 @@ public class GradeCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Assessment assessmentToEdit = studentToEdit.getAssessment();
+        Assessment assessmentToEdit = studentToEdit.getAssessment().getCopy();
         assessmentToEdit.updateAssessmentGrade(assessment, grade);
         Student editedStudent = new Student(
                 studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),

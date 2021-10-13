@@ -24,6 +24,11 @@ public class Assessment implements Information {
         assessment.put("FINAL", -1);
     }
 
+    @SuppressWarnings("unchecked") // guarantee assessment.clone() returns same type since it is final
+    public Assessment getCopy() {
+        return new Assessment((HashMap<String, Integer>) assessment.clone());
+    }
+
     /**
      * Constructs a HashMap containing the existing Assessments and respective grades.
      */

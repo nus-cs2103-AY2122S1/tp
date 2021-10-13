@@ -64,6 +64,10 @@ public class Student {
         this.studioRecord = new StudioRecord(studioRecord.getAttendance(), participation);
     }
 
+    public void setAssessment(Assessment assessment) {
+        this.assessment = assessment;
+    }
+
     public Name getName() {
         return name;
     }
