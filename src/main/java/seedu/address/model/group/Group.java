@@ -100,7 +100,7 @@ public class Group {
         Set<Student> students = getStudents();
         if (!students.isEmpty()) {
             builder.append("; Students: ");
-            students.forEach(builder::append);
+            students.forEach(student -> builder.append(student.getName()));
         }
         return builder.toString();
     }

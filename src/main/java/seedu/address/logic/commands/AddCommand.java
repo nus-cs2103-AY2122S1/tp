@@ -67,8 +67,13 @@ public class AddCommand extends Command {
         model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
         Group retrievedGroup = model.getFilteredGroupList().get(0);
 
+
+        Student studentToAdd =
+                new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), retrievedGroup);
+        retrievedGroup.addStudent(studentToAdd);
+
         // Add student with the group fetched from the data in the model
-        model.addStudent(new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), retrievedGroup));
+        model.addStudent(studentToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

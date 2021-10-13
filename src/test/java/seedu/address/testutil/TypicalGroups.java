@@ -8,7 +8,9 @@ import seedu.address.model.group.Group;
 public class TypicalGroups {
 
     public static final Group TYPICAL_GROUP_CS2103T =
-            new GroupBuilder().withGroupName("CS2103T").withDescription("hi").build();
+            new GroupBuilder().withGroupName("CS2103T").withDescription("A Software engineering module")
+                    .withSampleStudents().build();
     public static final Group TYPICAL_GROUP_CS2101 =
-            new GroupBuilder().withGroupName("CS2101").withDescription("hi").build();
+            new GroupBuilder().withGroupName("CS2101").withDescription("An effective communication module")
+                    .withSampleStudents().build();
 }

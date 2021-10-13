@@ -8,6 +8,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -40,6 +43,14 @@ public class DeleteCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        // Retrieve existing group in model
+        GroupName groupName = studentToDelete.getGroup().getGroupName();
+        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+        Group retrievedGroup = model.getFilteredGroupList().get(0);
+
+        retrievedGroup.removeStudent(studentToDelete);
+
         model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
