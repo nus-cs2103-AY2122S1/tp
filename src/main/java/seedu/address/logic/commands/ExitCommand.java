@@ -2,9 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
 /**
  * Terminates the program.
  */
@@ -18,7 +15,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, true);
     }
 
 }
