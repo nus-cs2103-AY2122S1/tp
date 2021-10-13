@@ -17,9 +17,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CurrentPlan;
+import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.comparators.SortDirection;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -27,6 +32,10 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_PHONE_FROM_PARSER = "+651234";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_DIRECTION = "desc";
+    private static final String INVALID_RISKAPPETITE = "10";
+    private static final String INVALID_DISPOSABLEINCOME = "-2313213";
+    private static final String INVALID_LASTMET = "20-30-2021";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE_FROM_PARSER = "123456";
@@ -36,6 +45,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DIRECTION = "asc";
+    private static final String VALID_RISKAPPETITE = "2";
+    private static final String VALID_DISPOSABLEINCOME = "5000";
+    private static final String VALID_CURRENTPLAN = "Prudential Prolife";
+    private static final String VALID_LASTMET = "05-10-2021";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -164,6 +178,116 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseDirection_validValueWithoutWhitespace_returnsDirection() throws Exception {
+        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(VALID_DIRECTION));
+    }
+
+    @Test
+    public void parseDirection_validValueWithWhitespace_returnsTrimmedDirection() throws Exception {
+        String directionWithWhitespace = WHITESPACE + VALID_DIRECTION + WHITESPACE;
+        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(directionWithWhitespace));
+    }
+
+    @Test
+    public void parseDirection_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortDirection((String) null));
+    }
+
+    @Test
+    public void parseDirection_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_DIRECTION));
+    }
+
+    @Test
+    public void parseRiskAppetite_validValueWithoutWhitespace_returnsRiskAppetite() throws Exception {
+        RiskAppetite expectedRiskAppetite = new RiskAppetite(VALID_RISKAPPETITE);
+        assertEquals(expectedRiskAppetite, ParserUtil.parseRiskAppetite(VALID_RISKAPPETITE));
+    }
+
+    @Test
+    public void parseRiskAppetite_validValueWithWhitespace_returnsTrimmedRiskAppetite() throws Exception {
+        String riskAppetiteWithWhitespace = WHITESPACE + VALID_RISKAPPETITE + WHITESPACE;
+        RiskAppetite expectedRiskAppetite = new RiskAppetite(VALID_RISKAPPETITE);
+        assertEquals(expectedRiskAppetite, ParserUtil.parseRiskAppetite(riskAppetiteWithWhitespace));
+    }
+
+    @Test
+    public void parseRiskAppetite_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskAppetite((String) null));
+    }
+
+    @Test
+    public void parseRiskAppetite_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRiskAppetite(INVALID_RISKAPPETITE));
+    }
+
+    @Test
+    public void parseDisposableIncome_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDisposableIncome(INVALID_DISPOSABLEINCOME));
+    }
+
+    @Test
+    public void parseDisposableIncome_validValueWithoutWhitespace_returnsDisposableIncome() throws Exception {
+        DisposableIncome expectedDisposableIncome = new DisposableIncome(VALID_DISPOSABLEINCOME);
+        assertEquals(expectedDisposableIncome, ParserUtil.parseDisposableIncome(VALID_DISPOSABLEINCOME));
+    }
+
+    @Test
+    public void parseDisposableIncome_validValueWithWhitespace_returnsTrimmedDisposableIncome() throws Exception {
+        String disposableIncomeWithWhitespace = WHITESPACE + VALID_DISPOSABLEINCOME + WHITESPACE;
+        DisposableIncome expectedDisposableIncome = new DisposableIncome(VALID_DISPOSABLEINCOME);
+        assertEquals(expectedDisposableIncome, ParserUtil.parseDisposableIncome(disposableIncomeWithWhitespace));
+    }
+
+    @Test
+    public void parseCurrentPlan_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCurrentPlan(null));
+    }
+
+    @Test
+    public void parseCurrentPlan_validValueWithoutWhitespace_returnsCurrentPlan() throws Exception {
+        CurrentPlan expectedCurrentPlan = new CurrentPlan(VALID_CURRENTPLAN);
+        assertEquals(expectedCurrentPlan, ParserUtil.parseCurrentPlan(VALID_CURRENTPLAN));
+    }
+
+    @Test
+    public void parseCurrentPlan_validValueWithWhitespace_returnsTrimmedCurrentPlan() throws Exception {
+        String currentPlanWithWhitespace = WHITESPACE + VALID_CURRENTPLAN + WHITESPACE;
+        CurrentPlan expectedCurrentPlan = new CurrentPlan(VALID_CURRENTPLAN);
+        assertEquals(expectedCurrentPlan, ParserUtil.parseCurrentPlan(currentPlanWithWhitespace));
+    }
+
+    @Test
+    public void parseLastMet_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastMet((String) null));
+    }
+
+    @Test
+    public void parseLastMet_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLastMet(INVALID_LASTMET));
+    }
+
+    @Test
+    public void parseLastMet_validValueWithoutWhitespace_returnsLastMet() throws Exception {
+        LastMet expectedLastMet = new LastMet(VALID_LASTMET);
+        assertEquals(expectedLastMet, ParserUtil.parseLastMet(VALID_LASTMET));
+    }
+
+    @Test
+    public void parseLastMet_validValueWithWhitespace_returnsTrimmedLastMet() throws Exception {
+        String lastMetWithWhitespace = WHITESPACE + VALID_LASTMET + WHITESPACE;
+        LastMet expectedLastMet = new LastMet(VALID_LASTMET);
+        assertEquals(expectedLastMet, ParserUtil.parseLastMet(lastMetWithWhitespace));
+    }
+
+    @Test
+    public void parseDisposableIncome_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisposableIncome((String) null));
     }
 
     @Test
