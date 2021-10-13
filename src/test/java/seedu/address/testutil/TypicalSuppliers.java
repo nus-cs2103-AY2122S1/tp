@@ -74,7 +74,7 @@ public class TypicalSuppliers {
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalAddressBookSuppliers() {
         AddressBook ab = new AddressBook();
         for (Supplier supplier : getTypicalSuppliers()) {
             ab.addSupplier(supplier);
