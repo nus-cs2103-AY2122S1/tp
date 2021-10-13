@@ -67,7 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_BIRTHDAY_DESC = " " + PREFIX_BIRTHDAY + "2020-Jan-12"; // only numbers
+    public static final String INVALID_BIRTHDAY_FORMAT_DESC = " " + PREFIX_BIRTHDAY + "2020-Jan-12"; // only numbers
     public static final String NONEXISTENT_BIRTHDAY_DESC = " " + PREFIX_BIRTHDAY + "50031997";
     public static final String LEAP_DAY_BIRTHDAY_DESC = " " + PREFIX_BIRTHDAY + "29022000";
 
@@ -87,7 +87,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withBirthday(VALID_BIRTHDAY_BOB).build();
         DESC_BOB_NO_BIRTHDAY = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withBirthday(VALID_BIRTHDAY_BOB).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

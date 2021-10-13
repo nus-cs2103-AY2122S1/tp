@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDAY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDAY_FORMAT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -155,7 +155,7 @@ public class AddCommandParserTest {
 
         // invalid birthday format
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_FRIEND + VALID_TAG_FRIEND + INVALID_BIRTHDAY_DESC, Birthday.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + VALID_TAG_FRIEND + INVALID_BIRTHDAY_FORMAT_DESC, Birthday.MESSAGE_CONSTRAINTS);
 
         // non-existent birthday
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

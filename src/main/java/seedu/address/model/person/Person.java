@@ -24,7 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private Birthday birthday;
+    private final Birthday birthday;
 
     /**
      * Every field must be present and not null.
