@@ -40,7 +40,7 @@ public class PolicyCard extends UiPart<Region> {
         price.setText(String.valueOf(policy.getPrice()));
         expiryDate.setText(String.valueOf(policy.getExpiryDate()));
         commission.setText(String.valueOf(policy.getCommission()));
-        owner.setText(String.valueOf(policy.getOwner()));
+        owner.setText(String.valueOf(policy.getOwner().getName()));
     }
 
     @Override
