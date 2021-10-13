@@ -29,15 +29,17 @@ Examples:
 - `add n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks t/paid`
 
 #### Adding a tuition class: `addclass`
-Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
+Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
 The students to be added are optional. If the student the user intends to add is not present, or the class limit has 
-been exceeded, TutAssistor will alert names of these students.
+been exceeded, TutAssistor will alert names of these students. The time slot should follow the 
+format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlop
+on time slots. If there is any conflict or overlap, TutAssistor will alert the conflict.
 
-Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
+Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
 Examples:
-- `addclass n/Chemistry l/16 c/4 ts/Thu 15:00-17:00 s/Bernice Yu`
-- `addclass n/Math l/8 c/5 ts/Mon 11:00-14:00 s/Alex Yeoh r/Quiz on final lesson`
+- `addclass n/Chemistry l/16 ts/Thu 15:00-17:00 s/Bernice Yu`
+- `addclass n/Math l/8 ts/Mon 11:00-14:00 s/Richard Ng r/Quiz on final lesson`
 
 ### Viewing students/tuition classes
 Provides a view of a student or class if an INDEX is provided. Otherwise, a full list is provided.
