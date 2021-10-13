@@ -189,6 +189,12 @@ public class FindCommandParserTest {
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidExpectedSalaryPrefixInput,
                         PREFIX_EXPECTED_SALARY)));
 
+        String invalidLevelOfEducationTypePrefixInput = " l/Kindergarten"; // none of the levels of education
+        // start with this keyword
+        assertThrows(ParseException.class, () ->
+                new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidLevelOfEducationTypePrefixInput,
+                        PREFIX_LEVEL_OF_EDUCATION)));
+
         String invalidTagPrefixInput = " t/old(70)"; // brackets
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidTagPrefixInput, PREFIX_TAG)));
