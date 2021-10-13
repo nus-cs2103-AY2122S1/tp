@@ -25,6 +25,8 @@ public class Room {
      */
     public static final String VALIDATION_REGEX = "^[a-eA-E][1-4][0-2][0-9]$";
 
+    public static final String DESC = "Room: ";
+
     public final String room;
 
     /**
