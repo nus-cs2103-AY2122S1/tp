@@ -3,15 +3,16 @@ package seedu.address.model.tuition;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import seedu.address.model.Nameable;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
 /**
  * Represents a tuition class in the book
  */
-public class TuitionClass {
+public class TuitionClass implements Nameable {
     /** Most recently viewed tuition class */
-    private static TuitionClass MOST_RECENT;
+    private static TuitionClass mostRecent;
 
     private final ClassName name;
     private final ClassLimit limit;
@@ -37,7 +38,7 @@ public class TuitionClass {
         this.studentList = studentList;
         this.remark = remark;
         this.id = this.hashCode();
-        MOST_RECENT = this;
+        mostRecent = this;
     }
 
     /**
@@ -57,7 +58,7 @@ public class TuitionClass {
         this.studentList = studentList;
         this.remark = remark;
         this.id = id;
-        MOST_RECENT = this;
+        mostRecent = this;
     }
 
     public ClassName getName() {
@@ -91,6 +92,11 @@ public class TuitionClass {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String getNameString() {
+        return name.getName();
     }
 
     /**
@@ -214,7 +220,7 @@ public class TuitionClass {
      * @param tuitionClass Tuition Class to set as most recently looked at.
      */
     public static void setMostRecentTo(TuitionClass tuitionClass) {
-        MOST_RECENT = tuitionClass;
+        mostRecent = tuitionClass;
     }
 
     /**
@@ -222,6 +228,6 @@ public class TuitionClass {
      * @return most recently viewed tuition class.
      */
     public static TuitionClass getMostRecent() {
-        return MOST_RECENT;
+        return mostRecent;
     }
 }

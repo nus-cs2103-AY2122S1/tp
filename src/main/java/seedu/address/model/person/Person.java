@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.Nameable;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -14,9 +15,9 @@ import seedu.address.model.tuition.TuitionClass;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Nameable {
     /** Most recently view person */
-    private static Person MOST_RECENT;
+    private static Person mostRecent;
 
     // Identity fields
     private final Name name;
@@ -43,7 +44,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.classes = classes;
-        MOST_RECENT = this;
+        mostRecent = this;
     }
 
     /**
@@ -81,6 +82,10 @@ public class Person {
 
     public Classes getClasses() {
         return classes;
+    }
+
+    public String getNameString() {
+        return name.fullName;
     }
 
     /**
@@ -218,7 +223,7 @@ public class Person {
      * @param student Student to set as most recently looked at.
      */
     public static void setMostRecentTo(Person student) {
-        MOST_RECENT = student;
+        mostRecent = student;
     }
 
     /**
@@ -226,7 +231,7 @@ public class Person {
      * @return most recently viewed student.
      */
     public static Person getMostRecent() {
-        return MOST_RECENT;
+        return mostRecent;
     }
 
 }
