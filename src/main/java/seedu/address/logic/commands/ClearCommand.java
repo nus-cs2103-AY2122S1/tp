@@ -11,13 +11,14 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "rm -contacts";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Address book contacts have been cleared!";
 
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        AddressBook newAddressBook = AddressBook.withFolders(model);
+        model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
