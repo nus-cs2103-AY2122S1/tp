@@ -1,10 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -13,18 +20,24 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
+import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,23 +45,39 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    public static final String COMMAND_ACTION = "Edit Student";
+
     public static final String COMMAND_WORD = "edit";
+
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_PARENT_PHONE + "PARENT_PHONE] "
+            + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SCHOOL + "SCHOOL] "
+            + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
+            + "[" + PREFIX_FEE + "FEE] "
+            + "[" + PREFIX_REMARK + "REMARK] "
+            + "[" + PREFIX_TAG + "TAG]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_CONTACT_REQUIRED = "This person must have at least one contact field.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
@@ -81,6 +110,9 @@ public class EditCommand extends Command {
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+        if (!editedPerson.hasContactField()) {
+            throw new CommandException(MESSAGE_CONTACT_REQUIRED);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -97,11 +129,21 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Phone updatedParentPhone = editPersonDescriptor.getParentPhone().orElse(personToEdit.getParentPhone());
+        Email updatedParentEmail = editPersonDescriptor.getParentEmail().orElse(personToEdit.getParentEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        School updatedSchool = editPersonDescriptor.getSchool().orElse(personToEdit.getSchool());
+        AcadStream updatedAcadStream = editPersonDescriptor.getAcadStream().orElse(personToEdit.getAcadStream());
+        AcadLevel updatedAcadLevel = editPersonDescriptor.getAcadLevel().orElse(personToEdit.getAcadLevel());
+        Fee updatedFee = editPersonDescriptor.getFee().orElse(personToEdit.getFee());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        // This command does not allow the editing of lessons.
+        Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
+                updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedFee, updatedRemark,
+                updatedTags, updatedLessons);
     }
 
     @Override
@@ -129,10 +171,17 @@ public class EditCommand extends Command {
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
+        private Phone parentPhone;
         private Email email;
+        private Email parentEmail;
         private Address address;
+        private School school;
+        private AcadStream acadStream;
+        private AcadLevel acadLevel;
+        private Fee outstandingFee;
         private Remark remark;
         private Set<Tag> tags;
+        private Set<Lesson> lessons;
 
         public EditPersonDescriptor() {}
 
@@ -143,17 +192,25 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
+            setParentPhone(toCopy.parentPhone);
             setEmail(toCopy.email);
+            setParentEmail(toCopy.parentEmail);
             setAddress(toCopy.address);
+            setSchool(toCopy.school);
+            setAcadStream(toCopy.acadStream);
+            setAcadLevel(toCopy.acadLevel);
+            setFee(toCopy.outstandingFee);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
+            setLessons(toCopy.lessons);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, parentPhone, parentEmail, address,
+                    school, acadStream, acadLevel, outstandingFee, remark, tags);
         }
 
         public void setName(Name name) {
@@ -180,6 +237,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
+        public void setParentPhone(Phone parentPhone) {
+            this.parentPhone = parentPhone;
+        }
+
+        public Optional<Phone> getParentPhone() {
+            return Optional.ofNullable(parentPhone);
+        }
+
+        public void setParentEmail(Email parentEmail) {
+            this.parentEmail = parentEmail;
+        }
+
+        public Optional<Email> getParentEmail() {
+            return Optional.ofNullable(parentEmail);
+        }
+
         public void setAddress(Address address) {
             this.address = address;
         }
@@ -188,12 +261,44 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setSchool(School school) {
+            this.school = school;
+        }
+
+        public Optional<School> getSchool() {
+            return Optional.ofNullable(school);
+        }
+
+        public void setAcadStream(AcadStream acadStream) {
+            this.acadStream = acadStream;
+        }
+
+        public Optional<AcadStream> getAcadStream() {
+            return Optional.ofNullable(acadStream);
+        }
+
+        public void setAcadLevel(AcadLevel acadLevel) {
+            this.acadLevel = acadLevel;
+        }
+
+        public Optional<AcadLevel> getAcadLevel() {
+            return Optional.ofNullable(acadLevel);
+        }
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
 
         public Optional<Remark> getRemark() {
             return Optional.ofNullable(remark);
+        }
+
+        public void setFee(Fee outstandingFee) {
+            this.outstandingFee = outstandingFee;
+        }
+
+        public Optional<Fee> getFee() {
+            return Optional.ofNullable(outstandingFee);
         }
 
         /**
@@ -211,6 +316,19 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable lesson set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code lessons} is null.
+         */
+        public Optional<Set<Lesson>> getLessons() {
+            return (lessons != null) ? Optional.of(Collections.unmodifiableSet(lessons)) : Optional.empty();
+        }
+
+        public void setLessons(Set<Lesson> lessons) {
+            this.lessons = (lessons != null) ? new TreeSet<>(lessons) : null;
         }
 
         @Override
@@ -231,9 +349,16 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getParentPhone().equals(e.getParentPhone())
+                    && getParentEmail().equals(e.getParentEmail())
                     && getAddress().equals(e.getAddress())
+                    && getSchool().equals(e.getSchool())
+                    && getAcadStream().equals(e.getAcadStream())
+                    && getAcadLevel().equals(e.getAcadLevel())
+                    && getFee().equals(e.getFee())
                     && getRemark().equals(e.getRemark())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getLessons().equals(e.getLessons());
         }
     }
 }

@@ -1,3 +1,77 @@
 #copyButton, #helpMessage {
     -fx-font-family: "Open Sans";
+    -fx-font-size: 14px;
+}
+#copyButton {
+    -fx-background-color: #A6B1E1;
+    -fx-background-radius: 10;
+}
+
+#copyButton:hover {
+    -fx-background-color: #8390C9;
+    -fx-cursor: hand;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #8390C9;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.table-view .table-cell,.table-row-cell {
+    -fx-text-fill: #424874;
+    -fx-label-padding: 5;
+    -fx-wrap-text: true;
+    -fx-font-size: 14px;
+}
+
+.table-view .table-cell:hover {
+    -fx-cursor: hand;
+}
+
+.table-view .table-cell:selected {
+    -fx-background-color: #A6B1E185;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: #D3DAFB50;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #A6B1E150;
+}
+
+/* Style adapted from: https://edencoding.com/style-tableview-javafx/ */
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: #E2E5F2;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2.5;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: #EFF1F6;
+}
+
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: #EFF1F6;
 }
