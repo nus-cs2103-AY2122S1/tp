@@ -161,11 +161,17 @@ but not with *Role*s such as `Software` or `Software Developer`.
 
 * *Expected Salary* `p/`
     * Each additional keyword for *Expected Salary* leads to a more **accommodating** search.
-    * An
-      *Expected Salary* is considered matching if at least 1 keyword is within `500` from at least 1 *Expected Salary*.
+    * An *Expected Salary* is considered matching if at least 1 keyword is within `500` from at least 1 *Expected Salary*.
     * For example:
         * A `3000` input can match with *Expected Salary*s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with *Expected Salary*s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
+
+* *Years of Experience* `y/`
+    * Each additional keyword for *Year of Experience* leads to a more **accommodating** search.
+    * A *Year of Experience* is considered matching if the value is larger than or equal to the keyword.
+    * For example:
+        * A `3` input can match with *Year of Experience*s that are higher than or equal to 3.
+        * A `2 3` input can match with *Year of Experience*s that are higher than or equal to 2.
 
 
 * *Tag* `t/`
