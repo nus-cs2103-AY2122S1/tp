@@ -43,7 +43,7 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
 
     @Test
     public void test_levelOfEducationContainsKeywords_returnsTrue() {
-        // One matching letter
+        // One matching letter that starts with
         LevelOfEducationContainsKeywordsPredicate predicate =
                 new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("M"));
         assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("Masters").build()));
@@ -52,8 +52,8 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
         predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("Masters"));
         assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("Masters").build()));
 
-        // One portion of a two word category
-        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("School"));
+        // First word of a two word category
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Collections.singletonList("High"));
         assertTrue(predicate.test(new PersonBuilder().withLevelOfEducation("High School").build()));
 
         // Both parts of a two word category
@@ -71,6 +71,10 @@ public class LevelOfEducationContainsKeywordsPredicateTest {
         LevelOfEducationContainsKeywordsPredicate predicate =
                 new LevelOfEducationContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withLevelOfEducation("PhD").build()));
+
+        // Keyword that is part of a level of education but does not start with it
+        predicate = new LevelOfEducationContainsKeywordsPredicate(Arrays.asList("School"));
+        assertFalse(predicate.test(new PersonBuilder().withLevelOfEducation("High School").build()));
 
         // Non-matching keyword
         predicate = new LevelOfEducationContainsKeywordsPredicate(Arrays.asList("Masters"));
