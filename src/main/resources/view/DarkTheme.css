@@ -207,6 +207,24 @@
     -fx-background-color: black;
 }
 
+.student_view_big_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #ffffff;
+}
+
+.student_view_medium_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
+}
+
+.student_view_small_label {
+    -fx-font-family: "Open Sans Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: #ffffff;
+}
+
 /*
  * Metro style Push Button
  * Author: Pedro Duque Vieira
