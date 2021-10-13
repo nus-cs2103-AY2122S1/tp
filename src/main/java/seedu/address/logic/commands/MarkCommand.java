@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,14 +31,9 @@ public class MarkCommand extends Command {
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";
 
-    private enum ToEdit {
-        OBSERVED, INTERNAL
-    }
-
-    private final ToEdit toModify;
-    private Period period;
-    private PersonContainsFieldsPredicate predicate;
-    private Index index;
+    private final Period period;
+    private final PersonContainsFieldsPredicate predicate;
+    private final int index;
 
     /**
      * Constructs an {@code MarkCommand} to indicate that a person who satisfies
@@ -47,7 +43,7 @@ public class MarkCommand extends Command {
     public MarkCommand(PersonContainsFieldsPredicate predicate, Period period) {
         this.period = period;
         this.predicate = predicate;
-        this.toModify = ToEdit.INTERNAL;
+        this.index = -1;
     }
 
     /**
@@ -57,27 +53,20 @@ public class MarkCommand extends Command {
      */
     public MarkCommand(Index index, Period period, PersonContainsFieldsPredicate predicate) {
         this.period = period;
-        this.toModify = ToEdit.OBSERVED;
         this.predicate = predicate;
-        this.index = index;
+        this.index = index.getZeroBased();
 
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        FilteredList<Person> toModify;
-        switch (this.toModify) {
-        case OBSERVED:
-            Person modifiedStaff = model.getFilteredPersonList().get(index.getZeroBased());
-            toModify = model.getFilteredPersonList().filtered(p -> p.equals(modifiedStaff))
-                .filtered(this.predicate);
-            break;
-        case INTERNAL:
-            toModify = model.getFilteredPersonList().filtered(predicate);
-            break;
-        default:
-            throw new CommandException(MESSAGE_USAGE);
+
+        if (index != -1) {
+            return executeIndex(model);
+
         }
+        FilteredList<Person> toModify = model.getFilteredPersonList().filtered(predicate);
+
         int total = toModify.size();
 
         for (Person p : toModify) {
@@ -89,6 +78,17 @@ public class MarkCommand extends Command {
         return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, names));
 
 
+
+    }
+
+    private CommandResult executeIndex(Model model) throws CommandException {
+        if (index >= model.getFilteredPersonList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person staffToModify = model.getFilteredPersonList().get(index);
+        Person changedStaff = staffToModify.mark(period);
+        model.setPerson(staffToModify, changedStaff);
+        return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, changedStaff));
 
     }
 }
