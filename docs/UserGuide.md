@@ -71,14 +71,19 @@ Format: `deleteclass [INDEX]`
 ### Adding/Removing an existing student from class
 Move a student to/from classes by adding or removing them.
 
-#### Adding an existing student to a class: `addtoclass`
-Add an existing student to an existing class using student NAME or INDEX.
+#### Adding existing students to a class: `addtoclass`
+Add one or more existing students to an existing class using student NAME or INDEX.
+When the student to be added is already enrolled in the class or is not found in TutAssistor, TutAssistor will alert the
+names of these students to the tutor.
 
-Format: `addtoclass si/INDEX_STUDENT tc/INDEX_CLASS` or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`
+Format: `addtoclass si/INDEX_STUDENT INDEX_STUDENT INDEX_STUDENT... tc/INDEX_CLASS` 
+or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`
 
 Examples:
 - `addtoclass si/1 tc/1`
+- `addtoclass si/1 2 3 4 tc/1`
 - `addtoclass s/James,Felicia tc/2`
+- `addtoclass s/James tc/3`
 
 #### Removing existing students from a class: `remove`
 Removes existing students from a tuition class using student INDEX.
@@ -118,7 +123,7 @@ Action | Format
 ***Edit Class*** | `editclass [INDEX] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
 ***Delete Student*** | `deletestudent [INDEX]`
 ***Delete Class*** | `deleteclass [INDEX]`
-***Add Student to Class*** | `addtoclass si/INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
+***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
 ***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 ***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
 ***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
