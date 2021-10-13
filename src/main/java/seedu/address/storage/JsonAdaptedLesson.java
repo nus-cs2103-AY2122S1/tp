@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Price;
@@ -73,6 +72,7 @@ public class JsonAdaptedLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */
     public Lesson toModelType() throws IllegalValueException {
+        // subject
         if (subject == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Subject.class.getSimpleName()));
@@ -82,6 +82,7 @@ public class JsonAdaptedLesson {
         }
         final Subject lessonSubject = new Subject(subject);
 
+        // grade
         if (grade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
         }
@@ -90,9 +91,16 @@ public class JsonAdaptedLesson {
         }
         final Grade lessonGrade = new Grade(grade);
 
+        // day
+        if (day == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DayOfWeek.class.getSimpleName()));
+        }
         final DayOfWeek lessonDay = parseStringToDay(day)
                 .orElseThrow(() -> new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
                         DayOfWeek.class.getSimpleName())));
+
+        // time
         LocalTime lessonStart;
         if (startTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -101,15 +109,17 @@ public class JsonAdaptedLesson {
         try {
             lessonStart = LocalTime.parse(startTime, TIME_FORMATTER); /// guarantees non-null outcome, else exception
         } catch (DateTimeParseException e) {
-            throw new ParseException(String.format(INVALID_FIELD_MESSAGE_FORMAT, LocalTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
+                    LocalTime.class.getSimpleName()));
         }
         if (!isValidTime(lessonStart)) {
             throw new IllegalValueException(TIME_MESSAGE_CONSTRAINTS);
         }
         final LessonTime lessonTime = new LessonTime(lessonDay, lessonStart);
 
+        // price
         if (price == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "price"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
         if (!isValidPrice(price)) {
             throw new IllegalValueException(PRICE_MESSAGE_CONSTRAINT);

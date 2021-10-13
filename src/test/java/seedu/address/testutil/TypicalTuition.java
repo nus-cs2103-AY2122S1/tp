@@ -13,6 +13,7 @@ import seedu.address.model.person.Student;
 
 public class TypicalTuition {
 
+    // Test Lessons, direct copy from json equivalent
     public static final Student ALICE = TypicalPersons.ALICE;
     public static final Student BENSON = TypicalPersons.BENSON;
     public static final Student CARL = TypicalPersons.CARL;

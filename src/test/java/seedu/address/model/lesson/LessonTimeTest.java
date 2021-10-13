@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.lesson.LessonTime.TIME_FORMATTER;
 import static seedu.address.model.lesson.LessonTime.TIME_MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.LessonBuilder.DEFAULT_LESSON_TIME;
@@ -124,5 +125,13 @@ public class LessonTimeTest {
         // different instance but same values -> true
         LessonTime otherLessonTime = new LessonTime(DEFAULT_LESSON_TIME.dayOfWeek, DEFAULT_LESSON_TIME.startTime);
         assertEquals(DEFAULT_LESSON_TIME, otherLessonTime);
+    }
+
+    @Test
+    public void toString_returnsCorrectFormat() {
+        String expected = '(' + LessonTime.parseDayToString(DEFAULT_LESSON_TIME.dayOfWeek) + ", "
+                + DEFAULT_LESSON_TIME.startTime.format(TIME_FORMATTER) + '-'
+                + DEFAULT_LESSON_TIME.endTime.format(TIME_FORMATTER) + ')';
+        assertEquals(expected, DEFAULT_LESSON_TIME.toString());
     }
 }
