@@ -18,12 +18,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsFieldsPredicate;
 
 public class MarkCommandTest {
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private static final Index DEFAULT_FIRST = Index.fromOneBased(1);
     private static final Person DEFAULT_TEST_PERSON = ALICE;
     private static final Name DEFAULT_TEST_NAME = ALICE.getName();
     private static final Period DEFAULT_TEST_PERIOD = ALICE.getAbsentDates().stream().findFirst().get();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_command_success() {
