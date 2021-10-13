@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
 
 import org.junit.jupiter.api.Test;
 

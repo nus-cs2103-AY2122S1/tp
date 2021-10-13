@@ -22,8 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
 
 import java.util.ArrayList;
 import java.util.Arrays;
