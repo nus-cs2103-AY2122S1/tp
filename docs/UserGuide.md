@@ -237,27 +237,25 @@ Examples:
 ### Adding grades for an assessment:  `grade`
 Avengers will be able to add a student’s grade for a particular assessment.
 
-Format: `grade n/NAME a/ASSESSMENT g/GRADE`
+Format: `grade INDEX a/ASSESSMENT g/GRADE`
 
 Record the student’s `GRADE` for the `ASSESSMENT`.
-Student’s `NAME` will have to match a name that is saved in the AD.
 The input `GRADE` must be a positive integer.
 
 Example:
-* `grade n/Aaron a/RA1 g/15`
+* `grade 1 a/RA1 g/15`
 
-### Displaying the grades for an assessment:  `showgrade`
-Avengers will be able to view the grades of all the students for a particular assessment.
+### Displaying the grades for an assessment:  `show`
+Avengers will be able to view the grades and the average score of all the students 
+for a particular assessment.
 
-Format: `showgrade a/ASSESSMENT [s/STUDIO_GROUP]`
+Format: `show ASSESSMENT`
 
-Display the list of grades that the students achieved for a particular `ASSESSMENT`.
-If `STUDIO_GROUP` is not supplied, the grades of all the students will be displayed.
-Otherwise, only the grades of the students in the specified `STUDIO_GROUP` will be displayed.
+Display the list of grades that the students achieved for a particular `ASSESSMENT`, as well
+as the average score.
 
 Examples:
-* `showgrade a/RA1`
-* `showgrade a/RA1 s/01A`
+* `show RA1`
 
 
 
@@ -291,6 +289,6 @@ Action | Format, Examples
 **List** | `list`
 **Attendance** | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
 **Studio Participation** | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
-**Grade** | `grade n/STUDENT_NAME a/ASSESSMENT g/GRADE` <br> e.g., `grade n/Aaron a/RA1 g/15`
-**Show Grades** | `showgrade a/ASSESSMENT [s/STUDIO_GROUP]` <br> e.g., `showgrade a/RA1`
+**Grade** | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
+**Show Grades** | `showg ASSESSMENT` <br> e.g., `show RA1`
 **Help** | `help`
