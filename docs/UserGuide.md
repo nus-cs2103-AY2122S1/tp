@@ -20,7 +20,7 @@ TBA
 
 ### Adding students/tuition classes
 #### Adding a student: `add`
-Adds a student’s information such as n/NAME, p/PHONE_NUMBER. 
+Adds a student’s information such as n/NAME, p/PHONE_NUMBER.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 
@@ -30,10 +30,10 @@ Examples:
 
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
-The students to be added are optional. When adding student names, using comma to separate names and there is no space around comma.
-If the student the user intends to add is not present, or the class limit has 
-been exceeded, TutAssistor will alert names of these students. The time slot should follow the 
-format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlop
+
+The students to be added are optional. If the student the user intends to add is not present, or the class limit has 
+been exceeded, TutAssistor will alert names of these students. The time slot should follow the
+format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap
 on time slots. If there is any conflict or overlap, TutAssistor will alert the conflict.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
@@ -52,7 +52,7 @@ Format: `student INDEX`
 Format: `class INDEX`
 
 ### Editing students/tuition classes
-Edits a student’s information such as n/NAME, p/PHONE_NUMBER. 
+Edits a student’s information such as n/NAME, p/PHONE_NUMBER.
 Edits a tuition class at specified t/TIME.
 
 #### Editing a student: `editstudent`

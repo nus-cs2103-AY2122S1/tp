@@ -90,6 +90,10 @@ class JsonAdaptedTuition {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
 
+        if (!new Timeslot(timeslot).isFormatCorrect()) {
+            throw new IllegalValueException(Timeslot.TIME_FORMAT_INCORRECT);
+        }
+
         final Timeslot modelTimeslot = new Timeslot(timeslot);
 
         final StudentList modelStudent = new StudentList(students);
