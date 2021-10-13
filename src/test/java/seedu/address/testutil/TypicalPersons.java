@@ -54,6 +54,18 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withBirthday("12041990").build();
+    public static final Person HANNAH = new PersonBuilder().withName("Hannah Worst").withPhone("1234567")
+            .withEmail("hhhhannah@example.com").withAddress("12th street")
+            .withBirthday("31011990").build();
+    public static final Person HANNAH_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
+            .withName("Hannah No Birthday Worst").withPhone("1234567")
+            .withEmail("hhhhannah@example.com").withAddress("12th street").build();
+    public static final Person INDIGO = new PersonBuilder().withName("Indigo Color").withPhone("2442984")
+            .withEmail("color@rainbow.com").withAddress("big tokyo")
+            .withBirthday("11101995").build();
+    public static final Person INDIGO_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
+            .withName("Indigo No Birthday Color").withPhone("2442984")
+            .withEmail("color@rainbow.com").withAddress("big tokyo").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -116,6 +128,18 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(
+                ALICE,
+                BENSON,
+                CARL,
+                DANIEL,
+                ELLE,
+                FIONA,
+                GEORGE,
+                HANNAH,
+                HANNAH_NO_BIRTHDAY,
+                INDIGO,
+                INDIGO_NO_BIRTHDAY
+        ));
     }
 }

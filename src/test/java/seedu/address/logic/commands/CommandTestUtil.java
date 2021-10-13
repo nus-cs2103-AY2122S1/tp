@@ -141,4 +141,23 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person between and including given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showPersonBetweenIndex(Model model, Index startIndex, Index endIndex) {
+        assertTrue(startIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(endIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+        // Determine persons to display within and including given indexes.
+        ArrayList<Person> personsToDisplay = new ArrayList<>();
+        for (int i = startIndex.getZeroBased(); i <= endIndex.getZeroBased(); i++) {
+            Person person = model.getFilteredPersonList().get(i);
+            personsToDisplay.add(person);
+        }
+
+        model.updateFilteredPersonList(person -> personsToDisplay.contains(person));
+
+        assertEquals(endIndex.getOneBased() - startIndex.getOneBased() + 1, model.getFilteredPersonList().size());
+    }
 }
