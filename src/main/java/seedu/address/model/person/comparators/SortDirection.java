@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class SortDirection {
+    public static final String MESSAGE_CONSTRAINTS = "Sort direction should either be asc or dsc";
 
     private String direction;
 
-    public static final String MESSAGE_CONSTRAINTS = "Sort direction should either be asc or dsc";
-
+    /**
+     * @param direction to sort by. Either asc or dsc.
+     */
     public SortDirection(String direction) {
         requireNonNull(direction);
         checkArgument(isValidDirection(direction), MESSAGE_CONSTRAINTS);

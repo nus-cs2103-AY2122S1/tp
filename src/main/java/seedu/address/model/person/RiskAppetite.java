@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import org.jetbrains.annotations.NotNull;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 

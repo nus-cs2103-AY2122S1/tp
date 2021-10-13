@@ -13,6 +13,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.ParserUtil.parseSortDirection;
 
+import java.util.Comparator;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,14 +31,11 @@ import seedu.address.model.person.comparators.SortByPhone;
 import seedu.address.model.person.comparators.SortByRiskAppetite;
 import seedu.address.model.person.comparators.SortDirection;
 
-import java.util.Comparator;
-import java.util.stream.Stream;
-
 public class SortCommandParser implements Parser<SortCommand> {
 
     private static final Prefix[] ALL_PREFIXES = {
-            PREFIX_CLIENTID, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET
+        PREFIX_CLIENTID, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
+        PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET
     };
 
     private String sortedField;
