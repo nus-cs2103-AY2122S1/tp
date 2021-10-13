@@ -19,7 +19,11 @@ public class ImportCommand extends Command {
 
     private List<Person> personsToAdd;
 
+    /**
+     * Creates an ImportCommand to add the specified list of {@code Person}.
+     */
     public ImportCommand(List<Person> personsToAdd) {
+        requireNonNull(personsToAdd);
         this.personsToAdd = personsToAdd;
     }
 
