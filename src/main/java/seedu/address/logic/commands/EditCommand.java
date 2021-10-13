@@ -42,7 +42,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the client's ID. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + PREFIX_CLIENTID + " CLIENT ID (must be a positive integer) "
+            + "Parameters: " + " CLIENT ID (must be a positive integer) "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + PREFIX_LASTMET + "LAST MET "
             + PREFIX_CURRENTPLAN + "CURRENTPLAN "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CLIENTID + " 1 "
+            + "Example: " + COMMAND_WORD + " " + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
