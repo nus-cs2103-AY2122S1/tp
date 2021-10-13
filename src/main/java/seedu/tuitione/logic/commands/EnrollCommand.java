@@ -23,7 +23,7 @@ public class EnrollCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a specified student "
             + "from a given TuitiONE lesson\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "LESSON_CODE\n"
+            + "l/LESSON_CODE\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_STUDENT_IN_LESSON = "%1$s is already enrolled in the existing %2$s";

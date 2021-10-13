@@ -26,7 +26,7 @@ public class UnenrollCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unenroll a specified student "
             + "from a given TuitiONE lesson\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "LESSON_CODE\n"
+            + "l/LESSON_CODE\n"
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
 
     public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from Lesson: %2$s";
