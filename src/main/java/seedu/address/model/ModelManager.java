@@ -126,6 +126,12 @@ public class ModelManager implements Model {
         addressBook.removeGroup(target);
     }
 
+    @Override
+    public void addGroup(Group group) {
+        addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
