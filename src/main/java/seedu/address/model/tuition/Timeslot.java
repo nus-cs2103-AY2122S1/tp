@@ -2,12 +2,25 @@ package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
+
+
 /**
  * Represents the time slot the tuition class takes
  */
 public class Timeslot {
     public static final String TIME_FORMAT_INCORRECT = "The time format is not correct";
     public final String time;
+    //used to sorting tuition classes by comparing date
+    private HashMap<String, Integer> days = new HashMap<>() {{
+            put("Mon", 1);
+            put("Tue", 2);
+            put("Wed", 3);
+            put("Thu", 4);
+            put("Fri", 5);
+            put("Sat", 6);
+            put("Sun", 7);
+        }};
 
 
     /**
@@ -115,6 +128,41 @@ public class Timeslot {
             return compareTime(((Timeslot) other).getTime());
         }
         return false;
+    }
+
+    /**
+     * Compares two timeslot.
+     * @param otherTime the other timeslots to be compared to.
+     * @return 0 if equal, -1 if the othertime is later, and 1 if this time is later.
+     */
+    public int compareTimeOrder(String otherTime) {
+        //exactly the same
+        if (time.equals(otherTime)) {
+            return 0;
+        }
+        String[] time1 = time.split(" ");
+        String[] time2 = otherTime.split(" ");
+        int compareDay = days.get(time1[0]).compareTo(days.get(time2[0]));
+        if (compareDay != 0) {
+            return compareDay;
+        }
+        //day is the same, compare time
+        int time1Start = Integer.parseInt(time1[1].substring(0, 2));
+        int time1End = Integer.parseInt(time1[1].substring(6, 8));
+        int time2Start = Integer.parseInt(time2[1].substring(0, 2));
+        int time2End = Integer.parseInt(time2[1].substring(6, 8));
+        if (time1Start == time2Start) {
+            int compareTime = time1End == time2End ? 0
+                    : time1End > time2End
+                    ? 1
+                    : 0;
+            return compareTime;
+        }
+        if (time1Start > time2Start) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     public String getTime() {
