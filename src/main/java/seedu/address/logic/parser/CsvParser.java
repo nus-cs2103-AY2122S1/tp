@@ -21,31 +21,27 @@ public class CsvParser {
             + "Csv file is empty";
     public static final String MESSAGE_FILE_UNREADABLE = "File could not be read";
 
-    private final BufferedReader br;
     private final Map<String, List<String>> data;
+    private BufferedReader br;
     private String[] inputtedHeaders;
 
     /**
      * Constructs instance of CsvParser and parses the provided file.
-     *
-     * @param csvFileSelector csvFileSelector to choose csv file to be parsed.
-     * @throws ParseException if csv file is empty or cannot be read.
      */
-    public CsvParser(CsvFileSelector csvFileSelector) throws ParseException {
+    public CsvParser() {
+        data = new HashMap<>();
+    }
+
+    public void parse(CsvFileSelector fileSelector) throws ParseException {
         try {
-            br = new BufferedReader(new FileReader(csvFileSelector.selectFile()));
-            data = new HashMap<>();
-            parse();
+            br = new BufferedReader(new FileReader(fileSelector.selectFile()));
+            parseHeader();
+            parseColumns();
         } catch (IOException e) {
             throw new ParseException(MESSAGE_FILE_UNREADABLE);
         } catch (FileSelectorException e) {
             throw new ParseException(e.getMessage());
         }
-    }
-
-    protected void parse() throws ParseException, IOException {
-        parseHeader();
-        parseColumns();
     }
 
     private void parseHeader() throws IOException, ParseException {

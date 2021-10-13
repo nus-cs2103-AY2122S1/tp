@@ -74,7 +74,7 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    public static List<String> getTypicalNames() {
+    public static List<String> getTypicalNamesStringForm() {
         return new ArrayList<>(Arrays.asList("Alice Pauline",
                 "Benson Meier",
                 "Carl Kurz",
@@ -83,4 +83,46 @@ public class TypicalPersons {
                 "Fiona Kunz",
                 "George Best"));
     }
+
+    public static List<String> getTypicalPhonesStringForm() {
+        return new ArrayList<>(Arrays.asList("94351253",
+                "98765432",
+                "95352563",
+                "87652533",
+                "9482224",
+                "9482427",
+                "9482442"));
+    }
+
+    public static List<String> getTypicalEmailsStringForm() {
+        return new ArrayList<>(Arrays.asList("alice@example.com",
+                "johnd@example.com",
+                "heinz@example.com",
+                "cornelia@example.com",
+                "werner@example.com",
+                "lydia@example.com",
+                "anna@example.com"));
+    }
+
+    public static List<String> getTypicalAddressesStringForm() {
+        return new ArrayList<>(Arrays.asList("123, Jurong West Ave 6, #08-111",
+                "311, Clementi Ave 2, #02-25",
+                "wall street",
+                "10th street",
+                "michegan ave",
+                "little tokyo",
+                "4th street"));
+    }
+
+    public static List<String> getTypicalTagsStringForm() {
+        return new ArrayList<>(Arrays.asList("friends",
+                "owesMoney friends",
+                "",
+                "friends",
+                "",
+                "",
+                ""));
+    }
+
+
 }
