@@ -10,13 +10,13 @@ import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
+import safeforhall.logic.commands.EaddCommand;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.commands.EaddCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**

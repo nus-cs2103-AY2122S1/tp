@@ -1,11 +1,11 @@
 package safeforhall.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
-
-import static java.util.Objects.requireNonNull;
 
 public class EaddCommand extends Command {
     public static final String COMMAND_WORD = "eadd";

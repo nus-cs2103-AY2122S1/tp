@@ -1,20 +1,20 @@
 package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.stream.Stream;
 
 import safeforhall.logic.commands.EaddCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.event.EventName;
-import safeforhall.model.event.Event;
-import safeforhall.model.event.Venue;
 import safeforhall.model.event.Capacity;
+import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.Venue;
 
 /**
  * Parses input arguments and creates a new EaddCommand object

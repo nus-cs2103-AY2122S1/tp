@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
-import safeforhall.model.event.EventDate;
-import safeforhall.model.event.Event;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.Capacity;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;

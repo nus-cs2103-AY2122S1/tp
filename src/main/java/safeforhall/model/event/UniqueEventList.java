@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import safeforhall.model.event.exceptions.DuplicateEventException;
 import safeforhall.model.event.exceptions.EventNotFoundException;
-import safeforhall.model.person.Person;
 import safeforhall.model.person.exceptions.DuplicatePersonException;
 
 /**

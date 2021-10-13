@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import safeforhall.commons.exceptions.IllegalValueException;
-import safeforhall.model.event.Event;
 import safeforhall.model.event.Capacity;
-import safeforhall.model.event.Venue;
+import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.Venue;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -54,7 +54,8 @@ class JsonAdaptedEvent {
     public Event toModelType() throws IllegalValueException {
         // EventName
         if (eventName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventName.class.getSimpleName()));
         }
         if (!EventName.isValidEventName(eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
@@ -64,7 +65,8 @@ class JsonAdaptedEvent {
         // EventDate
 
         if (eventDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventDate.class.getSimpleName()));
         }
         if (!EventDate.isValidEventDate(eventDate)) {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
@@ -84,7 +86,8 @@ class JsonAdaptedEvent {
         // Capacity
 
         if (capacity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Capacity.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Capacity.class.getSimpleName()));
         }
         if (!Capacity.isValidCapacity(capacity)) {
             throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);

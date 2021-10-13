@@ -1,9 +1,10 @@
 package safeforhall.model.event;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import static java.util.Objects.requireNonNull;
 
 public class EventDate {
     public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";

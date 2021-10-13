@@ -1,7 +1,8 @@
 package safeforhall.model.event;
 
-import java.util.Objects;
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents an Event in the address book.
@@ -75,5 +76,4 @@ public class Event {
 
         return builder.toString();
     }
-
 }
