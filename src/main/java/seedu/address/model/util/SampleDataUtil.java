@@ -64,10 +64,10 @@ public class SampleDataUtil {
     public static TuitionClass[] getSampleClass() {
         return new TuitionClass[] {
             new TuitionClass(new ClassName("Physics"),
-                new ClassLimit(10), new Counter(5), new Timeslot("Monday 10am"),
+                new ClassLimit(3), new Counter(5), new Timeslot("Mon 10:00-12:00"),
                 getSampleStudentList(), EMPTY_REMARK, 1234567),
             new TuitionClass(new ClassName("Chemistry"),
-                new ClassLimit(10), new Counter(5), new Timeslot("Tuesday 10am"),
+                new ClassLimit(10), new Counter(5), new Timeslot("Tue 10:00-12:00"),
                 getSampleStudentList(), EMPTY_REMARK, 2234567)
         };
     }

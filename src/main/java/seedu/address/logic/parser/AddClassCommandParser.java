@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 
@@ -31,22 +32,25 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddClassCommand parse(String args) throws ParseException {
+        boolean hasStudents = false;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_LIMIT,
                         PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT, PREFIX_REMARK);
-
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LIMIT,
-                PREFIX_COUNTER, PREFIX_TIMESLOT, PREFIX_STUDENT)
+                PREFIX_COUNTER, PREFIX_TIMESLOT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddClassCommand.MESSAGE_USAGE));
         }
-
+        if (arePrefixesPresent(argMultimap, PREFIX_STUDENT)) {
+            hasStudents = true;
+        }
         ClassName name = ParserUtil.parseClassName(argMultimap.getValue(PREFIX_NAME).get());
         ClassLimit limit = ParserUtil.parseLimit(argMultimap.getValue(PREFIX_LIMIT).get());
         Counter counter = ParserUtil.parseCounter(argMultimap.getValue(PREFIX_COUNTER).get());
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_TIMESLOT).get());
-        StudentList student = ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT));
+        StudentList student = hasStudents ? ParserUtil.parseStudent(argMultimap.getAllValues(PREFIX_STUDENT))
+                : new StudentList(new ArrayList<>());
         Remark remark = ParserUtil.parseRemark(argMultimap.getOptionalValue(PREFIX_REMARK).get());
         TuitionClass tuitionClass = new TuitionClass(name, limit, counter, timeslot, student, remark);
 
