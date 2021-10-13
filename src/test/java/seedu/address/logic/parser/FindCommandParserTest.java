@@ -2,14 +2,7 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.FindCommandParser.FindDescriptor;
@@ -95,15 +88,21 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
+        String emptyExperiencePrefixInput = " y/";
+        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(emptyExperiencePrefixInput,
+                PREFIX_EXPERIENCE);
+        findDescriptor = new FindDescriptor(argMultimap);
+        assertTrue(findDescriptor.getPredicates().isEmpty());
+
         String emptyTagPrefixInput = " t/";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(emptyTagPrefixInput, PREFIX_TAG);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleEmptyPrefixInput = " n/ e/ p/ r/ et/ s/ l/ t/";
+        String multipleEmptyPrefixInput = " n/ e/ p/ r/ et/ s/ l/ t/ y/";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleEmptyPrefixInput,
                 PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG);
+                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG, PREFIX_EXPERIENCE);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
@@ -147,15 +146,21 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
+        String blankExperiencePrefixInput = " y/  ";
+        argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(blankExperiencePrefixInput,
+                PREFIX_EXPERIENCE);
+        findDescriptor = new FindDescriptor(argMultimap);
+        assertTrue(findDescriptor.getPredicates().isEmpty());
+
         String blankTagPrefixInput = " t/  ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(blankTagPrefixInput, PREFIX_TAG);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleBlankPrefixInput = " n/   e/   p/   r/   et/   s/   t/  ";
+        String multipleBlankPrefixInput = " n/   e/   p/   r/   et/   s/   t/  y/  ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleBlankPrefixInput,
                 PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG);
+                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG, PREFIX_EXPERIENCE);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
@@ -194,6 +199,16 @@ public class FindCommandParserTest {
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidLevelOfEducationTypePrefixInput,
                         PREFIX_LEVEL_OF_EDUCATION)));
+
+        String invalidExperiencePrefixInput1 = " y/800"; // large number
+        assertThrows(ParseException.class, () ->
+                new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidExperiencePrefixInput1,
+                        PREFIX_EXPERIENCE)));
+
+        String invalidExperiencePrefixInput2 = " y/-11"; // negative number
+        assertThrows(ParseException.class, () ->
+                new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidExperiencePrefixInput2,
+                        PREFIX_EXPERIENCE)));
 
         String invalidTagPrefixInput = " t/old(70)"; // brackets
         assertThrows(ParseException.class, () ->
