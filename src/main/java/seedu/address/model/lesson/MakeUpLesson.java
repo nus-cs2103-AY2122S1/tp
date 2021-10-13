@@ -2,6 +2,8 @@ package seedu.address.model.lesson;
 
 import java.util.Set;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents a Make Up Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -10,14 +12,15 @@ public class MakeUpLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
+     * @param owner The person that this lesson belongs to.
      * @param date Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange,
-                           Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public MakeUpLesson(Person owner, Date date, TimeRange timeRange,
+                        Subject subject, Set<Homework> homework) {
+        super(owner, date, timeRange, subject, homework);
     }
 
     /**
@@ -31,7 +34,7 @@ public class MakeUpLesson extends Lesson {
         Date newDate = new Date(newDateString);
 
         return newDate.compareTo(getDate()) > 0
-            ? new MakeUpLesson(newDate, getTimeRange(), getSubject(), getHomework())
+            ? new MakeUpLesson(getOwner(), newDate, getTimeRange(), getSubject(), getHomework())
             : this;
     }
 

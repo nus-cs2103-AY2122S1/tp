@@ -3,6 +3,8 @@ package seedu.address.model.lesson;
 import java.time.LocalDate;
 import java.util.Set;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents a Recurring Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -16,14 +18,15 @@ public class RecurringLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
+     * @param owner The person that this lesson belongs to.
      * @param date Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange,
+    public RecurringLesson(Person owner, Date date, TimeRange timeRange,
                            Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+        super(owner, date, timeRange, subject, homework);
         updateRecurringLessonCount();
     }
 
@@ -57,7 +60,7 @@ public class RecurringLesson extends Lesson {
         Date newDate = new Date(newDateString);
 
         return newDate.compareTo(getDate()) > 0
-            ? new RecurringLesson(new Date(newDateString), getTimeRange(),
+            ? new RecurringLesson(getOwner(), new Date(newDateString), getTimeRange(),
             getSubject(), getHomework())
             : this;
     }
@@ -78,7 +81,7 @@ public class RecurringLesson extends Lesson {
         recurringLessonsCount++;
         // Update the date
         Date newDate = getDate().updateDateWithWeek();
-        return new RecurringLesson(newDate, getTimeRange(),
+        return new RecurringLesson(getOwner(), newDate, getTimeRange(),
                 getSubject(), getHomework());
     }
 

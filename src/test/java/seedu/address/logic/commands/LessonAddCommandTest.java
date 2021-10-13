@@ -13,6 +13,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -40,16 +42,16 @@ public class LessonAddCommandTest {
     @Test
     public void equals() {
         LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
         LessonAddCommand addSampleLessonCommand2 = new LessonAddCommand(INDEX_SECOND_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
         LessonAddCommand addSampleLessonCommandCopy = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                SampleDataUtil.getSampleLessonWithoutOwner());
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
         // different types -> returns false
@@ -122,12 +124,27 @@ public class LessonAddCommandTest {
         }
 
         @Override
+        public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Person target, Person editedPerson, Lesson toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 

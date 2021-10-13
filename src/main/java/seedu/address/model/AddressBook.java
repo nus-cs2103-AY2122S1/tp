@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -67,12 +69,38 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     * Returns true if a person that has lessons that clash with {@code lesson} exists in the address book.
      */
     public boolean hasClashingLesson(Lesson lesson) {
         requireNonNull(lesson);
         return persons.hasClashes(lesson);
     }
+
+    /**
+     * Returns true if a person that has clashing lessons with {@code person} exists in the address book.
+     */
+    public boolean hasClashingLesson(Person person) {
+        requireNonNull(person);
+        return persons.hasClashes(person);
+    }
+
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
+        persons.addLesson(target, editedPerson, toAdd);
+    }
+
+
+    /**
+     * Removes {@code toRemove} from the {@code target} in the {@code AddressBook}.
+     * {@code target} and {@code toRemove} must exist in the address book.
+     */
+    public void deleteLesson(Person target, Person editedPerson, Lesson toRemove) {
+        persons.removeLesson(target, editedPerson, toRemove);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -112,6 +140,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public Calendar getCalendar() {
+        return persons.getCalendar();
     }
 
     @Override

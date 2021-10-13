@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
+import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -29,6 +30,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
+    public static final String MESSAGE_CLASHING_LESSON = "Person contains clashing lesson(s).";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
@@ -111,9 +113,13 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
+        final List<LessonWithoutOwner> personLessons = new ArrayList<>();
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            LessonWithoutOwner lesson = jsonAdaptedLesson.toModelType();
+            if (personLessons.stream().anyMatch(personLesson -> personLesson.isClashing(lesson))) {
+                throw new IllegalValueException(MESSAGE_CLASHING_LESSON);
+            }
+            personLessons.add(lesson);
         }
 
         if (name == null) {
@@ -196,7 +202,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
+        final Set<LessonWithoutOwner> modelLessonWithoutOwner = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
                 modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelFee, modelRemark, modelTags,

@@ -87,7 +87,7 @@ public class LessonDeleteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.deleteLesson(personToEdit, editedPerson, toRemove);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, editedPerson));
     }

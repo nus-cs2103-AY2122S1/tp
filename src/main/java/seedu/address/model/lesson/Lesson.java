@@ -4,10 +4,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
+import com.calendarfx.model.Entry;
+
+import seedu.address.commons.util.CalendarUtil;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Lesson in the address book.
@@ -27,20 +34,39 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
+    // Hidden fields
+    private final Person owner; // reference to the owner of this lesson
+    private final Entry<Lesson> calendarEntry; // the corresponding calendar entry of this lesson
+
     /**
      * Every field must be present and not null.
      *
+     * @param owner Person that this lesson belongs to.
      * @param date Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        requireAllNonNull(date, timeRange, subject, homework);
+    public Lesson(Person owner, Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
+        requireAllNonNull(owner, date, timeRange, subject, homework);
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
+        this.owner = owner;
+        calendarEntry = CalendarUtil.convertToEntry(this);
+    }
+
+    public LessonWithoutOwner getLessonWithoutOwner() {
+        return new LessonWithoutOwner(date, timeRange, subject, homework, isRecurring());
+    }
+
+    public Person getOwner() {
+        return owner;
+    }
+
+    public Name getName() {
+        return owner.getName();
     }
 
     public Date getDate() {
@@ -63,6 +89,14 @@ public abstract class Lesson implements Comparable<Lesson> {
         return timeRange;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(date.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(date.getLocalDate());
+    }
+
     public String getTypeOfLesson() {
         return isRecurring() ? RECURRING : MAKEUP;
     }
@@ -75,6 +109,9 @@ public abstract class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableSet(homework);
     }
 
+    public Entry<Lesson> asCalendarEntry() {
+        return calendarEntry;
+    }
     /**
      * Check if the Lesson object is recurring.
      *
@@ -168,4 +205,3 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
 }
-

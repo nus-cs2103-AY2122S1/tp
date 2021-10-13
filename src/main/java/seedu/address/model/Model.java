@@ -1,7 +1,10 @@
 package seedu.address.model;
 
+
 import java.nio.file.Path;
 import java.util.function.Predicate;
+
+import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -64,6 +67,19 @@ public interface Model {
     boolean hasClashingLesson(Lesson lesson);
 
     /**
+     * Adds the given lesson to the target person.
+     * {@code target} must exist in the address book.
+     * The lesson {@code toAdd} must not clash with existing lessons in the address book.
+     */
+    void addLesson(Person target, Person editedPerson, Lesson toAdd);
+
+    /**
+     * Removes the given lesson from the target person.
+     * {@code target} and {@code toRemove} must exist in the address book.
+     */
+    void deleteLesson(Person target, Person editedPerson, Lesson toAdd);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -81,6 +97,11 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Returns the Calendar.
+     */
+    Calendar getCalendar();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

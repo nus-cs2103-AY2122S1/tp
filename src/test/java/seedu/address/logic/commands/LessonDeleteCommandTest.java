@@ -11,10 +11,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
+import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -43,8 +45,7 @@ public class LessonDeleteCommandTest {
         LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
         ModelStub modelStub = new ModelStubWithPerson(editedPerson);
 
-        Lesson lessonToDelete = editedPerson.getLessons().stream()
-            .collect(Collectors.toList())
+        Lesson lessonToDelete = new ArrayList<>(editedPerson.getLessons())
             .get(INDEX_FIRST_LESSON.getZeroBased());
         String expectedMessage = String.format(
             LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);
@@ -138,12 +139,27 @@ public class LessonDeleteCommandTest {
         }
 
         @Override
+        public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Person target, Person editedPerson, Lesson toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -173,6 +189,11 @@ public class LessonDeleteCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public void deleteLesson(Person target, Person editedPerson, Lesson toRemove) {
+            setPerson(target, editedPerson);
         }
 
         @Override

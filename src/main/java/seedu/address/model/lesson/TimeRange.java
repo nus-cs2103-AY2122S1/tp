@@ -20,10 +20,11 @@ public class TimeRange implements Comparable<TimeRange> {
         + "2. Lesson should be conducted between 8am and 10pm, inclusive.";
 
     public static final String VALIDATION_REGEX = "^(([01]?[0-9]|2[0-3])[0-5][0-9])-(([01]?[0-9]|2[0-3])[0-5][0-9])";
+    public static final LocalTime DAY_START = LocalTime.of(8, 0, 0);
+    public static final LocalTime DAY_END = LocalTime.of(22, 0, 0);
 
     private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
-    private static final LocalTime DAY_START = LocalTime.of(8, 0, 0);
-    private static final LocalTime DAY_END = LocalTime.of(22, 0, 0);
+
 
     public final String value;
 
