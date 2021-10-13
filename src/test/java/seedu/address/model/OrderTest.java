@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-import seedu.address.model.item.UniqueItemList;
 
 class OrderTest {
 
