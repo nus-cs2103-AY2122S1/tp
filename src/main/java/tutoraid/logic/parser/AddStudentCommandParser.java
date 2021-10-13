@@ -6,8 +6,6 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 
-import java.util.stream.Stream;
-
 import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
@@ -57,13 +55,4 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
         return new AddStudentCommand(student);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
