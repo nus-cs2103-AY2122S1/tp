@@ -111,7 +111,7 @@ Examples:
 
 ### Retrieve Particular Contact : `view`
 
-View a particular client on your address book to view the client’s information.
+Fully view a client’s information in detail.
 
 Format: `view {client’s id number}`
 
