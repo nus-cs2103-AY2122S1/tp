@@ -16,6 +16,8 @@ public class VaccStatus {
      */
     public static final String VALIDATION_REGEX = "^([Tt]|[Ff])$";
 
+    public static final String DESC = "Vaccinated: ";
+
     public final String vaccStatus;
     public final boolean vaccinated;
 

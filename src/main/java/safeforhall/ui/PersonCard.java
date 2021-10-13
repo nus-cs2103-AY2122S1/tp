@@ -1,5 +1,7 @@
 package safeforhall.ui;
 
+import static safeforhall.model.person.LastDate.DEFAULT_DATE;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -8,7 +10,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import safeforhall.model.person.Email;
+import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -50,9 +57,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private VBox statusContainer;
     @FXML
-    private Label lastfetdate;
+    private VBox labelBox;
     @FXML
-    private Label lastcollectiondate;
+    private VBox labelBoxInterior;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,12 +69,22 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        room.setText(person.getRoom().room);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
-        faculty.setText(person.getFaculty().faculty);
-        lastfetdate.setText(person.getLastFetDate().date);
-        lastcollectiondate.setText(person.getLastCollectionDate().date);
+        room.setText(Room.DESC + person.getRoom().room);
+        phone.setText(Phone.DESC + person.getPhone().value);
+        email.setText(Email.DESC + person.getEmail().value);
+        faculty.setText(Faculty.DESC + person.getFaculty().faculty);
+
+        if (person.getLastFetDate().date != DEFAULT_DATE) {
+            Label textBox = new Label(LastDate.FET_DESC + person.getLastFetDate().date);
+            textBox.getStyleClass().add("cell_small_label");
+            labelBoxInterior.getChildren().add(textBox);
+        }
+
+        if (person.getLastCollectionDate().date != DEFAULT_DATE) {
+            Label textBox = new Label(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
+            textBox.getStyleClass().add("cell_small_label");
+            labelBoxInterior.getChildren().add(textBox);
+        }
 
         if (person.hasMissedDeadline()) {
             this.getRoot().setStyle("-fx-background-color: #8B0000;");

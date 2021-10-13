@@ -1,9 +1,13 @@
 package safeforhall.testutil;
 
+import static safeforhall.logic.commands.CommandTestUtil.VALID_COLLECTIONDATE_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_COLLECTIONDATE_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FETDATE_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FETDATE_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -36,8 +40,8 @@ public class TypicalPersons {
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withRoom("A101")
-            .withEmail("johnd@example.com")
             .withPhone("98765432")
+            .withEmail("johnd@example.com")
             .withVaccStatus("T")
             .withFaculty("SoC")
             .withFet("12-10-2021")
@@ -116,8 +120,34 @@ public class TypicalPersons {
             .withRoom(VALID_ROOM_AMY)
             .withFaculty(VALID_FACULTY_AMY)
             .withVaccStatus(VALID_VACCSTATUS_AMY)
-            .withFet("09-10-2021")
-            .withCollection("08-10-2021")
+            .withFet(VALID_FETDATE_AMY)
+            .withCollection(VALID_COLLECTIONDATE_AMY)
+            .build();
+    // Person AMY without FET or COLLECTION
+    public static final Person AMY_NO_FET_COLLECTION = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .build();
+    // Person AMY without FET
+    public static final Person AMY_NO_FET = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .withCollection(VALID_COLLECTIONDATE_AMY)
+            .build();
+    // Person AMY without COLLECTION
+    public static final Person AMY_NO_COLLECTION = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .withFet(VALID_FETDATE_AMY)
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -125,8 +155,8 @@ public class TypicalPersons {
             .withRoom(VALID_ROOM_BOB)
             .withFaculty(VALID_FACULTY_BOB)
             .withVaccStatus(VALID_VACCSTATUS_BOB)
-            .withFet("15-11-2021")
-            .withCollection("12-11-2021")
+            .withFet(VALID_FETDATE_BOB)
+            .withCollection(VALID_COLLECTIONDATE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
