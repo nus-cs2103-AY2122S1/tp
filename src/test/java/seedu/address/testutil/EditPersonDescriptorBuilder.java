@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
 import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
