@@ -11,20 +11,10 @@ import java.util.function.Predicate;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -55,7 +45,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         endIndex = targetIndex;
-        predicate = null;
+        predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
     }
 
     /**
@@ -67,12 +57,12 @@ public class DeleteCommand extends Command {
     public DeleteCommand(Index targetIndex, Index endIndex) {
         this.targetIndex = targetIndex;
         this.endIndex = endIndex;
-        predicate = null;
+        predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
     }
 
     public DeleteCommand(ModuleCodesContainsKeywordsPredicate predicate, ModuleCode moduleCode) {
-        targetIndex = null;
-        endIndex = null;
+        targetIndex = Index.fromZeroBased(0);
+        endIndex = Index.fromZeroBased(0);
         this.predicate = predicate;
         this.moduleCode = moduleCode;
     }
@@ -83,7 +73,7 @@ public class DeleteCommand extends Command {
         int sizeOfPersonList = model.getFilteredPersonList().size();
         String successMessage;
 
-        if (predicate != null) {
+        if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS) {
             successMessage = deleteRelatedPersonByModuleCode(model);
         } else {
             if(targetIndex.getZeroBased() >= sizeOfPersonList) {
@@ -140,8 +130,7 @@ public class DeleteCommand extends Command {
     }
 
     private void deleteModuleCodeTag(Person person, Model model) {
-        Set<ModuleCode> moduleCodes = new HashSet<>();
-        moduleCodes.addAll(person.getModuleCodes());
+        Set<ModuleCode> moduleCodes = new HashSet<>(person.getModuleCodes());
         moduleCodes.remove(moduleCode);
 
         EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
@@ -157,6 +146,7 @@ public class DeleteCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)
-                && endIndex.equals(((DeleteCommand) other).endIndex)); // state check
+                && endIndex.equals(((DeleteCommand) other).endIndex)
+                && predicate.equals(((DeleteCommand) other).predicate)); // state check
     }
 }

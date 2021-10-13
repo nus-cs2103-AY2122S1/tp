@@ -62,6 +62,11 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validModuleCodeUnfilteredList_Success() {
+
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -76,6 +81,11 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand1 = new DeleteCommand(invalidStartIndex, invalidEndIndex);
 
         assertCommandFailure(deleteCommand1, model, Messages.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void execute_invalidModuleCodeUnfilteredList_throwsCommandExceptio() {
+
     }
 
     @Test
@@ -118,6 +128,11 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validModuleCodeFilteredList_success() {
+
+    }
+
+    @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
@@ -143,6 +158,11 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(invalidStartIndex, invalidEndIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void execute_invalidModuleCodeFilteredList_throwsCommandException() {
+
     }
 
     @Test
