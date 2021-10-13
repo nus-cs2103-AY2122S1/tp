@@ -9,11 +9,13 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -31,9 +33,13 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private FriendListPanel friendListPanel;
+    private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private FriendMainCard friendMainCard;
+    private GameMainCard gameMainCard;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -42,7 +48,16 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane friendsPlaceholder;
+
+    @FXML
+    private VBox friendBox;
+
+    @FXML
+    private VBox gameBox;
+
+    @FXML
+    private StackPane gamesPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,8 +126,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredFriendsList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        friendListPanel = new FriendListPanel(logic.getFilteredFriendsList());
+        showFriendList();
+
+        gameListPanel = new GameListPanel(logic.getFilteredGamesList());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -164,12 +181,151 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void hideFriendBox() {
+        friendBox.setVisible(false);
+        friendBox.setManaged(false);
+    }
+
+    private void showFriendBox() {
+        friendBox.setVisible(true);
+        friendBox.setManaged(true);
+    }
+
+    private void hideGameBox() {
+        gameBox.setVisible(false);
+        gameBox.setManaged(false);
+    }
+
+    private void showGameBox() {
+        gameBox.setVisible(true);
+        gameBox.setManaged(true);
+    }
+
+    private void removeFriendListPanelFromFriendsPlaceholder() {
+        friendsPlaceholder.getChildren().removeAll(friendListPanel.getRoot());
+    }
+
+    private void addFriendListPanelToFriendsPlaceholder() {
+        // only shows friend list if not already being shown
+        if (!friendsPlaceholder.getChildren().contains(friendListPanel.getRoot())) {
+            friendsPlaceholder.getChildren().add(friendListPanel.getRoot());
+        }
+    }
+
+    private void removeFriendMainCardFromFriendsPlaceholder() {
+        if (friendMainCard != null) {
+            friendsPlaceholder.getChildren().removeAll(friendMainCard.getRoot());
+            friendMainCard = null;
+        }
+    }
+
+    private void addFriendMainCardToFriendsPlaceholder(CommandResult commandResult) {
+        friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
+        friendsPlaceholder.getChildren().add(friendMainCard.getRoot());
+    }
+
+    private void removeGameListPanelFromGamesPlaceholder() {
+        gamesPlaceholder.getChildren().removeAll(gameListPanel.getRoot());
+    }
+
+    private void addGameListPanelToGamesPlaceholder() {
+        if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
+            gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
+        }
+    }
+
+    private void addGameMainCardToGamesPlaceholder(CommandResult commandResult) {
+        gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
+        gamesPlaceholder.getChildren().add(gameMainCard.getRoot());
+    }
+
+    private void removeGameMainCardFromGamesPlaceholder() {
+        if (gameMainCard != null) {
+            gamesPlaceholder.getChildren().removeAll(gameMainCard.getRoot());
+            gameMainCard = null;
+        }
     }
 
     /**
-     * Executes the command and returns the result.
+     * Shows the {@Code FriendMainCard} when the {@Code find} command is run.
+     * @param commandResult The {@Code commandResult} from the find command.
+     */
+    private void handleShowFriendMainCard(CommandResult commandResult) {
+        // only mounts the friend main card if it is not already mounted or if friend different
+        removeFriendListPanelFromFriendsPlaceholder();
+        if (friendMainCard == null) {
+            addFriendMainCardToFriendsPlaceholder(commandResult);
+        } else if (!friendMainCard.getCurrentFriend().equals(commandResult.getFriendToGet())) {
+            removeFriendMainCardFromFriendsPlaceholder();
+            addFriendMainCardToFriendsPlaceholder(commandResult);
+        }
+    }
+
+    /**
+     * Shows the {@Code GameMainCard} when the {@Code find} command is run.
+     * @param commandResult The {@Code commandResult} from the find command.
+     */
+    private void handleShowGameMainCard(CommandResult commandResult) {
+        // only mounts the friend main card if it is not already mounted
+        removeGameListPanelFromGamesPlaceholder();
+        if (gameMainCard == null) {
+            addGameMainCardToGamesPlaceholder(commandResult);
+        } else if (!gameMainCard.getCurrentGame().equals(commandResult.getGameToGet())) {
+            removeGameMainCardFromGamesPlaceholder();
+            addGameMainCardToGamesPlaceholder(commandResult);
+        }
+    }
+
+    /**
+     * Shows the {@Code friendListPanel} when the {@Code friend --list} command is run.
+     */
+    private void showFriendList() {
+        // only shows friend list if not already being shown
+        removeFriendMainCardFromFriendsPlaceholder();
+        addFriendListPanelToFriendsPlaceholder();
+    }
+
+    private void showGameList() {
+        removeGameMainCardFromGamesPlaceholder();
+        addGameListPanelToGamesPlaceholder();
+    }
+
+    /**
+     * Handles the mounting and dismounting of UI Regions when a {@Code friend}
+     * command is run.
+     * @param commandResult The {@Code commandResult} from the {@Code friend} command.
+     */
+    private void handleFriendCommand(CommandResult commandResult) {
+        hideGameBox();
+        showFriendBox();
+        if (commandResult.isFriendGet()) {
+            handleShowFriendMainCard(commandResult);
+        } else {
+            showFriendList();
+        }
+    }
+
+    /**
+     * Handles the mounting and dismounting of UI Regions when a {@Code game}
+     * command is run.
+     * @param commandResult The {@Code commandResult} from the {@Code game} command.
+     */
+    // TODO: Handle the game command to list or get
+    private void handleGameCommand(CommandResult commandResult) {
+        hideFriendBox();
+        showGameBox();
+        if (commandResult.isGameGet()) {
+            // TODO: hide the personlist panel
+            //TODO: show the game detailed card
+            handleShowGameMainCard(commandResult);
+        } else {
+            showGameList();
+        }
+    }
+
+    /**
+     * Executes the command based on the {@Code CommandType}
+     * enumeration.
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
@@ -179,14 +335,24 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            switch (commandResult.getCommandType()) {
+            case FRIEND_GET: case FRIEND_ADD: case FRIEND_LIST: case FRIEND_DELETE:
+                handleFriendCommand(commandResult);
+                break;
+            case GAME_ADD: case GAME_GET: case GAME_DELETE: case GAME_LIST:
+                handleGameCommand(commandResult);
+                break;
+            case HELP:
+                // TODO temporarily invoke game list with "help" command
+                // handleHelp();
+                handleGameCommand(new CommandResult("sample feedback", CommandType.GAME_LIST));
+                break;
+            case EXIT:
                 handleExit();
+                break;
+            default:
+                break;
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

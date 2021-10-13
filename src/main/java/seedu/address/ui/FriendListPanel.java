@@ -13,9 +13,9 @@ import seedu.address.model.friend.Friend;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class FriendListPanel extends UiPart<Region> {
+    private static final String FXML = "FriendListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(FriendListPanel.class);
 
     @FXML
     private ListView<Friend> personListView;
@@ -23,7 +23,7 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Friend> friendList) {
+    public FriendListPanel(ObservableList<Friend> friendList) {
         super(FXML);
         personListView.setItems(friendList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
