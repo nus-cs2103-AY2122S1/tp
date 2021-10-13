@@ -75,6 +75,17 @@ public class Period {
     }
 
     /**
+     * Returns true if {@code this} contains {@code period}.
+     */
+    public boolean contains(Period period) {
+        return this.contains(period.start)
+                && this.contains(period.end);
+
+    }
+
+
+
+    /**
      * Tests if the input string is a valid string representing a period.
      */
     public static boolean isValidPeriodString(String toTest) {
@@ -95,5 +106,14 @@ public class Period {
     @Override
     public String toString() {
         return this.start + DELIMITER + this.end;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return (o != null)
+                && (o instanceof Period)
+                && ((Period) o).start.equals(this.start)
+                && ((Period) o).end.equals(this.end);
+
     }
 }
