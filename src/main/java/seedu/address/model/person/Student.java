@@ -150,14 +150,13 @@ public class Student {
                 .append("; Address: ").append(address)
                 .append("; Grade: ").append(grade);
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+            builder.append("; Tag(s): ");
+            tags.forEach(t -> builder.append(t).append(" "));
         }
         if (!lessonCodes.isEmpty()) {
-            builder.append("; Lesson: ");
-            lessonCodes.forEach(builder::append);
+            builder.append("; Lesson(s): ");
+            lessonCodes.forEach(l -> builder.append(l).append(" "));
         }
         return builder.toString();
     }
-
 }
