@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Item;
 import seedu.address.model.tag.Tag;
@@ -22,6 +23,15 @@ public class ItemUtil {
      */
     public static String getAddCommand(Item item) {
         return AddCommand.COMMAND_WORD + " " + getItemDetails(item);
+    }
+
+    /**
+     * Returns a delete command string for adding the {@code item}.
+     */
+    public static String getDeleteCommand(Item item) {
+        return DeleteCommand.COMMAND_WORD
+                + " " + item.getName()
+                + " " + PREFIX_COUNT + item.getCount();
     }
 
     /**

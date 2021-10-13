@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
@@ -50,9 +53,9 @@ public class TypicalItems {
 
     // Manually added - Item's details found in {@code CommandTestUtil}
     public static final Item BAGEL = new ItemBuilder()
-            .withName(VALID_NAME_BAGEL).withCount("5").withId("123456").withTags(VALID_TAG_BAKED).build();
+            .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL).withId(VALID_ID_BAGEL).withTags(VALID_TAG_BAKED).build();
     public static final Item DONUT = new ItemBuilder()
-            .withName(VALID_NAME_DONUT).withCount("5").withId("789012").withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
+            .withName(VALID_NAME_DONUT).withCount(VALID_COUNT_BAGEL).withId(VALID_ID_DONUT).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
