@@ -52,10 +52,10 @@ public class TypicalSuppliers {
             .withDeliveryDetails("15th October 2pm").build();
 
     // Manually added
-    public static final Supplier HOON = new SupplierBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Supplier HOON_SUPPLIER = new SupplierBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").withSupplyType("Mee Hoon Kueh")
             .withDeliveryDetails("Every Monday on alternate weeks").build();
-    public static final Supplier IDA = new SupplierBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Supplier IDA_SUPPLIER = new SupplierBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withSupplyType("Pork")
             .withDeliveryDetails("Monthly").build();
 
@@ -72,7 +72,7 @@ public class TypicalSuppliers {
     private TypicalSuppliers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical suppliers.
      */
     public static AddressBook getTypicalAddressBookSuppliers() {
         AddressBook ab = new AddressBook();
