@@ -74,7 +74,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " i/1");
         ClientId clientId = new ClientId("1");
         PersonHasId predicate = new PersonHasId(clientId);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         assertEquals(new DeleteCommand(predicates), command);
     }

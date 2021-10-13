@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonHasEmail;
 import seedu.address.model.person.PersonHasId;
 
@@ -30,7 +32,7 @@ public class DeleteCommandParserTest {
     public void parse_validClientId_returnsDeleteCommand() {
         ClientId clientId = new ClientId("1");
         PersonHasId predicate = new PersonHasId(clientId);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         assertParseSuccess(parser, " i/1", new DeleteCommand(predicates));
     }
@@ -39,7 +41,7 @@ public class DeleteCommandParserTest {
     public void parse_validEmail_returnsDeleteCommand() {
         Email email = new Email("test@gmail.com");
         PersonHasEmail predicate = new PersonHasEmail(email);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         assertParseSuccess(parser, " e/test@gmail.com", new DeleteCommand(predicates));
     }
@@ -50,7 +52,7 @@ public class DeleteCommandParserTest {
         PersonHasEmail predicateEmail = new PersonHasEmail(email);
         ClientId clientId = new ClientId("1");
         PersonHasId predicateId = new PersonHasId(clientId);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicateId);
         predicates.add(predicateEmail);
         assertParseSuccess(parser, " i/1 e/test@gmail.com", new DeleteCommand(predicates));
