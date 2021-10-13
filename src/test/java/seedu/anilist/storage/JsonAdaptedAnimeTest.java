@@ -16,7 +16,7 @@ import seedu.anilist.model.anime.Name;
 
 public class JsonAdaptedAnimeTest {
     private static final String INVALID_NAME = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#adventure";
 
     private static final String VALID_NAME = BRS.getName().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BRS.getTags().stream()
