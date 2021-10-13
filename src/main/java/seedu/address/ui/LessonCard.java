@@ -35,7 +35,7 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
-        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() +")");
+        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
         date.setText("Date: " + lesson.getDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         lesson.getHomework().stream()
