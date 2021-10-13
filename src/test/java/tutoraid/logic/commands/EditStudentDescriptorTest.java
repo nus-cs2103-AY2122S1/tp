@@ -10,7 +10,6 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
-
 import tutoraid.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import tutoraid.testutil.EditStudentDescriptorBuilder;
 
@@ -36,26 +35,26 @@ public class EditStudentDescriptorTest {
 
         // different name -> returns false
         EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different student phone -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
-            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .build();
+                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different parent name -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
-            .withParentName(VALID_PARENT_NAME_BOB)
-            .build();
+                .withParentName(VALID_PARENT_NAME_BOB)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different parent phone -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
-            .withParentPhone(VALID_PARENT_PHONE_BOB)
-            .build();
+                .withParentPhone(VALID_PARENT_PHONE_BOB)
+                .build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }
