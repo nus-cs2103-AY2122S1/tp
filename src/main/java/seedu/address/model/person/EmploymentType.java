@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -16,6 +18,16 @@ public class EmploymentType {
             this.term = term;
         }
 
+        public static ArrayList<String> getTerms() {
+            ArrayList<String> terms = new ArrayList<>();
+
+            for (Type type: Type.values()) {
+                terms.add(type.term);
+            }
+
+            return terms;
+        }
+
         public static String getRegex() {
             StringBuilder regex = new StringBuilder("(?i)\\b(?:");
             for (Type type: Type.values()) {
@@ -23,12 +35,16 @@ public class EmploymentType {
                 regex.append("|");
             }
             regex.append("\\w+)\\b");
+            System.out.println(regex.toString());
             return regex.toString();
         }
     }
 
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "
             + "Full time, Part time, Temporary or Internship";
+
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for one or more of the" +
+            " following employment types: Full time, Part time, Temporary or Internship";
 
     public final String employmentType;
 
