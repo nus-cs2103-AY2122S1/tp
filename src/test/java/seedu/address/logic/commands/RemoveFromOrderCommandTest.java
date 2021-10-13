@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.UUID;
@@ -157,6 +158,14 @@ public class RemoveFromOrderCommandTest {
 
         @Override
         public void setItem(Item target, Item editedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Sorts the item list using the given {@code comparator}.
+         */
+        @Override
+        public void sortItems(Comparator<Item> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 
