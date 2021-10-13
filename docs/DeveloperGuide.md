@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-    
+
 **Use case: Add a person**
 
 **MSS**
@@ -363,7 +363,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. The attribute to be edited does not exist.
   * 3b1. AddressBook shows an error message.
   * Use case ends
-  * 
+  *
 
 
 **Use case: Export contacts**
@@ -395,7 +395,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to import existing contacts from JSON file.
-2. AddressBook checks if file is valid format 
+2. AddressBook checks if file is valid format
 3. AddressBook shows a list of persons
 4. User decides to import (or not)
 5. AddressBook imports if user selects yes
