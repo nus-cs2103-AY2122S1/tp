@@ -1,5 +1,6 @@
 package seedu.address.model.tutorialclass;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -39,7 +40,7 @@ public class TutorialClass {
     }
 
     public Set<Tag> getTags() {
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
