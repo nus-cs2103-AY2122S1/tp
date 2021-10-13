@@ -70,28 +70,28 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-### Adding a position: `add position`
+### Adding a position: `add-position`
 
-Adds a position to the application management system.
+Adds a position to MrTechRecruiter.
 
-Format: `add position t/TITLE desc/DESCRIPTION`
-
-Examples:
-* `add position t/software engineer desc/work in a team that builds a facial recognition application`
-
-
-### Deleting a position: `delete position`
-
-Deletes the specified position from the application management system.
-
-Format: `delete position t/TITLE`
-
-* Deletes the position with the specified `POSITION`.
-* The name refers to the name of the position as displayed in the position list.
-* The name must match exactly.
+Format: `add-position tit/TITLE des/DESCRIPTION`
 
 Examples:
-* `delete position t/software engineer` deletes the position with the exact name `software engineer`.
+* `add-position tit/software engineer des/work in a team that builds a facial recognition application`
+
+
+### Deleting a position: `delete-position`
+
+Deletes the specified position from MrTechRecruiter.
+
+Format: `delete position tit/TITLE`
+
+* Deletes the position with the specified `TITLE`.
+* The title refers to the name of the position as displayed in the position list.
+* The title must match exactly.
+
+Examples:
+* `delete-position tit/software engineer` deletes the position with the exact name `software engineer`.
 
 
 ### Adding an applicant: `add-applicant`
