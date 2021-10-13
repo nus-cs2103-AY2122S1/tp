@@ -76,9 +76,6 @@ public class ApplicantTest {
         editedAlice = new ApplicantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new ApplicantBuilder(ALICE).build();
-        assertFalse(ALICE.equals(editedAlice));
     }
 
 }
