@@ -13,19 +13,16 @@ import seedu.academydirectory.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
-
     public static final String DEFAULT_MESSAGE = Messages.GENERAL_HELP_MESSAGE;
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows program usage instructions for the command in query\n"
             + "Example: " + COMMAND_WORD + "add";
-
-    public static final String SHOWING_HELP_MESSAGE = "Showing summary help.";
-
-    public static final String MESSAGE_HELP_SUCCESS = "Show help for command: %1$s.";
+    public static final String MESSAGE_HELP_SUCCESS_GENERAL = "Showing summary help.";
+    public static final String MESSAGE_HELP_SUCCESS_SPECIFIC = "Show help for command: %1$s.";
 
     private final String commandWord;
     private final String helpMessage;
+    private final boolean isGeneralHelp;
 
     /**
      * Default constructor of help, resulting in a summary table on the help window.
@@ -33,6 +30,7 @@ public class HelpCommand extends Command {
     public HelpCommand() {
         this.commandWord = COMMAND_WORD;
         this.helpMessage = DEFAULT_MESSAGE;
+        this.isGeneralHelp = true;
     }
 
     /**
@@ -43,6 +41,7 @@ public class HelpCommand extends Command {
         requireAllNonNull(helpMessage);
         this.commandWord = commandWord;
         this.helpMessage = helpMessage;
+        this.isGeneralHelp = false;
     }
 
     @Override
@@ -51,8 +50,12 @@ public class HelpCommand extends Command {
         if (this.commandWord == null || this.helpMessage == null) {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
-        return new CommandResult(String.format(MESSAGE_HELP_SUCCESS, this.commandWord),
-                this.helpMessage);
+        if (isGeneralHelp) {
+            return new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, this.helpMessage);
+        } else {
+            return new CommandResult(String.format(MESSAGE_HELP_SUCCESS_SPECIFIC, this.commandWord),
+                    this.helpMessage);
+        }
     }
 
     @Override
@@ -64,6 +67,6 @@ public class HelpCommand extends Command {
             return false;
         }
         HelpCommand curr = (HelpCommand) obj;
-        return curr.helpMessage.equals(this.helpMessage);
+        return curr.helpMessage.equals(this.helpMessage) && curr.commandWord.equals(this.commandWord);
     }
 }
