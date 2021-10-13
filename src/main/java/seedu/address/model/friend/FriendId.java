@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class FriendId {
 
     public static final String MESSAGE_EMPTY_FRIEND_ID =
-            "Friend ID cannot be empty.";
-    public static final String MESSAGE_INVALID_CHARACTERS = "FriendID provided must be a single word and only contain "
+            "FRIEND_ID cannot be empty.";
+    public static final String MESSAGE_INVALID_CHARACTERS = "FRIEND_ID provided must be a single word and only contain "
             + "alphanumeric characters.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
     public final String value;

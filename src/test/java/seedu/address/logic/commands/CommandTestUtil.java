@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
+import static seedu.address.testutil.TypicalGames.CSGO;
+import static seedu.address.testutil.TypicalGames.VALORANT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,18 +31,19 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_FRIEND_ID_AMY = "123";
     public static final String VALID_FRIEND_ID_BOB = "456";
-    public static final String VALID_GAME_ID_CSGO = "CSGO";
-    public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
+    public static final String VALID_GAME_ID_CSGO = CSGO.gameId.value;
+    public static final String VALID_GAME_ID_APEX_LEGENDS = APEX_LEGENDS.gameId.value;
 
     public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_AMY = " " + FLAG_ADD + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_BOB = " " + FLAG_ADD + VALID_GAME_ID_CSGO;
 
-    public static final String GAME_DESC_CSGO = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
-    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_CSGO = " " + FLAG_ADD + CSGO.gameId;
+    public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;
+    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_ADD + APEX_LEGENDS.gameId;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games

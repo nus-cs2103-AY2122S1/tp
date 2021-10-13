@@ -71,6 +71,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> gameSet = games.size() == 1 && games.contains("") ? Collections.emptySet() : games;
-        return Optional.of(ParserUtil.parseGames(gameSet));
+        return Optional.of(ParserUtil.parseGameFriendLinks(gameSet));
     }
 }

@@ -13,6 +13,8 @@ import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
+ * The gameFriendLinkSet for each friend must be empty to prevent mismatched game and friend data
+ * in the event of storage load failure.
  */
 public class SampleDataUtil {
     public static Friend[] getSampleFriends() {

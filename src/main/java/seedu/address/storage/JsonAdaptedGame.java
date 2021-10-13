@@ -36,7 +36,7 @@ class JsonAdaptedGame {
      */
     public Game toModelType() throws IllegalValueException {
         if (!GameId.isValidGameId(gameId)) {
-            throw new IllegalValueException(GameId.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
         }
         return new Game(new GameId(gameId));
     }

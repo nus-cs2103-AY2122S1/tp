@@ -28,7 +28,7 @@ public class AddFriendCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newFriend_success() {
         Friend validFriend = new FriendBuilder().build();
 
         Model expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
@@ -39,7 +39,7 @@ public class AddFriendCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateFriend_throwsCommandException() {
         // duplicated in list
         Friend friendInList = model.getFriendsList().getFriendsList().get(0);
         assertCommandFailure(new AddFriendCommand(friendInList), model, AddFriendCommand.MESSAGE_DUPLICATE_FRIEND_ID);

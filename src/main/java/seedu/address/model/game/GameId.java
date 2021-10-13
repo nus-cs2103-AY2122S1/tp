@@ -9,8 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GameId {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_DUPLICATE_GAME_ID =
             "Game IDs should be unique for each game in the game's list.";
+    public static final String MESSAGE_INVALID_CHARACTERS_IN_GAME_ID = "GAME_ID provided must be a single word"
+            + " and only contain alphanumeric characters.";
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9._-]+$";
     public final String value;
 
@@ -21,7 +23,7 @@ public class GameId {
      */
     public GameId(String gameId) {
         requireNonNull(gameId);
-        checkArgument(isValidGameId(gameId), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidGameId(gameId), MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
         value = gameId;
     }
 
