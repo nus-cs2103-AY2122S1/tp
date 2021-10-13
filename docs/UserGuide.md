@@ -14,17 +14,16 @@ Finding your next lead has never been easier.
 * [Features](#features)
     * [Create new contact: create](#create-new-contact--create)
     * [Retrieve particular contact: view](#retrieve-particular-contact--view)
-    * [Update existing contact: update](#update-existing-contact--update)
+    * [Update existing contact: edit](#update-existing-contact--edit)
     * [Delete particular contact: delete](#delete-particular-contact--delete)
-    * [List all contacts](#list-all-contacts--list)
+    * [List all contacts: list](#list-all-contacts--list)
     * [Clearing all entries: clear](#clearing-all-entries--clear)
     * [Sort Contacts: sort](#sort-contacts--sort)
-    * [Locating person by name: find](#locating-clients-by-keywords--find)
-    * [Locating clients by keywords](#locating-clients-by-keywords--search)
-    * [Filter current list](#filter-current-list-by-keywords--filter)
+    * [Locating clients by keywords: search](#locating-clients-by-keywords--search)
+    * [Filter current list: filter](#filter-current-list-by-keywords--filter)
     * [Exiting the program: exit](#exiting-the-program--exit)
     * [Saving data](#saving-the-data)
-    * [Edit data file](#editing-data-file)
+    * [Edit data file](#edit-data-file)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -46,7 +45,7 @@ Finding your next lead has never been easier.
 
     * **`list`** : Lists all contacts.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * **`create`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Creates a contact named `John Doe` to the Address Book.
 
     * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -64,14 +63,15 @@ Every client that is registered in LeadsForce have the following attributes that
 
 Client Attribute | Type of Attribute | Argument Tag
 -----------------|-----------------|-----------------
-Client ID (**unique**) | integer | None. Assigned on creation of new contact
-Name (**Compulsory**) | String | name/
-Email (**Compulsory**)| String (email address)| email/
-Contact number | Integer (8 digits long)| contact/
-Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| risk-appetite/
-Last met/contacted | Date | last-met/
-Current financial plans | List of Strings | current-plans-add/<br>current-plans-remove/
-Disposable Income | Integer | disposable-income/
+Client ID (**unique**) | integer | i/. Assigned on creation of new contact
+Name (**Compulsory**) | String | n/
+Email (**Compulsory**)| String (email address)| e/
+Contact number | Integer (8 digits long)| p/
+Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
+Last met/contacted | Date | l/
+Current financial plans | List of Strings | c/
+Disposable Income | Integer | d/
+Address | String | a/
 
 
 
@@ -90,7 +90,7 @@ Disposable Income | Integer | disposable-income/
 
 * Inputs with `…`​ at the end refers to inputs that can be used multiple times in that command
   .<br>
-  e.g. `[/tag ATTRIBUTE]…​` can be in the form of `/email @gmail.com` or `/email @gmail.com /risk-appetite 5`
+  e.g. `[tag/ATTRIBUTE]…​` can be in the form of `e/@gmail.com` or `e/@gmail.com r/5`
 </div>
 
 
@@ -105,8 +105,8 @@ Format: `create {client’s name} <email>/{email} <phone-no>/{phone number} <ris
 * Tags that can be added are as seen in the client information in the Client Info Section
 
 Examples:
-* `create Benedict Chua email/benchua@hotmail.com`
-* `create Keith email/keithtan@ymail.com phone-no/12345678 risk-appetite/4`
+* `create Benedict Chua e/benchua@hotmail.com`
+* `create Keith e/keithtan@ymail.com p/12345678 r/4`
 
 
 ### Retrieve Particular Contact : `view`
@@ -117,9 +117,9 @@ Format: `view {client’s id number}`
 
 Example: `view 2` would be used to view client 2's information
 
-### Update Existing Contact : `update`
+### Update Existing Contact : `edit`
 
-Update the information of existing users by using the “update” command. This can be used to change the
+Update the information of existing users by using the “edit” command. This can be used to change the
 attributes of a client, using the tag of the client’s attribute.
 
 * Multiple attributes could be changed with one command.
@@ -128,8 +128,8 @@ Format: `update {Client’s id number} <attribute>/{changed value of attribute} 
 
 Examples:
 
-* `update 15 name/Dominic` command changes the name of client 15 to “Dominic”.
-* `update 3 contact-number/12345678 risk-appetite/5` command changes the contact number to “12345678” and
+* `update 15 n/Dominic` command changes the name of client 15 to “Dominic”.
+* `update 3 p/12345678 r/5` command changes the contact number to “12345678” and
   the risk appetite to 5 for the client who’s id number is 3.
 
 ### Delete particular contact : `delete`
@@ -138,12 +138,12 @@ Deletes an existing client from the address book using any specified attribute t
 
 Format: `delete <attribute>/{value}`
 
-* Attributes would be limited to client id, email or contact number.
-* It is possible to bulk delete multiple clients by inputting multiple keys separated by ‘,’.
+* Attributes would be limited to client id, email or both.
 
 Examples:
-* `delete id/4,6,7`(deletes clients with client id 4, client id 6 and client 7)
-* `delete email/keithtan@gmail.com`(deletes a client whose email address is keithtan@gmail.com)
+* `delete i/7`(deletes client with client id 7)
+* `delete e/keithtan@gmail.com`(deletes the client whose email address is keithtan@gmail.com)
+* `delete i/4 e/johndoe@gmail.com`(deletes the client whose client id is 4 and email address is johndoe@gmail.com)
 
 ### List all contacts : `list`
 
@@ -156,29 +156,14 @@ Format: `list`
 
 Sorts clients in order based off the inputted attribute
 
-Format: `sort <attribute>/{ASC/DESC}`
+Format: `sort <attribute>/{ASC/DSC}`
 
-* The asc and desc tag dictates whether filtered client list is sorted in ascending or descending order
-
-Examples:
-* `sort risk-appetite/ASC`
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]...`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. 
+* The tags are case-insensitive. (ASC are asc both okay.)
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
+* `sort r/ASC` will sort the list by ascending risk-appetite
+* `sort i/dsc` will sort the list by descending client id
 
 ### Locating clients by keywords : `search`
 
@@ -260,13 +245,13 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| create benedict email/benedict@gmail.com phone-no/90909898 risk-appetite/3 |
+**Create** | `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| create benedict e/benedict@gmail.com p/90909898 r/3 |
 **View** | `view {client’s id number}` | view 123 |
-**Delete** | `delete <attribute>/{value}` | delete id/4,6,7  |
-**Update** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 name/Dominic phone-number/12345678 |
+**Delete** | `delete <attribute>/{value}` | delete i/4  |
+**Edit** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
 **List** | `list` | - |
 **Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
-**Search** | `search [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com risk-appetite/5 |
-**Filter** | `filter KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * email/doe@gmail.com p/9 |
-**Sort** | `sort <attribute>/{ASC/DESC}` | sort risk-appetite/asc |
+**Search** | `search [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * e/doe@gmail.com r/5 |
+**Filter** | `filter KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * e/doe@gmail.com p/9 |
+**Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
 **Exit** | `exit` | - |
