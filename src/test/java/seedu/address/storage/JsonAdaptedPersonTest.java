@@ -25,6 +25,8 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_BIRTHDAY_FORMAT = "19-06-2001";
+    private static final String INVALID_DATE = "30022001";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -132,19 +134,25 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidBirthday_throwsIllegalException() {
+    public void toModelType_invalidBirthdayFormat_throwsIllegalException() {
         JsonAdaptedPerson personWrongBirthdayFormat =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        "19-06-2001");
+                        INVALID_BIRTHDAY_FORMAT);
         String expectedMessageWrongBirthdayFormat = Birthday.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessageWrongBirthdayFormat,
                 personWrongBirthdayFormat::toModelType);
 
+
+    }
+
+    @Test
+    public void toModelType_invalidBirthdayDate_throwsIllegalException() {
         String expectedMessageInvalidDate = Birthday.MESSAGE_INVALID_DATE;
         JsonAdaptedPerson personInvalidDate =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
-                        "30022001");
+                        INVALID_DATE);
         assertThrows(IllegalValueException.class, expectedMessageInvalidDate, personInvalidDate::toModelType);
     }
+
 
 }
