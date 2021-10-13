@@ -67,7 +67,7 @@
                   </StackPane>
                 <HBox GridPane.columnIndex="1">
                      <children>
-      
+
                                                                                                                           <VBox fx:id="personList" alignment="CENTER" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
@@ -78,7 +78,7 @@
                               </opaqueInsets>
                            </StackPane>
                     </VBox>
-      
+
                                                                                                   <VBox fx:id="tuitionList" alignment="CENTER" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
