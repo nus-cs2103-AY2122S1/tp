@@ -6,7 +6,9 @@ import static java.util.Objects.requireNonNull;
  * Represents the time slot the tuition class takes
  */
 public class Timeslot {
+    public static final String TIME_FORMAT_INCORRECT = "The time format is not correct";
     public final String time;
+
 
     /**
      * Constructor for time slot.
@@ -73,8 +75,8 @@ public class Timeslot {
 
     /**
      * compare two time slot to detect any conflict
-     * @param otherTime
-     * @return
+     * @param otherTime the time to compare
+     * @return true if conflict exist, false if no conflict
      */
     public boolean compareTime(String otherTime) {
         //exactly the same

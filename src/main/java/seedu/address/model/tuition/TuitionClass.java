@@ -98,6 +98,9 @@ public class TuitionClass {
      * This defines a weaker notion of equality between two tuition classes.
      */
     public boolean isSameTuition(TuitionClass otherTuition) {
+        if (otherTuition == null) {
+            return false;
+        }
         if (otherTuition == this) {
             return true;
         }
