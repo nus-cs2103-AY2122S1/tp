@@ -1,5 +1,5 @@
 {
-  "persons" : [ ],
+  "students" : [ ],
   "lessons" : [ {
     "subject" : "Science",
     "grade" : "P2",

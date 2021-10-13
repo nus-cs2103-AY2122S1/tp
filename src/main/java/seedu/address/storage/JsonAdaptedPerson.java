@@ -12,20 +12,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.LessonCode;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.ParentContact;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.ParentContact;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedStudent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
     private final String phone;
@@ -36,10 +36,10 @@ class JsonAdaptedPerson {
     private final List<String> lessonCodes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("grade") String grade, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("lessons") List<String> lessonCodes) {
@@ -58,9 +58,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Student} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Student source) {
+    public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         phone = source.getParentContact().value;
         email = source.getEmail().value;
@@ -82,16 +82,16 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
      * Lesson codes will only be attached in {@link JsonAddressBookStorage} when it can interact
      * with both lesson and students.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            studentTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -135,7 +135,7 @@ class JsonAdaptedPerson {
         }
         final Grade modelGrade = new Grade(grade);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(studentTags);
         return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelTags);
     }
 }

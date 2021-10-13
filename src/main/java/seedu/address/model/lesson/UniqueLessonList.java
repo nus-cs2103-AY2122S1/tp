@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -43,7 +43,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void add(Lesson toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateStudentException();
         }
         internalList.add(toAdd);
     }
@@ -58,11 +58,11 @@ public class UniqueLessonList implements Iterable<Lesson> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new StudentNotFoundException();
         }
 
         if (!target.isSameLesson(editedLesson) && contains(editedLesson)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateStudentException();
         }
 
         internalList.set(index, editedLesson);
@@ -75,7 +75,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void remove(Lesson toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new StudentNotFoundException();
         }
     }
 
@@ -91,7 +91,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
     public void setLessons(List<Lesson> lessons) {
         requireAllNonNull(lessons);
         if (!lessonsAreUnique(lessons)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateStudentException();
         }
 
         internalList.setAll(lessons);

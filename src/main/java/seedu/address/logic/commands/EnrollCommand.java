@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.model.lesson.LessonCode.isValidLessonCode;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonCode;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Student;
 
 public class EnrollCommand extends Command {
 
@@ -55,9 +55,9 @@ public class EnrollCommand extends Command {
         Lesson lesson = model.searchLessons(code)
                 .orElseThrow(() -> new CommandException(MESSAGE_LESSON_NOT_FOUND));
 
-        List<Student> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
         Student studentToEnroll = lastShownList.get(targetIndex.getZeroBased());
 
@@ -70,8 +70,8 @@ public class EnrollCommand extends Command {
 
         Student newStudent = studentToEnroll.createClone();
         lesson.addStudent(newStudent);
-        model.setPerson(studentToEnroll, newStudent);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setStudent(studentToEnroll, newStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, newStudent.getName(), lesson));

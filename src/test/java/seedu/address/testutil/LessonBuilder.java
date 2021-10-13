@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.model.lesson.Price.isValidPrice;
 import static seedu.address.model.lesson.Subject.isValidSubject;
-import static seedu.address.model.person.Grade.isValidGrade;
+import static seedu.address.model.student.Grade.isValidGrade;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -14,8 +14,8 @@ import seedu.address.model.lesson.LessonCode;
 import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Price;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Student;
 
 /**
  * A utility class to help with building Lesson objects.

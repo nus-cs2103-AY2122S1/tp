@@ -12,12 +12,12 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Price;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.ParentContact;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.ParentContact;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,7 +28,7 @@ public class SampleDataUtil {
     /**
      * Returns an array of sample students.
      */
-    public static Student[] getSamplePersons() {
+    public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new ParentContact("87438807"),
                     new Email("alexyeoh@example.com"),
@@ -77,7 +77,7 @@ public class SampleDataUtil {
      * Returns a sample addressbook.
      */
     public static ReadOnlyAddressBook getSampleAddressBook() {
-        Student[] students = getSamplePersons();
+        Student[] students = getSampleStudents();
         Lesson[] lessons = getSampleLessons();
 
         Student alex = students[0];
@@ -89,7 +89,7 @@ public class SampleDataUtil {
 
         AddressBook sampleAb = new AddressBook();
         for (Student sampleStudent : students) {
-            sampleAb.addPerson(sampleStudent);
+            sampleAb.addStudent(sampleStudent);
         }
         for (Lesson sampleLesson : lessons) {
             sampleAb.addLesson(sampleLesson);

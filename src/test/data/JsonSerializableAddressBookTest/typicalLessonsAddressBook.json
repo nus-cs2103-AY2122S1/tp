@@ -1,6 +1,6 @@
 {
   "_comment": "AddressBook save file which contains the same Lesson values as in TypicalLessons",
-  "persons" : [ ],
+  "students" : [ ],
   "lessons" : [ {
     "subject" : "Science",
     "grade" : "P2",

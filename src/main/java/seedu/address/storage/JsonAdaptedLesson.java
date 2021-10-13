@@ -9,8 +9,8 @@ import static seedu.address.model.lesson.Price.PRICE_MESSAGE_CONSTRAINT;
 import static seedu.address.model.lesson.Price.isValidPrice;
 import static seedu.address.model.lesson.Subject.SUBJECT_MESSAGE_CONSTRAINTS;
 import static seedu.address.model.lesson.Subject.isValidSubject;
-import static seedu.address.model.person.Grade.GRADE_MESSAGE_CONSTRAINTS;
-import static seedu.address.model.person.Grade.isValidGrade;
+import static seedu.address.model.student.Grade.GRADE_MESSAGE_CONSTRAINTS;
+import static seedu.address.model.student.Grade.isValidGrade;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
@@ -24,7 +24,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonTime;
 import seedu.address.model.lesson.Price;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.person.Grade;
+import seedu.address.model.student.Grade;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -67,7 +67,7 @@ public class JsonAdaptedLesson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Lesson} object.
+     * Converts this Jackson-friendly adapted student object into the model's {@code Lesson} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted lesson.
      */

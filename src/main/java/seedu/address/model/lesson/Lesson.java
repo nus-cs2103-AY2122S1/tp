@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import seedu.address.model.person.Grade;
-import seedu.address.model.person.Student;
+import seedu.address.model.student.Grade;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Lesson in the tuitiONE book.
@@ -164,7 +164,7 @@ public class Lesson {
         requireNonNull(student);
         checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student, this));
         for (Student s : students) {
-            if (s.isSamePerson(student)) {
+            if (s.isSameStudent(student)) {
                 students.remove(s);
                 s.unenrollFromLesson(this);
                 student.unenrollFromLesson(this);
