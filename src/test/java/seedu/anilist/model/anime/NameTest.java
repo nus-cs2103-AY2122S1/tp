@@ -33,7 +33,7 @@ public class NameTest {
         assertTrue(Name.isValidName("Danshi Koukousei no Nichijou")); // alphabets only
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName(":;.'!")); // punctuation only
-        assertTrue(Name.isValidName("~!@#$%^&()+-=:;")); // ascii characters
+        assertTrue(Name.isValidName("~!@#$%^&()+-=:;")); // non-alphanumeric ascii characters
         assertTrue(Name.isValidName("3-gatsu no Lion")); // starting with numeric character containing punctuation
         assertTrue(Name.isValidName("No. 6")); // starting with alphabet containing punctuation
         assertTrue(Name.isValidName("BLEACH")); // with all capital letters
