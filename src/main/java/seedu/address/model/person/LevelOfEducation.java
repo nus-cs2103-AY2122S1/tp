@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+
 /**
  * Represents an Applicant's level of education in RecruitIn.
  */
@@ -31,11 +33,35 @@ public class LevelOfEducation {
         Education(String educationLevel) {
             this.educationLevel = educationLevel;
         }
+
+        public static ArrayList<String> getEducationLevels() {
+            ArrayList<String> educationLevels = new ArrayList<>();
+
+            for (Education education: Education.values()) {
+                educationLevels.add(education.educationLevel);
+            }
+
+            return educationLevels;
+        }
+
+        public static String getRegex() {
+            StringBuilder regex = new StringBuilder("(?i)\\b(?:");
+            for (Education education: Education.values()) {
+                regex.append(education.educationLevel);
+                regex.append("|");
+            }
+            regex.append("\\w+)\\b");
+            return regex.toString();
+        }
     }
 
     public static final String MESSAGE_CONSTRAINTS =
             "Level of Education should only be one of the following: Elementary, Middle School,"
                     + " High School, University, Bachelors, Masters or PhD";
+
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for keywords that start with "
+            + "one or more of the following levels of education: Elementary, Middle School, High School, University,"
+            + " Bachelors, Masters or PhD";
 
     public final String levelOfEducation;
 

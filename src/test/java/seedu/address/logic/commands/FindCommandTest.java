@@ -29,6 +29,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
+import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -188,6 +189,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
         EmploymentTypeContainsKeywordsPredicate predicate = prepareEmploymentTypePredicate(" ");
+
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
         expectedModel.updateFilteredPersonList(predicate);
@@ -197,15 +199,25 @@ public class FindCommandTest {
 
     @Test
     public void execute_oneEmploymentTypeKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
         ArrayList<Predicate<Person>> predicates = new ArrayList<>();
         EmploymentTypeContainsKeywordsPredicate predicate =
                 prepareEmploymentTypePredicate("Full time");
         predicates.add(predicate);
         FindCommand command = new FindCommand(predicates);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredPersonList());
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(ALICE, ELLE, IDA), modelWithHoonIda.getFilteredPersonList());
     }
 
     @Test
@@ -257,6 +269,54 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_zeroLevelOfEducationKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate = prepareLevelOfEducationPredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneLevelOfEducationKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate =
+                prepareLevelOfEducationPredicate("Masters");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(BENSON, IDA), modelWithHoonIda.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleLevelOfEducationKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        LevelOfEducationContainsKeywordsPredicate predicate =
+                prepareLevelOfEducationPredicate("Masters University");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
     }
 
     @Test
@@ -324,6 +384,14 @@ public class FindCommandTest {
     private ExpectedSalaryWithinRangePredicate prepareExpectedSalaryPredicate(String userInput) {
         return new ExpectedSalaryWithinRangePredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    /**
+     * Parses {@code userInput} into a {@code LevelOfEducationContainsKeywordPredicate}.
+     */
+    private LevelOfEducationContainsKeywordsPredicate prepareLevelOfEducationPredicate(String userInput) {
+        return new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
 
     /**
      * Parses {@code userInput} into a {@code TagContainsKeywordPredicate}.

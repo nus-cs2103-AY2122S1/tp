@@ -27,6 +27,7 @@ import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
+import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -184,8 +185,30 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String arg = argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get();
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(keywords)));
+                    List<String> keywords = new ArrayList<>();
+                    Pattern r = Pattern.compile(LevelOfEducation.Education.getRegex());
+                    Matcher m = r.matcher(trimmedArg);
+
+                    ArrayList<String> terms = LevelOfEducation.Education.getEducationLevels();
+
+                    while (m.find()) {
+                        if (!m.group().isEmpty()) {
+                            boolean contains = false;
+                            for (String term: terms) {
+                                if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
+                                    contains = true;
+                                    break;
+                                }
+                            }
+
+                            if (!contains) {
+                                throw new ParseException(LevelOfEducation.FIND_MESSAGE_CONSTRAINTS);
+                            } else {
+                                keywords.add(m.group());
+                            }
+                        }
+                    }
+                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(keywords));
                 }
             }
 

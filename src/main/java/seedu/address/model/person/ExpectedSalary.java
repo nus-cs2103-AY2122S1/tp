@@ -11,8 +11,8 @@ import seedu.address.commons.util.StringUtil;
  */
 public class ExpectedSalary {
 
-    public static final String MESSAGE_CONSTRAINTS = "Expected salary should only contain numbers (no decimals), "
-            + "should be non-negative, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Expected salary should only be a non-negative integer "
+            + "(ranges from 0 to 2^(31) - 1 inclusive), and it should not be blank";
 
     /*
      * The first character of the salary must not be a whitespace,
@@ -39,7 +39,15 @@ public class ExpectedSalary {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidExpectedSalary(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            if (test.matches(VALIDATION_REGEX)) {
+                Integer.parseInt(test);
+                return true;
+            }
+            return false;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

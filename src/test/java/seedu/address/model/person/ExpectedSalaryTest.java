@@ -32,11 +32,12 @@ public class ExpectedSalaryTest {
         assertFalse(ExpectedSalary.isValidExpectedSalary("9011p041")); // alphabets within digits
         assertFalse(ExpectedSalary.isValidExpectedSalary("!@#$%^&*()")); // non-alphanumeric characters
         assertFalse(ExpectedSalary.isValidExpectedSalary("9312 1534")); // spaces within digits
+        assertFalse(ExpectedSalary.isValidExpectedSalary("124293842033123")); // long expected salary
 
         // valid expected salary
         assertTrue(ExpectedSalary.isValidExpectedSalary("0")); // exactly 1 number
         assertTrue(ExpectedSalary.isValidExpectedSalary("911")); // more than 1 number
         assertTrue(ExpectedSalary.isValidExpectedSalary("93121534"));
-        assertTrue(ExpectedSalary.isValidExpectedSalary("124293842033123")); // long expected salary
+
     }
 }
