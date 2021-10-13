@@ -18,7 +18,7 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  */
 public class RemoveMarkCommand extends Command {
 
-    private static final String COMMAND_WORD = "unmark";
+    public static final String COMMAND_WORD = "unmark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to remove the marking of an absentee!\n"
             + "e.g. " + COMMAND_WORD + " " + PREFIX_INDEX + "INDEX"
             + " " + PREFIX_DAY_SHIFT + "DATE" + ",\n"
@@ -31,12 +31,22 @@ public class RemoveMarkCommand extends Command {
     private final int index;
     private final Period period;
 
+    /**
+     * Constructs an {@code RemoveMarkCommand} to indicate that a person who satisfies
+     * the {@code PersonContainsFieldsPredicate} has been marked as working
+     * in {@code period}.
+     */
     public RemoveMarkCommand(PersonContainsFieldsPredicate predicate, Period period) {
         index = -1;
         this.predicate = predicate;
         this.period = period;
     }
 
+    /**
+     * Constructs an {@code RemoveMarkCommand} to indicate that a person who satisfies the
+     * {@code PersonContainsFieldsPredicate} has been marked as working in
+     * {@code period}.
+     */
     public RemoveMarkCommand(PersonContainsFieldsPredicate predicate, Index index, Period period) {
         this.index = index.getZeroBased();
         this.predicate = predicate;

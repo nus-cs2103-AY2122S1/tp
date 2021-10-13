@@ -26,7 +26,7 @@ public class PersonTest {
         assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
     }
 
-    
+
 
     @Test
     public void isSamePerson() {

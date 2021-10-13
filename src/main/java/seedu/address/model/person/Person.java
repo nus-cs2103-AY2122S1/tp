@@ -113,7 +113,7 @@ public class Person {
     public boolean unMark(Period period) {
         requireNonNull(period);
         List<Period> toRemove = getAbsentDates().stream()
-                .filter(p -> contained(p, period))
+                .filter(p -> period.contains(period))
                 .collect(Collectors.toList());
         this.getAbsentDates().removeAll(toRemove);
         return toRemove.size() != 0;

@@ -42,7 +42,7 @@ public class MarkCommand extends Command {
     /**
      * Constructs an {@code MarkCommand} to indicate that a person who satisfies
      * the {@code PersonContainsFieldsPredicate} has been marked as not working
-     * in {@code} period.
+     * in {@code period}.
      */
     public MarkCommand(PersonContainsFieldsPredicate predicate, Period period) {
         this.period = period;

@@ -64,6 +64,15 @@ public class Period {
 
     }
 
+    /**
+     * Returns true if {@code this} contains {@code period}.
+     */
+    public boolean contains(Period period) {
+        return this.contains(period.start)
+                && this.contains(period.end);
+
+    }
+
     private boolean withinExclusively(LocalDate date) {
         return (this.start.isBefore(date))
                 && (this.end.isAfter(date));
@@ -74,14 +83,7 @@ public class Period {
                 || this.end.isEqual(date);
     }
 
-    /**
-     * Returns true if {@code this} contains {@code period}.
-     */
-    public boolean contains(Period period) {
-        return this.contains(period.start)
-                && this.contains(period.end);
 
-    }
 
 
 
