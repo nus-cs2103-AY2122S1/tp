@@ -58,11 +58,11 @@ public class LessonAddCommand extends UndoableCommand {
             + PREFIX_HOMEWORK + "Textbook Page 52";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student identified "
-        + "by the index number\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Examples:\n"
-        + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
-        + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
+            + "by the index number\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Examples:\n"
+            + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
+            + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
 
     public static final String USER_TIP = "Try adding a lesson to a student using: \n"
             + COMMAND_WORD + " "
