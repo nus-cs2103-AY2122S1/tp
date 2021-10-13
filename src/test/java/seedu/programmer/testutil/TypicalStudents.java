@@ -1,13 +1,13 @@
 package seedu.programmer.testutil;
 
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASSID_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASSID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,10 +52,10 @@ public class TypicalStudents {
             .withGrade("A").build();
 
     // Manually added - student's details found in {@code CommandTestUtil}
-    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENTID_AMY)
-            .withClassId(VALID_CLASSID_AMY).withGrade(VALID_GRADE_AMY).build();
-    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withStudentId(VALID_STUDENTID_BOB)
-            .withClassId(VALID_CLASSID_BOB).withGrade(VALID_GRADE_BOB).build();
+    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENT_ID_AMY)
+            .withClassId(VALID_CLASS_ID_AMY).withGrade(VALID_GRADE_AMY).build();
+    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withStudentId(VALID_STUDENT_ID_BOB)
+            .withClassId(VALID_CLASS_ID_BOB).withGrade(VALID_GRADE_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

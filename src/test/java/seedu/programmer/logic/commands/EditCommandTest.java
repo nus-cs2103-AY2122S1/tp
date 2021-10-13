@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASSID_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -53,10 +53,10 @@ public class EditCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withClassId(VALID_CLASSID_BOB).build();
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withClassId(VALID_CLASS_ID_BOB).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withClassId(VALID_CLASSID_BOB).build();
+                .withClassId(VALID_CLASS_ID_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
