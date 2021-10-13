@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CS2103;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -44,6 +45,18 @@ public class ClearCommandTest {
                 model,
                 new CommandResult(ClearCommand.MESSAGE_SUCCESS),
                 expectedModel);
+    }
+
+    @Test
+    public void copyFolders_success() {
+        AddressBook addressBook = getTypicalAddressBook();
+        addressBook.addFolder(CS2103);
+        Model model = new ModelManager(addressBook, new UserPrefs());
+        Model actualModel = new ModelManager(AddressBook.copyFolders(model), new UserPrefs());
+        AddressBook addressBookWithFolder = new AddressBook();
+        addressBookWithFolder.addFolder(CS2103);
+        Model expectedModel = new ModelManager(addressBookWithFolder, new UserPrefs());
+        assertEquals(actualModel, expectedModel);
     }
 
 }
