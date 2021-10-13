@@ -118,7 +118,7 @@ public class AddGroupCommandTest {
         String randomId = "E9090909";
         AllocDescriptor descriptorForNonExistentStudent = new AllocDescriptorBuilder()
                 .withGroup(NEW_GROUP)
-                .withName(randomId).build();
+                .withId(randomId).build();
 
         AddGroupCommand command = new AddGroupCommand(groupToAdd, Arrays.asList(descriptorForNonExistentStudent));
 
