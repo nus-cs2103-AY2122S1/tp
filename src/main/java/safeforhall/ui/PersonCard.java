@@ -2,8 +2,12 @@ package safeforhall.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import safeforhall.model.person.Person;
 
 /**
@@ -38,6 +42,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label faculty;
     @FXML
+    private Rectangle status;
+    @FXML
+    private HBox informationContainer;
+    @FXML
+    private VBox deadlineContainer;
+    @FXML
+    private VBox statusContainer;
+    @FXML
     private Label lastfetdate;
     @FXML
     private Label lastcollectiondate;
@@ -56,6 +68,29 @@ public class PersonCard extends UiPart<Region> {
         faculty.setText(person.getFaculty().faculty);
         lastfetdate.setText(person.getLastFetDate().date);
         lastcollectiondate.setText(person.getLastCollectionDate().date);
+
+        if (person.hasMissedDeadline()) {
+            this.getRoot().setStyle("-fx-background-color: #8B0000;");
+            Label textBox = new Label("Late by:");
+            int missedDates = person.getMissedDates();
+            Label date;
+            if (missedDates > 1) {
+                date = new Label(missedDates + " days");
+            } else {
+                date = new Label(missedDates + " day");
+            }
+            deadlineContainer.getChildren().add(textBox);
+            deadlineContainer.getChildren().add(date);
+        }
+
+        if (person.getVaccStatus().vaccinated) {
+            Image img = new Image("/images/vaccinated.png");
+            Rectangle rec = new Rectangle(30, 30);
+            rec.setArcHeight(10);
+            rec.setArcWidth(10);
+            rec.setFill(new ImagePattern(img));
+            statusContainer.getChildren().add(rec);
+        }
     }
 
     @Override
