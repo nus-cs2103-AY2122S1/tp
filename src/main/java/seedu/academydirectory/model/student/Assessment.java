@@ -10,10 +10,10 @@ public class Assessment implements Information {
     public static final String MESSAGE_CONSTRAINTS =
             "Grades can only be recorded for the following assessments: RA1, MIDTERM, RA2, PE, FINAL.";
 
-    private HashMap<String, Integer> assessment;
+    private final HashMap<String, Integer> assessment;
 
     /**
-     * Constructs a HashMap containing the Assessment and respective grades.
+     * Constructs a HashMap containing the Assessment and NA for grades.
      */
     public Assessment() {
         assessment = new HashMap<>();
@@ -25,6 +25,13 @@ public class Assessment implements Information {
     }
 
     /**
+     * Constructs a HashMap containing the existing Assessments and respective grades.
+     */
+    public Assessment(HashMap<String, Integer> assessment) {
+        this.assessment = assessment;
+    }
+
+    /**
      * Returns true if a given string is a valid assessment.
      */
     public static boolean isValidAssessment(String test) {
@@ -32,7 +39,7 @@ public class Assessment implements Information {
                 || test.equalsIgnoreCase("PE") || test.equalsIgnoreCase("FINAL");
     }
 
-    public HashMap<String, Integer> getAssessment() {
+    public HashMap<String, Integer> getAssessmentHashMap() {
         return assessment;
     }
 
