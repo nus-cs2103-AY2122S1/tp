@@ -7,8 +7,8 @@ public enum Status {
     NEED_GROUP("SG"),
     NEED_MEMBER("SM");
 
-    public static final String MESSAGE_CONSTRAINTS = "The group status you are trying to find does not exist! " +
-            "Please enter 'SG' for 'Seeking group', 'SM' for 'Seeking member' or 'G' for 'Not looking for group'";
+    public static final String MESSAGE_CONSTRAINTS = "The group status you are trying to find does not exist! "
+            + "Please enter 'SG' for 'Seeking group', 'SM' for 'Seeking member' or 'G' for 'Not looking for group'";
 
     private String status;
 
