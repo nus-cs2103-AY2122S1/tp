@@ -60,11 +60,7 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         if (descriptor.getRoles().isPresent()) {
             Set<Role> roles = descriptor.getRoles().get();
-            if (roles.isEmpty()) {
-                sb.append(PREFIX_ROLE).append(" ");
-            } else {
-                roles.forEach(s -> sb.append(PREFIX_TAG).append(s.getValue()).append(" "));
-            }
+            roles.forEach(s -> sb.append(PREFIX_ROLE).append(s.getValue()).append(" "));
         }
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.toString()).append(" "));
         descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status.getValue()).append(" "));

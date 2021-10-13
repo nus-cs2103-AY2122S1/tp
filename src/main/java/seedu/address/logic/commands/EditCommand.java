@@ -98,7 +98,6 @@ public class EditCommand extends Command {
         this.identifier = Identifier.NAME;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         switch(this.identifier) {
@@ -112,7 +111,6 @@ public class EditCommand extends Command {
         }
 
     }
-
 
     private CommandResult editBasedOnName(Model model) throws CommandException {
         requireNonNull(model);
