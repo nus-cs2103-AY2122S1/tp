@@ -245,9 +245,16 @@ Examples:
 
 ### Create a reservation: `reserve` 
 
-Format: `reserve d/DATE t/TIME  n/NAME p/PHONE_NUMBER`
+Add a new reservation with number of people, 
+customer's phone number and the date & time.
 
-Examples: `reserve d/2021-09-19 t/1800 n/John Doe p/87654321`
+Format: `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
+
+* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2030`
+
+Examples: 
+* `reserve 2 p/98765432 at/2021-12-24 2000`
+* `reserve 5 p/12345668 at/2021-02-14 1200`
 
 Note: System will reject if time slot is not available
 
@@ -331,6 +338,7 @@ Action | Format, Examples
 **Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
 **Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Create reservation** | `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`<br> e.g., `reserve 2 p/98765432 at/2021-12-24 2000`
 **Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [COMING SOON]** | `list`
 **Help [COMING SOON]** | `help`
