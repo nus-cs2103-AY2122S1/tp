@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
 
     public static final String USER_TIP = "You may clear all the data with: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "TAB data has been cleared!";
+    public static final String MESSAGE_SUCCESS = "TAB's data has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {

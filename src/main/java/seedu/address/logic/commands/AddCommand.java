@@ -67,8 +67,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_CONTACT_REQUIRED = "This student must have at least one contact field!";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in TAB!";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 
     private final Person toAdd;
 
@@ -85,7 +84,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addPerson(toAdd);

@@ -75,10 +75,10 @@ public class EditCommand extends Command {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided!";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited student: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit!";
     public static final String MESSAGE_CONTACT_REQUIRED = "This student must have at least one contact field!";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in TAB!";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -101,14 +101,14 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
         if (!editedPerson.hasContactField()) {
             throw new CommandException(MESSAGE_CONTACT_REQUIRED);
@@ -116,7 +116,7 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedPerson));
     }
 
     /**
