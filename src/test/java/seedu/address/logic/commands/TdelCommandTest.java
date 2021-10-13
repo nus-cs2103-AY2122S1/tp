@@ -30,10 +30,10 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 
 
-class TDelCommandTest {
+class TdelCommandTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TDelCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new TdelCommand(null, null));
     }
 
     @Test
@@ -43,12 +43,12 @@ class TDelCommandTest {
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TAddCommand tAddCommand = new TAddCommand(validMemberID, validTask);
+        TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
         ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberID);
         tAddCommand.execute(modelStub);
-        CommandResult commandResult = new TDelCommand(validMemberID, validTaskID).execute(modelStub);
+        CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);
 
-        assertEquals(String.format(TDelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getTaskName()),
+        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getTaskName()),
                 commandResult.getFeedbackToUser());
     }
 
@@ -58,10 +58,10 @@ class TDelCommandTest {
         Index validTaskID = Index.fromOneBased(1);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TDelCommand tDelCommand = new TDelCommand(validMemberID, validTaskID);
+        TdelCommand tDelCommand = new TdelCommand(validMemberID, validTaskID);
         ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberID);
 
-        assertThrows(CommandException.class, TDelCommand.MESSAGE_TASK_NOT_FOUND, () ->
+        assertThrows(CommandException.class, TdelCommand.MESSAGE_TASK_NOT_FOUND, () ->
                 tDelCommand.execute(modelStub));
     }
 
@@ -73,14 +73,14 @@ class TDelCommandTest {
         Index validTaskID2 = Index.fromOneBased(2);
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TDelCommand tDelCommand1 = new TDelCommand(validMemberID, validTaskID1);
-        TDelCommand tDelCommand2 = new TDelCommand(validMemberID, validTaskID2);
+        TdelCommand tDelCommand1 = new TdelCommand(validMemberID, validTaskID1);
+        TdelCommand tDelCommand2 = new TdelCommand(validMemberID, validTaskID2);
 
         // same object -> returns true
         assertTrue(tDelCommand1.equals(tDelCommand1));
 
         // same values -> returns true
-        TDelCommand tDelCommand1Copy = new TDelCommand(validMemberID, validTaskID1);
+        TdelCommand tDelCommand1Copy = new TdelCommand(validMemberID, validTaskID1);
         assertTrue(tDelCommand1.equals(tDelCommand1Copy));
 
         // different types -> returns false

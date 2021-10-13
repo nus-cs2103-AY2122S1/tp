@@ -14,10 +14,10 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TDelCommand;
+import seedu.address.logic.commands.TdelCommand;
 
-class TDelCommandParserTest {
-    private TDelCommandParser parser = new TDelCommandParser();
+class TdelCommandParserTest {
+    private TdelCommandParser parser = new TdelCommandParser();
 
     @Test
     void parse_allFieldsPresent_success() {
@@ -25,12 +25,12 @@ class TDelCommandParserTest {
         Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID_DEL);
 
         assertParseSuccess(parser, TASK_ID_DESC_ONE + MEMBER_ID_DEL_DESC_ONE,
-                new TDelCommand(expectedMemberID, expectedTaskID));
+                new TdelCommand(expectedMemberID, expectedTaskID));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TDelCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TdelCommand.MESSAGE_USAGE);
 
         //missing member id
         assertParseFailure(parser, TASK_ID_DESC_ONE, expectedMessage);

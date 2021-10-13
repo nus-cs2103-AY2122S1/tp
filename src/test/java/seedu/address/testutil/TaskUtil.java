@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TAddCommand;
-import seedu.address.logic.commands.TDelCommand;
+import seedu.address.logic.commands.TaddCommand;
+import seedu.address.logic.commands.TdelCommand;
 import seedu.address.model.task.Task;
 
 /**
@@ -17,8 +17,8 @@ public class TaskUtil {
     /**
      * Returns an add command string for adding the {@code task} to the member with {@code memberID}.
      */
-    public static String getTAddCommand(Task task, Index memberID) {
-        return TAddCommand.COMMAND_WORD + " " + getTaskDetails(task, memberID);
+    public static String getTaddCommand(Task task, Index memberID) {
+        return TaddCommand.COMMAND_WORD + " " + getTaskDetails(task, memberID);
     }
 
     /**
@@ -35,8 +35,8 @@ public class TaskUtil {
      * Returns a task delete command string for deleting the {@code task}
      * from the member with {@code memberID}.
      */
-    public static String getTDelCommand(Index taskID, Index memberID) {
-        return TDelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberID);
+    public static String getTdelCommand(Index taskID, Index memberID) {
+        return TdelCommand.COMMAND_WORD + " " + getTaskIdDetails(taskID, memberID);
     }
 
     /**

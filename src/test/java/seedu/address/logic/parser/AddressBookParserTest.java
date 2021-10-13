@@ -23,8 +23,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaddCommand;
-import seedu.address.logic.commands.TAddCommand;
-import seedu.address.logic.commands.TDelCommand;
+import seedu.address.logic.commands.TaddCommand;
+import seedu.address.logic.commands.TdelCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.data.NameContainsKeywordsPredicate;
 import seedu.address.model.data.member.Member;
@@ -49,16 +49,16 @@ public class AddressBookParserTest {
     public void parseCommand_add_task() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
         Task validTask = new Task("do homework");
-        TAddCommand command = (TAddCommand) parser.parseCommand(TaskUtil.getTAddCommand(validTask, validMemberID));
-        assertEquals(new TAddCommand(validMemberID, validTask), command);
+        TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
+        assertEquals(new TaddCommand(validMemberID, validTask), command);
     }
 
     @Test
     public void parseCommand_del_task() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
-        TDelCommand command = (TDelCommand) parser.parseCommand(TaskUtil.getTDelCommand(validTaskID, validMemberID));
-        assertEquals(new TDelCommand(validMemberID, validTaskID), command);
+        TdelCommand command = (TdelCommand) parser.parseCommand(TaskUtil.getTdelCommand(validTaskID, validMemberID));
+        assertEquals(new TdelCommand(validMemberID, validTaskID), command);
     }
 
     @Test

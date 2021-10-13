@@ -27,11 +27,11 @@ import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 
-class TAddCommandTest {
+class TaddCommandTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TAddCommand(null, null));
+        assertThrows(NullPointerException.class, () -> new TaddCommand(null, null));
     }
 
     @Test
@@ -41,9 +41,9 @@ class TAddCommandTest {
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
-        CommandResult commandResult = new TAddCommand(validMemberID, validTask).execute(modelStub);
+        CommandResult commandResult = new TaddCommand(validMemberID, validTask).execute(modelStub);
 
-        assertEquals(String.format(TAddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
+        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
                 commandResult.getFeedbackToUser());
     }
 
@@ -54,14 +54,14 @@ class TAddCommandTest {
         Task validTask2 = new Task("Write a poem");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TAddCommand addHomeworkCommand = new TAddCommand(validMemberID, validTask1);
-        TAddCommand addPoemCommand = new TAddCommand(validMemberID, validTask2);
+        TaddCommand addHomeworkCommand = new TaddCommand(validMemberID, validTask1);
+        TaddCommand addPoemCommand = new TaddCommand(validMemberID, validTask2);
 
         // same object -> returns true
         assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        TAddCommand addHomeworkCommandCopy = new TAddCommand(validMemberID, validTask1);
+        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberID, validTask1);
         assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false

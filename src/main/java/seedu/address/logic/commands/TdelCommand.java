@@ -16,7 +16,7 @@ import seedu.address.model.task.TaskList;
 /**
  * Deletes a task from the task list of a person.
  */
-public class TDelCommand extends Command {
+public class TdelCommand extends Command {
     public static final String COMMAND_WORD = "tdel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the task list of a person. "
@@ -34,10 +34,10 @@ public class TDelCommand extends Command {
     public final Index targetTaskID;
 
     /**
-     * Creates an TDelCommand to delete the task with specified {@code TaskID}
+     * Creates an TdelCommand to delete the task with specified {@code TaskID}
      * from the member with specified {@code MemberID}.
      */
-    public TDelCommand(Index memberID, Index taskID) {
+    public TdelCommand(Index memberID, Index taskID) {
         requireAllNonNull(memberID, taskID);
         targetMemberID = memberID;
         targetTaskID = taskID;
@@ -70,7 +70,7 @@ public class TDelCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TDelCommand // instanceof handles nulls
-                && targetTaskID.equals(((TDelCommand) other).targetTaskID));
+                || (other instanceof TdelCommand // instanceof handles nulls
+                && targetTaskID.equals(((TdelCommand) other).targetTaskID));
     }
 }

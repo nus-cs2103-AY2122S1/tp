@@ -14,11 +14,11 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TAddCommand;
+import seedu.address.logic.commands.TaddCommand;
 import seedu.address.model.task.Task;
 
-class TAddCommandParserTest {
-    private TAddCommandParser parser = new TAddCommandParser();
+class TaddCommandParserTest {
+    private TaddCommandParser parser = new TaddCommandParser();
 
     @Test
     void parse_allFieldsPresent_success() {
@@ -26,12 +26,12 @@ class TAddCommandParserTest {
         Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
 
         assertParseSuccess(parser, TASK_NAME_DESC_POEM + MEMBER_ID_DESC_ONE,
-                new TAddCommand(expectedMemberID, expectedTask));
+                new TaddCommand(expectedMemberID, expectedTask));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TAddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaddCommand.MESSAGE_USAGE);
 
         //missing member id
         assertParseFailure(parser, TASK_NAME_DESC_POEM, expectedMessage);

@@ -15,7 +15,7 @@ import seedu.address.model.task.Task;
 /**
  * Adds a task to the task list of a person.
  */
-public class TAddCommand extends Command {
+public class TaddCommand extends Command {
     public static final String COMMAND_WORD = "tadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a person. "
@@ -32,9 +32,9 @@ public class TAddCommand extends Command {
     public final Task toAdd;
 
     /**
-     * Creates an TAddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
+     * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
-    public TAddCommand(Index memberID, Task task) {
+    public TaddCommand(Index memberID, Task task) {
         requireAllNonNull(memberID, task);
         targetMemberID = memberID;
         toAdd = task;
@@ -54,7 +54,7 @@ public class TAddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TAddCommand // instanceof handles nulls
-                && toAdd.equals(((TAddCommand) other).toAdd));
+                || (other instanceof TaddCommand // instanceof handles nulls
+                && toAdd.equals(((TaddCommand) other).toAdd));
     }
 }
