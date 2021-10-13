@@ -111,20 +111,20 @@ public class ViewCommandParserTest {
         assertParseSuccess(parser, " -n \n Alice\t", expectedViewCommand);
     }
 
-    //    @Test
-    //    public void parse_validMultipleArgs_returnsViewCommand() {
-    //        // no leading and trailing whitespaces
-    //        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
-    //        queryFields.setName("Alice");
-    //        queryFields.setClassId("B01");
-    //        queryFields.setStudentId("A1234567X");
-    //        StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
-    //        ViewCommand expectedViewCommand =
-    //                new ViewCommand(queryPredicate);
-    //        assertParseSuccess(parser, " -n Alice -cid B01 -sid A1234567X", expectedViewCommand);
-    //
-    //        // multiple leading and trailing whitespaces before and after keywords
-    //        assertParseSuccess(parser, " -n \n Alice\t -cid \nB01 -sid A1234567X  ", expectedViewCommand);
-    //        assertParseSuccess(parser, " -n     Alice    -cid   B01  -sid   A1234567X   ", expectedViewCommand);
-    //    }
+    @Test
+    public void parse_validMultipleArgs_returnsViewCommand() {
+        // no leading and trailing whitespaces
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
+        queryFields.setName("Alice");
+        queryFields.setClassId("B01");
+        queryFields.setStudentId("A1234567X");
+        StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
+        ViewCommand expectedViewCommand =
+                new ViewCommand(queryPredicate);
+        assertParseSuccess(parser, " -n Alice -cid B01 -sid A1234567X", expectedViewCommand);
+
+        // multiple leading and trailing whitespaces before and after keywords
+        assertParseSuccess(parser, " -n \n Alice\t -cid B01 -sid A1234567X  ", expectedViewCommand);
+        assertParseSuccess(parser, " -n     Alice    -cid   B01  -sid   A1234567X   ", expectedViewCommand);
+    }
 }
