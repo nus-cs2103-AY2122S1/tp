@@ -2,13 +2,18 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
@@ -28,21 +33,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
 
-        if (!moduleCodes.isEmpty()) {
+        if (moduleCodes.size() == 1) { //delete only accepts deleting 1 batch of module code at a time
             try {
-                Set<ModuleCode> moduleCodeSet = ParserUtil.parseModuleCodes(moduleCodes);
-                List<String> stringListOfModuleCodes = moduleCodeSet.stream()
+                List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
                         .map(moduleCode -> moduleCode.toString())
                         .collect(Collectors.toList());
-
+                ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
                 return new DeleteCommand(
-                        new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes));
+                        new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
             }
         }
-
         try {
             if (args.contains("-")) {
                 Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
@@ -53,9 +56,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 return new DeleteCommand(index);
             }
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
