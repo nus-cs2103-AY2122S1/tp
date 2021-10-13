@@ -11,8 +11,11 @@ public class Phone implements Information {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers should only contain numbers, and it should be at least 3 digits long"
+            + " or 'NA' if you don't want to specify phone number";
+    public static final String PHONE_REGEX = "\\d{3,}";
+    public static final String NA_REGEX = "^NA$";
+    public static final String VALIDATION_REGEX = PHONE_REGEX + "|" + NA_REGEX;
     public final String value;
 
     /**

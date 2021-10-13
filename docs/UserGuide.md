@@ -62,7 +62,7 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage students�
 
 ![help message](images/helpMessage.png)
 
-First-time tutors can seek in-depth assistance using AD with a `help` command, either
+First-time avengers can seek in-depth assistance using AD with a `help` command, either
 generally or specifically.
 
 #### Viewing general help
@@ -88,7 +88,7 @@ Examples:
 
 ### Adding a student: `add`
 
-Tutors will be able to add their tutees.
+Avengers will be able to add their students.
 
 Format: `add n/NAME e/EMAIL t/TELE_HANDLE [p/PHONE_NUMBER]`
 
@@ -96,31 +96,31 @@ Format: `add n/NAME e/EMAIL t/TELE_HANDLE [p/PHONE_NUMBER]`
 A student can have no phone number due to privacy concern.
 </div>
 
-* `PHONE_NUMBER` is an optional field.
-* `EMAIL` entry **must end with @u.nus.edu**. Else, a warning message will be shown.\
-`Students outside of NUS cannot be added`
-* If newly inputted students have `NAME`, `EMAIL`, `TELE_HANDLE` matching exactly
-with an already existing entry, the program will output a warning message and show the existing entry.\
-`This student already exists and thus cannot be added again`\
-`Existing student: Name: NAME, Email: EMAIL , Telegram: TELE_HANDLE`
+* `PHONE_NUMBER` is an optional field. The default value is `NA` which stands for "Not Applicable".
+* If Avengers do not wish to enter a student's phone number, 
+  * `p` tag can be omitted from the command.
+  * OR Avengers can supply the value `NA` to `p` tag. Note that it must be `NA` not `N.A` or `NAb`
+* If newly inputted students have `NAME` matching exactly with an already existing entry, the program will output a warning message and show the existing entry.\
+`This student already exists in the academy directory`
 
 Examples:
 * `add n/Aaron Tan t/@sausage e/e0123456@u.nus.edu p/90312311`
+* `add n/Charles Ng t/@charles e/e0123434@u.nus.edu p/NA`
 * `add n/Betsy Lim t/@unislave e/e0123456@u.nus.edu`
 
 ### Listing all students : `list`
 
-Shows a list of all students in the address book.
+Shows a list of all students in the academy directory.
 
 Format: `list`
 
 ### Editing a student : `edit`
 
-Tutors will be able to edit their tutees.
+Avengers will be able to edit their students.
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [t/TELE_HANDLE] [p/PHONE_NUMBER]`
 
-* Edits the tutee at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -148,7 +148,7 @@ Examples:
 
 ### Deleting a student: `delete`
 
-Tutors will be able to delete their tutees.
+Avengers will be able to delete their students.
 
 Format: `delete INDEX`
 

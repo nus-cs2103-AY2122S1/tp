@@ -23,12 +23,14 @@ import seedu.academydirectory.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE_NA = "+NA";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_TELEGRAM = ".tele";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
+    private static final String VALID_PHONE_NA = "NA";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TELEGRAM = "@rachel";
     private static final String VALID_TAG_1 = "friend";
@@ -99,6 +101,24 @@ public class ParserUtilTest {
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    }
+
+    @Test
+    public void parsePhoneNA_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE_NA));
+    }
+
+    @Test
+    public void parsePhoneNA_validValueWithoutWhitespace_returnsPhone() throws Exception {
+        Phone expectedPhone = new Phone(VALID_PHONE_NA);
+        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE_NA));
+    }
+
+    @Test
+    public void parsePhoneNA_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
+        String phoneWithWhitespace = WHITESPACE + VALID_PHONE_NA + WHITESPACE;
+        Phone expectedPhone = new Phone(VALID_PHONE_NA);
         assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
