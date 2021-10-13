@@ -290,10 +290,10 @@ Examples:
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
   adds the recurring lesson to the 1st student in the displayed student list.
 
-* `list` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
-  adds the makeup lesson to the 1st student in the displayed student list.
+* `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+  adds the makeup lesson to the 4th student in the displayed student list.
 
-* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Exercise 3 hw/Lab report`
+* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
