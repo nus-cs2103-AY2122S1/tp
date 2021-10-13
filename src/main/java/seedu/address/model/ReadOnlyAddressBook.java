@@ -29,7 +29,7 @@ public interface ReadOnlyAddressBook {
      * Sets the target {@code target} in the addressBook to {@code editperson}.
      */
     void setPerson(Person target, Person editedPerson);
-    
+
     /**
      * Returns the person with {@code clientId}
      */
