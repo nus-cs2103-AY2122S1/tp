@@ -82,6 +82,30 @@ public class CollectionUtilTest {
         assertTrue(CollectionUtil.isAnyNonNull(new Object(), null));
     }
 
+    @Test
+    public void equalsIgnoreOrder() {
+        // both null, returns true
+        assertTrue(CollectionUtil.equalsIgnoreOrder(null, null));
+
+        // empty lists -> returns true
+        assertTrue(CollectionUtil.equalsIgnoreOrder(Arrays.asList(), Arrays.asList()));
+
+        // same elements, different order -> returns true
+        assertTrue(CollectionUtil.equalsIgnoreOrder(Arrays.asList(1, 2, 3), Arrays.asList(3, 2, 1)));
+
+        // first list null, second list non-null -> returns false
+        assertFalse(CollectionUtil.equalsIgnoreOrder(null, Arrays.asList(1, 2, 3)));
+
+        // first list non-null, second list null -> returns false
+        assertFalse(CollectionUtil.equalsIgnoreOrder(Arrays.asList(1, 2, 3), null));
+
+        // different size -> returns false
+        assertFalse(CollectionUtil.equalsIgnoreOrder(Arrays.asList(1, 2), Arrays.asList(1, 2, 2)));
+
+        // same size, different elements -> returns false
+        assertFalse(CollectionUtil.equalsIgnoreOrder(Arrays.asList(1, 2, 3), Arrays.asList(4, 5, 6)));
+    }
+
     /**
      * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException}
      * if {@code objects} or any element of {@code objects} is null.
