@@ -25,9 +25,9 @@ public class UniqueItemListTest {
 
     @Test
     public void contains_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Item)null));
-        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Name)null));
-        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((String)null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Item) null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Name) null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((String) null));
     }
 
     @Test

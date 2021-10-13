@@ -1,18 +1,19 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 
-import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.function.Predicate;
-
 /**
  * A default model stub that have all of its methods failing.
  */
 public class ModelStub implements Model {
+
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
@@ -105,6 +106,11 @@ public class ModelStub implements Model {
 
     @Override
     public Item getItemWithName(String name) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Item getItemWithId(String id) {
         throw new AssertionError("This method should not be called.");
     }
 

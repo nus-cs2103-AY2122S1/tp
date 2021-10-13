@@ -78,11 +78,11 @@ public class ModelManagerTest {
     @Test
     public void hasItem_nullItem_throwsNullPointerException() {
         //Search by item
-        assertThrows(NullPointerException.class, () -> modelManager.hasItem((Item)null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasItem((Item) null));
         //Search by name
-        assertThrows(NullPointerException.class, () -> modelManager.hasItem((Name)null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasItem((Name) null));
         //Search by id
-        assertThrows(NullPointerException.class, () -> modelManager.hasItem((String)null));
+        assertThrows(NullPointerException.class, () -> modelManager.hasItem((String) null));
     }
 
     @Test

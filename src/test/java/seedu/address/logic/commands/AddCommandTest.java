@@ -6,22 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Inventory;
-import seedu.address.model.Model;
 import seedu.address.model.ModelStub;
-import seedu.address.model.Order;
 import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.ItemBuilder;
 
@@ -79,7 +71,7 @@ public class AddCommandTest {
         // different item -> returns false
         assertFalse(addBagelCommand.equals(addDonutCommand));
     }
-    
+
     /**
      * A Model stub that contains a single item.
      */

@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-
-import java.util.Optional;
 
 /**
  * Deletes an item identified using it's displayed index from the inventory.
@@ -87,7 +87,7 @@ public class DeleteCommand extends Command {
         DeleteCommand otherCommand = (DeleteCommand) other;
 
         return name.equals(otherCommand.name)
-           && id.equals(otherCommand.id)
-           && count == otherCommand.count;
+                && id.equals(otherCommand.id)
+                && count == otherCommand.count;
     }
 }

@@ -3,8 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;

@@ -53,9 +53,16 @@ public class TypicalItems {
 
     // Manually added - Item's details found in {@code CommandTestUtil}
     public static final Item BAGEL = new ItemBuilder()
-            .withName(VALID_NAME_BAGEL).withCount(VALID_COUNT_BAGEL).withId(VALID_ID_BAGEL).withTags(VALID_TAG_BAKED).build();
+            .withName(VALID_NAME_BAGEL)
+            .withCount(VALID_COUNT_BAGEL)
+            .withId(VALID_ID_BAGEL)
+            .withTags(VALID_TAG_BAKED)
+            .build();
     public static final Item DONUT = new ItemBuilder()
-            .withName(VALID_NAME_DONUT).withCount(VALID_COUNT_BAGEL).withId(VALID_ID_DONUT).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
+            .withName(VALID_NAME_DONUT)
+            .withCount(VALID_COUNT_BAGEL)
+            .withId(VALID_ID_DONUT)
+            .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

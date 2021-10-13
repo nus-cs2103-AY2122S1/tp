@@ -6,10 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-
-import java.util.HashSet;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object

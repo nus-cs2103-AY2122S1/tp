@@ -58,13 +58,13 @@ public class UniqueItemList implements Iterable<Item> {
     /**
      * Returns an optional of the item in the list with the same identity fields.
      * If item does not exist, return an empty optional.
-     * @see Item#isSameItem(Item) 
+     * @see Item#isSameItem(Item)
      */
     public Optional<Item> getItem(Item item) {
         requireNonNull(item);
         return internalList.stream().filter(item::equals).findFirst();
     }
-    
+
     /**
      * Returns an optional of the item in the list with the given {@code name}.
      * If item does not exist, return an empty optional.
