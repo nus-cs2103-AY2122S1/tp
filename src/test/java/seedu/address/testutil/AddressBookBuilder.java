@@ -4,8 +4,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
-import seedu.address.model.reservation.Reservation;
 import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.reservation.Reservation;
 
 /**
  * A utility class to help with building Addressbook objects.
