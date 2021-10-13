@@ -15,7 +15,6 @@ import java.util.TreeSet;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
@@ -29,7 +28,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.School;
 import seedu.address.model.tag.Tag;
 
-public class LessonAddCommand extends Command {
+public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Lesson";
 
@@ -76,6 +75,8 @@ public class LessonAddCommand extends Command {
 
     private final Index index;
     private final Lesson toAdd;
+    private Person personBeforeLessonAdd;
+    private Person personAfterLessonAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -114,7 +115,7 @@ public class LessonAddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -122,16 +123,34 @@ public class LessonAddCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, toAdd);
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd));
+    }
+
+    @Override
+    protected void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
     }
 
     @Override

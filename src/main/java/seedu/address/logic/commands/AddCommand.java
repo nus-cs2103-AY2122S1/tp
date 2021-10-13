@@ -15,13 +15,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Student";
 
@@ -69,7 +68,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final Person toAdd; //the person to be added, should not be modified in execution of command
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -80,7 +79,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
@@ -89,6 +88,27 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * To undo add student, delete added student
+     */
+    @Override
+    protected void undo() {
+        requireNonNull(model);
+
+        model.deletePerson(toAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
     }
 
     @Override

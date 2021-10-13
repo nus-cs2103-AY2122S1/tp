@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -33,15 +35,16 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonDeleteCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> prepareLessonDeleteCommand(INDEX_FIRST_PERSON, null, model));
     }
 
     @Test
     public void execute_oneExistingLesson_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
         ModelStub modelStub = new ModelStubWithPerson(editedPerson);
+        LessonDeleteCommand lessonDeleteCommand =
+                prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, modelStub);
 
         Lesson lessonToDelete = editedPerson.getLessons().stream()
             .collect(Collectors.toList())
@@ -55,17 +58,17 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void equals() {
-        LessonDeleteCommand deleteSampleLessonCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON,
-            INDEX_FIRST_LESSON);
-        LessonDeleteCommand deleteSampleLessonCommand2 = new LessonDeleteCommand(INDEX_SECOND_PERSON,
-            INDEX_FIRST_LESSON);
+        LessonDeleteCommand deleteSampleLessonCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
+            INDEX_FIRST_LESSON, model);
+        LessonDeleteCommand deleteSampleLessonCommand2 = prepareLessonDeleteCommand(INDEX_SECOND_PERSON,
+            INDEX_FIRST_LESSON, model);
 
         // same object -> returns true
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommand));
 
         // same values -> returns true
-        LessonDeleteCommand deleteSampleLessonCommandCopy = new LessonDeleteCommand(INDEX_FIRST_PERSON,
-            INDEX_FIRST_LESSON);
+        LessonDeleteCommand deleteSampleLessonCommandCopy = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
+            INDEX_FIRST_LESSON, model);
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommandCopy));
 
         // different types -> returns false
@@ -76,6 +79,15 @@ public class LessonDeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteSampleLessonCommand.equals(deleteSampleLessonCommand2));
+    }
+
+    /**
+     * Generates a {@code LessonDeleteCommand} with parameters {@code personIndex} and {@code lessonIndex}.
+     */
+    private LessonDeleteCommand prepareLessonDeleteCommand(Index personIndex, Index lessonIndex, Model model) {
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(personIndex, lessonIndex);
+        lessonDeleteCommand.setDependencies(model, new UndoRedoStack());
+        return lessonDeleteCommand;
     }
 
     /**
@@ -114,6 +126,11 @@ public class LessonDeleteCommandTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonAtIndex(Person person, Index index) {
             throw new AssertionError("This method should not be called.");
         }
 
