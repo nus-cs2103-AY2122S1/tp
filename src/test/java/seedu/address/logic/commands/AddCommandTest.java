@@ -78,7 +78,7 @@ public class AddCommandTest {
     }
 
     /**
-     * Generate an Add Command with respective dependencies set.
+     * Generates an Add Command with respective dependencies set.
      * UndoRedoStack not tested under Add Command thus UndoRedoStack is created within the method.
      */
     private AddCommand prepareAddCommandForPerson(Person person, Model model) {
