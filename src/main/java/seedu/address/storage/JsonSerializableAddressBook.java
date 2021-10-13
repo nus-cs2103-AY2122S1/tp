@@ -43,8 +43,8 @@ class JsonSerializableAddressBook {
         @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
         @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
         @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
-        this.customers.addAll(customers);
         this.persons.addAll(persons);
+        this.customers.addAll(customers);
         this.employees.addAll(employees);
         this.suppliers.addAll(suppliers);
         this.reservations.addAll(reservations);

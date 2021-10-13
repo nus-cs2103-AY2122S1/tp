@@ -6,9 +6,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ALLERGY_DESC_NONSENSE;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.LEAVES_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_NONSENSE;
@@ -22,6 +25,7 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.SUPPLY_TYPE_D
 import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_AMY;
+import static seedu.address.testutil.TypicalEmployees.AMY_EMPLOYEE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalSuppliers.BOB;
 
@@ -35,6 +39,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.AddEmployeeCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -46,10 +51,12 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.supplier.Supplier;
+import seedu.address.model.person.employee.Employee;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.CustomerBuilder;
+import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
@@ -130,7 +137,27 @@ public class LogicManagerTest {
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCustomerCommand, CommandException.class, expectedMessage, expectedModel);
     }
+  
+  @Test
+  public void executeAddEmployee_storageThrowsIoException_throwsCommandException() {
+      // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
+       JsonAddressBookStorage addressBookStorage =
+               new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+       JsonUserPrefsStorage userPrefsStorage =
+               new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+       StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+       logic = new LogicManager(model, storage);
 
+        // Execute add command
+        String addEmployeeCommand = AddEmployeeCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + TAG_DESC_FRIEND;
+        Employee expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addEmployee(expectedEmployee);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertCommandFailure(addEmployeeCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+  
     @Test
     public void executeAddSupplier_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
@@ -161,7 +188,12 @@ public class LogicManagerTest {
     public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredCustomerList().remove(0));
     }
-
+    
+    @Test
+    public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEmployeeList().remove(0));
+    }
+  
     @Test
     public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSupplierList().remove(0));

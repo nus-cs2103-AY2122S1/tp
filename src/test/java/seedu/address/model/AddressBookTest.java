@@ -90,6 +90,7 @@ public class AddressBookTest {
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
+
     @Test
     public void resetData_withDuplicateCustomers_throwsDuplicateCustomerException() {
         // Two customers with the same identity fields
@@ -281,6 +282,7 @@ public class AddressBookTest {
         public ObservableList<Customer> getCustomerList() {
             return customers;
         }
+
         @Override
         public ObservableList<Employee> getEmployeeList() {
             return employees;

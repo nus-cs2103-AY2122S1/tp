@@ -64,6 +64,7 @@ public class CommandTestUtil {
     public static final String VALID_JOBTITLE_BOB = "UIUX Designer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -195,6 +196,7 @@ public class CommandTestUtil {
         assertEquals(expectedFilteredCustomerList, actualModel.getFilteredCustomerList());
         assertEquals(expectedFilteredEmployees, actualModel.getFilteredEmployeeList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -222,6 +224,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the employee at the given {@code targetIndex} in the
      * {@code model}'s address book.

@@ -61,6 +61,9 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddCustomerCommand.COMMAND_WORD:
+            return new AddCustomerCommandParser().parse(arguments);
+
         case AddEmployeeCommand.COMMAND_WORD:
             return new AddEmployeeCommandParser().parse(arguments);
 
@@ -70,6 +73,9 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
+        case EditCustomerCommand.COMMAND_WORD:
+            return new EditCustomerCommandParser().parse(arguments);
+
         case EditEmployeeCommand.COMMAND_WORD:
             return new EditEmployeeCommandParser().parse(arguments);
 
@@ -78,6 +84,9 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCustomerCommand.COMMAND_WORD:
+            return new DeleteCustomerCommandParser().parse(arguments);
 
         case DeleteEmployeeCommand.COMMAND_WORD:
             return new DeleteEmployeeCommandParser().parse(arguments);
@@ -94,23 +103,15 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListCustomerCommand.COMMAND_WORD:
+            return new ListCustomerCommand();
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case AddCustomerCommand.COMMAND_WORD:
-            return new AddCustomerCommandParser().parse(arguments);
-
-        case ListCustomerCommand.COMMAND_WORD:
-            return new ListCustomerCommand();
-
-        case EditCustomerCommand.COMMAND_WORD:
-            return new EditCustomerCommandParser().parse(arguments);
-
-        case DeleteCustomerCommand.COMMAND_WORD:
-            return new DeleteCustomerCommandParser().parse(arguments);
         case SupplierCommand.COMMAND_WORD:
             return new SupplierCommand();
 
