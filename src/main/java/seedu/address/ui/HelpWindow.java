@@ -1,5 +1,14 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.CommandFormat.ADD_FORMAT;
+import static seedu.address.ui.CommandFormat.DELETE_FORMAT;
+import static seedu.address.ui.CommandFormat.EDIT_FORMAT;
+import static seedu.address.ui.CommandFormat.EXIT_FORMAT;
+import static seedu.address.ui.CommandFormat.MOVE_FORMAT;
+import static seedu.address.ui.CommandFormat.REMARK_FORMAT;
+import static seedu.address.ui.CommandFormat.SORT_FORMAT;
+import static seedu.address.ui.CommandFormat.VIEW_FORFMAT;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,8 +24,16 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide for more information:\n" + USERGUIDE_URL + "\n\n"
+            + ADD_FORMAT
+            + DELETE_FORMAT
+            + MOVE_FORMAT
+            + EDIT_FORMAT
+            + VIEW_FORFMAT
+            + REMARK_FORMAT
+            + SORT_FORMAT
+            + EXIT_FORMAT;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

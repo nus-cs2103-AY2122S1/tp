@@ -19,7 +19,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Counter;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 
@@ -155,16 +154,22 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String counter} into an {@code Counter}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     *
+     * Parses a {@code String order} into a trimmed string.
+     * @param order the intended sorting order input by user.
+     * @return an Order object.
      */
-    public static Counter parseCounter(String counter) {
-        requireNonNull(counter);
-        String trimmedCounter = counter.trim();
-
-        return new Counter(Integer.valueOf(trimmedCounter));
+    public static SortCommandParser.Order parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (trimmedOrder.equals(SortCommandParser.Order.TIME.toString())) {
+            return SortCommandParser.Order.TIME;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.ASCENDING.toString())) {
+            return SortCommandParser.Order.ASCENDING;
+        } else if (trimmedOrder.equals(SortCommandParser.Order.DESCENDING.toString())) {
+            return SortCommandParser.Order.DESCENDING;
+        } else {
+            throw new ParseException(SortCommandParser.Order.ORDER_CONSTRAINT);
+        }
     }
 
     /**
@@ -215,5 +220,23 @@ public class ParserUtil {
         return new StudentList(studentList);
     }
 
-
+    /**
+     * Returns list of student indexes.
+     *
+     * @param studentIndexes list of indexes, each representing a student.
+     * @return List of student indexes.
+     * @throws ParseException If index is invalid.
+     */
+    public static List<Index> parseStudentIndexes(List studentIndexes) throws ParseException {
+        List<Index> args = new ArrayList<Index>();
+        String[] students = ((String) studentIndexes.get(0)).split(" ");
+        for (String student : students) {
+            Index i = parseIndex(student);
+            if (!args.contains(i)) {
+                args.add(i);
+            }
+        }
+        //throw  new ParseException(studentIndexes.stream().reduce("", (s, x) -> s+x));
+        return args;
+    }
 }

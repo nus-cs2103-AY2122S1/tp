@@ -3,11 +3,13 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
@@ -31,6 +33,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     private final ObservableList<TuitionClass> internalList = FXCollections.observableArrayList();
     private final ObservableList<TuitionClass> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private SortCommandParser.Order order;
 
     /**
      * Returns true if the list contains an equivalent tuitionClass as the given argument.
@@ -145,6 +148,35 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
 
     public int tuitionListSize() {
         return this.internalList.size();
+    }
+
+    /**
+     * Sorts the tuition class list according to time or alphabetically order.
+     * @param order the order to sort the list with.
+     */
+    public void sort(SortCommandParser.Order order) {
+        this.order = order;
+        internalList.sort(new TuitionClassComparator(order));
+    }
+    class TuitionClassComparator implements Comparator<TuitionClass> {
+        private SortCommandParser.Order order;
+        public TuitionClassComparator(SortCommandParser.Order order) {
+            this.order = order;
+        }
+
+        @Override
+        public int compare(TuitionClass o1, TuitionClass o2) {
+            switch (order) {
+            case ASCENDING:
+                return o1.getName().getName().compareTo(o2.getName().getName());
+            case DESCENDING:
+                return o2.getName().getName().compareTo(o1.getName().getName());
+            case TIME:
+                return o1.getTimeslot().compareTimeOrder(o2.getTimeslot().getTime());
+            default:
+                return 0;
+            }
+        }
     }
 }
 

@@ -105,7 +105,7 @@ public class Person implements Nameable {
         for (Integer id : classes.getClasses()) {
             if ((tuitionClass.getId()) == id) {
                 classes.removeClass(id);
-                removeTag(new Tag(tuitionClass.getName().getName()));
+                removeTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot().time));
                 return this;
             }
         }

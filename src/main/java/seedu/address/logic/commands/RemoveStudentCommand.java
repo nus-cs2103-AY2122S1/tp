@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -20,10 +21,11 @@ public class RemoveStudentCommand extends Command {
             + ": Removes a student from a tuition class.\n"
             + "Parameters: " + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 " + PREFIX_TUITION_CLASS + "2";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 2 " + PREFIX_TUITION_CLASS + "2";
 
-    public static final String MESSAGE_REMOVE_STUDENT_SUCCESS = "Removed student: %1$s from tuition class: %2$s ";
-    private final Index studentIndex;
+    public static final String MESSAGE_REMOVE_STUDENT_SUCCESS = "Removed students: %1$s from class: %2$s";
+    public static final String MESSAGE_REMOVE_STUDENT_FAILURE = "Students: %1$s are not found in class: %2$s";
+    private final List<Index> studentIndex;
     private final Index classIndex;
 
     /**
@@ -32,7 +34,7 @@ public class RemoveStudentCommand extends Command {
      * @param studentIndex
      * @param classIndex
      */
-    public RemoveStudentCommand(Index studentIndex, Index classIndex) {
+    public RemoveStudentCommand(List<Index> studentIndex, Index classIndex) {
         this.studentIndex = studentIndex;
         this.classIndex = classIndex;
     }
@@ -49,36 +51,40 @@ public class RemoveStudentCommand extends Command {
         requireNonNull(model);
         Person personToRemove = null;
         TuitionClass tuitionClass = null;
-        List<Person> lastShownList = model.getFilteredPersonList();
-        List<TuitionClass> lastClassList = model.getFilteredTuitionList();
-
-        if (studentIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        if (classIndex.getZeroBased() >= lastClassList.size()) {
+        List<String> studentsNotInClass = new ArrayList<>();
+        List<String> studentsRemoved = new ArrayList<>();
+        if (classIndex.getZeroBased() >= model.getFilteredTuitionList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
         }
-
-        personToRemove = lastShownList.get(studentIndex.getZeroBased());
-        tuitionClass = lastClassList.get(classIndex.getZeroBased());
-
-        if (personToRemove == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND));
-        } else if (tuitionClass == null) {
+        tuitionClass = model.getFilteredTuitionList().get(classIndex.getZeroBased());
+        if (tuitionClass == null) {
             throw new CommandException(String.format(Messages.MESSAGE_CLASS_NOT_FOUND));
-        } else if (personToRemove != null && tuitionClass != null) {
+        }
+        for (int i = 0; i < studentIndex.size(); i++) {
+            Index currIndex = studentIndex.get(i);
+            if (currIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+            personToRemove = model.getFilteredPersonList().get(currIndex.getZeroBased());
+            if (personToRemove == null) {
+                throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND));
+            }
             if (tuitionClass.containsStudent(personToRemove)) {
                 TuitionClass updatedClass = tuitionClass.removeStudent(personToRemove);
                 Person updatedPerson = personToRemove.removeClass(tuitionClass);
                 model.setTuition(tuitionClass, updatedClass);
                 model.setPerson(personToRemove, updatedPerson);
+                studentsRemoved.add(personToRemove.getName().fullName);
             } else {
-                throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_IN_CLASS,
-                        personToRemove.getName().fullName, tuitionClass.getName().name));
+                studentsNotInClass.add(personToRemove.getName().fullName);
             }
         }
-        return new CommandResult(String.format(MESSAGE_REMOVE_STUDENT_SUCCESS,
-                personToRemove.getName().fullName, tuitionClass.getName().name));
+        String feedback = (!studentsRemoved.isEmpty()
+                ? String.format(MESSAGE_REMOVE_STUDENT_SUCCESS + "\n", studentsRemoved, tuitionClass.getName().name)
+                : "") + (!studentsNotInClass.isEmpty()
+                ? String.format(MESSAGE_REMOVE_STUDENT_FAILURE, studentsNotInClass, tuitionClass.getName().name)
+                : "");
+        return new CommandResult(feedback);
     }
 
     @Override

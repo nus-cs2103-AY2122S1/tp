@@ -37,7 +37,7 @@ public class TuitionClassInfoPage extends InfoPage {
     @FXML
     private Label students;
     @FXML
-    private Label notes;
+    private Label remark;
 
     /**
      * Constructor for a TuitionClassInfoPage
@@ -53,7 +53,7 @@ public class TuitionClassInfoPage extends InfoPage {
         this.studentCount.setText("No. of students: " + tuitionClass.getStudentCount());
         this.timeSlot.setText("Timeslot: " + tuitionClass.getTimeslot());
         this.students.setText("Students: " + tuitionClass.listStudents());
-        this.notes.setText("Notes: " + tuitionClass.getRemark());
+        this.remark.setText("Remark: " + tuitionClass.getRemark());
     }
 
 

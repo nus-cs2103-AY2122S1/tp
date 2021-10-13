@@ -16,7 +16,6 @@ public class TuitionClass implements Nameable {
 
     private final ClassName name;
     private final ClassLimit limit;
-    private final Counter counter;
     private final Timeslot timeslot;
     private StudentList studentList;
     private final Remark remark;
@@ -27,16 +26,14 @@ public class TuitionClass implements Nameable {
      *
      * @param name The name of the tuition class.
      * @param limit The maximum number of students allowed.
-     * @param counter The number of weeks the tuition class will recur.
      * @param timeslot The date and time of the tuition.
      * @param studentList The list of students attending the tuition.
      * @param remark Any remarks noted for the tuition class.
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot, StudentList studentList,
+    public TuitionClass(ClassName name, ClassLimit limit, Timeslot timeslot, StudentList studentList,
                         Remark remark) {
         this.name = name;
         this.limit = limit;
-        this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
         this.remark = remark;
@@ -47,18 +44,16 @@ public class TuitionClass implements Nameable {
     /**
      * Constructor for Tuition Class used in reading data.
      *
-     * @param name
-     * @param limit
-     * @param counter
-     * @param timeslot
-     * @param studentList
-     * @param id
+     * @param name The name of the tuition class.
+     * @param limit The maximum number of students allowed.
+     * @param timeslot The date and time of the tuition.
+     * @param studentList The list of students attending the tuition.
+     * @param id the auto generated unique id for each tuition class
      */
-    public TuitionClass(ClassName name, ClassLimit limit, Counter counter, Timeslot timeslot,
+    public TuitionClass(ClassName name, ClassLimit limit, Timeslot timeslot,
                         StudentList studentList, Remark remark, int id) {
         this.name = name;
         this.limit = limit;
-        this.counter = counter;
         this.timeslot = timeslot;
         this.studentList = studentList;
         this.remark = remark;
@@ -74,9 +69,6 @@ public class TuitionClass implements Nameable {
         return limit;
     }
 
-    public Counter getCounter() {
-        return counter;
-    }
 
     public Timeslot getTimeslot() {
         return timeslot;
@@ -112,6 +104,9 @@ public class TuitionClass implements Nameable {
      * This defines a weaker notion of equality between two tuition classes.
      */
     public boolean isSameTuition(TuitionClass otherTuition) {
+        if (otherTuition == null) {
+            return false;
+        }
         if (otherTuition == this) {
             return true;
         }
@@ -132,18 +127,13 @@ public class TuitionClass implements Nameable {
         }
 
         TuitionClass otherClass = (TuitionClass) other;
-        return otherClass.getName().equals(getName())
-                && otherClass.limit.equals(this.limit)
-                && otherClass.counter.equals(this.counter)
-                && otherClass.timeslot.equals(this.timeslot)
-                && otherClass.studentList.equals(this.studentList)
-                && otherClass.remark.equals(this.remark);
+        return otherClass.getTimeslot().equals(getTimeslot());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, limit, counter, timeslot, studentList, remark);
+        return Objects.hash(name, limit, timeslot, studentList, remark);
     }
 
     @Override
@@ -153,8 +143,6 @@ public class TuitionClass implements Nameable {
                 .append(getName())
                 .append("; Limit: ")
                 .append(getLimit())
-                .append("; Counter: ")
-                .append(getCounter())
                 .append(" Timeslot: ")
                 .append(getTimeslot())
                 .append("; Students: ")
