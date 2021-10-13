@@ -71,6 +71,34 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * returns the person with the corresponding ClientId.
+     */
+    public Person getPerson(ClientId clientId) {
+        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
+            return person.getClientId().equals(clientId);
+        });
+        if (personInQuestion.isEmpty()) {
+            throw new PersonNotFoundException();
+        }
+        return personInQuestion.get(0);
+    }
+
+    /**
+     * returns true if a client with the given clientId exists.
+     * @param clientId of the client
+     * @return true if a client with the clientId exists
+     */
+    public boolean hasClientId(ClientId clientId) {
+        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
+            return person.getClientId().equals(clientId);
+        });
+        if (personInQuestion.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */

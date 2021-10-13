@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
 /**
@@ -95,6 +96,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasClientId(ClientId clientId) {
+        requireNonNull(clientId);
+        return addressBook.hasClientId(clientId);
     }
 
     @Override
