@@ -75,7 +75,7 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecified_success() {
         ClientId clientId = CLIENTID_FIRST_PERSON;
-        EditCommand editCommand = new EditCommand(CLIENTID_FIRST_PERSON, new EditPersonDescriptor());
+        EditCommand editCommand = new EditCommand(clientId, new EditPersonDescriptor());
         Person editedPerson = model.getAddressBook().getPerson(clientId);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
