@@ -41,8 +41,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list.";
 
-    public final Index index;
-    public final EditAnimeDescriptor editAnimeDescriptor;
+    private final Index index;
+    private final EditAnimeDescriptor editAnimeDescriptor;
 
     /**
      * @param index of the anime in the filtered anime list to edit
