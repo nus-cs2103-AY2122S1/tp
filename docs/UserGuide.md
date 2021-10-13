@@ -137,6 +137,16 @@ and `marysue@gmail.com`.
     * A `Software Engineer` input can match with *Role*s such as `Software Engineer` or `Senior Software Engineer`
 but not with *Role*s such as `Software` or `Software Developer`.
 
+* *Employment Type* `et/`
+  * Each additional keyword for Email leads to a more **accommodating** search, as long as all keywords are **valid**.
+  * A *Employment Type* is considered matching only if it starts with any of the keywords and all keywords are valid.
+  * For example:
+    * A `Full time` or `full time` or `full` input will match only with *Employment Type*s that are ```Full time```
+    * A ```Full part``` input will match with all *Employment Type*s that are ```Full time``` or ```Part time```
+    * A ```temp Intern``` input will match with all *Employment Type*s that are ```Temporary``` or ```Internship```
+    * A ```full time bob``` input will throw an exception as ```bob``` is not a term any of the *Employment Type*s start
+    with.
+
 Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
