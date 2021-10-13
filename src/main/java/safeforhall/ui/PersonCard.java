@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -59,6 +58,8 @@ public class PersonCard extends UiPart<Region> {
     private VBox statusContainer;
     @FXML
     private VBox labelBox;
+    @FXML
+    private VBox labelBoxInterior;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -75,14 +76,14 @@ public class PersonCard extends UiPart<Region> {
 
         if (person.getLastFetDate().date != DEFAULT_DATE) {
             Label textBox = new Label(LastDate.FET_DESC + person.getLastFetDate().date);
-            textBox.setFont(new Font(3));
-            labelBox.getChildren().add(textBox);
+            textBox.getStyleClass().add("cell_small_label");
+            labelBoxInterior.getChildren().add(textBox);
         }
 
         if (person.getLastCollectionDate().date != DEFAULT_DATE) {
             Label textBox = new Label(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
-            textBox.setFont(new Font(3));
-            labelBox.getChildren().add(textBox);
+            textBox.getStyleClass().add("cell_small_label");
+            labelBoxInterior.getChildren().add(textBox);
         }
 
         if (person.hasMissedDeadline()) {

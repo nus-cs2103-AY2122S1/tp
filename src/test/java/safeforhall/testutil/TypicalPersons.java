@@ -123,6 +123,32 @@ public class TypicalPersons {
             .withFet(VALID_FETDATE_AMY)
             .withCollection(VALID_COLLECTIONDATE_AMY)
             .build();
+    // Person AMY without FET or COLLECTION
+    public static final Person AMY_NO_FET_COLLECTION = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .build();
+    // Person AMY without FET
+    public static final Person AMY_NO_FET = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .withCollection(VALID_COLLECTIONDATE_AMY)
+            .build();
+    // Person AMY without COLLECTION
+    public static final Person AMY_NO_COLLECTION = new PersonBuilder().withName(VALID_NAME_AMY)
+            .withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY)
+            .withRoom(VALID_ROOM_AMY)
+            .withFaculty(VALID_FACULTY_AMY)
+            .withVaccStatus(VALID_VACCSTATUS_AMY)
+            .withFet(VALID_FETDATE_AMY)
+            .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)

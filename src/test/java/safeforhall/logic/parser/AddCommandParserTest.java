@@ -34,7 +34,9 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VACCSTATUS_BOB;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static safeforhall.testutil.TypicalPersons.AMY;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_COLLECTION;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_FET;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_FET_COLLECTION;
 import static safeforhall.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -106,17 +108,19 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Person expectedPerson = new PersonBuilder(AMY_NO_FET_COLLECTION).build();
 
         // missing lastFetDate and lastCollectionDate
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
                 + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY, new AddCommand(expectedPerson));
 
         // missing lastFetDate
+        expectedPerson = new PersonBuilder(AMY_NO_FET).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
                 + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + COLLECTION_DESC_AMY, new AddCommand(expectedPerson));
 
         // missing lastCollectionDate
+        expectedPerson = new PersonBuilder(AMY_NO_COLLECTION).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
                 + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY, new AddCommand(expectedPerson));
     }

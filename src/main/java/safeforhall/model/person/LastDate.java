@@ -32,7 +32,7 @@ public class LastDate {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String date) {
-        if (date == DEFAULT_DATE) {
+        if (date.equals(DEFAULT_DATE)) {
             return true;
         }
         try {
