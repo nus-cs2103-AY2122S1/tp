@@ -104,10 +104,10 @@ Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYM
 
 Prefix Input Specifications:
 
-***Note***: Italicized word refers to a stored prefix value. e.g. *Name* could refer to the value `John` stored as a name in the application.
+***Note***: Italicised word refers to a stored prefix value. e.g. *Name* could refer to the value `John` stored as a name in the application.
 * *Name* `n/`
-  * Each additional keyword for Name leads to a more **accommodating** search.
-  * A *Name* is considered matching if at least 1 keyword is equals to at least 1 word in the *Name*.
+  * Each additional keyword for *Name* leads to a more **accommodating** search.
+  * A *Name* is considered matching if at least 1 keyword is equal to at least 1 word in the *Name*.
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
@@ -115,7 +115,7 @@ Prefix Input Specifications:
 
 * *Email* `e/`
   * Each additional keyword for *Email* leads to a more **accommodating** search.
-  * An *Email* is considered matching if at least 1 keyword is equals to at least 1 word in the *Email*.
+  * An *Email* is considered matching if at least 1 keyword is equal to at least 1 word in the *Email*.
   * For example:
     * A `alexyeoh@example.com` input can match with *Email*s such as `alexyeoh@example.com`.
     * A `alexyeoh@example.com marysue@gmail.com` input can match with *Email*s such as `alexyeoh@example.com`
@@ -124,19 +124,28 @@ and `marysue@gmail.com`.
 
 * *Contact Number* `p/`
   * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
-  * A *Contact Number* is considered matching if at least 1 keyword is equals to at least 1 word in the *Contact Number*
+  * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
   * For example:
     * A `99999999` input can only match with *Contact Number*s that are `99999999`.
     * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
 
 
 * *Role* `r/`
-  * Each additional keyword for Role leads to a more **restrictive** search
-  * A *Role* is considered matching only if every single keyword is equals to at least 1 word in the *Role*.
+  * Each additional keyword for *Role* leads to a more **restrictive** search
+  * A *Role* is considered matching only if every single keyword is equal to at least 1 word in the *Role*.
   * For example:
-    * A `Software` input can match with *Role*s such as `Software Engineer` or `Software` or `Software Developer`.
+    * A `Software` input can match with *Role*s such as `Software Engineer`, `Software` or `Software Developer`
     * A `Software Engineer` input can match with *Role*s such as `Software Engineer` or `Senior Software Engineer`
 but not with *Role*s such as `Software` or `Software Developer`.
+
+
+* *Level of Education* `l/`
+  * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
+  * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
+  * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
+  * For example:
+    * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
+    * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
 
 
 * *Employment Type* `et/`
