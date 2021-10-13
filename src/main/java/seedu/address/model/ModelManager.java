@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 
@@ -149,9 +150,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addApplicantToPosition(Applicant applicant, Position position) {
+    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
+        Position position = positionBook.getPosition(dummyPosition);
+        Application application = new Application(applicant, position);
         applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(applicant.getApplication());
+        applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 

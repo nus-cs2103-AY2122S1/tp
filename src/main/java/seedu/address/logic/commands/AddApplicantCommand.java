@@ -45,7 +45,7 @@ public class AddApplicantCommand extends Command {
      */
     public AddApplicantCommand(Applicant applicant, Position position) {
         requireNonNull(applicant);
-        toAdd = applicant;
+        this.toAdd = applicant;
         this.position = position;
     }
 

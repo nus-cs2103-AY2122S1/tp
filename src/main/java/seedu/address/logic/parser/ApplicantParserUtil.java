@@ -9,20 +9,22 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Email;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.Phone;
 import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
-public class ParserUtil {
+public class ApplicantParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String PLACEHOLDER_DESCRIPTION = "This is a placeholder description";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -122,6 +124,19 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String position} into a {@code Position} with a placeholder description.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param position the string title of the related position.
+     * @return the Position object of this corresponding position.
+     */
+    public static Position parsePosition(String position) {
+        requireNonNull(position);
+        String trimmedPosition = position.trim();
+        return new Position(new Title(position), new Description(PLACEHOLDER_DESCRIPTION));
     }
 
     // All position related methods
