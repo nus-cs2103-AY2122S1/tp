@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
@@ -27,10 +28,14 @@ import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.RoleContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagContainsKeywordsPredicate;
 
 /**
@@ -79,6 +84,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Name.isValidName(keyword)) {
+                            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
@@ -88,6 +98,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Phone.isValidPhone(keyword)) {
+                            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
@@ -97,6 +112,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Email.isValidEmail(keyword)) {
+                            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
@@ -106,6 +126,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Role.isValidRole(keyword)) {
+                            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new RoleContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
@@ -151,13 +176,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
                 String arg = argMultimap.getValue(PREFIX_EXPECTED_SALARY).get();
                 String trimmedArg = arg.trim();
-                String[] keywords = splitByWhiteSpace(trimmedArg);
-                for (String keyword : keywords) {
-                    if (!ExpectedSalary.isValidExpectedSalary(keyword)) {
-                        throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+                if (!trimmedArg.isEmpty()) {
+                    String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!ExpectedSalary.isValidExpectedSalary(keyword)) {
+                            throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+                        }
                     }
+                    predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
                 }
-                predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
             }
 
             if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
@@ -183,6 +210,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Tag.isValidTagName(keyword)) {
+                            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new TagContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }

@@ -29,9 +29,9 @@ public class RoleTest {
         assertFalse(Role.isValidRole(" ")); // spaces only
         assertFalse(Role.isValidRole("engineer@nus")); // contains non-alphanumeric
         assertFalse(Role.isValidRole("software engineer (senior)")); // brackets
-        assertFalse(Role.isValidRole("!@#$%^&*()_+")); // only alphanumeric
+        assertFalse(Role.isValidRole("!@#$%^&*()_+")); // only non-alphanumeric
 
-        // valid phone numbers
+        // valid roles
         assertTrue(Role.isValidRole("software engineer")); // alphabets only
         assertTrue(Role.isValidRole("93121534")); // numbers only
         assertTrue(Role.isValidRole("ieee754 enjoyer")); // alphanumeric characters
