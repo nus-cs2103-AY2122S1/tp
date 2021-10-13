@@ -35,7 +35,7 @@ public class UpdateEpisodeCommandTest {
             .build();
         UpdateEpisodeCommand.EpisodeDescriptor descriptor = new EpisodeDescriptorBuilder()
             .withEpisode(VALID_EPISODE_TWO)
-                .build();
+            .build();
         UpdateEpisodeCommand updateEpisodeCommand = new UpdateEpisodeCommand(INDEX_FIRST_ANIME, descriptor);
 
         String expectedMessage = String.format(
