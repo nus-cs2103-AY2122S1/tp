@@ -27,6 +27,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentCommand parse(String args) throws ParseException {
@@ -38,14 +39,17 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         // Student name is a required fields (student phone, parent name and parent phone are optional)
         if (argMultimap.getValue(PREFIX_STUDENT_NAME).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
-                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
         StudentName studentName = ParserUtil.parseStudentName(
-                argMultimap.getValue(PREFIX_STUDENT_NAME).get());
-        Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
-        ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
-        Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
+            argMultimap.getValue(PREFIX_STUDENT_NAME).get());
+        Phone studentPhone = ParserUtil.parsePhone(
+            argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
+        ParentName parentName = ParserUtil.parseParentName(
+            argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
+        Phone parentPhone = ParserUtil.parsePhone(
+            argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 

@@ -103,8 +103,11 @@ public class EditStudentCommandParserTest {
             + PARENT_NAME_DESC_AMY
             + STUDENT_NAME_DESC_AMY;
 
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_AMY)
-            .withStudentPhone(VALID_STUDENT_PHONE_BOB).withParentPhone(VALID_PARENT_PHONE_AMY).withParentName(VALID_PARENT_NAME_AMY)
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+            .withStudentName(VALID_STUDENT_NAME_AMY)
+            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+            .withParentPhone(VALID_PARENT_PHONE_AMY)
+            .withParentName(VALID_PARENT_NAME_AMY)
             .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
 
@@ -116,8 +119,10 @@ public class EditStudentCommandParserTest {
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + STUDENT_PHONE_DESC_BOB + PARENT_PHONE_DESC_AMY;
 
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .withParentPhone(VALID_PARENT_PHONE_AMY).build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+            .withParentPhone(VALID_PARENT_PHONE_AMY)
+            .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -128,25 +133,33 @@ public class EditStudentCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_STUDENT;
         String userInput = targetIndex.getOneBased() + STUDENT_NAME_DESC_AMY;
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_AMY).build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+            .withStudentName(VALID_STUDENT_NAME_AMY)
+            .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
         userInput = targetIndex.getOneBased() + STUDENT_PHONE_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withStudentPhone(VALID_STUDENT_PHONE_AMY).build();
+        descriptor = new EditStudentDescriptorBuilder()
+            .withStudentPhone(VALID_STUDENT_PHONE_AMY)
+            .build();
         expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // parent phone
         userInput = targetIndex.getOneBased() + PARENT_PHONE_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withParentPhone(VALID_PARENT_PHONE_AMY).build();
+        descriptor = new EditStudentDescriptorBuilder()
+            .withParentPhone(VALID_PARENT_PHONE_AMY)
+            .build();
         expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // parent name
         userInput = targetIndex.getOneBased() + PARENT_NAME_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withParentName(VALID_PARENT_NAME_AMY).build();
+        descriptor = new EditStudentDescriptorBuilder()
+            .withParentName(VALID_PARENT_NAME_AMY)
+            .build();
         expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -154,12 +167,15 @@ public class EditStudentCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY
+        String userInput = targetIndex.getOneBased()
+            + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY
             + STUDENT_PHONE_DESC_AMY + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY
             + STUDENT_PHONE_DESC_BOB + PARENT_NAME_DESC_BOB + PARENT_PHONE_DESC_BOB;
 
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .withParentPhone(VALID_PARENT_PHONE_BOB).withParentName(VALID_PARENT_NAME_BOB)
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+            .withParentPhone(VALID_PARENT_PHONE_BOB)
+            .withParentName(VALID_PARENT_NAME_BOB)
             .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
 
@@ -171,15 +187,23 @@ public class EditStudentCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + INVALID_STUDENT_PHONE_DESC + STUDENT_PHONE_DESC_BOB;
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentPhone(VALID_STUDENT_PHONE_BOB).build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+            .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + PARENT_PHONE_DESC_BOB + INVALID_STUDENT_PHONE_DESC + PARENT_NAME_DESC_BOB
+        userInput = targetIndex.getOneBased()
+            + PARENT_PHONE_DESC_BOB
+            + INVALID_STUDENT_PHONE_DESC
+            + PARENT_NAME_DESC_BOB
             + STUDENT_PHONE_DESC_BOB;
-        descriptor = new EditStudentDescriptorBuilder().withStudentPhone(VALID_STUDENT_PHONE_BOB).withParentPhone(VALID_PARENT_PHONE_BOB)
-            .withParentName(VALID_PARENT_NAME_BOB).build();
+        descriptor = new EditStudentDescriptorBuilder()
+            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+            .withParentPhone(VALID_PARENT_PHONE_BOB)
+            .withParentName(VALID_PARENT_NAME_BOB)
+            .build();
         expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
