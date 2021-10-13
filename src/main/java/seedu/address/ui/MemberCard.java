@@ -52,8 +52,8 @@ public class MemberCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(member.getName().fullName);
         phone.setText(member.getPhone().value);
-        address.setText(member.getAddress().orElse(new Address("")).value);
-        email.setText(member.getEmail().orElse(new Email("")).value);
+        address.setText(member.getAddress().orElse(new Address("Not provided")).value);
+        email.setText(member.getEmail().orElse(new Email("noprovide@email.com")).value);
         member.getPositions().stream()
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));

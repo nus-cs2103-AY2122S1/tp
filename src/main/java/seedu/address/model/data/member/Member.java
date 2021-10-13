@@ -131,12 +131,12 @@ public class Member extends Data {
                 .append("; Phone: ")
                 .append(getPhone());
 
-        if (getEmail() != null) {
-            builder.append("; Email: ").append(getEmail());
+        if (getEmail().isPresent()) {
+            builder.append("; Email: ").append(getEmail().get());
         }
 
-        if (getAddress() != null) {
-            builder.append("; Address: ").append(getAddress());
+        if (getAddress().isPresent()) {
+            builder.append("; Address: ").append(getAddress().get());
         }
 
         Set<Position> positions = getPositions();
