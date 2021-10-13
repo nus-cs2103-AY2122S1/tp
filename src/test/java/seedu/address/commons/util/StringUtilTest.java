@@ -242,4 +242,40 @@ public class StringUtilTest {
                 Integer.toString(i + range + 2), range));
     }
 
+    //---------------- Tests for areUnsignedIntegersWithinRange ---------------------------
+
+    @Test
+    public void isIntegerLargerOrEqualToValue() {
+        // EP: empty strings
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("", ""));
+
+        // EP: not a number
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("a", "b"));
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("aaa", "bbb"));
+
+        // EP: numbers with white space
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(" 10 ", "    20    ")); // Leading/trailing spaces
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue("1 0", "2 0")); // Spaces in the middle
+
+        // EP: number larger than Integer.MAX_VALUE
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Long.toString(Integer.MAX_VALUE + 1),
+                Long.toString(Integer.MAX_VALUE + 2)));
+
+        // EP: s1 >= s2, should return true
+        int small = 1;
+        int large = 10;
+        assertTrue(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(large),
+                Integer.toString(small)));
+        assertTrue(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(large + 5),
+                Integer.toString(small + 5)));
+
+        // EP: s1 < s2, should return false
+        int i = 5;
+        int j = 20;
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(i),
+                Integer.toString(j))); // Boundary value
+        assertFalse(StringUtil.isIntegerLargerOrEqualToValue(Integer.toString(i - 5),
+                Integer.toString(j - 5)));
+    }
+
 }
