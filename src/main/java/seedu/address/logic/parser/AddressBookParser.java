@@ -34,7 +34,7 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWord>.*)(?<flag>(-c|-p))(?<arguments>.*)");
+            Pattern.compile("(?<commandWord>\\S+)(?<flag>\\s+-[cp])(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -60,7 +60,6 @@ public class AddressBookParser {
                         + (matcher.pattern() == ADVANCED_COMMAND_FORMAT
                            ? " " + matcher.group("flag").trim()
                            : "");
-
         final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {

@@ -16,7 +16,7 @@ public class UnitPrice {
      */
     public static final String VALIDATION_REGEX = "[0-9]+(\\.[0-9]{2})?";
 
-    private String unitPrice;
+    public final String unitPrice;
 
     /**
      * Constructs a {@code UnitPrice}.

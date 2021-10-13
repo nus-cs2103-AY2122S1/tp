@@ -15,7 +15,7 @@ public class PhoneNumber {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    private String phoneNumber;
+    public final String phoneNumber;
 
     /**
      * Constructs a {@code PhoneNumber}.
