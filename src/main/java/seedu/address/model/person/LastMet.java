@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class LastMet implements OptionalPersonNonStringField {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
-    // TODO: why call it alternative?
-    public static final String ALTERNATIVE_VALIDATION_REGEX =
+    public static final String VALIDATION_REGEX =
         "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
 
     public final LocalDate value;
@@ -45,7 +44,7 @@ public class LastMet implements OptionalPersonNonStringField {
      */
     public static boolean isValidLastMet(String test) {
         return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-            || test.matches(ALTERNATIVE_VALIDATION_REGEX);
+            || test.matches(VALIDATION_REGEX);
     }
 
     @Override

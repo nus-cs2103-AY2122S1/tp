@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -72,6 +71,34 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * returns the person with the corresponding ClientId.
+     */
+    public Person getPerson(ClientId clientId) {
+        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
+            return person.getClientId().equals(clientId);
+        });
+        if (personInQuestion.isEmpty()) {
+            throw new PersonNotFoundException();
+        }
+        return personInQuestion.get(0);
+    }
+
+    /**
+     * returns true if a client with the given clientId exists.
+     * @param clientId of the client
+     * @return true if a client with the clientId exists
+     */
+    public boolean hasClientId(ClientId clientId) {
+        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
+            return person.getClientId().equals(clientId);
+        });
+        if (personInQuestion.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
@@ -86,7 +113,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Removes the equivalent person with matching client id and/or email from the list.
      * The person must exist in the list.
      */
-    public Person removeByFields(ArrayList<Predicate> predicates) {
+    public Person removeByFields(List<Predicate<Person>> predicates) {
         requireAllNonNull(predicates);
         Predicate<Person> predicate = predicates.stream().reduce(x -> true, Predicate::and);
         FilteredList<Person> filteredList = internalList.filtered(predicate);

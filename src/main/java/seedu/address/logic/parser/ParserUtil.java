@@ -18,6 +18,7 @@ import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.comparators.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,19 +55,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_CLIENT_ID);
         }
         return new ClientId(trimmedId);
-    }
-    /**
-     * Parses {@code clientId} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseClientIndex(String clientId) throws ParseException {
-        String trimmedIndex = clientId.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromZeroBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -153,6 +141,9 @@ public class ParserUtil {
     public static LastMet parseLastMet(String lastMet) throws ParseException {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
+        if (!LastMet.isValidLastMet(trimmedLastMet)) {
+            throw new ParseException(LastMet.MESSAGE_CONSTRAINTS);
+        }
         return new LastMet(trimmedLastMet);
     }
 
@@ -171,7 +162,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String disposableIncome} into an {@code disposableIncome}.
+     * Parses a {@code String disposableIncome} into an {@code DisposableIncome}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code DisposableIncome} is invalid.
@@ -183,6 +174,21 @@ public class ParserUtil {
             throw new ParseException(DisposableIncome.MESSAGE_CONSTRAINTS);
         }
         return new DisposableIncome(trimmedDisposableIncome);
+    }
+
+    /**
+     * Parses a {@code String sortDirection} into an {@code SortDirection}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code DisposableIncome} is invalid.
+     */
+    public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
+        requireNonNull(sortDirection);
+        String trimmedSortDirection = sortDirection.trim();
+        if (!SortDirection.isValidDirection(trimmedSortDirection)) {
+            throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
+        }
+        return new SortDirection(trimmedSortDirection);
     }
 
     /**

@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
 /**
@@ -59,6 +61,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same identity as {@code clientId} exists in the address book.
+     */
+    boolean hasClientId(ClientId clientId);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -66,9 +73,8 @@ public interface Model {
 
     /**
      * Deletes the person with the matching Client ID and Email and returns the deleted person
-     *
      */
-    Person deletePersonByFields(ArrayList<Predicate> predicates);
+    Person deletePersonByFields(List<Predicate<Person>> predicates);
 
     /**
      * Adds the given person.
@@ -97,6 +103,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void filterFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Sorts the filtered person list to sort by the given {@code sorter}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void sortFilteredPersonList(Comparator<Person> sorter);
 
     /** Returns an unmodifiable view of the person to view */
     ObservableList<Person> getPersonToView();

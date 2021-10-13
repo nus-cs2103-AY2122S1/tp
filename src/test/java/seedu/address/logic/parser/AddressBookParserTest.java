@@ -74,7 +74,7 @@ public class AddressBookParserTest {
                 DeleteCommand.COMMAND_WORD + " i/1");
         ClientId clientId = new ClientId("1");
         PersonHasId predicate = new PersonHasId(clientId);
-        ArrayList<Predicate> predicates = new ArrayList<>();
+        List<Predicate<Person>> predicates = new ArrayList<>();
         predicates.add(predicate);
         assertEquals(new DeleteCommand(predicates), command);
     }
@@ -83,11 +83,11 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        descriptor.setClientId(null);
+
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        EditCommand command1 = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        assertEquals(new EditCommand(new ClientId(Integer.toString(INDEX_FIRST_PERSON.getOneBased())), descriptor),
+                command);
     }
 
     @Test

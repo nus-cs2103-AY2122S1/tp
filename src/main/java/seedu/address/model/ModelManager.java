@@ -4,14 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +25,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> personToView;
 
@@ -36,7 +40,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(sortedPersons);
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -98,12 +103,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasClientId(ClientId clientId) {
+        requireNonNull(clientId);
+        return addressBook.hasClientId(clientId);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public Person deletePersonByFields(ArrayList<Predicate> predicates) {
+    public Person deletePersonByFields(List<Predicate<Person>> predicates) {
         return addressBook.removePersonByFields(predicates);
     }
 
@@ -145,6 +156,11 @@ public class ModelManager implements Model {
             currentPredicate = PREDICATE_SHOW_ALL_PERSONS;
         }
         filteredPersons.setPredicate(predicate.and(currentPredicate));
+    }
+
+    @Override
+    public void sortFilteredPersonList(Comparator<Person> sorter) {
+        sortedPersons.setComparator(sorter);
     }
 
     //=========== Person To View List Accessors =============================================================
