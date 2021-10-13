@@ -56,7 +56,7 @@
              <Label fx:id="role" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$role" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
              <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$status" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
              <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$salary" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-             <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="0.0" prefWidth="383.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+             <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
  </VBox>
