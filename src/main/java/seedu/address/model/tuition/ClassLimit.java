@@ -34,4 +34,13 @@ public class ClassLimit {
     public int getLimit() {
         return limit;
     }
+
+    /**
+     * checks whether the class limit is valid(limit should be larger than 0)
+     * @param myLimit the limit to be checked
+     * @return true if the limit is valid.
+     */
+    public static boolean isValid(int myLimit) {
+        return myLimit > 0;
+    }
 }

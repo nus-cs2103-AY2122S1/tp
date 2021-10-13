@@ -11,7 +11,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Counter;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
@@ -25,7 +24,6 @@ class JsonAdaptedTuition {
 
     private final String name;
     private final int limit;
-    private final int counter;
     private final String timeslot;
 
     private final ArrayList<String> students = new ArrayList<>();
@@ -41,12 +39,11 @@ class JsonAdaptedTuition {
      */
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
-                             @JsonProperty("counter") int counter, @JsonProperty("timeslot") String timeslot,
+                             @JsonProperty("timeslot") String timeslot,
                              @JsonProperty("students") ArrayList<String> student,
                              @JsonProperty("remark") String remark, @JsonProperty("id") int id) {
         this.name = name;
         this.limit = limit;
-        this.counter = counter;
         this.timeslot = timeslot;
         this.remark = remark;
         this.id = id;
@@ -64,7 +61,6 @@ class JsonAdaptedTuition {
     public JsonAdaptedTuition(TuitionClass source) {
         name = source.getName().getName();
         limit = source.getLimit().getLimit();
-        counter = source.getCounter().getCounter();
         timeslot = source.getTimeslot().getTime();
         students.addAll(source.getStudentList().getStudents());
         remark = source.getRemark().value;
@@ -89,10 +85,13 @@ class JsonAdaptedTuition {
 
         final ClassLimit modelLimit = new ClassLimit(limit);
 
-        final Counter modelCounter = new Counter(counter);
 
         if (timeslot == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        }
+
+        if (!new Timeslot(timeslot).isFormatCorrect()) {
+            throw new IllegalValueException(Timeslot.TIME_FORMAT_INCORRECT);
         }
 
         final Timeslot modelTimeslot = new Timeslot(timeslot);
@@ -106,6 +105,6 @@ class JsonAdaptedTuition {
         }
         final Remark modelRemark = new Remark(remark);
 
-        return new TuitionClass(modelName, modelLimit, modelCounter, modelTimeslot, modelStudent, modelRemark, this.id);
+        return new TuitionClass(modelName, modelLimit, modelTimeslot, modelStudent, modelRemark, this.id);
     }
 }
