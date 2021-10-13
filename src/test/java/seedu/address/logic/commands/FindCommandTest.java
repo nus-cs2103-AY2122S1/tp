@@ -24,9 +24,9 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
+    public static final String NAMETYPE = "n/";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private static final String NAMETYPE = "n/";
 
     @Test
     public void equals() {

@@ -33,8 +33,8 @@ import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
     private static final String NAMETYPE = "n/";
+    private final AddressBookParser parser = new AddressBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {

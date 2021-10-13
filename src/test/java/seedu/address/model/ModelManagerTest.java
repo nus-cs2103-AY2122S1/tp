@@ -20,8 +20,8 @@ import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
-    private ModelManager modelManager = new ModelManager();
     private static final String NAMETYPE = "n/";
+    private ModelManager modelManager = new ModelManager();
 
     @Test
     public void constructor() {
