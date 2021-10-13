@@ -72,9 +72,6 @@ public class AddCommandParserTest {
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL, expectedMessage);
 
-        // missing id prefix
-        assertParseFailure(parser, NAME_DESC_BAGEL + VALID_ID_BAGEL, expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BAGEL + VALID_ID_BAGEL, expectedMessage);
     }

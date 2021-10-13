@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 
 /**
  * Adds a person to the address book.
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
     public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %1$s";
-    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory";
+    public static final String MESSAGE_INCOMPLETE_INFO = "For first time adding, please provide both name and id";
 
     private final Item toAdd;
 
@@ -49,14 +50,19 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasItem(toAdd)) {
-            // throw new CommandException(MESSAGE_DUPLICATE_ITEM);
-            Item inInventory = model.getItemWithName(toAdd.getName().toString());
-            toAdd.replenishItem(inInventory.getCount());
-            // TODO: HASN'T ACCOUNTED IF ID IS DIFF
-            model.setItem(inInventory, toAdd);
+            Item inInventory = toAdd.getId() == "999999"
+                    ? model.getItemWithName(toAdd.getName().toString())
+                    : model.getItemWithId(toAdd.getId());
+            inInventory.replenishItem(toAdd.getCount());
+            model.setItem(inInventory, inInventory);
 
-            return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, toAdd));
+            return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, inInventory));
         }
+
+        if (toAdd.getId() == "999999" || toAdd.getName().equals(new Name("dummy name"))) {
+            throw new CommandException(MESSAGE_INCOMPLETE_INFO);
+        }
+
         model.addItem(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

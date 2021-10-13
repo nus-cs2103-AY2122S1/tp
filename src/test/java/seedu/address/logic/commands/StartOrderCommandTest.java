@@ -130,6 +130,11 @@ public class StartOrderCommandTest {
         }
 
         @Override
+        public Item getItemWithId(String id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setOrder(Order order) {
             StartOrderCommandTest.ModelStubWithOrder.this.optionalOrder = Optional.of(order);
         }

@@ -162,6 +162,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Item getItemWithId(String id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setOrder(Order order) {
             throw new AssertionError("This method should not be called.");
         }
