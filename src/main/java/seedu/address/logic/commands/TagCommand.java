@@ -22,15 +22,17 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Adds a new tag to the details of an existing person in the address book.
+ * Adds one or more new {@code Tag} objects to the details of an existing {@code Person} in the address book.
  */
 public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a Tag to the details of the person identified "
-            + "by the index number used in the displayed person list.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds one or more Tags to the details of the person "
+            + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TAG + "TAG" + " [" + PREFIX_TAG + "EXTRA_TAG]...\n"
+            + PREFIX_TAG + "TAG "
+            + "[" + PREFIX_TAG + "EXTRA_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TAG + "ExampleTag";
 
     public static final String MESSAGE_TAG_ADD_SUCCESS = "Person %1$s now has tags: %2$s";
@@ -39,8 +41,8 @@ public class TagCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the {@code Person} in the filtered person list to edit
+     * @param editPersonDescriptor details the tags to add to the {@code Person}
      */
     public TagCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -72,7 +74,7 @@ public class TagCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * with added tags from {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(personToEdit);
