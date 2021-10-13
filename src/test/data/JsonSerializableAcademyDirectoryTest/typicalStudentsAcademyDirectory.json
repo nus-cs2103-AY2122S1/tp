@@ -7,6 +7,13 @@
     "telegram": "@alice",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +22,13 @@
     "telegram": "@johnd",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +37,13 @@
     "telegram": "@heinz",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +52,13 @@
     "telegram": "@cornelia",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +67,13 @@
     "telegram": "@werner",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +82,13 @@
     "telegram": "@lydia",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +97,13 @@
     "telegram": "@anna",
     "attendance" : [ false, false, false, false, false, false, false, false, false, false, false, false ],
     "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "assessment" : {
+      "RA2" : -1,
+      "RA1" : -1,
+      "MIDTERM" : -1,
+      "PE" : -1,
+      "FINAL" : -1
+    },
     "tagged" : [ ]
   } ]
 }
