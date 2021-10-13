@@ -91,8 +91,8 @@ public class AddressBookParser {
     }
 
     private Command parseTwoWordCommand(String commandWord, String arguments) throws ParseException {
-            commandWord = extractFullCommandWord(commandWord, arguments);
-            arguments = extractArguments(arguments);
+        commandWord = extractFullCommandWord(commandWord, arguments);
+        arguments = extractArguments(arguments);
 
         switch (commandWord) {
 
