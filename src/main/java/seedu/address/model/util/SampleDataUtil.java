@@ -17,7 +17,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
-import seedu.address.model.tuition.Counter;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
@@ -64,10 +63,10 @@ public class SampleDataUtil {
     public static TuitionClass[] getSampleClass() {
         return new TuitionClass[] {
             new TuitionClass(new ClassName("Physics"),
-                new ClassLimit(3), new Counter(5), new Timeslot("Mon 10:00-12:00"),
+                new ClassLimit(3), new Timeslot("Mon 10:00-12:00"),
                 getSampleStudentList(), EMPTY_REMARK, 1234567),
             new TuitionClass(new ClassName("Chemistry"),
-                new ClassLimit(10), new Counter(5), new Timeslot("Tue 10:00-12:00"),
+                new ClassLimit(10), new Timeslot("Tue 10:00-12:00"),
                 getSampleStudentList(), EMPTY_REMARK, 2234567)
         };
     }
