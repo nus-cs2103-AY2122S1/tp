@@ -228,6 +228,7 @@ Action | Format, Examples
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
+**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222` 
 **List** | `list`
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
