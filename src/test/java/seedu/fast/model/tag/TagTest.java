@@ -38,7 +38,7 @@ public class TagTest {
         //null tag term
         assertThrows(NullPointerException.class, () -> Tag.isValidTagTerm(null));
 
-        //valid Tag term
+        //valid Tag terms
         assertTrue(Tag.isValidTagTerm(VALID_ALPHABET_TAG_TERM));
         assertTrue(Tag.isValidTagTerm(VALID_NUMBER_TAG_TERM));
         assertTrue(Tag.isValidTagTerm(VALID_MIXED_TAG_TERM));
@@ -53,7 +53,7 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.createTag(null));
 
         //valid Tag term
-        assertTrue(Tag.createTag(VALID_TAG_TERM) instanceof Tag);
+        assertTrue(Tag.createTag(VALID_ALPHABET_TAG_TERM) instanceof Tag);
 
         //valid PriorityTag term
         assertTrue(Tag.createTag(VALID_PRIORITY_TAG_TERM) instanceof PriorityTag);

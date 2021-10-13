@@ -12,8 +12,8 @@ public class AppointmentTest {
     public static final String BAD_FORMAT_DATE = "2021-111-13";
     public static final String INVALID_DATE = "2021-13-13";
     public static final String VALID_DATE = "11 Nov 2021";
-    //following string will remain correct as long as locale of the system is the same
-    public static final String VALID_DATE_STRING = "Thu Nov 11 00:00:00 SGT 2021";
+    public static final String VALID_TIME = "2300";
+    public static final String VALID_VENUE = "testArea";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -22,7 +22,7 @@ public class AppointmentTest {
 
     @Test
     public void convertDate() {
-        //no date
+        //no date specified
         Appointment noDateAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
                 Appointment.NO_VENUE);
         assertTrue(noDateAppointment.convertDate().equals(DateUtil.MAX_DATE));
@@ -39,6 +39,36 @@ public class AppointmentTest {
         Appointment validDateAppointment = new Appointment(VALID_DATE, Appointment.NO_TIME, Appointment.NO_VENUE);
         assertFalse(validDateAppointment.convertDate().equals(DateUtil.MAX_DATE));
 
+    }
+
+    @Test
+    public void getTime() {
+        //no time specified
+        Appointment noTimeAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(noTimeAppointment.getTime().equals(""));
+
+        //time specified
+        Appointment validTimeAppointment = new Appointment(VALID_DATE, VALID_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(validTimeAppointment.getTime().equals(VALID_TIME + "hrs"));
+
+        //invalid time not tested as parser automatically rejects invalid instances
+    }
+
+    @Test
+    public void getVenue() {
+        //no venue specified
+        Appointment noTimeAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(noTimeAppointment.getVenue().equals(""));
+
+        //venue specified
+        Appointment validVenueAppointment = new Appointment(VALID_DATE, Appointment.NO_TIME,
+                VALID_VENUE);
+        assertTrue(validVenueAppointment.getVenue().equals(VALID_VENUE));
+
+        //invalid venue not tested as parser automatically rejects invalid instances
     }
 
 }
