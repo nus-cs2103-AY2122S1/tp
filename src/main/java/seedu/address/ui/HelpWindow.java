@@ -6,6 +6,7 @@ import static seedu.address.ui.CommandFormat.EDIT_FORMAT;
 import static seedu.address.ui.CommandFormat.EXIT_FORMAT;
 import static seedu.address.ui.CommandFormat.MOVE_FORMAT;
 import static seedu.address.ui.CommandFormat.REMARK_FORMAT;
+import static seedu.address.ui.CommandFormat.SORT_FORMAT;
 import static seedu.address.ui.CommandFormat.VIEW_FORFMAT;
 
 import java.util.logging.Logger;
@@ -31,6 +32,7 @@ public class HelpWindow extends UiPart<Stage> {
             + EDIT_FORMAT
             + VIEW_FORFMAT
             + REMARK_FORMAT
+            + SORT_FORMAT
             + EXIT_FORMAT;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
