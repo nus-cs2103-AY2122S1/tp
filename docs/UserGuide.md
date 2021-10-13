@@ -98,15 +98,15 @@ Address | String | a/
 
 Adds a new client to the address book.
 
-Format: `add {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
+Format: `add <name>/{client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
 
 * A client must have minimally the name and email tag filled during creation
 * Any other tags are optional
 * Tags that can be added are as seen in the client information in the Client Info Section
 
 Examples:
-* `add Benedict Chua e/benchua@hotmail.com`
-* `add Keith e/keithtan@ymail.com p/12345678 r/4`
+* `add n/Benedict Chua e/benchua@hotmail.com`
+* `add n/Keith e/keithtan@ymail.com p/12345678 r/4`
 
 
 ### Retrieve Particular Contact : `view`
@@ -245,7 +245,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| add benedict e/benedict@gmail.com p/90909898 r/3 |
+**Create** | `add <name>/{client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
 **View** | `view {client’s id number}` | view 123 |
 **Delete** | `delete <attribute>/{value}` | delete i/4  |
 **Edit** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
