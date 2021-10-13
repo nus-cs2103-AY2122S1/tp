@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
+// Solution adapted from
+// https://github.com/nus-cs2103-AY1718S2/
+// addressbook-level4/blob/master/src/main/java/seedu/
+// address/logic/commands/UndoableCommand.java
 
 /**
  * A command that can be undone or redone

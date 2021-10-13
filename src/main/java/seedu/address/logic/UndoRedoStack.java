@@ -5,6 +5,11 @@ import java.util.Stack;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.UndoableCommand;
 
+//@@author Zhiyuan-Amos-reused
+// Reused code from
+// https://github.com/nus-cs2103-AY1718S2/addressbook-level4/
+// blob/master/src/main/java/seedu/address/logic/UndoRedoStack.java
+// with minor modifications
 
 /**
  * Keeps track of Commands that have been called (undoStack)
@@ -37,7 +42,7 @@ public class UndoRedoStack {
 
     /**
      * Returns true if there are commands to be undone.
-     * 
+     *
      * @return True if there are commands to be undone.
      */
     public boolean canUndo() {
@@ -66,7 +71,7 @@ public class UndoRedoStack {
 
     /**
      * Moves the Command that has been redone to the undoStack so that command can be undone again.
-     * 
+     *
      * @return Last UndoableCommand that has been redone.
      */
     public UndoableCommand popRedo() {
@@ -75,3 +80,5 @@ public class UndoRedoStack {
         return toRedo;
     }
 }
+//@@author Zhiyuan-Amos-reused
+
