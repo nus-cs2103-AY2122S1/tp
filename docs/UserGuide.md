@@ -12,7 +12,7 @@ Finding your next lead has never been easier.
 * [Quick Start](#quick-start)
 * [Client Information](#client-information)
 * [Features](#features)
-    * [Create new contact: create](#create-new-contact--create)
+    * [Create new contact: add](#create-new-contact--create)
     * [Retrieve particular contact: view](#retrieve-particular-contact--view)
     * [Update existing contact: edit](#update-existing-contact--edit)
     * [Delete particular contact: delete](#delete-particular-contact--delete)
@@ -94,19 +94,19 @@ Address | String | a/
 </div>
 
 
-### Create New Contact : `create`
+### Create New Contact : `add`
 
 Adds a new client to the address book.
 
-Format: `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
+Format: `add {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
 
 * A client must have minimally the name and email tag filled during creation
 * Any other tags are optional
 * Tags that can be added are as seen in the client information in the Client Info Section
 
 Examples:
-* `create Benedict Chua e/benchua@hotmail.com`
-* `create Keith e/keithtan@ymail.com p/12345678 r/4`
+* `add Benedict Chua e/benchua@hotmail.com`
+* `add Keith e/keithtan@ymail.com p/12345678 r/4`
 
 
 ### Retrieve Particular Contact : `view`
