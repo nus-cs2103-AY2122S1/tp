@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -69,7 +72,11 @@ public class RemoveMarkCommand extends Command {
         for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
         }
-        return new CommandResult(String.format(STAFF_UNMARKED, toEdit));
+        List<String> toPrint = toEdit.stream()
+                .map(Person::getName)
+                .map(Object::toString)
+                .collect(Collectors.toList());
+        return new CommandResult(String.format(STAFF_UNMARKED, listToString(toPrint)));
     }
 
 
@@ -80,7 +87,26 @@ public class RemoveMarkCommand extends Command {
         }
         Person toTest = model.getFilteredPersonList().get(index);
         model.setPerson(toTest, checkPerson(toTest));
-        return new CommandResult(String.format(STAFF_UNMARKED, toTest));
+        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName()));
+    }
+
+    /**
+     * Converts a {@code List<String> strings} of strings to the following format.
+     * e.g. ["Rudy", "Roxy", "Paul"] would output
+     * Rudy
+     * Roxy
+     * Paul
+     * Note that there is no new line at the end.
+     */
+    public static String listToString(List<String> strings) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < strings.size(); i++) {
+            result.append(strings.get(i));
+            if (i != (strings.size() - 1)) {
+                result.append("\n");
+            }
+        }
+        return result.toString();
     }
 
     /**

@@ -114,8 +114,8 @@ public class Period {
     public boolean equals(Object o) {
         return (o != null)
                 && (o instanceof Period)
-                && ((Period) o).start.equals(this.start)
-                && ((Period) o).end.equals(this.end);
+                && ((Period) o).contains(this)
+                && this.contains((Period) o);
 
     }
 }

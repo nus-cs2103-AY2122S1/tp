@@ -9,6 +9,7 @@
     "salary": "1000000",
     "status" : "fulltime",
     "tagged" : [ "friends" ],
+    "absentDates" : [ "2020-02-01 2020-02-03" ],
     "schedule": ""
   }, {
     "name" : "Benson Meier",

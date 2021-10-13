@@ -187,6 +187,10 @@ public class Person {
         }
 
         Person otherStaff = (Person) other;
+        //for some odd reason, the set equals method does not work, neither does the contains all
+        List<Period> periods = getAbsentDates().stream().collect(Collectors.toList());
+        List<Period> otherPeriods = otherStaff.getAbsentDates().stream().collect(Collectors.toList());
+
         return otherStaff.getName().equals(getName())
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
@@ -195,7 +199,9 @@ public class Person {
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags())
-                &&otherStaff.getAbsentDates().equals(getAbsentDates());
+                && periods.containsAll(otherPeriods)
+                && otherPeriods.containsAll(periods);
+
     }
 
     @Override

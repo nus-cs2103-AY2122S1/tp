@@ -52,12 +52,13 @@ public class PeriodTest {
         Period after = new Period(PAST_TEST_DATE, TEST_DATE);
         Period before = new Period(TEST_DATE, BEFORE_TEST_DATE);
         Period same = new Period(TEST_DATE);
+        Period another = new Period(TEST_DATE, TEST_DATE);
         assertTrue(after.equals(after));
         assertTrue(before.equals(before));
         assertTrue(same.equals(same));
+        assertTrue(same.equals(another));
         assertFalse(after.equals(before));
         assertFalse(after.equals(same));
-
     }
 
 }

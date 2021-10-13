@@ -171,6 +171,8 @@ public class EditCommand extends Command {
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(staffToEdit.getTags());
+        //currently do not allow modifications to period via edit person descriptor
+        //exception would be during tests.
         Set<Period> updatedPeriod = editPersonDescriptor.getPeriod().orElse(staffToEdit.getAbsentDates());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
@@ -351,8 +353,7 @@ public class EditCommand extends Command {
                     && getRole().equals(e.getRole())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())
-                    && getTags().equals(e.getTags())
-                    && getPeriod().equals(e.getPeriod());
+                    && getTags().equals(e.getTags());
         }
     }
 }
