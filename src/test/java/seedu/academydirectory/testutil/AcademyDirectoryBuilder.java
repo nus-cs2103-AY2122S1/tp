@@ -4,9 +4,9 @@ import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building AcademyDirectory objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AcademyDirectoryBuilder().withStudent("John", "Doe").build();}
+ *     {@code AcademyDirectory ab = new AcademyDirectoryBuilder().withStudent("John", "Doe").build();}
  */
 public class AcademyDirectoryBuilder {
 
@@ -21,7 +21,7 @@ public class AcademyDirectoryBuilder {
     }
 
     /**
-     * Adds a new {@code Student} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Student} to the {@code AcademyDirectory} that we are building.
      */
     public AcademyDirectoryBuilder withStudent(Student student) {
         academyDirectory.addStudent(student);

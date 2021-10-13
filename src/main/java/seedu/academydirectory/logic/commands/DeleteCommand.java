@@ -11,7 +11,7 @@ import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a student identified using it's displayed index from the academy directory.
  */
 public class DeleteCommand extends Command {
 

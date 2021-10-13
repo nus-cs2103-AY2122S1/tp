@@ -14,7 +14,7 @@ import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable AcademyDirectory that is serializable to JSON format.
  */
 @JsonRootName(value = "academy directory")
 class JsonSerializableAcademyDirectory {

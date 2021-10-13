@@ -9,7 +9,7 @@ import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the academy-directory level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class AcademyDirectory implements ReadOnlyAcademyDirectory {
@@ -30,7 +30,7 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
     public AcademyDirectory() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an AcademyDirectory using the Students in the {@code toBeCopied}
      */
     public AcademyDirectory(ReadOnlyAcademyDirectory toBeCopied) {
         this();
@@ -48,7 +48,7 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code AcademyDirectory} with {@code newData}.
      */
     public void resetData(ReadOnlyAcademyDirectory newData) {
         requireNonNull(newData);
@@ -59,7 +59,7 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the academy directory.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -67,8 +67,8 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a student to the academy directory.
+     * The student must not already exist in the academy directory.
      */
     public void addStudent(Student p) {
         students.add(p);
@@ -76,9 +76,9 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the academy directory.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * academy directory.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -86,8 +86,8 @@ public class AcademyDirectory implements ReadOnlyAcademyDirectory {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AcademyDirectory}.
+     * {@code key} must exist in the academy directory.
      */
     public void removeStudent(Student key) {
         students.remove(key);

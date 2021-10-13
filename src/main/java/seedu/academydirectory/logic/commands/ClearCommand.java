@@ -6,17 +6,17 @@ import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the academy directory.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String HELP_MESSAGE = "### Clearing all entries : `clear`\n"
             + "\n"
-            + "Clears all entries from the address book.\n"
+            + "Clears all entries from the academy directory.\n"
             + "\n"
             + "Format: `clear`";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Academy directory has been cleared!";
 
 
     @Override

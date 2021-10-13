@@ -19,7 +19,7 @@ public interface AcademyDirectoryStorage {
     Path getAcademyDirectoryFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAcademyDirectory}.
+     * Returns AcademyDirectory data as a {@link ReadOnlyAcademyDirectory}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
@@ -33,14 +33,14 @@ public interface AcademyDirectoryStorage {
 
     /**
      * Saves the given {@link ReadOnlyAcademyDirectory} to the storage.
-     * @param addressBook cannot be null.
+     * @param academyDirectory cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook) throws IOException;
+    void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory) throws IOException;
 
     /**
      * @see #saveAcademyDirectory(ReadOnlyAcademyDirectory)
      */
-    void saveAcademyDirectory(ReadOnlyAcademyDirectory addressBook, Path filePath) throws IOException;
+    void saveAcademyDirectory(ReadOnlyAcademyDirectory academyDirectory, Path filePath) throws IOException;
 
 }
