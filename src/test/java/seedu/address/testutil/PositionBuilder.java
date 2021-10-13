@@ -46,4 +46,8 @@ public class PositionBuilder {
         return this;
     }
 
+    public Position build() {
+        return new Position(title, description);
+    }
+
 }

@@ -76,6 +76,27 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
+    /**
+     * Left temporarily to pass unit tests
+     * Initializes a ModelManager with the given positionBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(positionBook, userPrefs);
+
+        logger.fine("Initializing with position book: " + positionBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook();
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+    }
+
+
     public ModelManager() {
         this(new AddressBook(), new ApplicantBook(), new PositionBook(), new ApplicationBook(), new UserPrefs());
     }
