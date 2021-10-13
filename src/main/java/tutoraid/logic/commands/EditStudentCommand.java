@@ -30,18 +30,18 @@ public class EditStudentCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-        + "by the index number used in the displayed student list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_STUDENT_NAME + "STUDENT NAME "
-        + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
-        + PREFIX_PARENT_NAME + "PARENT NAME "
-        + PREFIX_PARENT_PHONE + "PARENT PHONE "
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_STUDENT_NAME + "John Doe "
-        + PREFIX_STUDENT_PHONE + "81234567 "
-        + PREFIX_PARENT_NAME + "Mrs Doe "
-        + PREFIX_PARENT_PHONE + "91234567 ";
+            + "by the index number used in the displayed student list. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_STUDENT_NAME + "STUDENT NAME "
+            + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
+            + PREFIX_PARENT_NAME + "PARENT NAME "
+            + PREFIX_PARENT_PHONE + "PARENT PHONE "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_STUDENT_NAME + "John Doe "
+            + PREFIX_STUDENT_PHONE + "81234567 "
+            + PREFIX_PARENT_NAME + "Mrs Doe "
+            + PREFIX_PARENT_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,7 +100,7 @@ public class EditStudentCommand extends Command {
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-            studentProgress, paymentStatus);
+                studentProgress, paymentStatus);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class EditStudentCommand extends Command {
         // state check
         EditStudentCommand e = (EditStudentCommand) other;
         return targetIndex.equals(e.targetIndex)
-            && editStudentDescriptor.equals(e.editStudentDescriptor);
+                && editStudentDescriptor.equals(e.editStudentDescriptor);
     }
 
     /**
@@ -130,10 +130,6 @@ public class EditStudentCommand extends Command {
         private Phone studentPhone;
         private ParentName parentName;
         private Phone parentPhone;
-
-        // Data fields
-        private Progress progress;
-        private PaymentStatus paymentStatus;
 
         public EditStudentDescriptor() {
         }
@@ -204,9 +200,9 @@ public class EditStudentCommand extends Command {
             EditStudentDescriptor e = (EditStudentDescriptor) other;
             EditStudentDescriptor otherDescriptor = (EditStudentDescriptor) other;
             return otherDescriptor.getStudentName().equals(getStudentName())
-                && otherDescriptor.getStudentPhone().equals(getStudentPhone())
-                && otherDescriptor.getParentName().equals(getParentName())
-                && otherDescriptor.getParentPhone().equals(getParentPhone());
+                    && otherDescriptor.getStudentPhone().equals(getStudentPhone())
+                    && otherDescriptor.getParentName().equals(getParentName())
+                    && otherDescriptor.getParentPhone().equals(getParentPhone());
         }
     }
 }

@@ -31,23 +31,23 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     public AddStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
-                PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
+                        PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
 
         // Student name is a required fields (student phone, parent name and parent phone are optional)
         if (argMultimap.getValue(PREFIX_STUDENT_NAME).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
-                Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
         StudentName studentName = ParserUtil.parseStudentName(
-            argMultimap.getValue(PREFIX_STUDENT_NAME).get());
+                argMultimap.getValue(PREFIX_STUDENT_NAME).get());
         Phone studentPhone = ParserUtil.parsePhone(
-            argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
+                argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
         ParentName parentName = ParserUtil.parseParentName(
-            argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
+                argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
         Phone parentPhone = ParserUtil.parsePhone(
-            argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
+                argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 

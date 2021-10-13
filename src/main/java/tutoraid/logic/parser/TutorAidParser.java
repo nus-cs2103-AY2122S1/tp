@@ -28,7 +28,7 @@ public class TutorAidParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT =
-        Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+            Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -54,7 +54,7 @@ public class TutorAidParser {
             matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
             if (!matcher.matches()) {
                 throw new ParseException(String.format(
-                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+                        Messages.MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             }
             commandWord = matcher.group("commandWord");
             arguments = matcher.group("arguments");

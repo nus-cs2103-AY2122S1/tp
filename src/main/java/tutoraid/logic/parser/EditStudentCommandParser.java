@@ -21,13 +21,14 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditStudentCommand
      * and returns an EditStudentCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
-                PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
+                        PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
 
         Index index;
 
@@ -35,25 +36,25 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(
-                MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE), pe);
         }
 
         EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         if (argMultimap.getValue(PREFIX_STUDENT_NAME).isPresent()) {
             editStudentDescriptor.setStudentName(
-                ParserUtil.parseStudentName(argMultimap.getValue(PREFIX_STUDENT_NAME).get()));
+                    ParserUtil.parseStudentName(argMultimap.getValue(PREFIX_STUDENT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_STUDENT_PHONE).isPresent()) {
             editStudentDescriptor.setStudentPhone(
-                ParserUtil.parsePhone(argMultimap.getValue(PREFIX_STUDENT_PHONE).get()));
+                    ParserUtil.parsePhone(argMultimap.getValue(PREFIX_STUDENT_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_PARENT_NAME).isPresent()) {
             editStudentDescriptor.setParentName(
-                ParserUtil.parseParentName(argMultimap.getValue(PREFIX_PARENT_NAME).get()));
+                    ParserUtil.parseParentName(argMultimap.getValue(PREFIX_PARENT_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PARENT_PHONE).isPresent()) {
             editStudentDescriptor.setParentPhone(
-                ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get()));
+                    ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PARENT_PHONE).get()));
         }
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditStudentCommand.MESSAGE_NOT_EDITED);

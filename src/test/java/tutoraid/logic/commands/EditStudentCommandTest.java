@@ -52,14 +52,14 @@ public class EditStudentCommandTest {
 
         StudentBuilder personInList = new StudentBuilder(lastStudent);
         Student editedStudent = personInList
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+                .build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .withStudentPhone(VALID_STUDENT_PHONE_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .withStudentPhone(VALID_STUDENT_PHONE_BOB)
+                .build();
         EditStudentCommand editCommand = new EditStudentCommand(indexLastStudent, descriptor);
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
         Model expectedModel = new ModelManager(new StudentBook(model.getStudentBook()), new UserPrefs());
@@ -86,10 +86,10 @@ public class EditStudentCommandTest {
 
         Student personInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student editedStudent = new StudentBuilder(personInFilteredList)
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .build();
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT,
-            new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
+                new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
@@ -115,7 +115,7 @@ public class EditStudentCommandTest {
         // edit person in filtered list into a duplicate in address book
         Student personInList = model.getStudentBook().getStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
         EditStudentCommand editCommand = new EditStudentCommand(INDEX_FIRST_STUDENT,
-            new EditStudentDescriptorBuilder(personInList).build());
+                new EditStudentDescriptorBuilder(personInList).build());
 
         assertCommandFailure(editCommand, model, EditStudentCommand.MESSAGE_DUPLICATE_STUDENT);
     }
@@ -124,8 +124,8 @@ public class EditStudentCommandTest {
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-            .withStudentName(VALID_STUDENT_NAME_BOB)
-            .build();
+                .withStudentName(VALID_STUDENT_NAME_BOB)
+                .build();
         EditStudentCommand editCommand = new EditStudentCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -143,7 +143,7 @@ public class EditStudentCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStudentBook().getStudentList().size());
 
         EditStudentCommand editCommand = new EditStudentCommand(outOfBoundIndex,
-            new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
+                new EditStudentDescriptorBuilder().withStudentName(VALID_STUDENT_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
