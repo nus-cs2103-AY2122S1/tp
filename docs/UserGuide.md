@@ -245,7 +245,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `create {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| create benedict e/benedict@gmail.com p/90909898 r/3 |
+**Create** | `add {client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| add benedict e/benedict@gmail.com p/90909898 r/3 |
 **View** | `view {client’s id number}` | view 123 |
 **Delete** | `delete <attribute>/{value}` | delete i/4  |
 **Edit** | `update {Client’s id number} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
