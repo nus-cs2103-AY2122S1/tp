@@ -105,9 +105,9 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getVaccStatus().equals(getVaccStatus())
-                && otherPerson.getFaculty().equals(getFaculty())
-                && otherPerson.getLastFetDate().equals(getLastFetDate())
-                && otherPerson.getLastCollectionDate().equals(getLastCollectionDate());
+                && otherPerson.getFaculty().equals(getFaculty());
+                //&& otherPerson.getLastFetDate().equals(getLastFetDate())
+                //&& otherPerson.getLastCollectionDate().equals(getLastCollectionDate());
     }
 
     @Override
