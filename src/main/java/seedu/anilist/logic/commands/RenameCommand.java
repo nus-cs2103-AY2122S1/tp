@@ -76,10 +76,11 @@ public class RenameCommand extends Command {
 
         Name updatedName = nameDescriptor.getName().orElse(animeToRename.getName());
         Episode episode = animeToRename.getEpisode();
+        Status status = animeToRename.getStatus();
         Set<Tag> updatedTags = animeToRename.getTags();
 
 
-        return new Anime(updatedName, episode, updatedTags);
+        return new Anime(updatedName, episode, status, updatedTags);
     }
 
     @Override
