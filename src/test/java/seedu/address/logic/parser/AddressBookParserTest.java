@@ -27,8 +27,8 @@ import seedu.address.logic.commands.ShowEventParticipantsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventNamePredicate;
-import seedu.address.model.participant.NameContainsKeywordsPredicate;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditParticipantDescriptorBuilder;
 import seedu.address.testutil.ParticipantBuilder;
 import seedu.address.testutil.ParticipantUtil;
@@ -79,7 +79,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
             FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new ParticipantNameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -74,7 +75,7 @@ public class AddParticipantToEventCommand extends Command {
                 .findFirst().get();
 
         if (selectedEvent.hasParticipant(participantToAdd)) {
-            throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
+            throw new CommandException(Messages.showParticipantExists(participantToAdd.getFullName()));
         }
 
         selectedEvent.addParticipant(participantToAdd);

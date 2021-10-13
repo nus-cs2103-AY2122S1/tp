@@ -17,8 +17,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.participant.NameContainsKeywordsPredicate;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditParticipantDescriptorBuilder;
 
 /**
@@ -113,6 +115,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredParticipantList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the Participant at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -122,8 +125,22 @@ public class CommandTestUtil {
 
         Participant participant = model.getFilteredParticipantList().get(targetIndex.getZeroBased());
         final String[] splitName = participant.getFullName().split("\\s+");
-        model.updateFilteredParticipantList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredParticipantList(new ParticipantNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredParticipantList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the Event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getNameString().split("\\s+");
+        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
     }
 }

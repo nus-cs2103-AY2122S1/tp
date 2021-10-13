@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
 import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
-import static seedu.address.logic.commands.AddParticipantToEventCommand.MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS;
+import static seedu.address.logic.commands.RemoveParticipantFromEventCommand.MESSAGE_PARTICIPANT_NOT_IN_EVENT;
+import static seedu.address.logic.commands.RemoveParticipantFromEventCommand
+        .MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
@@ -17,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
@@ -27,21 +28,25 @@ import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ParticipantBuilder;
 
-class AddParticipantToEventCommandTest {
+class RemoveParticipantFromEventCommandTest {
 
     @Test
-    public void execute_addParticipantToEventSuccessful() throws Exception {
+    public void execute_removeParticipantFromEventSuccessful() throws Exception {
         Participant validParticipant = new ParticipantBuilder().build();
+        EventBuilder eventBuilder = new EventBuilder();
+        eventBuilder.addParticipant(validParticipant);
         EventName eventName = SAMPLE_EVENT.getName();
+
         ModelStubWithEventAndParticipant modelStub =
-                new ModelStubWithEventAndParticipant(validParticipant, new EventBuilder().build());
+                new ModelStubWithEventAndParticipant(validParticipant, eventBuilder.build());
 
         CommandResult commandResult =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName).execute(modelStub);
+                new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(),
+                        eventName).execute(modelStub);
 
-        assertEquals(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
+        assertEquals(String.format(MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS,
                 validParticipant.getFullName(), eventName), commandResult.getFeedbackToUser());
-        assertTrue(modelStub.event.hasParticipant(validParticipant));
+        assertFalse(modelStub.event.hasParticipant(validParticipant));
     }
 
     @Test
@@ -51,12 +56,12 @@ class AddParticipantToEventCommandTest {
         ModelStubWithEventAndParticipant modelStub =
                 new ModelStubWithEventAndParticipant(ALEX, new EventBuilder().build());
 
-        AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+        RemoveParticipantFromEventCommand removeParticipantFromEventCommand =
+                new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
         assertThrows(CommandException.class,
                 String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(),
-                        ListCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
+                        ListCommand.COMMAND_WORD), () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test
@@ -66,30 +71,29 @@ class AddParticipantToEventCommandTest {
         ModelStubWithEventAndParticipant modelStub =
                 new ModelStubWithEventAndParticipant(validParticipant, new EventBuilder().build());
 
-        AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+        RemoveParticipantFromEventCommand removeParticipantFromEventCommand =
+                new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
-        assertThrows(CommandException.class,
-                String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName,
-                        ListEventCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
+        String errorMessage = String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST,
+                eventName, ListEventCommand.COMMAND_WORD);
+
+        assertThrows(CommandException.class, errorMessage, () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_eventContainsParticipant_throwsCommandException() {
+    public void execute_eventDoesNotContainParticipant_throwsCommandException() {
         Participant validParticipant = new ParticipantBuilder().build();
-        EventBuilder eventBuilder = new EventBuilder();
-        eventBuilder.addParticipant(validParticipant);
         EventName eventName = SAMPLE_EVENT.getName();
 
         ModelStubWithEventAndParticipant modelStub =
-                new ModelStubWithEventAndParticipant(validParticipant, eventBuilder.build());
+                new ModelStubWithEventAndParticipant(validParticipant, new EventBuilder().build());
 
-        AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+        RemoveParticipantFromEventCommand removeParticipantFromEventCommand =
+                new RemoveParticipantFromEventCommand(validParticipant.getParticipantId(), eventName);
 
-        assertThrows(CommandException.class,
-                Messages.showParticipantExists(validParticipant.getFullName()), () ->
-                        addParticipantToEventCommand.execute(modelStub));
+        String errorMessage = String.format(MESSAGE_PARTICIPANT_NOT_IN_EVENT, validParticipant.getFullName());
+
+        assertThrows(CommandException.class, errorMessage, () -> removeParticipantFromEventCommand.execute(modelStub));
     }
 
     @Test
@@ -97,32 +101,32 @@ class AddParticipantToEventCommandTest {
         ParticipantId alexId = ALEX.getParticipantId();
         ParticipantId berniceId = BERNICE.getParticipantId();
         EventName sampleEventName = SAMPLE_EVENT.getName();
-        AddParticipantToEventCommand addAlexToSampleEvent =
-                new AddParticipantToEventCommand(alexId, sampleEventName);
-        AddParticipantToEventCommand addAlexToAnotherEvent =
-                new AddParticipantToEventCommand(alexId, ANOTHER_EVENT.getName());
-        AddParticipantToEventCommand addBerniceToSampleEvent =
-                new AddParticipantToEventCommand(berniceId, sampleEventName);
+        RemoveParticipantFromEventCommand removeAlexFromSampleEvent =
+                new RemoveParticipantFromEventCommand(alexId, sampleEventName);
+        RemoveParticipantFromEventCommand removeALexFromAnotherEvent =
+                new RemoveParticipantFromEventCommand(alexId, ANOTHER_EVENT.getName());
+        RemoveParticipantFromEventCommand removeBerniceFromSampleEvent =
+                new RemoveParticipantFromEventCommand(berniceId, sampleEventName);
 
         // same object -> returns true
-        assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEvent));
+        assertTrue(removeAlexFromSampleEvent.equals(removeAlexFromSampleEvent));
 
         // same values -> returns true
-        AddParticipantToEventCommand addAlexToSampleEventCopy =
-                new AddParticipantToEventCommand(alexId, sampleEventName);
-        assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEventCopy));
+        RemoveParticipantFromEventCommand removeAlexFromSampleEventCopy =
+                new RemoveParticipantFromEventCommand(alexId, sampleEventName);
+        assertTrue(removeAlexFromSampleEvent.equals(removeAlexFromSampleEventCopy));
 
         // different types -> returns false
-        assertFalse(addAlexToSampleEvent.equals(1));
+        assertFalse(removeAlexFromSampleEvent.equals(1));
 
         // null -> returns false
-        assertFalse(addAlexToSampleEvent.equals(null));
+        assertFalse(removeAlexFromSampleEvent.equals(null));
 
         // different participant -> returns false
-        assertFalse(addAlexToSampleEvent.equals(addBerniceToSampleEvent));
+        assertFalse(removeAlexFromSampleEvent.equals(removeBerniceFromSampleEvent));
 
         // different event -> returns false
-        assertFalse(addAlexToSampleEvent.equals(addAlexToAnotherEvent));
+        assertFalse(removeAlexFromSampleEvent.equals(removeALexFromAnotherEvent));
     }
 
     /**
