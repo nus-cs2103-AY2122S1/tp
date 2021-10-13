@@ -30,8 +30,10 @@ Examples:
 
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified t/TIME.
-The students to be added are optional. If the student the user intends to add is not present, or the class limit has 
+The students to be added are optional. If the student the tutor intends to add is not present, or the class limit has 
 been exceeded, TutAssistor will alert names of these students.
+
+When adding student names, using comma to separate names and there is no space around comma.
 
 Format: `addclass n/NAME l/LIMIT c/CAPACITY ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
@@ -75,6 +77,9 @@ Move a student to/from classes by adding or removing them.
 Add one or more existing students to an existing class using student NAME or INDEX.
 When the student to be added is already enrolled in the class or is not found in TutAssistor, TutAssistor will alert the
 names of these students to the tutor.
+
+When adding student names, using comma to separate names and there is no space around comma.
+When adding student indexes, using space to separate indexes.
 
 Format: `addtoclass si/INDEX_STUDENT INDEX_STUDENT INDEX_STUDENT... tc/INDEX_CLASS` 
 or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`

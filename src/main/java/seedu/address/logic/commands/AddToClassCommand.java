@@ -26,8 +26,8 @@ public class AddToClassCommand extends Command {
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + "[OR " + PREFIX_STUDENT + "STUDENT_NAME" + "] "
             + PREFIX_TUITION_CLASS + "CLASS_INDEX"
-            + "\n" + "Example1: " + COMMAND_WORD + " si/3 tc/3"
-            + "\n" + "Example2: " + COMMAND_WORD + " s/Felicia,James tc/3";
+            + "\n" + "Example1: " + COMMAND_WORD + " " + PREFIX_STUDENT_INDEX + "1 2 " + PREFIX_TUITION_CLASS + "2"
+            + "\n" + "Example2: " + COMMAND_WORD + " " + PREFIX_STUDENT + "Felicia,James " + PREFIX_TUITION_CLASS + "3";
     public static final String MESSAGE_SUCCESS = "New student %1$s added to class.";
     private static final String MESSAGE_STUDENT_EXISTS = "Student %1$s is already in the class";
     private static final String MESSAGE_CLASS_IS_FULL = "The following students are not "
