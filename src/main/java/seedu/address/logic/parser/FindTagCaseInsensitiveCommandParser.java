@@ -12,7 +12,7 @@ import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new FindTagsCommand object
+ * Parses input arguments and creates a new FindTagCaseInsensitiveCommand object
  */
 public class FindTagCaseInsensitiveCommandParser implements Parser<FindTagCaseInsensitiveCommand> {
 

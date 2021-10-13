@@ -212,8 +212,7 @@ Notes:
 
 **Sample Usage:**
 * `find Friend NUS`
-    * returns people tagged with both `Friend` and `NUS`
-    * returns people tagged with both `friend` and `nus`
+    * returns people tagged with both `Friend` or `friend` and `NUS` or `NUS`
 
 ### Locating persons by tags: `findTagC`
 

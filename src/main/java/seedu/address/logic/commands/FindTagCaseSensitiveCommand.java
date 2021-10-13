@@ -4,7 +4,7 @@ import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
 
 /**
  * Finds and lists all persons in address book whose tags contains all of the argument tags.
- * Tag matching is case sensitive or insensitive based on command word.
+ * Tag matching is case sensitive based on command word.
  */
 public class FindTagCaseSensitiveCommand extends FindTagCommand {
 
