@@ -26,13 +26,10 @@ public class StudentUtil {
      * Returns the part of command string for the given {@code student}'s details.
      */
     public static String getStudentDetails(Student student) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + student.getName().fullName + " ");
-        sb.append(PREFIX_STUDENT_ID + student.getStudentId().studentId + " ");
-        sb.append(PREFIX_CLASS_ID + student.getClassId().classId + " ");
-        sb.append(PREFIX_GRADE + student.getGrade().grade + " ");
-
-        return sb.toString();
+        return PREFIX_NAME + student.getName().fullName + " "
+                + PREFIX_STUDENT_ID + student.getStudentId().studentId + " "
+                + PREFIX_CLASS_ID + student.getClassId().classId + " "
+                + PREFIX_GRADE + student.getGrade().grade + " ";
     }
 
     /**
