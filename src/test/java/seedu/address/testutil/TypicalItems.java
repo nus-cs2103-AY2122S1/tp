@@ -81,7 +81,7 @@ public class TypicalItems {
     }
 
     public static List<Item> getTypicalItems() {
-        return new ArrayList<>(Arrays.asList(APPLE_PIE, BANANA_MUFFIN, CHOCOCHIP,
+        return new ArrayList<>(Arrays.asList(APPLE_PIE.updateCount(5), BANANA_MUFFIN, CHOCOCHIP,
                 DALGONA_COFFEE, EGGNOG, FOREST_CAKE, GRANOLA_BAR));
     }
 }
