@@ -37,7 +37,6 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
-        descriptor.setClientId(person.getClientId());
         descriptor.setName(person.getName());
         descriptor.setEmail(person.getEmail());
         descriptor.setLastMet(person.getLastMet());
@@ -47,14 +46,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setRiskAppetite(person.getRiskAppetite());
         descriptor.setDisposableIncome(person.getDisposableIncome());
         descriptor.setTags(person.getTags());
-    }
-
-    /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withClientId(String clientId) {
-        descriptor.setClientId(new ClientId(clientId));
-        return this;
     }
 
     /**
