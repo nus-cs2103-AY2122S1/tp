@@ -165,6 +165,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setDisposableIncome(toCopy.disposableIncome);
+            setRiskAppetite(toCopy.riskAppetite);
             setLastMet(toCopy.lastMet);
             setCurrentPlan(toCopy.currentPlan);
             setTags(toCopy.tags);
