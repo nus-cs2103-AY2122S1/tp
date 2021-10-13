@@ -59,7 +59,7 @@ public class EndAndTransactOrderCommandTest {
         Item orderItem = new Item(new Name("milk"), "A0123", 15, new HashSet<>());
         Inventory inventory = new Inventory();
         Order order = new Order();
-        inventory.addItem(inventoryItem );
+        inventory.addItem(inventoryItem);
         order.addItem(orderItem);
 
         modelStub.setInventory(inventory);
@@ -82,7 +82,7 @@ public class EndAndTransactOrderCommandTest {
         Item orderItem = new Item(new Name("milk"), "A0123", 10, new HashSet<>());
         Inventory inventory = new Inventory();
         Order order = new Order();
-        inventory.addItem(inventoryItem );
+        inventory.addItem(inventoryItem);
         order.addItem(orderItem);
 
         modelStub.setInventory(inventory);

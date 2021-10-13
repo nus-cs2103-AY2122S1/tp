@@ -2,18 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Path;
-import java.util.Optional;
-import java.util.function.Predicate;
-
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.Order;
-import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.item.Item;
 
 public class EndAndTransactOrderCommand extends Command {
     public static final String COMMAND_WORD = "eorder";

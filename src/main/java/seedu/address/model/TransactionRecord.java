@@ -13,6 +13,9 @@ public class TransactionRecord {
     private final UniqueItemList items;
     private final long timestamp;
 
+    /**
+     * Instantiates a transaction record with a list of items.
+     */
     public TransactionRecord(UniqueItemList items) {
         this.items = items;
         timestamp = Instant.now().getNano();
