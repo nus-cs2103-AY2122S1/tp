@@ -43,7 +43,8 @@ public class LessonDeleteCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
         ModelStub modelStub = new ModelStubWithPerson(editedPerson);
-        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, modelStub);
+        LessonDeleteCommand lessonDeleteCommand =
+                prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, modelStub);
 
         Lesson lessonToDelete = editedPerson.getLessons().stream()
             .collect(Collectors.toList())

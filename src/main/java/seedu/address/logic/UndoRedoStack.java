@@ -1,9 +1,10 @@
 package seedu.address.logic;
 
+import java.util.Stack;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.UndoableCommand;
 
-import java.util.Stack;
 
 /**
  * Keeps track of Commands that have been called (undoStack)
@@ -13,6 +14,9 @@ public class UndoRedoStack {
     private Stack<UndoableCommand> undoStack;
     private Stack<UndoableCommand> redoStack;
 
+    /**
+     * Constructor for UndoRedoStack to store Undoable commands
+     */
     public UndoRedoStack() {
         undoStack = new Stack<>();
         redoStack = new Stack<>();
@@ -37,6 +41,10 @@ public class UndoRedoStack {
         return !undoStack.empty();
     }
 
+    /**
+     * Gets the last executed UndoableCommand.
+     * @return UndoableCommand
+     */
     public UndoableCommand popUndo() {
         UndoableCommand toUndo = undoStack.pop();
         redoStack.push(toUndo);

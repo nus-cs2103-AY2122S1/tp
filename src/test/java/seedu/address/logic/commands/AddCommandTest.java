@@ -49,8 +49,8 @@ public class AddCommandTest {
         Person validPerson = new PersonBuilder().build();
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON,
-                () -> prepareAddCommandForPerson(validPerson, modelStub).execute());
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                prepareAddCommandForPerson(validPerson, modelStub).execute());
     }
 
     @Test
@@ -127,7 +127,9 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPersonAtIndex(Person person, Index index) { throw new AssertionError(("This method should not be called.")); }
+        public void addPersonAtIndex(Person person, Index index) {
+            throw new AssertionError(("This method should not be called."));
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

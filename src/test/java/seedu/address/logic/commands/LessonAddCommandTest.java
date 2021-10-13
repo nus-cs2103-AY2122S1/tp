@@ -113,7 +113,9 @@ public class LessonAddCommandTest {
         }
 
         @Override
-        public void addPersonAtIndex(Person person, Index index) { throw new AssertionError("This method should not be called."); }
+        public void addPersonAtIndex(Person person, Index index) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

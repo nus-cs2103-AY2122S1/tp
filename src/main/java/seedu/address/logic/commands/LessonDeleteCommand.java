@@ -85,7 +85,8 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         personAfterLessonDelete = createEditedPerson(personBeforeLessonDelete, lessonList, toRemove);
 
-        if (!personBeforeLessonDelete.isSamePerson(personAfterLessonDelete) && model.hasPerson(personAfterLessonDelete)) {
+        if (!personBeforeLessonDelete.isSamePerson(personAfterLessonDelete)
+                && model.hasPerson(personAfterLessonDelete)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
