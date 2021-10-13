@@ -10,7 +10,9 @@ import seedu.fast.commons.util.TagUtil;
 
 public class TagTest {
 
-    public static final String VALID_TAG_TERM = "test";
+    public static final String VALID_ALPHABET_TAG_TERM = "test";
+    public static final String VALID_NUMBER_TAG_TERM = "1234567890";
+    public static final String VALID_MIXED_TAG_TERM = "te12345test67890st";
     public static final String INVALID_TAG_TERM = "hi there";
     public static final String VALID_PRIORITY_TAG_TERM = "pr/low";
 
@@ -37,7 +39,9 @@ public class TagTest {
         assertThrows(NullPointerException.class, () -> Tag.isValidTagTerm(null));
 
         //valid Tag term
-        assertTrue(Tag.isValidTagTerm(VALID_TAG_TERM));
+        assertTrue(Tag.isValidTagTerm(VALID_ALPHABET_TAG_TERM));
+        assertTrue(Tag.isValidTagTerm(VALID_NUMBER_TAG_TERM));
+        assertTrue(Tag.isValidTagTerm(VALID_MIXED_TAG_TERM));
 
         //invalid Tag term
         assertFalse(Tag.isValidTagTerm(INVALID_TAG_TERM));
