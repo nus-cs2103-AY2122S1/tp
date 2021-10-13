@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -11,7 +10,6 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentList;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.GroupList;
-import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
@@ -100,32 +98,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      * Any new groups that the student has are added into the group list.
+     * Any new assessments that the student has are added into the assessment list.
      */
     public void addStudent(Student s) {
-        List<Group> studentGroups = s.getGroups();
-        for (Group group : studentGroups) {
-            if (!groups.contains(group)) {
-                groups.add(group);
-            }
-        }
-        // TODO: someone help make it more OOP :P
-        List<Assessment> assessmentList = getAssessmentList();
-        Map<Assessment, Score> studentScores = s.getScores();
-        for (Assessment assessment : studentScores.keySet()) {
-            if (!assessments.contains(assessment)) {
-                assessments.add(assessment);
-            }
-            int index = assessmentList.indexOf(assessment);
-            assessmentList.get(index).add(s.getId(), studentScores.get(assessment));
-        }
+        groups.update(s);
+        assessments.update(s);
         students.add(s);
     }
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -175,6 +160,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addAssessment(Assessment a) {
         assessments.add(a);
+    }
+
+    /**
+     * Replaces the given assessment {@code target} in the list with {@code editedAssessment}.
+     * {@code target} must exist in the address book.
+     * The assessment identity of {@code editedStudent} must not be the same as
+     * another existing assessment in the address book.
+     */
+    public void setAssessment(Assessment target, Assessment editedAssessment) {
+        requireNonNull(editedAssessment);
+
+        assessments.setAssessment(target, editedAssessment);
     }
 
     //// util methods

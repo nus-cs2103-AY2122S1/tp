@@ -7,6 +7,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.model.student.exceptions.AssessmentNotFoundException;
 import seedu.address.model.student.exceptions.DuplicateAssessmentException;
@@ -47,6 +48,27 @@ public class AssessmentList {
             throw new DuplicateAssessmentException();
         }
         assessments.add(toAdd);
+    }
+
+    /**
+     * Updates the assessment list accordingly to the student info.
+     *
+     * @see seedu.address.model.AddressBook#addStudent(Student)
+     */
+    public void update(Student toUpdate) {
+        requireNonNull(toUpdate);
+
+        Map<Assessment, Score> scores = toUpdate.getScores();
+
+        for (Assessment assessment : scores.keySet()) {
+            if (!contains(assessment)) {
+                add(assessment);
+            }
+            int index = assessments.indexOf(assessment);
+            ID id = toUpdate.getId();
+            Score score = scores.get(assessment);
+            assessments.get(index).setScore(id, score);
+        }
     }
 
     /**

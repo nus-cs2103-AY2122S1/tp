@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
@@ -73,8 +74,8 @@ public interface Model {
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the
-     * address book.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the address book.
      */
     void setStudent(Student target, Student editedStudent);
 
@@ -88,6 +89,25 @@ public interface Model {
      * {@code group} must not already exist in the address book.
      */
     void addGroup(Group group);
+
+    /**
+     * Returns true if a group with the same identity as {@code assessment} exists in the application.
+     */
+    boolean hasAssessment(Assessment assessment);
+
+    /**
+     * Adds the given assessment.
+     * {@code assessment} must not already exist in the address book.
+     */
+    void addAssessment(Assessment assessment);
+
+    /**
+     * Replaces the given assessment {@code target} with {@code editedAssessment}.
+     * {@code target} must exist in the address book.
+     * The assessment identity of {@code editedAssessment} must not be the same as
+     * another existing assessment in the address book.
+     */
+    void setAssessment(Assessment target, Assessment editedAssessment);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

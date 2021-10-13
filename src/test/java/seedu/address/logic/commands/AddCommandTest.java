@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.PersonBuilder;
@@ -146,6 +147,21 @@ public class AddCommandTest {
 
         @Override
         public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssessment(Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssessment(Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setAssessment(Assessment target, Assessment editedAssessment) {
             throw new AssertionError("This method should not be called.");
         }
 

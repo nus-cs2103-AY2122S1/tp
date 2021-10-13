@@ -44,14 +44,22 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid Group name.
+     * Returns true if the given string {@code test} is a valid group name.
      */
     public static boolean isValidGroup(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getValue() {
+        return name;
+    }
+
+    public List<ID> getStudents() {
+        return students;
+    }
+
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the group.
+     * Returns true if the given ID {@code id} specifies a student in the group.
      */
     public boolean hasStudent(ID id) {
         requireNonNull(id);
@@ -59,16 +67,15 @@ public class Group {
     }
 
     /**
-     * Adds a student to the group.
-     * The student must not already exist in the group.
-     * The student's group list needs to be updated accordingly.
+     * Adds student with ID {@code ID} to this {@code Group}.
+     * {@code id} must not already exist in the group.
      */
     public void addStudent(ID id) {
         students.add(id);
     }
 
     /**
-     * Removes student with id {@code key} from this {@code Group}.
+     * Removes student with ID {@code key} from this {@code Group}.
      * {@code key} must exist in the group.
      */
     public void removeStudent(ID key) {

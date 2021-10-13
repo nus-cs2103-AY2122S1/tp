@@ -45,6 +45,22 @@ public class GroupList {
     }
 
     /**
+     * Updates the group list accordingly to the student info.
+     *
+     * @see seedu.address.model.AddressBook#addStudent(Student)
+     */
+    public void update(Student toUpdate) {
+        requireNonNull(toUpdate);
+
+        List<Group> studentGroups = toUpdate.getGroups();
+        for (Group group : studentGroups) {
+            if (!groups.contains(group)) {
+                groups.add(group);
+            }
+        }
+    }
+
+    /**
      * Replaces the Group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
      * The Group identity of {@code editedGroup} must not be the same as another existing Group in the list.

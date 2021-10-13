@@ -1,13 +1,12 @@
 package seedu.address.testutil;
 
-
 import seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
 
 /**
- * A utility class to help with building AllocStudentDescriptor objects.
+ * A utility class to help with building AllocDescriptor objects.
  */
 public class AllocDescriptorBuilder {
     private AllocDescriptor descriptor;
@@ -43,7 +42,6 @@ public class AllocDescriptorBuilder {
         descriptor.setGroup(new Group(group));
         return this;
     }
-
 
     public AllocDescriptor build() {
         return descriptor;

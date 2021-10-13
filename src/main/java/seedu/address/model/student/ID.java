@@ -42,6 +42,10 @@ public class ID {
         return upperCase + name.substring(1);
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

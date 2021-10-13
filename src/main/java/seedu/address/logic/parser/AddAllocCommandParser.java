@@ -26,6 +26,8 @@ public class AddAllocCommandParser implements Parser<AddAllocCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_NAME, PREFIX_ID);
 
         if (argMultimap.getValue(PREFIX_GROUP).isEmpty()
+                || (argMultimap.getValue(PREFIX_NAME).isEmpty()
+                && argMultimap.getValue(PREFIX_ID).isEmpty())
                 || arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAllocCommand.MESSAGE_USAGE));

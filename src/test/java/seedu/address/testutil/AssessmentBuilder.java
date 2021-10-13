@@ -1,29 +1,64 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import seedu.address.model.student.Assessment;
+import seedu.address.model.student.ID;
 import seedu.address.model.student.Score;
-import seedu.address.model.student.Student;
 
+/**
+ * A utility class to help with building Assessment object.
+ */
 public class AssessmentBuilder {
+
+    public static final String DEFAULT_VALUE = "P01";
+
+    private Map<ID, Score> scores;
+    private String value;
+
     /**
-     * Takes in a list of students with scores, and returns a list of assessments with those scores reflected
+     * Creates a {@code AssessmentBuilder} with the default details.
      */
-    public static List<Assessment> createAssessmentListFromStudents(List<Student> students) {
-        List<Assessment> result = new ArrayList<>();
-        for (Student student : students) {
-            Map<Assessment, Score> studentScores = student.getScores();
-            for (Assessment assessment : studentScores.keySet()) {
-                if (!result.contains(assessment)) {
-                    result.add(assessment);
-                }
-                Assessment resultAssessment = result.get(result.indexOf(assessment));
-                resultAssessment.setScore(student.getId(), studentScores.get(assessment));
-            }
+    public AssessmentBuilder() {
+        scores = new HashMap<>();
+        value = DEFAULT_VALUE;
+    }
+
+    /**
+     * Initializes the AssessmentBuilder with the data of {@code assessmentToCopy}.
+     */
+    public AssessmentBuilder(Assessment assessmentToCopy) {
+        scores = assessmentToCopy.getScores();
+        value = assessmentToCopy.getValue();
+    }
+
+    /**
+     * Sets the {@code scores} of the {@code assessment} that we are building.
+     */
+    public AssessmentBuilder withScores(Map<String, String> scores) {
+        Map<ID, Score> scoresAdapted = new HashMap<>();
+        for (Map.Entry<String, String> score : scores.entrySet()) {
+            scoresAdapted.put(new ID(score.getKey()), new Score(score.getValue()));
         }
-        return result;
+        this.scores = scoresAdapted;
+        return this;
+    }
+
+    /**
+     * Sets the {@code value} of the {@code assessment} that we are building.
+     */
+    public AssessmentBuilder withValue(String value) {
+        this.value = value;
+        return this;
+    }
+
+    /**
+     * Returns an {@code Assessment}.
+     */
+    public Assessment build() {
+        Assessment assessment = new Assessment(value);
+        assessment.getScores().putAll(scores);
+        return assessment;
     }
 }

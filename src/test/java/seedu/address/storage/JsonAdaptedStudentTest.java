@@ -33,7 +33,7 @@ public class JsonAdaptedStudentTest {
             .map(group -> group.name)
             .collect(Collectors.toList());
     private static final List<String> VALID_ASSESSMENTS = BENSON.getScores().keySet().stream()
-            .map(Assessment::getName)
+            .map(Assessment::getValue)
             .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
