@@ -84,14 +84,12 @@ Examples:
 
 Deletes the specified position from MrTechRecruiter.
 
-Format: `delete position tit/TITLE`
+Format: `delete-position INDEX`
 
-* Deletes the position with the specified `TITLE`.
-* The title refers to the name of the position as displayed in the position list.
-* The title must match exactly.
+* Deletes the position with the specified `INDEX`.
 
 Examples:
-* `delete-position tit/software engineer` deletes the position with the exact name `software engineer`.
+* `delete-position 1` deletes the position with index 1.
 
 
 ### Adding an applicant: `add-applicant`
@@ -113,14 +111,12 @@ Examples:
 
 Deletes the specified applicant from MrTechRecruiter.
 
-Format: `delete-applicant n/NAME`
+Format: `delete-applicant INDEX`
 
-* Deletes the applicant with the specified `NAME`.
-* The name refers to the name of the applicant as shown in the displayed person list.
-* The name must match exactly.
+* Deletes the applicant with the specified `INDEX`.
 
 Examples:
-* `delete-applicant n/John Doe` deletes the applicant with the exact name John Doe.
+* `delete-applicant 1` deletes the applicant with index 1.
 
 
 ### Listing all positions : `list position` [coming soon]
