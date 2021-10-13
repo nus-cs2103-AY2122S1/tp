@@ -1,5 +1,11 @@
 package tutoraid.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
+
 import java.util.stream.Stream;
 
 import tutoraid.commons.core.Messages;
@@ -24,22 +30,22 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_STUDENT_NAME, CliSyntax.PREFIX_STUDENT_PHONE,
-                        CliSyntax.PREFIX_PARENT_NAME, CliSyntax.PREFIX_PARENT_PHONE);
+            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
+                PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
 
         // Student name is a required fields (student phone, parent name and parent phone are optional)
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_STUDENT_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_STUDENT_NAME).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
                     Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
         StudentName studentName = ParserUtil.parseStudentName(
-                argMultimap.getValue(CliSyntax.PREFIX_STUDENT_NAME).get());
-        Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).get());
-        ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).get());
-        Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).get());
+                argMultimap.getValue(PREFIX_STUDENT_NAME).get());
+        Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).orElse(""));
+        ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).orElse(""));
+        Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).orElse(""));
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 
