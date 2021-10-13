@@ -60,6 +60,12 @@ public class DeleteCommand extends Command {
         predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
     }
 
+    /**
+     * Creates a DeleteCommand to delete the persons with the specified predicate
+     *
+     * @param predicate the condition to delete the person
+     * @param moduleCode the specified module code to delete
+     */
     public DeleteCommand(ModuleCodesContainsKeywordsPredicate predicate, ModuleCode moduleCode) {
         targetIndex = Index.fromZeroBased(0);
         endIndex = Index.fromZeroBased(0);
@@ -76,7 +82,7 @@ public class DeleteCommand extends Command {
         if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS) {
             successMessage = deleteRelatedPersonByModuleCode(model);
         } else {
-            if(targetIndex.getZeroBased() >= sizeOfPersonList) {
+            if (targetIndex.getZeroBased() >= sizeOfPersonList) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
 
