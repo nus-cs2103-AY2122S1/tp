@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -20,10 +20,10 @@ public class TAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a person. "
             + "Parameters: "
-            + PREFIX_TASKNAME + " TASKNAME "
+            + PREFIX_NAME + " TASKNAME "
             + PREFIX_MEMBER_ID + " MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASKNAME + " Submit form "
+            + PREFIX_NAME + " Submit form "
             + PREFIX_MEMBER_ID + " 2";
 
     public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";

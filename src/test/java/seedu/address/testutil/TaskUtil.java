@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import seedu.address.commons.core.index.Index;
@@ -26,7 +26,7 @@ public class TaskUtil {
      */
     public static String getTaskDetails(Task task, Index memberID) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_TASKNAME + task.getTaskName() + " ");
+        sb.append(PREFIX_NAME + task.getTaskName() + " ");
         sb.append(PREFIX_MEMBER_ID + Integer.toString(memberID.getOneBased()));
         return sb.toString();
     }

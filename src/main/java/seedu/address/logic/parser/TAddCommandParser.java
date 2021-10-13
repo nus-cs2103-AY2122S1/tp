@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -24,14 +24,14 @@ public class TAddCommandParser implements Parser<TAddCommand> {
     public TAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
-                        args, PREFIX_TASKNAME, PREFIX_MEMBER_ID);
+                        args, PREFIX_NAME, PREFIX_MEMBER_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TASKNAME, PREFIX_MEMBER_ID)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_MEMBER_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TAddCommand.MESSAGE_USAGE));
         }
 
-        Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASKNAME).get());
+        Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_NAME).get());
         Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
 
         return new TAddCommand(memberID, task);

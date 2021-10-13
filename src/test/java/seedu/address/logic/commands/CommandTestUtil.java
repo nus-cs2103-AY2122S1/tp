@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASKNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -19,6 +18,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.data.NameContainsKeywordsPredicate;
@@ -55,7 +55,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String POSITION_DESC_FRIEND = " " + PREFIX_POSITION + VALID_POSITION_FRIEND;
     public static final String POSITION_DESC_HUSBAND = " " + PREFIX_POSITION + VALID_POSITION_HUSBAND;
-    public static final String TASK_NAME_DESC_POEM = " " + PREFIX_TASKNAME + VALID_TASK_NAME;
+    public static final String TASK_NAME_DESC_POEM = " " + CliSyntax.PREFIX_NAME + VALID_TASK_NAME;
     public static final String TASK_ID_DESC_ONE = " " + PREFIX_TASK_ID + VALID_TASK_ID;
     public static final String MEMBER_ID_DESC_ONE = " " + PREFIX_MEMBER_ID + VALID_MEMBER_ID;
     public static final String MEMBER_ID_DEL_DESC_ONE = " " + PREFIX_MEMBER_ID_DEL + VALID_MEMBER_ID;
@@ -66,7 +66,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_POSITION_DESC = " " + PREFIX_POSITION + "hubby*"; // '*' not allowed in positions
     public static final String INVALID_TASK_NAME_DESC =
-            " " + PREFIX_TASKNAME + ""; // an empty string is not allowed in names
+            " " + CliSyntax.PREFIX_NAME + ""; // an empty string is not allowed in names
     public static final String INVALID_TASK_ID_DESC =
             " " + PREFIX_TASK_ID + "abs"; // 'abs' not allowed in id
     public static final String INVALID_MEMBER_ID_DESC =
