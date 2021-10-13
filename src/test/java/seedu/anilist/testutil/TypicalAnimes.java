@@ -50,7 +50,7 @@ public class TypicalAnimes {
             .withName("Goblin Slayer: Goblin's Crown")
             .withStatus("T")
             .build();
-  
+
     // Manually added
     public static final Anime HXH = new AnimeBuilder().withName("Hunter x Hunter (2011)").build();
     public static final Anime IDOL = new AnimeBuilder().withName("iDOLM@STER").build();
