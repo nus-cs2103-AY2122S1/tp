@@ -6,6 +6,7 @@ import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.Person;
 
 /**
  * Converts a {@code Lesson} object instance to a calendar {@code Entry}.
@@ -18,15 +19,15 @@ public class CalendarUtil {
      *
      * @param lesson The lesson to be converted to a calendar entry.
      */
-    public static Entry<Lesson> convertToEntry(Lesson lesson) {
+    public static Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
         requireNonNull(lesson);
 
         Entry<Lesson> entry = new Entry<>();
         entry.setUserObject(lesson);
         Interval entryInterval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
         entry.setInterval(entryInterval);
-        StringBuilder entryTitle = new StringBuilder(lesson.getName().toString());
-        entryTitle.append(" (" + lesson.getSubject().toString() + ")");
+        StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
+        entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
         if (lesson.isRecurring()) {
             entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
             entryTitle.append("(Recurring)");

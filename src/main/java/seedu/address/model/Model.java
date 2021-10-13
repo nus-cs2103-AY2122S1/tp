@@ -67,19 +67,6 @@ public interface Model {
     boolean hasClashingLesson(Lesson lesson);
 
     /**
-     * Adds the given lesson to the target person.
-     * {@code target} must exist in the address book.
-     * The lesson {@code toAdd} must not clash with existing lessons in the address book.
-     */
-    void addLesson(Person target, Person editedPerson, Lesson toAdd);
-
-    /**
-     * Removes the given lesson from the target person.
-     * {@code target} and {@code toRemove} must exist in the address book.
-     */
-    void deleteLesson(Person target, Person editedPerson, Lesson toAdd);
-
-    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

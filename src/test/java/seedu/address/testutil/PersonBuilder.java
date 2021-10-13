@@ -3,11 +3,9 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
-import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -49,7 +47,7 @@ public class PersonBuilder {
     private Fee fee;
     private Remark remark;
     private Set<Tag> tags;
-    private Set<LessonWithoutOwner> lessons;
+    private Set<Lesson> lessons;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -86,8 +84,7 @@ public class PersonBuilder {
         fee = personToCopy.getFee();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
-        lessons = new TreeSet<>(
-                personToCopy.getLessons().stream().map(Lesson::getLessonWithoutOwner).collect(Collectors.toSet()));
+        lessons = new TreeSet<>(personToCopy.getLessons());
     }
 
     /**
@@ -110,7 +107,7 @@ public class PersonBuilder {
      * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with multiple sample lessons.
      */
     public PersonBuilder withLessons() {
-        this.lessons = SampleDataUtil.getSampleLessonsWithoutOwner();
+        this.lessons = SampleDataUtil.getSampleLessons();
         return this;
     }
 
@@ -126,8 +123,8 @@ public class PersonBuilder {
      * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
      */
     public PersonBuilder withSampleLesson() {
-        Set<LessonWithoutOwner> lessonSetWithOneLesson = new TreeSet<>();
-        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLessonWithoutOwner());
+        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
+        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
         this.lessons = lessonSetWithOneLesson;
         return this;
     }

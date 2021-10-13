@@ -139,16 +139,6 @@ public class LessonDeleteCommandTest {
         }
 
         @Override
-        public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteLesson(Person target, Person editedPerson, Lesson toAdd) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -189,11 +179,6 @@ public class LessonDeleteCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public void deleteLesson(Person target, Person editedPerson, Lesson toRemove) {
-            setPerson(target, editedPerson);
         }
 
         @Override

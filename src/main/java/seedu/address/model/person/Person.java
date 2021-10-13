@@ -7,10 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +32,7 @@ public class Person {
     private final Remark remark;
     private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Lesson> lessons;
+    private final Set<Lesson> lessons = new TreeSet<>();
 
     /**
      * Constructs a person using a set of {@code Lessons}. Every field must be present and not null.
@@ -66,64 +64,12 @@ public class Person {
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
-        this.outstandingFee = outstandingFee;
-        this.remark = remark;
-        this.tags.addAll(tags);
-        this.lessons = copyLessons(lessons);
-    }
-
-    /**
-     * Constructs a person using {@code lessonWithoutOwnerSet}. Every field must be present and not null.
-     * This method converts the given set of {@code LessonWithoutOwner} to a valid set of {@Lesson} by taking ownership.
-     *
-     * @param lessonWithoutOwnerSet The Set of LessonWithoutOwner objects that this person will become owner of.
-     * @param name The name of this person.
-     * @param phone The phone number of this person.
-     * @param email The email of this person
-     * @param parentPhone The parent's phone number of this person.
-     * @param parentEmail The parent's email of this person.
-     * @param address The address of this person.
-     * @param school The school of this person.
-     * @param acadStream The academic stream of this person.
-     * @param outstandingFee The outstanding fees of this person.
-     * @param remark Any remarks on this person.
-     * @param tags Tags that categorise this person.
-     */
-    public Person(Set<LessonWithoutOwner> lessonWithoutOwnerSet,
-                  Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
-                  Address address, School school, AcadStream acadStream, Fee outstandingFee,
-                  Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, outstandingFee, remark, tags, lessonWithoutOwnerSet);
-
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.parentPhone = parentPhone;
-        this.parentEmail = parentEmail;
-        this.address = address;
-        this.school = school;
-        this.acadStream = acadStream;
         this.acadLevel = acadLevel;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
-        this.lessons = setOwner(lessonWithoutOwnerSet);
+        this.lessons.addAll(lessons);
     }
-
-    private Set<Lesson> setOwner(Set<LessonWithoutOwner> lessonWithoutOwnerSet) {
-        Set<Lesson> lessons = new TreeSet<>();
-        for (LessonWithoutOwner lessonWithoutOwner : lessonWithoutOwnerSet) {
-            Lesson newLesson = lessonWithoutOwner.buildLessonWithOwner(this);
-            lessons.add(newLesson);
-        }
-        return lessons;
-    }
-
-    private Set<Lesson> copyLessons(Set<Lesson> otherPersonLessons) {
-        return setOwner(otherPersonLessons.stream().map(Lesson::getLessonWithoutOwner).collect(Collectors.toSet()));
-    }
-
     public Name getName() {
         return name;
     }
@@ -194,49 +140,6 @@ public class Person {
         }
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if {@code Lesson} to check clashes with existing lessons.
-     *
-     * @param toCheck The lesson to be compared with.
-     * @return True if and only if there is at least one clash.
-     */
-    public boolean hasClashingLessons(Lesson toCheck) {
-        if (toCheck == null) {
-            return false;
-        }
-        boolean isClash = false;
-        for (Lesson lesson : lessons) {
-            if (isClash) {
-                break;
-            }
-            isClash = lesson.isClashing(toCheck);
-        }
-        return isClash;
-    }
-
-    /**
-     * Returns true if {@code Person} to check has clashing lessons.
-     *
-     * @param toCheck The lesson to be compared with.
-     * @return True if and only if there is at least one clash.
-     */
-    public boolean hasClashingLessons(Person toCheck) {
-        if (toCheck == null) {
-            return false;
-        }
-        if (isSamePerson(toCheck)) {
-            return false; // prevents checking with self as that would always return true
-        }
-        boolean isClash = false;
-        for (Lesson lesson : lessons) {
-            if (isClash) {
-                break;
-            }
-            isClash = toCheck.hasClashingLessons(lesson);
-        }
-        return isClash;
     }
 
     /**

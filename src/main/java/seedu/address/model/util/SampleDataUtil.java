@@ -11,7 +11,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonWithoutOwner;
+import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.AcadLevel;
@@ -75,25 +76,25 @@ public class SampleDataUtil {
         };
     }
 
-    public static Set<LessonWithoutOwner> getSampleLessonsWithoutOwner() {
-        Set<LessonWithoutOwner> sampleLessons = new TreeSet<>();
-        sampleLessons.add(new LessonWithoutOwner(new Date("14 Jan 2022"),
+    public static Set<Lesson> getSampleLessons() {
+        Set<Lesson> sampleLessons = new TreeSet<>();
+        sampleLessons.add(new RecurringLesson(new Date("14 Jan 2022"),
             new TimeRange("1430-1530"),
-                new Subject("Math"), getSampleHomeworkSet(), true));
-        sampleLessons.add(new LessonWithoutOwner(new Date("24 Mar 2022"),
+                new Subject("Math"), getSampleHomeworkSet()));
+        sampleLessons.add(new MakeUpLesson(new Date("24 Mar 2022"),
             new TimeRange("1230-1400"),
-                new Subject("Science"), getSampleHomeworkSet(), false));
-        sampleLessons.add(new LessonWithoutOwner(new Date("09 Feb 2022"),
+                new Subject("Science"), getSampleHomeworkSet()));
+        sampleLessons.add(new RecurringLesson(new Date("09 Feb 2022"),
             new TimeRange("1730-1930"),
-                new Subject("GP"), getSampleHomeworkSet(), true));
+                new Subject("GP"), getSampleHomeworkSet()));
 
         return sampleLessons;
     }
 
-    public static LessonWithoutOwner getSampleLessonWithoutOwner() {
-        return new LessonWithoutOwner(new Date("14 Jan 2022"),
+    public static Lesson getSampleLesson() {
+        return new RecurringLesson(new Date("14 Jan 2022"),
             new TimeRange("1430-1530"),
-                new Subject("Math"), getSampleHomeworkSet(), true);
+                new Subject("Math"), getSampleHomeworkSet());
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

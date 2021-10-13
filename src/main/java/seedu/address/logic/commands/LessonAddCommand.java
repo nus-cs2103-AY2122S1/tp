@@ -18,7 +18,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
-import seedu.address.model.lesson.LessonWithoutOwner;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -76,21 +75,21 @@ public class LessonAddCommand extends Command {
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
-    private final LessonWithoutOwner lessonWithoutOwner;
+    private final Lesson toAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
      */
-    public LessonAddCommand(Index index, LessonWithoutOwner lessonWithoutOwner) {
-        requireNonNull(lessonWithoutOwner);
+    public LessonAddCommand(Index index, Lesson lesson) {
+        requireNonNull(lesson);
         this.index = index;
-        this.lessonWithoutOwner = lessonWithoutOwner;
+        toAdd = lesson;
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private static Person createEditedPerson(Person personToEdit, LessonWithoutOwner lessonWithoutOwner) {
+    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -107,7 +106,7 @@ public class LessonAddCommand extends Command {
         Set<Tag> updatedTags = personToEdit.getTags();
 
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(lessonWithoutOwner.buildLessonWithOwner(personToEdit));
+        lessons.add(toAdd);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
                 updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
@@ -123,16 +122,13 @@ public class LessonAddCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, lessonWithoutOwner);
-        Lesson toAdd = lessonWithoutOwner.buildLessonWithOwner(editedPerson);
-        // this is a copy of the lesson we added to the edited person that is only used to check for clashes
-
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
-        model.addLesson(personToEdit, editedPerson, toAdd);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, toAdd);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
     }
@@ -142,6 +138,6 @@ public class LessonAddCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof LessonAddCommand // instanceof handles nulls
                 && index.equals(((LessonAddCommand) other).index)
-                && lessonWithoutOwner.equals(((LessonAddCommand) other).lessonWithoutOwner));
+                && toAdd.equals(((LessonAddCommand) other).toAdd));
     }
 }

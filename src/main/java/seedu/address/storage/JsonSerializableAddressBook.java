@@ -52,7 +52,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            if (addressBook.hasClashingLesson(person)) {
+            if (addressBook.hasClashingLesson(person.getLessons())) {
                 throw new IllegalValueException(JsonAdaptedPerson.MESSAGE_CLASHING_LESSON);
             }
             addressBook.addPerson(person);

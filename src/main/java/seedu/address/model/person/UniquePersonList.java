@@ -5,34 +5,26 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
-import com.calendarfx.model.Calendar;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements, no overlapping lessons, and does not allow nulls.
+ * A list of persons that enforces uniqueness between its elements, and does not allow nulls.
  * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}.
- * A person's lesson is considered unique by comparing using {@code Person#hasClashingLessons(Lesson)}.
  * As such, adding and updating of persons uses Person#isSamePerson(Person) for equality to ensure that the person
- * being added or updated is unique in terms of identity and lessons in the UniquePersonList.
+ * being added or updated is unique in terms of identity in the UniquePersonList.
  * However, the removal of a person uses Person#equals(Object) to ensure that the person with exactly the same fields
  * will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
- * @see Person#hasClashingLessons(Lesson)
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    private final Calendar calendar = new Calendar();
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -46,25 +38,6 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Returns true if the list contains a person with a clashing lesson.
-     *
-     * @param toCheck The lesson to check.
-     * @return True if there is a clash in lesson timing, false otherwise.
-     */
-    public boolean hasClashes(Lesson toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(person -> person.hasClashingLessons(toCheck));
-    }
-
-    /**
-     * Returns true if a person that has clashing lessons with {@code person} exists in the address book.
-     */
-    public boolean hasClashes(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(person -> person.hasClashingLessons(toCheck));
-    }
-
-    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -74,18 +47,6 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
-    }
-
-    /**
-     * Adds a lesson to the list.
-     * The lesson must not clash with any in the list.
-     */
-    public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
-        requireNonNull(toAdd);
-        if (hasClashes(toAdd)) {
-            throw new ClashingLessonException();
-        }
-        setPerson(target, editedPerson);
     }
 
     /**
@@ -106,8 +67,6 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.set(index, editedPerson);
-        removeLessons(target.getLessons());
-        addLessons(editedPerson.getLessons());
     }
 
     /**
@@ -119,23 +78,11 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
-        removeLessons(toRemove.getLessons());
-    }
-
-    /**
-     * Removes the equivalent Lesson from the Calendar.
-     * The lesson must exist in the calendar.
-     */
-    public void removeLesson(Person target, Person editedPerson, Lesson toRemove) {
-        requireAllNonNull(target, editedPerson, toRemove);
-
-        setPerson(target, editedPerson);
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        setLessons(replacement);
     }
 
     /**
@@ -150,55 +97,6 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.setAll(persons);
-        setLessons(persons);
-    }
-
-    public void setLessons(UniquePersonList replacement) {
-        requireNonNull(replacement);
-        setLessons(replacement.internalList);
-    }
-
-    /**
-     * Replaces the entries of the calendar with {@code persons}.
-     * {@code persons} must not contain clashing lessons.
-     */
-    public void setLessons(List<Person> persons) {
-        requireAllNonNull(persons);
-        calendar.clear();
-        for (Person person : persons) {
-            addLessons(person.getLessons());
-        }
-    }
-
-    /**
-     * Adds all specified lessons into the calendar.
-     *
-     * @param lessons The lessons to be added.
-     */
-    public void addLessons(Set<Lesson> lessons) {
-        requireAllNonNull(lessons);
-        calendar.startBatchUpdates();
-        for (Lesson lesson : lessons) {
-            calendar.addEntry(lesson.asCalendarEntry());
-        }
-        calendar.stopBatchUpdates();
-    }
-
-    /**
-     * Removes all specified lessons into the calendar.
-     *
-     * @param lessons The lessons to be removed.
-     */
-    public void removeLessons(Set<Lesson> lessons) {
-        if (lessons.isEmpty()) {
-            return;
-        }
-        requireAllNonNull(lessons);
-        calendar.startBatchUpdates();
-        for (Lesson lesson : lessons) {
-            calendar.removeEntry(lesson.asCalendarEntry());
-        }
-        calendar.stopBatchUpdates();
     }
 
     /**
@@ -206,10 +104,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
     }
 
     @Override

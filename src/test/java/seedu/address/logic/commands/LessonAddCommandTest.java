@@ -42,16 +42,16 @@ public class LessonAddCommandTest {
     @Test
     public void equals() {
         LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLessonWithoutOwner());
+                SampleDataUtil.getSampleLesson());
         LessonAddCommand addSampleLessonCommand2 = new LessonAddCommand(INDEX_SECOND_PERSON,
-                SampleDataUtil.getSampleLessonWithoutOwner());
+                SampleDataUtil.getSampleLesson());
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
         LessonAddCommand addSampleLessonCommandCopy = new LessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLessonWithoutOwner());
+                SampleDataUtil.getSampleLesson());
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
         // different types -> returns false
@@ -120,16 +120,6 @@ public class LessonAddCommandTest {
 
         @Override
         public boolean hasClashingLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addLesson(Person target, Person editedPerson, Lesson toAdd) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteLesson(Person target, Person editedPerson, Lesson toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
