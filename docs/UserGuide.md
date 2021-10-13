@@ -279,7 +279,7 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT
 
 **:information_source: Notes about the `ladd` command:**<br>
 
-* The type of lesson will be inferred from the presence of the "recurring/" prefix.
+* The type of lesson will be inferred from the presence of the `recurring/` prefix.
   
 * The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
 
