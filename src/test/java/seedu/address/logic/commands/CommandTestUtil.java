@@ -52,7 +52,6 @@ public class CommandTestUtil {
     public static final String VALID_STUDENT_ID_BOB = "A1111111A";
     public static final String VALID_TUTORIAL_ID_AMY = "00";
     public static final String VALID_TUTORIAL_ID_BOB = "11";
-    public static final String NAMETYPE = "n/";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -172,7 +171,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -186,7 +185,7 @@ public class CommandTestUtil {
         for (int i = 0; i < persons.length; ++i) {
             queries[i] = persons[i].getName().fullName.split("\\s+")[0];
         }
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries)));
 
         assertEquals(persons.length, model.getFilteredPersonList().size());
     }
