@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 
 public class LastDate {
     public static final String MESSAGE_CONSTRAINTS = "Date inputted has to be in dd-mm-yyyy format";
+    public static final String DEFAULT_DATE = "";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -29,6 +30,9 @@ public class LastDate {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String date) {
+        if (date == DEFAULT_DATE) {
+            return true;
+        }
         try {
             LocalDate.parse(date, dateFormatter);
         } catch (DateTimeParseException e) {

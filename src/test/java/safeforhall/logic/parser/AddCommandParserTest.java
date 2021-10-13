@@ -37,8 +37,6 @@ import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static safeforhall.testutil.TypicalPersons.AMY;
 import static safeforhall.testutil.TypicalPersons.BOB;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
@@ -109,6 +107,10 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         Person expectedPerson = new PersonBuilder(AMY).build();
+
+        // missing lastFetDate and lastCollectionDate
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY, new AddCommand(expectedPerson));
 
         // missing lastFetDate
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
@@ -186,12 +188,12 @@ public class AddCommandParserTest {
 
         // invalid FET date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + INVALID_VACCSTATUS_DESC + INVALID_FETDATE_DESC
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + INVALID_FETDATE_DESC
                 + COLLECTION_DESC_BOB, LastDate.MESSAGE_CONSTRAINTS);
 
         // invalid collection date
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + INVALID_VACCSTATUS_DESC + FET_DESC_BOB
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
                 + INVALID_COLLECTIONDATE_DESC, LastDate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported

@@ -1,9 +1,13 @@
 package safeforhall.testutil;
 
+import static safeforhall.logic.commands.CommandTestUtil.VALID_COLLECTIONDATE_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_COLLECTIONDATE_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_FACULTY_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FETDATE_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.VALID_FETDATE_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -30,7 +34,7 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withEmail("alice@example.com")
             .withVaccStatus("T")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("03-10-2021")
             .withCollection("03-10-2021")
             .build();
@@ -39,7 +43,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withVaccStatus("T")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("12-10-2021")
             .withCollection("13-10-2021")
             .build();
@@ -48,7 +52,7 @@ public class TypicalPersons {
             .withPhone("95352563")
             .withEmail("heinz@example.com")
             .withVaccStatus("F")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("10-10-2021")
             .withCollection("03-10-2021")
             .build();
@@ -57,7 +61,7 @@ public class TypicalPersons {
             .withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withVaccStatus("T")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("12-10-2021")
             .withCollection("13-10-2021")
             .build();
@@ -66,7 +70,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withVaccStatus("F")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("05-10-2021")
             .withCollection("16-10-2021")
             .build();
@@ -75,7 +79,7 @@ public class TypicalPersons {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withVaccStatus("T")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("20-10-2021")
             .withCollection("04-10-2021")
             .build();
@@ -84,7 +88,7 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withVaccStatus("F")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("15-10-2021")
             .withCollection("01-10-2021")
             .build();
@@ -95,7 +99,7 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withRoom("A103")
             .withVaccStatus("T")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("15-10-2021")
             .withCollection("15-10-2021")
             .build();
@@ -104,7 +108,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withRoom("C200")
             .withVaccStatus("F")
-            .withFaculty("SoC")
+            .withFaculty("SOC")
             .withFet("20-10-2021")
             .withCollection("22-10-2021")
             .build();
@@ -116,8 +120,8 @@ public class TypicalPersons {
             .withRoom(VALID_ROOM_AMY)
             .withFaculty(VALID_FACULTY_AMY)
             .withVaccStatus(VALID_VACCSTATUS_AMY)
-            .withFet("09-10-2021")
-            .withCollection("08-10-2021")
+            .withFet(VALID_FETDATE_AMY)
+            .withCollection(VALID_COLLECTIONDATE_AMY)
             .build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -125,8 +129,8 @@ public class TypicalPersons {
             .withRoom(VALID_ROOM_BOB)
             .withFaculty(VALID_FACULTY_BOB)
             .withVaccStatus(VALID_VACCSTATUS_BOB)
-            .withFet("15-11-2021")
-            .withCollection("12-11-2021")
+            .withFet(VALID_FETDATE_BOB)
+            .withCollection(VALID_COLLECTIONDATE_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

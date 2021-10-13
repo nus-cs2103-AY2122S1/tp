@@ -37,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY,
-                        PREFIX_FETDATE, PREFIX_COLLECTIONDATE, PREFIX_FETDATE, PREFIX_COLLECTIONDATE);
+                        PREFIX_FETDATE, PREFIX_COLLECTIONDATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY)
@@ -45,14 +45,19 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        // Required fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Room room = ParserUtil.parseRoom(argMultimap.getValue(PREFIX_ROOM).get());
         VaccStatus vaccStatus = ParserUtil.parseVaccStatus(argMultimap.getValue(PREFIX_VACCSTATUS).get());
         Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
-        LastDate lastFetDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FETDATE).get());
-        LastDate lastCollectionDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_COLLECTIONDATE).get());
+
+        // Optional fields
+        LastDate lastFetDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FETDATE)
+                .orElse(LastDate.DEFAULT_DATE));
+        LastDate lastCollectionDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_COLLECTIONDATE)
+                .orElse(LastDate.DEFAULT_DATE));
 
         Person person = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
         return new AddCommand(person);
