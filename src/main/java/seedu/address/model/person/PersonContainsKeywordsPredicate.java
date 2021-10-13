@@ -51,7 +51,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         boolean checkAddress = keywords.getValue(PREFIX_ADDRESS)
                 .map(x -> containsIgnoreCase(person.getAddress().toString(), x)).orElse(true);
         boolean checkRiskAppetite = keywords.getValue(PREFIX_RISKAPPETITE)
-                .map(x -> containsIgnoreCase(person.getAddress().toString(), x)).orElse(true);
+                .map(x -> containsIgnoreCase(person.getRiskAppetite().toString(), x)).orElse(true);
         boolean checkDisposableIncome = keywords.getValue(PREFIX_DISPOSABLEINCOME)
                 .map(x -> containsIgnoreCase(person.getDisposableIncome().toString(), x)).orElse(true);
         boolean checkLastMet = keywords.getValue(PREFIX_LASTMET)
