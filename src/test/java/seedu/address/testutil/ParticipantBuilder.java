@@ -25,7 +25,6 @@ import seedu.address.model.util.SampleDataUtil;
 
 public class ParticipantBuilder {
 
-
     public static final String DEFAULT_NAME = VALID_NAME_AMY;
     public static final String DEFAULT_PHONE = VALID_PHONE_AMY;
     public static final String DEFAULT_EMAIL = VALID_EMAIL_AMY;
@@ -143,7 +142,6 @@ public class ParticipantBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code nextOfKins} of the {@code Participant} that we are building.
      */
@@ -152,7 +150,11 @@ public class ParticipantBuilder {
         return this;
     }
 
-
+    /**
+     * Returns a new instance of Participant with the details set in {@code ParticipantBuilder}.
+     *
+     * @return an Participant.
+     */
     public Participant build() {
         return new Participant(name, phone, email, address, tags, birthDate, notes, nextOfKins);
     }

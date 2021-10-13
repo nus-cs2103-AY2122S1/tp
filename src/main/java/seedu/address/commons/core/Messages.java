@@ -19,4 +19,14 @@ public class Messages {
     public static final String MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST =
             "Event %1$s Not Found, consider relisting events using '%2$s'.";
 
+    /**
+     * Forms the message that states that a Participant already exists in an Event in Managera.
+     *
+     * @param participantName The name of the Participant.
+     * @return a message that states that the Participant already exists in an Event.
+     */
+    public static String showParticipantExists(String participantName) {
+        return "Participant " + participantName + " already exists!";
+    }
+
 }

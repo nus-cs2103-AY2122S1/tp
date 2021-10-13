@@ -52,14 +52,14 @@ public class DeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showParticipantAtIndex(model, INDEX_FIRST_PARTICIPANT);
 
-        Participant personToDelete = model.getFilteredParticipantList().get(INDEX_FIRST_PARTICIPANT.getZeroBased());
+        Participant participantToDelete = model.getFilteredParticipantList().get(INDEX_FIRST_PARTICIPANT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PARTICIPANT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, personToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PARTICIPANT_SUCCESS, participantToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteParticipant(personToDelete);
-        showNoPerson(expectedModel);
+        expectedModel.deleteParticipant(participantToDelete);
+        showNoParticipant(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -95,14 +95,14 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different participant -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoParticipant(Model model) {
         model.updateFilteredParticipantList(p -> false);
 
         assertTrue(model.getFilteredParticipantList().isEmpty());
