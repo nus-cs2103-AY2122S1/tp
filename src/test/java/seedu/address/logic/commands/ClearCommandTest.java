@@ -52,7 +52,7 @@ public class ClearCommandTest {
         AddressBook addressBook = getTypicalAddressBook();
         addressBook.addFolder(CS2103);
         Model model = new ModelManager(addressBook, new UserPrefs());
-        Model actualModel = new ModelManager(AddressBook.copyFolders(model), new UserPrefs());
+        Model actualModel = new ModelManager(AddressBook.withFolders(model), new UserPrefs());
         AddressBook addressBookWithFolder = new AddressBook();
         addressBookWithFolder.addFolder(CS2103);
         Model expectedModel = new ModelManager(addressBookWithFolder, new UserPrefs());

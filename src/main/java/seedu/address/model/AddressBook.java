@@ -49,7 +49,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param model model to copy folder names from
      * @return address book with copied folders
      */
-    public static AddressBook copyFolders(Model model) {
+    public static AddressBook withFolders(Model model) {
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         ObservableList<Folder> folders = addressBook.getFolderList();
         AddressBook newAddressBook = new AddressBook();
