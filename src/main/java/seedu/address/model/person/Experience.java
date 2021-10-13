@@ -12,15 +12,15 @@ import seedu.address.commons.util.StringUtil;
 public class Experience {
 
     public static final String MESSAGE_CONSTRAINTS = "Experience should only contain numbers (no decimals), "
-            + "should be non-negative, and it should not be blank";
+            + "should be non-negative, not larger than 67 (re-employment age in Singapore), and it should not be blank";
 
-    /*
+    /**
      * The first character of the experience must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "\\d+";
 
-
+    public static final int MAX_EXPERIENCE = 67;
     public final String value;
 
     /**
@@ -40,7 +40,11 @@ public class Experience {
      * Returns true if a given number matches validation.
      */
     public static boolean isValidExperience(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            int value = Integer.parseInt(test);
+            return (value <= MAX_EXPERIENCE);
+        }
+        return false;
     }
 
     @Override
