@@ -299,10 +299,20 @@ Deletes the specified lesson from the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ldelete` command:**<br>
+
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+  
 * The index refers to the index number shown in the displayed student list.
-* The lesson index refers to the index number shown in the lesson list of the student. 
+  
+* The lesson index refers to the index number shown in the lesson list of the student.
+  
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
+
+</div>
+
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
