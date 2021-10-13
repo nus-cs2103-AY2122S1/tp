@@ -81,7 +81,7 @@ public class AddClassCommand extends Command {
             }
             if (newStudents.size() >= limit) {
                 //valid students not added due to limit exceeded.
-                if (!notAddedStudent.contains(s)) {
+                if (!notAddedStudent.contains(s) && !newStudents.contains(s)) {
                     notAddedStudent.add(s);
                 }
                 continue;
