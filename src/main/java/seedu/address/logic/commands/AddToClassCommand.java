@@ -150,7 +150,7 @@ public class AddToClassCommand extends Command {
             Person studentToAdd = person;
             Person studentToChange = person;
             studentToAdd.addClass(modifiedClass);
-            studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " "
+            studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " | "
                     + modifiedClass.getTimeslot().time));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
