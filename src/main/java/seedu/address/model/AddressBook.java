@@ -126,6 +126,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.add(g);
     }
 
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
+    }
+
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.

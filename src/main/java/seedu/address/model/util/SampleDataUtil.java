@@ -32,8 +32,11 @@ public class SampleDataUtil {
         };
     }
 
-    public static Group[] getSampleGroups() {
-        return new Group[]{new Group(new GroupName("CS2103T"), new Description("SWE Module"))};
+    private static Group[] getSampleGroups() {
+        return new Group[]{
+            new Group(new GroupName("CS2103T"), new Description("SWE Module")),
+            new Group(new GroupName("CS2101"), new Description("test"))
+        };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -48,5 +51,4 @@ public class SampleDataUtil {
 
         return sampleAb;
     }
-
 }

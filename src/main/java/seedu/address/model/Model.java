@@ -94,11 +94,11 @@ public interface Model {
      */
     boolean hasGroup(Group group);
 
-    ///**
-    // * Deletes the given group.
-    // * The group must exist in the address book.
-    // */
-    // void deleteGroup(Group target); //TODO to implement in 1.2b
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
 
     /**
      * Adds the given group.
@@ -115,11 +115,11 @@ public interface Model {
     // void setGroup(Group target, Group editedGroup); //TODO to implement in 1.2b
 
     /** Returns an unmodifiable view of the filtered group list */
-    ObservableList<Group> getFilteredGroupList(); //TODO to implement in 1.2b
+    ObservableList<Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredGroupList(Predicate<Group> predicate); //TODO to implement in 1.2b
+    void updateFilteredGroupList(Predicate<Group> predicate);
 }

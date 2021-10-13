@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 
 /**
  * Represents a Student in the address book.
@@ -47,6 +48,10 @@ public class Student {
         return group;
     }
 
+    public GroupName getGroupName() {
+        return group.getGroupName();
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -84,7 +89,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegramHandle, email, group);
+        return Objects.hash(name, telegramHandle, email, getGroupName());
     }
 
     @Override
@@ -96,7 +101,7 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Group: ")
-                .append(getGroup());
+                .append(getGroupName());
 
         return builder.toString();
     }

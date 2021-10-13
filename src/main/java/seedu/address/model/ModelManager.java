@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +14,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 /**
@@ -99,11 +103,28 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudent(Student target) {
+        // Retrieve existing group in model
+        GroupName groupName = target.getGroupName();
+        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+        Group retrievedGroup = getFilteredGroupList().get(0);
+
+        // Remove reference to student from the group that the student belonged to
+        retrievedGroup.removeStudent(target);
+
         addressBook.removeStudent(target);
     }
 
     @Override
     public void addStudent(Student student) {
+        // Retrieve existing group in model
+        GroupName groupName = student.getGroupName();
+        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+        Group retrievedGroup = getFilteredGroupList().get(0);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+
+        // Add reference to student into the group
+        retrievedGroup.addStudent(student);
+
         addressBook.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
@@ -119,6 +140,18 @@ public class ModelManager implements Model {
     public boolean hasGroup(Group group) {
         requireNonNull(group);
         return addressBook.hasGroup(group);
+    }
+
+    @Override
+    public void deleteGroup(Group target) {
+        Set<Student> studentsToDelete = target.getStudents();
+
+        // Delete all students associated with the group
+        for (Student student : studentsToDelete) {
+            addressBook.removeStudent(student);
+        }
+
+        addressBook.removeGroup(target);
     }
 
     @Override
