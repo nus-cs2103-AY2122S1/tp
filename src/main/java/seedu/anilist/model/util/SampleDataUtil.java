@@ -18,9 +18,12 @@ public class SampleDataUtil {
         return new Anime[] {
             new Anime(new Name("Asobi Asobase"), getTagSet("comedy")),
             new Anime(new Name("BLEACH"), getTagSet("adventure", "supernatural")),
-            new Anime(new Name("Charlotte"), getTagSet("supernatural")),
-            new Anime(new Name("Darling in the Franxx"), getTagSet("mecha")),
+            new Anime(new Name("Charlotte"), getTagSet("drama", "supernatural")),
+            new Anime(new Name("Darling in the Franxx"), getTagSet("action", "mecha", "science fiction")),
             new Anime(new Name("Haikyuu!!: To the Top"), getTagSet("sports")),
+            new Anime(new Name("Higehiro: After Being Rejected, I Shaved and Took in a High School Runaway"),
+                    getTagSet("tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8", "tag9",
+                            "tag10", "tag11", "tag12", "tag13", "tag14", "tag15")),
             new Anime(new Name("Steins;Gate 0"), getTagSet("science fiction"))
         };
     }
