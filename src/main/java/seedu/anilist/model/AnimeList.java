@@ -9,7 +9,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.UniqueAnimeList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the anime list level
  * Duplicates are not allowed (by .isSameAnime comparison)
  */
 public class AnimeList implements ReadOnlyAnimeList {
@@ -30,7 +30,7 @@ public class AnimeList implements ReadOnlyAnimeList {
     public AnimeList() {}
 
     /**
-     * Creates an AddressBook using the Anime in the {@code toBeCopied}
+     * Creates an AnimeList using the Anime in the {@code toBeCopied}
      */
     public AnimeList(ReadOnlyAnimeList toBeCopied) {
         this();
@@ -48,7 +48,7 @@ public class AnimeList implements ReadOnlyAnimeList {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code AnimeList} with {@code newData}.
      */
     public void resetData(ReadOnlyAnimeList newData) {
         requireNonNull(newData);
@@ -59,7 +59,7 @@ public class AnimeList implements ReadOnlyAnimeList {
     //// Anime-level operations
 
     /**
-     * Returns true if a Anime with the same identity as {@code Anime} exists in the address book.
+     * Returns true if a Anime with the same identity as {@code Anime} exists in the anime list.
      */
     public boolean hasAnime(Anime anime) {
         requireNonNull(anime);
@@ -67,8 +67,8 @@ public class AnimeList implements ReadOnlyAnimeList {
     }
 
     /**
-     * Adds a Anime to the address book.
-     * The Anime must not already exist in the address book.
+     * Adds a Anime to the anime list.
+     * The Anime must not already exist in the anime list.
      */
     public void addAnime(Anime p) {
         animeList.add(p);
@@ -76,8 +76,8 @@ public class AnimeList implements ReadOnlyAnimeList {
 
     /**
      * Replaces the given Anime {@code target} in the list with {@code editedAnime}.
-     * {@code target} must exist in the address book.
-     * The Anime identity of {@code editedAnime} must not be the same as another existing Anime in the address book.
+     * {@code target} must exist in the anime list.
+     * The Anime identity of {@code editedAnime} must not be the same as another existing Anime in the anime list.
      */
     public void setAnime(Anime target, Anime editedAnime) {
         requireNonNull(editedAnime);
@@ -86,8 +86,8 @@ public class AnimeList implements ReadOnlyAnimeList {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AnimeList}.
+     * {@code key} must exist in the anime list.
      */
     public void removeAnime(Anime key) {
         animeList.remove(key);
