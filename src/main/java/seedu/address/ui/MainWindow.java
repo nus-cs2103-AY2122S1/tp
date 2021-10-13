@@ -174,6 +174,10 @@ public class MainWindow extends UiPart<Stage> {
         return memberListPanel;
     }
 
+    public EventListPanel getEventListPanel() {
+        return eventListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *

@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.data.event.Event;
 
 /**
- * An UI component that displays information of a {@code Member}.
+ * A UI component that displays information of a {@code Event}.
  */
 public class EventCard extends UiPart<Region> {
 
@@ -38,7 +38,7 @@ public class EventCard extends UiPart<Region> {
     private FlowPane participants;
 
     /**
-     * Creates a {@code MemberCode} with the given {@code Member} and index to display.
+     * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
@@ -47,8 +47,8 @@ public class EventCard extends UiPart<Region> {
         name.setText(event.getName().fullName);
         date.setText(event.getDate().toString());
         event.getParticipants().stream()
-                .sorted(Comparator.comparing(participant -> participant.getName().fullName))
-                .forEach(participant -> participants.getChildren().add(new Label(participant.getName().fullName)));
+                .sorted(Comparator.comparing(member -> member.getName().fullName))
+                .forEach(member -> participants.getChildren().add(new Label(member.getName().fullName)));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class EventCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MemberCard)) {
+        if (!(other instanceof EventCard)) {
             return false;
         }
 
