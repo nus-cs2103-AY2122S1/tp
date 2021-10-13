@@ -14,10 +14,18 @@ public class ListCommand extends Command {
 
     private final boolean viewAll;
 
+    /**
+     * Default constructor that lists students without showing fields.
+     */
     public ListCommand() {
         this.viewAll = false;
     }
 
+    /**
+     * Constructor for a list command that lists students. Fields are shown if {@code viewAll} is true.
+     *
+     * @param viewAll Whether to show fields
+     */
     public ListCommand(boolean viewAll) {
         this.viewAll = viewAll;
     }

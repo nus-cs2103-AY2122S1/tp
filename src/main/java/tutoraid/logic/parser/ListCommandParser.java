@@ -4,20 +4,26 @@ import static java.util.Objects.requireNonNull;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LIST_ALL;
 
 import tutoraid.logic.commands.ListCommand;
-import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new ListCommand object
  */
 public class ListCommandParser implements Parser<ListCommand> {
 
-    public ListCommand parse(String args) throws ParseException {
+    /**
+     * Parses the given {@code String} of arguments in the context of ListCommand
+     * and returns a ListCommand object for execution. The command object can instruct
+     * TutorAid to show student fields or hide them when the list of students is displayed.
+     *
+     * @param args Arguments provided by the user command
+     * @return A ListCommand object corresponding to the command
+     */
+    public ListCommand parse(String args) {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LIST_ALL);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIST_ALL);
         if (argMultimap.getValue(PREFIX_LIST_ALL).isEmpty()) {
             return new ListCommand(false);
-        } else {
+        } else { // any unexpected user input is ignored
             return new ListCommand(true);
         }
     }
