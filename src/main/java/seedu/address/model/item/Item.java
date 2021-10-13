@@ -95,6 +95,17 @@ public class Item {
     }
 
     /**
+     * Returns true if both items have the same count.
+     */
+    public boolean isSameCount(Item other) {
+        if (other == this) {
+            return true;
+        }
+
+        return other != null && Objects.equals(other.getCount(), getCount());
+    }
+
+    /**
      * Returns true if both items have the same identity and data fields.
      * This defines a stronger notion of equality between two items.
      */

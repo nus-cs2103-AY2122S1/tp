@@ -8,6 +8,8 @@ import java.io.FileNotFoundException;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.item.Name;
+
 public class StringUtilTest {
 
     //---------------- Tests for isNonZeroUnsignedInteger --------------------------------------
@@ -140,4 +142,9 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void generateRandomString_normalGeneration_stringIsValidName() {
+        String generatedString = StringUtil.generateRandomString();
+        assertTrue(Name.isValidName(generatedString));
+    }
 }
