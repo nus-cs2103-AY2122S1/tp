@@ -28,7 +28,8 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_BIRTHDAY = "12345678";
+    private static final String INVALID_BIRTHDAY_FORMAT = "20-01-1997";
+    private static final String INVALID_BIRTHDAY_DATE = "12345678";
     private static final String INVALID_SUBSTRING = "..";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -37,7 +38,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_BIRTHDAY = "31011991";
+    private static final String VALID_BIRTHDAY = "14091999";
+    private static final String VALID_BIRTHDAY_LEAP_DAY = "29022000";
     private static final String VALID_STRING = "substring";
     private static final String VALID_SUBSTRING = "sub";
 
@@ -202,13 +204,27 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseBirthday_null_returnsNull() throws ParseException {
-        assertNull(ParserUtil.parseBirthday((String) null));
+    public void parseBirthday_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_DATE));
     }
 
     @Test
-    public void parseBirthday_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY));
+    public void parseBirthday_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBirthday(INVALID_BIRTHDAY_FORMAT));
+    }
+
+    @Test
+    public void parseBirthday_validBirthday_returnsBirthday() throws Exception {
+        Birthday expectedBirthday = new Birthday(VALID_BIRTHDAY);
+        assertEquals(expectedBirthday, ParserUtil.parseBirthday(VALID_BIRTHDAY));
+
+        Birthday expectedBirthdayLeapDay = new Birthday(VALID_BIRTHDAY_LEAP_DAY);
+        assertEquals(expectedBirthdayLeapDay, ParserUtil.parseBirthday(VALID_BIRTHDAY_LEAP_DAY));
+    }
+
+    @Test
+    public void parseBirthday_null_returnsNull() throws ParseException {
+        assertNull(ParserUtil.parseBirthday((String) null));
     }
 
     @Test

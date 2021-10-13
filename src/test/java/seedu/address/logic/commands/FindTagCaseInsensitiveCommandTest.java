@@ -94,12 +94,12 @@ public class FindTagCaseInsensitiveCommandTest {
 
     @Test
     public void execute_multipleTag_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         PersonTagsContainsCaseInsensitiveTagsPredicate predicate = preparePredicate("friends owesMoney");
         FindTagCaseInsensitiveCommand command = new FindTagCaseInsensitiveCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**

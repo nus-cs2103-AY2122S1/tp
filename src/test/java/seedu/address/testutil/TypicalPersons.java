@@ -43,7 +43,7 @@ public class TypicalPersons {
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withBirthday("25011997").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends", "owesMoney")
             .withBirthday("08091990").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
@@ -53,18 +53,18 @@ public class TypicalPersons {
             .withBirthday("07111990").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withBirthday("12041990").build();
+            .withBirthday("12041990").withTags("football").build();
     public static final Person HANNAH = new PersonBuilder().withName("Hannah Worst").withPhone("1234567")
             .withEmail("hhhhannah@example.com").withAddress("12th street")
             .withBirthday("31011990").build();
     public static final Person HANNAH_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
-            .withName("Hannah No Birthday Worst").withPhone("1234567")
+            .withName("Hannah No Birthday Worst").withPhone("12334567")
             .withEmail("hhhhannah@example.com").withAddress("12th street").build();
-    public static final Person INDIGO = new PersonBuilder().withName("Indigo Color").withPhone("2442984")
+    public static final Person INDIGO = new PersonBuilder().withName("Indigo Color").withPhone("24422984")
             .withEmail("color@rainbow.com").withAddress("big tokyo")
             .withBirthday("11101995").build();
     public static final Person INDIGO_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
-            .withName("Indigo No Birthday Color").withPhone("2442984")
+            .withName("Indigo No Birthday Color").withPhone("17263722")
             .withEmail("color@rainbow.com").withAddress("big tokyo").build();
 
     // Manually added
