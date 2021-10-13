@@ -59,8 +59,8 @@ class JsonAdaptedMember {
     public JsonAdaptedMember(Member source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        email = source.getEmail().get().value;
+        address = source.getAddress().get().value;
         attachedPositions.addAll(source.getPositions().stream()
                 .map(JsonAdaptedPosition::new)
                 .collect(Collectors.toList()));
@@ -100,21 +100,25 @@ class JsonAdaptedMember {
         }
         final Phone modelPhone = new Phone(phone);
 
+        Email modelEmail;
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            modelEmail = null;
+        } else {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
+            modelEmail = new Email(email);
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
 
+        Address modelAddress;
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            modelAddress = null;
+        } else {
+            if (!Address.isValidAddress(address)) {
+                throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            }
+            modelAddress = new Address(address);
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         final Set<Position> modelPositions = new HashSet<>(memberPositions);
         final TaskList modelTaskList = new TaskList();

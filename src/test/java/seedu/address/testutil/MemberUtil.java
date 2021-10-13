@@ -32,8 +32,12 @@ public class MemberUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + member.getName().fullName + " ");
         sb.append(PREFIX_PHONE + member.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + member.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + member.getAddress().value + " ");
+        if (member.getEmail().isPresent()) {
+            sb.append(PREFIX_EMAIL + member.getEmail().get().value + " ");
+        }
+        if (member.getAddress().isPresent()) {
+            sb.append(PREFIX_ADDRESS + member.getAddress().get().value + " ");
+        }
         member.getPositions().stream().forEach(
             s -> sb.append(PREFIX_POSITION + s.positionName + " ")
         );

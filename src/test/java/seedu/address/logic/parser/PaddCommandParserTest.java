@@ -81,6 +81,21 @@ public class PaddCommandParserTest {
         Member expectedMember = new MemberBuilder(AMY).withPositions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
                 new PaddCommand(expectedMember));
+
+        // no email
+        expectedMember = new MemberBuilder(AMY).withEmail(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + POSITION_DESC_FRIEND,
+                new PaddCommand(expectedMember));
+
+        // no address
+        expectedMember = new MemberBuilder(AMY).withAddress(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + POSITION_DESC_FRIEND,
+                new PaddCommand(expectedMember));
+
+        // no address and no email
+        expectedMember = new MemberBuilder(AMY).withEmail(null).withAddress(null).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + POSITION_DESC_FRIEND,
+                new PaddCommand(expectedMember));
     }
 
     @Test
@@ -93,14 +108,6 @@ public class PaddCommandParserTest {
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
                 expectedMessage);
 
         // all prefixes missing

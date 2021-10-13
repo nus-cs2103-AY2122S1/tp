@@ -96,8 +96,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editMemberDescriptor.getName().orElse(memberToEdit.getName());
         Phone updatedPhone = editMemberDescriptor.getPhone().orElse(memberToEdit.getPhone());
-        Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail());
-        Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress());
+        Email updatedEmail = editMemberDescriptor.getEmail().orElse(memberToEdit.getEmail().get());
+        Address updatedAddress = editMemberDescriptor.getAddress().orElse(memberToEdit.getAddress().get());
         Set<Position> updatedPositions = editMemberDescriptor.getPositions().orElse(memberToEdit.getPositions());
         TaskList originalTaskList = memberToEdit.getTaskList();
 
