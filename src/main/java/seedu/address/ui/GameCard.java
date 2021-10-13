@@ -1,20 +1,18 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.friend.Friend;
+import seedu.address.model.game.Game;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Game}.
  */
-public class FriendCard extends UiPart<Region> {
+public class GameCard extends UiPart<Region> {
 
-    private static final String FXML = "FriendListCard.fxml";
+    private static final String FXML = "GameListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,31 +22,28 @@ public class FriendCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Friend friend;
+    public final Game game;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label friendId;
-    @FXML
-    private Label friendName;
+    private Label gameId;
     @FXML
     private Label id;
     @FXML
     private FlowPane games;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code GameCode} with the given {@code Game} and index to display.
      */
-    public FriendCard(Friend friend, int displayedIndex) {
+    public GameCard(Game game, int displayedIndex) {
         super(FXML);
-        this.friend = friend;
+        this.game = game;
         id.setText(displayedIndex + ". ");
-        friendId.setText(friend.getFriendId().value);
-        friendName.setText(friend.getName().fullName);
-        friend.getGames().stream()
-                .sorted(Comparator.comparing(game -> game.getGameId().value))
-                .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
+        gameId.setText(game.getGameId().value);
+        // game.getGames().stream()
+        // .sorted(Comparator.comparing(game -> game.getGameId().value))
+        // .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
     }
 
     @Override
@@ -59,13 +54,13 @@ public class FriendCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FriendCard)) {
+        if (!(other instanceof GameCard)) {
             return false;
         }
 
         // state check
-        FriendCard card = (FriendCard) other;
+        GameCard card = (GameCard) other;
         return id.getText().equals(card.id.getText())
-                && friend.equals(card.friend);
+                && game.equals(card.game);
     }
 }

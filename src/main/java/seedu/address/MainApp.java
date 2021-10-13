@@ -1,5 +1,7 @@
 package seedu.address;
 
+import static seedu.address.model.util.SampleDataUtil.getSampleGamesList;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -95,6 +97,7 @@ public class MainApp extends Application {
         // TODO - Kevin
         // Read and load initialGameData
         ReadOnlyGamesList initialGameData = new GamesList();
+        initialGameData = getSampleGamesList();
 
         return new ModelManager(initialFriendData, initialGameData, userPrefs);
     }
