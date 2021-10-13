@@ -1,7 +1,9 @@
 package safeforhall.testutil;
 
+import static safeforhall.logic.parser.CliSyntax.PREFIX_COLLECTIONDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_FETDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
@@ -34,6 +36,8 @@ public class PersonUtil {
         sb.append(PREFIX_ROOM + person.getRoom().room + " ");
         sb.append(PREFIX_FACULTY + person.getFaculty().faculty + " ");
         sb.append(PREFIX_VACCSTATUS + person.getVaccStatus().vaccStatus + " ");
+        sb.append(PREFIX_FETDATE + person.getLastFetDate().date + " ");
+        sb.append(PREFIX_COLLECTIONDATE + person.getLastCollectionDate().date + " ");
         return sb.toString();
     }
 

@@ -16,6 +16,7 @@ import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
@@ -44,6 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        // Required fields
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -51,7 +53,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         VaccStatus vaccStatus = ParserUtil.parseVaccStatus(argMultimap.getValue(PREFIX_VACCSTATUS).get());
         Faculty faculty = ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get());
 
-        Person person = new Person(name, room, phone, email, vaccStatus, faculty, null, null);
+        // Optional fields
+        LastDate lastFetDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_FETDATE)
+                .orElse(LastDate.DEFAULT_DATE));
+        LastDate lastCollectionDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_COLLECTIONDATE)
+                .orElse(LastDate.DEFAULT_DATE));
+
+        Person person = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
         return new AddCommand(person);
     }
 

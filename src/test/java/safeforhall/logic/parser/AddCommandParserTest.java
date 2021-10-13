@@ -1,11 +1,17 @@
 package safeforhall.logic.parser;
 
+import static safeforhall.logic.commands.CommandTestUtil.COLLECTION_DESC_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.COLLECTION_DESC_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.FACULTY_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.FACULTY_DESC_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.FET_DESC_AMY;
+import static safeforhall.logic.commands.CommandTestUtil.FET_DESC_BOB;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_COLLECTIONDATE_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_FACULTY_DESC;
+import static safeforhall.logic.commands.CommandTestUtil.INVALID_FETDATE_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static safeforhall.logic.commands.CommandTestUtil.INVALID_ROOM_DESC;
@@ -28,7 +34,9 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VACCSTATUS_BOB;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
-//import static safeforhall.testutil.TypicalPersons.AMY;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_COLLECTION;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_FET;
+import static safeforhall.testutil.TypicalPersons.AMY_NO_FET_COLLECTION;
 import static safeforhall.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -37,6 +45,7 @@ import safeforhall.commons.core.Messages;
 import safeforhall.logic.commands.AddCommand;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
@@ -53,40 +62,68 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple rooms - last room accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_AMY
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple faculties - last faculty accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_AMY + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + FACULTY_DESC_AMY + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
 
         // multiple vaccination status - last vaccStatus accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB, new AddCommand(expectedPerson));
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+
+        // multiple fet dates - last fet date accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
+                + FET_DESC_AMY + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+
+        // multiple collection dates - last collection date accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
+                + FET_DESC_BOB + COLLECTION_DESC_AMY + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
     }
 
-    /*@Test
+    @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
-    }*/
+        Person expectedPerson = new PersonBuilder(AMY_NO_FET_COLLECTION).build();
+
+        // missing lastFetDate and lastCollectionDate
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY, new AddCommand(expectedPerson));
+
+        // missing lastFetDate
+        expectedPerson = new PersonBuilder(AMY_NO_FET).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + COLLECTION_DESC_AMY, new AddCommand(expectedPerson));
+
+        // missing lastCollectionDate
+        expectedPerson = new PersonBuilder(AMY_NO_COLLECTION).build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY, new AddCommand(expectedPerson));
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -125,35 +162,52 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid room
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ROOM_DESC
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, Room.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Room.MESSAGE_CONSTRAINTS);
 
         // invalid faculty
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + INVALID_FACULTY_DESC + VACCSTATUS_DESC_BOB, Faculty.MESSAGE_CONSTRAINTS);
+                + INVALID_FACULTY_DESC + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Faculty.MESSAGE_CONSTRAINTS);
 
         // invalid vaccination status
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
-                + FACULTY_DESC_BOB + INVALID_VACCSTATUS_DESC, VaccStatus.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + INVALID_VACCSTATUS_DESC + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, VaccStatus.MESSAGE_CONSTRAINTS);
+
+        // invalid FET date
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + INVALID_FETDATE_DESC
+                + COLLECTION_DESC_BOB, LastDate.MESSAGE_CONSTRAINTS);
+
+        // invalid collection date
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + INVALID_COLLECTIONDATE_DESC, LastDate.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ROOM_DESC
-                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB
+                + COLLECTION_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB,
+                + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB + COLLECTION_DESC_BOB,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

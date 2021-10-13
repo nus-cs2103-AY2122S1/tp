@@ -39,10 +39,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setRoom(person.getRoom());
         descriptor.setFaculty(person.getFaculty());
-        //TODO: lastfetdate and lastcollectiondate
-
-        // descriptor.setAddress(person.getAddress());
-        // descriptor.setTags(person.getTags());
+        descriptor.setVaccStatus(person.getVaccStatus());
+        descriptor.setLastFetDate(person.getLastFetDate());
+        descriptor.setLastCollectionDate(person.getLastCollectionDate());
     }
 
     /**
