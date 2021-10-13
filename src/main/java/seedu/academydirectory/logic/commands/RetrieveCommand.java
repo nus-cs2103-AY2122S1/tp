@@ -6,11 +6,12 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.Messages;
-import seedu.academydirectory.logic.parser.Prefix;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Information;
 import seedu.academydirectory.model.student.InformationWantedFunction;
@@ -20,8 +21,6 @@ import seedu.academydirectory.model.student.InformationWantedFunction;
  * Keyword matching is case-insensitive.
  */
 public class RetrieveCommand extends Command {
-    public static final List<Prefix> SUPPORTED_PREFIX = List.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
-
     public static final String COMMAND_WORD = "retrieve";
 
     public static final String HELP_MESSAGE = "### Retrieving additional information of students': `retrieve`\n"
@@ -50,7 +49,12 @@ public class RetrieveCommand extends Command {
     }
 
     private String executeFilter(Model model, InformationWantedFunction filter) {
-        ObservableList<Information> view = model.getFilteredStudentListView(filter);
+        ObservableList<Information> view = model.getFilteredStudentListView(filter)
+                .stream()
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
         return view.size() == 0
                 ? String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0)
                 : view.stream().map(Object::toString).collect(Collectors.joining("\n"));

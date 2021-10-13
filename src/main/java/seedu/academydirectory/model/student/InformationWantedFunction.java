@@ -4,27 +4,51 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import seedu.academydirectory.logic.parser.Prefix;
 
-public class InformationWantedFunction implements Function<Student, Information> {
-    private final Prefix prefix;
+/**
+ * Obtains desired Information among a list of Students
+ */
+public class InformationWantedFunction implements Function<Student, Optional<Information>> {
+    public static final List<Prefix> SUPPORTED_PREFIX = List.of(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM);
 
-    public InformationWantedFunction(Prefix prefix) {
+    private final Prefix prefix;
+    private final Optional<Name> name;
+
+    /**
+     * Returns a Predicate that can be used to obtain the desired {@code Information} among a list of Students.
+     * Will return {@code Information} tied to the given {@code Prefix} for a given {@code Name} if a Student with
+     * the same name is present, or for all students if no {@code Name} is given.
+     * @param prefix Prefix of the information that is desired
+     * @param name Name of student whose information is desired. Can be not passed in.
+     */
+    public InformationWantedFunction(Prefix prefix, Name name) {
+        this.name = Optional.ofNullable(name);
         this.prefix = prefix;
     }
 
+    public InformationWantedFunction(Prefix prefix) {
+        this(prefix, null);
+    }
+
     @Override
-    public Information apply(Student student) {
-        if (PREFIX_EMAIL.equals(prefix)) {
-            return student.getEmail();
-        } else if (PREFIX_TELEGRAM.equals(prefix)) {
-            return student.getTelegram();
-        } else if (PREFIX_PHONE.equals(prefix)) {
-            return student.getPhone();
+    public Optional<Information> apply(Student student) {
+        if (name.isPresent() && name.filter(x -> x.equals(student.getName())).isEmpty()) {
+            return Optional.empty();
         }
-        return null;
+
+        if (PREFIX_EMAIL.equals(prefix)) {
+            return Optional.of(student.getEmail());
+        } else if (PREFIX_TELEGRAM.equals(prefix)) {
+            return Optional.of(student.getTelegram());
+        } else if (PREFIX_PHONE.equals(prefix)) {
+            return Optional.of(student.getPhone());
+        }
+        return Optional.empty();
     }
 
     @Override
