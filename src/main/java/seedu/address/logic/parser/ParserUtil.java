@@ -25,7 +25,6 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
-import seedu.address.model.person.Slot;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -200,22 +199,6 @@ public class ParserUtil {
         return trimmedStr;
     }
 
-    /**
-     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
-     * Leading and trailing whitespaces will be trimmed.
-     * This parser is not case sensitive.
-     *
-     * @throws ParseException if the given {@code dayOfWeek} is invalid.
-     */
-    public static Slot parseSlot(String slot) throws ParseException {
-        requireNonNull(slot);
-        String trimmedSlot = slot.trim();
-        if (!Slot.isValidSlot(trimmedSlot)) {
-            throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
-        }
-        //maybe need to assert slot cannot be null
-        return Slot.translateStringToSlot(slot);
-    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
