@@ -33,6 +33,9 @@ public class CommandFormat {
             + "Add remarks to class\n"
             + "\tremarkclass INDEX_CLASS r/REMARK\n\n";
 
+    public static final String SORT_FORMAT = "Sort classes\n"
+            + "\tsort [o/ORDER]\n\n";
+
     public static final String EXIT_FORMAT = "Exit the app\n" + "\texit\n\n";
 
 }
