@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Salary implements Field {
 
-    public static final String MESSAGE_CONSTRAINTS = "Salaries have to be an integer representing the pay in cents.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Salaries have to be a positive integer representing the pay in cents.";
 
     public final Integer value;
 
@@ -34,6 +35,23 @@ public class Salary implements Field {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    /**
+     * Returns a String representation of the value of this Salary object in dollars.
+     */
+    public String convertToDollars() {
+        int dollars = value / 100;
+        int cents = value % 100;
+        String centsString;
+        if (cents == 0) {
+            centsString = "00";
+        } else if (cents < 10) {
+            centsString = "0" + cents;
+        } else {
+            centsString = String.valueOf(cents);
+        }
+        return ("$" + dollars + "." + centsString);
     }
 
     @Override

@@ -24,10 +24,11 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
             new ParseException(ViewScheduleCommand.HELP_MESSAGE);
 
     @Override
-    public ViewScheduleCommand parse(String userInput) throws ParseException {
-        requireNonNull(userInput);
+    public ViewScheduleCommand parse(String args) throws ParseException {
+        //currently defined for name prefix, undefined behaviour
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
         if (argMultimap.isEmpty()) {
             throw new ParseException(ViewScheduleCommand.HELP_MESSAGE);
