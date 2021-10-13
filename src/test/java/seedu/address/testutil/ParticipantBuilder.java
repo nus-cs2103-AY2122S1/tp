@@ -153,7 +153,7 @@ public class ParticipantBuilder {
     /**
      * Returns a new instance of Participant with the details set in {@code ParticipantBuilder}.
      *
-     * @return an Participant.
+     * @return a Participant.
      */
     public Participant build() {
         return new Participant(name, phone, email, address, tags, birthDate, notes, nextOfKins);
