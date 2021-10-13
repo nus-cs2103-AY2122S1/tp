@@ -28,4 +28,12 @@ public class SortDirection {
         return direction.toLowerCase().equals("asc");
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortDirection // instanceof handles nulls
+                && direction.equals(((SortDirection) other).direction)); // state check
+    }
+
+
 }
