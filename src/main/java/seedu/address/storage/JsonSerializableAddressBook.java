@@ -56,6 +56,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
             if (addressBook.hasGroup(group)) {
@@ -65,9 +66,6 @@ class JsonSerializableAddressBook {
         }
 
         ObservableList<Group> groupList = addressBook.getGroupList();
-        for (Group group : groupList) {
-            System.out.println(group);
-        }
 
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType(groupList);
@@ -75,6 +73,15 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             addressBook.addStudent(student);
+        }
+
+        for (Group groupWithoutStudentList : groupList) {
+            List<Student> studentsInGroup = addressBook.getStudentList().stream()
+                    .filter(student -> student.getGroup().equals(groupWithoutStudentList)).collect(Collectors.toList());
+            Group groupWithStudentList = new Group(groupWithoutStudentList.getGroupName(),
+                    groupWithoutStudentList.getDescription());
+            groupWithStudentList.addAllStudents(studentsInGroup);
+            addressBook.setGroup(groupWithoutStudentList, groupWithStudentList);
         }
 
         return addressBook;

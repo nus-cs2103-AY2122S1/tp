@@ -28,7 +28,7 @@ class JsonAdaptedGroup {
     }
 
     /**
-     * Converts a given {@code Student} into this class for Jackson use.
+     * Converts a given {@code Group} into this class for Jackson use.
      */
     public JsonAdaptedGroup(Group source) {
         this.name = source.getGroupName().toString();
@@ -36,9 +36,9 @@ class JsonAdaptedGroup {
     }
 
     /**
-     * Converts this Jackson-friendly adapted student object into the model's {@code Student} object.
+     * Converts this Jackson-friendly adapted Group object into the model's {@code Group} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted student
+     * @throws IllegalValueException if there were any data constraints violated in the adapted group
      *                               or there is no Group in the group list that has the same group name
      *                               as the student.
      */
