@@ -90,6 +90,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasEmployee_nullEmployee_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEmployee(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
@@ -97,6 +102,11 @@ public class ModelManagerTest {
     @Test
     public void hasCustomer_customerNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasCustomer(CUSTOMER_ALICE));
+    }
+
+    @Test
+    public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEmployee(ALICE_EMPLOYEE));
     }
 
     @Test
@@ -112,6 +122,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasEmployee_employeeInAddressBook_returnsTrue() {
+        modelManager.addEmployee(ALICE_EMPLOYEE);
+        assertTrue(modelManager.hasEmployee(ALICE_EMPLOYEE));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -120,6 +136,12 @@ public class ModelManagerTest {
     public void getFilteredCustomerList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
                 .getFilteredCustomerList().remove(0));
+    }
+
+    @Test
+    public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getFilteredEmployeeList().remove(0));
     }
 
     @Test
