@@ -22,9 +22,13 @@ public class JsonSerializableAddressBookTest {
     private static final Path TYPICAL_LESSONS_FILE = TEST_DATA_FOLDER.resolve("typicalLessonsAddressBook.json");
     private static final Path TYPICAL_TUITION_FILE = TEST_DATA_FOLDER.resolve("typicalTuitionAddressBook.json");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.json");
+    private static final Path INVALID_LESSON_FILE = TEST_DATA_FOLDER.resolve("invalidLessonAddressBook.json");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path DUPLICATE_LESSON_FILE = TEST_DATA_FOLDER.resolve("duplicateLessonAddressBook.json");
-    private static final Path LESSON_NOT_FOUND_FILE = TEST_DATA_FOLDER.resolve("lessonNotFoundAddressBook.json");
+    private static final Path DUPLICATE_ENROLLMENT_FILE = TEST_DATA_FOLDER
+            .resolve("duplicateEnrollmentAddressBook.json");
+    private static final Path ENROLLED_LESSON_NOT_FOUND_FILE = TEST_DATA_FOLDER
+            .resolve("enrolledLessonNotFoundAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -61,6 +65,13 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
+    public void toModelType_invalidLessonFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_LESSON_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
@@ -77,8 +88,16 @@ public class JsonSerializableAddressBookTest {
     }
 
     @Test
-    public void toModelType_enrollTwice_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(LESSON_NOT_FOUND_FILE,
+    public void toModelType_doubleEnrollment_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_ENROLLMENT_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_ENROLLMENT,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_lessonNotFound_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(ENROLLED_LESSON_NOT_FOUND_FILE,
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_INVALID_LESSON_CODE,
                 dataFromFile::toModelType);

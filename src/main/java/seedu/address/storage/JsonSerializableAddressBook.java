@@ -22,6 +22,7 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
+    public static final String MESSAGE_DUPLICATE_ENROLLMENT = "Lessons list contains duplicate enrollment(s).";
     public static final String MESSAGE_INVALID_LESSON_CODE = "Lessons list does not match with "
             + "person-associated lesson codes(s).";
 
@@ -114,7 +115,11 @@ class JsonSerializableAddressBook {
         for (String jsonLessonCode : jsonLessonCodes) {
             boolean hasFoundLesson = false;
             for (Lesson lesson : lessonList) {
-                if (jsonLessonCode.equals(lesson.getLessonCode().value)) {
+                boolean isSameLesson = jsonLessonCode.equals(lesson.getLessonCode().value);
+                if (isSameLesson && lesson.containsStudent(student)) {
+                    throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
+                }
+                if (isSameLesson) {
                     lesson.addStudent(student);
                     hasFoundLesson = true;
                     break;
