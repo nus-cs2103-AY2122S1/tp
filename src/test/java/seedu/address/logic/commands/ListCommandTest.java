@@ -30,7 +30,7 @@ public class ListCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(
                 new ListCommand(), model,
-                String.format(ListCommand.MESSAGE_SUCCESS, model.getFilteredPersonList().size()),
+                String.format(ListCommand.MESSAGE_SUCCESS, expectedModel.getFilteredPersonList().size()),
                 expectedModel);
     }
 
@@ -39,7 +39,7 @@ public class ListCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(
                 new ListCommand(), model,
-                String.format(ListCommand.MESSAGE_SUCCESS, model.getFilteredPersonList().size()),
+                String.format(ListCommand.MESSAGE_SUCCESS, expectedModel.getFilteredPersonList().size()),
                 expectedModel);
     }
 }
