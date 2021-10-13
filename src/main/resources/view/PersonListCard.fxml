@@ -36,10 +36,6 @@
             </Label>
       </HBox>
       <FlowPane fx:id="tags" />
-       <Label fx:id="clientId" styleClass="cell_small_label" text="\$clientId">
-            <tooltip>
-                <Tooltip text="Client Id" />
-            </tooltip></Label>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone">
             <tooltip>
                <Tooltip text="Phone" />
@@ -78,7 +74,6 @@
    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;">
       <children>
          <Label layoutX="5.0" layoutY="11.0" text="Next Meeting:" />
-         <Label fx:id="nextMeeting" layoutX="9.0" layoutY="60.0" text="&lt;Meeting Info Here&gt;" />
       </children>
    </AnchorPane>
 </HBox>
