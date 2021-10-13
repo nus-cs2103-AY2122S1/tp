@@ -36,34 +36,38 @@
 
         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
+            <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+
 
         <BorderPane>
 
           <left>
-            <VBox fx:id="personList" minWidth="340" prefWidth="340" style="-fx-background-color: pink;" styleClass="pane-with-border">
+            <VBox fx:id="personList" minWidth="250" prefWidth="250" minHeight="450" prefHeight="450" style="-fx-background-color: #f4f4f4;">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+              <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
           </left>
 
-          <right>
-            <VBox fx:id="taskList" minWidth="340" prefWidth="340" style="-fx-background-color: green;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+          <center>
+            <VBox fx:id="taskList" minWidth="250" prefWidth="250" minHeight="450" prefHeight="450" style="-fx-background-color: #f4f4f4;">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
-              <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+              <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
+          </center>
+
+          <right>
+            <StackPane fx:id="resultDisplayPlaceholder" maxWidth = "230" prefWidth="230" minHeight="400" prefHeight="400" styleClass="pane-with-border" VBox.vgrow="NEVER">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+            </StackPane>
           </right>
 
         </BorderPane>
