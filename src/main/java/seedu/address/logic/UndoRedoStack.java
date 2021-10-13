@@ -47,7 +47,7 @@ public class UndoRedoStack {
     /**
      * Gets the last executed UndoableCommand.
      *
-     * @return UndoableCommand
+     * @return Last executed UndoableCommand.
      */
     public UndoableCommand popUndo() {
         UndoableCommand toUndo = undoStack.pop();
