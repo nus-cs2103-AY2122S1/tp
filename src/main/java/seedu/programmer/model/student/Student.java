@@ -88,9 +88,9 @@ public class Student {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Student_Id: ")
+                .append("; Student Id: ")
                 .append(getStudentId())
-                .append("; Class_Id: ")
+                .append("; Class Id: ")
                 .append(getClassId())
                 .append("; Grade: ")
                 .append(getGrade());

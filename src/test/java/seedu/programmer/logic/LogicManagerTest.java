@@ -3,10 +3,10 @@
 //import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_student_DISPLAYED_INDEX;
 //import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-//import static seedu.programmer.logic.commands.CommandTestUtil.CLASSID_DESC_AMY;
+//import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 //import static seedu.programmer.logic.commands.CommandTestUtil.GRADE_DESC_AMY;
 //import static seedu.programmer.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-//import static seedu.programmer.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
+//import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 //import static seedu.programmer.testutil.Assert.assertThrows;
 //import static seedu.programmer.testutil.Typicalstudents.AMY;
 
@@ -80,7 +80,7 @@
 ////        logic = new LogicManager(model, storage);
 ////
 ////        // Execute add command
-////        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + STUDENTID_DESC_AMY + CLASSID_DESC_AMY
+////        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY
 ////                + GRADE_DESC_AMY;
 ////        student expectedstudent = new studentBuilder(AMY).build();
 ////        ModelManager expectedModel = new ModelManager();
