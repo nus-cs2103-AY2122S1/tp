@@ -113,6 +113,14 @@ Prefix Input Specifications:
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
 
 
+* *Contact Number* `p/`
+  * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
+  * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
+  * For example:
+    * A `99999999` input can only match with *Contact Number*s that are `99999999`.
+    * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
+
+
 * *Email* `e/`
   * Each additional keyword for *Email* leads to a more **accommodating** search.
   * An *Email* is considered matching if at least 1 keyword is equal to at least 1 word in the *Email*.
@@ -122,14 +130,6 @@ Prefix Input Specifications:
 and `marysue@gmail.com`.
 
 
-* *Contact Number* `p/`
-  * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
-  * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
-  * For example:
-    * A `99999999` input can only match with *Contact Number*s that are `99999999`.
-    * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
-
-
 * *Role* `r/`
   * Each additional keyword for *Role* leads to a more **restrictive** search
   * A *Role* is considered matching only if every single keyword is equal to at least 1 word in the *Role*.
@@ -137,15 +137,6 @@ and `marysue@gmail.com`.
     * A `Software` input can match with *Role*s such as `Software Engineer`, `Software` or `Software Developer`
     * A `Software Engineer` input can match with *Role*s such as `Software Engineer` or `Senior Software Engineer`
 but not with *Role*s such as `Software` or `Software Developer`.
-
-
-* *Level of Education* `l/`
-  * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
-  * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-  * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
-  * For example:
-    * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
-    * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
 
 
 * *Employment Type* `et/`
@@ -165,6 +156,16 @@ but not with *Role*s such as `Software` or `Software Developer`.
     * For example:
         * A `3000` input can match with *Expected Salary*s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with *Expected Salary*s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
+
+
+* *Level of Education* `l/`
+  * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
+  * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
+  * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
+  * For example:
+    * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
+    * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
+
 
 * *Years of Experience* `y/`
     * Each additional keyword for *Year of Experience* leads to a more **accommodating** search.
