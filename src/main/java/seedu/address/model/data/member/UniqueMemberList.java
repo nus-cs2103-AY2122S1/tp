@@ -1,4 +1,4 @@
-package seedu.address.model.member;
+package seedu.address.model.data.member;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,19 +8,19 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.member.exceptions.DuplicateMemberException;
-import seedu.address.model.member.exceptions.MemberNotFoundException;
+import seedu.address.model.data.member.exceptions.DuplicateMemberException;
+import seedu.address.model.data.member.exceptions.MemberNotFoundException;
 
 /**
  * A list of members that enforces uniqueness between its elements and does not allow nulls.
- * A member is considered unique by comparing using {@code Member#isSameMember(Member)}. As such, adding and updating of
- * members uses Member#isSameMember(Member) for equality so as to ensure that the member being added or updated is
+ * A member is considered unique by comparing using {@code Member#isSameType(Member)}. As such, adding and updating of
+ * members uses Member#isSameType(Member) for equality so as to ensure that the member being added or updated is
  * unique in terms of identity in the UniqueMemberList. However, the removal of a member uses Member#equals(Object) so
  * as to ensure that the member with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Member#isSameMember(Member)
+ * @see Member#isSameType(seedu.address.model.data.Data)
  */
 public class UniqueMemberList implements Iterable<Member> {
 
@@ -33,7 +33,7 @@ public class UniqueMemberList implements Iterable<Member> {
      */
     public boolean contains(Member toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameMember);
+        return internalList.stream().anyMatch(toCheck::isSameType);
     }
 
     /**
@@ -61,7 +61,7 @@ public class UniqueMemberList implements Iterable<Member> {
             throw new MemberNotFoundException();
         }
 
-        if (!target.isSameMember(editedMember) && contains(editedMember)) {
+        if (!target.isSameType(editedMember) && contains(editedMember)) {
             throw new DuplicateMemberException();
         }
 
@@ -127,7 +127,7 @@ public class UniqueMemberList implements Iterable<Member> {
     private boolean membersAreUnique(List<Member> members) {
         for (int i = 0; i < members.size() - 1; i++) {
             for (int j = i + 1; j < members.size(); j++) {
-                if (members.get(i).isSameMember(members.get(j))) {
+                if (members.get(i).isSameType(members.get(j))) {
                     return false;
                 }
             }

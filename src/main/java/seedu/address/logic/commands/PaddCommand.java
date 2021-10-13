@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.member.Member;
+import seedu.address.model.data.member.Member;
 
 /**
  * Adds a member to the address book.

@@ -1,4 +1,4 @@
-package seedu.address.model.member.exceptions;
+package seedu.address.model.data.member.exceptions;
 
 /**
  * Signals that the operation is unable to find the specified member.

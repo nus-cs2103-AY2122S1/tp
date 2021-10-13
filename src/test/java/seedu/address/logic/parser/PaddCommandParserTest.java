@@ -32,11 +32,11 @@ import static seedu.address.testutil.TypicalMembers.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.PaddCommand;
-import seedu.address.model.member.Address;
-import seedu.address.model.member.Email;
-import seedu.address.model.member.Member;
-import seedu.address.model.member.Name;
-import seedu.address.model.member.Phone;
+import seedu.address.model.data.Name;
+import seedu.address.model.data.member.Address;
+import seedu.address.model.data.member.Email;
+import seedu.address.model.data.member.Member;
+import seedu.address.model.data.member.Phone;
 import seedu.address.model.position.Position;
 import seedu.address.testutil.MemberBuilder;
 
