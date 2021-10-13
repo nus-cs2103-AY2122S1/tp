@@ -1,5 +1,12 @@
 package seedu.anilist.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.exceptions.CommandException;
@@ -9,13 +16,9 @@ import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.genre.Genre;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
-
+/**
+ * Deletes the provided genres from the specified anime.
+ */
 public class GenreDeleteCommand extends GenreCommand {
 
     public static final String MESSAGE_SUCCESS = "Genres %1$s deleted from anime %2$s";
@@ -41,6 +44,9 @@ public class GenreDeleteCommand extends GenreCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getGenresDescriptor().toString(), editedAnime));
     }
 
+    /**
+     * Creates and returns an {@code Anime} with the {@code Genre} from {@code genresDescriptor} removed.
+     */
     private static Anime createUpdatedAnime(Anime animeToEdit,
                                             GenreCommand.GenresDescriptor genresDescriptor) {
         assert animeToEdit != null;

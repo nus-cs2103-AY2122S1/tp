@@ -1,14 +1,14 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SUPERHERO;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -67,9 +67,15 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_GENRE} alone will reset the genres of the {@code Anime} being edited,
         // parsing it together with a valid genre results in error
-        assertParseFailure(parser, "1" + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN + GENRE_EMPTY, Genre.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + GENRE_DESC_SUPERHERO + GENRE_EMPTY + GENRE_DESC_SHOUNEN, Genre.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + GENRE_EMPTY + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN, Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN + GENRE_EMPTY,
+                Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + GENRE_DESC_SUPERHERO + GENRE_EMPTY + GENRE_DESC_SHOUNEN,
+                Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + GENRE_EMPTY + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN,
+                Genre.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC,

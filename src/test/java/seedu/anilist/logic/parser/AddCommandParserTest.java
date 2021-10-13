@@ -1,17 +1,17 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SUPERHERO;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.TypicalAnimes.AKIRA;
@@ -42,7 +42,8 @@ public class AddCommandParserTest {
 
 
         // multiple genress - all accepted
-        Anime expectedAnimeMultipleGenres = new AnimeBuilder(BNHA).withGenres(VALID_GENRE_SUPERHERO, VALID_GENRE_SHOUNEN)
+        Anime expectedAnimeMultipleGenres = new AnimeBuilder(BNHA)
+                .withGenres(VALID_GENRE_SUPERHERO, VALID_GENRE_SHOUNEN)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BNHA
                 + GENRE_DESC_SHOUNEN + GENRE_DESC_SUPERHERO, new AddCommand(expectedAnimeMultipleGenres));

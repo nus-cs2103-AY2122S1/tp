@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 
 import org.junit.jupiter.api.Test;
 

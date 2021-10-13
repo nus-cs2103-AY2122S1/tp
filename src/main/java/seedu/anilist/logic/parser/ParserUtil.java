@@ -92,6 +92,13 @@ public class ParserUtil {
     }
 
 
+    /**
+     * Parse a {@Code String actionString} into a {@Code Action}.
+     * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
+     * @param actionString string to be parsed
+     * @return a {@Code Action}
+     * @throws ParseException if the given {@code actionString} is invalid.
+     */
     public static Action parseAction(String actionString) throws ParseException {
         requireNonNull(actionString);
         String trimmedActionLowerCase = actionString.trim().toLowerCase(Locale.ROOT);

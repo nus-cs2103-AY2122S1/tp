@@ -11,11 +11,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
-import seedu.anilist.model.anime.Anime;
-import seedu.anilist.model.anime.Episode;
-import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.genre.Genre;
 
+/**
+ * Represents a command that affects the genres of an Anime
+ */
 public abstract class GenreCommand extends Command {
 
     public static final String COMMAND_WORD = "genre";
@@ -40,6 +40,10 @@ public abstract class GenreCommand extends Command {
     private final GenreCommand.GenresDescriptor genresDescriptor;
     private final Index index;
 
+    /**
+     * @param index of the anime in the filtered anime list to edit
+     * @param genresDescriptor details to update the anime's episode with
+     */
     public GenreCommand(Index index, GenreCommand.GenresDescriptor genresDescriptor) {
         requireNonNull(index);
         requireNonNull(genresDescriptor);
@@ -64,6 +68,9 @@ public abstract class GenreCommand extends Command {
                 && genresDescriptor.equals(((GenreCommand) other).genresDescriptor));
     }
 
+    /**
+     * Stores the set of genres to be modified.
+     */
     public static class GenresDescriptor {
         private Set<Genre> genres;
 

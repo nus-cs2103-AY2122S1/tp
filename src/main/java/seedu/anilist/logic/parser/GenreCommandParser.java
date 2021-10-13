@@ -6,6 +6,10 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.ParserUtil.parseAction;
 
+import java.util.Collection;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
@@ -13,18 +17,21 @@ import seedu.anilist.logic.commands.GenreDeleteCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.genre.Genre;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
 
+/**
+ * Parses input arguments and creates a new GenreCommand object
+ */
 public class GenreCommandParser implements Parser<GenreCommand> {
-    @Override
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the GenreCommand
+     * and returns a GenreCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public GenreCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ACTION, PREFIX_GENRE);
-
         if (!argMultimap.getValue(PREFIX_ACTION).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
         }
@@ -33,9 +40,6 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         }
 
         Index index;
-        Action action;
-        String actionString;
-
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
@@ -44,9 +48,8 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         }
 
         GenreCommand.GenresDescriptor genresDescriptor = new GenreCommand.GenresDescriptor();
-
-        actionString = argMultimap.getValue(PREFIX_ACTION).get();
-        action = parseAction(actionString);
+        String actionString = argMultimap.getValue(PREFIX_ACTION).get();
+        Action action = parseAction(actionString);
         parseGenresForEdit(argMultimap.getAllValues(PREFIX_GENRE)).ifPresent(genresDescriptor::setGenres);
 
         switch (action) {

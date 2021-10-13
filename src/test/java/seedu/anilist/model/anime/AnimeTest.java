@@ -2,8 +2,8 @@ package seedu.anilist.model.anime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.ALICE;
 import static seedu.anilist.testutil.TypicalAnimes.BNHA;

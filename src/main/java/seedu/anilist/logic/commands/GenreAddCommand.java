@@ -16,6 +16,9 @@ import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.genre.Genre;
 
+/**
+ * Adds the provided genres to the specified anime.
+ */
 public class GenreAddCommand extends GenreCommand {
 
     public static final String MESSAGE_SUCCESS = "New genres %1$s added to anime %2$s";
@@ -41,6 +44,9 @@ public class GenreAddCommand extends GenreCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getGenresDescriptor().toString(), editedAnime));
     }
 
+    /**
+     * Creates and returns an {@code Anime} with the {@code Genre} from {@code genresDescriptor} removed.
+     */
     private static Anime createUpdatedAnime(Anime animeToEdit,
                                             GenreCommand.GenresDescriptor genresDescriptor) {
         assert animeToEdit != null;
