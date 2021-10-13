@@ -27,15 +27,15 @@ public class ExperienceTest {
         // invalid experience
         assertFalse(Experience.isValidExperience("")); // empty string
         assertFalse(Experience.isValidExperience(" ")); // spaces only
-        assertFalse(Experience.isValidExperience("^")); // only non-alphanumeric characters
+        assertFalse(Experience.isValidExperience("^!@#$%")); // only non-alphanumeric characters
         assertFalse(Experience.isValidExperience("11*")); // contains non-alphanumeric characters
         assertFalse(Experience.isValidExperience("1.11")); // contains decimals
         assertFalse(Experience.isValidExperience("-11")); // contains negative number
         assertFalse(Experience.isValidExperience("12345")); // number is too large
 
-
-
         // valid experience
         assertTrue(Experience.isValidExperience("1")); // positive number
+        assertTrue(Experience.isValidExperience("67")); // number not larger than 67
+
     }
 }

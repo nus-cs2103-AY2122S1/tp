@@ -105,7 +105,7 @@ public class TypicalPersons {
             .withEmploymentType("Part time")
             .withExpectedSalary("3300")
             .withLevelOfEducation("PhD")
-            .withExperience("3").build();
+            .withExperience("7").build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131")
@@ -114,7 +114,7 @@ public class TypicalPersons {
             .withEmploymentType("Full time")
             .withExpectedSalary("7100")
             .withLevelOfEducation("Masters")
-            .withExperience("7").build();
+            .withExperience("8").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
