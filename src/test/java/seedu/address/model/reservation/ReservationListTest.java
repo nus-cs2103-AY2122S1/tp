@@ -8,7 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.exception.ReservationNotFoundException;
 
@@ -24,7 +26,7 @@ class ReservationListTest {
             LocalDateTime.parse("2021-11-11T20:00")
     );
 
-    ReservationList reservationList = new ReservationList();
+    private ReservationList reservationList = new ReservationList();
 
     @Test
     public void contains_nullReservation_throwsNullPointerException() {
