@@ -21,10 +21,10 @@ public class ListCommandParser implements Parser<ListCommand> {
     public ListCommand parse(String args) {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LIST_ALL);
-        if (argMultimap.getValue(PREFIX_LIST_ALL).isEmpty()) {
-            return new ListCommand(false);
-        } else { // any unexpected user input is ignored
+        if (argMultimap.getValue(PREFIX_LIST_ALL).isPresent()) {
             return new ListCommand(true);
+        } else { // all unexpected input is ignored
+            return new ListCommand(false);
         }
     }
 }
