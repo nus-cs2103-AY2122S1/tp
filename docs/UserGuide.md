@@ -316,7 +316,7 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
 ### Viewing the Schedule
