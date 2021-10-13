@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
@@ -22,6 +23,7 @@ import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FindCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.model.student.NameContainsKeywordsPredicate;
 import seedu.academydirectory.model.student.Student;
@@ -80,6 +82,11 @@ public class AcademyDirectoryParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_retrieve() throws Exception {
+        assertTrue(parser.parseCommand(RetrieveCommand.COMMAND_WORD + " " + PREFIX_EMAIL + " ") instanceof RetrieveCommand);
     }
 
     @Test

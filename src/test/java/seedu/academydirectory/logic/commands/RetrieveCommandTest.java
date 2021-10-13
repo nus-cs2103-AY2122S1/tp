@@ -31,29 +31,30 @@ public class RetrieveCommandTest {
 
     @Test
     public void equals() {
-        InformationWantedFunction firstFunction = new InformationWantedFunction(PREFIX_EMAIL);
-        InformationWantedFunction secondFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
+        InformationWantedFunction emailRetrieveFunction = new InformationWantedFunction(PREFIX_EMAIL);
+        InformationWantedFunction telegramRetrieveFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
 
-        RetrieveCommand retrieveFirstCommand = new RetrieveCommand(firstFunction);
-        RetrieveCommand retrieveSecondCommand = new RetrieveCommand(secondFunction);
+        RetrieveCommand emailRetrieveCommand = new RetrieveCommand(emailRetrieveFunction);
+        RetrieveCommand telegramRetrieveCommand = new RetrieveCommand(telegramRetrieveFunction);
 
         // same object -> returns true
-        assertEquals(retrieveFirstCommand, retrieveFirstCommand);
+        assertEquals(emailRetrieveCommand, emailRetrieveCommand);
+        assertEquals(telegramRetrieveCommand, telegramRetrieveCommand);
 
         // same values -> returns true
-        RetrieveCommand retrieveFirstCommandCopy = new RetrieveCommand(firstFunction);
-        assertEquals(retrieveFirstCommand, retrieveFirstCommandCopy);
+        RetrieveCommand emailRetrieveCommandCopy = new RetrieveCommand(emailRetrieveFunction);
+        assertEquals(emailRetrieveCommand, emailRetrieveCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, retrieveFirstCommand);
-        assertNotEquals(0, retrieveSecondCommand);
+        assertNotEquals(1, emailRetrieveCommand);
+        assertNotEquals(0, telegramRetrieveCommand);
 
         // null -> returns false
-        assertFalse(retrieveFirstCommand.equals(null));
-        assertFalse(retrieveSecondCommand.equals(null));
+        assertFalse(emailRetrieveCommand.equals(null));
+        assertFalse(telegramRetrieveCommand.equals(null));
 
         // different student -> returns false
-        assertNotEquals(retrieveFirstCommand, retrieveSecondCommand);
+        assertNotEquals(emailRetrieveCommand, telegramRetrieveCommand);
     }
 
     @Test
