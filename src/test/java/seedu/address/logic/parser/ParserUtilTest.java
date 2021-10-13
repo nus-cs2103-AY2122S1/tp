@@ -2,10 +2,13 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE_TIME_FORMAT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_NUMBER_OF_PEOPLE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +21,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.employee.JobTitle;
+import seedu.address.model.person.employee.Leaves;
+import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -25,14 +33,24 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_LEAVES = "a";
+    private static final String INVALID_SALARY = "8we9";
+    private static final String INVALID_JOBTITLE = "% manager";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_SUPPLY_TYPE = "Chicken & Beef";
+    private static final String INVALID_DELIVERY_DETAILS = "Monday 2-4 pm";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_LEAVES = "14";
+    private static final String VALID_SALARY = "4000";
+    private static final String VALID_JOBTITLE = "Sales Team Lead";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SUPPLY_TYPE = "Chicken and Beef";
+    private static final String VALID_DELIVERY_DETAILS = "Every Monday 2pm";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -54,6 +72,33 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseNumberOfPeople_nonZeroUnsignedInteger_success() throws Exception {
+        assertEquals(1, ParserUtil.parseNumberOfPeople("1"));
+        assertEquals(1, ParserUtil.parseNumberOfPeople("   1  "));
+    }
+
+    @Test
+    public void parseNumberOfPeople_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople(" a"));
+
+        assertThrows(ParseException.class, MESSAGE_INVALID_NUMBER_OF_PEOPLE, ()
+            -> ParserUtil.parseNumberOfPeople("-1 "));
+    }
+
+    @Test
+    public void parseDateTime_validDateTime_success() throws Exception {
+        LocalDateTime expected = LocalDateTime.parse("2021-11-11 2000", ParserUtil.DATE_TIME_FORMATTER);
+        assertEquals(expected, ParserUtil.parseDateTime("  2021-11-11 2000   "));
+    }
+
+    @Test
+    public void parseDateTime_invalidDateTime_failure() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_DATE_TIME_FORMAT, ()
+            -> ParserUtil.parseDateTime("11-11-2021 2000"));
     }
 
     @Test
@@ -149,6 +194,75 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseLeaves_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLeaves((String) null));
+    }
+
+    @Test
+    public void parseLeaves_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLeaves(INVALID_LEAVES));
+    }
+
+    @Test
+    public void parseLeaves_validValueWithoutWhitespace_returnsLeaves() throws Exception {
+        Leaves expectedLeaves = new Leaves(VALID_LEAVES);
+        assertEquals(expectedLeaves, ParserUtil.parseLeaves(VALID_LEAVES));
+    }
+
+    @Test
+    public void parseLeaves_validValueWithWhitespace_returnsTrimmedLeaves() throws Exception {
+        String leavesWithWhitespace = WHITESPACE + VALID_LEAVES + WHITESPACE;
+        Leaves expectedLeaves = new Leaves(VALID_LEAVES);
+        assertEquals(expectedLeaves, ParserUtil.parseLeaves(leavesWithWhitespace));
+    }
+
+    @Test
+    public void parseSalary_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSalary((String) null));
+    }
+
+    @Test
+    public void parseSalary_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSalary(INVALID_SALARY));
+    }
+
+    @Test
+    public void parseSalary_validValueWithoutWhitespace_returnsSalary() throws Exception {
+        Salary expectedSalary = new Salary(VALID_SALARY);
+        assertEquals(expectedSalary, ParserUtil.parseSalary(VALID_SALARY));
+    }
+
+    @Test
+    public void parseSalary_validValueWithWhitespace_returnsTrimmedSalary() throws Exception {
+        String salaryWithWhitespace = WHITESPACE + VALID_SALARY + WHITESPACE;
+        Salary expectedSalary = new Salary(VALID_SALARY);
+        assertEquals(expectedSalary, ParserUtil.parseSalary(salaryWithWhitespace));
+    }
+
+    @Test
+    public void parseJobTitle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseJobTitle((String) null));
+    }
+
+    @Test
+    public void parseJobTitle_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseJobTitle(INVALID_JOBTITLE));
+    }
+
+    @Test
+    public void parseJobTitle_validValueWithoutWhitespace_returnsName() throws Exception {
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
+        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOBTITLE));
+    }
+
+    @Test
+    public void parseJobTitle_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String jobTitleWithWhitespace = WHITESPACE + VALID_JOBTITLE + WHITESPACE;
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
+        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(jobTitleWithWhitespace));
+    }
+
+    @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
     }
@@ -192,5 +306,51 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSupplyType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSupplyType((String) null));
+    }
+
+    @Test
+    public void parseSupplyType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSupplyType(INVALID_SUPPLY_TYPE));
+    }
+
+    @Test
+    public void parseSupplyType_validValueWithoutWhitespace_returnsName() throws Exception {
+        SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
+        assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(VALID_SUPPLY_TYPE));
+    }
+
+    @Test
+    public void parseSupplyType_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String supplyTypeWithWhitespace = WHITESPACE + VALID_SUPPLY_TYPE + WHITESPACE;
+        SupplyType expectedSupplyType = new SupplyType(VALID_SUPPLY_TYPE);
+        assertEquals(expectedSupplyType, ParserUtil.parseSupplyType(supplyTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseDeliveryDetails_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDeliveryDetails((String) null));
+    }
+
+    @Test
+    public void parseDeliveryDetails_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDeliveryDetails(INVALID_DELIVERY_DETAILS));
+    }
+
+    @Test
+    public void parseDeliveryDetails_validValueWithoutWhitespace_returnsName() throws Exception {
+        DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
+        assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(VALID_DELIVERY_DETAILS));
+    }
+
+    @Test
+    public void parseDeliveryDetails_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String deliveryDetailsWithWhitespace = WHITESPACE + VALID_DELIVERY_DETAILS + WHITESPACE;
+        DeliveryDetails expectedDeliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAILS);
+        assertEquals(expectedDeliveryDetails, ParserUtil.parseDeliveryDetails(deliveryDetailsWithWhitespace));
     }
 }

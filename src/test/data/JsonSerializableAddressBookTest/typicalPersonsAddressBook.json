@@ -42,5 +42,16 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ]
-  } ]
+  } ],
+  "customers": [
+
+  ],
+  "employees": [
+
+  ],
+  "suppliers": [
+
+  ],
+  "reservations": [
+  ]
 }

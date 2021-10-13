@@ -32,6 +32,9 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private CustomerListPanel customerListPanel;
+    private EmployeeListPanel employeeListPanel;
+    private SupplierListPanel supplierListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane personTypePlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -111,10 +117,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
+        employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
+        supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        PersonType personType = new PersonType("Person");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -147,6 +159,49 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays the person list.
+     */
+    @FXML
+    public void handleShowPerson() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Person");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+    /**
+     * Displays the Customer list.
+     */
+    @FXML
+    public void handleShowCustomer() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Customer");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
+    }
+
+    /**
+     * Displays the Supplier list.
+     */
+    @FXML
+    public void handleShowSupplier() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Supplier");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+    }
+
+    /**
+     * Displays the Employee list.
+     */
+    @FXML
+    public void handleShowEmployee() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Employee");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -167,6 +222,10 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public EmployeeListPanel getEmployeeListPanel() {
+        return employeeListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -184,6 +243,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowPerson()) {
+                handleShowPerson();
+            }
+
+            if (commandResult.isShowSupplier()) {
+                handleShowSupplier();
             }
 
             return commandResult;

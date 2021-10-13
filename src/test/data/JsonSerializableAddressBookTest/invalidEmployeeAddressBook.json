@@ -1,0 +1,23 @@
+{
+  "persons": [
+
+  ],
+  "employees": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street",
+    "leaves": "Invalid",
+    "salary": "SSS",
+    "jobTitle": "Product manager"
+  } ],
+  "customers": [
+
+  ],
+  "suppliers": [
+
+  ],
+  "reservations": [
+
+  ]
+}
