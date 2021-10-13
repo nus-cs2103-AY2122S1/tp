@@ -182,7 +182,7 @@ public class LogicManagerTest {
         }
 
         @Override
-        public void saveGamesList(ReadOnlyGamesList friendsList, Path filePath) throws IOException {
+        public void saveGamesList(ReadOnlyGamesList gamesList, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

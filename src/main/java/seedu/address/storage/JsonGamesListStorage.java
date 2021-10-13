@@ -15,7 +15,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyGamesList;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access games list data stored as a json file on the hard disk.
  */
 public class JsonGamesListStorage implements GamesListStorage {
 
@@ -61,8 +61,8 @@ public class JsonGamesListStorage implements GamesListStorage {
     }
 
     @Override
-    public void saveGamesList(ReadOnlyGamesList dataList) throws IOException {
-        saveGamesList(dataList, filePath);
+    public void saveGamesList(ReadOnlyGamesList gamesList) throws IOException {
+        saveGamesList(gamesList, filePath);
     }
 
     /**
@@ -70,12 +70,12 @@ public class JsonGamesListStorage implements GamesListStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveGamesList(ReadOnlyGamesList friendsList, Path filePath) throws IOException {
-        requireNonNull(friendsList);
+    public void saveGamesList(ReadOnlyGamesList gamesList, Path filePath) throws IOException {
+        requireNonNull(gamesList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableGamesList(friendsList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableGamesList(gamesList), filePath);
     }
 
 }

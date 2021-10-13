@@ -63,26 +63,26 @@ public class JsonFriendsListStorageTest {
 
     @Test
     public void readAndSaveFriendsList_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path filePath = testFolder.resolve("TempFriendsList.json");
         FriendsList original = getTypicalFriendsList();
-        JsonFriendsListStorage jsonAddressBookStorage = new JsonFriendsListStorage(filePath);
+        JsonFriendsListStorage jsonFriendsListStorage = new JsonFriendsListStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveFriendsList(original, filePath);
-        ReadOnlyFriendsList readBack = jsonAddressBookStorage.readFriendsList(filePath).get();
+        jsonFriendsListStorage.saveFriendsList(original, filePath);
+        ReadOnlyFriendsList readBack = jsonFriendsListStorage.readFriendsList(filePath).get();
         assertEquals(original, new FriendsList(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addFriend(HOON);
         original.removeFriend(ALICE);
-        jsonAddressBookStorage.saveFriendsList(original, filePath);
-        readBack = jsonAddressBookStorage.readFriendsList(filePath).get();
+        jsonFriendsListStorage.saveFriendsList(original, filePath);
+        readBack = jsonFriendsListStorage.readFriendsList(filePath).get();
         assertEquals(original, new FriendsList(readBack));
 
         // Save and read without specifying file path
         original.addFriend(IDA);
-        jsonAddressBookStorage.saveFriendsList(original); // file path not specified
-        readBack = jsonAddressBookStorage.readFriendsList().get(); // file path not specified
+        jsonFriendsListStorage.saveFriendsList(original); // file path not specified
+        readBack = jsonFriendsListStorage.readFriendsList().get(); // file path not specified
         assertEquals(original, new FriendsList(readBack));
 
     }

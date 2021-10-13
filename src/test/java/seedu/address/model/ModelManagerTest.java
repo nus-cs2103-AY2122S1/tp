@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.FriendBuilder;
+import seedu.address.testutil.FriendsListBuilder;
 
 public class ModelManagerTest {
 
@@ -120,7 +120,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        FriendsList friendsList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        FriendsList friendsList = new FriendsListBuilder().withFriend(ALICE).withFriend(BENSON).build();
         FriendsList differentFriendsList = new FriendsList();
         GamesList gamesList = new GamesList();
         UserPrefs userPrefs = new UserPrefs();

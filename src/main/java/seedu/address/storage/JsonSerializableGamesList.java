@@ -52,7 +52,7 @@ class JsonSerializableGamesList {
             if (gamesList.hasGame(game)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GAME);
             }
-            gamesList.hasGame(game);
+            gamesList.addGame(game);
         }
         return gamesList;
     }

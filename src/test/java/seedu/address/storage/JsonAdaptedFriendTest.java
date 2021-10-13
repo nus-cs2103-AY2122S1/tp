@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 
 // TODO: Update tests for FriendId and Games based on UG specs
@@ -25,7 +26,7 @@ public class JsonAdaptedFriendTest {
             .collect(Collectors.toList());
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson() throws Exception {
+    public void toModelType_validPersonDetails_returnsFriend() throws Exception {
         JsonAdaptedFriend person = new JsonAdaptedFriend(BENSON);
         assertEquals(BENSON, person.toModelType());
     }
@@ -35,6 +36,14 @@ public class JsonAdaptedFriendTest {
         JsonAdaptedFriend person =
                 new JsonAdaptedFriend(VALID_FRIEND_ID, INVALID_NAME, VALID_GAME_FRIEND_LINK);
         String expectedMessage = FriendName.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_friendIdNull_throwsIllegalValueException() throws Exception {
+        JsonAdaptedFriend person = new JsonAdaptedFriend(null, BENSON.getName().toString(),
+                VALID_GAME_FRIEND_LINK);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, FriendId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

@@ -52,7 +52,6 @@ public class ParserUtil {
     public static FriendId parseFriendId(String friendId) throws ParseException {
         requireNonNull(friendId);
         String trimmedName = friendId.trim();
-        System.out.println(trimmedName);
         if (friendId.isBlank()) {
             throw new ParseException(FriendId.MESSAGE_EMPTY_FRIEND_ID);
         } else if (!FriendId.isValidFriendId(trimmedName)) {
