@@ -162,13 +162,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                             }
                         }
                     }
-
-                    System.out.println(keywords);
-
-                    if (keywords.isEmpty()) {
-                        throw new ParseException(EmploymentType.FIND_MESSAGE_CONSTRAINTS);
-                    }
-
+                    
                     predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
                 }
             }
