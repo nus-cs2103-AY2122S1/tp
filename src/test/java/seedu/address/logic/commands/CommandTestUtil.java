@@ -16,6 +16,8 @@ import seedu.address.model.FriendsList;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameIdContainsKeywordPredicate;
 import seedu.address.testutil.EditFriendDescriptorBuilder;
 
 /**
@@ -25,7 +27,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_FRIEND_ID_AMY = "123";
+    public static final String VALID_FRIEND_ID_AMY = "amyawesome";
     public static final String VALID_FRIEND_ID_BOB = "456";
     public static final String VALID_GAME_ID_CSGO = "CSGO";
     public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
@@ -110,6 +112,20 @@ public class CommandTestUtil {
         model.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFriendsList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGameAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGamesList().size());
+
+        Game game = model.getFilteredGamesList().get(targetIndex.getZeroBased());
+        final String[] splitName = game.getGameId().value.split("\\s+");
+        model.updateFilteredGamesList(new GameIdContainsKeywordPredicate(splitName[0]));
+
+        assertEquals(1, model.getFilteredGamesList().size());
     }
 
 }

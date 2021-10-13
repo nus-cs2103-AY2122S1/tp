@@ -16,6 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.game.GameId;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -59,6 +60,21 @@ public class ParserUtil {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendId.MESSAGE_CONSTRAINTS));
         }
         return new FriendId(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String gameId} into a {@code GameId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gameId} is invalid.
+     */
+    public static GameId parseGameId(String gameId) throws ParseException {
+        requireNonNull(gameId);
+        String trimmedName = gameId.trim();
+        if (!GameId.isValidGameId(trimmedName)) {
+            throw new ParseException(GameId.MESSAGE_CONSTRAINTS);
+        }
+        return new GameId(trimmedName);
     }
 
     /**
