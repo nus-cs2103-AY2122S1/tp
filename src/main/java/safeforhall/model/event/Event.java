@@ -15,6 +15,7 @@ public class Event {
     private final EventDate eventDate;
     private final Venue venue;
     private final Capacity capacity;
+    // test
 
     /**
      * Every field must be present
