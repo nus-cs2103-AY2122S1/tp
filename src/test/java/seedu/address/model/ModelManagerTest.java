@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -25,8 +26,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
-import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
 import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -92,17 +93,17 @@ public class ModelManagerTest {
     public void hasCustomer_nullCustomer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasCustomer(null));
     }
-  
+
     @Test
     public void hasEmployee_nullEmployee_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasEmployee(null));
     }
-  
+
     @Test
     public void hasSupplier_nullSupplier_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasSupplier(null));
     }
-  
+
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
@@ -112,8 +113,8 @@ public class ModelManagerTest {
     public void hasCustomer_customerNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasCustomer(CUSTOMER_ALICE));
     }
-  
-   @Test
+
+    @Test
     public void hasEmployee_employeeNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasEmployee(ALICE_EMPLOYEE));
     }
@@ -134,8 +135,8 @@ public class ModelManagerTest {
         modelManager.addCustomer(CUSTOMER_ALICE);
         assertTrue(modelManager.hasCustomer(CUSTOMER_ALICE));
     }
-  
-   @Test
+
+    @Test
     public void hasEmployee_employeeInAddressBook_returnsTrue() {
         modelManager.addEmployee(ALICE_EMPLOYEE);
         assertTrue(modelManager.hasEmployee(ALICE_EMPLOYEE));
@@ -157,7 +158,7 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
                 .getFilteredCustomerList().remove(0));
     }
-  
+
     @Test
     public void getFilteredEmployeeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager
@@ -178,7 +179,7 @@ public class ModelManagerTest {
                         .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE)
                         .withSupplier(AMY).withSupplier(BOB)
                         .build();
-      
+
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -209,22 +210,24 @@ public class ModelManagerTest {
         modelManager.updateFilteredCustomerList(new CustomerNameContainsKeywordsPredicate(Arrays.asList(custkeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        // different filteredList -> returns false
-        String[] supplierKeywords = AMY.getName().fullName.split("\\s+");
-        modelManager.updateFilteredSupplierList(
-                new SupplierNameContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
-      
         // different filteredList for employees -> returns false
         String[] employeeKeywords = ALICE_EMPLOYEE.getName().fullName.split("\\s+");
         modelManager.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(
                 Arrays.asList(employeeKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different filteredList for suppliers -> returns false
+        String[] supplierKeywords = AMY.getName().fullName.split("\\s+");
+        modelManager.updateFilteredSupplierList(
+                new SupplierNameContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
 
         modelManager.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
 
