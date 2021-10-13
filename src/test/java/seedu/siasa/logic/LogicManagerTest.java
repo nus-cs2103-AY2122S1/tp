@@ -19,6 +19,7 @@ import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.storage.JsonAddressBookStorage;
+import seedu.siasa.storage.JsonPolicyBookStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
 import seedu.siasa.storage.StorageManager;
 
@@ -36,7 +37,8 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(temporaryFolder.resolve("policyBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -70,7 +72,9 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPolicyBookStorage policyBookStorage =
+                new JsonPolicyBookStorage(temporaryFolder.resolve("ioExceptionPolicyBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
