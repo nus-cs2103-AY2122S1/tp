@@ -63,7 +63,7 @@ Format: `help`
 Shows a list of all anime names the user has added.<br>
 Format: `list`
 
-### Updating an anime episode: `update`
+### Updating an anime's episode: `update`
 
 Updates the episode that you are currently on for a specified anime.<br>
 Format: `update INDEX e/NEWEPISODE`
@@ -74,3 +74,17 @@ Format: `update INDEX e/NEWEPISODE`
 
 Examples:
 *  `update 1 e/3`
+
+### Updating an anime's status: `status`
+
+Updates the status of a specified anime.<br>
+Format: `status INDEX s/UPDATEDSTATUS`
+
+- `UPDATEDSTATUS` refers to the updated status of the anime.
+- Available statuses: "towatch", "watching", "finished"
+- Shortforms: "t", "w", "f"
+- Updates the anime at the specified `INDEX`.
+- The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+*  `status 1 s/f`
