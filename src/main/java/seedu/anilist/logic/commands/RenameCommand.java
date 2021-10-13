@@ -15,6 +15,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.tag.Tag;
 
 public class RenameCommand extends Command {
@@ -27,8 +28,8 @@ public class RenameCommand extends Command {
         + PREFIX_NAME + "NAME\n"
         + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NAME + "Hyouka";
 
-    public static final String MESSAGE_RENAME_ANIME_SUCCESS = "Edited Anime's Name: %1$s";
-    public static final String MESSAGE_NOT_RENAMED = "An name should be provided.";
+    public static final String MESSAGE_RENAME_ANIME_SUCCESS = "Edited Anime name: %1$s";
+    public static final String MESSAGE_NOT_RENAMED = "A name should be provided.";
     public static final String MESSAGE_DUPLICATE_ANIME = "This anime already exists in the anime list.";
 
     private final Index index;
@@ -78,7 +79,6 @@ public class RenameCommand extends Command {
         Episode episode = animeToRename.getEpisode();
         Status status = animeToRename.getStatus();
         Set<Tag> updatedTags = animeToRename.getTags();
-
 
         return new Anime(updatedName, episode, status, updatedTags);
     }

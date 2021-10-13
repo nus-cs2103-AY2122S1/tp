@@ -53,8 +53,7 @@ public class RenameCommandTest {
 
         Anime renamedAnime = new AnimeBuilder(
             model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
-            .withName(VALID_NAME_BNHA)
-            .build();
+            .withName(VALID_NAME_BNHA).build();
         RenameCommand.NameDescriptor descriptor = new NameDescriptorBuilder()
             .withName(VALID_NAME_BNHA).build();
         RenameCommand renameCommand = new RenameCommand(INDEX_FIRST_ANIME, descriptor);

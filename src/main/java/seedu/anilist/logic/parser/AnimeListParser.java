@@ -76,7 +76,7 @@ public class AnimeListParser {
 
         case RenameCommand.COMMAND_WORD:
             return new RenameCommandParser().parse(arguments);
-            
+
         case UpdateStatusCommand.COMMAND_WORD:
             return new UpdateStatusCommandParser().parse(arguments);
 
