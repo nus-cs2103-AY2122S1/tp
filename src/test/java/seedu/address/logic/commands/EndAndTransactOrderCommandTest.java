@@ -195,6 +195,11 @@ public class EndAndTransactOrderCommandTest {
         }
 
         @Override
+        public Item getItemWithId(String Id) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setOrder(Order order) {
             EndAndTransactOrderCommandTest.ModelStubWithOrderAndInventory.this.optionalOrder = Optional.of(order);
         }
