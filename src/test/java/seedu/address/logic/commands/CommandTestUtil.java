@@ -58,9 +58,9 @@ public class CommandTestUtil {
     public static final String VALID_FEE_BOB = "0.50";
     public static final String VALID_REMARK_AMY = "Amy loves sushi!";
     public static final String VALID_REMARK_BOB = "Bob loves sashimi!";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIENDS = "friends";
-    public static final String VALID_TAG_OWES_MONEY = "owesMoney";
+    public static final String VALID_TAG_CARELESS = "careless";
+    public static final String VALID_TAG_FORGETFUL = "forgetful";
+    public static final String VALID_TAG_UNPAID = "unpaid";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -84,8 +84,8 @@ public class CommandTestUtil {
     public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIENDS;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FORGETFUL;
+    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_CARELESS;
     public static final String FIND_COND_DESC_ALL = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ALL;
     public static final String FIND_COND_DESC_ANY = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.ANY;
     public static final String FIND_COND_DESC_NONE = " " + PREFIX_FIND_CONDITION + FindCommand.FindCondition.NONE;
@@ -118,7 +118,7 @@ public class CommandTestUtil {
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withFee(VALID_FEE_AMY).withRemark(VALID_REMARK_AMY)
-                .withTags(VALID_TAG_FRIENDS).build();
+                .withTags(VALID_TAG_FORGETFUL).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
@@ -128,7 +128,7 @@ public class CommandTestUtil {
                 .withAcadStream(VALID_ACAD_STREAM_BOB)
                 .withAcadLevel(VALID_ACAD_LEVEL_BOB)
                 .withFee(VALID_FEE_BOB).withRemark(VALID_REMARK_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIENDS).build();
+                .withTags(VALID_TAG_CARELESS, VALID_TAG_FORGETFUL).build();
     }
 
     /**

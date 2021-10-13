@@ -38,8 +38,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -145,7 +145,7 @@ public class FindCommandParserTest {
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_CARELESS, VALID_TAG_FORGETFUL).build();
 
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -156,7 +156,7 @@ public class FindCommandParserTest {
         String userInput = PHONE_DESC_BOB + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_FRIEND).build();
+                .withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_FORGETFUL).build();
 
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -167,21 +167,21 @@ public class FindCommandParserTest {
         // Match all
         String userInput = FIND_COND_DESC_ALL + NAME_DESC_AMY + TAG_DESC_FRIEND;
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
-                .withCondition(FindCondition.ALL).withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withCondition(FindCondition.ALL).withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match any
         userInput = FIND_COND_DESC_ANY + NAME_DESC_AMY + TAG_DESC_FRIEND;
         predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.ANY)
-                .withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Match none
         userInput = FIND_COND_DESC_NONE + NAME_DESC_AMY + TAG_DESC_FRIEND;
         predicate = new PersonMatchesKeywordsPredicateBuilder().withCondition(FindCondition.NONE)
-                .withName(VALID_NAME_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withName(VALID_NAME_AMY).withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -246,7 +246,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, ACAD_LEVEL_DESC_AMY, expectedCommand);
 
         // tags
-        predicate = new PersonMatchesKeywordsPredicateBuilder().withTags(VALID_TAG_FRIEND).build();
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withTags(VALID_TAG_FORGETFUL).build();
         expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, TAG_DESC_FRIEND, expectedCommand);
     }
@@ -264,7 +264,7 @@ public class FindCommandParserTest {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withParentEmail(VALID_PARENT_EMAIL_AMY).withParentPhone(VALID_PARENT_PHONE_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY).withAcadStream(VALID_ACAD_STREAM_BOB)
-                .withSchool(VALID_SCHOOL_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withSchool(VALID_SCHOOL_BOB).withTags(VALID_TAG_FORGETFUL, VALID_TAG_FORGETFUL, VALID_TAG_CARELESS)
                 .withCondition(FindCondition.ANY).build();
         FindCommand expectedCommand = new FindCommand(predicate);
 
