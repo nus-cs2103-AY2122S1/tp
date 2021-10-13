@@ -245,9 +245,16 @@ Examples:
 
 ### Create a reservation: `reserve` 
 
-Format: `reserve d/DATE t/TIME  n/NAME p/PHONE_NUMBER`
+Add a new reservation with number of people, 
+customer's phone number and the date & time.
 
-Examples: `reserve d/2021-09-19 t/1800 n/John Doe p/87654321`
+Format: `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
+
+* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2030`
+
+Examples: 
+* `reserve 2 p/98765432 at/2021-12-24 2000`
+* `reserve 5 p/12345668 at/2021-02-14 1200`
 
 Note: System will reject if time slot is not available
 
