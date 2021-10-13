@@ -141,10 +141,9 @@ but not with *Role*s such as `Software` or `Software Developer`.
 * *Level of Education* `l/`
   * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
   * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-  * A *Level of Education* is considered matching only if at least 1 keyword is equal to at least 1 letter in the possible types of *Level of Education*
+  * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
   * For example:
-    * A `S` input can match with *Level of Education*s such `High School`, `Middle School`, `University`, `Bachelors` or `Masters`
-    * A `School` input can match with *Level of Education*s such as `High School` or `Middle School`
+    * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
     * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
 
 
