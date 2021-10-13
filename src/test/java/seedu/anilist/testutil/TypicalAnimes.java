@@ -19,7 +19,7 @@ public class TypicalAnimes {
 
     public static final Anime ALICE = new AnimeBuilder()
             .withName("Alice Pauline")
-            .withEpisode("2")
+            .withEpisode("0")
             .withTags("friends")
             .build();
     public static final Anime BENSON = new AnimeBuilder()

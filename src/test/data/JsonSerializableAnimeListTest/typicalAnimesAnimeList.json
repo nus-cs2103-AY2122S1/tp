@@ -2,7 +2,7 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "anime" : [ {
     "name" : "Alice Pauline",
-    "episode" : "2",
+    "episode" : "0",
     "status" : "watching",
     "tagged" : [ "friends" ]
   }, {

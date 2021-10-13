@@ -2,7 +2,13 @@ package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.*;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
