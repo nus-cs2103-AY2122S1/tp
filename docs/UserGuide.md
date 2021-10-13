@@ -235,7 +235,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Delete lesson** | `delete-l INDEX`<br> e.g. `delete-l 1`
-**Enroll** | `enroll INDEX l/LESSONCODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
+**Enroll** | `enroll INDEX l/LESSON_CODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
 **Unenroll** | `unenroll INDEX l/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
