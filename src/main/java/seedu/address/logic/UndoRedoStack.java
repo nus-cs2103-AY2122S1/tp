@@ -24,6 +24,7 @@ public class UndoRedoStack {
 
     /**
      * Adds Command to Undo Stack if command is undoable.
+     *
      * @param command Command executed.
      */
     public void pushUndoableCommand(Command command) {
