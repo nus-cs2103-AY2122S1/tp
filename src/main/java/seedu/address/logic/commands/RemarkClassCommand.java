@@ -50,8 +50,8 @@ public class RemarkClassCommand extends Command {
         }
 
         TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
-        TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(), classToEdit.getTimeslot(), classToEdit.getStudentList(),
-                remark);
+        TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
+                classToEdit.getTimeslot(), classToEdit.getStudentList(), remark);
 
         model.setTuition(classToEdit, editedClass);
         model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
