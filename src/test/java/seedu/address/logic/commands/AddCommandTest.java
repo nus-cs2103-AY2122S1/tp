@@ -137,7 +137,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Person deletePersonByFields(ArrayList<Predicate> predicates) {
+        public Person deletePersonByFields(List<Predicate<Person>> predicates) {
             throw new AssertionError("This method should not be called.");
         }
 

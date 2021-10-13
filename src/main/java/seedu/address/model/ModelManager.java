@@ -107,7 +107,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Person deletePersonByFields(ArrayList<Predicate> predicates) {
+    public Person deletePersonByFields(List<Predicate<Person>> predicates) {
         return addressBook.removePersonByFields(predicates);
     }
 
