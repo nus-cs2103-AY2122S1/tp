@@ -20,11 +20,11 @@ public abstract class Command {
     public abstract CommandResult execute() throws CommandException;
 
     /**
-     * Set the required components that are required for commands to be executed
-     * If different dependencies are required, override method
+     * Sets the required components that are required for commands to be executed.
+     * This method may be overridden to set the different dependencies required.
      *
-     * @param model for command to execute on
-     * @param undoRedoStack access for undoable commands
+     * @param model Model for commands to be executed on.
+     * @param undoRedoStack UndoRedoStack that stores the accessible undoable commands.
      */
     public void setDependencies(Model model, UndoRedoStack undoRedoStack) {
         this.model = model;
