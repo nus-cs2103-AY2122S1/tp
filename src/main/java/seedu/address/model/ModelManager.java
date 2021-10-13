@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
 
@@ -132,6 +133,12 @@ public class ModelManager implements Model {
     public TuitionClass getClassById(Integer id) {
         requireAllNonNull(id);
         return addressBook.getClassById(id);
+    }
+
+    @Override
+    public void sort(SortCommandParser.Order order) {
+        requireAllNonNull(order);
+        addressBook.sort(order);
     }
 
     //=========== Filtered Person List Accessors =============================================================
