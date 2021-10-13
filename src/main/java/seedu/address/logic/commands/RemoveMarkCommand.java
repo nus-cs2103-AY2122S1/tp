@@ -63,6 +63,9 @@ public class RemoveMarkCommand extends Command {
         }
         FilteredList<Person> toEdit = model.getUnFilteredPersonList()
                 .filtered(this.predicate);
+        if (toEdit.size() == 0) {
+            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+        }
         for (Person p : toEdit) {
             model.setPerson(p, checkPerson(p));
         }
@@ -100,4 +103,14 @@ public class RemoveMarkCommand extends Command {
         return result;
 
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj != null)
+                && (obj instanceof RemoveMarkCommand)
+                && ((RemoveMarkCommand) obj).index == index
+                && ((RemoveMarkCommand) obj).predicate.equals(predicate)
+                && ((RemoveMarkCommand) obj).period.equals(period);
+    }
+
 }
