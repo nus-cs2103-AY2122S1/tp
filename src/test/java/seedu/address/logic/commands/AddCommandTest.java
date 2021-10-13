@@ -95,7 +95,8 @@ public class AddCommandTest {
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
-        private final String MESSAGE_UNEXPECTED_METHOD_CALL = "This method should not be called.";
+        private static final String MESSAGE_UNEXPECTED_METHOD_CALL = "This method should not be called.";
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
