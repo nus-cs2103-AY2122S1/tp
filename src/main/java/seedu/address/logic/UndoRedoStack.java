@@ -8,7 +8,7 @@ import seedu.address.logic.commands.UndoableCommand;
 
 /**
  * Keeps track of Commands that have been called (undoStack)
- * and Commands that have been undone (redoStack)
+ * and Commands that have been undone (redoStack).
  */
 public class UndoRedoStack {
     private Stack<UndoableCommand> undoStack;
