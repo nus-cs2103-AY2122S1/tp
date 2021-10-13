@@ -21,9 +21,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,14 +48,14 @@ public class FindCommandTest {
         PersonMatchesKeywordsPredicate secondPredicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName(VALID_NAME_BOB).build();
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstCommand = prepareFindCommand(firstPredicate);
+        FindCommand findSecondCommand = prepareFindCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = prepareFindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -72,7 +74,7 @@ public class FindCommandTest {
                 .withName(KEYWORD_MATCHING_MEIER).build();
         List<Person> expectedPersons = Arrays.asList(BENSON, DANIEL);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedPersons, model.getFilteredPersonList());
@@ -85,7 +87,7 @@ public class FindCommandTest {
                 .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FORGETFUL).build();
         List<Person> expectedPersons = Arrays.asList(ALICE, BENSON);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 2, predicate);
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedPersons, model.getFilteredPersonList());
@@ -94,7 +96,7 @@ public class FindCommandTest {
         predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress(KEYWORD_MATCHING_AVE)
                 .withTags(KEYWORD_MATCHING_FORGETFUL).withCondition(FindCondition.ALL).build();
         expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
-        command = new FindCommand(predicate);
+        command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedPersons, model.getFilteredPersonList());
@@ -108,7 +110,7 @@ public class FindCommandTest {
                 .withCondition(FindCondition.ANY).build();
         List<Person> expectedPersons = Arrays.asList(ALICE, BENSON, DANIEL, ELLE);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL, ELLE), model.getFilteredPersonList());
@@ -122,10 +124,19 @@ public class FindCommandTest {
                 .withCondition(FindCondition.NONE).build();
         List<Person> expectedPersons = Arrays.asList(CARL, FIONA, GEORGE);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = prepareFindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(expectedPersons, model.getFilteredPersonList());
+    }
+
+    /**
+     * Generates a {@code FindCommand} with parameters {@code predicate}.
+     */
+    private FindCommand prepareFindCommand(Predicate<Person> predicate) {
+        FindCommand findCommand = new FindCommand(predicate);
+        findCommand.setDependencies(model, new UndoRedoStack());
+        return findCommand;
     }
 
     @Test

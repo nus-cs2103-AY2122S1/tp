@@ -12,7 +12,7 @@ public class TagCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Displayed all tags!";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute() throws CommandException {
         requireNonNull(model);
         model.getFilteredTagList();
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);

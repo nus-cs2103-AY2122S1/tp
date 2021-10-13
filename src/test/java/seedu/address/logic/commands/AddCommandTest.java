@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -37,7 +39,7 @@ public class AddCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = prepareAddCommandForPerson(validPerson, modelStub).execute();
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
@@ -46,10 +48,10 @@ public class AddCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () ->
+                prepareAddCommandForPerson(validPerson, modelStub).execute());
     }
 
     @Test
@@ -77,82 +79,103 @@ public class AddCommandTest {
     }
 
     /**
+     * Generates an Add Command with respective dependencies set.
+     * UndoRedoStack not tested under Add Command thus UndoRedoStack is created within the method.
+     *
+     * @param person Person to be added to AddressBook.
+     * @param model Model which the command is executing on.
+     * @return AddCommand with the dependencies and person to be added.
+     */
+    private AddCommand prepareAddCommandForPerson(Person person, Model model) {
+        AddCommand addCommandForPerson = new AddCommand(person);
+        addCommandForPerson.setDependencies(model, new UndoRedoStack());
+        return addCommandForPerson;
+    }
+
+    /**
      * A default model stub that have all of the methods failing.
      */
     private class ModelStub implements Model {
+        private static final String MESSAGE_UNEXPECTED_METHOD_CALL = "This method should not be called.";
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public void addPersonAtIndex(Person person, Index index) {
+            throw new AssertionError((MESSAGE_UNEXPECTED_METHOD_CALL));
         }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public boolean hasClashingLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override

@@ -114,7 +114,7 @@ A student can have any number of tags (including 0).
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the add command:**<br>
+**:information_source: Notes about the `add` command:**<br>
 
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
@@ -134,7 +134,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit command:**<br>
+**:information_source: Notes about the `edit` command:**<br>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
@@ -177,7 +177,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Viewing a student's details: `view`
 
@@ -207,7 +207,7 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the find command:**<br>
+**:information_source: Notes about the `find` command:**<br>
 
 * You can find students by all the fields except remark and fee.
 
@@ -269,24 +269,32 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 **Lesson fields:**
 * Date of lesson `dd MMM yyyy`
   *  e.g. `02 Jan 2018`
-* Start time `HH:mm`
-* End time `HH:mm`
+* Time range `HHmm-HHmm`
 * Subject
 * Homework
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: The type of lesson will be inferred from the presence of the "recurring/" prefix.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ladd` command:**<br>
+
+* The type of lesson will be inferred from the presence of the `recurring/` prefix.
+  
+* The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
+
 </div>
 
 Examples:
 
-* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
-adds the lesson to the 1st student in TAB.
+* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
+  adds the recurring lesson to the 1st student in the displayed student list.
 
-* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
-  (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
+* `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+  adds the makeup lesson to the 4th student in the displayed student list.
+
+* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1`
+  adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
 
@@ -294,14 +302,24 @@ Deletes the specified lesson from the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ldelete` command:**<br>
+
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+  
 * The index refers to the index number shown in the displayed student list.
-* The lesson index refers to the index number shown in the lesson list of the student. 
+  
+* The lesson index refers to the index number shown in the lesson list of the student.
+  
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
+
+</div>
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
+  
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
 ### Viewing the Schedule
@@ -385,7 +403,7 @@ Action | Format, Examples
 **List Students** | `list`
 **Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
-**Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`<br><br> e.g. `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math`
+**Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **View Schedule** | `schedule`
 **Clear** |`clear`
