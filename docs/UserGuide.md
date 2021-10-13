@@ -113,6 +113,18 @@ Format: `remarkclass [INDEX_CLASS] r/REMARK`
 Examples:
 - `remarkclass 2 r/Math homework due Friday`
 
+#### Sorting tuition classes: `sort`
+Permanently sorts tuition class list according to time or alphabetical order.
+If the tutor does not exit TutAssistor, the list will be auto-sorted when adding and editing classes after the tutor sorted the list.
+
+Format: `sort [o/ORDER]`
+
+Examples: (examples below are all possible usages of `sort`)
+- `sort` (without order being specified, TutAssistor will sort the list by time)
+- `sort o/asc`
+- `sort o/desc`
+- `sort o/time`
+
 ### Exiting the app: `exit`
 Exits the program.<br>
 Format: `exit`
@@ -133,6 +145,7 @@ Action | Format
 ***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 ***Add Remarks to Student*** | `remark [INDEX_STUDENT] r/REMARK`
 ***Add Remarks to Class*** | `remarkclass [INDEX_CLASS] r/REMARK`
+***Sort Tuition Class*** | `sort [o/ORDER]`
 ***Exit*** | `exit`
 
 
