@@ -67,6 +67,24 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Creates a {@code PersonCode} with the headers desired.
+     *
+     * This should only be used in PersonListPanel as the first PersonCard for the headers.
+     */
+    public PersonCard() {
+        super(FXML);
+        this.staff = null;
+        name.setText("Name");
+        id.setText("No.");
+        phone.setText("Phone");
+        address.setText("Address");
+        email.setText("Email");
+        role.setText("Roles");
+        salary.setText("Salary");
+        status.setText("Status");
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
