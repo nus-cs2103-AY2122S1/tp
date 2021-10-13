@@ -133,7 +133,7 @@ public class AddToClassCommand extends Command {
         return returnValue;
     }
 
-    private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) throws CommandException {
+    private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) {
         ArrayList[] students = this.getStudent(studentList, model, tuitionClass);
         ArrayList<Person> newStudents = students[0];
         if (newStudents.size() == 0) {
