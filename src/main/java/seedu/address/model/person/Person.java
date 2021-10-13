@@ -120,7 +120,7 @@ public class Person {
         requireNonNull(period);
         Set<Period> periods = new HashSet<>();
         List<Period> toRemove = getAbsentDates().stream()
-                .filter(p -> period.contains(period))
+                .filter(p -> period.contains(p))
                 .collect(Collectors.toList());
         periods.addAll(getAbsentDates());
         periods.removeAll(toRemove);
