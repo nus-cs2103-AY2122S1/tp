@@ -23,9 +23,9 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * However, the removal of a lesson uses Person#equals(Object) to ensure that the person with exactly the same fields
  * will be removed.
  *
- * @see Lesson#isClashing(Lesson)
- *
  * @author Chesterwongz
+ *
+ * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
     private final Calendar calendar = new Calendar();
@@ -66,7 +66,7 @@ public class CalendarEntryList {
     }
 
     /**
-     * Returns true if the entryList contains a Lesson that clashes with the specified Lessons.
+     * Returns true if the specified lesson clashes with existing lessons.
      *
      * @param toCheck The lesson to check.
      * @return True if there is a clash in lesson timing, false otherwise.
@@ -76,6 +76,12 @@ public class CalendarEntryList {
         return entryList.stream().anyMatch(entry-> entry.getUserObject().isClashing(toCheck));
     }
 
+    /**
+     * Returns true if the entryList contains a Lesson that clashes with the specified Lessons.
+     *
+     * @param toCheck The lesson to check.
+     * @return True if there is a clash in lesson timing, false otherwise.
+     */
     public boolean hasClashes(Iterable<Lesson> toCheck) {
         requireAllNonNull(toCheck);
         for (Lesson lesson : toCheck) {
