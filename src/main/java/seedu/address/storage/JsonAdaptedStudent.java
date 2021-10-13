@@ -15,6 +15,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +27,7 @@ class JsonAdaptedStudent {
 
     private final String name;
     private final String email;
+    private final String studentNumber;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final ArrayList<Integer> attendance = new ArrayList<>();
     private Participation participation;
@@ -36,10 +38,12 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("email") String email,
+                              @JsonProperty("studentNumber") String studentNumber,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("attendance") ArrayList<Integer> attendance) {
         this.name = name;
         this.email = email;
+        this.studentNumber = studentNumber;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -52,6 +56,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
+        studentNumber = source.getStudentNumber().toString();
         participation = source.getParticipation();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -89,9 +94,18 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
+        if (studentNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentNumber.class.getSimpleName()));
+        }
+        if (!StudentNumber.isValidNumber(studentNumber)) {
+            throw new IllegalValueException(StudentNumber.MESSAGE_CONSTRAINTS);
+        }
+        final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         final Attendance modelAttendance = new Attendance(studentAttendance);
 
-        return new Student(modelName, modelEmail, modelTags, modelAttendance);
+        return new Student(modelName, modelEmail, modelStudentNumber, modelTags, modelAttendance);
     }
 }

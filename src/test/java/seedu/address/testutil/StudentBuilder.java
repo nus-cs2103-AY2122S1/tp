@@ -8,6 +8,7 @@ import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -18,9 +19,11 @@ public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_STUDENTNUMBER = "A0123456B";
 
     private Name name;
     private Email email;
+    private StudentNumber studentNumber;
     private Set<Tag> tags;
     private Attendance attendance;
 
@@ -30,6 +33,7 @@ public class StudentBuilder {
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
+        studentNumber = new StudentNumber(DEFAULT_STUDENTNUMBER);
         tags = new HashSet<>();
         attendance = new Attendance();
     }
@@ -40,6 +44,7 @@ public class StudentBuilder {
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
         email = studentToCopy.getEmail();
+        studentNumber = studentToCopy.getStudentNumber();
         tags = new HashSet<>(studentToCopy.getTags());
         attendance = new Attendance(new ArrayList<>(studentToCopy.getAttendance().attendanceList));
     }
@@ -61,6 +66,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code StudentNumber} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withStudentNumber(String studentNumber) {
+        this.studentNumber = new StudentNumber(studentNumber);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
      */
     public StudentBuilder withTags(String ... tags) {
@@ -77,7 +90,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, email, tags, attendance);
+        return new Student(name, email, studentNumber, tags, attendance);
     }
 
 }

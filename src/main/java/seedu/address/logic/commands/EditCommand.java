@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -20,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,7 +38,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_STUDENTNUMBER + "A0000000B";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -87,9 +90,11 @@ public class EditCommand extends Command {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
+                .orElse(studentToEdit.getStudentNumber());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedEmail, updatedTags);
+        return new Student(updatedName, updatedEmail, updatedStudentNumber, updatedTags);
     }
 
     @Override
@@ -117,6 +122,7 @@ public class EditCommand extends Command {
     public static class EditStudentDescriptor {
         private Name name;
         private Email email;
+        private StudentNumber studentNumber;
         private Set<Tag> tags;
 
         public EditStudentDescriptor() {}
@@ -128,6 +134,7 @@ public class EditCommand extends Command {
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
             setEmail(toCopy.email);
+            setStudentNumber(toCopy.studentNumber);
             setTags(toCopy.tags);
         }
 
@@ -135,7 +142,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, tags);
+            return CollectionUtil.isAnyNonNull(name, email, studentNumber, tags);
         }
 
         public void setName(Name name) {
@@ -152,6 +159,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setStudentNumber(StudentNumber studentNumber) {
+            this.studentNumber = studentNumber;
+        }
+
+        public Optional<StudentNumber> getStudentNumber() {
+            return Optional.ofNullable(studentNumber);
         }
 
 
@@ -189,6 +204,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getEmail().equals(e.getEmail())
+                    && getStudentNumber().equals(e.getStudentNumber())
                     && getTags().equals(e.getTags());
         }
     }
