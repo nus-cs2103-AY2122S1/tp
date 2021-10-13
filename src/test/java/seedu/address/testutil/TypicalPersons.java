@@ -43,7 +43,7 @@ public class TypicalPersons {
             .withReview("great").withTags("friends").withRating("5").build();
     public static final Person ELLE = new PersonBuilder().withCategoryCode("att").withName("Elle Meyer")
             .withReview("great").withPhone("9482224")
-            .withEmail("werner@example.com").withAddress("michigan ave").withRating("5").build();
+            .withEmail("werner@example.com").withAddress("michegan ave").withRating("5").build();
     public static final Person FIONA = new PersonBuilder().withCategoryCode("com").withName("Fiona Kunz")
             .withReview("great").withPhone("9482427").withEmail("lydia@example.com")
             .withAddress("little tokyo").withRating("5")
