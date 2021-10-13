@@ -162,7 +162,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                             }
                         }
                     }
-                    
                     predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
                 }
             }
