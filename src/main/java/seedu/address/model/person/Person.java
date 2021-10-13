@@ -124,6 +124,8 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Category: ")
+                .append(getCategoryCode())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
