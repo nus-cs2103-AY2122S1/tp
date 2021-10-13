@@ -152,7 +152,7 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns true if {@code members} contains only unique members.
+     * Returns true if {@code tasks} contains only unique tasks.
      */
     private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
