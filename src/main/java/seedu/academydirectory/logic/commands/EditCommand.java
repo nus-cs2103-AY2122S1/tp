@@ -269,7 +269,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getTelegram().equals(e.getTelegram())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getAssessment().equals(e.getAssessment())
+                    && getStudioRecord().equals(e.getStudioRecord());
         }
     }
 }

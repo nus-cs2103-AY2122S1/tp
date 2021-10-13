@@ -135,7 +135,8 @@ public class Student {
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTelegram().equals(getTelegram())
                 && otherStudent.getTags().equals(getTags())
-                && otherStudent.getStudioRecord().equals(getStudioRecord());
+                && otherStudent.getStudioRecord().equals(getStudioRecord())
+                && otherStudent.getAssessment().equals(getAssessment());
     }
 
     @Override
