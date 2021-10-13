@@ -9,51 +9,49 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Rachel Cheah
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rachelcheah.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/RachelCheah)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Team Lead
-* Responsibilities: UI
+* Responsibilities: Scheduling and tracking project progress
 
-### Johnny Doe
+### Ong Cheng Seong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chengseong.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: Data
-
-### Jean Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/chengseong)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsiblities : Integration and Code Quality
 
-### James Doe
+### Jin Mei Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/meixuanjin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/meixuanjin)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: Deliverables and Deadlines
+
+### Siddharth Srivastava
+
+<img src="images/siddharth-sid.png" width="200px">
+
+[[github](https://github.com/siddharth-sid)]
+
+* Role: Developer
+* Responsibilities: Testing
+
+### Chua Kai Jun
+
+
+<img src="images/nujiak.png" width="200px">
+
+[[github](http://github.com/nujiak)]
+
+* Role: Developer
+* Responsibilities: Documentation

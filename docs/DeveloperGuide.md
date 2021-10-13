@@ -257,7 +257,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* instructor from cs2103
+* has a need to manage a significant number of contacts of students and tutors
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -270,14 +271,22 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                            | So that I can…​                                                                  |
+| -------- | ------------------------------------------ | ------------------------------                | ----------------------------------------------------------------------              |
+| `* * *`  | potential user                             | find a user guide for the app                 | have an idea of the features provided by the app                                    |
+| `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
+| `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
+| `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using PB3 without manually inputting every piece of information              |
+| `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
+| `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
+| `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
+| `* * *`  | beginner user                              | exit the program when I am done               | I don't have to keep it running all the time                                        |
+| `* * *`  | intermediate user                          | search a person with any specific detail      | locate details of persons without having to go through the entire list              |
+| `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
+| `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
+| `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
+
 
 *{More to be added}*
 
@@ -289,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
+1.  User requests to list/search persons
 2.  AddressBook shows a list of persons
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
@@ -308,20 +317,118 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+    
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. AddressBook checks if input is valid
+3. AddressBook adds the persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Arguments that should be there is not there
+  * 2a1. Address Book rejects the command and shows an error message.
+
+    Use case ends.
+
+
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  AddressBook shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  AddressBook edits the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The attribute to be edited does not exist.
+  * 3b1. AddressBook shows an error message.
+  * Use case ends
+  * 
+
+
+**Use case: Export contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  AddressBook shows a list of persons
+3.  User requests to export the list
+4.  AddressBook exports list to JSON file
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The file directory is invalid
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Import existing contacts**
+
+**MSS**
+
+1. User requests to import existing contacts from JSON file.
+2. AddressBook checks if file is valid format 
+3. AddressBook shows a list of persons
+4. User decides to import (or not)
+5. AddressBook imports if user selects yes
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The file is in invalid format/does not exist
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should be usable by a novice who has never used any similar application.
+5. The project is expected to adhere to a schedule that delivers a new version every 2 weeks.
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: A single contact in the address book. An individual can be represented by multiple Persons if they are added multiple times.
+* **Tag**: A text string associated with a person. A person can have multiple tags, and a tag can be added to multiple persons.
 
 --------------------------------------------------------------------------------------------------------------------
 
