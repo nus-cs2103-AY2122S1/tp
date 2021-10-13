@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_PARENT_EMAIL + "PARENT_EMAIL] "
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
-            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LVL] "
+            + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
             + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
