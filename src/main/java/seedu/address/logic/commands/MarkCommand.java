@@ -79,8 +79,9 @@ public class MarkCommand extends Command {
             throw new CommandException(MESSAGE_USAGE);
         }
         int total = toModify.size();
+
         for (Person p : toModify) {
-            p.mark(period);
+            model.setPerson(p, p.mark(period));
         }
         List<Name> names = toModify.stream()
                 .map(staff -> staff.getName())

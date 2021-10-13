@@ -33,8 +33,8 @@ public class Person {
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
+    private final Set<Period> absentDates = new HashSet<>();
 
-    private Set<Period> absentDates = new HashSet<>();
     private Schedule schedule;
 
     /**
@@ -101,34 +101,32 @@ public class Person {
      * Marks this {@code period} when the {@code Person} was not working.
      */
     public Person mark(Period period) {
-        this.absentDates.add(period);
-        return this;
+        Set<Period> periods = new HashSet<>();
+        periods.addAll(this.getAbsentDates());
+        periods.add(period);
+        return new Person(name, phone, email, address,
+                role, salary, status, tags, periods);
+
     }
 
 
     /**
      * Removes the marking of {@code period} to mark that the person was working in
-     * this period.
+     * this period. The input period must contain the period to remove.
+     *
+     * @return The resulting person from marking that the person was working.
      */
-    public boolean unMark(Period period) {
+    public Person unMark(Period period) {
         requireNonNull(period);
+        Set<Period> periods = new HashSet<>();
         List<Period> toRemove = getAbsentDates().stream()
                 .filter(p -> period.contains(period))
                 .collect(Collectors.toList());
-        this.absentDates.removeAll(toRemove);
-        return toRemove.size() != 0;
+        periods.addAll(absentDates);
+        periods.removeAll(toRemove);
+        return new Person(name, phone, email, address,
+                role, salary, status, tags, periods);
     }
-
-    //tests if period1 contains period2 or period2 contains period1
-    private static boolean contained(Period period1, Period period2) {
-        requireAllNonNull(period1, period2);
-        return period1.contains(period2)
-                || period2.contains(period1);
-    }
-
-
-
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -229,4 +227,7 @@ public class Person {
         }
         return builder.toString();
     }
+
+
+
 }

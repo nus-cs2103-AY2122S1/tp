@@ -63,22 +63,38 @@ public class RemoveMarkCommand extends Command {
         FilteredList<Person> toEdit = model.getUnFilteredPersonList()
                 .filtered(this.predicate);
         for (Person p : toEdit) {
-            checkPerson(p);
+            model.setPerson(p, checkPerson(p));
         }
         return new CommandResult(String.format(STAFF_UNMARKED, toEdit));
     }
+
 
     private CommandResult executeIndex(Model model) throws CommandException {
         requireNonNull(model);
         Person toTest = model.getFilteredPersonList().get(index);
         requireNonNull(toTest);
-        checkPerson(toTest);
+        model.setPerson(toTest, checkPerson(toTest));
         return new CommandResult(String.format(STAFF_UNMARKED, toTest));
     }
 
-    private void checkPerson(Person toTest) throws CommandException {
-        if (!this.predicate.test(toTest) || !toTest.unMark(period)) { //use short circuit to control
+    /**
+     * Checks if the staff satisfies the {@code predicate} and
+     * has {@code period} to be removed from the unmark command.
+     *
+     * @throws CommandException When the staff does not satisfy the conditions.
+     */
+    private Person checkPerson(Person toTest) throws CommandException {
+        requireNonNull(toTest);
+        //ensures that the staff to unmark satisfies the predicate
+        if (!this.predicate.test(toTest)) {
             throw new CommandException(NO_STAFF_SATISFIES_QUERY);
         }
+        Person result = toTest.unMark(period);
+        //when nothing has changed
+        if (result.equals(toTest)) {
+            throw new CommandException(NO_STAFF_SATISFIES_QUERY);
+        }
+        return result;
+
     }
 }
