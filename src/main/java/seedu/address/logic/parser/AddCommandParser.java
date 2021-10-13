@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -29,14 +30,20 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT)
+        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_ID))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        String id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-        Integer count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
+        Name name = arePrefixesPresent(argMultimap, PREFIX_NAME)
+                ? ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get())
+                : new Name("dummy name");
+        String id = arePrefixesPresent(argMultimap, PREFIX_ID)
+                ? ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get())
+                : "999999";
+        Integer count = arePrefixesPresent(argMultimap, PREFIX_COUNT)
+                ? ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get())
+                : 1;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Item item = new Item(name, id, count, tagList);

@@ -124,4 +124,11 @@ public interface Model {
      * @return the Item with the same name.
      */
     Item getItemWithName(String name);
+
+    /**
+     * Gets Item with the same name.
+     * @param id The name of the item that wants to be searched
+     * @return the Item with the same name.
+     */
+    Item getItemWithId(String id);
 }

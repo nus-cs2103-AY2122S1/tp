@@ -164,6 +164,12 @@ public class ModelManager implements Model {
         return inventory.getItemWithName(name);
     }
 
+    @Override
+    public Item getItemWithId(String id) {
+        requireNonNull(id);
+        return inventory.getItemWithId(id);
+    }
+
     // ============== Order related methods ========================
 
     /**
