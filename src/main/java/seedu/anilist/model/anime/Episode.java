@@ -33,7 +33,7 @@ public class Episode {
 
     @Override
     public String toString() {
-        return String.format("Episode %d", episodeNumber);
+        return String.format("%d", episodeNumber);
     }
 
     @Override
