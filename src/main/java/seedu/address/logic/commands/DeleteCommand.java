@@ -1,17 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
+
+import java.util.Optional;
 
 /**
- * Deletes a item identified using it's displayed index from the inventory.
+ * Deletes an item identified using it's displayed index from the inventory.
  */
 public class DeleteCommand extends Command {
 
@@ -19,35 +20,74 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the item identified by the index number used in the displayed item list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: NAME "
+            + "Or " + PREFIX_ID + "ID"
+            + "[" + PREFIX_COUNT + "COUNT" + "]"
+            + "Example: " + COMMAND_WORD + "Apple Pie";
 
+    public static final String MESSAGE_ITEM_ID_NOT_FOUND = "Item name not in inventory: %1$s";
+    public static final String MESSAGE_ITEM_NAME_NOT_FOUND = "Item id not in inventory: %1$s";
     public static final String MESSAGE_DELETE_ITEM_SUCCESS = "Deleted Item: %1$s";
 
-    private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    private final Optional<Name> name;
+    private final Optional<String> id;
+    private final int count; //value == -1 if to delete all of specified item
+
+    /**
+     * @param name of the item in the filtered item list to delete
+     * @param count number of the specified item to delete (Let value = -1 if deleting all)
+     */
+    public DeleteCommand(Name name, int count) {
+        this.name = Optional.of(name);
+        this.id = Optional.empty();
+        this.count = count;
+    }
+
+    /**
+     * @param id of the item in the filtered item list to delete
+     * @param count number of the specified item to delete (Let value = -1 if deleting all)
+     */
+    public DeleteCommand(String id, int count) {
+        this.name = Optional.empty();
+        this.id = Optional.of(id);
+        this.count = count;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Item> lastShownList = model.getFilteredItemList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        if (name.isPresent() && !model.hasItem(name.get())) {
+            throw new CommandException(String.format(MESSAGE_ITEM_NAME_NOT_FOUND, name.get()));
+        } else if (id.isPresent() && !model.hasItem(id.get())) {
+            throw new CommandException(String.format(MESSAGE_ITEM_ID_NOT_FOUND, id.get()));
         }
 
-        Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteItem(itemToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));
+        Item deletedItem;
+        if (name.isPresent()) {
+            deletedItem = model.deleteItem(name.get(), count);
+        } else {
+            deletedItem = model.deleteItem(id.get(), count);
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, deletedItem));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof DeleteCommand)) {
+            return false;
+        }
+
+        DeleteCommand otherCommand = (DeleteCommand) other;
+
+        return name.equals(otherCommand.name)
+           && id.equals(otherCommand.id)
+           && count == otherCommand.count;
     }
 }
