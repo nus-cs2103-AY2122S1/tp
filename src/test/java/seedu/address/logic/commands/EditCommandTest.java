@@ -197,7 +197,7 @@ public class EditCommandTest {
     }
 
     /**
-     * Generate an {@code EditCommand} with parameter {@code index} and {@code descriptor}.
+     * Generates an {@code EditCommand} with parameter {@code index} and {@code descriptor}.
      */
     private EditCommand prepareEditCommand(Index index, EditPersonDescriptor descriptor) {
         EditCommand editCommand = new EditCommand(index, descriptor);
