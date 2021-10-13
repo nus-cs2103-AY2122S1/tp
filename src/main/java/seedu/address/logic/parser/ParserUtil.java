@@ -134,7 +134,7 @@ public class ParserUtil {
         if (status != null) {
             String trimmedStatus = status.trim();
             if (!Status.isValidStatus(trimmedStatus)) {
-                throw new ParseException(Mod.MESSAGE_CONSTRAINTS);
+                throw new ParseException(Status.MESSAGE_CONSTRAINTS);
             }
             return Status.parseStatusForFilter(trimmedStatus);
         } else {
