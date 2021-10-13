@@ -232,9 +232,9 @@ Use case ends.
 * 1a. TutAssistor detects the wrong format in the user input.
     * 1a1. TutAssitor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
-    
+
       Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
-      
+
       Use case resumes from step 2.
 
 **Use case:  UC02 - Delete Student/Tuition Class**
@@ -251,19 +251,19 @@ Use case ends.
 * 1a. TutAssistor detects the wrong format in the user input.
     * 1a1. TutAssitor reminds the tutor the right format.
     * 1a2. Tutor enters a new command.
-     
+
      Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
-     
+  
      Use case resumes from step 2.
 
 * 1b. TutAssistor does not detect existing Student/Tuition Class with names indicated by the user.
 	   * 1b1. TutAssistor alerts that the Student/Class does not exist.
   	 * 1b2. Tutor keys in new command.
-  	 
+	 
     Steps 1b1-1b2 are repeated until the Tutor keys in the existing student/class.
-    
+
     Use case resumes from step 2.
-      
+ 
 **Use Case: UC03 - Add student to a tuition class**
 
 **MSS**
@@ -278,9 +278,9 @@ Use case ends.
 
 * 3a. TutAssistor detects an error when the number of students exceeds the limit.
     * 3a1. TutAssistor displays error.
-    
+
     Use case ends.
-      
+  
 **Use Case: UC04 - Edit Student/Tuition class**
 
 **MSS**
@@ -295,9 +295,9 @@ Use case ends.
 * 1a. TutAssistor detects the wrong format in the user input.
 	   * 1a1. TutAssitor reminds the tutor the right format.
 	   * 1a2. Tutor enters a new command.
-	   
+  
     Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
-    
+
     Use case resumes from step 2.
 
 **Use Case: UC05 - Search Student/Tuition class**
@@ -315,7 +315,7 @@ Use case ends.
 
 1. Tutor keys in command to view the list of tuition classes for the week.
 2. TutAssistor displays a list of tuition classes for the week.
-      
+ 
 Use case ends.
 
 **Extensions**
@@ -323,9 +323,9 @@ Use case ends.
 * 1a. Tutor keys in an unrecognised command.
     * 1a1. TutAssistor displays an error message.
     * 1a2. Tutor keys in a new command.
-    
+ 
     Steps 1a1-1a2 are repeated until the Tutor keys in a command recognised by TutAssistor.
-    
+
     Use case resumes from step 2.
 
 
