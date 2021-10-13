@@ -8,6 +8,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
+import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
+import static seedu.address.testutil.TypicalEmployees.BOB_EMPLOYEE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -20,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -123,7 +126,8 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook =
                 new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON)
-                        .withCustomer(CUSTOMER_ALICE).withCustomer(CUSTOMER_BOB).build();
+                        .withCustomer(CUSTOMER_ALICE).withCustomer(CUSTOMER_BOB)
+                        .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -154,6 +158,11 @@ public class ModelManagerTest {
         modelManager.updateFilteredCustomerList(new CustomerNameContainsKeywordsPredicate(Arrays.asList(custkeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different filteredList for employees -> returns false
+        String[] employeeKeywords = ALICE_EMPLOYEE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(
+                Arrays.asList(employeeKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -224,19 +224,43 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Employee List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Employee} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
     public ObservableList<Employee> getFilteredEmployeeList() {
         return filteredEmployees;
     }
 
     @Override
-    public ObservableList<Reservation> getFilteredReservationList() {
-        return filteredReservations;
+    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
+        requireNonNull(predicate);
+        filteredEmployees.setPredicate(predicate);
+    }
+
+    //=========== Filtered Customer List Accessors =========================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Customer> getFilteredCustomerList() {
+        return filteredCustomers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredCustomers.setPredicate(predicate);
     }
 
     //=========== Filtered Supplier List Accessors =============================================================
@@ -256,16 +280,21 @@ public class ModelManager implements Model {
         filteredSuppliers.setPredicate(predicate);
     }
 
+    //=========== Filtered Reservation List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return filteredReservations;
+    }
+
     @Override
     public void updateFilteredReservationList(Predicate<Reservation> predicate) {
         requireNonNull(predicate);
         filteredReservations.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFilteredEmployeeList(Predicate<Employee> predicate) {
-        requireNonNull(predicate);
-        filteredEmployees.setPredicate(predicate);
     }
 
     @Override
@@ -288,22 +317,5 @@ public class ModelManager implements Model {
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredEmployees.equals(other.filteredEmployees)
                 && filteredSuppliers.equals(other.filteredSuppliers);
-    }
-
-    //=========== Filtered Customer List Accessors =========================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Customer} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Customer> getFilteredCustomerList() {
-        return filteredCustomers;
-    }
-
-    @Override
-    public void updateFilteredCustomerList(Predicate<Customer> predicate) {
-        requireNonNull(predicate);
-        filteredCustomers.setPredicate(predicate);
     }
 }

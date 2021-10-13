@@ -183,22 +183,22 @@ public class AddCommandTest {
 
         @Override
         public boolean hasReservation(Reservation reservation) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteReservation(Reservation target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addReservation(Reservation reservation) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setReservation(Reservation target, Reservation editedReservation) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -212,7 +212,7 @@ public class AddCommandTest {
         }
         @Override
         public ObservableList<Reservation> getFilteredReservationList() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -266,7 +266,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredReservationList(Predicate<Reservation> predicate) {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 
