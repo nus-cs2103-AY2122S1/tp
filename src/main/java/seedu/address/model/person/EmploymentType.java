@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+
 public class EmploymentType {
 
     public enum Type {
@@ -14,6 +16,16 @@ public class EmploymentType {
         private final String term;
         Type(String term) {
             this.term = term;
+        }
+
+        public static ArrayList<String> getTerms() {
+            ArrayList<String> terms = new ArrayList<>();
+
+            for (Type type: Type.values()) {
+                terms.add(type.term);
+            }
+
+            return terms;
         }
 
         public static String getRegex() {
@@ -29,6 +41,9 @@ public class EmploymentType {
 
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "
             + "Full time, Part time, Temporary or Internship";
+
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for keywords that one or more of the"
+            + " following employment types: Full time, Part time, Temporary or Internship start with";
 
     public final String employmentType;
 
