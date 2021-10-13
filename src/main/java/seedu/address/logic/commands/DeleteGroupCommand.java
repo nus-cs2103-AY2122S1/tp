@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,7 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Student;
 
 /**
  * Deletes a student identified using it's displayed index from the address book.
@@ -46,13 +44,6 @@ public class DeleteGroupCommand extends Command {
         }
 
         Group groupToDelete = model.getFilteredGroupList().get(0);
-
-        Set<Student> studentsToDelete = groupToDelete.getStudents();
-
-        // Delete all students associated with the group
-        for (Student student : studentsToDelete) {
-            model.deleteStudent(student);
-        }
 
         model.deleteGroup(groupToDelete);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);

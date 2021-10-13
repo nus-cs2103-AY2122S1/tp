@@ -64,6 +64,13 @@ public class Group {
     }
 
     /**
+     * Returns true if the group has no assigned students
+     */
+    public boolean hasNoStudents() {
+        return students.isEmpty();
+    }
+
+    /**
      * Returns true if both Groups have the same GroupName and list of students
      * This defines a stronger notion of equality between two groups.
      */
@@ -100,7 +107,8 @@ public class Group {
         Set<Student> students = getStudents();
         if (!students.isEmpty()) {
             builder.append("; Students: ");
-            students.forEach(student -> builder.append(student.getName()));
+            students.forEach(student -> builder.append(student.getName()).append(", "));
+            builder.delete(builder.lastIndexOf(", "), builder.length() - 1); // Remove last delimiter
         }
         return builder.toString();
     }

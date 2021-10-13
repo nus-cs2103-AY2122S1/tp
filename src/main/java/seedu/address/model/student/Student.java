@@ -48,7 +48,9 @@ public class Student {
         return group;
     }
 
-    public GroupName getGroupName() { return group.getGroupName(); }
+    public GroupName getGroupName() {
+        return group.getGroupName();
+    }
 
     /**
      * Returns true if both students have the same name.

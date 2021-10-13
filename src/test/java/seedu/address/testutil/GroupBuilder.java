@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
+
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,7 +11,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 import seedu.address.model.util.SampleDataUtil;
-
 
 /**
  * A utility class to help with building Group objects.
@@ -57,15 +59,30 @@ public class GroupBuilder {
     }
 
     /**
+     * Adds a reference of the {@code Student} that belongs to this group
+     */
+    public GroupBuilder withStudent(Student student) {
+        students.add(student);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Students} of the {@code Group} that we are building
+     * with typical students.
+     */
+    public GroupBuilder withTypicalStudents() {
+        students.addAll(getTypicalStudents());
+        return this;
+    }
+
+    /**
      * Sets the {@code Students} of the {@code Group} that we are building
      * with sample students.
      */
     public GroupBuilder withSampleStudents() {
         Student[] studentsArray = SampleDataUtil.getSampleStudents();
         HashSet<Student> students = new HashSet<>();
-        for (Student student : studentsArray) {
-            students.add(student);
-        }
+        students.addAll(Arrays.asList(studentsArray));
         this.students = students;
         return this;
     }
