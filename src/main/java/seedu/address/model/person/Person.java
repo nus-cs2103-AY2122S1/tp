@@ -61,6 +61,7 @@ public class Person implements HasUniqueId {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.assignedTaskIds.addAll(assignedTaskIds);
         this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
     }
 
