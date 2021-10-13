@@ -35,7 +35,8 @@ public class UndoRedoStack {
     }
 
     /**
-     * @return If there are commands to be undone.
+     * Returns true if there are commands to be undone.
+     * @return True if there are commands to be undone.
      */
     public boolean canUndo() {
         return !undoStack.empty();
