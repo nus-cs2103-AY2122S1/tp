@@ -22,7 +22,7 @@ public class AddClassCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Add tuition class given name, limit, sessions, timeslot, and student \n"
             + "Parameters: NAME LIMIT TIMESLOT STUDENT\n"
-            + "Example: " + COMMAND_WORD + " n/Physics l/10 c/4 ts/Mon 11:00-14:00 s/Alex Yeoh";
+            + "Example: " + COMMAND_WORD + " n/Physics l/10 ts/Mon 11:00-14:00 s/Alex Yeoh";
 
     private static final String MESSAGE_CLASS_LIMIT_EXCEEDED = "The following students are not "
             + "added due to class limit: ";
