@@ -54,7 +54,18 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withBirthday("12041990").withTags("football").build();
-
+    public static final Person HANNAH = new PersonBuilder().withName("Hannah Worst").withPhone("1234567")
+            .withEmail("hhhhannah@example.com").withAddress("12th street")
+            .withBirthday("31011990").build();
+    public static final Person HANNAH_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
+            .withName("Hannah No Birthday Worst").withPhone("12334567")
+            .withEmail("hhhhannah@example.com").withAddress("12th street").build();
+    public static final Person INDIGO = new PersonBuilder().withName("Indigo Color").withPhone("24422984")
+            .withEmail("color@rainbow.com").withAddress("big tokyo")
+            .withBirthday("11101995").build();
+    public static final Person INDIGO_NO_BIRTHDAY = PersonBuilder.ofNoBirthday()
+            .withName("Indigo No Birthday Color").withPhone("17263722")
+            .withEmail("color@rainbow.com").withAddress("big tokyo").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -64,7 +75,6 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave")
             .withBirthday("17121998").build();
 
-
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
@@ -72,9 +82,6 @@ public class TypicalPersons {
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withBirthday(VALID_BIRTHDAY_BOB).build();
-    public static final Person BOB_NO_BIRTHDAY = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -121,6 +128,18 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(
+                ALICE,
+                BENSON,
+                CARL,
+                DANIEL,
+                ELLE,
+                FIONA,
+                GEORGE,
+                HANNAH,
+                HANNAH_NO_BIRTHDAY,
+                INDIGO,
+                INDIGO_NO_BIRTHDAY
+        ));
     }
 }

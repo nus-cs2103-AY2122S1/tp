@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -74,9 +75,9 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB_NO_BIRTHDAY;
+    public static final EditPersonDescriptor DESC_BOB_NO_BIRTHDAY;
+    public static final EditPersonDescriptor DESC_AMY;
+    public static final EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -146,4 +147,23 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person between and including given
+     * {@code targetIndex} in the {@code model}'s address book.
+     */
+    public static void showPersonBetweenIndex(Model model, Index startIndex, Index endIndex) {
+        assertTrue(startIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(endIndex.getZeroBased() < model.getFilteredPersonList().size());
+
+        // Determine persons to display within and including given indexes.
+        ArrayList<Person> personsToDisplay = new ArrayList<>();
+        for (int i = startIndex.getZeroBased(); i <= endIndex.getZeroBased(); i++) {
+            Person person = model.getFilteredPersonList().get(i);
+            personsToDisplay.add(person);
+        }
+
+        model.updateFilteredPersonList(person -> personsToDisplay.contains(person));
+
+        assertEquals(endIndex.getOneBased() - startIndex.getOneBased() + 1, model.getFilteredPersonList().size());
+    }
 }

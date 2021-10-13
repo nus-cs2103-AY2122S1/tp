@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -22,7 +22,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindTagsCommand;
+import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
+import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
@@ -30,7 +31,8 @@ import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
+import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
+import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -105,9 +107,22 @@ public class AddressBookParserTest {
     public void parseCommand_findTag() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         List<Tag> tagList = keywords.stream().map(Tag::new).collect(Collectors.toList());
-        FindTagsCommand command = (FindTagsCommand) parser.parseCommand(
-                FindTagsCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindTagsCommand(new PersonTagsContainsTagsPredicate(tagList)), command);
+        FindTagCaseInsensitiveCommand command = (FindTagCaseInsensitiveCommand) parser.parseCommand(
+                FindTagCaseInsensitiveCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCaseInsensitiveCommand(new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList)),
+                command);
+    }
+
+    @Test
+    public void parseCommand_findTagC() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<Tag> tagList = keywords.stream().map(Tag::new).collect(Collectors.toList());
+        FindTagCaseSensitiveCommand command = (FindTagCaseSensitiveCommand) parser.parseCommand(
+                FindTagCaseSensitiveCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCaseSensitiveCommand(new PersonTagsContainsCaseSensitiveTagsPredicate(tagList)),
+                command);
     }
 
     @Test

@@ -17,7 +17,8 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
   * [Adding Tags : `tag`](#adding-tags--tag)
   * [Removing Tags : `untag`](#removing-tags--untag)
   * [Locating persons by name: `find`](#locating-persons-by-name-find)
-  * [Locating persons by tag: `findTag`](#locating-persons-by-tag-findtag)
+  * [Locating persons by tag (case insensitive): `findTag`](#locating-persons-by-tag-findtag)
+  * [Locating persons by tag (case sensitive): `findTagC`](#locating-persons-by-tag-findtagC)
   * [Deleting a person : `delete`](#deleting-a-person--delete)
   * [Clearing all entries : `clear`](#clearing-all-entries--clear)
   * [Exiting the program : `exit`](#exiting-the-program--exit)
@@ -211,7 +212,25 @@ Notes:
 
 **Sample Usage:**
 * `find Friend NUS`
-    * returns people tagged with both `Friend` and `NUS`
+    * returns people tagged with both `Friend` or `friend` and `NUS` or `NUS`
+
+### Locating persons by tags: `findTagC`
+
+Finds persons whose contact contain any of the given tags.
+
+#### Format:
+* `findTagC TAG [MORE_TAGS]`
+
+Notes:
+* The search is case-sensitive. e.g. `friend` will not match `Friend`
+* The order of the tags does not matter.
+* Only full tags will be matched e.g. `Friend` will not match `Friends`
+* Persons matching all tags will be returned (i.e. `AND` search).
+
+**Sample Usage:**
+* `find Friend NUS`
+  * returns people tagged with both `Friend` and `NUS`
+  * does not return people tagged with `friend` and `nus`
 
 ### Deleting a person : `delete`
 
