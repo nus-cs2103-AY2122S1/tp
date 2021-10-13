@@ -29,7 +29,7 @@ public class TaskListManager {
     //// task-level operation
 
     /**
-     * Returns ture if a given task with the same identity as task exist in the current task list.
+     * Returns true if a given task with the same identity as task exist in the current task list.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);

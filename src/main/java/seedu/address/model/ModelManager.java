@@ -189,13 +189,13 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns ture if a given {@code task} with the same identity as task
+     * Returns true if a given {@code task} with the same identity as task
      * exist in the task list of the given {@code member}.
      */
     @Override
-    public void hasTask(Member member, Task task) {
+    public boolean hasTask(Member member, Task task) {
         loadTaskList(member);
-        taskListManager.hasTask(task);
+        return taskListManager.hasTask(task);
     }
 
     /**
