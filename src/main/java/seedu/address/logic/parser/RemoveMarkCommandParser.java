@@ -32,24 +32,25 @@ public class RemoveMarkCommandParser implements Parser<RemoveMarkCommand> {
     @Override
     public RemoveMarkCommand parse(String userInput) throws ParseException {
         //created to test if there are any identifiers
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_DAY_SHIFT, PREFIX_INDEX);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_INDEX, PREFIX_DAY_SHIFT,
+                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
         //created to test if there are
         List<String> periods = argMultimap.getAllValues(PREFIX_DAY_SHIFT);
         if ((periods.size() != 1 && periods.size() != 2)) {
             throw NO_FIELD_EXCEPTION;
         }
         Period period = parsePeriod(periods);
-        argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
-        if (argMultimap.isEmpty()) {
-            throw NO_FIELD_EXCEPTION;
-        }
-        PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
 
+        PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
+        //checks for index
         if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             return new RemoveMarkCommand(predicate, index, period);
+        }
+        //checks for empty
+        if (predicate.isEmpty()) {
+            throw NO_FIELD_EXCEPTION;
         }
 
         return new RemoveMarkCommand(predicate, period);

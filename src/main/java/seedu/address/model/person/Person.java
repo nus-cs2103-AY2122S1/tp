@@ -115,7 +115,7 @@ public class Person {
         List<Period> toRemove = getAbsentDates().stream()
                 .filter(p -> period.contains(period))
                 .collect(Collectors.toList());
-        this.getAbsentDates().removeAll(toRemove);
+        this.absentDates.removeAll(toRemove);
         return toRemove.size() != 0;
     }
 
