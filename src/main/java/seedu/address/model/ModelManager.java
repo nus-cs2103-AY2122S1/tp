@@ -15,33 +15,33 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the ClassMATE data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Classmate classmate;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<TutorialClass> filteredTutorialClasses;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given classmate and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyClassmate classmate, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(classmate, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with ClassMATE: " + classmate + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.classmate = new Classmate(classmate);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        filteredTutorialClasses = new FilteredList<>(this.addressBook.getTutorialClassList());
+        filteredStudents = new FilteredList<>(this.classmate.getStudentList());
+        filteredTutorialClasses = new FilteredList<>(this.classmate.getTutorialClassList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Classmate(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -69,59 +69,59 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getClassmateFilePath() {
+        return userPrefs.getClassmateFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setClassmateFilePath(Path classmateFilePath) {
+        requireNonNull(classmateFilePath);
+        userPrefs.setClassmateFilePath(classmateFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Classmate ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setClassmate(ReadOnlyClassmate classmate) {
+        this.classmate.resetData(classmate);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyClassmate getClassmate() {
+        return classmate;
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
-        return addressBook.hasStudent(student);
+        return classmate.hasStudent(student);
     }
 
     @Override
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireAllNonNull(tutorialClass);
-        return addressBook.hasTutorialClass(tutorialClass);
+        return classmate.hasTutorialClass(tutorialClass);
     }
 
     @Override
     public void deleteStudent(Student target) {
-        addressBook.removeStudent(target);
+        classmate.removeStudent(target);
     }
 
     @Override
     public void deleteTutorialClass(TutorialClass target) {
-        addressBook.removeTutorialClass(target);
+        classmate.removeTutorialClass(target);
     }
 
     @Override
     public void addStudent(Student student) {
-        addressBook.addStudent(student);
+        classmate.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
     public void addTutorialClass(TutorialClass tutorialClass) {
-        addressBook.addTutorialClass(tutorialClass);
+        classmate.addTutorialClass(tutorialClass);
 
     }
 
@@ -129,7 +129,7 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        addressBook.setStudent(target, editedStudent);
+        classmate.setStudent(target, editedStudent);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedClassmate}
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -175,7 +175,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return classmate.equals(other.classmate)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents);
     }
