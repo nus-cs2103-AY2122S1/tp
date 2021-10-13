@@ -9,6 +9,7 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.Model;
 import safeforhall.model.ReadOnlyAddressBook;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.Person;
 
 /**
@@ -33,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Returns the user prefs' address book file path.

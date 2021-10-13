@@ -17,7 +17,7 @@ public class NameMissedDeadlinePredicate implements Predicate<Person> {
     }
 
     /**
-     * Tests if the given {@code Person} object's FET or Collection Date is due before the given date.
+     * Tests if the given {@code Person} object's FET or Collection EventDate is due before the given date.
      *
      * @return true if the person's deadline is due before the given date
      */

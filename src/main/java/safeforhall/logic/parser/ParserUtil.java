@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.Capacity;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -162,5 +166,65 @@ public class ParserUtil {
             throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
         }
         return new LastDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static EventName parseEventName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LastDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static EventDate parseEventDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!EventDate.isValidEventDate(trimmedDate)) {
+            throw new ParseException(LastDate.MESSAGE_CONSTRAINTS);
+        }
+        return new EventDate(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Venue parseVenue(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String eventName} into a {@code EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Capacity parseCapacity(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Capacity(trimmedName);
     }
 }

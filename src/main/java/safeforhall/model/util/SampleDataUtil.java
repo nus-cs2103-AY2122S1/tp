@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
+import safeforhall.model.event.*;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -48,6 +49,8 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        sampleAb.addEvent(new Event(new EventName("CCA"), new EventDate("12-01-2021"),
+                new Venue("A123"), new Capacity("3")));
         return sampleAb;
     }
 

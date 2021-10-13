@@ -28,7 +28,7 @@ public class NameNearLastDatePredicate implements Predicate<Person> {
     }
 
     /**
-     * Tests if the given {@code Person} object's FET or Collection Date is due in a week's time by adding their
+     * Tests if the given {@code Person} object's FET or Collection EventDate is due in a week's time by adding their
      * lastDate's week by 1 and comparing with the given date.
      *
      * @return true if the person's lastDate added by 1 falls within the given date or the given range of dates
