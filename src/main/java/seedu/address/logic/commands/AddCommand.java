@@ -22,7 +22,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "<student_name> "
             + PREFIX_ID + "<student_id> "
             + "[" + PREFIX_GROUP + "<group_name>]... "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "<tag>]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_ID + "E0543948 "
