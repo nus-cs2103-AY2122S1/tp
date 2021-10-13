@@ -42,6 +42,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
+    //// static operations
+
+    /**
+     * Returns a new address book with empty folders with the copied names from model
+     * @param model model to copy folder names from
+     * @return address book with copied folders
+     */
+    public static AddressBook withFolders(Model model) {
+        ReadOnlyAddressBook addressBook = model.getAddressBook();
+        ObservableList<Folder> folders = addressBook.getFolderList();
+        AddressBook newAddressBook = new AddressBook();
+        for (Folder folder : folders) {
+            newAddressBook.addFolder(new Folder(folder.getFolderName()));
+        }
+        return newAddressBook;
+    }
+
     //// list overwrite operations
 
     /**
