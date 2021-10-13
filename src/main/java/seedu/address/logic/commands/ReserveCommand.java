@@ -20,7 +20,7 @@ public class ReserveCommand extends Command {
     public static final String MESSAGE_USAGE = String.format(
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
             + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
-            + "Example: %1$s 2 %2$s98765432 %3$s24/12/2021 1930.",
+            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
             COMMAND_WORD,
             PREFIX_PHONE, PREFIX_TIME
     );
@@ -51,7 +51,7 @@ public class ReserveCommand extends Command {
 
         Reservation reservation = new Reservation(phone, numberOfPeople, time);
         if (model.hasReservation(reservation)) {
-            return new CommandResult(String.format(MESSAGE_UNSUCCESSFUL, reservation));
+            throw new CommandException(String.format(MESSAGE_UNSUCCESSFUL, reservation));
         }
         model.addReservation(reservation);
         return new CommandResult(String.format(MESSAGE_SUCCESS, reservation));

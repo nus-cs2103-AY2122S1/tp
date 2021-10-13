@@ -204,12 +204,13 @@ public class ModelManager implements Model {
     @Override
     public void addReservation(Reservation reservation) {
         addressBook.addReservation(reservation);
-
+        updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
     }
 
     @Override
     public void setReservation(Reservation target, Reservation editedReservation) {
-
+        requireAllNonNull(target, editedReservation);
+        addressBook.setReservation(target, editedReservation);
     }
 
     //=========== Filtered Person List Accessors =============================================================

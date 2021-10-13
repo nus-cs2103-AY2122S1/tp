@@ -68,6 +68,6 @@ public class Reservation {
      */
     @Override
     public String toString() {
-        return String.format("Reservation{phone=%s, numberOfPeople=%s, time=%s}", phone, numberOfPeople, dateTime);
+        return String.format("phone=%s; numberOfPeople=%s; time=%s", phone, numberOfPeople, dateTime);
     }
 }

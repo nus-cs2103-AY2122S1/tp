@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.reservation.exception.ReservationNotFoundException;
 
 /**
