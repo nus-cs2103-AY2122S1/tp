@@ -42,7 +42,7 @@ title: User Guide
 
    * **`list`** : Lists all elderly.
 
-   * **`find`**`Hans` : Find all elderly whose names contain Hans.
+   * **`find`**`n/Hans` : Find all elderly whose names contain Hans.
 
    * **`clear`** : Deletes all elderly.
 
