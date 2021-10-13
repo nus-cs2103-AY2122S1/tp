@@ -56,7 +56,9 @@ public class LastDate {
      * Adds the period of validity to the given {@code LastDate} to get the next deadline.
      */
     public LocalDate getDeadline() {
-        return LocalDate.parse(date, dateFormatter).plusWeeks(LASTDATE_DEADLINE);
+        return date.equals("")
+                ? LocalDate.now()
+                : LocalDate.parse(date, dateFormatter).plusWeeks(LASTDATE_DEADLINE);
     }
 
     @Override

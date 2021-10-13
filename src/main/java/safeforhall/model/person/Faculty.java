@@ -9,8 +9,8 @@ import static safeforhall.commons.util.AppUtil.checkArgument;
  */
 public class Faculty {
 
-    public static final String MESSAGE_CONSTRAINTS = "Faculty is a single word made up of alphabets " +
-            "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Faculty is a single word made up of alphabets "
+            + "and it should not be blank";
 
     /*
      * The first character of the faculty must not be a whitespace,
