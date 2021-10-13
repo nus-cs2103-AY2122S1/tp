@@ -75,18 +75,23 @@ public class TagCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+        requireNonNull(personToEdit);
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        Birthday updatedBirthday = personToEdit.getBirthday().orElse(null);
+        Name unchangedName = personToEdit.getName();
+        Phone unchangedPhone = personToEdit.getPhone();
+        Email unchangedEmail = personToEdit.getEmail();
+        Address unchangedAddress = personToEdit.getAddress();
+        Birthday unchangedBirthday = personToEdit.getBirthday().orElse(null);
 
+        Set<Tag> existingTags = personToEdit.getTags();
+        Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
         Set<Tag> updatedTags = new HashSet<Tag>();
-        updatedTags.addAll(personToEdit.getTags());
-        updatedTags.addAll(editPersonDescriptor.getTags().orElse(new HashSet<Tag>()));
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        updatedTags.addAll(existingTags);
+        updatedTags.addAll(addedTags);
+
+        return new Person(unchangedName, unchangedPhone, unchangedEmail, unchangedAddress,
+                updatedTags,
+                unchangedBirthday);
     }
 
     @Override
