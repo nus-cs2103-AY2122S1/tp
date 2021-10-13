@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class AddSupplierCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
     }
 
     @Test

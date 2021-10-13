@@ -3,9 +3,11 @@ package seedu.address.model.person.customer;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_ALMONDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
@@ -85,6 +87,14 @@ public class CustomerTest {
         editedAlice = new CustomerBuilder(CUSTOMER_ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(CUSTOMER_ALICE.equals(editedAlice));
 
+        // different allergies -> returns false
+        editedAlice = new CustomerBuilder(CUSTOMER_ALICE).withAllergies(VALID_ALLERGY_ALMONDS).build();
+        assertFalse(CUSTOMER_ALICE.equals(editedAlice));
+
+        // different special requests -> returns false
+        editedAlice = new CustomerBuilder(CUSTOMER_ALICE)
+                .withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND).build();
+        assertFalse(CUSTOMER_ALICE.equals(editedAlice));
         // different tags -> returns false
         editedAlice = new CustomerBuilder(CUSTOMER_ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(CUSTOMER_ALICE.equals(editedAlice));

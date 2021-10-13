@@ -2,6 +2,8 @@ package seedu.address.model.person.supplier;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_DAILY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_MONTHLY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +38,28 @@ public class DeliveryDetailsTest {
         assertTrue(DeliveryDetails.isValidDeliveryDetail("2nd march 6pm")); // alphanumeric characters
         assertTrue(DeliveryDetails.isValidDeliveryDetail("October 27th 8am")); // with capital letters
         assertTrue(DeliveryDetails.isValidDeliveryDetail("27th October at around 2pm to 4 pm")); // long names
+    }
+
+    @Test
+    public void equals() {
+        DeliveryDetails deliveryDetails = new DeliveryDetails(VALID_DELIVERY_DETAIL_DAILY);
+
+        // same values -> returns true
+        DeliveryDetails toCopy = new DeliveryDetails(VALID_DELIVERY_DETAIL_DAILY);
+        assertTrue(deliveryDetails.equals(toCopy));
+
+        // same object -> returns true
+        assertTrue(deliveryDetails.equals(deliveryDetails));
+
+        // null -> returns false
+        assertFalse(deliveryDetails.equals(null));
+
+        // different type -> returns false
+        assertFalse(deliveryDetails.equals(5));
+
+        // different DeliveryDetails -> returns false
+        DeliveryDetails different = new DeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY);
+        assertFalse(deliveryDetails.equals(different));
+
     }
 }

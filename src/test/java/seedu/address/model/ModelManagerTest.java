@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CUSTOMERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SUPPLIERS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
@@ -14,6 +16,8 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 import static seedu.address.testutil.TypicalReservation.BENSON_RESERVATION;
+import static seedu.address.testutil.TypicalSuppliers.AMY;
+import static seedu.address.testutil.TypicalSuppliers.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +29,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
 import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -102,6 +107,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasSupplier_nullSupplier_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasSupplier(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
@@ -119,6 +129,11 @@ public class ModelManagerTest {
     @Test
     public void hasReservation_reservationNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasReservation(ALICE_RESERVATION));
+    }
+
+    @Test
+    public void hasSupplier_supplierNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasSupplier(AMY));
     }
 
     @Test
@@ -146,6 +161,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasSupplier_supplierInAddressBook_returnsTrue() {
+        modelManager.addSupplier(AMY);
+        assertTrue(modelManager.hasSupplier(AMY));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -169,13 +190,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager
+                .getFilteredSupplierList().remove(0));
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook =
                 new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON)
                         .withCustomer(CUSTOMER_ALICE).withCustomer(CUSTOMER_BOB)
                         .withEmployee(ALICE_EMPLOYEE).withEmployee(BOB_EMPLOYEE)
                         .withReservation(ALICE_RESERVATION).withReservation(BENSON_RESERVATION)
+                        .withSupplier(AMY).withSupplier(BOB)
                         .build();
+
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -212,6 +241,12 @@ public class ModelManagerTest {
                 Arrays.asList(employeeKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different filteredList for suppliers -> returns false
+        String[] supplierKeywords = AMY.getName().fullName.split("\\s+");
+        modelManager.updateFilteredSupplierList(
+                new SupplierNameContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // different filteredList for reservations -> returns false
         modelManager.updateFilteredReservationList(res -> res.equals(ALICE_RESERVATION));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
@@ -219,8 +254,11 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-
         modelManager.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
+
+        modelManager.updateFilteredEmployeeList(PREDICATE_SHOW_ALL_EMPLOYEES);
+
+        modelManager.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommand
 import static seedu.address.logic.commands.SupplierCommandTestUtil.showSupplierAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_SUPPLIER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_SUPPLIER;
-import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +34,7 @@ import seedu.address.testutil.SupplierBuilder;
  */
 public class EditSupplierCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookSuppliers(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

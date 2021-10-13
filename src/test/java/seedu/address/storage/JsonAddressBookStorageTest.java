@@ -11,6 +11,10 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalSuppliers.CHETWIN;
+import static seedu.address.testutil.TypicalSuppliers.HOON_SUPPLIER;
+import static seedu.address.testutil.TypicalSuppliers.IDA_SUPPLIER;
+import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBookSuppliers;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -65,6 +69,11 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
+    public void readAddressBook_invalidSupplierAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidSupplierAddressBook.json"));
+    }
+
+    @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
@@ -75,10 +84,16 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
+    public void readAddressBook_invalidAndValidSupplierAddressBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidSupplierAddressBook.json"));
+    }
+
+    @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
         AddressBook original = getTypicalAddressBook();
         AddressBook originalEmployee = getTypicalAddressBookEmployees();
+        AddressBook originalSuppliers = getTypicalAddressBookSuppliers();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
@@ -100,6 +115,14 @@ public class JsonAddressBookStorageTest {
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(originalEmployee, new AddressBook(readBack));
 
+
+        // Modify data, overwrite exiting file, and read back Suppliers test
+        originalSuppliers.addSupplier(HOON_SUPPLIER);
+        originalSuppliers.removeSupplier(CHETWIN);
+        jsonAddressBookStorage.saveAddressBook(originalSuppliers, filePath);
+        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        assertEquals(originalSuppliers, new AddressBook(readBack));
+
         // Save and read without specifying file path
         original.addPerson(IDA);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
@@ -112,6 +135,11 @@ public class JsonAddressBookStorageTest {
         readBack = jsonAddressBookStorage.readAddressBook().get();
         assertEquals(originalEmployee, new AddressBook(readBack));
 
+        // Save and read without specifying file path Employees test
+        originalSuppliers.addSupplier(IDA_SUPPLIER);
+        jsonAddressBookStorage.saveAddressBook(originalSuppliers);
+        readBack = jsonAddressBookStorage.readAddressBook().get();
+        assertEquals(originalSuppliers, new AddressBook(readBack));
     }
 
     @Test

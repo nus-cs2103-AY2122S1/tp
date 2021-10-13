@@ -5,6 +5,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.person.supplier.Supplier;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -50,6 +51,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withReservation(Reservation reservation) {
         addressBook.addReservation(reservation);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Supplier} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withSupplier(Supplier supplier) {
+        addressBook.addSupplier(supplier);
         return this;
     }
 
