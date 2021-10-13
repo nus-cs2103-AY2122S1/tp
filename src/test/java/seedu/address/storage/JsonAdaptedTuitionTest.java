@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tuition.Timeslot;
-
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
 
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tuition.Timeslot;
 
 public class JsonAdaptedTuitionTest {
 
