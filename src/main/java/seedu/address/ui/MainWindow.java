@@ -217,6 +217,21 @@ public class MainWindow extends UiPart<Stage> {
         case SHOW_STUDENT_PAGE:
             showStudentPage();
             break;
+        case SET_TUITIONS_DEFAULT:
+            updateTuitionListTitle(false);
+            break;
+        case SET_STUDENTS_DEFAULT:
+            updateStudentListTitle(false);
+            break;
+        case SET_TUITIONS_FILTERED:
+            updateTuitionListTitle(true);
+            break;
+        case SET_STUDENTS_FILTERED:
+            updateStudentListTitle(true);
+            break;
+        case NONE:
+            updateInfoPage(null);
+            break;
         default:
             break;
         }
@@ -236,6 +251,17 @@ public class MainWindow extends UiPart<Stage> {
      */
     private void updateInfoPage(InfoPage infoPage) {
         infoPagePlaceholder.getChildren().clear();
-        infoPagePlaceholder.getChildren().add(infoPage.getRoot());
+        if (infoPage != null) {
+            infoPagePlaceholder.getChildren().add(infoPage.getRoot());
+        }
     }
+
+    private void updateStudentListTitle(boolean bool) {
+        personListPanel.setFiltered(bool);
+    }
+
+    private void updateTuitionListTitle(boolean bool) {
+        tuitionListPanel.setFiltered(bool);
+    }
+
 }
