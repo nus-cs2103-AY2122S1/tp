@@ -288,9 +288,12 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT
 Examples:
 
 * `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
-  adds the recurring lesson to the 1st student in TAB.
+  adds the recurring lesson to the 1st student in the displayed student list.
 
-* `find n/john` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+* `list` followed by `ladd 1 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+  adds the makeup lesson to the 1st student in the displayed student list.
+
+* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Exercise 3 hw/Lab report`
   adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
@@ -313,9 +316,9 @@ Format: `ldelete INDEX LESSON_INDEX`
 
 </div>
 
-
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
+  
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
