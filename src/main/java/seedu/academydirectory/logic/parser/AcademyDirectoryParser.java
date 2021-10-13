@@ -21,6 +21,7 @@ import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
 import seedu.academydirectory.logic.commands.RetrieveCommand;
+import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +85,9 @@ public class AcademyDirectoryParser {
 
         case GradeCommand.COMMAND_WORD:
             return new GradeCommandParser().parse(arguments);
+
+        case ShowCommand.COMMAND_WORD:
+            return new ShowCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -66,7 +66,7 @@ class JsonAdaptedStudent {
         telegram = source.getTelegram().value;
         attendance = source.getAttendance().getAttendanceArray();
         participation = source.getParticipation().getParticipationArray();
-        assessment = source.getAssessment().getAssessment();
+        assessment = source.getAssessment().getAssessmentHashMap();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -126,7 +126,7 @@ class JsonAdaptedStudent {
 
         final StudioRecord modelStudioRecord = tempStudioRecord;
 
-        final Assessment modelAssessment = new Assessment();
+        final Assessment modelAssessment = new Assessment(assessment);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 

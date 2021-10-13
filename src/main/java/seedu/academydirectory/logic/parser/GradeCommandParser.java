@@ -27,7 +27,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         Integer grade;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            assessment = ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get());
+            assessment = ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()).toUpperCase();
             grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
