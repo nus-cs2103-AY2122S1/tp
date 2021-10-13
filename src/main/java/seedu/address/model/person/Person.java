@@ -122,7 +122,7 @@ public class Person {
         List<Period> toRemove = getAbsentDates().stream()
                 .filter(p -> period.contains(period))
                 .collect(Collectors.toList());
-        periods.addAll(absentDates);
+        periods.addAll(getAbsentDates());
         periods.removeAll(toRemove);
         return new Person(name, phone, email, address,
                 role, salary, status, tags, periods);
@@ -194,7 +194,8 @@ public class Person {
                 && otherStaff.getRole().equals(getRole())
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
-                && otherStaff.getTags().equals(getTags());
+                && otherStaff.getTags().equals(getTags())
+                &&otherStaff.getAbsentDates().equals(getAbsentDates());
     }
 
     @Override

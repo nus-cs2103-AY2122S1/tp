@@ -59,6 +59,9 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        if (isEmpty()) {
+            return true;
+        }
         return person.containsFields(this.fields);
     }
 

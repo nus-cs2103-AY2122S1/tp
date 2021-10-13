@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -71,8 +72,10 @@ public class RemoveMarkCommand extends Command {
 
     private CommandResult executeIndex(Model model) throws CommandException {
         requireNonNull(model);
+        if (index > model.getFilteredPersonList().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
         Person toTest = model.getFilteredPersonList().get(index);
-        requireNonNull(toTest);
         model.setPerson(toTest, checkPerson(toTest));
         return new CommandResult(String.format(STAFF_UNMARKED, toTest));
     }
