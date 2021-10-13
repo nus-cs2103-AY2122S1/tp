@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.ArrayList;
 
 public class EmploymentType {
 
@@ -43,8 +43,8 @@ public class EmploymentType {
     public static final String MESSAGE_CONSTRAINTS = "Employment type can only be one of the following: "
             + "Full time, Part time, Temporary or Internship";
 
-    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for one or more of the" +
-            " following employment types: Full time, Part time, Temporary or Internship";
+    public static final String FIND_MESSAGE_CONSTRAINTS = "You can only search for one or more of the"
+            + " following employment types: Full time, Part time, Temporary or Internship";
 
     public final String employmentType;
 
