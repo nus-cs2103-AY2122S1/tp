@@ -5,10 +5,7 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
-import java.util.Optional;
-
 import seedu.programmer.commons.core.Messages;
-import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
@@ -50,68 +47,5 @@ public class ViewCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof ViewCommand // instanceof handles nulls
                 && predicate.equals(((ViewCommand) other).predicate)); // state check
-    }
-
-    /**
-     * Stores the details to query the students with. Each non-empty field value will be used to query
-     * for the student from the list;
-     */
-    public static class QueryStudentDescriptor {
-        private String name;
-        private String studentId;
-        private String classId;
-
-        public QueryStudentDescriptor() {}
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldToBeQueried() {
-            return CollectionUtil.isAnyNonNull(name, studentId, classId);
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Optional<String> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setStudentId(String studentId) {
-            this.studentId = studentId;
-        }
-
-        public Optional<String> getStudentId() {
-            return Optional.ofNullable(studentId);
-        }
-
-        public void setClassId(String classId) {
-            this.classId = classId;
-        }
-
-        public Optional<String> getClassId() {
-            return Optional.ofNullable(classId);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof ViewCommand.QueryStudentDescriptor)) {
-                return false;
-            }
-
-            // state check
-            ViewCommand.QueryStudentDescriptor e = (ViewCommand.QueryStudentDescriptor) other;
-
-            return getName().equals(e.getName())
-                    && getStudentId().equals(e.getStudentId())
-                    && getClassId().equals(e.getClassId());
-        }
     }
 }

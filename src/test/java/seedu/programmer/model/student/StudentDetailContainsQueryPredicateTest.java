@@ -7,14 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.testutil.StudentBuilder;
 
 class StudentDetailContainsQueryPredicateTest {
     @Test
     void equals() {
-        ViewCommand.QueryStudentDescriptor firstDescriptor = new ViewCommand.QueryStudentDescriptor();
-        ViewCommand.QueryStudentDescriptor secondDescriptor = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor firstDescriptor = new QueryStudentDescriptor();
+        QueryStudentDescriptor secondDescriptor = new QueryStudentDescriptor();
         firstDescriptor.setName("One");
         firstDescriptor.setStudentId("A1234567X");
         firstDescriptor.setClassId("B01");
@@ -106,7 +105,7 @@ class StudentDetailContainsQueryPredicateTest {
     }
 
     private StudentDetailContainsQueryPredicate buildPredicate(String name, String sid, String cid) {
-        ViewCommand.QueryStudentDescriptor descriptor = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor();
         descriptor.setName(name);
         descriptor.setStudentId(sid);
         descriptor.setClassId(cid);

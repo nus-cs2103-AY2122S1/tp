@@ -7,6 +7,7 @@ import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuc
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.commands.ViewCommand;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 public class ViewCommandParserTest {
@@ -99,7 +100,7 @@ public class ViewCommandParserTest {
     @Test
     public void parse_validSingleArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
-        ViewCommand.QueryStudentDescriptor queryFields = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
         queryFields.setName("Alice");
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
         ViewCommand expectedViewCommand =
@@ -112,7 +113,7 @@ public class ViewCommandParserTest {
 
     public void parse_validMultipleArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
-        ViewCommand.QueryStudentDescriptor queryFields = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
         queryFields.setName("Alice");
         queryFields.setClassId("B01");
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);

@@ -4,16 +4,15 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.programmer.commons.util.StringUtil;
-import seedu.programmer.logic.commands.ViewCommand;
 
 /**
  * Tests that a {@code Student}'s {@code Name}, {@code ClassId}, {@code StudentId} matches any of the query given.
  */
 
 public class StudentDetailContainsQueryPredicate implements Predicate<Student> {
-    private final ViewCommand.QueryStudentDescriptor queryFields;
+    private final QueryStudentDescriptor queryFields;
 
-    public StudentDetailContainsQueryPredicate(ViewCommand.QueryStudentDescriptor queryFields) {
+    public StudentDetailContainsQueryPredicate(QueryStudentDescriptor queryFields) {
         this.queryFields = queryFields;
     }
 
@@ -35,7 +34,7 @@ public class StudentDetailContainsQueryPredicate implements Predicate<Student> {
      * @param queryFields contains the respective fields to be checked against the student's.
      * @return true if all the non-null fields matches that of the {@code student} and false otherwise.
      */
-    private boolean testIfStudentMatchesQueryFields (Student student, ViewCommand.QueryStudentDescriptor queryFields) {
+    private boolean testIfStudentMatchesQueryFields (Student student, QueryStudentDescriptor queryFields) {
         Optional<String> nameToBeQueried = queryFields.getName();
         Optional<String> sidToBeQueried = queryFields.getStudentId();
         Optional<String> cidToBeQueried = queryFields.getClassId();

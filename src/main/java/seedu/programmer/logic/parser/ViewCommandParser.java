@@ -8,6 +8,7 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
@@ -25,7 +26,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID);
 
-        ViewCommand.QueryStudentDescriptor queryStudentDescriptor = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor queryStudentDescriptor = new QueryStudentDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             String trimmedNameArg = argMultimap.getValue(PREFIX_NAME).get().trim();

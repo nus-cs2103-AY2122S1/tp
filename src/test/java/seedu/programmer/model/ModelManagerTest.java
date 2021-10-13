@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.logic.commands.ViewCommand;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 import seedu.programmer.testutil.ProgrammerErrorBuilder;
 
@@ -117,7 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentProgrammerError, userPrefs)));
 
         // different filteredList -> returns false
-        ViewCommand.QueryStudentDescriptor descriptor = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor();
         descriptor.setName(ALICE.getName().fullName);
         modelManager.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
         assertFalse(modelManager.equals(new ModelManager(programmerError, userPrefs)));

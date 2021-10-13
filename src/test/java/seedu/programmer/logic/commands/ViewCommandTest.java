@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
@@ -32,9 +33,9 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        ViewCommand.QueryStudentDescriptor firstQueryFields = new ViewCommand.QueryStudentDescriptor();
-        ViewCommand.QueryStudentDescriptor secondQueryFields = new ViewCommand.QueryStudentDescriptor();
-        ViewCommand.QueryStudentDescriptor thirdQueryFields = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor();
+        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor();
+        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor();
 
         firstQueryFields.setName("first");
         secondQueryFields.setName("second");
@@ -144,7 +145,7 @@ public class ViewCommandTest {
      * Parses {@code name}, {@code classId} and {@code studentId} into a {@code StudentDetailContainsQueryPredicate}.
      */
     private StudentDetailContainsQueryPredicate preparePredicate(String name, String classId, String studentId) {
-        ViewCommand.QueryStudentDescriptor queryFields = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
         queryFields.setName(name);
         queryFields.setClassId(classId);
         queryFields.setStudentId(studentId);
@@ -155,7 +156,7 @@ public class ViewCommandTest {
      * Prepares an empty {@code StudentDetailContainsQueryPredicate}.
      */
     private StudentDetailContainsQueryPredicate preparePredicate() {
-        ViewCommand.QueryStudentDescriptor queryFields = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
         return new StudentDetailContainsQueryPredicate(queryFields);
     }
 }

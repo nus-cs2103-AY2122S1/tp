@@ -15,6 +15,7 @@ import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
@@ -112,7 +113,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        ViewCommand.QueryStudentDescriptor descriptor = new ViewCommand.QueryStudentDescriptor();
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor();
         descriptor.setName(student.getName().fullName);
 
         model.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
