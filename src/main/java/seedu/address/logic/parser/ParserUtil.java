@@ -41,7 +41,7 @@ public class ParserUtil {
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * stripped.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String strippedIndex = oneBasedIndex.strip();
@@ -55,7 +55,7 @@ public class ParserUtil {
      * Parses {@code oneBasedIndex} into an {@code Index[]} and returns it. Leading and trailing whitespaces will be
      * stripped.
      *
-     * @throws ParseException if the specified indices are invalid (not non-zero unsigned integer).
+     * @throws ParseException If the specified indices are invalid (not non-zero unsigned integer).
      */
     public static Index[] parseIndices(String args) throws ParseException {
         // There will be 2 index arguments
@@ -303,7 +303,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be stripped and
      * keywords string is split by whitespace into a list of words.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException If the given {@code address} is invalid.
      */
     public static List<String> parseKeywords(String keywords) throws ParseException {
         requireNonNull(keywords);
@@ -319,7 +319,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces of keywords will be stripped.
      * A tag keyword can only be one word.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException If the given {@code address} is invalid.
      */
     public static String parseTagKeyword(String keyword) throws ParseException {
         requireNonNull(keyword);
@@ -349,7 +349,7 @@ public class ParserUtil {
      * Parses a {@code String condition} into a {@code FindCondition}.
      * Leading and trailing whitespaces will be stripped.
      *
-     * @throws ParseException if the given {@code Subject} is invalid.
+     * @throws ParseException If the given {@code Subject} is invalid.
      */
     public static FindCondition parseFindCondition(String condition) throws ParseException {
         requireNonNull(condition);

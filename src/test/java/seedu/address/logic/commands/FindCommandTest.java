@@ -14,10 +14,13 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_AVE;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_FRIENDS;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +28,7 @@ import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonMatchesKeywordsPredicate;
 import seedu.address.testutil.PersonMatchesKeywordsPredicateBuilder;
 
@@ -66,40 +70,44 @@ public class FindCommandTest {
     public void execute_oneField_multiplePersonsFound() {
         PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName(KEYWORD_MATCHING_MEIER).build();
-        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 2, predicate);
+        List<Person> expectedPersons = Arrays.asList(BENSON, DANIEL);
+        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+        assertEquals(expectedPersons, model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleFieldsAllCondition_multiplePersonsFound() {
         // Default condition
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
-                .withTags("friends").build();
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FRIENDS).build();
+        List<Person> expectedPersons = Arrays.asList(ALICE, BENSON);
         String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 2, predicate);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+        assertEquals(expectedPersons, model.getFilteredPersonList());
 
         // Match all condition
-        predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave").withTags("friends")
-                .withCondition(FindCommand.FindCondition.ALL).build();
-        expectedMessage = String.format(MESSAGE_FIND_RESULTS, 2, predicate);
+        predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress(KEYWORD_MATCHING_AVE)
+                .withTags(KEYWORD_MATCHING_FRIENDS).withCondition(FindCondition.ALL).build();
+        expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
         command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
+        assertEquals(expectedPersons, model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleFieldsAnyCondition_multiplePersonsFound() {
         // Match any condition
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
-                .withTags("friends").withCondition(FindCommand.FindCondition.ANY).build();
-        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 4, predicate);
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withAddress("ave").withTags(KEYWORD_MATCHING_FRIENDS)
+                .withCondition(FindCondition.ANY).build();
+        List<Person> expectedPersons = Arrays.asList(ALICE, BENSON, DANIEL, ELLE);
+        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -109,13 +117,15 @@ public class FindCommandTest {
     @Test
     public void execute_multipleFieldsNoneCondition_multiplePersonsFound() {
         // Match none condition
-        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder().withAddress("ave")
-                .withTags("friends").withCondition(FindCommand.FindCondition.NONE).build();
-        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, 3, predicate);
+        PersonMatchesKeywordsPredicate predicate = new PersonMatchesKeywordsPredicateBuilder()
+                .withAddress(KEYWORD_MATCHING_AVE).withTags(KEYWORD_MATCHING_FRIENDS)
+                .withCondition(FindCondition.NONE).build();
+        List<Person> expectedPersons = Arrays.asList(CARL, FIONA, GEORGE);
+        String expectedMessage = String.format(MESSAGE_FIND_RESULTS, expectedPersons.size(), predicate);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, FIONA, GEORGE), model.getFilteredPersonList());
+        assertEquals(expectedPersons, model.getFilteredPersonList());
     }
 
     @Test

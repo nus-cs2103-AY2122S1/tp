@@ -71,8 +71,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil
+                .parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -205,13 +205,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseRemark_validValueWithoutWhitespace_returnsFee() throws Exception {
+    public void parseRemark_validValueWithoutWhitespace_returnsFee() {
         Remark expectedRemark = new Remark(VALID_REMARK);
         assertEquals(expectedRemark, ParserUtil.parseRemark(VALID_REMARK));
     }
 
     @Test
-    public void parseRemark_validValueWithWhitespace_returnsTrimmedFee() throws Exception {
+    public void parseRemark_validValueWithWhitespace_returnsTrimmedFee() {
         String remarkWithWhitespace = WHITESPACE + VALID_REMARK + WHITESPACE;
         Remark expectedRemark = new Remark(VALID_REMARK);
         assertEquals(expectedRemark, ParserUtil.parseRemark(remarkWithWhitespace));
@@ -312,29 +312,29 @@ public class ParserUtilTest {
     @Test
     public void parseIndividualPieceOfHomework_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil
-            .parseIndividualPieceOfHomework(null));
+                .parseIndividualPieceOfHomework(null));
     }
 
     @Test
     public void parseIndividualPieceOfHomework_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil
-            .parseIndividualPieceOfHomework(INVALID_HOMEWORK));
+                .parseIndividualPieceOfHomework(INVALID_HOMEWORK));
     }
 
     @Test
-    public void parseIndividualPieceOfHomework_validValueWithoutWhitespace_returnsHomework()
-        throws Exception {
+    public void parseIndividualPieceOfHomework_validValueWithoutWhitespace_returnsHomework() throws Exception {
         Homework expectedHomework = new Homework(VALID_HOMEWORK_1);
-        assertEquals(expectedHomework,
-            ParserUtil.parseIndividualPieceOfHomework(VALID_HOMEWORK_1));
+        assertEquals(
+                expectedHomework,
+                ParserUtil.parseIndividualPieceOfHomework(VALID_HOMEWORK_1));
     }
 
     @Test
-    public void parseIndividualPieceOfHomework_validValueWithWhitespace_returnsTrimmedHomework()
-        throws Exception {
+    public void parseIndividualPieceOfHomework_validValueWithWhitespace_returnsTrimmedHomework() throws Exception {
         String homeworkWithWhitespace = WHITESPACE + VALID_HOMEWORK_1 + WHITESPACE;
         Homework expectedHomework = new Homework(VALID_HOMEWORK_1);
-        assertEquals(expectedHomework,
+        assertEquals(
+                expectedHomework,
                 ParserUtil.parseIndividualPieceOfHomework(homeworkWithWhitespace));
     }
 
@@ -355,8 +355,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseHomeworkList_collectionWithValidHomeworks_returnsHomeworkSet()
-        throws Exception {
+    public void parseHomeworkList_collectionWithValidHomeworks_returnsHomeworkSet() throws Exception {
         Set<Homework> actualHomeworkSet = ParserUtil.parseHomeworkList(
                 Arrays.asList(VALID_HOMEWORK_1, VALID_HOMEWORK_2));
         Set<Homework> expectedHomeworkSet = new HashSet<Homework>(
@@ -390,7 +389,8 @@ public class ParserUtilTest {
     @Test
     public void parseKeywords_validKeywords_returnsKeywordStringList() throws Exception {
         // split by whitespace
-        assertEquals(Arrays.asList(VALID_KEYWORD_1, VALID_KEYWORD_2),
+        assertEquals(
+                Arrays.asList(VALID_KEYWORD_1, VALID_KEYWORD_2),
                 ParserUtil.parseKeywords(VALID_KEYWORD_1 + WHITESPACE + VALID_KEYWORD_2));
     }
 

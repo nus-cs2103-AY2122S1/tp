@@ -63,9 +63,9 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_KEYWORD_CONSTRAINTS = "Keyword cannot be empty.";
 
-    public static final String MESSAGE_TAG_KEYWORD_CONSTRAINTS = "Tag can only take one keyword. "
-            + "To search for multiple tags, use multiple t/ \n"
-            + "Example: find t/unpaid t/zoom";
+    public static final String MESSAGE_TAG_KEYWORD_CONSTRAINTS = String.format("Tag can only take one keyword. "
+            + "To search for multiple tags, use multiple %1$s \n"
+            + "Example: find %1$sunpaid %1$szoom", PREFIX_TAG);
 
     public static final String MESSAGE_FIND_RESULTS = "%1$d students found who %2$s";
 
