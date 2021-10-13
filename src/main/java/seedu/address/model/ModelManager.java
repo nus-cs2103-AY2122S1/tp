@@ -161,7 +161,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getUnFilteredPersonList() {
-        return this.addressBook.getPersonList();
+        return new FilteredList<>(this.addressBook.getPersonList());
     }
 
     /**

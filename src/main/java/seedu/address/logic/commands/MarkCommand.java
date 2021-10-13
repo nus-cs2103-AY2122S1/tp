@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +21,11 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  */
 public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent!\n"
+            + "e.g. " + COMMAND_WORD + " " + PREFIX_INDEX + "INDEX"
+            + " " + PREFIX_DAY_SHIFT + "DATE" + ",\n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "NAME"
+            + PREFIX_DAY_SHIFT + "DATE" + " " + PREFIX_DAY_SHIFT + "DATE";
 
     private static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";
