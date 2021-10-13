@@ -1,11 +1,9 @@
 package seedu.address.model.person;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
+import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Tag} matches all of the tags given.

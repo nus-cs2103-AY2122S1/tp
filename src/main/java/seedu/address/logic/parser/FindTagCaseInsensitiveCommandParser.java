@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**

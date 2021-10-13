@@ -108,8 +108,10 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         List<Tag> tagList = keywords.stream().map(Tag::new).collect(Collectors.toList());
         FindTagCaseInsensitiveCommand command = (FindTagCaseInsensitiveCommand) parser.parseCommand(
-                FindTagCaseInsensitiveCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindTagCaseInsensitiveCommand(new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList)), command);
+                FindTagCaseInsensitiveCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCaseInsensitiveCommand(new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList)),
+                command);
     }
 
     @Test
@@ -117,8 +119,10 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         List<Tag> tagList = keywords.stream().map(Tag::new).collect(Collectors.toList());
         FindTagCaseSensitiveCommand command = (FindTagCaseSensitiveCommand) parser.parseCommand(
-                FindTagCaseSensitiveCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindTagCaseSensitiveCommand(new PersonTagsContainsCaseSensitiveTagsPredicate(tagList)), command);
+                FindTagCaseSensitiveCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindTagCaseSensitiveCommand(new PersonTagsContainsCaseSensitiveTagsPredicate(tagList)),
+                command);
     }
 
     @Test

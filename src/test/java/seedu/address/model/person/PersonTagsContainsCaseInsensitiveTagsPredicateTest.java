@@ -22,14 +22,17 @@ public class PersonTagsContainsCaseInsensitiveTagsPredicateTest {
         List<String> secondPredicateTags = Arrays.asList("first", "second");
         List<Tag> firstPredicateTagList = firstPredicateTags.stream().map(Tag::new).collect(Collectors.toList());
         List<Tag> secondPredicateTagList = secondPredicateTags.stream().map(Tag::new).collect(Collectors.toList());
-        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(firstPredicateTagList);
-        PersonTagsContainsCaseInsensitiveTagsPredicate secondPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(secondPredicateTagList);
+        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(firstPredicateTagList);
+        PersonTagsContainsCaseInsensitiveTagsPredicate secondPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(secondPredicateTagList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicateCopy = new PersonTagsContainsCaseInsensitiveTagsPredicate(firstPredicateTagList);
+        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicateCopy =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(firstPredicateTagList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -47,7 +50,8 @@ public class PersonTagsContainsCaseInsensitiveTagsPredicateTest {
         // One tag
         List<Tag> firstTags = new ArrayList<>();
         firstTags.add(new Tag("Alice"));
-        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(firstTags);
+        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(firstTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Alice");
         assertTrue(firstPredicate.test(personToTest));
     }
@@ -59,7 +63,8 @@ public class PersonTagsContainsCaseInsensitiveTagsPredicateTest {
         List<Tag> secondTags = new ArrayList<>();
         secondTags.add(new Tag("Alice"));
         secondTags.add(new Tag("Bob"));
-        PersonTagsContainsCaseInsensitiveTagsPredicate secondPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(secondTags);
+        PersonTagsContainsCaseInsensitiveTagsPredicate secondPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(secondTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Alice", "Bob");
         assertTrue(secondPredicate.test(personToTest));
     }
@@ -69,7 +74,8 @@ public class PersonTagsContainsCaseInsensitiveTagsPredicateTest {
         List<Tag> thirdTags = new ArrayList<>();
         thirdTags.add(new Tag("Bob"));
         thirdTags.add(new Tag("Carol"));
-        PersonTagsContainsCaseInsensitiveTagsPredicate thirdPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(thirdTags);
+        PersonTagsContainsCaseInsensitiveTagsPredicate thirdPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(thirdTags);
         Person personToTest = createsPersonWithTags("Alice Carol", "Friend", "Bob");
         assertFalse(thirdPredicate.test(personToTest));
     }
@@ -80,7 +86,8 @@ public class PersonTagsContainsCaseInsensitiveTagsPredicateTest {
         List<Tag> fourthTags = new ArrayList<>();
         fourthTags.add(new Tag("BOb"));
         fourthTags.add(new Tag("cAroL"));
-        PersonTagsContainsCaseInsensitiveTagsPredicate fourthPredicate = new PersonTagsContainsCaseInsensitiveTagsPredicate(fourthTags);
+        PersonTagsContainsCaseInsensitiveTagsPredicate fourthPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(fourthTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Carol", "Bob");
         assertTrue(fourthPredicate.test(personToTest));
     }

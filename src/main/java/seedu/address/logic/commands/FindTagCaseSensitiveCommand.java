@@ -1,12 +1,6 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.model.Model;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
-
-import static java.util.Objects.requireNonNull;
-
 
 /**
  * Finds and lists all persons in address book whose tags contains all of the argument tags.
@@ -30,11 +24,16 @@ public class FindTagCaseSensitiveCommand extends FindTagCommand {
         if (other == this) {
             return true;
         }
+
         if (other instanceof FindTagCaseSensitiveCommand) {
             FindTagCaseSensitiveCommand otherFindTagCaseInsensitiveCommand = (FindTagCaseSensitiveCommand) other;
-            return predicate.equals(otherFindTagCaseInsensitiveCommand.predicate);
+            return getPredicate().equals(otherFindTagCaseInsensitiveCommand.getPredicate());
         } else {
             return false;
         }
+    }
+
+    public PersonTagsContainsCaseSensitiveTagsPredicate getPredicate() {
+        return (PersonTagsContainsCaseSensitiveTagsPredicate) super.getPredicate();
     }
 }

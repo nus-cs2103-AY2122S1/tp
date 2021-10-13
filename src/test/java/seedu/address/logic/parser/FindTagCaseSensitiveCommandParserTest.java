@@ -11,13 +11,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
-import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 public class FindTagCaseSensitiveCommandParserTest {
 
-    private FindTagCaseInsensitiveCommandParser parser = new FindTagCaseInsensitiveCommandParser();
+    private FindTagCaseSensitiveCommandParser parser = new FindTagCaseSensitiveCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -60,5 +59,4 @@ public class FindTagCaseSensitiveCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "\n friends \n \t husband  \t", expectedFindCommand);
     }
-
 }

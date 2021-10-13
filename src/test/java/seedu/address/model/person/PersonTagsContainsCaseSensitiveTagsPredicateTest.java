@@ -1,8 +1,7 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +9,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
 
@@ -21,14 +22,17 @@ public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
         List<String> secondPredicateTags = Arrays.asList("first", "second");
         List<Tag> firstPredicateTagList = firstPredicateTags.stream().map(Tag::new).collect(Collectors.toList());
         List<Tag> secondPredicateTagList = secondPredicateTags.stream().map(Tag::new).collect(Collectors.toList());
-        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(firstPredicateTagList);
-        PersonTagsContainsCaseSensitiveTagsPredicate secondPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(secondPredicateTagList);
+        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(firstPredicateTagList);
+        PersonTagsContainsCaseSensitiveTagsPredicate secondPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(secondPredicateTagList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicateCopy = new PersonTagsContainsCaseSensitiveTagsPredicate(firstPredicateTagList);
+        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicateCopy =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(firstPredicateTagList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -46,7 +50,8 @@ public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
         // One tag
         List<Tag> firstTags = new ArrayList<>();
         firstTags.add(new Tag("Alice"));
-        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(firstTags);
+        PersonTagsContainsCaseSensitiveTagsPredicate firstPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(firstTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Alice");
         assertTrue(firstPredicate.test(personToTest));
     }
@@ -58,7 +63,8 @@ public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
         List<Tag> secondTags = new ArrayList<>();
         secondTags.add(new Tag("Alice"));
         secondTags.add(new Tag("Bob"));
-        PersonTagsContainsCaseSensitiveTagsPredicate secondPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(secondTags);
+        PersonTagsContainsCaseSensitiveTagsPredicate secondPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(secondTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Alice", "Bob");
         assertTrue(secondPredicate.test(personToTest));
     }
@@ -68,7 +74,8 @@ public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
         List<Tag> thirdTags = new ArrayList<>();
         thirdTags.add(new Tag("Bob"));
         thirdTags.add(new Tag("Carol"));
-        PersonTagsContainsCaseSensitiveTagsPredicate thirdPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(thirdTags);
+        PersonTagsContainsCaseSensitiveTagsPredicate thirdPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(thirdTags);
         Person personToTest = createsPersonWithTags("Alice Carol", "Friend", "Bob");
         assertFalse(thirdPredicate.test(personToTest));
     }
@@ -79,7 +86,8 @@ public class PersonTagsContainsCaseSensitiveTagsPredicateTest {
         List<Tag> fourthTags = new ArrayList<>();
         fourthTags.add(new Tag("BOb"));
         fourthTags.add(new Tag("cAroL"));
-        PersonTagsContainsCaseSensitiveTagsPredicate fourthPredicate = new PersonTagsContainsCaseSensitiveTagsPredicate(fourthTags);
+        PersonTagsContainsCaseSensitiveTagsPredicate fourthPredicate =
+                new PersonTagsContainsCaseSensitiveTagsPredicate(fourthTags);
         Person personToTest = createsPersonWithTags("Alice Bob", "Carol", "Bob");
         assertFalse(fourthPredicate.test(personToTest));
     }

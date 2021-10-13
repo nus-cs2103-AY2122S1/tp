@@ -1,17 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
-import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
-import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
-import seedu.address.model.tag.Tag;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
+import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
+import seedu.address.model.tag.Tag;
+
+
 
 /**
  * Parses input arguments and creates a new FindTagsCommand object
