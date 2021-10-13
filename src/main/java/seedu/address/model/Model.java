@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 
 /**
  * The API of the Model component.
@@ -41,9 +42,9 @@ public interface Model {
     Path getInventoryFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' inventory file path.
      */
-    void setInventoryFilePath(Path addressBookFilePath);
+    void setInventoryFilePath(Path inventoryFilePath);
 
     /**
      * Replaces inventory data with the data in {@code inventory}.
@@ -54,15 +55,38 @@ public interface Model {
     ReadOnlyInventory getInventory();
 
     /**
-     * Returns true if a item with the same identity as {@code item} exists in the inventory.
+     * Returns true if an item with the given {@code id} exists in the inventory.
+     * @see Item#isSameItem
      */
     boolean hasItem(Item item);
 
     /**
-     * Deletes the given item.
-     * The item must exist in the inventory.
+     * Returns true if an item with the given {@code name} exists in the inventory.
      */
-    void deleteItem(Item target);
+    boolean hasItem(Name name);
+
+    /**
+     * Returns true if an item with the given {@code id} exists in the inventory.
+     */
+    boolean hasItem(String id);
+
+    /**
+     * Deletes item in the inventory with the given name.
+     * The item must exist in the inventory.
+     * @param name name of the item to remove
+     * @param count count of the item to remove, set to -1 to remove all
+     * @returns the deleted item
+     */
+    Item deleteItem(Name name, int count);
+
+    /**
+     * Deletes item in the inventory with the given id.
+     * The item must exist in the inventory.
+     * @param id id of the item to remove
+     * @param count count of the item to remove, set to -1 to remove all
+     * @returns the deleted item
+     */
+    Item deleteItem(String id, int count);
 
     /**
      * Adds the given item.

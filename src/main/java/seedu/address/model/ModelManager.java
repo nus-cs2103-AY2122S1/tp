@@ -14,9 +14,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of BogoBogo data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -27,13 +28,13 @@ public class ModelManager implements Model {
     private Optional<Order> optionalOrder;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given inventory and userPrefs.
      */
     public ModelManager(ReadOnlyInventory inventory, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(inventory, userPrefs);
 
-        logger.fine("Initializing with address book: " + inventory + " and user prefs " + userPrefs);
+        logger.fine("Initializing with inventory: " + inventory + " and user prefs " + userPrefs);
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
@@ -99,8 +100,25 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteItem(Item target) {
-        inventory.removeItem(target);
+    public boolean hasItem(Name name) {
+        requireNonNull(name);
+        return inventory.hasItem(name);
+    }
+
+    @Override
+    public boolean hasItem(String id) {
+        requireNonNull(id);
+        return inventory.hasItem(id);
+    }
+
+    @Override
+    public Item deleteItem(Name name, int count) {
+        return inventory.removeItem(name, count);
+    }
+
+    @Override
+    public Item deleteItem(String id, int count) {
+        return inventory.removeItem(id, count);
     }
 
     @Override

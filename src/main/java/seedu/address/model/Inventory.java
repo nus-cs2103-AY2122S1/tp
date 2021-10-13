@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -61,11 +63,28 @@ public class Inventory implements ReadOnlyInventory {
     //// item-level operations
 
     /**
-     * Returns true if an item with the same id as {@code item} that exists in the inventory.
+     * Returns true if an item with the same identity fields as {@code item} that exists in the inventory.
+     * @see Item#isSameItem(Item)
      */
     public boolean hasItem(Item item) {
         requireNonNull(item);
         return items.contains(item);
+    }
+
+    /**
+     * Returns true if an item with the given {@code name} exists in the inventory.
+     */
+    public boolean hasItem(Name name) {
+        requireNonNull(name);
+        return items.contains(name);
+    }
+
+    /**
+     * Returns true if an item with the given {@code id} exists in the inventory.
+     */
+    public boolean hasItem(String id) {
+        requireNonNull(id);
+        return items.contains(id);
     }
 
     /**
@@ -177,11 +196,53 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Removes {@code key} from this {@code Inventory}.
-     * {@code key} must exist in the inventory.
+     * Removes the specified amount of item with the given {@code name} from this {@code Inventory}.
+     * If amount of item drops to 0 or less, remove the entire item from inventory
+     * The specified item must exist in the inventory.
+     * @param name name of item to remove
+     * @param amount number of the item to remove, set to -1 to remove all.
+     * @returns the deleted item
      */
-    public void removeItem(Item key) {
-        items.remove(key);
+    public Item removeItem(Name name, Integer amount) {
+        requireNonNull(name);
+
+        Item existingItem = items.getItem(name).get();
+        items.remove(existingItem);
+
+        int amountDeleted = (amount == -1)
+                ? existingItem.getCount() : Math.min(amount, existingItem.getCount());
+
+        int newCount = existingItem.getCount() - amountDeleted;
+        if (newCount > 0) {
+            items.add(existingItem.updateCount(newCount));
+        }
+
+        return existingItem.updateCount(amountDeleted);
+    }
+
+    /**
+     * Removes the specified amount of item with the given {@code id} from this {@code Inventory}.
+     * If amount of item drops to 0 or less, remove the entire item from inventory
+     * The specified item must exist in the inventory.
+     * @param id id of item to remove
+     * @param amount amount of the item to remove, set to -1 to remove all.
+     * @returns the deleted item
+     */
+    public Item removeItem(String id, Integer amount) {
+        requireNonNull(id);
+
+        Item existingItem = items.getItem(id).get();
+        items.remove(existingItem);
+
+        int amountDeleted = (amount == -1)
+                ? existingItem.getCount() : Math.min(amount, existingItem.getCount());
+
+        int newCount = existingItem.getCount() - amountDeleted;
+        if (newCount > 0) {
+            items.add(existingItem.updateCount(newCount));
+        }
+
+        return existingItem.updateCount(amountDeleted);
     }
 
     //// util methods
