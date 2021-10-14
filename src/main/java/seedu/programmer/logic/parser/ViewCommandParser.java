@@ -26,32 +26,35 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID);
 
-        QueryStudentDescriptor queryStudentDescriptor = new QueryStudentDescriptor();
+        // Initializing all the arguments as null at the beginning.
+        String trimmedNameArg = null;
+        String trimmedSidArg = null;
+        String trimmedCidArg = null;
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String trimmedNameArg = argMultimap.getValue(PREFIX_NAME).get().trim();
+            trimmedNameArg = argMultimap.getValue(PREFIX_NAME).get().trim();
             if (trimmedNameArg.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
-            queryStudentDescriptor.setName(trimmedNameArg);
         }
         if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            String trimmedSidArg = argMultimap.getValue(PREFIX_STUDENT_ID).get().trim();
+            trimmedSidArg = argMultimap.getValue(PREFIX_STUDENT_ID).get().trim();
             if (trimmedSidArg.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
-            queryStudentDescriptor.setStudentId(trimmedSidArg);
         }
         if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
-            String trimmedCidArg = argMultimap.getValue(PREFIX_CLASS_ID).get().trim();
+            trimmedCidArg = argMultimap.getValue(PREFIX_CLASS_ID).get().trim();
             if (trimmedCidArg.isEmpty()) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
-            queryStudentDescriptor.setClassId(trimmedCidArg);
         }
+
+        QueryStudentDescriptor queryStudentDescriptor =
+                new QueryStudentDescriptor(trimmedNameArg, trimmedSidArg, trimmedCidArg);
 
         if (!queryStudentDescriptor.isAnyFieldToBeQueried()) {
             throw new ParseException(

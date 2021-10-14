@@ -100,8 +100,7 @@ public class ViewCommandParserTest {
     @Test
     public void parse_validSingleArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
-        queryFields.setName("Alice");
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", null, null);
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
         ViewCommand expectedViewCommand =
                 new ViewCommand(queryPredicate);
@@ -114,10 +113,7 @@ public class ViewCommandParserTest {
     @Test
     public void parse_validMultipleArgs_returnsViewCommand() {
         // no leading and trailing whitespaces
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
-        queryFields.setName("Alice");
-        queryFields.setClassId("B01");
-        queryFields.setStudentId("A1234567X");
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", "A1234567X", "B01");
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
         ViewCommand expectedViewCommand =
                 new ViewCommand(queryPredicate);

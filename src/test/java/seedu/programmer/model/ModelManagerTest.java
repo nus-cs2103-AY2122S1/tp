@@ -117,8 +117,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentProgrammerError, userPrefs)));
 
         // different filteredList -> returns false
-        QueryStudentDescriptor descriptor = new QueryStudentDescriptor();
-        descriptor.setName(ALICE.getName().fullName);
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor(ALICE.getName().fullName, null, null);
         modelManager.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
         assertFalse(modelManager.equals(new ModelManager(programmerError, userPrefs)));
 

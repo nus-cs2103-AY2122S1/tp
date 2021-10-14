@@ -12,17 +12,12 @@ import seedu.programmer.testutil.StudentBuilder;
 class StudentDetailContainsQueryPredicateTest {
     @Test
     void equals() {
-        QueryStudentDescriptor firstDescriptor = new QueryStudentDescriptor();
-        QueryStudentDescriptor secondDescriptor = new QueryStudentDescriptor();
-        firstDescriptor.setName("One");
-        firstDescriptor.setStudentId("A1234567X");
-        firstDescriptor.setClassId("B01");
-        secondDescriptor.setName("Two");
-        secondDescriptor.setStudentId("A7654321X");
-        secondDescriptor.setClassId("B02");
+        QueryStudentDescriptor firstDescriptor = new QueryStudentDescriptor("One", "A1234567X", "B01");
+        QueryStudentDescriptor secondDescriptor = new QueryStudentDescriptor("Two", "A7654321X", "B02");
 
         StudentDetailContainsQueryPredicate firstPredicate = new StudentDetailContainsQueryPredicate(firstDescriptor);
         StudentDetailContainsQueryPredicate secondPredicate = new StudentDetailContainsQueryPredicate(secondDescriptor);
+
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
@@ -105,10 +100,7 @@ class StudentDetailContainsQueryPredicateTest {
     }
 
     private StudentDetailContainsQueryPredicate buildPredicate(String name, String sid, String cid) {
-        QueryStudentDescriptor descriptor = new QueryStudentDescriptor();
-        descriptor.setName(name);
-        descriptor.setStudentId(sid);
-        descriptor.setClassId(cid);
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor(name, sid, cid);
         return new StudentDetailContainsQueryPredicate(descriptor);
     }
 }

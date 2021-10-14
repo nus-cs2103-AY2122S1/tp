@@ -33,16 +33,9 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor();
-        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor();
-        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor();
-
-        firstQueryFields.setName("first");
-        secondQueryFields.setName("second");
-        secondQueryFields.setStudentId("A123");
-        secondQueryFields.setClassId("B01");
-        thirdQueryFields.setName("second");
-        thirdQueryFields.setStudentId("A123");
+        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor("first", null, null);
+        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor("second", "A123", "B01");
+        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor("second", "A123", null);
 
         // firstPredicate contains query field(s) : name
         StudentDetailContainsQueryPredicate firstPredicate =
@@ -104,7 +97,7 @@ public class ViewCommandTest {
     @Test
     public void execute_singleCidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "B01", null);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -114,7 +107,7 @@ public class ViewCommandTest {
     @Test
     public void execute_singleSidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "a021");
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -124,7 +117,7 @@ public class ViewCommandTest {
     @Test
     public void execute_multipleQueryArg_oneStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate("Pauline", null, "A0212425H");
+        StudentDetailContainsQueryPredicate predicate = preparePredicate("Pauline", "A0212425H", null);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -134,7 +127,7 @@ public class ViewCommandTest {
     @Test
     public void execute_multipleQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "B0", "A02");
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "A02", "B0");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -144,11 +137,8 @@ public class ViewCommandTest {
     /**
      * Parses {@code name}, {@code classId} and {@code studentId} into a {@code StudentDetailContainsQueryPredicate}.
      */
-    private StudentDetailContainsQueryPredicate preparePredicate(String name, String classId, String studentId) {
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
-        queryFields.setName(name);
-        queryFields.setClassId(classId);
-        queryFields.setStudentId(studentId);
+    private StudentDetailContainsQueryPredicate preparePredicate(String name, String studentId, String classId) {
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor(name, studentId, classId);
         return new StudentDetailContainsQueryPredicate(queryFields);
     }
 
