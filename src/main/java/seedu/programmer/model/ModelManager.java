@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
+import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 
 
@@ -128,6 +129,12 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }
+
+    @Override
+    public ObservableList<LabResult> showLabResultList(Student target) {
+        return programmerError.showLabResultList(target);
+    }
+
 
     @Override
     public boolean equals(Object obj) {
