@@ -113,7 +113,7 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different animeLit -> returns false
+        // different animeList -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAnimeList, userPrefs)));
 
         // different filteredList -> returns false
