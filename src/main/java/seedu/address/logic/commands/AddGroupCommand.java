@@ -97,6 +97,9 @@ public class AddGroupCommand extends Command {
         return new CommandResult(formatSuccessMessage(addedStudents));
     }
 
+    /**
+     * Returns the formatted success message, depending on whether there were students added to the new group.
+     */
     public String formatSuccessMessage(List<Student> addedStudents) {
         String groupAddedMessage = String.format(MESSAGE_SUCCESS, toAdd.name);
 
@@ -104,11 +107,11 @@ public class AddGroupCommand extends Command {
             return groupAddedMessage;
         }
 
-        List<String> studentNames = addedStudents.stream()
+        String studentNames = addedStudents.stream()
                 .map(student -> student.getName().fullName)
-                .collect(Collectors.toList());
+                .collect(Collectors.joining(", "));
 
-        return groupAddedMessage + String.format(MESSAGE_STUDENTS_ADDED, String.join(", ", studentNames));
+        return groupAddedMessage + String.format(MESSAGE_STUDENTS_ADDED, studentNames);
     }
 
     @Override
