@@ -12,6 +12,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -64,6 +65,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                     .collect(Collectors.toList());
 
             return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
+        }
+
+        if (isTagPrefixPresent) {
+            Optional<String> searchInput = argMultimap.getValue(PREFIX_TAG);
+            String tags = searchInput.get().trim();
+            if (tags.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+
+            List<String> tagKeywordsList = Arrays.stream(tags.split("\\s+"))
+                    .map(tag -> '[' + tag + ']')
+                    .collect(Collectors.toList());
+
+            return new FindCommand(new TagsContainsKeywordsPredicate(tagKeywordsList));
         }
 
         throw new ParseException(
