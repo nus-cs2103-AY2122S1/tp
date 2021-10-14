@@ -60,7 +60,6 @@ public class FindTagCaseInsensitiveCommandIntegrationTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         try {
             CommandResult parserCommandResult = parser.parse("friEnDs OwesMoney").execute(model);
-            System.out.println(parserCommandResult.getFeedbackToUser());
             CommandResult expectCommandResult = new CommandResult("2 persons listed!");
             assertEquals(expectCommandResult, parserCommandResult);
         } catch (ParseException e) {
