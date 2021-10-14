@@ -2,7 +2,6 @@ package seedu.fast.logic.parser;
 
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.fast.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;

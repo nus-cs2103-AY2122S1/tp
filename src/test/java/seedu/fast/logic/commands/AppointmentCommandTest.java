@@ -11,7 +11,6 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
@@ -21,7 +20,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;

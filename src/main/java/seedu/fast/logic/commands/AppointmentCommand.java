@@ -43,8 +43,8 @@ public class AppointmentCommand extends Command {
             + PREFIX_APPOINTMENT + "2021-10-25 \n\n";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
-    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Appointment already exist! " +
-            "Edit the appointment or delete to re-add!";
+    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Appointment already exist! "
+            + "Edit the appointment or delete to re-add!";
 
     private final Index index;
     private final Appointment appointment;
@@ -52,7 +52,7 @@ public class AppointmentCommand extends Command {
     /**
      * Construct for an {@code AppointmentCommand}
      *
-     * @param index index of the person in the filtered person list to edit the remark
+     * @param index index of the person in the filtered person list to add appointment
      * @param appointment appointment scheduled with the person
      */
     public AppointmentCommand(Index index, Appointment appointment) {

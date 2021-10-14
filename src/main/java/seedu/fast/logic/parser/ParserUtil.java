@@ -14,7 +14,6 @@ import java.util.Set;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.StringUtil;
-import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;

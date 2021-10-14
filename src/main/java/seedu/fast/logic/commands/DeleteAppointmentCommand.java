@@ -1,5 +1,9 @@
 package seedu.fast.logic.commands;
 
+import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
@@ -7,19 +11,15 @@ import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 
-import java.util.List;
-
-import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 public class DeleteAppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "dappt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes appointment with the person identified"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"
             + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
-            + "Examples: \n" + COMMAND_WORD + " 1 ";
+            + "Example: \n" + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
@@ -28,7 +28,7 @@ public class DeleteAppointmentCommand extends Command {
     private final Appointment appointment;
 
     /**
-     * Construct for an {@code AppointmentCommand}
+     * Construct for an {@code DeleteAppointmentCommand}
      *
      * @param index       index of the person in the filtered person list to delete the appointment
      * @param appointment appointment scheduled with the person
@@ -51,14 +51,16 @@ public class DeleteAppointmentCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment);
 
+        String name = personToEdit.getName().fullName;
+
         if (personToEdit.getAppointment().equals(appointment)) {
-            throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED, personToEdit.getName().fullName));
+            throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED, name));
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, personToEdit.getName().fullName));
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, name));
     }
 
     @Override

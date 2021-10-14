@@ -1,15 +1,5 @@
 package seedu.fast.logic.commands;
 
-import seedu.fast.model.Fast;
-import seedu.fast.model.Model;
-import seedu.fast.model.ModelManager;
-import seedu.fast.model.UserPrefs;
-import seedu.fast.model.person.Appointment;
-import seedu.fast.model.person.Person;
-import seedu.fast.testutil.PersonBuilder;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -19,6 +9,16 @@ import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.model.Fast;
+import seedu.fast.model.Model;
+import seedu.fast.model.ModelManager;
+import seedu.fast.model.UserPrefs;
+import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.Person;
+import seedu.fast.testutil.PersonBuilder;
 
 public class DeleteAppointmentCommandTest {
     private static final String APPOINTMENT_STUB = "10 Oct 2021";

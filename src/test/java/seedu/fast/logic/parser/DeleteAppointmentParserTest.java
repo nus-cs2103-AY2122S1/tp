@@ -1,18 +1,16 @@
 package seedu.fast.logic.parser;
 
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.AppointmentCommand;
-import seedu.fast.logic.commands.DeleteAppointmentCommand;
-import seedu.fast.model.person.Appointment;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.index.Index;
+import seedu.fast.logic.commands.DeleteAppointmentCommand;
+import seedu.fast.model.person.Appointment;
 
 public class DeleteAppointmentParserTest {
     private DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();

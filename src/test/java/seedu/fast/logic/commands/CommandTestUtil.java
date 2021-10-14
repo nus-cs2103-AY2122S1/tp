@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;

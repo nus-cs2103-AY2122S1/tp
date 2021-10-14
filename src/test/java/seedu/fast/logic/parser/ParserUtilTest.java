@@ -2,8 +2,6 @@ package seedu.fast.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -15,7 +13,6 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;

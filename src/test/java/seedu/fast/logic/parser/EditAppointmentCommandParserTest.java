@@ -1,10 +1,5 @@
 package seedu.fast.logic.parser;
 
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.logic.commands.EditAppointmentCommand;
-
-import org.junit.jupiter.api.Test;
-
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
@@ -14,6 +9,10 @@ import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.index.Index;
+import seedu.fast.logic.commands.EditAppointmentCommand;
 import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 
@@ -47,8 +46,8 @@ public class EditAppointmentCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME + validTimeInput + " "
                 + PREFIX_APPOINTMENT_VENUE + appointmentVenue;
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withTime(formattedTime).
-                withVenue(appointmentVenue).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withTime(formattedTime)
+                .withVenue(appointmentVenue).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 

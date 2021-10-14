@@ -1,15 +1,5 @@
 package seedu.fast.logic.commands;
 
-import seedu.fast.commons.core.Messages;
-import seedu.fast.commons.core.index.Index;
-import seedu.fast.model.Fast;
-import seedu.fast.model.Model;
-import seedu.fast.model.ModelManager;
-import seedu.fast.model.UserPrefs;
-import seedu.fast.model.person.Appointment;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.logic.commands.CommandTestUtil.APPT_DES_AMY;
@@ -22,7 +12,16 @@ import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.fast.commons.core.Messages;
+import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.fast.model.Fast;
+import seedu.fast.model.Model;
+import seedu.fast.model.ModelManager;
+import seedu.fast.model.UserPrefs;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.PersonBuilder;
@@ -185,7 +184,7 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_EditNonExistingAppointmentFilteredList_failure() {
+    public void execute_editNonExistingAppointmentFilteredList_failure() {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
@@ -311,7 +310,7 @@ public class EditAppointmentCommandTest {
     }
 
     @Test
-    public void execute_EditNonExistingAppointmentUnfilteredList_failure() {
+    public void execute_editNonExistingAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
                 .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();

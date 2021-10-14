@@ -1,10 +1,5 @@
 package seedu.fast.logic.commands;
 
-import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
-import seedu.fast.testutil.EditPersonDescriptorBuilder;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.logic.commands.CommandTestUtil.APPT_DES_AMY;
@@ -13,7 +8,10 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_BOB;
 
+import org.junit.jupiter.api.Test;
+
 import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentDescriptorTest {
     @Test
