@@ -1,0 +1,49 @@
+package seedu.address.ui;
+
+import java.util.Comparator;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Lesson;
+
+public class LessonCard extends UiPart<Region> {
+
+    private static final String FXML = "LessonListCard.fxml";
+
+    public final Lesson lesson;
+
+    @javafx.fxml.FXML
+    private HBox cardPane;
+    @FXML
+    private Label lessonId;
+    @FXML
+    private Label type;
+    @FXML
+    private Label date;
+    @FXML
+    private Label time;
+    @FXML
+    private Label subject;
+    @FXML
+    private FlowPane homeworkList;
+
+    /**
+     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     */
+    public LessonCard(Lesson lesson, int displayedIndex) {
+        super(FXML);
+        this.lesson = lesson;
+        lessonId.setText(displayedIndex + ". ");
+        type.setText(lesson.getTypeOfLesson());
+        date.setText("Date: " + lesson.getDate().value);
+        time.setText("Time: " + lesson.getTimeRange().toString());
+        subject.setText("Subject: " + lesson.getSubject().toString());
+        lesson.getHomework().stream()
+                .sorted(Comparator.comparing(homework -> homework.description))
+                .forEach(homework -> homeworkList.getChildren()
+                        .add(new Label(homework + "\n")));
+    }
+}

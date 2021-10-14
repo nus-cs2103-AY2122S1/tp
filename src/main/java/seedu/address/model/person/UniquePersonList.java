@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -37,6 +39,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with a clashing lesson.
+     *
+     * @param toCheck The lesson to check.
+     * @return True if there is a clash in lesson timing, false otherwise.
+     */
+    public boolean hasClashes(Lesson toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(person -> person.hasClashingLessons(toCheck));
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -46,6 +59,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a person to a specific index in the list for list to return to state before undo command.
+     * The person must not already exist in the list.
+     */
+    public void add(Person toAdd, Index toIndex) {
+        requireAllNonNull(toAdd, toIndex);
+        if (contains(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.add(toIndex.getZeroBased(), toAdd);
     }
 
     /**
@@ -133,5 +158,11 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Internal list:\n" + internalList
+                + "\nInternal unmodifiable list:\n" + internalUnmodifiableList;
     }
 }
