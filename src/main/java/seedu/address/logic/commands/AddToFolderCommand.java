@@ -51,7 +51,8 @@ public class AddToFolderCommand extends Command {
 
         if (!model.hasFolderName(folderName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
-        } else if (model.folderContainsPerson(personToAdd, folderName)) {
+        }
+        if (model.folderContainsPerson(personToAdd, folderName)) {
             throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
         }
 
