@@ -144,6 +144,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedMember);
 
         members.setMember(target, editedMember);
+        for (Event event : events) {
+            Set<Member> memberSet = event.getParticipants();
+            if (memberSet.contains(target)) {
+                event.removeParticipant(target);
+                event.addParticipant(editedMember);
+            }
+        }
     }
 
     /**
@@ -168,6 +175,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeMember(Member key) {
         members.remove(key);
+        for (Event event : events) {
+            Set<Member> memberSet = event.getParticipants();
+            if (memberSet.contains(key)) {
+                event.removeParticipant(key);
+            }
+        }
     }
 
     /**
