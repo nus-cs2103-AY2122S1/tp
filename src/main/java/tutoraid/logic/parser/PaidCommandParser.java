@@ -14,6 +14,7 @@ public class PaidCommandParser implements Parser<PaidCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of PaidCommand
      * and returns a PaidCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public PaidCommand parse(String args) throws ParseException {
