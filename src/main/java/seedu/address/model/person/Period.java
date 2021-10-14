@@ -33,7 +33,7 @@ public class Period {
             this.startDate = endDate;
             this.endDate = startDate;
         } else {
-            this.startDate = endDate;
+            this.startDate = startDate;
             this.endDate = endDate;
         }
 
