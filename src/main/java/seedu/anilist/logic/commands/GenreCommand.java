@@ -24,6 +24,7 @@ public abstract class GenreCommand extends Command {
             + "Parameters:\n"
             + "INDEX (must be a positive integer) "
             + PREFIX_ACTION + "ACTION "
+            + PREFIX_GENRE + "GENRE "
             + "[" + PREFIX_GENRE + "GENRE]\n"
             + "Example of adding Genres: " + COMMAND_WORD + " "
             + "1 "

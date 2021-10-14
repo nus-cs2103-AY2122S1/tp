@@ -255,6 +255,9 @@ I.e. the user data is stored as an instance of AnimeList in json format.
 ### Genre
 Represents a genre of anime.
 
+### Action
+Used to provide more information to some commands, like `genre`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

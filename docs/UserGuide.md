@@ -74,3 +74,27 @@ Format: `update INDEX e/NEWEPISODE`
 
 Examples:
 *  `update 1 e/3`
+
+### Add/Delete a genre from an anime: `genre`
+
+Adds or deletes a genre from a specified anime.<br>
+All genres will be automatically changed to lowercase, and duplicate genres are not allowed.
+Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
+
+- `ACTION` specifies whether you are adding or deleting genres.
+- For list of available actions, refer to appendix A
+- Updates the anime at the specified `INDEX`.  
+- The index must be a positive integer 1, 2, 3, ...
+- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
+- You need to provide at least 1 `GENRE`.
+
+Examples:
+*  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
+*  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## APPENDIX A list of available `ACTION`:
+Current list of available actions:
+- `add`
+- `delete`
