@@ -55,7 +55,8 @@ public class MarkAppointmentCommandTest {
     public void execute_markAppointmentUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).withAppointmentCount("1")
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("1")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
@@ -76,7 +77,8 @@ public class MarkAppointmentCommandTest {
     public void execute_markAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
@@ -92,7 +94,8 @@ public class MarkAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).withAppointmentCount("1")
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .withAppointmentCount("1")
                 .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
@@ -114,7 +117,8 @@ public class MarkAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,

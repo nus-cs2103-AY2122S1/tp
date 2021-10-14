@@ -29,7 +29,8 @@ public class EditAppointmentCommandParserTest {
     public void parse_indexSpecifiedWithDateOnly_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT;
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withDate(VALID_APPOINTMENT_BOB).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withDate(VALID_APPOINTMENT_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -41,8 +42,8 @@ public class EditAppointmentCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withTime(VALID_APPOINTMENT_TIME_FORMATTED)
-                .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withTime(VALID_APPOINTMENT_TIME_FORMATTED).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -66,13 +67,14 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithRepeatedFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT + " "
-                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
                 + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
                 + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withDate(VALID_APPOINTMENT_BOB)
-                .withTime(VALID_APPOINTMENT_TIME_FORMATTED).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_FORMATTED)
+                .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -82,11 +84,12 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithSpacesFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT + " "
-                + PREFIX_APPOINTMENT_TIME + " " + " "
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
+                + " " + PREFIX_APPOINTMENT_TIME + " " + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withDate(VALID_APPOINTMENT_BOB)
-                .withTime(VALID_APPOINTMENT_TIME_AMY).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
+        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
+                .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_AMY)
+                .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -106,12 +109,12 @@ public class EditAppointmentCommandParserTest {
                 + VALID_APPOINTMENT_INPUT, expectedMessage);
 
         // with index, no date, no time, no venue
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                expectedMessage);
+        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);
 
         // with index, with date prefix, blank date
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + " " + PREFIX_APPOINTMENT + " ", expectedMessage);
+        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT + " ", expectedMessage);
 
     }
 }

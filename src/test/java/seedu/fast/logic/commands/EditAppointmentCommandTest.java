@@ -38,11 +38,13 @@ public class EditAppointmentCommandTest {
 
     @Test
     public void equals() {
-        final EditAppointmentCommand standardCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON, APPT_DES_AMY);
+        final EditAppointmentCommand standardCommand = new EditAppointmentCommand(INDEX_FIRST_PERSON,
+                APPT_DES_AMY);
 
         // same values -> returns true
         EditAppointmentDescriptor copyDescriptor = new EditAppointmentDescriptor(APPT_DES_AMY);
-        EditAppointmentCommand commandWithSameValues = new EditAppointmentCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditAppointmentCommand commandWithSameValues = new EditAppointmentCommand(INDEX_FIRST_PERSON,
+                copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
 
@@ -90,7 +92,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -112,7 +115,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -134,7 +138,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -147,7 +152,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -155,7 +161,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -168,7 +175,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -176,7 +184,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -189,7 +198,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -214,7 +224,8 @@ public class EditAppointmentCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -222,7 +233,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -234,7 +246,8 @@ public class EditAppointmentCommandTest {
     public void execute_twoFieldsSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -242,7 +255,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -254,7 +268,8 @@ public class EditAppointmentCommandTest {
     public void execute_dateFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -262,7 +277,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -274,7 +290,8 @@ public class EditAppointmentCommandTest {
     public void execute_timeFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -282,7 +299,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -294,7 +312,8 @@ public class EditAppointmentCommandTest {
     public void execute_venueFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -302,7 +321,8 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue());
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -314,7 +334,8 @@ public class EditAppointmentCommandTest {
     public void execute_editNonExistingAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
