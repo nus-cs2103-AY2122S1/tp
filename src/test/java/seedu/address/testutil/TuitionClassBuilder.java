@@ -16,11 +16,11 @@ public class TuitionClassBuilder {
     public static final String DEFAULT_REMARK = "$40 per hour";
     public static final int DEFAULT_ID = 1;
 
-    private  ClassName name;
-    private  ClassLimit limit;
-    private  Timeslot timeslot;
+    private ClassName name;
+    private ClassLimit limit;
+    private Timeslot timeslot;
     private StudentList studentList;
-    private  Remark remark;
+    private Remark remark;
     private int id;
 
     /**
