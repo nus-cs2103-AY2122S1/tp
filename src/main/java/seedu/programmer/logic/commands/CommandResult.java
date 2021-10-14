@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.programmer.model.student.Student;
+
 /**
  * Represents the result of a command execution.
  */
@@ -17,6 +19,11 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show student's result. */
+    private final boolean showResult;
+
+    private final Student target;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,18 +31,37 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showResult = false;
+        this.target = null;
     }
+
+
+    /**
+     * Constructs a {@code CommandResult} when there is a result to show.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showResult, Student target) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showResult = showResult;
+        this.target = target;
+    }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Student getTarget() {
+        return target;
     }
 
     public boolean isShowHelp() {
@@ -44,6 +70,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowResult() {
+        return showResult;
     }
 
     @Override
@@ -60,12 +90,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showResult == otherCommandResult.showResult;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showResult);
     }
 
 }

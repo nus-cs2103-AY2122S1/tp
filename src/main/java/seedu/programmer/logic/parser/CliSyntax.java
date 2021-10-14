@@ -11,4 +11,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_CLASS_ID = new Prefix("-cid ");
     public static final Prefix PREFIX_GRADE = new Prefix("-grade ");
 
+    //todo for test purposes
+    public static final Prefix PREFIX_INDEX = new Prefix("-i ");
+    public static final Prefix PREFIX_LAB_TITLE = new Prefix("-task ");
+    public static final Prefix PREFIX_LAB_RESULT = new Prefix("-s ");
+    public static final Prefix PREFIX_LAB_TOTAL = new Prefix("-t ");
 }

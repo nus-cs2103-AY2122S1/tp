@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.Command;
+import seedu.programmer.logic.commands.CreateLabResultCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.ExitCommand;
@@ -15,6 +16,7 @@ import seedu.programmer.logic.commands.FillCommand;
 import seedu.programmer.logic.commands.HelpCommand;
 import seedu.programmer.logic.commands.ListCommand;
 import seedu.programmer.logic.commands.PurgeCommand;
+import seedu.programmer.logic.commands.ShowCommand;
 import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
@@ -43,6 +45,7 @@ public class ProgrammerErrorParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -71,6 +74,12 @@ public class ProgrammerErrorParser {
 
         case FillCommand.COMMAND_WORD:
             return new FillCommand();
+
+        case CreateLabResultCommand.COMMAND_WORD:
+            return new CreateLabResultCommandParser().parse(arguments);
+
+        case ShowCommand.COMMAND_WORD:
+            return new ShowCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

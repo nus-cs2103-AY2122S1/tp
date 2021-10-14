@@ -1,11 +1,15 @@
 package seedu.programmer.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -21,6 +25,7 @@ class JsonAdaptedStudent {
     private final String studentId;
     private final String classId;
     private final String grade;
+    private List<LabResult> labResultList;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -42,6 +47,11 @@ class JsonAdaptedStudent {
         studentId = source.getStudentId().studentId;
         classId = source.getClassId().classId;
         grade = source.getGrade().grade;
+        //todo: for test of show feature only
+        if (source.getLabResultList() != null) {
+            labResultList = new ArrayList<>();
+            labResultList.addAll(source.getLabResultList());
+        }
     }
 
     /**
@@ -83,8 +93,10 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
         }
         final Grade modelGrade = new Grade(grade);
-
-        return new Student(modelName, modelStudentId, modelClassId, modelGrade);
+        Student student = new Student(modelName, modelStudentId, modelClassId, modelGrade);
+        //todo: for test of show feature only
+        student.setLabResultRecord(labResultList);
+        return student;
     }
 
 }
