@@ -16,6 +16,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -106,7 +108,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleModuleCodes_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = prepareNamePredicate("[CS2106] [CS2100]");
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("CS2106 CS2100");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -116,7 +118,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleModuleCodes_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        ModuleCodesContainsKeywordsPredicate predicate = prepareModulePredicate("[CS2030S] [CS2040]");
+        ModuleCodesContainsKeywordsPredicate predicate = prepareModulePredicate("CS2030S CS2040");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -134,7 +136,10 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code ModuleCodesContainsKeywordsPredicate}.
      */
     private ModuleCodesContainsKeywordsPredicate prepareModulePredicate(String userInput) {
-        return new ModuleCodesContainsKeywordsPredicate(Arrays.asList(userInput.split(" ")));
+        List<String> moduleKeywordsList = Arrays.stream(userInput.split("\\s+"))
+                .map(moduleName -> '[' + moduleName + ']')
+                .collect(Collectors.toList());
+        return new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList);
     }
 
 }
