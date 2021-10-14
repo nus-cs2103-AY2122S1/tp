@@ -33,8 +33,10 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_FRIEND_ID_AMY = "123";
     public static final String VALID_FRIEND_ID_BOB = "456";
-    public static final String VALID_GAME_ID_CSGO = CSGO.gameId.value;
-    public static final String VALID_GAME_ID_APEX_LEGENDS = APEX_LEGENDS.gameId.value;
+    public static final String VALID_GAME_ID_CSGO = "CSGO";
+    public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
+    public static final String VALID_USER_NAME_DRACO = "draco#1777";
+    public static final String VALID_USER_NAME_OMEGA = "OmegaLynx";
 
     public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;

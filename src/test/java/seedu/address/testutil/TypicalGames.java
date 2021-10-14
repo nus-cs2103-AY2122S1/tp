@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.model.GamesList;
 import seedu.address.model.game.Game;
 
@@ -11,9 +12,6 @@ import seedu.address.model.game.Game;
  * A utility class containing a list of {@code Game} objects to be used in tests.
  */
 public class TypicalGames {
-
-    public static final String VALID_GAME_ID_CSGO = "CSGO";
-    public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
 
     public static final Game MINECRAFT = new GameBuilder().withGameId("Minecraft").build();
     public static final Game LEAGUE_OF_LEGENDS = new GameBuilder().withGameId("LeagueOfLegends").build();
@@ -28,8 +26,9 @@ public class TypicalGames {
     public static final Game ROCKET_LEAGUE = new GameBuilder().withGameId("RocketLeague").build();
 
     // Manually added - Game's details found in {@code CommandTestUtil}
-    public static final Game CSGO = new GameBuilder().withGameId(VALID_GAME_ID_CSGO).build();
-    public static final Game APEX_LEGENDS = new GameBuilder().withGameId(VALID_GAME_ID_APEX_LEGENDS).build();
+    public static final Game CSGO = new GameBuilder().withGameId(CommandTestUtil.VALID_GAME_ID_CSGO).build();
+    public static final Game APEX_LEGENDS = new GameBuilder().withGameId(CommandTestUtil.VALID_GAME_ID_APEX_LEGENDS)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Legends"; // A keyword that matches MEIER
 

@@ -175,11 +175,6 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public boolean hasFriendId(FriendId idToFind) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
             throw new AssertionError("This method should not be called.");
         }
@@ -223,11 +218,6 @@ public class AddGameCommandTest {
         public void updateFilteredGamesList(Predicate<Game> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean hasGameId(GameId idToFind) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -248,7 +238,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public boolean hasGameId(GameId idToFind) {
+        public boolean hasGameWithId(GameId idToFind) {
             return this.game.getGameId().equals(idToFind);
         }
     }
@@ -266,7 +256,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public boolean hasGameId(GameId idToFind) {
+        public boolean hasGameWithId(GameId idToFind) {
             return gamesAdded.stream().anyMatch(game -> game.getGameId().equals(idToFind));
         }
 

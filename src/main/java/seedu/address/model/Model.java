@@ -114,8 +114,6 @@ public interface Model {
      */
     void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
 
-    boolean hasFriendId(FriendId idToFind);
-
     //=========== GamesBook ==================================================================================
 
     /**
@@ -169,5 +167,4 @@ public interface Model {
      */
     void updateFilteredGamesList(Predicate<Game> predicate);
 
-    boolean hasGameId(GameId idToFind);
 }

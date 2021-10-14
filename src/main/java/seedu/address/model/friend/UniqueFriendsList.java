@@ -55,7 +55,7 @@ public class UniqueFriendsList implements Iterable<Friend> {
      */
     public void add(Friend friendToAdd) {
         requireNonNull(friendToAdd);
-        if (contains(friendToAdd)) {
+        if (containsId(friendToAdd.getFriendId())) {
             throw new DuplicateFriendException();
         }
         internalList.add(friendToAdd);
@@ -75,7 +75,7 @@ public class UniqueFriendsList implements Iterable<Friend> {
         }
 
         // guard against if editedFriend already exists in the UniqueFriendsList.
-        if (!friendToEdit.equals(editedFriend) && contains(editedFriend)) {
+        if (!friendToEdit.isSameFriendId(editedFriend) && containsId(editedFriend.getFriendId())) {
             throw new DuplicateFriendException();
         }
 
