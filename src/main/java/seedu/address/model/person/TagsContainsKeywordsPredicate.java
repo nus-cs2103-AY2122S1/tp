@@ -20,7 +20,7 @@ public class TagsContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .allMatch(keyword -> person.getTags()
                         .stream().anyMatch(tag ->
-                                tag.toString().equalsIgnoreCase(keyword)
+                                keyword.equalsIgnoreCase(tag.toString())
                         )
                 );
     }

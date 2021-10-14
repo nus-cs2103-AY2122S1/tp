@@ -78,7 +78,6 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> tagKeywordsList = Arrays.stream(tags.split("\\s+"))
                     .map(tag -> '[' + tag + ']')
                     .collect(Collectors.toList());
-
             return new FindCommand(new TagsContainsKeywordsPredicate(tagKeywordsList));
         }
 

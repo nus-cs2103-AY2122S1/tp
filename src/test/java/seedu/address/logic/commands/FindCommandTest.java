@@ -5,14 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -26,6 +19,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -83,6 +77,30 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstModuleCommand.equals(findSecondModuleCommand));
+
+        TagsContainsKeywordsPredicate firstTagPredicate =
+                new TagsContainsKeywordsPredicate(Collections.singletonList("first"));
+        TagsContainsKeywordsPredicate secondTagPredicate =
+                new TagsContainsKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCommand findFirstTagCommand = new FindCommand(firstTagPredicate);
+        FindCommand findSecondTagCommand = new FindCommand(secondTagPredicate);
+
+        // same object -> returns true
+        assertTrue(findFirstTagCommand.equals(findFirstTagCommand));
+
+        // same values -> returns true
+        FindCommand findFirstTagCommandCopy = new FindCommand(firstTagPredicate);
+        assertTrue(findFirstTagCommand.equals(findFirstTagCommandCopy));
+
+        // different types -> returns false
+        assertFalse(findFirstTagCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(findFirstTagCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(findFirstTagCommand.equals(findSecondTagCommand));
     }
 
     @Test
@@ -125,6 +143,16 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
+    @Test
+    public void execute_multipleTags_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        TagsContainsKeywordsPredicate predicate = prepareTagPredicate("quarantined");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
@@ -142,4 +170,14 @@ public class FindCommandTest {
         return new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList);
     }
 
+    /**
+     * Parses {@code userInput} into a {@code TagsContainsKeywordsPredicate}.
+     */
+    private TagsContainsKeywordsPredicate prepareTagPredicate(String userInput) {
+        List<String> tagKeywordsList = Arrays.stream(userInput.split("\\s+"))
+                .map(tag -> '[' + tag + ']')
+                .collect(Collectors.toList());
+        System.out.println(tagKeywordsList);
+        return new TagsContainsKeywordsPredicate(tagKeywordsList);
+    }
 }
