@@ -87,13 +87,14 @@ public class TagCommand extends Command {
 
         Set<Tag> existingTags = personToEdit.getTags();
         Set<Tag> addedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
-        Set<Tag> updatedTags = new HashSet<Tag>();
+        Set<Tag> updatedTags = new HashSet<>();
         updatedTags.addAll(existingTags);
         updatedTags.addAll(addedTags);
 
         return new Person(unchangedName, unchangedPhone, unchangedEmail, unchangedAddress,
                 updatedTags,
                 unchangedBirthday);
+      
     }
 
     @Override

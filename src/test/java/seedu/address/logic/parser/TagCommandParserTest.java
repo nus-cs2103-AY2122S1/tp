@@ -34,10 +34,13 @@ class TagCommandParserTest {
         // no index specified
         assertParseFailure(parser, TAG_DESC_FRIEND, MESSAGE_INVALID_FORMAT);
 
+        // no prefix specified
+        assertParseFailure(parser, "1" + VALID_TAG_FRIEND, MESSAGE_INVALID_FORMAT);
+
         // no field specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
-        // no index and no field specified
+        // no index, no prefix and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -86,7 +89,7 @@ class TagCommandParserTest {
     }
 
     @Test
-    public void parse_multipleTag_success() {
+    public void parse_multipleTags_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
 

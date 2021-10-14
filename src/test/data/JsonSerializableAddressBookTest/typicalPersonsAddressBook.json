@@ -26,7 +26,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "tagged" : [ "friends" ],
+    "tagged" : [ "owesMoney", "friends" ],
     "birthday": "08091990"
   }, {
     "name" : "Elle Meyer",
@@ -47,7 +47,32 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "tagged" : [ ],
+    "tagged" : [ "football" ],
     "birthday": "12041990"
+  }, {
+      "name": "Hannah Worst",
+      "phone": "1234567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "tagged" : [],
+      "birthday" : "31011990"
+  }, {
+      "name": "Hannah No Birthday Worst",
+      "phone": "12334567",
+      "email": "hhhhannah@example.com",
+      "address": "12th street",
+      "birthday" : null
+  }, {
+    "name" : "Indigo Color",
+    "phone" : "24422984",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : "11101995"
+  }, {
+    "name" : "Indigo No Birthday Color",
+    "phone" : "17263722",
+    "email" : "color@rainbow.com",
+    "address" : "big tokyo",
+    "birthday" : null
   } ]
 }

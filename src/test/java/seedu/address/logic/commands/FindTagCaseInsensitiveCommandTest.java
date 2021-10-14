@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,13 +21,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
+import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindTagsCommand}.
  */
-public class FindTagsCommandTest {
+public class FindTagCaseInsensitiveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -38,19 +37,19 @@ public class FindTagsCommandTest {
         firstTagList.add(new Tag("first"));
         List<Tag> secondTagList = new ArrayList<>();
         secondTagList.add(new Tag("second"));
-        PersonTagsContainsTagsPredicate firstPredicate =
-                new PersonTagsContainsTagsPredicate(firstTagList);
-        PersonTagsContainsTagsPredicate secondPredicate =
-                new PersonTagsContainsTagsPredicate(secondTagList);
+        PersonTagsContainsCaseInsensitiveTagsPredicate firstPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(firstTagList);
+        PersonTagsContainsCaseInsensitiveTagsPredicate secondPredicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(secondTagList);
 
-        FindTagsCommand findFirstTagCommand = new FindTagsCommand(firstPredicate);
-        FindTagsCommand findSecondTagCommand = new FindTagsCommand(secondPredicate);
+        FindTagCaseInsensitiveCommand findFirstTagCommand = new FindTagCaseInsensitiveCommand(firstPredicate);
+        FindTagCaseInsensitiveCommand findSecondTagCommand = new FindTagCaseInsensitiveCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstTagCommand.equals(findFirstTagCommand));
 
         // same values -> returns true
-        FindTagsCommand findFirstTagCommandCopy = new FindTagsCommand(firstPredicate);
+        FindTagCaseInsensitiveCommand findFirstTagCommandCopy = new FindTagCaseInsensitiveCommand(firstPredicate);
         assertTrue(findFirstTagCommand.equals(findFirstTagCommandCopy));
 
         // different types -> returns false
@@ -66,8 +65,8 @@ public class FindTagsCommandTest {
     @Test
     public void execute_oneTags_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonTagsContainsTagsPredicate predicate = preparePredicate("sdfiojoij");
-        FindTagsCommand command = new FindTagsCommand(predicate);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate = preparePredicate("sdfiojoij");
+        FindTagCaseInsensitiveCommand command = new FindTagCaseInsensitiveCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -76,8 +75,18 @@ public class FindTagsCommandTest {
     @Test
     public void execute_oneTag_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PersonTagsContainsTagsPredicate predicate = preparePredicate("friends");
-        FindTagsCommand command = new FindTagsCommand(predicate);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate = preparePredicate("friends");
+        FindTagCaseInsensitiveCommand command = new FindTagCaseInsensitiveCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneTag_multiplePersonsWithCaseSensitivityFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate = preparePredicate("frieNds");
+        FindTagCaseInsensitiveCommand command = new FindTagCaseInsensitiveCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
@@ -85,20 +94,20 @@ public class FindTagsCommandTest {
 
     @Test
     public void execute_multipleTag_onePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        PersonTagsContainsTagsPredicate predicate = preparePredicate("friends owesMoney");
-        FindTagsCommand command = new FindTagsCommand(predicate);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate = preparePredicate("friends owesMoney");
+        FindTagCaseInsensitiveCommand command = new FindTagCaseInsensitiveCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private PersonTagsContainsTagsPredicate preparePredicate(String userInput) {
+    private PersonTagsContainsCaseInsensitiveTagsPredicate preparePredicate(String userInput) {
         String[] userArguments = userInput.split("\\s+");
         List<Tag> tagList = Arrays.stream(userArguments).map(Tag::new).collect(Collectors.toList());
-        return new PersonTagsContainsTagsPredicate(tagList);
+        return new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList);
     }
 }

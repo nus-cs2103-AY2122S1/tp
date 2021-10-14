@@ -9,18 +9,18 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindTagsCommand;
-import seedu.address.model.person.PersonTagsContainsTagsPredicate;
+import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
+import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
 import seedu.address.model.tag.Tag;
 
-public class FindTagsCommandParserTest {
+public class FindTagCaseInsensitiveCommandParserTest {
 
-    private FindTagsCommandParser parser = new FindTagsCommandParser();
+    private FindTagCaseInsensitiveCommandParser parser = new FindTagCaseInsensitiveCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagsCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCaseInsensitiveCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -28,9 +28,10 @@ public class FindTagsCommandParserTest {
         // no leading and trailing whitespaces
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("friends"));
-        PersonTagsContainsTagsPredicate predicate = new PersonTagsContainsTagsPredicate(tagList);
-        FindTagsCommand expectedFindCommand =
-                new FindTagsCommand(predicate);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList);
+        FindTagCaseInsensitiveCommand expectedFindCommand =
+                new FindTagCaseInsensitiveCommand(predicate);
         assertParseSuccess(parser, "friends", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -48,9 +49,10 @@ public class FindTagsCommandParserTest {
         List<Tag> tagList = new ArrayList<>();
         tagList.add(new Tag("friends"));
         tagList.add(new Tag("husband"));
-        PersonTagsContainsTagsPredicate predicate = new PersonTagsContainsTagsPredicate(tagList);
-        FindTagsCommand expectedFindCommand =
-                new FindTagsCommand(predicate);
+        PersonTagsContainsCaseInsensitiveTagsPredicate predicate =
+                new PersonTagsContainsCaseInsensitiveTagsPredicate(tagList);
+        FindTagCaseInsensitiveCommand expectedFindCommand =
+                new FindTagCaseInsensitiveCommand(predicate);
         assertParseSuccess(parser, "friends husband", expectedFindCommand);
 
         // multiple whitespaces between keywords
