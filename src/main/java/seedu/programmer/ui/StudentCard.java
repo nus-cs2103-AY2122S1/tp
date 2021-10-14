@@ -79,8 +79,8 @@ public class StudentCard extends UiPart<Region> {
      * */
     public void updateStudentInformation(Student student) {
         name.setText(student.getName().fullName);
-        studentId.setText("Student_ID: " + student.getStudentId().studentId);
-        classId.setText("Class_ID: " + student.getClassId().classId);
+        studentId.setText("Student ID: " + student.getStudentId().studentId);
+        classId.setText("Class ID: " + student.getClassId().classId);
         grade.setText("Grade: " + student.getGrade().grade);
 
         name.setTextFill(Color.WHITE);
