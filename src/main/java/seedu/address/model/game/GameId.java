@@ -43,7 +43,7 @@ public class GameId {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GameId // instanceof handles nulls
-                && value.equals(((GameId) other).value)); // state check
+                && value.equalsIgnoreCase(((GameId) other).value)); // state check
     }
 
     @Override

@@ -38,7 +38,7 @@ public class AddGameCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasGameId(toAdd.getGameId())) {
+        if (model.hasGameWithId(toAdd.getGameId())) {
             throw new CommandException(MESSAGE_DUPLICATE_GAME);
         }
 

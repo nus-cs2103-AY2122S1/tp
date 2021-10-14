@@ -115,8 +115,6 @@ public interface Model {
      */
     void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks);
 
-    boolean hasFriendId(FriendId idToFind);
-
     //=========== GamesBook ==================================================================================
 
     /**
@@ -170,5 +168,4 @@ public interface Model {
      */
     void updateFilteredGamesList(Predicate<Game> predicate);
 
-    boolean hasGameId(GameId idToFind);
 }

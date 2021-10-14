@@ -6,7 +6,7 @@ import seedu.address.model.friend.Friend;
 /**
  * A utility class to help with building FriendsList objects.
  * Example usage: <br>
- *     {@code FriendsList fl = new FriendsList().withFriend(new Friend("friendId", "friendName")).build();}
+ *     {@code FriendsList fl = new FriendsList().withFriend(new Friend(friendId, friendName, gameFriendLinks)).build();}
  */
 public class FriendsListBuilder {
 

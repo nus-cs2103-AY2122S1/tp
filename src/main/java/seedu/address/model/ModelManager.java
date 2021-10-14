@@ -158,13 +158,6 @@ public class ModelManager implements Model {
         filteredFriends.setPredicate(predicate);
     }
 
-    @Override
-    public boolean hasFriendId(FriendId idToFind) {
-        requireNonNull(idToFind);
-        return this.getFriendsList().getFriendsList().stream()
-                .anyMatch(friend -> friend.getFriendId().equals(idToFind));
-    }
-
     //=========== GamesBook ==================================================================================
 
     @Override
@@ -225,13 +218,6 @@ public class ModelManager implements Model {
     public void updateFilteredGamesList(Predicate<Game> predicate) {
         requireNonNull(predicate);
         filteredGames.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean hasGameId(GameId idToFind) {
-        requireNonNull(idToFind);
-        return this.getGamesList().getGamesList().stream()
-                .anyMatch(game -> game.getGameId().equals(idToFind));
     }
 
     @Override

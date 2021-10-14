@@ -71,7 +71,7 @@ public class UniqueGamesList implements Iterable<Game> {
         }
 
         // guard against if editedGame already exists in the UniqueGamesList.
-        if (!gameToEdit.equals(editedGame) && contains(editedGame)) {
+        if (!gameToEdit.isSameGameId(editedGame) && containsId(editedGame.getGameId())) {
             throw new DuplicateGameException();
         }
 

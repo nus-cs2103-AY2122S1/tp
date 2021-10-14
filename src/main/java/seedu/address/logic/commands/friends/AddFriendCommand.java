@@ -45,7 +45,7 @@ public class AddFriendCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasFriendId(toAdd.getFriendId())) {
+        if (model.hasFriendWithId(toAdd.getFriendId())) {
             throw new CommandException(MESSAGE_DUPLICATE_FRIEND_ID);
         }
 

@@ -74,7 +74,7 @@ public class UniqueFriendsList implements Iterable<Friend> {
         }
 
         // guard against if editedFriend already exists in the UniqueFriendsList.
-        if (!friendToEdit.equals(editedFriend) && contains(editedFriend)) {
+        if (!friendToEdit.isSameFriendId(editedFriend) && containsId(editedFriend.getFriendId())) {
             throw new DuplicateFriendException();
         }
 

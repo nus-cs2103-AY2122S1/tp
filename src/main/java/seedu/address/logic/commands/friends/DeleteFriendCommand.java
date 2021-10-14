@@ -36,7 +36,7 @@ public class DeleteFriendCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasFriendId(friendToDeleteId)) {
+        if (model.hasFriendWithId(friendToDeleteId)) {
             model.deleteFriend(friendToDeleteId);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, friendToDeleteId));
         } else {

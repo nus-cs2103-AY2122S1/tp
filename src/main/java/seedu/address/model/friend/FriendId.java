@@ -43,7 +43,7 @@ public class FriendId {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FriendId // instanceof handles nulls
-                && value.equals(((FriendId) other).value)); // state check
+                && value.equalsIgnoreCase(((FriendId) other).value)); // state check
     }
 
     @Override
