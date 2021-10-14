@@ -1,0 +1,30 @@
+{
+  "persons": [
+
+  ],
+  "employees": [
+
+  ],
+  "customers": [
+
+  ],
+  "suppliers": [ {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "tagged": [ "friends" ],
+      "supplyType" : "Chicken",
+      "deliveryDetails" : "Every Wednesday"
+    }, {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "pauline@example.com",
+      "address": "4th street",
+      "supplyType" : "Beef",
+      "deliveryDetails" : "Every Wednesday"
+    } ],
+  "reservations": [
+
+  ]
+}

@@ -15,6 +15,8 @@ import seedu.address.model.reservation.Reservation;
  */
 public class JsonAdaptedReservation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reservation's %s field is missing";
+    public static final String NUMBER_OF_PEOPLE_CONSTRAINT = "Number of people should be a non-zero unsigned integer";
+    public static final String DATE_TIME_CONSTRAINT = "Wrong date time format";
 
     private final String phone;
     private final Integer numberOfPeople;
@@ -64,7 +66,7 @@ public class JsonAdaptedReservation {
             );
         }
         if (numberOfPeople <= 0) {
-            throw new IllegalValueException("Number of people should be a non-zero unsigned integer");
+            throw new IllegalValueException(NUMBER_OF_PEOPLE_CONSTRAINT);
         }
 
         if (time == null) {
@@ -75,7 +77,7 @@ public class JsonAdaptedReservation {
         try {
             LocalDateTime.parse(time);
         } catch (DateTimeParseException e) {
-            throw new IllegalValueException("Wrong date time format");
+            throw new IllegalValueException(DATE_TIME_CONSTRAINT);
         }
         LocalDateTime modelTime = LocalDateTime.parse(time);
 

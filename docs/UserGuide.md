@@ -68,67 +68,45 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a customer: `add customer`
+### Adding a customer: `addcustomer`
 
 Adds a customer to RHRH.
 
-Format: `add customer n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS lp/LOYALTYPOINTS [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]`
 
-Examples: `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+* Adds a customer with all specified fields, where `LOYALTYPOINTS`, `ALLERGIES` and `SPECIALREQUESTS` are fields specific to customers.
+* `ALLERGIES`, `SPECIALREQUESTS` and `TAG` are optional fields that can be omitted.
 
-Note: customer specific question prompts will be triggered
+Examples: 
+* `addcustomer n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/0 alg/Kiwi sr/NoAirCon t/friendly` adds a customer with the respective fields to the customer list.
+* `addcustomer n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 lp/0` adds a customer without any optional fields.
 
-### Adding an employee: `add employee`
+
+### Adding an employee: `addemployee`
 
 Adds an employee to RHRH.
 
-Format: `add employee n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]`
 
-Examples: `add employee n/John Doe p/87654321 e/e12345@u.nus.edu`
+* Adds an employee with all specified fields, where `LEAVES`, `SALARY` and `JOBTITLE` are fields specific to employees.
+* `TAG` is an optional field that can be omitted.
 
-Note: employee specific question prompts will be triggered
+Examples: 
+* `addemployee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Developer t/workaholic` adds an employee with the respective fields.
+* `addemployee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 l/14 sal/4000 jt/Junior Developer` adds an employee without any optional fields.
 
-### Adding a supplier: `add supplier`
+### Adding a supplier: `addSupplier`
 
 Adds a supplier to RHRH.
 
-Format: `add supplier n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `addSupplier n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]`
 
-Examples: `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu`
-
-Note: supplier specific question prompts will be triggered
-
-### Search a reservation's availability: `find -r`
-
-Search a reservation's availability using the given date/time
-
-Format:
-* `find -r d/DATE t/TIME`
-* `find -r t/TIME`
-* `find -r d/DATE`
+* Adds a supplier with all specified fields, where `SUPPLYTYPE` and `DELIVERYDETAILS` are fields specific to suppliers
+* `TAG` is an optional field that can be omitted.
 
 Examples:
-* `find -r 2021-09-19 18:00`
-* `find -r 18:00`
-* `find -r 2021-09-19`
-
-### Create a reservation: `reserve` 
-
-Format: `reserve d/DATE t/TIME  n/NAME p/PHONE_NUMBER`
-
-Examples: `reserve d/2021-09-19 t/1800 n/John Doe p/87654321`
-
-Note: System will reject if time slot is not available
-
----
-
-## These features will be coming soon!
-
-### Listing all persons : `list`
-
-Shows a list of all persons in RHRH.
-
-Format: `list`
+* `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday t/punctual` adds a supplier with the respective fields.
+* `addSupplier n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 10 st/Alcohol dd/Every Monday` adds a supplier without any optional fields.
 
 ### Editing a person : `edit`
 
@@ -147,6 +125,149 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Editing a customer : `editcustomer`
+
+Edits an existing customer in RHRH.
+
+Format: `editcustomer INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`
+
+* Edits the customer at the specified `INDEX`. The index refers to the index number shown in the displayed customer list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing allergies, special requests or tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing `t/` without
+    specifying any tags after it. Similar for allergies by typing `alg/` and special requests by typing `sr/`.
+
+Examples:
+*  `editcustomer 1 alg/Kiwi sr/noAirCon` Edits the allergies and special requests of the 1st customer to be `Kiwi` and `noAirCon` respectively.
+*  `editcustomer 2 n/Betsy Crower t/` Edits the name of the 2nd customer to be `Betsy Crower` and clears all existing tags.
+
+### Editing an employee : `editemployee`
+
+Edits an existing employee in RHRH.
+
+Format: `editemployee INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`
+
+* Edits the employee at the specified `INDEX`. The index refers to the index number shown in the displayed employee list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the employee will be removed i.e adding of tags is not cumulative.
+* You can remove all the employee’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+*  `editemployee 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
+*  `editemployee 2 n/Betsy Crower t/` Edits the name of the 2nd employeee to be `Betsy Crower` and clears all existing tags.
+
+### Editing a supplier : `editsupplier`
+
+Edits an existing supplier in RHRH.
+
+Format: `editSupplier INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`
+
+* Edits the supplier at the specified `INDEX`. The index refers to the index number shown in the displayed supplier list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the supplier will be removed i.e adding of tags is not cumulative.
+* You can remove all the supplier’s tags by typing `t/` without
+    specifying any tags after it.
+
+Examples:
+*  `editSupplier 1 p/91234567 st/Beef` Edits the phone number and supply type of the 1st supplier to be `91234567` and `Beef` respectively.
+*  `editSupplier 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
+
+### Deleting a person : `delete`
+
+Deletes the specified person from RHRH.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a customer : `deletecustomer`
+
+Deletes the specified customer from RHRH.
+
+Format: `deletecustomer INDEX`
+
+* Deletes the customer at the specified `INDEX`.
+* The index refers to the index number shown in the displayed customer list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deletecustomer 2` deletes the 2nd customer in the address book.
+
+### Deleting an employee : `deleteemployee`
+
+Deletes the specified employee from RHRH.
+
+Format: `deleteemployee INDEX`
+
+* Deletes the employee at the specified `INDEX`.
+* The index refers to the index number shown in the displayed employee list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deleteemployee 2` deletes the 2nd person in the address book.
+
+### Deleting a supplier : `deleteSupplier`
+
+Deletes the specified supplier from RHRH.
+
+Format: `deleteSupplier INDEX`
+
+* Deletes the supplier at the specified `INDEX`.
+* The index refers to the index number shown in the displayed supplier list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deleteSupplier 2` deletes the 2nd supplier in the address book.
+
+### Search a reservation's availability: `find -r`
+
+Search a reservation's availability using the given date/time
+
+Format:
+* `find -r d/DATE t/TIME`
+* `find -r t/TIME`
+* `find -r d/DATE`
+
+Examples:
+* `find -r 2021-09-19 18:00`
+* `find -r 18:00`
+* `find -r 2021-09-19`
+
+### Create a reservation: `reserve` 
+
+Add a new reservation with number of people, 
+customer's phone number and the date & time.
+
+Format: `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
+
+* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2030`
+
+Examples: 
+* `reserve 2 p/98765432 at/2021-12-24 2000`
+* `reserve 5 p/12345668 at/2021-02-14 1200`
+
+Note: System will reject if time slot is not available
+
+---
+
+## These features will be coming soon!
+
+### Listing all persons : `list`
+
+Shows a list of all persons in RHRH.
+
+Format: `list`
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -163,20 +284,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
-### Deleting a person : `delete`
-
-Deletes the specified person from RHRH.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -219,14 +326,19 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Customer** | `add customer n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add Employee** | `add employee n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu`
-**Add supplier** | `add supplier n/NAME p/PHONE_NUMBER e/EMAIL` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Customer** | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
+**Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
+**Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
 **Check a reservation availability** | `find -r d/DATE t/TIME`, `find -r t/TIME`, `find -r d/DATE` <br> e.g. `find -r 2021-09-19 18:00`, `find -r 18:00` `find -r 2021-09-19`
 **Create reservation** | `reserve d/DATE t/TIME  n/NAME p/PHONE_NUMBER` <br> e.g. `reserve d/2021-09-19 t/1800 n/John Doe p/87654321`
 **Clear [COMING SOON]** | `clear`
-**Delete [COMING SOON]** | `delete INDEX`<br> e.g., `delete 3`
-**Edit [COMING SOON]** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
+**Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`
+**Delete Customer** | `deletecustomer INDEX`<br> e.g., `delete 3`
+**Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
+**Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
+**Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
+**Create reservation** | `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`<br> e.g., `reserve 2 p/98765432 at/2021-12-24 2000`
 **Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [COMING SOON]** | `list`
 **Help [COMING SOON]** | `help`
