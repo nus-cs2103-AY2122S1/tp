@@ -11,7 +11,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Module}.
  */
 public class ModuleCard extends UiPart<Region> {
 
@@ -54,11 +54,14 @@ public class ModuleCard extends UiPart<Region> {
      */
     void fillInnerParts() {
         ObservableList<Student> studentList = module.getStudentList();
-        System.out.println("MGSLsize: " + studentList.size());
         if (studentList.size() != 0) {
             studentListPanel = new StudentListPanel(module.getStudentList());
             studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
         }
+    }
+
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     @Override
