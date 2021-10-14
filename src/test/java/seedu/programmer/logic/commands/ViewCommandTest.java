@@ -5,20 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.programmer.testutil.TypicalStudents.ALICE;
+import static seedu.programmer.testutil.TypicalStudents.BENSON;
 import static seedu.programmer.testutil.TypicalStudents.CARL;
+import static seedu.programmer.testutil.TypicalStudents.DANIEL;
 import static seedu.programmer.testutil.TypicalStudents.ELLE;
 import static seedu.programmer.testutil.TypicalStudents.FIONA;
+import static seedu.programmer.testutil.TypicalStudents.GEORGE;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
-import seedu.programmer.model.student.NameContainsKeywordsPredicate;
+import seedu.programmer.model.student.QueryStudentDescriptor;
+import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
@@ -29,13 +33,23 @@ public class ViewCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor("first", null, null);
+        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor("second", "A123", "B01");
+        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor("second", "A123", null);
+
+        // firstPredicate contains query field(s) : name
+        StudentDetailContainsQueryPredicate firstPredicate =
+                new StudentDetailContainsQueryPredicate(firstQueryFields);
+        // secondPredicate contains query field(s) : name, StudentId, ClassID
+        StudentDetailContainsQueryPredicate secondPredicate =
+                new StudentDetailContainsQueryPredicate(secondQueryFields);
+        // thirdPredicate contains query field(s) : name, StudentId (same as that of the secondPredicate)
+        StudentDetailContainsQueryPredicate thirdPredicate = new StudentDetailContainsQueryPredicate(thirdQueryFields);
+
 
         ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
         ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
+        ViewCommand viewThirdCommand = new ViewCommand(thirdPredicate);
 
         // same object -> returns true
         assertTrue(viewFirstCommand.equals(viewFirstCommand));
@@ -52,32 +66,79 @@ public class ViewCommandTest {
 
         // different student -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
+
+        // different student -> returns false
+        assertFalse(viewFirstCommand.equals(viewThirdCommand));
+
+        // different student -> returns false
+        assertFalse(viewSecondCommand.equals(viewThirdCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noStudentFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+    public void execute_zeroQueryArg_allStudentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 7);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredStudentList());
     }
 
     @Test
-    public void execute_multipleKeywords_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+    public void execute_singleNameQueryArg_oneStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate("Elle", null, null);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(ELLE), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_singleCidQueryArg_multipleStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_singleSidQueryArg_multipleStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null);
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_multipleQueryArg_oneStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate("Pauline", "A0212425H", null);
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredStudentList());
+    }
+
+    @Test
+    public void execute_multipleQueryArg_multipleStudentsFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "A02", "B0");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredStudentList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredStudentList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code name}, {@code classId} and {@code studentId} into a {@code StudentDetailContainsQueryPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private StudentDetailContainsQueryPredicate preparePredicate(String name, String studentId, String classId) {
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor(name, studentId, classId);
+        return new StudentDetailContainsQueryPredicate(queryFields);
     }
 }
