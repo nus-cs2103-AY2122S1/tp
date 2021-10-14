@@ -76,6 +76,13 @@ public class SampleDataUtil {
     }
 
     /**
+     * Returns a set containing the list of members given.
+     */
+    public static Set<Member> getMemberSet(Member... members) {
+        return Arrays.stream(members).collect(Collectors.toSet());
+    }
+
+    /**
      * Returns a list of tasks containing the list of tasks given.
      */
     public static List<Task> getTaskList(Task ... tasks) {

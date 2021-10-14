@@ -136,6 +136,15 @@ public class Event extends Data {
     }
 
     /**
+     * Marks everyone as present for attendance.
+     */
+    public void markAttendanceForAll() {
+        for (Member m : participants.keySet()) {
+            participants.replace(m, true);
+        }
+    }
+
+    /**
      * Mark the absence of a set of members.
      *
      * @param members to be marked as absent
