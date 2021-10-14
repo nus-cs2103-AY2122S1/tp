@@ -35,9 +35,9 @@ public class HelpPanel extends UiPart<Region> {
             + "4. Find by description -> find DESCRIPTION\n"
             + "5. Find by tag -> find [t/TAG]\n"
             + "6. Clear Tasks -> clear\n\n"
-            + "For more detailed information on each command,"
-            + " visit our User Guide by clicking the buttons below to copy \n"
-            + " the URL of the User Guide. \n\n";
+            + "For more detailed information,"
+            + " visit our User Guide or Developer Guide by clicking the buttons below to copy \n"
+            + " their URLs. \n\n";
 
     private static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
 
