@@ -172,11 +172,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th client in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new client. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -184,7 +184,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the client was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -229,7 +229,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -257,44 +257,115 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* works as an insurance agent
 * prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* has a need to manage a large number of his/her Singaporean clients and their details
+* has a need to be reminded about his/her meeting timings with clients
+* has a need to manage revenue and costs for his clients
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage clients faster than a typical mouse/GUI driven app and to also be able
+to collate details of clients in one application.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority   | As a …​                                    | I want to …​                     | So that I can…​                                                        |
+| -----------| ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
+| `* * *`  | insurance agent                            | add clients' names to the client list        | connect with them easier on future meetups.              |
+| `* * *`  | insurance agent whose clients live in Singapore                            | add the address of clients to the client list              | plan meetups with them in the future easily                                                                 |
+| `* * *`  | insurance agent                            | add clients' client number to the client list               | contact them when I want to                                  |
+| `* * *`  | insurance agent                            | keep track of clients' claim status         | update the client about it |
+| `* * *`  | insurance agent                                     | add total revenue from each of my clients  |  determine the quality of my clients|
+| `* * *`  | insurance agent                                     | add total costs from each of my clients         | determine how much to spend on gifts for clients.|
+| `* * *`  | user                                                | save my total costs for future use         | save time on having to type them everytime.|
+| `* * *`  | insurance agent                                     | keep notes about the client      | remember the health condition and ailments of all my clients.|
+| `* * *`  | insurance agent                                     |  wants to record the time and place of my appointments          | be punctual|
+| `* * *`  | user                                     | save my clients upon closing my address book        | save time on having to type them everytime |
+| `* * *`  | organised user                                    | all the clients in my address book to be arranged alphabetically by their First Name         | find whoever I am looking for faster|
+| `* * *`  | organised and shrewd insurance agent                                     | sort my clients based on how much money I am making from them         | know which clients to prioritise|
+| `* * *`  | insurance agent                                     | be able to easily calculate the commissions I get from my clients        | know the revenue obtained from each client |
+| `* * *`  | organised insurance agent                                    | remember what insurance my client already has        |  sell the client insurance he/she does not have yet |
+| `* * *`  | user with many clients in the address book                                     | search for clients in my clients list whose name matches my input         |  navigate to the client I am looking for quickly |
+| `* * *`  | user                                     | be able to delete people from my client list         | remove a client from my client list I no longer need to keep in contact with|
+| `* * *`  | user                                    | be able to use programs on Windows and Mac         | use it on all my laptops |
+| `* * *`  | user                                    | exit the program safely        | free up resources on his computer |
+| `* * *`  | new user                                     |  be able to install the application        | I can use it |
+| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
+| `* * *`  | insurance agent                                     | keep track of clients' claim status         | update the client about it |
+| `* *`    | insurance agent                                      | keep track of the birthday of my clients   | maintain customer relations with them|
+| `* *`    | insurance agent that labels my clients    | delete labels that I have assigned  | correct mislabels and inaccurate labels
+| `* *`    | user                                       | import my clients from a different source   | easily add multiple clients at once
+| `* *`    | user                                       | be able to filter out the clients in my address book based on address   | better plan out my appointments
+| `* *`    | user                                       | see my client list as a user interface   | read the list easily|
+| `* *`    | experienced user                                      | be able to back up my client data  | not lose the data|
+| `* *`    | expert insurance agent                                      | give my clients a nickname   | more easily search for my regular clients |
+| `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
+| `* *`    | insurance agent                                      | be able to see the labels attached to each client easily   |  quickly reference it when I am about to meet the client|
+| `* *`    | user                                       | edit the information of entries in my address book   | ensure the information is accurate and up to date.|
+| `* *`    | insurance agent with a lot of clients                                       | create labels for my clients   |  classify and keep track of each of their characteristics|
+| `*`      | user | see how much space the program is using          | easily manage my computer memory |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `InsurancePal` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Viewing help**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to see the help menu
+2. InsurancePal shows the user how to access the help webpage
+3. User accesses the help webpage
 
-    Use case ends.
+   Use case ends.
+
+**Use case: Add a client**
+
+**MSS**
+
+1. User requests to add a client
+2. InsurancePal adds the client
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given details are of an invalid format
+
+    * 1a1. InsurancePal shows an error message
+
+      Use case ends.
+
+**Use case: List all clients**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty
+    * 2a1. InsurancePal displays an empty list of clients
+
+      Use case ends.
+
+**Use case: Edit a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to edit a specific client in the list
+4. InsurancePal edits the client
+
+   Use case ends.
 
 **Extensions**
 
@@ -303,17 +374,183 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 * 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
+    * 3a1. InsurancePal shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Finding a client**
+
+**MSS**
+
+1. User requests to find a client using keywords
+2. InsurancePal shows a list of clients whose names match at least one keyword
+
+   Use case ends.
+
+**Use case: Delete a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to delete a specific client in the list
+4. InsurancePal delete the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Clear the InsurancePal**
+
+**MSS**
+
+1. User requests to clear the InsurancePal
+2. InsurancePal clears all entries in it
+
+   Use case ends.
+
+**Use case: Add reveneue to a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to add revenue to a specific client in the list
+4. InsurancePal adds revenue to the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given revenue is of an invalid format
+    * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add a claim to a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to add a claim to a specific client in the list
+4. InsurancePal adds the claim to the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+* 3b. The given claim is of an invalid format
+    * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add a note to a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to add a note to a specific client in the list
+4. InsurancePal adds a note to the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Schedule a meeting**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to schedule a meeting with a specific client in the list
+4. InsurancePal schedules a meeting with the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given meeting time is of an invalid format
+    * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add insurance to a client**
+
+**MSS**
+
+1. User requests to list clients
+2. InsurancePal shows a list of clients
+3. User requests to add insurance to a specific client in the list
+4. InsurancePal adds insurance to the client
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given insurance is of an invalid format
+    * 3b1. InsurancePal shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 1000 clients without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. New users should be able to easily see where to find information on how to use the application.
 5. Should inform user of the necessary amendments to make to their input when receiving a bad input.
@@ -328,6 +565,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Notes**: A short paragraph that is written for a person to remind the user about details of that person
 * **Client**: A person the user is selling or trying to sell insurance to
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,7 +584,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample clients. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -357,17 +595,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a client
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while all clients are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all clients using the `list` command. Multiple clients in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First client is deleted from the list. Details of the deleted client shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
