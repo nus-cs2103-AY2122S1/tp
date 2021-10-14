@@ -258,5 +258,4 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPositions.setPredicate(predicate);
     }
-
 }

@@ -135,6 +135,4 @@ public interface Model {
     ObservableList<Position> getFilteredPositionList();
 
     void updateFilteredPositionList(Predicate<Position> predicate);
-
-
 }
