@@ -15,7 +15,6 @@ public class Event {
     private final EventDate eventDate;
     private final Venue venue;
     private final Capacity capacity;
-    // test
 
     /**
      * Every field must be present
@@ -46,7 +45,7 @@ public class Event {
 
     /**
      * Returns true if both events have the same name, date and venue.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
