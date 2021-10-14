@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    private static String MESSAGE_USAGE = "";
+    private static final String MESSAGE_USAGE = "";
     /**
      * Creates a HelpCommand with specific help messages
      */

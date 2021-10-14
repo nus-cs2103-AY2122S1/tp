@@ -29,15 +29,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label index;
+    @FXML
     private Label name;
     @FXML
     private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
     @FXML
     private FlowPane tags;
     @FXML
@@ -49,11 +45,10 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Item item, int displayedIndex) {
         super(FXML);
         this.item = item;
-        id.setText(displayedIndex + ". ");
+        index.setText(displayedIndex + ". ");
         name.setText(item.getName().fullName);
-        phone.setText(item.getId()); // id temporarily displayed in old phone label
-        address.setText(Integer.toString(item.getCount()));
-        //email.setText(person.getEmail().value);
+        id.setText(item.getId());
+        count.setText(Integer.toString(item.getCount()));
         item.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
