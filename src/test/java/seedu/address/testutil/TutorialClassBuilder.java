@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.tag.Tag;
@@ -7,8 +9,6 @@ import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.util.SampleDataUtil;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class TutorialClassBuilder {
 

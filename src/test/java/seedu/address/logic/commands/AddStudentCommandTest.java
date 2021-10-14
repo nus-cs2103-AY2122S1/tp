@@ -12,12 +12,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-
 import seedu.address.model.Classmate;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyClassmate;
-import seedu.address.model.ReadOnlyUserPrefs;
-
 import seedu.address.model.student.Student;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.StudentBuilder;

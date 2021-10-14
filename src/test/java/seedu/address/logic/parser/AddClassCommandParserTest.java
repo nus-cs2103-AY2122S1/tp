@@ -1,17 +1,33 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.CLASSCODE_DESC_G101;
+import static seedu.address.logic.commands.CommandTestUtil.CLASSCODE_DESC_G102;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_G1O1;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_G1O2;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BESTCLASS;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MORNING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BESTCLASS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MORNING;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalTutorialClasses.G101;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.TutorialClassBuilder;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalTutorialClasses.G101;
+
 
 public class AddClassCommandParserTest {
     private AddClassCommandParser parser = new AddClassCommandParser();
@@ -29,11 +45,13 @@ public class AddClassCommandParserTest {
                 + TAG_DESC_BESTCLASS, new AddClassCommand(expectedTutorialClass));
 
         // multiple schedules - last schedule accepted
-        assertParseSuccess(parser,  CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O2 + SCHEDULE_DESC_G1O1
+        assertParseSuccess(parser, CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O2 + SCHEDULE_DESC_G1O1
                 + TAG_DESC_BESTCLASS, new AddClassCommand(expectedTutorialClass));
 
         // multiple tags - all accepted
-        TutorialClass expectedTutorialClassMultipleTags = new TutorialClassBuilder(G101).withTags(VALID_TAG_BESTCLASS, VALID_TAG_MORNING).build();
+        TutorialClass expectedTutorialClassMultipleTags = new TutorialClassBuilder(G101)
+                .withTags(VALID_TAG_BESTCLASS, VALID_TAG_MORNING).build();
+
         assertParseSuccess(parser, CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1 + TAG_DESC_MORNING
                 + TAG_DESC_BESTCLASS, new AddClassCommand(expectedTutorialClassMultipleTags));
     }
@@ -41,8 +59,8 @@ public class AddClassCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         TutorialClass expectedTutorialClass = new TutorialClassBuilder(G101).withTags().build();
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1
-                , new AddClassCommand(expectedTutorialClass));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1,
+                new AddClassCommand(expectedTutorialClass));
     }
 
     @Test
@@ -63,14 +81,18 @@ public class AddClassCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid schedule
-        assertParseFailure(parser, CLASSCODE_DESC_G101 + INVALID_SCHEDULE + TAG_DESC_MORNING, Schedule.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, CLASSCODE_DESC_G101 + INVALID_SCHEDULE + TAG_DESC_MORNING,
+                Schedule.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1 + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1 + INVALID_TAG_DESC,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, CLASSCODE_DESC_G101 + INVALID_SCHEDULE + INVALID_TAG_DESC, Schedule.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, CLASSCODE_DESC_G101 + INVALID_SCHEDULE + INVALID_TAG_DESC,
+                Schedule.MESSAGE_CONSTRAINTS);
 
+        // preamble not empty
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CLASSCODE_DESC_G101 + SCHEDULE_DESC_G1O1,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
     }

@@ -1,6 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Classmate;
 import seedu.address.model.ReadOnlyClassmate;
@@ -8,12 +18,8 @@ import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.ModelStub;
 import seedu.address.testutil.TutorialClassBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
+
 
 public class AddClassCommandTest {
     @Test
@@ -44,17 +50,17 @@ public class AddClassCommandTest {
 
     @Test
     public void equals() {
-        TutorialClass A = new TutorialClassBuilder().withClassCode("A").build();
-        TutorialClass B = new TutorialClassBuilder().withClassCode("B").build();
+        TutorialClass a = new TutorialClassBuilder().withClassCode("a").build();
+        TutorialClass b = new TutorialClassBuilder().withClassCode("b").build();
 
-        AddClassCommand addACommand = new AddClassCommand(A);
-        AddClassCommand addBCommand = new AddClassCommand(B);
+        AddClassCommand addACommand = new AddClassCommand(a);
+        AddClassCommand addBCommand = new AddClassCommand(b);
 
         // same object -> returns true
         assertTrue(addACommand.equals(addACommand));
 
         // same values -> returns true
-        AddClassCommand addACommandCopy = new AddClassCommand(A);
+        AddClassCommand addACommandCopy = new AddClassCommand(a);
         assertTrue(addACommand.equals(addACommandCopy));
 
         // different types -> returns false

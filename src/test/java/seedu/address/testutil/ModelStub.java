@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
@@ -8,8 +11,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
+
 
 /**
  * A default model stub that have all of the methods failing.
