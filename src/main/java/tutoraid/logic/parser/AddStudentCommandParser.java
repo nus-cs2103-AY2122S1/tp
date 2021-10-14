@@ -1,6 +1,10 @@
 package tutoraid.logic.parser;
 
-import java.util.stream.Stream;
+import static java.util.Objects.requireNonNull;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddStudentCommand;
@@ -21,25 +25,29 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddStudentCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_STUDENT_NAME, CliSyntax.PREFIX_STUDENT_PHONE,
-                        CliSyntax.PREFIX_PARENT_NAME, CliSyntax.PREFIX_PARENT_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
+                        PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
 
         // Student name is a required fields (student phone, parent name and parent phone are optional)
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_STUDENT_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_STUDENT_NAME).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(
                     Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
 
         StudentName studentName = ParserUtil.parseStudentName(
-                argMultimap.getValue(CliSyntax.PREFIX_STUDENT_NAME).get());
-        Phone studentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_PHONE).get());
-        ParentName parentName = ParserUtil.parseParentName(argMultimap.getValue(CliSyntax.PREFIX_PARENT_NAME).get());
-        Phone parentPhone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PARENT_PHONE).get());
+                argMultimap.getValue(PREFIX_STUDENT_NAME).get());
+        Phone studentPhone = ParserUtil.parsePhone(
+                argMultimap.getValue(PREFIX_STUDENT_PHONE).orElse(""));
+        ParentName parentName = ParserUtil.parseParentName(
+                argMultimap.getValue(PREFIX_PARENT_NAME).orElse(""));
+        Phone parentPhone = ParserUtil.parsePhone(
+                argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
         Progress progress = new Progress("No Progress");
         PaymentStatus paymentStatus = new PaymentStatus(false);
 
@@ -47,13 +55,4 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
 
         return new AddStudentCommand(student);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }
