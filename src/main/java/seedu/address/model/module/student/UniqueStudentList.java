@@ -99,6 +99,13 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns the backing list as an modifiable {@code ObservableList}.
+     */
+    public ObservableList<Student> asModifiableObservableList() {
+        return internalList;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {

@@ -41,7 +41,9 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                StudentCard studentCard = new StudentCard(student, getIndex() + 1);
+                setGraphic(studentCard.getRoot());
+                studentCard.fillInnerParts();
             }
         }
     }

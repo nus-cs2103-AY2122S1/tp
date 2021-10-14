@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 /**
  * An UI component that displays information of a {@code Student}.
@@ -24,6 +28,9 @@ public class StudentCard extends UiPart<Region> {
 
     public final Student student;
 
+    // Independent Ui parts residing in this Ui container
+    private TaskListPanel taskListPanel;
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -36,6 +43,10 @@ public class StudentCard extends UiPart<Region> {
     private Label studentId;
     @FXML
     private Label email;
+    @FXML
+    private ListView<Task> taskListView;
+    @FXML
+    private StackPane taskListPanelPlaceholder;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -48,6 +59,17 @@ public class StudentCard extends UiPart<Region> {
         teleHandle.setText(student.getTeleHandle().value);
         studentId.setText(student.getStudentId().value);
         email.setText(student.getEmail().value);
+    }
+
+    /**
+     * Fills up all the placeholders of this StudentCard.
+     */
+    void fillInnerParts() {
+        ObservableList<Task> taskList = student.getTaskList().asModifiableObservableList();
+        if (taskList.size() != 0) {
+            taskListPanel = new TaskListPanel(student.getTaskList().asModifiableObservableList());
+            taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        }
     }
 
     @Override

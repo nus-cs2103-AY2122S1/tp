@@ -47,7 +47,8 @@
           </padding>
         </StackPane>
 
-        <VBox fx:id="studentList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+<!--        This VBox is a moduleListPanel-->
+        <VBox fx:id="studentList" styleClass="pane-with-border" minHeight="-Infinity" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>

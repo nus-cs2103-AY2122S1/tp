@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.StackPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -27,18 +26,9 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-                <Label fx:id="teleHandle" styleClass="cell_small_label" text="\$teleHandle" />
-                <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
-                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+                <Label fx:id="isComplete" styleClass="cell_small_label" text="\$isComplete" />
             </HBox>
-
-<!--            This VBox is a TaskListPanel-->
-            <VBox fx:id="taskList" styleClass="pane-with-border" minHeight="-Infinity" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-                <padding>
-                    <Insets top="10" right="10" bottom="10" left="10" />
-                </padding>
-                <StackPane minHeight="-Infinity" fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-            </VBox>
             <!--      <FlowPane fx:id="tags" />-->
 
         </VBox>
