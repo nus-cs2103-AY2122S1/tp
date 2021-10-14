@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Class representing a period of dates.
@@ -76,6 +78,44 @@ public class Period {
                 && this.contains(period.endDate);
 
     }
+
+    /**
+     * Gets the complement duration of {@code period} and the
+     * input period.
+     */
+    public Collection<Period> complement(Period period) {
+        assert period.endDate.isAfter(period.startDate)
+                || period.endDate.isEqual(period.startDate);
+        assert endDate.isAfter(startDate)
+                || endDate.isEqual(startDate);
+        if (period.contains(this)) {
+            return List.of();
+        }
+        if (contains(period)) {
+            //when it is contained
+            Period period1 = new Period(startDate, period.startDate.minusDays(1));
+            Period period2 = new Period(period.endDate.plusDays(1), endDate);
+            return List.of(period1, period2);
+        }
+        // startDate period.startDate endDate period.endDate
+        // startDate <-> period.startDate - 1
+        if (contains(period.startDate)) {
+            return List.of(new Period(startDate, period.startDate.minusDays(1)));
+        }
+        // period.startDate startDate period.endDate endDate
+        // period.endDate + 1 <-> endDate
+        if (contains(period.endDate)) {
+            return List.of(new Period(period.endDate.plusDays(1), endDate));
+        }
+
+        //when there is no need to
+        return List.of(this);
+
+    }
+
+
+
+
 
     private boolean withinExclusively(LocalDate date) {
         return (this.startDate.isBefore(date))

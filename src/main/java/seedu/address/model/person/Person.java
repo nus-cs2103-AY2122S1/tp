@@ -119,11 +119,10 @@ public class Person {
     public Person unMark(Period period) {
         requireNonNull(period);
         Set<Period> periods = new HashSet<>();
-        List<Period> toRemove = getAbsentDates().stream()
-                .filter(p -> period.contains(p))
-                .collect(Collectors.toList());
-        periods.addAll(getAbsentDates());
-        periods.removeAll(toRemove);
+        Set<Period> result = getAbsentDates().stream()
+                .flatMap(p -> p.complement(period).stream())
+                .collect(Collectors.toSet());
+        periods.addAll(result);
         return new Person(name, phone, email, address,
                 role, salary, status, tags, periods);
     }
