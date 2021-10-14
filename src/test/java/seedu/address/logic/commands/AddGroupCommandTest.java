@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
@@ -10,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -82,7 +84,7 @@ public class AddGroupCommandTest {
                 new Student(AMY.getName(), AMY.getId(), newGroups, AMY.getScores(), AMY.getTags()));
 
         assertCommandSuccess(command, model,
-                String.format(AddGroupCommand.MESSAGE_SUCCESS, NEW_GROUP), expectedModel);
+                command.formatSuccessMessage(Arrays.asList(AMY)), expectedModel);
     }
 
     @Test
@@ -145,7 +147,8 @@ public class AddGroupCommandTest {
                 AMY.getName()), () -> command.execute(model));
     }
 
-    @Test void execute_ambiguousStudentName_throwsCommandException() {
+    @Test
+    public void execute_ambiguousStudentName_throwsCommandException() {
         // Two students named John Doe (with different IDs) exist in the application
         final String duplicatedName = "John Doe";
         Student firstJohn = new PersonBuilder().withName(duplicatedName).withId("E9090909").build();
@@ -162,6 +165,35 @@ public class AddGroupCommandTest {
 
         assertThrows(CommandException.class, String.format(AddGroupCommand.MESSAGE_DUPLICATE_STUDENT,
                 duplicatedName), () -> command.execute(model));
+    }
+
+    @Test
+    public void formatSuccessMessage_noStudentsToAdd_returnsGroupAddedMessage() {
+        Group standardGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
+        AddGroupCommand standardCommand = new AddGroupCommand(standardGroup, new ArrayList<>());
+
+        // no students to add -> returns only group added message
+        assertEquals(standardCommand.formatSuccessMessage(new ArrayList<>()),
+                String.format(AddGroupCommand.MESSAGE_SUCCESS, standardGroup.name));
+    }
+
+    @Test
+    public void formatSuccessMessage_studentsToAdd_returnsGroupAndStudentsAddedMessage() {
+        Group standardGroup = new GroupBuilder().withName(VALID_GROUP_TUTORIAL).build();
+        AddGroupCommand standardCommand = new AddGroupCommand(standardGroup, new ArrayList<>());
+
+        // one student to add
+        List<Student> listWithOneStudent = Arrays.asList(AMY);
+        assertEquals(standardCommand.formatSuccessMessage(listWithOneStudent),
+                String.format(AddGroupCommand.MESSAGE_SUCCESS, standardGroup.name)
+                        + String.format(AddGroupCommand.MESSAGE_STUDENTS_ADDED, AMY.getName()));
+
+        // multiple students to add
+        List<Student> listWithMultipleStudents = Arrays.asList(AMY, BOB);
+        String names = AMY.getName().fullName + ", " + BOB.getName().fullName;
+        assertEquals(standardCommand.formatSuccessMessage(listWithMultipleStudents),
+                String.format(AddGroupCommand.MESSAGE_SUCCESS, standardGroup.name)
+                        + String.format(AddGroupCommand.MESSAGE_STUDENTS_ADDED, names));
     }
 
     @Test
