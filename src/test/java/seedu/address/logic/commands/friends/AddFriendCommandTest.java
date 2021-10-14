@@ -2,14 +2,15 @@ package seedu.address.logic.commands.friends;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collections;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,36 +26,42 @@ import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullFriend_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddFriendCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Friend validFriend = new FriendBuilder().build();
-        CommandResult commandResult = new AddFriendCommand(validFriend).execute(modelStub);
-        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS, validFriend), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validFriend), modelStub.personsAdded);
+    public void execute_friendAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingFriendAdded modelStub = new ModelStubAcceptingFriendAdded();
+        Friend validFriendBobId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_BOB).build();
+
+        CommandResult commandResult = new AddFriendCommand(validFriendBobId).execute(modelStub);
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendBobId),
+                commandResult.getFeedbackToUser());
+        assertEquals(Collections.singletonList(validFriendBobId), modelStub.friendsAdded);
+
+        Friend validFriendAmyId = new FriendBuilder().withFriendId(VALID_FRIEND_ID_AMY).build();
+        CommandResult commandResultAddAnother = new AddFriendCommand(validFriendAmyId).execute(modelStub);
+        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS_ADD_FRIEND, validFriendAmyId),
+                commandResultAddAnother.getFeedbackToUser());
+        assertEquals(Arrays.asList(validFriendBobId, validFriendAmyId), modelStub.friendsAdded);
     }
 
-
-
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateFriend_throwsCommandException() {
         Friend validFriend = new FriendBuilder().build();
         AddFriendCommand addFriendCommand = new AddFriendCommand(validFriend);
-        ModelStub modelStub = new ModelStubWithPerson(validFriend);
+        ModelStub modelStub = new ModelStubWithFriend(validFriend);
 
-        assertThrows(CommandException.class, AddFriendCommand.MESSAGE_DUPLICATE_PERSON, () ->
+        assertThrows(CommandException.class, AddFriendCommand.MESSAGE_DUPLICATE_FRIEND_ID, () ->
                 addFriendCommand.execute(modelStub));
     }
 
@@ -66,20 +73,20 @@ public class AddFriendCommandTest {
         AddFriendCommand addBobCommand = new AddFriendCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         AddFriendCommand addAliceCommandCopy = new AddFriendCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommandCopy, addAliceCommand);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null, addAliceCommand);
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different friend -> returns false
+        assertNotEquals(addBobCommand, addAliceCommand);
     }
 
     /**
@@ -162,12 +169,7 @@ public class AddFriendCommandTest {
         }
 
         @Override
-        public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasFriendId(FriendId idToFind) {
+        public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -215,20 +217,15 @@ public class AddFriendCommandTest {
         public void updateFilteredGamesList(Predicate<Game> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean hasGameId(GameId idToFind) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single friend.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithFriend extends ModelStub {
         private final Friend friend;
 
-        ModelStubWithPerson(Friend friend) {
+        ModelStubWithFriend(Friend friend) {
             requireNonNull(friend);
             this.friend = friend;
         }
@@ -240,33 +237,33 @@ public class AddFriendCommandTest {
         }
 
         @Override
-        public boolean hasFriendId(FriendId idToFind) {
+        public boolean hasFriendWithId(FriendId idToFind) {
             return this.friend.getFriendId().equals(friend.getFriendId());
         }
 
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the friend being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Friend> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingFriendAdded extends ModelStub {
+        final ArrayList<Friend> friendsAdded = new ArrayList<>();
 
         @Override
         public boolean hasFriend(Friend friend) {
             requireNonNull(friend);
-            return personsAdded.stream().anyMatch(friend::equals);
+            return friendsAdded.stream().anyMatch(friend::equals);
         }
 
         @Override
-        public boolean hasFriendId(FriendId idToFind) {
-            return personsAdded.stream().anyMatch(friend -> friend.getFriendId().equals(idToFind));
+        public boolean hasFriendWithId(FriendId idToFind) {
+            return friendsAdded.stream().anyMatch(friend -> friend.getFriendId().equals(idToFind));
         }
 
         @Override
         public void addFriend(Friend friend) {
             requireNonNull(friend);
-            personsAdded.add(friend);
+            friendsAdded.add(friend);
         }
 
         @Override

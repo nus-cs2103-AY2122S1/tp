@@ -19,13 +19,21 @@ public class Game {
      *
      * @param gameId A valid game name.
      */
-    public Game (GameId gameId) {
+    public Game(GameId gameId) {
         requireNonNull(gameId);
         this.gameId = gameId;
     }
 
     public GameId getGameId() {
         return gameId;
+    }
+
+    /**
+     * Returns true if both games have same gameId.
+     * @return boolean result of equals.
+     */
+    public boolean isSameGameId(Game game) {
+        return this.gameId.equals(game.getGameId());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package seedu.address;
 
-import static seedu.address.model.util.SampleDataUtil.getSampleGamesList;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -27,7 +25,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.FriendsListStorage;
+import seedu.address.storage.GamesListStorage;
 import seedu.address.storage.JsonFriendsListStorage;
+import seedu.address.storage.JsonGamesListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -60,8 +60,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        FriendsListStorage friendsListStorage = new JsonFriendsListStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(friendsListStorage, userPrefsStorage);
+        FriendsListStorage friendsListStorage = new JsonFriendsListStorage(userPrefs.getFriendsListFilePath());
+        GamesListStorage gamesListStorage = new JsonGamesListStorage(userPrefs.getGamesListFilePath());
+        storage = new StorageManager(friendsListStorage, gamesListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -73,33 +74,56 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s friends list, games list and
+     * {@code userPrefs}. <br>
+     * The data from the sample friend's list will be used instead if {@code storage}'s friends list is not found,
+     * or an empty friends list will be used instead if errors occur when reading {@code storage}'s friends list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyFriendsList> addressBookOptional;
+        // TODO: refine and update this method
+        // necessary to use empty friends list if the games list storage faces loading errors - since
+        // friends may have GameFriendLinks to games that do not exist due to failure loading.
+        ReadOnlyGamesList initialGameData;
         ReadOnlyFriendsList initialFriendData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            Optional<ReadOnlyGamesList> readOnlyGamesList = storage.readGamesList();
+            if (readOnlyGamesList.isEmpty()) {
+                logger.info("Game data file not found. Will be starting with a empty friends and games list.");
+                initialGameData = new GamesList();
+                initialFriendData = new FriendsList();
+            } else {
+                initialGameData = readOnlyGamesList.get();
+                initialFriendData = loadInitialFriendData(storage);
             }
-            initialFriendData = addressBookOptional.orElseGet(SampleDataUtil::getSampleFriendsList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty friends and "
+                    + "games list.");
+            initialGameData = new GamesList();
             initialFriendData = new FriendsList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty friends and "
+                    + "games list.");
+            initialGameData = new GamesList();
             initialFriendData = new FriendsList();
         }
 
-        // TODO - Kevin
-        // Read and load initialGameData
-        ReadOnlyGamesList initialGameData = new GamesList();
-        initialGameData = getSampleGamesList();
-
         return new ModelManager(initialFriendData, initialGameData, userPrefs);
+    }
+
+    private ReadOnlyFriendsList loadInitialFriendData(Storage storage) {
+        try {
+            Optional<ReadOnlyFriendsList> readOnlyFriendsList = storage.readFriendsList();
+            if (readOnlyFriendsList.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a sample friend's list");
+            }
+            return readOnlyFriendsList.orElseGet(SampleDataUtil::getSampleFriendsList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty friends list.");
+            return new FriendsList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty friends list.");
+            return new FriendsList();
+        }
     }
 
     private void initLogging(Config config) {

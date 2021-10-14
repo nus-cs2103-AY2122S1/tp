@@ -1,11 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,8 +12,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.UserName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -29,11 +27,13 @@ public class ParserUtil {
      * Private constructor to hide implicit public constructor since
      * {@code ParserUtil} is a utility class.
      */
-    private ParserUtil() {}
+    private ParserUtil() {
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -53,11 +53,10 @@ public class ParserUtil {
     public static FriendId parseFriendId(String friendId) throws ParseException {
         requireNonNull(friendId);
         String trimmedName = friendId.trim();
-        if (!FriendId.isValidFriendId(trimmedName)) {
-            throw new ParseException(FriendId.MESSAGE_CONSTRAINTS);
-        } else if (friendId.contains(FLAG_FRIEND_NAME.toString().trim())) {
-            // TODO set a different message if preferred
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendId.MESSAGE_CONSTRAINTS));
+        if (friendId.isBlank()) {
+            throw new ParseException(FriendId.MESSAGE_EMPTY_FRIEND_ID);
+        } else if (!FriendId.isValidFriendId(trimmedName)) {
+            throw new ParseException(FriendId.MESSAGE_INVALID_CHARACTERS);
         }
         return new FriendId(trimmedName);
     }
@@ -72,7 +71,7 @@ public class ParserUtil {
         requireNonNull(gameId);
         String trimmedName = gameId.trim();
         if (!GameId.isValidGameId(trimmedName)) {
-            throw new ParseException(GameId.MESSAGE_CONSTRAINTS);
+            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
         }
         return new GameId(trimmedName);
     }
@@ -92,55 +91,35 @@ public class ParserUtil {
         return new FriendName(trimmedName);
     }
 
-    //    /**
-    //     * Parses a {@code String gameName} into a {@code Game}.
-    //     * Leading and trailing whitespaces will be trimmed.
-    //     *
-    //     * @throws ParseException if the given {@code gameName} is invalid.
-    //     */
-    //    public static Game parseGame(String gameName) throws ParseException {
-    //        requireNonNull(gameName);
-    //        String trimmedGameName = gameName.trim();
-    //        if (!Game.isValidGameName(trimmedGameName)) {
-    //            throw new ParseException(Game.MESSAGE_CONSTRAINTS);
-    //        }
-    //        return new Game(trimmedGameName);
-    //    }
-
     /**
-     * Parses {@code Collection<String> games} into a {@code Set<GameFriendLink>}.
+     * Parses {@code Collection<String> games} into a {@code Set<Game>}.
      */
-    public static Set<GameFriendLink> parseGames(Collection<String> games) throws ParseException {
+    public static Set<GameFriendLink> parseGameFriendLinks(Collection<String> games) throws ParseException {
         requireNonNull(games);
         final Set<GameFriendLink> gameSet = new HashSet<>();
         for (String gameName : games) {
             // TODO - Edit command
-            // gameSet.add(parseGame(gameName));
+
+            // gameSet.add(new Game(parseGameId(gameName)));
         }
         return gameSet;
     }
 
     /**
-     * Parses {@code Collection<String> games} into a {@code Hashmap<String, String>}.
-     * The key of the Hashmap is the game name, while the value is the username for that key.
+     * Takes in {@code userName} and returns the corresponding {@code UserName} if its format is valid.
      */
-    public static HashMap<String, String> parseGamesAndUsernames(Collection<String> games) throws ParseException {
-        requireNonNull(games);
-        final HashMap<String, String> gamesHashMap = new HashMap<>();
-        games.stream().forEach(segment -> {
-            String[] gameAndUsername = segment.split(":");
-            String gameName = gameAndUsername[0];
-            String inGameUsername = gameAndUsername[1];
-            gamesHashMap.put(gameName, inGameUsername);
-        });
-        return gamesHashMap;
+    public static UserName parseUserName(String userName) throws ParseException {
+        if (!UserName.isValidUserName(userName)) {
+            throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
+        }
+        return new UserName(userName);
     }
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
+    public static boolean areFlagsPresent(ArgumentMultimap argumentMultimap, Flag... flags) {
         return Stream.of(flags).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

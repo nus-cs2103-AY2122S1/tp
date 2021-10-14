@@ -38,7 +38,7 @@ public class DeleteGameCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasGameId(gameToDeleteId)) {
+        if (model.hasGameWithId(gameToDeleteId)) {
             model.deleteGame(gameToDeleteId);
             return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, gameToDeleteId),
                     CommandType.GAME_DELETE);

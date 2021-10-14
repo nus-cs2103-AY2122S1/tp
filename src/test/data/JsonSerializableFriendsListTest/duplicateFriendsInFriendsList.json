@@ -1,0 +1,31 @@
+{
+  "friends" : [ {
+    "friendId" : "AlexY123",
+    "friendName" : "Alex Yeoh",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "AlexY123",
+    "friendName" : "Bernice Yu",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "ChickenTender",
+    "friendName" : "Charlotte Oliveiro",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "Davidz",
+    "friendName" : "David Li",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "II3",
+    "friendName" : "Irfan Ibrahim",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "RoyJoy",
+    "friendName" : "Roy Balakrishnan",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "hello",
+    "friendName" : "world",
+    "gameFriendLinks" : [ ]
+  } ]
+}

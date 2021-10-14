@@ -3,11 +3,10 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -37,7 +36,7 @@ public class FriendBuilder {
     public FriendBuilder(Friend friendToCopy) {
         friendId = friendToCopy.getFriendId();
         friendName = friendToCopy.getName();
-        games = new HashSet<>(friendToCopy.getGames());
+        games = new HashSet<>(friendToCopy.getGameFriendLinks());
     }
 
     /**
@@ -52,8 +51,8 @@ public class FriendBuilder {
      * Parses the {@code games} into a {@code Set<GameFriendLink>} and set it to the {@code Person} that we are
      * building.
      */
-    public FriendBuilder withGames(String ... games) {
-        this.games = SampleDataUtil.getGameSet(games);
+    public FriendBuilder withGameFriendLinks(GameFriendLink... gameFriendLinks) {
+        this.games = SampleDataUtil.getGameFriendLinkSet(gameFriendLinks);
         return this;
     }
 
@@ -69,9 +68,4 @@ public class FriendBuilder {
     public Friend build() {
         return new Friend(friendId, friendName, games);
     }
-
-    public Friend buildNoName() {
-        return new Friend(friendId, AddFriendCommand.DEFAULT_FRIEND_NAME);
-    }
-
 }

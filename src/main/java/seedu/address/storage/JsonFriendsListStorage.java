@@ -21,38 +21,38 @@ public class JsonFriendsListStorage implements FriendsListStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonFriendsListStorage.class);
 
-    private Path filePath;
+    private final Path filePath;
 
     public JsonFriendsListStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getFriendsListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyFriendsList> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyFriendsList> readFriendsList() throws DataConversionException {
+        return readFriendsList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readFriendsList()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyFriendsList> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyFriendsList> readFriendsList(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableFriendsList> jsonFriendsList = JsonUtil.readJsonFile(
+                filePath, JsonSerializableFriendsList.class);
+        if (jsonFriendsList.isEmpty()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonFriendsList.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonFriendsListStorage implements FriendsListStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyFriendsList addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveFriendsList(ReadOnlyFriendsList friendsList) throws IOException {
+        saveFriendsList(friendsList, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyFriendsList)}.
+     * Similar to {@link #saveFriendsList(ReadOnlyFriendsList)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyFriendsList addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveFriendsList(ReadOnlyFriendsList friendsList, Path filePath) throws IOException {
+        requireNonNull(friendsList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableFriendsList(friendsList), filePath);
     }
 
 }

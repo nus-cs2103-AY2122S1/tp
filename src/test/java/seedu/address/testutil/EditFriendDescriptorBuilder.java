@@ -8,7 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditFriendDescriptor;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -32,7 +32,7 @@ public class EditFriendDescriptorBuilder {
         descriptor = new EditCommand.EditFriendDescriptor();
         descriptor.setFriendId(friend.getFriendId());
         descriptor.setFriendName(friend.getName());
-        descriptor.setGames(friend.getGames());
+        descriptor.setGames(friend.getGameFriendLinks());
     }
 
     /**

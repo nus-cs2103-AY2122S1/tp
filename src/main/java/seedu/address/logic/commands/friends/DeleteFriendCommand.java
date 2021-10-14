@@ -10,7 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.FriendId;
 
-
 public class DeleteFriendCommand extends Command {
     public static final String COMMAND_WORD = "--delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes the person identified by the friend id"
@@ -22,6 +21,7 @@ public class DeleteFriendCommand extends Command {
 
     /**
      * Command to delete a friend using the unique FRIEND_ID.
+     *
      * @param friendId The friend id to identify the friend to be deleted.
      */
     public DeleteFriendCommand(FriendId friendId) {
@@ -32,7 +32,7 @@ public class DeleteFriendCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasFriendId(friendToDeleteId)) {
+        if (model.hasFriendWithId(friendToDeleteId)) {
             model.deleteFriend(friendToDeleteId);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                     friendToDeleteId), CommandType.FRIEND_DELETE);
@@ -45,7 +45,6 @@ public class DeleteFriendCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteFriendCommand // instanceof handles nulls
-                && friendToDeleteId.equals(((DeleteFriendCommand) other).friendToDeleteId)); // state
-                // check
+                && friendToDeleteId.equals(((DeleteFriendCommand) other).friendToDeleteId)); // state check
     }
 }

@@ -28,7 +28,8 @@ public class GamesList implements ReadOnlyGamesList {
         games = new UniqueGamesList();
     }
 
-    public GamesList() {}
+    public GamesList() {
+    }
 
     /**
      * Creates an GamesBook using the Games in the {@code toBeCopied}

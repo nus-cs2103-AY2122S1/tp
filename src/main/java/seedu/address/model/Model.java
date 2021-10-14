@@ -1,24 +1,27 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Friend> PREDICATE_SHOW_ALL_FRIENDS = unused -> true;
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Game> PREDICATE_SHOW_ALL_GAMES = unused -> true;
 
     /**
@@ -58,7 +61,9 @@ public interface Model {
      */
     void setFriendsList(ReadOnlyFriendsList readOnlyFriendsList);
 
-    /** Returns the FriendsBook */
+    /**
+     * Returns the FriendsBook
+     */
     ReadOnlyFriendsList getFriendsList();
 
     /**
@@ -90,11 +95,14 @@ public interface Model {
      */
     void setFriend(Friend target, Friend editedFriend);
 
-    /** Returns an unmodifiable view of the filtered friend list */
+    /**
+     * Returns an unmodifiable view of the filtered friend list
+     */
     ObservableList<Friend> getFilteredFriendsList();
 
     /**
      * Updates the filter of the filtered friend list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredFriendsList(Predicate<Friend> predicate);
@@ -104,9 +112,7 @@ public interface Model {
      * The key in the HashMap represents a {@code GAME_NAME}, while the value represents
      * the {@code IN_GAME_USERNAME} for that game.
      */
-    void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks);
-
-    boolean hasFriendId(FriendId idToFind);
+    void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
 
     //=========== GamesBook ==================================================================================
 
@@ -115,7 +121,9 @@ public interface Model {
      */
     void setGamesList(ReadOnlyGamesList readOnlyGamesList);
 
-    /** Returns the GamesBook */
+    /**
+     * Returns the GamesBook
+     */
     ReadOnlyGamesList getGamesList();
 
     /**
@@ -147,14 +155,16 @@ public interface Model {
      */
     void setGame(Game target, Game editedGame);
 
-    /** Returns an unmodifiable view of the filtered game list */
+    /**
+     * Returns an unmodifiable view of the filtered game list
+     */
     ObservableList<Game> getFilteredGamesList();
 
     /**
      * Updates the filter of the filtered game list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGamesList(Predicate<Game> predicate);
 
-    boolean hasGameId(GameId idToFind);
 }

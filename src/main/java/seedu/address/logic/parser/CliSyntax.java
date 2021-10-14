@@ -4,7 +4,6 @@ package seedu.address.logic.parser;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
-
     /* Flag definitions */
 
     // command flags:
@@ -19,11 +18,9 @@ public class CliSyntax {
     // data flags
     public static final Flag FLAG_FRIEND_NAME = new Flag("--name ");
     public static final Flag FLAG_FRIEND_ID = new Flag("--id ");
+    public static final Flag FLAG_USERNAME = new Flag("--user ");
 
     // TODO remove once commands are updated
     public static final Flag FLAG_GAME_OLD = new Flag("--g");
     public static final Flag FLAG_FRIEND_SPACE = new Flag("--friend ");
-
-
-
 }

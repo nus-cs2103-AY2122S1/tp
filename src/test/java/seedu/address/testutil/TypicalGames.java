@@ -1,12 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_APEX_LEGENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.commands.CommandTestUtil;
 import seedu.address.model.GamesList;
 import seedu.address.model.game.Game;
 
@@ -28,8 +26,9 @@ public class TypicalGames {
     public static final Game ROCKET_LEAGUE = new GameBuilder().withGameId("RocketLeague").build();
 
     // Manually added - Game's details found in {@code CommandTestUtil}
-    public static final Game CSGO = new GameBuilder().withGameId(VALID_GAME_ID_CSGO).build();
-    public static final Game APEX_LEGENDS = new GameBuilder().withGameId(VALID_GAME_ID_APEX_LEGENDS).build();
+    public static final Game CSGO = new GameBuilder().withGameId(CommandTestUtil.VALID_GAME_ID_CSGO).build();
+    public static final Game APEX_LEGENDS = new GameBuilder().withGameId(CommandTestUtil.VALID_GAME_ID_APEX_LEGENDS)
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Legends"; // A keyword that matches MEIER
 

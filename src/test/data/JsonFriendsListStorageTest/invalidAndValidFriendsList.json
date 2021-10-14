@@ -1,0 +1,11 @@
+{
+  "friends": [{
+    "friendId" : "InvalidFriendName",
+    "friendName" : "Roy Balakrishnan!.%",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "ValidFriendName",
+    "friendName" : "world",
+    "gameFriendLinks" : [ ]
+  }]
+}

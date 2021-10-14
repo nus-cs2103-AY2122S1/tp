@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class for Friend.
@@ -30,7 +30,7 @@ public class FriendUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(friend.getFriendId().value + " ");
         sb.append(FLAG_FRIEND_NAME + friend.getName().fullName + " ");
-        friend.getGames().stream().forEach(
+        friend.getGameFriendLinks().stream().forEach(
             game -> sb.append(FLAG_GAME_OLD + game.getGameId().value + " ")
         );
         return sb.toString();

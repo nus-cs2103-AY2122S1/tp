@@ -44,14 +44,7 @@ public class ListFriendCommand extends Command {
             FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
                     (FriendIdContainsKeywordPredicate) predicate;
             model.updateFilteredFriendsList(friendIdContainsKeywordPredicate);
-            //TODO: get the actual friend being listed if only one friend
-            if (model.getFilteredFriendsList().size() == 1) {
-                return new CommandResult(getMessageSuccess(), CommandType.FRIEND_GET,
-                        model.getFilteredFriendsList().get(0));
-            } else {
-                return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
-            }
-
+            return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
         }
         // ListCommand initialized with unknown predicate
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);
@@ -59,9 +52,10 @@ public class ListFriendCommand extends Command {
 
     /**
      * Returns success message to display after running list
+     *
      * @return String containing success message
      */
-    public String getMessageSuccess() {
+    public String getMessageSuccess() throws CommandException {
         if (predicate instanceof FriendIdContainsKeywordPredicate) {
             FriendIdContainsKeywordPredicate friendIdContainsKeywordPredicate =
                     (FriendIdContainsKeywordPredicate) predicate;
@@ -71,7 +65,7 @@ public class ListFriendCommand extends Command {
                     : " whose id contains the keyword: " + keyword;
             return String.format(MESSAGE_SUCCESS_PREPEND, FRIEND_LIST) + messageEnd;
         }
-        return String.format(MESSAGE_SUCCESS_PREPEND, FRIEND_LIST);
+        throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);
     }
 
     @Override

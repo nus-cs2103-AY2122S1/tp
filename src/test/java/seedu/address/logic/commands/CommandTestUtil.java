@@ -2,9 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
+import static seedu.address.testutil.TypicalGames.CSGO;
+import static seedu.address.testutil.TypicalGames.VALORANT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +17,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
@@ -31,26 +36,30 @@ public class CommandTestUtil {
     public static final String VALID_FRIEND_ID_BOB = "456";
     public static final String VALID_GAME_ID_CSGO = "CSGO";
     public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
+    public static final String VALID_USER_NAME_DRACO = "draco#1777";
+    public static final String VALID_USER_NAME_OMEGA = "OmegaLynx";
 
-    public static final String FRIEND_ID_DESC_AMY = " " + VALID_FRIEND_ID_AMY;
-    public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
-    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
+    public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
+    public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
+    public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + VALID_NAME_BOB;
+    public static final String GAME_DESC_AMY = " " + FLAG_ADD + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_BOB = " " + FLAG_ADD + VALID_GAME_ID_CSGO;
 
-    public static final String GAME_DESC_CSGO = " " + FLAG_GAME_OLD + VALID_GAME_ID_CSGO;
-    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_GAME_OLD + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_CSGO = " " + FLAG_ADD + CSGO.gameId;
+    public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;
+    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_ADD + APEX_LEGENDS.gameId;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  --name";
+    public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditFriendDescriptor DESC_AMY;
     public static final EditCommand.EditFriendDescriptor DESC_BOB;
 
+    // TODO: check if these are still needed for edit command
     static {
         DESC_AMY = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_AMY)
                 .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_ID_APEX_LEGENDS).build();
@@ -94,11 +103,15 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         FriendsList expectedFriendsList = new FriendsList(actualModel.getFriendsList());
-        List<Friend> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        List<Friend> expectedFilteredFriendsList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        GamesList expectedGamesList = new GamesList(actualModel.getGamesList());
+        List<Game> expectedFilteredGamesList = new ArrayList<>(actualModel.getFilteredGamesList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedFriendsList, actualModel.getFriendsList());
-        assertEquals(expectedFilteredList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedFilteredFriendsList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedGamesList, actualModel.getGamesList());
+        assertEquals(expectedFilteredGamesList, actualModel.getFilteredGamesList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

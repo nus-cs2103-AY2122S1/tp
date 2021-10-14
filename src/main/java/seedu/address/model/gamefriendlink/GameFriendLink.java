@@ -1,4 +1,4 @@
-package seedu.address.model.friend.gamefriendlink;
+package seedu.address.model.gamefriendlink;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -13,15 +13,15 @@ import seedu.address.model.game.GameId;
  */
 public class GameFriendLink {
 
-    private GameId gameId;
-    private FriendId friendId;
-    private UserName userName;
+    private final GameId gameId;
+    private final FriendId friendId;
+    private final UserName userName;
 
     /**
      * Constructs a {@code GameFriendLink}.
      * Every field must be present and not null.
      *
-     * @param gameId the valid game id of an existing {@code Game}.
+     * @param gameId   the valid game id of an existing {@code Game}.
      * @param friendId the valid friend id of an existing {@code Friend}.
      * @param userName a valid username.
      */
