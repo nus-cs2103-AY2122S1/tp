@@ -29,16 +29,22 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, "find n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, "find n/ \n Alice \t Bob  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_emptyName_throwsParseException() {
+        assertParseFailure(parser, "find n/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyModule_throwsParseException() {
         assertParseFailure(parser, "find m/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCode.MESSAGE_CONSTRAINTS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -50,7 +56,13 @@ public class FindCommandParserTest {
                                 String.format("[%s]", VALID_MODULE_CODE_CS2040)
                         )
                 ));
-        String userInput = String.format(" m/%s m/%s", VALID_MODULE_CODE_CS2030S, VALID_MODULE_CODE_CS2040);
+        String userInput = String.format(" m/%s %s", VALID_MODULE_CODE_CS2030S, VALID_MODULE_CODE_CS2040);
         assertParseSuccess(parser, userInput, expectedFindCommand);
+    }
+
+    @Test
+    public void parse_twoPrefixes_throwsParseException() {
+        assertParseFailure(parser, "find n/ben m/cs2100",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 }
