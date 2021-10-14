@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -47,6 +49,18 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a person to a specific index in the list for list to return to state before undo command.
+     * The person must not already exist in the list.
+     */
+    public void add(Person toAdd, Index toIndex) {
+        requireAllNonNull(toAdd, toIndex);
+        if (contains(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        internalList.add(toIndex.getZeroBased(), toAdd);
     }
 
     /**

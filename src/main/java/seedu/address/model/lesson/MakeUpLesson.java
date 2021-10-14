@@ -15,24 +15,8 @@ public class MakeUpLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange,
-                        Subject subject, Set<Homework> homework) {
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
         super(date, timeRange, subject, homework);
-    }
-
-    /**
-     * Edit the date of the make-up lesson.
-     *
-     * @param newDateString The date to be updated with.
-     * @return {@code MakeUpLesson} with the updated date.
-     */
-    @Override
-    public Lesson updateDate(String newDateString) {
-        Date newDate = new Date(newDateString);
-
-        return newDate.compareTo(getDate()) > 0
-            ? new MakeUpLesson(newDate, getTimeRange(), getSubject(), getHomework())
-            : this;
     }
 
     /**

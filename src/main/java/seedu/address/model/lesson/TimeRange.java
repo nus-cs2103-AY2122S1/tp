@@ -15,9 +15,9 @@ import java.util.Objects;
  */
 public class TimeRange implements Comparable<TimeRange> {
     public static final String MESSAGE_CONSTRAINTS = "Lesson time range should be formatted as HHmm-HHmm "
-        + "and adhere to the following constraints:\n"
-        + "1. Start time must be before end time.\n"
-        + "2. Lesson should be conducted between 8am and 10pm, inclusive.";
+            + "and adhere to the following constraints:\n"
+            + "1. Start time must be before end time.\n"
+            + "2. Lesson should be conducted between 8am and 10pm, inclusive.";
 
     public static final String VALIDATION_REGEX = "^(([01]?[0-9]|2[0-3])[0-5][0-9])-(([01]?[0-9]|2[0-3])[0-5][0-9])";
     public static final LocalTime DAY_START = LocalTime.of(8, 0, 0);
@@ -109,9 +109,9 @@ public class TimeRange implements Comparable<TimeRange> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof TimeRange) // instanceof handles nulls
-            && start.equals(((TimeRange) other).start)
-            && end.equals(((TimeRange) other).end); // state check
+                || (other instanceof TimeRange) // instanceof handles nulls
+                && start.equals(((TimeRange) other).start)
+                && end.equals(((TimeRange) other).end); // state check
     }
 
     @Override

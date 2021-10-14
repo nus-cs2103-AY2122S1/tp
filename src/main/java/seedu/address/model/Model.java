@@ -8,6 +8,7 @@ import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
@@ -77,6 +78,8 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    void addPersonAtIndex(Person person, Index targetIndex);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

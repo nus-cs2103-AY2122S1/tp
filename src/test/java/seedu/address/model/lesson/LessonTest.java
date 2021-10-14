@@ -15,6 +15,7 @@ import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -75,6 +76,11 @@ public class LessonTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonAtIndex(Person person, Index index) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -8,6 +8,7 @@ import java.util.List;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.CalendarEntryList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -96,6 +97,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
         entries.addLessons(p);
+    }
+
+    /**
+     * Adds a person to a specific index in address book.
+     * Called when undoing a Delete Command.
+     */
+    public void addPerson(Index index, Person p) {
+        persons.add(p, index);
     }
 
     /**
