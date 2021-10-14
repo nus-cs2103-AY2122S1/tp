@@ -12,6 +12,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Inventory has been cleared!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": clears the current inventory. ";
 
 
     @Override

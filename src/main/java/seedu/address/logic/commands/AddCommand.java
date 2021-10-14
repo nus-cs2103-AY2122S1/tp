@@ -26,7 +26,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Banana Bread "
-            + PREFIX_ID + "#019381 "
+            + PREFIX_ID + "019381 "
             + PREFIX_COUNT + "10 "
             + PREFIX_TAG + "baked "
             + PREFIX_TAG + "popular";

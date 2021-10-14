@@ -42,7 +42,10 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            final String userGuide = "https://se-education.org/addressbook-level3/UserGuide.html";
+            final String helpMessage = "Refer to the user guide: " + userGuide;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    helpMessage));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -74,7 +77,7 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommandParser().parse(arguments);
 
         case StartOrderCommand.COMMAND_WORD:
             return new StartOrderCommand();
