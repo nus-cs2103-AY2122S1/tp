@@ -250,6 +250,25 @@ Notes:
 * `find Betsy` followed by `delete 1`
   * deletes the 1st person in the results of the `find` command.
 
+### Deleting multiple people : `deleteM`
+
+Deletes the people within the range from the address book.
+
+#### Format:
+* `deleteM START_INDEX - END_INDEX`
+
+Notes:
+* Deletes the people within the specified range from `START_INDEX to END_INDEX`.
+* The indexes refers to the index number shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* The `END_INDEX` must be bigger than or equal to `START_INDEX`
+
+**Sample Usage:**
+* `list` followed by `deleteM 2 - 3`
+  * deletes the 2nd and 3rd person in the address book.
+* `find Betsy` followed by `deleteM 1 - 2`
+  * deletes the 1st and 2nd person in the results of the `find` command.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -298,10 +317,12 @@ Action | Summary | Format, Examples
 **Add** | Adds a person | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [b/BIRTHDAY] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/23062001 t/friend t/colleague`
 **Clear** | Clears all entries | `clear`
 **Delete** | Deletes a person | `delete INDEX`<br> e.g., `delete 3`
+**DeleteM** | Deletes multiple people within the range | `delete START_INDEX END_INDEX`<br> e.g., `deleteM 3 - 5`
 **Edit** | Edits a person | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/BIRTHDAY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com b/30012000`
 **Exit** | Exits the program | `exit`
 **Find** | Locates persons by name | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**FindTag** | Locates persons by tags | `findTag TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
+**FindTag** | Locates persons by tags (case insensitive) | `findTag TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
+**FindTag** | Locates persons by tags (case sensitive) | `findTagC TAG [MORE_TAGS]`<br> e.g., `find friend NUS`
 **Help** | Displays help information | `help [COMMAND] [/d]`
 **List** | Lists all persons | `list`
 **Tag** | Tags a person | `tag INDEX [t/TAG]…​`<br> e.g., `tag 2 t/friend t/NUS`
