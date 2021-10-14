@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    private static String MESSAGE_USAGE;
+    private static String MESSAGE_USAGE = "";
     /**
      * Creates a HelpCommand with specific help messages
      */
@@ -26,5 +26,12 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult(MESSAGE_USAGE, false);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof HelpCommand // instanceof handles nulls
+                && this.MESSAGE_USAGE.equals(((HelpCommand) other).MESSAGE_USAGE));
     }
 }

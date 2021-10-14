@@ -99,8 +99,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT), ()
-            -> parser.parseCommand(""));
+        final String userGuide = "https://se-education.org/addressbook-level3/UserGuide.html";
+        final String helpMessage = "Refer to the user guide: " + userGuide;
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, helpMessage), (
+            ) -> parser.parseCommand(""));
     }
 
     @Test
