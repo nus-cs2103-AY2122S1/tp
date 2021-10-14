@@ -101,9 +101,9 @@ public class Person {
      * Marks this {@code period} when the {@code Person} was not working.
      */
     public Person mark(Period period) {
-        Set<Period> periods = new HashSet<>();
-        periods.addAll(this.getAbsentDates());
-        periods.add(period);
+        Set<Period> periods = period.union(this.getAbsentDates())
+                .stream()
+                .collect(Collectors.toUnmodifiableSet());
         return new Person(name, phone, email, address,
                 role, salary, status, tags, periods);
 
@@ -118,13 +118,11 @@ public class Person {
      */
     public Person unMark(Period period) {
         requireNonNull(period);
-        Set<Period> periods = new HashSet<>();
         Set<Period> result = getAbsentDates().stream()
                 .flatMap(p -> p.complement(period).stream())
                 .collect(Collectors.toSet());
-        periods.addAll(result);
         return new Person(name, phone, email, address,
-                role, salary, status, tags, periods);
+                role, salary, status, tags, result);
     }
 
     /**

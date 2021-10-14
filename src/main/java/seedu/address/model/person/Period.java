@@ -1,9 +1,14 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * Class representing a period of dates.
@@ -114,8 +119,51 @@ public class Period {
     }
 
 
+    /**
+     * Unions the input {@code Collection<Period> periods} with {@code this}.
+     */
+    public Collection<Period> union(Collection<Period> periods) {
+        //the list of periods to union
+        List<Period> toMerge = new ArrayList<>();
+        Collection<Period> result = periods.stream()
+                .flatMap(p -> this.union(p, pe -> toMerge.add(pe)).stream())
+                .collect(Collectors.toSet());
+        //merge the changed periods
+        //in theory there is only two assuming collection is unique
+        for (Period p : toMerge) {
+            result = p.union(result);
+        }
+        return result;
 
+    }
 
+    /**
+     * Unions {@code period} with {@code this}.
+     * The result is placed into the consumer if it is modified.
+     */
+    private Collection<Period> union(Period period, Consumer<Period> consumer) {
+        requireNonNull(period);
+        if (this.contains(period)) {
+            return List.of(this);
+        }
+        if (period.contains(this)) {
+            return List.of(period);
+        }
+        //can lead to multiple unions
+        if (contains(period.startDate.minusDays(1))) {
+            //we know that periods endDate is not contained
+            Period res = new Period(startDate, period.endDate);
+            consumer.accept(res);
+            return List.of();
+        }
+        if (contains(period.endDate.plusDays(1))) {
+            //we know that period startDate is not contained
+            Period res = new Period(period.startDate, endDate);
+            consumer.accept(res);
+            return List.of();
+        }
+        return List.of(period, this);
+    }
 
     private boolean withinExclusively(LocalDate date) {
         return (this.startDate.isBefore(date))
