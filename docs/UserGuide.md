@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface 
-(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your 
-contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students 
+ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your
+contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students
 and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
@@ -168,16 +168,16 @@ Format: `exit`
 
 ### Saving the data
 
-PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
+PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
 ### Editing the data file
 
-PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update 
+PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, ProfBook will discard all data and start with an empty data 
+If your changes to the data file makes its format invalid, ProfBook will discard all data and start with an empty data
 file at the next run.
 </div>
 
@@ -190,7 +190,7 @@ Export feature...
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that
 contains the data of your previous PB3 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
