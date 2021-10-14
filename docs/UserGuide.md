@@ -229,19 +229,25 @@ Format: `deleteSupplier INDEX`
 Examples:
 * `deleteSupplier 2` deletes the 2nd supplier in the address book.
 
-### Search a reservation's availability: `find -r`
+### Search for reservation's made: `check`
 
-Search a reservation's availability using the given date/time
+Displays the reservations made at the specified date and/or time
 
 Format:
-* `find -r d/DATE t/TIME`
-* `find -r t/TIME`
-* `find -r d/DATE`
+* `check DATE TIME`
+  * Returns all reservations on `DATE TIME`
+* `check DATE`
+  * Returns all reservations on `DATE`, for **all timings**
+* `check TIME`
+  * Returns all reservations on **today's date**, at `TIME` 
+
+
+* `DATE` is formatted as `yyyy-MM-dd`, `TIME` is formatted as `HHmm`
 
 Examples:
-* `find -r 2021-09-19 18:00`
-* `find -r 18:00`
-* `find -r 2021-09-19`
+* `check 2021-09-19 1800`
+* `check 2021-09-19`
+* `check 1800`
 
 ### Create a reservation: `reserve` 
 
@@ -329,8 +335,8 @@ Action | Format, Examples
 **Add Customer** | `addcustomer n/NAME p/PHONE_NUMBER e/EMAIL [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]` <br> e.g. `add customer n/John Doe p/87654321 e/e12345@u.nus.edu`
 **Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
 **Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
-**Check a reservation availability** | `find -r d/DATE t/TIME`, `find -r t/TIME`, `find -r d/DATE` <br> e.g. `find -r 2021-09-19 18:00`, `find -r 18:00` `find -r 2021-09-19`
-**Create reservation** | `reserve d/DATE t/TIME  n/NAME p/PHONE_NUMBER` <br> e.g. `reserve d/2021-09-19 t/1800 n/John Doe p/87654321`
+**Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
+**Create reservation** | `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `reserve 2 p/98765432 at/2021-12-24 2000`
 **Clear [COMING SOON]** | `clear`
 **Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
 **Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`

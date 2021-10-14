@@ -356,19 +356,19 @@ Use case ends
      * 1c2. User enters the command again.
      
      Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
-	    
+
      
      Use case resumes from step 2.
 
  * 3a. RHRH detects an invalid class entered. 
    * 3a1. RHRH requests for the class to be corrected.
    * 3a2. User enters the class again.
-	
+
    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
-	
+
  
     Use case resumes from step 4.
-    
+
 **Use case (UC02): Add a Supplier**
 
 **MSS**
@@ -410,16 +410,16 @@ Use case ends
      * 1c2. User enters the command again.
      
      Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
-	    
-     
+
+
      Use case resumes from step 2.
 
  * 3a. RHRH detects an invalid class entered. 
    * 3a1. RHRH requests for the class to be corrected.
    * 3a2. User enters the class again.
-	
+
    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
-	
+
  
     Use case resumes from step 4.
     
@@ -465,16 +465,16 @@ Use case ends
      * 1c2. User enters the command again.
      
      Steps 1c1 - 1c2 are repeated until the command is correctly formatted.
-	    
-     
+
+ 
      Use case resumes from step 2.
 
  * 3a.  RHRH detects an invalid class entered. 
    * 3a1. RHRH requests for the class to be corrected.
    * 3a2. User enters the class again.
-	
+
    Steps 3a1 - 3a2 are repeated until the command is correctly formatted.
-	
+
  
     Use case resumes from step 4.
 
