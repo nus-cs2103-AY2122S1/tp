@@ -90,6 +90,12 @@ public interface Model {
     void addFriend(Friend friend);
 
     /**
+     * Returns the friend with the given friendId.
+     * {@code friend} with the friendId must already exist in the friends book.
+     */
+    Friend getFriend(FriendId friendId);
+
+    /**
      * Replaces the given friend {@code target} with {@code editedFriend}.
      * {@code target} must exist in the friends book.
      * The friend identity of {@code editedFriend} must not be the same as another existing friend in the friends book.
@@ -150,6 +156,12 @@ public interface Model {
      * {@code game} must not already exist in the games book.
      */
     void addGame(Game game);
+
+    /**
+     * Returns the game with the given gameId.
+     * {@code game} with the gameId must already exist in the games book.
+     */
+    Game getGame(GameId gameId);
 
     /**
      * Replaces the given game {@code target} with {@code editedGame}.

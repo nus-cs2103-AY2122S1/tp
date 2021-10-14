@@ -113,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Friend getFriend(FriendId friendId) {
+        return friendsList.getFriend(friendId);
+    }
+
+    @Override
     public void deleteFriend(FriendId targetId) {
         Friend friendToDelete =
                 this.getFriendsList().getFriendsList()
@@ -205,6 +210,11 @@ public class ModelManager implements Model {
     public void addGame(Game game) {
         gamesList.addGame(game);
         updateFilteredGamesList(PREDICATE_SHOW_ALL_GAMES);
+    }
+
+    @Override
+    public Game getGame(GameId gameId) {
+        return gamesList.getGame(gameId);
     }
 
     @Override

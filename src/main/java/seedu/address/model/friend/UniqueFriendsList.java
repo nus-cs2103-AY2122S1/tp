@@ -61,6 +61,18 @@ public class UniqueFriendsList implements Iterable<Friend> {
     }
 
     /**
+     * Gets a friend from the list.
+     * The friend with the friendId must already exist in the list.
+     */
+    public Friend getFriend(FriendId friendId) {
+        requireNonNull(friendId);
+        if (!containsId(friendId)) {
+            throw new FriendNotFoundException();
+        }
+        return internalList.stream().filter(friend -> friend.getFriendId().equals(friendId)).iterator().next();
+    }
+
+    /**
      * Replaces the friend {@code friendToEdit} in the list with {@code editedFriend}.
      * {@code friendToEdit} must exist in the list.
      * The friend identity of {@code editedFriend} must not be the same as another existing friend in the list.

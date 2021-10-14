@@ -85,6 +85,14 @@ public class GamesList implements ReadOnlyGamesList {
     }
 
     /**
+     * Gets a game from the games list.
+     * The game with the gameId must already exist in the games list.
+     */
+    public Game getGame(GameId gameId) {
+        return games.getGame(gameId);
+    }
+
+    /**
      * Replaces the given game {@code target} in the list with {@code editedGame}.
      * {@code target} must exist in the games list.
      * The game identity of {@code editedGame} must not be the same as another existing game in the games list.

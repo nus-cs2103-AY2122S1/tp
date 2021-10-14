@@ -58,6 +58,18 @@ public class UniqueGamesList implements Iterable<Game> {
     }
 
     /**
+     * Gets a game from the list.
+     * The game with the gameId must already exist in the list.
+     */
+    public Game getGame(GameId gameId) {
+        requireNonNull(gameId);
+        if (!containsId(gameId)) {
+            throw new GameNotFoundException();
+        }
+        return internalList.stream().filter(game -> game.getGameId().equals(gameId)).iterator().next();
+    }
+
+    /**
      * Replaces the game {@code gameToEdit} in the list with {@code editedGame}.
      * {@code gameToEdit} must exist in the list.
      * The game identity of {@code editedGame} must not be the same as another existing game in the list.
