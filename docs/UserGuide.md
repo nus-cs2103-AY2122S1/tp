@@ -44,25 +44,25 @@ Student Insurance Agent Sales Assistant (SIASA) **is a Command Line Interface (C
 
 </div>
 
-### Adding a person: `add`
+### Adding a person: `addclient`
 
 Adds a person to the application.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addclient n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addclient n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Listing all persons : `list`
+### Listing all persons : `listclient`
 
 Shows a list of all persons in the application.
 
-Format: `list`
+Format: `listclient`
 
 ### Editing a person : `edit`
 
@@ -81,25 +81,60 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Deleting a person : `delete`
+### Deleting a person : `deleteclient`
 
 Deletes the specified person from the application.
 
-Format: `delete INDEX`
+Format: `deleteclient INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `listclient` followed by `deleteclient 2` deletes the 2nd person in the application.
+* `find Betsy` followed by `deleteclient 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the application.
+Clears all persons and policies from the application.
 
 Format: `clear`
+
+### Creating A Policy : `addpolicy`
+
+Adds a policy to the policy list.
+
+Format: `addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/PERSON_INDEX`
+
+### Deleting A Policy : `deletepolicy`
+
+Deletes a policy from the policy list.
+
+Format: `deletepolicy INDEX`
+
+### Listing All Policies : `listpolicy`
+
+Shows a list of all policies.
+
+Format: `listpolicy`
+
+### List a Person's Policies : `clientpolicy`
+
+Shows the list of policies that belong to a specific person.
+
+Format: `clientpolicy PERSON_INDEX`
+
+- List policies for the person at the specified PERSON_INDEX.
+- The index refers to the index number shown in the displayed persons list.
+- The index must be a positive integer 1, 2, 3, …​
+
+### Clear Person's Policy : `clearpolicy`
+
+Clear all policies from a person.
+
+Format: `clearpolicy PERSON_INDEX`
+
 
 ### Exiting the program : `exit`
 
@@ -110,72 +145,6 @@ Format: `exit`
 ### Saving the data
 
 SIASA data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-## Upcoming Features
-
-### Creating A Client `[coming in v1.2]`
-
-Adds a client to the list
-
-Format: `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]`
-
-### Deleting A Client
-
-Deletes the specified client from the client list.
-
-Format: `delete INDEX`
-
-- Deletes the client at the specified INDEX.
-- The index refers to the index number shown in the displayed client list.
-- The index must be a positive integer 1, 2, 3, …​
-
-### Listing All Clients
-
-Shows a list of all clients in the client list.
-
-Format: `listclient`
-
-### List Of Client\'s Policies
-
-Shows the list of policies that belong to a specific client.
-
-Format: `listpolicy CLIENT_INDEX`
-
-- List policies for the client at the specified CLIENT_INDEX.
-- The index refers to the index number shown in the displayed client list.
-- The index must be a positive integer 1, 2, 3, …​
-
-### Clear All
-Clear all clients and policies.
-
-Format: `clear`
-
-### Creating A Policy
-
-Adds a policy to the policy list.
-
-Format: `addpolicy n/NAME_OF_POLICY e/EXPIRY_DATE p/PRICE c/COMMISSION cl/CLIENT_INDEX`
-
-### Deleting A Policy
-
-Deletes a policy from the policy list.
-
-Format: `deletepolicy INDEX`
-
-### Listing All Policies
-
-Shows a list of all policies.
-
-Format: `listpolicy`
-
-### Clear Client's Policy
-
-Clear all policies from a client.
-
-Format: `clearpolicy CLIENT_INDEX`
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,9 +159,15 @@ Format: `clearpolicy CLIENT_INDEX`
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**List** | `list`
+**Add Person** | `addclient n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete Person** | `deleteclient INDEX`<br> e.g., `delete 3`
+**Edit Person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**List Persons** | `listclient`
+**Add Policy** | `addpolicy [n/NAME_OF_POLICY] [e/EXPIRY_DATE] [p/PRICE] [c/COMMISSION] [cl/PERSON_INDEX]`
+**Delete Policy** | `deletepolicy INDEX`
+**List Policies** | `listpolicy`
+**List Person's Policies** | `clientpolicy PERSON_INDEX`
+**Clear Person's Policies** | `clearpolicy PERSON_INDEX`
+**Clear All** | `clear`
 **Help** | `help`
+**Exit** | `exit`
