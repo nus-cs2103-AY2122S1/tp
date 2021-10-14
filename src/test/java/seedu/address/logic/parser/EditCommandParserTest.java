@@ -26,10 +26,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditItemDescriptorBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class EditCommandParserTest {
 
@@ -95,7 +95,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_BAGEL + ID_DESC_BAGEL
                 + TAG_DESC_BAKED + TAG_DESC_POPULAR;
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -107,7 +107,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + ID_DESC_BAGEL + TAG_DESC_POPULAR;
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder()
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
                 .withId(VALID_ID_BAGEL).withTags(VALID_TAG_POPULAR).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -119,19 +119,19 @@ public class EditCommandParserTest {
         // name
         Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_BAGEL;
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // id
         userInput = targetIndex.getOneBased() + ID_DESC_BAGEL;
-        descriptor = new EditItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_POPULAR;
-        descriptor = new EditItemDescriptorBuilder().withTags(VALID_TAG_POPULAR).build();
+        descriptor = new ItemDescriptorBuilder().withTags(VALID_TAG_POPULAR).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -142,7 +142,7 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_BAGEL + ID_DESC_BAGEL + ID_DESC_DONUT
                 + TAG_DESC_BAKED + NAME_DESC_DONUT + TAG_DESC_POPULAR;
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT)
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
                 .withId(VALID_ID_DONUT).withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -155,14 +155,14 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + INVALID_NAME_DESC + NAME_DESC_BAGEL;
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + ID_DESC_DONUT + INVALID_NAME_DESC + NAME_DESC_DONUT
                 + TAG_DESC_POPULAR;
-        descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT).withId(VALID_ID_DONUT)
+        descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT).withId(VALID_ID_DONUT)
                 .withTags(VALID_TAG_POPULAR).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -173,7 +173,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withTags().build();
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

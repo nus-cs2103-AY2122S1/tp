@@ -17,8 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditItemDescriptorBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -53,13 +54,13 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditItemDescriptor DESC_BAGEL;
-    public static final EditCommand.EditItemDescriptor DESC_DONUT;
+    public static final ItemDescriptor DESC_BAGEL;
+    public static final ItemDescriptor DESC_DONUT;
 
     static {
-        DESC_BAGEL = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
+        DESC_BAGEL = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
-        DESC_DONUT = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT)
+        DESC_DONUT = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
                 .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL)
                 .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
     }

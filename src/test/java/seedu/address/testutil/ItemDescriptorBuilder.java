@@ -35,41 +35,49 @@ public class ItemDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditItemDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code ItemDescriptor} that we are building.
      */
-    public EditItemDescriptorBuilder withName(String name) {
+    public ItemDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditItemDescriptor} that we are building.
+     * Sets the {@code Count} of the {@code ItemDescriptor} that we are building.
      */
-    public EditItemDescriptorBuilder withCount(String count) {
+    public ItemDescriptorBuilder withCount(String count) {
         descriptor.setCount(Integer.parseInt(count));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Count} of the {@code ItemDescriptor} that we are building.
+     */
+    public ItemDescriptorBuilder withCount(int count) {
+        descriptor.setCount(count);
         return this;
     }
 
 
     /**
-     * Sets the id of the {@code EditItemDescriptor} that we are building.
+     * Sets the {@code id} of the {@code ItemDescriptor} that we are building.
      */
-    public EditItemDescriptorBuilder withId(String id) {
+    public ItemDescriptorBuilder withId(String id) {
         descriptor.setId(id);
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditItemDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code ItemDescriptor}
      * that we are building.
      */
-    public EditItemDescriptorBuilder withTags(String... tags) {
+    public ItemDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }
 
-    public EditItemDescriptor build() {
+    public ItemDescriptor build() {
         return descriptor;
     }
 }
