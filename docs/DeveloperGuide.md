@@ -285,29 +285,39 @@ We categorise our user stories into three main epics:
 Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 | ID  | Priority | As a …​                                 | I want to …​                                                     | So that I can…​                                                      |
-|-----| -------- | ------------------------------------------ | ------------------------------------------ | ---------------------------------------------------------------------- |
+|-----| -------- | ------------------------------------------ | ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | S1  | `HIGH`   | user                                       | add a new student                                                   | track student information with **TAB**                                  |
-| S2  | `HIGH`   | user                                       | delete a student                                                    | remove entries that I no longer need                                    |
-| S3  | `HIGH`   | user                                       | edit a student                                                      | update student information                                              |
-| S4  | `HIGH`   | user                                       | categorise my students with tags                                    |                                                                         |
-| S5  | `HIGH`   | user                                       | keep track of parent contacts                                       | communicate directly with the parent                                    |
-| S6  | `HIGH`   | user                                       | add remarks to a student                                            | keep track of supplementary information                                 |
-| S7  | `MEDIUM` | user                                       | add a student's school                                              | be reminded of the content that is relevant to the student              |
-| S8  | `MEDIUM` | user                                       | view a student's school                                             |                                                                         |
-| S9  | `MEDIUM` | user                                       | edit a student's school                                             |                                                                         |
-| S10 | `MEDIUM` | user                                       | delete a student's school                                           |                                                                         |
-| S11 | `MEDIUM` | user                                       | add a student's academic stream                                     | be reminded of the content that is relevant to the student              |
-| S12 | `MEDIUM` | user                                       | view a student's academic stream                                    |                                                                         |
-| S13 | `MEDIUM` | user                                       | edit a student's academic stream                                    |                                                                         |
-| S14 | `MEDIUM` | user                                       | delete a student's academic stream                                  |                                                                         |
-| S15 | `MEDIUM` | user                                       | add a student's academic level                                      | be reminded of the content that is relevant to the student              |
-| S16 | `MEDIUM` | user                                       | view a student's academic level                                     |                                                                         |
-| S17 | `MEDIUM` | user                                       | edit a student's academic level                                     |                                                                         |
-| S18 | `MEDIUM` | user                                       | delete a student's academic level                                   |                                                                         |
-| S19 | `MEDIUM` | user                                       | keep track of a student's outstanding fees                          | be reminded of the fees I have yet to collect                           |
-| S20 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
-| S21 | `LOW`    | user with many students stored in **TAB**  | sort students by name                                               | locate a student easily                                                 |
-| S22 | `LOW`    | user with many students stored in **TAB**  | sort students by tag                                                | locate a student easily                                                 |
+| S2  | `HIGH`   | user                                       | view a student                                                      | track student information with **TAB**                                  |
+| S3  | `HIGH`   | user                                       | delete a student                                                    | remove entries that I no longer need                                    |
+| S4  | `HIGH`   | user                                       | edit a student                                                      | update student information                                              |
+| S5  | `HIGH`   | user                                       | categorise my students with tags                                    |                                                                         |
+| S6  | `HIGH`   | user                                       | add remarks to a student                                            | keep track of supplementary information related to a student            |
+| S7  | `HIGH`   | user                                       | view remarks of a student                                           |                                                                         |
+| S8  | `HIGH`   | user                                       | edit remarks of a student                                           |                                                                         |
+| S9  | `HIGH`   | user                                       | delete remarks of a student                                         |                                                                         |
+| S10 | `HIGH`   | user                                       | add a student's parent contacts                                     | maintain direct avenues of contact with their parents                   |
+| S11 | `HIGH`   | user                                       | view a student's parent contacts                                    |                                                                         |
+| S12 | `HIGH`   | user                                       | edit a student's parent contacts                                    |                                                                         |
+| S13 | `HIGH`   | user                                       | delete a student's parent contacts                                  |                                                                         |
+| S14 | `HIGH`   | user                                       | add a student's school                                              | be reminded of the content that is relevant to the student              |
+| S15 | `HIGH`   | user                                       | view a student's school                                             |                                                                         |
+| S16 | `HIGH`   | user                                       | edit a student's school                                             |                                                                         |
+| S17 | `HIGH`   | user                                       | delete a student's school                                           |                                                                         |
+| S18 | `HIGH`   | user                                       | add a student's academic stream                                     | be reminded of the content that is relevant to the student              |
+| S19 | `HIGH`   | user                                       | view a student's academic stream                                    |                                                                         |
+| S20 | `HIGH`   | user                                       | edit a student's academic stream                                    |                                                                         |
+| S21 | `HIGH`   | user                                       | delete a student's academic stream                                  |                                                                         |
+| S22 | `HIGH`   | user                                       | add a student's academic level                                      | be reminded of the content that is relevant to the student              |
+| S23 | `HIGH`   | user                                       | view a student's academic level                                     |                                                                         |
+| S24 | `HIGH`   | user                                       | edit a student's academic level                                     |                                                                         |
+| S25 | `HIGH`   | user                                       | delete a student's academic level                                   |                                                                         |
+| S26 | `HIGH`   | user                                       | add a student's outstanding fees                                    | be reminded of the fees I have yet to collect                           |
+| S27 | `HIGH`   | user                                       | view a student's outstanding fees                                   |                                                                         |
+| S28 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
+| S29 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
+| S30 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
+| S31 | `LOW`    | user with many students stored in **TAB**  | sort students by name                                               | locate a student easily                                                 |
+| S32 | `LOW`    | user with many students stored in **TAB**  | sort students by tag                                                | locate a student easily                                                 |
 | L1  | `HIGH`   | user                                       | add recurring lessons with a specific start date for a student      | keep track of which date the student's lessons starts                   |
 | L2  | `HIGH`   | user                                       | add specific start and end timings for my lessons                   | plan my lesson schedule in detail                                       |
 | L3  | `HIGH`   | user                                       | add the corresponding subject to my lessons                         | plan and prepare for that specific subject                              |
@@ -320,10 +330,9 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | L10 | `MEDIUM` | user                                       | add makeup lessons with specific time and date for a student        | track lessons outside of my usual lesson schedule                       |
 | L11 | `MEDIUM` | user                                       | add homework for the makeup lessons                                 | track lessons outside of my usual lesson schedule                       |
 | L12 | `MEDIUM` | user                                       | add subject for the makeup lessons                                  | track lessons outside of my usual lesson schedule                       |
-| L13 | `MEDIUM` | user                                       | view the lessons I have for the week                                | easily manage my schedule                                               |
-| L15 | `MEDIUM` | user                                       | view the homework I have set for my student after the lesson        | prepare for my upcoming lessons                                         |
-| L16 | `MEDIUM` | user                                       | view the subject of my upcoming lessons                             | prepare for my upcoming lessons                                         |
-| L17 | `MEDIUM` | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
+| L13 | `MEDIUM` | user                                       | view the homework I have set for my student after the lesson        | prepare for my upcoming lessons                                         |
+| L14 | `MEDIUM` | user                                       | view the subject of my upcoming lessons                             | prepare for my upcoming lessons                                         |
+| L15 | `MEDIUM` | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
 | U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use **TAB**    |
 | U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring **TAB**      |
 | U3  | `HIGH`   | user                                       | find a student by keyword                                           | locate details of students without having to go through the entire list |
@@ -366,6 +375,10 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
     Use case ends.
 
+* 2a. The list is empty.
+    
+    Use case ends.
+* 
 <br/>
 
 **Use case: UC2 - Add a new student**
@@ -405,10 +418,6 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 **Extensions**
 
-* 1a. The list is empty
-
-  Use case ends.
-
 * 2a. The given index is invalid
 
     * 2a1. TAB displays an error message
@@ -447,10 +456,6 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 **Extensions**
 
-* 1a. The list is empty
-
-   Use case ends.
-
 * 2a. The given index is invalid
 
     * 2a1. TAB displays an error message
@@ -470,10 +475,6 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
     Use case ends.
 
 **Extensions**
-
-* 1a. The list is empty
-  
-  Use case ends.
 
 * 2a. The given index is invalid
 
@@ -500,10 +501,6 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
    Use case ends.
 
 **Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
 
 * 2a. The specified student has no lessons
 
@@ -552,10 +549,6 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
    Use case ends.
 
 **Extensions**
-
-* 1a. The list is empty
-
-  Use case ends.
 
 * 2a. The given index of the student is invalid
 
@@ -648,14 +641,14 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 ### Glossary
 
-* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6)
-* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT)
-* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Outstanding fees**: Tuition fees that have yet to be collected
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Recurring lesson**: A lesson that will occur more than once in patterned intervals
-* **Session**: A session begins when the app is started and ends when the app is exited
+* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Outstanding fees**: Tuition fees that have yet to be collected.
+* **Private contact detail**: A contact detail that is not meant to be shared with others.
+* **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
+* **Session**: A session begins when the app is started and ends when the app is exited.
 * **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
   UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 
