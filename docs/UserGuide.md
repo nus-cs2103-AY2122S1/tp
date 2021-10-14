@@ -176,7 +176,7 @@ Finds clients whose contacts match with the given keywords.
 
 Format: `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
 
-* `KEYWORD` and `MORE_KEYWORDS` will be used to match with all attribute of the person.
+* `KEYWORD` will be used to match with all attribute of the person.
 * `<attribute>/` refers to the argument tag for the client's attribute.
 * `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
 * If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only.
@@ -256,6 +256,6 @@ Action | Format | Examples
 **Edit** | `update {CLIENT'S ID} <attribute>/{CHANGED VALUE OF ATTRIBUTE} ...` | update 1234 n/Dominic p/12345678 |
 **List** | `list` | - |
 **Search** | `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter KEYWORD [MORE KEYWORDS]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | search * e/doe@gmail.com p/9 |
+**Filter** | `filter [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | filter * e/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
 **Exit** | `exit` | - |
