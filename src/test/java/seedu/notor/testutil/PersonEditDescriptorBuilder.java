@@ -35,7 +35,6 @@ public class PersonEditDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setNote(person.getNote());
-        descriptor.setTags(person.getTags());
     }
 
     /**
@@ -68,7 +67,6 @@ public class PersonEditDescriptorBuilder {
      */
     public PersonEditDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

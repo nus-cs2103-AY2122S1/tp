@@ -5,10 +5,6 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -16,7 +12,7 @@ import seedu.notor.logic.executors.person.PersonEditExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 /**
- * Edits the details of an existing person in the notor.
+ * Edits the details of an existing person in Notor.
  */
 public class PersonEditCommand extends PersonCommand {
     public static final String COMMAND_WORD = "edit";
@@ -33,9 +29,8 @@ public class PersonEditCommand extends PersonCommand {
             + "Parameters:"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + PREFIX_NAME + "Jane Deh "
+            + "[" + PREFIX_EMAIL + "EMAIL] \n"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

@@ -11,6 +11,7 @@ import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
+import seedu.notor.model.tag.Tag;
 import seedu.notor.model.util.UniqueList;
 
 /**
@@ -19,9 +20,7 @@ import seedu.notor.model.util.UniqueList;
  */
 public class Notor implements ReadOnlyNotor {
 
-
     private final UniqueList<Person> persons;
-
     private final UniqueList<SuperGroup> superGroups;
 
     private Note note;

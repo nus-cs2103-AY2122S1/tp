@@ -3,10 +3,7 @@ package seedu.notor.logic.executors.person;
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.commons.util.CollectionUtil;
@@ -17,7 +14,6 @@ import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
-import seedu.notor.model.tag.Tag;
 
 /**
  * Executor for a PersonEditCommand.
@@ -64,10 +60,9 @@ public class PersonEditExecutor extends PersonExecutor {
         Name updatedName = personEditDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = personEditDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = personEditDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = personEditDescriptor.getTags().orElse(personToEdit.getTags());
         Note updatedNote = personEditDescriptor.getNote().orElse(personToEdit.getNote());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote);
     }
 
     @Override
@@ -96,7 +91,6 @@ public class PersonEditExecutor extends PersonExecutor {
         private Name name;
         private Phone phone;
         private Email email;
-        private Set<Tag> tags;
         private Note note;
 
         public PersonEditDescriptor() {
@@ -110,7 +104,6 @@ public class PersonEditExecutor extends PersonExecutor {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setTags(toCopy.tags);
             setNote(toCopy.note);
         }
 
@@ -118,7 +111,7 @@ public class PersonEditExecutor extends PersonExecutor {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email);
         }
 
         public void setName(Name name) {
@@ -153,23 +146,6 @@ public class PersonEditExecutor extends PersonExecutor {
             return Optional.ofNullable(note);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : new HashSet<>();
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -186,8 +162,7 @@ public class PersonEditExecutor extends PersonExecutor {
             PersonEditDescriptor e = (PersonEditDescriptor) other;
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getTags().equals(e.getTags());
+                    && getEmail().equals(e.getEmail());
         }
     }
 }

@@ -1,18 +1,27 @@
 package seedu.notor.model.tag;
 
+import static java.util.Objects.nonNull;
 import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.util.AppUtil.checkArgument;
 
+import seedu.notor.model.person.Person;
+import seedu.notor.model.util.Unique;
+import seedu.notor.model.util.UniqueList;
+
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in Notor. Tags have unique names & can be used to filter Notor.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Tag implements Unique<Tag> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags' names should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
+    // TODO: populate tagged with all the people who are tagged, w/ appropriate accessors
+    // decide if groups are also tagged in the same way, and what happens if a group is
+    // removed from someone...
+    private final UniqueList<Person> tagged;
 
     /**
      * Constructs a {@code Tag}.
@@ -23,6 +32,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
+        this.tagged = new UniqueList<>();
     }
 
     /**
@@ -30,6 +40,12 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    @Override public boolean isSame(Tag other) {
+        return other == this // short circuit if same object
+                || nonNull(other)
+                && tagName.equals(other.tagName); // state check
     }
 
     @Override

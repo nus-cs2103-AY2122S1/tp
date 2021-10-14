@@ -38,16 +38,16 @@ public class Person implements Unique<Person>, Notable {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Note note) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.tags.addAll(tags);
+        this.note = note;
     }
 
     /**
-     * Every field must be present and not null.
+     * May create a person with tags
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
