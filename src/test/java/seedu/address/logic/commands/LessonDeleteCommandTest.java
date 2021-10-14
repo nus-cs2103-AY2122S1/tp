@@ -1,31 +1,28 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class LessonDeleteCommandTest {
@@ -33,38 +30,71 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonDeleteCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> prepareLessonDeleteCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
-    public void execute_oneExistingLesson_success() {
+    public void execute_validPersonWithoutExistingLessons_failure() {
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validPersonWithAnExistingLesson_success() {
+        Lesson lesson = new LessonBuilder().build();
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withSampleLesson().build();
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
-        ModelStub modelStub = new ModelStubWithPerson(editedPerson);
+        Person editedPerson = new PersonBuilder(firstPerson).withLessons(lesson).build();
+        model.setPerson(firstPerson, editedPerson);
 
-        Lesson lessonToDelete = editedPerson.getLessons().stream()
-            .collect(Collectors.toList())
-            .get(INDEX_FIRST_LESSON.getZeroBased());
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+
         String expectedMessage = String.format(
-            LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);
-        Model expectedModel = new ModelStubWithPerson(firstPerson);
+            LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lesson, editedPerson);
 
-        assertCommandSuccess(lessonDeleteCommand, modelStub, expectedMessage, expectedModel);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            firstPerson);
+
+        assertCommandSuccess(lessonDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        // filter list to show only the first person
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        LessonDeleteCommand deleteSampleLessonCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
             INDEX_FIRST_LESSON);
-        LessonDeleteCommand deleteSampleLessonCommand2 = new LessonDeleteCommand(INDEX_SECOND_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommand2 = prepareLessonDeleteCommand(INDEX_SECOND_PERSON,
             INDEX_FIRST_LESSON);
 
         // same object -> returns true
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommand));
 
         // same values -> returns true
-        LessonDeleteCommand deleteSampleLessonCommandCopy = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommandCopy = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
             INDEX_FIRST_LESSON);
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommandCopy));
 
@@ -79,139 +109,11 @@ public class LessonDeleteCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * Generates a {@code LessonDeleteCommand} with parameters {@code personIndex} and {@code lessonIndex}.
      */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasClashingLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            this.person = editedPerson;
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            return;
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            UniquePersonList list = new UniquePersonList();
-            list.add(this.person);
-            return list.asUnmodifiableObservableList();
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            // short circuit if same object
-            if (obj == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(obj instanceof ModelStubWithPerson)) {
-                return false;
-            }
-
-            // state check
-            return person.equals(((ModelStubWithPerson) obj).person);
-        }
-
+    private LessonDeleteCommand prepareLessonDeleteCommand(Index personIndex, Index lessonIndex) {
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(personIndex, lessonIndex);
+        lessonDeleteCommand.setDependencies(model, new UndoRedoStack());
+        return lessonDeleteCommand;
     }
 }

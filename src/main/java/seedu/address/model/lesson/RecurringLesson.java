@@ -7,7 +7,6 @@ import java.util.Set;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class RecurringLesson extends Lesson {
-
     /**
      * Every field must be present and not null.
      *
@@ -16,8 +15,7 @@ public class RecurringLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange,
-                           Subject subject, Set<Homework> homework) {
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
         super(date, timeRange, subject, homework);
     }
 

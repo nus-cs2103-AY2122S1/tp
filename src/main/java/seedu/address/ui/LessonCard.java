@@ -20,13 +20,11 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label lessonId;
     @FXML
-    private Label type;
+    private Label title;
     @FXML
     private Label date;
     @FXML
     private Label time;
-    @FXML
-    private Label subject;
     @FXML
     private FlowPane homeworkList;
 
@@ -37,11 +35,10 @@ public class LessonCard extends UiPart<Region> {
         super(FXML);
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
-        type.setText(lesson.getTypeOfLesson());
-        date.setText("Date: "
-            + (lesson.isRecurring() ? lesson.getNextDate().value : lesson.getStartDate().value));
+        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
+        date.setText("Date: " + (
+                lesson.isRecurring() ? lesson.getNextDate().value : lesson.getStartDate().value));
         time.setText("Time: " + lesson.getTimeRange().toString());
-        subject.setText("Subject: " + lesson.getSubject().toString());
         lesson.getHomework().stream()
             .sorted(Comparator.comparing(homework -> homework.description))
             .forEach(homework -> homeworkList.getChildren()

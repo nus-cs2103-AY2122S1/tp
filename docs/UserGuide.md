@@ -68,7 +68,10 @@ to help you with the installation. Follow the guide for your operation system fo
 
 * Items in square brackets are optional.<br>
   e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
+  
+* Items in curly brackets separated by the pipe character `|` indicates that you must select exactly one parameter from the list of choices.
+  e.g. `cond/{all | any | none}` can be used as `cond/all` or `cond/any` or `cond/none`.
+  
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -111,7 +114,7 @@ A student can have any number of tags (including 0).
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the add command:**<br>
+**:information_source: Notes about the `add` command:**<br>
 
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
@@ -131,7 +134,7 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the edit command:**<br>
+**:information_source: Notes about the `edit` command:**<br>
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
@@ -174,7 +177,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 #### Viewing a student's details: `view`
 
@@ -198,74 +201,58 @@ Format: `list`
 
 #### Finding students by fields: `find`
 
-Finds all students whose fields match the given keywords.
+Finds all students whose fields match the given keyword(s), based on the specified find condition.
 
-Format: `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the find command:**<br>
-
-* You must provide at least one field.<br>
-  e.g. entering just `find` alone is not a valid command. You need to include the fields you wish to search for.
-
-* The search is case-insensitive.<br>
-  e.g.`hans` will match `Hans`.
-
-* The order of the keywords does not matter.<br>
-  e.g. `Clementi West` will match `West Clementi`.
-
-* The keyword does not need to match the field exactly.<br>
-  e.g. `john@gmail.com` will match `leejohn@gmail.com`.
-
-* A field just needs to match at least one keyword.<br>
-  e.g. `Hans Bo` will match `Hans Gruber`, `Bo Yang`.
-
-* A student is only considered a match when all fields which you are searching for match their keywords.<br>
-  e.g. `find n/john a/Clementi`
-  * will match student named `john` with address `West Clementi Street`
-  * will not match student named `john` with address `Bedok Reservoir`
-
-</div>
-
-Examples:
-* `find n/John Lee` returns `john`, `johnny Doe`, `Aileen`.
-* `find a/Jurong east n/Ben e/gmail`
-  * will match a student named `benny tan`, with address `West Jurong`, and email `benny.tan@gmail.com`
-  * will match a student named `benjamin`, with address `yishun east ave 1`, and email `benj@gmail.com`
-
-#### Filtering students by tags: `filter`
-
-Filters students in TAB by their tags, based on the given filter condition.
-
-Format: `filter cond/{all | any | none} t/TAG [t/MORE_TAGS]…`
+Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the filter command:**<br>
+**:information_source: Notes about the `find` command:**<br>
 
-* `all` indicates that a student must have all the specified tags to be matched.
+* You can find students by all the fields except remark and fee.
 
-* `any` indicates that a student with at least one of the specified tag will be matched.
+* The filter condition indicates that a student is only considered a match when `all`, `any` or `none`
+  of the fields which you are searching for match the student.<br>
+  e.g. 
+    * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
+    * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
+    * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
 
-* `none` indicates that a student must have none of the specified tags to be matched.
-
-* The filter condition will not accept other arguments besides `all`, `any` and `none`.
+* The filter condition will not accept other arguments besides `all`, `any` and `none`.<br>
   e.g. `cond/every` will result in an error.
   
-* You must use the exact spelling of the existing tag.<br>
-  e.g. `Math` will not match `Mathematics`.
+* The filter condition is optional and defaults to `all` if not specified.
+
+* The filter condition is case-insensitive.<br>
+  e.g. `None` or `ANY` are valid.
   
-* The tags are **case-sensitive**.<br>
-  e.g. `filter cond/all t/MATH` does not return the same result as `filter cond/all t/math`.
+* You must provide at least one field to search.<br>
+  e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
+
+* You must provide at least one keyword to search for.<br>
+  e.g. entering just `find n/ ` alone is not a valid command as the keyword is empty.
+
+* Tags must only have one keyword.<br>
+  e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
+  
+* The search is case-insensitive.<br>
+  e.g. keyword `hans` will match `Hans`.
+
+* A keyword can match a word partially.<br>
+  e.g. keyword `math` will match `mathematics`.
+  
+* The order of the keywords do not matter.<br>
+  e.g. keyword `west jurong` will match `jurong west`.
+  
+* A field needs to contain all specified keywords to be matched.<br>
+  e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
 
 </div>
 
 Examples:
-* `filter cond/all t/math t/Sec1` will return students who have both `math` and `Sec1` tags.
-* `filter cond/any t/English t/Zoom` will return students with only the `English` tag, or only the `Zoom` tag, or both tags.
-* `filter cond/none t/Inactive t/paid` will return students without both `Inactive` and `paid` tags.
-
+* `find a/west p/9876 n/john` matches student with name `Johnny tan`, address `Clementi west`, and phone number `98765432`.
+* `find cond/none t/new t/paid t/zoom` returns students with none of the tags `new`, `paid` and `zoom`.
+* `find stream/express sch/nus cond/any` returns students with stream `express` or school `nus`.
 
 ### Managing Lessons
 
@@ -282,24 +269,32 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 **Lesson fields:**
 * Date of lesson `dd MMM yyyy`
   *  e.g. `02 Jan 2018`
-* Start time `HH:mm`
-* End time `HH:mm`
+* Time range `HHmm-HHmm`
 * Subject
 * Homework
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: The type of lesson will be inferred from the presence of the "recurring/" prefix.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ladd` command:**<br>
+
+* The type of lesson will be inferred from the presence of the `recurring/` prefix.
+  
+* The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
+
 </div>
 
 Examples:
 
-* `list` followed by `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math` (recurring lesson)
-adds the lesson to the 1st student in TAB.
+* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
+  adds the recurring lesson to the 1st student in the displayed student list.
 
-* `find john` followed by `ladd 1 date/16 Sep 2021 start/15:30 end/17:30 subject/Science hw/TYS p2 Q2` 
-  (makeup lesson w/ homework) adds the lesson to the 1st student in the results of the `find` command.
+* `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+  adds the makeup lesson to the 4th student in the displayed student list.
+
+* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1`
+  adds the makeup lesson to the 1st student in the results of the `find` command.
 
 #### Deleting a lesson : `ldelete`
 
@@ -307,14 +302,24 @@ Deletes the specified lesson from the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ldelete` command:**<br>
+
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+  
 * The index refers to the index number shown in the displayed student list.
-* The lesson index refers to the index number shown in the lesson list of the student. 
+  
+* The lesson index refers to the index number shown in the lesson list of the student.
+  
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
+
+</div>
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
-* `find Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
+  
+* `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
 
 ### Viewing the Schedule
@@ -396,10 +401,9 @@ Action | Format, Examples
 **Edit Student** | `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…`<br><br> e.g. `edit 2 n/James Lee e/jameslee@example.com`
 **Delete Student** | `delete INDEX`<br><br> e.g. `delete 3`
 **List Students** | `list`
-**Find Students** | `find [n/NAME_KEYWORD …] [a/ADDRESS_KEYWORD …] [e/EMAIL_KEYWORD …] [p/PHONE_KEYWORD …] [sch/SCHOOL_KEYWORD …] [stream/ACAD_STREAM_KEYWORD …] [lvl/ACAD_LEVEL_KEYWORD …]`<br><br> e.g. `find n/James Tan a/clementi sch/NUS`
+**Find Students** | `find [cond/{all &#124; any &#124; none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 **View Tags** | `tag`
-**Filter Students** | <code>filter cond/{all &#124; any &#124; none} t/TAG [t/MORE_TAGS]…</code> <br><br> e.g. `filter cond/all t/Sec1 t/zoom`
-**Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy start/HH:mm end/HH:mm subject/SUBJECT [hw/HOMEWORK]`<br><br> e.g. `ladd 1 recurring/ date/16 Sep 2021 start/15:00 end/16:00 subject/Math`
+**Add Lesson** | `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`<br><br> e.g. `ladd 1 recurring/ date/10 Nov 2021 time/1000-1200 subject/Math`
 **Delete Lesson** | `ldelete INDEX LESSON_INDEX`<br><br> e.g.`ldelete 2 1`
 **View Schedule** | `schedule`
 **Clear** |`clear`

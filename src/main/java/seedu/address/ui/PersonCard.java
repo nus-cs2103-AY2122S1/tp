@@ -1,17 +1,13 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.Set;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     private Label school;
     @FXML
     private Label acadStream;
+    @FXML
+    private Label acadLevel;
     @FXML
     private Label remark;
     @FXML
@@ -105,6 +103,13 @@ public class PersonCard extends UiPart<Region> {
             acadStream.setManaged(false);
         } else {
             acadStream.setText("Academic Stream: " + person.getAcadStream().value);
+        }
+
+        if (person.getAcadLevel().isEmpty()) {
+            acadLevel.setVisible(false);
+            acadLevel.setManaged(false);
+        } else {
+            acadLevel.setText("Academic Level: " + person.getAcadLevel().value);
         }
 
         if (person.getRemark().isEmpty()) {

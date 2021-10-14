@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 public class DateTest {
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Date(null));
@@ -110,6 +109,5 @@ public class DateTest {
         Date today = new Date(LocalDate.now().format(Date.FORMATTER));
         assertEquals(LocalDate.now(), today.updateDate().getLocalDate());
     }
-
 }
 

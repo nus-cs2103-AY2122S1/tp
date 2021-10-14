@@ -15,8 +15,7 @@ public class MakeUpLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange,
-                           Subject subject, Set<Homework> homework) {
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
         super(date, timeRange, subject, homework);
     }
 

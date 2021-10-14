@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,6 +29,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
+    public static final String MESSAGE_CLASHING_LESSON = "Person contains clashing lesson(s).";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
@@ -38,6 +40,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String school;
     private final String acadStream;
+    private final String acadLevel;
     private final String outstandingFee;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -51,6 +54,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
                              @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
+                             @JsonProperty("acadLevel") String acadLevel,
                              @JsonProperty("outstanding fee") String outstandingFee,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
@@ -63,6 +67,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.school = school;
         this.acadStream = acadStream;
+        this.acadLevel = acadLevel;
         this.outstandingFee = outstandingFee;
         this.remark = remark;
         if (tagged != null) {
@@ -85,6 +90,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         school = source.getSchool().value;
         acadStream = source.getAcadStream().value;
+        acadLevel = source.getAcadLevel().value;
         outstandingFee = source.getFee().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
@@ -107,8 +113,12 @@ class JsonAdaptedPerson {
         }
 
         final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+            if (personLessons.stream().anyMatch(personLesson -> personLesson.isClashing(lesson))) {
+                throw new IllegalValueException(MESSAGE_CLASHING_LESSON);
+            }
+            personLessons.add(lesson);
         }
 
         if (name == null) {
@@ -170,11 +180,19 @@ class JsonAdaptedPerson {
         }
         final AcadStream modelAcadStream = new AcadStream(acadStream);
 
+        if (acadLevel == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, AcadLevel.class.getSimpleName()));
+        }
+        if (!AcadLevel.isValidAcadLevel(acadLevel)) {
+            throw new IllegalValueException(AcadLevel.MESSAGE_CONSTRAINTS);
+        }
+        final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
+
         if (outstandingFee == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
         }
         final Fee modelFee = new Fee(outstandingFee);
-
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -186,6 +204,7 @@ class JsonAdaptedPerson {
         final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
-                modelAddress, modelSchool, modelAcadStream, modelFee, modelRemark, modelTags, modelLessons);
+                modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelFee, modelRemark, modelTags,
+                modelLessons);
     }
 }

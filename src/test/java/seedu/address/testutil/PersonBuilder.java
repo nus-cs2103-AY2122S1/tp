@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -30,6 +31,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SCHOOL = "";
     public static final String DEFAULT_ACAD_STREAM = "";
+    public static final String DEFAULT_ACAD_LEVEL = "";
     public static final String DEFAULT_FEE = "";
     public static final String DEFAULT_REMARK = "";
 
@@ -41,6 +43,7 @@ public class PersonBuilder {
     private Address address;
     private School school;
     private AcadStream acadStream;
+    private AcadLevel acadLevel;
     private Fee fee;
     private Remark remark;
     private Set<Tag> tags;
@@ -58,6 +61,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         school = new School(DEFAULT_SCHOOL);
         acadStream = new AcadStream(DEFAULT_ACAD_STREAM);
+        acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
         fee = new Fee(DEFAULT_FEE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
@@ -76,6 +80,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         school = personToCopy.getSchool();
         acadStream = personToCopy.getAcadStream();
+        acadLevel = personToCopy.getAcadLevel();
         fee = personToCopy.getFee();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
@@ -179,6 +184,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code AcadLevel} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAcadLevel(String acadLevel) {
+        this.acadLevel = new AcadLevel(acadLevel);
+        return this;
+    }
+
+    /**
+     * Sets the {@code AcadLevel} of the {@code Person} that we are building as blank.
+     */
+    public PersonBuilder withAcadLevel() {
+        this.acadLevel = new AcadLevel(DEFAULT_ACAD_LEVEL);
+        return this;
+    }
+
+    /**
      * Sets the {@code Fee} of the {@code Person} that we are building.
      */
     public PersonBuilder withFee(String fee) {
@@ -221,28 +242,18 @@ public class PersonBuilder {
     /**
      * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withLessons() {
-        this.lessons = SampleDataUtil.getSampleLessons();
-        return this;
-    }
-
-    /**
-     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
-     */
-    public PersonBuilder withSampleLesson() {
-        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
-        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
-        this.lessons = lessonSetWithOneLesson;
+    public PersonBuilder withLessons(Lesson... lessons) {
+        this.lessons = SampleDataUtil.getLessonSet(lessons);
         return this;
     }
 
     /**
      * Builds a person with the specified information.
      *
-     * @return {@code Person} container the information given.
+     * @return {@code Person} containing the information given.
      */
     public Person build() {
         return new Person(name, phone, email, parentPhone, parentEmail,
-            address, school, acadStream, fee, remark, tags, lessons);
+            address, school, acadStream, acadLevel, fee, remark, tags, lessons);
     }
 }

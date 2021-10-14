@@ -14,13 +14,15 @@ import java.util.TreeSet;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.PersonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.PersonUtil;
 
-public class LessonAddCommand extends Command {
+
+public class LessonAddCommand extends UndoableCommand {
+
+    public static final String COMMAND_ACTION = "Add Lesson";
 
     public static final String COMMAND_WORD = "ladd";
 
@@ -30,6 +32,8 @@ public class LessonAddCommand extends Command {
             + PREFIX_TIME + "HHmm-HHmm "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String COMMAND_EXAMPLE_RECURRING_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_RECURRING + " "
@@ -46,11 +50,11 @@ public class LessonAddCommand extends Command {
             + PREFIX_HOMEWORK + "Textbook Page 52";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student identified "
-        + "by the index number\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Examples:\n"
-        + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
-        + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
+            + "by the index number\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Examples:\n"
+            + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
+            + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
 
     public static final String USER_TIP = "Try adding a lesson to a student using: \n"
             + COMMAND_WORD + " "
@@ -63,6 +67,8 @@ public class LessonAddCommand extends Command {
 
     private final Index index;
     private final Lesson toAdd;
+    private Person personBeforeLessonAdd;
+    private Person personAfterLessonAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -76,34 +82,50 @@ public class LessonAddCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private static Person createEditedPerson(Person personToEdit, Lesson lesson) {
+    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
         assert personToEdit != null;
 
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(lesson);
+        lessons.add(toAdd);
 
         return PersonUtil.createdEditedPerson(personToEdit, lessons);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, toAdd);
-
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd));
+    }
+
+    @Override
+    protected void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
     }
 
     @Override

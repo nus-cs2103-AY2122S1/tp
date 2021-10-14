@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,8 +17,8 @@ import java.util.Set;
 public abstract class Lesson implements Comparable<Lesson> {
 
     // Types of lesson
-    private static final String RECURRING = "Recurring Lesson";
-    private static final String MAKEUP = "Makeup Lesson";
+    private static final String RECURRING = "Recurring";
+    private static final String MAKEUP = "Makeup";
 
     // Time fields
     private final Date startDate;
@@ -63,6 +64,14 @@ public abstract class Lesson implements Comparable<Lesson> {
         return timeRange;
     }
 
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(startDate.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(startDate.getLocalDate());
+    }
+
     public String getTypeOfLesson() {
         return isRecurring() ? RECURRING : MAKEUP;
     }
@@ -94,10 +103,6 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @return True if and only if lessons clash.
      */
     public abstract boolean isClashing(Lesson otherLesson);
-
-    public boolean isOver() {
-        return getStartDate().isOver();
-    }
 
     /**
      * Check if both lessons have the same data fields.
@@ -152,4 +157,3 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
 }
-

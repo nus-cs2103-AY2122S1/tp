@@ -19,10 +19,10 @@ import java.util.Locale;
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd MMM yyyy "
-        + "and adhere to the following constraints:\n"
-        + "1. dd and yyyy are numerical characters.\n"
-        + "2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec\n"
-        + "3. Must be a valid date for the year.";
+            + "and adhere to the following constraints:\n"
+            + "1. dd and yyyy are numerical characters.\n"
+            + "2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec\n"
+            + "3. Must be a valid date for the year.";
 
     /*
     Date strings should be formatted as dd MMM uuuu, where dd and uuuu are digits.
@@ -30,10 +30,10 @@ public class Date implements Comparable<Date> {
      */
     public static final String VALIDATION_REGEX = "^[0-2]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
     public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-        .parseCaseInsensitive()
-        .appendPattern("d MMM uuuu")
-        .toFormatter(Locale.ENGLISH)
-        .withResolverStyle(ResolverStyle.STRICT);
+            .parseCaseInsensitive()
+            .appendPattern("d MMM uuuu")
+            .toFormatter(Locale.ENGLISH)
+            .withResolverStyle(ResolverStyle.STRICT);
 
     public final String value;
 
@@ -80,6 +80,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+<<<<<<< HEAD
      * Update the lesson date to the same day on the most recent week
      * that has yet to be pass.
      *
@@ -103,6 +104,8 @@ public class Date implements Comparable<Date> {
     }
 
     /**
+=======
+>>>>>>> 5cc08fce492ac99d01795d6cbec8a990ace3f6cc
      * Check if the date has passed.
      *
      * @return true if date is earlier than now.
