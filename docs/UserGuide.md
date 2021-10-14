@@ -160,6 +160,14 @@ Format: `import FILENAME`
 
 * Reads the contacts in `FILENAME` and merges them into the existing contacts.
 
+### Export filtered contacts to JSON: `export`
+
+Exports all current filtered contacts into a JSON file.
+
+Format: `export FILENAME`
+
+* Takes the current filtered list of contacts and writes them into `FILENAME`
+
 ### Exiting the program : `exit`
 
 Exits the program.
