@@ -2,6 +2,8 @@ package seedu.programmer.model.student;
 
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -16,6 +18,7 @@ public class Student {
     private final StudentId studentId;
     private final ClassId classId;
     private final Grade grade;
+    private List<LabResult> labResultList;
 
     /**
      * Every field must be present and not null.
@@ -26,6 +29,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.grade = grade;
+        this.labResultList = new ArrayList<>();
     }
 
     public Name getName() {
@@ -44,6 +48,23 @@ public class Student {
         return grade;
     }
 
+    public List<LabResult> getLabResultList() {
+        return labResultList;
+    }
+
+    /**
+     * Add a lab result into the student's record
+     * */
+    public void addLabResult(LabResult result) {
+        if (this.labResultList == null) {
+            labResultList = new ArrayList<>();
+        }
+        this.labResultList.add(result);
+    }
+
+    public void setLabResultRecord(List<LabResult> labResultRecord) {
+        this.labResultList = labResultRecord;
+    }
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -75,7 +96,8 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
-                && otherStudent.getGrade().equals(getGrade());
+                && otherStudent.getGrade().equals(getGrade())
+                && otherStudent.getLabResultList().equals(getLabResultList());
     }
 
     @Override

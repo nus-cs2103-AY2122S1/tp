@@ -32,6 +32,7 @@ import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
+import seedu.programmer.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -50,6 +51,8 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private LabResultListPanel labResultListPanel;
+    private StudentCard studentParticular;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,6 +65,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane labResultListPanelPlaceholder;
+
+    @FXML
+    private StackPane studentParticularPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -177,6 +186,22 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Display the selected student's lab results.
+     */
+    @FXML
+    public void handleShowResult(Student target) {
+        if (studentParticularPlaceholder.getChildren().isEmpty()) {
+            studentParticular = new StudentCard(target);
+            studentParticularPlaceholder.getChildren().add(studentParticular.getRoot());
+        } else {
+            studentParticular.updateStudentInformation(target);
+            studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
+        }
+        labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
+        labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
 
     /**
@@ -296,6 +321,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            studentParticularPlaceholder.getChildren().clear();
+            labResultListPanelPlaceholder.getChildren().clear();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -306,6 +333,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowResult()) {
+                handleShowResult(commandResult.getTarget());
             }
 
             return commandResult;
