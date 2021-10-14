@@ -34,7 +34,7 @@ public class ClassCard extends UiPart<Region> {
         this.tutorialClass = tutorialClass;
         id.setText(displayedIndex + ". ");
         classCode.setText(tutorialClass.getClassCode().value);
-        schedule.setText(tutorialClass.getSchedule().schedule);
+        schedule.setText(tutorialClass.getSchedule().value);
         tutorialClass.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new javafx.scene.control.Label(tag.tagName)));
