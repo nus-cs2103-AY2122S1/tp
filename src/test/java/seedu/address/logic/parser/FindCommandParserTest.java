@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -79,25 +82,25 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_twoPrefixes_NameAndModule_throwsParseException() {
+    public void parse_twoPrefixesNameAndModule_throwsParseException() {
         assertParseFailure(parser, "find n/ben m/cs2100",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 
     @Test
-    public void parse_twoPrefixes_NameAndTag_throwsParseException() {
+    public void parse_twoPrefixesNameAndTag_throwsParseException() {
         assertParseFailure(parser, "find n/ben t/UwU",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 
     @Test
-    public void parse_twoPrefixes_TagAndModule_throwsParseException() {
+    public void parse_twoPrefixesTagAndModule_throwsParseException() {
         assertParseFailure(parser, "find t/UwU m/cs2100",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 
     @Test
-    public void parse_threePrefixes_NameAndModule_throwsParseException() {
+    public void parse_threePrefixesNameAndModule_throwsParseException() {
         assertParseFailure(parser, "find n/ben m/cs2100 t/UwU",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
