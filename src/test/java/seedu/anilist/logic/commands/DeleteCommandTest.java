@@ -58,7 +58,7 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getAnimeList(), new UserPrefs());
         expectedModel.deleteAnime(animeToDelete);
-        showNoPerson(expectedModel);
+        showNoAnime(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -94,14 +94,14 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different anime -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered list to show no anime.
      */
-    private void showNoPerson(Model model) {
+    private void showNoAnime(Model model) {
         model.updateFilteredAnimeList(p -> false);
 
         assertTrue(model.getFilteredAnimeList().isEmpty());

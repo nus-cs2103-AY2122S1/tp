@@ -20,25 +20,30 @@ public class Anime {
 
     // Data fields
     private final Episode episode;
+    private final Status status;
     private final Set<Genre> genres = new HashSet<>();
 
     /**
-     * Every field must be present and not null except Episode which defaults to 0.
+     * Every field must be present and not null
+     * except Episode which defaults to 0,
+     * and Status which defaults to "watching".
      */
     public Anime(Name name, Set<Genre> genres) {
         requireAllNonNull(name, genres);
         this.name = name;
         this.episode = new Episode("0");
+        this.status = new Status("watching");
         this.genres.addAll(genres);
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Anime(Name name, Episode episode, Set<Genre> genres) {
-        requireAllNonNull(name, genres, episode);
+    public Anime(Name name, Episode episode, Status status, Set<Genre> genres) {
+        requireAllNonNull(name, genres, episode, status);
         this.name = name;
         this.episode = episode;
+        this.status = status;
         this.genres.addAll(genres);
     }
 
@@ -48,6 +53,10 @@ public class Anime {
 
     public Episode getEpisode() {
         return episode;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -93,20 +102,20 @@ public class Anime {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, episode, genres);
+        return Objects.hash(name, episode, status, genres);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName());
-        builder.append(String.format(" (%s)", getEpisode()));
-
+        builder.append(String.format(" (Episode: %s)", getEpisode()));
         Set<Genre> genres = getGenres();
         if (!genres.isEmpty()) {
             builder.append("; Genres: ");
             genres.forEach(builder::append);
         }
+        builder.append(String.format("; (Status: %s)", getStatus()));
         return builder.toString();
     }
 

@@ -16,7 +16,9 @@ import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
+import seedu.anilist.logic.commands.RenameCommand;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
+import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
@@ -75,6 +77,12 @@ public class AnimeListParser {
 
         case UpdateEpisodeCommand.COMMAND_WORD:
             return new UpdateEpisodeCommandParser().parse(arguments);
+
+        case RenameCommand.COMMAND_WORD:
+            return new RenameCommandParser().parse(arguments);
+
+        case UpdateStatusCommand.COMMAND_WORD:
+            return new UpdateStatusCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

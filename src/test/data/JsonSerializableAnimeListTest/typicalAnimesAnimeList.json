@@ -1,25 +1,39 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "AnimeList save file which contains the same Anime values as in TypicalAnimes#getTypicalAnimeList()",
   "anime" : [ {
-    "name" : "Alice Pauline",
-    "genres" : [ "friends" ]
+    "name" : "Attack on Titan: The Final Season",
+    "episode" : "0",
+    "status" : "watching",
+    "genres" : [ "action" ]
   }, {
-    "name" : "Benson Meier",
-    "genres" : [ "owesMoney", "friends" ]
+    "name" : "Black Rock Shooter",
+    "episode" : "12",
+    "status" : "finished",
+    "genres" : [ "fantasy", "action" ]
   }, {
-    "name" : "Carl Kurz",
+    "name" : "Chainsaw Man",
+    "episode" : "0",
+    "status" : "towatch",
     "genres" : [ ]
   }, {
-    "name" : "Daniel Meier",
-    "genres" : [ "friends" ]
+    "name" : "Dragon Ball Z",
+    "episode" : "0",
+    "status" : "towatch",
+    "genres" : [ "action" ]
   }, {
-    "name" : "Elle Meyer",
+    "name" : "Elfen Lied",
+    "episode" : "21",
+    "status" : "watching",
     "genres" : [ ]
   }, {
-    "name" : "Fiona Kunz",
+    "name" : "Fate/stay night",
+    "episode" : "24",
+    "status" : "finished",
     "genres" : [ ]
   }, {
-    "name" : "George Best",
+    "name" : "Goblin Slayer: Goblin's Crown",
+    "episode" : "0",
+    "status" : "towatch",
     "genres" : [ ]
   } ]
 }

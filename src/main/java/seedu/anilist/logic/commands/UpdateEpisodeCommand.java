@@ -15,6 +15,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
 
 public class UpdateEpisodeCommand extends Command {
@@ -71,11 +72,12 @@ public class UpdateEpisodeCommand extends Command {
                                             UpdateEpisodeCommand.EpisodeDescriptor episodeDescriptor) {
         assert animeToEdit != null;
 
-        Name updatedName = animeToEdit.getName();
-        Episode episode = episodeDescriptor.getEpisode().orElse(animeToEdit.getEpisode());
-        Set<Genre> updatedGenres = animeToEdit.getGenres();
+        Name name = animeToEdit.getName();
+        Episode updatedEpisode = episodeDescriptor.getEpisode().orElse(animeToEdit.getEpisode());
+        Status status = animeToEdit.getStatus();
+        Set<Genre> genres = animeToEdit.getGenres();
 
-        return new Anime(updatedName, episode, updatedGenres);
+        return new Anime(name, updatedEpisode, status, genres);
     }
 
     @Override
@@ -112,12 +114,11 @@ public class UpdateEpisodeCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if episode is edited.
          */
         public boolean isEpisodeUpdated() {
             return episode != null;
         }
-
 
         public void setEpisode(Episode e) {
             this.episode = e;

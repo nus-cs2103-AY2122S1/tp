@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.util.SampleDataUtil;
 
@@ -14,18 +15,22 @@ import seedu.anilist.model.util.SampleDataUtil;
  */
 public class AnimeBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_NAME = "Attack on Titan";
+    public static final String DEFAULT_EPISODE = "0";
+    public static final String DEFAULT_STATUS = "watching";
 
     private Name name;
     private Episode episode;
     private Set<Genre> genres;
+    private Status status;
 
     /**
      * Creates a {@code AnimeBuilder} with the default details.
      */
     public AnimeBuilder() {
         name = new Name(DEFAULT_NAME);
-        episode = new Episode("0");
+        episode = new Episode(DEFAULT_EPISODE);
+        status = new Status(DEFAULT_STATUS);
         genres = new HashSet<>();
     }
 
@@ -35,6 +40,7 @@ public class AnimeBuilder {
     public AnimeBuilder(Anime animeToCopy) {
         name = animeToCopy.getName();
         episode = animeToCopy.getEpisode();
+        status = animeToCopy.getStatus();
         genres = new HashSet<>(animeToCopy.getGenres());
     }
 
@@ -55,7 +61,15 @@ public class AnimeBuilder {
     }
 
     /**
-     * Parses the {@code genres} into a {@code Set<Genre>} and set it to the {@code Anime} that we are building.
+     * Sets the {@code Status} of the {@code Anime} that we are building.
+     */
+    public AnimeBuilder withStatus(String status) {
+        this.status = new Status(status);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Genres} of the {@code Anime} that we are building.
      */
     public AnimeBuilder withGenres(String ... genres) {
         this.genres = SampleDataUtil.getGenreSet(genres);
@@ -63,7 +77,7 @@ public class AnimeBuilder {
     }
 
     public Anime build() {
-        return new Anime(name, episode, genres);
+        return new Anime(name, episode, status, genres);
     }
 
 }

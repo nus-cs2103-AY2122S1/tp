@@ -13,6 +13,7 @@ import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
 
 /**
@@ -92,7 +93,6 @@ public class ParserUtil {
         return new Episode(trimmedEpisode);
     }
 
-
     /**
      * Parse a {@Code String actionString} into a {@Code Action}.
      * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
@@ -111,5 +111,20 @@ public class ParserUtil {
         result = Action.actionFromString(trimmedActionLowerCase);
 
         return result;
+    }
+    
+    /**
+     * Parses a {@code String status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return new Status(trimmedStatus);
     }
 }

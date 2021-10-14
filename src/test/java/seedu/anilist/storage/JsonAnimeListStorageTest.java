@@ -3,9 +3,9 @@ package seedu.anilist.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.ALICE;
-import static seedu.anilist.testutil.TypicalAnimes.HOON;
-import static seedu.anilist.testutil.TypicalAnimes.IDA;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
+import static seedu.anilist.testutil.TypicalAnimes.HXH;
+import static seedu.anilist.testutil.TypicalAnimes.IDOL;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.io.IOException;
@@ -62,14 +62,14 @@ public class JsonAnimeListStorageTest {
         assertEquals(original, new AnimeList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addAnime(HOON);
-        original.removeAnime(ALICE);
+        original.addAnime(HXH);
+        original.removeAnime(AOT);
         jsonAnimeListStorage.saveAnimeList(original, filePath);
         readBack = jsonAnimeListStorage.readAnimeList(filePath).get();
         assertEquals(original, new AnimeList(readBack));
 
         // Save and read without specifying file path
-        original.addAnime(IDA);
+        original.addAnime(IDOL);
         jsonAnimeListStorage.saveAnimeList(original); // file path not specified
         readBack = jsonAnimeListStorage.readAnimeList().get(); // file path not specified
         assertEquals(original, new AnimeList(readBack));

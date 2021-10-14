@@ -10,4 +10,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_EPISODE = new Prefix("e/");
     public static final Prefix PREFIX_GENRE = new Prefix("g/");
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_STATUS = new Prefix("s/");
 }

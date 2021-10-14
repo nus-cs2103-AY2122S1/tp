@@ -17,7 +17,9 @@ import seedu.anilist.commons.util.CollectionUtil;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
 
 /**
@@ -83,9 +85,11 @@ public class EditCommand extends Command {
         assert animeToEdit != null;
 
         Name updatedName = editAnimeDescriptor.getName().orElse(animeToEdit.getName());
+        Episode episode = animeToEdit.getEpisode();
+        Status status = animeToEdit.getStatus();
         Set<Genre> updatedGenres = editAnimeDescriptor.getGenres().orElse(animeToEdit.getGenres());
 
-        return new Anime(updatedName, updatedGenres);
+        return new Anime(updatedName, episode, status, updatedGenres);
     }
 
     @Override
@@ -112,6 +116,8 @@ public class EditCommand extends Command {
      */
     public static class EditAnimeDescriptor {
         private Name name;
+        private Episode episode;
+        private Status status;
         private Set<Genre> genres;
 
         public EditAnimeDescriptor() {}
@@ -122,6 +128,8 @@ public class EditCommand extends Command {
          */
         public EditAnimeDescriptor(EditAnimeDescriptor toCopy) {
             setName(toCopy.name);
+            setEpisode(toCopy.episode);
+            setStatus(toCopy.status);
             setGenres(toCopy.genres);
         }
 
@@ -129,7 +137,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, genres);
+            return CollectionUtil.isAnyNonNull(name, episode, status, genres);
         }
 
         public void setName(Name name) {
@@ -155,6 +163,22 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Genre>> getGenres() {
             return (genres != null) ? Optional.of(Collections.unmodifiableSet(genres)) : Optional.empty();
+        }
+
+        public void setEpisode(Episode e) {
+            this.episode = e;
+        }
+
+        public Optional<Episode> getEpisode() {
+            return Optional.ofNullable(episode);
+        }
+
+        public void setStatus(Status status) {
+            this.status = status;
+        }
+
+        public Optional<Status> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         @Override

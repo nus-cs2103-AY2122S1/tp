@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an anime list
  */
 public interface ReadOnlyAnimeList {
 

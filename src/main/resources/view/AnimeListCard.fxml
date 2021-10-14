@@ -29,13 +29,13 @@
           </VBox>
             <VBox maxWidth="100.0" minWidth="100.0" prefWidth="100.0" HBox.hgrow="NEVER">
                <children>
-                  <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="80.0" text="Watching" textOverrun="CLIP" VBox.vgrow="NEVER">
+                  <Label fx:id="status" alignment="TOP_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="80.0" textOverrun="CLIP" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </Label>
                   <Region prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                  <Label alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="80.0" text="5" VBox.vgrow="ALWAYS">
+                  <Label fx:id="episode" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="80.0" VBox.vgrow="ALWAYS">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>

@@ -33,6 +33,10 @@ public class AnimeCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label episode;
+    @FXML
+    private Label status;
+    @FXML
     private FlowPane genres;
 
     /**
@@ -43,6 +47,8 @@ public class AnimeCard extends UiPart<Region> {
         this.anime = anime;
         id.setText(displayedIndex + ". ");
         name.setText(anime.getName().fullName);
+        episode.setText(anime.getEpisode().toString());
+        status.setText(anime.getStatus().toString());
         anime.getGenres().stream()
                 .sorted(Comparator.comparing(genre -> genre.genreName))
                 .forEach(genre -> genres.getChildren().add(new Label(genre.genreName)));
