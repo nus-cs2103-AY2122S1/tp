@@ -24,6 +24,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (argList.size() == 1 && argList.get(0).equals("-a")) {
             return DeleteCommand.all();
+        } else if (argList.size() == 1 && argList.get(0).equals("-f")) {
+            return DeleteCommand.allShown();
         } else if (argList.size() == 2
                 && argList.contains("-a")
                 && argList.contains("-f")) {
