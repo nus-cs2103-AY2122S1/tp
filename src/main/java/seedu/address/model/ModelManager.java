@@ -131,6 +131,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setNewFolder(Folder oldFolder, Folder newFolder) {
+        requireAllNonNull(oldFolder, newFolder);
+        addressBook.setNewFolder(oldFolder, newFolder);
+        updateFilteredFolderList(PREDICATE_SHOW_ALL_FOLDERS);
+
+    }
+
+    @Override
     public boolean hasFolder(Folder folder) {
         requireNonNull(folder);
         return addressBook.hasFolder(folder);

@@ -68,6 +68,10 @@ public class Folder {
         this.contacts.add(contact);
     }
 
+    public void setAll(Folder oldFolder) {
+        this.contacts.addAll(oldFolder.contacts);
+    }
+
     /**
      * Returns true if both folders have the same name.
      * This defines a weaker notion of equality between two folders.

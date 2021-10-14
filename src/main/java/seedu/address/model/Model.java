@@ -104,6 +104,13 @@ public interface Model {
     void addFolder(Folder folder);
 
     /**
+     * Replaces {@code oldFolder} with {@code newFolder}.
+     * {@code oldFolder} must exist in the address book and
+     * {@code newFolder} must not already exist.
+     */
+    void setNewFolder(Folder oldFolder, Folder newFolder);
+
+    /**
      * Adds a Contact to the Folder.
      * The contact must not already exist in the Folder.
      */
