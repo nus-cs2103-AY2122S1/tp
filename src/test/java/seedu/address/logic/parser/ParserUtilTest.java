@@ -3,10 +3,8 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_CLIENT_ID;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalClientIds.CLIENT_ID_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,26 +52,6 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
-    }
-
-    @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class,
-                MESSAGE_INVALID_INDEX, () -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseIndex_validInput_success() throws Exception {
-        // No whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("1"));
-
-        // Leading and trailing whitespaces
-        assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
-    }
-
-    @Test
     public void parseClientId_invalidInput_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseClientId("10 a"));
     }
@@ -87,10 +65,10 @@ public class ParserUtilTest {
     @Test
     public void parseClientId_validInput_success() throws Exception {
         // No whitespaces
-        assertEquals(CLIENT_ID_FIRST_PERSON, ParserUtil.parseClientId("0"));
+        assertEquals(CLIENTID_ZERO_PERSON, ParserUtil.parseClientId("0"));
 
         // Leading and trailing whitespaces
-        assertEquals(CLIENT_ID_FIRST_PERSON, ParserUtil.parseClientId("  0  "));
+        assertEquals(CLIENTID_ZERO_PERSON, ParserUtil.parseClientId("  0  "));
     }
 
     @Test
