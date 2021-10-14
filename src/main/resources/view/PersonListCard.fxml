@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
@@ -38,14 +37,6 @@
       <Label fx:id="acadStream" styleClass="cell_small_label" text="\$acadStream" />
       <Label fx:id="outstandingFee" styleClass="cell_small_label" text="\$outstandingFee" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-    </VBox>
-    <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10" percentWidth="50" />
-    </columnConstraints>
-    <VBox alignment="CENTER_RIGHT" minHeight="105" GridPane.columnIndex="1">
-      <HBox spacing="5" alignment="CENTER_RIGHT" >
-        <StackPane fx:id="lessonListPanelPlaceholder" HBox.hgrow="SOMETIMES"/>
-      </HBox>
     </VBox>
   </GridPane>
 </HBox>

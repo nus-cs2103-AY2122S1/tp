@@ -126,19 +126,6 @@ public class PersonCard extends UiPart<Region> {
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         }
-
-        if (person.getLessons().isEmpty()) {
-            lessonListPanelPlaceholder.setManaged(false);
-        } else {
-            lessonListPanel = new LessonListPanel(getObservableListLessons(person.getLessons()));
-            lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
-        }
-    }
-
-    private ObservableList<Lesson> getObservableListLessons(Set<Lesson> lessonSet) {
-        ObservableList<Lesson> lessonObservableList = FXCollections.observableArrayList();
-        lessonSet.forEach(lesson -> lessonObservableList.add(lesson));
-        return lessonObservableList;
     }
 
     @Override
