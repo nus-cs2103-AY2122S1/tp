@@ -12,20 +12,11 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.AcadLevel;
-import seedu.address.model.person.AcadStream;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.School;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.util.PersonUtil;
 
 /**
- * Deletes a Lesson from an existing person in the address book.
+ * Contains integration tests (interaction with the Model) and unit tests for LessonDeleteCommand.
  */
 
 public class LessonDeleteCommand extends UndoableCommand {
@@ -47,7 +38,6 @@ public class LessonDeleteCommand extends UndoableCommand {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
 
     private final Index index;
     private final Index lessonIndex;
@@ -85,11 +75,6 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         personAfterLessonDelete = createEditedPerson(personBeforeLessonDelete, lessonList, toRemove);
 
-        if (!personBeforeLessonDelete.isSamePerson(personAfterLessonDelete)
-                && model.hasPerson(personAfterLessonDelete)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, personAfterLessonDelete));
@@ -102,25 +87,10 @@ public class LessonDeleteCommand extends UndoableCommand {
     private static Person createEditedPerson(Person personToEdit, List<Lesson> updatedLessons, Lesson toRemove) {
         assert personToEdit != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Phone updatedParentPhone = personToEdit.getParentPhone();
-        Email updatedParentEmail = personToEdit.getParentEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        School updatedSchool = personToEdit.getSchool();
-        AcadStream updatedAcadStream = personToEdit.getAcadStream();
-        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
-        Fee updatedOutstandingFee = personToEdit.getFee();
-        Remark updatedRemark = personToEdit.getRemark();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
         updatedLessons.remove(toRemove);
         TreeSet<Lesson> updatedLessonSet = new TreeSet<>(updatedLessons);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone, updatedParentEmail,
-                updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel, updatedOutstandingFee,
-                updatedRemark, updatedTags, updatedLessonSet);
+        return PersonUtil.createdEditedPerson(personToEdit, updatedLessonSet);
     }
 
     @Override

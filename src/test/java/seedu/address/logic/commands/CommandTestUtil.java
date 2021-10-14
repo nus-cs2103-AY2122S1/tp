@@ -5,16 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -102,6 +106,27 @@ public class CommandTestUtil {
             + "abcdefghijklmnopq"; // max 15 characters allowed for acad level
     public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_DATE_PAST = "15 May 1988";
+    public static final String VALID_DATE_FUTURE = "07 Apr 2103";
+    public static final String VALID_TIME_RANGE = "1234-1345";
+    public static final String VALID_SUBJECT = "Language Arts";
+    public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
+    public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
+
+    public static final String PAST_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_PAST;
+    public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
+    public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
+    public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
+    public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
+    public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
+
+    public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
+    public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
+    public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "-An+"; // Not alphanumeric
+    public static final String INVALID_HOMEWORK_DESC =
+            " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"
+            + " including whitespaces";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
