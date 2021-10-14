@@ -7,6 +7,7 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
+import static seedu.anilist.testutil.TypicalAnimes.FIRST_ANIME_GENRE;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_SECOND_ANIME;
@@ -28,7 +29,7 @@ import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
 
 public class GenreDeleteCommandTest {
-    private static final String ANIME_ONE_GENRE = "friends";
+    private static final String ANIME_ONE_GENRE = FIRST_ANIME_GENRE;
 
     private Model model = new ModelManager(getTypicalAnimeList(), new UserPrefs());
 

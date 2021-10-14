@@ -7,7 +7,6 @@ import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // cannot be blank
     public static final String INVALID_NAME_DESC_NONASCII = " " + PREFIX_NAME + "中文";
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
+    public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "shounen*"; // '*' not allowed in genres
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
         + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode

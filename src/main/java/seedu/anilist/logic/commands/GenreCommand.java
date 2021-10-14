@@ -128,8 +128,8 @@ public abstract class GenreCommand extends Command {
 
         @Override
         public String toString() {
-            String changedTags = Arrays.toString(genres.toArray());
-            return changedTags.substring(1, changedTags.length() - 1);
+            String changedGenres = Arrays.toString(genres.toArray());
+            return changedGenres.substring(1, changedGenres.length() - 1);
         }
     }
 }

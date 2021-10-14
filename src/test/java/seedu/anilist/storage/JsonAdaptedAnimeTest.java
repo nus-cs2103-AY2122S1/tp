@@ -26,7 +26,7 @@ public class JsonAdaptedAnimeTest {
     private static final String VALID_EPISODE = BRS.getEpisode().toString();
     private static final String VALID_STATUS = BRS.getStatus().toString();
     private static final List<JsonAdaptedGenre> VALID_GENRES = BRS.getGenres().stream()
-            .map(JsonAdaptedTag::new)
+            .map(JsonAdaptedGenre::new)
             .collect(Collectors.toList());
 
     @Test
@@ -52,14 +52,14 @@ public class JsonAdaptedAnimeTest {
 
     public void toModelType_invalidEpisode_throwsIllegalValueException() {
         JsonAdaptedAnime anime =
-                new JsonAdaptedAnime(VALID_NAME, INVALID_EPISODE, VALID_STATUS, VALID_TAGS);
+                new JsonAdaptedAnime(VALID_NAME, INVALID_EPISODE, VALID_STATUS, VALID_GENRES);
         String expectedMessage = Episode.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
 
     @Test
     public void toModelType_nullEpisode_throwsIllegalValueException() {
-        JsonAdaptedAnime anime = new JsonAdaptedAnime(VALID_NAME, null, VALID_STATUS, VALID_TAGS);
+        JsonAdaptedAnime anime = new JsonAdaptedAnime(VALID_NAME, null, VALID_STATUS, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Episode.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
@@ -67,14 +67,14 @@ public class JsonAdaptedAnimeTest {
     @Test
     public void toModelType_invalidStatus_throwsIllegalValueException() {
         JsonAdaptedAnime anime =
-                new JsonAdaptedAnime(VALID_NAME, VALID_EPISODE, INVALID_STATUS, VALID_TAGS);
+                new JsonAdaptedAnime(VALID_NAME, VALID_EPISODE, INVALID_STATUS, VALID_GENRES);
         String expectedMessage = Status.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
 
     @Test
     public void toModelType_nullStatus_throwsIllegalValueException() {
-        JsonAdaptedAnime anime = new JsonAdaptedAnime(VALID_NAME, VALID_EPISODE, null, VALID_TAGS);
+        JsonAdaptedAnime anime = new JsonAdaptedAnime(VALID_NAME, VALID_EPISODE, null, VALID_GENRES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, anime::toModelType);
     }
@@ -84,7 +84,7 @@ public class JsonAdaptedAnimeTest {
         List<JsonAdaptedGenre> invalidGenres = new ArrayList<>(VALID_GENRES);
         invalidGenres.add(new JsonAdaptedGenre(INVALID_GENRE));
         JsonAdaptedAnime anime =
-                new JsonAdaptedAnime(VALID_NAME, invalidGenres);
+                new JsonAdaptedAnime(VALID_NAME, VALID_EPISODE, VALID_STATUS, invalidGenres);
         assertThrows(IllegalValueException.class, anime::toModelType);
     }
 }

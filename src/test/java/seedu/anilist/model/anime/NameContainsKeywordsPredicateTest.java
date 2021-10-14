@@ -68,9 +68,9 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Chainsaw"));
         assertFalse(predicate.test(new AnimeBuilder().withName("Black Rock Shooter").build()));
 
-        // Keywords match tags, but does not match name
+        // Keywords match genres, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("action", "adventure"));
         assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan")
-                .withTags("action", "adventure").build()));
+                .withGenres("action", "adventure").build()));
     }
 }

@@ -16,8 +16,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
-import seedu.anilist.model.tag.Tag;
-
+import seedu.anilist.model.genre.Genre;
 
 public class UpdateStatusCommand extends Command {
 
@@ -76,9 +75,9 @@ public class UpdateStatusCommand extends Command {
         Name name = animeToEdit.getName();
         Episode episode = animeToEdit.getEpisode();
         Status updatedStatus = statusDescriptor.getStatus().orElse(animeToEdit.getStatus());
-        Set<Tag> tags = animeToEdit.getTags();
+        Set<Genre> genres = animeToEdit.getGenres();
 
-        return new Anime(name, episode, updatedStatus, tags);
+        return new Anime(name, episode, updatedStatus, genres);
     }
 
     @Override
@@ -110,7 +109,7 @@ public class UpdateStatusCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code genres} is used internally.
          */
         public StatusDescriptor(UpdateStatusCommand.StatusDescriptor toCopy) {
             setStatus(toCopy.status);

@@ -14,6 +14,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
 
 /**
@@ -53,6 +54,7 @@ public class GenreDeleteCommand extends GenreCommand {
 
         Name updatedName = animeToEdit.getName();
         Episode episode = animeToEdit.getEpisode();
+        Status status = animeToEdit.getStatus();
 
         Set<Genre> updatedGenres = new HashSet<>(animeToEdit.getGenres());
         Set<Genre> genresToDelete = genresDescriptor.getGenres().get();
@@ -62,6 +64,6 @@ public class GenreDeleteCommand extends GenreCommand {
         updatedGenres.removeAll(genresToDelete);
 
 
-        return new Anime(updatedName, episode, updatedGenres);
+        return new Anime(updatedName, episode, status, updatedGenres);
     }
 }

@@ -69,7 +69,7 @@ public class AnimeTest {
         Anime editedAot = new AnimeBuilder(AOT).withName(VALID_NAME_BNHA).build();
         assertFalse(AOT.equals(editedAot));
 
-        // different tags -> returns false
+        // different genres -> returns false
         editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SHOUNEN).build();
         assertFalse(AOT.equals(editedAot));
     }

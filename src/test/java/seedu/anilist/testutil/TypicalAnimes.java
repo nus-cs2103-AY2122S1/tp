@@ -16,11 +16,11 @@ import seedu.anilist.model.anime.Anime;
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
 public class TypicalAnimes {
-
+    public static final String FIRST_ANIME_GENRE = "action";
     public static final Anime AOT = new AnimeBuilder()
             .withName("Attack on Titan: The Final Season")
             .withEpisode("0")
-            .withGenres("action")
+            .withGenres(FIRST_ANIME_GENRE)
             .build();
     public static final Anime BRS = new AnimeBuilder()
             .withName("Black Rock Shooter")
@@ -62,6 +62,7 @@ public class TypicalAnimes {
             .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
 
     public static final String KEYWORD_MATCHING_HUNTER = "Hunter"; // A keyword that matches HUNTER
+
 
     private TypicalAnimes() {} // prevents instantiation
 
