@@ -12,11 +12,14 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -27,6 +30,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -91,6 +95,30 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getDisplayTaskList_success() {
+        Task[] taskList = {};
+        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
+        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
+                mockObservableList);
+        assertEquals(logic.getDisplayTaskList(), mockUnmodifiableObservableList);
+    }
+
+    @Test
+    public void updateDisplayTaskList_success() {
+        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
+        logic.updateDisplayTaskList(Arrays.asList(taskList));
+        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
+        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
+                mockObservableList);
+        assertEquals(logic.getDisplayTaskList(), mockUnmodifiableObservableList);
+    }
+
+    @Test
+    public void getDisplayTaskList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getDisplayTaskList().remove(0));
     }
 
     /**
