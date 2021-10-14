@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the result of a command execution.
  */
@@ -20,14 +22,25 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Lesson information of student should be shown to the user. */
+    private final Person student;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit) {
+    private CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit, Person student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showSchedule = showSchedule;
         this.exit = exit;
+        this.student = student;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit) {
+        this(feedbackToUser, showHelp, showSchedule, exit, null);
     }
 
     /**
@@ -35,7 +48,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Person student) {
+        this(feedbackToUser, false, false, false, student);
     }
 
     public String getFeedbackToUser() {
@@ -48,6 +69,14 @@ public class CommandResult {
 
     public boolean isShowSchedule() {
         return showSchedule;
+    }
+
+    public boolean isDisplayStudent() {
+        return student != null;
+    }
+
+    public Person getStudent() {
+        return student;
     }
 
     public boolean isShowStudentList() {
