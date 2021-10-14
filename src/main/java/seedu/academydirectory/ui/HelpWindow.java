@@ -60,16 +60,28 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
 
+    /**
+     * Set the help message to be put on the Help Window
+     * @param helpMessage of a command
+     */
     public void setHelpMessage(String helpMessage) {
         wrapInMarkdown(helpMessage);
         wrapInContainer(markdownView);
     }
 
+    /**
+     * Wrap the given Help Message in a Markdown-supported view
+     * @param helpMessage of a command
+     */
     private void wrapInMarkdown(String helpMessage) {
         Label label = new Label(HELP_MESSAGE + helpMessage);
         markdownView.mdStringProperty().bind(label.textProperty());
     }
 
+    /**
+     * Wrap the given Help Message Markdown view in a container
+     * @param markdownView wrapper of help message
+     */
     private void wrapInContainer(MarkdownView markdownView) {
         ScrollPane content = new ScrollPane(markdownView);
         content.setFitToWidth(true);

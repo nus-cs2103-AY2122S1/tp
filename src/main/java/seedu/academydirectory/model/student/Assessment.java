@@ -31,6 +31,11 @@ public class Assessment implements Information {
         this.assessment = assessment;
     }
 
+    @SuppressWarnings("unchecked") // guarantee assessment.clone() returns same type since it is final
+    public Assessment getCopy() {
+        return new Assessment((HashMap<String, Integer>) assessment.clone());
+    }
+
     /**
      * Returns true if a given string is a valid assessment.
      */

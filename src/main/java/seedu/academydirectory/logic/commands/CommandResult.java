@@ -88,9 +88,4 @@ public class CommandResult {
     public int hashCode() {
         return Objects.hash(feedbackToUser, showHelp, exit);
     }
-
-    @Override
-    public String toString() {
-        return helpContent;
-    }
 }
