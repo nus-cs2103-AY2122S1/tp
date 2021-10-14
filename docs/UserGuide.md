@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 AniList is a **desktop app for managing anime you have watched, optimized for use via
 a Command Line Interface** (CLI) while still having the benefits of a Graphical User
 Interface (GUI). If you can type fast, AniList can get your anime management tasks done
