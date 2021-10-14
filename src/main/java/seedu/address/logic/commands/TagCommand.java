@@ -94,7 +94,6 @@ public class TagCommand extends Command {
         return new Person(unchangedName, unchangedPhone, unchangedEmail, unchangedAddress,
                 updatedTags,
                 unchangedBirthday);
-      
     }
 
     @Override
