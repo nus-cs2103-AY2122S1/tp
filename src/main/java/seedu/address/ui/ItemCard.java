@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.item.Item;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of an {@code Item}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ItemCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ItemListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,15 +40,15 @@ public class PersonCard extends UiPart<Region> {
     private Label count;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ItemCard} with the given {@code Item} and index to display.
      */
-    public PersonCard(Item item, int displayedIndex) {
+    public ItemCard(Item item, int displayedIndex) {
         super(FXML);
         this.item = item;
         index.setText(displayedIndex + ". ");
         name.setText(item.getName().fullName);
-        id.setText(item.getId());
-        count.setText(Integer.toString(item.getCount()));
+        id.setText(String.format("#%s", item.getId()));
+        count.setText(String.format("Quantity: %d", item.getCount()));
         item.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -62,12 +62,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ItemCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ItemCard card = (ItemCard) other;
         return id.getText().equals(card.id.getText())
                 && item.equals(card.item);
     }

@@ -11,28 +11,28 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of items.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ItemListPanel extends UiPart<Region> {
+    private static final String FXML = "ItemListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
     @FXML
-    private ListView<Item> personListView;
+    private ListView<Item> itemListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ItemListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Item> itemList) {
+    public ItemListPanel(ObservableList<Item> itemList) {
         super(FXML);
-        personListView.setItems(itemList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        itemListView.setItems(itemList);
+        itemListView.setCellFactory(listView -> new ItemListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Item} using a {@code ItemCard}.
      */
-    class PersonListViewCell extends ListCell<Item> {
+    class ItemListViewCell extends ListCell<Item> {
         @Override
         protected void updateItem(Item item, boolean empty) {
             super.updateItem(item, empty);
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(item, getIndex() + 1).getRoot());
+                setGraphic(new ItemCard(item, getIndex() + 1).getRoot());
             }
         }
     }
