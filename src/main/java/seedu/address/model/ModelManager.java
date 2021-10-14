@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -129,6 +131,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Calendar getCalendar() {
+        return addressBook.getCalendar();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -172,5 +179,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

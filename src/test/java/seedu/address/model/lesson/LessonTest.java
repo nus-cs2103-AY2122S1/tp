@@ -11,6 +11,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -36,9 +38,6 @@ public class LessonTest {
     @Test
     public void updateDateWithWeek_validDateString_success() {
         String validOneWeekLaterDateString = "21 Jan 2022";
-        Lesson lesson = new RecurringLesson(new Date(DATE),
-            new TimeRange(TIME_RANGE),
-            new Subject(SUBJECT), HOMEWORK);
         assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
 
@@ -113,6 +112,11 @@ public class LessonTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 

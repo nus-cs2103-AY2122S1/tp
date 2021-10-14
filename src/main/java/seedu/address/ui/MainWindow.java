@@ -19,6 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
             + LessonAddCommand.USER_TIP + "\n\n"
+            + ScheduleCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
@@ -46,9 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private TagListPanel tagListPanel;
+    private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -58,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane centerPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -125,8 +130,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
+        centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -197,8 +202,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void handleShowSchedule() {
+        centerPanel.displaySchedulePanel();
+    }
+
+    private void handlePersonList() {
+        centerPanel.displayPersonListPanel();
     }
 
     /**
@@ -224,6 +233,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleShowTagList();
             }
 
+            if (commandResult.isShowSchedule()) {
+                handleShowSchedule();
+            }
 
             if (commandResult.isExit()) {
                 handleExit();

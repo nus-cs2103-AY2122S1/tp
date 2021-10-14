@@ -36,12 +36,25 @@ public class Person {
 
     /**
      * Every field must be present and not null.
+     *
+     * @param name The name of this person.
+     * @param phone The phone number of this person.
+     * @param email The email of this person
+     * @param parentPhone The parent's phone number of this person.
+     * @param parentEmail The parent's email of this person.
+     * @param address The address of this person.
+     * @param school The school of this person.
+     * @param acadStream The academic stream of this person.
+     * @param outstandingFee The outstanding fees of this person.
+     * @param remark Any remarks on this person.
+     * @param tags Tags that categorise this person.
+     * @param lessons The Set of Lessons objects that this person will become owner of.
      */
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
                   Address address, School school, AcadStream acadStream, AcadLevel acadLevel,
                   Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, acadLevel, outstandingFee, remark, tags, lessons);
+                school, acadStream, outstandingFee, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,7 +69,6 @@ public class Person {
         this.tags.addAll(tags);
         this.lessons.addAll(lessons);
     }
-
     public Name getName() {
         return name;
     }
@@ -125,29 +137,8 @@ public class Person {
         if (otherPerson == this) {
             return true;
         }
-
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
-    }
-
-    /**
-     * Returns true if {@code Lesson} to check clashes with existing lessons.
-     *
-     * @param toCheck The lesson to be compared with.
-     * @return True if and only if there is at least one clash.
-     */
-    public boolean hasClashingLessons(Lesson toCheck) {
-        if (toCheck == null) {
-            return false;
-        }
-        boolean isClash = false;
-        for (Lesson lesson : lessons) {
-            if (isClash) {
-                break;
-            }
-            isClash = lesson.isClashing(toCheck);
-        }
-        return isClash;
     }
 
     /**

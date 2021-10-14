@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.CalendarEntryList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -18,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final CalendarEntryList entries;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -27,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        entries = new CalendarEntryList();
     }
 
     public AddressBook() {}
@@ -47,6 +53,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        entries.resetLessons(persons);
     }
 
     /**
@@ -69,18 +76,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     * Returns true if {@code lesson} clashes with an existing lesson in the address book.
      */
     public boolean hasClashingLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return persons.hasClashes(lesson);
+        return entries.hasClashes(lesson);
     }
+
+    /**
+     * Returns true if any of the specified lessons clashes with existing lesson in the address book.
+     */
+    public boolean hasClashingLesson(Iterable<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        return entries.hasClashes(lessons);
+    }
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+        entries.addLessons(p);
     }
 
     /**
@@ -98,8 +115,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        entries.setLessons(target, editedPerson);
     }
 
     /**
@@ -108,6 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        entries.removeLessons(key);
     }
 
     //// util methods
@@ -132,6 +150,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Tag> getTagList() {
         return persons.asUnmodifiableTagList();
+    }
+
+    public Calendar getCalendar() {
+        // TODO: Make defensive
+        return entries.getCalendar();
     }
 
     @Override

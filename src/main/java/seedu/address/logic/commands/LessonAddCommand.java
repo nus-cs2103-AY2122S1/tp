@@ -90,7 +90,7 @@ public class LessonAddCommand extends UndoableCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private static Person createEditedPerson(Person personToEdit, Lesson lesson) {
+    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -107,7 +107,7 @@ public class LessonAddCommand extends UndoableCommand {
         Set<Tag> updatedTags = personToEdit.getTags();
 
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(lesson);
+        lessons.add(toAdd);
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
                 updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
@@ -122,13 +122,11 @@ public class LessonAddCommand extends UndoableCommand {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-
-        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
-        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
-
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

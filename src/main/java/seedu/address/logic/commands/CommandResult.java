@@ -20,6 +20,9 @@ public class CommandResult {
     /** Tag list should be shown to the user instead of the default person list. */
     private final boolean isShowTagList;
 
+    /** Schedule should be shown to the user. */
+    private final boolean isShowSchedule;
+
     /** The application should exit. */
     private final boolean isExit;
 
@@ -28,12 +31,13 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
-                         boolean isShowTagList, boolean isExit) {
+                         boolean isShowTagList, boolean isShowSchedule, boolean isExit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowPersonList = isShowPersonList;
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
         this.isShowTagList = isShowTagList;
+        this.isShowSchedule = isShowSchedule;
     }
 
     /**
@@ -41,7 +45,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, true, false, false, false);
+        this(feedbackToUser, true, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -58,6 +62,10 @@ public class CommandResult {
 
     public boolean isShowTagList() {
         return isShowTagList;
+    }
+
+    public boolean isShowSchedule() {
+        return isShowSchedule;
     }
 
     public boolean isExit() {
@@ -80,17 +88,19 @@ public class CommandResult {
                 && isShowPersonList == otherCommandResult.isShowPersonList
                 && isShowHelp == otherCommandResult.isShowHelp
                 && isShowTagList == otherCommandResult.isShowTagList
+                && isShowSchedule == otherCommandResult.isShowSchedule
                 && isExit == otherCommandResult.isExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isExit);
+        return Objects.hash(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isShowSchedule, isExit);
     }
 
     @Override
     public String toString() {
-        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + isShowHelp
-                + ", exit = " + isExit;
+        return "Feedback To User: " + feedbackToUser + "\n" + "Show Student ListL: " + isShowHelp + "\n"
+                + "Show Help: " + isShowHelp + "\n" + "Show Tag List: " + isShowTagList + "\n"
+                + "Show Schedule: " + isShowSchedule + "\n" + "Exit: " + isExit;
     }
 }

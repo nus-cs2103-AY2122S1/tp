@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -72,6 +74,10 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         return model.getFilteredTagList();
+
+    @Override
+    public Calendar getCalendar() {
+        return model.getCalendar();
     }
 
     @Override

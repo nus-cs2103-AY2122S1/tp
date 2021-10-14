@@ -11,10 +11,12 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
+import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -47,8 +49,7 @@ public class LessonDeleteCommandTest {
         LessonDeleteCommand lessonDeleteCommand =
                 prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, modelStub);
 
-        Lesson lessonToDelete = editedPerson.getLessons().stream()
-            .collect(Collectors.toList())
+        Lesson lessonToDelete = new ArrayList<>(editedPerson.getLessons())
             .get(INDEX_FIRST_LESSON.getZeroBased());
         String expectedMessage = String.format(
             LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, editedPerson);
@@ -162,6 +163,11 @@ public class LessonDeleteCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 
