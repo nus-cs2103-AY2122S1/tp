@@ -11,13 +11,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new ListCommand object
+ * Parses input arguments and creates a new ListFriendCommand object
  */
 public class ListFriendCommandParser implements Parser<ListFriendCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListFriendCommand
+     * and returns a ListFriendCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -29,8 +29,8 @@ public class ListFriendCommandParser implements Parser<ListFriendCommand> {
             return new ListFriendCommand(
                     new FriendIdContainsKeywordPredicate(argMultimap.getValue(FLAG_LIST).get()));
         }
-        // no tags present, default to friend search
-        return new ListFriendCommand(new FriendIdContainsKeywordPredicate(args));
+        // default to list all
+        return new ListFriendCommand(new FriendIdContainsKeywordPredicate(""));
     }
 
 }

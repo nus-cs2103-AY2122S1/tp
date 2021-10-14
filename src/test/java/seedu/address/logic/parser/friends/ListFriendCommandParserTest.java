@@ -13,7 +13,7 @@ public class ListFriendCommandParserTest {
 
     @Test
     public void parse_emptyArgs_success() {
-        String userInput = " ";
+        String userInput = "";
         ListFriendCommand expectedListFriendCommand =
                 new ListFriendCommand(new FriendIdContainsKeywordPredicate(userInput));
         assertParseSuccess(parser, userInput, expectedListFriendCommand);
