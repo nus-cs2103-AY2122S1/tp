@@ -34,6 +34,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         Semester defaultSemester = new Semester(1);
         currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
+        mcGoal = new Mc(160);
     }
 
     public ModuleTracker() {}
