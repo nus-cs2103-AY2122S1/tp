@@ -21,13 +21,8 @@ import seedu.fast.model.person.Person;
 import seedu.fast.testutil.PersonBuilder;
 
 public class DeleteAppointmentCommandTest {
-    private static final String APPOINTMENT_STUB = "10 Oct 2021";
     private static final String NO_APPOINTMENT_STUB = "No Appointment Scheduled Yet";
-
-    private static final String TIME_STUB = "16:00";
     private static final String NO_TIME_STUB = "";
-
-    private static final String VENUE_STUB = "Tampines Hub";
     private static final String NO_VENUE_STUB = "";
 
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());

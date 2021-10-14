@@ -12,7 +12,7 @@ import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.DeleteAppointmentCommand;
 import seedu.fast.model.person.Appointment;
 
-public class DeleteAppointmentParserTest {
+public class DeleteAppointmentCommandParserTest {
     private DeleteAppointmentCommandParser parser = new DeleteAppointmentCommandParser();
 
     private final String validDateInput = "2021-10-10";

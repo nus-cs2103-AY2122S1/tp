@@ -42,6 +42,21 @@ public class AppointmentTest {
     }
 
     @Test
+    public void getDate() {
+        //no date specified
+        Appointment noTimeAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(noTimeAppointment.getDate().equals(Appointment.NO_APPOINTMENT));
+
+        //date specified
+        Appointment validTimeAppointment = new Appointment(VALID_DATE, VALID_TIME,
+                Appointment.NO_VENUE);
+        assertTrue(validTimeAppointment.getDate().equals(VALID_DATE));
+
+        //invalid date not tested as parser automatically rejects invalid instances
+    }
+
+    @Test
     public void getTime() {
         //no time specified
         Appointment noTimeAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
