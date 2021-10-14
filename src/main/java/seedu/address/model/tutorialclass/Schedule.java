@@ -25,7 +25,7 @@ public class Schedule {
     public Schedule(String value) {
         requireNonNull(value);
         checkArgument(isValidSchedule(value), MESSAGE_CONSTRAINTS);
-        this.value = parseaSchedule(value);
+        this.value = parseSchedule(value);
     }
 
     /**
@@ -38,7 +38,7 @@ public class Schedule {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public String parseaSchedule(String input) {
+    private String parseSchedule(String input) {
         String finalSchedule = "";
         String[] lessonTimings = input.split(",");
         for (String lesson : lessonTimings) {

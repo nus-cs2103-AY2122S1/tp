@@ -20,7 +20,7 @@ class ScheduleTest {
     }
 
     @Test
-    public void isValidName() {
+    public void isValidSchedule() {
         // null Schedule
         assertThrows(NullPointerException.class, () -> Schedule.isValidSchedule(null));
 
