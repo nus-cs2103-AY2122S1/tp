@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javafx.collections.ObservableList;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
@@ -22,6 +23,7 @@ class JsonSerializableSiasa {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_POLICY = "Policy list contains duplicate policies(s).";
+    public static final String MESSAGE_POLICY_NO_OWNER_FOUND = "Person list does not contain owner of policy.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
@@ -63,7 +65,12 @@ class JsonSerializableSiasa {
 
         for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
             Person policyOwner = jsonAdaptedPolicy.getOwner().toModelType();
-            Person owner = siasa.getPersonList().get(siasa.getPersonList().indexOf(policyOwner));
+            ObservableList<Person> personList = siasa.getPersonList();
+            if (!personList.contains(policyOwner)) {
+                throw new IllegalValueException(MESSAGE_POLICY_NO_OWNER_FOUND);
+            }
+            int ownerIndex = personList.indexOf(policyOwner);
+            Person owner = personList.get(ownerIndex);
             Policy policy = jsonAdaptedPolicy.toModelType(owner);
             if (siasa.hasPolicy(policy)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POLICY);
