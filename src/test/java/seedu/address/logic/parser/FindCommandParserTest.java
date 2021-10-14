@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_100PLUS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_H20;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -45,11 +49,22 @@ public class FindCommandParserTest {
     public void parse_validNameArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_BAGEL, VALID_NAME_DONUT)));
+        assertParseSuccess(parser, "Bagel Donut", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, "Bagel   Donut", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validNameWithNumbersArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_100PLUS, VALID_NAME_H20)));
+        assertParseSuccess(parser, "100Plus H20", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "100Plus     H20", expectedFindCommand);
     }
 
 }

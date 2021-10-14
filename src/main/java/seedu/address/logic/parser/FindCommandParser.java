@@ -31,17 +31,29 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> fields = Arrays.asList(nameKeywords);
+        boolean isAllNumbers = true;
 
-        if (((int) (fields.get(0).charAt(0)) >= 65) & ((int) (fields.get(0).charAt(0)) <= 122)) {
+        for (int i = 0; i < fields.size(); i = i + 1) {
+            for (int j = 0; j < fields.get(i).length(); j = j + 1) {
+                if (fields.get(i).charAt(0) == 45) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN,
+                            FindCommand.MESSAGE_USAGE));
+                }
+                if (((int) (fields.get(i).charAt(j)) >= 48) & ((int) (fields.get(i).charAt(j)) <= 57)) {
+                } else {
+                    isAllNumbers = false;
+                    break;
+                }
+            }
+        }
+        if (!isAllNumbers) {
             return new FindCommand(new NameContainsKeywordsPredicate(fields));
         }
         for (int i = 0; i < fields.size(); i = i + 1) {
-            if (fields.get(i).length() != 6 || fields.get(i).charAt(0) == 45) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+            if (fields.get(i).length() != 6) {
+                throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
             }
         }
-        return new FindCommand(new IdContainsNumberPredicate(fields));
+        return new FindCommand((new IdContainsNumberPredicate(fields)));
     }
-
 }

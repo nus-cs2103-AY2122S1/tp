@@ -27,6 +27,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_BAGEL = "Bagel";
     public static final String VALID_NAME_DONUT = "Donut";
+    public static final String VALID_NAME_100PLUS = "100Plus";
+    public static final String VALID_NAME_H20 = "H20";
     public static final String VALID_ID_BAGEL = "123456";
     public static final String VALID_ID_DONUT = "789012";
     public static final String VALID_COUNT_BAGEL = "5";
