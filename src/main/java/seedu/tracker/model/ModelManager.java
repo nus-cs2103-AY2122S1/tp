@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -99,6 +100,13 @@ public class ModelManager implements Model {
         return moduleTracker.getCurrentSemester();
     }
 
+    @Override
+    public void setMcGoal(Mc mcGoal) {
+        this.moduleTracker.setMcGoal(mcGoal);
+    }
+
+    @Override
+    public Mc getMcGoal() { return moduleTracker.getMcGoal(); }
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
