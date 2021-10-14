@@ -44,6 +44,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' position book file path.
+     */
+    Path getPositionBookFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -135,6 +140,7 @@ public interface Model {
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
+    //=========== Filtered Position List Accessors =============================================================
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -156,6 +162,8 @@ public interface Model {
 
     void deletePosition(Position positionToDelete);
 
-    //=========== Filtered Position List Accessors =============================================================
 
+
+    // Applicant related methods ==============================================================================
+    Path getApplicantBookFilePath();
 }

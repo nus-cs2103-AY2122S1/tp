@@ -131,6 +131,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getPositionBookFilePath() {
+        return userPrefs.getPositionBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -174,6 +179,10 @@ public class ModelManager implements Model {
     public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
         Position position = positionBook.getPosition(dummyPosition);
         Application application = new Application(applicant, position);
+
+        // Sets the application of the applicant to the application with original position object
+        applicant.setApplication(application);
+
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
@@ -280,8 +289,8 @@ public class ModelManager implements Model {
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
+        applicantBook.removeApplicantsUnderPosition(positionToDelete);
     }
-
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
@@ -293,6 +302,12 @@ public class ModelManager implements Model {
     public void updateFilteredPositionList(Predicate<Position> predicate) {
         requireNonNull(predicate);
         filteredPositions.setPredicate(predicate);
+    }
+
+    //=========== Filtered Applicant List Accessors =============================================================
+    @Override
+    public Path getApplicantBookFilePath() {
+        return userPrefs.getApplicantBookFilePath();
     }
 
 }

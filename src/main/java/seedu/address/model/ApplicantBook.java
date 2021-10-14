@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.UniqueApplicantList;
+import seedu.address.model.position.Position;
 
 /**
  * Wraps all applicant data at ApplicantBook level
@@ -89,6 +90,10 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
      */
     public void removeApplicant(Applicant key) {
         applicants.remove(key);
+    }
+
+    public void removeApplicantsUnderPosition(Position position) {
+        applicants.removeIf(applicant -> applicant.isApplyingTo(position));
     }
 
     @Override
