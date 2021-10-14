@@ -15,6 +15,14 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String PHONE_NUMBER = "Phone Number: ";
+    private static final String EMAIL = "Email: ";
+    private static final String GITHUB_ID = "GitHub ID: ";
+    private static final String NUS_NETWORK_ID = "NUSNET ID: ";
+    private static final String STUDENT_ID = "Student ID: ";
+    private static final String ADDRESS = "Address: ";
+    private static final String TYPE = "Type: ";
+    private static final String TUTORIAL_ID = "Tutorial ID: T";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -60,17 +68,17 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.setText(PHONE_NUMBER + person.getPhone().value);
+        address.setText(ADDRESS + person.getAddress().value);
+        email.setText(EMAIL + person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        gitHubId.setText(person.getGitHubId().value);
-        studentId.setText(person.getStudentId().value);
-        type.setText(person.getType().value);
-        nusNetworkId.setText(person.getNusNetworkId().value);
-        tutorialId.setText(person.getTutorialId().value);
+        gitHubId.setText(GITHUB_ID + person.getGitHubId().value);
+        studentId.setText(STUDENT_ID + person.getStudentId().value);
+        type.setText(TYPE + person.getType().value.toUpperCase());
+        nusNetworkId.setText(NUS_NETWORK_ID + person.getNusNetworkId().value);
+        tutorialId.setText(TUTORIAL_ID + person.getTutorialId().value);
 
     }
 
