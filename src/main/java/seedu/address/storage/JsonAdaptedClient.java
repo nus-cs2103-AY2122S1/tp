@@ -39,8 +39,13 @@ class JsonAdaptedClient {
     public JsonAdaptedClient(Client source) {
         name = source.getName().fullName;
         phoneNumber = source.getPhoneNumber().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+
+        email = isNull(source.getEmail()) ? null : source.getEmail().value;
+        address = isNull(source.getAddress()) ? null : source.getAddress().value;
+    }
+
+    private <T> boolean isNull(T obj) {
+        return obj == null;
     }
 
     /**
@@ -66,21 +71,23 @@ class JsonAdaptedClient {
         }
         final PhoneNumber modelPhoneNumber = new PhoneNumber(phoneNumber);
 
+        final Email modelEmail;
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
+            modelEmail = null;
+        } else if (Email.isValidEmail(email)) {
+            modelEmail = new Email(email);
+        } else {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
 
+        final Address modelAddress;
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
+            modelAddress = null;
+        } else if (Address.isValidAddress(address)) {
+            modelAddress = new Address(address);
+        } else {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
 
         return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress);
     }

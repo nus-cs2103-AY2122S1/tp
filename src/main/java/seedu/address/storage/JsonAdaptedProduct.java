@@ -36,7 +36,11 @@ public class JsonAdaptedProduct {
     public JsonAdaptedProduct(Product source) {
         name = source.getName().fullName;
         unitPrice = source.getUnitPrice().value;
-        quantity = source.getQuantity().value;
+        quantity = isNull(source.getQuantity()) ? null : source.getQuantity().value;
+    }
+
+    private <T> boolean isNull(T obj) {
+        return obj == null;
     }
 
     /**
@@ -62,14 +66,14 @@ public class JsonAdaptedProduct {
         }
         final UnitPrice modelUnitPrice = new UnitPrice(unitPrice);
 
+        final Quantity modelQuantity;
         if (quantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Quantity.class.getSimpleName()));
-        }
-        if (!Quantity.isValidQuantity(quantity)) {
+            modelQuantity = null;
+        } else if (Quantity.isValidQuantity(quantity)) {
+            modelQuantity = new Quantity(quantity);
+        } else {
             throw new IllegalValueException(Quantity.MESSAGE_CONSTRAINTS);
         }
-        final Quantity modelQuantity = new Quantity(quantity);
 
         return new Product(modelName, modelUnitPrice, modelQuantity);
     }
