@@ -140,11 +140,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteApplicant(Applicant target) {
-        applicantBook.removeApplicant(target);
-    }
-
-    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -168,6 +163,22 @@ public class ModelManager implements Model {
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return applicantBook.hasApplicant(applicant);
+    }
+
+    @Override
+    public void deleteApplicant(Applicant target) {
+        boolean hasApplicant = applicantBook.hasApplicant(target);
+        if (hasApplicant) {
+            Position p = target.getApplication().getPosition();
+            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
+            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
+                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
+            }
+            p.updateRejectionRate();
+            applicantBook.removeApplicant(target);
+        } else {
+            throw new ApplicantNotFoundException(); // to be updated
+        }
     }
 
     @Override
@@ -258,28 +269,6 @@ public class ModelManager implements Model {
     public void updateFilteredPositionList(Predicate<Position> predicate) {
         requireNonNull(predicate);
         filteredPositions.setPredicate(predicate);
-    }
-
-    //========== Applicant related methods ============================
-
-    /**
-     * Deletes an applicant from the MTR ApplicantBook.
-     *
-     * @param target The applicant to be deleted.
-     */
-    public void deleteApplicant(Applicant target) {
-        boolean hasApplicant = applicantBook.hasApplicant(target);
-        if (hasApplicant) {
-            Position p = target.getApplication().getPosition();
-            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
-            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
-            }
-            p.updateRejectionRate();
-            applicantBook.removeApplicant(target);
-        } else {
-            throw new ApplicantNotFoundException(); // to be updated
-        }
     }
 
     //========== Rejection rates =======================================
