@@ -52,7 +52,7 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_ACAD_STREAM + "Express "
             + PREFIX_ACAD_LEVEL + "S1 "
             + PREFIX_FEE + "50 "
-            + PREFIX_REMARK + "He owes me a dinner! "
+            + PREFIX_REMARK + "weak at trigo "
             + PREFIX_TAG + "retained "
             + PREFIX_TAG + "new";
 
