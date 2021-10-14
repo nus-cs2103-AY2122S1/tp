@@ -7,6 +7,9 @@ public enum Status {
     NEED_GROUP("SG"),
     NEED_MEMBER("SM");
 
+    public static final String MESSAGE_CONSTRAINTS = "The group status you are trying to find does not exist! "
+            + "Please enter 'SG' for 'Seeking group', 'SM' for 'Seeking member' or 'G' for 'Not looking for group'";
+
     private String status;
 
     Status(String s) {
@@ -21,14 +24,19 @@ public enum Status {
      */
     public static Status parseStatusForFilter(String status) {
         assert (status != null);
-        return Status.valueOf(status);
+        if (status.equalsIgnoreCase("SG")) {
+            return Status.NEED_GROUP;
+        } else if (status.equalsIgnoreCase("SM")) {
+            return Status.NEED_MEMBER;
+        } else {
+            return Status.NONE;
+        }
     }
 
     /**
      * Returns true if a given string is a valid status.
      */
     public static boolean isValidStatus(String test) {
-        System.out.println(Status.NONE.toString());
         return Stream.of(Status.values()).anyMatch(status -> status.toString().equalsIgnoreCase(test));
     }
 

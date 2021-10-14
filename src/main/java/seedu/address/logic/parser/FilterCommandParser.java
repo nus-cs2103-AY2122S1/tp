@@ -29,7 +29,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         }
 
         Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
-        System.out.println(modList.size());
         Status groupStatus = ParserUtil.parseGroupStatus(argMultimap.getValue(PREFIX_GROUP).orElse(null));
 
         if (modList.size() > 1) {
