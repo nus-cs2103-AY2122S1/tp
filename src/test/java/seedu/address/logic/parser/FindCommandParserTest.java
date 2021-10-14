@@ -118,10 +118,10 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleEmptyPrefixInput = " n/ e/ p/ r/ et/ s/ l/ t/ y/";
+        String multipleEmptyPrefixInput = " n/ e/ p/ r/ et/ s/ l/ y/ t/ ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleEmptyPrefixInput,
                 PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG, PREFIX_EXPERIENCE);
+                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,PREFIX_EXPERIENCE, PREFIX_TAG);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
@@ -176,10 +176,10 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
 
-        String multipleBlankPrefixInput = " n/   e/   p/   r/   et/   s/   t/  y/  ";
+        String multipleBlankPrefixInput = " n/   e/   p/   r/   et/   s/   y/   t/   ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleBlankPrefixInput,
                 PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_TAG, PREFIX_EXPERIENCE);
+                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }
