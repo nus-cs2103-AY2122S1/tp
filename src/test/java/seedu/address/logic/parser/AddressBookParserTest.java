@@ -33,6 +33,7 @@ import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
 
+    private static final String NAMETYPE = "n/";
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
@@ -77,7 +78,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords, NAMETYPE)), command);
     }
 
     @Test

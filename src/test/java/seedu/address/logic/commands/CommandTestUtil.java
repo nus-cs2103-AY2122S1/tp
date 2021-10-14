@@ -32,6 +32,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String NAMETYPE = "n/";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -171,7 +172,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -185,7 +186,7 @@ public class CommandTestUtil {
         for (int i = 0; i < persons.length; ++i) {
             queries[i] = persons[i].getName().fullName.split("\\s+")[0];
         }
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries)));
+        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
 
         assertEquals(persons.length, model.getFilteredPersonList().size());
     }
