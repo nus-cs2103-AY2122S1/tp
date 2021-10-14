@@ -17,7 +17,7 @@ import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
 import seedu.address.testutil.FriendBuilder;
 
-public class UniqueFriendListTest {
+public class UniqueFriendsListTest {
 
     private final UniqueFriendsList uniqueFriendsList = new UniqueFriendsList();
 

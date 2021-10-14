@@ -51,7 +51,7 @@ public class UniqueGamesList implements Iterable<Game> {
      */
     public void add(Game gameToAdd) {
         requireNonNull(gameToAdd);
-        if (contains(gameToAdd)) {
+        if (containsId(gameToAdd.getGameId())) {
             throw new DuplicateGameException();
         }
         internalList.add(gameToAdd);
