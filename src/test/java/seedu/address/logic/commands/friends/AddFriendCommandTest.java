@@ -162,7 +162,7 @@ public class AddFriendCommandTest {
         }
 
         @Override
-        public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
+        public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
             throw new AssertionError("This method should not be called.");
         }
 

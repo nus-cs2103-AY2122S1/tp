@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class FriendUtil {
         sb.append(friend.getFriendId().value + " ");
         sb.append(FLAG_FRIEND_NAME + friend.getName().fullName + " ");
         friend.getGames().stream().forEach(
-            game -> sb.append(PREFIX_GAME + game.getGameId().value + " ")
+            game -> sb.append(FLAG_GAME + game.getGameId().value + " ")
         );
         return sb.toString();
     }
@@ -46,9 +46,9 @@ public class FriendUtil {
         if (descriptor.getGames().isPresent()) {
             Set<GameFriendLink> games = descriptor.getGames().get();
             if (games.isEmpty()) {
-                sb.append(PREFIX_GAME);
+                sb.append(FLAG_GAME);
             } else {
-                games.forEach(game -> sb.append(PREFIX_GAME).append(game.getGameId().value).append(" "));
+                games.forEach(game -> sb.append(FLAG_GAME).append(game.getGameId().value).append(" "));
             }
         }
         return sb.toString();

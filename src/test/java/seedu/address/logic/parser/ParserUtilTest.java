@@ -75,14 +75,5 @@ public class ParserUtilTest {
         assertEquals(expectedFriendName, ParserUtil.parseFriendName(nameWithWhitespace));
     }
 
-    @Test
-    public void parseGamesAndUsernames_validInput_success() throws ParseException {
-        List<String> games = new ArrayList<String>();
-        games.add(VALID_GAME_NAME + ":" + VALID_IN_GAME_USERNAME);
-        HashMap<String, String> expectedGamesHashMap = new HashMap<>();
-        expectedGamesHashMap.put(VALID_GAME_NAME, VALID_IN_GAME_USERNAME);
-        assertEquals(expectedGamesHashMap, ParserUtil.parseGamesAndUsernames(games));
-    }
-
     // TODO: Add tests for parseFriendId and parseGame
 }

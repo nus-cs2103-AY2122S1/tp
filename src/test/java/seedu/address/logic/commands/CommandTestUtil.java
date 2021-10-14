@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -13,9 +13,11 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
+import seedu.address.model.game.Game;
 import seedu.address.testutil.EditFriendDescriptorBuilder;
 
 /**
@@ -34,14 +36,14 @@ public class CommandTestUtil {
     public static final String FRIEND_ID_DESC_BOB = " " + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + FLAG_FRIEND_NAME + " " + VALID_NAME_BOB;
-    public static final String GAME_DESC_AMY = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
-    public static final String GAME_DESC_BOB = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_AMY = " " + FLAG_GAME + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_BOB = " " + FLAG_GAME + VALID_GAME_ID_CSGO;
 
-    public static final String GAME_DESC_CSGO = " " + PREFIX_GAME + VALID_GAME_ID_CSGO;
-    public static final String GAME_DESC_APEX_LEGENDS = " " + PREFIX_GAME + VALID_GAME_ID_APEX_LEGENDS;
+    public static final String GAME_DESC_CSGO = " " + FLAG_GAME + VALID_GAME_ID_CSGO;
+    public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_GAME + VALID_GAME_ID_APEX_LEGENDS;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
-    public static final String INVALID_GAME_DESC = " " + PREFIX_GAME + "kickstar*"; // '*' not allowed in games
+    public static final String INVALID_GAME_DESC = " " + FLAG_GAME + "kickstar*"; // '*' not allowed in games
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  --name";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -92,11 +94,15 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         FriendsList expectedFriendsList = new FriendsList(actualModel.getFriendsList());
-        List<Friend> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        List<Friend> expectedFilteredFriendsList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        GamesList expectedGamesList = new GamesList(actualModel.getGamesList());
+        List<Game> expectedFilteredGamesList = new ArrayList<>(actualModel.getFilteredGamesList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedFriendsList, actualModel.getFriendsList());
-        assertEquals(expectedFilteredList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedFilteredFriendsList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedGamesList, actualModel.getGamesList());
+        assertEquals(expectedFilteredGamesList, actualModel.getFilteredGamesList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

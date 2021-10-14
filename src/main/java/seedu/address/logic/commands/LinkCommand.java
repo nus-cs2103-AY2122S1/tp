@@ -24,8 +24,8 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Links game(s) and the associated in-game username(s) "
             + "for each game to a friend. \n"
-            + "Parameters: FRIEND_ID --g GAME_NAME:IN_GAME_USERNAME...\n"
-            + "Example: " + COMMAND_WORD + " Draco --g Valorant:SmurfLord";
+            + "Parameters: --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME...\n"
+            + "Example: " + COMMAND_WORD + " --friend Draco --game Valorant --user SmurfLord";
 
     private final FriendId friendId;
     private final GameId gameId;
@@ -53,7 +53,7 @@ public class LinkCommand extends Command {
 
         GameFriendLink gameFriendLink = new GameFriendLink(gameId, friendId, userName);
         List<Friend> lastShownFriendList = model.getFilteredFriendsList();
-        // Obtain a Friend object from the model tha matches friendId
+        // Obtain a Friend object from the model that matches friendId
         Friend friendToEdit = lastShownFriendList
                 .stream()
                 .filter(friend -> friend.getFriendId().equals(friendId))

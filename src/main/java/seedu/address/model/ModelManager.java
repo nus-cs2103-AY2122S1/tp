@@ -186,8 +186,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasGameWithId(GameId gameId) {
         requireNonNull(gameId);
-//        return gamesList.hasGameWithId(gameId);
-        return true;
+        return gamesList.hasGameWithId(gameId);
     }
 
     @Override
