@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -36,6 +37,7 @@ public class AddGroupCommand extends Command {
             + PREFIX_ID + "E0543948";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s\n";
+    public static final String MESSAGE_STUDENTS_ADDED = "Students added to group: %1$s\n";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "Student with name or ID \"%1$s\" does not exist.";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the application.";
     public static final String MESSAGE_DUPLICATE_STUDENT =
@@ -63,6 +65,8 @@ public class AddGroupCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
+        List<Student> addedStudents = new ArrayList<>();
+
         for (AllocDescriptor allocDescriptor : allocDescriptors) {
             List<Student> matchedStudents = getAllocStudents(model.getAddressBook().getStudentList(), allocDescriptor);
 
@@ -85,11 +89,29 @@ public class AddGroupCommand extends Command {
 
             Student editedStudent = createEditedStudent(studentToEdit, allocDescriptor);
             toAdd.addStudent(editedStudent.getId());
+            addedStudents.add(editedStudent);
             model.setStudent(studentToEdit, editedStudent);
         }
 
         model.addGroup(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(formatSuccessMessage(addedStudents));
+    }
+
+    /**
+     * Returns the formatted success message, depending on whether there were students added to the new group.
+     */
+    public String formatSuccessMessage(List<Student> addedStudents) {
+        String groupAddedMessage = String.format(MESSAGE_SUCCESS, toAdd.name);
+
+        if (addedStudents.isEmpty()) {
+            return groupAddedMessage;
+        }
+
+        String studentNames = addedStudents.stream()
+                .map(student -> student.getName().fullName)
+                .collect(Collectors.joining(", "));
+
+        return groupAddedMessage + String.format(MESSAGE_STUDENTS_ADDED, studentNames);
     }
 
     @Override
