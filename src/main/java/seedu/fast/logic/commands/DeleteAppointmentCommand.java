@@ -51,32 +51,14 @@ public class DeleteAppointmentCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment);
 
+        if (personToEdit.getAppointment().equals(appointment)) {
+            throw new CommandException(String.format(MESSAGE_DELETE_APPOINTMENT_FAILED, personToEdit.getName().fullName));
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
-    }
-
-    /**
-     * Generates a command execution success message based on whether
-     * the appointment is added, deleted or updated
-     * {@code personToEdit}.
-     */
-    private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
-        String message = "";
-        boolean isEmptyStatusAfter = editedPerson.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
-        boolean isEmptyStatusBefore = personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
-
-        if (isEmptyStatusAfter && !isEmptyStatusBefore) {
-            message = MESSAGE_DELETE_APPOINTMENT_SUCCESS;
-        } else if (isEmptyStatusAfter && isEmptyStatusBefore) {
-            message = MESSAGE_DELETE_APPOINTMENT_FAILED;
-        } else {
-            // should never reach here
-            message = MESSAGE_INVALID_COMMAND_FORMAT;
-        }
-
-        return String.format(message, editedPerson.getName().fullName);
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, personToEdit.getName().fullName));
     }
 
     @Override

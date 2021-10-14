@@ -21,7 +21,7 @@ public class DeleteAppointmentCommandParser implements Parser<DeleteAppointmentC
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE), ive);
+                    DeleteAppointmentCommand.MESSAGE_USAGE), ive);
         }
 
         return new DeleteAppointmentCommand(index,
