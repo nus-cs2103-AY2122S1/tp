@@ -84,9 +84,9 @@ public interface Model {
     void viewStudent(Student student);
 
     /**
-     * Views the list of people in the database.
+     * Views the list of students in the database. The viewAll flag determines whether student details should be shown.
      */
-    void viewList();
+    void viewList(boolean viewAll);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();

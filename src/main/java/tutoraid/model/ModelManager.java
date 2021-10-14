@@ -122,8 +122,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void viewList() {
-        UiManager.hideViewWindow();
+    public void viewList(boolean viewAll) {
+        if (viewAll) {
+            UiManager.showViewWindow();
+        } else {
+            UiManager.hideViewWindow();
+        }
     }
 
     //=========== Filtered Student List Accessors =============================================================
