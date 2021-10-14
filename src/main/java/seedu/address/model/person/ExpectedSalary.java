@@ -14,7 +14,7 @@ public class ExpectedSalary {
     public static final String MESSAGE_CONSTRAINTS = "Expected salary should only be a non-negative integer "
             + "(ranges from 0 to 2^(31) - 1 inclusive), and it should not be blank";
 
-    /*
+    /**
      * The first character of the salary must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */

@@ -17,7 +17,7 @@ public class ExperienceContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword ->
-                        StringUtil.containsWordIgnoreCase(person.getExperience().value, keyword));
+                        StringUtil.isIntegerLargerOrEqualToValue(person.getExperience().value, keyword));
     }
 
     @Override

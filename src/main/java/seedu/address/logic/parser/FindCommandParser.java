@@ -26,6 +26,7 @@ import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalary;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
+import seedu.address.model.person.Experience;
 import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.LevelOfEducation;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
@@ -217,6 +218,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                 String trimmedArg = arg.trim();
                 if (!trimmedArg.isEmpty()) {
                     String[] keywords = splitByWhiteSpace(trimmedArg);
+                    for (String keyword : keywords) {
+                        if (!Experience.isValidExperience(keyword)) {
+                            throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
+                        }
+                    }
                     predicateList.add(new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
             }
