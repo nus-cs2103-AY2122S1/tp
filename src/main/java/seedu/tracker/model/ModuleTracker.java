@@ -57,9 +57,13 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         return this.currentSemester;
     }
 
-    public void setMcGoal(Mc mcGoal) { this.mcGoal = mcGoal; }
+    public void setMcGoal(Mc mcGoal) {
+        this.mcGoal = mcGoal;
+    }
 
-    public Mc getMcGoal() { return this.mcGoal; }
+    public Mc getMcGoal() {
+        return this.mcGoal;
+    }
 
     /**
      * Replaces the contents of the Module list with {@code modules}.

@@ -5,7 +5,6 @@ import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
 
-
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.calendar.AcademicCalendar;
@@ -17,7 +16,7 @@ import seedu.tracker.model.module.Mc;
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets current semester or mc goal. \n"
-            +"Only one set of field should be specified\n"
+            + "Only one set of field should be specified\n"
             + "Parameters: "
             + "[" + PREFIX_ACADEMIC_YEAR + "YEAR"
             + PREFIX_SEMESTER + "SEMESTER]"
@@ -58,14 +57,33 @@ public class SetCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if(sem) {
-            model.setCurrentSemester(currentSemester);
+        if (sem) {
+            //model.setCurrentSemester(currentSemester);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_SEM, currentSemester));
         } else {
-            model.setMcGoal(mcGoal);
+            //model.setMcGoal(mcGoal);
             return new CommandResult(
                     String.format(MESSAGE_SUCCESS_MC, mcGoal));
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SetCommand)) {
+            return false;
+        }
+
+        // state check
+        SetCommand t = (SetCommand) other;
+
+        return sem ? currentSemester.equals(t.currentSemester)
+                   : mcGoal.equals(t.mcGoal);
     }
 }

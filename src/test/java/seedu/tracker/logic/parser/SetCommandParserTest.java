@@ -1,21 +1,27 @@
 package seedu.tracker.logic.parser;
 
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tracker.logic.commands.CommandTestUtil.*;
+import static seedu.tracker.logic.commands.CommandTestUtil.ACADEMIC_YEAR_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_ACADEMIC_YEAR_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_ACADEMIC_YEAR_SIGNED_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_MC_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_SEMESTER_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.INVALID_SEMESTER_SIGNED_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.MC_DESC_GOAL;
+import static seedu.tracker.logic.commands.CommandTestUtil.SEMESTER_DESC;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_ACADEMIC_YEAR;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_MC_GOAL;
+import static seedu.tracker.logic.commands.CommandTestUtil.VALID_SEMESTER;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.tracker.commons.core.index.Index;
-import seedu.tracker.logic.commands.EditCommand;
 import seedu.tracker.logic.commands.SetCommand;
-import seedu.tracker.logic.commands.TakeCommand;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Mc;
-import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 
 public class SetCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =

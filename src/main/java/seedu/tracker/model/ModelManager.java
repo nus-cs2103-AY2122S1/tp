@@ -106,7 +106,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Mc getMcGoal() { return moduleTracker.getMcGoal(); }
+    public Mc getMcGoal() {
+        return moduleTracker.getMcGoal();
+    }
+
     @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
