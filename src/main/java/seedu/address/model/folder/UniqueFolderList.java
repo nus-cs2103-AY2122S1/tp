@@ -5,10 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.folder.exceptions.DuplicateFolderException;
+import seedu.address.model.folder.exceptions.DuplicatePersonInFolderException;
 import seedu.address.model.folder.exceptions.FolderNotFoundException;
 import seedu.address.model.person.Person;
 
@@ -38,6 +40,35 @@ public class UniqueFolderList implements Iterable<Folder> {
     }
 
     /**
+     * Returns true if the list contains a folder with the same folder name.
+     */
+    public boolean containsFolderName(FolderName name) {
+        requireNonNull(name);
+        for (int i = 0; i < internalList.size(); i++) {
+            Folder folder = internalList.get(i);
+            if (folder.getFolderName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Checks and returns true if person has already been added to folder
+     */
+    public boolean folderContainsPerson(Person person, FolderName name) {
+        requireAllNonNull(person, name);
+        for (int i = 0; i < internalList.size(); i++) {
+            Folder folder = internalList.get(i);
+            if (folder.getFolderName().equals(name) && folder.hasContact(person)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a folder to the list.
      * The folder must not already exist in the list.
      */
@@ -57,9 +88,15 @@ public class UniqueFolderList implements Iterable<Folder> {
         requireNonNull(contact);
         for (int i = 0; i < internalList.size(); i++) {
             Folder folder = internalList.get(i);
-            if (folder.getFolderName() == name) {
-                folder.addContacts(contact);
-                break;
+            if (folderContainsPerson(contact, name)) {
+                throw new DuplicatePersonInFolderException();
+            }
+            if (folder.getFolderName().equals(name)) {
+                Set<Person> newContactList = folder.getContacts();
+                newContactList.add(contact);
+                Folder newFolder = new Folder(name, newContactList);
+                setFolder(folder, newFolder);
+                return;
             }
         }
     }
@@ -150,4 +187,6 @@ public class UniqueFolderList implements Iterable<Folder> {
         }
         return true;
     }
+
+
 }

@@ -171,6 +171,16 @@ class CreateFolderCommandTest {
         }
 
         @Override
+        public boolean hasFolderName(FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean folderContainsPerson(Person target, FolderName name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFolder(Folder folder) {
             throw new AssertionError("This method should not be called.");
         }

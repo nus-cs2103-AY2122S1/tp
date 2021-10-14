@@ -137,6 +137,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasFolderName(FolderName folderName) {
+        requireNonNull(folderName);
+        return addressBook.hasFolderName(folderName);
+    }
+
+    @Override
+    public boolean folderContainsPerson(Person target, FolderName name) {
+        requireAllNonNull(target, name);
+        return addressBook.folderContainsPerson(target, name);
+    }
+
+    @Override
     public void addContactToFolder(Person target, FolderName folderName) {
         requireAllNonNull(target, folderName);
         addressBook.addContactToFolder(target, folderName);
