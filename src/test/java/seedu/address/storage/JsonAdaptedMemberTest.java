@@ -48,7 +48,7 @@ public class JsonAdaptedMemberTest {
     }
 
     @Test
-    public void toModelType_validMemberDetails_returnsMember2() throws Exception {
+    public void toModelType_validMemberDetailsWithNoOptionalFields_returnsMember() throws Exception {
         JsonAdaptedMember member = new JsonAdaptedMember(JERRY);
         assertEquals(JERRY, member.toModelType());
     }
@@ -103,11 +103,6 @@ public class JsonAdaptedMemberTest {
                 new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         INVALID_ADDRESS, VALID_POSITIONS, VALID_TASK_LIST);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        try {
-            member.toModelType();
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 
