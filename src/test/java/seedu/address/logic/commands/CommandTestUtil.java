@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
@@ -40,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_TUTORIAL_GROUP_BOB = "28";
     public static final String VALID_SOCIAL_HANDLE_AMY = "@amyb";
     public static final String VALID_SOCIAL_HANDLE_BOB = "@bobc";
+    public static final String VALID_REMARK_AMY = "Like skiing.";
+    public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String TUTORIAL_GROUP_DESC_BOB = " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_BOB;
     public static final String SOCIAL_HANDLE_DESC_AMY = " " + PREFIX_SOCIAL_HANDLE + VALID_SOCIAL_HANDLE_AMY;
     public static final String SOCIAL_HANDLE_DESC_BOB = " " + PREFIX_SOCIAL_HANDLE + VALID_SOCIAL_HANDLE_BOB;
+    public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
+    public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -67,6 +72,7 @@ public class CommandTestUtil {
             + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
             + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK; // empty string not allowed for remark
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -79,11 +85,11 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withNationality(VALID_NATIONALITY_AMY)
                 .withTutorialGroup(VALID_TUTORIAL_GROUP_AMY).withSocialHandle(VALID_SOCIAL_HANDLE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withRemark(REMARK_DESC_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withNationality(VALID_NATIONALITY_BOB)
                 .withTutorialGroup(VALID_TUTORIAL_GROUP_BOB).withSocialHandle(VALID_SOCIAL_HANDLE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withRemark(REMARK_DESC_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
