@@ -5,13 +5,15 @@
     "email": "hans@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@valid"
+    "socialHandle": "@valid",
+    "remark": "likes coding"
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "28",
-    "socialHandle": "@valid"
+    "socialHandle": "@valid",
+    "remark": "likes coding"
   } ]
 }

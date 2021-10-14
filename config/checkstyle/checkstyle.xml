@@ -77,7 +77,10 @@
     -->
     <module name="UnusedImports"/>
 
-    <module name="AvoidStarImport"/>
+    <!-- Star import from package CommandTestUtil is allowed: -->
+    <module name="AvoidStarImport">
+      <property name="excludes" value="seedu.address.logic.commands.CommandTestUtil"/>
+    </module>
 
     <!--
     NAMING CHECKS
