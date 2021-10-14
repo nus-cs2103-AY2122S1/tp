@@ -26,9 +26,7 @@ public class FindIdCommandParser implements Parser<FindIdCommand> {
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
-        if (nameKeywords.length > 1) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindIdCommand.MESSAGE_USAGE));
-        }
+
 
         return new FindIdCommand(new StudentIdContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
