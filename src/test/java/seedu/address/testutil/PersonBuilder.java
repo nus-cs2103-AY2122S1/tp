@@ -97,6 +97,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isFavourite} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withFavourite(boolean isFavourite) {
+        this.isFavourite = isFavourite;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, id, phone, email, isFavourite, mods, isMyProfile);
     }
