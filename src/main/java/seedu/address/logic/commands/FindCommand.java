@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.function.Predicate;
 
@@ -19,17 +18,19 @@ import seedu.address.model.person.TagsContainsKeywordsPredicate;
  */
 public class FindCommand extends Command {
 
-    public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive)\n"
-            + "Alternatively, finds all persons whose module codes contains all of the specified\n"
-            + "module code(s) (case-insensitive).\n"
-            + "Displays the results as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_NAME + " [name]...\n"
-            + "OR\n"
+    public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain "
+            + "any of the specified keywords (case-insensitive).\n"
+            + "You can choose one of three ways to search:\n"
+            + "1) search by name(s) using the prefix 'n/'\n"
+            + "2) search by module code(s) using the prefix 'm/'\n"
+            + "3) search by tag(s) using the prefix 't/'\n"
+            + "Parameters: " + PREFIX_NAME + "[name]...\n"
             + PREFIX_MODULE_CODE + "[module code]...\n"
-            + "Example:\n"
+            + PREFIX_TAG + "[tags]...\n"
+            + "Examples:\n"
             + "find " + PREFIX_NAME + "alice bob charlie\n"
-            + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100";
+            + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100\n"
+            + "find " + PREFIX_TAG + "overseas quarantined";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
     private final Predicate<Person> predicate;
