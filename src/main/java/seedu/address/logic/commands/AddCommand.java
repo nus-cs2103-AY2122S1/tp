@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds item(s) to the inventory. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "ID "
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
     private final Item toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Item}
      */
     public AddCommand(Item item) {
         requireNonNull(item);
