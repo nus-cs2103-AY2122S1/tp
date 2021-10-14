@@ -41,7 +41,7 @@ class DeleteTaskCommandTest {
                         .size());
 
         assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(null, null));
-        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(Index.fromOneBased(1), null));
+        assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(INDEX_FIRST_PERSON, null));
         assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(null, targetTasksIndex));
     }
 
@@ -52,13 +52,12 @@ class DeleteTaskCommandTest {
                 .getTasks()
                 .size());
 
-        assertAll(() -> new DeleteTaskCommand(Index.fromZeroBased(0), targetTasksIndex));
+        assertAll(() -> new DeleteTaskCommand(INDEX_FIRST_PERSON, targetTasksIndex));
     }
 
     @Test
     void execute_invalidTargetPersonIndex_throwsCommandException() {
-        int numOfPersons = model.getFilteredPersonList().size();
-        Index targetPersonIndex = Index.fromZeroBased(numOfPersons);
+        Index targetPersonIndex = Index.fromZeroBased(model.getFilteredPersonList().size());
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPersonIndex, Index.fromZeroBased(0));
 
         CommandException commandException = Assertions.assertThrows(
@@ -93,7 +92,7 @@ class DeleteTaskCommandTest {
 
             List<Task> taskListCopy = new ArrayList<>(person.getTasks());
             Index targetTaskIndex = Index.fromOneBased(taskListCopy.size());
-            String taskName = taskListCopy.get(taskListCopy.size() - 1).getTaskName();
+            String taskName = taskListCopy.get(targetTaskIndex.getZeroBased()).getTaskName();
             taskListCopy.remove(targetTaskIndex.getZeroBased());
 
             DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personIndex, targetTaskIndex);
@@ -114,7 +113,7 @@ class DeleteTaskCommandTest {
     @Test
     void getCommand_success() {
         String commandWord = DeleteTaskCommand.COMMAND_WORD;
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(1),
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 Index.fromOneBased(1));
         assertEquals(deleteTaskCommand.getCommand(), commandWord);
     }
@@ -122,7 +121,7 @@ class DeleteTaskCommandTest {
     @Test
     void getDescription_success() {
         String description = DeleteTaskCommand.DESCRIPTION;
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(Index.fromOneBased(1),
+        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 Index.fromOneBased(1));
         assertEquals(deleteTaskCommand.getDescription(), description);
     }
@@ -150,7 +149,6 @@ class DeleteTaskCommandTest {
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(
-                new DeleteTaskCommand(INDEX_SECOND_PERSON, Index.fromOneBased(1))));
+        assertFalse(deleteFirstCommand.equals(new DeleteTaskCommand(INDEX_SECOND_PERSON, Index.fromOneBased(1))));
     }
 }
