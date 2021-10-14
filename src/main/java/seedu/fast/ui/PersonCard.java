@@ -121,7 +121,7 @@ public class PersonCard extends UiPart<Region> {
      */
     private String checkDateAndAddHeader(String date) {
         String emptyDate = "";
-        String header = "Date: ";
+        String header = "Date";
 
         if (date.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
             appointmentHeader.setText(Appointment.NO_APPOINTMENT);

@@ -24,6 +24,7 @@ public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appt";
     public static final String APPOINTMENT_DELETE_COMMAND = "del";
+    public static final String APPOINTMENT_EDIT_COMMAND = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"
@@ -55,6 +56,8 @@ public class AppointmentCommand extends Command {
             + "%4$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
+
+    public static final String MESSAGE_APPOINTMENT_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final Appointment appointment;

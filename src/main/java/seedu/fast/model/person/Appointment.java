@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+import seedu.fast.commons.util.CollectionUtil;
 import seedu.fast.commons.util.DateUtil;
 
 /**
@@ -18,9 +19,9 @@ public class Appointment {
     public static final String NO_TIME = "";
     public static final String NO_VENUE = "";
 
-    private final String date;
-    private final String time;
-    private final String venue;
+    private String date;
+    private String time;
+    private String venue;
 
     /**
      * Constructs an {@code Appointment}.
@@ -34,15 +35,6 @@ public class Appointment {
         this.date = date;
         this.time = time;
         this.venue = venue;
-    }
-
-    /**
-     * Returns a string in the format 'dd MMM yyyy' of the appointment.
-     *
-     * @return A string representing the date of the appointment.
-     */
-    public String getDate() {
-        return this.date;
     }
 
     /**
@@ -64,6 +56,15 @@ public class Appointment {
     }
 
     /**
+     * Returns a string in the format 'dd MMM yyyy' of the appointment.
+     *
+     * @return A string representing the date of the appointment.
+     */
+    public String getDate() {
+        return this.date;
+    }
+
+    /**
      * Returns a string in the format 'HHmm' of the appointment.
      *
      * @return A string representing the time of the appointment.
@@ -79,17 +80,12 @@ public class Appointment {
 
         return this.time;
     }
-
     /**
      * Returns a string representing the venue of the appointment.
      *
      * @return A string representing the venue of the appointment.
      */
     public String getVenue() {
-        if (this.venue.equals(NO_VENUE)) {
-            return "";
-        }
-
         return this.venue;
     }
 
