@@ -4,6 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.logic.commands.CommandTestUtil.APPT_DES_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.APPT_DES_BOB;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_BOB;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -27,14 +33,6 @@ import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.PersonBuilder;
 
 public class EditAppointmentCommandTest {
-    private static final String APPOINTMENT_STUB = "11 Nov 2021";
-    private static final String NO_APPOINTMENT_STUB = "No Appointment Scheduled Yet";
-
-    private static final String TIME_STUB = "16:00";
-    private static final String NO_TIME_STUB = "";
-
-    private static final String VENUE_STUB = "Tampines Hub";
-    private static final String NO_VENUE_STUB = "";
 
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
@@ -83,7 +81,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -104,7 +103,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -125,7 +125,8 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -146,7 +147,7 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -167,7 +168,7 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -188,7 +189,7 @@ public class EditAppointmentCommandTest {
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -213,7 +214,7 @@ public class EditAppointmentCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -233,7 +234,7 @@ public class EditAppointmentCommandTest {
     public void execute_twoFieldsSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -253,7 +254,7 @@ public class EditAppointmentCommandTest {
     public void execute_dateFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -273,7 +274,7 @@ public class EditAppointmentCommandTest {
     public void execute_timeFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -293,7 +294,7 @@ public class EditAppointmentCommandTest {
     public void execute_venueFieldSpecifiedUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 
@@ -313,7 +314,7 @@ public class EditAppointmentCommandTest {
     public void execute_editNonExistingAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB).build();
         Appointment editedAppt = editedPerson.getAppointment();
         EditAppointmentDescriptor desc = new EditAppointmentDescriptorBuilder(editedAppt).build();
 

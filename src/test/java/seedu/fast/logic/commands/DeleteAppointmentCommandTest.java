@@ -2,6 +2,9 @@ package seedu.fast.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -21,20 +24,16 @@ import seedu.fast.model.person.Person;
 import seedu.fast.testutil.PersonBuilder;
 
 public class DeleteAppointmentCommandTest {
-    private static final String NO_APPOINTMENT_STUB = "No Appointment Scheduled Yet";
-    private static final String NO_TIME_STUB = "";
-    private static final String NO_VENUE_STUB = "";
-
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
     @Test
     public void equals() {
         final DeleteAppointmentCommand standardCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB));
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
 
         // same values -> returns true
         DeleteAppointmentCommand commandWithSameValues = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB));
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -48,14 +47,15 @@ public class DeleteAppointmentCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new DeleteAppointmentCommand(INDEX_SECOND_PERSON,
-                new Appointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB))));
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
     }
 
     @Test
     public void execute_deleteAppointmentUnfilteredList_success() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_SECOND_PERSON,
@@ -74,7 +74,8 @@ public class DeleteAppointmentCommandTest {
     public void execute_deleteAppointmentUnfilteredList_failure() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
@@ -92,7 +93,8 @@ public class DeleteAppointmentCommandTest {
 
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
@@ -113,7 +115,8 @@ public class DeleteAppointmentCommandTest {
 
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
-                .withAppointment(NO_APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,

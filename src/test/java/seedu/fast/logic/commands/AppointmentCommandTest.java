@@ -29,14 +29,6 @@ import seedu.fast.model.person.Person;
 import seedu.fast.testutil.PersonBuilder;
 
 public class AppointmentCommandTest {
-    private static final String APPOINTMENT_STUB = "10 Oct 2021";
-
-    private static final String TIME_STUB = "16:00";
-    private static final String NO_TIME_STUB = "";
-
-    private static final String VENUE_STUB = "Tampines Hub";
-    private static final String NO_VENUE_STUB = "";
-
     private final Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
     @Test
@@ -68,15 +60,15 @@ public class AppointmentCommandTest {
 
         // different appointment date -> return false
         assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(APPOINTMENT_STUB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
+                new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
 
         //different appointment time -> return false
         assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(VALID_APPOINTMENT_AMY, TIME_STUB, VALID_APPOINTMENT_VENUE_AMY))));
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY))));
 
         // different appointment venue -> return false
         assertFalse(standardCommand.equals(new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VENUE_STUB))));
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB))));
     }
 
     @Test
@@ -93,7 +85,8 @@ public class AppointmentCommandTest {
     public void execute_addAppointmentWithoutAdditionUnfilteredList_success() {
         Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(thirdPerson)
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_THIRD_PERSON,
@@ -113,7 +106,8 @@ public class AppointmentCommandTest {
     public void execute_addAppointmentWithAdditionUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -134,7 +128,8 @@ public class AppointmentCommandTest {
     public void execute_addAppointmentWithTimeUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -154,7 +149,8 @@ public class AppointmentCommandTest {
     public void execute_addAppointmentWithVenueUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson)
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -173,7 +169,8 @@ public class AppointmentCommandTest {
     public void execute_addAppointmentWithExistingUnfilteredList_failure() {
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_SECOND_PERSON,
@@ -204,7 +201,8 @@ public class AppointmentCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -228,7 +226,8 @@ public class AppointmentCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -252,7 +251,8 @@ public class AppointmentCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, NO_VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -276,7 +276,8 @@ public class AppointmentCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
                 .get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withAppointment(APPOINTMENT_STUB, NO_TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
@@ -298,7 +299,8 @@ public class AppointmentCommandTest {
 
         Person secondPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(secondPerson)
-                .withAppointment(APPOINTMENT_STUB, TIME_STUB, VENUE_STUB).build();
+                .withAppointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB)
+                .build();
         Appointment editedAppt = editedPerson.getAppointment();
 
         AppointmentCommand appointmentCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
