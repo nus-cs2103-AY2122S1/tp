@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -61,10 +62,10 @@ public class FindCommandParserTest {
     @Test
     public void findDescriptor_validPrefixInput_addToPredicateList() throws ParseException {
         String validExperiencePrefixInput = " y/3";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(validExperiencePrefixInput,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(validExperiencePrefixInput,
                 PREFIX_EXPERIENCE);
         FindDescriptor findDescriptor = new FindDescriptor(argMultimap);
-        assertTrue(!findDescriptor.getPredicates().isEmpty());
+        assertFalse(findDescriptor.getPredicates().isEmpty());
     }
 
 
