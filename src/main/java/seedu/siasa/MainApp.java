@@ -22,11 +22,9 @@ import seedu.siasa.model.ReadOnlyUserPrefs;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.model.util.SampleDataUtil;
-import seedu.siasa.storage.AddressBookStorage;
-import seedu.siasa.storage.JsonAddressBookStorage;
-import seedu.siasa.storage.JsonPolicyBookStorage;
+import seedu.siasa.storage.JsonSiasaStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
-import seedu.siasa.storage.PolicyBookStorage;
+import seedu.siasa.storage.SiasaStorage;
 import seedu.siasa.storage.Storage;
 import seedu.siasa.storage.StorageManager;
 import seedu.siasa.storage.UserPrefsStorage;
@@ -58,9 +56,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getSiasaFilePath());
-        PolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(userPrefs.getPolicyFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
+        SiasaStorage siasaStorage = new JsonSiasaStorage(userPrefs.getSiasaFilePath());
+        storage = new StorageManager(siasaStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -77,14 +74,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlySiasa> addressBookOptional;
+        Optional<ReadOnlySiasa> siasaOptional;
         ReadOnlySiasa initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            siasaOptional = storage.readSiasa();
+            if (!siasaOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleSiasa);
+            initialData = siasaOptional.orElseGet(SampleDataUtil::getSampleSiasa);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new Siasa();

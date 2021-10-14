@@ -18,8 +18,7 @@ import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
-import seedu.siasa.storage.JsonAddressBookStorage;
-import seedu.siasa.storage.JsonPolicyBookStorage;
+import seedu.siasa.storage.JsonSiasaStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
 import seedu.siasa.storage.StorageManager;
 
@@ -34,11 +33,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonSiasaStorage addressBookStorage =
+                new JsonSiasaStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonPolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(temporaryFolder.resolve("policyBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -149,13 +147,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
+    private static class JsonAddressBookIoExceptionThrowingStub extends JsonSiasaStorage {
         private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException {
+        public void saveSiasa(ReadOnlySiasa addressBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

@@ -8,36 +8,44 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javafx.collections.ObservableList;
 import seedu.siasa.commons.exceptions.IllegalValueException;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.person.Person;
+import seedu.siasa.model.policy.Policy;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+class JsonSerializableSiasa {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_POLICY = "Policy list contains duplicate policies(s).";
+    public static final String MESSAGE_POLICY_NO_OWNER_FOUND = "Person list does not contain owner of policy.";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedPolicy> policies = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableSiasa} with the given persons and policies.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableSiasa(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                 @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
         this.persons.addAll(persons);
+        this.policies.addAll(policies);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlySiasa} into this class for Jackson use.
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlySiasa source) {
+    public JsonSerializableSiasa(ReadOnlySiasa source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        policies.addAll(source.getPolicyList().stream().map(JsonAdaptedPolicy::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +61,21 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             siasa.addPerson(person);
+        }
+
+        for (JsonAdaptedPolicy jsonAdaptedPolicy : policies) {
+            Person policyOwner = jsonAdaptedPolicy.getOwner().toModelType();
+            ObservableList<Person> personList = siasa.getPersonList();
+            if (!personList.contains(policyOwner)) {
+                throw new IllegalValueException(MESSAGE_POLICY_NO_OWNER_FOUND);
+            }
+            int ownerIndex = personList.indexOf(policyOwner);
+            Person owner = personList.get(ownerIndex);
+            Policy policy = jsonAdaptedPolicy.toModelType(owner);
+            if (siasa.hasPolicy(policy)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_POLICY);
+            }
+            siasa.addPolicy(policy);
         }
         return siasa;
     }

@@ -17,20 +17,17 @@ import seedu.siasa.model.UserPrefs;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private SiasaStorage siasaStorage;
     private UserPrefsStorage userPrefsStorage;
-    private PolicyBookStorage policyBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage}, {@code UserPrefStorage}
      * and {@code PolicyBookStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          PolicyBookStorage policyBookStorage) {
+    public StorageManager(SiasaStorage siasaStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.siasaStorage = siasaStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.policyBookStorage = policyBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -54,59 +51,30 @@ public class StorageManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getSiasaFilePath() {
+        return siasaStorage.getSiasaFilePath();
     }
 
     @Override
-    public Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlySiasa> readSiasa() throws DataConversionException, IOException {
+        return readSiasa(siasaStorage.getSiasaFilePath());
     }
 
     @Override
-    public Optional<ReadOnlySiasa> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlySiasa> readSiasa(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return siasaStorage.readSiasa(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlySiasa addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveSiasa(ReadOnlySiasa siasa) throws IOException {
+        saveSiasa(siasa, siasaStorage.getSiasaFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException {
+    public void saveSiasa(ReadOnlySiasa addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
-    }
-
-    // ================ PolicyBook methods ==============================
-
-    @Override
-    public Path getPolicyBookFilePath() {
-        return policyBookStorage.getPolicyBookFilePath();
-    }
-
-    @Override
-    public Optional<ReadOnlySiasa> readPolicyBook() throws DataConversionException, IOException {
-        return readPolicyBook(policyBookStorage.getPolicyBookFilePath());
-    }
-
-    @Override
-    public Optional<ReadOnlySiasa> readPolicyBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return policyBookStorage.readPolicyBook(filePath);
-    }
-
-    @Override
-    public void savePolicyBook(ReadOnlySiasa policyBook) throws IOException {
-        savePolicyBook(policyBook, policyBookStorage.getPolicyBookFilePath());
-    }
-
-    @Override
-    public void savePolicyBook(ReadOnlySiasa policyBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        policyBookStorage.savePolicyBook(policyBook, filePath);
+        siasaStorage.saveSiasa(addressBook, filePath);
     }
 
 }
