@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.commons.util.PersonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
@@ -29,38 +28,40 @@ import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.PersonUtil;
 
 /**
  * Edits the details of an existing person in the address book.
  */
-public class LessonEditCommand extends Command {
+public class LessonEditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "ledit";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
-        + "LESSON_INDEX (must be a positive integer)\n"
-        + "[" + PREFIX_DATE + "dd MMM yyyy] "
-        + "[" + PREFIX_TIME + "HHmm-HHmm] "
-        + "[" + PREFIX_SUBJECT + "SUBJECT] "
-        + "[" + PREFIX_HOMEWORK + "HOMEWORK] "
-        + "[" + PREFIX_HOMEWORK + "HOMEWORK] ";
+            + "LESSON_INDEX (must be a positive integer)\n"
+            + "[" + PREFIX_DATE + "dd MMM yyyy] "
+            + "[" + PREFIX_TIME + "HHmm-HHmm] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 1 "
-        + PREFIX_HOMEWORK + "Textbook Pg2 "
-        + PREFIX_DATE + "20 may 2022";
+            + PREFIX_HOMEWORK + "Textbook Pg2 "
+            + PREFIX_DATE + "20 may 2022";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
-        + " of the student identified by the index number used in the displayed student list.\n"
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Example: " + COMMAND_EXAMPLE;
+            + " of the student identified by the index number used in the displayed student list.\n"
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!.";
 
     private final Index index;
     private final Index indexToEdit;
+    private Person personBeforeLessonEdit;
+    private Person personAfterLessonEdit;
     private final EditLessonDescriptor editLessonDescriptor;
 
     /**
@@ -77,17 +78,17 @@ public class LessonEditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        personBeforeLessonEdit = lastShownList.get(index.getZeroBased());
 
-        Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
+        Set<Lesson> lessons = new TreeSet<>(personBeforeLessonEdit.getLessons());
         if (indexToEdit.getZeroBased() >= lessons.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
@@ -96,19 +97,19 @@ public class LessonEditCommand extends Command {
         Check if the edited lesson clashes with any existing lessons apart from the one to be
         edited.
          */
-        List<Lesson> lessonList = lessons.stream().sorted().collect(Collectors.toList());
+        List<Lesson> lessonList = lessons.stream().collect(Collectors.toList());
         Lesson toEdit = lessonList.get(indexToEdit.getZeroBased());
         Lesson editedLesson = createEditedLesson(toEdit, editLessonDescriptor);
         if (model.hasClashingLesson(editedLesson, toEdit)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
-        Person editedPerson = createEditedPerson(personToEdit, toEdit, editedLesson);
+        personAfterLessonEdit = createEditedPerson(personBeforeLessonEdit, toEdit, editedLesson);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS,
-            toEdit, editedLesson, editedPerson));
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, toEdit,
+                editedLesson, personAfterLessonEdit));
     }
 
     /**
@@ -119,8 +120,8 @@ public class LessonEditCommand extends Command {
         assert personToEdit != null;
 
         Set<Lesson> updatedLessons = new TreeSet<>(personToEdit.getLessons().stream()
-            .map(lesson -> lesson.equals(toEdit) ? editedLesson : lesson)
-            .collect(Collectors.toSet()));
+                .map(lesson -> lesson.equals(toEdit) ? editedLesson : lesson)
+                .collect(Collectors.toSet()));
 
         return PersonUtil.createdEditedPerson(personToEdit, updatedLessons);
     }
@@ -133,17 +134,36 @@ public class LessonEditCommand extends Command {
         assert lessonToEdit != null;
 
         Date updatedDate = editLessonDescriptor.getDate()
-            .orElse(lessonToEdit.getStartDate());
+                .orElse(lessonToEdit.getStartDate());
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange()
-            .orElse(lessonToEdit.getTimeRange());
+                .orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject()
-            .orElse(lessonToEdit.getSubject());
+                .orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet()
-            .orElse(lessonToEdit.getHomework());
+                .orElse(lessonToEdit.getHomework());
 
         return editLessonDescriptor.isRecurring
-            ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet)
-            : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet);
+                ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet)
+                : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet);
+    }
+
+    @Override
+    protected void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonEdit, personBeforeLessonEdit);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
+
     }
 
     @Override

@@ -24,7 +24,7 @@ class JsonAdaptedLessonTest {
     private static final String INVALID_SUBJECT = "1^739;";
     private static final String INVALID_HOMEWORK = INVALID_HOMEWORK_DESC;
 
-    private static final String VALID_DATE = RECURRING_LESSON.getDate().toString();
+    private static final String VALID_DATE = RECURRING_LESSON.getNextDate().toString();
     private static final String VALID_TIME_RANGE = RECURRING_LESSON.getTimeRange().toString();
     private static final String VALID_SUBJECT = RECURRING_LESSON.getSubject().toString();
     private static final List<JsonAdaptedHomework> VALID_HOMEWORK_PIECES = RECURRING_LESSON

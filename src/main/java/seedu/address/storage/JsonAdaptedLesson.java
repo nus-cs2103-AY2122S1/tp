@@ -40,7 +40,7 @@ class JsonAdaptedLesson {
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework) {
-        this.date = StringUtil.stripLeadingZeroes(date);
+        this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         if (homework != null) {
@@ -80,7 +80,7 @@ class JsonAdaptedLesson {
         if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        final Date modelDate = new Date(StringUtil.stripLeadingZeroes(date));
 
         if (timeRange == null) {
             throw new IllegalValueException(

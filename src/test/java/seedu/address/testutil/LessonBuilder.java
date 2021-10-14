@@ -38,7 +38,7 @@ public class LessonBuilder {
      * Initializes the LessonBuilder with the data of {@code lessonToCopy}.
      */
     public LessonBuilder(Lesson lessonToCopy) {
-        date = lessonToCopy.getDate();
+        date = lessonToCopy.getStartDate();
         timeRange = lessonToCopy.getTimeRange();
         subject = lessonToCopy.getSubject();
         homeworkSet = new HashSet<>(lessonToCopy.getHomework());

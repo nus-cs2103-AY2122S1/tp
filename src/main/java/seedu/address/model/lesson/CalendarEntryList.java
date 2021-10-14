@@ -77,6 +77,20 @@ public class CalendarEntryList {
     }
 
     /**
+     * Returns true if the specified lesson clashes with existing lessons.
+     *
+     * @param toCheck The lesson to check.
+     * @param toIgnore The lesson to ignore.
+     * @return True if there is a clash in lesson timing, false otherwise.
+     */
+    public boolean hasClashes(Lesson toCheck, Lesson toIgnore) {
+        requireNonNull(toCheck);
+        requireNonNull(toIgnore);
+        return entryList.stream().anyMatch(entry-> entry.getUserObject()
+                .equals(toIgnore) ? false : entry.getUserObject().isClashing(toCheck));
+    }
+
+    /**
      * Returns true if the entryList contains a Lesson that clashes with the specified Lessons.
      *
      * @param toCheck The lesson to check.
