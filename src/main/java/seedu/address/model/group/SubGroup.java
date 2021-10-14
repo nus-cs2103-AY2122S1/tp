@@ -2,10 +2,12 @@ package seedu.address.model.group;
 
 import java.util.Objects;
 
+import seedu.address.model.util.Unique;
+
 /**
  * Represents a group that can be part of a SuperGroup.
  */
-public class SubGroup extends Group {
+public class SubGroup extends Group implements Unique<SubGroup> {
 
     protected String parent;
     /**
@@ -35,5 +37,11 @@ public class SubGroup extends Group {
 
     public String getParent() {
         return parent;
+    }
+
+
+    @Override
+    public boolean isSame(SubGroup other) {
+        return other.toString().equals(this.toString());
     }
 }

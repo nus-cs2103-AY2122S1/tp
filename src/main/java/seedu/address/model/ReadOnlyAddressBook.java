@@ -1,9 +1,6 @@
 package seedu.address.model;
 
-import java.util.HashMap;
-
 import javafx.collections.ObservableList;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
@@ -18,7 +15,5 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
-    HashMap<String, SuperGroup> getSuperGroups();
-
-    HashMap<String, SubGroup> getSubGroups();
+    ObservableList<SuperGroup> getSuperGroups();
 }

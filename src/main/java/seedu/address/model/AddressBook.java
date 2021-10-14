@@ -2,11 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.UniqueList;
@@ -19,9 +17,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueList<Person> persons;
 
-    private HashMap<String, SuperGroup> superGroups;
-
-    private HashMap<String, SubGroup> subGroups;
+    private final UniqueList<SuperGroup> superGroups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,8 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniqueList<>();
-        superGroups = new HashMap<>();
-        subGroups = new HashMap<>();
+        superGroups = new UniqueList<>();
     }
 
     public AddressBook() {}
@@ -60,16 +55,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code SuperGroups}.
      * {@code SuperGroups} must not contain duplicate SuperGroups.
      */
-    public void setSuperGroups(HashMap<String, SuperGroup> superGroups) {
-        this.superGroups = superGroups;
-    }
-
-    /**
-     * Replaces the contents of the person list with {@code SuperGroups}.
-     * {@code SuperGroups} must not contain duplicate SuperGroups.
-     */
-    public void setSubGroups(HashMap<String, SubGroup> subGroups) {
-        this.subGroups = subGroups;
+    public void setSuperGroups(List<SuperGroup> superGroups) {
+        this.superGroups.setItems(superGroups);
     }
 
     /**
@@ -80,7 +67,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setSuperGroups(newData.getSuperGroups());
-        setSubGroups(newData.getSubGroups());
     }
 
     //// person-level operations
@@ -139,48 +125,23 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param sg the SuperGroup to be added into AddressBook.
      */
     public void addSuperGroup(SuperGroup sg) {
-        if (!superGroups.containsKey(sg.getName())) {
-            superGroups.put(sg.getName(), sg);
-        }
+        superGroups.add(sg);
     }
 
     public void deleteSuperGroup(SuperGroup sg) {
-        superGroups.remove(sg.getName());
+        superGroups.remove(sg);
     }
 
     /**
      * Gets SuperGroup based on group name.
      */
     public SuperGroup findSuperGroup(String name) {
-        return superGroups.get(name);
-    }
-
-    /**
-     * Returns true if SuperGroup exists.
-     */
-    public boolean hasSubGroup(SubGroup subGroup) {
-        requireNonNull(subGroup);
-        return subGroups.containsKey(subGroup.toString());
-    }
-
-    /**
-     * Adds SubGroup into the AddressBook.
-     * @param subGroup the SuperGroup to be added into AddressBook.
-     */
-    public void addSubGroup(SubGroup subGroup) {
-        requireNonNull(subGroup);
-        subGroups.put(subGroup.toString(), subGroup);
-    }
-
-    public void deleteSubGroup(SubGroup subGroup) {
-        subGroups.remove(subGroup.toString());
-    }
-
-    /**
-     * Gets SuperGroup based on group name.
-     */
-    public SubGroup findSubGroup(String name) {
-        return subGroups.get(name);
+        for (SuperGroup superGroup: superGroups) {
+            if (superGroup.getName().equals(name)) {
+                return superGroup;
+            }
+        }
+        return null;
     }
 
     /**
@@ -188,7 +149,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasSuperGroup(SuperGroup superGroup) {
         requireNonNull(superGroup);
-        return superGroups.containsKey(superGroup.getName());
+        return superGroups.contains(superGroup);
     }
 
 
@@ -206,13 +167,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public HashMap<String, SuperGroup> getSuperGroups() {
-        return superGroups;
-    }
-
-    @Override
-    public HashMap<String, SubGroup> getSubGroups() {
-        return subGroups;
+    public ObservableList<SuperGroup> getSuperGroups() {
+        return superGroups.asUnmodifiableObservableList();
     }
 
     @Override

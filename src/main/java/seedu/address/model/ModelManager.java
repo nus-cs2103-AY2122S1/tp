@@ -1,5 +1,4 @@
 package seedu.address.model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -11,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
@@ -140,23 +138,6 @@ public class ModelManager implements Model {
     @Override
     public SuperGroup findSuperGroup(String name) {
         return addressBook.findSuperGroup(name);
-    }
-
-    @Override
-    public SubGroup findSubGroup(String name) {
-        return addressBook.findSubGroup(name);
-    }
-
-    @Override
-    public void addSubGroup(SubGroup subGroup) {
-        addressBook.addSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void deleteSubGroup(SubGroup subGroup) {
-        addressBook.deleteSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

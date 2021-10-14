@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
@@ -93,12 +92,6 @@ public interface Model {
     void deleteSuperGroup(SuperGroup superGroup);
 
     SuperGroup findSuperGroup(String name);
-
-    SubGroup findSubGroup(String name);
-
-    void addSubGroup(SubGroup subGroup);
-
-    void deleteSubGroup(SubGroup subGroup);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

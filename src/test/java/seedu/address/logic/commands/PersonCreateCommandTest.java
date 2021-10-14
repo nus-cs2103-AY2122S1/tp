@@ -24,7 +24,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -147,22 +146,7 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public void deleteSubGroup(SubGroup subGroup) {
-
-        }
-
-        @Override
-        public void addSubGroup(SubGroup subGroup) {
-
-        }
-
-        @Override
         public SuperGroup findSuperGroup(String name) {
-            return null;
-        }
-
-        @Override
-        public SubGroup findSubGroup(String name) {
             return null;
         }
 

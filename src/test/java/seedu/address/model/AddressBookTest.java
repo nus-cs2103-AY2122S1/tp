@@ -1,8 +1,6 @@
 package seedu.address.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -10,13 +8,10 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-
-import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.group.SubGroup;
+import org.junit.jupiter.api.Test;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -88,12 +83,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public HashMap<String, SuperGroup> getSuperGroups() {
-            return null;
-        }
-
-        @Override
-        public HashMap<String, SubGroup> getSubGroups() {
+        public ObservableList<SuperGroup> getSuperGroups() {
             return null;
         }
     }

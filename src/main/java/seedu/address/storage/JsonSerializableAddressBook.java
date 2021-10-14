@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 import seedu.address.model.person.Person;
 
@@ -26,18 +25,15 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedSuperGroup> superGroups = new ArrayList<>();
 
-    private final List<JsonAdaptedSubGroup> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups,
-        @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
+        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
         this.persons.addAll(persons);
         this.superGroups.addAll(superGroups);
-        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -49,11 +45,8 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(
             Collectors.toList()));
         superGroups
-            .addAll(source.getSuperGroups().values().stream().map(JsonAdaptedSuperGroup::new).collect(
+            .addAll(source.getSuperGroups().stream().map(JsonAdaptedSuperGroup::new).collect(
             Collectors.toList()));
-        subGroups
-            .addAll(source.getSubGroups().values().stream().map(JsonAdaptedSubGroup::new).collect(
-                Collectors.toList()));
     }
 
     /**
@@ -69,12 +62,6 @@ class JsonSerializableAddressBook {
                 addressBook.addSuperGroup(superGroup);
             }
         }
-        for (JsonAdaptedSubGroup jsonAdaptedSubGroups : subGroups) {
-            SubGroup subGroup = jsonAdaptedSubGroups.toModelType();
-            if (!addressBook.hasSubGroup(subGroup)) {
-                addressBook.addSubGroup(subGroup);
-            }
-        }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
@@ -85,7 +72,9 @@ class JsonSerializableAddressBook {
                 addressBook.findSuperGroup(superGroup).addPerson(person);
             }
             for (String subGroup : person.getSubGroups()) {
-                addressBook.findSubGroup(subGroup).addPerson(person);
+                String[] split = subGroup.split("_");
+                // TODO: Create method to check for validity
+                addressBook.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
             }
 
             addressBook.addPerson(person);

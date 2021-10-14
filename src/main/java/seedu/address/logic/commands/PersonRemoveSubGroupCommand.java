@@ -52,7 +52,10 @@ public class PersonRemoveSubGroupCommand extends Command {
             throw new CommandException(MESSAGE_NOT_IN_SUBGROUP);
         }
         personToEdit.getSubGroups().remove(groupName + "_" + subGroupName);
-        SubGroup subGroup = model.findSubGroup(groupName + "_" + subGroupName);
+        SubGroup subGroup = model.findSuperGroup(groupName).findSubGroup(subGroupName);
+        if (subGroup == null) {
+            throw new CommandException(MESSAGE_NOT_IN_SUBGROUP);
+        }
         subGroup.getPeople().remove(personName);
         model.setPerson(personToEdit, personToEdit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName + "_" + subGroupName));

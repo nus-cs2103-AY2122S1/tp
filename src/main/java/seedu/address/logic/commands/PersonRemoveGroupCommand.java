@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Arrays;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -46,7 +44,6 @@ public class PersonRemoveGroupCommand extends Command {
             throw new CommandException(MESSAGE_NOT_IN_GROUP);
         }
         personToEdit.getSuperGroups().remove(groupName);
-        System.out.println(Arrays.toString(personToEdit.getSubGroups().toArray()));
         personToEdit.getSubGroups().removeIf(subGroup -> subGroup.split("_")[0].equals(groupName));
         model.setPerson(personToEdit, personToEdit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));

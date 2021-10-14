@@ -1,11 +1,13 @@
 package seedu.address.storage;
+
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.SubGroup;
 import seedu.address.model.group.SuperGroup;
 
 public class JsonAdaptedSuperGroup {
@@ -13,16 +15,16 @@ public class JsonAdaptedSuperGroup {
 
     private final String name;
 
-    private ArrayList<String> subGroups;
+    private List<JsonAdaptedSubGroup> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedSuperGroup} with the given group details.
      */
     @JsonCreator
     public JsonAdaptedSuperGroup(@JsonProperty("name") String name,
-        @JsonProperty("subGroups") ArrayList<String> subGroups) {
+        @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
         this.name = name;
-        this.subGroups = subGroups;
+        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -30,7 +32,9 @@ public class JsonAdaptedSuperGroup {
      */
     public JsonAdaptedSuperGroup(SuperGroup source) {
         this.name = source.getName();
-        this.subGroups = source.getSubGroups();
+        subGroups.addAll(source.getSubGroups().asUnmodifiableObservableList().stream()
+            .map(JsonAdaptedSubGroup::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -41,8 +45,8 @@ public class JsonAdaptedSuperGroup {
      */
     public SuperGroup toModelType() throws IllegalValueException {
         SuperGroup group = new SuperGroup(name);
-        for (String sg : this.subGroups) {
-            group.addSubGroup(new SubGroup(sg, group.getName()));
+        for (JsonAdaptedSubGroup subGroup : this.subGroups) {
+            group.addSubGroup(subGroup.toModelType());
         }
         return group;
     }
