@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.commons.util.StringUtil;
+import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
@@ -103,20 +104,11 @@ public class ParserUtil {
         requireNonNull(actionString);
         String trimmedActionLowerCase = actionString.trim().toLowerCase(Locale.ROOT);
         Action result;
-        if (!Action.ADD.isValidAction(trimmedActionLowerCase)) {
+        if (!Action.isValidAction(trimmedActionLowerCase)) {
             throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedActionLowerCase));
         }
 
-        switch (trimmedActionLowerCase) {
-        case "add" :
-            result = Action.ADD;
-            break;
-        case "delete" :
-            result = Action.DELETE;
-            break;
-        default:
-            result = Action.DEFAULT;
-        }
+        result = Action.actionFromString(trimmedActionLowerCase);
 
         return result;
     }

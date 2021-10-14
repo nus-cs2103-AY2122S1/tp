@@ -3,11 +3,10 @@ package seedu.anilist.testutil;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.model.anime.Episode;
 
+/**
+ * A utility class to help with building EpisodeDescriptor objects.
+ */
 public class EpisodeDescriptorBuilder {
-
-    /**
-     * A utility class to help with building EpisodeDescriptorBuilder objects.
-     */
 
     private UpdateEpisodeCommand.EpisodeDescriptor descriptor;
 

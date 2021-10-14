@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
+import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.commands.GenreAddCommand;
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.GenreDeleteCommand;
@@ -58,6 +59,7 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         case DELETE :
             return new GenreDeleteCommand(index, genresDescriptor);
         default :
+            //shouldn't reach here
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
         }
     }

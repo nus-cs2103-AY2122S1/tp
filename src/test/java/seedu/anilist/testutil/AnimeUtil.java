@@ -7,6 +7,7 @@ import java.util.Set;
 
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.EditCommand;
+import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.genre.Genre;
 
@@ -48,6 +49,21 @@ public class AnimeUtil {
                 genres.forEach(s -> sb.append(PREFIX_GENRE).append(s.genreName).append(" "));
             }
         }
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code GenresDescriptor}'s details.
+     */
+    public static String getGenreDescriptorDetails(GenreCommand.GenresDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        Set<Genre> genres = descriptor.getGenres().get();
+        if (genres.isEmpty()) {
+            sb.append(PREFIX_GENRE);
+        } else {
+            genres.forEach(s -> sb.append(PREFIX_GENRE).append(s.genreName).append(" "));
+        }
+
         return sb.toString();
     }
 }
