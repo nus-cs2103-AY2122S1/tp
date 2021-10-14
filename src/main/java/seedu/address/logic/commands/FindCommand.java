@@ -25,10 +25,10 @@ public class FindCommand extends Command {
             + "Displays the results as a list with index numbers.\n"
             + "Parameters: " + PREFIX_NAME + " [name]...\n"
             + "OR\n"
-            + PREFIX_MODULE_CODE + "\n "
-            + "Example: find " + PREFIX_NAME + "alice bob charlie"
-            + "OR\n"
-            + "Example: find " + PREFIX_MODULE_CODE + "CS2030S " + PREFIX_MODULE_CODE + "CS2100";
+            + PREFIX_MODULE_CODE + "[module code]...\n"
+            + "Example:\n"
+            + "find " + PREFIX_NAME + "alice bob charlie\n"
+            + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
     private final Predicate<Person> predicate;
