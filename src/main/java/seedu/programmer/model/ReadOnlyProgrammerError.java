@@ -1,6 +1,7 @@
 package seedu.programmer.model;
 
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -14,4 +15,8 @@ public interface ReadOnlyProgrammerError {
      */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns an unmodifiable view of the student's Lab results.
+     */
+    ObservableList<LabResult> showLabResultList(Student target);
 }

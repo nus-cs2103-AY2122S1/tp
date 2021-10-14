@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.LabResultList;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.UniqueStudentList;
 
@@ -82,7 +84,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 
@@ -105,6 +106,14 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<LabResult> showLabResultList(Student target) {
+        List<LabResult> results = target.getLabResultList();
+        LabResultList labResultList = new LabResultList();
+        labResultList.setLabResults(results);
+        return labResultList.asUnmodifiableObservableList();
     }
 
     @Override
