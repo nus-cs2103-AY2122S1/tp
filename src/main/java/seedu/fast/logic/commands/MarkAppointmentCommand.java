@@ -65,19 +65,19 @@ public class MarkAppointmentCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(personToEdit));
     }
 
     /**
      * Generates a command execution success message when the appointment is marked as completed successfully.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person editedPerson) {
+    private String generateSuccessMessage(Person personToEdit) {
 
-        return String.format(MESSAGE_MARK_APPOINTMENT_FAILURE, editedPerson.getName().fullName,
-                editedPerson.getAppointment().getDate(),
-                editedPerson.getAppointment().getTime(),
-                editedPerson.getAppointment().getVenue());
+        return String.format(MESSAGE_MARK_APPOINTMENT_SUCCESS, personToEdit.getName().fullName,
+                personToEdit.getAppointment().getDate(),
+                personToEdit.getAppointment().getTime(),
+                personToEdit.getAppointment().getVenue());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class MarkAppointmentCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AppointmentCommand)) {
+        if (!(other instanceof MarkAppointmentCommand)) {
             return false;
         }
 
