@@ -22,8 +22,8 @@ public class MarkAppointmentCommand extends Command {
             + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
             + "Examples: \n" + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Completes an appointment with "
-            + " %1$s (%2$s %3$s %4$s)";
+    public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Completed an appointment with "
+            + "%1$s %2$s %3$s %4$s";
     public static final String MESSAGE_MARK_APPOINTMENT_FAILURE = "No Appointment exist!";
 
     private final Index index;
