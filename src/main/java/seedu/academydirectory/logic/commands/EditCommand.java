@@ -19,10 +19,12 @@ import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.CollectionUtil;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Student;
+import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
 
@@ -115,8 +117,18 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Telegram updatedTelegram = editStudentDescriptor.getTelegram().orElse(studentToEdit.getTelegram());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Assessment updatedAssessment = editStudentDescriptor.getAssessment().orElse(studentToEdit.getAssessment());
+        StudioRecord updatedStudioRecord =
+                editStudentDescriptor.getStudioRecord().orElse(studentToEdit.getStudioRecord());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTelegram, updatedTags);
+        return new Student(
+                updatedName,
+                updatedPhone,
+                updatedEmail,
+                updatedTelegram,
+                updatedStudioRecord,
+                updatedAssessment,
+                updatedTags);
     }
 
     @Override
@@ -147,6 +159,8 @@ public class EditCommand extends Command {
         private Email email;
         private Telegram telegram;
         private Set<Tag> tags;
+        private StudioRecord studioRecord;
+        private Assessment assessment;
 
         public EditStudentDescriptor() {}
 
@@ -160,6 +174,8 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setTelegram(toCopy.telegram);
             setTags(toCopy.tags);
+            setAssessment(toCopy.assessment);
+            setStudioRecord(toCopy.studioRecord);
         }
 
         /**
@@ -201,6 +217,22 @@ public class EditCommand extends Command {
             return Optional.ofNullable(telegram);
         }
 
+        public void setAssessment(Assessment assessment) {
+            this.assessment = assessment;
+        }
+
+        public Optional<Assessment> getAssessment() {
+            return Optional.ofNullable(assessment);
+        }
+
+        public void setStudioRecord(StudioRecord studioRecord) {
+            this.studioRecord = studioRecord;
+        }
+
+        public Optional<StudioRecord> getStudioRecord() {
+            return Optional.ofNullable(studioRecord);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -237,7 +269,9 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getTelegram().equals(e.getTelegram())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getAssessment().equals(e.getAssessment())
+                    && getStudioRecord().equals(e.getStudioRecord());
         }
     }
 }

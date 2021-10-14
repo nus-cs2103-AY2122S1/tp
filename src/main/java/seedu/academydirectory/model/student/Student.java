@@ -64,6 +64,10 @@ public class Student {
         this.studioRecord = new StudioRecord(studioRecord.getAttendance(), participation);
     }
 
+    public void setAssessment(Assessment assessment) {
+        this.assessment = assessment;
+    }
+
     public Name getName() {
         return name;
     }
@@ -135,7 +139,8 @@ public class Student {
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTelegram().equals(getTelegram())
                 && otherStudent.getTags().equals(getTags())
-                && otherStudent.getStudioRecord().equals(getStudioRecord());
+                && otherStudent.getStudioRecord().equals(getStudioRecord())
+                && otherStudent.getAssessment().equals(getAssessment());
     }
 
     @Override

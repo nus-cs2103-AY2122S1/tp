@@ -17,12 +17,14 @@ import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.UserPrefs;
+import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.testutil.StudentBuilder;
+import seedu.academydirectory.testutil.TypicalStudents;
 
 class GradeCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
     private final String validAssessmentName1 = "RA1";
     private final String validAssessmentName2 = "MIDTERM";
     private final Integer validGrade1 = 10;
@@ -35,7 +37,7 @@ class GradeCommandTest {
 
     @Test
     void execute_addGrade_success() {
-        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student firstStudent = model.getFilteredStudentList().get(0);
         Student editedStudent = new StudentBuilder(firstStudent).withAssessment().build();
         GradeCommand addGradeCommand =
                 new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName1, validGrade1);
@@ -44,6 +46,9 @@ class GradeCommandTest {
         Model expectedModel = new ModelManager(new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
         assertCommandSuccess(addGradeCommand, model, expectedMessage, expectedModel);
+
+        // reset model
+        TypicalStudents.getTypicalAcademyDirectory().getStudentList().get(0).setAssessment(new Assessment());
     }
 
     @Test
