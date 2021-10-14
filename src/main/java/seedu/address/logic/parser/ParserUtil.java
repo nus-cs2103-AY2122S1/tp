@@ -16,7 +16,6 @@ import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.UserName;
 
-
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -63,6 +62,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gameId} into a {@code GameId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gameId} is invalid.
+     */
+    public static GameId parseGameId(String gameId) throws ParseException {
+        requireNonNull(gameId);
+        String trimmedName = gameId.trim();
+        if (!GameId.isValidGameId(trimmedName)) {
+            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
+        }
+        return new GameId(trimmedName);
+    }
+
+    /**
      * Parses a {@code String friendName} into a {@code FriendName}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -75,21 +89,6 @@ public class ParserUtil {
             throw new ParseException(FriendName.MESSAGE_CONSTRAINTS);
         }
         return new FriendName(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String gameId} into a {@code Game}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code gameId} is invalid.
-     */
-    public static GameId parseGameId(String gameId) throws ParseException {
-        requireNonNull(gameId);
-        String trimmedGameIdString = gameId.trim();
-        if (!GameId.isValidGameId(trimmedGameIdString)) {
-            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
-        }
-        return new GameId(trimmedGameIdString);
     }
 
     /**

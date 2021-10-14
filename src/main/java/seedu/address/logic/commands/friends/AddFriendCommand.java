@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
@@ -12,7 +13,6 @@ import seedu.address.model.friend.Friend;
 
 public class AddFriendCommand extends Command {
     public static final String COMMAND_WORD = "--add";
-    // add command messages
     public static final String MESSAGE_SUCCESS_ADD_FRIEND = "New friend added - %1$s";
     public static final String MESSAGE_DUPLICATE_FRIEND_ID = "A friend with the same FRIEND_ID already exists in "
             + "the friends list.";
@@ -50,7 +50,7 @@ public class AddFriendCommand extends Command {
         }
 
         model.addFriend(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS_ADD_FRIEND, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS_ADD_FRIEND, toAdd), CommandType.FRIEND_ADD);
     }
 
     @Override
