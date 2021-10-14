@@ -11,27 +11,27 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    private static String MESSAGE_USAGE = "";
+    private static String messageUsage = "";
     /**
      * Creates a HelpCommand with specific help messages
      */
     public HelpCommand(String message) {
-        HelpCommand.MESSAGE_USAGE = message;
+        HelpCommand.messageUsage = message;
     }
 
     public static String getMessageUsage() {
-        return MESSAGE_USAGE;
+        return messageUsage;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_USAGE, false);
+        return new CommandResult(messageUsage, false);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof HelpCommand // instanceof handles nulls
-                && this.MESSAGE_USAGE.equals(((HelpCommand) other).MESSAGE_USAGE));
+                && this.messageUsage.equals(((HelpCommand) other).messageUsage));
     }
 }
