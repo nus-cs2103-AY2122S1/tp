@@ -9,15 +9,15 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.programmer.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
-import seedu.programmer.model.student.NameContainsKeywordsPredicate;
+import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 import seedu.programmer.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -113,8 +113,9 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        // final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(student.getName().fullName)));
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor(student.getName().fullName, null, null);
+
+        model.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
