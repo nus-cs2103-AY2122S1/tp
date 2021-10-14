@@ -64,9 +64,6 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean testName(Person person) {
         String name = person.getName().fullName;
         String[] nameList = name.split("\\s");
-        for (String n : nameList) {
-            System.out.println(n);
-        }
         String allKeysNameList = "";
         for (String s : nameList) {
             for (int j = 1; j <= s.length(); j++) {

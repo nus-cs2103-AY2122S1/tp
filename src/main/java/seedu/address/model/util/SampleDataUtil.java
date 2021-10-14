@@ -34,9 +34,9 @@ public class SampleDataUtil {
             "e0123458@u.nus.edu", "Blk 11 Ang Mo Kio Street 74, #11-04", "test3",
             "e0123458", "student", "A0123456C", "03", "neighbours");
 
-    private static final Person davidLi = createPerson("Irfan Ibrahim", "92492021",
-            "e0123450@u.nus.edu", "Blk 47 Tampines Street 20, #17-35", "test5",
-            "e0123450", "student", "A0123456E", "05", "classmates");
+    private static final Person davidLi = createPerson("David Li", "91031282", "e0123459@u.nus.edu",
+            "Blk 436 Serangoon Gardens Street 26, #16-43", "test4", "e0123459",
+            "student", "A0123456D", "04", "family");
 
     private static final Person irfanIbrahim = createPerson("Irfan Ibrahim", "92492021",
             "e0123450@u.nus.edu", "Blk 47 Tampines Street 20, #17-35" , "test5",
