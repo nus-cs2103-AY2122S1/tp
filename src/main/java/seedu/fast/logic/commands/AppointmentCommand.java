@@ -1,11 +1,9 @@
 package seedu.fast.logic.commands;
 
-import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
-import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_APPOINTMENT;
 import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -31,8 +29,6 @@ public class AppointmentCommand extends Command {
             + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd), "
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format)), "
             + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 30 characters long);" + "\n\n"
-            // + "Note: Appointment time and venue are optional.\n\n"
-            //not needed as using [] already represents optional, similar to add and edit commands
             + "Examples: \n" + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "
@@ -44,17 +40,11 @@ public class AppointmentCommand extends Command {
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_VENUE + "Ion \n"
             + COMMAND_WORD + " 1 "
-            + PREFIX_APPOINTMENT + "2021-10-25 \n\n"
-            + "Parameters (to delete an appointment): \nINDEX (must be a positive integer), "
-            + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND + "\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND;
+            + PREFIX_APPOINTMENT + "2021-10-25 \n\n";
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
     public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Appointment already exist! " +
             "Edit the appointment or delete to re-add!";
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
-    public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
 
     private final Index index;
     private final Appointment appointment;
@@ -92,7 +82,7 @@ public class AppointmentCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(personToEdit, editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
@@ -100,23 +90,10 @@ public class AppointmentCommand extends Command {
      * the appointment is added, deleted or updated
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit, Person editedPerson) {
-        String message = "";
-        boolean isEmptyStatusAfter = editedPerson.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
-        boolean isEmptyStatusBefore = personToEdit.getAppointment().getDate().equals(Appointment.NO_APPOINTMENT);
+    private String generateSuccessMessage(Person editedPerson) {
 
-        if (isEmptyStatusAfter && !isEmptyStatusBefore) {
-            message = MESSAGE_DELETE_APPOINTMENT_SUCCESS;
-        } else if (isEmptyStatusAfter && isEmptyStatusBefore) {
-            message = MESSAGE_DELETE_APPOINTMENT_FAILED;
-        } else if (isEmptyStatusBefore && !isEmptyStatusAfter) {
-            message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
-        } else {
-            // should never reach here
-            message = MESSAGE_INVALID_COMMAND_FORMAT;
-        }
-
-        return String.format(message, editedPerson.getName().fullName, editedPerson.getAppointment().getDate(),
+        return String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson.getName().fullName,
+                editedPerson.getAppointment().getDate(),
                 editedPerson.getAppointment().getTime(),
                 editedPerson.getAppointment().getVenue());
     }

@@ -10,6 +10,7 @@ import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
 import seedu.fast.logic.commands.Command;
+import seedu.fast.logic.commands.DeleteAppointmentCommand;
 import seedu.fast.logic.commands.DeleteCommand;
 import seedu.fast.logic.commands.EditAppointmentCommand;
 import seedu.fast.logic.commands.EditCommand;
@@ -83,6 +84,9 @@ public class FastParser {
 
         case EditAppointmentCommand.COMMAND_WORD:
             return new EditAppointmentCommandParser().parse(arguments);
+
+        case DeleteAppointmentCommand.COMMAND_WORD:
+            return new DeleteAppointmentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

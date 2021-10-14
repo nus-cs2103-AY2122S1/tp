@@ -5,15 +5,9 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
-import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_APPOINTMENT;
 import static seedu.fast.logic.parser.ParserUtil.parseDateString;
 import static seedu.fast.logic.parser.ParserUtil.parseTimeString;
 import static seedu.fast.logic.parser.ParserUtil.parseVenueString;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.exceptions.IllegalValueException;
@@ -30,7 +24,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
      */
     public AppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DELETE_APPOINTMENT,
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_APPOINTMENT, PREFIX_APPOINTMENT_TIME, PREFIX_APPOINTMENT_VENUE);
 
         Index index;
@@ -39,13 +33,6 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AppointmentCommand.MESSAGE_USAGE), ive);
-        }
-
-        String retrievedDeleteCommand = argMultimap.getValue(PREFIX_DELETE_APPOINTMENT).orElse("");
-
-        if (isAppointmentDeleteCommand(retrievedDeleteCommand)) {
-            return new AppointmentCommand(index,
-                    new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME, Appointment.NO_VENUE));
         }
 
         String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
@@ -58,16 +45,5 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String parsedVenue = parseVenueString(retrievedVenue);
 
         return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
-    }
-
-    /**
-     * Returns true if the argument passed in is a delete appointment command.
-     * Returns false if it is not a delete appointment command.
-     *
-     * @param commandString The input retrieved from the argument.
-     * @return A boolean indicating whether if it is a appointment delete command.
-     */
-    private boolean isAppointmentDeleteCommand(String commandString) {
-        return commandString.equalsIgnoreCase(AppointmentCommand.APPOINTMENT_DELETE_COMMAND);
     }
 }
