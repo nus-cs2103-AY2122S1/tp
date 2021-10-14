@@ -20,8 +20,9 @@ public interface Model {
 
     // TODO: List
     // Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
-    
+
     //=========== UserPrefs ==================================================================================
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -51,9 +52,9 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setNotorFilePath(Path notorFilePath);
-    
+
     //=========== Notor =====================================================================================
-    
+
     /**
      * Replaces Notor data (of the list) with the data in {@code notor}.
      */

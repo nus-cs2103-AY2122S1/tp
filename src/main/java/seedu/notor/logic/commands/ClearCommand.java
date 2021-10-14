@@ -2,8 +2,8 @@ package seedu.notor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
+import seedu.notor.model.Notor;
 
 /**
  * Clears Notor of all entries

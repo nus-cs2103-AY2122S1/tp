@@ -4,9 +4,9 @@ import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
+import seedu.notor.model.Notor;
 import seedu.notor.model.UserPrefs;
 
 public class ClearCommandTest {
