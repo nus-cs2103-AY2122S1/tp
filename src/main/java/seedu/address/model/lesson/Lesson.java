@@ -92,26 +92,6 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
-     * Check if lessons occur on the same {@code DayOfWeek}.
-     *
-     * @param otherLesson The lesson to be compared to.
-     * @return True if and only if this lesson occurs on the same {@code DayOfWeek} as {@code otherLesson}
-     */
-    public boolean isSameDayOfWeek(Lesson otherLesson) {
-        return getDayOfWeek().equals(otherLesson.getDayOfWeek());
-    }
-
-    /**
-     * Check if lessons have clashing {@code TimeRange}.
-     *
-     * @param otherLesson The lesson to be compared to.
-     * @return True if and only if this lesson has clashing {@code TimeRange} with {@code otherLesson}
-     */
-    public boolean hasClashingTimeRange(Lesson otherLesson) {
-        return getTimeRange().isClashing(otherLesson.getTimeRange());
-    }
-
-    /**
      * Returns true both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.

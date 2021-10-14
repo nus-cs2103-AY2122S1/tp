@@ -190,14 +190,6 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displayPersonListPanel();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return centerPanel.getPersonListPanel();
-    }
-
-    public SchedulePanel getSchedulePanel() {
-        return centerPanel.getSchedulePanel();
-    }
-
     /**
      * Executes the command and returns the result.
      *

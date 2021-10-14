@@ -83,7 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person that has clashing lessons with {@code person} exists in the address book.
+     * Returns true if any of the specified lessons clashes with existing lesson in the address book.
      */
     public boolean hasClashingLesson(Iterable<Lesson> lessons) {
         requireAllNonNull(lessons);
@@ -114,8 +114,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-        entries.setLessons(target, editedPerson);
         persons.setPerson(target, editedPerson);
+        entries.setLessons(target, editedPerson);
     }
 
     /**

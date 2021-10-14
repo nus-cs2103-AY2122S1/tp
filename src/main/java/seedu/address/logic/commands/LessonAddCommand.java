@@ -122,15 +122,11 @@ public class LessonAddCommand extends UndoableCommand {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
-        
         personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
         personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
-
-        
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

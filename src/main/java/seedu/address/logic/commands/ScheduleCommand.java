@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 /**
  * Format full help instructions for every command for display.
  */
@@ -18,7 +16,7 @@ public class ScheduleCommand extends Command {
             + " You can go back to list view by typing \"list\" or any other valid command.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute() {
         return new CommandResult(SHOWING_SCHEDULE_MESSAGE, false, true, false);
     }
 }
