@@ -15,14 +15,14 @@ import tutoraid.model.student.Student;
 /**
  * Delete progress of an existing student in TutorAid.
  */
-public class DeleteProgressCommand extends Command {
+public class DeleteProgressCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "del -p";
+    public static final String COMMAND_FLAG = "-p";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a progress from a student in TutorAid "
+    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Deletes a progress from a student in TutorAid "
             + "identified by the index number used in the last student listing.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_FLAG + " 1";
 
     public static final String MESSAGE_SUCCESS = "Deleted progress: %1$s\nOf this student: %2$s";
 
