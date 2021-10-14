@@ -96,7 +96,7 @@ public class AddCommandParserTest {
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -106,6 +106,10 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
                 + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY, new AddCommand(expectedPerson));
+        // no social handle
+        Person expectedPersonNoSocial = new PersonBuilder(AMY).withSocialHandle("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoSocial));
     }
 
     @Test
@@ -114,7 +118,7 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                        + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB, expectedMessage);
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
@@ -131,10 +135,6 @@ public class AddCommandParserTest {
         // missing tutorial group prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + VALID_TUTORIAL_GROUP_BOB + SOCIAL_HANDLE_DESC_BOB, expectedMessage);
-
-        // missing social handle prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + VALID_SOCIAL_HANDLE_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_NATIONALITY_BOB
@@ -180,13 +180,13 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + INVALID_NATIONALITY_DESC + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB,
+                        + INVALID_NATIONALITY_DESC + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB
+                        + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
