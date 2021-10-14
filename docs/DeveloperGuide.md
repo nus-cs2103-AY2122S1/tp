@@ -319,7 +319,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. MrTechRecruiter shows a list of positions
 3. User requests to delete a specific position in the list
 4. MrTechRecruiter deletes the position
- 
     Use case ends.
 
 **Extensions**
