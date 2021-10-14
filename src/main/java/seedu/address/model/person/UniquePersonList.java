@@ -137,22 +137,35 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Increments the number of students labelled under each tag entry in tagTableWithNum.
+     *
+     * @param tagTableWithNum Hashtable to store tag and number of students labelled with the corresponding tag.
+     * @param tag Tag to be checked.
+     * @param person Student to be checked.
+     */
+    private void incrementTagNumTable(HashMap<Tag, Integer> tagTableWithNum, Tag tag, Person person) {
+        if (person.isContainsTag(tag)) {
+            if (!tagTableWithNum.containsKey(tag)) {
+                tagTableWithNum.put(tag, 1);
+            } else {
+                tagTableWithNum.put(tag, tagTableWithNum.get(tag) + 1);
+            }
+        }
+    }
+
+    /**
      * Calculates the number of students labelled under each tag.
      *
      * @param tagList List of distinct tags to be checked against.
+     * @return List of tags with the calculated number of students labelled under each tag.
      */
     public List<Tag> calculateNumDuplicateTags(List<Tag> tagList) {
         requireNonNull(tagList);
-        HashMap<Tag, Integer> tagWithNum = new HashMap<>();
-        // TODO: DEBUG
+        HashMap<Tag, Integer> tagTableWithNum = new HashMap<>();
+
         return tagList.stream().map(t -> {
-            internalList.forEach(person -> {
-                if (person.getTags().contains(t)) {
-                    t.incrementNumDuplicates();
-                    tagWithNum.put(t, tagWithNum.get(t) + 1);
-                }
-            });
-            return new Tag(t.tagName, tagWithNum.get(t));
+            internalList.forEach(person -> incrementTagNumTable(tagTableWithNum, t, person));
+            return t.createTagWithNum(tagTableWithNum.get(t));
         }).collect(Collectors.toList());
     }
 

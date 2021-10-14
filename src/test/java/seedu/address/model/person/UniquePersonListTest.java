@@ -187,23 +187,17 @@ public class UniquePersonListTest {
     public void calculateNumDuplicateTags_success() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BENSON);
-        Tag tagWithOneDuplicate = new Tag(VALID_TAG_UNPAID);
-        tagWithOneDuplicate.incrementNumDuplicates();
-        Tag tagWithTwoDuplicates = new Tag(VALID_TAG_FORGETFUL);
-        tagWithTwoDuplicates.incrementNumDuplicates();
-        tagWithTwoDuplicates.incrementNumDuplicates();
+        Tag tagWithOneDuplicate = new Tag(VALID_TAG_UNPAID).createTagWithNum(1);
+        Tag tagWithTwoDuplicates = new Tag(VALID_TAG_FORGETFUL).createTagWithNum(2);
+        List<Tag> expectedList = new ArrayList<>(Arrays.asList(tagWithOneDuplicate, tagWithTwoDuplicates));
 
-        List<Tag> sampleList = new ArrayList<>();
         Tag tagWithOneDuplicateForCalculation = new Tag(VALID_TAG_UNPAID);
         Tag tagWithTwoDuplicatesForCalculation = new Tag(VALID_TAG_FORGETFUL);
-        sampleList.add(tagWithOneDuplicateForCalculation);
-        sampleList.add(tagWithTwoDuplicatesForCalculation);
-        uniquePersonList.calculateNumDuplicateTags(sampleList);
+        List<Tag> sampleList = new ArrayList<>(
+                Arrays.asList(tagWithOneDuplicateForCalculation, tagWithTwoDuplicatesForCalculation));
+        List<Tag> resultList = uniquePersonList.calculateNumDuplicateTags(sampleList);
 
-        assertEquals(tagWithOneDuplicate.getNumDuplicatesString(),
-                tagWithOneDuplicateForCalculation.getNumDuplicatesString());
-        assertEquals(tagWithTwoDuplicates.getNumDuplicatesString(),
-                tagWithTwoDuplicatesForCalculation.getNumDuplicatesString());
+        assertEquals(expectedList, resultList);
     }
 
     @Test

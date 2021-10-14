@@ -122,6 +122,16 @@ public class Person {
     }
 
     /**
+     * Returns true if the person's tags contains the specified tag.
+     *
+     * @param tag Tag to be checked.
+     * @return true if the person's tags contains the specified tag.
+     */
+    public boolean isContainsTag(Tag tag) {
+        return tags.contains(tag);
+    }
+
+    /**
      * Returns an immutable lesson set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

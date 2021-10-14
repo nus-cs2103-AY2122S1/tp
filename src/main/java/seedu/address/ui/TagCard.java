@@ -31,7 +31,7 @@ public class TagCard extends UiPart<Region> {
         super(FXML);
         this.tag = tag;
         tagName.setText(tag.tagName);
-        numDuplicates.setText(tag.getNumDuplicatesString());
+        numDuplicates.setText(tag.getNumStudentsString());
     }
 
     @Override

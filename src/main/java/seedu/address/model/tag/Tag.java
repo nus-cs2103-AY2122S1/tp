@@ -13,7 +13,7 @@ public class Tag {
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
-    private int numDuplicates = 0;
+    private int numStudents = 0;
 
     /**
      * Constructs a {@code Tag}.
@@ -30,27 +30,40 @@ public class Tag {
      * Constructs a {@code Tag} with specified number of students labelled under this tag.
      *
      * @param tagName A valid tag name.
-     * @param numDuplicates Number of students labelled under this tag.
+     * @param numStudents Number of students labelled under this tag.
      */
-    public Tag(String tagName, int numDuplicates) {
+    private Tag(String tagName, int numStudents) {
         this(tagName);
-        this.numDuplicates = numDuplicates;
+        this.numStudents = numStudents;
     }
 
     /**
      * Returns true if a given string is a valid tag name.
+     *
+     * @param test String to be checked if it is a valid tag name.
+     * @return True if the string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public void incrementNumDuplicates() {
-//        return new Tag(tagName, numDuplicates + 1);
-        numDuplicates++;
+    /**
+     * Creates a tag with its original tag name and the given number of students labelled under this tag.
+     *
+     * @param num Number of students labelled under this tag.
+     * @return Tag containing the original tag name and number of students under this tag.
+     */
+    public Tag createTagWithNum(int num) {
+        return new Tag(tagName, num);
     }
 
-    public String getNumDuplicatesString() {
-        return Integer.toString(numDuplicates);
+    /**
+     * Stringifies the number of students under this tag.
+     *
+     * @return String representation of the number of students under this tag.
+     */
+    public String getNumStudentsString() {
+        return Integer.toString(numStudents);
     }
 
     @Override
