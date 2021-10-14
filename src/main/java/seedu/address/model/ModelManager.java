@@ -163,8 +163,7 @@ public class ModelManager implements Model {
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the filtered student list.
      */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
@@ -172,7 +171,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the filtered module list
+     * Returns an unmodifiable view of the filtered module list.
      */
     @Override
     public ObservableList<Module> getFilteredModuleList() {

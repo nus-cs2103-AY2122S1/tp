@@ -81,9 +81,9 @@ public interface Model {
     void addStudent(Student student);
 
     /**
-     * Replaces the given student {@code target} with {@code editedPerson}.
+     * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedPerson} must not be the same
+     * The student identity of {@code editedStudent} must not be the same
      * as another existing student in the address book.
      */
     void setStudent(Student target, Student editedStudent);
