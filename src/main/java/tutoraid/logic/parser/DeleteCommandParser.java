@@ -11,7 +11,7 @@ import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- Checks if a given delete command is to delete a student from TutorAid or to delete the progress note of a student.
+ * Checks if a given delete command is to delete a student from TutorAid or to delete the progress note of a student.
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
     public static final String COMMAND_WORD = "del";
