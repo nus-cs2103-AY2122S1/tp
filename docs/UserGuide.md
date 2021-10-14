@@ -85,9 +85,14 @@ The student's phone number, parent's name and parent's phone number are optional
 
 ### Listing all students : `list`
 
-Shows a list of all students in TutorAid in the order that they were added.
+Shows a list of all students in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise fields are hidden by default.
 
-Format: `list`
+Format: `list [-a]`
+
+Examples:
+
+- `list` displays all students in TutorAid while showing only their name and list index
+- `list -a` displays all students in TutorAid while showing all of their data such as their contact number, payment status and so on. 
 
 ### Deleting a student : `delete`
 Deletes the specified student with the given student index from TutorAid.
@@ -100,6 +105,21 @@ Format: `del -s STUDENT_INDEX`
 
 Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
+
+### Editing a student : `edit`
+
+Edits the specified student with the given student index from TutorAid.
+
+Format: `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
+
+* Edits the student at the specified STUDENT_INDEX.
+* The index refers to the index number shown in the displayed student list.
+* The index must be a positive integer 1,2,3, …​
+* At least one of the optional fields should be present
+
+Example:
+
+* `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
 
 ### Viewing a student : `view`
 
@@ -213,7 +233,8 @@ Action | Format, Examples
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**List** | `list`
+**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222` 
+**List** | `list [-a]`<br>e.g., `list`, `list -a` 
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
