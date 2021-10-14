@@ -145,7 +145,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void viewList() {
+        public void viewList(boolean viewAll) {
             throw new AssertionError("This method should not be called.");
         }
 
