@@ -79,7 +79,7 @@ public class MainApp extends Application {
         ReadOnlyProgrammerError initialData;
         try {
             programmerErrorOptional = storage.readProgrammerError();
-            if (!programmerErrorOptional.isPresent()) {
+            if (programmerErrorOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample ProgrammerError");
             }
             initialData = programmerErrorOptional.orElseGet(SampleDataUtil::getSampleProgrammerError);

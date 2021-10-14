@@ -32,7 +32,7 @@ public class StudentListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code student} using a {@code studentCard}.
      */
-    class StudentListViewCell extends ListCell<Student> {
+    static class StudentListViewCell extends ListCell<Student> {
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);

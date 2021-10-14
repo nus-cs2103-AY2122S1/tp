@@ -108,16 +108,13 @@ public class Student {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Student Id: ")
-                .append(getStudentId())
-                .append("; Class Id: ")
-                .append(getClassId())
-                .append("; Grade: ")
-                .append(getGrade());
-
-        return builder.toString();
+        return getName()
+                + "; Student Id: "
+                + getStudentId()
+                + "; Class Id: "
+                + getClassId()
+                + "; Grade: "
+                + getGrade();
     }
 
 }

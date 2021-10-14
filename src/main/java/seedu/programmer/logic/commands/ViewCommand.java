@@ -1,10 +1,13 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.student.NameContainsKeywordsPredicate;
+import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
  * Finds and lists all students in ProgrammerError whose name contains any of the argument keywords.
@@ -15,13 +18,19 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " -n alice bob charlie";
+            + "the specified arguments (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: [" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_STUDENT_ID + "STUDENTID] "
+            + "[" + PREFIX_CLASS_ID + "CLASSID] "
+            + "Example: " + COMMAND_WORD + " -n alice -cid B01 -sid A1234567X";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final StudentDetailContainsQueryPredicate predicate;
 
-    public ViewCommand(NameContainsKeywordsPredicate predicate) {
+    /**
+     * Initializes a a {@code ViewCommand} object with the {@code predicate} to test which students to be filtered.
+     * @param predicate that filters the list of students to be displayed.
+     */
+    public ViewCommand(StudentDetailContainsQueryPredicate predicate) {
         this.predicate = predicate;
     }
 

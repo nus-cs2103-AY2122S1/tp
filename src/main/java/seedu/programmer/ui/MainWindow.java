@@ -51,7 +51,6 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private LabResultListPanel labResultListPanel;
     private StudentCard studentParticular;
 
     @FXML
@@ -200,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
             studentParticular.updateStudentInformation(target);
             studentParticularPlaceholder.getChildren().set(0, studentParticular.getRoot());
         }
-        labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
+        LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
     }
 
