@@ -6,7 +6,7 @@ import seedu.anilist.model.anime.Anime;
 /**
  * A utility class to help with building AnimeList objects.
  * Example usage: <br>
- *     {@code AnimeList al = new AnimeListBuilder().withAnime("John", "Doe").build();}
+ *     {@code AnimeList al = new AnimeListBuilder().withAnime("Angel Beats!", "Banana Fish").build();}
  */
 public class AnimeListBuilder {
 

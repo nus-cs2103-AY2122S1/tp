@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Anime's episode number in the address book.
+ * Represents an Anime's episode number in the anime list.
  * Guarantees: immutable; is valid as declared in {@link #isValidEpisode(String)}
  */
 public class Episode {

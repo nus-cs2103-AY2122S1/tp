@@ -30,11 +30,11 @@ public interface Logic {
      */
     ReadOnlyAnimeList getAnimeList();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of animes */
     ObservableList<Anime> getFilteredAnimeList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' anime list file path.
      */
     Path getAnimeListFilePath();
 

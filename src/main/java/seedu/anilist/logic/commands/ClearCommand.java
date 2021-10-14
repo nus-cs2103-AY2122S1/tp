@@ -6,7 +6,7 @@ import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
 
 /**
- * Clears the anime book.
+ * Clears the anime list.
  */
 public class ClearCommand extends Command {
 

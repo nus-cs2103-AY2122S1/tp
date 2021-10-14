@@ -1,13 +1,12 @@
 {
   "anime": [ {
-    "name" : "Alice Pauline",
+    "name": "Attack on Titan",
     "episode" : "0",
     "status" : "watching",
-    "tagged" : [ "friends" ]
+    "tagged": [ "action" ]
   }, {
-    "name" : "Alice Pauline",
+    "name" : "Attack on Titan",
     "episode" : "0",
-    "status" : "watching",
-    "tagged" : [ "friends" ]
+    "status" : "watching"
   } ]
 }

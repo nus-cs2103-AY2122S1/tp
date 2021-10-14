@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.ALICE;
-import static seedu.anilist.testutil.TypicalAnimes.BENSON;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
+import static seedu.anilist.testutil.TypicalAnimes.BRS;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -79,13 +79,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasAnime_animeNotInAnimeList_returnsFalse() {
-        assertFalse(modelManager.hasAnime(ALICE));
+        assertFalse(modelManager.hasAnime(AOT));
     }
 
     @Test
     public void hasAnime_animeInAnimeList_returnsTrue() {
-        modelManager.addAnime(ALICE);
-        assertTrue(modelManager.hasAnime(ALICE));
+        modelManager.addAnime(AOT);
+        assertTrue(modelManager.hasAnime(AOT));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AnimeList animeList = new AnimeListBuilder().withAnime(ALICE).withAnime(BENSON).build();
+        AnimeList animeList = new AnimeListBuilder().withAnime(AOT).withAnime(BRS).build();
         AnimeList differentAnimeList = new AnimeList();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -113,11 +113,11 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
+        // different animeList -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAnimeList, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = AOT.getName().fullName.split("\\s+");
         modelManager.updateFilteredAnimeList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(animeList, userPrefs)));
 

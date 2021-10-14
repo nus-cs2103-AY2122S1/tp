@@ -3,7 +3,7 @@ package seedu.anilist.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.anilist.storage.JsonAdaptedAnime.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.BENSON;
+import static seedu.anilist.testutil.TypicalAnimes.BRS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +18,21 @@ import seedu.anilist.model.anime.Status;
 
 public class JsonAdaptedAnimeTest {
     private static final String INVALID_NAME = " ";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "#adventure";
     private static final String INVALID_EPISODE = "-1";
     private static final String INVALID_STATUS = "Wishlist";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_EPISODE = BENSON.getEpisode().toString();
-    private static final String VALID_STATUS = BENSON.getStatus().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BRS.getName().toString();
+    private static final String VALID_EPISODE = BRS.getEpisode().toString();
+    private static final String VALID_STATUS = BRS.getStatus().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = BRS.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validAnimeDetails_returnsAnime() throws Exception {
-        JsonAdaptedAnime anime = new JsonAdaptedAnime(BENSON);
-        assertEquals(BENSON, anime.toModelType());
+        JsonAdaptedAnime anime = new JsonAdaptedAnime(BRS);
+        assertEquals(BRS, anime.toModelType());
     }
 
     @Test

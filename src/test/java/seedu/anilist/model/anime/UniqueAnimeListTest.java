@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.ALICE;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
 import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 
 import java.util.Arrays;
@@ -29,21 +29,21 @@ public class UniqueAnimeListTest {
 
     @Test
     public void contains_animeNotInList_returnsFalse() {
-        assertFalse(uniqueAnimeList.contains(ALICE));
+        assertFalse(uniqueAnimeList.contains(AOT));
     }
 
     @Test
     public void contains_animeInList_returnsTrue() {
-        uniqueAnimeList.add(ALICE);
-        assertTrue(uniqueAnimeList.contains(ALICE));
+        uniqueAnimeList.add(AOT);
+        assertTrue(uniqueAnimeList.contains(AOT));
     }
 
     @Test
     public void contains_animeWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        uniqueAnimeList.add(AOT);
+        Anime editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN)
                 .build();
-        assertTrue(uniqueAnimeList.contains(editedAlice));
+        assertTrue(uniqueAnimeList.contains(editedAot));
     }
 
     @Test
@@ -53,49 +53,49 @@ public class UniqueAnimeListTest {
 
     @Test
     public void add_duplicateAnime_throwsDuplicateAnimeException() {
-        uniqueAnimeList.add(ALICE);
-        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.add(ALICE));
+        uniqueAnimeList.add(AOT);
+        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.add(AOT));
     }
 
     @Test
     public void setAnime_nullTargetAnime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(null, AOT));
     }
 
     @Test
     public void setAnime_nullEditedAnime_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueAnimeList.setAnime(AOT, null));
     }
 
     @Test
     public void setAnime_targetAnimeNotInList_throwsAnimeNotFoundException() {
-        assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.setAnime(ALICE, ALICE));
+        assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.setAnime(AOT, AOT));
     }
 
     @Test
     public void setAnime_editedAnimeIsSameAnime_success() {
-        uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.setAnime(ALICE, ALICE);
+        uniqueAnimeList.add(AOT);
+        uniqueAnimeList.setAnime(AOT, AOT);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(ALICE);
+        expectedUniqueAnimeList.add(AOT);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
     public void setAnime_editedAnimeHasSameIdentity_success() {
-        uniqueAnimeList.add(ALICE);
-        Anime editedAlice = new AnimeBuilder(ALICE).withTags(VALID_TAG_SHOUNEN)
+        uniqueAnimeList.add(AOT);
+        Anime editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN)
                 .build();
-        uniqueAnimeList.setAnime(ALICE, editedAlice);
+        uniqueAnimeList.setAnime(AOT, editedAot);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
-        expectedUniqueAnimeList.add(editedAlice);
+        expectedUniqueAnimeList.add(editedAot);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
 
     @Test
     public void setAnime_editedAnimeHasDifferentIdentity_success() {
-        uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.setAnime(ALICE, BNHA);
+        uniqueAnimeList.add(AOT);
+        uniqueAnimeList.setAnime(AOT, BNHA);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
         expectedUniqueAnimeList.add(BNHA);
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
@@ -103,9 +103,9 @@ public class UniqueAnimeListTest {
 
     @Test
     public void setAnime_editedAnimeHasNonUniqueIdentity_throwsDuplicateAnimeException() {
-        uniqueAnimeList.add(ALICE);
+        uniqueAnimeList.add(AOT);
         uniqueAnimeList.add(BNHA);
-        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(ALICE, BNHA));
+        assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setAnime(AOT, BNHA));
     }
 
     @Test
@@ -115,13 +115,13 @@ public class UniqueAnimeListTest {
 
     @Test
     public void remove_animeDoesNotExist_throwsAnimeNotFoundException() {
-        assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.remove(ALICE));
+        assertThrows(AnimeNotFoundException.class, () -> uniqueAnimeList.remove(AOT));
     }
 
     @Test
     public void remove_existingAnime_removesAnime() {
-        uniqueAnimeList.add(ALICE);
-        uniqueAnimeList.remove(ALICE);
+        uniqueAnimeList.add(AOT);
+        uniqueAnimeList.remove(AOT);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
         assertEquals(expectedUniqueAnimeList, uniqueAnimeList);
     }
@@ -133,7 +133,7 @@ public class UniqueAnimeListTest {
 
     @Test
     public void setAnimes_uniqueAnimeList_replacesOwnListWithProvidedUniqueAnimeList() {
-        uniqueAnimeList.add(ALICE);
+        uniqueAnimeList.add(AOT);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
         expectedUniqueAnimeList.add(BNHA);
         uniqueAnimeList.setMultipleAnime(expectedUniqueAnimeList);
@@ -147,7 +147,7 @@ public class UniqueAnimeListTest {
 
     @Test
     public void setAnimes_list_replacesOwnListWithProvidedList() {
-        uniqueAnimeList.add(ALICE);
+        uniqueAnimeList.add(AOT);
         List<Anime> animeList = Collections.singletonList(BNHA);
         uniqueAnimeList.setMultipleAnime(animeList);
         UniqueAnimeList expectedUniqueAnimeList = new UniqueAnimeList();
@@ -157,7 +157,7 @@ public class UniqueAnimeListTest {
 
     @Test
     public void setAnimes_listWithDuplicateAnimes_throwsDuplicateAnimeException() {
-        List<Anime> listWithDuplicateAnimes = Arrays.asList(ALICE, ALICE);
+        List<Anime> listWithDuplicateAnimes = Arrays.asList(AOT, AOT);
         assertThrows(DuplicateAnimeException.class, () -> uniqueAnimeList.setMultipleAnime(listWithDuplicateAnimes));
     }
 
