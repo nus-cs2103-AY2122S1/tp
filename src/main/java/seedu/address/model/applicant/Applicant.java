@@ -1,11 +1,11 @@
 package seedu.address.model.applicant;
 
-import seedu.address.model.application.Application;
-import seedu.address.model.position.Position;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.model.application.Application;
+import seedu.address.model.position.Position;
 
 /**
  * Represents an Applicant in the address book.
@@ -48,6 +48,10 @@ public class Applicant {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Application getApplication() {
+        return application;
     }
 
     public void setApplication(Application application) {
@@ -102,6 +106,13 @@ public class Applicant {
                 + "; Email: "
                 + email
                 + "; Address: "
-                + address;
+                + address
+                + "; Application: "
+                + application;
     }
+
+    public String getApplicationSummary() {
+        return "Applied for: " + application.getPosition().getTitle() + "; Status: " + application.getStatus();
+    }
+
 }
