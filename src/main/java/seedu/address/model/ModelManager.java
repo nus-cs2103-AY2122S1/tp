@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
@@ -111,6 +110,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getPositionBookFilePath() {
+        return userPrefs.getPositionBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -140,22 +144,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteApplicant(Applicant target) {
+        applicantBook.removeApplicant(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void addApplicantToPosition(Applicant applicant, Position position) {
+    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
+        Position position = positionBook.getPosition(dummyPosition);
+        Application application = new Application(applicant, position);
         applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(new Application(applicant, position));
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
-        position.updateNoOfApplicants(position.getNoOfApplicants() + 1);
-        if (applicant.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-            position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
-        }
-        position.updateRejectionRate();
-        applicationBook.addApplication(applicant.getApplication());
+        applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
@@ -163,22 +167,6 @@ public class ModelManager implements Model {
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return applicantBook.hasApplicant(applicant);
-    }
-
-    @Override
-    public void deleteApplicant(Applicant target) {
-        boolean hasApplicant = applicantBook.hasApplicant(target);
-        if (hasApplicant) {
-            Position p = target.getApplication().getPosition();
-            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
-            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
-            }
-            p.updateRejectionRate();
-            applicantBook.removeApplicant(target);
-        } else {
-            throw new ApplicantNotFoundException(); // to be updated
-        }
     }
 
     @Override
@@ -251,13 +239,13 @@ public class ModelManager implements Model {
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        initialiseRejectionRate(position);
     }
 
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
     }
+
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
@@ -271,35 +259,4 @@ public class ModelManager implements Model {
         filteredPositions.setPredicate(predicate);
     }
 
-    //========== Rejection rates =======================================
-    /**
-     * Initialise rejection rate of a new position.
-     *
-     * @param p The position to be initialised.
-     */
-    public void initialiseRejectionRate(Position p) {
-        int total = 0;
-        int count = 0;
-        for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getApplication().getPosition();
-            if (currentPosition == p) {
-                total++;
-                if (a.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                    count++;
-                }
-            }
-        }
-        p.updateNoOfApplicants(total);
-        p.updateNoOfRejectedApplicants(count);
-        p.updateRejectionRate();
-    }
-
-    /**
-     * Updates all rejection rates for all current positions.
-     */
-    public void initialiseAllRejectionRates() {
-        for (Position p: positionBook.getPositionList()) {
-            initialiseRejectionRate(p);
-        }
-    }
 }
