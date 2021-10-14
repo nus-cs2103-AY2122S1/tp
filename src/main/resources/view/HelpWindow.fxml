@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 <?import javafx.scene.layout.VBox?>
-<fx:root title="Help" type="javafx.stage.Stage"
+<fx:root title="Help" type="javafx.stage.Stage" minWidth="700" minHeight="400"
          xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
