@@ -31,16 +31,13 @@
                 <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
                 <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             </HBox>
-
-<!--            This VBox is a TaskListPanel-->
+            <!--            This VBox is a TaskListPanel-->
             <VBox fx:id="taskList" styleClass="pane-with-border" minHeight="-Infinity" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
                 <StackPane minHeight="-Infinity" fx:id="taskListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
-            <!--      <FlowPane fx:id="tags" />-->
-
         </VBox>
     </GridPane>
 </HBox>

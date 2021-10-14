@@ -29,8 +29,6 @@
                 <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
                 <Label fx:id="isComplete" styleClass="cell_small_label" text="\$isComplete" />
             </HBox>
-            <!--      <FlowPane fx:id="tags" />-->
-
         </VBox>
     </GridPane>
 </HBox>
