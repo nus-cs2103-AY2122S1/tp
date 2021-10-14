@@ -111,6 +111,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getPositionBookFilePath() {
+        return userPrefs.getPositionBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -146,7 +151,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addApplicantToPosition(Applicant applicant, Position position) {
+    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
+        Position position = positionBook.getPosition(dummyPosition);
+        Application application = new Application(applicant, position);
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(new Application(applicant, position));
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
@@ -155,7 +162,7 @@ public class ModelManager implements Model {
             position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
         }
         position.updateRejectionRate();
-        applicationBook.addApplication(applicant.getApplication());
+        applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
