@@ -11,6 +11,7 @@ import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
 import seedu.address.model.facility.Time;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -20,14 +21,17 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static final Availability SAMPLE_AVAILABILITY = new Availability("Mon Wed Fri");
+
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283")),
-            new Person(new Name("David Li"), new Phone("91031282")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"))
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), SAMPLE_AVAILABILITY),
+            new Person(new Name("David Li"), new Phone("91031282"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), SAMPLE_AVAILABILITY),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), SAMPLE_AVAILABILITY)
         };
     }
 

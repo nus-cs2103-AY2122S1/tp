@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -17,14 +18,17 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
+    private final String availability;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+            @JsonProperty("availability") String availability) {
         this.name = name;
         this.phone = phone;
+        this.availability = availability;
     }
 
     /**
@@ -33,6 +37,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
+        availability = source.getAvailability().values;
     }
 
     /**
@@ -56,6 +61,13 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(phone);
-        return new Person(modelName, modelPhone);
+
+        if (availability == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Availability.class.getSimpleName()));
+        }
+        final Availability modelAvailability = new Availability(availability);
+
+        return new Person(modelName, modelPhone, modelAvailability);
     }
 }

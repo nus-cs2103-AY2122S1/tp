@@ -1,10 +1,12 @@
 {
   "members": [ {
     "name": "Alice Pauline",
-    "phone": "94351253"
+    "phone": "94351253",
+    "availability": "mon"
   }, {
     "name": "Alice Pauline",
-    "phone": "94343423"
+    "phone": "94343423",
+    "availability": "mon"
   } ],
   "facilities": []
 }

@@ -8,8 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -18,8 +16,12 @@ public class PersonTest {
 
     @Test
     public void constructor_null_throwsException() {
-        assertThrows(NullPointerException.class, () -> new Person(new Name(null), new Phone("92929292")));
-        assertThrows(NullPointerException.class, () -> new Person(new Name("Alice"), new Phone(null)));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name(null), new Phone("92929292"), new Availability("Mon")));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name("Alice"), new Phone(null), new Availability("Mon")));
+        assertThrows(NullPointerException.class, () ->
+                new Person(new Name("Alice"), new Phone("92929292"), new Availability(null)));
     }
 
     @Test
@@ -52,7 +54,7 @@ public class PersonTest {
     public void isAvailableOnDay_success() {
         Person person = new PersonBuilder().build();
         assertFalse(person.isAvailableOnDay("Mon"));
-        person.setDays(Arrays.asList("Mon", "Tue"));
+        person = new PersonBuilder().withAvailability("Mon Tue").build();
         assertTrue(person.isAvailableOnDay("Mon"));
         assertTrue(person.isAvailableOnDay("Tue"));
         assertFalse(person.isAvailableOnDay("Fri"));

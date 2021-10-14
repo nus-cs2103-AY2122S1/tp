@@ -13,17 +13,17 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-
 
 /**
  * Edits the details of an existing person in the address book.
  */
 public class EditMemberCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "
@@ -83,8 +83,10 @@ public class EditMemberCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        // edit command does not allow editing availability
+        Availability updatedAvailability = personToEdit.getAvailability();
 
-        return new Person(updatedName, updatedPhone);
+        return new Person(updatedName, updatedPhone, updatedAvailability);
     }
 
     @Override

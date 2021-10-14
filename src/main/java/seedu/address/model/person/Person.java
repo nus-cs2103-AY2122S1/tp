@@ -17,13 +17,17 @@ public class Person {
     private List<String> days;
 
 
+    // Data fields
+    private final Availability availability;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone) {
-        requireAllNonNull(name, phone);
+    public Person(Name name, Phone phone, Availability availability) {
+        requireAllNonNull(name, phone, availability);
         this.name = name;
         this.phone = phone;
+        this.availability = availability;
     }
 
     public Name getName() {
@@ -32,6 +36,10 @@ public class Person {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public Availability getAvailability() {
+        return availability;
     }
 
     /**
@@ -48,7 +56,7 @@ public class Person {
     }
 
     public boolean isAvailableOnDay(String day) {
-        return days != null && days.contains(day);
+        return availability.contains(day);
     }
 
     public void setDays(List<String> days) {
@@ -71,13 +79,14 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone());
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getAvailability().equals(getAvailability());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone);
+        return Objects.hash(name, phone, availability);
     }
 
     @Override
@@ -85,7 +94,9 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone());
+                .append(getPhone())
+                .append(": Availability: ")
+                .append(getAvailability());
         return builder.toString();
     }
 }
