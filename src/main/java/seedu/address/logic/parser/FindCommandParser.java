@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,11 +24,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer
+                .tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_TAG);
         boolean isNamePrefixPresent = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean isModulePrefixPresent = argMultimap.getValue(PREFIX_MODULE_CODE).isPresent();
+        boolean isTagPrefixPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
 
-        if (isNamePrefixPresent && isModulePrefixPresent) {
+        // boolean condition to check that only one of the three prefixes are present
+        if (isNamePrefixPresent
+                ? (isModulePrefixPresent || isTagPrefixPresent)
+                : (isModulePrefixPresent && isTagPrefixPresent)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
             );
