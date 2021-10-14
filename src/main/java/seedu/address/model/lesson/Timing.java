@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Timing {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Timing should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Timing should only contain a pair of 4 numbers each separated by a dash";
+    public static final String VALIDATION_REGEX = "\\d{4}-\\d{4}";
     public final String value;
 
     /**
