@@ -1,40 +1,36 @@
 package seedu.fast.model.person;
 
-import seedu.fast.logic.commands.exceptions.CommandException;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.fast.commons.util.AppUtil.checkArgument;
 
+/**
+ * Unmodifiable by the user.
+ * Manipulated by the application program.
+ */
 public class AppointmentCount {
     private static final String ERROR_MESSAGE = "Unable to update appointment count! Please try again!";
 
     private int count;
 
+    /**
+     * Constructor for {@Code AppointmentCount}
+     *
+     * @param count A String representing the number of appointment with a contact.
+     */
     public AppointmentCount(String count) {
         requireNonNull(count);
-        checkArgument(isValidCount(count), ERROR_MESSAGE);
+        // will always be correct, since count is initialise to 0 when a contact is added
+        // and always incremented by 1.
         this.count = Integer.parseInt(count);
     }
 
-
+    /**
+     * Increases the appointment count by 1.
+     *
+     * @return The updated AppointmentCount
+     */
     public AppointmentCount incrementAppointmentCount() {
         count++;
         return this;
-    }
-
-    /**
-     * Returns true if a given count is a valid number.
-     */
-    public static boolean isValidCount(String test) {
-        int i;
-
-        try {
-            i = Integer.parseInt(test);
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-
-        return i >= 0;
     }
 
 

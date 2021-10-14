@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.AppointmentCount;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Person;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     public static final String DEFAULT_APPOINTMENT = "10 Oct 2021";
     public static final String DEFAULT_APPOINTMENT_TIME = "20:00";
     public static final String DEFAULT_APPOINTMENT_VENUE = "Jewel Changi";
+    public static final String DEFAULT_APPOINTMENT_COUNT = "0";
 
     private Name name;
     private Phone phone;
@@ -34,6 +36,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Remark remark;
     private Appointment appointment;
+    private AppointmentCount count;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -46,6 +49,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         remark = new Remark(DEFAULT_REMARK);
         appointment = new Appointment(DEFAULT_APPOINTMENT, DEFAULT_APPOINTMENT_TIME, DEFAULT_APPOINTMENT_VENUE);
+        count = new AppointmentCount(DEFAULT_APPOINTMENT_COUNT);
     }
 
     /**
@@ -59,6 +63,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
         appointment = personToCopy.getAppointment();
+        count = personToCopy.getCount();
     }
 
     /**
@@ -117,9 +122,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code AppointmentCount} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAppointmentCount(String count) {
+        this.count = new AppointmentCount(count);
+        return this;
+    }
+
 
     public Person build() {
-        return new Person(name, phone, email, address, remark, tags, appointment);
+        return new Person(name, phone, email, address, remark, tags, appointment, count);
     }
 
 }

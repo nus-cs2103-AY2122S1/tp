@@ -1,16 +1,16 @@
 package seedu.fast.logic.commands;
 
+import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
-
-import java.util.List;
-
-import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.fast.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class MarkAppointmentCommand extends Command {
 
