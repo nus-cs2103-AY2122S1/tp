@@ -25,7 +25,7 @@ public class CenterPanel extends UiPart<Region> {
     private StackPane centerPanelPlaceholder;
 
     /**
-     * Construtor for a CenterPanel.
+     * Constructor for a CenterPanel.
      *
      * @param calendar The calendar in the CenterPanel.
      * @param personList The ObservableList of persons.
