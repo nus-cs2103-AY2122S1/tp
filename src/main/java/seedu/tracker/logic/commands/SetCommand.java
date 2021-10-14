@@ -1,7 +1,10 @@
 package seedu.tracker.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tracker.logic.parser.CliSyntax.*;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
+
 
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
@@ -14,6 +17,7 @@ import seedu.tracker.model.module.Mc;
 public class SetCommand extends Command {
     public static final String COMMAND_WORD = "set";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sets current semester or mc goal. \n"
+            +"Only one set of field should be specified\n"
             + "Parameters: "
             + "[" + PREFIX_ACADEMIC_YEAR + "YEAR"
             + PREFIX_SEMESTER + "SEMESTER]"

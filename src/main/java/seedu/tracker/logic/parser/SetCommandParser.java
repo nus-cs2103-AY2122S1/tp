@@ -2,7 +2,6 @@ package seedu.tracker.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tracker.commons.core.Messages.MESSAGE_PARAMETER_DUPLICATE;
 import static seedu.tracker.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
@@ -31,7 +30,7 @@ public class SetCommandParser implements Parser<SetCommand> {
         if (argMultimap.getValue(PREFIX_MC).isPresent()) {
             if(argMultimap.getValue(PREFIX_ACADEMIC_YEAR).isPresent() ||
                     argMultimap.getValue(PREFIX_SEMESTER).isPresent()) {
-                throw new ParseException(String.format(MESSAGE_PARAMETER_DUPLICATE, SetCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetCommand.MESSAGE_USAGE));
             }
 
             Mc mc = ParserUtil.parseMc(argMultimap.getValue(PREFIX_MC).get());
