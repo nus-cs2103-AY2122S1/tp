@@ -103,7 +103,9 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBound, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_CLIENTID);
+        assertCommandFailure(editCommand, model,
+            String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, CLIENTID_OUTOFBOUND)
+        );
     }
 
     @Test
