@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_APEX_LEGENDS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +11,9 @@ import seedu.address.model.game.Game;
  * A utility class containing a list of {@code Game} objects to be used in tests.
  */
 public class TypicalGames {
+
+    public static final String VALID_GAME_ID_CSGO = "CSGO";
+    public static final String VALID_GAME_ID_APEX_LEGENDS = "ApexLegends";
 
     public static final Game MINECRAFT = new GameBuilder().withGameId("Minecraft").build();
     public static final Game LEAGUE_OF_LEGENDS = new GameBuilder().withGameId("LeagueOfLegends").build();

@@ -2,14 +2,14 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 
 import java.util.Set;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class for Friend.
@@ -30,8 +30,8 @@ public class FriendUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(friend.getFriendId().value + " ");
         sb.append(FLAG_FRIEND_NAME + friend.getName().fullName + " ");
-        friend.getGames().stream().forEach(
-            game -> sb.append(FLAG_GAME + game.getGameId().value + " ")
+        friend.getGameFriendLinks().stream().forEach(
+            game -> sb.append(FLAG_GAME_OLD + game.getGameId().value + " ")
         );
         return sb.toString();
     }
@@ -46,9 +46,9 @@ public class FriendUtil {
         if (descriptor.getGames().isPresent()) {
             Set<GameFriendLink> games = descriptor.getGames().get();
             if (games.isEmpty()) {
-                sb.append(FLAG_GAME);
+                sb.append(FLAG_GAME_OLD);
             } else {
-                games.forEach(game -> sb.append(FLAG_GAME).append(game.getGameId().value).append(" "));
+                games.forEach(game -> sb.append(FLAG_GAME_OLD).append(game.getGameId().value).append(" "));
             }
         }
         return sb.toString();

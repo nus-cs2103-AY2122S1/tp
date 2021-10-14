@@ -1,0 +1,32 @@
+{
+  "_comment": "friends list save file which contains the same Friend values as in TypicalFriends#getTypicalFriendsList()",
+  "friends" : [ {
+    "friendId" : "94351253",
+    "friendName" : "Alice Pauline",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "98765432",
+    "friendName" : "Benson Meier",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "95352563",
+    "friendName" : "Carl Kurz",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "87652533",
+    "friendName" : "Daniel Meier",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "9482224",
+    "friendName" : "Elle Meyer",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "9482427",
+    "friendName" : "Fiona Kunz",
+    "gameFriendLinks" : [ ]
+  }, {
+    "friendId" : "9482442",
+    "friendName" : "George Best",
+    "gameFriendLinks" : [ ]
+  } ]
+}

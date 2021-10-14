@@ -1,0 +1,12 @@
+{
+  "friends": [{
+      "friendId" : "RoyJoy 3space",
+      "friendName" : "Roy Balakrishnan",
+      "gameFriendLinks" : [ ]
+    }, {
+      "friendId" : "",
+      "friendName" : "world",
+      "gameFriendLinks" : [ ]
+    }
+  ]
+}

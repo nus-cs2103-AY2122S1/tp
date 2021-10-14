@@ -4,22 +4,16 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditFriendDescriptor;
 import seedu.address.model.friend.FriendName;
-import seedu.address.testutil.EditFriendDescriptorBuilder;
 
 public class EditCommandParserTest {
-
-    private static final String GAME_EMPTY = " " + FLAG_GAME;
+    private static final String GAME_EMPTY = " " + FLAG_GAME_OLD;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -181,14 +175,14 @@ public class EditCommandParserTest {
     //        assertParseSuccess(parser, userInput, expectedCommand);
     //    }
 
-//    @Test
-//    public void parse_resetTags_success() {
-//        Index targetIndex = INDEX_THIRD_PERSON;
-//        String userInput = targetIndex.getOneBased() + GAME_EMPTY;
-//
-//        EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder().withGames().build();
-//        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-//
-//        assertParseSuccess(parser, userInput, expectedCommand);
-//    }
+    //    @Test
+    //    public void parse_resetTags_success() {
+    //        Index targetIndex = INDEX_THIRD_PERSON;
+    //        String userInput = targetIndex.getOneBased() + GAME_EMPTY;
+    //
+    //        EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder().withGames().build();
+    //        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+    //
+    //        assertParseSuccess(parser, userInput, expectedCommand);
+    //    }
 }

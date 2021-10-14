@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +14,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -28,7 +30,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_ID, FLAG_FRIEND_NAME, FLAG_GAME_SPACE);
+                ArgumentTokenizer.tokenize(args, FLAG_FRIEND_ID, FLAG_FRIEND_NAME, FLAG_GAME_OLD);
 
         Index index;
 
@@ -48,7 +50,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     .get()));
         }
 
-        parseGamesForEdit(argMultimap.getAllValues(FLAG_GAME_SPACE)).ifPresent(editFriendDescriptor::setGames);
+        parseGamesForEdit(argMultimap.getAllValues(FLAG_GAME_OLD)).ifPresent(editFriendDescriptor::setGames);
 
         if (!editFriendDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -69,6 +71,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             return Optional.empty();
         }
         Collection<String> gameSet = games.size() == 1 && games.contains("") ? Collections.emptySet() : games;
-        return Optional.of(ParserUtil.parseGames(gameSet));
+        return Optional.of(ParserUtil.parseGameFriendLinks(gameSet));
     }
 }

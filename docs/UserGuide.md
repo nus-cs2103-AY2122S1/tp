@@ -72,16 +72,16 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a friend: `friend`
+### Adding a friend: `friend --add`
 
 Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
-Format: `friend FRIEND_ID [--name NAME]`
+Format: `friend -add FRIEND_ID [--name NAME]`
 
 Examples:
-* `friend Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
+* `friend --add Draco` Adds a brand-new friend into the friends list with the identifier 'Draco' and
   which does not currently have an associated real-life name.
-* `friend tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
+* `friend --add tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
 ### Deleting a friend: `friend --delete`
@@ -96,14 +96,17 @@ Format: `friend --delete FRIEND_ID`
 Examples:
 * `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
 
-### Adding a game: `game`
+### Adding a game: `game --add`
 
-Adds a game into the gitGud game list.
+Adds a game with the given **unique** GAME_ID into the gitGud game list.
 
-Format: `game GAME_NAME`
+Format: `game --add GAME_ID`
+
+* If the GAME_ID provided already exists, an error will be displayed. 
+* The GAME_ID provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
 
 Examples:
-* `game Valorant` Adds a brand-new game into the game list with the name 'Valorant'.
+* `game --add Valorant` Adds a brand-new game into the game list with the unique GAME_ID 'Valorant'.
 
 ### Deleting a game: `game --delete`
 
@@ -212,9 +215,9 @@ Examples:
 Action | Format, Examples
 --------|------------------
 **Viewing Help** | `help`
-**Add friend** | `friend FRIEND_ID [--name "NAME"]` <br> e.g., `friend Draco --name "Marcus Tang"`
+**Add friend** | `friend --add FRIEND_ID [--name "NAME"]` <br> e.g., `friend --add Draco --name "Marcus Tang"`
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
-**Add game** | `game GAME_NAME` <br> e.g., `game Valorant`, `game "Apex Legends"` 
+**Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
 **Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`

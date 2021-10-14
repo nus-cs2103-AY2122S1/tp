@@ -14,7 +14,7 @@ import seedu.address.model.friend.Friend;
  */
 public class FriendCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "FriendListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -46,7 +46,7 @@ public class FriendCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         friendId.setText(friend.getFriendId().value);
         friendName.setText(friend.getName().fullName);
-        friend.getGames().stream()
+        friend.getGameFriendLinks().stream()
                 .sorted(Comparator.comparing(game -> game.getGameId().value))
                 .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
     }

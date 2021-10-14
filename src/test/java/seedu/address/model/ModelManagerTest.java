@@ -16,8 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.FriendBuilder;
+import seedu.address.testutil.FriendsListBuilder;
 
 public class ModelManagerTest {
 
@@ -38,14 +38,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setFriendsListFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setFriendsListFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -120,7 +120,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        FriendsList friendsList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        FriendsList friendsList = new FriendsListBuilder().withFriend(ALICE).withFriend(BENSON).build();
         FriendsList differentFriendsList = new FriendsList();
         GamesList gamesList = new GamesList();
         UserPrefs userPrefs = new UserPrefs();
@@ -152,7 +152,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setFriendsListFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, differentUserPrefs)));
     }
 }

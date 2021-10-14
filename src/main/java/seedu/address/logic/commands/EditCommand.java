@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_FRIENDS;
 
 import java.util.Collections;
@@ -18,7 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Edits the details of an existing friend in the address book.
@@ -32,12 +34,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + FLAG_FRIEND_ID + "FRIEND_ID] "
-            + "[" + PREFIX_FRIEND_NAME + "NAME] "
-            + "[" + FLAG_GAME_SPACE + "GAME]...\n"
+            + "[" + FLAG_FRIEND_NAME + "NAME] "
+            + "[" + FLAG_GAME_OLD + "GAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + FLAG_GAME_SPACE + "Apex Legends "
-            + FLAG_GAME_SPACE + "CSGO "
-            + PREFIX_FRIEND_NAME + "John Lim";
+            + FLAG_GAME_OLD + "Apex Legends "
+            + FLAG_GAME_OLD + "CSGO "
+            + FLAG_FRIEND_NAME + "John Lim";
 
     public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Edited Friend: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -48,7 +50,7 @@ public class EditCommand extends Command {
     private final EditFriendDescriptor editFriendDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editFriendDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditFriendDescriptor editFriendDescriptor) {
@@ -89,7 +91,7 @@ public class EditCommand extends Command {
 
         FriendId updatedFriendId = editFriendDescriptor.getFriendId().orElse(friendToEdit.getFriendId());
         FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getName());
-        Set<GameFriendLink> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGames());
+        Set<GameFriendLink> updatedGames = editFriendDescriptor.getGames().orElse(friendToEdit.getGameFriendLinks());
 
         return new Friend(updatedFriendId, updatedFriendName, updatedGames);
     }
@@ -121,7 +123,8 @@ public class EditCommand extends Command {
         private FriendId friendId;
         private Set<GameFriendLink> games;
 
-        public EditFriendDescriptor() {}
+        public EditFriendDescriptor() {
+        }
 
         /**
          * Copy constructor.

@@ -7,48 +7,46 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
-import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Represents a Friend in the gitGud friend's list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Friend {
-
     // Identity fields
     // used to uniquely identify each Friend.
-    private FriendId friendId;
-    private FriendName friendName;
+    private final FriendId friendId;
+    private final FriendName friendName;
 
     // Data fields
-    private final Set<GameFriendLink> games = new HashSet<>();
+    private final Set<GameFriendLink> gameFriendLinks = new HashSet<>();
 
     /**
      * Constructs a {@code Friend}.
      * Every field must be present and not null.
      *
-     * @param friendId a valid friend id.
-     * @param friendName a valid friend name.
-     * @param games a set of game-friend links of this friend.
+     * @param friendId        a valid friend id.
+     * @param friendName      a valid friend name.
+     * @param gameFriendLinks a set of game-friend links of this friend.
      */
-    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> games) {
-        requireAllNonNull(friendId, friendName, games);
+    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> gameFriendLinks) {
+        requireAllNonNull(friendId, gameFriendLinks);
         this.friendId = friendId;
-        this.friendName = friendName;
-        this.games.addAll(games);
+        this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
+        this.gameFriendLinks.addAll(gameFriendLinks);
     }
 
     /**
      * Overloaded constructor using only friendId and friendName.
      *
-     * @param friendId Unique id of friend.
+     * @param friendId   Unique id of friend.
      * @param friendName Name of friend.
      */
     public Friend(FriendId friendId, FriendName friendName) {
-        requireAllNonNull(friendId, friendName);
+        requireAllNonNull(friendId);
         this.friendId = friendId;
-        this.friendName = friendName;
+        this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
     }
 
     public FriendId getFriendId() {
@@ -63,8 +61,16 @@ public class Friend {
      * Returns an immutable game set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<GameFriendLink> getGames() {
-        return Collections.unmodifiableSet(games);
+    public Set<GameFriendLink> getGameFriendLinks() {
+        return Collections.unmodifiableSet(gameFriendLinks);
+    }
+
+    /**
+     * Returns true if both friends have same friendId.
+     * @return
+     */
+    public boolean isSameFriendId(Friend friendId) {
+        return this.friendId == friendId.getFriendId();
     }
 
     /**
@@ -82,7 +88,7 @@ public class Friend {
 
         Friend otherFriend = (Friend) other;
         return otherFriend.getFriendId().equals(getFriendId())
-                && otherFriend.getGames().equals(getGames())
+                && otherFriend.getGameFriendLinks().equals(getGameFriendLinks())
                 && otherFriend.getName().equals(getName());
     }
 
@@ -95,13 +101,12 @@ public class Friend {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Friend ID: ")
+        builder.append("Friend ID: ")
                 .append(getFriendId())
                 .append("; Name: ")
                 .append(getName());
 
-        Set<GameFriendLink> gameSet = getGames();
+        Set<GameFriendLink> gameSet = getGameFriendLinks();
         if (!gameSet.isEmpty()) {
             builder.append("; Games: ");
             gameSet.forEach(builder::append);

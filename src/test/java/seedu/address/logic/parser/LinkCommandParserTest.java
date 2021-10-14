@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.UserName;
 import seedu.address.model.game.GameId;
-
+import seedu.address.model.gamefriendlink.UserName;
 
 class LinkCommandParserTest {
     private LinkCommandParser parser = new LinkCommandParser();

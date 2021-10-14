@@ -14,33 +14,34 @@ import seedu.address.model.ReadOnlyFriendsList;
 public interface FriendsListStorage {
 
     /**
-     * Returns the file path of the data file.
+     * Returns the file path of the friends list file.
      */
-    Path getAddressBookFilePath();
+    Path getFriendsListFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyFriendsList}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns gitGud friends list as a {@link ReadOnlyFriendsList}.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
      * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * @throws IOException             if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyFriendsList> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyFriendsList> readFriendsList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getFriendsListFilePath()
      */
-    Optional<ReadOnlyFriendsList> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyFriendsList> readFriendsList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyFriendsList} to the storage.
-     * @param addressBook cannot be null.
+     *
+     * @param friendsList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyFriendsList addressBook) throws IOException;
+    void saveFriendsList(ReadOnlyFriendsList friendsList) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyFriendsList)
+     * @see #saveFriendsList(ReadOnlyFriendsList)
      */
-    void saveAddressBook(ReadOnlyFriendsList addressBook, Path filePath) throws IOException;
-
+    void saveFriendsList(ReadOnlyFriendsList friendsList, Path filePath) throws IOException;
 }

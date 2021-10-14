@@ -19,7 +19,7 @@ public class Game {
      *
      * @param gameId A valid game name.
      */
-    public Game (GameId gameId) {
+    public Game(GameId gameId) {
         requireNonNull(gameId);
         this.gameId = gameId;
     }

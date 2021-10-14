@@ -9,9 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
-import seedu.address.model.friend.gamefriendlink.UserName;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.UserName;
 
 /**
  * Links an existing friend to an existing game, associating them.

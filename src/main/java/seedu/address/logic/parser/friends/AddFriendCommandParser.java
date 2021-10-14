@@ -1,21 +1,20 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 
 import seedu.address.logic.commands.friends.AddFriendCommand;
-import seedu.address.logic.commands.friends.FriendCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 
-public class AddFriendCommandParser extends FriendCommandParser {
-    private FriendId friendId;
-    private FriendName friendName;
+public class AddFriendCommandParser implements Parser<AddFriendCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddFriendCommand
@@ -24,27 +23,17 @@ public class AddFriendCommandParser extends FriendCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public FriendCommand parse(String args) throws ParseException {
+    public AddFriendCommand parse(String args) throws ParseException {
+        // assign friend name
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, FLAG_ADD, FLAG_FRIEND_NAME);
 
-        if (args.contains(FLAG_FRIEND_NAME.toString())) {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, FLAG_FRIEND_NAME);
-            friendName = ParserUtil.parseFriendName(argMultimap.getValue(FLAG_FRIEND_NAME).get());
-        } else {
-            friendName = AddFriendCommand.DEFAULT_FRIEND_NAME;
+        if (!ParserUtil.areFlagsPresent(argumentMultimap, FLAG_ADD)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFriendCommand.MESSAGE_USAGE));
         }
-
-        friendId = getFriendId(args);
+        FriendName friendName = argumentMultimap.getValue(FLAG_FRIEND_NAME).isPresent()
+                ? ParserUtil.parseFriendName(argumentMultimap.getValue(FLAG_FRIEND_NAME).get())
+                : null;
+        FriendId friendId = ParserUtil.parseFriendId(argumentMultimap.getValue(FLAG_ADD).get());
         return new AddFriendCommand(new Friend(friendId, friendName));
     }
-
-    private FriendId getFriendId(String args) throws ParseException {
-        String[] splitCommand = args.split(" ");
-        try {
-            String friendId = splitCommand[1];
-            return ParserUtil.parseFriendId(friendId);
-        } catch (IndexOutOfBoundsException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FriendCommand.MESSAGE_USAGE));
-        }
-    }
-
 }

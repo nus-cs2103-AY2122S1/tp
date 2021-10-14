@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
@@ -45,7 +44,7 @@ public class FriendsListTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_ID_CSGO)
+        Friend editedAlice = new FriendBuilder(ALICE).withGameFriendLinks()
                 .build();
         List<Friend> newFriends = Arrays.asList(ALICE, editedAlice);
         FriendsListStub newData = new FriendsListStub(newFriends);
@@ -72,7 +71,7 @@ public class FriendsListTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         friendsList.addFriend(ALICE);
-        Friend editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_ID_CSGO)
+        Friend editedAlice = new FriendBuilder(ALICE).withGameFriendLinks()
                 .build();
         assertTrue(friendsList.hasFriend(editedAlice));
     }
