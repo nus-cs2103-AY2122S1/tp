@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,15 +27,27 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE);
-//        List<String> names = argMultimap.getAllValues(PREFIX_NAME);
+        List<String> names = argMultimap.getAllValues(PREFIX_NAME);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
 
-//        if (!names.isEmpty()) {
-//            Set<Name> nameSet;
-//            try {
-//                nameSet = ParserUtil.parseName()
-//            }
-//        }
+        if (!names.isEmpty()) {
+            Set<Name> nameSet;
+            try {
+                nameSet = ParserUtil.parseNames(names);
+            } catch (ParseException e) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage())
+                );
+            }
+
+            List<String> stringListOfNames = nameSet.stream()
+                    .map(Name::toString)
+                    .collect(Collectors.toList());
+
+            return new FindCommand(
+                    new NameContainsKeywordsPredicate(stringListOfNames)
+            );
+        }
 
         if (!moduleCodes.isEmpty()) {
             Set<ModuleCode> moduleCodeSet;
@@ -49,7 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
 
             List<String> stringListOfModuleCodes = moduleCodeSet.stream()
-                    .map(moduleCode -> moduleCode.toString())
+                    .map(ModuleCode::toString)
                     .collect(Collectors.toList());
 
             return new FindCommand(
@@ -57,15 +68,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             );
         }
 
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
+        );
     }
-
 }
