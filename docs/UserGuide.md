@@ -94,15 +94,21 @@ Examples:
 
 - `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to ProgrammerError.
 
-### <a name="view-student"></a>5. View Student Details: `view`
+### <a name="view-student"></a>5. View Students: `view`
 
-Views all the related information of a student stored on ProgrammerError with his/her student ID.
+Views students in ProgrammerError whose details correspond to the specified arguments provided. Of the three arguments, 
+at least one has to be provided. Arguments can be provided in any order. ProgrammerError will display 
+the list of students whose details matches all the specified arguments.
 
-Format: `view -sid <STUDENT_ID>`
+Format: `view -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 
 Examples:
 
-- `view -sid A1234567X` Views all related information of the student with student ID A1234567X in ProgrammerError.
+- `view -sid A1234567X` Views all students whose student ID contains `A1234567X`.
+- `view -n abc` Views all students whose name contains `abc`.
+- `view -cid B01` Views all students whose class ID contains the character sequence `B01`.
+- `view -n Sherwin -cid B01` Views all students whose name contains the character sequence `Sherwin` and 
+belongs to a class with the class ID containing the character sequence `B01`. 
 
 ### <a name="update-student"></a>6. Update Student's Grade : `update`
 
@@ -147,7 +153,7 @@ Command | Format & Examples
 **Fill** | `fill`
 **Help** | `help`
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-**View** | `view -sid <STUDENT_ID>`
+**View** | `view -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **Update** | `update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Delete** | `delete -sid <STUDENT_ID>`
 **Exit** | `exit`
