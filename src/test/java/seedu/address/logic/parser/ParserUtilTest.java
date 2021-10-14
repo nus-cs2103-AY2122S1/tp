@@ -24,7 +24,7 @@ import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
-import seedu.address.model.person.comparators.SortDirection;
+import seedu.address.model.person.SortDirection;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -182,14 +182,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_validValueWithoutWhitespace_returnsDirection() throws Exception {
-        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        SortDirection expectedSortDirection = SortDirection.of(VALID_DIRECTION);
         assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(VALID_DIRECTION));
     }
 
     @Test
     public void parseDirection_validValueWithWhitespace_returnsTrimmedDirection() throws Exception {
         String directionWithWhitespace = WHITESPACE + VALID_DIRECTION + WHITESPACE;
-        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        SortDirection expectedSortDirection = SortDirection.of(VALID_DIRECTION);
         assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(directionWithWhitespace));
     }
 

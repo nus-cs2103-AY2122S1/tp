@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -15,4 +19,23 @@ public class CliSyntax {
     public static final Prefix PREFIX_LASTMET = new Prefix("l/");
     public static final Prefix PREFIX_CURRENTPLAN = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
+    /* Array of all Prefix */
+    public static final Prefix[] ALL_PREFIXES = {
+        PREFIX_CLIENTID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
+        PREFIX_DISPOSABLEINCOME, PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG
+    };
+
+
+    /**
+     * Returns an array of all prefix less {@code prefixes}.
+     *
+     * @param prefixes prefix to be excluded
+     */
+    public static Prefix[] allPrefixLess(Prefix... prefixes) {
+        List<Prefix> excludePrefix = List.of(prefixes);
+        List<Prefix> resultPrefix = new ArrayList<>(Arrays.asList(ALL_PREFIXES));
+        resultPrefix.removeAll(excludePrefix);
+        return resultPrefix.toArray(new Prefix[] {});
+    }
 }

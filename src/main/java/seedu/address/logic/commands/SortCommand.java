@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.SortByAttribute;
 
 /**
  * Sorts all persons in address book whose according to the specified attribute in either ascending or descending
@@ -21,31 +19,28 @@ public class SortCommand extends Command {
             + "Parameters: <attribute>/{ASC/DESC}\n"
             + "Example: " + COMMAND_WORD + " ra/ asc";
 
-    private final Comparator<Person> sorter;
+    public static final String MESSAGE_INVALID_PREFIX = "Sorting based on %s is not supported";
 
-    private final String field;
+    private final SortByAttribute sorter;
 
     /**
      * @param sorter to sort the persons list with.
-     * @param field which is the field that the list is sorted by.
      */
-    public SortCommand(Comparator<Person> sorter, String field) {
+    public SortCommand(SortByAttribute sorter) {
         this.sorter = sorter;
-        this.field = field;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortFilteredPersonList(sorter);
-        return new CommandResult(String.format(Messages.MESSAGE_SORT_SUCCESS, field));
+        return new CommandResult(String.format(Messages.MESSAGE_SORT_SUCCESS, sorter.getPrefixName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SortCommand // instanceof handles nulls
-                && sorter.equals(((SortCommand) other).sorter)
-                && field.equals(((SortCommand) other).field)); // state check
+                && sorter.equals(((SortCommand) other).sorter));
     }
 }

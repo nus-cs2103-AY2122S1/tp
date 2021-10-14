@@ -18,7 +18,7 @@ import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
-import seedu.address.model.person.comparators.SortDirection;
+import seedu.address.model.person.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -184,11 +184,11 @@ public class ParserUtil {
      */
     public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
         requireNonNull(sortDirection);
-        String trimmedSortDirection = sortDirection.trim();
+        String trimmedSortDirection = sortDirection.trim().toLowerCase();
         if (!SortDirection.isValidDirection(trimmedSortDirection)) {
             throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
         }
-        return new SortDirection(trimmedSortDirection);
+        return SortDirection.of(trimmedSortDirection);
     }
 
     /**
