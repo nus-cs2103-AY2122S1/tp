@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant’s Buddy (TAB) is a **desktop app for managing tutees, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB can get your tutee management 
+Teaching Assistant’s Buddy (TAB) is a **desktop app for managing tutees, optimized for use via a Command Line Interface** (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, TAB can get your tutee management
 tasks done faster than traditional GUI apps.
 
 * Table of Contents
@@ -60,9 +60,9 @@ Create a new task for a specific module
 Format: `add task m/<module name>, a/<task name>, d/<task deadline>`
 
 Examples:
-* `add task m/CS2103 a/assignment1 d/2021.10.12`: 
+* `add task m/CS2103 a/assignment1 d/2021.10.12`:
   * Adds the task assignment1 with deadline on 12 October 2021 to module CS2103
-* `add task m/CS2100 a/lab1 d/2021.10.13 `: 
+* `add task m/CS2100 a/lab1 d/2021.10.13 `:
   * Adds the task lab1 with deadline on 13 October 2021 to module CS2100
 
 ### Creating a new module: `add module`
@@ -93,7 +93,7 @@ Also automatically copies over the task list from the module to the student
 Format: `add student m/<module name> i/<student id> n/<student name> t/<student tele handle> e/<student email>`
 
 Examples:
-* `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`: Adds student with id 
+* `add student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`: Adds student with id
    A0123456A to module CS2103
 * `add student m/CS2100 i/A0123457A n/Amy t/@amylee e/amy@u.nus.edu`: Adds student with id A0123457A to module CS2100
 

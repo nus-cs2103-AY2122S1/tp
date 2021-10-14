@@ -258,7 +258,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * is a tutor overseeing students for an academic module or subject
-* has a need to manage a moderate to large number of students 
+* has a need to manage a moderate to large number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -317,9 +317,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Student's ID is not found.
     * 1a1. System shows an error message.
-  
+
       Use case ends.
-    
+
 **Use case: Delete a student from a module**
 
 **MSS**
@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. System shows an error message.
 
       Use case ends.
-    
+
 **Use case: Mark task as done**
 
 **MSS**
