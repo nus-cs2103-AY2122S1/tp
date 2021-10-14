@@ -10,7 +10,7 @@ import seedu.siasa.commons.core.LogsCenter;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
-import seedu.siasa.logic.parser.AddressBookParser;
+import seedu.siasa.logic.parser.SiasaParser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ReadOnlySiasa;
@@ -27,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final SiasaParser siasaParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        siasaParser = new SiasaParser();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = siasaParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
