@@ -29,8 +29,16 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE);
+        boolean isNamePrefixPresent = argMultimap.getValue(PREFIX_NAME).isPresent();
+        boolean isModulePrefixPresent = argMultimap.getValue(PREFIX_MODULE_CODE).isPresent();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        if (isNamePrefixPresent && isModulePrefixPresent) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
+            );
+        }
+
+        if (isNamePrefixPresent) {
             Optional<String> searchInput = argMultimap.getValue(PREFIX_NAME);
             String names = searchInput.get().trim();
             if (names.isEmpty()) {
@@ -42,7 +50,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
         }
 
-        if (argMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+        if (isModulePrefixPresent) {
             Optional<String> searchInput = argMultimap.getValue(PREFIX_MODULE_CODE);
             String moduleCodes = searchInput.get().trim();
             if (moduleCodes.isEmpty()) {

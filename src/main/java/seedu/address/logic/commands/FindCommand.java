@@ -29,6 +29,7 @@ public class FindCommand extends Command {
             + "Example: find " + PREFIX_NAME + "alice bob charlie"
             + "OR\n"
             + "Example: find " + PREFIX_MODULE_CODE + "CS2030S " + PREFIX_MODULE_CODE + "CS2100";
+    public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
     private final Predicate<Person> predicate;
 
