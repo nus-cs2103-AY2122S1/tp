@@ -26,11 +26,12 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="teleHandle" styleClass="cell_small_label" text="\$teleHandle" />
+                <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />
+                <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             </HBox>
             <!--      <FlowPane fx:id="tags" />-->
-            <!--      <Label fx:id="teleHandle" styleClass="cell_small_label" text="\$teleHandle" />-->
-            <!--      <Label fx:id="studentId" styleClass="cell_small_label" text="\$studentId" />-->
-            <!--      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />-->
+
         </VBox>
     </GridPane>
 </HBox>
