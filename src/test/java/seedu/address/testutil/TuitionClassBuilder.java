@@ -1,10 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
