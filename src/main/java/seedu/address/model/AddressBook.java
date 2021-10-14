@@ -74,7 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if {@code lesson} with an existing lesson in the address book.
+     * Returns true if {@code lesson} clashes with an existing lesson in the address book.
      */
     public boolean hasClashingLesson(Lesson lesson) {
         requireNonNull(lesson);
