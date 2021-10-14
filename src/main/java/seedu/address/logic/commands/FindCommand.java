@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.function.Predicate;
 
@@ -21,11 +22,13 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive)\n"
             + "Alternatively, finds all persons whose module codes contains all of the specified\n"
             + "module code(s) (case-insensitive).\n"
-            + "Displays the results as a list with index numbers."
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + PREFIX_MODULE_CODE + "CS2030S "
-            + PREFIX_MODULE_CODE + "CS2040 "
-            + "Example: find alice bob charlie";
+            + "Displays the results as a list with index numbers.\n"
+            + "Parameters: " + PREFIX_NAME + " [name]...\n"
+            + "OR\n"
+            + PREFIX_MODULE_CODE + "\n "
+            + "Example: find " + PREFIX_NAME + "alice bob charlie"
+            + "OR\n"
+            + "Example: find " + PREFIX_MODULE_CODE + "CS2030S " + PREFIX_MODULE_CODE + "CS2100";
 
     private final Predicate<Person> predicate;
 
