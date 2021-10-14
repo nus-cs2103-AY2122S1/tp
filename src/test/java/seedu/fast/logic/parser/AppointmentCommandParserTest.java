@@ -203,15 +203,4 @@ public class AppointmentCommandParserTest {
                 AppointmentCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
-
-    @Test
-    public void parse_appointmentDelete_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_DELETE_APPOINTMENT
-                + AppointmentCommand.APPOINTMENT_DELETE_COMMAND;
-        AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(noAppointment, noAppointmentTime, noAppointmentVenue));
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
 }
