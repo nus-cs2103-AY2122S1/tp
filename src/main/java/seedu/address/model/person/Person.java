@@ -35,8 +35,7 @@ public class Person {
     private final Set<Lesson> lessons = new TreeSet<>();
 
     /**
-     * Constructs a person using a set of {@code Lessons}. Every field must be present and not null.
-     * The contents of the lessons will be copied and the owner will change to this person.
+     * Every field must be present and not null.
      *
      * @param name The name of this person.
      * @param phone The phone number of this person.

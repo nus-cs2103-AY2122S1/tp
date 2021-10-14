@@ -95,6 +95,9 @@ public class CalendarEntryList {
     /**
      * Adds a lesson to the list.
      * The lesson must not clash with any in the list.
+     *
+     * @param editedPerson the person we added the lesson to.
+     * @param toAdd The lesson to add
      */
     public void addLesson(Person editedPerson, Lesson toAdd) {
         requireAllNonNull(editedPerson, toAdd);
@@ -108,6 +111,8 @@ public class CalendarEntryList {
     /**
      * Removes the equivalent Lesson from the Calendar.
      * The lesson must exist in the calendar.
+     *
+     * @param toRemove The lesson to remove.
      */
     public void removeLesson(Lesson toRemove) {
         requireNonNull(toRemove);
@@ -143,6 +148,12 @@ public class CalendarEntryList {
         calendar.stopBatchUpdates();
     }
 
+    /**
+     * Sets the {@code target} person's lessons to the {@code editedPerson} lessons.
+     *
+     * @param target The person whose lessons we want to remove.
+     * @param editedPerson THe person whose lessons we want to add.
+     */
     public void setLessons(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         removeLessons(target);
@@ -152,6 +163,8 @@ public class CalendarEntryList {
     /**
      * Replaces the entries of the calendar with {@code persons}.
      * {@code persons} must not contain clashing lessons.
+     *
+     * @param persons The list of persons we will use to build the {@code CalendarEntryList}.
      */
     public void resetLessons(List<Person> persons) {
         requireAllNonNull(persons);
