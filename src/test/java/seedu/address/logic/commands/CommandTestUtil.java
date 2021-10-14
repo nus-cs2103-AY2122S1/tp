@@ -3,9 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -17,6 +19,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.Description;
+import seedu.address.model.claim.Status;
+import seedu.address.model.claim.Title;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -32,10 +38,23 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_REVENUE_AMY = "0";
+    public static final String VALID_REVENUE_BOB = "0";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_INSURANCE_LIFE = "Life";
+    public static final String VALID_INSURANCE_HEALTH = "Health";
+    public static final String VALID_NOTE_AMY = "Has diabetes";
+    public static final String VALID_NOTE_BOB = "Has chronic back pain";
+
+    public static final String VALID_CLAIM_TITLE_AMY = "Heart Surgery";
+    public static final String VALID_CLAIM_TITLE_BOB = "Knee Surgery";
+    public static final String VALID_CLAIM_DESCRIPTION_AMY = "Done at TTSH";
+    public static final String VALID_CLAIM_DESCRIPTION_BOB = "Caused by a fall";
+    public static final String VALID_CLAIM_STATUS_AMY = "Pending";
+    public static final String VALID_CLAIM_STATUS_BOB = "Completed";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -47,6 +66,18 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String CLAIM_TITLE_DESC_AMY = " " + PREFIX_NAME + VALID_CLAIM_TITLE_AMY;
+    public static final String CLAIM_DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_CLAIM_DESCRIPTION_AMY;
+    public static final String CLAIM_STATUS_DESC_AMY = " " + PREFIX_STATUS + VALID_CLAIM_STATUS_AMY;
+
+    public static final Claim CLAIM_AMY = new Claim(new Title(VALID_CLAIM_TITLE_AMY),
+            new Description(VALID_CLAIM_DESCRIPTION_AMY),
+            new Status(VALID_CLAIM_STATUS_AMY));
+
+    public static final Claim CLAIM_BOB = new Claim(new Title(VALID_CLAIM_TITLE_BOB),
+            new Description(VALID_CLAIM_DESCRIPTION_BOB),
+            new Status(VALID_CLAIM_STATUS_BOB));
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -63,10 +94,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND).withNote(VALID_NOTE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withNote(VALID_NOTE_BOB).build();
     }
 
     /**

@@ -12,11 +12,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.claim.Claim;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Revenue;
 import seedu.address.model.tag.Tag;
 
 public class ScheduleCommand extends Command {
@@ -73,11 +77,15 @@ public class ScheduleCommand extends Command {
         Name originalName = personToMeet.getName();
         Phone originalPhone = personToMeet.getPhone();
         Email originalEmail = personToMeet.getEmail();
+        Revenue originalRevenue = personToMeet.getRevenue();
         Address originalAddress = personToMeet.getAddress();
         Set<Tag> originalTags = personToMeet.getTags();
-
-        return new Person(originalName, originalPhone, originalEmail,
-                originalAddress, originalTags, desiredAppointment);
+        Set<Insurance> originalInsurances = personToMeet.getInsurances();
+        Note originalNote = personToMeet.getNote();
+        Set<Claim> originalClaims = personToMeet.getClaims();
+        return new Person(originalName, originalPhone, originalEmail, originalRevenue,
+                originalAddress, originalTags, originalInsurances, originalNote, desiredAppointment,
+                originalClaims);
     }
 
     @Override
