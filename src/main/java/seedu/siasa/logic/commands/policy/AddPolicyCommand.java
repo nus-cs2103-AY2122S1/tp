@@ -23,6 +23,7 @@ import seedu.siasa.model.policy.Policy;
 import seedu.siasa.model.policy.Price;
 import seedu.siasa.model.policy.Title;
 
+
 /**
  * Adds a person to the address book.
  */
@@ -51,38 +52,40 @@ public class AddPolicyCommand extends Command {
     private final Price price;
     private final ExpiryDate expiryDate;
     private final Commission commission;
-    private final Index ownerIndex;
+    private final Index index;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index ownerIndex) {
-        requireAllNonNull(title, price, expiryDate, commission, ownerIndex);
+    public AddPolicyCommand(Title title, Price price, ExpiryDate expiryDate, Commission commission, Index index) {
+        requireAllNonNull(title, price, expiryDate, commission, index);
         this.title = title;
         this.price = price;
         this.expiryDate = expiryDate;
         this.commission = commission;
-        this.ownerIndex = ownerIndex;
+        this.index = index;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (ownerIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person owner = lastShownList.get(ownerIndex.getZeroBased());
-        Policy policyToAdd = new Policy(title, price, expiryDate, commission, owner);
+        Person owner = lastShownList.get(index.getZeroBased());
 
-        if (model.hasPolicy(policyToAdd)) {
+        Policy toAdd = new Policy(title, price, expiryDate, commission, owner);
+
+        if (model.hasPolicy(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
         }
 
-        model.addPolicy(policyToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, policyToAdd));
+        model.addPolicy(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
@@ -92,7 +95,6 @@ public class AddPolicyCommand extends Command {
                 && title.equals(((AddPolicyCommand) other).title)
                 && price.equals(((AddPolicyCommand) other).price)
                 && expiryDate.equals(((AddPolicyCommand) other).expiryDate)
-                && commission.equals(((AddPolicyCommand) other).commission)
-                && ownerIndex.equals(((AddPolicyCommand) other).ownerIndex));
+                && commission.equals(((AddPolicyCommand) other).commission));
     }
 }
