@@ -3,9 +3,9 @@ layout: page
 title: Wang Mengzhe's Project Portfolio Page
 ---
 
-### Project: TAB3
+### Project: TAB
 
-TAB3 is a desktop address book application that can help Teaching Assistants (TAs) manage their students'
+TAB is a desktop address book application that can help Teaching Assistants (TAs) manage their students'
 progress.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX.
 It is written in Java, and has about 10 kLoC.

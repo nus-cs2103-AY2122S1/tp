@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of modules.
  */
 public class ModuleListPanel extends UiPart<Region> {
     private static final String FXML = "ModuleListPanel.fxml";
@@ -30,7 +30,7 @@ public class ModuleListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code ModuleCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
      */
     class ModuleListViewCell extends ListCell<Module> {
         @Override
@@ -41,7 +41,9 @@ public class ModuleListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ModuleCard(module, getIndex() + 1).getRoot());
+                ModuleCard moduleCard = new ModuleCard(module, getIndex() + 1);
+                setGraphic(moduleCard.getRoot());
+                moduleCard.fillInnerParts();
             }
         }
     }

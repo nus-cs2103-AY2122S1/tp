@@ -93,6 +93,16 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.setAll(tasks);
     }
 
+    /**
+     * Returns the backing list as an modifiable {@code ObservableList}.
+     */
+    public ObservableList<Task> asModifiableObservableList() {
+        return internalList;
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
