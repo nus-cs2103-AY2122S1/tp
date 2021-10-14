@@ -20,7 +20,6 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
@@ -61,11 +60,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            Lesson lesson = new RecurringLesson(date, timeRange, subject, homework);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework);
             return new LessonAddCommand(index, lesson);
         }
 
-        Lesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
         return new LessonAddCommand(index, lesson);
     }
 

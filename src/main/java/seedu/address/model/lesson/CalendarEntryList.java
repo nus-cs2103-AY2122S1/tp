@@ -8,8 +8,8 @@ import java.util.List;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
+import com.calendarfx.model.Interval;
 
-import seedu.address.commons.util.CalendarUtil;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
@@ -101,7 +101,7 @@ public class CalendarEntryList {
         if (hasClashes(toAdd)) {
             throw new ClashingLessonException();
         }
-        Entry<Lesson> entryToAdd = CalendarUtil.convertToEntry(editedPerson, toAdd);
+        Entry<Lesson> entryToAdd = convertToEntry(editedPerson, toAdd);
         add(entryToAdd);
     }
 
@@ -159,5 +159,29 @@ public class CalendarEntryList {
         for (Person person : persons) {
             addLessons(person);
         }
+    }
+
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
+     *
+     * @param lesson The lesson to be converted to a calendar entry.
+     * @return The calendar entry that also contains this lesson.
+     */
+    public Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
+        requireNonNull(lesson);
+
+        Entry<Lesson> entry = new Entry<>();
+        entry.setUserObject(lesson);
+        Interval entryInterval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
+        entry.setInterval(entryInterval);
+        StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
+        entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
+        if (lesson.isRecurring()) {
+            entry.setRecurrenceRule("RRULE:FREQ=WEEKLY");
+            entryTitle.append("(Recurring)");
+        }
+        entry.setTitle(entryTitle.toString());
+        return entry;
     }
 }
