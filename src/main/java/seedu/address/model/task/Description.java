@@ -5,9 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Task's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
-public class Name {
+public class Description {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -21,20 +21,20 @@ public class Name {
     public final String name;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code Description}.
      *
      * @param name A valid name.
      */
-    public Name(String name) {
+    public Description(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDescription(name), MESSAGE_CONSTRAINTS);
         this.name = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -47,8 +47,8 @@ public class Name {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
-                && name.equals(((Name) other).name)); // state check
+                || (other instanceof Description // instanceof handles nulls
+                && name.equals(((Description) other).name)); // state check
     }
 
     @Override

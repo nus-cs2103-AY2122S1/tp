@@ -48,7 +48,7 @@ public class Lesson {
      * @return true if lessons do overlap, false otherwise
      */
     public boolean doLessonsOverlap(Lesson other) {
-        if (!dayOfWeek.equals(other.dayOfWeek)) {
+        if (other == null || !dayOfWeek.equals(other.dayOfWeek)) {
             return false;
         }
 

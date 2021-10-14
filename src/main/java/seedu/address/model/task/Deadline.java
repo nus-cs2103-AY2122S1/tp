@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Deadlines should be in the format YYYY-MM-DD, such as 2007-12-03";
+            "Deadlines should be in the format YYYY-MM-DD with valid year, month, and day, such as 2007-12-03";
     public final LocalDate deadline;
 
     /**

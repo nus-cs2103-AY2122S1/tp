@@ -21,6 +21,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -101,9 +102,11 @@ public class EditPersonCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds(); // not allowed to be edited here
         NoOverlapLessonList lessonList = editPersonDescriptor.getLessonsList().orElse(personToEdit.getLessonsList());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, lessonList);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList);
     }
 
     @Override
