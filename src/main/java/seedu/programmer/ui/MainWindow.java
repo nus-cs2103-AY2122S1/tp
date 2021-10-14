@@ -187,10 +187,14 @@ public class MainWindow extends UiPart<Stage> {
         try {
             JSONArray jsonData = getJsonData();
             File destinationFile = promptUserForDestination();
-            writeJsonToCsv(jsonData, destinationFile);
-            Popup popup = createPopup("Your student's data has been downloaded to " + destinationFile + "!");
-            showPopupMessage(popup);
-            logger.info("Data successfully downloaded as CSV.");
+            if (destinationFile != null) {
+                boolean writeSuccessful = writeJsonToCsv(jsonData, destinationFile);
+                String message = writeSuccessful ? "Your data has been downloaded to " + destinationFile + "!"
+                                                 : "No data to download!";
+                Popup popup = createPopup(message);
+                showPopupMessage(popup);
+                logger.info("Data successfully downloaded as CSV.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -202,9 +206,11 @@ public class MainWindow extends UiPart<Stage> {
      * @param popup Popup object to be displayed on the primaryStage
      */
     private void showPopupMessage(Popup popup) {
-        // Display popup at position scaled according to primaryStage's coordinates
-        popup.setX(1.5 * primaryStage.getX());
-        popup.setY(3 * primaryStage.getY());
+        // Add some left padding
+        popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
+
+        // Set Y coordinate scaled according to primaryStage's Y coordinate
+        popup.setY(1.8 * primaryStage.getY());
         popup.show(primaryStage);
     }
 
@@ -238,10 +244,15 @@ public class MainWindow extends UiPart<Stage> {
      * @throws IOException if error reading to or from file
      * @throws JSONException if JSON is invalid
      */
-    private void writeJsonToCsv(JSONArray jsonData, File destinationFile) throws JSONException, IOException {
+    private boolean writeJsonToCsv(JSONArray jsonData, File destinationFile) throws JSONException, IOException {
         String csv = CDL.toString(jsonData);
+        if (csv == null) {
+            return false;
+        }
+
         FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
         logger.info("The following data was written:\n" + csv);
+        return true;
     }
 
     /**
@@ -252,7 +263,11 @@ public class MainWindow extends UiPart<Stage> {
     private File promptUserForDestination() {
         String destFileName = "programmerError.csv";
         DirectoryChooser dirChooser = new DirectoryChooser();
-        return new File(dirChooser.showDialog(primaryStage), destFileName);
+        File chosenDir = dirChooser.showDialog(primaryStage);
+        if (chosenDir != null) {
+            return new File(chosenDir, destFileName);
+        }
+        return null;
     }
 
     /**
