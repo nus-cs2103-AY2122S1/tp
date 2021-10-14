@@ -1,7 +1,7 @@
-package seedu.address.model.lesson;
+package tutoraid.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static tutoraid.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Lesson's price in TutorAid.

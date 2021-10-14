@@ -1,15 +1,15 @@
-package seedu.address.model.lesson;
+package tutoraid.model.lesson;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.lesson.exceptions.DuplicateLessonException;
-import seedu.address.model.lesson.exceptions.LessonNotFoundException;
+import tutoraid.model.lesson.exceptions.DuplicateLessonException;
+import tutoraid.model.lesson.exceptions.LessonNotFoundException;
 
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
@@ -78,7 +78,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(seedu.address.model.lesson.UniqueLessonList replacement) {
+    public void setLessons(tutoraid.model.lesson.UniqueLessonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -111,8 +111,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.lesson.UniqueLessonList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.lesson.UniqueLessonList) other).internalList));
+                || (other instanceof tutoraid.model.lesson.UniqueLessonList // instanceof handles nulls
+                && internalList.equals(((tutoraid.model.lesson.UniqueLessonList) other).internalList));
     }
 
     @Override

@@ -1,8 +1,8 @@
-package seedu.address.model.lesson;
+package tutoraid.model.lesson;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Lesson in the TutorAid.
