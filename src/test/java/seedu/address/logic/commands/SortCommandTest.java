@@ -12,8 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
-import static seedu.address.model.person.comparators.SortDirection.SORT_ASCENDING;
-import static seedu.address.model.person.comparators.SortDirection.SORT_DESCENDING;
+import static seedu.address.model.person.SortDirection.SORT_ASCENDING;
+import static seedu.address.model.person.SortDirection.SORT_DESCENDING;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -31,7 +31,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.comparators.SortByAttribute;
+import seedu.address.model.person.SortByAttribute;
 
 public class SortCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

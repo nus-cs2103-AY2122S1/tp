@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.comparators.SortByAttribute;
-import seedu.address.model.person.comparators.SortDirection;
+import seedu.address.model.person.SortByAttribute;
+import seedu.address.model.person.SortDirection;
 
 public class SortCommandParser implements Parser<SortCommand> {
     /**

@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.comparators.SortByAttribute;
+import seedu.address.model.person.SortByAttribute;
 
 /**
  * Sorts all persons in address book whose according to the specified attribute in either ascending or descending

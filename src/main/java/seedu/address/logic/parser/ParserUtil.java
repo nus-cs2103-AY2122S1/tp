@@ -18,7 +18,7 @@ import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
-import seedu.address.model.person.comparators.SortDirection;
+import seedu.address.model.person.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -1,15 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,8 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         // appends " " in front as Filter Command can accept arguments without a preamble
         String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(preparedArgs, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
-                        PREFIX_DISPOSABLEINCOME, PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG);
+                .tokenize(preparedArgs, ALL_PREFIXES);
         return new FilterCommand(new PersonContainsKeywordsPredicate(argMultimap));
     }
 }
