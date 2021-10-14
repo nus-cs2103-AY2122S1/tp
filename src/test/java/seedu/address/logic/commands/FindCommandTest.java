@@ -24,15 +24,16 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
+    public static final String NAMETYPE = "n/";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
         NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"), NAMETYPE);
         NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+                new NameContainsKeywordsPredicate(Collections.singletonList("second"), NAMETYPE);
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -78,6 +79,6 @@ public class FindCommandTest {
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")), NAMETYPE);
     }
 }
