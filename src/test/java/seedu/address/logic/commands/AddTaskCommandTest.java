@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_LIST_1;
@@ -37,6 +38,11 @@ public class AddTaskCommandTest {
         List<Task> taskList = new ArrayList<>();
         taskList.add(new Task("Task1"));
         assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, taskList));
+    }
+
+    @Test
+    public void constructor_correctArgs_success() {
+        assertAll(() -> new AddTaskCommand(INDEX_FIRST_PERSON, VALID_TASK_LIST_1));
     }
 
     @Test
