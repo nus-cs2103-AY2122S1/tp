@@ -150,7 +150,7 @@ with `eorder`.
 
 ![mange orders workflow](images/manageOrdersWorkflow.png)
 
-### Start ordering: `sorder` [Coming soon]
+### Start ordering: `sorder`
 
 Starts a new list of orders.
 
@@ -163,11 +163,13 @@ sorder
 >> Please enter item name and quantity.
 ```
 
-### Input an item into order: `iorder` [Coming soon]
+### Input an item into order: `iorder`
 
 Add an item into the current list of orders.
 
 Format:
+`iorder n/{name} c/{count}`
+
 `iorder [-n {name} | -s {serial number}] -c {count}`
 
 Flag    |  Argument      | Description
@@ -183,11 +185,13 @@ iorder -n milk -c 5  // Input order of item named milk
 iorder -s 12345 -c 5  // Input order of item with serial no.12345
 ```
 
-### Cancel an item from order: `corder` [Coming soon]
+### Cancel an item from order: `corder`
 
 Cancels the specified order from the current list of orders.
 
 Format:
+`corder n/{name}`
+
 `corder [-n {name} | -s {serial number}]`
 
 Flag    |  Argument      | Description
@@ -202,7 +206,7 @@ corder -n milk  // Cancel order of item named milk
 corder -s 12345  // Cancel order of item with serial no. 12345
 ```
 
-### End ordering: `eorder` [Coming soon]
+### End ordering: `eorder`
 
 Saves the current list of orders
 
@@ -232,8 +236,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+
 **
-Add** | `add {name} -sp {sales price} -s {serial number} -c {count} -cp {cost price}` <br> e.g., `add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2`
+Add** | `add {name} -sp {sales price} -s {serial number} -c {count} -cp {cost price}` <br>
+e.g., `add apple -sp 8.5 -s A012345 -c 1000 -cp 5.2`
 **Delete** | `delete [-n {name} \| -s {serial number}] -c {count}` <br> e.g., `delete -n milk -c 10`
 **Count** | `count [-n {name} \| -s {serial number}]` <br> e.g., `count milk`
 **Start ordering** | `sorder`
