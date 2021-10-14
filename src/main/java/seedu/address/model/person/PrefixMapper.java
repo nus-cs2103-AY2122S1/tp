@@ -12,10 +12,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.Prefix;
 
 /**
@@ -32,9 +30,6 @@ public class PrefixMapper {
     public static final Function<Person, ?> GET_LASTMET = Person::getLastMet;
     public static final Function<Person, ?> GET_CURRENTPLAN = Person::getCurrentPlan;
     public static final Function<Person, ?> GET_TAGS = Person::getTags;
-
-    public static final Function<EditCommand.EditPersonDescriptor, ?> SET_CLIENTID
-            = EditCommand.EditPersonDescriptor::setName;
 
     public static final Map<Prefix, Function<Person, ?>> PREFIX_FUNCTION_MAP = Map.of(
             PREFIX_CLIENTID, GET_CLIENTID,
