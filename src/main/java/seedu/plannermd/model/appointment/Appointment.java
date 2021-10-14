@@ -16,21 +16,21 @@ public class Appointment {
 
     private final Patient patient;
     private final Doctor doctor;
-    private final AppointmentDateTime startDateTime;
-    private final AppointmentDateTime endDateTime;
+    private final AppointmentDate date;
+    private final Session session;
     private final Remark remark;
 
     /**
      * Constructs an Appointment.
      * Every field must be present and not null.
      */
-    public Appointment(Patient patient, Doctor doctor, AppointmentDateTime startDateTime,
-                       AppointmentDateTime endDateTime, Remark remark) {
-        requireAllNonNull(patient, doctor, startDateTime, endDateTime, remark);
+    public Appointment(Patient patient, Doctor doctor, AppointmentDate date,
+                       Session session, Remark remark) {
+        requireAllNonNull(patient, doctor, date, session, remark);
         this.patient = patient;
         this.doctor = doctor;
-        this.startDateTime = startDateTime;
-        this.endDateTime = endDateTime;
+        this.date = date;
+        this.session = session;
         this.remark = remark;
     }
 
@@ -42,12 +42,12 @@ public class Appointment {
         return doctor;
     }
 
-    public AppointmentDateTime getStartDateTime() {
-        return startDateTime;
+    public AppointmentDate getAppointmentDate() {
+        return date;
     }
 
-    public AppointmentDateTime getEndDateTime() {
-        return endDateTime;
+    public Session getSession() {
+        return session;
     }
 
     public Remark getRemark() {
@@ -56,20 +56,19 @@ public class Appointment {
 
     /**
      * Checks if this Appointment clashes with the given Appointment.
-     * There is a clash if both Appointments have the same Patient or Doctor with an overlapping date/time.
+     * There is a clash if both Appointments have the same Patient or Doctor with an overlapping date and time.
      */
     public boolean isClash(Appointment otherAppointment) {
         boolean isSamePatient = getPatient().isSamePerson(otherAppointment.getPatient());
         boolean isSameDoctor = getDoctor().isSamePerson(otherAppointment.getDoctor());
-        boolean isDateTimeClash = AppointmentDateTime.isClash(
-                getStartDateTime(), getEndDateTime(),
-                otherAppointment.getStartDateTime(), otherAppointment.getEndDateTime());
+        boolean isDateClash = getAppointmentDate().equals(otherAppointment.getAppointmentDate());
+        boolean isSessionClash = getSession().isClash(otherAppointment.getSession());
 
-        return (isSamePatient || isSameDoctor) && isDateTimeClash;
+        return (isSamePatient || isSameDoctor) && isDateClash && isSessionClash;
     }
 
     /**
-     * Returns true if both appointments have the same patient, doctor, starting date and time, ending date and time.
+     * Returns true if both appointments have the same patient, doctor, date, session.
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
@@ -80,8 +79,8 @@ public class Appointment {
         return otherAppointment != null
                 && otherAppointment.getPatient().equals(getPatient())
                 && otherAppointment.getDoctor().equals(getDoctor())
-                && otherAppointment.getStartDateTime().equals(getStartDateTime())
-                && otherAppointment.getEndDateTime().equals(getEndDateTime());
+                && otherAppointment.getAppointmentDate().equals(getAppointmentDate())
+                && otherAppointment.getSession().equals(getSession());
     }
 
     /**
@@ -101,15 +100,15 @@ public class Appointment {
         Appointment otherAppointment = (Appointment) other;
         return otherAppointment.getPatient().equals(getPatient())
                 && otherAppointment.getDoctor().equals(getDoctor())
-                && otherAppointment.getStartDateTime().equals(getStartDateTime())
-                && otherAppointment.getEndDateTime().equals(getEndDateTime())
+                && otherAppointment.getAppointmentDate().equals(getAppointmentDate())
+                && otherAppointment.getSession().equals(getSession())
                 && otherAppointment.getRemark().equals(getRemark());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(patient, doctor, startDateTime, endDateTime, remark);
+        return Objects.hash(patient, doctor, date, session, remark);
     }
 
     @Override
@@ -117,8 +116,8 @@ public class Appointment {
         final StringBuilder sb = new StringBuilder();
         sb.append("Patient: ").append(getPatient().getName())
                 .append("; Doctor: ").append(getDoctor().getName())
-                .append("; Start: ").append(getStartDateTime())
-                .append("; End: ").append(getEndDateTime());
+                .append("; Date: ").append(getAppointmentDate())
+                .append("; ").append(getSession());
 
         if (!remark.isEmpty()) {
             sb.append("; Remark: ").append(getRemark());
