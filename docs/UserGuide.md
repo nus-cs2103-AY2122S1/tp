@@ -164,7 +164,7 @@ Sorts clients in order based off the inputted attribute
 Format: `sort <attribute>/{ASC/DSC}`
 
 * The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. 
-* The tags are case-insensitive. (ASC are asc both okay.)
+* The tags are case-insensitive. (ASC and asc both okay.)
 
 Examples:
 * `sort r/ASC` will sort the list by ascending risk-appetite
