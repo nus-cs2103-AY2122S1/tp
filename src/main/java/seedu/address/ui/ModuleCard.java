@@ -4,14 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.module.student.Student;
+import seedu.address.model.module.Module;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class StudentCard extends UiPart<Region> {
+public class ModuleCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
+    private static final String FXML = "ModuleListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,32 +22,20 @@ public class StudentCard extends UiPart<Region> {
      * The issue on TeachingAssistantBuddy level 4</a>
      */
 
-    public final Student student;
+    public final Module module;
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
-    @FXML
-    private Label teleHandle;
-    @FXML
-    private Label studentId;
-    @FXML
-    private Label email;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
-        this.student = student;
-        id.setText(displayedIndex + ". ");
-        name.setText(student.getName().fullName);
-        teleHandle.setText(student.getTeleHandle().value);
-        studentId.setText(student.getStudentId().value);
-        email.setText(student.getEmail().value);
+        this.module = module;
+        name.setText(module.getName().moduleName);
     }
 
     @Override
@@ -58,13 +46,13 @@ public class StudentCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StringBuilder)) {
+        if (!(other instanceof ModuleCard)) {
             return false;
         }
 
         // state check
-        StudentCard card = (StudentCard) other;
+        ModuleCard card = (ModuleCard) other;
 
-        return id.getText().equals(card.id.getText()) && student.equals(card.student);
+        return name.getText().equals(card.name.getText()) && module.equals(card.module);
     }
 }
