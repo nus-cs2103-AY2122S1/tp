@@ -1,7 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -37,5 +41,27 @@ public class StudentIdTest {
         // valid StudentId
         assertTrue(StudentId.isValidStudentId("a0000000X"));
         assertTrue(StudentId.isValidStudentId("A1234567A"));
+    }
+
+    @Test
+    public void isEqualStudentId() {
+        StudentId studentId = new StudentId("A1234567A");
+        StudentId differentStudentId = new StudentId("A7654321A");
+        StudentId sameStudentId = new StudentId("A1234567A");
+
+        // Different StudentId
+        assertFalse(studentId.equals(differentStudentId));
+
+        // Same Object
+        assertTrue(studentId.equals(studentId));
+
+        // Different Objects Same StudentId
+        assertTrue(studentId.equals(sameStudentId));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        assertEquals(VALID_STUDENT_ID_AMY.hashCode(), VALID_STUDENT_ID_AMY.hashCode());
+        assertNotEquals(VALID_STUDENT_ID_AMY.hashCode(), VALID_STUDENT_ID_BOB.hashCode());
     }
 }

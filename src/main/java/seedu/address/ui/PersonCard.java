@@ -22,7 +22,7 @@ public class PersonCard extends UiPart<Region> {
     private static final String STUDENT_ID = "Student ID: ";
     private static final String ADDRESS = "Address: ";
     private static final String TYPE = "Type: ";
-    private static final String TUTORIAL_ID = "Tutorial ID: T";
+    private static final String TUTORIAL_ID = "Tutorial ID: ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -76,7 +76,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         gitHubId.setText(GITHUB_ID + person.getGitHubId().value);
         studentId.setText(STUDENT_ID + person.getStudentId().value);
-        type.setText(TYPE + person.getType().value.toUpperCase());
+        type.setText(TYPE + person.getType().value);
         nusNetworkId.setText(NUS_NETWORK_ID + person.getNusNetworkId().value);
         tutorialId.setText(TUTORIAL_ID + person.getTutorialId().value);
 
