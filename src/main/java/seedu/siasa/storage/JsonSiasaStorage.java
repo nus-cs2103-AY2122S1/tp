@@ -17,36 +17,36 @@ import seedu.siasa.model.ReadOnlySiasa;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonSiasaStorage implements SiasaStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonSiasaStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonSiasaStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getSiasaFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlySiasa> readSiasa() throws DataConversionException {
+        return readSiasa(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readSiasa()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlySiasa> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlySiasa> readSiasa(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableSiasa> jsonAddressBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableSiasa.class);
         if (!jsonAddressBook.isPresent()) {
             return Optional.empty();
         }
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlySiasa addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveSiasa(ReadOnlySiasa siasa) throws IOException {
+        saveSiasa(siasa, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlySiasa)}.
+     * Similar to {@link #saveSiasa(ReadOnlySiasa)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException {
+    public void saveSiasa(ReadOnlySiasa addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableSiasa(addressBook), filePath);
     }
 
 }

@@ -21,7 +21,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonSiasaStorage addressBookStorage = new JsonSiasaStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         JsonPolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(getTempFilePath("pb"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
@@ -55,15 +55,15 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
 
         Siasa original = getTypicalSiasa();
-        storageManager.saveAddressBook(original);
-        ReadOnlySiasa retrieved = storageManager.readAddressBook().get();
+        storageManager.saveSiasa(original);
+        ReadOnlySiasa retrieved = storageManager.readSiasa().get();
         assertEquals(original, new Siasa(retrieved));
     }
      */
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getSiasaFilePath());
     }
 
 }

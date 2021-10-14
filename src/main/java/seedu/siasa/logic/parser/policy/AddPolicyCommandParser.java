@@ -10,6 +10,7 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TITLE;
 import java.util.HashSet;
 import java.util.stream.Stream;
 
+import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.parser.ArgumentMultimap;
 import seedu.siasa.logic.parser.ArgumentTokenizer;
@@ -61,6 +62,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         ExpiryDate expiryDate = ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_EXPIRY).get());
         Commission commission = ParserUtil.parseCommission(argMultimap.getValue(PREFIX_COMMISSION).get());
+        Index ownerIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLIENT_INDEX).get());
 
         // TODO: Link owner to policy
         Person owner = new Person(new Name("a"),
@@ -69,9 +71,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
                 new Address("empty"),
                 new HashSet<>());
 
-        Policy policy = new Policy(title, price, expiryDate, commission, owner);
-
-        return new AddPolicyCommand(policy);
+        return new AddPolicyCommand(title, price, expiryDate, commission, ownerIndex);
     }
 
     /**

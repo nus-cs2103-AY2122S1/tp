@@ -12,7 +12,7 @@ import seedu.siasa.model.UserPrefs;
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, PolicyBookStorage {
+public interface Storage extends SiasaStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,21 +21,12 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, PolicyBoo
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getSiasaFilePath();
 
     @Override
-    Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlySiasa> readSiasa() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlySiasa addressBook) throws IOException;
-
-    @Override
-    Path getPolicyBookFilePath();
-
-    @Override
-    Optional<ReadOnlySiasa> readPolicyBook() throws DataConversionException, IOException;
-
-    @Override
-    void savePolicyBook(ReadOnlySiasa policyBook) throws IOException;
+    void saveSiasa(ReadOnlySiasa siasa) throws IOException;
 
 }
