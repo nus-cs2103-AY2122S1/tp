@@ -57,8 +57,6 @@ public class AppointmentCommand extends Command {
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
 
-    public static final String MESSAGE_APPOINTMENT_NOT_EDITED = "At least one field to edit must be provided.";
-
     private final Index index;
     private final Appointment appointment;
 
