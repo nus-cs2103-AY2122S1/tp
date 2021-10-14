@@ -73,6 +73,14 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
+     * Searches for a position with the same identity as {@code dummyPosition}.
+     */
+    public Position getPosition(Position dummyPosition) {
+        requireNonNull(dummyPosition);
+        return positions.getPosition(dummyPosition);
+    }
+
+    /**
      * Replaces the given position {@code target} in the list with {@code editedPosition}.
      * {@code target} must exist in the position book.
      * The position identity of {@code editedPosition} must not be the same as

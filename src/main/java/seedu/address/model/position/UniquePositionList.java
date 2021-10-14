@@ -51,6 +51,18 @@ public class UniquePositionList implements Iterable<Position> {
     }
 
     /**
+     * Searches for a position matching the given {@code dummyPosition}.
+     * Positions are compared with {@code Position::isSamePosition}.
+     */
+    public Position getPosition(Position dummyPosition) {
+        requireNonNull(dummyPosition);
+        return internalList.stream()
+                .filter(position -> position.isSamePosition(dummyPosition))
+                .findFirst()
+                .orElseThrow(PositionNotFoundException::new);
+    }
+
+    /**
      * Replaces the position {@code target} in the list with {@code editedPosition}.
      * {@code target} must exist in the list.
      * The position identity of {@code editedPosition} must not be the same as another existing position in the list.

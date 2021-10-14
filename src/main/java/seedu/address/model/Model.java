@@ -16,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
+    Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -43,6 +44,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' position book file path.
+     */
+    Path getPositionBookFilePath();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -67,6 +73,12 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
+     */
+    void deleteApplicant(Applicant target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -79,14 +91,30 @@ public interface Model {
     void addApplicantToPosition(Applicant applicant, Position position);
 
     /**
+     * Returns true if an applicant with the same identity as {@code applicant} exists MrTechRecruiter.
+     */
+    boolean hasApplicant(Applicant applicant);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
+     * {@code target} must exist in MrTechRecruiter.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
+     * MrTechRecruiter.
+     */
+    public void setApplicant(Applicant target, Applicant editedApplicant);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered applicant list */
+    ObservableList<Applicant> getFilteredApplicantList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -94,6 +122,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     // Position related methods
     boolean hasPosition(Position toAdd);

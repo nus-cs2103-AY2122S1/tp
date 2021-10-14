@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
@@ -29,19 +28,21 @@ public class ModelManager implements Model {
     private final ApplicationBook applicationBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Applicant> filteredApplicants;
     private final FilteredList<Position> filteredPositions;
 
     /**
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
-                        ReadOnlyApplicantBook applicantBook, ApplicationBook applicationBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
+                        ReadOnlyPositionBook positionBook, ApplicationBook applicationBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, positionBook, applicantBook, applicationBook, userPrefs);
+        requireAllNonNull(addressBook, applicantBook, positionBook, applicationBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
-                + ", position book: " + positionBook
                 + ", applicant book: " + applicantBook
+                + ", position book: " + positionBook
                 + ", application book: " + applicationBook
                 + ", userPrefs: " + userPrefs);
 
@@ -51,6 +52,7 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook(applicationBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
@@ -70,11 +72,12 @@ public class ModelManager implements Model {
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new PositionBook(), new ApplicantBook(), new ApplicationBook(), new UserPrefs());
+        this(new AddressBook(), new ApplicantBook(), new PositionBook(), new ApplicationBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -107,6 +110,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getPositionBookFilePath() {
+        return userPrefs.getPositionBookFilePath();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
@@ -136,28 +144,41 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteApplicant(Applicant target) {
+        applicantBook.removeApplicant(target);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void addApplicantToPosition(Applicant applicant, Position position) {
+    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
+        Position position = positionBook.getPosition(dummyPosition);
+        Application application = new Application(applicant, position);
         applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(new Application(applicant, position));
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // TODO: update to show applicants
-        position.updateNoOfApplicants(position.getNoOfApplicants() + 1);
-        if (applicant.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-            position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
-        }
-        position.updateRejectionRate();
+        applicationBook.addApplication(application);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+    }
+
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicantBook.hasApplicant(applicant);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
+        applicantBook.setApplicant(target, editedApplicant);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -172,9 +193,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
+        requireNonNull(predicateShowAllApplicants);
+        filteredApplicants.setPredicate(predicateShowAllApplicants);
     }
 
     @Override
@@ -207,13 +239,13 @@ public class ModelManager implements Model {
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        initialiseRejectionRate(position);
     }
 
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
     }
+
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
@@ -227,57 +259,4 @@ public class ModelManager implements Model {
         filteredPositions.setPredicate(predicate);
     }
 
-    //========== Applicant related methods ============================
-
-    /**
-     * Deletes an applicant from the MTR ApplicantBook.
-     *
-     * @param target The applicant to be deleted.
-     */
-    public void deleteApplicant(Applicant target) {
-        boolean hasApplicant = applicantBook.hasApplicant(target);
-        if (hasApplicant) {
-            Position p = target.getApplication().getPosition();
-            p.updateNoOfApplicants(p.getNoOfApplicants() - 1);
-            if (target.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                p.updateNoOfRejectedApplicants(p.getNoOfRejectedApplicants() - 1);
-            }
-            p.updateRejectionRate();
-            applicantBook.removeApplicant(target);
-        } else {
-            throw new ApplicantNotFoundException(); // to be updated
-        }
-    }
-
-    //========== Rejection rates =======================================
-    /**
-     * Initialise rejection rate of a new position.
-     *
-     * @param p The position to be initialised.
-     */
-    public void initialiseRejectionRate(Position p) {
-        int total = 0;
-        int count = 0;
-        for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getApplication().getPosition();
-            if (currentPosition == p) {
-                total++;
-                if (a.getApplication().getStatus() == Application.ApplicationStatus.REJECTED) {
-                    count++;
-                }
-            }
-        }
-        p.updateNoOfApplicants(total);
-        p.updateNoOfRejectedApplicants(count);
-        p.updateRejectionRate();
-    }
-
-    /**
-     * Updates all rejection rates for all current positions.
-     */
-    public void initialiseAllRejectionRates() {
-        for (Position p: positionBook.getPositionList()) {
-            initialiseRejectionRate(p);
-        }
-    }
 }
