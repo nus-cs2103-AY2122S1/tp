@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -93,17 +94,19 @@ public class UniqueFriendsList implements Iterable<Friend> {
     }
 
     /**
-     * Links a friend with the games he plays.
+     * Links a friend with the game he plays.
+     * The friend must exist in the list.
      */
-    public void link(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
-        requireAllNonNull(toLink, gameFriendLinks);
-        Set<GameFriendLink> newGameList = new HashSet<>(toLink.getGameFriendLinks());
+    public void link(Friend toLink, GameFriendLink gameFriendLink) {
+        requireAllNonNull(toLink, gameFriendLink);
 
-        // TODO - Yu Zher
-        // Temporary fix. Change as deemed necessary.
-        newGameList.addAll(gameFriendLinks);
+        // Get a modifiable copy of the current games in toLink
+        Set<GameFriendLink> currentGames = new HashSet<>(toLink.getGameFriendLinks());
+        GameId gameId = gameFriendLink.getGameId();
+        currentGames.removeIf(game -> game.getGameId().equals(gameId));
+        currentGames.add(gameFriendLink);
 
-        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), newGameList);
+        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), currentGames);
         this.setFriend(toLink, editedFriend);
     }
 

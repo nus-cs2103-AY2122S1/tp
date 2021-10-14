@@ -17,9 +17,11 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.FriendsList;
+import seedu.address.model.GamesList;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
+import seedu.address.model.game.Game;
 import seedu.address.testutil.EditFriendDescriptorBuilder;
 
 /**
@@ -98,11 +100,15 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         FriendsList expectedFriendsList = new FriendsList(actualModel.getFriendsList());
-        List<Friend> expectedFilteredList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        List<Friend> expectedFilteredFriendsList = new ArrayList<>(actualModel.getFilteredFriendsList());
+        GamesList expectedGamesList = new GamesList(actualModel.getGamesList());
+        List<Game> expectedFilteredGamesList = new ArrayList<>(actualModel.getFilteredGamesList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedFriendsList, actualModel.getFriendsList());
-        assertEquals(expectedFilteredList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedFilteredFriendsList, actualModel.getFilteredFriendsList());
+        assertEquals(expectedGamesList, actualModel.getGamesList());
+        assertEquals(expectedFilteredGamesList, actualModel.getFilteredGamesList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

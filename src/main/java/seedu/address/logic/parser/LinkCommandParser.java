@@ -2,18 +2,21 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_SPACE;
+import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_USERNAME;
 import static seedu.address.logic.parser.ParserUtil.areFlagsPresent;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.UserName;
 
 public class LinkCommandParser implements Parser<LinkCommand> {
+    private FriendId friendId;
+    private GameId gameId;
+    private UserName userName;
 
     /**
      * Parses the given {@code String} of arguments in the context of the LinkCommand
@@ -25,28 +28,18 @@ public class LinkCommandParser implements Parser<LinkCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_GAME_OLD);
+                ArgumentTokenizer.tokenize(args, FLAG_GAME, FLAG_FRIEND_SPACE, FLAG_USERNAME);
 
-        if (!areFlagsPresent(argMultimap, FLAG_GAME_OLD)) {
+        // All fields must be present.
+        if (!areFlagsPresent(argMultimap, FLAG_GAME, FLAG_FRIEND_SPACE, FLAG_USERNAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
-        List<String> commandSegments = Arrays.asList(args.split(" "));
+        friendId = ParserUtil.parseFriendId(argMultimap.getValue(FLAG_FRIEND_SPACE).get());
+        gameId = ParserUtil.parseGameId(argMultimap.getValue(FLAG_GAME).get());
+        userName = ParserUtil.parseUserName(argMultimap.getValue(FLAG_USERNAME).get());
 
-        FriendId friendId;
-
-        try {
-            // first element is whitespace, FRIEND_ID is at the second element
-            friendId = ParserUtil.parseFriendId(commandSegments.get(1));
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    LinkCommand.MESSAGE_USAGE), pe);
-        }
-
-        HashMap<String, String> games = ParserUtil.parseGamesAndUsernames(
-                argMultimap.getAllValues(FLAG_GAME_OLD));
-
-        return new LinkCommand(friendId, games);
+        return new LinkCommand(friendId, gameId, userName);
     }
 
 }

@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -171,7 +170,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
+        public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
             throw new AssertionError("This method should not be called.");
         }
 
