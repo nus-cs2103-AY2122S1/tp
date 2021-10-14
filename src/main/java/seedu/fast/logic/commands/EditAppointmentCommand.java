@@ -74,7 +74,8 @@ public class EditAppointmentCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
-                createEditedAppointment(personToEdit.getAppointment(), editAppointmentDescriptor));
+                createEditedAppointment(personToEdit.getAppointment(), editAppointmentDescriptor),
+                personToEdit.getCount());
 
         if (personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
             throw new CommandException(MESSAGE_UPDATE_APPOINTMENT_ERROR);

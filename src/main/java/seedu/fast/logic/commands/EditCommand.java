@@ -21,6 +21,7 @@ import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.AppointmentCount;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Person;
@@ -102,9 +103,10 @@ public class EditCommand extends Command {
         Remark updatedRemark = personToEdit.getRemark();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Appointment updatedAppointment = personToEdit.getAppointment();
+        AppointmentCount updatedCount = personToEdit.getCount();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags,
-                updatedAppointment);
+                updatedAppointment, updatedCount);
     }
 
     @Override

@@ -21,7 +21,6 @@ import seedu.fast.model.person.Person;
 public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appt";
-    public static final String APPOINTMENT_DELETE_COMMAND = "del";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"
@@ -73,7 +72,8 @@ public class AppointmentCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment);
+                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment,
+                personToEdit.getCount());
 
         if (!personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
             throw new CommandException(MESSAGE_ADD_APPOINTMENT_FAILURE);
@@ -86,8 +86,7 @@ public class AppointmentCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the appointment is added, deleted or updated
+     * Generates a command execution success message when appointment has been added successfully.
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person editedPerson) {

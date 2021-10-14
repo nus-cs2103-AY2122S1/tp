@@ -14,6 +14,7 @@ import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.AppointmentCount;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Person;
@@ -49,8 +50,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Appointment appointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
                 Appointment.NO_VENUE);
+        AppointmentCount count = new AppointmentCount("0");
 
-        Person person = new Person(name, phone, email, address, remark, tagList, appointment);
+        Person person = new Person(name, phone, email, address, remark, tagList, appointment, count);
 
         return new AddCommand(person);
     }

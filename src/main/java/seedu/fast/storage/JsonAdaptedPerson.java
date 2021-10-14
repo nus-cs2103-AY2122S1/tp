@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.fast.commons.exceptions.IllegalValueException;
 import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.AppointmentCount;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Person;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String appointmentDate;
     private final String appointmentTime;
     private final String appointmentVenue;
+    private final String appointmentCount;
 
 
     /**
@@ -45,7 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("appointment date") String date, @JsonProperty("appointment time") String time,
-            @JsonProperty("appointment venue") String venue) {
+            @JsonProperty("appointment venue") String venue, @JsonProperty("appointment count") String count) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +59,7 @@ class JsonAdaptedPerson {
         this.appointmentDate = date;
         this.appointmentTime = time;
         this.appointmentVenue = venue;
+        this.appointmentCount = count;
     }
 
     /**
@@ -76,6 +79,7 @@ class JsonAdaptedPerson {
         appointmentDate = source.getAppointment().getDate();
         appointmentTime = source.getAppointment().getTime();
         appointmentVenue = source.getAppointment().getVenue();
+        appointmentCount = source.getCount().toString();
     }
 
     /**
@@ -129,6 +133,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Remark.class.getSimpleName()));
         }
+        final Remark modelRemark = new Remark(remark);
 
         if (appointmentDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -145,15 +150,20 @@ class JsonAdaptedPerson {
                     Appointment.class.getSimpleName()));
         }
 
-        final Remark modelRemark = new Remark(remark);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
         final Appointment modelAppointment = new Appointment(appointmentDate, appointmentTime,
                 appointmentVenue);
 
+        if (appointmentCount == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AppointmentCount.class.getSimpleName()));
+        }
+
+        final AppointmentCount apptCount = new AppointmentCount(appointmentCount);
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRemark, modelTags,
-                modelAppointment);
+                modelAppointment, apptCount);
     }
 
 }

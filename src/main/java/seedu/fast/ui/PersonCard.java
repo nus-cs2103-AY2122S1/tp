@@ -53,6 +53,8 @@ public class PersonCard extends UiPart<Region> {
     private Label appointmentTime;
     @FXML
     private Label appointmentVenue;
+    @FXML
+    private Label appointmentCount;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -75,6 +77,7 @@ public class PersonCard extends UiPart<Region> {
                 person.getAppointment().getDate()));
         appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
                 person.getAppointment().getDate()));
+        appointmentCount.setText("Appointment: " + person.getCount());
     }
 
     /**
