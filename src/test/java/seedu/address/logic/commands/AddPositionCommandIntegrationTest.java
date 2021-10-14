@@ -34,7 +34,7 @@ public class AddPositionCommandIntegrationTest {
         expectedModel.addPosition(validPosition);
 
         assertCommandSuccess(new AddPositionCommand(validPosition), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPosition), expectedModel);
+                String.format(AddPositionCommand.MESSAGE_SUCCESS, validPosition), expectedModel);
     }
 
     @Test

@@ -100,10 +100,19 @@ public interface Model {
     /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in MrTechRecruiter.
-     * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in
      * MrTechRecruiter.
      */
-    public void setApplicant(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
+
+    /**
+     * Replaces the given position {@code target} with {@code editedPosition}.
+     * {@code target} must exist in MrTechRecruiter.
+     * The position identity of {@code editedPosition} must not be the same as another existing position in
+     * MrTechRecruiter.
+     */
+    void setPosition(Position position, Position editedPosition);
+
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -111,13 +120,34 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 
+    /** Returns an unmodifiable view of the filtered position list */
+    ObservableList<Position> getFilteredPositionList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+    /**
+     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
+
+    /**
+     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPositionList(Predicate<Position> predicate);
+
+    /**
+     * Replaces position book data with the data in {@code positionBook}.
+     */
+    void setPositionBook(ReadOnlyPositionBook positionBook);
+
+    /** Returns the AddressBook */
+    ReadOnlyPositionBook getPositionBook();
 
     // Position related methods
     boolean hasPosition(Position toAdd);
@@ -127,7 +157,5 @@ public interface Model {
     void deletePosition(Position positionToDelete);
 
     //=========== Filtered Position List Accessors =============================================================
-    ObservableList<Position> getFilteredPositionList();
 
-    void updateFilteredPositionList(Predicate<Position> predicate);
 }

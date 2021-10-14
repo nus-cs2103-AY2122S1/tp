@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
@@ -160,6 +161,11 @@ public class AddPositionCommandTest {
         }
 
         @Override
+        public void setPosition(Position target, Position editedPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -178,6 +184,17 @@ public class AddPositionCommandTest {
         public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setPositionBook(ReadOnlyPositionBook positionBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPositionBook getPositionBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public boolean hasPosition(Position toAdd) {
             return false;
         }

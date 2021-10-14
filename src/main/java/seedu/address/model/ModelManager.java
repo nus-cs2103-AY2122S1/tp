@@ -197,6 +197,12 @@ public class ModelManager implements Model {
         applicantBook.setApplicant(target, editedApplicant);
     }
 
+    @Override
+    public void setPosition(Position target, Position editedPosition) {
+        requireAllNonNull(target, editedPosition);
+        positionBook.setPosition(target, editedPosition);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -225,6 +231,8 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(predicateShowAllApplicants);
     }
 
+
+    // needs to update
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -243,6 +251,18 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+
+
+    @Override
+    public void setPositionBook(ReadOnlyPositionBook positionBook) {
+        this.positionBook.resetData(positionBook);
+    }
+
+    @Override
+    public ReadOnlyPositionBook getPositionBook() {
+        return positionBook;
+    }
+
 
     // Position related methods
     @Override
