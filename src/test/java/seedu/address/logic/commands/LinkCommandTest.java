@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.CSGO;
 import static seedu.address.testutil.TypicalGames.GENSHIN_IMPACT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_validFriendIdUnfilteredList_success() {
-        Friend friendToLink = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Friend friendToLink = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         UserName userName = new UserName("GoldNova");
         LinkCommand linkCommand = new LinkCommand(friendToLink.getFriendId(), GENSHIN_IMPACT.getGameId(), userName);
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(),

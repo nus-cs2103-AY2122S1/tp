@@ -31,8 +31,8 @@ public class GetFriendCommandParser implements Parser<GetFriendCommand> {
         }
 
         String keyword = argMultimap.getValue(FLAG_GET).get().trim();
-        if (keyword.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetFriendCommand.MESSAGE_USAGE));
+        if (!FriendId.isValidFriendId(keyword)) {
+            throw new ParseException(FriendId.MESSAGE_INVALID_CHARACTERS);
         }
 
         return new GetFriendCommand(new FriendId(keyword));

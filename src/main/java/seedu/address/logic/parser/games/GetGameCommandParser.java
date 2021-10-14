@@ -31,8 +31,8 @@ public class GetGameCommandParser implements Parser<GetGameCommand> {
         }
 
         String keyword = argMultimap.getValue(FLAG_GET).get().trim();
-        if (keyword.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetGameCommand.MESSAGE_USAGE));
+        if (!GameId.isValidGameId(keyword)) {
+            throw new ParseException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
         }
 
         return new GetGameCommand(new GameId(keyword));

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_FRIEND_ID;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.FRIEND_ID_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -18,7 +19,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.logic.commands.friends.DeleteFriendCommand;
+import seedu.address.logic.commands.friends.ListFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.friends.FriendCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyFriendsList;
@@ -58,18 +61,16 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = DeleteFriendCommand.COMMAND_WORD + " daksjhdkjashdjkashkdjashjkaskjdjkasdhkas";
-        // TODO Update after delete command is updated
-        // assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_FRIEND_ID);
+        String deleteCommand = FriendCommandParser.COMMAND_WORD + " " + DeleteFriendCommand.COMMAND_WORD
+                + " daksjhdkjashdjkashkdjashjkaskjdjkasdhkas";
+        assertCommandException(deleteCommand, MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        // no flag will default to listing all friends
-        // TODO Update after list command is updated
-        // String listCommand = ListFriendCommand.COMMAND_WORD;
-        // assertCommandSuccess(listCommand,
-        //         String.format(ListFriendCommand.MESSAGE_SUCCESS_PREPEND, ListFriendCommand.FRIEND_LIST), model);
+        String listCommand = FriendCommandParser.COMMAND_WORD + " " + ListFriendCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand,
+                String.format(ListFriendCommand.MESSAGE_SUCCESS_PREPEND, ListFriendCommand.FRIEND_LIST), model);
     }
 
     @Test
@@ -85,18 +86,23 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addFriendCommand = AddFriendCommand.COMMAND_WORD + FRIEND_ID_DESC_AMY + NAME_DESC_AMY;
+        String addFriendCommand = FriendCommandParser.COMMAND_WORD + " " + AddFriendCommand.COMMAND_WORD
+                + FRIEND_ID_DESC_AMY + NAME_DESC_AMY;
         Friend expectedFriend = new FriendBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addFriend(expectedFriend);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        // TODO Update after add command is updated
-        // assertCommandFailure(addFriendCommand, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addFriendCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredFriendList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredFriendsList().remove(0));
+    }
+
+    @Test
+    public void getFilteredGameList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredGamesList().remove(0));
     }
 
     /**
