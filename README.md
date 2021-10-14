@@ -25,13 +25,18 @@ be a collection of a groups of people designed for university students.
 * Search for a mobile number of a contact
 * Update contact details
 * Delete contacts
-  
-**Coming Soon...**
 * Create folders for your contacts
 * Add contacts to folders
 * List all folders
 * Delete folders
 * Use Unix commands to navigate UNIon
+
+**Coming Soon...**
+* GUI window update
+* Folders saved locally
+* Find specific folders
+* Add multiple contacts at once
+* Rename folder
 
 ### Built With
 
