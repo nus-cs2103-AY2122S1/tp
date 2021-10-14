@@ -61,6 +61,13 @@ public class DeleteCommandTest {
         assertCommandSuccess(deleteCommand1, model, expectedMessage1, expectedModel1);
     }
 
+    /*@Test
+    public void execute_validModuleCodeUnfilteredList_Success() {
+        ModuleCodesContainsKeywordsPredicate predicate =
+                new ModuleCodesContainsKeywordsPredicate(Arrays.asList("[CS2040]"));
+
+    }*/
+
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
@@ -78,6 +85,10 @@ public class DeleteCommandTest {
         assertCommandFailure(deleteCommand1, model, Messages.MESSAGE_INVALID_RANGE);
     }
 
+    /*@Test
+    public void execute_invalidModuleCodeUnfilteredList_throwsCommandExceptio() {
+    }*/
+
     @Test
     public void execute_validIndexFilteredList_success() {
         //Deletes 1 person in the filtered list
@@ -88,10 +99,11 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
         expectedMessage = String.format(DeleteCommand.MESSAGE_NUMBER_DELETED_PERSON, 1) + expectedMessage;
+        System.out.println(expectedMessage);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
+        //showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -112,10 +124,14 @@ public class DeleteCommandTest {
         ModelManager expectedModel1 = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel1.deletePerson(personToDelete1);
         expectedModel1.deletePerson(personToDelete2);
-        showNoPerson(expectedModel1);
+        //showNoPerson(expectedModel1);
 
         assertCommandSuccess(deleteCommand1, model, expectedMessage1, expectedModel1);
     }
+
+    /*@Test
+    public void execute_validModuleCodeFilteredList_success() {
+    }*/
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -144,6 +160,10 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_RANGE);
     }
+
+    /*@Test
+    public void execute_invalidModuleCodeFilteredList_throwsCommandException() {
+    }*/
 
     @Test
     public void equals() {
