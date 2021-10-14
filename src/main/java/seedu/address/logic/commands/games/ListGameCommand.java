@@ -42,7 +42,7 @@ public class ListGameCommand extends Command {
             GameIdContainsKeywordPredicate gameIdContainsKeywordPredicate =
                     (GameIdContainsKeywordPredicate) predicate;
             model.updateFilteredGamesList(gameIdContainsKeywordPredicate);
-            return new CommandResult(getMessageSuccess(), CommandType.FRIEND_LIST);
+            return new CommandResult(getMessageSuccess(), CommandType.GAME_ADD);
         }
         // ListCommand initialized with unknown predicate
         throw new CommandException(MESSAGE_UNKNOWN_PREDICATE);
