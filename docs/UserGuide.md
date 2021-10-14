@@ -195,7 +195,9 @@ Examples:
 * `schedule 3 m/05-Feb-2022 15:30`
 * `schedule 5 m/05-Dec-2021 20:00`
 
-### Adding Revenue: `revenue`
+
+### Adding Revenue: `revenue` 
+
 
 Adds revenue earned from an existing person in the address book.
 
