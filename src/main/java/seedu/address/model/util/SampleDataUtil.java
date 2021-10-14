@@ -1,20 +1,14 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.MakeUpLesson;
-import seedu.address.model.lesson.RecurringLesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
@@ -76,25 +70,9 @@ public class SampleDataUtil {
         };
     }
 
-    public static Set<Lesson> getSampleLessons() {
-        Set<Lesson> sampleLessons = new TreeSet<>();
-        sampleLessons.add(new RecurringLesson(new Date("14 Jan 2022"),
-            new TimeRange("1430-1530"),
-                new Subject("Math"), getSampleHomeworkSet()));
-        sampleLessons.add(new MakeUpLesson(new Date("24 Mar 2022"),
-            new TimeRange("1230-1400"),
-                new Subject("Science"), getSampleHomeworkSet()));
-        sampleLessons.add(new RecurringLesson(new Date("09 Feb 2022"),
-            new TimeRange("1730-1930"),
-                new Subject("GP"), getSampleHomeworkSet()));
-
-        return sampleLessons;
-    }
-
-    public static Lesson getSampleLesson() {
-        return new RecurringLesson(new Date("14 Jan 2022"),
-            new TimeRange("1430-1530"),
-                new Subject("Math"), getSampleHomeworkSet());
+    public static Set<Lesson> getLessonSet(Lesson... lessons) {
+        return Arrays.stream(lessons)
+            .collect(Collectors.toSet());
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -115,14 +93,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a sample homework set.
+     * Returns a homework set containing the list of strings given.
      */
-    public static Set<Homework> getSampleHomeworkSet() {
-        HashSet<Homework> sampleHomeworks = new HashSet<>();
-        sampleHomeworks.add(new Homework("TYS Page 20"));
-        sampleHomeworks.add(new Homework("Onsponge textbook"));
-        sampleHomeworks.add(new Homework("Tutorial 12"));
-        return sampleHomeworks;
+    public static Set<Homework> getHomeworkSet(String... strings) {
+        return Arrays.stream(strings)
+            .map(Homework::new)
+            .collect(Collectors.toSet());
     }
-
 }

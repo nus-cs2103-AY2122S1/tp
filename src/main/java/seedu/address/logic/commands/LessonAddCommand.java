@@ -16,17 +16,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.AcadLevel;
-import seedu.address.model.person.AcadStream;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.School;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.util.PersonUtil;
 
 public class LessonAddCommand extends UndoableCommand {
 
@@ -93,25 +84,10 @@ public class LessonAddCommand extends UndoableCommand {
     private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
         assert personToEdit != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Phone updatedParentPhone = personToEdit.getParentPhone();
-        Email updatedParentEmail = personToEdit.getParentEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        School updatedSchool = personToEdit.getSchool();
-        AcadStream updatedAcadStream = personToEdit.getAcadStream();
-        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
-        Fee updatedOutstandingFee = personToEdit.getFee();
-        Remark updatedRemark = personToEdit.getRemark();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
         lessons.add(toAdd);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
-                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
-                updatedOutstandingFee, updatedRemark, updatedTags, lessons);
+        return PersonUtil.createdEditedPerson(personToEdit, lessons);
     }
 
     @Override
