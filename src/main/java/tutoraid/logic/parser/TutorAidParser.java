@@ -59,6 +59,7 @@ public class TutorAidParser {
             commandWord = matcher.group("commandWord");
             arguments = matcher.group("arguments");
         }
+
         switch (commandWord) {
 
         case AddStudentCommand.COMMAND_WORD:
@@ -74,7 +75,7 @@ public class TutorAidParser {
             return new ClearCommand();
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

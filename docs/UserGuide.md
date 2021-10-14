@@ -85,9 +85,14 @@ The student's phone number, parent's name and parent's phone number are optional
 
 ### Listing all students : `list`
 
-Shows a list of all students in TutorAid in the order that they were added.
+Shows a list of all students in TutorAid in the order that they were added. Use the `-a` flag to display all fields, otherwise fields are hidden by default.
 
-Format: `list`
+Format: `list [-a]`
+
+Examples:
+
+- `list` displays all students in TutorAid while showing only their name and list index
+- `list -a` displays all students in TutorAid while showing all of their data such as their contact number, payment status and so on. 
 
 ### Deleting a student : `delete`
 Deletes the specified student with the given student index from TutorAid.
@@ -229,7 +234,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
 **Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222` 
-**List** | `list`
+**List** | `list [-a]`<br>e.g., `list`, `list -a` 
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
