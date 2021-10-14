@@ -103,7 +103,4 @@ class JsonAdaptedLesson {
                 ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework)
                 : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework);
     }
-
 }
-
-

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -29,12 +30,12 @@ public class LessonDeleteCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonDeleteCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> prepareLessonDeleteCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
     public void execute_validPersonWithoutExistingLessons_failure() {
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
         assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
@@ -45,7 +46,7 @@ public class LessonDeleteCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withLessons(lesson).build();
         model.setPerson(firstPerson, editedPerson);
 
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
 
         String expectedMessage = String.format(
             LessonDeleteCommand.MESSAGE_DELETE_LESSON_SUCCESS, lesson, editedPerson);
@@ -60,9 +61,9 @@ public class LessonDeleteCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
 
-        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -77,23 +78,23 @@ public class LessonDeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
+        LessonDeleteCommand lessonDeleteCommand = prepareLessonDeleteCommand(outOfBoundIndex, INDEX_FIRST_LESSON);
 
-        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(lessonDeleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        LessonDeleteCommand deleteSampleLessonCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommand = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
             INDEX_FIRST_LESSON);
-        LessonDeleteCommand deleteSampleLessonCommand2 = new LessonDeleteCommand(INDEX_SECOND_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommand2 = prepareLessonDeleteCommand(INDEX_SECOND_PERSON,
             INDEX_FIRST_LESSON);
 
         // same object -> returns true
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommand));
 
         // same values -> returns true
-        LessonDeleteCommand deleteSampleLessonCommandCopy = new LessonDeleteCommand(INDEX_FIRST_PERSON,
+        LessonDeleteCommand deleteSampleLessonCommandCopy = prepareLessonDeleteCommand(INDEX_FIRST_PERSON,
             INDEX_FIRST_LESSON);
         assertTrue(deleteSampleLessonCommand.equals(deleteSampleLessonCommandCopy));
 
@@ -105,5 +106,14 @@ public class LessonDeleteCommandTest {
 
         // different person -> returns false
         assertFalse(deleteSampleLessonCommand.equals(deleteSampleLessonCommand2));
+    }
+
+    /**
+     * Generates a {@code LessonDeleteCommand} with parameters {@code personIndex} and {@code lessonIndex}.
+     */
+    private LessonDeleteCommand prepareLessonDeleteCommand(Index personIndex, Index lessonIndex) {
+        LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(personIndex, lessonIndex);
+        lessonDeleteCommand.setDependencies(model, new UndoRedoStack());
+        return lessonDeleteCommand;
     }
 }

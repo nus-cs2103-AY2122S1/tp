@@ -1,10 +1,14 @@
 package seedu.address.model;
 
+
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
@@ -75,12 +79,19 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    void addPersonAtIndex(Person person, Index targetIndex);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    /**
+     * Returns the Calendar.
+     */
+    Calendar getCalendar();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

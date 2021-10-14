@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -61,6 +62,14 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(date.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(date.getLocalDate());
     }
 
     public String getTypeOfLesson() {
@@ -155,4 +164,3 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
 }
-

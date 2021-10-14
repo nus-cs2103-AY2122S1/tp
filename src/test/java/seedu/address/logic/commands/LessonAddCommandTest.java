@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.UndoRedoStack;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +33,7 @@ public class LessonAddCommandTest {
 
     @Test
     public void constructor_nullLesson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LessonAddCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> prepareLessonAddCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
@@ -42,7 +43,7 @@ public class LessonAddCommandTest {
             .get(INDEX_FIRST_PERSON.getZeroBased()))
             .withLessons(sampleLesson).build();
 
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
 
         String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
             sampleLesson, editedPerson);
@@ -64,7 +65,7 @@ public class LessonAddCommandTest {
 
         // Add a different lesson on the same time slot
         Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
     }
@@ -83,7 +84,7 @@ public class LessonAddCommandTest {
         slot as the second person in the unfiltered list.
          */
         Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
 
         assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
     }
@@ -92,9 +93,9 @@ public class LessonAddCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         Lesson lesson = new LessonBuilder().buildRecurring();
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(outOfBoundIndex, lesson);
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(outOfBoundIndex, lesson);
 
-        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     /**
@@ -109,24 +110,24 @@ public class LessonAddCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        LessonAddCommand lessonAddCommand = new LessonAddCommand(outOfBoundIndex, new LessonBuilder().build());
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(outOfBoundIndex, new LessonBuilder().build());
 
-        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         Lesson sampleLesson = new LessonBuilder().build();
-        LessonAddCommand addSampleLessonCommand = new LessonAddCommand(INDEX_FIRST_PERSON,
+        LessonAddCommand addSampleLessonCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON,
                 sampleLesson);
-        LessonAddCommand addSampleLessonCommand2 = new LessonAddCommand(INDEX_SECOND_PERSON,
+        LessonAddCommand addSampleLessonCommand2 = prepareLessonAddCommand(INDEX_SECOND_PERSON,
                 sampleLesson);
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
-        LessonAddCommand addSampleLessonCommandCopy = new LessonAddCommand(INDEX_FIRST_PERSON,
+        LessonAddCommand addSampleLessonCommandCopy = prepareLessonAddCommand(INDEX_FIRST_PERSON,
                 sampleLesson);
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
@@ -138,5 +139,14 @@ public class LessonAddCommandTest {
 
         // different person -> returns false
         assertFalse(addSampleLessonCommand.equals(addSampleLessonCommand2));
+    }
+
+    /**
+     * Generates a {@code LessonAddCommand} with parameters {@code index} and {@code lesson}.
+     */
+    private LessonAddCommand prepareLessonAddCommand(Index index, Lesson lesson) {
+        LessonAddCommand lessonAddCommand = new LessonAddCommand(index, lesson);
+        lessonAddCommand.setDependencies(model, new UndoRedoStack());
+        return lessonAddCommand;
     }
 }

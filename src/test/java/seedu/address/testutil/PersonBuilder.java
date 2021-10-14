@@ -240,6 +240,7 @@ public class PersonBuilder {
     }
 
     /**
+<<<<<<< HEAD
      * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withLessons(Lesson... lessons) {
@@ -248,6 +249,8 @@ public class PersonBuilder {
     }
 
     /**
+=======
+>>>>>>> ab0ce2b460e6b216989aa580232b59d14194d10a
      * Builds a person with the specified information.
      *
      * @return {@code Person} containing the information given.
