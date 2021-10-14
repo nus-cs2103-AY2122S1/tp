@@ -14,7 +14,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
   4. [View Help: `help`](#view-help)
   5. [Add Student: `add`](#add-student)
   6. [View Student Details: `view`](#view-student)
-  7. [Update Student's Grade: `update`](#update-student)
+  7. [Edit Student Details: `update`](#edit-student)
   8. [Delete Student: `delete`](#delete-student)
   9. [Exit: `exit`](#exit)
   10. [Save data](#save-data)
@@ -38,7 +38,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 
    * **`view -sid A1234567X`** Views a particular student's by its Student ID
 
-   * **`update -sid A1234567X -grade 100`** Updates a student's grade with the -grade flag
+   * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 with the `-n` flag
 
    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
 
@@ -104,19 +104,19 @@ Examples:
 
 - `view -sid A1234567X` Views all related information of the student with student ID A1234567X in ProgrammerError.
 
-### <a name="update-student"></a>6. Update Student's Grade : `update`
+### <a name="edit-student"></a>6. Edit Student Details : `edit`
 
-Updates the grade of an existing student's in the PE.
+Edits the grade of an existing student's in the PE.
 
-Format:`update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+Format:`edit <INDEX> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 
-- Updates the student with `<STUDENT_ID> with the grade <GRADE_SCORE>`
+- Updates the student with at the given `INDEX' with the arguments provided.
 - Existing values will be updated to the input values.
 
 Examples:
 
-- `update -sid A1234567X -grade 100` Updates the grade of the student with student ID A1234567X to be 100.
-- `update -sid A2345678X -grade 97.5` Updates the grade of the student with student ID A2345678X to be 97.5.
+- `edit 1 -sid A1234567X` Updates the student ID of the student at index 1 to A1234567X.
+- `edit 2 -grade 97.5` Updates the grade of the student at index 2 to 97.5.
 
 ### <a name="delete-student"></a>7. Delete Student: `delete`
 
@@ -148,6 +148,6 @@ Command | Format & Examples
 **Help** | `help`
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **View** | `view -sid <STUDENT_ID>`
-**Update** | `update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+**Edit** | `edit <INDEX> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Delete** | `delete -sid <STUDENT_ID>`
 **Exit** | `exit`
