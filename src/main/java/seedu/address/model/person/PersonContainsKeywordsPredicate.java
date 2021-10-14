@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 
@@ -25,16 +24,12 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String[] generalKeywords = keywords.getPreamble().split(" ");
-        boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x -> {
-                boolean checkAttribute = Stream.of(person.getName(), person.getPhone(),
-                        person.getEmail(), person.getAddress(), person.getRiskAppetite(),
-                        person.getDisposableIncome(), person.getLastMet(), person.getCurrentPlan())
-                        .map(Object::toString).anyMatch(y -> containsIgnoreCase(y, x));
-
-                boolean checkAttributeTag = person.getTags().stream()
-                    .anyMatch(y -> containsIgnoreCase(y.tagName, x));
-                return checkAttribute || checkAttributeTag;
-            }
+        boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x ->
+            Arrays.stream(ALL_PREFIXES).anyMatch(prefix -> {
+                Function<Person, String> getAttribute = PREFIX_FUNCTION_MAP.get(prefix).andThen(Object::toString);
+                String personAttribute = getAttribute.apply(person);
+                return containsIgnoreCase(personAttribute, x);
+            })
         );
 
         boolean checkAttributes = Arrays.stream(ALL_PREFIXES)
@@ -44,7 +39,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                     Optional<String> keyword = keywords.getValue(prefix);
                     return keyword.map(x -> containsIgnoreCase(personAttribute, x)).orElse(true);
                 })
-                .reduce(true, (x, y) -> x && y);
+                .reduce(true, Boolean::logicalAnd);
 
         return checkGeneral && checkAttributes;
     }
