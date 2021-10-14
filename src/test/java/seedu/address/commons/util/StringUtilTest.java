@@ -167,37 +167,37 @@ public class StringUtilTest {
 
     @Test
     public void containIgnoreCase_nullSentence_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase(null, "a"));
+        assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase(null, "a"));
     }
 
     @Test
     public void containIgnoreCase_nullWord_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsIgnoreCase("a", null));
+        assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase("a", null));
     }
 
     @Test
     public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsIgnoreCase("a", ""));
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsStringIgnoreCase("a", ""));
     }
 
     @Test
     public void containsIgnoreCase_validInputs_correctResult() {
-        assertFalse(StringUtil.containsIgnoreCase("", "aaa"));
-        assertFalse(StringUtil.containsIgnoreCase("abd", "g"));
-        assertFalse(StringUtil.containsIgnoreCase("abd", " a"));
+        assertFalse(StringUtil.containsStringIgnoreCase("", "aaa"));
+        assertFalse(StringUtil.containsStringIgnoreCase("abd", "g"));
+        assertFalse(StringUtil.containsStringIgnoreCase("abd", " a"));
 
-        assertTrue(StringUtil.containsIgnoreCase("abc", "a"));
-        assertTrue(StringUtil.containsIgnoreCase("ab c", "c"));
+        assertTrue(StringUtil.containsStringIgnoreCase("abc", "a"));
+        assertTrue(StringUtil.containsStringIgnoreCase("ab c", "c"));
 
         //match uppercase and lowercase
-        assertTrue(StringUtil.containsIgnoreCase("abC", "C"));
-        assertTrue(StringUtil.containsIgnoreCase("abfCa", "fCa"));
+        assertTrue(StringUtil.containsStringIgnoreCase("abC", "C"));
+        assertTrue(StringUtil.containsStringIgnoreCase("abfCa", "fCa"));
 
         // match for word with spaces in between
-        assertTrue(StringUtil.containsIgnoreCase("b a a d", "a a"));
+        assertTrue(StringUtil.containsStringIgnoreCase("b a a d", "a a"));
 
         // match multiple
-        assertTrue(StringUtil.containsIgnoreCase("acadffac", "ac"));
+        assertTrue(StringUtil.containsStringIgnoreCase("acadffac", "ac"));
     }
 
     //---------------- Tests for getDetails --------------------------------------
