@@ -1,11 +1,11 @@
 package seedu.address.model.position;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Address;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 
 public class DescriptionTest {
     @Test
@@ -31,8 +31,8 @@ public class DescriptionTest {
         // valid addresses
         assertTrue(Description.isValidDescription("Install and upgrade antivirus software Travel to client sites"));
         assertTrue(Description.isValidDescription("-")); // one character
-        assertTrue(Description.isValidDescription("Perform tests on new hardware and software." +
-                "Troubleshoot hardware and software issues")); // long address
+        assertTrue(Description.isValidDescription("Perform tests on new hardware and software."
+                + "Troubleshoot hardware and software issues")); // long address
     }
 
 }

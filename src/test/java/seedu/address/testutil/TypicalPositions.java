@@ -1,18 +1,16 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.PositionBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.position.Position;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DATAENGINEER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DATASCIENTIST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_DATAENGINEER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_DATASCIENTIST;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_DATAENGINEER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_DATASCIENTIST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DATAENGINEER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_DATASCIENTIST;
+import seedu.address.model.PositionBook;
+import seedu.address.model.position.Position;
 
 
 public class TypicalPositions {
