@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.commons.util.DateUtil;
 
 public class AppointmentTest {
-    public static final String BAD_FORMAT_DATE = "2021-111-13";
+    public static final String BAD_FORMAT_DATE = "10-10-1998";
     public static final String INVALID_DATE = "2021-13-13";
     public static final String VALID_DATE = "11 Nov 2021";
     public static final String VALID_TIME = "2300";
