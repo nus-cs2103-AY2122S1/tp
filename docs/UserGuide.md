@@ -242,7 +242,7 @@ Format:
   * Returns all reservations on **today's date**, at `TIME` 
 
 
-* `DATE` is formatted as `yyyy-MM-dd`, `TIME` is formatted as `HHmm`  
+* `DATE` is formatted as `yyyy-MM-dd`, `TIME` is formatted as `HHmm`
 
 Examples:
 * `check 2021-09-19 1800`
