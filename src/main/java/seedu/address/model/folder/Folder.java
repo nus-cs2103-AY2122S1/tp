@@ -51,11 +51,12 @@ public class Folder {
 
     /**
      * Checks if folder contains a specific person
+     *
      * @param target
      * @return true if person exists in folder
      */
     public boolean hasContact(Person target) {
-        for (Person contact: contacts) {
+        for (Person contact : contacts) {
             if (contact.equals(target)) {
                 return true;
             }
@@ -90,8 +91,7 @@ public class Folder {
         }
 
         Folder folder = (Folder) other;
-        return Objects.equals(folderName, folder.folderName)
-                && Objects.equals(contacts, folder.contacts);
+        return Objects.equals(folderName, folder.folderName);
     }
 
     @Override

@@ -67,7 +67,7 @@ dependencies {
 
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'UNIon.jar'
 }
 
 defaultTasks 'clean', 'test'
