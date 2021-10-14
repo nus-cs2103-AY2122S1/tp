@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.friends.ListFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -46,7 +45,7 @@ public class ListFriendCommandTest {
     @Test
     public void execute_listFriendNotFiltered_showsSameList() {
         assertCommandSuccess(new ListFriendCommand(preparePredicate("")), model,
-                String.format(ListFriendCommand.MESSAGE_SUCCESS_PREPEND, ListFriendCommand.FRIEND_LIST), expectedModel);
+                ListFriendCommand.MESSAGE_SUCCESS_PREPEND, expectedModel);
     }
 
     @Test
