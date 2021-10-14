@@ -49,8 +49,8 @@ public class MemberBuilder {
     public MemberBuilder(Member memberToCopy) {
         name = memberToCopy.getName();
         phone = memberToCopy.getPhone();
-        email = memberToCopy.getEmail();
-        address = memberToCopy.getAddress();
+        email = memberToCopy.getEmail().get();
+        address = memberToCopy.getAddress().get();
         positions = new HashSet<>(memberToCopy.getPositions());
         taskList = new TaskList();
         taskList.setTasks(memberToCopy.getTaskList());
@@ -76,7 +76,11 @@ public class MemberBuilder {
      * Sets the {@code Address} of the {@code Member} that we are building.
      */
     public MemberBuilder withAddress(String address) {
-        this.address = new Address(address);
+        if (address != null) {
+            this.address = new Address(address);
+        } else {
+            this.address = null;
+        }
         return this;
     }
 
@@ -92,7 +96,11 @@ public class MemberBuilder {
      * Sets the {@code Email} of the {@code Member} that we are building.
      */
     public MemberBuilder withEmail(String email) {
-        this.email = new Email(email);
+        if (email != null) {
+            this.email = new Email(email);
+        } else {
+            this.email = null;
+        }
         return this;
     }
 

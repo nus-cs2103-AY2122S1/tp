@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.data.Data;
@@ -32,7 +33,7 @@ public class Member extends Data {
      */
     public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions) {
         super(name);
-        requireAllNonNull(phone, email, address, positions);
+        requireAllNonNull(phone, positions);
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -44,7 +45,7 @@ public class Member extends Data {
      */
     public Member(Name name, Phone phone, Email email, Address address, Set<Position> positions, TaskList taskList) {
         super(name);
-        requireAllNonNull(phone, email, address, positions, taskList);
+        requireAllNonNull(phone, positions, taskList);
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -56,12 +57,12 @@ public class Member extends Data {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public Optional<Email> getEmail() {
+        return Optional.ofNullable(email);
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<Address> getAddress() {
+        return Optional.ofNullable(address);
     }
 
     /**
@@ -128,11 +129,15 @@ public class Member extends Data {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getPhone());
+
+        if (getEmail().isPresent()) {
+            builder.append("; Email: ").append(getEmail().get());
+        }
+
+        if (getAddress().isPresent()) {
+            builder.append("; Address: ").append(getAddress().get());
+        }
 
         Set<Position> positions = getPositions();
         if (!positions.isEmpty()) {
