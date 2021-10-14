@@ -34,7 +34,7 @@ public class GetGameCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasGameId(gameId)) {
+        if (!model.hasGameWithId(gameId)) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_INVALID_GAME_ID, gameId.value));
         }

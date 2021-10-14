@@ -39,7 +39,7 @@ public class GetFriendCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasFriendId(friendId)) {
+        if (!model.hasFriendWithId(friendId)) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_INVALID_FRIEND_ID, friendId.value));
         }

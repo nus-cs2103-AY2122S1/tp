@@ -154,6 +154,11 @@ public class AddFriendCommandTest {
         }
 
         @Override
+        public Friend getFriend(FriendId friendId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setFriend(Friend target, Friend editedFriend) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,6 +205,11 @@ public class AddFriendCommandTest {
 
         @Override
         public void addGame(Game game) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Game getGame(GameId gameId) {
             throw new AssertionError("This method should not be called.");
         }
 
