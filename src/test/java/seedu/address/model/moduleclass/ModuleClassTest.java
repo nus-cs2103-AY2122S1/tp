@@ -44,4 +44,12 @@ public class ModuleClassTest {
 
     }
 
+    @Test
+    public void toStringTest() {
+        assertEquals(CS2100_LAB1.toString(), "Module: [CS2100]; Day: Tuesday; Time: 15:00; Remark: COM1 0113");
+
+        assertEquals(CS2100_TUT1.toString(), "Module: [CS2100]; Day: Wednesday; Time: 17:00; Remark: COM1 01-20");
+    }
+
+
 }

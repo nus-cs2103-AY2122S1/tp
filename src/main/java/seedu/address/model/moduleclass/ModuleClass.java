@@ -91,8 +91,7 @@ public class ModuleClass {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getModuleCode())
-                .append("; Module: ")
+        builder.append("Module: ")
                 .append(getModuleCode())
                 .append("; Day: ")
                 .append(getDay().toString())
