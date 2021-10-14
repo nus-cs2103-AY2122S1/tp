@@ -26,6 +26,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_POSITION = "#friend";
+    private static final String INVALID_TASK_NAME = "";
+    private static final String INVALID_TASK_ID = "abc";
+    private static final String INVALID_MEMBER_ID = "abc";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_POSITION_1 = "friend";
     private static final String VALID_POSITION_2 = "neighbour";
+    private static final String VALID_TASK_NAME = "write a poem";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -194,5 +198,28 @@ public class ParserUtilTest {
                 Arrays.asList(new Position(VALID_POSITION_1), new Position(VALID_POSITION_2)));
 
         assertEquals(expectedPositionSet, actualPositionSet);
+    }
+
+    @Test
+    public void parseTask_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask((String) null));
+    }
+
+    @Test
+    public void parsTask_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_TASK_NAME));
+    }
+
+    @Test
+    public void parseTask_validValueWithoutWhitespace_returnsName() throws Exception {
+        Name expectedName = new Name(VALID_TASK_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(VALID_TASK_NAME));
+    }
+
+    @Test
+    public void parseTask_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + VALID_TASK_NAME + WHITESPACE;
+        Name expectedName = new Name(VALID_TASK_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
     }
 }
