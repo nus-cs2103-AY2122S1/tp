@@ -3,22 +3,16 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.nio.file.Path;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
-import seedu.address.model.Model;
+import seedu.address.model.ModelStub;
 import seedu.address.model.Order;
 import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TransactionRecord;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
@@ -102,7 +96,7 @@ public class EndAndTransactOrderCommandTest {
     /**
      * A model stub that has only order related functionality.
      */
-    private class ModelStubWithOrderAndInventory implements Model {
+    private class ModelStubWithOrderAndInventory extends ModelStub {
         private Optional<Order> optionalOrder;
         private Inventory inventory;
 
@@ -112,91 +106,8 @@ public class EndAndTransactOrderCommandTest {
         }
 
         @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getInventoryFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setInventoryFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addItem(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setInventory(ReadOnlyInventory newData) {
             inventory.resetData(newData);
-        }
-
-        @Override
-        public ReadOnlyInventory getInventory() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasItem(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteItem(Item target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setItem(Item target, Item editedItem) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        /**
-         * Sorts the item list using the given {@code comparator}.
-         */
-        @Override
-        public void sortItems(Comparator<Item> comparator) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Item> getFilteredItemList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredItemList(Predicate<Item> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Item getItemWithName(String name) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Item getItemWithId(String id) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override

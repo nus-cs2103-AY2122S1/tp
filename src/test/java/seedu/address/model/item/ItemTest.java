@@ -76,6 +76,11 @@ public class ItemTest {
         editedPie = new ItemBuilder(APPLE_PIE).withId(VALID_ID_BAGEL).build();
         assertFalse(APPLE_PIE.equals(editedPie));
 
+        // different count -> returns false
+        String diffCount = String.valueOf(APPLE_PIE.getCount() + 1);
+        editedPie = new ItemBuilder(APPLE_PIE).withCount(diffCount).build();
+        assertFalse(APPLE_PIE.equals(editedPie));
+
         // different tags -> returns false
         editedPie = new ItemBuilder(APPLE_PIE).withTags(VALID_TAG_POPULAR).build();
         assertFalse(APPLE_PIE.equals(editedPie));

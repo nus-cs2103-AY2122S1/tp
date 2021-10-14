@@ -25,18 +25,31 @@ public class UniqueItemListTest {
 
     @Test
     public void contains_nullItem_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueItemList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Item) null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((Name) null));
+        assertThrows(NullPointerException.class, () -> uniqueItemList.contains((String) null));
     }
 
     @Test
     public void contains_itemNotInList_returnsFalse() {
+        // Search by item
         assertFalse(uniqueItemList.contains(APPLE_PIE));
+        // Search by name
+        assertFalse(uniqueItemList.contains(APPLE_PIE.getName()));
+        // Search by id
+        assertFalse(uniqueItemList.contains(APPLE_PIE.getId()));
     }
 
     @Test
     public void contains_itemInList_returnsTrue() {
         uniqueItemList.add(APPLE_PIE);
+
+        // Search by item
         assertTrue(uniqueItemList.contains(APPLE_PIE));
+        // Search by name
+        assertTrue(uniqueItemList.contains(APPLE_PIE.getName()));
+        // Search by id
+        assertTrue(uniqueItemList.contains(APPLE_PIE.getId()));
     }
 
     @Test

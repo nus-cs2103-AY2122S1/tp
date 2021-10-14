@@ -2,21 +2,20 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showItemAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.item.Item;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,65 +26,57 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalInventory(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ITEM);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
-        expectedModel.deleteItem(itemToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showItemAtIndex(model, INDEX_FIRST_ITEM);
-
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_ITEM);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
+    public void execute_deleteExistingItemByName_success() {
+        DeleteCommand deleteCommand = new DeleteCommand(APPLE_PIE.getName(), 1);
 
         Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
-        expectedModel.deleteItem(itemToDelete);
-        showNoItem(expectedModel);
+        expectedModel.deleteItem(APPLE_PIE.getName(), 1);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, APPLE_PIE.updateCount(1));
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showItemAtIndex(model, INDEX_FIRST_ITEM);
+    public void execute_deleteExistingItemById_success() {
+        DeleteCommand deleteCommand = new DeleteCommand(APPLE_PIE.getId(), 1);
 
-        Index outOfBoundIndex = INDEX_SECOND_ITEM;
-        // ensures that outOfBoundIndex is still in bounds of inventory list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getInventory().getItemList().size());
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        expectedModel.deleteItem(APPLE_PIE.getId(), 1);
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, APPLE_PIE.updateCount(1));
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_nonexistentName_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(BAGEL.getName(), -1);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_ITEM_NAME_NOT_FOUND, BAGEL.getName());
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_nonexistentId_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(BAGEL.getId(), -1);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_ITEM_ID_NOT_FOUND, BAGEL.getId());
+
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_ITEM);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_ITEM);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(VALID_NAME_BAGEL, -1);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(VALID_NAME_DONUT, -1);
+        DeleteCommand deleteThirdCommand = new DeleteCommand(VALID_ID_BAGEL, -1);
+        DeleteCommand deleteFourthCommand = new DeleteCommand(VALID_NAME_DONUT, 2);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_ITEM);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(VALID_NAME_BAGEL, -1);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -94,16 +85,11 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different item -> returns false
+        // different values -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoItem(Model model) {
-        model.updateFilteredItemList(p -> false);
-
-        assertTrue(model.getFilteredItemList().isEmpty());
+        // different id -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
+        // different count -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteFourthCommand));
     }
 }

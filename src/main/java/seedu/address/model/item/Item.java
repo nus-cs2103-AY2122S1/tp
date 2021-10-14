@@ -122,6 +122,7 @@ public class Item {
         Item otherItem = (Item) other;
         return otherItem.getName().equals(getName())
                 && otherItem.getId().equals(getId())
+                && otherItem.getCount().equals(getCount())
                 && otherItem.getTags().equals(getTags());
     }
 
