@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
-import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
@@ -65,7 +64,7 @@ public class JsonAdaptedPolicy {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted policy.
      */
-    public Policy toModelType(Person policy_owner) throws IllegalValueException {
+    public Policy toModelType(Person policyOwner) throws IllegalValueException {
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
         }
@@ -121,10 +120,10 @@ public class JsonAdaptedPolicy {
 
         final Commission modelCommission = new Commission(Integer.parseInt(commission));
 
-        if (policy_owner == null) {
+        if (policyOwner == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-        return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, policy_owner);
+        return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, policyOwner);
     }
 }

@@ -30,7 +30,8 @@ class JsonSerializableSiasa {
      * Constructs a {@code JsonSerializableSiasa} with the given persons and policies.
      */
     @JsonCreator
-    public JsonSerializableSiasa(@JsonProperty("persons") List<JsonAdaptedPerson> persons, @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
+    public JsonSerializableSiasa(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                 @JsonProperty("policies") List<JsonAdaptedPolicy> policies) {
         this.persons.addAll(persons);
         this.policies.addAll(policies);
     }
