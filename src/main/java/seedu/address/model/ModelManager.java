@@ -176,7 +176,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean isPersonExistToView() {
-        return personToView.size() == 1 && personToView.get(0) != null;
+        return personToView.size() == 1;
     }
 
     @Override

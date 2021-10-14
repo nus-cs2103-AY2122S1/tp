@@ -33,6 +33,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -122,6 +123,15 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new FilterCommand(new PersonContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        String input = "1";
+        ClientId clientId = new ClientId(input);
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+            ViewCommand.COMMAND_WORD + " " + input);
+        assertEquals(new ViewCommand(clientId, new PersonHasId(clientId)), command);
     }
 
     @Test

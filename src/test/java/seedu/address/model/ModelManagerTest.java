@@ -97,6 +97,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void test_isPersonExistToView() {
+        // predicate returns empty list -> false
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.updatePersonToView(new PersonHasId(CARL.getClientId()));
+        assertFalse(modelManager.isPersonExistToView());
+
+        // predicate returns 1 person in list -> true
+        modelManager.updatePersonToView(new PersonHasId(ALICE.getClientId()));
+        assertTrue(modelManager.isPersonExistToView());
+    }
+
+    @Test
     public void getPersonToView_viewFirstClient_returnsTrue() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         UserPrefs userPrefs = new UserPrefs();
