@@ -2,6 +2,8 @@ package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalFriends.AMY;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +22,9 @@ public class DeleteFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteFriendCommand() {
-        // TODO Update after delete command is updated
-        // assertParseSuccess(parser, DeleteFriendCommand.COMMAND_WORD + " " + AMY.getFriendId().toString(),
-        //         new DeleteFriendCommand(AMY.getFriendId()));
+        String userInput = " " + DeleteFriendCommand.COMMAND_WORD + " " + AMY.getFriendId().toString();
+        assertParseSuccess(parser, userInput,
+                 new DeleteFriendCommand(AMY.getFriendId()));
     }
 
     @Test

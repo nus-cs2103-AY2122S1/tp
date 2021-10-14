@@ -315,8 +315,6 @@ public class MainWindow extends UiPart<Stage> {
         hideFriendBox();
         showGameBox();
         if (commandResult.isGameGet()) {
-            // TODO: hide the personlist panel
-            //TODO: show the game detailed card
             handleShowGameMainCard(commandResult);
         } else {
             showGameList();
