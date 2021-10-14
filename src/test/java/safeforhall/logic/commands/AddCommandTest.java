@@ -20,6 +20,7 @@ import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
 import safeforhall.model.ReadOnlyAddressBook;
 import safeforhall.model.ReadOnlyUserPrefs;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.PersonBuilder;
 
@@ -114,6 +115,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -125,6 +131,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +155,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

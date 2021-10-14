@@ -17,4 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_FACULTY = new Prefix("f/");
     public static final Prefix PREFIX_FETDATE = new Prefix("fd/");
     public static final Prefix PREFIX_COLLECTIONDATE = new Prefix("cd/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_VENUE = new Prefix("l/");
+    public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
 }

@@ -10,6 +10,7 @@ import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
+import safeforhall.logic.commands.EaddCommand;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
@@ -71,6 +72,9 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case EaddCommand.COMMAND_WORD:
+            return new EaddCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
