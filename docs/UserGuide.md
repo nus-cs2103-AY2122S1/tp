@@ -12,7 +12,7 @@ Finding your next lead has never been easier.
 * [Quick Start](#quick-start)
 * [Client Information](#client-information)
 * [Features](#features)
-    * [Create new contact: add](#create-new-contact--create)
+    * [Create new contact: add](#create-new-contact--add)
     * [Retrieve particular contact: view](#retrieve-particular-contact--view)
     * [Update existing contact: edit](#update-existing-contact--edit)
     * [Delete particular contact: delete](#delete-particular-contact--delete)
@@ -82,15 +82,19 @@ Address | String | a/
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-
-* In the format for the commands provided, words which are in UPPERCASE refers to input that the user must key in
+   
+* When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
+   
+* In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
+   
+* If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding argument tag
 
 * Inputs in square brackets are optional input:<br>
   e.g. `KEYWORD [OTHER_KEYWORD]` can be in the form of `firstName` or `firstName lastName`
 
-* Inputs with `…`​ at the end refers to inputs that can be used multiple times in that command
-  .<br>
-  e.g. `[tag/ATTRIBUTE]…​` can be in the form of `e/@gmail.com` or `e/@gmail.com r/5`
+* Inputs with `…`​ at the end refers to commands that can accept multiple attribute inputs
+  <br>
+  e.g. `<email>/{EMAIL}…​` can be in the form of `e/@gmail.com` or `e/@gmail.com r/5`
 </div>
 
 
@@ -98,7 +102,7 @@ Address | String | a/
 
 Adds a new client to the address book.
 
-Format: `add <name>/{client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}...​`
+Format: `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <attribute>/{OTHER ATTRIBUTES} ...​`
 
 * A client must have minimally the name and email tag filled during creation
 * Any other tags are optional
@@ -113,7 +117,7 @@ Examples:
 
 Fully view a client’s information in detail.
 
-Format: `view {client’s id}`
+Format: `view {CLIENT'S ID}`
 
 Example: `view 2` would be used to view client 2's information
 
@@ -124,7 +128,7 @@ attributes of a client, using the tag of the client’s attribute.
 
 * Multiple attributes could be changed with one command.
 
-Format: `update {client’s id} <attribute>/{changed value of attribute} ...`
+Format: `update {CLIENT'S ID} <attribute>/{CHANGED VALUE OF ATTRIBUTE} ...`
 
 Examples:
 
@@ -137,7 +141,7 @@ Examples:
 Deletes an existing client from the address book using their either client id or email address identify the client. 
 Both attributes can be given together.
 
-Format: `delete <client id>/{client’s id} <email>/{email}`
+Format: `delete <client id>/{CLIENT'S ID} <email>/{EMAIL}`
 
 * Attributes would be limited to client id, email or both.
 
@@ -170,12 +174,12 @@ Examples:
 
 Finds clients whose contacts match with the given keywords.
 
-Format: `search KEYWORD [MORE_KEYWORDS]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
+Format: `search KEYWORD [MORE_KEYWORDS]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
 
-* `KEYWORD` and `MORE_KEYWORDS` will be used to match will all attribute of the person.
-* `ATTRIBUTE/` refers to the argument tag for the client's attribute.
-* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
-* If no `KEYWORD` is provided, search will be based on `ATTRIBUTE/ATTRIBUTE_KEYWORD` only.
+* `KEYWORD` and `MORE_KEYWORDS` will be used to match with all attribute of the person.
+* `<attribute>/` refers to the argument tag for the client's attribute.
+* `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
+* If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only.
 * The search is case-insensitive. e.g `keith` will match `Keith`.
 * The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
 * Clients matching at least one keyword will be returned (i.e. `OR` search).
@@ -191,13 +195,13 @@ Examples:
 
 Filter the current list by the given keywords.
 
-Format: `filter [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...`
+Format: `filter [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
 
 * Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
-* `KEYWORD` will be used to match will all attribute of the person.
-* If no `KEYWORD` is provided, then filter will be based on `ATTRIBUTE/ATTRIBUTE_KEYWORDS`
-* `ATTRIBUTE/` refers to the argument tag for the client's attribute.
-* `ATTRIBUTE_KEYWORD` refers to the keyword that is to be matched with the corresponding client attribute.
+* `KEYWORD` will be used to match with all attribute of the person.
+* If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}`
+* `<attribute>/` refers to the argument tag for the client's attribute.
+* `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
 * The filter is case-insensitive. e.g `keith` will match `Keith`.
 * The order of the keywords does not matter. e.g. `John Doe` will match `Doe John`.
 * Clients matching at least one keyword will be returned (i.e. `OR` filter).
@@ -246,13 +250,12 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 
 Action | Format | Examples
 --------|---------|---------
-**Create** | `add <name>/{client’s name} <email>/{email} <phone-no>/{phone number} <risk-appetite>/{risk appetite}`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
-**View** | `view {client’s id}` | view 123 |
-**Delete** | `delete <client id>/{client’s id} <email>/{email}` | delete i/4  |
-**Edit** | `update {client’s id} <attribute>/{change value of attribute}` | update 1234 n/Dominic p/12345678 |
+**Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
+**View** | `view {CLIENT'S ID}` | view 123 |
+**Delete** | `delete <client id>/{CLIENT'S ID} <email>/{EMAIL}` | delete i/4  |
+**Edit** | `update {CLIENT'S ID} <attribute>/{CHANGED VALUE OF ATTRIBUTE} ...` | update 1234 n/Dominic p/12345678 |
 **List** | `list` | - |
-**Find** | `find KEYWORD [OTHER_KEYWORD]` | find alex tom |
-**Search** | `search [KEYWORD]... [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter KEYWORD [OTHER_KEYWORD] [ATTRIBUTE/ATTRIBUTE_KEYWORD]...` | search * e/doe@gmail.com p/9 |
+**Search** | `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | search * e/doe@gmail.com r/5 |
+**Filter** | `filter KEYWORD [MORE KEYWORDS]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | search * e/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
 **Exit** | `exit` | - |
