@@ -10,6 +10,7 @@ import tutoraid.logic.commands.ClearCommand;
 import tutoraid.logic.commands.Command;
 import tutoraid.logic.commands.DeleteProgressCommand;
 import tutoraid.logic.commands.DeleteStudentCommand;
+import tutoraid.logic.commands.EditStudentCommand;
 import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.commands.ListCommand;
@@ -65,6 +66,9 @@ public class TutorAidParser {
 
         case DeleteStudentCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case EditStudentCommand.COMMAND_WORD:
+            return new EditStudentCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();

@@ -24,6 +24,9 @@ import tutoraid.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static StudentListPanel fullPanel = null;
+    private static StudentListPanel minimalPanel = null;
+
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -59,6 +62,9 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        fullPanel = new StudentListPanel(logic.getFilteredStudentList(), true);
+        minimalPanel = new StudentListPanel(logic.getFilteredStudentList(), false);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -110,15 +116,18 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the student's particulars of this window.
      */
     void fillStudentCard(boolean viewAll) {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), viewAll);
+        studentListPanel = viewAll
+            ? fullPanel
+            : minimalPanel;
+        studentListPanelPlaceholder.getChildren().clear();
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts(boolean viewAll) {
-        fillStudentCard(viewAll);
+    void fillInnerParts() {
+        fillStudentCard(false); // TutorAid launches with list view
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

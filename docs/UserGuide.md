@@ -101,6 +101,21 @@ Format: `del -s STUDENT_INDEX`
 Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
 
+### Editing a student : `edit`
+
+Edits the specified student with the given student index from TutorAid.
+
+Format: `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
+
+* Edits the student at the specified STUDENT_INDEX.
+* The index refers to the index number shown in the displayed student list.
+* The index must be a positive integer 1,2,3, …​
+* At least one of the optional fields should be present
+
+Example:
+
+* `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
+
 ### Viewing a student : `view`
 
 Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
@@ -213,6 +228,7 @@ Action | Format, Examples
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
+**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222` 
 **List** | `list`
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
