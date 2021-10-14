@@ -1,8 +1,8 @@
 package tutoraid.model.lesson;
 
-import java.util.Objects;
-
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents a Lesson in the TutorAid.
