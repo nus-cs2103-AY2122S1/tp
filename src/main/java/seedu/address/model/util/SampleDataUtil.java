@@ -22,33 +22,32 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+    private static final Person alexYeoh = createPerson("Alex Yeoh", "87438807", "e0123456@u.nus.edu",
+            "Blk 30 Geylang Street 29, #06-40", "test1", "e0123456", "student",
+            "A0123456A", "01", "friends");
+
+    private static final Person berniceYu = createPerson("Bernice Yu", "99272758",
+            "e0123457@u.nus.edu", "Blk 30 Lorong 3 Serangoon Gardens, #07-18", "test2",
+            "e0123457", "student", "A0123456B", "02", "colleagues", "friends");
+
+    private static final Person charlotteOliveiro = createPerson("Charlotte Oliveiro", "93210283",
+            "e0123458@u.nus.edu", "Blk 11 Ang Mo Kio Street 74, #11-04", "test3",
+            "e0123458", "student", "A0123456C", "03", "neighbours");
+
+    private static final Person davidLi = createPerson("Irfan Ibrahim", "92492021",
+            "e0123450@u.nus.edu", "Blk 47 Tampines Street 20, #17-35", "test5",
+            "e0123450", "student", "A0123456E", "05", "classmates");
+
+    private static final Person irfanIbrahim = createPerson("Irfan Ibrahim", "92492021",
+            "e0123450@u.nus.edu", "Blk 47 Tampines Street 20, #17-35" , "test5",
+            "e0123450", "student", "A0123456E", "05", "classmates");
+
+    private static final Person royBalakrishnan = createPerson("Roy Balakrishnan", "92624417",
+            "e0123451@u.nus.edu", "Blk 45 Aljunied Street 85, #11-31", "test6",
+            "e0123451", "student", "A0123456F", "06", "colleagues");
+
     public static Person[] getSamplePersons() {
-        return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), new GitHubId("test1"), new NusNetworkId("e0123456"),
-                new Type("student"), new StudentId("A0123456A"), new TutorialId("01")),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), new GitHubId("test2"), new NusNetworkId("e0123457"),
-                new Type("student"), new StudentId("A0123456B"), new TutorialId("02")),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new GitHubId("test3"), new NusNetworkId("e0123458"),
-                new Type("student"), new StudentId("A0123456C"), new TutorialId("03")),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family"), new GitHubId("test4"), new NusNetworkId("e0123459"),
-                new Type("student"), new StudentId("A0123456D"), new TutorialId("04")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), new GitHubId("test5"), new NusNetworkId("e0123450"),
-                new Type("student"), new StudentId("A0123456E"), new TutorialId("05")),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"), new GitHubId("test6"), new NusNetworkId("e0123451"),
-                new Type("student"), new StudentId("A0123456F"), new TutorialId("06"))
-        };
+        return new Person[] { alexYeoh, berniceYu, charlotteOliveiro, davidLi, irfanIbrahim, royBalakrishnan };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -68,4 +67,25 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Create a Person with the given values
+     * @param name Name of the person
+     * @param phone Phone of the person
+     * @param email Email of the person
+     * @param address address of the person
+     * @param gitHubId gitHubId of the person
+     * @param nusNetworkId nusNetworkId of the person
+     * @param type tupe of the person
+     * @param studentId studentId of the person
+     * @param tutorialId tutorialId of the person
+     * @param tags tags of the person
+     * @return A person
+     */
+    public static Person createPerson(String name, String phone, String email, String address, String gitHubId,
+                                      String nusNetworkId, String type, String studentId, String tutorialId,
+                                      String... tags) {
+        return new Person(new Name(name), new Phone(phone), new Email(email), new Address(address), getTagSet(tags),
+                new GitHubId(gitHubId), new NusNetworkId(nusNetworkId), new Type(type), new StudentId(studentId),
+                new TutorialId(tutorialId));
+    }
 }
