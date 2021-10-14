@@ -242,7 +242,7 @@ public class StringUtilTest {
                 Integer.toString(i + range + 2), range));
     }
 
-    //---------------- Tests for areUnsignedIntegersWithinRange ---------------------------
+    //---------------- Tests for isIntegerLargerOrEqualToValue ---------------------------
 
     @Test
     public void isIntegerLargerOrEqualToValue() {
