@@ -19,6 +19,6 @@ public class ScheduleCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return new CommandResult(SHOWING_SCHEDULE_MESSAGE, false, true, false);
+        return new CommandResult(SHOWING_SCHEDULE_MESSAGE, false, false, false, true, false);
     }
 }

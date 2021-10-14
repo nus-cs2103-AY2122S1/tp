@@ -130,7 +130,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getFilteredTagList());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -157,15 +157,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Displays the person list.
-     */
-    @FXML
-    public void handleShowPersonList() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-    }
-
-    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -175,15 +166,6 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
-    }
-
-    /**
-     * Displays tag list instead of the default person list.
-     */
-    @FXML
-    public void handleShowTagList() {
-        tagListPanel = new TagListPanel(logic.getFilteredTagList());
-        personListPanelPlaceholder.getChildren().add(tagListPanel.getRoot());
     }
 
     void show() {
@@ -202,12 +184,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleShowSchedule() {
+    private void handleSchedule() {
         centerPanel.displaySchedulePanel();
     }
 
-    private void handlePersonList() {
+    private void handleShowPersonList() {
         centerPanel.displayPersonListPanel();
+    }
+
+    /**
+     * Displays tag list instead of the default person list.
+     */
+    public void handleShowTagList() {
+        centerPanel.displayTagListPanel();
     }
 
     /**
@@ -234,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowSchedule()) {
-                handleShowSchedule();
+                handleSchedule();
             }
 
             if (commandResult.isExit()) {

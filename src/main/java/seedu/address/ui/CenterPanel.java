@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The Center Panel of the App that can switch between {@code Person Panel} and {@code Calendar Panel}.
@@ -21,6 +22,8 @@ public class CenterPanel extends UiPart<Region> {
 
     private PersonListPanel personListPanel;
 
+    private TagListPanel tagListPanel;
+
     @FXML
     private StackPane centerPanelPlaceholder;
 
@@ -30,10 +33,11 @@ public class CenterPanel extends UiPart<Region> {
      * @param calendar The calendar in the CenterPanel.
      * @param personList The ObservableList of persons.
      */
-    public CenterPanel(Calendar calendar, ObservableList<Person> personList) {
+    public CenterPanel(Calendar calendar, ObservableList<Person> personList, ObservableList<Tag> tagList) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
         schedulePanel = new SchedulePanel(calendar);
+        tagListPanel = new TagListPanel(tagList);
         displayPersonListPanel();
     }
 
@@ -46,7 +50,7 @@ public class CenterPanel extends UiPart<Region> {
     }
 
     /**
-     * Bring PersonListPanel to top of the stack's child list.
+     * Brings PersonListPanel to top of the stack's child list.
      */
     public void displayPersonListPanel() {
         if (!centerPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
@@ -55,11 +59,20 @@ public class CenterPanel extends UiPart<Region> {
     }
 
     /**
-     * Bring SchedulePanel to top of the stack's child list.
+     * Brings SchedulePanel to top of the stack's child list.
      */
     public void displaySchedulePanel() {
         if (!centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot())) {
             centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
+        }
+    }
+
+    /**
+     * Brings TagListPanel to top of the stack's child list.
+     */
+    public void displayTagListPanel() {
+        if (!centerPanelPlaceholder.getChildren().contains(tagListPanel.getRoot())) {
+            centerPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
         }
     }
 }

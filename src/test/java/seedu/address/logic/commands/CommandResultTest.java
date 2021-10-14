@@ -14,12 +14,9 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-<<<<<<< HEAD
-        assertTrue(commandResult.equals(new CommandResult("feedback", true, false, false, false)));
-=======
-        assertTrue(commandResult.equals(
-                new CommandResult("feedback", false, false, false)));
->>>>>>> master
+
+        assertTrue(commandResult.equals(new CommandResult("feedback",
+                true, false, false, false, false)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -33,31 +30,26 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
-<<<<<<< HEAD
         // different isShowPersonList value -> return false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, false, false)));
 
         // different isShowHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, true, false, false, false)));
 
         // different isShowTagList value -> return false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, true, false, false)));
+
+        // different isShowSchedule value -> return false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, true, false)));
 
         // different isExit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, false, true)));
-=======
-        // different showHelp value -> returns false
-        assertFalse(commandResult.equals(
-                new CommandResult("feedback", true, false, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, false, true)));
 
-        // different showSchedule value -> returns false
-        assertFalse(commandResult.equals(
-                new CommandResult("feedback", false, true, false)));
-
-        // different exit value -> returns false
-        assertFalse(commandResult.equals(
-                new CommandResult("feedback", false, false, true)));
->>>>>>> master
     }
 
     @Test
@@ -70,34 +62,24 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-<<<<<<< HEAD
         // different isShowPersonList value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                false, false, false, false).hashCode());
+                false, false, false, false, false).hashCode());
 
         // different isShowHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                false, true, false, false).hashCode());
+                false, true, false, false, false).hashCode());
 
         // different isShowTagList value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                false, false, true, false).hashCode());
+                false, false, true, false, false).hashCode());
+
+        // different isSchedule value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
+                false, false, false, true, false).hashCode());
 
         // different isExit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback",
-                false, false, false, true).hashCode());
-=======
-        // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", true, false, false).hashCode());
-
-        // different showSchedule value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, true, false).hashCode());
-
-        // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(),
-                new CommandResult("feedback", false, false, true).hashCode());
->>>>>>> master
+                false, false, false, false, true).hashCode());
     }
 }

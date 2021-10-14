@@ -8,12 +8,13 @@ public class TagCommand extends Command {
 
     public static final String COMMAND_WORD = "tag";
 
-    public static final String MESSAGE_SUCCESS = "Displayed all tags!";
+    public static final String MESSAGE_SUCCESS = "Displayed all tags! "
+            + "You can go back to list view by typing \"list\" or any other valid command.";
 
     @Override
     public CommandResult execute() throws CommandException {
         requireNonNull(model);
         model.getFilteredTagList();
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }

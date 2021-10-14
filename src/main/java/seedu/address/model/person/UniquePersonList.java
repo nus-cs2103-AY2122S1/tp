@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -140,14 +141,19 @@ public class UniquePersonList implements Iterable<Person> {
      *
      * @param tagList List of distinct tags to be checked against.
      */
-    public void calculateNumDuplicateTags(List<Tag> tagList) {
+    public List<Tag> calculateNumDuplicateTags(List<Tag> tagList) {
         requireNonNull(tagList);
-
-        tagList.forEach(t -> internalList.forEach(person -> {
-            if (person.getTags().contains(t)) {
-                t.incrementNumDuplicates();
-            }
-        }));
+        HashMap<Tag, Integer> tagWithNum = new HashMap<>();
+        // TODO: DEBUG
+        return tagList.stream().map(t -> {
+            internalList.forEach(person -> {
+                if (person.getTags().contains(t)) {
+                    t.incrementNumDuplicates();
+                    tagWithNum.put(t, tagWithNum.get(t) + 1);
+                }
+            });
+            return new Tag(t.tagName, tagWithNum.get(t));
+        }).collect(Collectors.toList());
     }
 
     /**
@@ -157,10 +163,10 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Tag> asUnmodifiableTagList() {
         List<Tag> tagList = getDistinctTagList();
-        calculateNumDuplicateTags(tagList);
+        List<Tag> tagListWithNum = calculateNumDuplicateTags(tagList);
 
         ObservableList<Tag> tagObservableList = FXCollections.observableArrayList();
-        tagObservableList.setAll(tagList);
+        tagObservableList.setAll(tagListWithNum);
         return FXCollections.unmodifiableObservableList(tagObservableList);
     }
 

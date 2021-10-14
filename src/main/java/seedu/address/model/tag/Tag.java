@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -27,6 +27,17 @@ public class Tag {
     }
 
     /**
+     * Constructs a {@code Tag} with specified number of students labelled under this tag.
+     *
+     * @param tagName A valid tag name.
+     * @param numDuplicates Number of students labelled under this tag.
+     */
+    public Tag(String tagName, int numDuplicates) {
+        this(tagName);
+        this.numDuplicates = numDuplicates;
+    }
+
+    /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
@@ -34,6 +45,7 @@ public class Tag {
     }
 
     public void incrementNumDuplicates() {
+//        return new Tag(tagName, numDuplicates + 1);
         numDuplicates++;
     }
 
