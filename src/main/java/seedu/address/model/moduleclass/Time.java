@@ -10,7 +10,7 @@ public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Time should only contain numbers in the following format: HH:mm";
-    public static final String VALIDATION_REGEX = "\\d+:\\d+";
+    public static final String VALIDATION_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     private final LocalTime value;
 
     /**
@@ -19,7 +19,7 @@ public class Time {
      */
     public Time(String time) {
         requireNonNull(time);
-        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
+        checkArgument(time.matches(VALIDATION_REGEX) && isValidTime(time), MESSAGE_CONSTRAINTS);
         this.value = LocalTime.parse(time);
     }
 
@@ -28,10 +28,9 @@ public class Time {
      * Returns true if a string is valid DateTime.
      *
      * @param test the given String.
-     * @return True if the string can be parsed and is a valid DateTime, false otherwise.
-     * @throw DateTimeParseException if the test String cannot be parsed.
+     * @return True if the string can be parsed and is a valid time, false otherwise.
      */
-    public static boolean isValidTime(String test) throws DateTimeParseException {
+    public static boolean isValidTime(String test) {
         try {
             LocalTime.parse(test);
         } catch (DateTimeParseException e) {
