@@ -4,31 +4,31 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditItemDescriptor objects.
  */
-public class EditItemDescriptorBuilder {
+public class ItemDescriptorBuilder {
 
-    private EditItemDescriptor descriptor;
+    private ItemDescriptor descriptor;
 
-    public EditItemDescriptorBuilder() {
-        descriptor = new EditItemDescriptor();
+    public ItemDescriptorBuilder() {
+        descriptor = new ItemDescriptor();
     }
 
-    public EditItemDescriptorBuilder(EditItemDescriptor descriptor) {
-        this.descriptor = new EditItemDescriptor(descriptor);
+    public ItemDescriptorBuilder(ItemDescriptor descriptor) {
+        this.descriptor = new ItemDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditItemDescriptor} with fields containing {@code item}'s details
      */
-    public EditItemDescriptorBuilder(Item item) {
-        descriptor = new EditItemDescriptor();
+    public ItemDescriptorBuilder(Item item) {
+        descriptor = new ItemDescriptor();
         descriptor.setName(item.getName());
         descriptor.setId(item.getId());
         descriptor.setTags(item.getTags());
