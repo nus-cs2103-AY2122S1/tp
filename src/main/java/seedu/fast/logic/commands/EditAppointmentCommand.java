@@ -49,6 +49,7 @@ public class EditAppointmentCommand extends Command {
             + "%4$s";
     public static final String MESSAGE_UPDATE_APPOINTMENT_FAILED = "Unable to edit appointment. " +
             "At least one field to edit must be provided.";
+    public static final String MESSAGE_UPDATE_APPOINTMENT_ERROR = "No Appointment to edit.";
 
     private final Index index;
     private final EditAppointmentDescriptor editAppointmentDescriptor;
@@ -75,6 +76,10 @@ public class EditAppointmentCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(),
                 createEditedAppointment(personToEdit.getAppointment(), editAppointmentDescriptor));
+
+        if (personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            throw new CommandException(MESSAGE_UPDATE_APPOINTMENT_ERROR);
+        }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

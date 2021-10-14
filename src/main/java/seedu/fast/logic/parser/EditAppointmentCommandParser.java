@@ -26,7 +26,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE), ive);
+                    EditAppointmentCommand.MESSAGE_USAGE), ive);
         }
 
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();

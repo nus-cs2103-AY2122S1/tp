@@ -15,10 +15,12 @@ import java.util.List;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
+import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
+import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -76,6 +78,14 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final EditAppointmentDescriptor APPT_DES_AMY = new EditAppointmentDescriptorBuilder()
+            .withDate(VALID_APPOINTMENT_AMY).withTime(VALID_APPOINTMENT_TIME_AMY)
+            .withVenue(VALID_APPOINTMENT_VENUE_AMY).build();
+
+    public static final EditAppointmentDescriptor APPT_DES_BOB = new EditAppointmentDescriptorBuilder()
+            .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_BOB)
+            .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
 
     /**
      * Executes the given {@code command}, confirms that <br>
