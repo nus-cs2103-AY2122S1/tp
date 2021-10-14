@@ -59,6 +59,13 @@ public class Applicant {
     }
 
     /**
+     * Returns true if this applicant is applying to the given position.
+     */
+    public boolean isApplyingTo(Position position) {
+        return application.getPosition().equals(position);
+    }
+
+    /**
      * Returns true if both applicants have the same name.
      * This defines a weaker notion of equality between two applicants.
      */

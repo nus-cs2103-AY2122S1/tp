@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,6 +79,14 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         if (!internalList.remove(toRemove)) {
             throw new ApplicantNotFoundException();
         }
+    }
+
+    /**
+     * Removes all applicants from the list matching the given condition.
+     */
+    public void removeIf(Predicate<? super Applicant> condition) {
+        requireNonNull(condition);
+        internalList.removeIf(condition);
     }
 
     public void setApplicants(UniqueApplicantList replacement) {

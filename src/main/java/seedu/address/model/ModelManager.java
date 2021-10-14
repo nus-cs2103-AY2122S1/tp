@@ -248,8 +248,8 @@ public class ModelManager implements Model {
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
+        applicantBook.removeApplicantsUnderPosition(positionToDelete);
     }
-
 
     //=========== Filtered Position List Accessors =============================================================
     @Override
