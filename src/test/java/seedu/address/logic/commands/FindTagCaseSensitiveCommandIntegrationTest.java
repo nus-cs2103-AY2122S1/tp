@@ -1,16 +1,15 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.FindTagCaseInsensitiveCommandParser;
+
 import seedu.address.logic.parser.FindTagCaseSensitiveCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
 
 public class FindTagCaseSensitiveCommandIntegrationTest {
     private FindTagCaseSensitiveCommandParser parser = new FindTagCaseSensitiveCommandParser();

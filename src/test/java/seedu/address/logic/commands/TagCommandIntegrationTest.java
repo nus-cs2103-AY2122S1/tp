@@ -5,10 +5,10 @@ import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getNoTagTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +29,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class TagCommandIntegrationTest {
 
+    private TagCommandParser parser = new TagCommandParser();
+
     private EditPersonDescriptor descriptorAddFriend = new EditPersonDescriptorBuilder()
             .withTags(VALID_TAG_FRIEND).build();
     private EditPersonDescriptor descriptorAddHusband = new EditPersonDescriptorBuilder()
@@ -42,7 +44,6 @@ public class TagCommandIntegrationTest {
     private Model generateDefaultTagModel() {
         return new ModelManager(getTaggedTypicalAddressBook(VALID_TAG_WIFE), new UserPrefs());
     }
-    private TagCommandParser parser = new TagCommandParser();
 
     @Test
     public void execute_singleTagNoExistingUnfilteredList_success() {
