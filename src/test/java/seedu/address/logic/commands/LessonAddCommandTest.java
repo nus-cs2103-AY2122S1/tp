@@ -13,6 +13,8 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
@@ -144,6 +146,11 @@ public class LessonAddCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Calendar getCalendar() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -9,16 +9,16 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of persons that enforces uniqueness between its elements, and does not allow nulls.
+ * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}.
+ * As such, adding and updating of persons uses Person#isSamePerson(Person) for equality to ensure that the person
+ * being added or updated is unique in terms of identity in the UniquePersonList.
+ * However, the removal of a person uses Person#equals(Object) to ensure that the person with exactly the same fields
+ * will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -36,17 +36,6 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
-    }
-
-    /**
-     * Returns true if the list contains a person with a clashing lesson.
-     *
-     * @param toCheck The lesson to check.
-     * @return True if there is a clash in lesson timing, false otherwise.
-     */
-    public boolean hasClashes(Lesson toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(person -> person.hasClashingLessons(toCheck));
     }
 
     /**
@@ -112,13 +101,14 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+     *
+     * @param persons The Persons to be set.
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
         internalList.setAll(persons);
     }
 

@@ -104,10 +104,28 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with multiple sample lessons.
+     */
+    public PersonBuilder withLessons() {
+        this.lessons = SampleDataUtil.getSampleLessons();
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
+     */
+    public PersonBuilder withSampleLesson() {
+        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
+        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
+        this.lessons = lessonSetWithOneLesson;
         return this;
     }
 
@@ -236,24 +254,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
-        return this;
-    }
-
-    /**
-     * Parses the {@code lessons} into a {@code Set<Lesson>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withLessons() {
-        this.lessons = SampleDataUtil.getSampleLessons();
-        return this;
-    }
-
-    /**
-     * Sets the {@code Set<Lesson>} of the {@code Person} that we are building with one sample lesson.
-     */
-    public PersonBuilder withSampleLesson() {
-        Set<Lesson> lessonSetWithOneLesson = new TreeSet<>();
-        lessonSetWithOneLesson.add(SampleDataUtil.getSampleLesson());
-        this.lessons = lessonSetWithOneLesson;
         return this;
     }
 

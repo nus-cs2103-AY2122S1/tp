@@ -77,7 +77,7 @@ public class SampleDataUtil {
     }
 
     public static Set<Lesson> getSampleLessons() {
-        Set<Lesson> sampleLessons = new HashSet<>();
+        Set<Lesson> sampleLessons = new TreeSet<>();
         sampleLessons.add(new RecurringLesson(new Date("14 Jan 2022"),
             new TimeRange("1430-1530"),
                 new Subject("Math"), getSampleHomeworkSet()));
