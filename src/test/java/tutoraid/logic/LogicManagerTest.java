@@ -7,6 +7,7 @@ import static tutoraid.logic.commands.CommandTestUtil.PARENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_AMY;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_ADD_STUDENT_COMMAND;
 import static tutoraid.testutil.Assert.assertThrows;
 import static tutoraid.testutil.TypicalStudents.AMY;
 
@@ -17,7 +18,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.ListCommand;
 import tutoraid.logic.commands.exceptions.CommandException;
@@ -79,7 +79,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddStudentCommand.COMMAND_WORD + STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY
+        String addCommand = VALID_ADD_STUDENT_COMMAND + STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY
                 + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
