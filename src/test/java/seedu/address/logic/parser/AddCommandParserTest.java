@@ -37,8 +37,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -128,7 +128,7 @@ public class AddCommandParserTest {
                 + REMARK_DESC_AMY + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FORGETFUL, VALID_TAG_CARELESS)
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FORGETFUL, VALID_TAG_ZOOM)
                 .build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

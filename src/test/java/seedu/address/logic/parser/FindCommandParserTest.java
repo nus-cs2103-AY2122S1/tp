@@ -38,8 +38,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -145,7 +145,7 @@ public class FindCommandParserTest {
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
                 .withParentPhone(VALID_PARENT_PHONE_AMY).withParentEmail(VALID_PARENT_EMAIL_AMY)
-                .withTags(VALID_TAG_CARELESS, VALID_TAG_FORGETFUL).build();
+                .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
 
         FindCommand expectedCommand = new FindCommand(predicate);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -264,7 +264,7 @@ public class FindCommandParserTest {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withParentEmail(VALID_PARENT_EMAIL_AMY).withParentPhone(VALID_PARENT_PHONE_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY).withAcadStream(VALID_ACAD_STREAM_BOB)
-                .withSchool(VALID_SCHOOL_BOB).withTags(VALID_TAG_FORGETFUL, VALID_TAG_FORGETFUL, VALID_TAG_CARELESS)
+                .withSchool(VALID_SCHOOL_BOB).withTags(VALID_TAG_FORGETFUL, VALID_TAG_FORGETFUL, VALID_TAG_ZOOM)
                 .withCondition(FindCondition.ANY).build();
         FindCommand expectedCommand = new FindCommand(predicate);
 

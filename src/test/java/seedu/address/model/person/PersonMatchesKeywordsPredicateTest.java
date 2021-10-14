@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 
 import org.junit.jupiter.api.Test;
 
@@ -209,7 +209,7 @@ public class PersonMatchesKeywordsPredicateTest {
                 .withSchool(VALID_SCHOOL_AMY)
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
-                .withTags(VALID_TAG_FORGETFUL, VALID_TAG_CARELESS).build();
+                .withTags(VALID_TAG_FORGETFUL, VALID_TAG_ZOOM).build();
         PersonMatchesKeywordsPredicate secondPredicate = new PersonMatchesKeywordsPredicateBuilder()
                 .withName(VALID_NAME_BOB).build();
 
@@ -227,7 +227,7 @@ public class PersonMatchesKeywordsPredicateTest {
                 .withSchool(VALID_SCHOOL_AMY)
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
-                .withTags(VALID_TAG_FORGETFUL, VALID_TAG_CARELESS).build();
+                .withTags(VALID_TAG_FORGETFUL, VALID_TAG_ZOOM).build();
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

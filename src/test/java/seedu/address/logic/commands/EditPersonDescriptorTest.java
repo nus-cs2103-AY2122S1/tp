@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_BO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 
 import org.junit.jupiter.api.Test;
 
@@ -72,7 +72,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_CARELESS).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_ZOOM).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

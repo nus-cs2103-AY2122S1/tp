@@ -22,8 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CARELESS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -128,7 +128,7 @@ public class TypicalPersons {
             .withAcadLevel(VALID_ACAD_LEVEL_BOB)
             .withFee(VALID_FEE_BOB)
             .withRemark(VALID_REMARK_BOB)
-            .withTags(VALID_TAG_CARELESS, VALID_TAG_FORGETFUL).build();
+            .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER in name
 
