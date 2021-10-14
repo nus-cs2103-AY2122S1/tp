@@ -23,7 +23,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/joelchanzhiyang.png" width="200px">
 
 [[github](https://github.com/JoelChanZhiYang/)]
-[[portfolio](team/joelchan.md)]
+[[portfolio](team/joelchanzhiyang.md)]
 
 * Role: Team Lead
 * Responsibilities: Deliverables and deadlines + Scheduling and Tracking

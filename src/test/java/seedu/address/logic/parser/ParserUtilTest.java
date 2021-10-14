@@ -14,8 +14,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.Description;
+import seedu.address.model.claim.Status;
+import seedu.address.model.claim.Title;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Insurance;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -26,6 +30,10 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INSURANCE = "Money";
+    private static final String INVALID_CLAIM_TITLE = "@Title ";
+    private static final String INVALID_CLAIM_DESCRIPTION = " ";
+    private static final String INVALID_CLAIM_STATUS = "isCompleted";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,6 +41,12 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_INSURANCE_1 = "Life";
+    private static final String VALID_INSURANCE_2 = "Health";
+    private static final String VALID_INSURANCE_ANY_CAPS = "gENEraL";
+    private static final String VALID_CLAIM_TITLE = "Title";
+    private static final String VALID_CLAIM_DESCRIPTION = "Description description.";
+    private static final String VALID_CLAIM_STATUS = "Completed";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -58,7 +72,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -81,7 +95,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -104,7 +118,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -127,7 +141,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -189,8 +203,110 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDescription_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDescription(null));
+    }
+
+    @Test
+    public void parseDescription_validDescription_returnDescription() throws Exception {
+        Description actualDescription = ParserUtil.parseDescription(VALID_CLAIM_DESCRIPTION);
+        Description expectedDescription = new Description(VALID_CLAIM_DESCRIPTION);
+
+        assertEquals(actualDescription, expectedDescription);
+    }
+
+    @Test
+    public void parseDescription_invalidDescription_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDescription(INVALID_CLAIM_DESCRIPTION));
+    }
+
+    @Test
+    public void parseTitle_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTitle(null));
+    }
+
+    @Test
+    public void parseTitle_validTitle_returnTitle() throws Exception {
+        Title actualTitle = ParserUtil.parseTitle(VALID_CLAIM_TITLE);
+        Title expectedTitle = new Title(VALID_CLAIM_TITLE);
+
+        assertEquals(actualTitle, expectedTitle);
+    }
+
+    @Test
+    public void parseTitle_invalidTitle_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTitle(INVALID_CLAIM_TITLE));
+    }
+
+    @Test
+    public void parseStatus_null_throwsException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStatus(null));
+    }
+
+    @Test
+    public void parseStatus_validStatus_returnStatus() throws Exception {
+        Status actualStatus = ParserUtil.parseStatus(VALID_CLAIM_STATUS);
+        Status expectedStatus = new Status(VALID_CLAIM_STATUS);
+
+        assertEquals(actualStatus, expectedStatus);
+    }
+
+    @Test
+    public void parseStatus_invalidStatus_throwsException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatus(INVALID_CLAIM_STATUS));
+    }
+
+    @Test
+    public void parseInsurance_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurance(null));
+    }
+
+    @Test
+    public void parseInsurance_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurance(INVALID_INSURANCE));
+    }
+
+    @Test
+    public void parseInsurance_validValue_returnsTag() throws Exception {
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_1);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_1));
+    }
+
+    @Test
+    public void parseInsurance_validValueAnyCaps_returnsTag() throws Exception {
+        Insurance expectedInsurance = Insurance.of(VALID_INSURANCE_ANY_CAPS);
+        assertEquals(expectedInsurance, ParserUtil.parseInsurance(VALID_INSURANCE_ANY_CAPS));
+    }
+
+    @Test
+    public void parseInsurances_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseInsurances(null));
+    }
+
+    @Test
+    public void parseInsurances_collectionWithInvalidInsurances_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseInsurances(
+                Arrays.asList(VALID_INSURANCE_1, INVALID_INSURANCE)));
+    }
+
+    @Test
+    public void parseInsurances_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseInsurances(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseInsurances_collectionWithValidInsurances_returnsInsuranceSet() throws Exception {
+        Set<Insurance> actualInsuranceSet = ParserUtil.parseInsurances(
+                Arrays.asList(VALID_INSURANCE_1, VALID_INSURANCE_2));
+        Set<Insurance> expectedInsuranceSet = new HashSet<Insurance>(
+                Arrays.asList(Insurance.of(VALID_INSURANCE_1), Insurance.of(VALID_INSURANCE_2)));
+
+        assertEquals(expectedInsuranceSet, actualInsuranceSet);
     }
 }
