@@ -82,11 +82,9 @@ Address | String | a/
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-   
+
 * When `<attribute>` is given, it means that the any *attribute tag* can be used, with the exception of *client id* in some cases
-   
 * In the format for the commands provided, words which are in `UPPERCASE` refers to the `input` that the user must key in
-   
 * If the inputs are wrapped in curly brackets `{}`, they are inputs that are related to the preceeding argument tag
 
 * Inputs in square brackets are optional input:<br>
@@ -138,7 +136,7 @@ Examples:
 
 ### Delete particular contact : `delete`
 
-Deletes an existing client from the address book using their either client id or email address identify the client. 
+Deletes an existing client from the address book using their either client id or email address identify the client.
 Both attributes can be given together.
 
 Format: `delete <client id>/{CLIENT'S ID} <email>/{EMAIL}`
@@ -164,7 +162,7 @@ Sorts clients in order based off the inputted attribute
 Format: `sort <attribute>/{ASC/DSC}`
 
 * The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. 
-* The tags are case-insensitive. (ASC and asc both okay.)
+* The tags are case-insensitive. (ASC and asc are both okay.)
 
 Examples:
 * `sort r/ASC` will sort the list by ascending risk-appetite

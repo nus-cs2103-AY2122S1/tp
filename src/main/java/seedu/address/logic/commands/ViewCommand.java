@@ -33,7 +33,7 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updatePersonToView(predicate);
         if (!model.isPersonExistToView()) {
-            return new CommandResult(String.format(Messages.MESSAGE_VIEW_INVALID_CLIENT_ID, clientId.toString()));
+            return new CommandResult(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, clientId.toString()));
         }
         return new CommandResult(String.format(Messages.MESSAGE_VIEW_SUCCESS, model.getNameOfPersonToView()));
     }

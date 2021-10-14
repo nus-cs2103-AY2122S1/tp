@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_VIEW_INVALID_CLIENT_ID;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_CLIENT_ID;
 import static seedu.address.commons.core.Messages.MESSAGE_VIEW_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -66,7 +66,7 @@ class ViewCommandTest {
     @Test
     public void execute_invalidClientId_failure() {
         String userInput = "10";
-        String expectedMessage = String.format(MESSAGE_VIEW_INVALID_CLIENT_ID, userInput);
+        String expectedMessage = String.format(MESSAGE_NONEXISTENT_CLIENT_ID, userInput);
         PersonHasId predicate = preparePredicate(userInput);
         ViewCommand command = new ViewCommand(new ClientId(userInput), predicate);
         expectedModel.updatePersonToView(predicate);
