@@ -17,7 +17,6 @@ import seedu.address.model.task.Task;
 public class DeleteTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Removed %1$s task from %2$s";
-    public static final String MESSAGE_INVALID_TASK = "The size of %1$s's task list is not that big";
     public static final String COMMAND_WORD = "deletetask";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task, specified by the TASKINDEX, from person"
@@ -38,6 +37,8 @@ public class DeleteTaskCommand extends Command {
      * @param targetTaskIndex The Index of the target Task that belongs to target person.
      */
     public DeleteTaskCommand(Index targetPersonIndex, Index targetTaskIndex) {
+        requireNonNull(targetPersonIndex);
+        requireNonNull(targetTaskIndex);
         this.targetPersonIndex = targetPersonIndex;
         this.targetTaskIndex = targetTaskIndex;
     }
@@ -59,7 +60,7 @@ public class DeleteTaskCommand extends Command {
         tasks.addAll(personToEdit.getTasks());
 
         if (targetTaskIndex.getZeroBased() >= tasks.size()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
         }
 
         Task taskToRemove = tasks.get(targetTaskIndex.getZeroBased());
@@ -90,5 +91,13 @@ public class DeleteTaskCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit, Task taskRemoved) {
         return String.format(MESSAGE_SUCCESS, taskRemoved.getTaskName(), personToEdit.getName());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteTaskCommand // instanceof handles nulls
+                && targetPersonIndex.equals(((DeleteTaskCommand) other).targetPersonIndex)
+                && targetTaskIndex.equals(((DeleteTaskCommand) other).targetTaskIndex)); // state check
     }
 }
