@@ -224,11 +224,6 @@ public class FindCommandParserTest {
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidExperiencePrefixInput1,
                         PREFIX_EXPERIENCE)));
 
-        String invalidExperiencePrefixInput2 = " y/-11"; // negative number
-        assertThrows(ParseException.class, () ->
-                new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidExperiencePrefixInput2,
-                        PREFIX_EXPERIENCE)));
-
         String invalidTagPrefixInput = " t/old(70)"; // brackets
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidTagPrefixInput, PREFIX_TAG)));
