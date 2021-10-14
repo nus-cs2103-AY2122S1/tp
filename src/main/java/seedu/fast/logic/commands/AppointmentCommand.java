@@ -24,7 +24,6 @@ public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "appt";
     public static final String APPOINTMENT_DELETE_COMMAND = "del";
-    public static final String APPOINTMENT_EDIT_COMMAND = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"
@@ -52,8 +51,8 @@ public class AppointmentCommand extends Command {
             + PREFIX_DELETE_APPOINTMENT + APPOINTMENT_DELETE_COMMAND;
 
     public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added appointment with %1$s: %2$s %3$s %4$s";
-    public static final String MESSAGE_UPDATE_APPOINTMENT_SUCCESS = "Updated appointment with %1$s: %2$s %3$s "
-            + "%4$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_FAILURE = "Appointment already exist! " +
+            "Edit the appointment or delete to re-add!";
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
     public static final String MESSAGE_DELETE_APPOINTMENT_FAILED = "No appointment with %1$s yet!";
 
@@ -86,6 +85,10 @@ public class AppointmentCommand extends Command {
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), appointment);
 
+        if (!personToEdit.getAppointment().getDate().equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            throw new CommandException(MESSAGE_ADD_APPOINTMENT_FAILURE);
+        }
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -108,8 +111,6 @@ public class AppointmentCommand extends Command {
             message = MESSAGE_DELETE_APPOINTMENT_FAILED;
         } else if (isEmptyStatusBefore && !isEmptyStatusAfter) {
             message = MESSAGE_ADD_APPOINTMENT_SUCCESS;
-        } else if (!isEmptyStatusBefore && !isEmptyStatusAfter) {
-            message = MESSAGE_UPDATE_APPOINTMENT_SUCCESS;
         } else {
             // should never reach here
             message = MESSAGE_INVALID_COMMAND_FORMAT;
