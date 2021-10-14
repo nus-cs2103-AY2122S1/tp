@@ -1,16 +1,13 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.person.PrefixMapper.PREFIX_FUNCTION_MAP;
 import static seedu.address.model.person.PrefixMapper.PREFIX_NAME_MAP;
 
 import java.util.Comparator;
-import java.util.Set;
 import java.util.function.Function;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.tag.Tag;
 
 /**
  * Compare two {@code Person} based on {@code Prefix} and {@code SortDirection}
@@ -37,20 +34,10 @@ public class SortByAttribute implements Comparator<Person> {
 
     @Override
     public int compare(Person a, Person b) {
-        Function<Person, ?> getAttribute = PREFIX_FUNCTION_MAP.get(prefix);
-        Function<Person, String> getString;
+        Function<Person, String> getAttribute = PREFIX_FUNCTION_MAP.get(prefix).andThen(Object::toString);
 
-        // For tags, to sort and concatenate the resulting string to compare
-        if (prefix.equals(PREFIX_TAG)) {
-            @SuppressWarnings("unchecked")
-            Function<Person, Set<Tag>> getTags = (Function<Person, Set<Tag>>) getAttribute;
-            getString = getTags.andThen(this::concatenateTagString);
-        } else {
-            getString = getAttribute.andThen(Object::toString);
-        }
-
-        String sa = getString.apply(a);
-        String sb = getString.apply(b);
+        String sa = getAttribute.apply(a);
+        String sb = getAttribute.apply(b);
 
         int result = compareString(sa, sb);
         if (!direction.isAscending()) {
@@ -78,12 +65,5 @@ public class SortByAttribute implements Comparator<Person> {
         }
 
         return a.compareToIgnoreCase(b);
-    }
-
-    private String concatenateTagString(Set<Tag> tags) {
-        return tags.stream()
-                .map(Tag::toString)
-                .sorted(String::compareToIgnoreCase)
-                .reduce("", String::concat);
     }
 }

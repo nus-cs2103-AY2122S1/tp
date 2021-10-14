@@ -72,6 +72,7 @@ Last met/contacted | Date | l/
 Current financial plans | List of Strings | c/
 Disposable Income | Integer | d/
 Address | String | a/
+Tag | String | t/
 
 
 
@@ -161,7 +162,8 @@ Sorts clients in order based off the inputted attribute
 
 Format: `sort <attribute>/{ASC/DSC}`
 
-* The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order. 
+* The asc and dsc tag dictates whether filtered client list is sorted in ascending or descending order.
+* Sorting by the attribute Tag (t/) is not supported.
 * The tags are case-insensitive. (ASC and asc are both okay.)
 
 Examples:

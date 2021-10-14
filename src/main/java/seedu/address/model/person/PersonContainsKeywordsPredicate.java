@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.StringUtil.containsIgnoreCase;
+import static seedu.address.commons.util.StringUtil.containsStringIgnoreCase;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.model.person.PrefixMapper.PREFIX_FUNCTION_MAP;
 
@@ -28,7 +28,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
             Arrays.stream(ALL_PREFIXES).anyMatch(prefix -> {
                 Function<Person, String> getAttribute = PREFIX_FUNCTION_MAP.get(prefix).andThen(Object::toString);
                 String personAttribute = getAttribute.apply(person);
-                return containsIgnoreCase(personAttribute, x);
+                return containsStringIgnoreCase(personAttribute, x);
             })
         );
 
@@ -37,7 +37,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
                     Function<Person, String> getAttribute = PREFIX_FUNCTION_MAP.get(prefix).andThen(Object::toString);
                     String personAttribute = getAttribute.apply(person);
                     Optional<String> keyword = keywords.getValue(prefix);
-                    return keyword.map(x -> containsIgnoreCase(personAttribute, x)).orElse(true);
+                    return keyword.map(x -> containsStringIgnoreCase(personAttribute, x)).orElse(true);
                 })
                 .reduce(true, Boolean::logicalAnd);
 

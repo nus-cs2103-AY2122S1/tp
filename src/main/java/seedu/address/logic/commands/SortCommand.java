@@ -19,6 +19,8 @@ public class SortCommand extends Command {
             + "Parameters: <attribute>/{ASC/DESC}\n"
             + "Example: " + COMMAND_WORD + " ra/ asc";
 
+    public static final String MESSAGE_INVALID_PREFIX = "Sorting based on %s is not supported";
+
     private final SortByAttribute sorter;
 
     /**
