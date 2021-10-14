@@ -135,6 +135,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given folder {@code oldFolder} in the list with {@code newFolder}.
+     * {@code oldFolder} must exist in the address book.
+     * The folder identity of {@code newFolder} must not be the same as
+     * another existing folder in the address book.
+     */
+    public void setNewFolder(Folder oldFolder, Folder newFolder) {
+        requireNonNull(newFolder);
+
+        folders.setFolder(oldFolder, newFolder);
+    }
+
+    /**
      * Checks and returns true if folder already exists
      */
     public boolean hasFolderName(FolderName folderName) {

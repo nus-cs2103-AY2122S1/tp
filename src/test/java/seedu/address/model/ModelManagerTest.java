@@ -96,6 +96,13 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void folderRemoved_folderInAddressBook_returnsTrue() {
+        modelManager.addFolder(CCA);
+        modelManager.deleteFolder(CCA);
+        assertFalse(modelManager.hasFolder(CCA));
+    }
+
+    @Test
     public void hasFolder_folderNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasFolder(CCA));
     }

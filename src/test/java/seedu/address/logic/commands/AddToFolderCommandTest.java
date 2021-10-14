@@ -181,6 +181,11 @@ public class AddToFolderCommandTest {
         }
 
         @Override
+        public void setNewFolder(Folder oldFolder, Folder newFolder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasFolder(Folder folder) {
             throw new AssertionError("This method should not be called.");
         }

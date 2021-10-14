@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CreateFolderCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteFolderCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditFolderNameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -49,6 +50,8 @@ public class AddressBookParser {
         // allows for the flexibility of having commands with multiple words, e.g. rm -contacts
         if (userInput.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommandParser().parse(arguments);
+        } else if (userInput.startsWith(EditFolderNameCommand.COMMAND_WORD)) {
+            return new EditFolderNameCommandParser().parse(arguments);
         } else if (userInput.startsWith(DeleteFolderCommand.COMMAND_WORD)) {
             return new DeleteFolderCommandParser().parse(arguments);
         } else if (userInput.startsWith(EditCommand.COMMAND_WORD)) {

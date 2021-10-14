@@ -104,7 +104,8 @@ public class UniqueFolderList implements Iterable<Folder> {
     /**
      * Replaces the folder {@code target} in the list with {@code editedFolder}.
      * {@code target} must exist in the list.
-     * The folder identity of {@code editedFolder} must not be the same as another existing folder in the list.
+     * The folder identity of {@code editedFolder} must not be
+     * the same as another existing folder in the list.
      */
     public void setFolder(Folder target, Folder editedFolder) {
         requireAllNonNull(target, editedFolder);
@@ -118,6 +119,7 @@ public class UniqueFolderList implements Iterable<Folder> {
             throw new DuplicateFolderException();
         }
 
+        editedFolder.setAll(target);
         internalList.set(index, editedFolder);
     }
 
