@@ -1,5 +1,6 @@
 package seedu.address.model.friend;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -9,8 +10,8 @@ import org.junit.jupiter.api.Test;
 public class FriendNameTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new FriendName(null));
+    public void constructor_null_returnsFriendWithDefaultName() {
+        assertEquals(FriendName.DEFAULT_FRIEND_NAME, new FriendName(null));
     }
 
     @Test

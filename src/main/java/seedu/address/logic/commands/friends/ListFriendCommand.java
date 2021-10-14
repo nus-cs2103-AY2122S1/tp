@@ -59,6 +59,7 @@ public class ListFriendCommand extends Command {
 
     /**
      * Returns success message to display after running list
+     *
      * @return String containing success message
      */
     public String getMessageSuccess() {

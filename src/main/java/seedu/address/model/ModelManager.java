@@ -14,9 +14,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * Represents the in-memory model of the gitGud friends and games list data.
@@ -79,13 +79,13 @@ public class ModelManager implements Model {
 
     @Override
     public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+        return userPrefs.getFriendsListFilePath();
     }
 
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setFriendsListFilePath(addressBookFilePath);
     }
 
     //=========== FriendsBook ================================================================================
@@ -191,6 +191,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteGame(GameId targetId) {
+        // TODO: Check for gameId not found for DELETE.
         Game gameToDelete =
                 this.getGamesList().getGamesList()
                         .stream()

@@ -9,11 +9,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all friends list data at the gitGud level.
+ * Duplicates are not allowed (by .equals comparison).
  */
 public class FriendsList implements ReadOnlyFriendsList {
 
@@ -30,10 +30,11 @@ public class FriendsList implements ReadOnlyFriendsList {
         friends = new UniqueFriendsList();
     }
 
-    public FriendsList() {}
+    public FriendsList() {
+    }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Friends List using the friends in {@code toBeCopied}
      */
     public FriendsList(ReadOnlyFriendsList toBeCopied) {
         this();
@@ -43,15 +44,15 @@ public class FriendsList implements ReadOnlyFriendsList {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the friends list with {@code friends}.
+     * {@code friends} must not contain duplicate friends.
      */
     public void setFriends(List<Friend> friends) {
         this.friends.setFriends(friends);
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code FriendsList} with {@code newData}.
      */
     public void resetData(ReadOnlyFriendsList newData) {
         requireNonNull(newData);

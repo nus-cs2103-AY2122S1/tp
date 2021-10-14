@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -57,10 +56,10 @@ public class EditCommandTest {
 
         FriendBuilder personInList = new FriendBuilder(lastFriend);
         Friend editedFriend = personInList.withFriendName(VALID_NAME_BOB).withFriendId(VALID_FRIEND_ID_BOB)
-                .withGames(VALID_GAME_ID_CSGO).build();
+                .withGameFriendLinks().build();
 
         EditCommand.EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB)
-                .withFriendId(VALID_FRIEND_ID_BOB).withGames(VALID_GAME_ID_CSGO).build();
+                .withFriendId(VALID_FRIEND_ID_BOB).withGames().build();
         EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);

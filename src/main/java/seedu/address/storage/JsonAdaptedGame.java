@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.game.Game;
@@ -12,38 +12,33 @@ import seedu.address.model.game.GameId;
  */
 class JsonAdaptedGame {
 
-    private final String gameName;
+    private final String gameId;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedGame} with the given gameName {@code String}.
      */
     @JsonCreator
-    public JsonAdaptedGame(String gameName) {
-        this.gameName = gameName;
+    public JsonAdaptedGame(@JsonProperty("gameId") String gameId) {
+        this.gameId = gameId;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Game} into this class for Jackson use.
      */
     public JsonAdaptedGame(Game sourceInstance) {
-        gameName = sourceInstance.getGameId().value;
-    }
-
-    @JsonValue
-    public String getGameName() {
-        return gameName;
+        this.gameId = sourceInstance.getGameId().value;
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted game object into the model's {@code Game} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Game.
      */
     public Game toModelType() throws IllegalValueException {
-        if (!GameId.isValidGameId(gameName)) {
-            throw new IllegalValueException(GameId.MESSAGE_CONSTRAINTS);
+        if (!GameId.isValidGameId(gameId)) {
+            throw new IllegalValueException(GameId.MESSAGE_INVALID_CHARACTERS_IN_GAME_ID);
         }
-        return new Game(new GameId(gameName));
+        return new Game(new GameId(gameId));
     }
 
 }

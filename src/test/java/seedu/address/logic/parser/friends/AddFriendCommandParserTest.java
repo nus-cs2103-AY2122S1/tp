@@ -16,33 +16,38 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.testutil.FriendBuilder;
 
 public class AddFriendCommandParserTest {
     private final AddFriendCommandParser parser = new AddFriendCommandParser();
-    // TODO set a different message if preferred
     private final String invalidCommandFormatMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-           FriendId.MESSAGE_CONSTRAINTS);
+           AddFriendCommand.MESSAGE_USAGE);
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Friend expectedFriend = new FriendBuilder(BOB).build();
+        // BOB has valid name and friendId
+        Friend expectedFriendBob = new FriendBuilder(BOB).build();
+        Friend expectedFriendAmy = new FriendBuilder(AMY).build();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, FRIEND_ID_DESC_BOB + PREAMBLE_WHITESPACE + NAME_DESC_BOB,
-                new AddFriendCommand(expectedFriend));
+        // normal command
+        assertParseSuccess(parser, FRIEND_ID_DESC_BOB + NAME_DESC_BOB,
+                new AddFriendCommand(expectedFriendBob));
+
+        // with whitespace preamble
+        assertParseSuccess(parser, FRIEND_ID_DESC_AMY + PREAMBLE_WHITESPACE + NAME_DESC_AMY,
+                new AddFriendCommand(expectedFriendAmy));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, FRIEND_ID_DESC_BOB + NAME_DESC_AMY + NAME_DESC_BOB ,
-                new AddFriendCommand(expectedFriend));
+                new AddFriendCommand(expectedFriendBob));
     }
 
     @Test
     public void parse_compulsoryFieldsMissing_failure() {
-        // id missing
+        // name id missing
         assertParseFailure(parser, NAME_DESC_AMY, invalidCommandFormatMessage);
+        assertParseFailure(parser, NAME_DESC_BOB, invalidCommandFormatMessage);
     }
 
     @Test
@@ -67,9 +72,9 @@ public class AddFriendCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // no friend name
-        Friend expectedFriend = new FriendBuilder().withFriendId(AMY.getFriendId()
-                .toString()).buildNoName();
+        Friend expectedFriendAmyDefaultName = new FriendBuilder().withFriendId(AMY.getFriendId()
+                .toString()).withFriendName(null).build();
         assertParseSuccess(parser, FRIEND_ID_DESC_AMY,
-                new AddFriendCommand(expectedFriend));
+                new AddFriendCommand(expectedFriendAmyDefaultName));
     }
 }

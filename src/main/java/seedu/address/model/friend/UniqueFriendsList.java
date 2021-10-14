@@ -12,7 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A list of friends that enforces uniqueness between its elements and does not allow nulls.
@@ -97,7 +97,7 @@ public class UniqueFriendsList implements Iterable<Friend> {
      */
     public void link(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
         requireAllNonNull(toLink, gameFriendLinks);
-        Set<GameFriendLink> newGameList = new HashSet<>(toLink.getGames());
+        Set<GameFriendLink> newGameList = new HashSet<>(toLink.getGameFriendLinks());
 
         // TODO - Yu Zher
         // Temporary fix. Change as deemed necessary.

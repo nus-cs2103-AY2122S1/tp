@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,29 +11,31 @@ import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.friend.gamefriendlink.GameFriendLink;
-import seedu.address.model.friend.gamefriendlink.UserName;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
+import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.UserName;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
+ * The gameFriendLinkSet for each friend must be empty to prevent mismatched game and friend data
+ * in the event of storage load failure.
  */
 public class SampleDataUtil {
     public static Friend[] getSampleFriends() {
-        return new Friend[] {
-            createFriend("AlexY123", "Alex Yeoh",
-                "Valorant", "Minecraft"),
-            createFriend("BernieSanders", "Bernice Yu",
-                "RocketLeague", "Doom"),
-            createFriend("ChickenTender", "Charlotte Oliveiro",
-                "Halo", "Valorant"),
-            createFriend("Davidz", "David Li",
-                "ApexLegends"),
-            createFriend("II3", "Irfan Ibrahim",
-                "CSGO"),
-            createFriend("RoyJoy", "Roy Balakrishnan",
-                "Valorant", "CSGO")
+        return new Friend[]{
+                createFriend("AlexY123", "Alex Yeoh",
+                        "Valorant", "Minecraft"),
+                createFriend("BernieSanders", "Bernice Yu",
+                        "RocketLeague", "Doom"),
+                createFriend("ChickenTender", "Charlotte Oliveiro",
+                        "Halo", "Valorant"),
+                createFriend("Davidz", "David Li",
+                        "ApexLegends"),
+                createFriend("II3", "Irfan Ibrahim",
+                        "CSGO"),
+                createFriend("RoyJoy", "Roy Balakrishnan",
+                        "Valorant", "CSGO")
         };
     }
 
@@ -63,7 +66,7 @@ public class SampleDataUtil {
     /**
      * Create a Friend object with an array of gameIds.
      */
-    public static Friend createFriend(String friendIdString, String friendNameString, String ...gameIds) {
+    public static Friend createFriend(String friendIdString, String friendNameString, String... gameIds) {
         Set<GameFriendLink> gameFriendLinks = new HashSet<>();
         FriendId friendId = new FriendId(friendIdString);
         FriendName friendName = new FriendName(friendNameString);
@@ -80,4 +83,7 @@ public class SampleDataUtil {
         return new HashSet<>();
     }
 
+    public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {
+        return new HashSet<>(Arrays.asList(gameFriendLinks));
+    }
 }
