@@ -50,7 +50,7 @@ public class ExportCommand extends Command {
         }
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS));
+                String.format(MESSAGE_SUCCESS + " to " + filePath));
     }
 
 }
