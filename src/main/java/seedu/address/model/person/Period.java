@@ -123,6 +123,10 @@ public class Period {
      * Unions the input {@code Collection<Period> periods} with {@code this}.
      */
     public Collection<Period> union(Collection<Period> periods) {
+        if (periods.stream().count() == 0) {
+            //nothing to union to
+            return List.of(this);
+        }
         //the list of periods to union
         List<Period> toMerge = new ArrayList<>();
         Collection<Period> result = periods.stream()
