@@ -23,7 +23,7 @@ import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.StudentBuilder;
 
-public class AddCommandTest {
+public class AddStudentCommandTest {
 
     @Test
     public void constructor_nullStudent_throwsNullPointerException() {
