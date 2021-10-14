@@ -47,7 +47,7 @@ public class JsonProgrammerErrorStorage implements ProgrammerErrorStorage {
 
         Optional<JsonSerializableProgrammerError> jsonProgrammerError = JsonUtil.readJsonFile(
                 filePath, JsonSerializableProgrammerError.class);
-        if (!jsonProgrammerError.isPresent()) {
+        if (jsonProgrammerError.isEmpty()) {
             return Optional.empty();
         }
 
