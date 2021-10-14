@@ -5,6 +5,9 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
+import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 public class ApplicantBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
@@ -16,6 +19,8 @@ public class ApplicantBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Position position = new Position(new Title("software engineer"), new Description("This is a "
+            + "placeholder description"));
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -70,7 +75,7 @@ public class ApplicantBuilder {
     }
 
     public Applicant build() {
-        return new Applicant(name, phone, email, address);
+        return new Applicant(name, phone, email, address, position);
     }
 
 }

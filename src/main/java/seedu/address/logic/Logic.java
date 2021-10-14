@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 
@@ -38,10 +39,18 @@ public interface Logic {
     ObservableList<Position> getFilteredPositionList();
 
 
+    /** Returns an unmodifiable view of the filtered list of applicants */
+    ObservableList<Applicant> getFilteredApplicantList();
+
     /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    /**
+     * Returns the user prefs' applicant book file path.
+     */
+    Path getApplicantBookFilePath();
 
     /**
      * Returns the user prefs' position book file path.
