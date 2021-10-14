@@ -174,7 +174,7 @@ Examples:
 
 Finds clients whose contacts match with the given keywords.
 
-Format: `search KEYWORD [MORE_KEYWORDS]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
+Format: `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
 
 * `KEYWORD` and `MORE_KEYWORDS` will be used to match with all attribute of the person.
 * `<attribute>/` refers to the argument tag for the client's attribute.
