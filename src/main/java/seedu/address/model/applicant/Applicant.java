@@ -1,5 +1,8 @@
 package seedu.address.model.applicant;
 
+import seedu.address.model.application.Application;
+import seedu.address.model.position.Position;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -17,16 +20,18 @@ public class Applicant {
 
     // Data fields
     private final Address address;
+    private Application application;
 
     /**
      * Every field must be present and not null
      */
-    public Applicant(Name name, Phone phone, Email email, Address address) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Position dummyPosition) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.application = new Application(this, dummyPosition);
     }
 
     public Name getName() {
@@ -43,6 +48,10 @@ public class Applicant {
 
     public Address getAddress() {
         return address;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
     }
 
     /**
@@ -95,5 +104,4 @@ public class Applicant {
                 + "; Address: "
                 + address;
     }
-
 }
