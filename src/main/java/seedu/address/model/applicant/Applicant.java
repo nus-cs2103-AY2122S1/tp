@@ -54,9 +54,7 @@ public class Applicant {
         return address;
     }
 
-    public Application getApplication() {
-        return application;
-    }
+    public Application getApplication() { return application; }
 
     /**
      * Returns true if both applicants have the same name.
