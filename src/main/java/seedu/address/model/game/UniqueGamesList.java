@@ -51,7 +51,7 @@ public class UniqueGamesList implements Iterable<Game> {
      */
     public void add(Game gameToAdd) {
         requireNonNull(gameToAdd);
-        if (contains(gameToAdd)) {
+        if (containsId(gameToAdd.getGameId())) {
             throw new DuplicateGameException();
         }
         internalList.add(gameToAdd);
@@ -83,7 +83,7 @@ public class UniqueGamesList implements Iterable<Game> {
         }
 
         // guard against if editedGame already exists in the UniqueGamesList.
-        if (!gameToEdit.equals(editedGame) && contains(editedGame)) {
+        if (!gameToEdit.isSameGameId(editedGame) && containsId(editedGame.getGameId())) {
             throw new DuplicateGameException();
         }
 

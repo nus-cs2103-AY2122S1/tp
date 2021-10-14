@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -105,8 +104,12 @@ public class FriendsList implements ReadOnlyFriendsList {
         friends.setFriend(target, editedFriend);
     }
 
-    public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
-        friends.link(toLink, gameFriendLinks);
+    /**
+     * Associates the given friend {@code toLink} in the list with {@code gameFriendLink}
+     * {@code toLink} must exist in the friends list.
+     */
+    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
+        friends.link(toLink, gameFriendLink);
     }
 
     /**

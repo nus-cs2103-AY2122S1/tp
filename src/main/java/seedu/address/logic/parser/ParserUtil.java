@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -15,6 +14,8 @@ import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.UserName;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -106,19 +107,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> games} into a {@code Hashmap<String, String>}.
-     * The key of the Hashmap is the game name, while the value is the username for that key.
+     * Takes in {@code userName} and returns the corresponding {@code UserName} if its format is valid.
      */
-    public static HashMap<String, String> parseGamesAndUsernames(Collection<String> games) throws ParseException {
-        requireNonNull(games);
-        final HashMap<String, String> gamesHashMap = new HashMap<>();
-        games.stream().forEach(segment -> {
-            String[] gameAndUsername = segment.split(":");
-            String gameName = gameAndUsername[0];
-            String inGameUsername = gameAndUsername[1];
-            gamesHashMap.put(gameName, inGameUsername);
-        });
-        return gamesHashMap;
+    public static UserName parseUserName(String userName) throws ParseException {
+        if (!UserName.isValidUserName(userName)) {
+            throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
+        }
+        return new UserName(userName);
     }
 
     /**

@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -171,12 +170,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasFriendId(FriendId idToFind) {
+        public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -224,11 +218,6 @@ public class AddGameCommandTest {
         public void updateFilteredGamesList(Predicate<Game> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public boolean hasGameId(GameId idToFind) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -249,7 +238,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public boolean hasGameId(GameId idToFind) {
+        public boolean hasGameWithId(GameId idToFind) {
             return this.game.getGameId().equals(idToFind);
         }
     }
@@ -267,7 +256,7 @@ public class AddGameCommandTest {
         }
 
         @Override
-        public boolean hasGameId(GameId idToFind) {
+        public boolean hasGameWithId(GameId idToFind) {
             return gamesAdded.stream().anyMatch(game -> game.getGameId().equals(idToFind));
         }
 

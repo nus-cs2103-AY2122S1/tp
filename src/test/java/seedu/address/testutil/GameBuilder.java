@@ -4,7 +4,7 @@ import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Game objects.
  */
 public class GameBuilder {
 

@@ -119,23 +119,17 @@ Examples:
 
 ### Link games with a friend: `link`
 
-Links game(s) and the associated in-game username(s) for each game to a friend for the provided gitGud FRIEND_ID to
+Links game and the associated in-game username for each game to a friend for the provided gitGud FRIEND_ID to
 his/her friend information.
 
-Format: `link FRIEND_ID GAME_NAME:IN_GAME_USERNAME1 GAME2_NAME:IN_GAME_USERNAME2...`
+Format: `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
 
-* Add multiple games and in-game usernames for a friend by listing the game:in-game-username pairs separated by a space.
-* For game names or in-game usernames with spaces in-between, wrap the name string with double quotation marks.
-  For example, the game 'Apex Legends' linked to an in-game username 'tau-bar' would be represented as the pair
-  `"Apex Legends":tau-bar`.
+* Both FRIEND_ID and GAME_NAME has to already be inside the database.
 
 Examples:
-* `link Draco Valorant:biscuitismydog Minecraft:Draco`
-  Links two games, ‘Valorant’ with the in-game username ‘biscuitismydog’ and ‘Minecraft’ with the
-  in-game username ‘Draco’, to the friend with the gitGud FRIEND_ID ‘Draco’.
-* `link tau-bar “Apex Legends”:tau-dominator`
-  Links a single game, “Apex Legends” with the in-game username ‘tau-dominator’,
-  to the friend with the gitGud FRIEND_ID ‘tau-bar’.
+* `link --friend Draco --game DOTA --user Draco995`
+  Links a single game, “DOTA” with the in-game username ‘Draco995’,
+  to the friend with the gitGud FRIEND_ID ‘Draco’.
 
 ### Listing multiple friends data: `list --friend`
 
@@ -219,7 +213,7 @@ Action | Format, Examples
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
-**Link game and friend** | `link FRIEND_ID “GAME_NAME”:”IN_GAME_USERNAME”…`<br> e.g., `link tau_bar “Apex Legends”:taufiq007 Minecraft:taufMC`
+**Link game and friend** | `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME”…`<br> e.g., `link --friend Draco --game Valorant --user taufiq007`
 **List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
 **List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`

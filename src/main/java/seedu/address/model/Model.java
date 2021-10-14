@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -119,9 +118,7 @@ public interface Model {
      * The key in the HashMap represents a {@code GAME_NAME}, while the value represents
      * the {@code IN_GAME_USERNAME} for that game.
      */
-    void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks);
-
-    boolean hasFriendId(FriendId idToFind);
+    void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
 
     //=========== GamesBook ==================================================================================
 
@@ -182,5 +179,4 @@ public interface Model {
      */
     void updateFilteredGamesList(Predicate<Game> predicate);
 
-    boolean hasGameId(GameId idToFind);
 }

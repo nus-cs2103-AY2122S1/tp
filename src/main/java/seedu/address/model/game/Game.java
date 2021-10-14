@@ -28,6 +28,14 @@ public class Game {
         return gameId;
     }
 
+    /**
+     * Returns true if both games have same gameId.
+     * @return boolean result of equals.
+     */
+    public boolean isSameGameId(Game game) {
+        return this.gameId.equals(game.getGameId());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

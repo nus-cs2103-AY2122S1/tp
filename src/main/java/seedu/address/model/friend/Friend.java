@@ -67,10 +67,10 @@ public class Friend {
 
     /**
      * Returns true if both friends have same friendId.
-     * @return
+     * @return boolean result of equals.
      */
-    public boolean isSameFriendId(Friend friendId) {
-        return this.friendId == friendId.getFriendId();
+    public boolean isSameFriendId(Friend friend) {
+        return this.friendId.equals(friend.getFriendId());
     }
 
     /**
@@ -113,5 +113,4 @@ public class Friend {
         }
         return builder.toString();
     }
-
 }

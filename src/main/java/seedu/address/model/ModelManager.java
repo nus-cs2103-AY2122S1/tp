@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -142,8 +141,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void linkFriend(Friend toLink, HashSet<GameFriendLink> gameFriendLinks) {
-        friendsList.linkFriend(toLink, gameFriendLinks);
+    public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
+        friendsList.linkFriend(toLink, gameFriendLink);
     }
 
     //=========== Filtered Friend List Accessors =============================================================
@@ -161,13 +160,6 @@ public class ModelManager implements Model {
     public void updateFilteredFriendsList(Predicate<Friend> predicate) {
         requireNonNull(predicate);
         filteredFriends.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean hasFriendId(FriendId idToFind) {
-        requireNonNull(idToFind);
-        return this.getFriendsList().getFriendsList().stream()
-                .anyMatch(friend -> friend.getFriendId().equals(idToFind));
     }
 
     //=========== GamesBook ==================================================================================
@@ -235,13 +227,6 @@ public class ModelManager implements Model {
     public void updateFilteredGamesList(Predicate<Game> predicate) {
         requireNonNull(predicate);
         filteredGames.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean hasGameId(GameId idToFind) {
-        requireNonNull(idToFind);
-        return this.getGamesList().getGamesList().stream()
-                .anyMatch(game -> game.getGameId().equals(idToFind));
     }
 
     @Override
