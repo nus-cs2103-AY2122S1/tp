@@ -29,6 +29,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentTypeContainsKeywordsPredicate;
 import seedu.address.model.person.ExpectedSalaryWithinRangePredicate;
+import seedu.address.model.person.ExperienceContainsKeywordsPredicate;
 import seedu.address.model.person.LevelOfEducationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -319,6 +320,66 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(BENSON, GEORGE), model.getFilteredPersonList());
     }
 
+
+    @Test
+    public void execute_zeroExperience_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExperienceContainsKeywordsPredicate predicate = prepareExperiencePredicate(" ");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneExperience_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        // Model with Hoon and Ida manually added
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExperienceContainsKeywordsPredicate predicate =
+                prepareExperiencePredicate("7");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(HOON, IDA), modelWithHoonIda.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleExperience_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        // Model with Hoon and Ida
+        Model modelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelWithHoonIda.addPerson(HOON);
+        modelWithHoonIda.addPerson(IDA);
+
+        // Expected Model with Hoon and Ida manually added
+        Model expectedModelWithHoonIda = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModelWithHoonIda.addPerson(HOON);
+        expectedModelWithHoonIda.addPerson(IDA);
+
+        ArrayList<Predicate<Person>> predicates = new ArrayList<>();
+        ExperienceContainsKeywordsPredicate predicate =
+                prepareExperiencePredicate("7 6");
+        predicates.add(predicate);
+        FindCommand command = new FindCommand(predicates);
+        expectedModelWithHoonIda.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, modelWithHoonIda, expectedMessage, expectedModelWithHoonIda);
+        assertEquals(Arrays.asList(GEORGE, HOON, IDA), modelWithHoonIda.getFilteredPersonList());
+    }
+
+
     @Test
     public void execute_zeroTagKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
@@ -390,6 +451,13 @@ public class FindCommandTest {
      */
     private LevelOfEducationContainsKeywordsPredicate prepareLevelOfEducationPredicate(String userInput) {
         return new LevelOfEducationContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code ExperienceContainsKeywordPredicate}.
+     */
+    private ExperienceContainsKeywordsPredicate prepareExperiencePredicate(String userInput) {
+        return new ExperienceContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
 
