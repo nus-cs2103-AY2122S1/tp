@@ -159,7 +159,7 @@ Examples:
 *  `editemployee 1 sal/4000` Edits the salary of the 1st employee to be `4000`.
 *  `editemployee 2 n/Betsy Crower t/` Edits the name of the 2nd employeee to be `Betsy Crower` and clears all existing tags.
 
-### Editing a supplier : `editsupplier`
+### Editing a supplier : `editSupplier`
 
 Edits an existing supplier in RHRH.
 
