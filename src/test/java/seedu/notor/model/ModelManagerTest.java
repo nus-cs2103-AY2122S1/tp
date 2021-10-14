@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.model.person.NameContainsKeywordsPredicate;
-import seedu.notor.testutil.AddressBookBuilder;
+import seedu.notor.testutil.NotorBuilder;
 
 public class ModelManagerTest {
 
@@ -27,7 +27,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new Notor(), new Notor(modelManager.getNotor()));
     }
 
     @Test
@@ -38,14 +38,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setNotorFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setNotorFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -62,15 +62,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setNotorFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setNotorFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setNotorFilePath_validPath_setsNotorFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setNotorFilePath(path);
+        assertEquals(path, modelManager.getNotorFilePath());
     }
 
     @Test
@@ -79,12 +79,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInNotor_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInNotor_returnsTrue() {
         modelManager.createPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -96,13 +96,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        Notor notor = new NotorBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        Notor differentNotor = new Notor();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(notor, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(notor, userPrefs);
         assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
@@ -114,20 +114,20 @@ public class ModelManagerTest {
         // different types -> returns false
         assertNotEquals(5, modelManager);
 
-        // different addressBook -> returns false
-        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs));
+        // different notor -> returns false
+        assertNotEquals(modelManager, new ModelManager(differentNotor, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs));
+        assertNotEquals(modelManager, new ModelManager(notor, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs));
+        differentUserPrefs.setNotorFilePath(Paths.get("differentFilePath"));
+        assertNotEquals(modelManager, new ModelManager(notor, differentUserPrefs));
     }
 }

@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.notor.testutil.Assert.assertThrows;
 import static seedu.notor.testutil.TypicalPersons.ALICE;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -22,63 +22,63 @@ import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
 
 
-public class AddressBookTest {
+public class NotorTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final Notor notor = new Notor();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), notor.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> notor.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyNotor_replacesData() {
+        Notor newData = getTypicalNotor();
+        notor.resetData(newData);
+        assertEquals(newData, notor);
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> notor.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInNotor_returnsFalse() {
+        assertFalse(notor.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInNotor_returnsTrue() {
+        notor.addPerson(ALICE);
+        assertTrue(notor.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInNotor_returnsTrue() {
+        notor.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(notor.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> notor.getPersonList().remove(0));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyNotor whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class NotorStub implements ReadOnlyNotor {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        NotorStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

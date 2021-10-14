@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
@@ -76,10 +76,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code Notor} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static Notor getTypicalNotor() {
+        Notor ab = new Notor();
         for (SuperGroup superGroup: TypicalGroups.getSuperGroups()) {
             ab.addSuperGroup(superGroup);
         }

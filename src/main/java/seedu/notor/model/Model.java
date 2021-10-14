@@ -20,7 +20,8 @@ public interface Model {
 
     // TODO: List
     // Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
-
+    
+    //=========== UserPrefs ==================================================================================
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -44,25 +45,27 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getAddressBookFilePath();
+    Path getNotorFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
-
+    void setNotorFilePath(Path notorFilePath);
+    
+    //=========== Notor =====================================================================================
+    
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Notor data (of the list) with the data in {@code notor}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setNotor(ReadOnlyNotor notor);
 
     /**
-     * Returns the AddressBook
+     * Returns the Notor data (lists and the like)
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyNotor getNotor();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in Notor.
      */
     boolean hasPerson(Person person);
 
@@ -74,7 +77,7 @@ public interface Model {
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in Notor.
      */
     void createPerson(Person person);
 
@@ -99,6 +102,8 @@ public interface Model {
     void addSubGroup(SubGroup subGroup);
 
     void deleteSubGroup(SubGroup subGroup);
+
+    //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

@@ -8,17 +8,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.notor.commons.exceptions.IllegalValueException;
-import seedu.notor.model.AddressBook;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.Notor;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable Notor that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "notor")
+class JsonSerializableNotor {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
@@ -29,10 +29,10 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedSubGroup> subGroups = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableNotor} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+    public JsonSerializableNotor(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
         @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups,
         @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
         this.persons.addAll(persons);
@@ -41,11 +41,11 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyNotor} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableNotor}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableNotor(ReadOnlyNotor source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(
             Collectors.toList()));
         superGroups
@@ -57,39 +57,39 @@ class JsonSerializableAddressBook {
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this notor into the model's {@code Notor} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public Notor toModelType() throws IllegalValueException {
+        Notor notor = new Notor();
         for (JsonAdaptedSuperGroup jsonAdaptedSuperGroup : superGroups) {
             SuperGroup superGroup = jsonAdaptedSuperGroup.toModelType();
-            if (!addressBook.hasSuperGroup(superGroup)) {
-                addressBook.addSuperGroup(superGroup);
+            if (!notor.hasSuperGroup(superGroup)) {
+                notor.addSuperGroup(superGroup);
             }
         }
         for (JsonAdaptedSubGroup jsonAdaptedSubGroups : subGroups) {
             SubGroup subGroup = jsonAdaptedSubGroups.toModelType();
-            if (!addressBook.hasSubGroup(subGroup)) {
-                addressBook.addSubGroup(subGroup);
+            if (!notor.hasSubGroup(subGroup)) {
+                notor.addSubGroup(subGroup);
             }
         }
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+            if (notor.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             for (String superGroup : person.getSuperGroups()) {
-                addressBook.findSuperGroup(superGroup).addPerson(person);
+                notor.findSuperGroup(superGroup).addPerson(person);
             }
             for (String subGroup : person.getSubGroups()) {
-                addressBook.findSubGroup(subGroup).addPerson(person);
+                notor.findSubGroup(subGroup).addPerson(person);
             }
 
-            addressBook.addPerson(person);
+            notor.addPerson(person);
         }
-        return addressBook;
+        return notor;
     }
 }

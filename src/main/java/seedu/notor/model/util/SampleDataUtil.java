@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.notor.model.AddressBook;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.Notor;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Name;
 import seedu.notor.model.person.Note;
@@ -14,7 +14,7 @@ import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code Notor} with sample data.
  */
 public class SampleDataUtil {
     public static final Note EMPTY_NOTE = new Note("", "");
@@ -37,8 +37,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyNotor getSampleNotor() {
+        Notor sampleAb = new Notor();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

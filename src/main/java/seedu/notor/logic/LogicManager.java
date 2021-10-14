@@ -11,10 +11,10 @@ import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.logic.parser.AddressBookParser;
+import seedu.notor.logic.parser.NotorParser;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Model;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.person.Person;
 import seedu.notor.storage.Storage;
 
@@ -27,7 +27,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
-    private final AddressBookParser addressBookParser;
+    private final NotorParser notorParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        notorParser = new NotorParser();
     }
 
     @Override
@@ -43,11 +43,11 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = notorParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveNotor(model.getNotor());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -64,7 +64,7 @@ public class LogicManager implements Logic {
     public void executeSaveNote(Person person, Person editedPerson) throws CommandException {
         model.setPerson(person, editedPerson);
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.saveNotor(model.getNotor());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -72,8 +72,8 @@ public class LogicManager implements Logic {
 
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return model.getAddressBook();
+    public ReadOnlyNotor getNotor() {
+        return model.getNotor();
     }
 
     @Override
@@ -82,8 +82,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return model.getAddressBookFilePath();
+    public Path getNotorFilePath() {
+        return model.getNotorFilePath();
     }
 
     @Override

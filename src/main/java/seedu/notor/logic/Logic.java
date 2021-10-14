@@ -8,7 +8,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.person.Person;
 
 /**
@@ -35,11 +35,11 @@ public interface Logic {
      */
     void executeSaveNote(Person person, Person editedPerson) throws CommandException;
     /**
-     * Returns the AddressBook.
+     * Returns the Notor.
      *
-     * @see seedu.notor.model.Model#getAddressBook()
+     * @see seedu.notor.model.Model#getNotor()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyNotor getNotor();
 
     /**
      * Returns an unmodifiable view of the filtered list of persons
@@ -47,9 +47,9 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Notor file path.
      */
-    Path getAddressBookFilePath();
+    Path getNotorFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

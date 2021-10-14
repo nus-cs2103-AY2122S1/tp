@@ -17,15 +17,15 @@ import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.LogicManager;
 import seedu.notor.logic.executors.Executor;
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
 import seedu.notor.model.UserPrefs;
 import seedu.notor.model.util.SampleDataUtil;
-import seedu.notor.storage.AddressBookStorage;
-import seedu.notor.storage.JsonAddressBookStorage;
+import seedu.notor.storage.JsonNotorStorage;
+import seedu.notor.storage.NotorStorage;
 import seedu.notor.storage.JsonUserPrefsStorage;
 import seedu.notor.storage.Storage;
 import seedu.notor.storage.StorageManager;
@@ -61,8 +61,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        NotorStorage notorStorage = new JsonNotorStorage(userPrefs.getNotorFilePath());
+        storage = new StorageManager(notorStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -77,24 +77,24 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * The data from the sample Notor will be used instead if {@code storage}'s notor is not found,
+     * or an empty Notor will be used instead if errors occur when reading {@code storage}'s notor.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyNotor> notorOptional;
+        ReadOnlyNotor initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (addressBookOptional.isEmpty()) {
+            notorOptional = storage.readNotor();
+            if (notorOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample Notor");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = notorOptional.orElseGet(SampleDataUtil::getSampleNotor);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty Notor");
-            initialData = new AddressBook();
+            initialData = new Notor();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty Notor");
-            initialData = new AddressBook();
+            initialData = new Notor();
         }
 
         return new ModelManager(initialData, userPrefs);

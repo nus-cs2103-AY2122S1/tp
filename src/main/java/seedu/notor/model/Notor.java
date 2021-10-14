@@ -15,7 +15,7 @@ import seedu.notor.model.util.UniqueList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class Notor implements ReadOnlyNotor {
 
     private final UniqueList<Person> persons;
 
@@ -36,12 +36,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         subGroups = new HashMap<>();
     }
 
-    public AddressBook() {}
+    public Notor() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an Notor using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public Notor(ReadOnlyNotor toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -73,9 +73,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code Notor} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyNotor newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
@@ -125,7 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code Notor}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
@@ -135,8 +135,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// Group-level operations
 
     /**
-     * Adds superGroup into the AddressBook.
-     * @param sg the SuperGroup to be added into AddressBook.
+     * Adds superGroup into the Notor.
+     * @param sg the SuperGroup to be added into Notor.
      */
     public void addSuperGroup(SuperGroup sg) {
         if (!superGroups.containsKey(sg.getName())) {
@@ -164,8 +164,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds SubGroup into the AddressBook.
-     * @param subGroup the SuperGroup to be added into AddressBook.
+     * Adds SubGroup into the Notor.
+     * @param subGroup the SuperGroup to be added into Notor.
      */
     public void addSubGroup(SubGroup subGroup) {
         requireNonNull(subGroup);
@@ -219,8 +219,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         // TODO: Add Group
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof Notor // instanceof handles nulls
+                && persons.equals(((Notor) other).persons));
     }
 
     @Override

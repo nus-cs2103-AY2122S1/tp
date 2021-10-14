@@ -1,10 +1,10 @@
 package seedu.notor.logic.commands;
 
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.UserPrefs;
@@ -12,7 +12,7 @@ import seedu.notor.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyNotor_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -20,10 +20,10 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+    public void execute_nonEmptyNotor_success() {
+        Model model = new ModelManager(getTypicalNotor(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalNotor(), new UserPrefs());
+        expectedModel.setNotor(new Notor());
 
         CommandTestUtil.assertExecuteSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

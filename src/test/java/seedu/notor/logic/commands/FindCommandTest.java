@@ -6,7 +6,7 @@ import static seedu.notor.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.notor.testutil.TypicalPersons.CARL;
 import static seedu.notor.testutil.TypicalPersons.ELLE;
 import static seedu.notor.testutil.TypicalPersons.FIONA;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,8 +22,8 @@ import seedu.notor.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalNotor(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalNotor(), new UserPrefs());
 
     @Test
     public void equals() {

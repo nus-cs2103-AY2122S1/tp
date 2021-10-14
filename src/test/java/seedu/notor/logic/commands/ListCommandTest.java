@@ -2,7 +2,7 @@ package seedu.notor.logic.commands;
 
 import static seedu.notor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +21,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalNotor(), new UserPrefs());
+        expectedModel = new ModelManager(model.getNotor(), new UserPrefs());
     }
 
     @Test

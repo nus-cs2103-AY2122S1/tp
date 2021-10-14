@@ -16,31 +16,31 @@ import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of Notor's data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final Notor notor;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given Notor and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyNotor notor, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(notor, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with: " + notor + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.notor = new Notor(notor);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(this.notor.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new Notor(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -68,94 +68,94 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getNotorFilePath() {
+        return userPrefs.getNotorFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setNotorFilePath(Path notorFilePath) {
+        requireNonNull(notorFilePath);
+        userPrefs.setNotorFilePath(notorFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== Notor =====================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setNotor(ReadOnlyNotor notor) {
+        this.notor.resetData(notor);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyNotor getNotor() {
+        return notor;
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return notor.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        notor.removePerson(target);
     }
 
     @Override
     public void createPerson(Person person) {
-        addressBook.addPerson(person);
+        notor.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public Person findPerson(String name) {
-        return addressBook.findPerson(name);
+        return notor.findPerson(name);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        notor.setPerson(target, editedPerson);
     }
 
     @Override
     public boolean hasSuperGroup(SuperGroup superGroup) {
         requireNonNull(superGroup);
-        return addressBook.hasSuperGroup(superGroup);
+        return notor.hasSuperGroup(superGroup);
     }
 
     @Override
     public void addSuperGroup(SuperGroup superGroup) {
-        addressBook.addSuperGroup(superGroup);
+        notor.addSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
-        addressBook.deleteSuperGroup(superGroup);
+        notor.deleteSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public SuperGroup findSuperGroup(String name) {
-        return addressBook.findSuperGroup(name);
+        return notor.findSuperGroup(name);
     }
 
     @Override
     public SubGroup findSubGroup(String name) {
-        return addressBook.findSubGroup(name);
+        return notor.findSubGroup(name);
     }
 
     @Override
     public void addSubGroup(SubGroup subGroup) {
-        addressBook.addSubGroup(subGroup);
+        notor.addSubGroup(subGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void deleteSubGroup(SubGroup subGroup) {
-        addressBook.deleteSubGroup(subGroup);
+        notor.deleteSubGroup(subGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -190,7 +190,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return notor.equals(other.notor)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }

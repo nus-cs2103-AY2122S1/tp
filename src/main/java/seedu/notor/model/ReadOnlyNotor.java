@@ -8,9 +8,9 @@ import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of Notor
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyNotor {
 
     /**
      * Returns an unmodifiable view of the persons list.
@@ -19,6 +19,5 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     HashMap<String, SuperGroup> getSuperGroups();
-
     HashMap<String, SubGroup> getSubGroups();
 }

@@ -8,7 +8,7 @@ import static seedu.notor.logic.commands.CommandTestUtil.assertExecuteSuccess;
 import static seedu.notor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ import seedu.notor.model.person.Person;
  */
 public class PersonDeleteCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalNotor(), new UserPrefs());
 
     @BeforeEach
     public void setUp() {
@@ -43,7 +43,7 @@ public class PersonDeleteCommandTest {
 
         String expectedMessage = String.format(PersonDeleteExecutor.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getNotor(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         CommandTestUtil.assertExecuteSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -66,7 +66,7 @@ public class PersonDeleteCommandTest {
 
         String expectedMessage = String.format(PersonDeleteExecutor.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getNotor(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
@@ -78,8 +78,8 @@ public class PersonDeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that outOfBoundIndex is still in bounds of notor list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getNotor().getPersonList().size());
 
         PersonDeleteCommand deleteCommand = new PersonDeleteCommand(outOfBoundIndex);
 

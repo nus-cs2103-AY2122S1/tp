@@ -15,7 +15,7 @@ import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonEditExecutor;
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 import seedu.notor.model.person.NameContainsKeywordsPredicate;
 import seedu.notor.model.person.Person;
@@ -96,22 +96,22 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the ExecuteException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the Notor, filtered person list and selected person in {@code actualModel} remain unchanged
      */
     public static void assertExecuteFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        Notor expectedNotor = new Notor(actualModel.getNotor());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         assertThrows(ExecuteException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedNotor, actualModel.getNotor());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s Notor.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());

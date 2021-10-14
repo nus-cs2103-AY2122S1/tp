@@ -2,7 +2,7 @@ package seedu.notor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 
 /**
@@ -15,7 +15,7 @@ public class ClearCommand implements Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAddressBook(new AddressBook());
+        model.setNotor(new Notor());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

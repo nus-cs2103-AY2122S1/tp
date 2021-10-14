@@ -12,7 +12,7 @@ import static seedu.notor.logic.commands.CommandTestUtil.assertExecuteFailure;
 import static seedu.notor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.person.PersonEditExecutor;
 import seedu.notor.logic.executors.person.PersonEditExecutor.PersonEditDescriptor;
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.UserPrefs;
@@ -36,7 +36,7 @@ import seedu.notor.testutil.PersonEditDescriptorBuilder;
  */
 public class PersonEditCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalNotor(), new UserPrefs());
 
     @BeforeEach
     public void setUp() {
@@ -51,7 +51,7 @@ public class PersonEditCommandTest {
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
@@ -72,7 +72,7 @@ public class PersonEditCommandTest {
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
@@ -86,7 +86,7 @@ public class PersonEditCommandTest {
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
 
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
@@ -102,7 +102,7 @@ public class PersonEditCommandTest {
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
@@ -121,8 +121,8 @@ public class PersonEditCommandTest {
     public void execute_duplicatePersonFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        // edit person in filtered list into a duplicate in notor
+        Person personInList = model.getNotor().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         PersonEditCommand personEditCommand = new PersonEditCommand(INDEX_FIRST_PERSON,
                 new PersonEditDescriptorBuilder(personInList).build());
 
@@ -140,14 +140,14 @@ public class PersonEditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of Notor
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        // ensures that outOfBoundIndex is still in bounds of notor list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getNotor().getPersonList().size());
 
         PersonEditCommand personEditCommand = new PersonEditCommand(outOfBoundIndex,
                 new PersonEditDescriptorBuilder().withName(VALID_NAME_BOB).build());

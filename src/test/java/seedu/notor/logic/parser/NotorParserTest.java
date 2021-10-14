@@ -30,8 +30,8 @@ import seedu.notor.testutil.PersonBuilder;
 import seedu.notor.testutil.PersonEditDescriptorBuilder;
 import seedu.notor.testutil.PersonUtil;
 
-public class AddressBookParserTest {
-    private final AddressBookParser parser = new AddressBookParser();
+public class NotorParserTest {
+    private final NotorParser parser = new NotorParser();
 
     @Test
     public void parseCommand_add() throws Exception {

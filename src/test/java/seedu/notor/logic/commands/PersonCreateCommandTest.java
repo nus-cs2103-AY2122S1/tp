@@ -20,9 +20,9 @@ import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonCreateExecutor;
 import seedu.notor.logic.parser.exceptions.ParseException;
-import seedu.notor.model.AddressBook;
+import seedu.notor.model.Notor;
 import seedu.notor.model.Model;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
@@ -111,12 +111,12 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getNotorFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setNotorFilePath(Path notorFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -167,12 +167,12 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setNotor(ReadOnlyNotor newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyNotor getNotor() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -239,8 +239,8 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyNotor getNotor() {
+            return new Notor();
         }
     }
 

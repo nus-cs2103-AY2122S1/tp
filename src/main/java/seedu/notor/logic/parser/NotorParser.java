@@ -30,7 +30,7 @@ import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class NotorParser {
     /**
      * Used for initial separation of command word and args.
      */

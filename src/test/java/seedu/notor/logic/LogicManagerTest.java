@@ -25,10 +25,10 @@ import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
-import seedu.notor.model.ReadOnlyAddressBook;
+import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.UserPrefs;
 import seedu.notor.model.person.Person;
-import seedu.notor.storage.JsonAddressBookStorage;
+import seedu.notor.storage.JsonNotorStorage;
 import seedu.notor.storage.JsonUserPrefsStorage;
 import seedu.notor.storage.StorageManager;
 import seedu.notor.testutil.PersonBuilder;
@@ -44,10 +44,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonNotorStorage notorStorage =
+                new JsonNotorStorage(temporaryFolder.resolve("notor.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(notorStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
         Executor.setup(model);
     }
@@ -72,12 +72,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonNotorIoExceptionThrowingStub
+        JsonNotorStorage notorStorage =
+                new JsonNotorIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionNotor.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(notorStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -134,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertExecuteFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getNotor(), new UserPrefs());
         assertExecuteFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -155,13 +155,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonNotorIoExceptionThrowingStub extends JsonNotorStorage {
+        private JsonNotorIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveNotor(ReadOnlyNotor notor, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

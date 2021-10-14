@@ -13,7 +13,7 @@ import seedu.notor.logic.executors.person.PersonEditExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in the notor.
  */
 public class PersonEditCommand extends PersonCommand {
 

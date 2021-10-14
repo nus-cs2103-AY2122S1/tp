@@ -1,7 +1,7 @@
 package seedu.notor.logic.commands;
 
 import static seedu.notor.logic.commands.CommandTestUtil.assertExecuteFailure;
-import static seedu.notor.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class PersonCreateCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalNotor(), new UserPrefs());
         Executor.setup(model);
     }
 
@@ -33,7 +33,7 @@ public class PersonCreateCommandIntegrationTest {
     public void execute_newPerson_success() throws ParseException {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getNotor(), new UserPrefs());
         expectedModel.createPerson(validPerson);
 
         CommandTestUtil.assertExecuteSuccess(new PersonCreateCommand(null, validPerson), model,
@@ -42,7 +42,7 @@ public class PersonCreateCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws ParseException {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
+        Person personInList = model.getNotor().getPersonList().get(0);
         assertExecuteFailure(new PersonCreateCommand(null, personInList), model,
                 PersonCreateExecutor.MESSAGE_DUPLICATE_PERSON);
     }
