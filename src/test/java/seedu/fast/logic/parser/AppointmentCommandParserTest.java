@@ -20,7 +20,6 @@ public class AppointmentCommandParserTest {
 
     private final String validDateInput = "2021-10-10";
     private final String formattedDate = "10 Oct 2021";
-    private final String noAppointment = "No Appointment Scheduled Yet";
 
     private final String validTimeInput = "20:00";
     private final String formattedTime = "2000";
