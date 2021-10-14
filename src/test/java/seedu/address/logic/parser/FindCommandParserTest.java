@@ -121,7 +121,7 @@ public class FindCommandParserTest {
         String multipleEmptyPrefixInput = " n/ e/ p/ r/ et/ s/ l/ y/ t/ ";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(multipleEmptyPrefixInput,
                 PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,PREFIX_EXPERIENCE, PREFIX_TAG);
+                PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG);
         findDescriptor = new FindDescriptor(argMultimap);
         assertTrue(findDescriptor.getPredicates().isEmpty());
     }

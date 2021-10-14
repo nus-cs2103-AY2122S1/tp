@@ -37,7 +37,8 @@ public class ExperienceTest {
 
         // valid experience
         assertTrue(Experience.isValidExperience("1")); // positive number
-        assertTrue(Experience.isValidExperience("67")); // number not larger than 67
+        assertTrue(Experience.isValidExperience(
+                Integer.toString(Experience.MAX_EXPERIENCE))); // number not larger than maximum
 
     }
 }
