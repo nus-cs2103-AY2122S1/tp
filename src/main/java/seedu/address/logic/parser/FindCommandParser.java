@@ -31,29 +31,72 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> fields = Arrays.asList(nameKeywords);
-        boolean isAllNumbers = true;
+        boolean isAllNumbers = checkAllNumbers(fields);
+        if (checkNegativeId(fields)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN,
+                    FindCommand.MESSAGE_USAGE));
+        }
+        if (!isAllNumbers) {
+            return new FindCommand(new NameContainsKeywordsPredicate(fields));
+        }
+        if (!checkSixDigits(fields)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN,
+                    FindCommand.MESSAGE_USAGE));
+        }
+        return new FindCommand((new IdContainsNumberPredicate(fields)));
+    }
 
-        for (int i = 0; i < fields.size(); i = i + 1) {
-            for (int j = 0; j < fields.get(i).length(); j = j + 1) {
-                if (fields.get(i).charAt(0) == 45) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN,
-                            FindCommand.MESSAGE_USAGE));
-                }
-                if (((int) (fields.get(i).charAt(j)) >= 48) & ((int) (fields.get(i).charAt(j)) <= 57)) {
+    /**
+     * Checks whether the given {@code String} of arguments is negative.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public boolean checkNegativeId (List<String> args) {
+        boolean isNegative = false;
+        for (int i = 0; i < args.size(); i = i + 1) {
+            if (args.get(i).charAt(0) == 45) {
+                isNegative = true;
+                break;
+            }
+        }
+        return isNegative;
+    }
+
+    /**
+     * Checks whether the given {@code String} of arguments are all numbers.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public boolean checkAllNumbers (List<String> args) {
+        boolean isAllNumbers = true;
+        for (int i = 0; i < args.size(); i = i + 1) {
+            for (int j = 0; j < args.get(i).length(); j = j + 1) {
+                if (((int) (args.get(i).charAt(j)) >= 48) & ((int) (args.get(i).charAt(j)) <= 57)) {
                 } else {
                     isAllNumbers = false;
                     break;
                 }
             }
         }
-        if (!isAllNumbers) {
-            return new FindCommand(new NameContainsKeywordsPredicate(fields));
-        }
-        for (int i = 0; i < fields.size(); i = i + 1) {
-            if (fields.get(i).length() != 6) {
-                throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+        return isAllNumbers;
+    }
+
+    /**
+     * Checks whether the given {@code String} of id is 6 digits.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public boolean checkSixDigits (List<String> args) {
+        boolean isSixDigits = true;
+        for (int i = 0; i < args.size(); i = i + 1) {
+            if (args.get(i).length() != 6) {
+                isSixDigits = false;
+                break;
             }
         }
-        return new FindCommand((new IdContainsNumberPredicate(fields)));
+        return isSixDigits;
     }
+
+
+
 }
