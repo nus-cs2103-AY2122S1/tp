@@ -6,9 +6,14 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NUS_NETWORK_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -53,6 +58,26 @@ public class EditPersonDescriptorTest {
 
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different gitHubId -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withGitHubId(VALID_GITHUB_ID_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different nusNetworkId -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withNusNetworkId(VALID_NUS_NETWORK_ID_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different type -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withType(VALID_TYPE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different studentId -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudentId(VALID_STUDENT_ID_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different tutorialId -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TUTORIAL_ID_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

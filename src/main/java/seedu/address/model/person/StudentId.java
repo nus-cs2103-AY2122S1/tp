@@ -43,9 +43,17 @@ public class StudentId {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof StudentId // instanceof handles nulls
-                && value.equals(((StudentId) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof StudentId)) {
+            return false;
+        }
+
+        StudentId otherStudentId = (StudentId) other;
+
+        return value.equals(otherStudentId.value); // state check
     }
 
     @Override

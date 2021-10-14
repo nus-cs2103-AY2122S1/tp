@@ -18,7 +18,7 @@ public class SampleDataUtilTest {
             newAddressBook.addPerson(persons[i]);
         }
 
-        List<Person> listOfPersons = newAddressBook.getPersonList();
+        List<Person> listOfPersons = SampleDataUtil.getSampleAddressBook().getPersonList();
         for (int i = 0; i < persons.length; i++) {
             assertTrue(listOfPersons.get(i).equals(persons[i]));
         }

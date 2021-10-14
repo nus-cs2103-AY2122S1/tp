@@ -43,9 +43,17 @@ public class NusNetworkId {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof NusNetworkId // instanceof handles nulls
-                && value.equals(((NusNetworkId) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof NusNetworkId)) {
+            return false;
+        }
+
+        NusNetworkId otherNusNetworkId = (NusNetworkId) other;
+
+        return value.equals(otherNusNetworkId.value); // state check
     }
 
     @Override
