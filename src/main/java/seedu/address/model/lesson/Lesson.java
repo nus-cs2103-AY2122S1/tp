@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -16,8 +17,8 @@ import java.util.Set;
 public abstract class Lesson implements Comparable<Lesson> {
 
     // Types of lesson
-    private static final String RECURRING = "Recurring Lesson";
-    private static final String MAKEUP = "Makeup Lesson";
+    private static final String RECURRING = "Recurring";
+    private static final String MAKEUP = "Makeup";
 
     // Time fields
     private final Date date;
@@ -61,6 +62,14 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(date.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(date.getLocalDate());
     }
 
     public String getTypeOfLesson() {
@@ -117,7 +126,6 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(date, timeRange, subject, homework);
     }
 
@@ -156,4 +164,3 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
 }
-

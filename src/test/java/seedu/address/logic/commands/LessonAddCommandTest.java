@@ -1,31 +1,28 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for LessonAddCommand.
@@ -40,18 +37,98 @@ public class LessonAddCommandTest {
     }
 
     @Test
+    public void execute_validPersonValidLesson_success() {
+        Lesson sampleLesson = new LessonBuilder().build();
+        Person editedPerson = new PersonBuilder(model.getFilteredPersonList()
+            .get(INDEX_FIRST_PERSON.getZeroBased()))
+            .withLessons(sampleLesson).build();
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
+
+        String expectedMessage = String.format(LessonAddCommand.MESSAGE_ADD_LESSON_SUCCESS,
+            sampleLesson, editedPerson);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+            editedPerson);
+
+        assertCommandSuccess(lessonAddCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_clashingLessonUnfilteredList_failure() {
+        Lesson lesson = new LessonBuilder().build();
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person person = new PersonBuilder(firstPerson).withLessons(lesson).build();
+
+        model.setPerson(firstPerson, person);
+
+        // Add a different lesson on the same time slot
+        Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
+
+        assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
+    }
+
+    @Test
+    public void execute_clashingLessonFilteredList_failure() {
+        Lesson lesson = new LessonBuilder().build();
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person person = new PersonBuilder(secondPerson).withLessons(lesson).build();
+
+        model.setPerson(secondPerson, person);
+
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        /*
+        Add a different lesson to the only person in the filtered list on a clashing time
+        slot as the second person in the unfiltered list.
+         */
+        Lesson clashingLesson = new LessonBuilder().withHomeworkSet("Test").buildRecurring();
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON, clashingLesson);
+
+        assertCommandFailure(lessonAddCommand, model, LessonAddCommand.MESSAGE_CLASHING_LESSON);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Lesson lesson = new LessonBuilder().buildRecurring();
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(outOfBoundIndex, lesson);
+
+        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        // filter list to show only the first person
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        LessonAddCommand lessonAddCommand = prepareLessonAddCommand(outOfBoundIndex, new LessonBuilder().build());
+
+        assertCommandFailure(lessonAddCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
     public void equals() {
+        Lesson sampleLesson = new LessonBuilder().build();
         LessonAddCommand addSampleLessonCommand = prepareLessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                sampleLesson);
         LessonAddCommand addSampleLessonCommand2 = prepareLessonAddCommand(INDEX_SECOND_PERSON,
-                SampleDataUtil.getSampleLesson());
+                sampleLesson);
 
         // same object -> returns true
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommand));
 
         // same values -> returns true
         LessonAddCommand addSampleLessonCommandCopy = prepareLessonAddCommand(INDEX_FIRST_PERSON,
-                SampleDataUtil.getSampleLesson());
+                sampleLesson);
         assertTrue(addSampleLessonCommand.equals(addSampleLessonCommandCopy));
 
         // different types -> returns false
@@ -72,116 +149,4 @@ public class LessonAddCommandTest {
         lessonAddCommand.setDependencies(model, new UndoRedoStack());
         return lessonAddCommand;
     }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
-    private class ModelStub implements Model {
-        @Override
-        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyUserPrefs getUserPrefs() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public GuiSettings getGuiSettings() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGuiSettings(GuiSettings guiSettings) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addPersonAtIndex(Person person, Index index) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasClashingLesson(Lesson lesson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deletePerson(Person target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setPerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-    }
-
-    /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            UniquePersonList list = new UniquePersonList();
-            list.add(this.person);
-            return list.asUnmodifiableObservableList();
-        }
-
-    }
-
 }
