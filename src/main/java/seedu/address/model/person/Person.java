@@ -127,7 +127,7 @@ public class Person {
      * @param tag Tag to be checked.
      * @return true if the person's tags contains the specified tag.
      */
-    public boolean isContainsTag(Tag tag) {
+    public boolean containsTag(Tag tag) {
         return tags.contains(tag);
     }
 

@@ -144,11 +144,11 @@ public class UniquePersonList implements Iterable<Person> {
      * @param person Student to be checked.
      */
     private void incrementTagNumTable(HashMap<Tag, Integer> tagTableWithNum, Tag tag, Person person) {
-        if (person.isContainsTag(tag)) {
-            if (!tagTableWithNum.containsKey(tag)) {
-                tagTableWithNum.put(tag, 1);
-            } else {
+        if (person.containsTag(tag)) {
+            if (tagTableWithNum.containsKey(tag)) {
                 tagTableWithNum.put(tag, tagTableWithNum.get(tag) + 1);
+            } else {
+                tagTableWithNum.put(tag, 1);
             }
         }
     }
