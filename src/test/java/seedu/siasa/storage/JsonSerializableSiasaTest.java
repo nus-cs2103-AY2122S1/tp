@@ -1,14 +1,7 @@
 package seedu.siasa.storage;
 
-import static seedu.siasa.testutil.Assert.assertThrows;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import org.junit.jupiter.api.Test;
-
-import seedu.siasa.commons.exceptions.IllegalValueException;
-import seedu.siasa.commons.util.JsonUtil;
 
 public class JsonSerializableSiasaTest {
 
@@ -27,7 +20,7 @@ public class JsonSerializableSiasaTest {
         Siasa typicalPersonsSiasa = TypicalSiasa.getTypicalSiasa();
         assertEquals(siasaFromFile, typicalPersonsSiasa);
     }
-    */
+
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
@@ -43,5 +36,6 @@ public class JsonSerializableSiasaTest {
         assertThrows(IllegalValueException.class, JsonSerializableSiasa.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
     }
+     */
 
 }

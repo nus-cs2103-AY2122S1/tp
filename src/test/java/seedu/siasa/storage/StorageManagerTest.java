@@ -23,8 +23,7 @@ public class StorageManagerTest {
     public void setUp() {
         JsonSiasaStorage addressBookStorage = new JsonSiasaStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        JsonPolicyBookStorage policyBookStorage = new JsonPolicyBookStorage(getTempFilePath("pb"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
+        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
