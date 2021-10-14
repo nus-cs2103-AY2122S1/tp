@@ -136,7 +136,7 @@ public class Period {
         List<Period> toMerge = new ArrayList<>();
         Collection<Period> result = periods.stream()
                 .flatMap(p -> this.union(p, pe -> toMerge.add(pe)).stream())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         //merge the changed periods
         //in theory there is only two assuming collection is unique
         for (Period p : toMerge) {
@@ -215,8 +215,8 @@ public class Period {
     public boolean equals(Object o) {
         return (o != null)
                 && (o instanceof Period)
-                && ((Period) o).contains(this)
-                && this.contains((Period) o);
+                && ((Period) o).startDate.equals(startDate)
+                && ((Period) o).endDate.equals(endDate);
 
     }
 }

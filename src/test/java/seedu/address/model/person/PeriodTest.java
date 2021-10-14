@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +14,18 @@ public class PeriodTest {
     private static final LocalDate TEST_DATE = LocalDate.of(1999, 5, 14);
     private static final LocalDate PAST_TEST_DATE = LocalDate.of(1999, 6, 14);
     private static final LocalDate BEFORE_TEST_DATE = LocalDate.of(1999, 4, 14);
+    private static final Period[] TEST_PERIODS = new Period[]{
+            new Period(LocalDate.of(12, 10, 1), LocalDate.of(12, 10, 1)),
+            new Period(LocalDate.of(12, 10, 2), LocalDate.of(12, 10, 3)),
+            new Period(LocalDate.of(12, 10, 4), LocalDate.of(12, 11, 1))
+        };
     private Period singleTestPeriod = new Period(TEST_DATE);
     private Period testPeriodAfterSingle = new Period(PAST_TEST_DATE, TEST_DATE);
     private Period testPeriodBeforeSingle = new Period(TEST_DATE, BEFORE_TEST_DATE);
     private Period singleTestPeriodAfter = new Period(PAST_TEST_DATE);
     private Period singleTestPeriodBefore = new Period(BEFORE_TEST_DATE);
     private Period overLargePeriod = new Period(PAST_TEST_DATE, BEFORE_TEST_DATE);
+
 
     @Test
     public void test_contains_success() {
@@ -67,6 +74,26 @@ public class PeriodTest {
         expectedResult = List.of(testPeriodAfterSingle, singleTestPeriodBefore);
         assertEquals(expectedResult, testPeriods);
 
+        expectedResult = List.of(new Period(LocalDate.of(12, 10, 1)
+                , LocalDate.of(12, 11, 1)));
+        testPeriods = List.of(TEST_PERIODS[0], TEST_PERIODS[2]);
+        testPeriods = TEST_PERIODS[1].union(testPeriods);
+        assertEquals(expectedResult, testPeriods);
+
+        //testing overlaps
+        testPeriods = List.of(createPeriod(1, 3), createPeriod(5, 7), createPeriod(9, 11));
+        expectedResult = List.of(createPeriod(1, 7), createPeriod(9, 11));
+        testPeriods = createPeriod(2, 6).union(testPeriods);
+        assertEquals(expectedResult, testPeriods);
+
+    }
+
+    /**
+     * Convenience method to create test periods.
+     */
+    private Period createPeriod(int val1, int val2) {
+        return new Period(LocalDate.of(1, 1, val1 % 30),
+                LocalDate.of(1, 1, val2 % 30));
     }
 
 
@@ -76,6 +103,11 @@ public class PeriodTest {
 
 
     private void assertEquals(Collection<Period> expected, Collection<Period> actual) {
+        Collection<Period> expectedS = expected.stream()
+                .collect(Collectors.toList());
+        Collection<Period> actuals = actual.stream()
+                .collect(Collectors.toList());
+
         assertTrue(expected.containsAll(actual));
         assertTrue(actual.containsAll(expected));
     }
