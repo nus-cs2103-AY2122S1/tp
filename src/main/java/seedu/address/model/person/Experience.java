@@ -40,11 +40,15 @@ public class Experience {
      * Returns true if a given number matches validation.
      */
     public static boolean isValidExperience(String test) {
-        if (test.matches(VALIDATION_REGEX)) {
-            int value = Integer.parseInt(test);
-            return (value <= MAX_EXPERIENCE);
+        try {
+            if (test.matches(VALIDATION_REGEX)) {
+                int value = Integer.parseInt(test);
+                return (value <= MAX_EXPERIENCE);
+            }
+            return false;
+        } catch (NumberFormatException e) {
+            return false;
         }
-        return false;
     }
 
     @Override
