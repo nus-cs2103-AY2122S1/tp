@@ -25,7 +25,7 @@ public class ShowCommand extends Command {
             + "* `show RA1`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Show students' grades for an assessment. "
-            + "Parameters: "
+            + "\nParameters: "
             + "ASSESSMENT "
             + "Example: " + COMMAND_WORD + " "
             + "RA1";
