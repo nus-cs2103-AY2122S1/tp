@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;;
+import java.util.Set;
 
 import seedu.address.model.data.Name;
 import seedu.address.model.data.event.Event;
