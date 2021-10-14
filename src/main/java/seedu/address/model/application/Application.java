@@ -21,7 +21,7 @@ public class Application {
     /**
      * Constructor for a job application.
      * Invoked whenever the add-applicant command is called.
-      */
+     */
     public Application(Applicant applicant, Position position) {
         this.applicant = applicant;
         this.position = position;
@@ -51,20 +51,13 @@ public class Application {
 
     /**
      * Returns the status of the /application.
-     *
-     * @return Status of current application.
      */
     public ApplicationStatus getStatus() {
-        return this.status;
+        return status;
     }
 
-    /**
-     * Returns the position requested in application by the applicant.
-     *
-     * @return Position requested by the applicant.
-     */
     public Position getPosition() {
-        return this.position;
+        return position;
     }
 
     @Override
@@ -91,8 +84,8 @@ public class Application {
     @Override
     public String toString() {
         return "Application: {"
-                + "Applicant: " + applicant
-                + ", Position: " + position
+                + "Applicant: " + applicant.getName()
+                + ", Position: " + position.getTitle()
                 + ", Status: " + status
                 + "}";
     }
@@ -102,5 +95,3 @@ public class Application {
      */
     public enum ApplicationStatus { PENDING, ACCEPTED, REJECTED }
 }
-
-

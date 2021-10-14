@@ -38,15 +38,15 @@ public class AddApplicantCommand extends Command {
     public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
     private final Applicant toAdd;
-    private final Position position;
+    private final Position dummyPosition;
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
      */
-    public AddApplicantCommand(Applicant applicant, Position position) {
+    public AddApplicantCommand(Applicant applicant, Position dummyPosition) {
         requireNonNull(applicant);
         this.toAdd = applicant;
-        this.position = position;
+        this.dummyPosition = dummyPosition;
     }
 
     @Override
@@ -57,11 +57,11 @@ public class AddApplicantCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        if (!model.hasPosition(position)) {
+        if (!model.hasPosition(dummyPosition)) {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        model.addApplicantToPosition(toAdd, position);
+        model.addApplicantToPosition(toAdd, dummyPosition);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
@@ -70,7 +70,7 @@ public class AddApplicantCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof AddApplicantCommand // instanceof handles nulls
                 && toAdd.equals(((AddApplicantCommand) other).toAdd)
-                && position.equals(((AddApplicantCommand) other).position));
+                && dummyPosition.equals(((AddApplicantCommand) other).dummyPosition));
     }
 
 }
