@@ -48,6 +48,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getSiasa());
+            storage.savePolicyBook(model.getSiasa());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

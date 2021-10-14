@@ -78,19 +78,31 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlySiasa> addressBookOptional;
-        ReadOnlySiasa initialData;
+        Optional<ReadOnlySiasa> policyBookOptional;
+        Siasa initialData = new Siasa();
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleSiasa);
+            initialData = new Siasa(addressBookOptional.orElseGet(SampleDataUtil::getSampleSiasa));
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new Siasa();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new Siasa();
+        }
+        try {
+            policyBookOptional = storage.readPolicyBook();
+            if (!policyBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with an empty PolicyBook");
+            } else {
+
+                initialData.mergePolicies(policyBookOptional.get());
+            }
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty PolicyBook");
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty PolicyBook");
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -123,7 +135,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
             logger.warning("Config file at " + configFilePathUsed + " is not in the correct format. "
-                    + "Using default config properties");
+                + "Using default config properties");
             initializedConfig = new Config();
         }
 
@@ -151,7 +163,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
-                    + "Using default user prefs");
+                + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");

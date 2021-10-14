@@ -1,7 +1,12 @@
 package seedu.siasa.storage;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.siasa.testutil.Assert.assertThrows;
+import static seedu.siasa.testutil.TypicalPersons.ALICE;
+import static seedu.siasa.testutil.TypicalPersons.HOON;
+import static seedu.siasa.testutil.TypicalPersons.IDA;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -31,8 +36,8 @@ public class JsonSiasaStorageTest {
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
-                : null;
+            ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
+            : null;
     }
 
     @Test
@@ -55,7 +60,7 @@ public class JsonSiasaStorageTest {
         assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
     }
 
-    /*
+
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
@@ -93,7 +98,7 @@ public class JsonSiasaStorageTest {
     private void saveAddressBook(ReadOnlySiasa addressBook, String filePath) {
         try {
             new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

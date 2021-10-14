@@ -1,0 +1,27 @@
+{
+  "policies" : [ {
+    "title" : "Life Policy",
+    "price" : "$1200.00",
+    "expiryDate" : "2022-06-13",
+    "commission" : "20%",
+    "owner" : {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "tagged" : [ "friends" ]
+    }
+  }, {
+    "title" : "Car Policy",
+    "price" : "$1500.00",
+    "expiryDate" : "2022-01-13",
+    "commission" : "35%",
+    "owner" : {
+      "name" : "John Bob",
+      "phone" : "99112842",
+      "email" : "johnbob@example.com",
+      "address" : "Blk 10 Ang Mo Kio Street 1, #01-30",
+      "tagged" : [ ]
+    }
+  } ]
+}

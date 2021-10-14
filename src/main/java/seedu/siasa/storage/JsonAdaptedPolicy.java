@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.siasa.commons.exceptions.IllegalValueException;
-import seedu.siasa.model.person.Email;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
 import seedu.siasa.model.policy.ExpiryDate;
@@ -75,29 +74,29 @@ public class JsonAdaptedPolicy {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
             }
-            if (!Price.isValidPrice(Integer.parseInt(price))) {
+
+            if (!Price.isValidPrice((int) Double.parseDouble(price.substring(1)))) {
                 throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
         }
+        final Price modelPrice = new Price((int) Double.parseDouble(price.substring(1)));
 
-        final Price modelPrice = new Price(Integer.parseInt(price));
 
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
             LocalDate date = LocalDate.parse(expiryDate, formatter);
             if (expiryDate == null) {
                 throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
             }
 
             if (!ExpiryDate.isValidExpiryDate(date)) {
-                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | DateTimeParseException e) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
 
         LocalDate date = LocalDate.parse(expiryDate, formatter);
@@ -108,14 +107,16 @@ public class JsonAdaptedPolicy {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
             }
-            if (!Commission.isValidCommission(Integer.parseInt(commission))) {
+            String temp2 = commission.substring(0, commission.length() - 1);
+            if (!Commission.isValidCommission(Integer.parseInt(temp2))) {
                 throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
             throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
         }
 
-        final Commission modelCommission = new Commission(Integer.parseInt(commission));
+        final Commission modelCommission =
+            new Commission(Integer.parseInt(commission.substring(0, commission.length() - 1)));
 
         if (owner == null) {
             throw new IllegalValueException(
