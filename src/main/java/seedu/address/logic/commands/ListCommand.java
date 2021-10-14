@@ -13,7 +13,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "%1$d students listed!";
+    public static final String MESSAGE_SUCCESS = "Displayed list with %1$d students!";
 
     @Override
     public CommandResult execute() {
