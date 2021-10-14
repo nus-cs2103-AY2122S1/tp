@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -128,7 +130,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
+        centerPanel = new CenterPanel(logic.getCalendar(),
+                logic.getFilteredPersonList(), logic.getEmptyLessonList());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -190,6 +193,14 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displayPersonListPanel();
     }
 
+    private void handlePersonGridPanel(Person student) {
+        centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
+    }
+
+    private void handlePersonGridPanel() {
+        centerPanel.displayPersonGridPanel();
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -209,6 +220,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleSchedule();
             } else {
                 handlePersonList();
+            }
+
+            if (commandResult.isDisplayStudent()) {
+                Person student = commandResult.getStudent();
+                handlePersonGridPanel(student);
             }
 
             if (commandResult.isExit()) {

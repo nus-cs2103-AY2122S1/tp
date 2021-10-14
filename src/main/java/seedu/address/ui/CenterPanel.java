@@ -3,9 +3,11 @@ package seedu.address.ui;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,6 +23,8 @@ public class CenterPanel extends UiPart<Region> {
 
     private PersonListPanel personListPanel;
 
+    private PersonGridPanel personGridPanel;
+
     @FXML
     private StackPane centerPanelPlaceholder;
 
@@ -30,11 +34,12 @@ public class CenterPanel extends UiPart<Region> {
      * @param calendar The calendar in the CenterPanel.
      * @param personList The ObservableList of persons.
      */
-    public CenterPanel(Calendar calendar, ObservableList<Person> personList) {
+    public CenterPanel(Calendar calendar, ObservableList<Person> personList, ObservableList<Lesson> lessonList) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
         schedulePanel = new SchedulePanel(calendar);
-        displayPersonListPanel();
+        personGridPanel = new PersonGridPanel(personList, lessonList);
+        displayPersonGridPanel();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -51,6 +56,22 @@ public class CenterPanel extends UiPart<Region> {
     public void displayPersonListPanel() {
         if (!centerPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
             centerPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
+        }
+    }
+
+    public void displayPersonGridPanel() {
+        if (!centerPanelPlaceholder.getChildren().contains(personGridPanel.getRoot())) {
+            personGridPanel.setListPanels();
+            centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
+        }
+    }
+
+
+    public void displayPersonGridPanel(Person student, ObservableList<Lesson> lessons) {
+        if (!centerPanelPlaceholder.getChildren().contains(personGridPanel.getRoot())) {
+            personGridPanel.fillListPanels(student, lessons);
+            personGridPanel.setListPanels();
+            centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
         }
     }
 
