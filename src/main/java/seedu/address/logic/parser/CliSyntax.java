@@ -15,4 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_LASTMET = new Prefix("l/");
     public static final Prefix PREFIX_CURRENTPLAN = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
+    public static final Prefix[] ALL_PREFIXES = {
+        PREFIX_CLIENTID, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
+        PREFIX_DISPOSABLEINCOME, PREFIX_CURRENTPLAN, PREFIX_LASTMET
+    };
 }

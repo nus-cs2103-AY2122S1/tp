@@ -3,29 +3,52 @@ package seedu.address.model.person.comparators;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.logic.parser.exceptions.ParseException;
+
 public class SortDirection {
     public static final String MESSAGE_CONSTRAINTS = "Sort direction should either be asc or dsc";
+    public static final SortDirection SORT_ASCENDING = new SortDirection("asc");
+    public static final SortDirection SORT_DESCENDING = new SortDirection("dsc");
 
-    private String direction;
+    private final String direction;
 
     /**
      * @param direction to sort by. Either asc or dsc.
      */
-    public SortDirection(String direction) {
+    private SortDirection(String direction) {
         requireNonNull(direction);
-        checkArgument(isValidDirection(direction), MESSAGE_CONSTRAINTS);
         this.direction = direction;
+    }
+
+    /**
+     * Returns a SortDirection if the given {@code direction} is valid
+     *
+     * @param direction a string representing the direction for sorting
+     * @return SortDirection based on the {@code direction}
+     */
+    public static SortDirection of(String direction) throws ParseException {
+        SortDirection result = null;
+        if (direction.equals(SORT_ASCENDING.direction)) {
+            result = SORT_ASCENDING;
+        }
+
+        if (direction.equals(SORT_DESCENDING.direction)) {
+            result = SORT_DESCENDING;
+        }
+
+        checkArgument(result != null);
+        return result;
     }
 
     /**
      * Returns true if a given string is a valid sorting direction.
      */
     public static boolean isValidDirection(String test) {
-        return test.toLowerCase().equals("asc") || test.toLowerCase().equals("dsc");
+        return test.equalsIgnoreCase(SORT_ASCENDING.direction) || test.equalsIgnoreCase(SORT_DESCENDING.direction);
     }
 
     public boolean isAscending() {
-        return direction.toLowerCase().equals("asc");
+        return this.equals(SORT_ASCENDING);
     }
 
     @Override

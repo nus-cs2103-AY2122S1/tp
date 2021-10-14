@@ -184,11 +184,11 @@ public class ParserUtil {
      */
     public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
         requireNonNull(sortDirection);
-        String trimmedSortDirection = sortDirection.trim();
+        String trimmedSortDirection = sortDirection.trim().toLowerCase();
         if (!SortDirection.isValidDirection(trimmedSortDirection)) {
             throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
         }
-        return new SortDirection(trimmedSortDirection);
+        return SortDirection.of(trimmedSortDirection);
     }
 
     /**

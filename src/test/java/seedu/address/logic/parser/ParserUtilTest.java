@@ -182,14 +182,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_validValueWithoutWhitespace_returnsDirection() throws Exception {
-        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        SortDirection expectedSortDirection = SortDirection.of(VALID_DIRECTION);
         assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(VALID_DIRECTION));
     }
 
     @Test
     public void parseDirection_validValueWithWhitespace_returnsTrimmedDirection() throws Exception {
         String directionWithWhitespace = WHITESPACE + VALID_DIRECTION + WHITESPACE;
-        SortDirection expectedSortDirection = new SortDirection(VALID_DIRECTION);
+        SortDirection expectedSortDirection = SortDirection.of(VALID_DIRECTION);
         assertEquals(expectedSortDirection, ParserUtil.parseSortDirection(directionWithWhitespace));
     }
 
