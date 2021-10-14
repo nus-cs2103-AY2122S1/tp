@@ -127,6 +127,11 @@ public class Period {
             //nothing to union to
             return List.of(this);
         }
+        //optimisation
+        if (periods.stream()
+                .filter(p -> p.contains(this)).count() != 0) {
+            return periods;
+        }
         //the list of periods to union
         List<Period> toMerge = new ArrayList<>();
         Collection<Period> result = periods.stream()

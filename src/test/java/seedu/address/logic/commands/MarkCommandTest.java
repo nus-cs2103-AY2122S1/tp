@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -29,7 +30,10 @@ public class MarkCommandTest {
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
         predicate.addFieldToTest(DEFAULT_TEST_NAME);
         ArrayList<String> ls = new ArrayList<>();
+        //placeholder string
         ls.add(DEFAULT_TEST_NAME.toString());
+
+        model.setPerson(DEFAULT_TEST_PERSON, DEFAULT_TEST_PERSON.unMark(DEFAULT_TEST_PERIOD));
         String expectedResult = String.format(MarkCommand.DEFAULT_EXECUTION, 1, DEFAULT_TEST_PERIOD, ls);
         MarkCommand defaultCommand = new MarkCommand(predicate, DEFAULT_TEST_PERIOD);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -37,4 +41,14 @@ public class MarkCommandTest {
         assertCommandSuccess(defaultCommand, model, expectedResult, expectedModel);
 
     }
+
+    @Test
+    public void execute_command_failure() {
+        PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
+        MarkCommand defaultCommand = new MarkCommand(predicate, DEFAULT_TEST_PERIOD);
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel.setPerson(DEFAULT_TEST_PERSON, DEFAULT_TEST_PERSON.mark(DEFAULT_TEST_PERIOD));
+        assertCommandFailure(defaultCommand, model, String.format(MarkCommand.NOTHING_CHANGED, ALICE));
+    }
+
 }

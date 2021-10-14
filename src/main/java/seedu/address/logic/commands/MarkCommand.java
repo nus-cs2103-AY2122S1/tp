@@ -30,7 +30,7 @@ public class MarkCommand extends Command {
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";
-
+    public static final String NOTHING_CHANGED = "Staff has already been marked for the input duration: %1$s";
     private final Period period;
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -70,6 +70,11 @@ public class MarkCommand extends Command {
         int total = toModify.size();
 
         for (Person p : toModify) {
+            if (p.mark(period).equals(p)) {
+                throw new CommandException(String.format(NOTHING_CHANGED, p));
+            }
+        }
+        for (Person p : toModify) {
             model.setPerson(p, p.mark(period));
         }
         List<Name> names = toModify.stream()
@@ -87,6 +92,9 @@ public class MarkCommand extends Command {
         }
         Person staffToModify = model.getFilteredPersonList().get(index);
         Person changedStaff = staffToModify.mark(period);
+        if (staffToModify.equals(changedStaff)) {
+            throw new CommandException(String.format(NOTHING_CHANGED, staffToModify));
+        }
         model.setPerson(staffToModify, changedStaff);
         return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, changedStaff));
 
