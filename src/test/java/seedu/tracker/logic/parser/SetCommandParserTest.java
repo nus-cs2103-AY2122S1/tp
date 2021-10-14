@@ -14,6 +14,7 @@ import static seedu.tracker.logic.commands.CommandTestUtil.VALID_MC_GOAL;
 import static seedu.tracker.logic.commands.CommandTestUtil.VALID_SEMESTER;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tracker.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.tracker.model.module.Mc.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +76,7 @@ public class SetCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid mc goal
-        assertParseFailure(parser, INVALID_MC_DESC, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, INVALID_MC_DESC, MESSAGE_CONSTRAINTS);
 
         // invalid academic year, missing semester
         assertParseFailure(parser, INVALID_ACADEMIC_YEAR_DESC, MESSAGE_INVALID_FORMAT);
@@ -84,7 +85,7 @@ public class SetCommandParserTest {
         assertParseFailure(parser, INVALID_SEMESTER_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid academic year followed by valid semester
-        assertParseFailure(parser,  INVALID_ACADEMIC_YEAR_DESC + SEMESTER_DESC,
+        assertParseFailure(parser, INVALID_ACADEMIC_YEAR_DESC + SEMESTER_DESC,
                 AcademicYear.MESSAGE_CONSTRAINTS);
 
         //invalid academic year (signed integer) followed by valid semester
@@ -92,7 +93,7 @@ public class SetCommandParserTest {
                 AcademicYear.MESSAGE_CONSTRAINTS);
 
         // valid academic year followed by invalid semester (signed integer)
-        assertParseFailure(parser,  ACADEMIC_YEAR_DESC + INVALID_SEMESTER_SIGNED_DESC,
+        assertParseFailure(parser, ACADEMIC_YEAR_DESC + INVALID_SEMESTER_SIGNED_DESC,
                 Semester.MESSAGE_CONSTRAINTS);
 
         // valid academic year followed by invalid semester

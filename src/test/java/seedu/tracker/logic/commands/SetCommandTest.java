@@ -1,5 +1,10 @@
 package seedu.tracker.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.model.Model;
@@ -10,11 +15,6 @@ import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Mc;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
 public class SetCommandTest {
     private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
