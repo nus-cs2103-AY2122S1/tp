@@ -94,7 +94,16 @@ public class Event extends Data {
     }
 
     /**
-     * Add a set of members from the event.
+     * Removes a member from the event.
+     *
+     * @param member to be removed
+     */
+    public void removeParticipant(Member member) {
+        participants.remove(member);
+    }
+
+    /**
+     * Add a set of members to the event.
      *
      * @param members to be added
      */
@@ -102,6 +111,15 @@ public class Event extends Data {
         for (Member m : members) {
             participants.put(m, false);
         }
+    }
+
+    /**
+     * Add a member to the event.
+     *
+     * @param member to be added
+     */
+    public void addParticipant(Member member) {
+        participants.put(member, false);
     }
 
     /**

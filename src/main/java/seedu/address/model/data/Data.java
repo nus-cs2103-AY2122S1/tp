@@ -3,7 +3,7 @@ package seedu.address.model.data;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
- * Abstract class which Event and Data inherits from.
+ * Abstract class which Event and Member inherits from.
  */
 public abstract class Data {
     private final Name name;
