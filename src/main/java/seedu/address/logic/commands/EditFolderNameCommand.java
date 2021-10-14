@@ -73,5 +73,4 @@ public class EditFolderNameCommand extends Command {
                 && this.newFolder.equals(e.newFolder);
     }
 
-
 }
