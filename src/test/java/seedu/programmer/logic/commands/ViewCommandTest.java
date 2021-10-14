@@ -77,7 +77,7 @@ public class ViewCommandTest {
     @Test
     public void execute_zeroQueryArg_allStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 7);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate();
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -139,14 +139,6 @@ public class ViewCommandTest {
      */
     private StudentDetailContainsQueryPredicate preparePredicate(String name, String studentId, String classId) {
         QueryStudentDescriptor queryFields = new QueryStudentDescriptor(name, studentId, classId);
-        return new StudentDetailContainsQueryPredicate(queryFields);
-    }
-
-    /**
-     * Prepares an empty {@code StudentDetailContainsQueryPredicate}.
-     */
-    private StudentDetailContainsQueryPredicate preparePredicate() {
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor();
         return new StudentDetailContainsQueryPredicate(queryFields);
     }
 }

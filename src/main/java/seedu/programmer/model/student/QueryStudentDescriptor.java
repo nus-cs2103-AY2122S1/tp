@@ -15,12 +15,6 @@ public class QueryStudentDescriptor {
     private String classId;
 
     /**
-     * Empty constructor.
-     */
-    public QueryStudentDescriptor() {
-    }
-
-    /**
      * Constructor with the query parameters.
      * @param name the name to be queried.
      * @param sid the student ID to be queried.
