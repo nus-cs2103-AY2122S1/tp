@@ -168,13 +168,12 @@ Format: `clear`
 
 ### Retrieving additional information of students': `retrieve`
 
-Retrieves additional information of students if present. Currently supported information includes: 
-- Studio Participation
+Retrieves additional information of students. Currently supported information includes:
 - Telegram Handle
 - Email address
-- Contact Number, if any
+- Telephone number, if any
 
-Format: `retrieve INFORMATION [of STUDENT_NAME]`
+Format: `retrieve [p/PHONE_NUMBER] [e/EMAIL] [MORE INFORMATION] [n/NAME]`
 
 ### Exiting the program : `exit`
 
@@ -291,4 +290,5 @@ Action | Format, Examples
 **Studio Participation** | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
 **Grade** | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
 **Show Grades** | `showg ASSESSMENT` <br> e.g., `show RA1`
+**Retrieve** | `retrieve [p/PHONE_NUMBER] [e/EMAIL] [te/TELEGRAM] [n/NAME]` <br> e.g., `retrieve p/ e/ n/Alex Yeoh`
 **Help** | `help`

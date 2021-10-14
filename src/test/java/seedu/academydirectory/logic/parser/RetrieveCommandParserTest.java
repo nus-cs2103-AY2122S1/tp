@@ -4,6 +4,8 @@ import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMA
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.logic.commands.RetrieveCommand;
@@ -35,8 +37,12 @@ public class RetrieveCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsRetrieveCommand() {
-        String userInput = "e/";
-        RetrieveCommand expectedCommand = new RetrieveCommand(new InformationWantedFunction(new Prefix(userInput)));
-        assertParseSuccess(parser, userInput, expectedCommand);
+        Stream<Prefix> relevantPrefixes = Stream.of(InformationWantedFunction.SUPPORTED_PREFIX.toArray(Prefix[]::new))
+                .parallel();
+        relevantPrefixes.forEach(prefix -> {
+            String userInput = " " + prefix.getPrefix();
+            RetrieveCommand expectedCommand = new RetrieveCommand(new InformationWantedFunction(prefix));
+            assertParseSuccess(parser, userInput, expectedCommand);
+        });
     }
 }
