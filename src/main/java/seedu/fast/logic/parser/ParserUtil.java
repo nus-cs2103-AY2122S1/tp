@@ -253,7 +253,7 @@ public class ParserUtil {
             date = LocalDate.parse(date).format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         } catch (DateTimeParseException dtpe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AppointmentCommand.MESSAGE_USAGE), dtpe);
+                    Appointment.INVALID_DATE_INPUT), dtpe);
         }
 
         return date.trim();
@@ -280,7 +280,7 @@ public class ParserUtil {
             // checks that time only contains HH:mm and nothing else
             if (!time.matches(validationPattern)) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE));
+                        Appointment.INVALID_TIME_INPUT));
             }
 
             try {
@@ -288,7 +288,7 @@ public class ParserUtil {
                 time = LocalTime.parse(time).format(DateTimeFormatter.ofPattern("HHmm"));
             } catch (DateTimeParseException dtpe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        AppointmentCommand.MESSAGE_USAGE), dtpe);
+                        Appointment.INVALID_TIME_INPUT), dtpe);
             }
         }
 
@@ -306,10 +306,11 @@ public class ParserUtil {
      */
     public static String parseVenueString(String venue) throws ParseException {
         if (venue.length() > 30) {
-            return venue.substring(0, 29);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Appointment.INVALID_VENUE_INPUT));
         }
 
-        return venue.trim();
+        return venue;
     }
 
 }

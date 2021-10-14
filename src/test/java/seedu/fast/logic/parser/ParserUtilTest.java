@@ -2,6 +2,8 @@ package seedu.fast.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Address;
@@ -44,6 +47,11 @@ public class ParserUtilTest {
     private static final String VALID_HELP_COMMAND_2 = "help priority tag";
     private static final String VALID_HELP_COMMAND_OUTPUT_1 = "Help";
     private static final String VALID_HELP_COMMAND_OUTPUT_2 = "Priority Tag";
+    private static final String VALID_DATE_INPUT = "2021-10-10";
+    private static final String FORMATTED_DATE = "10 Oct 2021";
+    private static final String VALID_TIME_INPUT = "20:00";
+    private static final String FORMATTED_TIME = "2000";
+    private static final String VALID_VENUE_INPUT = "Clementi Mall";
 
     private static final String SAMPLE_STRING = "the quick brown fox jumped over the lazy dog";
 
@@ -269,5 +277,79 @@ public class ParserUtilTest {
     @Test
     public void parseHelp_invalidInput2_success() {
         assertThrows(HelpParseException.class, () -> ParserUtil.parseHelp(INVALID_HELP_COMMAND_2));
+    }
+
+    @Test
+    public void parse_validDateFormat_success() throws ParseException {
+        assertEquals(FORMATTED_DATE, ParserUtil.parseDateString(VALID_DATE_INPUT));
+    }
+
+    @Test
+    public void parse_validTimeFormat_success() throws ParseException {
+        assertEquals(FORMATTED_TIME, ParserUtil.parseTimeString(VALID_TIME_INPUT));
+    }
+
+    @Test
+    public void parse_validVenueFormat_success() throws ParseException {
+        assertEquals(VALID_VENUE_INPUT, ParserUtil.parseVenueString(VALID_VENUE_INPUT));
+    }
+
+    @Test
+    public void parse_invalidDateFormat_failure() {
+        // wrong order
+        String invalidDateInput = "10-10-2021";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(invalidDateInput));
+
+        // using text
+        String invalidTextInput = "10-Oct-2021";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(invalidTextInput));
+
+        // without dash
+        String invalidNoDashInput = "10102021";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(invalidNoDashInput));
+    }
+
+    @Test
+    public void parse_appointmentMonthOutOfBound_failure() {
+        String invalidMonthInput = "2021-20-01";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(invalidMonthInput));
+    }
+
+    @Test
+    public void parse_appointmentDayOutOfBound_failure() {
+        String invalidDayInput = "2021-10-45";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(invalidDayInput));
+    }
+
+    @Test
+    public void parse_invalidTimeFormat_failure() {
+        // using 12-hour string-style format (i.e 8pm)
+        String invalidTimeInput = "8pm";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(invalidTimeInput));
+
+        // without semi-colon
+        assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(FORMATTED_TIME));
+
+        // specify hour only
+        String invalidSingleTimeInput = "8";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(invalidSingleTimeInput));
+    }
+
+    @Test
+    public void parse_appointmentHourOutOfBound_failure() {
+        String invalidHourInput = "26:00";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(invalidHourInput));
+    }
+
+    @Test
+    public void parse_appointmentMinuteOutOfBound_failure() {
+        String invalidMinuteInput = "08:80";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(invalidMinuteInput));
+    }
+
+    @Test
+    public void parse_invalidVenueInput_failure() {
+        String invalidVenueInput = "Test1Test2Test3Test4Test5Test6Test7";
+        assertThrows(ParseException.class, ()-> ParserUtil.parseVenueString(invalidVenueInput));
     }
 }
