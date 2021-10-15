@@ -141,31 +141,32 @@ public class StringUtilTest {
     }
 
     @Test
-    public void containIgnoreCase_nullSentence_throwsNullPointerException() {
+    public void containsPartialWordIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase(null, "a"));
     }
 
     @Test
-    public void containIgnoreCase_nullWord_throwsNullPointerException() {
+    public void containsPartialWordIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase("a", null));
     }
 
     @Test
-    public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+    public void containsPartialWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> StringUtil.containsPartialWordIgnoreCase("a", ""));
     }
 
     @Test
-    public void containsIgnoreCase_validInputs_correctResult() {
+    public void containsPartialWordIgnoreCase_validInputs_correctResult() {
+        //match with empty
         assertFalse(StringUtil.containsPartialWordIgnoreCase("", "aaa"));
+        //match with wrong word
         assertFalse(StringUtil.containsPartialWordIgnoreCase("abc", "g"));
-
         //match with exact starting word
         assertTrue(StringUtil.containsPartialWordIgnoreCase("abc", "a"));
-
+        //match with word that is not at start
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("abc", "bc"));
         //match different capitalisations
         assertTrue(StringUtil.containsPartialWordIgnoreCase("abcDEF", "aBcd"));
-
         // match with spaces
         assertTrue(StringUtil.containsPartialWordIgnoreCase("a b c d", "a b"));
     }

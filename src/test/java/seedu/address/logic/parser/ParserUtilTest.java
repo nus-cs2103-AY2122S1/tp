@@ -2,7 +2,10 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 import static seedu.address.logic.parser.ParserUtil.parseLastVisit;
 import static seedu.address.logic.parser.ParserUtil.parseVisit;
 import static seedu.address.logic.parser.ParserUtil.parseVisitForAdd;
@@ -313,5 +316,18 @@ public class ParserUtilTest {
         String storedDate = "2021-02-01 23:59";
         String displayedDate = "01 Feb 2021 23:59";
         assertEquals(displayedDate, ParserUtil.parseDisplayedDatetime(storedDate));
+    }
+
+    @Test
+    public void arePrefixesPresent_validPrefix_success() {
+        ArgumentMultimap argMap = ArgumentTokenizer.tokenize("v/" + VALID_VISIT_DATETIME, PREFIX_VISIT);
+        assertTrue(arePrefixesPresent(argMap));
+    }
+
+    @Test
+    public void arePrefixesPresent_validPrefixes_success() {
+        ArgumentMultimap argMap = ArgumentTokenizer.tokenize("v/ lv/" + VALID_VISIT_DATETIME,
+                PREFIX_VISIT, PREFIX_LAST_VISIT);
+        assertTrue(arePrefixesPresent(argMap));
     }
 }
