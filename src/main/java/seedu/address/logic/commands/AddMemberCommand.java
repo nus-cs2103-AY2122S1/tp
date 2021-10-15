@@ -25,7 +25,7 @@ public class AddMemberCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_AVAILABILITY + "mon wed fri ";
+            + PREFIX_AVAILABILITY + "1 3 5";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_MEMBER = "This member already exists in the member list";

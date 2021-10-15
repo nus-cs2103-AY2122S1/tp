@@ -212,8 +212,13 @@ public class ParserUtil {
             throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
         }
 
-        List<DayOfWeek> availability = Arrays.stream(trimmedAvailabilityString.split(" "))
-                .distinct().map(dayNumber -> DayOfWeek.of(Integer.parseInt(dayNumber))).collect(Collectors.toList());
+        List<DayOfWeek> availability;
+        if (availabilityDaysWithNoDuplicates.size() <= 1) { // valid but empty
+            availability = new ArrayList<>();
+        } else {
+            availability = Arrays.stream(trimmedAvailabilityString.split(" "))
+                    .distinct().map(dayNumber -> DayOfWeek.of(Integer.parseInt(dayNumber))).collect(Collectors.toList());
+        }
         Collections.sort(availability);
         return new Availability(availability);
     }

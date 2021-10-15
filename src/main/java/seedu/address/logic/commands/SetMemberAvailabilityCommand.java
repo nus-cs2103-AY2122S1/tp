@@ -27,7 +27,7 @@ public class SetMemberAvailabilityCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "d/1 2 3 7";
 
-    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Set availability of members";
+    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Successfully Set availability of member(s)";
 
     private final List<Index> indices;
     private final Availability availability;
