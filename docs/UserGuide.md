@@ -140,7 +140,7 @@ Examples:
 
 Exits ProgrammerError and closes the GUI.
 
-### <a name="download-data"></a>9. Save Data
+### <a name="download-data"></a>9. Download Data
 
 ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need to specify the directory to download the file to.
 
