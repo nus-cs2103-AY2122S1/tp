@@ -98,6 +98,7 @@ public class Fast implements ReadOnlyFast {
      * Sorts the list of persons by the given comparator
      */
     public void sortPersons(Comparator<Person> comparator) {
+        requireNonNull(comparator);
         persons.sortPersons(comparator);
     }
 
