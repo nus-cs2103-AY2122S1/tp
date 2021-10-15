@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.AttendanceCommand;
+import seedu.academydirectory.model.student.StudioRecord;
 
 public class AttendanceCommandParserTest {
     private AttendanceCommandParser parser = new AttendanceCommandParser();
@@ -39,6 +40,8 @@ public class AttendanceCommandParserTest {
     @Test
     public void parse_missingCompulsoryField_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AttendanceCommand.MESSAGE_USAGE);
+        String expectedInvalidStudioSessionMessage = StudioRecord.MESSAGE_CONSTRAINTS;
+        String expectedInvalidAttendanceMessage = ParserUtil.MESSAGE_INVALID_ATTENDANCE_STATUS;
 
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInputNoIndex = " "
@@ -65,10 +68,10 @@ public class AttendanceCommandParserTest {
         assertParseFailure(parser, userInputNoIndex, expectedMessage);
 
         // no session
-        assertParseFailure(parser, userInputNoSession, expectedMessage);
+        assertParseFailure(parser, userInputNoSession, expectedInvalidStudioSessionMessage);
 
         // no attendance
-        assertParseFailure(parser, userInputNoAttendance, expectedMessage);
+        assertParseFailure(parser, userInputNoAttendance, expectedInvalidAttendanceMessage);
 
     }
 }

@@ -40,8 +40,9 @@ public class Assessment implements Information {
      * Returns true if a given string is a valid assessment.
      */
     public static boolean isValidAssessment(String test) {
-        return test.equalsIgnoreCase("RA1") || test.equalsIgnoreCase("MIDTERM") || test.equalsIgnoreCase("RA2")
-                || test.equalsIgnoreCase("PE") || test.equalsIgnoreCase("FINAL");
+        return test.equalsIgnoreCase("RA1") || test.equalsIgnoreCase("MIDTERM")
+                || test.equalsIgnoreCase("RA2") || test.equalsIgnoreCase("PE")
+                || test.equalsIgnoreCase("FINAL");
     }
 
     public HashMap<String, Integer> getAssessmentHashMap() {

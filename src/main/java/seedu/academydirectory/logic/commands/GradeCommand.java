@@ -76,7 +76,7 @@ public class GradeCommand extends Command {
         Student editedStudent = new Student(
                 studentToEdit.getName(), studentToEdit.getPhone(), studentToEdit.getEmail(),
                 studentToEdit.getTelegram(), studentToEdit.getStudioRecord(),
-                studentToEdit.getAssessment(), studentToEdit.getTags());
+                assessmentToEdit, studentToEdit.getTags());
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment));

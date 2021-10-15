@@ -5,8 +5,9 @@ import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMA
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_GRADE;
 
+import java.util.stream.Stream;
+
 import seedu.academydirectory.commons.core.index.Index;
-import seedu.academydirectory.commons.exceptions.IllegalValueException;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
@@ -21,19 +22,23 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT, PREFIX_GRADE);
-
-        Index index;
-        String assessment;
-        Integer grade;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            assessment = ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()).toUpperCase();
-            grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GradeCommand.MESSAGE_USAGE), ive);
+        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT, PREFIX_GRADE)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
         }
+
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        String assessment = ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get()).toUpperCase();
+        Integer grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
+
         return new GradeCommand(index, assessment, grade);
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }
