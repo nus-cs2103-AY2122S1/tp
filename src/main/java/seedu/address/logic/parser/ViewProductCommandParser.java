@@ -20,12 +20,18 @@ public class ViewProductCommandParser implements Parser<ViewProductCommand> {
      */
     public ViewProductCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.length() != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewProductCommand.MESSAGE_USAGE));
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
+        try {
+            Integer.parseInt(keywords[0]);
+        } catch (NumberFormatException numberFormatException) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewProductCommand.MESSAGE_USAGE));
+        }
         return new ViewProductCommand(new ProductContainsIdPredicate(Arrays.asList(keywords)));
     }
 }
