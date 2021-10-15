@@ -34,57 +34,62 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean isTagPrefixPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
 
         // boolean condition to check that only one of the three prefixes are present
-        if (isNamePrefixPresent
-                ? (isModulePrefixPresent || isTagPrefixPresent)
-                : (isModulePrefixPresent && isTagPrefixPresent)) {
+        if (checkOnlyOnePrefixPresent(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
             );
         }
 
         if (isNamePrefixPresent) {
-            Optional<String> searchInput = argMultimap.getValue(PREFIX_NAME);
-            String names = searchInput.get().trim();
-            if (names.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-
-            String[] nameKeywords = names.split("\\s+");
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return getFindNameCommand(argMultimap);
         }
 
         if (isModulePrefixPresent) {
-            Optional<String> searchInput = argMultimap.getValue(PREFIX_MODULE_CODE);
-            String moduleCodes = searchInput.get().trim();
-            if (moduleCodes.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-
-            List<String> moduleKeywordsList = Arrays.stream(moduleCodes.split("\\s+"))
-                    .map(moduleName -> '[' + moduleName + ']')
-                    .collect(Collectors.toList());
-
-            return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
+            return getFindModuleOrTagCommand(argMultimap, PREFIX_MODULE_CODE);
         }
 
         if (isTagPrefixPresent) {
-            Optional<String> searchInput = argMultimap.getValue(PREFIX_TAG);
-            String tags = searchInput.get().trim();
-            if (tags.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-            }
-
-            List<String> tagKeywordsList = Arrays.stream(tags.split("\\s+"))
-                    .map(tag -> '[' + tag + ']')
-                    .collect(Collectors.toList());
-            return new FindCommand(new TagsContainsKeywordsPredicate(tagKeywordsList));
+            return getFindModuleOrTagCommand(argMultimap, PREFIX_TAG);
         }
 
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
         );
+    }
+
+    private boolean checkOnlyOnePrefixPresent (boolean firstPrefix, boolean secondPrefix, boolean thirdPrefix) {
+        return firstPrefix ? (secondPrefix || thirdPrefix) : (secondPrefix && thirdPrefix);
+    }
+
+    private FindCommand getFindNameCommand(ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> searchInput = argMultimap.getValue(PREFIX_NAME);
+        String names = searchInput.get().trim();
+        if (names.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        String[] nameKeywords = names.split("\\s+");
+        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+
+    }
+
+    private FindCommand getFindModuleOrTagCommand(ArgumentMultimap argMultimap, Prefix prefix) throws ParseException {
+        Optional<String> searchInput = argMultimap.getValue(prefix);
+        String tagsOrModules = searchInput.get().trim();
+        if (tagsOrModules.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        List<String> moduleKeywordsList = Arrays.stream(tagsOrModules.split("\\s+"))
+                .map(tagOrModule -> '[' + tagOrModule + ']')
+                .collect(Collectors.toList());
+
+        if (prefix.equals(PREFIX_MODULE_CODE)) {
+            return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
+        } else {
+            return new FindCommand(new TagsContainsKeywordsPredicate(moduleKeywordsList));
+        }
     }
 }
