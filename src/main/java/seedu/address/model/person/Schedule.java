@@ -15,6 +15,8 @@ public class Schedule {
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
+    // Set the number of hours for a slot as 4 hours
+    private static final int HOURS_PER_SLOT = 4;
 
 
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
@@ -127,6 +129,23 @@ public class Schedule {
                 formatShiftsToString(shifts[5]),
                 formatShiftsToString(shifts[6]));
 
+    }
+
+    /**
+     * Calculates the total working hours os one schedule.
+     *
+     * @return The total working hours.
+     */
+    public int getTotalWorkingHour() {
+        int totalHours = 0;
+        for (Shift[] dayShifts : shifts) {
+            for (Shift shift : dayShifts) {
+                if (shift != null) {
+                    totalHours += HOURS_PER_SLOT;
+                }
+            }
+        }
+        return totalHours;
     }
 
     /**
