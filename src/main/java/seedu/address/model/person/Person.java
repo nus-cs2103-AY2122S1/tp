@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,8 +111,19 @@ public class Person {
      * @param slot The time slot of the shift.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
+    }
+
+    /**
+     * Removes a shift from the staff's schedule.
+     *
+     * @param dayOfWeek The day of the shift.
+     * @param slot The time slot of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
+     */
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        schedule.removeShift(dayOfWeek, slot);
     }
 
     public void setSchedule(Schedule schedule) {
