@@ -17,11 +17,12 @@ import seedu.address.model.person.Person;
  */
 public class DeleteMultipleCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
+    public static final String INDEX_SPLITTER = "-";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a range of people identified by the index numbers in the displayed person list.\n"
             + "Parameters: START_INDEX - END_INDEX (must be positive integers, both inclusive)\n"
-            + "Example: " + COMMAND_WORD + " 8 - 14";
+            + "Example: " + COMMAND_WORD + " 8 " + INDEX_SPLITTER + " 14";
 
     public static final String MESSAGE_DELETE_MULTIPLE_PERSON_SUCCESS = "Deleted Persons: ";
     public static final String MESSAGE_CONSTRAINTS = "STARTINDEX cannot be larger than ENDINDEX";

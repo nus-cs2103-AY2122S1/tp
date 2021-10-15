@@ -58,5 +58,4 @@ public class FindTagCaseInsensitiveCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, "\n friends \n \t husband  \t", expectedFindCommand);
     }
-
 }
