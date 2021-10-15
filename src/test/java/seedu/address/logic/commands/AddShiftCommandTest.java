@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.AddShiftCommand.MESSAGE_ADD_SHIFT_SUCCESS;
-import static seedu.address.logic.commands.AddShiftCommand.MESSAGE_PERSON_NOT_EXIST;
 import static seedu.address.logic.commands.AddShiftCommand.MESSAGE_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -62,7 +61,6 @@ public class AddShiftCommandTest {
                 new Name("Alice Pauline"), "monday-1");
         AddShiftCommand personIsNullCommand = new AddShiftCommand(null, null, "monday-1");
 
-        assertCommandFailure(nameNotFoundCommand, model, MESSAGE_PERSON_NOT_EXIST);
         assertCommandFailure(indexOutOfBoundCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         assertCommandFailure(personIsNullCommand, model, MESSAGE_USAGE);
     }
@@ -74,11 +72,11 @@ public class AddShiftCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRole("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRole("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -87,7 +85,7 @@ public class AddShiftCommandTest {
         AddShiftCommand firstCommand = new AddShiftCommand(null, alice.getName(),
                 "tuesday-1");
 
-        expectedModel.findPersonByName(new Name("Alice Pauline")).changeSchedule(DayOfWeek.TUESDAY, Slot.AFTERNOON);
+        expectedModel.findPersonByName(new Name("Alice Pauline")).addShift(DayOfWeek.TUESDAY, Slot.AFTERNOON);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_ADD_SHIFT_SUCCESS, alice.getName(),
                 DayOfWeek.TUESDAY, Slot.AFTERNOON), expectedModel);
     }
@@ -99,11 +97,11 @@ public class AddShiftCommandTest {
 
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRole("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         Person copyOfAlice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRole("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
 
         model.addPerson(alice);
@@ -112,7 +110,7 @@ public class AddShiftCommandTest {
         AddShiftCommand firstCommand = new AddShiftCommand(Index.fromOneBased(1), null,
                 "tuesday-1");
 
-        expectedModel.findPersonByName(new Name("Alice Pauline")).changeSchedule(DayOfWeek.TUESDAY, Slot.AFTERNOON);
+        expectedModel.findPersonByName(new Name("Alice Pauline")).addShift(DayOfWeek.TUESDAY, Slot.AFTERNOON);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_ADD_SHIFT_SUCCESS, alice.getName(),
                 DayOfWeek.TUESDAY, Slot.AFTERNOON), expectedModel);
     }
