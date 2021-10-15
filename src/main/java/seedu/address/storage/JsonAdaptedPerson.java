@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Salary;
 import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -35,8 +37,9 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String salary;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String schedule;
+    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedPeriod> absentDates = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +49,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("role") List<JsonAdaptedRole> roles,
             @JsonProperty("salary") String salary, @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule,
+            @JsonProperty("absentDates") List<JsonAdaptedPeriod> absentDates) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,10 +60,15 @@ class JsonAdaptedPerson {
         }
         this.salary = salary;
         this.status = status;
+        this.schedule = schedule;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.schedule = schedule;
+        if (absentDates != null) {
+            this.absentDates.addAll(absentDates);
+        }
+
+
     }
 
     /**
@@ -78,7 +87,11 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        absentDates.addAll(source.getAbsentDates().stream()
+                .map(JsonAdaptedPeriod::new)
+                .collect(Collectors.toList()));
         schedule = source.getSchedule().toString();
+
     }
 
     /**
@@ -91,10 +104,18 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
+
+        final List<Period> personAbsentPeriods = new ArrayList<>();
+        for (JsonAdaptedPeriod period : absentDates) {
+            personAbsentPeriods.add(period.toModelType());
+        }
+
+
         final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
         }
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -146,6 +167,7 @@ class JsonAdaptedPerson {
         final Status modelStatus = Status.translateStringToStatus(status);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Period> modelPeriods = new HashSet<>(personAbsentPeriods);
 
         if (schedule == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -162,7 +184,9 @@ class JsonAdaptedPerson {
             modelSchedule = new Schedule(schedule.trim());
         }
         Person p = new Person(modelName, modelPhone, modelEmail,
-                modelAddress, modelRoles, modelSalary, modelStatus, modelTags);
+                modelAddress, modelRoles, modelSalary, modelStatus, modelTags, modelPeriods);
+
+
         p.setSchedule(modelSchedule);
         return p;
     }

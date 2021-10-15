@@ -43,6 +43,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setSalary(person.getSalary());
         descriptor.setStatus(person.getStatus());
         descriptor.setTags(person.getTags());
+        descriptor.setPeriod(person.getAbsentDates());
     }
 
     /**

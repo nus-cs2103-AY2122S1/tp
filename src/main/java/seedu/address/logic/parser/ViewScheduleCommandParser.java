@@ -20,6 +20,9 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  */
 public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
 
+    private static final ParseException NO_FIELD_EXCEPTION =
+            new ParseException(ViewScheduleCommand.HELP_MESSAGE);
+
     @Override
     public ViewScheduleCommand parse(String args) throws ParseException {
         //currently defined for name prefix, undefined behaviour

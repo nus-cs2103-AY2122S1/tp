@@ -10,10 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -21,6 +24,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
@@ -254,9 +258,32 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> periods} to a {@code period} from the earliest date to the
+     * latest date in the collection.
+     * @throws DateTimeParseException When the input does not have the correct format.
+     */
+    public static Period parsePeriod(Collection<String> periods) throws DateTimeParseException {
+        LocalDate start = LocalDate.MAX;
+        LocalDate end = LocalDate.MIN;
+
+        for (String periodName : periods) {
+            if (start.isAfter(LocalDate.parse(periodName))) {
+                start = LocalDate.parse(periodName);
+            }
+            if (end.isBefore(LocalDate.parse(periodName))) {
+                end = LocalDate.parse(periodName);
+            }
+        }
+
+        return new Period(start, end);
+    }
+
+
+
+    /**
      * Parses {@code args} into {@code PersonContainsFieldsPredicate} which tests a person for all
      * of the qualifiers of the predicate.
-     * @throws ParseException
+     * @throws ParseException Throws parse exception when the input is not something needed.
      */
     public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
         requireNonNull(argMultimap);
@@ -270,9 +297,17 @@ public class ParserUtil {
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_ROLE), Role::translateStringToRole);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_SALARY), Salary::new);
             predicate.addFieldToTest(argMultimap.getValue(PREFIX_STATUS), Status::translateStringToStatus);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage());
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
         }
         return predicate;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

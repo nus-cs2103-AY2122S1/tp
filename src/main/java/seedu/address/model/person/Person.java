@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
@@ -9,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -32,6 +34,7 @@ public class Person {
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
+    private final Set<Period> absentDates = new HashSet<>();
 
     private Schedule schedule;
     private int totalWeeklyWorkingHour;
@@ -40,8 +43,9 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Role> roles, Salary salary, Status status, Set<Tag> tags) {
+                  Set<Role> roles, Salary salary, Status status, Set<Tag> tags, Set<Period> absentDates) {
         requireAllNonNull(name, phone, email, address, tags, roles);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +61,7 @@ public class Person {
         this.schedule = new Schedule();
         this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
         this.fields.addAll(tags);
+        this.absentDates.addAll(absentDates);
         this.fields.addAll(roles);
         addToFieldSet(fields, name, phone, email, address, salary, status);
     }
@@ -99,11 +104,47 @@ public class Person {
     }
 
     /**
+     * Marks this {@code period} when the {@code Person} was not working.
+     */
+    public Person mark(Period period) {
+        Set<Period> periods = period.union(this.getAbsentDates())
+                .stream()
+                .collect(Collectors.toUnmodifiableSet());
+        return new Person(name, phone, email, address,
+                roles, salary, status, tags, periods);
+
+    }
+
+
+    /**
+     * Removes the marking of {@code period} to mark that the person was working in
+     * this period. The input period must contain the period to remove.
+     *
+     * @return The resulting person from marking that the person was working.
+     */
+    public Person unMark(Period period) {
+        requireNonNull(period);
+        Set<Period> result = getAbsentDates().stream()
+                .flatMap(p -> p.complement(period).stream())
+                .collect(Collectors.toSet());
+        return new Person(name, phone, email, address,
+                roles, salary, status, tags, result);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable period set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Period> getAbsentDates() {
+        return Collections.unmodifiableSet(this.absentDates);
     }
 
     /**
@@ -167,6 +208,10 @@ public class Person {
         }
 
         Person otherStaff = (Person) other;
+        //for some odd reason, the set equals method does not work, neither does the contains all
+        List<Period> periods = getAbsentDates().stream().collect(Collectors.toList());
+        List<Period> otherPeriods = otherStaff.getAbsentDates().stream().collect(Collectors.toList());
+
         return otherStaff.getName().equals(getName())
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
@@ -175,7 +220,10 @@ public class Person {
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags())
+                && periods.containsAll(otherPeriods)
+                && otherPeriods.containsAll(periods)
                 && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
+
     }
 
     @Override
@@ -211,4 +259,7 @@ public class Person {
         }
         return builder.toString();
     }
+
+
+
 }
