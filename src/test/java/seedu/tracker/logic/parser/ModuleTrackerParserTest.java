@@ -20,6 +20,7 @@ import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.UntakeCommand;
 import seedu.tracker.logic.commands.ViewCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.calendar.AcademicCalendar;
@@ -95,6 +96,13 @@ public class ModuleTrackerParserTest {
 
         ModuleInSpecificSemesterPredicate predicate = new ModuleInSpecificSemesterPredicate(academicCalendar);
         assertEquals(new ViewCommand(predicate), command);
+    }
+
+    @Test
+    public void parseCommand_untake() throws Exception {
+        UntakeCommand command = (UntakeCommand) parser.parseCommand(
+                UntakeCommand.COMMAND_WORD + " " + INDEX_FIRST_MODULE.getOneBased());
+        assertEquals(new UntakeCommand(INDEX_FIRST_MODULE), command);
     }
 
     @Test
