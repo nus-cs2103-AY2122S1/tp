@@ -23,9 +23,9 @@ public class TypicalModules {
             .withTitle("Asking Questions")
             .withDescription("introduces six dominant modes of questioning").build();
 
-    public static final Module CS1101S = new ModuleBuilder().withCode("CS1101S")
-            .withTitle("Programming methodology")
-            .withDescription("introduces programming methodology")
+    public static final Module MA1521 = new ModuleBuilder().withCode("MA1521")
+            .withTitle("Calculus")
+            .withDescription("introduces calculus")
             .withAcademicCalendar(1, 1).build();
 
     public static final Module CS1231S = new ModuleBuilder().withCode("CS1231S")
@@ -52,6 +52,6 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, GEQ1000, CS1101S, CS1231S, CS2030S));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, GEQ1000, MA1521, CS1231S, CS2030S));
     }
 }

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tracker.testutil.Assert.assertThrows;
-import static seedu.tracker.testutil.TypicalModules.CS1101S;
-import static seedu.tracker.testutil.TypicalModules.CS2030S;
 import static seedu.tracker.testutil.TypicalModules.CS1231S;
+import static seedu.tracker.testutil.TypicalModules.CS2030S;
+import static seedu.tracker.testutil.TypicalModules.MA1521;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
 import java.util.Arrays;
@@ -100,7 +100,7 @@ class ViewCommandTest {
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS1101S, CS1231S), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(MA1521, CS1231S), model.getFilteredModuleList());
     }
 
     /**
