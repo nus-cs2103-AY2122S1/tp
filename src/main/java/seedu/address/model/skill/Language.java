@@ -14,6 +14,11 @@ public class Language {
 
     public final String languageName;
 
+    /**
+     * Constructs a {@code Language}.
+     *
+     * @param languageName A valid language name.
+     */
     public Language(String languageName) {
         requireNonNull(languageName);
         checkArgument(isValidLanguageName(languageName), MESSAGE_CONSTRAINTS);

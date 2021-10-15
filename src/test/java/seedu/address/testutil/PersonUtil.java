@@ -42,15 +42,15 @@ public class PersonUtil {
         sb.append(PREFIX_MAJOR + person.getMajor().value + " ");
 
         person.getSkills().stream().forEach(
-                s -> sb.append(PREFIX_SKILL + s.skillName + " ")
+            s -> sb.append(PREFIX_SKILL + s.skillName + " ")
         );
 
         person.getLanguages().stream().forEach(
-                s -> sb.append(PREFIX_LANGUAGE + s.languageName + " ")
+            s -> sb.append(PREFIX_LANGUAGE + s.languageName + " ")
         );
 
         person.getFrameworks().stream().forEach(
-                s -> sb.append(PREFIX_FRAMEWORK + s.frameworkName + " ")
+            s -> sb.append(PREFIX_FRAMEWORK + s.frameworkName + " ")
         );
 
         person.getTags().stream().forEach(

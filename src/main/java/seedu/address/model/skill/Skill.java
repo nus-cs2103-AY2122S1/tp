@@ -14,6 +14,11 @@ public class Skill {
 
     public final String skillName;
 
+    /**
+     * Constructs a {@code Skill}.
+     *
+     * @param skillName A valid skill name.
+     */
     public Skill(String skillName) {
         requireNonNull(skillName);
         checkArgument(isValidSkillName(skillName), MESSAGE_CONSTRAINTS);

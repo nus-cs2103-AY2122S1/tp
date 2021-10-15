@@ -118,7 +118,8 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code frameworks} into a {@code Set<Framework>} and set it to the {@code Person} that we are building.
+     * Parses the {@code frameworks} into a {@code Set<Framework>}
+     * and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withFrameworks(String ... frameworks) {
         this.frameworks = SampleDataUtil.getFrameworkSet(frameworks);

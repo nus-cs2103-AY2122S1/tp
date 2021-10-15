@@ -14,6 +14,11 @@ public class Framework {
 
     public final String frameworkName;
 
+    /**
+     * Constructs a {@code Framework}.
+     *
+     * @param frameworkName A valid framework name.
+     */
     public Framework(String frameworkName) {
         requireNonNull(frameworkName);
         checkArgument(isValidFrameworkName(frameworkName), MESSAGE_CONSTRAINTS);

@@ -39,13 +39,13 @@ public class UniquePersonListTest {
         assertTrue(uniquePersonList.contains(ALICE));
     }
 
-//    @Test
-//    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
-//        uniquePersonList.add(ALICE);
-//        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-//                .build();
-//        assertTrue(uniquePersonList.contains(editedAlice));
-//    }
+    @Test
+    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withFaculty(VALID_FACULTY_BOB).withTags(VALID_TAG_CLASSMATE)
+                .build();
+        assertTrue(uniquePersonList.contains(editedAlice));
+    }
 
     @Test
     public void add_nullPerson_throwsNullPointerException() {
