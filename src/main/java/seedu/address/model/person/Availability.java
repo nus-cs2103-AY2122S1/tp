@@ -41,7 +41,7 @@ public class Availability {
             for (String s : test) {
                 int dayNumber = Integer.parseInt(s);
 
-                if (dayNumber < 1 || dayNumber > 7 ) {
+                if (dayNumber < 1 || dayNumber > 7) {
                     return false;
                 }
             }
