@@ -23,6 +23,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,7 +56,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
         }
         if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
+            parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
         }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
@@ -106,4 +107,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>} if {@code roles} is non-empty.
+     * If {@code roles} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Role>} containing zero tags.
+     */
+    private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
+        assert roles != null;
+
+        if (roles.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> roleSet = roles.size() == 1 && roles.contains("") ? Collections.emptySet() : roles;
+        return Optional.of(ParserUtil.parseRoles(roleSet));
+    }
 }

@@ -48,6 +48,7 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
         this.fields.add(field);
     }
 
+
     /**
      * Checks if the predicate tests for anything.
      * @return True if the predicate tests no fields.
@@ -55,6 +56,7 @@ public class PersonContainsFieldsPredicate implements Predicate<Person> {
     public boolean isEmpty() {
         return this.fields.isEmpty();
     }
+
 
 
     @Override

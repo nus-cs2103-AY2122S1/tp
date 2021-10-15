@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -179,8 +180,14 @@ public class ModelManager implements Model {
     @Override
     public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
-        target.changeSchedule(dayOfWeek, slot);
+        target.addShift(dayOfWeek, slot);
 
+    }
+
+    @Override
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        requireAllNonNull(target, dayOfWeek, slot);
+        target.removeShift(dayOfWeek, slot);
     }
 
     @Override

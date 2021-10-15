@@ -24,8 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_ROLE = "floor";
     public static final String DEFAULT_SALARY = "900000";
+    public static final String DEFAULT_ROLE = "floor";
     public static final String DEFAULT_STATUS = "parttime";
 
     private Name name;
@@ -33,7 +33,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Role role;
+    private Set<Role> roles;
     private Salary salary;
     private Status status;
     private Set<Period> absentDates;
@@ -48,7 +48,8 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         absentDates = new HashSet<>();
-        role = Role.translateStringToRole(DEFAULT_ROLE);
+        roles = new HashSet<>();
+        roles.add(Role.NO_ROLE);
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
     }
@@ -62,7 +63,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        role = personToCopy.getRole();
+        roles = new HashSet<>(personToCopy.getRoles());
         salary = personToCopy.getSalary();
         status = personToCopy.getStatus();
         absentDates = personToCopy.getAbsentDates();
@@ -119,10 +120,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Role} of the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withRole(String role) {
-        this.role = Role.translateStringToRole(role);
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
 
@@ -143,7 +144,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, role, salary, status, tags, absentDates);
+        return new Person(name, phone, email, address, roles, salary, status, tags, absentDates);
     }
 
 }
