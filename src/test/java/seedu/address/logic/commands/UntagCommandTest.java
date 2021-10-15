@@ -36,8 +36,6 @@ import seedu.address.testutil.PersonBuilder;
 
 class UntagCommandTest {
 
-    private UntagCommandParser parser = new UntagCommandParser();
-
     private Model generateFriendTaggedModel() {
         return new ModelManager(getTaggedTypicalAddressBook(VALID_TAG_FRIEND), new UserPrefs());
     }
