@@ -3,12 +3,15 @@ package seedu.tuitione.model.student;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.tag.Tag;
 
 /**
@@ -26,7 +29,7 @@ public class Student {
     private final Address address;
     private final Grade grade;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<LessonCode> lessonCodes = new HashSet<>();
+    private final Map<LessonCode, Price> lessonCodesAndPrices = new HashMap<>();
 
     /**
      * Every field must be present and not null.
@@ -71,11 +74,27 @@ public class Student {
     }
 
     /**
+     * Returns an immutable lesson code and price map, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<LessonCode, Price> getLessonCodesAndPrices() {
+        return Collections.unmodifiableMap(lessonCodesAndPrices);
+    }
+
+    /**
      * Returns an immutable lesson code set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<LessonCode> getLessonCodes() {
-        return Collections.unmodifiableSet(lessonCodes);
+        return Collections.unmodifiableSet(lessonCodesAndPrices.keySet());
+    }
+
+    /**
+     * Returns an immutable lesson price set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Price> getLessonPrices() {
+        return Set.copyOf(lessonCodesAndPrices.values()); // equivalent generator to unmodifiable set
     }
 
     /**
@@ -93,7 +112,7 @@ public class Student {
      * Adds lesson to student instance. Student instance holds a weaker linkage to Lessons, using its lesson code.
      */
     public void enrollForLesson(Lesson lesson) {
-        lessonCodes.add(lesson.getLessonCode());
+        lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
     }
 
     /**
@@ -101,7 +120,7 @@ public class Student {
      */
     public void unenrollFromLesson(Lesson lesson) {
         LessonCode codeToUnenroll = lesson.getLessonCode();
-        lessonCodes.remove(codeToUnenroll);
+        lessonCodesAndPrices.remove(codeToUnenroll);
     }
 
     /**
@@ -109,7 +128,7 @@ public class Student {
      */
     public Student createClone() {
         Student newStudent = new Student(name, parentContact, email, address, grade, tags);
-        newStudent.lessonCodes.addAll(lessonCodes);
+        newStudent.lessonCodesAndPrices.putAll(lessonCodesAndPrices);
         return newStudent;
     }
 
@@ -132,13 +151,13 @@ public class Student {
                 && otherStudent.address.equals(address)
                 && otherStudent.grade.equals(grade)
                 && otherStudent.tags.equals(tags)
-                && otherStudent.lessonCodes.equals(lessonCodes);
+                && otherStudent.lessonCodesAndPrices.equals(lessonCodesAndPrices);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, parentContact, email, address, tags, lessonCodes);
+        return Objects.hash(name, parentContact, email, address, tags, lessonCodesAndPrices);
     }
 
     @Override
@@ -153,9 +172,9 @@ public class Student {
             builder.append("; Tag(s): ");
             tags.forEach(t -> builder.append(t).append(" "));
         }
-        if (!lessonCodes.isEmpty()) {
+        if (!lessonCodesAndPrices.isEmpty()) {
             builder.append("; Lesson(s): ");
-            lessonCodes.forEach(l -> builder.append(l).append(" "));
+            lessonCodesAndPrices.keySet().forEach(l -> builder.append(l).append(" "));
         }
         return builder.toString();
     }
