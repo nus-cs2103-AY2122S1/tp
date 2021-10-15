@@ -5,7 +5,7 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_BOB;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_FORMATTED;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_INPUT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_BOB;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
@@ -41,10 +41,10 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithTwoFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
-                .withTime(VALID_APPOINTMENT_TIME_FORMATTED).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
+                .withTime(VALID_APPOINTMENT_TIME_BOB).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -55,10 +55,10 @@ public class EditAppointmentCommandParserTest {
     public void parse_indexSpecifiedWithAllFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT + " "
-                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
+                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder().withDate(VALID_APPOINTMENT_BOB)
-                .withTime(VALID_APPOINTMENT_TIME_FORMATTED).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
+                .withTime(VALID_APPOINTMENT_TIME_BOB).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);
 
@@ -69,12 +69,12 @@ public class EditAppointmentCommandParserTest {
     public void parse_indexSpecifiedWithRepeatedFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
-                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
-                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB + " "
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
+                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
+                + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
                 + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
-                .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_FORMATTED)
+                .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_BOB)
                 .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
                 descriptor);

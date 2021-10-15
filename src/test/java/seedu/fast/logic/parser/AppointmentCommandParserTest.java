@@ -6,7 +6,7 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_INPUT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_BOB;
-import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_FORMATTED;
+import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TIME_INPUT;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_AMY;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_APPOINTMENT_VENUE_BOB;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
@@ -38,10 +38,10 @@ public class AppointmentCommandParserTest {
     public void parse_indexSpecifiedWithAddition_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_FORMATTED, VALID_APPOINTMENT_VENUE_BOB));
+                new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB));
         System.out.println(userInput);
         System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -51,9 +51,9 @@ public class AppointmentCommandParserTest {
     public void parse_indexSpecifiedWithTime_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB;
+                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_FORMATTED, VALID_APPOINTMENT_VENUE_AMY));
+                new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_AMY));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

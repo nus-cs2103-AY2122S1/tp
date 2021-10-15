@@ -44,10 +44,10 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_TIME_AMY = "";
     public static final String VALID_APPOINTMENT_VENUE_AMY = "";
     public static final String VALID_APPOINTMENT_BOB = "10 Oct 2021";
-    public static final String VALID_APPOINTMENT_TIME_BOB = "05:30";
+    public static final String VALID_APPOINTMENT_TIME_BOB = "0530";
     public static final String VALID_APPOINTMENT_VENUE_BOB = "Suntec City";
     public static final String VALID_APPOINTMENT_INPUT = "2021-10-10";
-    public static final String VALID_APPOINTMENT_TIME_FORMATTED = "0530";
+    public static final String VALID_APPOINTMENT_TIME_INPUT = "05:30";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
