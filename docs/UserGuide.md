@@ -105,6 +105,52 @@ Shows a list of all staffs in the staff list.
 
 Format: `list`
 
+
+
+### Marking a staff as absent : `mark`
+
+Marks a specified staff(s) as not working for a specified date.
+The salary for that date will be not included in calculation, 
+depending on the staff's status. By default, the staff is recorded
+as present for all shifts.
+
+The format of the input date is in:
+
+`YYYY-MM-DD`
+
+Format:
+
+`mark i/index d/startDate d/endDate`  
+`mark n/name d/startDate d/endDate`  
+`mark t/tag d/startDate d/endDate`
+
+Possible to mark a single date  
+`mark t/tag d/date`
+
+Examples:
+
+`mark i/1 d/2020-01-03 d/2021-01-03`  
+`mark d/Alex Yeoh d/2020-01-03`  
+
+
+### Removing the absent mark `unmark`
+
+Removes the period that was marked by the
+`mark` command.
+
+The format of the input date is in:
+
+`YYYY-MM-DD`
+
+Format:
+
+`unmark n/name d/startDate d/endDate`  
+`unmark i/index d/startDate d/endDate`  
+
+Examples:  
+`unmark i/1 d/2020-01-03 d/2021-01-03`  
+`unmark t/friends d/2020-01-03`  
+
 ### Deleting a Staff : `delete`
 
 Deletes the specified staff from the staff list.
