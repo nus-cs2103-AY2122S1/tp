@@ -275,8 +275,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> periods} to a {@code period} from the latest date to the
-     * smallest date in the collection.
+     * Parses {@code Collection<String> periods} to a {@code period} from the earliest date to the
+     * latest date in the collection.
      * @throws DateTimeParseException When the input does not have the correct format.
      */
     public static Period parsePeriod(Collection<String> periods) throws DateTimeParseException {

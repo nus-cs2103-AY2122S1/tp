@@ -100,13 +100,10 @@ public class RemoveMarkCommand extends Command {
      */
     public static String listToString(List<String> strings) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < strings.size(); i++) {
-            result.append(strings.get(i));
-            if (i != (strings.size() - 1)) {
-                result.append("\n");
-            }
+        for (String string : strings) {
+            result.append(string);
         }
-        return result.toString();
+        return result.toString().trim();
     }
 
     /**
