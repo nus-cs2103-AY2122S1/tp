@@ -19,6 +19,7 @@ import seedu.tracker.model.module.UniqueModuleList;
 public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
+    private final UserInfo userInfo;
     private AcademicCalendar currentSemester;
     private Mc mcGoal;
 
@@ -32,8 +33,10 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     {
         AcademicYear defaultAcademicYear = new AcademicYear(1);
         Semester defaultSemester = new Semester(1);
-        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
+        userInfo = new UserInfo();
+
+        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         mcGoal = new Mc(160);
     }
 
@@ -131,6 +134,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
 
     @Override
     public boolean equals(Object other) {
