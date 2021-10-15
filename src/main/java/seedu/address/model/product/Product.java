@@ -24,6 +24,7 @@ public class Product implements Category {
     public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
         this(new ID(), name, unitPrice, quantity);
     }
+
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
         requireAllNonNull(id, name, unitPrice);
 

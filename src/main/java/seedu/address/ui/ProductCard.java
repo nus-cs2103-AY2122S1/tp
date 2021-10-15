@@ -48,7 +48,7 @@ public class ProductCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(product.getName().fullName);
         if (product.getUnitPrice() != null) {
-            unitPrice.setText("Price: $" + product.getUnitPrice().unitPrice);
+            unitPrice.setText("Price: $" + product.getUnitPrice().value);
         }
 //        if (product.getQuantity() != null) {
 //            quantity.setText("Quantity: " + product.getQuantity().quantity);
