@@ -87,7 +87,7 @@ public abstract class GenreCommand extends Command {
         /**
          * Returns true if at least one genre is changed.
          */
-        public boolean isGenresUpdated() {
+        public boolean areGenresUpdated() {
             return genres != null;
         }
 

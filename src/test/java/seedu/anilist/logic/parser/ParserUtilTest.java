@@ -57,7 +57,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseAction_validInputUpperCase_returnsLowerCaseAction() throws Exception {
-        String upperCaseAction = VALID_ACTION_ADD.toUpperCase(Locale.ROOT);
+        String upperCaseAction = VALID_ACTION_ADD.toUpperCase();
         Action expectedAction = Action.ADD;
         assertEquals(expectedAction, parseAction(upperCaseAction));
     }
@@ -129,7 +129,7 @@ public class ParserUtilTest {
     }
 
     @Test void parseGenre_validValueWithUppercase_returnsLowerCaseGenre() throws Exception {
-        String upperCaseGenre = VALID_GENRE_1.toUpperCase(Locale.ROOT);
+        String upperCaseGenre = VALID_GENRE_1.toUpperCase();
         Genre expectedGenre = new Genre(VALID_GENRE_1);
         assertEquals(expectedGenre, ParserUtil.parseGenre(upperCaseGenre));
     }

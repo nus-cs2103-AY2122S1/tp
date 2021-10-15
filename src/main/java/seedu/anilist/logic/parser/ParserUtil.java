@@ -59,7 +59,7 @@ public class ParserUtil {
      */
     public static Genre parseGenre(String genre) throws ParseException {
         requireNonNull(genre);
-        String trimmedGenre = genre.trim().toLowerCase(Locale.ROOT);
+        String trimmedGenre = genre.trim().toLowerCase();
         if (!Genre.isValidGenreName(trimmedGenre)) {
             throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
         }
@@ -102,7 +102,7 @@ public class ParserUtil {
      */
     public static Action parseAction(String actionString) throws ParseException {
         requireNonNull(actionString);
-        String trimmedActionLowerCase = actionString.trim().toLowerCase(Locale.ROOT);
+        String trimmedActionLowerCase = actionString.trim().toLowerCase();
         Action result;
         if (!Action.isValidAction(trimmedActionLowerCase)) {
             throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedActionLowerCase));
