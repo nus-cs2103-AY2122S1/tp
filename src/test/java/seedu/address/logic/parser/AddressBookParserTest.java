@@ -16,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -58,9 +59,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
+        Function<ClientId, Person> personFunction = new PersonBuilder().buildFunction();
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        assertEquals(new AddCommand(personFunction), command);
     }
 
     @Test

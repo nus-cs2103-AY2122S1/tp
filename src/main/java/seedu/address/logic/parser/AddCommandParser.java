@@ -14,11 +14,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
 
 import java.util.Set;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -40,15 +40,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         PREFIX_NAME, PREFIX_EMAIL
     };
 
-    private Model model;
-
-    public AddCommandParser() {
-
-    }
-
-    public AddCommandParser(Model model) {
-        this.model = model;
-    }
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -64,16 +55,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        String clientCounter;
-
-        if (this.model == null) {
-            clientCounter = "0";
-        } else {
-            clientCounter = this.model.getAddressBook().getClientCounter() == null ? "0"
-                    : this.model.getAddressBook().getClientCounter();
-        }
-
-        ClientId clientId = new ClientId(clientCounter);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(Phone.DEFAULT_VALUE));
@@ -87,8 +68,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .orElse(CurrentPlan.DEFAULT_VALUE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome,
-                currentPlan, lastMet, tagList);
+        Function<ClientId, Person> person = clientId -> new Person(clientId, name, phone, email, address, riskAppetite,
+                disposableIncome, currentPlan, lastMet, tagList);
 
         return new AddCommand(person);
     }
