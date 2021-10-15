@@ -2,8 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Person's availability in the address book.
@@ -11,35 +14,36 @@ import java.util.List;
  */
 public class Availability {
 
-    public static final String[] DAYS = {"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
-
     public static final String MESSAGE_CONSTRAINTS =
-            "Availability should be given as the abbreviated names of days(mon tue wed thu fri sat sun)";
+            "Availability should be given as a list of numbers separated by a space each, "
+            + "where 1 represents Monday, 2 represents Tuesday... and 7 represents Sunday";
 
-    public final String values;
+    public final List<DayOfWeek> values;
 
     /**
      * Constructs an {@code Availability}.
      *
      * @param availability A valid availability string.
      */
-    public Availability(String availability) {
+    public Availability(List<DayOfWeek> availability) {
         requireNonNull(availability);
         values = availability;
     }
 
     /**
-     * Returns true if a given availability is valid.
+     * Returns true if a given availability list is valid.
      */
     public static boolean isValidAvailability(List<String> test) {
-        if (test.size() == 1) {
-            return true;
-        }
-        List<String> days = Arrays.asList(DAYS);
-        for (String day : test) {
-            if (!days.contains(day)) {
-                return false;
+        try {
+            for (String s : test) {
+                int dayNumber = Integer.parseInt(s);
+
+                if (dayNumber < 1 || dayNumber > 7 ) {
+                    return false;
+                }
             }
+        } catch (NumberFormatException e) { // if any of the string is not a number, it is invalid
+            return false;
         }
         return true;
     }
@@ -50,7 +54,8 @@ public class Availability {
 
     @Override
     public String toString() {
-        return values;
+        return values.stream().map(dayOfWeek -> dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()))
+                .collect(Collectors.joining(" "));
     }
 
     @Override

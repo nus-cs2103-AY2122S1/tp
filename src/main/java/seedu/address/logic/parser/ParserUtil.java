@@ -2,11 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.DayOfWeek;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -206,7 +203,7 @@ public class ParserUtil {
      */
     public static Availability parseAvailability(String availabilityString) throws ParseException {
         requireNonNull(availabilityString);
-        String trimmedAvailabilityString = availabilityString.trim().toUpperCase();
+        String trimmedAvailabilityString = availabilityString.trim();
         List<String> availabilityDaysWithNoDuplicates =
                 Arrays.stream(trimmedAvailabilityString.split(" "))
                 .distinct().collect(Collectors.toList());
@@ -215,8 +212,9 @@ public class ParserUtil {
             throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
         }
 
-        String availability = Arrays.stream(trimmedAvailabilityString.split(" "))
-                .distinct().collect(Collectors.joining(" "));
+        List<DayOfWeek> availability = Arrays.stream(trimmedAvailabilityString.split(" "))
+                .distinct().map(dayNumber -> DayOfWeek.of(Integer.parseInt(dayNumber))).collect(Collectors.toList());
+        Collections.sort(availability);
         return new Availability(availability);
     }
 }
