@@ -5,6 +5,7 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUP;
 
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.Model;
+import seedu.notor.model.exceptions.DuplicateItemException;
 import seedu.notor.model.group.SuperGroup;
 
 public class GroupCreateCommand implements Command {
@@ -33,12 +34,11 @@ public class GroupCreateCommand implements Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
-        if (model.hasSuperGroup(toAdd)) {
+        try {
+            model.addSuperGroup(toAdd);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
-
-        model.addSuperGroup(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 }

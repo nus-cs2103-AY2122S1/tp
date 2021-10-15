@@ -6,6 +6,7 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.Model;
+import seedu.notor.model.exceptions.DuplicateItemException;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -40,18 +41,15 @@ public class PersonAddGroupCommand implements Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToEdit = model.findPerson(personName);
-        if (personToEdit.getSuperGroups().contains(groupName)) {
+        try {
+            Person personToEdit = model.findPerson(personName);
+            SuperGroup superGroup = model.findSuperGroup(groupName);
+            personToEdit.addSuperGroup(superGroup);
+            superGroup.addPerson(personToEdit);
+            model.setPerson(personToEdit, personToEdit);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));
+        } catch (DuplicateItemException e) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
-        SuperGroup superGroup = model.findSuperGroup(groupName);
-        if (superGroup == null) {
-            superGroup = new SuperGroup(groupName);
-            model.addSuperGroup(superGroup);
-        }
-        superGroup.addPerson(personToEdit);
-        personToEdit.addSuperGroup(superGroup);
-        model.setPerson(personToEdit, personToEdit);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));
     }
 }

@@ -418,25 +418,26 @@ Square brackets `[]` refer to optional arguments.<p>
 * For the **Add** and **Remove** commands, please make sure that the `GROUP_NAME` is typed exactly as how it is spelt on
   the card.
 
-Action         | Format                                                                        | Advanced Format
----------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------
-**Create**     | `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
-**Edit**       | `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
-**Delete**     | `person (INDEX) /delete`                                                      | `p (INDEX) /d`
-**Add**        | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
-**Remove**     | `person (INDEX) /remove (g:GROUP_NAME) `                                      | `p (INDEX) /r (g:GROUP_NAME)`
-**Note**       | `person (INDEX) /note (NOTE)`                                                 | `p (INDEX) /n (NOTE)`
-**Tag**        | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                       | `p (INDEX) /t [t:TAG1,TAG2,...]`
-**Untag**      | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /u [t:TAG1,TAG2,...]`
-**Clear Tags** | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
-**List**       | `person /list [g:GROUP_INDEX]`                                                | `p /l [g:GROUP_INDEX]`
-**Find**       | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
+Action                    | Format                                                                        | Advanced Format
+--------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------
+**Create**                | `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
+**Edit**                  | `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
+**Delete**                | `person (INDEX) /delete`                                                      | `p (INDEX) /d`
+**Add**                   | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
+**Remove**                | `person (INDEX) /remove (g:GROUP_NAME) `                                      | `p (INDEX) /r (g:GROUP_NAME)`
+**Note**                  | `person (INDEX) /note (NOTE)`                                                 | `p (INDEX) /n (NOTE)`
+**Tag**                   | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                       | `p (INDEX) /t [t:TAG1,TAG2,...]`
+**Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /u [t:TAG1,TAG2,...]`
+**Clear Tags**            | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
+**List Persons**          | `person /list`                                                                | `p /list`
+**List Persons in Group** | `person [INDEX] /list`                                                        | `p [INDEX] /l`
+**Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 
 ### Group
 Action                 | Format                                         | Short Format
 -----------------------|------------------------------------------------|---------------------------------------
 **Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
-**Create Subgroups**   | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
+**Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
 **Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`
 **Note**               | `group (INDEX) /note (NOTE)`                   | `g (INDEX) /n (NOTE)`
@@ -451,9 +452,9 @@ Action                 | Format                                         | Short 
 **Note**: for the **List** command, the `INDEX` argument can be either a `Group` or a `Person`, depending on what you
 have listed after using `person /list` or `group /list`.
 
-Action   | Format                | Short Format
----------|-----------------------|------------------------------------------------
-**List** | `tag /list [p:INDEX]` | `t /l [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]`
+Action   | Format              | Short Format
+---------|---------------------|---------------
+**List** | `tag [INDEX] /list` | `t [INDEX] /l`
 
 ### General
 Action    | Format  | Advanced Format
