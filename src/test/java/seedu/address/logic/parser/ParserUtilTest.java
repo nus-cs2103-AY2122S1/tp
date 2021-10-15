@@ -30,9 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
     private static final String INVALID_SOCIAL_HANDLE = "rachel walker";
-    private static final String INVALID_REMARK = " ";
     private static final String INVALID_TAG = "#friend";
-
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_NATIONALITY = "Vietnam";
@@ -206,11 +204,6 @@ public class ParserUtilTest {
     @Test
     public void parseRemark_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseRemark((String) null));
-    }
-
-    @Test
-    public void parseRemark_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseRemark(INVALID_REMARK));
     }
 
     @Test

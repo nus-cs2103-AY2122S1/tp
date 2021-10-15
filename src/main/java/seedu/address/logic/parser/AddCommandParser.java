@@ -43,7 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_REMARK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_NATIONALITY, PREFIX_TUTORIAL_GROUP, PREFIX_REMARK)
+                PREFIX_NATIONALITY, PREFIX_TUTORIAL_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -59,8 +59,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             socialHandle = ParserUtil.parseSocialHandle(argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get());
         }
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
-
+        Remark remark;
+        if (argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
+            remark = ParserUtil.parseRemark("");
+        } else {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tagList);

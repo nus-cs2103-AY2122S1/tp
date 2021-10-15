@@ -60,7 +60,13 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         tutorialGroup.setText(person.getTutorialGroup().value);
         socialHandle.setText(person.getSocialHandle().value);
+        if (person.getSocialHandle().value.isEmpty()) {
+            socialHandle.setManaged(false);
+        }
         remark.setText(person.getRemark().value);
+        if (person.getRemark().value.isEmpty()) {
+            remark.setManaged(false);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
