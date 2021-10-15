@@ -1,8 +1,8 @@
 package seedu.siasa.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.siasa.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.siasa.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.siasa.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -18,15 +18,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.logic.commands.CommandResult;
-import seedu.siasa.logic.commands.client.AddClientCommand;
 import seedu.siasa.logic.commands.ListCommand;
+import seedu.siasa.logic.commands.client.AddClientCommand;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
-import seedu.siasa.model.person.Person;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
+import seedu.siasa.model.person.Person;
 import seedu.siasa.storage.JsonSiasaStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
 import seedu.siasa.storage.StorageManager;
