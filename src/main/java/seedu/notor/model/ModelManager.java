@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -26,7 +25,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given Notor and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyNotor notor, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -132,6 +131,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSuperGroup(String superGroup) {
+        notor.addSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -140,23 +145,6 @@ public class ModelManager implements Model {
     @Override
     public SuperGroup findSuperGroup(String name) {
         return notor.findSuperGroup(name);
-    }
-
-    @Override
-    public SubGroup findSubGroup(String name) {
-        return notor.findSubGroup(name);
-    }
-
-    @Override
-    public void addSubGroup(SubGroup subGroup) {
-        notor.addSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void deleteSubGroup(SubGroup subGroup) {
-        notor.deleteSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     //=========== Filtered Person List Accessors =============================================================

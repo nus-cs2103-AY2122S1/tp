@@ -24,7 +24,6 @@ import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -142,27 +141,17 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void addSuperGroup(String superGroup) {
+
+        }
+
+        @Override
         public void deleteSuperGroup(SuperGroup superGroup) {
 
         }
 
         @Override
-        public void deleteSubGroup(SubGroup subGroup) {
-
-        }
-
-        @Override
-        public void addSubGroup(SubGroup subGroup) {
-
-        }
-
-        @Override
         public SuperGroup findSuperGroup(String name) {
-            return null;
-        }
-
-        @Override
-        public SubGroup findSubGroup(String name) {
             return null;
         }
 
