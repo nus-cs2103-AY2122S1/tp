@@ -17,14 +17,14 @@ public class CopyableHistory<T extends Copyable<T>> extends BaseHistory<T> {
      *
      * @param capacity The specified capacity.
      */
-    protected CopyableHistory(int capacity) {
+    public CopyableHistory(int capacity) {
         super(capacity);
     }
 
     /**
      * Creates a CopyableHistory object with the default capacity.
      */
-    protected CopyableHistory() {
+    public CopyableHistory() {
         super();
     }
 
