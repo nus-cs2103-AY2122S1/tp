@@ -436,7 +436,7 @@ Action         | Format                                                         
 Action                 | Format                                         | Short Format
 -----------------------|------------------------------------------------|---------------------------------------
 **Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
-**Create Subgroups**   | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
+**Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
 **Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`
 **Note**               | `group (INDEX) /note (NOTE)`                   | `g (INDEX) /n (NOTE)`
@@ -451,9 +451,9 @@ Action                 | Format                                         | Short 
 **Note**: for the **List** command, the `INDEX` argument can be either a `Group` or a `Person`, depending on what you
 have listed after using `person /list` or `group /list`.
 
-Action   | Format                | Short Format
----------|-----------------------|------------------------------------------------
-**List** | `tag /list [p:INDEX]` | `t /l [p:INDEX] [g:GROUP_NAME]:[SUBGROUP_NAME]`
+Action   | Format              | Short Format
+---------|---------------------|---------------
+**List** | `tag [INDEX] /list` | `t [INDEX] /l`
 
 ### General
 Action    | Format  | Advanced Format
