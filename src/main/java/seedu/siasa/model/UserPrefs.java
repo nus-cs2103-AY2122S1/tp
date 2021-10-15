@@ -15,8 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     // TODO: Need to update file name
-    private Path siasaFilePath = Paths.get("data" , "addressbook.json");
-    private Path policyFilePath = Paths.get("data" , "policybook.json");
+    private Path siasaFilePath = Paths.get("data" , "siasa.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,7 +37,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setSiasaFilePath(newUserPrefs.getSiasaFilePath());
-        setPolicyFilePath(newUserPrefs.getPolicyFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -59,15 +57,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.siasaFilePath = siasaFilePath;
     }
 
-    public Path getPolicyFilePath() {
-        return policyFilePath;
-    }
-
-    public void setPolicyFilePath(Path policyFilePath) {
-        requireNonNull(policyFilePath);
-        this.policyFilePath = policyFilePath;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -80,21 +69,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && siasaFilePath.equals(o.siasaFilePath)
-                && policyFilePath.equals(o.policyFilePath);
+                && siasaFilePath.equals(o.siasaFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, siasaFilePath, policyFilePath);
+        return Objects.hash(guiSettings, siasaFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal address data file location : " + siasaFilePath);
-        sb.append("\nLocal policy data file location : " + policyFilePath);
+        sb.append("\nLocal siasa data file location : " + siasaFilePath);
         return sb.toString();
     }
 

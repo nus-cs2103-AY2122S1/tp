@@ -34,7 +34,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonSiasaStorage addressBookStorage =
-                new JsonSiasaStorage(temporaryFolder.resolve("addressBook.json"));
+                new JsonSiasaStorage(temporaryFolder.resolve("siasa.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
