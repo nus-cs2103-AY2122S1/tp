@@ -113,20 +113,20 @@ public class EditCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Module editedPerson = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
+        Module editedModule = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE,
                 new EditModuleDescriptorBuilder().withCode(VALID_CODE_CS1101S).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
         Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
-        expectedModel.setModule(model.getFilteredModuleList().get(0), editedPerson);
+        expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateModuleUnfilteredList_failure() {
         Module firstModule = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
         EditCommand editCommand = new EditCommand(INDEX_SECOND_MODULE, descriptor);
@@ -135,7 +135,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
+    public void execute_duplicateModuleFilteredList_failure() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         // edit person in filtered list into a duplicate in address book
@@ -147,7 +147,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidModuleIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleList().size() + 1);
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withCode(VALID_CODE_GEQ1000).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
@@ -160,7 +160,7 @@ public class EditCommandTest {
      * but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
+    public void execute_invalidModuleIndexFilteredList_failure() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Index outOfBoundIndex = INDEX_SECOND_MODULE;
         // ensures that outOfBoundIndex is still in bounds of address book list
