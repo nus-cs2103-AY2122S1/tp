@@ -11,13 +11,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ItemDescriptorBuilder;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ItemDescriptorTest {
 

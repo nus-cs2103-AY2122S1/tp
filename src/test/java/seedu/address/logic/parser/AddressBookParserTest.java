@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,8 +29,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
-import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.ItemUtil;
 
 public class AddressBookParserTest {
@@ -43,7 +42,7 @@ public class AddressBookParserTest {
         ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
         AddCommand command = (AddCommand) parser.parseCommand(ItemUtil.getAddCommand(descriptor));
 
-        descriptor.setCount(1);  // Parser should set descriptor count to 1
+        descriptor.setCount(1); // Parser should set descriptor count to 1
         assertEquals(new AddCommand(descriptor), command);
     }
 
@@ -65,12 +64,9 @@ public class AddressBookParserTest {
         Item item = new ItemBuilder().build();
         ItemDescriptor descriptor = new ItemDescriptorBuilder(item).build();
 
-        String re = EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ITEM.getOneBased() + " " + ItemUtil.getItemDescriptorDetails(descriptor);
-
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_ITEM.getOneBased() + " " + ItemUtil.getItemDescriptorDetails(descriptor));
-        
+
         assertEquals(new EditCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 

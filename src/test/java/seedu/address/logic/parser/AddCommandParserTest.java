@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_POPULAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;

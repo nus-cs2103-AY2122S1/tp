@@ -3,16 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
-
-import java.util.List;
 
 /**
  * Adds an item to the inventory.
@@ -36,7 +34,8 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS_NEW = "New item added: %1$s";
     public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %dx %s";
-    public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before, please provide both a name and id";
+    public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before,"
+            + " please provide both a name and id";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;

@@ -72,12 +72,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public List<Item> getItems(ItemDescriptor descriptor) {
+    public boolean hasItem(String id) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public boolean hasItem(String id) {
+    public List<Item> getItems(ItemDescriptor descriptor) {
         throw new AssertionError("This method should not be called.");
     }
 

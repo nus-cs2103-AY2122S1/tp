@@ -23,8 +23,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

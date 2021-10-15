@@ -68,15 +68,15 @@ public interface Model {
     boolean hasItem(Name name);
 
     /**
-     * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
-     */
-    List<Item> getItems(ItemDescriptor descriptor);
-
-    /**
      * Returns true if an item with the given {@code id} exists in the inventory.
      * @see ItemDescriptor#isMatch(Item)
      */
     boolean hasItem(String id);
+
+    /**
+     * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
+     */
+    List<Item> getItems(ItemDescriptor descriptor);
 
     /**
      * Deletes item in the inventory with the given name.
