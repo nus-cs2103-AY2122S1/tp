@@ -2,7 +2,13 @@ package seedu.siasa.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.siasa.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.siasa.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.siasa.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.siasa.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.siasa.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.siasa.testutil.Assert.assertThrows;
+import static seedu.siasa.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,15 +18,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.logic.commands.CommandResult;
+import seedu.siasa.logic.commands.client.AddClientCommand;
+import seedu.siasa.logic.commands.ListCommand;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.ModelManager;
+import seedu.siasa.model.person.Person;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.UserPrefs;
 import seedu.siasa.storage.JsonSiasaStorage;
 import seedu.siasa.storage.JsonUserPrefsStorage;
 import seedu.siasa.storage.StorageManager;
+import seedu.siasa.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
@@ -46,37 +56,31 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
-    /*
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-     */
 
-    /*
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
-     */
 
-    /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonSiasaIoExceptionThrowingStub
+        JsonSiasaStorage siasaStorage =
+                new JsonSiasaIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        JsonPolicyBookStorage policyBookStorage =
-                new JsonPolicyBookStorage(temporaryFolder.resolve("ioExceptionPolicyBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, policyBookStorage);
+
+        StorageManager storage = new StorageManager(siasaStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addCommand = AddClientCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
@@ -84,11 +88,15 @@ public class LogicManagerTest {
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
-    */
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredPolicyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPolicyList().remove(0));
     }
 
     /**
@@ -147,13 +155,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonSiasaStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonSiasaIoExceptionThrowingStub extends JsonSiasaStorage {
+        private JsonSiasaIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveSiasa(ReadOnlySiasa addressBook, Path filePath) throws IOException {
+        public void saveSiasa(ReadOnlySiasa siasa, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }
