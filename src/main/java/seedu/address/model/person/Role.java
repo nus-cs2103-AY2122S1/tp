@@ -8,7 +8,7 @@ public enum Role implements Field {
     KITCHEN("kitchen"), BARTENDER("bartender"), FLOOR("floor"), NO_ROLE("norole");
 
     public static final String MESSAGE_CONSTRAINTS =
-            "List of valid Roles: manager, director, hr, (norole if no role is assigned)."; //cleanup next time
+            "List of valid Roles: kitchen, bartender, floor, (norole if no role is assigned).";
 
     private final String role;
 
