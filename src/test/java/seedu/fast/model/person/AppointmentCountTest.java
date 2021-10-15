@@ -64,4 +64,21 @@ public class AppointmentCountTest {
 
         assertFalse(standard.hashCode() == countWithDifferentValue.hashCode());
     }
+
+    @Test
+    public void isValidCount() {
+        // valid input
+        assertTrue(AppointmentCount.isValidCount("0"));
+
+        // negative input
+        assertFalse(AppointmentCount.isValidCount("-10"));
+
+        // empty input
+        assertFalse(AppointmentCount.isValidCount(""));
+        assertFalse(AppointmentCount.isValidCount(" "));
+
+        // non integer input
+        assertFalse(AppointmentCount.isValidCount("Matthew"));
+        assertFalse(AppointmentCount.isValidCount("!"));
+    }
 }

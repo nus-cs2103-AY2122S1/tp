@@ -92,7 +92,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -115,7 +115,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -138,7 +138,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -161,7 +161,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -184,7 +184,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -233,7 +233,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -255,7 +255,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -277,7 +277,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -299,7 +299,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
@@ -321,7 +321,7 @@ public class EditAppointmentCommandTest {
                 new EditAppointmentDescriptor(desc));
 
         String expectedMessage = String.format(EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_SUCCESS,
-                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTime(),
+                editedPerson.getName().fullName, editedAppt.getDate(), editedAppt.getTimeFormatted(),
                 editedAppt.getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());

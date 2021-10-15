@@ -93,7 +93,7 @@ public class AppointmentCommand extends Command {
 
         return String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson.getName().fullName,
                 editedPerson.getAppointment().getDate(),
-                editedPerson.getAppointment().getTime(),
+                editedPerson.getAppointment().getTimeFormatted(),
                 editedPerson.getAppointment().getVenue());
     }
 

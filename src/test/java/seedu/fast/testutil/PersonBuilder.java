@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
     public static final String DEFAULT_APPOINTMENT = "10 Oct 2021";
-    public static final String DEFAULT_APPOINTMENT_TIME = "20:00";
+    public static final String DEFAULT_APPOINTMENT_TIME = "2000";
     public static final String DEFAULT_APPOINTMENT_VENUE = "Jewel Changi";
     public static final String DEFAULT_APPOINTMENT_COUNT = "0";
 

@@ -73,7 +73,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
 
         appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
-        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTime(), "Time",
+        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTimeFormatted(), "Time",
                 person.getAppointment().getDate()));
         appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
                 person.getAppointment().getDate()));

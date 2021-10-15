@@ -7,10 +7,9 @@ import static seedu.fast.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.util.DateUtil;
+import seedu.fast.testutil.PersonBuilder;
 
 public class AppointmentTest {
-    public static final String BAD_FORMAT_DATE = "10-10-1998";
-    public static final String INVALID_DATE = "2021-13-13";
     public static final String VALID_DATE = "11 Nov 2021";
     public static final String VALID_TIME = "2300";
     public static final String VALID_VENUE = "testArea";
@@ -26,14 +25,6 @@ public class AppointmentTest {
         Appointment noDateAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
                 Appointment.NO_VENUE);
         assertTrue(noDateAppointment.convertDate().equals(DateUtil.MAX_DATE));
-
-        //wrong format date input, stack trace should be printed.
-        Appointment badFormatAppointment = new Appointment(BAD_FORMAT_DATE, Appointment.NO_TIME, Appointment.NO_VENUE);
-        badFormatAppointment.convertDate();
-
-        //correct format, invalid date input, stack trace should be printed.
-        Appointment invalidDateAppointment = new Appointment(INVALID_DATE, Appointment.NO_TIME, Appointment.NO_VENUE);
-        invalidDateAppointment.convertDate();
 
         //correct format, valid date input
         Appointment validDateAppointment = new Appointment(VALID_DATE, Appointment.NO_TIME, Appointment.NO_VENUE);
@@ -61,12 +52,12 @@ public class AppointmentTest {
         //no time specified
         Appointment noTimeAppointment = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
                 Appointment.NO_VENUE);
-        assertTrue(noTimeAppointment.getTime().equals(""));
+        assertTrue(noTimeAppointment.getTimeFormatted().equals(""));
 
         //time specified
         Appointment validTimeAppointment = new Appointment(VALID_DATE, VALID_TIME,
                 Appointment.NO_VENUE);
-        assertTrue(validTimeAppointment.getTime().equals(VALID_TIME + "hrs"));
+        assertTrue(validTimeAppointment.getTimeFormatted().equals(VALID_TIME + "hrs"));
 
         //invalid time not tested as parser automatically rejects invalid instances
     }
@@ -120,5 +111,58 @@ public class AppointmentTest {
         assertTrue(standardAppointment.hashCode() == standardAppointment.hashCode());
 
         assertFalse(standardAppointment.hashCode() == appointmentWithDifferentData.hashCode());
+    }
+
+    @Test
+    public void isValidDateFormat() {
+        // valid date
+        assertTrue(Appointment.isValidDateFormat("27 Mar 2021"));
+
+        // empty date
+        assertTrue(Appointment.isValidDateFormat(Appointment.NO_APPOINTMENT));
+
+        // invalid date
+        assertFalse(Appointment.isValidDateFormat("2021-03-27"));
+        assertFalse(Appointment.isValidDateFormat("03-27-2021"));
+        assertFalse(Appointment.isValidDateFormat("2021 Mar 27"));
+        assertFalse(Appointment.isValidDateFormat("Mar 27 2021"));
+        assertFalse(Appointment.isValidDateFormat("27/Mar/2021"));
+        assertFalse(Appointment.isValidDateFormat("27/03/2021"));
+        assertFalse(Appointment.isValidDateFormat("27-Mar-2021"));
+        assertFalse(Appointment.isValidDateFormat("27-03-2021"));
+        assertFalse(Appointment.isValidDateFormat(""));
+    }
+
+    @Test
+    public void isValidTimeFormat() {
+        // valid time
+        assertTrue(Appointment.isValidTimeFormat("1000"));
+
+        // empty time
+        assertTrue(Appointment.isValidTimeFormat(""));
+
+        // invalid time
+        assertFalse(Appointment.isValidTimeFormat("1000hrs"));
+        assertFalse(Appointment.isValidTimeFormat("10:00"));
+        assertFalse(Appointment.isValidTimeFormat("10:00hrs"));
+        assertFalse(Appointment.isValidTimeFormat("10am"));
+        assertFalse(Appointment.isValidTimeFormat("10.00"));
+        assertFalse(Appointment.isValidTimeFormat("10:00am"));
+        assertFalse(Appointment.isValidTimeFormat("ten o'clock"));
+    }
+
+    @Test
+    public void isValidVenueFormat() {
+        // valid time
+        assertTrue(Appointment.isValidVenueFormat("Clementi Mall"));
+        assertTrue(Appointment.isValidVenueFormat("1234"));
+        assertTrue(Appointment.isValidVenueFormat("Clementi 123"));
+        assertTrue(Appointment.isValidVenueFormat("?!@!!?@"));
+
+        // empty time
+        assertTrue(Appointment.isValidVenueFormat(""));
+
+        // invalid time
+        assertFalse(Appointment.isValidVenueFormat("testttestttestttestttesttestttestt"));
     }
 }

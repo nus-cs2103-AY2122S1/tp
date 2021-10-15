@@ -1,6 +1,7 @@
 package seedu.fast.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.fast.commons.util.AppUtil.checkArgument;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,6 +40,9 @@ public class Appointment {
      */
     public Appointment(String date, String time, String venue) {
         requireNonNull(date);
+        checkArgument(isValidDateFormat(date), INVALID_DATE_INPUT);
+        checkArgument(isValidTimeFormat(time), INVALID_TIME_INPUT);
+        checkArgument(isValidVenueFormat(time), INVALID_VENUE_INPUT);
         this.date = date;
         this.time = time;
         this.venue = venue;
@@ -72,21 +76,27 @@ public class Appointment {
     }
 
     /**
+     * Returns a string in the format 'HHmm'hrs of the appointment.
+     *
+     * @return A string representing the formatted time of the appointment.
+     */
+    public String getTimeFormatted() {
+        if (this.time.equals(NO_TIME)) {
+            return "";
+        }
+
+        return this.time + "hrs";
+    }
+
+    /**
      * Returns a string in the format 'HHmm' of the appointment.
      *
      * @return A string representing the time of the appointment.
      */
     public String getTime() {
-        if (this.time.equals(NO_TIME)) {
-            return "";
-        }
-
-        if (!this.time.contains("hrs")) {
-            return this.time + "hrs";
-        }
-
         return this.time;
     }
+
     /**
      * Returns a string representing the venue of the appointment.
      *
@@ -95,6 +105,55 @@ public class Appointment {
     public String getVenue() {
         return this.venue;
     }
+
+    /**
+     * Check if the input date follows the format (dd MMM yyyy).
+     *
+     * @param test The input date string.
+     * @return A boolean indicating if the date follows the format.
+     */
+    public static boolean isValidDateFormat(String test) {
+        if (test.equalsIgnoreCase(NO_APPOINTMENT)) {
+            return true;
+        }
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat();
+            sdf.applyPattern("dd MMM yyyy");
+            sdf.setLenient(false);
+            sdf.parse(test);
+            return true;
+        } catch (ParseException e) {
+           return false;
+        }
+    }
+
+    /**
+     * Check if the input time follows the format (HHmm).
+     *
+     * @param test The input time string.
+     * @return A boolean indicating if the time follows the format.
+     */
+    public static boolean isValidTimeFormat(String test) {
+        if (test.equalsIgnoreCase(NO_TIME)) {
+            return true;
+        }
+
+        String validationPattern = "^([0-1]?[0-9]|2[0-3])[0-5][0-9]$";
+        return test.matches(validationPattern);
+    }
+
+    /**
+     * Check if the input venue is at most 30 characters.
+     *
+     * @param test The input venue string.
+     * @return A boolean indicating if the venue follows the format.
+     */
+    public static boolean isValidVenueFormat(String test) {
+        return test.length() <= 30;
+    }
+
+
 
     @Override
     public boolean equals(Object other) {
@@ -108,7 +167,7 @@ public class Appointment {
 
         Appointment otherAppt = (Appointment) other;
         return otherAppt.getDate().equals(getDate())
-                && otherAppt.getTime().equals(getTime())
+                && otherAppt.getTimeFormatted().equals(getTimeFormatted())
                 && otherAppt.getVenue().equals(getVenue());
     }
 
@@ -125,7 +184,7 @@ public class Appointment {
         builder.append("Appointment: ")
                 .append(this.getDate())
                 .append(" ")
-                .append(this.getTime())
+                .append(this.getTimeFormatted())
                 .append(" ")
                 .append(this.getVenue());
 

@@ -76,7 +76,7 @@ public class MarkAppointmentCommand extends Command {
 
         return String.format(MESSAGE_MARK_APPOINTMENT_SUCCESS, personToEdit.getName().fullName,
                 personToEdit.getAppointment().getDate(),
-                personToEdit.getAppointment().getTime(),
+                personToEdit.getAppointment().getTimeFormatted(),
                 personToEdit.getAppointment().getVenue());
     }
 

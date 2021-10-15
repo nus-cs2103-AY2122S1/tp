@@ -72,11 +72,11 @@ public class MarkAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_SECOND_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_SUCCESS,
                 secondPerson.getName().fullName, secondPerson.getAppointment().getDate(),
-                secondPerson.getAppointment().getTime(), secondPerson.getAppointment().getVenue());
+                secondPerson.getAppointment().getTimeFormatted(), secondPerson.getAppointment().getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -93,7 +93,7 @@ public class MarkAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
 
@@ -123,11 +123,11 @@ public class MarkAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_SUCCESS,
                 secondPerson.getName().fullName, secondPerson.getAppointment().getDate(),
-                secondPerson.getAppointment().getTime(), secondPerson.getAppointment().getVenue());
+                secondPerson.getAppointment().getTimeFormatted(), secondPerson.getAppointment().getVenue());
 
         Model expectedModel = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         expectedModel.setPerson(secondPerson, editedPerson);
@@ -145,7 +145,7 @@ public class MarkAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         MarkAppointmentCommand appointmentCommand = new MarkAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(MarkAppointmentCommand.MESSAGE_MARK_APPOINTMENT_FAILURE);
 

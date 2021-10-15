@@ -70,7 +70,7 @@ public class DeleteAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_SECOND_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 editedPerson.getName().fullName);
@@ -90,7 +90,7 @@ public class DeleteAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
                 editedPerson.getName().fullName);
@@ -121,7 +121,7 @@ public class DeleteAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 editedPerson.getName().fullName);
@@ -143,7 +143,7 @@ public class DeleteAppointmentCommandTest {
         Appointment editedAppt = editedPerson.getAppointment();
 
         DeleteAppointmentCommand appointmentCommand = new DeleteAppointmentCommand(INDEX_FIRST_PERSON,
-                new Appointment(editedAppt.getDate(), editedAppt.getTime(), editedAppt.getVenue()));
+                new Appointment(editedAppt.getDate(), editedAppt.getTimeFormatted(), editedAppt.getVenue()));
 
         String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_FAILED,
                 editedPerson.getName().fullName);

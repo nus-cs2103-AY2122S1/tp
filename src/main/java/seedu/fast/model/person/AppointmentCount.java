@@ -1,13 +1,17 @@
 package seedu.fast.model.person;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import static java.util.Objects.requireNonNull;
+import static seedu.fast.commons.util.AppUtil.checkArgument;
 
 /**
  * Unmodifiable by the user.
  * Manipulated by the application program.
  */
 public class AppointmentCount {
-    private static final String ERROR_MESSAGE = "Unable to update appointment count! Please try again!";
+    public static final String INVALID_COUNT_INPUT = "Appointment Count has be a non-negative integer";
 
     private int count;
 
@@ -18,8 +22,7 @@ public class AppointmentCount {
      */
     public AppointmentCount(String count) {
         requireNonNull(count);
-        // will always be correct, since count is initialise to 0 when a contact is added
-        // and always incremented by 1.
+        checkArgument(isValidCount(count), INVALID_COUNT_INPUT);
         this.count = Integer.parseInt(count);
     }
 
@@ -31,6 +34,21 @@ public class AppointmentCount {
     public AppointmentCount incrementAppointmentCount() {
         count++;
         return this;
+    }
+
+    /**
+     * Check if the input count is a non-negative integer.
+     *
+     * @param test The input count string.
+     * @return A boolean indicating if the count is valid.
+     */
+    public static boolean isValidCount(String test) {
+        try {
+            int n = Integer.parseInt(test);
+            return n >= 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 

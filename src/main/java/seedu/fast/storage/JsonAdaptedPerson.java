@@ -77,7 +77,7 @@ class JsonAdaptedPerson {
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
         appointmentDate = source.getAppointment().getDate();
-        appointmentTime = source.getAppointment().getTime();
+        appointmentTime = source.getAppointment().getTimeFormatted();
         appointmentVenue = source.getAppointment().getVenue();
         appointmentCount = source.getCount().toString();
     }
@@ -140,14 +140,26 @@ class JsonAdaptedPerson {
                     Appointment.class.getSimpleName()));
         }
 
+        if (!Appointment.isValidDateFormat(appointmentDate)) {
+            throw new IllegalValueException(Appointment.INVALID_DATE_INPUT);
+        }
+
         if (appointmentTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
         }
 
+        if (!Appointment.isValidTimeFormat(appointmentTime)) {
+            throw new IllegalValueException(Appointment.INVALID_TIME_INPUT);
+        }
+
         if (appointmentVenue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Appointment.class.getSimpleName()));
+        }
+
+        if (!Appointment.isValidVenueFormat(appointmentVenue)) {
+            throw new IllegalValueException(Appointment.INVALID_VENUE_INPUT);
         }
 
         final Appointment modelAppointment = new Appointment(appointmentDate, appointmentTime,
@@ -156,6 +168,10 @@ class JsonAdaptedPerson {
         if (appointmentCount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     AppointmentCount.class.getSimpleName()));
+        }
+
+        if (!AppointmentCount.isValidCount(appointmentCount)) {
+            throw new IllegalValueException(AppointmentCount.INVALID_COUNT_INPUT);
         }
 
         final AppointmentCount apptCount = new AppointmentCount(appointmentCount);

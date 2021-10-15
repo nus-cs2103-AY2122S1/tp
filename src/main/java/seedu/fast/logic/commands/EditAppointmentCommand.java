@@ -95,7 +95,7 @@ public class EditAppointmentCommand extends Command {
         assert appointmentToEdit != null;
 
         String updatedDate = editAppointmentDescriptor.getDate().orElse(appointmentToEdit.getDate());
-        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTime());
+        String updatedTime = editAppointmentDescriptor.getTime().orElse(appointmentToEdit.getTimeFormatted());
         String updatedVenue = editAppointmentDescriptor.getVenue().orElse(appointmentToEdit.getVenue());
 
         return new Appointment(updatedDate, updatedTime, updatedVenue);
@@ -110,7 +110,7 @@ public class EditAppointmentCommand extends Command {
     private String generateSuccessMessage(Person editedPerson) {
         return String.format(MESSAGE_UPDATE_APPOINTMENT_SUCCESS, editedPerson.getName().fullName,
                 editedPerson.getAppointment().getDate(),
-                editedPerson.getAppointment().getTime(),
+                editedPerson.getAppointment().getTimeFormatted(),
                 editedPerson.getAppointment().getVenue());
     }
 
