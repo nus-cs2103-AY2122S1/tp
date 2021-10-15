@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.GuiSettings;
 
 public class UserPrefsTest {
