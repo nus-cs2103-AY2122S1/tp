@@ -70,7 +70,7 @@ public class QueryStudentDescriptor {
      * @return true if {@code str} is contained within {@code optional} and false otherwise.
      */
     private boolean doesOptionalContainsField(Optional<String> optional, String str) {
-        if (!optional.isPresent()) {
+        if (optional.isEmpty()) {
             return true;
         }
 

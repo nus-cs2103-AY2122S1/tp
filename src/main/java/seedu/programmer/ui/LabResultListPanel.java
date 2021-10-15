@@ -32,7 +32,7 @@ public class LabResultListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code labResult} using a {@code LabResultCard}.
      */
-    class LabListListViewCell extends ListCell<LabResult> {
+    static class LabListListViewCell extends ListCell<LabResult> {
         @Override
         protected void updateItem(LabResult labResult, boolean empty) {
             super.updateItem(labResult, empty);
