@@ -128,6 +128,27 @@ public class AddCommandParserTest {
         Person expectedPersonNoSocialNoRemark = new PersonBuilder(AMY).withSocialHandle("").withRemark("").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
                 + TUTORIAL_GROUP_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoSocialNoRemark));
+        //no tutorial group
+        Person expectedPersonNoTutorial = new PersonBuilder(AMY).withTutorialGroup("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + SOCIAL_HANDLE_DESC_AMY + REMARK_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorial));
+        //no tutorial group and social handle
+        Person expectedPersonNoTutorialNoSocial = new PersonBuilder(AMY).withTutorialGroup("")
+                .withSocialHandle("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorialNoSocial));
+        //no tutorial group and remark
+        Person expectedPersonNoTutorialNoRemark = new PersonBuilder(AMY).withTutorialGroup("")
+                .withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + SOCIAL_HANDLE_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorialNoRemark));
+        //no tutorial group, social handle, and remark
+        Person expectedPersonNoTutNoSocialNoRemark = new PersonBuilder(AMY).withTutorialGroup("")
+                        .withSocialHandle("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutNoSocialNoRemark));
+
     }
 
     @Test
@@ -150,10 +171,6 @@ public class AddCommandParserTest {
         // missing nationality prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_NATIONALITY_BOB
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing tutorial group prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + VALID_TUTORIAL_GROUP_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_NATIONALITY_BOB

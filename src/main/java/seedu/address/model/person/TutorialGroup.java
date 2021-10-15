@@ -30,6 +30,9 @@ public class TutorialGroup {
      * Returns true if a given string is a valid tutorial group.
      */
     public static boolean isValidTutorialGroup(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

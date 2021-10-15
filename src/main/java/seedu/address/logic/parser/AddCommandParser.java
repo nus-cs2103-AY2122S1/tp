@@ -43,7 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_REMARK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_NATIONALITY, PREFIX_TUTORIAL_GROUP)
+                PREFIX_NATIONALITY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -52,7 +52,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Nationality nationality = ParserUtil.parseNationality(argMultimap.getValue(PREFIX_NATIONALITY).get());
-        TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
+        TutorialGroup tutorialGroup;
+        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isEmpty()) {
+            tutorialGroup = ParserUtil.parseTutorialGroup("");
+        } else {
+            tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
+        }
         SocialHandle socialHandle;
         if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isEmpty()) {
             socialHandle = ParserUtil.parseSocialHandle("");

@@ -59,6 +59,9 @@ public class PersonCard extends UiPart<Region> {
         nationality.setText(person.getNationality().value);
         email.setText(person.getEmail().value);
         tutorialGroup.setText(person.getTutorialGroup().value);
+        if (person.getTutorialGroup().value.isEmpty()) {
+            tutorialGroup.setManaged(false);
+        }
         socialHandle.setText(person.getSocialHandle().value);
         if (person.getSocialHandle().value.isEmpty()) {
             socialHandle.setManaged(false);
