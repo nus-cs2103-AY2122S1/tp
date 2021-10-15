@@ -84,6 +84,6 @@ public class StringUtil {
         String preppedWord = word;
         checkArgument(!preppedWord.isEmpty(), "Word cannot be empty!");
 
-        return sentence.toLowerCase().startsWith(word.toLowerCase());
+        return sentence.toLowerCase().contains(word.toLowerCase());
     }
 }

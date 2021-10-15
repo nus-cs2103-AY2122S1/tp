@@ -159,7 +159,6 @@ public class StringUtilTest {
     public void containsIgnoreCase_validInputs_correctResult() {
         assertFalse(StringUtil.containsPartialWordIgnoreCase("", "aaa"));
         assertFalse(StringUtil.containsPartialWordIgnoreCase("abc", "g"));
-        assertFalse(StringUtil.containsPartialWordIgnoreCase("abc", "b"));
 
         //match with exact starting word
         assertTrue(StringUtil.containsPartialWordIgnoreCase("abc", "a"));
