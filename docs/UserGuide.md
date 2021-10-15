@@ -266,7 +266,7 @@ Notes:
 **Sample Usage:**
 * `list` followed by `deleteM 2 - 3`
   * deletes the 2nd and 3rd person in the address book.
-* `find Betsy` followed by `deleteM 1 - 2`
+* `find Betsy` followed by `deleteM 1 - 5`
   * deletes the 1st and 2nd person in the results of the `find` command.
 
 ### Clearing all entries : `clear`

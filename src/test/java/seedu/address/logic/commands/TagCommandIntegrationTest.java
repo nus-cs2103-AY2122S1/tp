@@ -46,7 +46,7 @@ public class TagCommandIntegrationTest {
     }
 
     @Test
-    public void execute_singleTagNoExistingUnfilteredList_success() {
+    public void execute_singleTagNoExistingUnfilteredList_returnCommandResultEditPersonSuccess() {
         try {
             Model model = generateNoTagModel();
             TagCommand tagCommand =
@@ -66,7 +66,7 @@ public class TagCommandIntegrationTest {
     }
 
     @Test
-    public void execute_singleTagPreExistingTagUnfilteredList_success() {
+    public void execute_singleTagPreExistingTagUnfilteredList_returnCommandResultEditPersonSuccess() {
         Model model = generateDefaultTagModel();
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(defaultFirst).withTags(VALID_TAG_WIFE, VALID_TAG_FRIEND).build();
@@ -88,7 +88,7 @@ public class TagCommandIntegrationTest {
     }
 
     @Test
-    public void execute_multipleTagPreExistingTagUnfilteredList_success() {
+    public void execute_multipleTagPreExistingTagUnfilteredList_returnCommandResultEditPersonSuccess() {
         Model model = generateDefaultTagModel();
         Person defaultFirst = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(defaultFirst)
