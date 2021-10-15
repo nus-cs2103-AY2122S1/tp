@@ -65,11 +65,17 @@ Format: `editclass INDEX l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
 ### Deleting students/tuition classes
 Deletes a student or a tuition class given INDEX.
 
-#### Deleting a student: `delete`
-Format: `delete INDEX`
+#### Deleting students: `delete`
+Format: `delete STUDENT_INDEX STUDENT_INDEX`
 
-#### Deleting a tuition class: `deleteclass`
-Format: `deleteclass INDEX`
+Example:
+- `delete 1 2`
+
+#### Deleting tuition classes: `deleteclass`
+Format: `deleteclass CLASS_INDEX CLASS_INDEX`
+
+Example:
+- `deletclass 1 2`
 
 ### Adding/Removing an existing student from class
 Move a student to/from classes by adding or removing them.
@@ -174,8 +180,8 @@ Action | Format
 ***View Class*** | `class INDEX`
 ***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
 ***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-***Delete Student*** | `deletestudent INDEX`
-***Delete Class*** | `deleteclass INDEX`
+***Delete Student*** | `deletestudent INDEX_STUDENT INDEX_STUDENT`
+***Delete Class*** | `deleteclass INDEX_CLASS INDEX_CLASS`
 ***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
 ***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 ***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK`
