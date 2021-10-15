@@ -28,7 +28,7 @@ public class Price {
     @Override
     public String toString() {
         int cents = priceInCents % 100;
-        int dollars = (priceInCents - cents) + 100;
+        int dollars = (priceInCents - cents) / 100;
 
         String centsStr;
         if (cents <= 9) {
