@@ -19,7 +19,7 @@ public class DeleteClassCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_CLASS_SUCCESS = "Deleted Student: %1$s";
 
     private final Index targetIndex;
 
@@ -36,15 +36,15 @@ public class DeleteClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<TutorialClass> lastShownList = model.getFliteredTutorialClassList();
+        List<TutorialClass> lastShownList = model.getFilteredTutorialClassList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
         }
 
         TutorialClass classToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTutorialClass(classToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, classToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_CLASS_SUCCESS, classToDelete));
     }
 
     @Override

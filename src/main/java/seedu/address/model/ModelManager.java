@@ -133,7 +133,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<TutorialClass> getFliteredTutorialClassList() {
+    public ObservableList<TutorialClass> getFilteredTutorialClassList() {
         return filteredTutorialClasses;
     }
 
@@ -156,7 +156,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updaateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
+    public void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
         requireNonNull(predicate);
         filteredTutorialClasses.setPredicate(predicate);
     }
