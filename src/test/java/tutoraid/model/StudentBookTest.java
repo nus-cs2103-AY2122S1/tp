@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.exceptions.DuplicateStudentException;
 import tutoraid.testutil.Assert;
@@ -84,6 +85,7 @@ public class StudentBookTest {
      */
     private static class StudentBookStub implements ReadOnlyStudentBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
         StudentBookStub(Collection<Student> students) {
             this.students.setAll(students);
@@ -92,6 +94,11 @@ public class StudentBookTest {
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
+        }
+
+        @Override
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
         }
     }
 
