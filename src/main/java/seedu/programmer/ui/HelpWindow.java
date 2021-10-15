@@ -107,8 +107,11 @@ public class HelpWindow extends UiPart<Stage> {
         FeatureTableItem show = new FeatureTableItem("Show",
                 "show <INDEX_IN_LIST>",
                 "Show the lab results of the chosen student");
+        FeatureTableItem download = new FeatureTableItem("Download",
+                "NA, can be accessed by clicking File -> Download in the menu",
+                "Download the database as a csv file");
         featureTableItems = FXCollections.observableArrayList();
-        featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show);
+        featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show, download);
     }
 
 
