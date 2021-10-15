@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.UniqueItemList;
 
@@ -84,6 +85,15 @@ public class Inventory implements ReadOnlyInventory {
     public boolean hasItem(String id) {
         requireNonNull(id);
         return items.contains(id);
+    }
+
+    /**
+     * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
+     * @see ItemDescriptor#isMatch(Item)
+     */
+    public List<Item> getItems(ItemDescriptor descriptor) {
+        requireNonNull(descriptor);
+        return items.get(descriptor);
     }
 
     /**
@@ -192,6 +202,17 @@ public class Inventory implements ReadOnlyInventory {
         requireNonNull(editedItem);
 
         items.setItem(target, editedItem);
+    }
+
+    /**
+     * Increments the count of the given item {@code target} by {@code amount}.
+     * {@code target} must exist in the inventory.
+     */
+    public void restockItem(Item target, int amount) {
+        requireNonNull(target);
+
+        Item newItem = target.updateCount(target.getCount() + amount);
+        items.setItem(target, newItem);
     }
 
     /**

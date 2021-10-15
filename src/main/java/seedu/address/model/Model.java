@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 
 /**
@@ -66,7 +68,13 @@ public interface Model {
     boolean hasItem(Name name);
 
     /**
+     * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
+     */
+    List<Item> getItems(ItemDescriptor descriptor);
+
+    /**
      * Returns true if an item with the given {@code id} exists in the inventory.
+     * @see ItemDescriptor#isMatch(Item)
      */
     boolean hasItem(String id);
 
@@ -89,8 +97,7 @@ public interface Model {
     Item deleteItem(String id, int count);
 
     /**
-     * Adds the given item.
-     * If {@code item} must not already exist in the address book, increment its count accordingly.
+     * Adds the given item into inventory
      */
     void addItem(Item item);
 
@@ -100,6 +107,12 @@ public interface Model {
      * The item identity of {@code editedItem} must not be the same as another existing item in the inventory.
      */
     void setItem(Item target, Item editedItem);
+
+    /**
+     * Increments the count of the given item {@code target} with {@code amount}.
+     * {@code target} must exist in the inventory.
+     */
+    void restockItem(Item target, int amount);
 
     /**
      * Sorts the item list using the given {@code comparator}.
