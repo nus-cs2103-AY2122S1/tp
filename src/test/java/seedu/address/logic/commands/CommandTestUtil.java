@@ -66,13 +66,10 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_NATIONALITY_DESC = " "
-            + PREFIX_NATIONALITY; // empty string not allowed for nationality
     public static final String INVALID_TUTORIAL_GROUP_DESC = " "
             + PREFIX_TUTORIAL_GROUP + "B"; // Alphabets not allowed in tutorial groups
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
             + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK; // empty string not allowed for remark
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
