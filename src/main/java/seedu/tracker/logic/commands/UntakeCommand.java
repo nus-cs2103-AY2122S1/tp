@@ -65,7 +65,7 @@ public class UntakeCommand extends Command {
         }
 
         model.setModule(moduleToUntake, unscheduledModule);
-        return new CommandResult(String.format(MESSAGE_UNTAKE_MODULE_SUCCESS, moduleToUntake));
+        return new CommandResult(String.format(MESSAGE_UNTAKE_MODULE_SUCCESS, unscheduledModule));
     }
 
     @Override
