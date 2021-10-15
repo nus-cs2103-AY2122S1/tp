@@ -33,9 +33,9 @@ public class Appointment {
     /**
      * Constructs an {@code Appointment}.
      *
-     * @param date A valid date.
-     * @param time A valid time.
-     * @param venue A venue.
+     * @param date A valid date (dd MMM yyyy).
+     * @param time A valid time (hhmm).
+     * @param venue A venue (less than 30 characters).
      */
     public Appointment(String date, String time, String venue) {
         requireNonNull(date);
