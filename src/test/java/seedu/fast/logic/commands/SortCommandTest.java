@@ -16,6 +16,7 @@ import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.commons.util.sort.SortByPriority;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
+import seedu.fast.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +30,7 @@ public class SortCommandTest {
         model = new ModelManager();
         expectedModel = new ModelManager();
 
-        model.addPerson(GRABAHAN);
-        model.addPerson(BENSON);
-        model.addPerson(ELLE);
-        model.addPerson(JOE);
+        getCustomPersons(model, GRABAHAN, BENSON, ELLE, JOE);
     }
 
     @Test
@@ -64,10 +62,8 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByName_listSortedByName() {
-        expectedModel.addPerson(BENSON);
-        expectedModel.addPerson(ELLE);
-        expectedModel.addPerson(GRABAHAN);
-        expectedModel.addPerson(JOE);
+        getCustomPersons(expectedModel, BENSON, ELLE, GRABAHAN, JOE);
+
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByName.KEYWORD);
         SortCommand command = new SortCommand(new SortByName(), SortByName.KEYWORD);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,10 +71,8 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByAppointment_listSortedByAppointment() {
-        expectedModel.addPerson(ELLE);
-        expectedModel.addPerson(BENSON);
-        expectedModel.addPerson(GRABAHAN);
-        expectedModel.addPerson(JOE);
+        getCustomPersons(expectedModel, ELLE, BENSON, GRABAHAN, JOE);
+
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByAppointment.KEYWORD);
         SortCommand command = new SortCommand(new SortByAppointment(), SortByAppointment.KEYWORD);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,13 +80,22 @@ public class SortCommandTest {
 
     @Test
     public void execute_sortByPriority_listSortedByPriority() {
-        expectedModel.addPerson(JOE);
-        expectedModel.addPerson(GRABAHAN);
-        expectedModel.addPerson(BENSON);
-        expectedModel.addPerson(ELLE);
+        getCustomPersons(expectedModel, JOE, GRABAHAN, BENSON, ELLE);
+
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByPriority.KEYWORD);
         SortCommand command = new SortCommand(new SortByPriority(), SortByPriority.KEYWORD);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Adds the specified Persons into the Model
+     * @param model The model to add persons.
+     * @param persons Variable length of Person to be added.
+     */
+    private void getCustomPersons(Model model, Person ...persons) {
+        for (Person p: persons) {
+            model.addPerson(p);
+        }
     }
 
 }
