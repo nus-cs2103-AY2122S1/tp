@@ -9,9 +9,9 @@ import static seedu.plannermd.commons.util.AppUtil.checkArgument;
  */
 public class Duration {
 
-    public static final String MESSAGE_CONSTRAINTS = "The duration should be an integer between 1-60 minutes.";
+    public static final String MESSAGE_CONSTRAINTS = "The duration should be an integer between 1-120 minutes.";
 
-    public static final int DEFAULT_DURATION = 5;
+    public static final Integer DEFAULT_DURATION = 10;
 
     public final Integer duration;
 
@@ -32,10 +32,10 @@ public class Duration {
 
     /**
      * Returns true if a given integer is a valid duration.
-     * A valid duration is between 1-60 minutes.
+     * A valid duration is between 1-120 minutes.
      */
     public static boolean isValidDuration(Integer duration) {
-        return duration >= 1 && duration <= 60;
+        return duration >= 1 && duration <= 120;
     }
 
     /**
