@@ -4,10 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +40,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Item item = new ItemBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(ItemUtil.getAddCommand(item));
-        assertEquals(new AddCommand(item), command);
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        AddCommand command = (AddCommand) parser.parseCommand(ItemUtil.getAddCommand(descriptor));
+
+        descriptor.setCount(1);  // Parser should set descriptor count to 1
+        assertEquals(new AddCommand(descriptor), command);
     }
 
     @Test
@@ -60,8 +64,13 @@ public class AddressBookParserTest {
     public void parseCommand_edit() throws Exception {
         Item item = new ItemBuilder().build();
         ItemDescriptor descriptor = new ItemDescriptorBuilder(item).build();
+
+        String re = EditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_ITEM.getOneBased() + " " + ItemUtil.getItemDescriptorDetails(descriptor);
+
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_ITEM.getOneBased() + " " + ItemUtil.getItemDescriptorDetails(descriptor));
+        
         assertEquals(new EditCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 

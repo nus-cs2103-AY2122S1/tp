@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 
@@ -78,7 +79,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL;
+        String addCommand = AddCommand.COMMAND_WORD + " " + VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL;
         Item expectedItem = new ItemBuilder(BAGEL).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addItem(expectedItem);

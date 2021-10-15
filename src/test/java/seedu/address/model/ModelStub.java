@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 
 /**
@@ -70,6 +72,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public List<Item> getItems(ItemDescriptor descriptor) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasItem(String id) {
         throw new AssertionError("This method should not be called.");
     }
@@ -86,6 +93,11 @@ public class ModelStub implements Model {
 
     @Override
     public void setItem(Item target, Item editedItem) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void restockItem(Item target, int amount) {
         throw new AssertionError("This method should not be called.");
     }
 

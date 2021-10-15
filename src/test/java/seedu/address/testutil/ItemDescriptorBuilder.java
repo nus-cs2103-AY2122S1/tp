@@ -31,6 +31,7 @@ public class ItemDescriptorBuilder {
         descriptor = new ItemDescriptor();
         descriptor.setName(item.getName());
         descriptor.setId(item.getId());
+        descriptor.setCount(item.getCount());
         descriptor.setTags(item.getTags());
     }
 
