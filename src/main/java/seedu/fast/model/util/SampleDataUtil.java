@@ -47,14 +47,14 @@ public class SampleDataUtil {
             new Person(new Name("Stuart Brown"), new Phone("98490328"), new Email("stuartb@example.com"),
                 new Address("Blk 822 Sembawang Road, #02-13"), new Remark("He likes to eat pizza"),
                 getTagSet("LowPriority", "friends"),
-                new Appointment("2021-10-31", "1330", "Domino's Pizza")),
+                new Appointment("16 Dec 2021", "1330", "Domino's Pizza")),
             new Person(new Name("Thomas Lim"), new Phone("98902563"), new Email("thomaslim@example.com"),
                 new Address("Blk 145 Braddell Street 85, #20-13"), new Remark("He has a lot of money"),
                 getTagSet("HighPriority", "acquaintance"), EMPTY_APPOINTMENT),
             new Person(new Name("Wayne Robinson"), new Phone("92378943"), new Email("waynerob@example.com"),
                 new Address("Blk 412 Bishan Ring Road, #04-13"), EMPTY_REMARK,
                 getTagSet("MediumPriority", "oldfriend"),
-                new Appointment("2021-11-16", "1200", "Bishan Park"))
+                new Appointment("09 Sep 2021", "1200", "Bishan Park"))
 
         };
     }
