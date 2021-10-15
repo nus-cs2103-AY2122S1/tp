@@ -22,6 +22,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Removes an existing {@code Tag} from an existing {@code Person} in the address book.
+ */
 public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
@@ -34,7 +37,7 @@ public class UntagCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "friend";
 
-    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed tag(s) from %1$s: %2$s";
+    public static final String MESSAGE_REMOVE_TAG_SUCCESS = "Removed tag(s) from %1$s: %2$s";
     public static final String MESSAGE_NOT_REMOVED = "At least one tag to be removed must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_TAG_NOT_IN_PERSON = "%s does not have the following tags: %s";
@@ -63,42 +66,49 @@ public class UntagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToUntag = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToUntag, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!personToUntag.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personToUntag, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, editedPerson.getName(),
+        return new CommandResult(String.format(MESSAGE_REMOVE_TAG_SUCCESS, editedPerson.getName(),
                 getRemovedTags(editPersonDescriptor)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Person} with the details of {@code personToUntag}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+    private static Person createEditedPerson(Person personToUntag, EditPersonDescriptor editPersonDescriptor)
             throws CommandException {
-        assert personToEdit != null;
+        assert personToUntag != null;
+        assert editPersonDescriptor.getTags().isPresent();
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Birthday updatedBirthday = editPersonDescriptor.getBirthday().orElse(personToEdit.getBirthday().orElse(null));
+        assert editPersonDescriptor.getName().isEmpty();
+        assert editPersonDescriptor.getPhone().isEmpty();
+        assert editPersonDescriptor.getEmail().isEmpty();
+        assert editPersonDescriptor.getAddress().isEmpty();
+        assert editPersonDescriptor.getBirthday().isEmpty();
+
+        Name originalName = personToUntag.getName();
+        Phone originalPhone = personToUntag.getPhone();
+        Email originalEmail = personToUntag.getEmail();
+        Address originalAddress = personToUntag.getAddress();
+        Birthday originalBirthday = personToUntag.getBirthday().orElse(null);
 
         Set<Tag> removedTags = editPersonDescriptor.getTags().orElse(new HashSet<Tag>());
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        Set<Tag> updatedTags = new HashSet<>(personToUntag.getTags());
         if (!updatedTags.containsAll(removedTags)) {
-            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, updatedName,
+            throw new CommandException(String.format(MESSAGE_TAG_NOT_IN_PERSON, originalName,
                     getNotFoundTags(updatedTags, removedTags)));
         }
         updatedTags.removeAll(removedTags);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthday);
+        return new Person(originalName, originalPhone, originalEmail, originalAddress, updatedTags, originalBirthday);
     }
 
     /**
