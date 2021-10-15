@@ -14,6 +14,7 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
+
             + ": Sorts the people in FAST by the given keyword \n"
             + "Keyword: 'name', 'appointment', 'priority' \n"
             + "Example: " + COMMAND_WORD + " name";

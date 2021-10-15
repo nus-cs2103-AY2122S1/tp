@@ -35,8 +35,11 @@
         <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
       </VBox>
     </HBox>
-    <HBox alignment="CENTER_RIGHT"> <!-- Newly added -->
-      <VBox alignment="BASELINE_LEFT" minHeight="105" minWidth="225" GridPane.columnIndex="0">
+    <HBox alignment="CENTER_RIGHT">
+      <padding>
+        <Insets top="5" right="15" bottom="5" left="5" />
+      </padding>
+      <VBox alignment="TOP_LEFT" minHeight="105" minWidth="225" GridPane.columnIndex="0">
         <Label fx:id="appointmentHeader" styleClass="cell_small_label" text="Upcoming Appointment" style="-fx-font-weight: bold; -fx-font-size: 15;"/>
         <Label fx:id="appointmentDate" styleClass="cell_small_label" text="\$appointment date" />
         <Label fx:id="appointmentTime" styleClass="cell_small_label" text="\$appointment time" />

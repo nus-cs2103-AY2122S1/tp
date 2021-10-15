@@ -12,8 +12,8 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays all your clients saved in FAST\n"
-            + "Example: " + COMMAND_WORD;
+            + ": Displays all your clients saved in FAST\n\n"
+            + "Example: \n" + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
 

@@ -10,6 +10,14 @@ public class PriorityTag extends Tag {
 
     public static final String PRIORITY_TAG_PREFIX = "pr/";
 
+    public static final String MESSAGE_USAGE = "priority tag: label a person with a priority. "
+        + "The priority can be high, med, or low\n"
+        + "Similar to tag, to apply a priority tag, you have to use Add or Edit command.\n\n"
+        + "Parameters (using Edit): \n"
+        + "edit INDEX t/ pr/PRIORITY\n\n"
+        + "Example: \n"
+        + "edit 1 t/ pr/low\n"
+        + "edit 3 t/ pr/high";
     public static final String PRIORITY_VALIDATION_REGEX = LowPriority.COMMAND + "|"
             + MediumPriority.COMMAND + "|"
             + HighPriority.COMMAND;
@@ -45,7 +53,7 @@ public class PriorityTag extends Tag {
 
         public static final String NAME = "MediumPriority";
 
-        public static final String TERM = "medium";
+        public static final String TERM = "med";
 
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
