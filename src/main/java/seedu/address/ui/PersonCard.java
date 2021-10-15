@@ -56,11 +56,29 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        if (person.getPhone().value.isEmpty()) {
+            phone.setManaged(false);
+        }
         nationality.setText(person.getNationality().value);
+        if (person.getNationality().value.isEmpty()) {
+            nationality.setManaged(false);
+        }
         email.setText(person.getEmail().value);
+        if (person.getEmail().value.isEmpty()) {
+            email.setManaged(false);
+        }
         tutorialGroup.setText(person.getTutorialGroup().value);
+        if (person.getTutorialGroup().value.isEmpty()) {
+            tutorialGroup.setManaged(false);
+        }
         socialHandle.setText(person.getSocialHandle().value);
+        if (person.getSocialHandle().value.isEmpty()) {
+            socialHandle.setManaged(false);
+        }
         remark.setText(person.getRemark().value);
+        if (person.getRemark().value.isEmpty()) {
+            remark.setManaged(false);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

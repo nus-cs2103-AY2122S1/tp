@@ -32,6 +32,9 @@ public class Remark {
      * Returns true if a given string is a valid remark.
      */
     public static boolean isValidRemark(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

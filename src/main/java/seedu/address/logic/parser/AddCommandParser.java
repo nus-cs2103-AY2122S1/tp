@@ -33,6 +33,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
@@ -41,19 +42,48 @@ public class AddCommandParser implements Parser<AddCommand> {
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NATIONALITY,
                         PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_REMARK, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_NATIONALITY, PREFIX_SOCIAL_HANDLE, PREFIX_TUTORIAL_GROUP, PREFIX_REMARK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Nationality nationality = ParserUtil.parseNationality(argMultimap.getValue(PREFIX_NATIONALITY).get());
-        TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
-        SocialHandle socialHandle = ParserUtil.parseSocialHandle(argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get());
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Phone phone;
+        if (argMultimap.getValue(PREFIX_PHONE).isEmpty()) {
+            phone = ParserUtil.parsePhone("");
+        } else {
+            phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        }
+        Email email;
+        if (argMultimap.getValue(PREFIX_EMAIL).isEmpty()) {
+            email = ParserUtil.parseEmail("");
+        } else {
+            email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        }
+        Nationality nationality;
+        if (argMultimap.getValue(PREFIX_NATIONALITY).isEmpty()) {
+            nationality = ParserUtil.parseNationality("");
+        } else {
+            nationality = ParserUtil.parseNationality(argMultimap.getValue(PREFIX_NATIONALITY).get());
+        }
+        TutorialGroup tutorialGroup;
+        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isEmpty()) {
+            tutorialGroup = ParserUtil.parseTutorialGroup("");
+        } else {
+            tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
+        }
+        SocialHandle socialHandle;
+        if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isEmpty()) {
+            socialHandle = ParserUtil.parseSocialHandle("");
+        } else {
+            socialHandle = ParserUtil.parseSocialHandle(argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get());
+        }
+        Remark remark;
+        if (argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
+            remark = ParserUtil.parseRemark("");
+        } else {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tagList);

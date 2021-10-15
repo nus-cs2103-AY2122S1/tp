@@ -36,6 +36,9 @@ public class SocialHandle {
      * Returns true if a given string is a valid social handle.
      */
     public static boolean isValidSocialHandle(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 

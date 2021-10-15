@@ -19,7 +19,6 @@ public class RemarkTest {
         assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
 
         // invalid remark
-        assertFalse(Remark.isValidRemark("")); // empty string
         assertFalse(Remark.isValidRemark(" ")); // spaces only
         assertFalse(Remark.isValidRemark("      ")); // many spaces only
 
@@ -27,5 +26,6 @@ public class RemarkTest {
         assertTrue(Remark.isValidRemark("I like to code"));
         assertTrue(Remark.isValidRemark("-")); // one character
         assertTrue(Remark.isValidRemark("123")); // numbers
+        assertTrue(Remark.isValidRemark("")); // empty string
     }
 }

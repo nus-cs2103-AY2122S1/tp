@@ -5,9 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NATIONALITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SOCIAL_HANDLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUTORIAL_GROUP_DESC;
@@ -46,10 +44,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.SocialHandle;
 import seedu.address.model.person.TutorialGroup;
 import seedu.address.model.tag.Tag;
@@ -117,6 +113,103 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
                 + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY + REMARK_DESC_AMY, new AddCommand(expectedPerson));
+
+        // no social handle
+        Person expectedPersonNoSocial = new PersonBuilder(AMY).withSocialHandle("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoSocial));
+
+        // no remark
+        Person expectedPersonNoRemark = new PersonBuilder(AMY).withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoRemark));
+
+        //no social handle and remark
+        Person expectedPersonNoSocialNoRemark = new PersonBuilder(AMY).withSocialHandle("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoSocialNoRemark));
+
+        //no tutorial group
+        Person expectedPersonNoTutorial = new PersonBuilder(AMY).withTutorialGroup("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + SOCIAL_HANDLE_DESC_AMY + REMARK_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorial));
+
+        //no tutorial group and social handle
+        Person expectedPersonNoTutorialNoSocial = new PersonBuilder(AMY).withTutorialGroup("")
+                .withSocialHandle("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorialNoSocial));
+
+        //no tutorial group and remark
+        Person expectedPersonNoTutorialNoRemark = new PersonBuilder(AMY).withTutorialGroup("")
+                .withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + SOCIAL_HANDLE_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutorialNoRemark));
+
+        //no tutorial group, social handle, and remark
+        Person expectedPersonNoTutNoSocialNoRemark = new PersonBuilder(AMY).withTutorialGroup("")
+                .withSocialHandle("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoTutNoSocialNoRemark));
+
+        //no nationality
+        Person expectedPersonNoNat = new PersonBuilder(AMY).withNationality("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY + REMARK_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoNat));
+
+        //no nationality and social handle
+        Person expectedPersonNoNatNoSocial = new PersonBuilder(AMY).withNationality("").withSocialHandle("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + REMARK_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoNatNoSocial));
+
+        //no nationality, social handle, and remark
+        Person expectedPersonNoNatNoSocialNoRemark = new PersonBuilder(AMY).withNationality("")
+                .withSocialHandle("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoNatNoSocialNoRemark));
+
+        //no email
+        Person expectedPersonNoEmail = new PersonBuilder(AMY).withEmail("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
+                + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoEmail));
+
+        //no email and tutorial group
+        Person expectedPersonNoEmailNoTutorial = new PersonBuilder(AMY).withEmail("")
+                .withTutorialGroup("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + NATIONALITY_DESC_AMY
+                + SOCIAL_HANDLE_DESC_AMY
+                + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoEmailNoTutorial));
+
+        //no phone
+        Person expectedPersonNoPhone = new PersonBuilder(AMY).withPhone("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
+                + REMARK_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoPhone));
+
+        //no phone and remark
+        Person expectedPersonNoPhoneNoRemark = new PersonBuilder(AMY).withPhone("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoPhoneNoRemark));
+
+        //no phone, email, and remark
+        Person expectedPersonNoPhoneNoRemarkNoEmail = new PersonBuilder(AMY).withPhone("").withRemark("")
+                .withEmail("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoPhoneNoRemarkNoEmail));
+
+        //only name
+        Person expectedPersonOnlyName = new PersonBuilder(AMY).withPhone("").withEmail("")
+                .withNationality("").withTutorialGroup("").withSocialHandle("").withRemark("")
+                .withTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY, new AddCommand(expectedPersonOnlyName));
+
     }
 
     @Test
@@ -125,31 +218,7 @@ public class AddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                        + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing nationality prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_NATIONALITY_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing tutorial group prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + VALID_TUTORIAL_GROUP_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing social handle prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + VALID_SOCIAL_HANDLE_BOB + REMARK_DESC_BOB, expectedMessage);
-
-        // missing remark prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + VALID_REMARK_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_NATIONALITY_BOB
@@ -173,11 +242,6 @@ public class AddCommandParserTest {
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid nationality
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_NATIONALITY_DESC
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Nationality.MESSAGE_CONSTRAINTS);
-
         // invalid tutorial group
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + INVALID_TUTORIAL_GROUP_DESC + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
@@ -188,11 +252,6 @@ public class AddCommandParserTest {
                 + TUTORIAL_GROUP_DESC_BOB + INVALID_SOCIAL_HANDLE_DESC + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, SocialHandle.MESSAGE_CONSTRAINTS);
 
-        // invalid remark
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + INVALID_REMARK_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Remark.MESSAGE_CONSTRAINTS);
-
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
@@ -200,13 +259,13 @@ public class AddCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + INVALID_NATIONALITY_DESC + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB,
+                        + NATIONALITY_DESC_BOB + INVALID_TUTORIAL_GROUP_DESC + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                        + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB
+                        + REMARK_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
