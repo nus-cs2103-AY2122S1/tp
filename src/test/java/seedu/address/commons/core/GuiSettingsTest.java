@@ -2,12 +2,12 @@ package seedu.address.commons.core;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class GuiSettingsTest {
     @Test
     public void equals() {
         GuiSettings guiSettings = new GuiSettings();
-        assertFalse(guiSettings.equals(null));
+        assertNotEquals(null, guiSettings);
     }
 }
