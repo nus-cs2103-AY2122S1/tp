@@ -27,6 +27,7 @@ public abstract class Sortable {
             "PARTICIPATION",
             "NAME"
     );
+
     public static boolean isValidSortable(String test) {
         requireNonNull(test);
         String uppercaseTest = test.toUpperCase();
