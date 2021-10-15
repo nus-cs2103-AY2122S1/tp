@@ -50,12 +50,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Role role = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
+        Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         Status status = ParserUtil.parseStatuses(argMultimap.getAllValues(PREFIX_STATUS));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person staff = new Person(name, phone, email, address, role, salary, status, tagList);
+        Person staff = new Person(name, phone, email, address, roleList, salary, status, tagList);
 
         return new AddCommand(staff);
     }

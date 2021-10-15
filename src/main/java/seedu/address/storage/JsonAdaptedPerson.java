@@ -32,7 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String role;
+    private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String salary;
     private final String status;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -44,14 +44,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("role") String role,
+            @JsonProperty("address") String address, @JsonProperty("role") List<JsonAdaptedRole> roles,
             @JsonProperty("salary") String salary, @JsonProperty("status") String status,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.role = role;
+        if (roles != null) {
+            this.roles.addAll(roles);
+        }
         this.salary = salary;
         this.status = status;
         if (tagged != null) {
@@ -68,7 +70,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        role = source.getRole().getValue();
+        roles.addAll(source.getRoles().stream()
+                .map(JsonAdaptedRole::new)
+                .collect(Collectors.toList()));
         salary = source.getSalary().toString();
         status = source.getStatus().getValue();
         tagged.addAll(source.getTags().stream()
@@ -87,7 +91,10 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-
+        final List<Role> personRoles = new ArrayList<>();
+        for (JsonAdaptedRole role : roles) {
+            personRoles.add(role.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -120,13 +127,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (role == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
-        }
-        if (!Role.isValidRole(role)) {
-            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
-        }
-        final Role modelRole = Role.translateStringToRole(role);
+        final Set<Role> modelRoles = new HashSet<>(personRoles);
 
         if (salary == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
@@ -161,7 +162,7 @@ class JsonAdaptedPerson {
             modelSchedule = new Schedule(schedule.trim());
         }
         Person p = new Person(modelName, modelPhone, modelEmail,
-                modelAddress, modelRole, modelSalary, modelStatus, modelTags);
+                modelAddress, modelRoles, modelSalary, modelStatus, modelTags);
         p.setSchedule(modelSchedule);
         return p;
     }

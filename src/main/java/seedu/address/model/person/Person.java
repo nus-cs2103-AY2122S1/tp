@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,35 +27,39 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Role role;
+    private final Set<Role> roles = new HashSet<>();
     private final Salary salary;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
 
     private Schedule schedule;
+    private int totalWeeklyWorkingHour;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, Salary salary, Status status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  Set<Role> roles, Salary salary, Status status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.role = role;
+        if (roles.isEmpty()) {
+            this.roles.add(Role.NO_ROLE);
+        } else {
+            this.roles.addAll(roles);
+        }
         this.salary = salary;
         this.status = status;
         this.tags.addAll(tags);
         this.schedule = new Schedule();
+        this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
         this.fields.addAll(tags);
-        addToFieldSet(fields, name, phone, email, address, salary, status, role);
+        this.fields.addAll(roles);
+        addToFieldSet(fields, name, phone, email, address, salary, status);
     }
-
-
-
 
     public Name getName() {
         return name;
@@ -73,8 +78,8 @@ public class Person {
         return address;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
     public Salary getSalary() {
@@ -108,13 +113,31 @@ public class Person {
      * @param slot The time slot of the shift.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
+    }
+
+    /**
+     * Removes a shift from the staff's schedule.
+     *
+     * @param dayOfWeek The day of the shift.
+     * @param slot The time slot of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
+     */
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        schedule.removeShift(dayOfWeek, slot);
     }
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
+
+    public int getTotalWeeklyWorkingHour() {
+        return totalWeeklyWorkingHour;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -148,10 +171,11 @@ public class Person {
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
                 && otherStaff.getAddress().equals(getAddress())
-                && otherStaff.getRole().equals(getRole())
+                && otherStaff.getRoles().equals(getRoles())
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
-                && otherStaff.getTags().equals(getTags());
+                && otherStaff.getTags().equals(getTags())
+                && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
     }
 
     @Override
@@ -170,13 +194,16 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Role: ")
-                .append(getRole())
                 .append("; Salary: ")
                 .append(getSalary())
                 .append("; Status: ")
                 .append(getStatus());
 
+        Set<Role> roles = getRoles();
+        if (!roles.isEmpty()) {
+            builder.append("; Roles: ");
+            roles.forEach(builder::append);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

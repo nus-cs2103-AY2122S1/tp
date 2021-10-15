@@ -92,7 +92,7 @@ Examples:
 
 Format:
 
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [r/ROLE] [s/STATUS] [t/TAG...]`
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 Examples:
 
@@ -135,8 +135,8 @@ Edits an existing staff in the Staff List.
 
 Formats:
 
-`edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`\
-`edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [s/STATUS] [$/SALARY] [a/ADDRESS] [t/TAGS...]`
+`edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`\
+`edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 
 * Edits the staff of the specified `NAME`, `INDEX`
@@ -299,9 +299,9 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **View** | `view n/name` <br> `view i/index`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/ROLE] [s/STATUS]`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Delete** | `delete n/name` <br> `delete i/index` <br> `delete r/role` <br> `delete s/status`
-**Edit** | `edit -n NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [s/STATUS]` <br> `edit -i INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/ROLE] [s/STATUS]`
+**Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedlue n/name` <br> `viewSchedlue i/index`
 **Add staff schedule** | `addSchedule n/name d/fullDayName-shiftNumber` <br> `addSchedule i/index d/fullDayName-shiftNumber`
