@@ -2,6 +2,7 @@ package seedu.fast.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_LENGTH;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.fast.commons.core.index.Index;
@@ -25,7 +26,10 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         }
 
         String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
-
+        if (remark.length() > 100) {
+            throw new ParseException(String.format(MESSAGE_INVALID_LENGTH,
+                    RemarkCommand.MESSAGE_USAGE));
+        }
         return new RemarkCommand(index, new Remark(remark));
     }
 }
