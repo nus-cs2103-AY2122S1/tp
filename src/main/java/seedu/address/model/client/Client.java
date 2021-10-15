@@ -56,8 +56,25 @@ public class Client implements Category {
         return address;
     }
 
+    /**
+     * Returns a new copy of the {@code Client} with the same ID but the supplied data fields. <br>
+     * The only way to copy the ID of a {@code Client} over to another {@code Client}.
+     *
+     * @param client ID of the original client.
+     * @param name New name for the client.
+     * @param phoneNumber New phone number for the client.
+     * @param email New email for the client.
+     * @param address New address for the client.
+     */
     public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email, Address address) {
         return new Client(client.getId(), name, phoneNumber, email, address);
+    }
+
+    /**
+     * @see #updateClient(Client, Name, PhoneNumber, Email, Address)
+     */
+    public static Client updateClient(Client copyTo, Client copyFrom) {
+        return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email, copyFrom.address);
     }
 
     /**
