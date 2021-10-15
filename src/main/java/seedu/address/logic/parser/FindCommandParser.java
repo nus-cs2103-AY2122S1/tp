@@ -34,7 +34,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean isTagPrefixPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
 
         // boolean condition to check that only one of the three prefixes are present
-        if (checkOnlyOnePrefixPresent(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent)) {
+        if (checkMoreThanOnePrefixPresent(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
             );
@@ -58,7 +58,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         );
     }
 
-    private boolean checkOnlyOnePrefixPresent (boolean firstPrefix, boolean secondPrefix, boolean thirdPrefix) {
+    private boolean checkMoreThanOnePrefixPresent (boolean firstPrefix, boolean secondPrefix, boolean thirdPrefix) {
         return firstPrefix ? (secondPrefix || thirdPrefix) : (secondPrefix && thirdPrefix);
     }
 
