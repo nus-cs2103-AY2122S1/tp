@@ -50,11 +50,16 @@ public class ClearClientPolicyCommand extends Command {
         model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(owner));
 
         List<Policy> policyList = model.getFilteredPolicyList();
+
         int deletedPolicies = policyList.size();
 
-        for (Policy policy : policyList) {
-            model.deletePolicy(policy);
+        for (int i = deletedPolicies - 1; i >= 0; i--) {
+            Policy toDelete = policyList.get(i);
+            model.deletePolicy(toDelete);
         }
+
+        // Remove filter to display policies correctly in UI
+        model.updateFilteredPolicyList(x -> true);
 
         return new CommandResult(
                 String.format(MESSAGE_CLEAR_CLIENT_POLICY_SUCCESS,
