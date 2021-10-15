@@ -1,0 +1,13 @@
+{
+  "persons": [ {
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "note" : "",
+    "tagged" : [ "colleagues", "friends" ],
+    "superGroups" : [ ],
+    "subGroups" : [ ]
+  } ],
+  "superGroups" : [ ],
+  "subGroups" : [ ]
+}

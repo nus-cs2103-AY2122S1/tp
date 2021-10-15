@@ -7,5 +7,5 @@
       "y": 100
     }
   },
-  "addressBookFilePath": "notor.json"
+  "notorFilePath": "data/notor.json"
 }
