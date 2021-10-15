@@ -2,10 +2,11 @@ package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.anilist.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -30,28 +31,35 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
-    public static final String VALID_TAG_SHOUNEN = "shounen";
-    public static final String VALID_TAG_SUPERHERO = "superhero";
+    public static final String VALID_GENRE_SHOUNEN = "shounen";
+    public static final String VALID_GENRE_SUPERHERO = "superhero";
     public static final String VALID_EPISODE_ONE = "1";
     public static final String VALID_EPISODE_TWO = "2";
+    public static final String VALID_ACTION_ADD = "add";
+    public static final String VALID_ACTION_DELETE = "delete";
     public static final String VALID_STATUS_TOWATCH = "towatch";
     public static final String VALID_STATUS_WATCHING = "watching";
 
+    public static final String INVALID_ACTION_NO_SUCH_ACTION = "dancing";
+
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
-    public static final String TAG_DESC_SHOUNEN = " " + PREFIX_TAG + VALID_TAG_SHOUNEN;
-    public static final String TAG_DESC_SUPERHERO = " " + PREFIX_TAG + VALID_TAG_SUPERHERO;
+    public static final String GENRE_DESC_SHOUNEN = " " + PREFIX_GENRE + VALID_GENRE_SHOUNEN;
+    public static final String GENRE_DESC_SUPERHERO = " " + PREFIX_GENRE + VALID_GENRE_SUPERHERO;
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
     public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
     public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
+    public static final String ACTION_DESC_ADD = " " + PREFIX_ACTION + VALID_ACTION_ADD;
+    public static final String ACTION_DESC_DELETE = " " + PREFIX_ACTION + VALID_ACTION_DELETE;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // cannot be blank
     public static final String INVALID_NAME_DESC_NONASCII = " " + PREFIX_NAME + "中文";
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "shounen*"; // '*' not allowed in tags
+    public static final String INVALID_GENRE_DESC = " " + PREFIX_GENRE + "shounen*"; // '*' not allowed in genres
     public static final String INVALID_EPISODE_DESC_NEG = " " + PREFIX_EPISODE + "-1"; // '-' not allowed in episode
     public static final String INVALID_EPISODE_DESC_DECIMAL = " "
         + PREFIX_EPISODE + "0.1"; // '.' not allowed in episode
+    public static final String INVALID_ACTION_DESC = " " + PREFIX_ACTION + INVALID_ACTION_NO_SUCH_ACTION;
     public static final String INVALID_STATUS_DESC_ALPHA = " " + PREFIX_STATUS + "TOWATCHINGG";
     public static final String INVALID_STATUS_DESC_NUMERIC = " " + PREFIX_STATUS + "261";
 
@@ -72,9 +80,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AKIRA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
-                .withTags(VALID_TAG_SHOUNEN).build();
+                .withGenres(VALID_GENRE_SHOUNEN).build();
         DESC_BNHA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
-                .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
+                .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
         DESC_NAME_AKIRA = new NameDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
         DESC_NAME_BNHA = new NameDescriptorBuilder().withName(VALID_NAME_BNHA).build();
         DESC_EPISODE_ZERO = new EpisodeDescriptorBuilder().withEpisode("0").build();

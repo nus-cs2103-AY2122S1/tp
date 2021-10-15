@@ -14,7 +14,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Jackson-friendly version of {@link Anime}.
@@ -26,7 +26,7 @@ class JsonAdaptedAnime {
     private final String name;
     private final String episode;
     private final String status;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedGenre> genres = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedAnime} with the given Anime details.
@@ -35,12 +35,12 @@ class JsonAdaptedAnime {
     public JsonAdaptedAnime(@JsonProperty("name") String name,
                             @JsonProperty("episode") String episode,
                             @JsonProperty("status") String status,
-                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                            @JsonProperty("genres") List<JsonAdaptedGenre> genres) {
         this.name = name;
         this.episode = episode;
         this.status = status;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (genres != null) {
+            this.genres.addAll(genres);
         }
     }
 
@@ -51,8 +51,8 @@ class JsonAdaptedAnime {
         name = source.getName().fullName;
         this.episode = source.getEpisode().toString();
         this.status = source.getStatus().toString();
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        genres.addAll(source.getGenres().stream()
+                .map(JsonAdaptedGenre::new)
                 .collect(Collectors.toList()));
     }
 
@@ -62,9 +62,9 @@ class JsonAdaptedAnime {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Anime.
      */
     public Anime toModelType() throws IllegalValueException {
-        final List<Tag> animeTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            animeTags.add(tag.toModelType());
+        final List<Genre> animeGenres = new ArrayList<>();
+        for (JsonAdaptedGenre genre : genres) {
+            animeGenres.add(genre.toModelType());
         }
 
         if (name == null) {
@@ -89,8 +89,8 @@ class JsonAdaptedAnime {
         }
         final Status modelStatus = new Status(status);
 
-        final Set<Tag> modelTags = new HashSet<>(animeTags);
-        return new Anime(modelName, modelEpisode, modelStatus, modelTags);
+        final Set<Genre> modelGenres = new HashSet<>(animeGenres);
+        return new Anime(modelName, modelEpisode, modelStatus, modelGenres);
     }
 
 }

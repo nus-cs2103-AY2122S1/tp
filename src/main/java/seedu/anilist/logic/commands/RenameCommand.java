@@ -16,7 +16,7 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 public class RenameCommand extends Command {
     public static final String COMMAND_WORD = "rename";
@@ -78,9 +78,9 @@ public class RenameCommand extends Command {
         Name updatedName = nameDescriptor.getName().orElse(animeToRename.getName());
         Episode episode = animeToRename.getEpisode();
         Status status = animeToRename.getStatus();
-        Set<Tag> updatedTags = animeToRename.getTags();
+        Set<Genre> updatedGenres = animeToRename.getGenres();
 
-        return new Anime(updatedName, episode, status, updatedTags);
+        return new Anime(updatedName, episode, status, updatedGenres);
     }
 
     @Override

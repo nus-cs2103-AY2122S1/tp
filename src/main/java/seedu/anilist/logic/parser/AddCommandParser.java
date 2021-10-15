@@ -1,8 +1,8 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -11,7 +11,7 @@ import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -25,7 +25,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -33,9 +33,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Genre> genreList = ParserUtil.parseGenres(argMultimap.getAllValues(PREFIX_GENRE));
 
-        Anime anime = new Anime(name, tagList);
+        Anime anime = new Anime(name, genreList);
 
         return new AddCommand(anime);
     }

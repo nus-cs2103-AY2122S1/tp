@@ -1,9 +1,9 @@
 package seedu.anilist.testutil;
 
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,17 +16,17 @@ import seedu.anilist.model.anime.Anime;
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
 public class TypicalAnimes {
-
+    public static final String FIRST_ANIME_GENRE = "action";
     public static final Anime AOT = new AnimeBuilder()
             .withName("Attack on Titan: The Final Season")
             .withEpisode("0")
-            .withTags("action")
+            .withGenres(FIRST_ANIME_GENRE)
             .build();
     public static final Anime BRS = new AnimeBuilder()
             .withName("Black Rock Shooter")
             .withEpisode("12")
             .withStatus("F")
-            .withTags("fantasy", "action")
+            .withGenres("fantasy", "action")
             .build();
     public static final Anime CSM = new AnimeBuilder()
             .withName("Chainsaw Man")
@@ -35,7 +35,7 @@ public class TypicalAnimes {
     public static final Anime DBZ = new AnimeBuilder()
             .withName("Dragon Ball Z")
             .withStatus("T")
-            .withTags("action")
+            .withGenres("action")
             .build();
     public static final Anime ELF = new AnimeBuilder()
             .withName("Elfen Lied")
@@ -57,11 +57,12 @@ public class TypicalAnimes {
 
     // Manually added - Anime's details found in {@code CommandTestUtil}
     public static final Anime AKIRA = new AnimeBuilder().withName(VALID_NAME_AKIRA)
-            .withTags(VALID_TAG_SUPERHERO).build();
+            .withGenres(VALID_GENRE_SUPERHERO).build();
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
-            .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
+            .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
 
     public static final String KEYWORD_MATCHING_HUNTER = "Hunter"; // A keyword that matches HUNTER
+
 
     private TypicalAnimes() {} // prevents instantiation
 

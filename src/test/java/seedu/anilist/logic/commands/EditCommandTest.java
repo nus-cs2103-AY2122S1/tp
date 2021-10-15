@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
@@ -53,10 +53,10 @@ public class EditCommandTest {
         Anime lastAnime = model.getFilteredAnimeList().get(indexLastAnime.getZeroBased());
 
         AnimeBuilder animeInList = new AnimeBuilder(lastAnime);
-        Anime editedAnime = animeInList.withName(VALID_NAME_BNHA).withTags(VALID_TAG_SHOUNEN).build();
+        Anime editedAnime = animeInList.withName(VALID_NAME_BNHA).withGenres(VALID_GENRE_SHOUNEN).build();
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
-                .withTags(VALID_TAG_SHOUNEN).build();
+                .withGenres(VALID_GENRE_SHOUNEN).build();
         EditCommand editCommand = new EditCommand(indexLastAnime, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ANIME_SUCCESS, editedAnime);

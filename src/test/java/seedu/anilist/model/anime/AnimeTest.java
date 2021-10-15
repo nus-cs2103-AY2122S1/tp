@@ -2,8 +2,8 @@ package seedu.anilist.model.anime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
 import static seedu.anilist.testutil.TypicalAnimes.BNHA;
@@ -17,7 +17,7 @@ public class AnimeTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Anime anime = new AnimeBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> anime.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> anime.getGenres().remove(0));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class AnimeTest {
 
         // same name, all other attributes different -> returns true
         Anime editedAot = new AnimeBuilder(AOT)
-                .withTags(VALID_TAG_SHOUNEN).build();
+                .withGenres(VALID_GENRE_SHOUNEN).build();
         assertTrue(AOT.isSameAnime(editedAot));
 
         // different name, all other attributes same -> returns false
@@ -69,8 +69,8 @@ public class AnimeTest {
         Anime editedAot = new AnimeBuilder(AOT).withName(VALID_NAME_BNHA).build();
         assertFalse(AOT.equals(editedAot));
 
-        // different tags -> returns false
-        editedAot = new AnimeBuilder(AOT).withTags(VALID_TAG_SHOUNEN).build();
+        // different genres -> returns false
+        editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SHOUNEN).build();
         assertFalse(AOT.equals(editedAot));
     }
 }

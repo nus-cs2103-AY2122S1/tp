@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_BNHA;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,8 +36,8 @@ public class EditAnimeDescriptorTest {
         EditAnimeDescriptor editedAkira = new EditAnimeDescriptorBuilder(DESC_AKIRA).withName(VALID_NAME_BNHA).build();
         assertFalse(DESC_AKIRA.equals(editedAkira));
 
-        // different tags -> returns false
-        editedAkira = new EditAnimeDescriptorBuilder(DESC_AKIRA).withTags(VALID_TAG_SUPERHERO).build();
+        // different genres -> returns false
+        editedAkira = new EditAnimeDescriptorBuilder(DESC_AKIRA).withGenres(VALID_GENRE_SUPERHERO).build();
         assertFalse(DESC_AKIRA.equals(editedAkira));
     }
 }

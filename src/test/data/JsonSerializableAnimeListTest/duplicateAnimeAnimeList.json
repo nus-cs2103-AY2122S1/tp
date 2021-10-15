@@ -3,7 +3,7 @@
     "name": "Attack on Titan",
     "episode" : "0",
     "status" : "watching",
-    "tagged": [ "action" ]
+    "genres": [ "action" ]
   }, {
     "name" : "Attack on Titan",
     "episode" : "0",

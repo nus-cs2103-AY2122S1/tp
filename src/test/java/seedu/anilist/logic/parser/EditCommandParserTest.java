@@ -1,15 +1,15 @@
 package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.TAG_DESC_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SUPERHERO;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_TAG_SUPERHERO;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
@@ -21,12 +21,12 @@ import org.junit.jupiter.api.Test;
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.EditCommand;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 
 public class EditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String GENRE_EMPTY = " " + PREFIX_GENRE;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -63,13 +63,19 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_GENRE_DESC, Genre.MESSAGE_CONSTRAINTS); // invalid genre
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Anime} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_SUPERHERO + TAG_EMPTY + TAG_DESC_SHOUNEN, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN, Tag.MESSAGE_CONSTRAINTS);
+        // while parsing {@code PREFIX_GENRE} alone will reset the genres of the {@code Anime} being edited,
+        // parsing it together with a valid genre results in error
+        assertParseFailure(parser,
+                "1" + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN + GENRE_EMPTY,
+                Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + GENRE_DESC_SUPERHERO + GENRE_EMPTY + GENRE_DESC_SHOUNEN,
+                Genre.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser,
+                "1" + GENRE_EMPTY + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN,
+                Genre.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC,
@@ -79,11 +85,11 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_ANIME;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_SHOUNEN
-                + NAME_DESC_AKIRA + TAG_DESC_SUPERHERO;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_SHOUNEN
+                + NAME_DESC_AKIRA + GENRE_DESC_SUPERHERO;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
-                .withTags(VALID_TAG_SHOUNEN, VALID_TAG_SUPERHERO).build();
+                .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -99,9 +105,9 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_SUPERHERO;
-        descriptor = new EditAnimeDescriptorBuilder().withTags(VALID_TAG_SUPERHERO).build();
+        // genres
+        userInput = targetIndex.getOneBased() + GENRE_DESC_SUPERHERO;
+        descriptor = new EditAnimeDescriptorBuilder().withGenres(VALID_GENRE_SUPERHERO).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -109,10 +115,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ANIME;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_SUPERHERO + TAG_DESC_SUPERHERO + TAG_DESC_SHOUNEN;
+        String userInput = targetIndex.getOneBased() + GENRE_DESC_SUPERHERO + GENRE_DESC_SUPERHERO + GENRE_DESC_SHOUNEN;
 
         EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder()
-                .withTags(VALID_TAG_SUPERHERO, VALID_TAG_SHOUNEN)
+                .withGenres(VALID_GENRE_SUPERHERO, VALID_GENRE_SHOUNEN)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -121,11 +127,11 @@ public class EditCommandParserTest {
 
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetGenres_success() {
         Index targetIndex = INDEX_THIRD_ANIME;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = targetIndex.getOneBased() + GENRE_EMPTY;
 
-        EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withTags().build();
+        EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder().withGenres().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

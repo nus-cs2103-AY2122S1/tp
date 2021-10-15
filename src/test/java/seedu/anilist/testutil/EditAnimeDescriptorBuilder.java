@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.anilist.logic.commands.EditCommand.EditAnimeDescriptor;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Name;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * A utility class to help with building EditAnimeDescriptor objects.
@@ -32,7 +32,7 @@ public class EditAnimeDescriptorBuilder {
         descriptor.setName(anime.getName());
         descriptor.setEpisode(anime.getEpisode());
         descriptor.setStatus(anime.getStatus());
-        descriptor.setTags(anime.getTags());
+        descriptor.setGenres(anime.getGenres());
     }
 
     /**
@@ -44,12 +44,12 @@ public class EditAnimeDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditAnimeDescriptor}
+     * Parses the {@code genres} into a {@code Set<Genre>} and set it to the {@code EditAnimeDescriptor}
      * that we are building.
      */
-    public EditAnimeDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditAnimeDescriptorBuilder withGenres(String... genres) {
+        Set<Genre> genreSet = Stream.of(genres).map(Genre::new).collect(Collectors.toSet());
+        descriptor.setGenres(genreSet);
         return this;
     }
 

@@ -2,8 +2,8 @@ package seedu.anilist.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.anilist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.EditCommand;
 import seedu.anilist.logic.commands.EditCommand.EditAnimeDescriptor;
 import seedu.anilist.logic.parser.exceptions.ParseException;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -29,7 +29,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE);
 
         Index index;
 
@@ -43,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editAnimeDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editAnimeDescriptor::setTags);
+        parseGenresForEdit(argMultimap.getAllValues(PREFIX_GENRE)).ifPresent(editAnimeDescriptor::setGenres);
 
         if (!editAnimeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -53,18 +53,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> genres} into a {@code Set<Genre>} if {@code genres} is non-empty.
+     * If {@code genres} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Genre>} containing zero genres.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<Genre>> parseGenresForEdit(Collection<String> genres) throws ParseException {
+        assert genres != null;
 
-        if (tags.isEmpty()) {
+        if (genres.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+
+        Collection<String> genreSet = genres.size() == 1 && genres.contains("") ? Collections.emptySet() : genres;
+        return Optional.of(ParserUtil.parseGenres(genreSet));
     }
 
 }

@@ -8,11 +8,12 @@ import java.util.Set;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.commons.util.StringUtil;
+import seedu.anilist.logic.commands.Action;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
-import seedu.anilist.model.tag.Tag;
+import seedu.anilist.model.genre.Genre;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -50,30 +51,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String genre} into a {@code Genre}.
+     * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code genre} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Genre parseGenre(String genre) throws ParseException {
+        requireNonNull(genre);
+        String trimmedGenre = genre.trim().toLowerCase();
+        if (!Genre.isValidGenreName(trimmedGenre)) {
+            throw new ParseException(Genre.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Genre(trimmedGenre);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> genres} into a {@code Set<Genre>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Genre> parseGenres(Collection<String> genres) throws ParseException {
+        requireNonNull(genres);
+        final Set<Genre> genreSet = new HashSet<>();
+        for (String genreName : genres) {
+            genreSet.add(parseGenre(genreName));
         }
-        return tagSet;
+        return genreSet;
     }
 
     /**
@@ -92,9 +93,28 @@ public class ParserUtil {
     }
 
     /**
+     * Parse a {@Code String actionString} into a {@Code Action}.
+     * Leading and trailing whitespaces will be trimmed, and it will be set to lowercase.
+     * @param actionString string to be parsed
+     * @return a {@Code Action}
+     * @throws ParseException if the given {@code actionString} is invalid.
+     */
+    public static Action parseAction(String actionString) throws ParseException {
+        requireNonNull(actionString);
+        String trimmedActionLowerCase = actionString.trim().toLowerCase();
+        Action result;
+        if (!Action.isValidAction(trimmedActionLowerCase)) {
+            throw new ParseException(String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, trimmedActionLowerCase));
+        }
+
+        result = Action.actionFromString(trimmedActionLowerCase);
+
+        return result;
+    }
+
+    /**
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
-     *
      * @throws ParseException if the given {@code status} is invalid.
      */
     public static Status parseStatus(String status) throws ParseException {

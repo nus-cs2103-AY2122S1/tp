@@ -37,7 +37,7 @@ public class AnimeCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private FlowPane tags;
+    private FlowPane genres;
 
     /**
      * Creates a {@code AnimeCard} with the given {@code Anime} and index to display.
@@ -49,9 +49,9 @@ public class AnimeCard extends UiPart<Region> {
         name.setText(anime.getName().fullName);
         episode.setText(anime.getEpisode().toString());
         status.setText(anime.getStatus().toString());
-        anime.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        anime.getGenres().stream()
+                .sorted(Comparator.comparing(genre -> genre.genreName))
+                .forEach(genre -> genres.getChildren().add(new Label(genre.genreName)));
     }
 
     @Override
