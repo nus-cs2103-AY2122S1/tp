@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.notor.model.exceptions.DuplicateItemException;
+import seedu.notor.model.exceptions.ItemNotFoundException;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.tag.Tag;
@@ -75,13 +77,65 @@ public class Person implements Unique<Person> {
         return note.getSavedDate();
     }
 
-
-    public void addSuperGroup(SuperGroup superGroup) {
+    /**
+     * Adds a SuperGroup to person.
+     * @param superGroup the SuperGroup to be added to that person.
+     * @throws DuplicateItemException if person is already in the group.
+     */
+    public void addSuperGroup(SuperGroup superGroup) throws DuplicateItemException {
+        if (superGroups.contains(superGroup.toString())) {
+            throw new DuplicateItemException();
+        }
         superGroups.add(superGroup.toString());
     }
 
+    /**
+     * Adds a SuperGroup to person.
+     * @param superGroup the name of the SuperGroup to be added to that person.
+     * @throws DuplicateItemException if person is already in the group.
+     */
+    public void addSuperGroup(String superGroup) throws DuplicateItemException {
+        if (superGroups.contains(superGroup)) {
+            throw new DuplicateItemException();
+        }
+        superGroups.add(superGroup);
+    }
+
+    /**
+     * Adds a SubGroup to person.
+     * @param subGroup the SubGroup to be added to that person.
+     * @throws DuplicateItemException if person is already in the group.
+     */
     public void addSubGroup(SubGroup subGroup) {
+        if (subGroups.contains(subGroup.toString())) {
+            throw new DuplicateItemException();
+        }
         subGroups.add(subGroup.toString());
+    }
+
+    /**
+     * Removes a SuperGroup from the person.
+     * @param superGroup the name of the SuperGroup to be removed to that person.
+     * @throws ItemNotFoundException if person is not in in the group.
+     */
+    public void removeSuperGroup(String superGroup) throws ItemNotFoundException {
+        if (!superGroups.contains(superGroup)) {
+            throw new ItemNotFoundException();
+        }
+        subGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
+        superGroups.remove(superGroup);
+    }
+
+    /**
+     * Removes a subgroup from the person.
+     * @param subGroup the subgroup to be removed.
+     * @throws ItemNotFoundException if SubGroup is not found.
+     */
+    public void removeSuperGroup(SubGroup subGroup) throws ItemNotFoundException {
+        if (!subGroups.contains(subGroup.toString())) {
+            throw new ItemNotFoundException();
+        }
+        subGroups.remove(subGroup);
     }
 
     public HashSet<String> getSuperGroups() {

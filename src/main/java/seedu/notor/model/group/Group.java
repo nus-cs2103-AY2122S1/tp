@@ -3,6 +3,7 @@ package seedu.notor.model.group;
 import java.util.HashMap;
 import java.util.Objects;
 
+import seedu.notor.model.exceptions.ItemNotFoundException;
 import seedu.notor.model.person.Person;
 
 /**
@@ -56,5 +57,17 @@ public class Group {
 
     public void addPerson(Person p) {
         people.put(p.getName().toString(), p);
+    }
+
+    /**
+     * Remvoes the person from the group.
+     * @param p The person object to be removed.
+     * @throws ItemNotFoundException if Person is not found.
+     */
+    public void removePerson(Person p) throws ItemNotFoundException {
+        if (!people.containsKey(p.getName().toString())) {
+            throw new ItemNotFoundException();
+        }
+        people.remove(p.getName().toString());
     }
 }

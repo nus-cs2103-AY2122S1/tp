@@ -141,6 +141,11 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void addSuperGroup(String superGroup) {
+
+        }
+
+        @Override
         public void deleteSuperGroup(SuperGroup superGroup) {
 
         }

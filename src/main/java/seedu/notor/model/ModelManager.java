@@ -131,6 +131,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSuperGroup(String superGroup) {
+        notor.addSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

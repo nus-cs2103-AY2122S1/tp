@@ -35,6 +35,15 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
         subGroups.add(subGroup);
     }
 
+    /**
+     * Adds SubGroup into SuperGroup.
+     * @param subGroup the String of the subGroup to be added into the SuperGroup.
+     */
+    public void addSubGroup(String subGroup) {
+        requireNonNull(subGroup);
+        subGroups.add(new SubGroup(subGroup, this.name));
+    }
+
     public UniqueList<SubGroup> getSubGroups() {
         return subGroups;
     }

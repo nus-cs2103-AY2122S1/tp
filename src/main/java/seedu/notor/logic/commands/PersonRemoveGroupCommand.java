@@ -6,6 +6,7 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.Model;
+import seedu.notor.model.exceptions.ItemNotFoundException;
 import seedu.notor.model.person.Person;
 
 public class PersonRemoveGroupCommand implements Command {
@@ -39,13 +40,14 @@ public class PersonRemoveGroupCommand implements Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToEdit = model.findPerson(personName);
-        if (!personToEdit.getSuperGroups().contains(groupName)) {
+        try {
+            Person personToEdit = model.findPerson(personName);
+            personToEdit.removeSuperGroup(groupName);
+            model.findSuperGroup(groupName).removePerson(personToEdit);
+            model.setPerson(personToEdit, personToEdit);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));
+        } catch (ItemNotFoundException e) {
             throw new CommandException(MESSAGE_NOT_IN_GROUP);
         }
-        personToEdit.getSuperGroups().remove(groupName);
-        personToEdit.getSubGroups().removeIf(subGroup -> subGroup.split("_")[0].equals(groupName));
-        model.setPerson(personToEdit, personToEdit);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));
     }
 }

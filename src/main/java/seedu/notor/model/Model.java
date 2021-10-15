@@ -93,6 +93,8 @@ public interface Model {
 
     void addSuperGroup(SuperGroup superGroup);
 
+    void addSuperGroup(String superGroup);
+
     void deleteSuperGroup(SuperGroup superGroup);
 
     SuperGroup findSuperGroup(String name);
