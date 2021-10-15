@@ -167,7 +167,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsPartialWordIgnoreCase("abcDEF", "aBcd"));
 
         // match with spaces
-        assertTrue(StringUtil.containsPartialWordIgnoreCase("b a a d", "b a"));
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("a b c d", "a b"));
     }
 
 }
