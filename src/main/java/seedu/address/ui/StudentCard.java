@@ -66,10 +66,8 @@ public class StudentCard extends UiPart<Region> {
      */
     void fillInnerParts() {
         ObservableList<Task> taskList = student.getTaskList().asModifiableObservableList();
-        if (taskList.size() != 0) {
-            taskListPanel = new TaskListPanel(student.getTaskList().asModifiableObservableList());
-            taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
-        }
+        taskListPanel = new TaskListPanel(student.getTaskList().asModifiableObservableList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     @Override
