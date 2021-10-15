@@ -45,11 +45,11 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (isModulePrefixPresent) {
-            return getFindModuleOrTagCommand(argMultimap, PREFIX_MODULE_CODE);
+            return getFindModuleCommand(argMultimap);
         }
 
         if (isTagPrefixPresent) {
-            return getFindModuleOrTagCommand(argMultimap, PREFIX_TAG);
+            return getFindTagCommand(argMultimap);
         }
 
         // all three prefixes not present
@@ -76,22 +76,33 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     }
 
-    private FindCommand getFindModuleOrTagCommand(ArgumentMultimap argMultimap, Prefix prefix) throws ParseException {
-        Optional<String> searchInput = argMultimap.getValue(prefix);
-        String tagsOrModules = searchInput.get().trim();
-        if (tagsOrModules.isEmpty()) {
+    private FindCommand getFindModuleCommand (ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> searchInput = argMultimap.getValue(PREFIX_MODULE_CODE);
+        String modules = searchInput.get().trim();
+        if (modules.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        List<String> moduleKeywordsList = Arrays.stream(tagsOrModules.split("\\s+"))
-                .map(tagOrModule -> '[' + tagOrModule + ']')
+        List<String> moduleKeywordsList = Arrays.stream(modules.split("\\s+"))
+                .map(module -> '[' + module + ']')
                 .collect(Collectors.toList());
 
-        if (prefix.equals(PREFIX_MODULE_CODE)) {
-            return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
-        } else {
-            return new FindCommand(new TagsContainsKeywordsPredicate(moduleKeywordsList));
+        return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
+    }
+
+    private FindCommand getFindTagCommand (ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> searchInput = argMultimap.getValue(PREFIX_TAG);
+        String tags = searchInput.get().trim();
+        if (tags.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
+
+        List<String> tagKeywordsList = Arrays.stream(tags.split("\\s+"))
+                .map(tag -> '[' + tag + ']')
+                .collect(Collectors.toList());
+
+        return new FindCommand(new TagsContainsKeywordsPredicate(tagKeywordsList));
     }
 }
