@@ -52,6 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             return getFindModuleOrTagCommand(argMultimap, PREFIX_TAG);
         }
 
+        // all three prefixes not present
         throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
         );

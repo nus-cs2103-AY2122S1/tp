@@ -184,7 +184,6 @@ public class FindCommandTest {
         List<String> tagKeywordsList = Arrays.stream(userInput.split("\\s+"))
                 .map(tag -> '[' + tag + ']')
                 .collect(Collectors.toList());
-        System.out.println(tagKeywordsList);
         return new TagsContainsKeywordsPredicate(tagKeywordsList);
     }
 }

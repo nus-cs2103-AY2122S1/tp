@@ -23,16 +23,9 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = "find: Finds all persons whose names contain "
             + "any of the specified keywords (case-insensitive).\n"
             + "You can choose one of three ways to search:\n"
-            + "1) search by name(s) using the prefix 'n/'\n"
-            + "2) search by module code(s) using the prefix 'm/'\n"
-            + "3) search by tag(s) using the prefix 't/'\n"
-            + "Parameters: " + PREFIX_NAME + "[name]...\n"
-            + PREFIX_MODULE_CODE + "[module code]...\n"
-            + PREFIX_TAG + "[tags]...\n"
-            + "Examples:\n"
-            + "find " + PREFIX_NAME + "alice bob charlie\n"
-            + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100\n"
-            + "find " + PREFIX_TAG + "overseas quarantined";
+            + "1) search by name(s) using the prefix 'n/': " + "find " + PREFIX_NAME + "alice bob charlie\n"
+            + "2) search by module code(s) using the prefix 'm/': " + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100\n"
+            + "3) search by tag(s) using the prefix 't/': " + "find " + PREFIX_TAG + "overseas quarantined";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
     private final Predicate<Person> predicate;
