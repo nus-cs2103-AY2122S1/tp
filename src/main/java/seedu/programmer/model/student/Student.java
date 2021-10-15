@@ -109,9 +109,9 @@ public class Student {
     @Override
     public String toString() {
         return getName()
-                + "; Student Id: "
+                + "; Student ID: "
                 + getStudentId()
-                + "; Class Id: "
+                + "; Class ID: "
                 + getClassId()
                 + "; Grade: "
                 + getGrade();
