@@ -34,7 +34,7 @@ public class DeleteAppointmentCommandParserTest {
                 DeleteAppointmentCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, DeleteAppointmentCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
@@ -42,8 +42,7 @@ public class DeleteAppointmentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteAppointmentCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, DeleteAppointmentCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT,
-                expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT
+                        + VALID_APPOINTMENT_INPUT, expectedMessage);
     }
 }

@@ -36,6 +36,10 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         String retrievedDate = argMultimap.getValue(PREFIX_APPOINTMENT).orElse(Appointment.NO_APPOINTMENT);
+        if (retrievedDate.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AppointmentCommand.MESSAGE_USAGE));
+        }
         String parsedDate = parseDateString(retrievedDate);
 
         String retrievedTime = argMultimap.getValue(PREFIX_APPOINTMENT_TIME).orElse(Appointment.NO_TIME);

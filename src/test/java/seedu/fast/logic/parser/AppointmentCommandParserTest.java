@@ -89,27 +89,25 @@ public class AppointmentCommandParserTest {
                 AppointmentCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
 
         // no index, with date
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + PREFIX_APPOINTMENT
-                + VALID_APPOINTMENT_INPUT, expectedMessage);
+        assertParseFailure(parser, PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT, expectedMessage);
 
         // with index, no date, no time, no venue
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-                expectedMessage);
+        assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);
 
         // with index, no date, with time
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB, expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT_TIME
+                + VALID_APPOINTMENT_TIME_BOB, expectedMessage);
 
         // with index, no date, with venue
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB, expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT_VENUE
+                + VALID_APPOINTMENT_VENUE_BOB, expectedMessage);
 
         // with index, no date, with time and venue
-        assertParseFailure(parser, AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_BOB
-                + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB, expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT_TIME
+                + VALID_APPOINTMENT_TIME_BOB + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB,
+                expectedMessage);
     }
 }

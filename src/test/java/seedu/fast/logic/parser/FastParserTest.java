@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -20,13 +21,17 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
+import seedu.fast.logic.commands.DeleteAppointmentCommand;
 import seedu.fast.logic.commands.DeleteCommand;
+import seedu.fast.logic.commands.EditAppointmentCommand;
+import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.fast.logic.commands.EditCommand;
 import seedu.fast.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.fast.logic.commands.ExitCommand;
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
+import seedu.fast.logic.commands.MarkAppointmentCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
@@ -119,10 +124,44 @@ public class FastParserTest {
     public void parseCommand_appointment() throws Exception {
         final LocalDate date = LocalDate.parse("2021-10-10");
         final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-        final Appointment appt = new Appointment(dateString, "", "");
+        final Appointment appt = new Appointment(dateString, Appointment.NO_TIME, Appointment.NO_VENUE);
         AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
                 AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                 + PREFIX_APPOINTMENT + "2021-10-10");
         assertEquals(new AppointmentCommand(INDEX_FIRST_PERSON, appt), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAppointment() throws Exception {
+        final Appointment appt = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        DeleteAppointmentCommand command = (DeleteAppointmentCommand) parser.parseCommand(
+                DeleteAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
+    }
+
+    @Test
+    public void parseCommand_editAppointment() throws Exception {
+        final LocalDate date = LocalDate.parse("2021-10-10");
+        final String dateString = date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        final String venue = "Clementi Mall";
+
+        final EditAppointmentDescriptor appt = new EditAppointmentDescriptor();
+        appt.setDate(dateString);
+        appt.setVenue(venue);
+
+        EditAppointmentCommand command = (EditAppointmentCommand) parser.parseCommand(
+                EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_APPOINTMENT + "2021-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
+        assertEquals(new EditAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
+    }
+
+    @Test
+    public void parseCommand_markAppointment() throws Exception {
+        final Appointment appt = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
+                Appointment.NO_VENUE);
+        MarkAppointmentCommand command = (MarkAppointmentCommand) parser.parseCommand(
+                MarkAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MarkAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 }

@@ -282,13 +282,8 @@ public class ParserUtil {
                         Appointment.INVALID_TIME_INPUT));
             }
 
-            try {
-                // converts the time to the specified format
-                time = LocalTime.parse(time).format(DateTimeFormatter.ofPattern("HHmm"));
-            } catch (DateTimeParseException dtpe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        Appointment.INVALID_TIME_INPUT), dtpe);
-            }
+            // converts the time to the specified format
+            time = LocalTime.parse(time).format(DateTimeFormatter.ofPattern("HHmm"));
         }
 
         return time.trim();

@@ -1,5 +1,6 @@
 package seedu.fast.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,5 +30,38 @@ public class AppointmentCountTest {
         AppointmentCount initialCount = new AppointmentCount("0");
         initialCount.incrementAppointmentCount();
         assertTrue(initialCount.toString().equals("1"));
+    }
+
+    @Test
+    public void equals() {
+        AppointmentCount standard = new AppointmentCount("0");
+        AppointmentCount countWithSameValue = new AppointmentCount("0");
+
+        // same data
+        assertTrue(standard.equals(countWithSameValue));
+
+        // same appointment
+        assertTrue(standard.equals(standard));
+
+        // null
+        assertFalse(standard.equals(null));
+
+        // different type
+        assertFalse(standard.equals("Matthew"));
+
+        // different fields
+        assertFalse(standard.equals(new AppointmentCount("11")));
+    }
+
+    @Test
+    public void hashcode() {
+        AppointmentCount standard = new AppointmentCount("0");
+        AppointmentCount countWithSameValue = new AppointmentCount("0");
+        AppointmentCount countWithDifferentValue = new AppointmentCount("11");
+
+        assertTrue(standard.hashCode() == countWithSameValue.hashCode());
+        assertTrue(standard.hashCode() == standard.hashCode());
+
+        assertFalse(standard.hashCode() == countWithDifferentValue.hashCode());
     }
 }

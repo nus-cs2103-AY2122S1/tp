@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.exceptions.IllegalValueException;
 import seedu.fast.model.person.Address;
+import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.AppointmentCount;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
@@ -134,6 +136,47 @@ public class JsonAdaptedPersonTest {
                         invalidTags, VALID_APPOINTMENT_DATE, VALID_APPOINTMENT_TIME, VALID_APPOINTMENT_VENUE,
                         VALID_APPOINTMENT_COUNT);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAppointmentDate_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS,
+                null, VALID_APPOINTMENT_TIME, VALID_APPOINTMENT_VENUE,
+                VALID_APPOINTMENT_COUNT);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAppointmentTime_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS,
+                VALID_APPOINTMENT_DATE, null, VALID_APPOINTMENT_VENUE,
+                VALID_APPOINTMENT_COUNT);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAppointmentVenue_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS,
+                VALID_APPOINTMENT_DATE, VALID_APPOINTMENT_TIME, null,
+                VALID_APPOINTMENT_COUNT);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Appointment.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAppointmentCount_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_REMARK, VALID_TAGS,
+                VALID_APPOINTMENT_DATE, VALID_APPOINTMENT_TIME, VALID_APPOINTMENT_VENUE,
+                null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                AppointmentCount.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
 }

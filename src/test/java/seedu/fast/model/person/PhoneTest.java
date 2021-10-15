@@ -37,4 +37,16 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("93121534"));
         assertTrue(Phone.isValidPhone("124293842033123")); // long phone numbers
     }
+
+    @Test
+    public void hashcode() {
+        Phone standard = new Phone("93121534");
+        Phone phoneWithSameValue = new Phone("93121534");
+        Phone phoneWithDifferentValue = new Phone("911");
+
+        assertTrue(standard.hashCode() == phoneWithSameValue.hashCode());
+        assertTrue(standard.hashCode() == standard.hashCode());
+
+        assertFalse(standard.hashCode() == phoneWithDifferentValue.hashCode());
+    }
 }

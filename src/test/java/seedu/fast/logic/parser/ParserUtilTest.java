@@ -31,7 +31,6 @@ public class ParserUtilTest {
     private static final String INVALID_HELP_ARG_2 = "archive";
     private static final String INVALID_HELP_COMMAND_1 = "help archive";
     private static final String INVALID_HELP_COMMAND_2 = "help random command";
-
     private static final String INVALID_DATE_INPUT = "10-10-2021";
     private static final String INVALID_DATE_INPUT_2 = "10-Oct-2021";
     private static final String INVALID_DATE_INPUT_3 = "10102021";

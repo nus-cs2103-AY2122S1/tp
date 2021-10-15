@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.EditAppointmentCommand;
 import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
+import seedu.fast.model.person.Appointment;
 import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 
 public class EditAppointmentCommandParserTest {
@@ -98,23 +99,27 @@ public class EditAppointmentCommandParserTest {
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        String expectedMessageInvalidCommand = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 EditAppointmentCommand.MESSAGE_USAGE);
 
+        String expectedMessageMissingAllFields = EditAppointmentCommand.MESSAGE_UPDATE_APPOINTMENT_FAILED;
+
+        String expectedMessageWrongDateFormat = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                Appointment.INVALID_DATE_INPUT);
+
         // no parameters
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessageInvalidCommand);
 
         // no index, with date
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " " + PREFIX_APPOINTMENT
-                + VALID_APPOINTMENT_INPUT, expectedMessage);
+        assertParseFailure(parser, PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT,
+                expectedMessageInvalidCommand);
 
         // with index, no date, no time, no venue
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " "
-                        + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);
+        assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased(), expectedMessageMissingAllFields);
 
         // with index, with date prefix, blank date
-        assertParseFailure(parser, EditAppointmentCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT + " ", expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT
+                + " ", expectedMessageWrongDateFormat);
 
     }
 }

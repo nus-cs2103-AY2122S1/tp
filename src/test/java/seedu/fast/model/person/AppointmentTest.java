@@ -86,4 +86,39 @@ public class AppointmentTest {
         //invalid venue not tested as parser automatically rejects invalid instances
     }
 
+    @Test
+    public void equal() {
+        Appointment standardAppointment = new Appointment(VALID_DATE, VALID_TIME, VALID_VENUE);
+        Appointment appointmentWithSameData = new Appointment(VALID_DATE, VALID_TIME, VALID_VENUE);
+
+        // same data appointment
+        assertTrue(standardAppointment.equals(appointmentWithSameData));
+
+        // same appointment
+        assertTrue(standardAppointment.equals(standardAppointment));
+
+        // null
+        assertFalse(standardAppointment.equals(null));
+
+        // different type
+        assertFalse(standardAppointment.equals("Matthew"));
+
+        // different fields
+        assertFalse(standardAppointment.equals(new Appointment("27 Mar 2021", VALID_TIME, VALID_VENUE)));
+        assertFalse(standardAppointment.equals(new Appointment(VALID_DATE, "1130", VALID_VENUE)));
+        assertFalse(standardAppointment.equals(new Appointment(VALID_DATE, VALID_TIME, "")));
+    }
+
+    @Test
+    public void hashcode() {
+        Appointment standardAppointment = new Appointment(VALID_DATE, VALID_TIME, VALID_VENUE);
+        Appointment appointmentWithSameData = new Appointment(VALID_DATE, VALID_TIME, VALID_VENUE);
+        Appointment appointmentWithDifferentData = new Appointment(Appointment.NO_APPOINTMENT,
+                Appointment.NO_TIME, Appointment.NO_VENUE);
+
+        assertTrue(standardAppointment.hashCode() == appointmentWithSameData.hashCode());
+        assertTrue(standardAppointment.hashCode() == standardAppointment.hashCode());
+
+        assertFalse(standardAppointment.hashCode() == appointmentWithDifferentData.hashCode());
+    }
 }

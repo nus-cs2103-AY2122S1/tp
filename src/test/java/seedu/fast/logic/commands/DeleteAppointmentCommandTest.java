@@ -15,6 +15,8 @@ import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.core.Messages;
+import seedu.fast.commons.core.index.Index;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
@@ -48,6 +50,15 @@ public class DeleteAppointmentCommandTest {
         // different index -> returns false
         assertFalse(standardCommand.equals(new DeleteAppointmentCommand(INDEX_SECOND_PERSON,
                 new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY))));
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteAppointmentCommand apptCommand = new DeleteAppointmentCommand(outOfBoundIndex,
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
+
+        assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -85,6 +96,18 @@ public class DeleteAppointmentCommandTest {
                 editedPerson.getName().fullName);
 
         assertCommandFailure(appointmentCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of FAST list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getFast().getPersonList().size());
+
+        DeleteAppointmentCommand apptCommand = new DeleteAppointmentCommand(outOfBoundIndex,
+                new Appointment(VALID_APPOINTMENT_AMY, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_AMY));
+        assertCommandFailure(apptCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

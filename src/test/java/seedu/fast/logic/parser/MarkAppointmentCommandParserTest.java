@@ -34,7 +34,7 @@ public class MarkAppointmentCommandParserTest {
                 MarkAppointmentCommand.MESSAGE_USAGE);
 
         // no parameters
-        assertParseFailure(parser, MarkAppointmentCommand.COMMAND_WORD, expectedMessage);
+        assertParseFailure(parser, "", expectedMessage);
     }
 
     @Test
@@ -42,8 +42,7 @@ public class MarkAppointmentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MarkAppointmentCommand.MESSAGE_USAGE);
 
-        assertParseFailure(parser, MarkAppointmentCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT,
-                expectedMessage);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + " "
+                        + PREFIX_APPOINTMENT + VALID_APPOINTMENT_INPUT, expectedMessage);
     }
 }
