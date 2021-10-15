@@ -102,6 +102,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the persons in the list by the given comparator.
      */
     public void sortPersons(Comparator<Person> sortBy) {
+        requireNonNull(sortBy);
         internalList.sort(sortBy);
     }
 

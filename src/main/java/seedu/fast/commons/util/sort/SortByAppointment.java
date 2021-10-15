@@ -2,7 +2,6 @@ package seedu.fast.commons.util.sort;
 
 import java.util.Comparator;
 
-import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.model.person.Person;
 
 /**
