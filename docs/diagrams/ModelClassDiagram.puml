@@ -23,11 +23,15 @@ package "Person" {
     Class Email
     Class Name
     Class Phone
+}
+
+package "Tag" {
     Class Tag
 }
 
 
 package "Lesson" {
+    Class CalendarEntryList
     Class "{abstract}\nLesson" as Lesson
     Class RecurringLesson
     Class MakeUpLesson
@@ -60,6 +64,8 @@ Person *--> Address
 Person *--> "*" Tag
 Person *--> "*" Lesson
 
+AddressBook *--> "1" CalendarEntryList
+CalendarEntryList --> "~* all" Lesson
 RecurringLesson -up-|> Lesson
 MakeUpLesson -up-|> Lesson
 
@@ -74,6 +80,6 @@ MakeUpLesson -[hidden]right-> RecurringLesson
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
-
+Tag -[hidden]right-> "Person"
 ModelManager -->"~* filtered" Person
 @enduml
