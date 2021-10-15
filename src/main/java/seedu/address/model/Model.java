@@ -107,7 +107,7 @@ public interface Model {
     ObservableList<Student> getFilteredStudentList();
 
     /** Returns unmodifiable view of filtered Tutorial ClassList */
-    ObservableList<TutorialClass> getFliteredTutorialClassList();
+    ObservableList<TutorialClass> getFilteredTutorialClassList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
@@ -115,5 +115,5 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-    void updaateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
+    void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
 }
