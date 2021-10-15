@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -27,12 +27,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -47,15 +49,15 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list or by the name identifier\n. "
-            + "[" + EDIT_PREFIX_INDEX + "INDEX] "
-            + "[" + EDIT_PREFIX_NAME + "NAME] should be used for the lookup"
+            + "[" + PREFIX_DASH_INDEX + "INDEX] "
+            + "[" + PREFIX_DASH_NAME + "NAME] should be used for the lookup"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_ROLE + "ROLE] "
+            + "[" + PREFIX_ROLE + "ROLE]... "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -98,7 +100,6 @@ public class EditCommand extends Command {
         this.identifier = Identifier.NAME;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         switch(this.identifier) {
@@ -112,7 +113,6 @@ public class EditCommand extends Command {
         }
 
     }
-
 
     private CommandResult editBasedOnName(Model model) throws CommandException {
         requireNonNull(model);
@@ -165,13 +165,18 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(staffToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(staffToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(staffToEdit.getAddress());
-        Role updatedRole = editPersonDescriptor.getRole().orElse(staffToEdit.getRole());
+        Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(staffToEdit.getRoles());
         Salary updatedSalary = editPersonDescriptor.getSalary().orElse(staffToEdit.getSalary());
         Status updatedStatus = editPersonDescriptor.getStatus().orElse(staffToEdit.getStatus());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(staffToEdit.getTags());
+        //currently do not allow modifications to period via edit person descriptor
+        //exception would be during tests.
+        Set<Period> updatedPeriod = editPersonDescriptor.getPeriod().orElse(staffToEdit.getAbsentDates());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRole,
-                updatedSalary, updatedStatus, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles,
+                updatedSalary, updatedStatus, updatedTags, updatedPeriod);
+
     }
 
     @Override
@@ -201,10 +206,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Role role;
+        private Set<Role> roles;
         private Salary salary;
         private Status status;
         private Set<Tag> tags;
+        private Set<Period> absentPeriods;
 
         public EditPersonDescriptor() {
         }
@@ -218,17 +224,18 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setRole(toCopy.role);
+            setRoles(toCopy.roles);
             setSalary(toCopy.salary);
             setStatus(toCopy.status);
             setTags(toCopy.tags);
+            setPeriod(toCopy.absentPeriods);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, roles);
         }
 
         public void setName(Name name) {
@@ -263,12 +270,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setRole(Role role) {
-            this.role = role;
+        /**
+         * Sets {@code roles} to this object's {@code roles}.
+         * A defensive copy of {@code roles} is used internally.
+         */
+        public void setRoles(Set<Role> roles) {
+            this.roles = (roles != null) ? new HashSet<>(roles) : null;
         }
 
-        public Optional<Role> getRole() {
-            return Optional.ofNullable(role);
+        /**
+         * Returns an unmodifiable role set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code roles} is null.
+         */
+        public Optional<Set<Role>> getRoles() {
+            return (roles != null) ? Optional.of(Collections.unmodifiableSet(roles)) : Optional.empty();
         }
 
         public void setSalary(Salary salary) {
@@ -285,6 +301,26 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        /**
+         * Sets {@code periods} to this object's {@code periods}.
+         * A defensive copy of {@code periods is used internally.}
+         * @param periods
+         */
+        public void setPeriod(Set<Period> periods) {
+            this.absentPeriods = (periods != null) ? new HashSet<>(periods) : null;
+        }
+
+        /**
+         * Returns an unmodifiable period set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code period} is null.
+         */
+        public Optional<Set<Period>> getPeriod() {
+            return absentPeriods != null
+                    ? Optional.of(Collections.unmodifiableSet(absentPeriods))
+                    : Optional.empty();
         }
 
         /**
@@ -323,7 +359,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getRole().equals(e.getRole())
+                    && getRoles().equals(e.getRoles())
                     && getSalary().equals(e.getSalary())
                     && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags());

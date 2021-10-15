@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -10,13 +11,19 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.DayOfWeek;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Slot;
+import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -91,6 +98,41 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getPersonTest() {
+        Person alice = new PersonBuilder().withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withTags("friends").build();
+
+        modelManager.addPerson(alice);
+        assertEquals(alice, modelManager.findPersonByName(alice.getName()));
+        assertNull(modelManager.findPersonByName(new Name("random name")));
+    }
+
+    @Test
+    public void addShift_throwsDuplicateShiftException() {
+        Person alice = new PersonBuilder().withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withTags("friends").build();
+        modelManager.addPerson(alice);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON);
+        assertThrows(DuplicateShiftException.class, () ->
+                modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON));
+    }
+
+    @Test
+    public void addShift_success() {
+        Person alice = new PersonBuilder().withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
+                .withTags("friends").build();
+        modelManager.addPerson(alice);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON);
+        assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON));
     }
 
     @Test

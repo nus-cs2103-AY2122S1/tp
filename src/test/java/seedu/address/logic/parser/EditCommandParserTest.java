@@ -24,7 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.EDIT_PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -119,7 +119,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased()
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased()
                 + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
@@ -134,7 +134,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix()
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix()
                 + targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
@@ -148,31 +148,31 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased() + NAME_DESC_AMY;
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased() + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased() + PHONE_DESC_AMY;
+        userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased() + PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased() + ADDRESS_DESC_AMY;
+        userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased() + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased() + TAG_DESC_FRIEND;
+        userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -181,7 +181,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + targetIndex.getOneBased()
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix() + targetIndex.getOneBased()
                 + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
@@ -198,14 +198,14 @@ public class EditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix()
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix()
                 + targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = " " + EDIT_PREFIX_INDEX.getPrefix()
+        userInput = " " + PREFIX_DASH_INDEX.getPrefix()
                 + targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + ADDRESS_DESC_BOB
                 + PHONE_DESC_BOB;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
@@ -217,7 +217,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = " " + EDIT_PREFIX_INDEX.getPrefix() + " " + targetIndex.getOneBased() + TAG_EMPTY;
+        String userInput = " " + PREFIX_DASH_INDEX.getPrefix() + " " + targetIndex.getOneBased() + TAG_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);

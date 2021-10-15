@@ -193,4 +193,18 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseDayOfWeeks_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayOfWeek("wrongInput"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayOfWeek("monday-1-1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayOfWeek("1-monday"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseDayOfWeek("1"));
+    }
+
+    @Test
+    public void parseDayOfWeek_validInput_success() throws Exception {
+        assertEquals("monday-1", ParserUtil.parseDayOfWeek("monday-1"));
+        assertEquals("monday-0", ParserUtil.parseDayOfWeek("MONDAY-0"));
+    }
 }

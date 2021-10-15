@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
@@ -9,8 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,35 +29,42 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Role role;
+    private final Set<Role> roles = new HashSet<>();
     private final Salary salary;
     private final Status status;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Field> fields = new HashSet<>();
+    private final Set<Period> absentDates = new HashSet<>();
 
     private Schedule schedule;
+    private int totalWeeklyWorkingHour;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, Salary salary, Status status, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  Set<Role> roles, Salary salary, Status status, Set<Tag> tags, Set<Period> absentDates) {
+        requireAllNonNull(name, phone, email, address, tags, roles);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.role = role;
+        if (roles.isEmpty()) {
+            this.roles.add(Role.NO_ROLE);
+        } else {
+            this.roles.addAll(roles);
+        }
         this.salary = salary;
         this.status = status;
         this.tags.addAll(tags);
         this.schedule = new Schedule();
+        this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
         this.fields.addAll(tags);
-        addToFieldSet(fields, name, phone, email, address, salary, status, role);
+        this.absentDates.addAll(absentDates);
+        this.fields.addAll(roles);
+        addToFieldSet(fields, name, phone, email, address, salary, status);
     }
-
-
-
 
     public Name getName() {
         return name;
@@ -73,8 +83,8 @@ public class Person {
         return address;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return Collections.unmodifiableSet(roles);
     }
 
     public Salary getSalary() {
@@ -94,11 +104,47 @@ public class Person {
     }
 
     /**
+     * Marks this {@code period} when the {@code Person} was not working.
+     */
+    public Person mark(Period period) {
+        Set<Period> periods = period.union(this.getAbsentDates())
+                .stream()
+                .collect(Collectors.toUnmodifiableSet());
+        return new Person(name, phone, email, address,
+                roles, salary, status, tags, periods);
+
+    }
+
+
+    /**
+     * Removes the marking of {@code period} to mark that the person was working in
+     * this period. The input period must contain the period to remove.
+     *
+     * @return The resulting person from marking that the person was working.
+     */
+    public Person unMark(Period period) {
+        requireNonNull(period);
+        Set<Period> result = getAbsentDates().stream()
+                .flatMap(p -> p.complement(period).stream())
+                .collect(Collectors.toSet());
+        return new Person(name, phone, email, address,
+                roles, salary, status, tags, result);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable period set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Period> getAbsentDates() {
+        return Collections.unmodifiableSet(this.absentDates);
     }
 
     /**
@@ -108,13 +154,31 @@ public class Person {
      * @param slot The time slot of the shift.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void changeSchedule(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
         schedule.addShift(dayOfWeek, slot);
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
+    }
+
+    /**
+     * Removes a shift from the staff's schedule.
+     *
+     * @param dayOfWeek The day of the shift.
+     * @param slot The time slot of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
+     */
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        schedule.removeShift(dayOfWeek, slot);
     }
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+        totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
+
+    public int getTotalWeeklyWorkingHour() {
+        return totalWeeklyWorkingHour;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -144,14 +208,22 @@ public class Person {
         }
 
         Person otherStaff = (Person) other;
+        //for some odd reason, the set equals method does not work, neither does the contains all
+        List<Period> periods = getAbsentDates().stream().collect(Collectors.toList());
+        List<Period> otherPeriods = otherStaff.getAbsentDates().stream().collect(Collectors.toList());
+
         return otherStaff.getName().equals(getName())
                 && otherStaff.getPhone().equals(getPhone())
                 && otherStaff.getEmail().equals(getEmail())
                 && otherStaff.getAddress().equals(getAddress())
-                && otherStaff.getRole().equals(getRole())
+                && otherStaff.getRoles().equals(getRoles())
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
-                && otherStaff.getTags().equals(getTags());
+                && otherStaff.getTags().equals(getTags())
+                && periods.containsAll(otherPeriods)
+                && otherPeriods.containsAll(periods)
+                && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
+
     }
 
     @Override
@@ -170,13 +242,16 @@ public class Person {
                 .append(getEmail())
                 .append("; Address: ")
                 .append(getAddress())
-                .append("; Role: ")
-                .append(getRole())
                 .append("; Salary: ")
                 .append(getSalary())
                 .append("; Status: ")
                 .append(getStatus());
 
+        Set<Role> roles = getRoles();
+        if (!roles.isEmpty()) {
+            builder.append("; Roles: ");
+            roles.forEach(builder::append);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
@@ -184,4 +259,7 @@ public class Person {
         }
         return builder.toString();
     }
+
+
+
 }
