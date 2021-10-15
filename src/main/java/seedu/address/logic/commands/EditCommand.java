@@ -3,10 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -21,18 +22,18 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Role;
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing person in ComputingConnection.
  */
 public class EditCommand extends Command {
 
@@ -43,14 +44,14 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ROLE + "EMAIL] "
-            + "[" + PREFIX_FACULTY + "PHONE] "
-            + "[" + PREFIX_MAJOR + "PHONE] "
+            + "[" + PREFIX_FACULTY + "FACULTY] "
+            + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_SKILL + "SKILL] "
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
+            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -101,16 +102,16 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Role updatedRole = editPersonDescriptor.getRole().orElse(personToEdit.getRole());
         Faculty updatedFaculty = editPersonDescriptor.getFaculty().orElse(personToEdit.getFaculty());
         Major updatedMajor = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
+        Set<Skill> updatedSkills = editPersonDescriptor.getSkills().orElse(personToEdit.getSkills());
+        Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
+        Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedRole, updatedFaculty, updatedMajor, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
     }
 
     @Override
@@ -137,12 +138,12 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private Phone phone;
         private Email email;
-        private Address address;
-        private Role role;
         private Faculty faculty;
         private Major major;
+        private Set<Skill> skills;
+        private Set<Language> languages;
+        private Set<Framework> frameworks;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -153,12 +154,12 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
             setFaculty(toCopy.faculty);
             setMajor(toCopy.major);
-            setRole(toCopy.role);
+            setSkills(toCopy.skills);
+            setLanguages(toCopy.languages);
+            setFrameworks(toCopy.frameworks);
             setTags(toCopy.tags);
         }
 
@@ -166,7 +167,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, role, faculty, major, tags);
+            return CollectionUtil.isAnyNonNull(name, email, faculty, major, skills, languages, frameworks, tags);
         }
 
         public void setName(Name name) {
@@ -177,14 +178,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
-        }
-
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
-        }
-
         public void setEmail(Email email) {
             this.email = email;
         }
@@ -193,20 +186,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setFaculty(Faculty faculty) {
+            this.faculty = faculty;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        public void setRole(Role role) {
-            this.role = role;
-        }
-
-        public Optional<Role> getRole() {
-            return Optional.ofNullable(role);
+        public Optional<Faculty> getFaculty() {
+            return Optional.ofNullable(faculty);
         }
 
         public void setMajor(Major major) {
@@ -217,13 +202,57 @@ public class EditCommand extends Command {
             return Optional.ofNullable(major);
         }
 
-        public void setFaculty(Faculty faculty) {
-            this.faculty = faculty;
+        /**
+         * Sets {@code skill} to this object's {@code skills}.
+         * A defensive copy of {@code skills} is used internally.
+         */
+        public void setSkills(Set<Skill> skills) {
+            this.skills = (skills != null) ? new HashSet<>(skills) : null;
         }
 
-        public Optional<Faculty> getFaculty() {
-            return Optional.ofNullable(faculty);
+        /**
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code skills} is null.
+         */
+        public Optional<Set<Skill>> getSkills() {
+            return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
+
+        /**
+         * Sets {@code language} to this object's {@code languages}.
+         * A defensive copy of {@code languages} is used internally.
+         */
+        public void setLanguages(Set<Language> languages) {
+            this.languages = (languages != null) ? new HashSet<>(languages) : null;
+        }
+
+        /**
+         * Returns an unmodifiable language set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code languages} is null.
+         */
+        public Optional<Set<Language>> getLanguages() {
+            return (languages != null) ? Optional.of(Collections.unmodifiableSet(languages)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code framework} to this object's {@code frameworks}.
+         * A defensive copy of {@code frameworks} is used internally.
+         */
+        public void setFrameworks(Set<Framework> frameworks) {
+            this.frameworks = (frameworks != null) ? new HashSet<>(frameworks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable framework set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code frameworks} is null.
+         */
+        public Optional<Set<Framework>> getFrameworks() {
+            return (frameworks != null) ? Optional.of(Collections.unmodifiableSet(frameworks)) : Optional.empty();
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -257,10 +286,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getRole().equals(e.getRole())
                     && getFaculty().equals(e.getFaculty())
                     && getMajor().equals(e.getMajor())
                     && getTags().equals(e.getTags());
