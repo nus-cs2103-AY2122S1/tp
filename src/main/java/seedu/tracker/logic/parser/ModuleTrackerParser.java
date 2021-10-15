@@ -18,6 +18,7 @@ import seedu.tracker.logic.commands.InfoCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.SetCommand;
 import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.ViewCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 
 /**
@@ -79,6 +80,9 @@ public class ModuleTrackerParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

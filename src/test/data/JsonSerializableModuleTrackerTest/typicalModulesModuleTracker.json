@@ -5,18 +5,48 @@
     "title": "Software Engineering",
     "description": "Covers the main areas of software development",
     "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
     "tagged": [ ]
   }, {
     "code": "CS2101",
     "title": "Effective Communication for Computing Professionals",
     "description": "equip students with the skills needed to communicate technical information",
     "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
     "tagged": [ ]
   }, {
     "code": "GEQ1000",
     "title": "Asking Questions",
     "description": "introduces six dominant modes of questioning",
     "mc": 4,
+    "academicYear" : 0,
+    "semester" : 0,
+    "tagged": [ ]
+  }, {
+    "code": "CS1101S",
+    "title": "Programming methodology",
+    "description": "introduces programming methodology",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 1,
+    "tagged": [ ]
+  }, {
+    "code": "CS1231S",
+    "title": "Discrete math",
+    "description": "introduces discrete math",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 1,
+    "tagged": [ ]
+  }, {
+    "code": "CS2030S",
+    "title": "OOP",
+    "description": "OOP",
+    "mc": 4,
+    "academicYear" : 1,
+    "semester" : 2,
     "tagged": [ ]
   } ]
 }

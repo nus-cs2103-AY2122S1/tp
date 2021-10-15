@@ -20,11 +20,13 @@ import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.ViewCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Module;
+import seedu.tracker.model.module.ModuleInSpecificSemesterPredicate;
 import seedu.tracker.testutil.ModuleBuilder;
 import seedu.tracker.testutil.ModuleUtil;
 
@@ -81,6 +83,18 @@ public class ModuleTrackerParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + ACADEMIC_YEAR_DESC + SEMESTER_DESC);
+        AcademicYear year = new AcademicYear(VALID_ACADEMIC_YEAR);
+        Semester semester = new Semester(VALID_SEMESTER);
+        AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
+
+        ModuleInSpecificSemesterPredicate predicate = new ModuleInSpecificSemesterPredicate(academicCalendar);
+        assertEquals(new ViewCommand(predicate), command);
     }
 
     @Test

@@ -113,14 +113,14 @@ public class EditCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Module editedPerson = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
+        Module editedModule = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS1101S).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE,
                 new EditModuleDescriptorBuilder().withCode(VALID_CODE_CS1101S).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
         Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
-        expectedModel.setModule(model.getFilteredModuleList().get(0), editedPerson);
+        expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

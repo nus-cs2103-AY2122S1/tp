@@ -1,10 +1,14 @@
 package seedu.tracker.model.module;
 
-import seedu.tracker.model.calendar.AcademicCalendar;
-
+import java.util.Arrays;
 import java.util.function.Predicate;
 
-public class ModuleInSpecificSemesterPredicate implements Predicate<Module>{
+import seedu.tracker.model.calendar.AcademicCalendar;
+
+/**
+ * Tests that whether a {@code Module} is in specific semester.
+ */
+public class ModuleInSpecificSemesterPredicate implements Predicate<Module> {
     private final AcademicCalendar academicCalendar;
 
     public ModuleInSpecificSemesterPredicate(AcademicCalendar academicCalendar) {
@@ -13,13 +17,14 @@ public class ModuleInSpecificSemesterPredicate implements Predicate<Module>{
 
     @Override
     public boolean test(Module module) {
-        return this.academicCalendar.equals(module.getAcademicCalendar());
+        return module.hasAcademicCalendar() && this.academicCalendar.equals(module.getAcademicCalendar());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && academicCalendar.equals(((ModuleInSpecificSemesterPredicate) other).academicCalendar)); // state check
+                || (other instanceof ModuleInSpecificSemesterPredicate // instanceof handles nulls
+                && academicCalendar
+                .equals(((ModuleInSpecificSemesterPredicate) other).academicCalendar)); // state check
     }
 }
