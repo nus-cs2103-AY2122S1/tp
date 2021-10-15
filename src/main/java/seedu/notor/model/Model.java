@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -94,17 +93,11 @@ public interface Model {
 
     void addSuperGroup(SuperGroup superGroup);
 
+    void addSuperGroup(String superGroup);
+
     void deleteSuperGroup(SuperGroup superGroup);
 
     SuperGroup findSuperGroup(String name);
-
-    SubGroup findSubGroup(String name);
-
-    void addSubGroup(SubGroup subGroup);
-
-    void deleteSubGroup(SubGroup subGroup);
-
-    //=========== Filtered Person List Accessors =============================================================
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

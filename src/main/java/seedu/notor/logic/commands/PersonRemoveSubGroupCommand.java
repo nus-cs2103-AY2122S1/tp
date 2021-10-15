@@ -48,12 +48,9 @@ public class PersonRemoveSubGroupCommand implements Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToEdit = model.findPerson(personName);
-        if (!personToEdit.getSubGroups().contains(groupName + "_" + subGroupName)) {
-            throw new CommandException(MESSAGE_NOT_IN_SUBGROUP);
-        }
-        personToEdit.getSubGroups().remove(groupName + "_" + subGroupName);
-        SubGroup subGroup = model.findSubGroup(groupName + "_" + subGroupName);
-        subGroup.getPeople().remove(personName);
+        SubGroup subGroup = model.findSuperGroup(groupName).findSubGroup(subGroupName);
+        subGroup.removePerson(personToEdit);
+        personToEdit.removeSuperGroup(subGroup);
         model.setPerson(personToEdit, personToEdit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName + "_" + subGroupName));
     }
