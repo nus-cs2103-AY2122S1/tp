@@ -31,7 +31,6 @@ public class GameCommandParser implements Parser<Command> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        // TODO For respective command implementers to uncomment when done:
         switch (userInput[0]) {
         case AddGameCommand.COMMAND_WORD:
             return new AddGameCommandParser().parse(arguments);
