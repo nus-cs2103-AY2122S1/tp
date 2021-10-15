@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteMultipleCommand;
@@ -14,7 +15,7 @@ public class DeleteMultipleCommandParser implements Parser<DeleteMultipleCommand
      */
     public DeleteMultipleCommand parse(String args) throws ParseException {
         try {
-            int indexOfDash = ParserUtil.getIndexOfSubstring(args, "-");
+            int indexOfDash = ParserUtil.getIndexOfSubstring(args, INDEX_SPLITTER);
             Index indexStart = ParserUtil.parseIndex(args.substring(0, indexOfDash));
             Index indexEnd = ParserUtil.parseIndex(args.substring(indexOfDash + 1));
             return new DeleteMultipleCommand(indexStart, indexEnd);

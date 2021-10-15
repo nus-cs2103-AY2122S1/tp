@@ -8,7 +8,9 @@ import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -60,6 +63,14 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_deleteM() throws Exception {
+        DeleteMultipleCommand command = (DeleteMultipleCommand) parser.parseCommand(
+                DeleteMultipleCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + INDEX_SPLITTER + INDEX_EIGHTH_PERSON.getOneBased());
+        assertEquals(new DeleteMultipleCommand(INDEX_FIRST_PERSON, INDEX_EIGHTH_PERSON), command);
     }
 
     @Test

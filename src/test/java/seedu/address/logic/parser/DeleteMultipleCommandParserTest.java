@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_ELEVENTH_PERSON;
+import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +16,9 @@ public class DeleteMultipleCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "8-11",
+        assertParseSuccess(parser, "8" + INDEX_SPLITTER + "11",
                 new DeleteMultipleCommand(INDEX_EIGHTH_PERSON, INDEX_ELEVENTH_PERSON));
-        assertParseSuccess(parser, "8 - 8",
+        assertParseSuccess(parser, "8 " + INDEX_SPLITTER + " 8",
                 new DeleteMultipleCommand(INDEX_EIGHTH_PERSON, INDEX_EIGHTH_PERSON));
     }
 
