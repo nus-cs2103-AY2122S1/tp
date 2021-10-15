@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.assertPositionCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showPositionAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_POSITION;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_POSITION;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
 import org.junit.jupiter.api.Test;
@@ -45,19 +41,6 @@ public class DeletePositionCommandTest {
         DeletePositionCommand deletePositionCommand = new DeletePositionCommand(outOfBoundIndex);
 
         assertCommandFailure(deletePositionCommand, model, Messages.MESSAGE_INVALID_POSITION_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPositionAtIndex(model, INDEX_FIRST_POSITION);
-
-        Index outOfBoundIndex = INDEX_SECOND_POSITION;
-        // ensures that outOfBoundIndex is still in bounds of position book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getPositionBook().getPositionList().size());
-
-        DeletePositionCommand deletePositionCommand = new DeletePositionCommand(outOfBoundIndex);
-
-        assertPositionCommandFailure(deletePositionCommand, model, Messages.MESSAGE_INVALID_POSITION_DISPLAYED_INDEX);
     }
 
 }
