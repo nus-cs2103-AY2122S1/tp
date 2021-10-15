@@ -1,7 +1,6 @@
 package seedu.address.model.item;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.tag.Tag;
 
 import java.util.Collections;
@@ -14,6 +13,7 @@ import java.util.Set;
  * Utilised by logic like {@code AddCommand}, {@code EditCommand} to partially describe items.
  */
 public class ItemDescriptor {
+
     private Name name;
     private String id;
     private Set<Tag> tags;
@@ -79,6 +79,39 @@ public class ItemDescriptor {
      */
     public Optional<Set<Tag>> getTags() {
         return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+    }
+
+    /**
+     * Returns true if the given {@code item} has the same name or id as the descriptor.
+     */
+    public boolean isMatch(Item item) {
+        // Return true if name matches
+        if (name != null && name.equals(item.getName())) {
+            return true;
+        }
+        // Return true if id matches
+        if (id != null && id.equals(item.getId())) {
+            return true;
+        }
+        // Return false otherwise
+        return false;
+    }
+
+    /**
+     * Returns the corresponding {@code Item}.
+     * If count unspecified, defaults to 1.
+     * @throws NullPointerException if either name or id is unspecified.
+     *
+     */
+    public Item buildItem() {
+        if (name == null || id == null) {
+            throw new NullPointerException("Item descriptor requires both name and id to build");
+        }
+
+        int itemCount = (count == null) ? 1 : count;
+        Set<Tag> itemTags = (tags == null) ? new HashSet<>() : tags;
+
+        return new Item(name, id, itemCount, itemTags);
     }
 
     @Override
