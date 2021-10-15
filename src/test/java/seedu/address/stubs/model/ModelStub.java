@@ -79,6 +79,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) {
+        throw new AssertionError("This method should not be called");
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         throw new AssertionError("This method should not be called.");
     }

@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.util.Objects;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
@@ -74,8 +75,12 @@ public class Schedule {
      *
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The period of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) {
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
+            throw new NoShiftException();
+        }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = null;
     }
 

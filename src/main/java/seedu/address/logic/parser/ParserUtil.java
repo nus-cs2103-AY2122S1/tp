@@ -111,22 +111,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String role} into an {@code Role}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code role} is invalid.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
-    public static Role parseRoles(List<String> role) throws ParseException {
-        int length = role.size();
-        if (length == 0) {
-            return Role.NO_ROLE;
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
         }
-        String roleLast = role.get(role.size() - 1);
-        String trimmedRole = roleLast.trim();
-        if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-        return Role.translateStringToRole(trimmedRole);
+        return roleSet;
     }
 
     /**
@@ -236,7 +229,7 @@ public class ParserUtil {
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code status} is invalud
+     * @throws ParseException if the given {@code status} is invalid
      */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
