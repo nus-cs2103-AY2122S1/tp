@@ -34,6 +34,7 @@ public class ParticipantTest {
         assertFalse(ALEX.isSameParticipant(BERNICE));
         assertFalse(BERNICE.isSameParticipant(ALEX));
         assertFalse(ALEX.isSameParticipant(ALEX_DIFFERENT_BIRTHDATE));
+        assertFalse(ALEX.isSameParticipant(null));
     }
 
     @Test
