@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.logic.commands.CommandResult;
-import seedu.siasa.logic.commands.ListCommand;
 import seedu.siasa.logic.commands.client.AddClientCommand;
+import seedu.siasa.logic.commands.client.ListClientCommand;
 import seedu.siasa.logic.commands.exceptions.CommandException;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.model.Model;
@@ -58,14 +58,14 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "deleteclient 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String listCommand = ListClientCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ListClientCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
