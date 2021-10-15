@@ -37,6 +37,12 @@ public class SortCommand extends Command {
         return new CommandResult(messageSuccess);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof SortCommand && isReverseOrder == ((SortCommand) other).isReverseOrder);
+    }
+
     public String getCommand() {
         return COMMAND_WORD;
     }
