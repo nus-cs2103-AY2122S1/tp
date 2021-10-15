@@ -20,12 +20,18 @@ public class ViewClientCommandParser implements Parser<ViewClientCommand> {
      */
     public ViewClientCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.length() != 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
+        try {
+            Integer.parseInt(keywords[0]);
+        } catch (NumberFormatException numberFormatException) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClientCommand.MESSAGE_USAGE));
+        }
         return new ViewClientCommand(new ClientContainsIdPredicate(Arrays.asList(keywords)));
     }
 }
