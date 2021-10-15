@@ -3,23 +3,34 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
+import static seedu.address.testutil.TypicalItems.DONUT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InventoryBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class ModelManagerTest {
 
@@ -104,6 +115,52 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasItem(APPLE_PIE.getName()));
         // Search by id
         assertTrue(modelManager.hasItem(APPLE_PIE.getId()));
+    }
+
+    @Test
+    public void getItem_itemInInventory_returnsItem() {
+        modelManager.addItem(BAGEL);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of(BAGEL));
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of(BAGEL));
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of(BAGEL));
+    }
+
+    @Test
+    public void getItem_itemNotInInventory_returnEmptyList() {
+        modelManager.addItem(DONUT);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of());
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of());
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(modelManager.getItems(descriptor), List.of());
+    }
+
+    @Test
+    public void getItem_multipleMatches_returnMultiple() {
+        modelManager.addItem(DONUT);
+        modelManager.addItem(BAGEL);
+
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_DONUT).build();
+        assertEquals(modelManager.getItems(descriptor), List.of(DONUT, BAGEL));
     }
 
     @Test
