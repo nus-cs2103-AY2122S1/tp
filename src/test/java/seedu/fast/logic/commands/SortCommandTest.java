@@ -1,18 +1,12 @@
 package seedu.fast.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.fast.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
 import static seedu.fast.testutil.TypicalPersons.BENSON;
 import static seedu.fast.testutil.TypicalPersons.ELLE;
+import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
 import static seedu.fast.testutil.TypicalPersons.JOE;
-
-
-import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +16,6 @@ import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.commons.util.sort.SortByPriority;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
-import seedu.fast.model.UserPrefs;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -78,7 +70,7 @@ public class SortCommandTest {
         expectedModel.addPerson(JOE);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByName.KEYWORD);
         SortCommand command = new SortCommand(new SortByName(), SortByName.KEYWORD);
-        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -89,7 +81,7 @@ public class SortCommandTest {
         expectedModel.addPerson(JOE);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByAppointment.KEYWORD);
         SortCommand command = new SortCommand(new SortByAppointment(), SortByAppointment.KEYWORD);
-        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -100,7 +92,7 @@ public class SortCommandTest {
         expectedModel.addPerson(ELLE);
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByPriority.KEYWORD);
         SortCommand command = new SortCommand(new SortByPriority(), SortByPriority.KEYWORD);
-        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
 }
