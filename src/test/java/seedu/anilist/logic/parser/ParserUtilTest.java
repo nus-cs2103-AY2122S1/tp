@@ -10,7 +10,6 @@ import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
