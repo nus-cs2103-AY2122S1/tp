@@ -139,11 +139,36 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns the Person from the filtered list with the corresponding index.
+     *
+     * @return the Person from the filtered list with the corresponding index.
+     */
+    @Override
+    public Person getFilteredPersonListByIndex(int index) {
+        if (filteredPersons.size() == 0) {
+            return new FilteredList<>(this.addressBook.getPersonList()).get(index);
+        } else {
+            return filteredPersons.get(index);
+        }
+    }
+
+
+    /**
+     * Returns the unfiltered person list.
+     *
+     * @return Unfiltered Person list.
+     */
     @Override
     public ObservableList<Person> getUnFilteredPersonList() {
         return this.addressBook.getPersonList();
     }
 
+    /**
+     * Updates the filtered person list based on the predicate.
+     *
+     * @param predicate This filters the filtered person list.
+     */
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);

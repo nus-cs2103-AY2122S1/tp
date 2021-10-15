@@ -83,6 +83,17 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    /**
+     * Retrieves the Person at the index specified of the observed filtered list.
+     *
+     * @param index The index of the Person desired
+     * @return the Person at the index of the filtered list specified.
+     */
+    @Override
+    public Person getFilteredPersonListByIndex(int index) {
+        throw new AssertionError("This method should not be called.");
+    }
+
     @Override
     public Person findPersonByName(Name name) {
         throw new AssertionError("This method should not be called");
