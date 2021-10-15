@@ -33,17 +33,18 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label role;
+    private Label email;
     @FXML
     private Label faculty;
     @FXML
     private Label major;
     @FXML
-    private Label email;
+    private FlowPane skills;
+    @FXML
+    private FlowPane languages;
+    @FXML
+    private FlowPane frameworks;
+
     @FXML
     private FlowPane tags;
 
@@ -55,12 +56,22 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        role.setText(person.getRole().value);
         faculty.setText(person.getFaculty().value);
         major.setText(person.getMajor().value);
+
+        person.getSkills().stream()
+                .sorted(Comparator.comparing(skill -> skill.skillName))
+                .forEach(skill -> skills.getChildren().add(new Label(skill.skillName)));
+
+        person.getLanguages().stream()
+                .sorted(Comparator.comparing(language -> language.languageName))
+                .forEach(language -> languages.getChildren().add(new Label(language.languageName)));
+
+        person.getFrameworks().stream()
+                .sorted(Comparator.comparing(framework -> framework.frameworkName))
+                .forEach(framework -> frameworks.getChildren().add(new Label(framework.frameworkName)));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

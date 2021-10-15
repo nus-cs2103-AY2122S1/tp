@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,19 +24,16 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_ROLE + "ROLE "
             + PREFIX_FACULTY + "FACULTY "
             + PREFIX_MAJOR + "MAJOR "
+            + "[" + PREFIX_SKILL + "SKILL] "
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
+            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "Raffles Hall "
-            + PREFIX_ROLE + "student "
             + PREFIX_FACULTY + "computing "
             + PREFIX_MAJOR + "computer science "
             + PREFIX_TAG + "friends "

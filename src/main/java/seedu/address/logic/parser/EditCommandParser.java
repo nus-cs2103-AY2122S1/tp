@@ -2,13 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -20,6 +20,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +38,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                                            PREFIX_ROLE, PREFIX_FACULTY, PREFIX_MAJOR, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY, PREFIX_MAJOR,
+                        PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG);
 
         Index index;
 
@@ -49,17 +52,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-            editPersonDescriptor.setRole(ParserUtil.parseRole(argMultimap.getValue(PREFIX_ROLE).get()));
         }
         if (argMultimap.getValue(PREFIX_FACULTY).isPresent()) {
             editPersonDescriptor.setFaculty(ParserUtil.parseFaculty(argMultimap.getValue(PREFIX_FACULTY).get()));
@@ -67,6 +61,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_MAJOR).isPresent()) {
             editPersonDescriptor.setMajor(ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get()));
         }
+        parseSkillsForEdit(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(editPersonDescriptor::setSkills);
+        parseLanguagesForEdit(argMultimap.getAllValues(PREFIX_LANGUAGE)).ifPresent(editPersonDescriptor::setLanguages);
+        parseFrameworksForEdit(argMultimap.getAllValues(PREFIX_FRAMEWORK))
+                .ifPresent(editPersonDescriptor::setFrameworks);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -74,6 +72,55 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> skills} into a {@code Set<Tag>} if {@code skills} is non-empty.
+     * If {@code skills} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Skill>} containing zero skills.
+     */
+    private Optional<Set<Skill>> parseSkillsForEdit(Collection<String> skills) throws ParseException {
+        assert skills != null;
+
+        if (skills.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> skillSet = skills.size() == 1 && skills.contains("") ? Collections.emptySet() : skills;
+        return Optional.of(ParserUtil.parseSkills(skillSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> languages} into a {@code Set<Language>} if {@code languages} is non-empty.
+     * If {@code languages} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Language>} containing zero languages.
+     */
+    private Optional<Set<Language>> parseLanguagesForEdit(Collection<String> languages) throws ParseException {
+        assert languages != null;
+
+        if (languages.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> languageSet = languages.size() == 1 && languages.contains("")
+                ? Collections.emptySet()
+                : languages;
+        return Optional.of(ParserUtil.parseLanguages(languageSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> frameworks} into a {@code Set<Framework>} if {@code frameworks} is non-empty.
+     * If {@code frameworks} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Framework>} containing zero frameworks.
+     */
+    private Optional<Set<Framework>> parseFrameworksForEdit(Collection<String> frameworks) throws ParseException {
+        assert frameworks != null;
+
+        if (frameworks.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> frameworkSet = frameworks.size() == 1 && frameworks.contains("")
+                ? Collections.emptySet()
+                : frameworks;
+        return Optional.of(ParserUtil.parseFrameworks(frameworkSet));
     }
 
     /**
