@@ -4,18 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's address in the address book.
+ * Represents a Person's major in the ComputingConnection.
  * Guarantees: immutable; is valid as declared in {@link #isValidMajor(String)}
  */
 public class Major {
 
-    public static final String MESSAGE_CONSTRAINTS = "Major can take any values.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Majors should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the major must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
 

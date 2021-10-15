@@ -7,39 +7,46 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.skill.Framework;
+import seedu.address.model.skill.Language;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Person in ComputingConnection.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
-    // Identity fields
+    // Personal Data fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
-    // Data fields
-    private final Address address;
-    private final Role role;
+    // University Data fields
     private final Faculty faculty;
     private final Major major;
+
+    // Skill Data fields
+    private final Set<Skill> skills = new HashSet<>();
+    private final Set<Language> languages = new HashSet<>();
+    private final Set<Framework> frameworks = new HashSet<>();
+
+    // Misc Data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Role role, Faculty faculty, Major major, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, role, faculty, major, tags);
+    public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills,
+                  Set<Language> languages, Set<Framework> frameworks, Set<Tag> tags) {
+        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.role = role;
         this.faculty = faculty;
         this.major = major;
+        this.skills.addAll(skills);
+        this.languages.addAll(languages);
+        this.frameworks.addAll(frameworks);
         this.tags.addAll(tags);
     }
 
@@ -47,20 +54,8 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public Role getRole() {
-        return role;
     }
 
     public Faculty getFaculty() {
@@ -69,6 +64,30 @@ public class Person {
 
     public Major getMajor() {
         return major;
+    }
+
+    /**
+     * Returns an immutable skills set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Skill> getSkills() {
+        return Collections.unmodifiableSet(skills);
+    }
+
+    /**
+     * Returns an immutable languages set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Language> getLanguages() {
+        return Collections.unmodifiableSet(languages);
+    }
+
+    /**
+     * Returns an immutable frameworks set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Framework> getFrameworks() {
+        return Collections.unmodifiableSet(frameworks);
     }
 
     /**
@@ -108,37 +127,49 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getRole().equals(getRole())
                 && otherPerson.getFaculty().equals(getFaculty())
                 && otherPerson.getMajor().equals(getMajor())
+                && otherPerson.getSkills().equals(getSkills())
+                && otherPerson.getLanguages().equals(getLanguages())
+                && otherPerson.getFrameworks().equals(getFrameworks())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, role, faculty, major, tags);
+        return Objects.hash(name, email, faculty, major, skills, languages, frameworks, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Role: ")
-                .append(getRole())
                 .append("; Faculty: ")
                 .append(getFaculty())
                 .append("; Major: ")
                 .append(getMajor());
+
+        Set<Skill> skills = getSkills();
+        if (!skills.isEmpty()) {
+            builder.append("; Skills: ");
+            skills.forEach(builder::append);
+        }
+
+        Set<Language> languages = getLanguages();
+        if (!languages.isEmpty()) {
+            builder.append("; Languages: ");
+            languages.forEach(builder::append);
+        }
+
+        Set<Framework> frameworks = getFrameworks();
+        if (!frameworks.isEmpty()) {
+            builder.append("; Frameworks: ");
+            frameworks.forEach(builder::append);
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
