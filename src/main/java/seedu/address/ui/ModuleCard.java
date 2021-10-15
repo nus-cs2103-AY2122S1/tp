@@ -54,10 +54,8 @@ public class ModuleCard extends UiPart<Region> {
      */
     void fillInnerParts() {
         ObservableList<Student> studentList = module.getStudentList();
-        if (studentList.size() != 0) {
-            studentListPanel = new StudentListPanel(module.getStudentList());
-            studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-        }
+        studentListPanel = new StudentListPanel(module.getStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 
     public StudentListPanel getStudentListPanel() {
