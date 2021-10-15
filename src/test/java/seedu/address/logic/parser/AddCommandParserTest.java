@@ -124,6 +124,10 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
                 + TUTORIAL_GROUP_DESC_AMY + SOCIAL_HANDLE_DESC_AMY
                 + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoRemark));
+        //no social handle and remark
+        Person expectedPersonNoSocialNoRemark = new PersonBuilder(AMY).withSocialHandle("").withRemark("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + NATIONALITY_DESC_AMY
+                + TUTORIAL_GROUP_DESC_AMY + TAG_DESC_FRIEND, new AddCommand(expectedPersonNoSocialNoRemark));
     }
 
     @Test
