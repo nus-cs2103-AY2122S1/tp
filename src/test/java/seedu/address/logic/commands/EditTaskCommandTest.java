@@ -2,10 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TASK1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TASK2;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -22,9 +19,43 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditTaskCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_filteredList_success() {
+        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        Task newTask = new Task("walk");
+        tasks.set(0, newTask);
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags(), tasks);
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TASK, newTask);
+
+        String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask.taskName);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_outOfBoundsPersonIndexFilteredList_failure() {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Index outOfBoundIndex = Index.fromZeroBased(person.getTasks().size());
+        EditTaskCommand editTaskCommand = new EditTaskCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex, new Task("walk")
+        );
+        assertCommandFailure(
+                editTaskCommand, model, String.format(EditTaskCommand.MESSAGE_INVALID_TASK, person.getName())
+        );
+    }
 
     @Test
     public void execute_duplicateTask_failure() {
