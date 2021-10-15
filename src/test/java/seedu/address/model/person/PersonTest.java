@@ -61,11 +61,11 @@ public class PersonTest {
     public void getTotalWeeklyWorkingHour() {
         Person alice = new PersonBuilder().withName("Alice Pauline")
                 .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-                .withPhone("94351253").withRole("floor").withSalary("1000000").withStatus("fulltime")
+                .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         assertEquals(0, alice.getTotalWeeklyWorkingHour());
 
-        alice.changeSchedule(DayOfWeek.MONDAY, Slot.AFTERNOON);
+        alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON);
         assertEquals(4, alice.getTotalWeeklyWorkingHour());
 
         Schedule newSchedule = new Schedule();
