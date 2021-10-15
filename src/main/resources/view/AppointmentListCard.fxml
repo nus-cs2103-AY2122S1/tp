@@ -12,9 +12,9 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100" prefWidth="150" />
         </columnConstraints>
-        <VBox fx:id="detailsBox" alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <VBox fx:id="detailsBox" alignment="CENTER_LEFT" minHeight="85" GridPane.columnIndex="0">
             <padding>
                 <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
@@ -25,14 +25,18 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="apptDate" text="\$first" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <FlowPane fx:id="risk" />
             </HBox>
-            <FlowPane fx:id="tags" />
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-            <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
-            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-            <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" wrapText="true"/>
+            <Label fx:id="apptTime" styleClass="cell_small_label" text="\$apptTime" />
+            <Label fx:id="doctorName" styleClass="cell_small_label" text="\$doctorName"/>
+            <Label fx:id="patientName" styleClass="cell_small_label" text="\$patientName"/>
+            <Label fx:id="remarks" styleClass="cell_small_label" wrapText="true" text="\$remarks"/>
         </VBox>
     </GridPane>
 </HBox>

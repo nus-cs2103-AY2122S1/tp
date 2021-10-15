@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="PlannerMD" minWidth="700" minHeight="550" onCloseRequest="#handleExit">
+         title="PlannerMD" minWidth="1150" minHeight="650" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/planner_md_icon.png" />
   </icons>
@@ -33,27 +34,42 @@
           </Menu>
         </MenuBar>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-without-border">
-          <padding>
-            <Insets top="20" right="30" bottom="10" left="30" />
-          </padding>
-        </StackPane>
+        <HBox VBox.vgrow="ALWAYS">
+          <VBox minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-without-border">
+              <padding>
+                <Insets top="20" right="30" bottom="10" left="30" />
+              </padding>
+            </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-without-border"
-                   minHeight="120" prefHeight="120" maxHeight="120">
-          <padding>
-            <Insets top="10" right="30" bottom="10" left="30" />
-          </padding>
-        </StackPane>
+            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-without-border"
+                       minHeight="120" prefHeight="120" maxHeight="120">
+              <padding>
+                <Insets top="10" right="30" bottom="10" left="30" />
+              </padding>
+            </StackPane>
 
-        <VBox fx:id="personTab" styleClass="pane-without-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="20" right="30" bottom="30" left="30" />
-          </padding>
-          <StackPane fx:id="personTabPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+            <VBox fx:id="personTab" styleClass="pane-without-border" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="20" right="30" bottom="30" left="30.5" />
+              </padding>
+              <StackPane fx:id="personTabPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+          </VBox>
+
+          <VBox fx:id="appointmentTab" styleClass="pane-without-border" minWidth="400" VBox.vgrow="ALWAYS"
+                HBox.hgrow="NEVER">
+            <padding>
+              <Insets top="20" right="30" bottom="30" left="30" />
+            </padding>
+            <StackPane fx:id="appointmentTabPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+        </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+
       </VBox>
     </Scene>
   </scene>

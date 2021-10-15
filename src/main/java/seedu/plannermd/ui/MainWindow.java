@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonTab personTab;
+    private AppointmentListPanel appointmentPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane appointmentTabPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -122,6 +126,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        appointmentPanel = new AppointmentListPanel(logic.getFilteredPatientList());
+        appointmentTabPlaceholder.getChildren().add(appointmentPanel.getRoot());
     }
 
     /**
