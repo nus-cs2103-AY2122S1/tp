@@ -14,11 +14,12 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "SIASA Storage" #F4F6F6{
+Interface SiasaStorage <<Interface>>
+Class JsonSiasaStorage
+Class JsonSerializableSiasa
 Class JsonAdaptedPerson
+Class JsonAdaptedPolicy
 Class JsonAdaptedTag
 }
 
@@ -29,15 +30,17 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" SiasaStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> SiasaStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSiasaStorage .up.|> SiasaStorage
+JsonSiasaStorage ..> JsonSerializableSiasa
+JsonSerializableSiasa --> "*" JsonAdaptedPerson
+JsonSerializableSiasa --> "*" JsonAdaptedPolicy
+JsonAdaptedPolicy --> "1" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

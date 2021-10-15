@@ -19,7 +19,7 @@ import seedu.siasa.model.policy.PolicyIsOwnedByPredicate;
  */
 public class ListClientPolicyCommand extends Command {
 
-    public static final String COMMAND_WORD = "userpolicy";
+    public static final String COMMAND_WORD = "clientpolicy";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all policies that belongs to the client"
             + "with the specified index.\n"
