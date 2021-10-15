@@ -1,8 +1,8 @@
 package seedu.address.commons.core;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class GuiSettingsTest {
     @Test
