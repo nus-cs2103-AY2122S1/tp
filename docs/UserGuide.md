@@ -17,7 +17,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
   7. [Update Student's Grade: `update`](#update-student)
   8. [Delete Student: `delete`](#delete-student)
   9. [Exit: `exit`](#exit)
-  10. [Save data](#save-data)
+  10. [Download data](#download-data)
 - [Command Summary](#command-summary)
 
 
@@ -140,9 +140,9 @@ Examples:
 
 Exits ProgrammerError and closes the GUI.
 
-### <a name="save-data"></a>9. Save Data
+### <a name="download-data"></a>9. Save Data
 
-ProgrammerError data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need to specify the directory to download the file to.
 
 ## <a name="command-summary"></a>Command Summary
 
