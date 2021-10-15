@@ -33,14 +33,14 @@ public class AddFavCommand extends Command {
         // Look for the Person with the student ID, and if he is
         // not a favourite, make him a favourite. If he already is,
         // return a message saying he already is.
-            for (Person person : personList) {
-                if (person.getStudentId().toString().equalsIgnoreCase(studentId)) {
-                    if (person.getIsFavourite()) {
-                        return new CommandResult(String.format(Messages.MESSAGE_PERSON_ALREADY_FAVOURITE));
-                    } else {
-                        person.setFavourite();
-                        noPersonFound = false;
-                    }
+        for (Person person : personList) {
+            if (person.getStudentId().toString().equalsIgnoreCase(studentId)) {
+                if (person.getIsFavourite()) {
+                    return new CommandResult(String.format(Messages.MESSAGE_PERSON_ALREADY_FAVOURITE));
+                } else {
+                    person.setFavourite();
+                    noPersonFound = false;
+                }
             }
         }
 
