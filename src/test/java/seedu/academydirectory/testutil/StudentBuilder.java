@@ -1,5 +1,6 @@
 package seedu.academydirectory.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -125,8 +126,8 @@ public class StudentBuilder {
     /**
      * Sets the {@code Assessment} of the {@code Student} that we are building.
      */
-    public StudentBuilder withAssessment() {
-        this.assessment = new Assessment();
+    public StudentBuilder withAssessment(HashMap<String, Integer> assessment) {
+        this.assessment = new Assessment(assessment);
         return this;
     }
 
@@ -134,9 +135,9 @@ public class StudentBuilder {
      * Builds the Student object for testing.
      */
     public Student build() {
-
         Student newStudent = new Student(name, phone, email, telegram, tags);
         newStudent.setAttendance(studioRecord.getAttendance());
+        newStudent.setAssessment(assessment);
         return newStudent;
     }
 
