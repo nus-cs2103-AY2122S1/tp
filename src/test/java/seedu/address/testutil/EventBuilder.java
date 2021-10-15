@@ -45,4 +45,12 @@ public class EventBuilder {
     public Event build() {
         return new Event(this.eventName, this.eventDate, this.eventTime, false, this.participants);
     }
+
+    /**
+     * Sets the {@code Name} of the {@code Event} that we are building.
+     */
+    public EventBuilder withEventName(String name) {
+        this.eventName = new EventName(name);
+        return this;
+    }
 }
