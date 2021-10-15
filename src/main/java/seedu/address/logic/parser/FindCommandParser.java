@@ -58,8 +58,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         );
     }
 
-    private boolean checkMoreThanOnePrefixPresent (boolean firstPrefix, boolean secondPrefix, boolean thirdPrefix) {
-        return firstPrefix ? (secondPrefix || thirdPrefix) : (secondPrefix && thirdPrefix);
+    private boolean checkMoreThanOnePrefixPresent (Boolean... prefixPresent) {
+        long count = Arrays.stream(prefixPresent).filter(x -> x).count();
+        return count > 1;
     }
 
     private FindCommand getFindNameCommand(ArgumentMultimap argMultimap) throws ParseException {
