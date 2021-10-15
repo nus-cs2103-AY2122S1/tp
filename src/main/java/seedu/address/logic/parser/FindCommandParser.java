@@ -33,8 +33,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean isModulePrefixPresent = argMultimap.getValue(PREFIX_MODULE_CODE).isPresent();
         boolean isTagPrefixPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
 
-        // boolean condition to check that only one of the three prefixes are present
-        if (checkMoreThanOnePrefixPresent(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent)) {
+        long numberOfValidPrefixes = countValidPrefixes(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent);
+
+        if (numberOfValidPrefixes == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (numberOfValidPrefixes > 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
             );
@@ -42,25 +47,17 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (isNamePrefixPresent) {
             return getFindNameCommand(argMultimap);
-        }
-
-        if (isModulePrefixPresent) {
+        } else if (isModulePrefixPresent) {
             return getFindModuleCommand(argMultimap);
-        }
-
-        if (isTagPrefixPresent) {
+        } else {
+            // if tag prefix is not present
             return getFindTagCommand(argMultimap);
         }
-
-        // all three prefixes not present
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE)
-        );
     }
 
-    private boolean checkMoreThanOnePrefixPresent (Boolean... prefixPresent) {
+    private long countValidPrefixes (Boolean... prefixPresent) {
         long count = Arrays.stream(prefixPresent).filter(x -> x).count();
-        return count > 1;
+        return count;
     }
 
     private FindCommand getFindNameCommand(ArgumentMultimap argMultimap) throws ParseException {
