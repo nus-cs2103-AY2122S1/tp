@@ -8,8 +8,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.history.History;
-import seedu.address.logic.history.Historyable;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -21,7 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
-    private final Historyable<Command> commandHistory;
+    private final CommandInput commandInput = new CommandInput();
 
     @FXML
     private TextField commandTextField;
@@ -32,8 +30,6 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.commandHistory = new History<>();
-        commandHistory.push(new Command(""));
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -62,16 +58,13 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
+        String commandText = commandInput.value();
         if (commandText.equals("")) {
             return;
         }
 
-        commandHistory.pop();
-        commandHistory.restore();
-        commandHistory.push(new Command(commandText));
-        commandHistory.push(new Command(""));
-        commandTextField.setText("");
+        commandInput.save();
+        commandTextField.setText(commandInput.value());
 
         try {
             commandExecutor.execute(commandText);
@@ -86,13 +79,11 @@ public class CommandBox extends UiPart<Region> {
     private void handleNavigateHistory(KeyCode keyCode) {
         switch (keyCode) {
         case UP:
-            Command previousCommand = commandHistory.back();
-            commandTextField.setText(previousCommand.getCommand());
+            commandTextField.setText(commandInput.next());
             commandTextField.end();
             break;
         case DOWN:
-            Command nextCommand = commandHistory.forward();
-            commandTextField.setText(nextCommand.getCommand());
+            commandTextField.setText(commandInput.previous());
             commandTextField.end();
             break;
         default:
@@ -104,8 +95,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleKeyTyped(KeyEvent event) {
-        Command editedCommand = new Command(commandTextField.getText());
-        commandHistory.setCurrentState(editedCommand);
+        commandInput.set(commandTextField.getText());
     }
 
     /**
