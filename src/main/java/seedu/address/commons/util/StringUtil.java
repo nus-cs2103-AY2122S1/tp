@@ -65,4 +65,25 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code word}.
+     *   Ignores case, a full word match is not required.
+     *   <br>examples:<pre>
+     *       containsPartialWordIgnoreCase("ABc def", "abc") == true
+     *       containsPartialWordIgnoreCase("ABc def", "DEF") == true
+     *       containsPartialWordIgnoreCase("A Bc def", "A B") == true //full word match not required
+     *       </pre>
+     * @param sentence cannot be null
+     * @param word cannot be null, cannot be empty, can be partial word
+     */
+    public static boolean containsPartialWordIgnoreCase(String sentence, String word) {
+        requireNonNull(sentence);
+        requireNonNull(word);
+
+        String preppedWord = word;
+        checkArgument(!preppedWord.isEmpty(), "Word cannot be empty!");
+
+        return sentence.toLowerCase().startsWith(word.toLowerCase());
+    }
 }

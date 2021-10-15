@@ -140,4 +140,35 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    @Test
+    public void containIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase(null, "a"));
+    }
+
+    @Test
+    public void containIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsPartialWordIgnoreCase("a", null));
+    }
+
+    @Test
+    public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> StringUtil.containsPartialWordIgnoreCase("a", ""));
+    }
+
+    @Test
+    public void containsIgnoreCase_validInputs_correctResult() {
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("", "aaa"));
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("abc", "g"));
+        assertFalse(StringUtil.containsPartialWordIgnoreCase("abc", "b"));
+
+        //match with exact starting word
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("abc", "a"));
+
+        //match different capitalisations
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("abcDEF", "aBcd"));
+
+        // match with spaces
+        assertTrue(StringUtil.containsPartialWordIgnoreCase("b a a d", "b a"));
+    }
+
 }
