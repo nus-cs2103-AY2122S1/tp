@@ -5,14 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.fast.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.fast.testutil.TypicalPersons.CARL;
+import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
+import static seedu.fast.testutil.TypicalPersons.BENSON;
 import static seedu.fast.testutil.TypicalPersons.ELLE;
-import static seedu.fast.testutil.TypicalPersons.FIONA;
-import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+import static seedu.fast.testutil.TypicalPersons.JOE;
+
 
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.util.sort.SortByAppointment;
@@ -27,8 +29,19 @@ import seedu.fast.model.person.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class SortCommandTest {
-    private Model model = new ModelManager(getTypicalFast(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalFast(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager();
+        expectedModel = new ModelManager();
+
+        model.addPerson(GRABAHAN);
+        model.addPerson(BENSON);
+        model.addPerson(ELLE);
+        model.addPerson(JOE);
+    }
 
     @Test
     public void equals() {
@@ -58,22 +71,36 @@ public class SortCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-//        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-//        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-//        FindCommand command = new FindCommand(predicate);
-//        expectedModel.updateFilteredPersonList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    public void execute_sortByName_listSortedByName() {
+        expectedModel.addPerson(BENSON);
+        expectedModel.addPerson(ELLE);
+        expectedModel.addPerson(GRABAHAN);
+        expectedModel.addPerson(JOE);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByName.KEYWORD);
+        SortCommand command = new SortCommand(new SortByName(), SortByName.KEYWORD);
+        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-//        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-//        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-//        FindCommand command = new FindCommand(predicate);
-//        expectedModel.updateFilteredPersonList(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+    public void execute_sortByAppointment_listSortedByAppointment() {
+        expectedModel.addPerson(ELLE);
+        expectedModel.addPerson(BENSON);
+        expectedModel.addPerson(GRABAHAN);
+        expectedModel.addPerson(JOE);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByAppointment.KEYWORD);
+        SortCommand command = new SortCommand(new SortByAppointment(), SortByAppointment.KEYWORD);
+        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
     }
+
+    @Test
+    public void execute_sortByPriority_listSortedByPriority() {
+        expectedModel.addPerson(JOE);
+        expectedModel.addPerson(GRABAHAN);
+        expectedModel.addPerson(BENSON);
+        expectedModel.addPerson(ELLE);
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, SortByPriority.KEYWORD);
+        SortCommand command = new SortCommand(new SortByPriority(), SortByPriority.KEYWORD);
+        assertCommandSuccess(command, model, expectedMessage,  expectedModel);
+    }
+
 }

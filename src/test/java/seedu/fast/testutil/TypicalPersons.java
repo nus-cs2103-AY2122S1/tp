@@ -51,7 +51,7 @@ public class TypicalPersons {
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
+            .withAppointment("07 Dec 2021", NO_APPT_TIME, NO_APPT_VENUE).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).build();
