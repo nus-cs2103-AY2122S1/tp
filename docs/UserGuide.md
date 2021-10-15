@@ -178,6 +178,12 @@ Examples:
 
 * `rmdir CS1010` deletes a folder with the name `CS1010`.
 
+### Editing names of folders: `mv`
+
+Replaces the old folder name with the new folder name
+
+Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
+
 ### Viewing list of folders: `ls -folders`
 
 Retrieve list of all folders created
@@ -247,6 +253,7 @@ Action | Format, Examples
 **List contacts** | `ls -contacts`
 **Help** | `help`
 **Create folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
+**Edit folder Name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` e.g. `mv CS2103` &#124; `CS2102`
 **Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
