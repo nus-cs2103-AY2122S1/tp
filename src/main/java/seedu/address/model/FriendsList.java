@@ -86,6 +86,14 @@ public class FriendsList implements ReadOnlyFriendsList {
     }
 
     /**
+     * Gets a friend from the friends list.
+     * The friend with the friendId must already exist in the friends list.
+     */
+    public Friend getFriend(FriendId friendId) {
+        return friends.getFriend(friendId);
+    }
+
+    /**
      * Replaces the given friend {@code target} in the list with {@code editedFriend}.
      * {@code target} must exist in the friends list.
      * The friend identity of {@code editedFriend} must not be the same as another existing friend in the friends list.

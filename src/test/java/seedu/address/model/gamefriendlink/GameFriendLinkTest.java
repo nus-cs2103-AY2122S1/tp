@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_OMEGA_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_BOB_DRACO_LINK;
 
+import java.util.BitSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.friend.FriendId;
@@ -44,7 +46,7 @@ public class GameFriendLinkTest {
         assertNotEquals(null, CSGO_AMY_DRACO_LINK);
 
         // different type -> returns false
-        assertNotEquals(5, CSGO_AMY_DRACO_LINK);
+        assertNotEquals(CSGO_AMY_DRACO_LINK, new BitSet());
 
         // different friendId -> returns false
         assertNotEquals(CSGO_AMY_DRACO_LINK, CSGO_BOB_DRACO_LINK);

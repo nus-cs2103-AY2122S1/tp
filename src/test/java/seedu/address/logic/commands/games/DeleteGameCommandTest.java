@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.CSGO;
 import static seedu.address.testutil.TypicalGames.VALORANT;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ public class DeleteGameCommandTest {
     @Test
     public void execute_validIdUnfilteredList_success() {
         // command can delete game by game id
-        Game gameToDelete = model.getFilteredGamesList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Game gameToDelete = model.getFilteredGamesList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteGameCommand deleteCommand = new DeleteGameCommand(gameToDelete.getGameId());
 
         String expectedMessage = String.format(DeleteGameCommand.MESSAGE_DELETE_GAME_SUCCESS,
@@ -47,8 +47,8 @@ public class DeleteGameCommandTest {
     @Test
     public void execute_validIdFilteredList_success() {
         // can delete game by gameid even if not in the currently filtered list
-        showGameAtIndex(model, INDEX_FIRST_PERSON);
-        Game gameToDelete = model.getFilteredGamesList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showGameAtIndex(model, INDEX_FIRST_ITEM);
+        Game gameToDelete = model.getFilteredGamesList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteGameCommand deleteCommand = new DeleteGameCommand(gameToDelete.getGameId());
         String expectedMessage = String.format(DeleteGameCommand.MESSAGE_DELETE_GAME_SUCCESS,
                 gameToDelete.getGameId());
@@ -87,7 +87,7 @@ public class DeleteGameCommandTest {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show no one.
+     * Updates {@code model}'s filtered game list to show no one.
      */
     private void showNoGame(Model model) {
         model.updateFilteredGamesList(g -> false);

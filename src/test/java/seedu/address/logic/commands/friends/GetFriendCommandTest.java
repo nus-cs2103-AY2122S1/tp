@@ -4,16 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalFriends.AMY;
 import static seedu.address.testutil.TypicalFriends.BOB;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
+import java.util.BitSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -22,73 +25,74 @@ import seedu.address.testutil.FriendBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteFriendCommand}.
+ * {@code GetFriendCommand}.
  */
-public class DeleteFriendCommandTest {
+public class GetFriendCommandTest {
 
     private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
 
     @Test
     public void execute_validIdUnfilteredList_success() {
-        // command can delete friend by friend id
-        Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
-        DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
+        // command can get friend by friend id
+        Friend friendToGet = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        GetFriendCommand getCommand = new GetFriendCommand(friendToGet.getFriendId());
 
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                friendToDelete.getFriendId());
-
+        String expectedMessage = String.format(GetFriendCommand.MESSAGE_FRIEND_FULL_INFORMATION,
+                friendToGet.getFriendId());
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
-        expectedModel.deleteFriend(friendToDelete.getFriendId());
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FRIEND_GET, friendToGet);
+
+        assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
         // command fails if friend id does not exist in unfiltered list
-        DeleteFriendCommand deleteFriendCommand = new DeleteFriendCommand(AMY.getFriendId());
-        assertCommandFailure(deleteFriendCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
+        GetFriendCommand getFriendCommand = new GetFriendCommand(AMY.getFriendId());
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_FRIEND_ID, AMY.getFriendId());
+
+        assertCommandFailure(getFriendCommand, model, expectedMessage);
     }
 
     @Test
     public void execute_validIdFilteredList_success() {
-        // can delete friend by friendid even if not in the currently filtered list
-        showPersonAtIndex(model, INDEX_FIRST_ITEM);
-        Friend friendToDelete = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
-        DeleteFriendCommand deleteCommand = new DeleteFriendCommand(friendToDelete.getFriendId());
-        String expectedMessage = String.format(DeleteFriendCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                friendToDelete.getFriendId());
-        Model expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
+        // can get friend by friendId even if not in the currently filtered list
+        Friend friendToGet = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
+        GetFriendCommand getCommand = new GetFriendCommand(friendToGet.getFriendId());
+        showNoFriend(model);
 
+        String expectedMessage = String.format(GetFriendCommand.MESSAGE_FRIEND_FULL_INFORMATION,
+                friendToGet.getFriendId());
+        Model expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
         // show no one
         showNoFriend(expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FRIEND_GET, friendToGet);
 
-        // should still be able to delete
-        expectedModel.deleteFriend(friendToDelete.getFriendId());
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void equals() {
         Friend friendAmy = new FriendBuilder(AMY).build();
         Friend friendBob = new FriendBuilder(BOB).build();
-        DeleteFriendCommand deleteFirstCommand = new DeleteFriendCommand(friendAmy.getFriendId());
-        DeleteFriendCommand deleteSecondCommand = new DeleteFriendCommand(friendBob.getFriendId());
+        GetFriendCommand getFirstCommand = new GetFriendCommand(friendAmy.getFriendId());
+        GetFriendCommand getSecondCommand = new GetFriendCommand(friendBob.getFriendId());
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(getFirstCommand.equals(getFirstCommand));
 
         // same values -> returns true
-        DeleteFriendCommand deleteFirstCommandCopy = new DeleteFriendCommand(friendAmy.getFriendId());
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        GetFriendCommand getFirstCommandCopy = new GetFriendCommand(friendAmy.getFriendId());
+        assertTrue(getFirstCommand.equals(getFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals("123"));
+        assertFalse(getFirstCommand.equals(new BitSet()));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(getFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(getFirstCommand.equals(getSecondCommand));
     }
 
     /**

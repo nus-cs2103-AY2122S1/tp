@@ -107,7 +107,7 @@ public class ModelManagerTest {
     @Test
     public void hasFriendId_friendIdInFriendsList_returnsTrue() {
         modelManager.addFriend(ALICE);
-        assertTrue(modelManager.hasFriend(ALICE));
+        assertTrue(modelManager.hasFriendWithId(ALICE.getFriendId()));
     }
 
     @Test
@@ -122,10 +122,6 @@ public class ModelManagerTest {
     public void getFilteredFriendList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFriendsList().remove(0));
     }
-
-    //
-    //
-    //
 
     @Test
     public void hasGame_nullGame_throwsNullPointerException() {

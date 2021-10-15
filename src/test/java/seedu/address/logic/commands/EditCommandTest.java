@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalFriends.getTypicalFriendsList;
 import static seedu.address.testutil.TypicalGames.getTypicalGamesList;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +38,7 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Friend editedFriend = new FriendBuilder().build();
         EditCommand.EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder(editedFriend).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
@@ -73,8 +73,8 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditCommand.EditFriendDescriptor());
-        Friend editedFriend = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM, new EditCommand.EditFriendDescriptor());
+        Friend editedFriend = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
 
@@ -86,11 +86,11 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ITEM);
 
-        Friend friendInFilteredList = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Friend friendInFilteredList = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         Friend editedFriend = new FriendBuilder(friendInFilteredList).withFriendName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
                 new EditFriendDescriptorBuilder().withFriendName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
@@ -104,20 +104,20 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicatePersonUnfilteredList_failure() {
-        Friend firstFriend = model.getFilteredFriendsList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Friend firstFriend = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditFriendDescriptor descriptor = new EditFriendDescriptorBuilder(firstFriend).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_ITEM, descriptor);
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FRIEND);
     }
 
     @Test
     public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit person in filtered list into a duplicate in address book
-        Friend friendInList = model.getFriendsList().getFriendsList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        Friend friendInList = model.getFriendsList().getFriendsList().get(INDEX_SECOND_ITEM.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
                 new EditFriendDescriptorBuilder(friendInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_FRIEND);
@@ -139,8 +139,8 @@ public class EditCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showPersonAtIndex(model, INDEX_FIRST_ITEM);
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getFriendsList().getFriendsList().size());
 
@@ -152,11 +152,11 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ITEM, DESC_AMY);
 
         // same values -> returns true
         EditFriendDescriptor copyDescriptor = new EditFriendDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ITEM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -169,10 +169,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ITEM, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_BOB)));
     }
 
 }
