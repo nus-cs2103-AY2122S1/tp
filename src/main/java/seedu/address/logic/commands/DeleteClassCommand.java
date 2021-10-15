@@ -2,51 +2,73 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
 
 public class DeleteClassCommand extends Command {
     public static final String COMMAND_WORD = "deleteclass";
-    public static final String MESSAGE_DELETE_CLASS_SUCCESS = "Deleted Class: %1$s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Deletes an existing tuition class.\n"
-            + "Parameters: INDEX\n"
-            + "Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes existing classes.\n"
+            + "Parameters: CLASS_INDEX CLASS_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
-    private final Index targetIndex;
+    public static final String MESSAGE_DELETE_CLASSES_SUCCESS = "Deleted Classes: %1$s.\n";
+    public static final String MESSAGE_DELETE_CLASSES_FAILURE = "Classes at index : %1$s are not found.";
 
-    public DeleteClassCommand(Index i) {
-        targetIndex = i;
+    private List<Index> targetIndex = new ArrayList<>();
+
+    public DeleteClassCommand(List<Index> studentIndexes) {
+        targetIndex = studentIndexes;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
+        List<String> removed = new ArrayList<String>();
+        List<Integer> invalidClasses = new ArrayList<>();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
+        for (int i = 0; i < targetIndex.size(); i++) {
+            Index currIndex = targetIndex.get(i);
+            if (currIndex.getZeroBased() >= lastShownList.size()) {
+                invalidClasses.add(currIndex.getOneBased());
+                continue;
+            }
+            TuitionClass classToDelete = lastShownList.get(currIndex.getZeroBased());
+            if (classToDelete == null) {
+                invalidClasses.add(currIndex.getOneBased());
+                continue;
+            }
+            List<Person> currStudents = classToDelete
+                    .getStudentList().getStudents().stream()
+                    .map(x -> model.getSameNamePerson(new Person(new Name(x)))).collect(Collectors.toList());
+            for (Person person : currStudents) {
+                Person updatedPerson = person.removeClass(classToDelete);
+                model.setPerson(person, updatedPerson);
+            }
+            removed.add(classToDelete.getName().name + "|" + classToDelete.getTimeslot());
+            model.deleteTuition(classToDelete);
         }
-
-        TuitionClass classToDelete = lastShownList.get(targetIndex.getZeroBased());
-        for (Person p: model.getFilteredPersonList()) {
-            Person updatedPerson = p.removeClass(classToDelete);
-            model.setPerson(p, updatedPerson);
-        }
-        model.deleteTuition(classToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_CLASS_SUCCESS, classToDelete));
+        String feedback = (!removed.isEmpty()
+            ? String.format(MESSAGE_DELETE_CLASSES_SUCCESS, removed) : "")
+                + (!invalidClasses.isEmpty()
+                    ? String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses)
+                    : "");
+        return new CommandResult(feedback);
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof DeleteClassCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteClassCommand) other).targetIndex)); // state check
+        return other == this
+                || (other instanceof DeleteClassCommand
+                && this.targetIndex.containsAll(((DeleteClassCommand) other).targetIndex));
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.model.person.Classes;
 
@@ -17,9 +18,9 @@ public class StudentList {
      *
      * @param students
      */
-    public StudentList(ArrayList<String> students) {
+    public StudentList(List<String> students) {
         requireNonNull(students);
-        this.students = students;
+        this.students = (ArrayList<String>) students;
     }
 
     @Override
