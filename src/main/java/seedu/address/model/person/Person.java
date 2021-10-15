@@ -56,7 +56,6 @@ public class Person {
         this.tags.addAll(tags);
         this.schedule = new Schedule();
         this.totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
-      
         this.fields.addAll(tags);
         this.fields.addAll(roles);
         addToFieldSet(fields, name, phone, email, address, salary, status);
