@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.UniqueModuleList;
 
@@ -19,6 +20,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
     private AcademicCalendar currentSemester;
+    private Mc mcGoal;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +34,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         Semester defaultSemester = new Semester(1);
         currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
+        mcGoal = new Mc(160);
     }
 
     public ModuleTracker() {}
@@ -52,6 +55,14 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
 
     public AcademicCalendar getCurrentSemester() {
         return this.currentSemester;
+    }
+
+    public void setMcGoal(Mc mcGoal) {
+        this.mcGoal = mcGoal;
+    }
+
+    public Mc getMcGoal() {
+        return this.mcGoal;
     }
 
     /**
