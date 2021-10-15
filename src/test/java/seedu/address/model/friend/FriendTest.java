@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalFriends.ALICE;
 import static seedu.address.testutil.TypicalFriends.BOB;
+import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,7 +68,7 @@ public class FriendTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different games -> returns false
-        //        editedAlice = new FriendBuilder(ALICE).withGames(VALID_GAME_ID_APEX_LEGENDS).build();
-        //        assertFalse(ALICE.equals(editedAlice));
+        editedAlice = new FriendBuilder(ALICE).withGameFriendLinks(CSGO_AMY_DRACO_LINK).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 }
