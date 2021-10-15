@@ -2,15 +2,14 @@ package seedu.academydirectory.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academydirectory.logic.parser.CliSyntax.*;
-
-import seedu.academydirectory.commons.core.index.Index;
-import seedu.academydirectory.commons.exceptions.IllegalValueException;
-import seedu.academydirectory.logic.commands.AddCommand;
-import seedu.academydirectory.logic.commands.GradeCommand;
-import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_GRADE;
 
 import java.util.stream.Stream;
+
+import seedu.academydirectory.commons.core.index.Index;
+import seedu.academydirectory.logic.commands.GradeCommand;
+import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 public class GradeCommandParser implements Parser<GradeCommand> {
 
@@ -20,6 +19,7 @@ public class GradeCommandParser implements Parser<GradeCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GradeCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT, PREFIX_GRADE);
         if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT, PREFIX_GRADE)
