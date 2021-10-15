@@ -1,11 +1,22 @@
 package seedu.academydirectory.model.student;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Represents a Student's assessment in the academy directory.
  */
 public class Assessment implements Information {
+
+    public static final List<String> ASSESSMENT_LIST = Arrays.asList(
+            "RA1",
+            "MIDTERM",
+            "RA2",
+            "PE",
+            "FINAL"
+    );
 
     public static final String MESSAGE_CONSTRAINTS =
             "Grades can only be recorded for the following assessments: RA1, MIDTERM, RA2, PE, FINAL.";
@@ -58,6 +69,7 @@ public class Assessment implements Information {
         return grade == -1 ? "NA" : grade.toString();
     }
 
+
     @Override
     public String toString() {
         return "RA1: " + getAssessmentGrade("RA1") + ", "
@@ -65,6 +77,14 @@ public class Assessment implements Information {
                 + "RA2: " + getAssessmentGrade("RA2") + ", "
                 + "PE: " + getAssessmentGrade("PE") + ", "
                 + "FINAL: " + getAssessmentGrade("FINAL");
+    }
+
+    public int getTotalGrade() {
+        int total = 0;
+        for (String assessmentStr : ASSESSMENT_LIST) {
+            total += assessment.get(assessmentStr);
+        }
+        return total;
     }
 
     @Override
@@ -78,4 +98,33 @@ public class Assessment implements Information {
     public int hashCode() {
         return assessment.hashCode();
     }
+
+    public static Comparator<Student> getIndividualComparator(boolean isAscending, String assessmentStr) {
+        return new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                int grade1 = s1.getAssessment().getAssessmentHashMap().get(assessmentStr);
+                int grade2 = s2.getAssessment().getAssessmentHashMap().get(assessmentStr);
+                return isAscending
+                        ? Integer.compare(grade1, grade2)
+                        : Integer.compare(grade2, grade1);
+            }
+        };
+    }
+
+    public static Comparator<Student> getAverageComparator(boolean isAscending) {
+        return new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                int total1 = s1.getAssessment().getTotalGrade();
+                int total2 = s2.getAssessment().getTotalGrade();
+                return isAscending
+                        ? Integer.compare(total1, total2)
+                        : Integer.compare(total2, total1);
+            }
+        };
+    }
+
+
+
 }

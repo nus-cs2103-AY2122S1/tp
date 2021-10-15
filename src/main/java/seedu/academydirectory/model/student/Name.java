@@ -1,5 +1,7 @@
 package seedu.academydirectory.model.student;
 
+import java.util.Comparator;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +9,7 @@ import static seedu.academydirectory.commons.util.AppUtil.checkArgument;
  * Represents a Student's name in the academy directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Name implements Information {
+public class Name extends SortableInformation {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -54,6 +56,19 @@ public class Name implements Information {
     @Override
     public int hashCode() {
         return fullName.hashCode();
+    }
+
+    public static Comparator<Student> getComparator(boolean isAscending) {
+        return new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                Name name1 = s1.getName();
+                Name name2 = s2.getName();
+                return isAscending
+                        ? name1.toString().compareTo(name2.toString())
+                        : name2.toString().compareTo(name1.toString());
+            }
+        };
     }
 
 }

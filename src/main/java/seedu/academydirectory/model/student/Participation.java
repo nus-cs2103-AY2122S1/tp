@@ -3,12 +3,15 @@ package seedu.academydirectory.model.student;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Participation implements Information {
 
     private static final String VALIDATION_REGEX = "^-?[0-9]\\d*$";
 
     private int[] participationArray;
+
+    private int totalParticipation = 0;
 
     /**
      * The constructor for an Participation object.
@@ -31,6 +34,7 @@ public class Participation implements Information {
      */
     public Participation add(Integer index, int participationAdd) {
         int participationResult = participationArray[index - 1] + participationAdd;
+        totalParticipation += participationAdd;
         if (participationResult < 0) {
             participationArray[index - 1] = 0;
         } else if (participationResult > 500) {
@@ -47,6 +51,14 @@ public class Participation implements Information {
      */
     public void setParticipation(int[] intArr) {
         this.participationArray = intArr;
+        totalParticipation = 0;
+        for (int i : intArr) {
+            totalParticipation += i;
+        }
+    }
+
+    public int getTotalParticipation() {
+        return totalParticipation;
     }
 
     /**
@@ -128,5 +140,18 @@ public class Participation implements Information {
     @Override
     public int hashCode() {
         return Arrays.hashCode(participationArray);
+    }
+
+    public static Comparator<Student> getComparator(boolean isAscending) {
+        return new Comparator<Student>() {
+            @Override
+            public int compare(Student s1, Student s2) {
+                int participation1 = s1.getParticipation().getTotalParticipation();
+                int participation2 = s2.getParticipation().getTotalParticipation();
+                return isAscending
+                        ? Integer.compare(participation1, participation2)
+                        : Integer.compare(participation2, participation1);
+            }
+        };
     }
 }

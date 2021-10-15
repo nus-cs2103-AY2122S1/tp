@@ -16,6 +16,8 @@ import seedu.academydirectory.model.student.Grade;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
+import seedu.academydirectory.model.student.Sortable;
+import seedu.academydirectory.model.student.SortableInformation;
 import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
@@ -203,6 +205,28 @@ public class ParserUtil {
             throw new ParseException(StudioRecord.MESSAGE_CONSTRAINTS);
         }
         return Integer.parseInt(trimmedStudioRecord);
+    }
+
+    public static String parseAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.trim();
+        if (!Sortable.isValidSortable(attribute)) {
+            throw new ParseException(Sortable.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedAttribute.toUpperCase();
+    }
+
+    public static boolean parseOrder(String order) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (!Sortable.Order.isValidOrder(order)) {
+            throw new ParseException(Sortable.Order.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedOrder.toUpperCase().equals("ASC")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
