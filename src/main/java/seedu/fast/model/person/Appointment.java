@@ -124,7 +124,7 @@ public class Appointment {
             sdf.parse(test);
             return true;
         } catch (ParseException e) {
-           return false;
+            return false;
         }
     }
 

@@ -1,8 +1,5 @@
 package seedu.fast.model.person;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.fast.commons.util.AppUtil.checkArgument;
 

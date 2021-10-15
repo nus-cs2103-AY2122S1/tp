@@ -7,7 +7,6 @@ import static seedu.fast.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.commons.util.DateUtil;
-import seedu.fast.testutil.PersonBuilder;
 
 public class AppointmentTest {
     public static final String VALID_DATE = "11 Nov 2021";

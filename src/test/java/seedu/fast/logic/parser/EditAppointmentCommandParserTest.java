@@ -41,8 +41,8 @@ public class EditAppointmentCommandParserTest {
     @Test
     public void parse_indexSpecifiedWithTwoFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME + VALID_APPOINTMENT_TIME_INPUT + " "
-                + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_APPOINTMENT_TIME
+                + VALID_APPOINTMENT_TIME_INPUT + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
                 .withTime(VALID_APPOINTMENT_TIME_BOB).withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
         EditAppointmentCommand expectedCommand = new EditAppointmentCommand(INDEX_SECOND_PERSON,
