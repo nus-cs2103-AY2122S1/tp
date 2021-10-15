@@ -11,9 +11,10 @@ import static seedu.tracker.testutil.TypicalIndexes.INDEX_FOURTH_MODULE;
 import static seedu.tracker.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
-import java.util.Set;
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.model.Model;

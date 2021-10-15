@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Set;
+
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.logic.commands.exceptions.CommandException;
@@ -19,7 +20,8 @@ public class UntakeCommand extends Command {
     public static final String COMMAND_WORD = "untake";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Remove the schedule from the module identified by the index number used in the displayed module list.\n"
+            + ": Remove the schedule from the module identified by the index number"
+            + " used in the displayed module list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
