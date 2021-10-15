@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: red;
+    background-color: red; /* Used in the default.html file */
 }
 
 .label {
@@ -133,33 +133,50 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: #e6e6e6;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
-     -fx-border-top-width: 1px;
+     -fx-background-color: #f4f4f4;
+     -fx-border-width: 0;
 }
 
-.status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
+/* result-display consists of feedback from system */
 
 .result-display {
+    -fx-border-width: 0;
     -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
-    -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-font-family: "Open Sans";
+    -fx-font-size: 10pt;
+    -fx-text-fill: #393939;
+}
+
+.result-display .scroll-pane:vertical {
+    -fx-background-color: transparent;
+}
+
+.result-display .scroll-pane:vertical .viewport {
+    -fx-background-color: transparent;
 }
 
 .result-display .label {
     -fx-text-fill: black !important;
 }
 
+#resultDisplay .content {
+    -fx-background-color: #e6e6e6;
+    -fx-background-radius: 15;
+    -fx-border-width: 0;
+}
+
+.status-bar {
+    /* Modifies the background behind file path */
+    -fx-background-color: derive(#f4f4f4, 30%);
+}
+
 .status-bar .label {
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
@@ -171,7 +188,7 @@
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .grid-pane {
@@ -185,21 +202,23 @@
 }
 
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #cdcdcd;
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #282828;
 }
 
+/* menu bar consists of file and help */
+
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #cdcdcd;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #282828;
     -fx-opacity: 0.9;
 }
 
@@ -323,19 +342,16 @@
     -fx-border-color: #383838 #383838 #ffffff #383838;
     -fx-border-insets: 0;
     -fx-border-width: 1;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
-#resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
-}
+
 
 #tags {
     -fx-hgap: 7;
