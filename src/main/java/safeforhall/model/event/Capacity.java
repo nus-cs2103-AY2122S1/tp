@@ -7,6 +7,9 @@ public class Capacity {
     public static final String MESSAGE_CONSTRAINTS =
             "Capacity should be between 1 and 999";
     public static final String VALIDATION_REGEX = "\\d{1,3}"; // add check for capacity = 0
+
+    public static final String DESC = "Capacity: ";
+
     public final String capacity;
 
     /**

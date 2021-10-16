@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
 
 public class EventDate {
     public static final String MESSAGE_CONSTRAINTS = "EventDate inputted has to be in dd-mm-yyyy format";
+    public static final String DESC = "Date: ";
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 

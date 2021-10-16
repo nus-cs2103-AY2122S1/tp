@@ -13,6 +13,8 @@ public class Venue {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    public static final String DESC = "Venue: ";
+
     public final String venue;
 
     /**
