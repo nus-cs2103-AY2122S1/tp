@@ -2,6 +2,8 @@ package seedu.tuitione.model.student;
 
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -93,8 +95,9 @@ public class Student {
      * Returns an immutable lesson price set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Price> getLessonPrices() {
-        return Set.copyOf(lessonCodesAndPrices.values()); // equivalent generator to unmodifiable set
+    public ArrayList<Price> getLessonPrices() {
+        Collection<Price> values = lessonCodesAndPrices.values();
+        return new ArrayList<>(values); // equivalent generator to unmodifiable set
     }
 
     /**
