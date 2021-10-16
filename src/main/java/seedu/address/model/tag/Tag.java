@@ -65,6 +65,24 @@ public class Tag {
     }
 
     /**
+     * Returns the tag name of this tag.
+     *
+     * @return Tag name of this tag.
+     */
+    public String getTagName() {
+        return tagName;
+    }
+
+    /**
+     * Returns the number of students labelled under this tag.
+     *
+     * @return Number of students labelled under this tag.
+     */
+    public int getNumStudents() {
+        return numStudents;
+    }
+
+    /**
      * Stringifies the number of students under this tag.
      *
      * @return String representation of the number of students under this tag.
@@ -73,14 +91,12 @@ public class Tag {
         return Integer.toString(numStudents);
     }
 
-    public String getTagName() {
-        return tagName;
-    }
-
-    public int getNumStudents() {
-        return numStudents;
-    }
-
+    /**
+     * Returns true if both tags are the same object or both tags have the same tag name.
+     *
+     * @param other Object to be checked.
+     * @return True if both tags are the same object or both tags have the same tag name.
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
