@@ -31,7 +31,7 @@ Examples:
 #### Adding a tuition class: `addclass`
 Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
 
-The students to be added are optional. If the student the user intends to add is not present, or the class limit has 
+The students to be added are optional. If the student the user intends to add is not present, or the class limit has
 been exceeded, TutAssistor will alert names of these students. The time slot should follow the
 format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap
 on time slots. If there is any conflict or overlap, TutAssistor will alert the conflict.
@@ -88,7 +88,7 @@ names of these students to the tutor.
 When adding student names, using comma to separate names and there is no space around comma.
 When adding student indexes, using space to separate indexes.
 
-Format: `addtoclass si/INDEX_STUDENT INDEX_STUDENT INDEX_STUDENT... tc/INDEX_CLASS` 
+Format: `addtoclass si/INDEX_STUDENT INDEX_STUDENT INDEX_STUDENT... tc/INDEX_CLASS`
 or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`
 
 Examples:

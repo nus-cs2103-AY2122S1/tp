@@ -82,7 +82,6 @@ public class DeleteCommandTest {
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
-
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
@@ -95,7 +94,6 @@ public class DeleteCommandTest {
      */
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
-
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
