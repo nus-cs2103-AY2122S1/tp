@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import com.sun.javafx.UnmodifiableArrayList;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
@@ -95,9 +97,13 @@ public class Student {
      * Returns a lesson price array, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public ArrayList<Price> getLessonPrices() {
+    public List<Price> getLessonPrices() {
         Collection<Price> values = lessonCodesAndPrices.values();
-        return new ArrayList<>(values);
+        List<Price> listOfValues = new ArrayList<>();
+        for (Price p : values) {
+            listOfValues.add(p);
+        }
+        return Collections.unmodifiableList(listOfValues);
     }
 
     /**
