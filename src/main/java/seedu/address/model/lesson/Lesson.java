@@ -4,13 +4,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
+import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import seedu.address.model.person.Name;
 
 /**
  * Represents a lessons that has a day, timing and subject to be taught
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
 
     // Scheduling fields
     private final Timeslot timeslot;
@@ -18,15 +22,16 @@ public class Lesson {
 
     // Identity fields
     private final Subject subject;
-
+    private final List<Name> attendees;
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Timeslot timeslot, Subject subject, DayOfWeek dayOfWeek) {
-        requireAllNonNull(timeslot, subject, dayOfWeek);
+    public Lesson(Timeslot timeslot, Subject subject, DayOfWeek dayOfWeek, List<Name> attendees) {
+        requireAllNonNull(timeslot, subject, dayOfWeek, attendees);
         this.timeslot = timeslot;
         this.subject = subject;
         this.dayOfWeek = dayOfWeek;
+        this.attendees = attendees;
     }
 
     public Timeslot getTimeslot() {
@@ -39,6 +44,14 @@ public class Lesson {
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public List<Name> getAttendees() {
+        return Collections.unmodifiableList(attendees);
+    }
+
+    public void addAttendee(Name name) {
+        attendees.add(name);
     }
 
     /**
@@ -93,4 +106,14 @@ public class Lesson {
     }
 
 
+    @Override
+    public int compareTo(Lesson o) {
+        if (dayOfWeek.compareTo(o.dayOfWeek) != 0) {
+            // if not same day, judge based on day
+            return dayOfWeek.compareTo(o.dayOfWeek);
+        } else {
+            // judge based on timeslot
+            return timeslot.compareTo(o.timeslot);
+        }
+    }
 }
