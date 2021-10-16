@@ -161,4 +161,23 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns the visit formatted with frequency as well as occurrence.
+     */
+    public String getFormattedVisit() {
+        if (this.getVisit().isEmpty()) {
+            return new Visit("").getFormatted();
+        }
+
+        String visit = this.getVisit().get().getFormatted();
+        if (this.getFrequency().isEmpty() || this.getOccurrence().get().value == 1) {
+            return visit;
+        }
+
+        String frequency = this.getFrequency().get().toString();
+        int occurrence = this.getOccurrence().get().getNext().value;
+        String formattedVisit = visit + " (repeats " + frequency + ", for " + occurrence + " more time(s))";
+        return formattedVisit;
+    }
+
 }

@@ -78,6 +78,6 @@ public class LastVisitTest {
         assertEquals(expectedDate, new LastVisit("2021-02-01 23:59").getFormatted());
 
         // format displayed date for empty visit
-        assertEquals("", new LastVisit("").getFormatted());
+        assertEquals("-", new LastVisit("").getFormatted());
     }
 }

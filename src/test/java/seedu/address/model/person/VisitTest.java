@@ -86,6 +86,6 @@ public class VisitTest {
         assertEquals(expectedDate, new Visit("2021-02-01 23:59").getFormatted());
 
         // format displayed date for empty visit
-        assertEquals("", new Visit("").getFormatted());
+        assertEquals("-", new Visit("").getFormatted());
     }
 }
