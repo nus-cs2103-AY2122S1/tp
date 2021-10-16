@@ -13,7 +13,7 @@ import dash.model.Model;
 import dash.model.task.Task;
 
 /**
- * Deletes a task identified using it's index from the task list.
+ * Deletes a task identified using its index from the task list.
  */
 public class DeleteTaskCommand extends Command {
 

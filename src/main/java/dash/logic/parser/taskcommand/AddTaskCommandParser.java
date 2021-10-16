@@ -13,6 +13,7 @@ import dash.logic.parser.Parser;
 import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
 
@@ -38,9 +39,10 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         TaskDescription description =
                 ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
+        CompletionStatus completionStatus = new CompletionStatus(false);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, tagList);
+        Task task = new Task(description, completionStatus, tagList);
 
         return new AddTaskCommand(task);
     }

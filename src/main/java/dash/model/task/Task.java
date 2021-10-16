@@ -16,17 +16,20 @@ import dash.model.tag.Tag;
 public class Task {
     private final TaskDescription taskDescription;
     private final Set<Tag> tags = new HashSet<>();
+    private final CompletionStatus completionStatus;
 
     /**
      * Constructs a {@code Task}.
-     *
      * @param taskDescription A valid task description
+     * @param completionStatus A completion status
      * @param tags A valid tag
      */
-    public Task(TaskDescription taskDescription, Set<Tag> tags) {
-        requireAllNonNull(taskDescription, tags);
+    public Task(TaskDescription taskDescription, CompletionStatus completionStatus, Set<Tag> tags) {
+        requireAllNonNull(taskDescription, completionStatus, tags);
         this.taskDescription = taskDescription;
+        this.completionStatus = completionStatus;
         this.tags.addAll(tags);
+
     }
 
     public TaskDescription getTaskDescription() {
@@ -39,6 +42,14 @@ public class Task {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public CompletionStatus getCompletionStatus() {
+        return completionStatus;
+    }
+
+    public void complete() {
+        completionStatus.complete();
     }
 
     /**
@@ -66,7 +77,13 @@ public class Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getTaskDescription());
+        if (completionStatus.get()) {
+            builder.append(getTaskDescription())
+                    .append(" (completed)");
+        } else {
+            builder.append(getTaskDescription())
+                    .append(" (not completed)");
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

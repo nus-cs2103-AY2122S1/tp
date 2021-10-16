@@ -12,6 +12,7 @@ import dash.model.person.Name;
 import dash.model.person.Person;
 import dash.model.person.Phone;
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
 import dash.model.task.TaskList;
@@ -45,10 +46,14 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[]{
-            new Task(new TaskDescription("Submit CS2100 Assignment by 23:59"), getTagSet("homework")),
-            new Task(new TaskDescription("ST2334 quiz before Friday"), getTagSet("homework")),
-            new Task(new TaskDescription("Do PR review"), getTagSet("groupwork")),
-            new Task(new TaskDescription("Catch up with ST lectures"), getTagSet("classmates"))
+            new Task(new TaskDescription("Submit CS2100 Assignment by 23:59"), new CompletionStatus(false),
+                    getTagSet("homework")),
+            new Task(new TaskDescription("ST2334 quiz before Friday"), new CompletionStatus(false),
+                    getTagSet("homework")),
+            new Task(new TaskDescription("Do PR review"), new CompletionStatus(true),
+                    getTagSet("groupwork")),
+            new Task(new TaskDescription("Catch up with ST lectures"), new CompletionStatus(false),
+                    getTagSet("classmates"))
         };
     }
 
