@@ -79,7 +79,7 @@ Format: `help`
 
 Adds a contact to the address book.
 
-Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​​`
+Format: `add c/CATEGORY_CODE n/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS rv/REVIEW [t/TAG]…​​`
 
 Category Code:
 * Attraction: `att`
@@ -90,12 +90,16 @@ Category Code:
 * OTHERS: `oth`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A contact can have any number of tags (including 0)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A contact can have a review
 </div>
 
 Examples:
 * `add c/att/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803`
-* `add c/acc/Marina Bay Sands t/Hotel e/1234@example.com a/10 Bayfront Ave, Singapore 018956`
+* `add c/acc/Marina Bay Sands t/Hotel e/1234@example.com a/10 Bayfront Ave, Singapore 018956 rv/Great place!`
 
 ### Listing all persons : `list`
 
@@ -171,11 +175,15 @@ Category codes:
 * Accommodation :`c/acc`
 * Transport :`c/tpt`
 
-Format: `filter c/CATEGORY`
+Format: `filter c/CATEGORY...`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can filter contacts in one or many categories
+</div>
 
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts).
-* `filter c/acc` returns Mandarin Oriental and Hotel81 (all accommodation contacts)
+* `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts).
 
 
 ### Clearing all entries : `clear`

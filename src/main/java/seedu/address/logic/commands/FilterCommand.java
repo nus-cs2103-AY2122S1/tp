@@ -2,8 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.exceptions.CommandException;
+import java.util.Set;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.CategoryCode;
+import seedu.address.model.person.IsInCategoryPredicate;
+
+
 
 /**
  * Filters contacts in the address book by category.
@@ -12,21 +18,31 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    private final String category;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all contacts by category "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: CATEGORY_CODE\n"
+            + "Example: " + COMMAND_WORD + " c/att";
+
+    private final Set<CategoryCode> categoryCodes;
+    private final IsInCategoryPredicate predicate;
 
     /**
      * constructor for FilterCommand
-     * @param category type of contacts to be filtered
+     * @param categoryCodes types of contacts to be filtered
      */
-    public FilterCommand(String category) {
-        requireNonNull(category);
-        this.category = category;
+    public FilterCommand(Set<CategoryCode> categoryCodes) {
+        requireNonNull(categoryCodes);
+        this.categoryCodes = categoryCodes;
+        this.predicate = new IsInCategoryPredicate(categoryCodes);
+
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format("Filter command not implemented yet. Filter contacts in %s category.", category));
+    public CommandResult execute(Model model) {
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
@@ -43,6 +59,6 @@ public class FilterCommand extends Command {
 
         // state check
         FilterCommand e = (FilterCommand) other;
-        return category.equals(e.category);
+        return categoryCodes.equals(e.categoryCodes);
     }
 }
