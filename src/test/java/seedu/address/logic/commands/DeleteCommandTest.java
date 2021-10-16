@@ -83,12 +83,14 @@ public class DeleteCommandTest {
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
 
+
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
         // different students -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
+
 
     /**
      * Updates {@code model}'s filtered list to show no one.
