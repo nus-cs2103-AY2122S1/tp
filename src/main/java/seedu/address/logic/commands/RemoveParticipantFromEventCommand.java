@@ -26,7 +26,7 @@ public class RemoveParticipantFromEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + "240Km Marathon ";
 
     public static final String MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS =
-            "Removed Participant: %1$s from event %2$s successfully";
+            "Removed %1$s from %2$s successfully";
     public static final String MESSAGE_PARTICIPANT_NOT_IN_EVENT = "Participant %1$s doesn't exist in this event!";
 
     private final ParticipantId participantId;

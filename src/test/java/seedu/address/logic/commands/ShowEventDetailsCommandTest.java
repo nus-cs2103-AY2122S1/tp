@@ -100,11 +100,13 @@ public class ShowEventDetailsCommandTest {
     @Test
     public void execute_eventWithSpecifiedTimeAndCompletionInList_showDetailsSuccessful() throws CommandException {
         CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithTimeAndCompletion).execute(model);
-        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+        String expectedOutput = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted"
+                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getParticipants().size()
                 );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
@@ -119,11 +121,13 @@ public class ShowEventDetailsCommandTest {
     public void execute_eventWithDefaultTimeAndCompletionInList_showDetailsSuccessful() throws CommandException {
         CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithoutTimeAndCompletion)
                 .execute(model);
-        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+        String expectedOutput = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted"
+                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
@@ -140,11 +144,13 @@ public class ShowEventDetailsCommandTest {
         ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEventWithTimeAndCompletion);
         CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithTimeAndCompletion)
                 .execute(modelStub);
-        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+        String expectedOutput = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted"
+                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
@@ -161,11 +167,13 @@ public class ShowEventDetailsCommandTest {
         ModelStubWithEvent modelStub = new ModelStubWithEvent(sampleEventWithoutTimeAndCompletion);
         CommandResult commandResult = new ShowEventDetailsCommand(samplePredicateWithoutTimeAndCompletion)
                 .execute(modelStub);
-        String expectedOutput = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
+        String expectedOutput = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted"
+                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }

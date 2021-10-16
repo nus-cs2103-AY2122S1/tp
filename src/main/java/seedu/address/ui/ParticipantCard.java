@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.tag.Tag;
@@ -73,7 +72,8 @@ public class ParticipantCard extends UiPart<Region> {
         participant.getNotes().stream()
                 .sorted(Comparator.comparing(Note::toString))
                 .forEach(note -> notes.getChildren().add(noteLabel(note)));
-        nextOfKins.setText(participant.getNextOfKins().stream().map(NextOfKin::toString).collect(Collectors.joining()));
+        nextOfKins.setText(participant.getNextOfKins().stream().map(i -> i.toString() + "\n")
+                .collect(Collectors.joining()));
 
     }
 

@@ -97,8 +97,9 @@ public class ShowEventParticipantsCommandTest {
     @Test
     public void execute_eventWithSingleParticipantInList_showDetailsSuccessful() throws CommandException {
         CommandResult commandResult = new ShowEventParticipantsCommand(samplePredicate).execute(model);
-        String expectedOutput = String.format("Event Name: %s\nParticipants:\n1. %s\n",
+        String expectedOutput = String.format("Event Name: %s\nNumber of participants: %d\nParticipant list:\n1. %s\n",
                 sampleEvent.getNameString(),
+                sampleEvent.getParticipants().size(),
                 ParticipantBuilder.DEFAULT_NAME);
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }
@@ -113,8 +114,9 @@ public class ShowEventParticipantsCommandTest {
         ModelStubWithEventWithParticipant modelStub = new ModelStubWithEventWithParticipant(sampleEvent);
         EventNamePredicate predicate = preparePredicate(sampleEvent.getNameString());
         CommandResult commandResult = new ShowEventParticipantsCommand(predicate).execute(modelStub);
-        String expectedOutput = String.format("Event Name: %s\nParticipants:\n1. %s\n",
+        String expectedOutput = String.format("Event Name: %s\nNumber of participants: %d\nParticipant list:\n1. %s\n",
                 sampleEvent.getNameString(),
+                sampleEvent.getParticipants().size(),
                 ParticipantBuilder.DEFAULT_NAME);
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
     }

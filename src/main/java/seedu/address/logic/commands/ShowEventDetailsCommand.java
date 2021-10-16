@@ -42,13 +42,7 @@ public class ShowEventDetailsCommand extends Command {
         }
 
         Event desiredEvent = filteredEventList.get(0);
-        String displayedMessage = String.format("Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s",
-                desiredEvent.getName(),
-                desiredEvent.getDate(),
-                desiredEvent.getTime().toString().equals("") ? "" : desiredEvent.getTime(),
-                desiredEvent.getIsDone() ? "Completed" : "Uncompleted");
-
-        return new CommandResult(displayedMessage);
+        return new CommandResult(desiredEvent.toString());
 
     }
 

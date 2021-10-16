@@ -49,8 +49,9 @@ public class ShowEventParticipantsCommand extends Command {
         Event desiredEvent = filteredEventList.get(0);
         List<Participant> participantList = desiredEvent.getParticipants();
         participantList.sort(Comparator.comparing(Participant::getFullName));
-        String displayedMessage = String.format("Event Name: %s\nParticipants:\n%s",
+        String displayedMessage = String.format("Event Name: %s\nNumber of participants: %d\nParticipant list:\n%s",
                 desiredEvent.getName(),
+                participantList.size(),
                 Stream.iterate(0, i -> i + 1)
                         .limit(participantList.size())
                         .map(i -> (i + 1) + ". " + participantList.get(i).getFullName() + "\n")

@@ -76,8 +76,8 @@ public class ParticipantTest {
         alexP.addNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
         alexP.addNote(new Note("Alex is vegetarian", Note.Importance.VERY_HIGH));
         assertFalse(alexP.getNotes().isEmpty());
-        ArrayList<String> expectedNotes = new ArrayList<>(List.of("Importance[HIGH] Alex has allergy to pollen",
-                "Importance[VERY_HIGH] Alex is vegetarian"));
+        ArrayList<String> expectedNotes = new ArrayList<>(List.of("[HIGH] Alex has allergy to pollen",
+                "[VERY_HIGH] Alex is vegetarian"));
         assertTrue(alexP.getNotes().stream().map(Object::toString).allMatch(expectedNotes::contains));
     }
 
@@ -88,7 +88,7 @@ public class ParticipantTest {
         alexP.addNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
         alexP.addNote(new Note("Alex is vegetarian", Note.Importance.VERY_HIGH));
         alexP.removeNote(new Note("Alex has allergy to pollen", Note.Importance.HIGH));
-        assertEquals("[Importance[VERY_HIGH] Alex is vegetarian]",
+        assertEquals("[[VERY_HIGH] Alex is vegetarian]",
                 alexP.getNotes().toString());
     }
 
