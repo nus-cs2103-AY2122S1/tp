@@ -10,7 +10,6 @@ import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
-import safeforhall.logic.commands.EaddCommand;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
@@ -33,10 +32,11 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param isResidentTab indicates if the active tab is Resident or Model
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, Boolean isResidentTab) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -44,6 +44,36 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        switch (commandWord) {
+
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+
+        default:
+            if (isResidentTab) {
+                return parseResidentCommand(commandWord, arguments);
+            } else {
+                return parseEventCommand(commandWord, arguments);
+            }
+        }
+    }
+
+    /**
+     * Parses commands that have been input while the Resident tab is active.
+     *
+     * @param commandWord the main command word
+     * @param arguments the provided arguments
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    private Command parseResidentCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -55,9 +85,6 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
@@ -67,18 +94,36 @@ public class AddressBookParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case EaddCommand.COMMAND_WORD:
-            return new EaddCommandParser().parse(arguments);
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
+    /**
+     * Parses commands that have been input while the Event tab is active.
+     *
+     * @param commandWord the main command word
+     * @param arguments the provided arguments
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    private Command parseEventCommand(String commandWord, String arguments) throws ParseException {
+        switch (commandWord) {
+
+        case AddCommand.COMMAND_WORD:
+            return new EaddCommandParser().parse(arguments);
+
+        /*case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommand();*/
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
 }
