@@ -1,40 +1,44 @@
 package tutoraid.model.lesson;
 
-import static java.util.Objects.requireNonNull;
-import static tutoraid.commons.util.AppUtil.checkArgument;
+import tutoraid.model.student.Student;
+
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
- * Represents a Lesson's timing in TutorAid.
+ * Represents a Lesson's students in TutorAid.
  * Guarantees: immutable; is valid as declared in {@link #isValidStudents(String)}
  */
 public class Students {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Students should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
+    public final ArrayList<Student> value;
 
     /**
      * Constructs a {@code Students}.
      *
      * @param students Valid students' indexes.
      */
-    public Students(String students) {
-        requireNonNull(students);
-        checkArgument(isValidStudents(students), MESSAGE_CONSTRAINTS);
+    public Students(ArrayList<Student> students) {
         value = students;
     }
 
     /**
-     * Returns true if a given string are valid students.
+     * Returns true if both sets of students have the same names.
+     * This defines a weaker notion of equality between two sets of students.
      */
-    public static boolean isValidStudents(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public boolean areSameStudents(Students otherStudents) {
+        if (otherStudents == this) {
+            return true;
+        }
+
+        return otherStudents != null
+                && otherStudents.toString().equals(toString());
     }
 
     @Override
     public String toString() {
-        return value;
+        return value.stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 
     @Override
