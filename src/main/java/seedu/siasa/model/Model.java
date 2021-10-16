@@ -111,6 +111,12 @@ public interface Model {
      */
     void setPolicy(Policy target, Policy editedPolicy);
 
+    /**
+     * Removes all policies belonging to the given person {@code target}.
+     * {@code target} must exist in the SIASA.
+     */
+    void removePoliciesBelongingTo(Person target);
+
     /** Returns an unmodifiable view of the filtered policy list */
     ObservableList<Policy> getFilteredPolicyList();
 

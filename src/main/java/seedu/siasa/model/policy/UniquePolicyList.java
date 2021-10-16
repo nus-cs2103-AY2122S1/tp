@@ -74,7 +74,8 @@ public class UniquePolicyList implements Iterable<Policy> {
      */
     public void removeBelongingTo(Person owner) {
         requireNonNull(owner);
-        for (Policy policy: internalList) {
+        for (int i = internalList.size() - 1; i >= 0; i--) {
+            Policy policy = internalList.get(i);
             if (policy.getOwner().equals(owner)) {
                 remove(policy);
             }

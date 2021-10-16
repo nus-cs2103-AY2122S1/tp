@@ -27,7 +27,7 @@ public class ClearClientPolicyCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_CLEAR_CLIENT_POLICY_SUCCESS = "Deleted %1$s policies belonging to client %1$s";
+    public static final String MESSAGE_CLEAR_CLIENT_POLICY_SUCCESS = "Deleted %1$s policies belonging to client %2$s";
 
     private final Index targetIndex;
 
@@ -46,17 +46,11 @@ public class ClearClientPolicyCommand extends Command {
         }
 
         Person owner = lastShownList.get(targetIndex.getZeroBased());
-
         model.updateFilteredPolicyList(new PolicyIsOwnedByPredicate(owner));
-
         List<Policy> policyList = model.getFilteredPolicyList();
-
         int deletedPolicies = policyList.size();
 
-        for (int i = deletedPolicies - 1; i >= 0; i--) {
-            Policy toDelete = policyList.get(i);
-            model.deletePolicy(toDelete);
-        }
+        model.removePoliciesBelongingTo(owner);
 
         // Remove filter to display policies correctly in UI
         model.updateFilteredPolicyList(x -> true);
