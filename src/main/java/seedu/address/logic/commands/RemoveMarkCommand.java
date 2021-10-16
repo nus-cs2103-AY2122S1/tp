@@ -87,7 +87,7 @@ public class RemoveMarkCommand extends Command {
         }
         Person toTest = model.getFilteredPersonList().get(index);
         model.setPerson(toTest, checkPerson(toTest));
-        return new CommandResult(String.format(STAFF_UNMARKED, toTest.getName()));
+        return new CommandResult(String.format(STAFF_UNMARKED, "\n" + toTest.getName()));
     }
 
     /**
@@ -102,8 +102,9 @@ public class RemoveMarkCommand extends Command {
         StringBuilder result = new StringBuilder();
         for (String string : strings) {
             result.append(string);
+            result.append("\n");
         }
-        return result.toString().trim();
+        return "\n" + result.toString().trim();
     }
 
     /**
