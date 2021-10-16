@@ -270,35 +270,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new contact
-2. FAST displays a message indicating success
-3. FAST displays the new contact below
+1. User requests to add a new contact.
+2. FAST displays a message indicating success.
+3. FAST displays the new contact below.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given command syntax is invalid
-    * 1a1. FAST shows an error message
-    * 2a2. FAST shows an example of add command to user
+* 1a. The given command syntax is invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of add contact command to user.
 
-      Use case ends
+      Use case ends.
 
 **Use case: UC02 - Delete Contact**
 
 **MSS**
 
-1. User requests to list persons (UC06)
-2. User requests to delete a specific person in the list
-3. FAST deletes the person
+1. User requests to list persons (UC06).
+2. User requests to delete a specific person in the list.
+3. FAST deletes the person.
 
    Use case ends
 
 **Extensions**
 
-* 2a. The given index is invalid
-    * 2a1. FAST shows an error message
-    * 2a2. FAST shows an example of delete command to user
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of delete contact command to user.
 
       Use case ends.
 
@@ -306,24 +306,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts (UC06)
-2. User requests to edit a contact
-3. FAST displays the updated contact
+1. User requests to list contacts (UC06).
+2. User requests to edit a contact.
+3. FAST displays the updated contact.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 2a. The given index is invalid
-    * 2a1. FAST shows an error message
-    * 2a2. FAST shows an example of edit command to user
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of edit contact command to user.
 
       Use case ends.
 
 
-* 2b. The given command syntax is invalid
-    * 2b1. FAST displays an error message
-    * 2b2. FAST displays an example of the edit command to the user
+* 2b. The given command syntax is invalid.
+    * 2b1. FAST displays an error message.
+    * 2b2. FAST displays an example of the edit contact command to the user.
 
       Use case ends.
 
@@ -332,72 +332,172 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons (UC06)
-2. User requests to add a remark to a specific person in the list
-3. FAST displays the new remark in the contact
+1. User requests to list persons (UC06).
+2. User requests to add a remark to a specific person in the list.
+3. FAST displays the new remark in the contact.
 
    Use case ends
 
 **Extensions**
 
-* 2a. The given index is invalid
-    * 2a1. FAST shows an error message
-    * 2a2. FAST shows an example of remark command to user
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of remark command to user.
 
       Use case ends
 
 
 * 2b. The given command syntax is invalid
-    * 2b1. FAST displays an error message
-    * 2b2. FAST displays an example of the remark command to the user
+    * 2b1. FAST displays an error message.
+    * 2b2. FAST displays an example of the remark command to the user.
 
       Use case ends
 
 
 * 2c. User removes an existing remark
-    * 2c1. FAST displays a message that the remark has been removed
+    * 2c1. FAST displays a message that the remark has been removed.
 
-      Use case ends
+      Use case ends.
 
 
 **Use case: UC05 - Find Contact**
 
 **MSS**
 
-1. User searches for a name
-2. FAST shows a list of persons with the specified name or people whose name contains the search query
+1. User searches for a name.
+2. FAST shows a list of persons with the specified name or people whose name contains the search query.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given search query is invalid
-    * 1a1. FAST shows an error message
-    * 1a2. FAST shows an example of find command to user
+* 1a. The given search query is invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command to user.
 
-      Use case ends
+      Use case ends.
 
 
-* 1b FAST cannot find any contacts with the given search query
-    * 1b1. FAST displays a message to inform user no contacts that matches the query was found
+* 1b FAST cannot find any contacts with the given search query.
+    * 1b1. FAST displays a message to inform user no contacts that matches the query was found.
 
-      Use case ends
+      Use case ends.
 
 
 **Use case: UC06 - List Contacts**
 
 **MSS**
 
-1. User requests to list contacts
-2. FAST displays a list of contacts
+1. User requests to list contacts.
+2. FAST displays a list of contacts.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
 
-  Use case ends
+  Use case ends.
+
+**Use case: UC07 - Add Appointment**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to add a new appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of add appointment command to user. 
+
+* 2b. The given command syntax is invalid.
+    * 2b1. FAST shows an error message.
+    * 2b2. FAST shows an example of add appointment command to user.
+
+      Use case ends.
+
+* 2c. An appointment has already been scheduled.
+    * 2c1. FAST shows an error message.
+
+      Use case ends.
+
+**Use case: UC08 - Delete Appointment**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to delete an appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of delete appointment command to user.
+
+* 2b. No appointment scheduled yet.
+    * 2b1. FAST shows an error message.
+
+      Use case ends.
+
+**Use case: UC09 - Edit Appointment**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to edit an appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of edit appointment command to user.
+
+* 2b. The given command syntax is invalid.
+    * 2b1. FAST shows an error message.
+    * 2b2. FAST shows an example of edit appointment command to user.
+
+      Use case ends.
+
+* 2c. No appointment scheduled yet.
+    * 2c1.FAST shows an error message.
+
+      Use case ends.
+
+**Use case: UC10 - Update Completed Appointment**
+
+**MSS**
+
+1. User requests to list persons (UC06)
+2. User requests to update a completed appointment.
+3. FAST displays a message indicating success.
+4. FAST displays the new contact below.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of delete appointment command to user.
+
+* 2b. No appointment scheduled yet.
+    * 2b1. FAST shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 
