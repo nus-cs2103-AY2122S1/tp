@@ -10,19 +10,49 @@ import seedu.tracker.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
+    private final String optionalFilter;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        optionalFilter = keywords.get(0);
     }
 
     @Override
     public boolean test(Module module) {
-        return (keywords.stream()
+        switch (optionalFilter) {
+
+        case "code":
+            return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword)));
+
+        case "title":
+            return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
+
+        case "description":
+            return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword)));
+
+        case "mc":
+            return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword)));
+
+        case "tag":
+            return (keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
+
+        default:
+            return (keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
+                || keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
+        }
     }
 
     @Override
