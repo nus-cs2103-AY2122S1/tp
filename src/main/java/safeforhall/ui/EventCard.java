@@ -10,7 +10,7 @@ import safeforhall.model.event.EventDate;
 import safeforhall.model.event.Venue;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Event}.
  */
 public class EventCard extends UiPart<Region> {
 
@@ -40,7 +40,7 @@ public class EventCard extends UiPart<Region> {
     private Label capacity;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code EventCode} with the given {@code Event} and index to display.
      */
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
