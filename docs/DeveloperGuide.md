@@ -290,6 +290,25 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add contacts with optional arguments
+
+#### Implementation
+
+The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone, 
+without the need to include contact details. 
+
+Given below is an example usage scenario and how the addCommand mechanism behaves at each step.
+
+1. The user first launches Socius and wishes to add a new contact by name, without any contact details.
+
+2. The user executes the command add n/[NAME] add a new person with no/some contact details.
+
+3. If user input is valid, 
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,7 +462,7 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -460,7 +479,7 @@ Use case ends.
 3. User requests to tag a specific person in the list
 4. Socius tags the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -469,16 +488,14 @@ Use case ends.
   Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Remove existing tag of a person**
 
@@ -489,20 +506,16 @@ Use case ends.
 3. User requests to remove existing tag of a specific person in the list
 4. Socius removes the existing tag of the person
 
-    Use case ends.
-
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Filter persons by tag**
 
@@ -511,19 +524,14 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to filter the list of persons by tag
-4. Socius shows a filtered list of persons by tag
-    Use case ends.
-
+4. Socius shows a filtered list of persons by tag Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-  * 3a1. Socius shows an empty list.
-    Use case ends.
-
+    * 3a1. Socius shows an empty list. Use case ends.
 
 **Use case: Add remarks for a person**
 
@@ -532,27 +540,21 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person
-    Use case ends.
-
+4. Socius adds remarks for the person Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 *{More to be added}*
 
