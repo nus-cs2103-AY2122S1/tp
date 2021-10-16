@@ -1,7 +1,9 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 
+import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
@@ -10,7 +12,7 @@ import safeforhall.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddResidentCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -36,14 +38,14 @@ public class AddCommand extends Command {
             + CliSyntax.PREFIX_COLLECTIONDATE + "23-10-2021 ";
 
     public static final String MESSAGE_SUCCESS = "New resident added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This resident already exists in the address book";
+    public static final String MESSAGE_DUPLICATE = "This resident already exists in the address book";
 
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddResidentCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddResidentCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -53,7 +55,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE);
         }
 
         model.addPerson(toAdd);
@@ -63,7 +65,7 @@ public class AddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddResidentCommand // instanceof handles nulls
+                && toAdd.equals(((AddResidentCommand) other).toAdd));
     }
 }

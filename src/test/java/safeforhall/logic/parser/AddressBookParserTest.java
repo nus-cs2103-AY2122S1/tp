@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeleteCommand;
 //import safeforhall.logic.commands.EditCommand;
@@ -26,6 +25,7 @@ import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.add.AddResidentCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
@@ -43,8 +43,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person), true);
-        assertEquals(new AddCommand(person), command);
+        AddResidentCommand command = (AddResidentCommand) parser.parseCommand(PersonUtil.getAddCommand(person), true);
+        assertEquals(new AddResidentCommand(person), command);
     }
 
     @Test

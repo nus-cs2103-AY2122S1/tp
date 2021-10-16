@@ -6,7 +6,6 @@ import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
@@ -16,6 +15,10 @@ import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.add.AddEventCommand;
+import safeforhall.logic.commands.add.AddResidentCommand;
+import safeforhall.logic.parser.add.AddEventCommandParser;
+import safeforhall.logic.parser.add.AddResidentCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,8 +79,8 @@ public class AddressBookParser {
     private Command parseResidentCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddResidentCommand.COMMAND_WORD:
+            return new AddResidentCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -110,8 +113,8 @@ public class AddressBookParser {
     private Command parseEventCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new EaddCommandParser().parse(arguments);
+        case AddEventCommand.COMMAND_WORD:
+            return new AddEventCommandParser().parse(arguments);
 
         /*case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

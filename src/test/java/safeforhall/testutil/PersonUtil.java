@@ -9,8 +9,8 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
-import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.add.AddResidentCommand;
 import safeforhall.model.person.Person;
 
 /**
@@ -22,7 +22,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddResidentCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**

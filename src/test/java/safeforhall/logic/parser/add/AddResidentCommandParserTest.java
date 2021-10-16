@@ -1,4 +1,4 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.add;
 
 import static safeforhall.logic.commands.CommandTestUtil.COLLECTION_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.COLLECTION_DESC_BOB;
@@ -42,7 +42,7 @@ import static safeforhall.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
-import safeforhall.logic.commands.AddCommand;
+import safeforhall.logic.commands.add.AddResidentCommand;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -53,8 +53,8 @@ import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 import safeforhall.testutil.PersonBuilder;
 
-public class AddCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+public class AddResidentCommandParserTest {
+    private AddResidentCommandParser parser = new AddResidentCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -63,47 +63,47 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple rooms - last room accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_AMY
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple faculties - last faculty accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + FACULTY_DESC_AMY + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple vaccination status - last vaccStatus accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple fet dates - last fet date accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
-                + FET_DESC_AMY + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_AMY + FET_DESC_BOB + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
 
         // multiple collection dates - last collection date accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
                 + FACULTY_DESC_BOB + VACCSTATUS_DESC_AMY + VACCSTATUS_DESC_BOB
-                + FET_DESC_BOB + COLLECTION_DESC_AMY + COLLECTION_DESC_BOB, new AddCommand(expectedPerson));
+                + FET_DESC_BOB + COLLECTION_DESC_AMY + COLLECTION_DESC_BOB, new AddResidentCommand(expectedPerson));
     }
 
     @Test
@@ -112,22 +112,23 @@ public class AddCommandParserTest {
 
         // missing lastFetDate and lastCollectionDate
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
-                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY, new AddCommand(expectedPerson));
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY, new AddResidentCommand(expectedPerson));
 
         // missing lastFetDate
         expectedPerson = new PersonBuilder(AMY_NO_FET).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
-                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + COLLECTION_DESC_AMY, new AddCommand(expectedPerson));
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + COLLECTION_DESC_AMY, new AddResidentCommand(expectedPerson));
 
         // missing lastCollectionDate
         expectedPerson = new PersonBuilder(AMY_NO_COLLECTION).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ROOM_DESC_AMY
-                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY, new AddCommand(expectedPerson));
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY, new AddResidentCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                AddResidentCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ROOM_DESC_BOB
@@ -208,6 +209,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ROOM_DESC_BOB + FACULTY_DESC_BOB + VACCSTATUS_DESC_BOB + FET_DESC_BOB + COLLECTION_DESC_BOB,
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddResidentCommand.MESSAGE_USAGE));
     }
 }
