@@ -88,7 +88,6 @@ Format: `addfav STUDENT_ID`
 Examples:
 * `addfav A0222594A`
 * `addfav A1234567R`
-<br>
   <br>
   ![result for 'addfav A0222594A'](images/addFavResult.png)
 
