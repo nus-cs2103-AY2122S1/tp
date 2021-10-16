@@ -14,7 +14,7 @@ public class BirthDateTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
+    public void constructor_invalidBirthDate_throwsIllegalArgumentException() {
         String invalidBirthDate = "";
         assertThrows(IllegalArgumentException.class, () -> new BirthDate(invalidBirthDate));
     }
@@ -26,7 +26,7 @@ public class BirthDateTest {
         assertTrue(BirthDate.isValidBirthDate("3/3/2021"));
     }
     @Test
-    public void isValidBirthDate_invalidBirthDate_success() {
+    public void isValidBirthDate_invalidBirthDate_failure() {
         assertFalse(BirthDate.isValidBirthDate("")); // empty string
         assertFalse(BirthDate.isValidBirthDate("2021-02-02")); // in YYYY-MM-DD format
         assertFalse(BirthDate.isValidBirthDate("12/31/2021")); // in MM/DD/YYYY format
