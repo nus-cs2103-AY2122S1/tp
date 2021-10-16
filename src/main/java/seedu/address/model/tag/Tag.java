@@ -11,6 +11,8 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String ASSERTION_ERROR_NEGATIVE_DUPLICATES =
+            "Number of students labelled under this tag should be non-negative.";
 
     public final String tagName;
     private int numStudents = 0;
@@ -54,7 +56,12 @@ public class Tag {
      * @return Tag containing the original tag name and number of students under this tag.
      */
     public Tag createTagWithNum(int num) {
-        return new Tag(tagName, num);
+        assert num >= 0 : ASSERTION_ERROR_NEGATIVE_DUPLICATES;
+        if (num == 0) {
+            return this;
+        } else {
+            return new Tag(tagName, num);
+        }
     }
 
     /**
