@@ -38,10 +38,10 @@ public class EventCard extends UiPart<Region> {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
-        name.setText(event.getName().eventName);
-        isDone.setText(event.getIsDone() ? "Completed" : "Uncompleted");
-        date.setText(event.getDate().toString());
-        time.setText(event.getTime().toString());
+        name.setText(event.getNameString());
+        isDone.setText(event.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED);
+        date.setText(event.getDateString());
+        time.setText(event.getTimeString());
         event.getParticipants().stream()
                 .sorted(Comparator.comparing(Participant::getFullName))
                 .forEach(participant -> participants.getChildren().add(new Label(participant.getFullName())));
