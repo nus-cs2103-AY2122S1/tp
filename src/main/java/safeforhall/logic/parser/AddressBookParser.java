@@ -11,15 +11,15 @@ import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
 import safeforhall.logic.commands.EaddCommand;
-import safeforhall.logic.commands.EditCommands.EditEventCommand;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.parser.EditCommandParsers.EditEventCommandParser;
-import safeforhall.logic.parser.EditCommandParsers.EditPersonCommandParser;
+import safeforhall.logic.commands.editcommands.EditEventCommand;
+import safeforhall.logic.commands.editcommands.EditPersonCommand;
+import safeforhall.logic.parser.editcommandparsers.EditEventCommandParser;
+import safeforhall.logic.parser.editcommandparsers.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -30,9 +30,11 @@ public class AddressBookParser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT =
+            Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private static final Pattern TYPED_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+\\st/\\S+)(?<arguments>.*)");
+    private static final Pattern TYPED_COMMAND_FORMAT =
+            Pattern.compile("(?<commandWord>\\S+\\st/\\S+)(?<arguments>.*)");
 
 
     /**
@@ -68,7 +70,7 @@ public class AddressBookParser {
             return new EditPersonCommandParser().parse(arguments);
 
         case EditEventCommand.COMMAND_WORD:
-             return new EditEventCommandParser().parse(arguments);
+            return new EditEventCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

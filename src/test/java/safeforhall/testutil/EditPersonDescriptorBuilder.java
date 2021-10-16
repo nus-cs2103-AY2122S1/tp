@@ -4,7 +4,7 @@ package safeforhall.testutil;
 //import java.util.stream.Collectors;
 //import java.util.stream.Stream;
 
-import safeforhall.logic.commands.EditCommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;

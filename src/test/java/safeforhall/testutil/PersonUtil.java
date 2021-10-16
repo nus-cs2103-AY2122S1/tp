@@ -10,7 +10,7 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
 import safeforhall.logic.commands.AddCommand;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.person.Person;
 
 /**

@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.editcommands.EditPersonCommand;
+import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
@@ -83,7 +83,8 @@ public class EditPersonCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
-        EditPersonCommand editPersonCommand = new EditPersonCommand(indexArray, new EditPersonCommand.EditPersonDescriptor());
+        EditPersonCommand editPersonCommand =
+                new EditPersonCommand(indexArray, new EditPersonCommand.EditPersonDescriptor());
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String editedResidents = ("1.\t" + editedPerson.getName() + "\n");

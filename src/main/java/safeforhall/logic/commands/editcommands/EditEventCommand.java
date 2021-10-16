@@ -1,8 +1,11 @@
-package safeforhall.logic.commands.EditCommands;
+package safeforhall.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_EVENT;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+
+import java.util.List;
+import java.util.Optional;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
@@ -12,15 +15,15 @@ import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
-import safeforhall.model.event.EventName;
-import safeforhall.model.event.EventDate;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.Venue;
 
-import java.util.List;
-import java.util.Optional;
-
+/**
+ * Edits the details of an existing event in the address book.
+ */
 public class EditEventCommand extends Command {
     public static final String COMMAND_WORD = "edit" + " " + PREFIX_TYPE_EVENT;
 
@@ -43,6 +46,10 @@ public class EditEventCommand extends Command {
     private final Index targetIndex;
     private final EditEventDescriptor editEventDescriptor;
 
+    /**
+     * @param targetIndex Index of Event in the filtered event list to edit
+     * @param editEventDescriptor details to edit the event with
+     */
     public EditEventCommand(Index targetIndex, EditEventDescriptor editEventDescriptor) {
         requireNonNull(targetIndex);
         requireNonNull(editEventDescriptor);
@@ -72,6 +79,10 @@ public class EditEventCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 
+    /**
+     * Creates and returns a {@code Event} with the details of {@code eventToEdit}
+     * edited with {@code editEventDescriptor}.
+     */
     private static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
 
@@ -102,6 +113,10 @@ public class EditEventCommand extends Command {
                 && editEventDescriptor.equals(e.editEventDescriptor);
     }
 
+    /**
+     * Stores the details to edit the event with. Each non-empty field value will replace the
+     * corresponding field value of the event.
+     */
     public static class EditEventDescriptor {
         private EventName name;
         private EventDate date;

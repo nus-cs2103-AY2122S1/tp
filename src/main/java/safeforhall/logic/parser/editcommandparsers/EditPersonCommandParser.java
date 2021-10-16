@@ -1,4 +1,4 @@
-package safeforhall.logic.parser.EditCommandParsers;
+package safeforhall.logic.parser.editcommandparsers;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -6,9 +6,13 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.ArrayList;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand;
-import safeforhall.logic.commands.EditCommands.EditPersonCommand.EditPersonDescriptor;
-import safeforhall.logic.parser.*;
+import safeforhall.logic.commands.editcommands.EditPersonCommand;
+import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.parser.ArgumentMultimap;
+import safeforhall.logic.parser.ArgumentTokenizer;
+import safeforhall.logic.parser.CliSyntax;
+import safeforhall.logic.parser.Parser;
+import safeforhall.logic.parser.ParserUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -17,8 +21,8 @@ import safeforhall.logic.parser.exceptions.ParseException;
 public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditPersonCommand
+     * and returns an EditPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditPersonCommand parse(String args) throws ParseException {

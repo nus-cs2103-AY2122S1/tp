@@ -1,6 +1,8 @@
-package safeforhall.logic.commands.EditCommands;
+package safeforhall.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_EVENT;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_RESIDENT;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -24,13 +26,12 @@ import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
-
 /**
  * Edits the details of an existing person in the address book.
  */
 public class EditPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit" + " " + PREFIX_TYPE_RESIDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the residents identified "
             + "by the index numbers used in the displayed resident list. "
@@ -44,7 +45,7 @@ public class EditPersonCommand extends Command {
             + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY]"
             + "[" + CliSyntax.PREFIX_FETDATE + "LAST FET DATE] "
             + "[" + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE] \n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE_EVENT + " 1 "
             + CliSyntax.PREFIX_PHONE + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 

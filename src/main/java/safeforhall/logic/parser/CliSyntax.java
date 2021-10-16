@@ -22,5 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
 
     public static final String PREFIX_TYPE = "t/";
+    public static final String PREFIX_TYPE_RESIDENT = PREFIX_TYPE + "resident";
     public static final String PREFIX_TYPE_EVENT = PREFIX_TYPE + "event";
 }
