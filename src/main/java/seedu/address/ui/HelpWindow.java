@@ -9,7 +9,6 @@ import static seedu.address.ui.CommandFormat.REMARK_FORMAT;
 import static seedu.address.ui.CommandFormat.SORT_FORMAT;
 import static seedu.address.ui.CommandFormat.VIEW_FORFMAT;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -19,7 +18,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 
 /**
  * Controller for a help page

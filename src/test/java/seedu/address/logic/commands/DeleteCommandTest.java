@@ -83,7 +83,7 @@ public class DeleteCommandTest {
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
-  
+
     @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(List.of(INDEX_FIRST, INDEX_THIRD));
@@ -94,7 +94,7 @@ public class DeleteCommandTest {
 
         // same values -> returns true
         DeleteCommand deleteFirstCommandCopy = new DeleteCommand(List.of(INDEX_THIRD, INDEX_FIRST));
-      
+
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -116,5 +116,3 @@ public class DeleteCommandTest {
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
-
-

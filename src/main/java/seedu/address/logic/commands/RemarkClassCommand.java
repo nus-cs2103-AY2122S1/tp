@@ -7,11 +7,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUITIONS;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,6 +36,8 @@ public class RemarkClassCommand extends Command {
             + PREFIX_REMARK + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "physics homework: read chapter 3 pg 49-53.";
+
+    private static final Logger logger = LogsCenter.getLogger(RemarkEditor.class);
 
     private final Index index;
 
@@ -92,11 +96,20 @@ public class RemarkClassCommand extends Command {
         return index.equals(e.index);
     }
 
+    /**
+     * Displays a dialog box for the user to edit remarks.
+     * @param name The name of the student or tuition class being modified.
+     * @param remarkToEdit The current remark of the student or tuition class.
+     * @return Returns the updated remark.
+     * @throws CommandException If unable to load the fxml file for the remark editor.
+     */
     public Remark showRemarkEditor(String name, String remarkToEdit) throws CommandException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/view/RemarkEditor.fxml"));
             DialogPane remarkEditor = fxmlLoader.load();
+
+            logger.fine("Showing the remark editor");
 
             RemarkEditor remarkController = fxmlLoader.getController();
             remarkController.setRemark(name, remarkToEdit);
