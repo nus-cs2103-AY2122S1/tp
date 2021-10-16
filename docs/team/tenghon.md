@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to sort all contacts.
   * What it does: Allows the user to sort the contacts based on several keywords.
   * Justification: This feature allows user to quickly sort the contacts based on tags for example.
-  
+
 * **Code contributed**: [RepoSense link]()
 
 * **Project management**:
@@ -34,5 +34,3 @@ Given below are my contributions to the project.
 
 * **Tools**:
   * TBA
-
-  
