@@ -21,8 +21,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
-    public static final Collection<String> DEFAULT_MODULE_CODES = Set.of("CS2030S", "CS2040");
+    public static final String DEFAULT_REMARK = "Can't attend midterms";
+    public static final Collection<String> DEFAULT_MODULE_CODES = Set.of("CS2030S T12", "CS2040");
 
     private Name name;
     private Email email;
@@ -37,11 +37,11 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
-        remark = new Remark("");
         moduleCodes = DEFAULT_MODULE_CODES.stream()
-                .map(m -> new ModuleCode(m, new HashSet<>())).collect(Collectors.toSet());
+                .map(SampleDataUtil::parseModuleCode).collect(Collectors.toSet());
         phone = new Phone("");
         teleHandle = new TeleHandle("");
+        remark = new Remark("");
     }
 
     /**
@@ -56,7 +56,7 @@ public class PersonBuilder {
         teleHandle = personToCopy.getTeleHandle();
     }
 
-    /**
+    /**e
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {

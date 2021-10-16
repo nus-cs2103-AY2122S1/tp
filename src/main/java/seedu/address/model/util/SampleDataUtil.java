@@ -50,15 +50,6 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
-    }
-
-    /**
      * Returns a module code set containing the list of strings given.
      */
     public static Set<ModuleCode> getModuleCodeSet(String... strings) {
@@ -70,7 +61,7 @@ public class SampleDataUtil {
     /**
      * Helper method for {@code getModuleCodeSet} to parse {@code String moduleCode} into a {@code ModuleCode}.
      */
-    private static ModuleCode parseModuleCode(String moduleCode) {
+    public static ModuleCode parseModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
         String[] moduleCodeArr = trimmedModuleCode.split("\\s+");

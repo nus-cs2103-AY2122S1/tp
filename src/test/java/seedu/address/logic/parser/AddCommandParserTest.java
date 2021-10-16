@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELE_HANDLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2030S;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2040;
@@ -16,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TELE_HANDLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TELE_HANDLE_DESC_BOB;
@@ -39,6 +41,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -78,6 +81,11 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_AMY + TELE_HANDLE_DESC_BOB
                 + REMARK_DESC_BOB, new AddCommand(expectedPerson));
+
+        // multiple remark - last remark accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB
+                + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -85,8 +93,8 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).build();
 
         // missing phone prefix, telegram handle prefix and zero tags
-        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
-                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2040,
+                new AddCommand(expectedPerson));
     }
 
     @Test
@@ -137,10 +145,10 @@ public class AddCommandParserTest {
                 + INVALID_MODULE_CODE_DESC + MODULE_CODE_DESC_CS2030S + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
                 ModuleCode.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                Tag.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_CS2030S + TELE_HANDLE_DESC_BOB + INVALID_REMARK_DESC,
+                Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
