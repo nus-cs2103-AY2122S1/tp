@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class Participation implements Information {
+public class Participation extends SortableInformation {
 
     private static final String VALIDATION_REGEX = "^-?[0-9]\\d*$";
 

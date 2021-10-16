@@ -96,7 +96,7 @@ public class SortCommandTest {
         // before command executed
         assertNotEquals(expectedStudentList, model.getFilteredStudentList());
         assertCommandSuccess(sortParticipationAscendingCommand, model,
-                sortParticipationAscendingCommand.displayResult(), expectedModel);
+                sortParticipationAscendingCommand.getResultString(), expectedModel);
 
         //after command execute
         assertEquals(expectedStudentList, model.getFilteredStudentList());
@@ -112,7 +112,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortParticipationDescendingCommand, model,
-                sortParticipationDescendingCommand.displayResult(), expectedModel);
+                sortParticipationDescendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         SortCommand sortNameAscendingCommand = new SortCommand("NAME", true);
@@ -129,7 +129,7 @@ public class SortCommandTest {
 
         // after command execute
         assertCommandSuccess(sortNameAscendingCommand, model,
-                sortNameAscendingCommand.displayResult(), expectedModel);
+                sortNameAscendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         // sort by descending name
@@ -143,7 +143,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortNameDescendingCommand, model,
-                sortNameDescendingCommand.displayResult(), expectedModel);
+                sortNameDescendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         SortCommand sortAverageAscendingCommand =
@@ -162,7 +162,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortAverageAscendingCommand, model,
-                sortAverageAscendingCommand.displayResult(), expectedModel);
+                sortAverageAscendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         // sort by descending average
@@ -176,7 +176,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortAverageDescendingCommand, model,
-                sortAverageDescendingCommand.displayResult(), expectedModel);
+                sortAverageDescendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         SortCommand sortRA1AscendingCommand =
@@ -195,7 +195,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortRA1AscendingCommand, model,
-                sortRA1AscendingCommand.displayResult(), expectedModel);
+                sortRA1AscendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
         // sort by descending RA1 score
@@ -209,7 +209,7 @@ public class SortCommandTest {
 
         //after command execute
         assertCommandSuccess(sortRA1DescendingCommand, model,
-                sortRA1DescendingCommand.displayResult(), expectedModel);
+                sortRA1DescendingCommand.getResultString(), expectedModel);
         assertEquals(expectedStudentList, model.getFilteredStudentList());
 
     }

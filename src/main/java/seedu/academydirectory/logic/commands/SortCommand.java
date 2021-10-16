@@ -65,7 +65,7 @@ public class SortCommand extends Command {
      * Return a String representation of the respective sort executed.
      * @return A String representation of the sort executed.
      */
-    public String displayResult() {
+    public String getResultString() {
         String result = "AcademyDirectory is now sorted by ";
         String orderString = isAscendingOrder ? "ascending" : "descending";
         return result + attribute + " in " + orderString + " order!";
@@ -82,7 +82,7 @@ public class SortCommand extends Command {
         sortedList.addAll(students);
         sortedList.sort(comparator);
 
-        String result = displayResult();
+        String result = getResultString();
         AcademyDirectory sortedAcademyDirectory = new AcademyDirectory();
         sortedAcademyDirectory.setStudents(sortedList);
         model.setAcademyDirectory(sortedAcademyDirectory);
