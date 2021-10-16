@@ -88,6 +88,9 @@ Format: `addfav STUDENT_ID`
 Examples:
 * `addfav A0222594A`
 * `addfav A1234567R`
+<br>
+  <br>
+  ![result for 'addfav A0222594A'](images/addFavResult.png)
 
 ### Removing a favourite : `remfav`
 
@@ -104,6 +107,9 @@ Examples:
 Shows a list of all persons that the user has added to their favourites list.
 
 Format: `list`
+<br>
+  <br>
+  ![result for 'list'](images/listResult.png)
 
 ### Filter user profiles by module and group status : `filter`
 
@@ -118,6 +124,11 @@ Examples:
 * `filter mod/CS2030`
 * `filter mod/CS2030 group/SM`
 * `filter mod/CS2030 group/SG`
+<br>
+  <br>
+  ![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
+  <br>
+  ![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
 
 ### Find profiles by name  : `find`
 
@@ -133,10 +144,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `John` and `John Doe`
-* `find alex david` returns `Alex Yeoh` and `David Li`
+* `find alex david` returns `Alex Berenson` and `David Li`
 <br>
   <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex'](images/findAlexResult.png)
   
 ### Find profiles by student ID  : `findId`
 
@@ -154,7 +165,7 @@ Examples:
 * `findId A0123456A A0654321A` returns the persons whose student Id number matches either A0123456A or A0654321A.
 <br>
   <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'findId A0222594A'](images/findIdA0222594AResult.png)
 
 
 ### Viewing help : `help`
@@ -200,12 +211,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [t/TAG]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com t/Need a team for CS2103T`
-**Add** | `add id/STUDENT_ID` <br> e.g., `add id/A0222594A`
-**Remove** | `remove n/NAME id/STUDENT_ID`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/TAG]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Add Favourite** | `addfav STUDENT_ID` <br> e.g., `addfav A0222594A`
+**Remove Favourite** | `remfav STUDENT_ID` <br> e.g., `remfav A0222594A`
 **List** | `list`
-**View** | `view id/STUDENT_ID`
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM` 
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
+**Find by Name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
+**Find by Student Id** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `find A0222594A` returns person with student Id matching A0222594A.
 **Help** | `help`
 **Exit** | `exit`
