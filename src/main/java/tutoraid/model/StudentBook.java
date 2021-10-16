@@ -148,7 +148,7 @@ public class StudentBook implements ReadOnlyStudentBook {
 
     @Override
     public String toString() {
-        return students.asUnmodifiableObservableList().size() + " persons, "
+        return students.asUnmodifiableObservableList().size() + " students, "
                 + lessons.asUnmodifiableObservableList().size() + " lessons";
         // TODO: refine later
     }

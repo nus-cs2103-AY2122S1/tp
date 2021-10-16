@@ -21,7 +21,7 @@ import tutoraid.model.student.Student;
 class JsonSerializableStudentBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_LESSON = "Students list contains duplicate lesson(s).";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
