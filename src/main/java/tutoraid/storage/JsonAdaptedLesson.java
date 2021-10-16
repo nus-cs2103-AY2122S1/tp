@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.lesson.Capacity;
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.lesson.Name;
+import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
@@ -43,7 +43,7 @@ public class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        lessonName = source.getName().name;
+        lessonName = source.getLessonName().lessonName;
         capacity = source.getCapacity().value;
         price = source.getPrice().value;
         students = source.getStudents().value;
@@ -57,12 +57,13 @@ public class JsonAdaptedLesson {
      */
     public Lesson toModelType() throws IllegalValueException {
         if (lessonName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonName.class.getSimpleName()));
         }
-        if (!Name.isValidName(lessonName)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!LessonName.isValidLessonName(lessonName)) {
+            throw new IllegalValueException(LessonName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelLessonName = new Name(lessonName);
+        final LessonName modelLessonName = new LessonName(lessonName);
 
         if (!capacity.equals("") && !Capacity.isValidCapacity(capacity)) {
             throw new IllegalValueException(Capacity.MESSAGE_CONSTRAINTS);

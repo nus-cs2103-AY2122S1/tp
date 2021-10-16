@@ -9,7 +9,7 @@ import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 public class Lesson {
 
     // Identity Fields
-    private final Name name;
+    private final LessonName lessonName;
 
     // Data Fields
     private final Capacity capacity;
@@ -20,17 +20,17 @@ public class Lesson {
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Name name, Capacity capacity, Price price, Students students, Timing timing) {
-        requireAllNonNull(name, capacity, price, students, timing);
-        this.name = name;
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
+        requireAllNonNull(lessonName, capacity, price, students, timing);
+        this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
         this.students = students;
         this.timing = timing;
     }
 
-    public Name getName() {
-        return name;
+    public LessonName getLessonName() {
+        return lessonName;
     }
 
     public Capacity getCapacity() {
@@ -59,7 +59,7 @@ public class Lesson {
         }
 
         return otherLesson != null
-                && otherLesson.getName().equals(this.getName());
+                && otherLesson.getLessonName().equals(this.getLessonName());
     }
 
     /**
@@ -77,7 +77,7 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.getName().equals(getName())
+        return otherLesson.getLessonName().equals(getLessonName())
                 && otherLesson.getCapacity().equals(getCapacity())
                 && otherLesson.getPrice().equals(getPrice())
                 && otherLesson.getStudents().equals(getStudents())
