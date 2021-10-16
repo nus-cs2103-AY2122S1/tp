@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.tag.Tag;

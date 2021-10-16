@@ -184,7 +184,7 @@ public class Event implements Comparable<Event> {
     @Override
     public String toString() {
         return String.format(
-                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of Participants: %d", 
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
                 getNameString(),
                 getDateString(),
                 getTimeString(),

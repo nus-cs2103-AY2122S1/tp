@@ -10,7 +10,7 @@ public class NoteTest {
     @Test
     public void noteStringRepresentationTest() {
         Note note = new Note("test1", Note.Importance.VERY_HIGH);
-        assertEquals("Importance[VERY_HIGH] test1", note.toString());
+        assertEquals("[VERY_HIGH] test1", note.toString());
     }
 
     @Test

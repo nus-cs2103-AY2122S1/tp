@@ -137,23 +137,23 @@ public class EventTest {
         Event firstTestEvent = SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION;
         Event secondTestEvent = SAMPLE_EVENT_DEFAULT_TIME_AND_COMPLETION;
 
-        final StringBuilder firstBuilder = new StringBuilder();
-        firstBuilder.append("[").append((firstTestEvent.getIsDone() ? "X" : " ")).append("] ")
-                .append(firstTestEvent.getNameString()).append(" (at: ")
-                .append(firstTestEvent.getDateString()).append(" ")
-                .append(firstTestEvent.getTimeString())
-                .append(") ")
-                .append("Total Participants: ").append(firstTestEvent.getParticipants().size());
+        final String firstTestEventString = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
+                firstTestEvent.getNameString(),
+                firstTestEvent.getDateString(),
+                firstTestEvent.getTimeString(),
+                firstTestEvent.getIsDone() ? "Completed" : "Uncompleted",
+                firstTestEvent.getParticipants().size());
 
-        final StringBuilder secondBuilder = new StringBuilder();
-        secondBuilder.append("[").append((secondTestEvent.getIsDone() ? "X" : " ")).append("] ")
-                .append(secondTestEvent.getNameString()).append(" (at: ")
-                .append(secondTestEvent.getDateString()).append(" ")
-                .append(secondTestEvent.getTimeString())
-                .append(") ")
-                .append("Total Participants: ").append(secondTestEvent.getParticipants().size());
+        final String secondTestEventString = String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of participants: %d",
+                secondTestEvent.getNameString(),
+                secondTestEvent.getDateString(),
+                secondTestEvent.getTimeString(),
+                secondTestEvent.getIsDone() ? "Completed" : "Uncompleted",
+                secondTestEvent.getParticipants().size());
 
-        assertEquals(firstTestEvent.toString(), firstBuilder.toString());
-        assertEquals(secondTestEvent.toString(), secondBuilder.toString());
+        assertEquals(firstTestEvent.toString(), firstTestEventString);
+        assertEquals(secondTestEvent.toString(), secondTestEventString);
     }
 }
