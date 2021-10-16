@@ -82,6 +82,7 @@ public class DeleteCommandTest {
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
+
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 

@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -152,7 +151,6 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<TuitionClass> tuitionClasses = logic.getTodayTuitionList();
         TodayTuitionClassInfoPage todayTuitionClassInfoPage = new TodayTuitionClassInfoPage(tuitionClasses);
         updateInfoPage(todayTuitionClassInfoPage);
-//        System.out.println(tuitionClasses.toString());
     }
 
     /**

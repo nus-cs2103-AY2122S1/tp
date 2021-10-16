@@ -94,16 +94,6 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         internalList.setAll(replacement.internalList);
     }
 
-    public ObservableList<TuitionClass> getTodayTuition() {
-        LocalDate localDate = LocalDate.now();
-        DayOfWeek weekday = localDate.getDayOfWeek();
-        String today = weekday.toString().substring(0,3);
-        List<TuitionClass> todayTuitionClass = internalList.stream().
-                filter(tuitionClass -> tuitionClass.matchtheDay(today)).collect(Collectors.toList());
-        ObservableList<TuitionClass> observableList = FXCollections.observableList(todayTuitionClass);
-        return observableList;
-
-    }
 
     /**
      * Replaces the contents of this list with {@code tuitions}.
@@ -162,6 +152,21 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
 
     public int tuitionListSize() {
         return this.internalList.size();
+    }
+
+    /**
+     * Gets today tuition classes
+     * @return
+     */
+    public ObservableList<TuitionClass> getTodayTuition() {
+        LocalDate localDate = LocalDate.now();
+        DayOfWeek weekday = localDate.getDayOfWeek();
+        String today = weekday.toString().substring(0, 3);
+        List<TuitionClass> todayTuitionClass = internalList.stream()
+                .filter(tuitionClass -> tuitionClass.matchtheDay(today)).collect(Collectors.toList());
+        ObservableList<TuitionClass> observableList = FXCollections.observableList(todayTuitionClass);
+        return observableList;
+
     }
 
     /**

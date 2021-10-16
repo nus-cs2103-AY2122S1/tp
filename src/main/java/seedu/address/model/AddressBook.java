@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -70,9 +69,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-    public ObservableList<TuitionClass> getTodayTuitionList() {
-        return tuitions.getTodayTuition();
-    }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -243,5 +239,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sort(SortCommandParser.Order order) {
         this.order = order;
         this.tuitions.sort(order);
+    }
+
+    /**
+     * Gets today tuition classes
+     * @return a list contains today tuition classes
+     */
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return tuitions.getTodayTuition();
     }
 }
