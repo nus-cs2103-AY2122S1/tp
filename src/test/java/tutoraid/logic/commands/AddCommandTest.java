@@ -19,6 +19,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.StudentBook;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.StudentBuilder;
@@ -156,6 +157,36 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLesson(Lesson target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewLesson(Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Lesson> getFilteredLessonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLessonList(Predicate<Lesson> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
