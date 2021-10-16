@@ -13,6 +13,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Module> {
     private final String optionalFilter;
 
     /**
+     * Constructs a NameContainsKeywordsPredicate class and stores the first prefix as an optional filter.
+     *
      * @param keywords for finding the respective modules
      */
     public NameContainsKeywordsPredicate(List<String> keywords) {
