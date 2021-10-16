@@ -29,7 +29,6 @@ import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
 public class FindCommandParserTest {
@@ -103,7 +102,7 @@ public class FindCommandParserTest {
 
         FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
-        predicate.setRoom(new Room(VALID_ROOM_AMY));
+        predicate.setRoom(VALID_ROOM_AMY);
         predicate.setPhone(new Phone(VALID_PHONE_BOB));
         predicate.setEmail(new Email(VALID_EMAIL_AMY));
         predicate.setFaculty(new Faculty(VALID_FACULTY_AMY));
@@ -120,7 +119,7 @@ public class FindCommandParserTest {
 
         FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
-        predicate.setRoom(new Room(VALID_ROOM_AMY));
+        predicate.setRoom(VALID_ROOM_AMY);
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
 
         FindCommand expectedCommand = new FindCommand(predicate);
@@ -141,7 +140,7 @@ public class FindCommandParserTest {
         // room
         userInput = ROOM_DESC_AMY;
         predicate = new FindCommand.FindCompositePredicate();
-        predicate.setRoom(new Room(VALID_ROOM_AMY));
+        predicate.setRoom(VALID_ROOM_AMY);
         expectedCommand = new FindCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -162,7 +161,7 @@ public class FindCommandParserTest {
 
         FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
-        predicate.setRoom(new Room(VALID_ROOM_BOB));
+        predicate.setRoom(VALID_ROOM_BOB);
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
 
         FindCommand expectedCommand = new FindCommand(predicate);
@@ -193,7 +192,7 @@ public class FindCommandParserTest {
             f.setName(new Name(name));
         }
         if (room != null) {
-            f.setRoom(new Room(room));
+            f.setRoom(room);
         }
         if (phone != null) {
             f.setPhone(new Phone(phone));

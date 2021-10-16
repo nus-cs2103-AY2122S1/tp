@@ -20,7 +20,6 @@ import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 import safeforhall.testutil.TypicalPersons;
 
@@ -35,7 +34,7 @@ public class FindCommandTest {
     public void equals() {
         FindCompositePredicate firstPredicate = new FindCompositePredicate();
         firstPredicate.setName(new Name("Alice"));
-        firstPredicate.setRoom(new Room("A100"));
+        firstPredicate.setRoom("A100");
         firstPredicate.setFaculty(new Faculty("SoC"));
         firstPredicate.setVaccStatus(new VaccStatus("T"));
 
@@ -132,7 +131,7 @@ public class FindCommandTest {
             f.setName(new Name(name));
         }
         if (room != null) {
-            f.setRoom(new Room(room));
+            f.setRoom(room);
         }
         if (phone != null) {
             f.setPhone(new Phone(phone));

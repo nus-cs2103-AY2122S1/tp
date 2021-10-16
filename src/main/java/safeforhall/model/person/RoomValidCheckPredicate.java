@@ -1,7 +1,6 @@
 package safeforhall.model.person;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Room} matches either fully, by block, by level, or both.
