@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -275,7 +276,7 @@ public class ParserUtil {
                 }
             }
         } catch (DateTimeParseException e) {
-            throw new ParseException(e.getMessage());
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_PARSED);
         }
 
         return new Period(start, end);
