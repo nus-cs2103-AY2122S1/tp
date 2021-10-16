@@ -25,6 +25,8 @@ public class Room {
      */
     public static final String VALIDATION_REGEX = "^[a-eA-E][1-4][0-2][0-9]$";
 
+    public static final String VALIDATION_FOR_FIND_REGEX = "[a-eA-E]|[1-4]|[a-eA-E][1-4]";
+
     public static final String DESC = "Room: ";
 
     public final String room;
@@ -46,6 +48,13 @@ public class Room {
      */
     public static boolean isValidRoom(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid block, level, level-block or room.
+     */
+    public static boolean isValidRoomForFind(String test) {
+        return test.matches(VALIDATION_FOR_FIND_REGEX) || isValidRoom(test);
     }
 
     @Override
