@@ -11,12 +11,15 @@ import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeleteCommand;
 import safeforhall.logic.commands.EaddCommand;
-import safeforhall.logic.commands.EditCommand;
+import safeforhall.logic.commands.EditCommands.EditEventCommand;
+import safeforhall.logic.commands.EditCommands.EditPersonCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.parser.EditCommandParsers.EditEventCommandParser;
+import safeforhall.logic.parser.EditCommandParsers.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -29,6 +32,9 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private static final Pattern TYPED_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+\\st/\\S+)(?<arguments>.*)");
+
+
     /**
      * Parses user input into command for execution.
      *
@@ -37,20 +43,32 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
-        if (!matcher.matches()) {
+        final Matcher basicMatcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        final Matcher typeMatcher = TYPED_COMMAND_FORMAT.matcher(userInput.trim());
+
+        final String commandWord;
+        final String arguments;
+
+        if (typeMatcher.matches()) {
+            commandWord = typeMatcher.group("commandWord");
+            arguments = typeMatcher.group("arguments");
+        } else if (basicMatcher.matches()) {
+            commandWord = basicMatcher.group("commandWord");
+            arguments = basicMatcher.group("arguments");
+        } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditPersonCommand.COMMAND_WORD:
+            return new EditPersonCommandParser().parse(arguments);
+
+        case EditEventCommand.COMMAND_WORD:
+             return new EditEventCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

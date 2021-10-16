@@ -20,4 +20,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_VENUE = new Prefix("l/");
     public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
+
+    public static final String PREFIX_TYPE = "t/";
+    public static final String PREFIX_TYPE_EVENT = PREFIX_TYPE + "event";
 }

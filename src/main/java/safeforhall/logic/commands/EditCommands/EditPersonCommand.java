@@ -1,4 +1,4 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.EditCommands;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -10,6 +10,8 @@ import java.util.Optional;
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.CollectionUtil;
+import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
@@ -26,7 +28,7 @@ import safeforhall.model.person.VaccStatus;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -57,7 +59,7 @@ public class EditCommand extends Command {
      * @param indexArray Array of people in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(ArrayList<Index> indexArray, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(ArrayList<Index> indexArray, EditPersonDescriptor editPersonDescriptor) {
         for (Index index : indexArray) {
             requireNonNull(index);
         }
@@ -120,12 +122,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditPersonCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditPersonCommand e = (EditPersonCommand) other;
         return indexArray.equals(e.indexArray)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
