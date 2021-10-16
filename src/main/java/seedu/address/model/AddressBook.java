@@ -67,6 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
 
     public void mergeFile(Path filePath) throws DataConversionException {
+        requireNonNull(filePath);
         JsonAddressBookStorage toMergeStorage = new JsonAddressBookStorage(filePath);
         ReadOnlyAddressBook toMerge = toMergeStorage.readAddressBook().get();
         ObservableList<Person> toMergeList = toMerge.getPersonList();

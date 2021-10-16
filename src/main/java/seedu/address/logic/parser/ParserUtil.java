@@ -45,21 +45,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code filePath} into an {@code Path} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified filepath is invalid (cannot be converted to a Path).
      */
-    public static Path parseFilePath(String filePath) throws ParseException {
+    public static Path parseNewFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
-        if (trimmedFilePath == null) {
-            throw new ParseException(MESSAGE_INVALID_FILEPATH);
-        }
-
-        if (trimmedFilePath != null && !FileUtil.isValidPath(trimmedFilePath)) {
+        if (!FileUtil.isValidPath(trimmedFilePath)) {
             throw new ParseException(MESSAGE_INVALID_FILEPATH);
         }
         return Paths.get(trimmedFilePath);
+    }
+
+    /**
+     * Parses {@code filePath} into an {@code Path} and returns it.
+     * @throws ParseException if the specified filepath is invalid (does not exist).
+     */
+    public static Path parseExistingFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        Path path = Paths.get(trimmedFilePath);
+        if (!FileUtil.isFileExists(path)) {
+            throw new ParseException(MESSAGE_INVALID_FILEPATH);
+        }
+        return path;
     }
 
     /**
