@@ -11,7 +11,6 @@ import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -26,10 +25,10 @@ public class EncryptionTest {
     private static final String TEST_STRING = "This is a test string\n";
 
     private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING = "src/test/data/EncryptionTest/testSimpleString.enc";
-    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE
-            = "src/test/data/EncryptionTest/testSimpleStringOne.enc";
-    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO
-            = "src/test/data/EncryptionTest/testSimpleStringTwo.enc";
+    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE =
+            "src/test/data/EncryptionTest/testSimpleStringOne.enc";
+    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO =
+            "src/test/data/EncryptionTest/testSimpleStringTwo.enc";
     private static final String DECRYPTED_FILEPATH_JSON = "src/test/data/EncryptionTest/testJson.json";
     private static final String DECRYPTED_FILEPATH_JSON_OUTPUT = "src/test/data/EncryptionTest/testJsonOutput.json";
     private static final String ENCRYPTED_FILEPATH_JSON = "src/test/data/EncryptionTest/testJson.enc";
@@ -68,7 +67,7 @@ public class EncryptionTest {
     }
 
     @Test
-    public void ableToEncrypt_Decrypt_WriteJsonToDestination()
+    public void ableToEncrypt_decrypt_writeJsonToDestination()
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,
             InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
@@ -109,7 +108,8 @@ public class EncryptionTest {
     }
 
     @Test
-    public void failure_whenWrongFileFormatIsSuppliedToDecrypt() throws NoSuchAlgorithmException, NoSuchPaddingException {
+    public void failure_whenWrongFileFormatIsSuppliedToDecrypt()
+            throws NoSuchAlgorithmException, NoSuchPaddingException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
 
