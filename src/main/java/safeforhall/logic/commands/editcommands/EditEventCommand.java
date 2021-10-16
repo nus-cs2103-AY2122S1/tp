@@ -35,8 +35,8 @@ public class EditEventCommand extends Command {
             + "[" + CliSyntax.PREFIX_DATE + "DATE] "
             + "[" + CliSyntax.PREFIX_VENUE + "VENUE] "
             + "[" + CliSyntax.PREFIX_CAPACITY + "CAPACITY] \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE_EVENT + " 1 "
-            + CliSyntax.PREFIX_DATE + "20-01-2021"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + CliSyntax.PREFIX_DATE + "20-01-2021 "
             + CliSyntax.PREFIX_CAPACITY + "50";
 
     public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Events: \n%1$s";

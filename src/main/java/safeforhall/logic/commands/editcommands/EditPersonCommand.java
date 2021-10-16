@@ -45,7 +45,7 @@ public class EditPersonCommand extends Command {
             + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY]"
             + "[" + CliSyntax.PREFIX_FETDATE + "LAST FET DATE] "
             + "[" + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE] \n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE_EVENT + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 2 3 "
             + CliSyntax.PREFIX_PHONE + "91234567 "
             + CliSyntax.PREFIX_EMAIL + "johndoe@example.com";
 

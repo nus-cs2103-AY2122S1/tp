@@ -3,6 +3,8 @@ package safeforhall.logic.parser;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +38,8 @@ public class AddressBookParser {
     private static final Pattern TYPED_COMMAND_FORMAT =
             Pattern.compile("(?<commandWord>\\S+\\st/\\S+)(?<arguments>.*)");
 
+    private static final String[] TYPED_COMMANDS_ARRAY = {"edit"};
+
 
     /**
      * Parses user input into command for execution.
@@ -56,6 +60,10 @@ public class AddressBookParser {
             arguments = typeMatcher.group("arguments");
         } else if (basicMatcher.matches()) {
             commandWord = basicMatcher.group("commandWord");
+            if (Arrays.asList(TYPED_COMMANDS_ARRAY).contains(commandWord)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        "Please input either t/resident or t/event after command word."));
+            }
             arguments = basicMatcher.group("arguments");
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
