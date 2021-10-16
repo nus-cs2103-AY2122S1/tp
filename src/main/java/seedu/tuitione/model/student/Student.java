@@ -12,7 +12,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import com.sun.javafx.UnmodifiableArrayList;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
@@ -94,7 +93,7 @@ public class Student {
     }
 
     /**
-     * Returns a lesson price array, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson price list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public List<Price> getLessonPrices() {
@@ -124,6 +123,9 @@ public class Student {
         lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
     }
 
+    /**
+     * Puts the lesson codes and prices of the given input into the current students' lesson codes and prices.
+     */
     public void setLessonCodesAndPrices(Map<LessonCode, Price> map) {
         lessonCodesAndPrices.putAll(map);
     }

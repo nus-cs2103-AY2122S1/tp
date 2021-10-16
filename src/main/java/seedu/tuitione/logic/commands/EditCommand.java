@@ -253,6 +253,9 @@ public class EditCommand extends Command {
                     && getTags().equals(e.getTags());
         }
 
+        /**
+         * Toggles the gradeIsEdited value
+         */
         public void setGradeIsEdited(boolean b) {
             gradeIsEdited = b;
         }
