@@ -22,7 +22,7 @@ import seedu.address.commons.util.FileUtil;
 public class EncryptionTest {
     private static final String ENCRYPTION_ALGORITHM = "AES";
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    private static final String TEST_STRING = "This is a test string\n";
+    private static final String TEST_STRING = "This is a test string" + System.lineSeparator();
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "EncryptionTest");
     private static final Path ENCRYPTED_FILEPATH_SIMPLE_STRING = TEST_DATA_FOLDER.resolve("testSimpleString.enc");

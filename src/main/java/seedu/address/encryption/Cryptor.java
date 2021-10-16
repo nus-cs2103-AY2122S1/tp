@@ -67,7 +67,7 @@ public class Cryptor implements Cryptable {
     @Override
     public String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-        if (!isLegalFileFormat(encryptedSourceFilePath.toString())) {
+        if (!isLegalFileFormat(encryptedSourceFilePath)) {
             throw new IOException(); // Guard clause
         }
 
@@ -92,7 +92,7 @@ public class Cryptor implements Cryptable {
     /**
      * Checks if the file is in the legal format.
      */
-    private boolean isLegalFileFormat(String filePath) {
-        return filePath.endsWith(LEGAL_FILE_FORMAT_EXTENSION);
+    private boolean isLegalFileFormat(Path filePath) {
+        return filePath.toString().endsWith(LEGAL_FILE_FORMAT_EXTENSION);
     }
 }
