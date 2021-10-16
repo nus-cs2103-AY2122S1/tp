@@ -14,22 +14,16 @@ public class NationalityTest {
     }
 
     @Test
-    public void constructor_invalidNationality_throwsIllegalArgumentException() {
-        String invalidNationality = "";
-        assertThrows(IllegalArgumentException.class, () -> new Nationality(invalidNationality));
-    }
-
-    @Test
     public void isValidNationality() {
         // null nationality
         assertThrows(NullPointerException.class, () -> Nationality.isValidNationality(null));
 
         // invalid nationality
-        assertFalse(Nationality.isValidNationality("")); // empty string
         assertFalse(Nationality.isValidNationality(" ")); // spaces only
 
         // valid nationality
         assertTrue(Nationality.isValidNationality("Singapore"));
         assertTrue(Nationality.isValidNationality("-")); // one character
+        assertTrue(Nationality.isValidNationality("")); // empty string
     }
 }
