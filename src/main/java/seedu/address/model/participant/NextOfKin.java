@@ -80,8 +80,7 @@ public class NextOfKin {
 
     @Override
     public String toString() {
-
-        return getName() + "; Phone: " + getPhone() + "; Relationship: " + getTag();
+        return String.format("%s (%s): %s", getName(), getTag(), getPhone());
     }
 
 

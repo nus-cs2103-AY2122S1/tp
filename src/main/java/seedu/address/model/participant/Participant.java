@@ -274,30 +274,31 @@ public class Participant {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Phone: ")
+        builder.append("Name: ")
+                .append(getName())
+                .append("\nPhone: ")
                 .append(getPhone())
-                .append("; Email: ")
+                .append("\nEmail: ")
                 .append(getEmail())
-                .append("; Address: ")
+                .append("\nAddress: ")
                 .append(getAddress());
 
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
 
         Set<Note> notes = getNotes();
         if (!notes.isEmpty()) {
-            builder.append("; Notes: ");
+            builder.append("\nNotes: ");
             notes.forEach(builder::append);
         }
 
         ArrayList<NextOfKin> nextOfKins = getNextOfKins();
         if (!nextOfKins.isEmpty()) {
-            builder.append("; Next Of Kins: ");
+            builder.append("\nNext Of Kins: ");
             nextOfKins.forEach(builder::append);
         }
 

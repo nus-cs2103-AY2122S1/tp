@@ -84,6 +84,6 @@ public class Note {
      */
     @Override
     public String toString() {
-        return "Importance[" + this.importance + "] " + this.content;
+        return "[" + this.importance + "] " + this.content;
     }
 }

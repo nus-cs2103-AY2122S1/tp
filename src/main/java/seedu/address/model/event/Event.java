@@ -183,14 +183,13 @@ public class Event implements Comparable<Event> {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("[").append((isDone ? "X" : " ")).append("] ")
-                .append(eventName.toString()).append(" (at: ")
-                .append(eventDate.toString()).append(" ")
-                .append(eventTime.toString())
-                .append(") ")
-                .append("Total Participants: ").append(this.participants.size());
-        return builder.toString();
+        return String.format(
+                "Event Name: %s\nEvent Date: %s\nEvent Time: %s\nCompletion Status: %s\nNumber of Participants: %d", 
+                getNameString(),
+                getDateString(),
+                getTimeString(),
+                getIsDone() ? "Completed" : "Uncompleted",
+                getParticipants().size());
     }
 
     @Override
