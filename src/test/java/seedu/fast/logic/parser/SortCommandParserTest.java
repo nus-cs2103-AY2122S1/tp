@@ -29,6 +29,9 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() {
+        String nameKeyword = "name";
+        String appointmentKeyword = "appointment";
+        String priorityKeyword = "priority";
         // Different Sort Commands
         SortCommand expectedSortCommandName =
                 new SortCommand(new SortByName(), SortByName.KEYWORD);
@@ -38,11 +41,11 @@ public class SortCommandParserTest {
                 new SortCommand(new SortByPriority(), SortByPriority.KEYWORD);
 
         // no leading and trailing whitespaces
-        assertParseSuccess(parser, "name", expectedSortCommandName);
+        assertParseSuccess(parser, nameKeyword, expectedSortCommandName);
 
-        assertParseSuccess(parser, "appointment", expectedSortCommandAppointment);
+        assertParseSuccess(parser, appointmentKeyword, expectedSortCommandAppointment);
 
-        assertParseSuccess(parser, "priority", expectedSortCommandPriority);
+        assertParseSuccess(parser, priorityKeyword, expectedSortCommandPriority);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n name \n", expectedSortCommandName);
