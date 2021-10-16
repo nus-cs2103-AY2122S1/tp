@@ -24,7 +24,7 @@ public class MarkAppointmentCommand extends Command {
 
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Completed an appointment with "
             + "%1$s %2$s %3$s %4$s";
-    public static final String MESSAGE_MARK_APPOINTMENT_FAILURE = "No appointment exist!";
+    public static final String MESSAGE_MARK_APPOINTMENT_FAILURE = "No appointment exists!";
 
     private final Index index;
     private final Appointment appointment;
