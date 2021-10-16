@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dash.commons.exceptions.IllegalValueException;
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
 import dash.storage.JsonAdaptedTag;
@@ -24,6 +25,7 @@ class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's Description field is missing!";
 
     private final String description;
+    private final boolean isComplete;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -31,8 +33,10 @@ class JsonAdaptedTask {
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description,
+                           @JsonProperty("isComplete") boolean isComplete,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.description = description;
+        this.isComplete = isComplete;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -43,6 +47,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         description = source.getTaskDescription().description;
+        isComplete = source.getCompletionStatus().get();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -67,9 +72,10 @@ class JsonAdaptedTask {
             throw new IllegalValueException(TaskDescription.MESSAGE_CONSTRAINTS);
         }
         final TaskDescription modelTaskDescription = new TaskDescription(description);
+        final CompletionStatus modelCompletionStatus = new CompletionStatus(isComplete);
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
-        return new Task(modelTaskDescription, modelTags);
+        return new Task(modelTaskDescription, modelCompletionStatus, modelTags);
     }
 
 }

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
 import dash.model.util.SampleDataUtil;
@@ -14,7 +15,9 @@ import dash.model.util.SampleDataUtil;
 public class TaskBuilder {
     public static final String DEFAULT_DESCRIPTION = "Complete CS2103T Project";
 
+
     private TaskDescription taskDescription;
+    private CompletionStatus completionStatus;
     private Set<Tag> tags;
 
     /**
@@ -22,6 +25,7 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         taskDescription = new TaskDescription(DEFAULT_DESCRIPTION);
+        completionStatus = new CompletionStatus(false);
         tags = new HashSet<>();
     }
 
@@ -30,6 +34,7 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         taskDescription = taskToCopy.getTaskDescription();
+        completionStatus = taskToCopy.getCompletionStatus();
         tags = new HashSet<>(taskToCopy.getTags());
     }
 
@@ -42,6 +47,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code CompletionStatus} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withCompletionStatus(boolean isComplete) {
+        this.completionStatus = new CompletionStatus(isComplete);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Task} that we are building.
      */
     public TaskBuilder withTags(String... tags) {
@@ -50,7 +63,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(taskDescription, tags);
+        return new Task(taskDescription, completionStatus, tags);
     }
 
 }

@@ -37,7 +37,6 @@ public class TaskList implements Iterable<Task> {
      */
     public void resetData(TaskList newData) {
         requireNonNull(newData);
-
         setTasks(newData.getObservableTaskList());
     }
 
