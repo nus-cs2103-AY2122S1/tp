@@ -26,7 +26,7 @@ public class JsonSiasaStorageTest {
     }
 
     private java.util.Optional<ReadOnlySiasa> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonSiasaStorage(Paths.get(filePath)).readSiasa(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -63,28 +63,28 @@ public class JsonSiasaStorageTest {
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlySiasa readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveSiasa(original, filePath);
+        ReadOnlySiasa readBack = jsonAddressBookStorage.readSiasa(filePath).get();
         assertEquals(original, new Siasa(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePersonAndAssociatedPolicies(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonAddressBookStorage.saveSiasa(original, filePath);
+        readBack = jsonAddressBookStorage.readSiasa(filePath).get();
         assertEquals(original, new Siasa(readBack));
 
         // Save and read without specifying file path
         original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        jsonAddressBookStorage.saveSiasa(original); // file path not specified
+        readBack = jsonAddressBookStorage.readSiasa().get(); // file path not specified
         assertEquals(original, new Siasa(readBack));
 
     }
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+        assertThrows(NullPointerException.class, () -> saveSiasa(null, "SomeFile.json"));
     }
 
     /**
@@ -92,8 +92,8 @@ public class JsonSiasaStorageTest {
      */
     private void saveAddressBook(ReadOnlySiasa addressBook, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonSiasaStorage(Paths.get(filePath))
+                    .saveSiasa(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

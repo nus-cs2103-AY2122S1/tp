@@ -24,6 +24,13 @@ Class Name
 Class Phone
 Class Tag
 
+
+Class UniquePolicyList
+Class Policy
+Class Price
+Class Commission
+Class Title
+Class ExpiryDate
 }
 
 Class HiddenOutside #FFFFFF
@@ -46,9 +53,20 @@ Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+AddressBook *--> "1" UniquePolicyList
+UniquePolicyList --> "~* all" Policy
+UniquePolicyList ..> Person
+Policy *--> Price
+Policy *--> Commission
+Policy *--> Title
+Policy *--> ExpiryDate
+Policy -right->"owner" Person
+
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Policy
+
 @enduml

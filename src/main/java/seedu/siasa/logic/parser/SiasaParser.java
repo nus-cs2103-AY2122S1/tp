@@ -13,13 +13,17 @@ import seedu.siasa.logic.commands.ExitCommand;
 import seedu.siasa.logic.commands.FindCommand;
 import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.commands.client.AddClientCommand;
+import seedu.siasa.logic.commands.client.ClearClientPolicyCommand;
 import seedu.siasa.logic.commands.client.DeleteClientCommand;
 import seedu.siasa.logic.commands.client.ListClientCommand;
+import seedu.siasa.logic.commands.client.ListClientPolicyCommand;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
 import seedu.siasa.logic.parser.client.AddClientCommandParser;
+import seedu.siasa.logic.parser.client.ClearClientPolicyCommandParser;
 import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
+import seedu.siasa.logic.parser.client.ListClientPolicyCommandParser;
 import seedu.siasa.logic.parser.exceptions.ParseException;
 import seedu.siasa.logic.parser.policy.AddPolicyCommandParser;
 import seedu.siasa.logic.parser.policy.DeletePolicyCommandParser;
@@ -66,11 +70,17 @@ public class SiasaParser {
         case DeletePolicyCommand.COMMAND_WORD:
             return new DeletePolicyCommandParser().parse(arguments);
 
+        case ClearClientPolicyCommand.COMMAND_WORD:
+            return new ClearClientPolicyCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case ListClientPolicyCommand.COMMAND_WORD:
+            return new ListClientPolicyCommandParser().parse(arguments);
 
         case ListClientCommand.COMMAND_WORD:
             return new ListClientCommand();

@@ -11,12 +11,12 @@ import seedu.siasa.model.Siasa;
 /**
  * Represents a storage for {@link Siasa}.
  */
-public interface AddressBookStorage {
+public interface SiasaStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getSiasaFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlySiasa}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlySiasa> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlySiasa> readSiasa() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getSiasaFilePath()
      */
-    Optional<ReadOnlySiasa> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlySiasa> readSiasa(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlySiasa} to the storage.
-     * @param addressBook cannot be null.
+     * @param siasa cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlySiasa addressBook) throws IOException;
+    void saveSiasa(ReadOnlySiasa siasa) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlySiasa)
+     * @see #saveSiasa(ReadOnlySiasa)
      */
-    void saveAddressBook(ReadOnlySiasa addressBook, Path filePath) throws IOException;
+    void saveSiasa(ReadOnlySiasa siasa, Path filePath) throws IOException;
 
 }
