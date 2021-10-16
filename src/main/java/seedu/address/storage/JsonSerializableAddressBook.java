@@ -34,8 +34,12 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
                                        @JsonProperty("products") List<JsonAdaptedProduct> products) {
-        this.clients.addAll(clients);
-        this.products.addAll(products);
+        if (clients != null) {
+            this.clients.addAll(clients);
+        }
+        if (products != null) {
+            this.products.addAll(products);
+        }
     }
 
     /**
