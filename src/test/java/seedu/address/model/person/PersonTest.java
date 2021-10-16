@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -97,5 +98,25 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void getFormattedVisit() {
+        // without frequency and occurrence
+        String visit = ALICE.getVisit().get().getFormatted();
+        assertEquals(ALICE.getFormattedVisit(), visit);
+
+        // with frequency and occurrence = 1
+        Person editedAlice = new PersonBuilder(ALICE).withFrequency(Frequency.DAILY.toString()).withOccurrence(1).build();
+        assertEquals(editedAlice.getFormattedVisit(), visit);
+
+        // with frequency and occurrence > 1
+        editedAlice = new PersonBuilder(ALICE).withFrequency(Frequency.WEEKLY.toString()).withOccurrence(2).build();
+        visit = visit + " (repeats " + Frequency.WEEKLY.toString() + ", for " + 1 + " more time(s))";
+        assertEquals(editedAlice.getFormattedVisit(), visit);
+
+        // without visit
+        editedAlice = new PersonBuilder(ALICE).withVisit("").build();
+        assertEquals(editedAlice.getFormattedVisit(), "-");
     }
 }

@@ -170,7 +170,7 @@ public class Person {
         }
 
         String visit = this.getVisit().get().getFormatted();
-        if (this.getFrequency().get().isEmpty() || this.getOccurrence().get().value == 1) {
+        if (this.getFrequency().isEmpty() || this.getOccurrence().get().value == 1) {
             return visit;
         }
 
