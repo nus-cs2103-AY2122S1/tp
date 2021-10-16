@@ -9,6 +9,7 @@ import static seedu.fast.commons.util.AppUtil.checkArgument;
  */
 public class AppointmentCount {
     public static final String INVALID_COUNT_INPUT = "Appointment Count has be a non-negative integer";
+    public static final String INITIAL_COUNT = "0";
 
     private int count;
 
