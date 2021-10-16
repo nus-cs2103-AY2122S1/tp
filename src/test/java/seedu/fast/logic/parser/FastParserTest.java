@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
 import seedu.fast.logic.commands.ClearCommand;
@@ -33,6 +34,7 @@ import seedu.fast.logic.commands.HelpCommand;
 import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.MarkAppointmentCommand;
 import seedu.fast.logic.commands.RemarkCommand;
+import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
@@ -132,6 +134,14 @@ public class FastParserTest {
     }
 
     @Test
+    public void parseCommand_sort() throws Exception {
+        final SortByName sortByName = new SortByName();
+        final String keyword = SortByName.KEYWORD;
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " "
+                + keyword);
+        assertEquals(new SortCommand(sortByName, keyword), command);
+    }
+
     public void parseCommand_deleteAppointment() throws Exception {
         final Appointment appt = new Appointment(Appointment.NO_APPOINTMENT, Appointment.NO_TIME,
                 Appointment.NO_VENUE);
