@@ -3,7 +3,7 @@ package dash.model.task;
 import static java.util.Objects.requireNonNull;
 
 public class CompletionStatus {
-    private boolean isComplete;
+    private final boolean isComplete;
 
     /**
      * Constructs a {@code CompletionStatus}.
@@ -17,10 +17,6 @@ public class CompletionStatus {
 
     public boolean get() {
         return this.isComplete;
-    }
-
-    public void complete() {
-        this.isComplete = true;
     }
 
     @Override
