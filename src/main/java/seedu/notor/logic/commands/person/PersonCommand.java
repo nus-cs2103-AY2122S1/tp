@@ -4,10 +4,12 @@ import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.TargetedCommand;
 
 public abstract class PersonCommand extends TargetedCommand {
+    public static final String MESSAGE_USAGE = "Please use the help command to find out how to use the bot.";
+
     public static final String COMMAND_WORD = "person";
     protected final Index index;
 
-    public PersonCommand(Index index) {
+    protected PersonCommand(Index index) {
         this.index = index;
     }
 

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.notor.commons.exceptions.IllegalValueException;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.person.Phone;
 
 public class JsonAdaptedPersonTest {

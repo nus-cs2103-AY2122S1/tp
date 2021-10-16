@@ -31,7 +31,7 @@ import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;

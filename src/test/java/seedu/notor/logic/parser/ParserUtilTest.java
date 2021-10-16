@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
 

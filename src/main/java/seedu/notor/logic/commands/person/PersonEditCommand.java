@@ -4,7 +4,6 @@ import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
@@ -17,17 +16,20 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  */
 public class PersonEditCommand extends PersonCommand {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "/edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
+    private static final String COMMAND_DESCRIPTION =
+            ": Edits the details of the person identified by the index number used in the displayed person list.\n"
+                    + "Existing values will be overwritten by the input values.\n";
+
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+            + COMMAND_DESCRIPTION
+            + "Parameters:"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
+            + PREFIX_NAME + "Jane Deh "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 

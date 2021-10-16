@@ -6,6 +6,8 @@ import static seedu.notor.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.notor.model.common.Name;
+
 public class NameTest {
 
     @Test

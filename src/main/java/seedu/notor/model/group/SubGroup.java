@@ -1,7 +1,11 @@
 package seedu.notor.model.group;
 
 import java.util.Objects;
+import java.util.Set;
 
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
+import seedu.notor.model.tag.Tag;
 import seedu.notor.model.util.Unique;
 
 /**
@@ -10,14 +14,24 @@ import seedu.notor.model.util.Unique;
 public class SubGroup extends Group implements Unique<SubGroup> {
 
     protected String parent;
+
+    public SubGroup(Name name, Set<Tag> tags) {
+        super(name, tags);
+    }
+
     /**
      * Creates a new subGroup where name is the name of the subGroup.
      *
      * @param name the name of the SubGroup.
      * @param parent the parent of the SubGroup.
      */
-    public SubGroup(String name, String parent) {
-        super(name);
+    public SubGroup(Name name, Set<Tag> tags, String parent) {
+        super(name, tags);
+        this.parent = parent;
+    }
+
+    public SubGroup(Name name, Set<Tag> tags, Note note, String parent) {
+        super(name, tags, note);
         this.parent = parent;
     }
 
@@ -31,12 +45,17 @@ public class SubGroup extends Group implements Unique<SubGroup> {
         return parent + "_" + this.name;
     }
 
+    @Override
     public String getName() {
-        return name;
+        return name.toString();
     }
 
     public String getParent() {
         return parent;
+    }
+
+    public void setParent(SuperGroup parent) {
+        this.parent = parent.getName();
     }
 
 
