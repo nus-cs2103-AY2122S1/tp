@@ -118,6 +118,10 @@ public class Student {
         lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
     }
 
+    public void setLessonCodesAndPrices(Map<LessonCode, Price> map) {
+        lessonCodesAndPrices.putAll(map);
+    }
+
     /**
      * Remove lesson from student instance. Student instance uses a weaker linkage to Lessons, using its lesson code.
      */

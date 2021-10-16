@@ -12,6 +12,7 @@ import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,6 +21,8 @@ import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.CollectionUtil;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
+import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
@@ -66,6 +69,10 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
+        if (editStudentDescriptor.gradeIsEdited) {
+            this.editStudentDescriptor.setGradeIsEdited(true);
+        }
+
     }
 
     @Override
@@ -79,6 +86,12 @@ public class EditCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+
+        if (!editStudentDescriptor.gradeIsEdited) {
+            Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
+            editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
+        }
+
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -135,6 +148,8 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Set<Tag> tags;
+
+        private boolean gradeIsEdited = false;
 
         public EditStudentDescriptor() {}
 
@@ -237,5 +252,10 @@ public class EditCommand extends Command {
                     && getGrade().equals(e.getGrade())
                     && getTags().equals(e.getTags());
         }
+
+        public void setGradeIsEdited(boolean b) {
+            gradeIsEdited = b;
+        }
+
     }
 }
