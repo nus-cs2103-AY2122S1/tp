@@ -19,7 +19,7 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 1. Copy the file to the folder you want to use as the _home folder_ for your ModuLink.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui2.png)
+   ![Ui](images/screenshots/Ui2.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -89,7 +89,7 @@ Examples:
 * `addfav A0222594A`
 * `addfav A1234567R`
    <br>
-   ![result for 'addfav A0222594A'](images/addFavResult.png)
+   ![result for 'addfav A0222594A'](images/screenshots/addFavResult.png)
 
 ### Removing a favourite : `remfav`
 
@@ -108,7 +108,7 @@ Shows a list of all persons that the user has added to their favourites list.
 Format: `list`
 <br>
   <br>
-  ![result for 'list'](images/listResult.png)
+  ![result for 'list'](images/screenshots/listResult.png)
 
 ### Filter user profiles by module and group status : `filter`
 
@@ -124,8 +124,8 @@ Examples:
 * `filter mod/CS2030 group/SM`
 * `filter mod/CS2030 group/SG`
 
-![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
-![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
+![result for 'filter mod/CS2103T'](images/screenshots/filterModOnlyResult.png)
+![result for 'filter mod/CS2101' group/SM](images/screenshots/filterGroupResult.png)
 
 ### Find profiles by name  : `find`
 
@@ -143,7 +143,7 @@ Examples:
 * `find John` returns `John` and `John Doe`
 * `find alex david` returns `Alex Berenson` and `David Li`
 
-![result for 'find alex'](images/findAlexResult.png)
+![result for 'find alex'](images/screenshots/findAlexResult.png)
   
 ### Find profiles by student ID  : `findId`
 
@@ -160,14 +160,14 @@ Examples:
 * `findId A0123456A` returns the person whose student Id number matches A0123456A
 * `findId A0123456A A0654321A` returns the persons whose student Id number matches either A0123456A or A0654321A.
 
-![result for 'findId A0222594A'](images/findIdA0222594AResult.png)
+![result for 'findId A0222594A'](images/screenshots/findIdA0222594AResult.png)
 
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/screenshots/helpMessage.png)
 
 Format: `help`
 
