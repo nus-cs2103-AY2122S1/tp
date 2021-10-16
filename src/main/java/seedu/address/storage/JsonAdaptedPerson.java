@@ -15,6 +15,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -149,8 +150,11 @@ class JsonAdaptedPerson {
         }
         final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
 
+        // TODO actually store exams in storage
+        List<Exam> exams = new ArrayList<>();
+
         return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList);
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, exams);
     }
 
 }
