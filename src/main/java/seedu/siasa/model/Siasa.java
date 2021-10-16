@@ -26,7 +26,8 @@ public class Siasa implements ReadOnlySiasa {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         persons = new UniquePersonList();
         policies = new UniquePolicyList();
     }
@@ -152,7 +153,7 @@ public class Siasa implements ReadOnlySiasa {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons; "
-            + policies.asUnmodifiableObservableList().size() + " policies;";
+                + policies.asUnmodifiableObservableList().size() + " policies;";
     }
 
     @Override
@@ -168,9 +169,9 @@ public class Siasa implements ReadOnlySiasa {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof Siasa // instanceof handles nulls
-            && persons.equals(((Siasa) other).persons)
-            && policies.equals(((Siasa) other).policies));
+                || (other instanceof Siasa // instanceof handles nulls
+                && persons.equals(((Siasa) other).persons)
+                && policies.equals(((Siasa) other).policies));
     }
 
     @Override
