@@ -4,8 +4,8 @@ package seedu.address.model.task;
  * Basic Task class for v1.2 implementation
  */
 public class Task {
-    protected Label label;
-    protected Date date;
+    private Label label;
+    private Date date;
     private boolean isDone;
 
     /**
