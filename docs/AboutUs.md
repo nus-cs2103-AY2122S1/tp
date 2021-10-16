@@ -9,7 +9,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Aakansha Narain
 
-<img src="images/aakanshanarain.png" width="200px">
+<img src="images/developerPhotos/aakanshanarain.png" width="200px">
 
 [[github](https://github.com/aakanshanarain)]
 
