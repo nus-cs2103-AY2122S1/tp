@@ -114,17 +114,19 @@ Examples:
 
 ### Deleting a person : `delete` [coming soon]
 
-Deletes the contact at the specified index.
+Deletes the contact(s) at the specified index(s).
 
-Format: `delete INDEX`
+Format: `delete INDEX [MORE_INDICES]`
 
-* Deletes the contact at the specified `INDEX`.
-* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of contacts** in the address book
+* Deletes the contact(s) at the specified `INDEX`(s).
+* The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
+* The index(s) **must be given in ascending order** (e.g. `delete 1 4 5`)
+* The index(s) **must not exceed the total number of contacts** in the address book
 
 Examples:
 
 * `sort` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
+* `sort` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the contacts list when sorted by name.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -166,7 +168,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
