@@ -20,8 +20,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_VACCSTATUS = "T";
     public static final String DEFAULT_FACULTY = "SoC";
-    public static final String DEFAULT_FETDATE = "10-09-2021";
-    public static final String DEFAULT_COLLECTDATE = "10-09-2021";
+    public static final String DEFAULT_FETDATE = "";
+    public static final String DEFAULT_COLLECTDATE = "";
 
     private Name name;
     private Room room;

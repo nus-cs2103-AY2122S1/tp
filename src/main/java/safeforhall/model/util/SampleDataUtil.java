@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.ReadOnlyAddressBook;
+import safeforhall.model.event.Capacity;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -24,7 +29,7 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Room("E417"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"), new VaccStatus("T"),
-                    new Faculty("SoC"), new LastDate("09-10-2021"), new LastDate("10-10-2021")),
+                    new Faculty("SoC"), new LastDate("01-10-2021"), new LastDate("10-10-2021")),
             new Person(new Name("Bernice Yu"), new Room("A213"), new Phone("99272758"),
                     new Email("berniceyu@example.com"), new VaccStatus("F"),
                     new Faculty("FASS"), new LastDate("10-10-2021"), new LastDate("11-10-2021")),
@@ -33,7 +38,7 @@ public class SampleDataUtil {
                     new Faculty("SoC"), new LastDate("11-10-2021"), new LastDate("12-10-2021")),
             new Person(new Name("David Li"), new Room("C112"), new Phone("91031282"),
                     new Email("lidavid@example.com"), new VaccStatus("T"),
-                    new Faculty("SDE"), new LastDate("09-10-2021"), new LastDate("08-10-2021")),
+                    new Faculty("SDE"), new LastDate("02-10-2021"), new LastDate("01-10-2021")),
             new Person(new Name("Irfan Ibrahim"), new Room("D422"), new Phone("92492021"),
                     new Email("irfan@example.com"), new VaccStatus("T"),
                     new Faculty("FoE"), new LastDate("12-10-2021"), new LastDate("12-10-2021")),
@@ -48,6 +53,8 @@ public class SampleDataUtil {
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("03-01-2021"),
+                new Venue("Gym"), new Capacity("5")));
         return sampleAb;
     }
 

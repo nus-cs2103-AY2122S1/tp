@@ -1,10 +1,10 @@
 package safeforhall.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static safeforhall.logic.commands.CommandTestUtil.COLLECTION_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.FACULTY_DESC_AMY;
-import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE1_DESC_OCT;
-import static safeforhall.logic.commands.CommandTestUtil.LAST_DATE2_DESC_OCT;
+import static safeforhall.logic.commands.CommandTestUtil.FET_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.ROOM_DESC_AMY;
@@ -103,7 +103,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + LAST_DATE1_DESC_OCT + LAST_DATE2_DESC_OCT;
+                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY + COLLECTION_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

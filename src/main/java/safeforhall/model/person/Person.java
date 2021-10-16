@@ -2,6 +2,8 @@ package safeforhall.model.person;
 
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
@@ -23,12 +25,11 @@ public class Person {
     private final LastDate lastCollectionDate;
 
     /**
-     * Every field must be present and only last 3 can be null.
+     * Every field must be present.
      */
     public Person(Name name, Room room, Phone phone, Email email, VaccStatus vaccStatus,
                     Faculty faculty, LastDate lastFetDate, LastDate lastCollectionDate) {
-        // Optionals: faculty, lastFetDate, lastCollectionDate
-        requireAllNonNull(name, room, phone, email, vaccStatus);
+        requireAllNonNull(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
         this.name = name;
         this.room = room;
         this.phone = phone;
@@ -102,7 +103,11 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getRoom().equals(getRoom())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail());
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getVaccStatus().equals(getVaccStatus())
+                && otherPerson.getFaculty().equals(getFaculty())
+                && otherPerson.getLastFetDate().equals(getLastFetDate())
+                && otherPerson.getLastCollectionDate().equals(getLastCollectionDate());
     }
 
     @Override
@@ -124,9 +129,35 @@ public class Person {
                 .append("; Vaccinated: ")
                 .append(getVaccStatus())
                 .append("; Faculty: ")
-                .append(getFaculty());
+                .append(getFaculty())
+                .append("; Last Fet Date: ")
+                .append(getLastFetDate())
+                .append("; Last Collection Date: ")
+                .append(getLastCollectionDate());
 
         return builder.toString();
     }
 
+    /**
+     * Returns true the person has missed any of his fet dates.
+     */
+    public boolean hasMissedDeadline() {
+        LastDate currentDate = new LastDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        NameMissedDeadlinePredicate checkFet = new NameMissedDeadlinePredicate("f", currentDate);
+        return checkFet.test(this);
+    }
+
+    /**
+     * Returns the number of days the person has missed any of his fet dates.
+     */
+    public int getMissedDates() {
+        LastDate currentDate = new LastDate(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        NameMissedDeadlinePredicate checkFet = new NameMissedDeadlinePredicate("f", currentDate);
+
+        if (this.hasMissedDeadline()) {
+            return (int) Math.abs(checkFet.getDeadlinePeriod(this));
+        } else {
+            return -1;
+        }
+    }
 }

@@ -2,10 +2,12 @@ package safeforhall.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_COLLECTIONDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE1;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE2;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_FACULTY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_FETDATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -42,6 +44,10 @@ public class CommandTestUtil {
     public static final String VALID_FACULTY_BOB = "FASS";
     public static final String VALID_VACCSTATUS_AMY = "T";
     public static final String VALID_VACCSTATUS_BOB = "F";
+    public static final String VALID_FETDATE_AMY = "20-11-2021";
+    public static final String VALID_FETDATE_BOB = "02-09-2021";
+    public static final String VALID_COLLECTIONDATE_AMY = "22-11-2021";
+    public static final String VALID_COLLECTIONDATE_BOB = "12-09-2021";
     public static final String VALID_LAST_DATE1_OCT = "10-10-2021";
     public static final String VALID_LAST_DATE2_OCT = "15-10-2021";
     public static final String VALID_KEYWORD_F = "f";
@@ -59,6 +65,10 @@ public class CommandTestUtil {
     public static final String FACULTY_DESC_BOB = " " + PREFIX_FACULTY + VALID_FACULTY_BOB;
     public static final String VACCSTATUS_DESC_AMY = " " + PREFIX_VACCSTATUS + VALID_VACCSTATUS_AMY;
     public static final String VACCSTATUS_DESC_BOB = " " + PREFIX_VACCSTATUS + VALID_VACCSTATUS_BOB;
+    public static final String FET_DESC_AMY = " " + PREFIX_FETDATE + VALID_FETDATE_AMY;
+    public static final String FET_DESC_BOB = " " + PREFIX_FETDATE + VALID_FETDATE_BOB;
+    public static final String COLLECTION_DESC_AMY = " " + PREFIX_COLLECTIONDATE + VALID_COLLECTIONDATE_AMY;
+    public static final String COLLECTION_DESC_BOB = " " + PREFIX_COLLECTIONDATE + VALID_COLLECTIONDATE_BOB;
     public static final String LAST_DATE1_DESC_OCT = " " + PREFIX_DATE1 + VALID_LAST_DATE1_OCT;
     public static final String LAST_DATE2_DESC_OCT = " " + PREFIX_DATE2 + VALID_LAST_DATE2_OCT;
     public static final String KEYWORD_DESC_F = " " + PREFIX_KEYWORD + VALID_KEYWORD_F;
@@ -70,7 +80,9 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ROOM_DESC = " " + PREFIX_ROOM; // empty string not allowed for room
     public static final String INVALID_FACULTY_DESC = " " + PREFIX_FACULTY; // empty string not allowed for faculty
-    public static final String INVALID_VACCSTATUS_DESC = " " + PREFIX_VACCSTATUS + "fake"; //only T or F allowed
+    public static final String INVALID_VACCSTATUS_DESC = " " + PREFIX_VACCSTATUS + "fake"; // only T or F allowed
+    public static final String INVALID_FETDATE_DESC = " " + PREFIX_FETDATE + "41-20-20"; // not valid date
+    public static final String INVALID_COLLECTIONDATE_DESC = " " + PREFIX_FETDATE + "41/20/20"; // not valid date
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
