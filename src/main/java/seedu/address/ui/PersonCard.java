@@ -48,6 +48,10 @@ public class PersonCard extends UiPart<Region> {
     private Label lastVisit;
     @FXML
     private Label visit;
+    @FXML
+    private Label frequency;
+    @FXML
+    private Label occurrence;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,7 +65,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         language.setText(person.getLanguage().value);
         lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).getFormatted());
-        visit.setText(DISPLAY_NEXT_VISIT + person.getVisit().orElse(new Visit("")).getFormatted());
+        visit.setText(DISPLAY_NEXT_VISIT + person.getFormattedVisit());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

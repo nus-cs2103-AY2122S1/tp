@@ -36,7 +36,7 @@ public class LastVisit {
      */
     public String getFormatted() {
         if (value.isEmpty()) {
-            return value;
+            return "-";
         }
 
         return ParserUtil.parseDisplayedDatetime(value);

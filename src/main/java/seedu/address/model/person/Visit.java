@@ -44,7 +44,7 @@ public class Visit {
      */
     public String getFormatted() {
         if (!hasVisit()) {
-            return value;
+            return "-";
         }
 
         return ParserUtil.parseDisplayedDatetime(value);
