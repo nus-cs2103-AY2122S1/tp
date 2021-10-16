@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -34,7 +35,8 @@ public class MarkCommandTest {
         ls.add(DEFAULT_TEST_NAME.toString());
 
         model.setPerson(DEFAULT_TEST_PERSON, DEFAULT_TEST_PERSON.unMark(DEFAULT_TEST_PERIOD));
-        String expectedResult = String.format(MarkCommand.DEFAULT_EXECUTION, 1, DEFAULT_TEST_PERIOD, ls);
+        String expectedResult = String.format(MarkCommand.DEFAULT_EXECUTION, 1,
+                DEFAULT_TEST_PERIOD, listToString(ls));
         MarkCommand defaultCommand = new MarkCommand(predicate, DEFAULT_TEST_PERIOD);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setPerson(DEFAULT_TEST_PERSON, DEFAULT_TEST_PERSON.mark(DEFAULT_TEST_PERIOD));

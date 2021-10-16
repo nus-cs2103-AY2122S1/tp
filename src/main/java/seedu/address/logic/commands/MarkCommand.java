@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -12,7 +13,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsFieldsPredicate;
@@ -77,10 +77,10 @@ public class MarkCommand extends Command {
         for (Person p : toModify) {
             model.setPerson(p, p.mark(period));
         }
-        List<Name> names = toModify.stream()
-                .map(staff -> staff.getName())
+        List<String> names = toModify.stream()
+                .map(staff -> staff.getName().toString())
                 .collect(Collectors.toList());
-        return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, names));
+        return new CommandResult(String.format(DEFAULT_EXECUTION, total, period, listToString(names)));
 
 
 
@@ -96,7 +96,7 @@ public class MarkCommand extends Command {
             throw new CommandException(String.format(NOTHING_CHANGED, staffToModify));
         }
         model.setPerson(staffToModify, changedStaff);
-        return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, changedStaff));
+        return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, "\n" + changedStaff.getName()));
 
     }
 }
