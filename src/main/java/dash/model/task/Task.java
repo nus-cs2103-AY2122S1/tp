@@ -17,6 +17,7 @@ public class Task {
     private final TaskDescription taskDescription;
     private final Set<Tag> tags = new HashSet<>();
     private final CompletionStatus completionStatus;
+    private final TaskDate taskDate;
 
     /**
      * Constructs a {@code Task}.
@@ -24,12 +25,13 @@ public class Task {
      * @param completionStatus A completion status
      * @param tags A valid tag
      */
-    public Task(TaskDescription taskDescription, CompletionStatus completionStatus, Set<Tag> tags) {
-        requireAllNonNull(taskDescription, completionStatus, tags);
+    public Task(TaskDescription taskDescription, CompletionStatus completionStatus, TaskDate taskDate,
+                Set<Tag> tags) {
+        requireAllNonNull(taskDescription, completionStatus, taskDate, tags);
         this.taskDescription = taskDescription;
         this.completionStatus = completionStatus;
+        this.taskDate = taskDate;
         this.tags.addAll(tags);
-
     }
 
     public TaskDescription getTaskDescription() {
@@ -48,6 +50,10 @@ public class Task {
         return completionStatus;
     }
 
+    public TaskDate getTaskDate() {
+        return taskDate;
+    }
+
     /**
      * Returns true if both tasks have the same task description and tags.
      */
@@ -63,12 +69,13 @@ public class Task {
         Task otherTask = (Task) other;
         return otherTask.getTaskDescription().equals(getTaskDescription())
                 && otherTask.getCompletionStatus().equals(getCompletionStatus())
+                && otherTask.getTaskDate().equals(getTaskDate())
                 && otherTask.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskDescription, tags);
+        return Objects.hash(taskDescription, taskDate, tags);
     }
 
     @Override
@@ -80,6 +87,16 @@ public class Task {
         } else {
             builder.append(getTaskDescription())
                     .append(" (not completed)");
+        }
+
+        if (taskDate.hasDate()) {
+            builder.append("; Date: ")
+                    .append(getTaskDate().toDateString());
+        }
+
+        if (taskDate.hasTime()) {
+            builder.append("; Time: ")
+                    .append(getTaskDate().toTimeString());
         }
 
         Set<Tag> tags = getTags();

@@ -8,7 +8,7 @@ import static dash.commons.util.AppUtil.checkArgument;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a Date of a Task.
+ * Represents a Date of a Task, can have Date, Task, both or none.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}}
  */
 public class TaskDate {
@@ -53,6 +53,9 @@ public class TaskDate {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
             this.time = LocalTime.parse(taskTimeString, timeFormat);
         }
+    }
+
+    public TaskDate() {
     }
 
     /**
@@ -103,11 +106,21 @@ public class TaskDate {
         return this.time;
     }
 
-    private boolean hasDate() {
+    /**
+     * Returns true if this instance has Date.
+     *
+     * @return boolean
+     */
+    public boolean hasDate() {
         return detectedDateFormat != null;
     }
 
-    private boolean hasTime() {
+    /**
+     * Returns true if this instance has Time.
+     *
+     * @return boolean
+     */
+    public boolean hasTime() {
         return detectedTimeFormat != null;
     }
 
@@ -183,20 +196,12 @@ public class TaskDate {
         return isTime;
     }
 
-    @Override
-    public String toString() {
+    public String toDateString() {
+        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
 
-        if (hasDate() && hasTime()) {
-            String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-            String timeString = this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
-            return String.format("%s %s", dateString, timeString);
-        }
-        if (hasDate()) {
-            String dateString = this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
-            return String.format("%s", dateString);
-        }
-        String timeString = this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
-        return String.format("%s", timeString);
+    public String toTimeString() {
+        return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
     }
 
     @Override
@@ -206,4 +211,28 @@ public class TaskDate {
                 && date.equals(((TaskDate) other).getDate())
                 && time.equals(((TaskDate) other).getTime())); // state check
     }
+
+    @Override
+    public int hashCode() {
+        if (hasDate()) {
+            return date.hashCode();
+        }
+        return time.hashCode();
+    }
+
+    @Override
+    public String toString() {
+
+        if (hasDate() && hasTime()) {
+            return String.format("%s %s", toDateString(), toTimeString());
+        }
+        if (hasDate()) {
+            return String.format("%s", toDateString());
+        }
+        if (hasTime()) {
+            return String.format("%s", toTimeString());
+        }
+        return "";
+    }
+
 }

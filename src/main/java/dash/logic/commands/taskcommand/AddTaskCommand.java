@@ -1,7 +1,6 @@
 package dash.logic.commands.taskcommand;
 
-import static dash.logic.parser.CliSyntax.PREFIX_TAG;
-import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static dash.logic.parser.CliSyntax.*;
 import static java.util.Objects.requireNonNull;
 
 import dash.logic.commands.Command;
@@ -17,9 +16,11 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list. \n"
             + "Parameters: "
             + PREFIX_TASK_DESCRIPTION + "DESCRIPTION\n"
+            + PREFIX_TASK_DATE + "DATE/TIME\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "CS2103T Quiz 9"
+            + PREFIX_TASK_DATE + "21/10/2021 1500"
             + PREFIX_TAG + "quizzes";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
