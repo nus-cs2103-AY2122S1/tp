@@ -11,7 +11,7 @@ title: User Guide
   - [Adding elderly details](#add-elderly-details--add)
   - [Deleting an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Listing all elderly](#listing-all-persons--list)
-  - [Locating elderly by name](#locating-persons-by-name--find)
+  - [Locating elderly by attribute](#locating-elderly-by-attribute--find)
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
   - [Marking one visit as done](#marking-one-visit-as-done--done)
   - [Viewing help](#viewing-help--help)
@@ -42,7 +42,7 @@ title: User Guide
 
    * **`list`** : Lists all elderly.
 
-   * **`find`**`n/Hans` : Find all elderly whose names contain Hans.
+   * **`find`**`Hans` : Find all elderly whose attributes start with Hans.(Case insensitive)
 
    * **`clear`** : Deletes all elderly.
 
@@ -147,22 +147,23 @@ Shows a list of all the elderly and their associated details in the address book
 Format: `list`
 
 
-### Locating persons by name : `find`
+### Locating elderly by attribute : `find`
 
 Finds elderly whose names contain any of the given keywords.
 
-Format: `find n/KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The order of the keywords does not matter. e.g. `Hans Bo` will not match `Bo Hans`
+* All attributes are searched (`NAME`, `PHONE`, `LANGUAGE`, `ADDRESS`, `VISIT`, `LAST_VISIT`)
+* Partial words will be matched, and will return any person who has the partial word as a substring of any attribute e.g. `Han` will match `Hans Bo` and `Rohan Tan`
+* `VISIT` and `LAST_VISIT` are in the `yyyy-MM-dd HH:mm` format.
+* Persons matching all given keywords will be returned (i.e. `AND` search).
+  e.g. `Hans English` will return `Hans Gruber`, `Hanson Lim`, both of which have `LANGUAGE` English
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe`
+* `find alex English` returns `Alex Yeoh`, `Alex Lim`, both with `LANGUAGE` English.<br>
 
 
 ### Scheduling a visit to an elderly : `visit`
@@ -253,7 +254,7 @@ Action | Format, Examples
 **delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/1900-11-08 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 3 n/James`
-**find** | `find n/NAME` (Currently it is `find NAME`)<br> e.g., `find n/yida`
+**find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
 **list** | `list`
 **clear** | `clear`
 **exit** | `exit`
