@@ -106,8 +106,9 @@ public class LessonTest {
         assertEquals(1, defaultLesson.getStudents().size());
         assertTrue(defaultLesson.containsStudent(student));
 
-        assertEquals(1, student.getLessonCodes().size());
+        assertEquals(1, student.getLessonCodesAndPrices().size());
         assertTrue(student.getLessonCodes().contains(defaultLesson.getLessonCode()));
+        assertTrue(student.getLessonPrices().contains(defaultLesson.getPrice()));
     }
 
     @Test
@@ -121,7 +122,7 @@ public class LessonTest {
         // student present and to remove
         defaultLesson.addStudent(toRemove);
         assertEquals(1, defaultLesson.getLessonSize());
-        assertEquals(1, toRemove.getLessonCodes().size());
+        assertEquals(1, toRemove.getLessonCodesAndPrices().size());
 
         defaultLesson.removeStudent(toRemove);
         assertEquals(0, defaultLesson.getLessonSize());
@@ -138,8 +139,8 @@ public class LessonTest {
 
         defaultLesson.removeAll();
         assertEquals(0, defaultLesson.getStudents().size());
-        assertEquals(0, studentA.getLessonCodes().size());
-        assertEquals(0, studentB.getLessonCodes().size());
+        assertEquals(0, studentA.getLessonCodesAndPrices().size());
+        assertEquals(0, studentB.getLessonCodesAndPrices().size());
     }
 
     @Test

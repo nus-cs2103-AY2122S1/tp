@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.student.Student;
 
 /**
@@ -21,6 +22,7 @@ public class StudentCard extends UiPart<Region> {
     private static final String STRING_FORMAT_EMAIL = "Email Address: \t%s";
     private static final String STRING_FORMAT_GRADE = "Grade: \t\t\t%s";
     private static final String STRING_FORMAT_LESSON = "Lesson(s): \t";
+    private static final String STRING_FORMAT_SUBSCRIPTION = "Subscription: \t" + Price.CURRENCY + " %.2f";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -50,6 +52,8 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label lessons;
+    @FXML
+    private Label subscription;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -57,6 +61,7 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         name.setUnderline(true);
@@ -64,13 +69,24 @@ public class StudentCard extends UiPart<Region> {
         address.setText(String.format(STRING_FORMAT_ADDRESS, student.getAddress().value));
         email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
         grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
+
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        lessons.setText(student.getLessonCodes().stream()
-                .map(LessonCode::toString)
-                .sorted()
-                .reduce(STRING_FORMAT_LESSON, (l1, l2) -> l1 + '\t' + l2));
+
+        if (student.getLessonCodesAndPrices().size() > 0) {
+            lessons.setText(student.getLessonCodes().stream()
+                    .map(LessonCode::toString)
+                    .sorted()
+                    .reduce(STRING_FORMAT_LESSON, (l1, l2) -> l1 + '\t' + l2));
+        } else {
+            lessons.setText(STRING_FORMAT_LESSON + "\t-");
+        }
+
+        double totalPrice = student.getLessonPrices().stream()
+                .map(p -> p.value)
+                .reduce(0.0, Double::sum);
+        subscription.setText(String.format(STRING_FORMAT_SUBSCRIPTION, totalPrice));
     }
 
     @Override
