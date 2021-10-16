@@ -125,10 +125,11 @@ Examples:
 * `filter mod/CS2030 group/SM`
 * `filter mod/CS2030 group/SG`
 <br>
-  <br>
-  ![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
-  <br>
-  ![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
+   <br>
+   ![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
+<br>
+   <br>
+   ![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
 
 ### Find profiles by name  : `find`
 
