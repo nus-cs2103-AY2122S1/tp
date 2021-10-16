@@ -33,14 +33,14 @@ class JsonAdaptedTaskTest {
 
     @Test
     public void toModelType_invalidTaskDescription_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(INVALID_TASKDESCRIPTION, VALID_TAGS);
+        JsonAdaptedTask task = new JsonAdaptedTask(INVALID_TASKDESCRIPTION, false, VALID_TAGS);
         String expectedMessage = TaskDescription.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
 
     @Test
     public void toModelType_nullDescription_throwsIllegalValueException() {
-        JsonAdaptedTask task = new JsonAdaptedTask(null, VALID_TAGS);
+        JsonAdaptedTask task = new JsonAdaptedTask(null, false, VALID_TAGS);
         String expectedMessage = MISSING_FIELD_MESSAGE_FORMAT;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, task::toModelType);
     }
@@ -49,7 +49,7 @@ class JsonAdaptedTaskTest {
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedTask task = new JsonAdaptedTask(VALID_TASKDESCRIPTION, invalidTags);
+        JsonAdaptedTask task = new JsonAdaptedTask(VALID_TASKDESCRIPTION, false, invalidTags);
         Assert.assertThrows(IllegalValueException.class, task::toModelType);
     }
 

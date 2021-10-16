@@ -18,6 +18,7 @@ import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
 import dash.model.Model;
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDescription;
 
@@ -82,9 +83,11 @@ public class EditTaskCommand extends Command {
 
         TaskDescription updatedDescription = editTaskDescriptor.getTaskDescription()
                 .orElse(taskToEdit.getTaskDescription());
+        CompletionStatus updatedCompletionStatus = editTaskDescriptor.getCompletionStatus()
+                .orElse(taskToEdit.getCompletionStatus());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedTags);
+        return new Task(updatedDescription, updatedCompletionStatus, updatedTags);
     }
 
     @Override
@@ -112,6 +115,7 @@ public class EditTaskCommand extends Command {
     public static class EditTaskDescriptor {
         private TaskDescription taskDescription;
         private Set<Tag> tags;
+        private CompletionStatus completionStatus;
 
         public EditTaskDescriptor() {
         }
@@ -123,13 +127,14 @@ public class EditTaskCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setTaskDescription(toCopy.taskDescription);
             setTags(toCopy.tags);
+            setCompletionStatus(toCopy.completionStatus);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskDescription, tags);
+            return CollectionUtil.isAnyNonNull(taskDescription, completionStatus, tags);
         }
 
         public void setTaskDescription(TaskDescription description) {
@@ -155,6 +160,14 @@ public class EditTaskCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setCompletionStatus(CompletionStatus completionStatus) {
+            this.completionStatus = completionStatus;
+        }
+
+        public Optional<CompletionStatus> getCompletionStatus() {
+            return Optional.ofNullable(completionStatus);
         }
 
         @Override
