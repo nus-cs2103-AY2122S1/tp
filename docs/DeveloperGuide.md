@@ -154,90 +154,71 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Implemented\] Tabs System (Aaron)
 
-#### Proposed Implementation
+#### Implementation
+The tab system is implemented using the JavaFX `javafx.scene.control.Tab` class. It is
+encapsulated in its own class `TabMenu` within the `dash.ui` package as a UI component.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+Additionally, it expands the number of parsers from `ContactsTabParser` to have a `TasksTabParser` 
+and `HelpTabParser` to allow for a different list of commands to be parsed per tab/page.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+The following commands are implemented:
+* `SwitchTabContactsCommand`
+* `SwitchTabTasksCommand`
+* `SwitchTabHelpCommand`
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The following operations are implemented:
+* `MainWindow#handleHelp()`
+* `MainWindow#handleSwitchContactsTab()`
+* `MainWindow#handleSwitchTasksTab()`
+These operations handle the switching of tabs within the MainWindow class.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Here is an example of how the tab system works:
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1: The user launches the application. By default, the contacts
+tab will be shown. 
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 2: The user adds a contact by using the `add` command. The `LogicManager` object is passed the command and
+parses the command using the `ContactsTabParser` since it is on the contacts page and hence uses the contacts parser.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 3: The user decides to switch to the task tab by entering the command: `task`. The command follows a similar
+path like in Step 2.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Step 4: The commandResult object returned after execution indicates that the user wants to switch to the Task tab and 
+the method `handleSwitchTasksTab()` is called.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 5: The method first calls the `switchTab()` method within `TabMenu`, which directs the UI 
+to switch to the selected tab index (1 for the Tasks tab). Then, it calls `setTabNumber` within `LogicManager` so
+the `LogicManager` can keep track of the current tab, and use 1 out of the 3 parsers to fit the tab the user is on.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+Step 6: The user attempts to add a contact by using the same `add` command. However, since Step 5 has recorded the tab
+number inside `LogicManager` to be 1, the `LogicManager` detects that the user is still on the Task tab and hence uses 
+the `TaskTabParser` to parse the `add` command. 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Step 7: The `TaskTabParser` returns an `AddTaskCommand` instead of an `AddPersonCommand`.
 
-</div>
+The following sequence diagram shows how the switch tab system works when the command `task` is entered on the Contacts
+Tab:
+![TabSystemSequenceDiagram](images/TabSystemSequenceDiagram.png)
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+The following activity diagram summarises what happens when a user executes a switch tab command:
+![TabSystemActivityDiagram](images/TabSystemActivityDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How switching tabs execute:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Uses the JavaFX implementation of tabs.
+    * Pros: Easy to implement.
+    * Cons: Have to disable clicking of tabs because clicking in JavaFX has a different
+            implementation to how the Logic component parses commands.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+* **Alternative 2:** One single panel/list that changes/updates its displayed list depending on 
+user choice.
+    * Pros: Lesser dependence on JavaFX components.
+    * Cons: Not very scalable in case more tabs are needed in the future, hard to implement multiple segments
+            within a tab.
 
 --------------------------------------------------------------------------------------------------------------------
 
