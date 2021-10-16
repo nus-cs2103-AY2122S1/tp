@@ -78,7 +78,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = "add" + NAME_DESC_AMY + EMAIL_DESC_AMY
-                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040;
+                 + MODULE_CODE_DESC_CS2040;
         Person expectedPerson = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
