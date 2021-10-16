@@ -13,6 +13,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -117,6 +119,8 @@ public class RemarkClassCommand extends Command {
             Dialog<ButtonType> dialog = new Dialog<>();
             dialog.setDialogPane(remarkEditor);
             dialog.setTitle("Remark Editor");
+            Stage stage = (Stage) remarkEditor.getScene().getWindow();
+            stage.getIcons().add(new Image(String.valueOf(this.getClass().getResource("/images/edit_icon.png"))));
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.get() == ButtonType.OK) {
