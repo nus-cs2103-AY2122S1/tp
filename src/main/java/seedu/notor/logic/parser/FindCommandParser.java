@@ -31,4 +31,14 @@ public class FindCommandParser extends Parser<FindCommand> {
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
+    /**
+     * TODO: Stub command right now. Needs to have functionality moved over and converted to new command structure.
+     *
+     * @return
+     * @throws ParseException
+     */
+    @Override
+    public FindCommand parse() throws ParseException {
+        return null;
+    }
 }

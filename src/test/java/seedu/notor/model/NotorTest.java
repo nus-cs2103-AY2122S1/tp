@@ -10,13 +10,11 @@ import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -88,12 +86,7 @@ public class NotorTest {
         }
 
         @Override
-        public HashMap<String, SuperGroup> getSuperGroups() {
-            return null;
-        }
-
-        @Override
-        public HashMap<String, SubGroup> getSubGroups() {
+        public ObservableList<SuperGroup> getSuperGroups() {
             return null;
         }
     }

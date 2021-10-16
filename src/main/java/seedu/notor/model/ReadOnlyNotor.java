@@ -1,9 +1,6 @@
 package seedu.notor.model;
 
-import java.util.HashMap;
-
 import javafx.collections.ObservableList;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -18,6 +15,5 @@ public interface ReadOnlyNotor {
      */
     ObservableList<Person> getPersonList();
 
-    HashMap<String, SuperGroup> getSuperGroups();
-    HashMap<String, SubGroup> getSubGroups();
+    ObservableList<SuperGroup> getSuperGroups();
 }

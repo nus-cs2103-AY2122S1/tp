@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.notor.commons.exceptions.IllegalValueException;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -26,18 +25,15 @@ class JsonSerializableNotor {
 
     private final List<JsonAdaptedSuperGroup> superGroups = new ArrayList<>();
 
-    private final List<JsonAdaptedSubGroup> subGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableNotor} with the given persons.
      */
     @JsonCreator
     public JsonSerializableNotor(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups,
-        @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
+        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
         this.persons.addAll(persons);
         this.superGroups.addAll(superGroups);
-        this.subGroups.addAll(subGroups);
     }
 
     /**
@@ -49,11 +45,8 @@ class JsonSerializableNotor {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(
             Collectors.toList()));
         superGroups
-            .addAll(source.getSuperGroups().values().stream().map(JsonAdaptedSuperGroup::new).collect(
+            .addAll(source.getSuperGroups().stream().map(JsonAdaptedSuperGroup::new).collect(
             Collectors.toList()));
-        subGroups
-            .addAll(source.getSubGroups().values().stream().map(JsonAdaptedSubGroup::new).collect(
-                Collectors.toList()));
     }
 
     /**
@@ -69,12 +62,7 @@ class JsonSerializableNotor {
                 notor.addSuperGroup(superGroup);
             }
         }
-        for (JsonAdaptedSubGroup jsonAdaptedSubGroups : subGroups) {
-            SubGroup subGroup = jsonAdaptedSubGroups.toModelType();
-            if (!notor.hasSubGroup(subGroup)) {
-                notor.addSubGroup(subGroup);
-            }
-        }
+        System.out.println(notor.getSuperGroups());
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
@@ -82,10 +70,13 @@ class JsonSerializableNotor {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             for (String superGroup : person.getSuperGroups()) {
+                System.out.println(notor.findSuperGroup(superGroup));
                 notor.findSuperGroup(superGroup).addPerson(person);
             }
             for (String subGroup : person.getSubGroups()) {
-                notor.findSubGroup(subGroup).addPerson(person);
+                String[] split = subGroup.split("_");
+                // TODO: Create method to check for validity
+                notor.findSuperGroup(split[0]).addPersonToSubGroup(split[1], person);
             }
 
             notor.addPerson(person);

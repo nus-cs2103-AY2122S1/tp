@@ -24,7 +24,7 @@ import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.executors.person.PersonEditExecutor.PersonEditDescriptor;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.person.NameContainsKeywordsPredicate;
-import seedu.notor.model.person.Note;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
 import seedu.notor.testutil.PersonEditDescriptorBuilder;

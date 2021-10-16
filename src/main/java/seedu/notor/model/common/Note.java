@@ -1,16 +1,18 @@
-package seedu.notor.model.person;
+package seedu.notor.model.common;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's note that is opened upon note command.
+ * Represents a note that is opened upon the execution of note command.
  */
 public class Note {
+    public static final Note EMPTY_NOTE = new EmptyNote();
 
-    /** content of note **/
+    /**
+     * content of note
+     **/
     public final String value;
-    public final String savedDate;
-
+    private final String savedDate;
 
     /**
      * Constructor for a Note instance.
@@ -54,5 +56,23 @@ public class Note {
         return value;
     }
 
+    private static final class EmptyNote extends Note {
+        public EmptyNote() {
+            super("", null);
+        }
 
+        /**
+         * Returns string representation of saved date.
+         *
+         * @return String representation of saved date
+         */
+        public String getSavedDate() {
+            return null;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this;
+        }
+    }
 }

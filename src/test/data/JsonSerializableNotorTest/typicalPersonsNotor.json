@@ -66,13 +66,12 @@
   } ],
   "superGroups" : [ {
     "name" : "Orbital",
-    "subGroups" : [ "Group1" ]
+    "subGroups" : [ {
+      "name" : "Group1",
+      "parent" : "Orbital"
+    } ]
   }, {
     "name" : "CS2103",
     "subGroups" : [ ]
-  } ],
-  "subGroups" : [ {
-    "name" : "Group1",
-    "parent" : "Orbital"
   } ]
 }

@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.notor.model.Notor;
-import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -79,17 +78,14 @@ public class TypicalPersons {
      * Returns an {@code Notor} with all the typical persons.
      */
     public static Notor getTypicalNotor() {
-        Notor ab = new Notor();
+        Notor notor = new Notor();
         for (SuperGroup superGroup: TypicalGroups.getSuperGroups()) {
-            ab.addSuperGroup(superGroup);
-        }
-        for (SubGroup subGroup: TypicalSubGroups.getSubGroups()) {
-            ab.addSubGroup(subGroup);
+            notor.addSuperGroup(superGroup);
         }
         for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
+            notor.addPerson(person);
         }
-        return ab;
+        return notor;
     }
 
     public static List<Person> getTypicalPersons() {

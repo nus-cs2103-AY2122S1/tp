@@ -1,8 +1,12 @@
 package seedu.notor.storage;
+
+import java.util.HashSet;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.notor.commons.exceptions.IllegalValueException;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.group.SubGroup;
 
 public class JsonAdaptedSubGroup {
@@ -17,7 +21,7 @@ public class JsonAdaptedSubGroup {
      */
     @JsonCreator
     public JsonAdaptedSubGroup(@JsonProperty("name") String name,
-        @JsonProperty("Group") String parent) {
+            @JsonProperty("Group") String parent) {
         this.name = name;
         this.parent = parent;
     }
@@ -33,10 +37,11 @@ public class JsonAdaptedSubGroup {
     /**
      * Converts this Jackson-friendly adapted SuperGroup object into the model's {@code SuperGroup}
      * and {@code SuperGroup} objects.
+     * TODO: take in actual tags instead of just using empty HashSet.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public SubGroup toModelType() throws IllegalValueException {
-        return new SubGroup(name, parent);
+        return new SubGroup(new Name(name), new HashSet<>(), parent);
     }
 }

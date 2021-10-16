@@ -11,7 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
-import seedu.notor.model.group.SubGroup;
+import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -24,9 +25,10 @@ public class ModelManager implements Model {
     private final Notor notor;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<SuperGroup> filteredGroups;
 
     /**
-     * Initializes a ModelManager with the given Notor and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyNotor notor, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.notor = new Notor(notor);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
 
     public ModelManager() {
@@ -132,31 +135,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addSuperGroup(String superGroup) throws ParseException {
+        notor.addSuperGroup(superGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void deleteSuperGroup(SuperGroup superGroup) {
         notor.deleteSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public SuperGroup findSuperGroup(String name) {
-        return notor.findSuperGroup(name);
-    }
-
-    @Override
-    public SubGroup findSubGroup(String name) {
-        return notor.findSubGroup(name);
-    }
-
-    @Override
-    public void addSubGroup(SubGroup subGroup) {
-        notor.addSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void deleteSubGroup(SubGroup subGroup) {
-        notor.deleteSubGroup(subGroup);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public Group findGroup(String name) {
+        return notor.findGroup(name);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -174,6 +166,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<SuperGroup> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
+    @Override public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     @Override

@@ -11,7 +11,9 @@ public class TypicalGroups {
 
 
     public static final List<SuperGroup> getSuperGroups() {
-        ORBITAL.addSubGroup(TypicalSubGroups.ORBITAL_GROUP1);
+        if (ORBITAL.findSubGroup("Group1") == null) {
+            ORBITAL.addSubGroup(TypicalSubGroups.ORBITAL_GROUP1);
+        }
         ArrayList<SuperGroup> temp = new ArrayList<>();
         temp.add(ORBITAL);
         temp.add(CS2103);

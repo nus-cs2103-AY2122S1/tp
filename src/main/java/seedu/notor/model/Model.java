@@ -5,7 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.notor.commons.core.GuiSettings;
-import seedu.notor.model.group.SubGroup;
+import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -94,17 +95,11 @@ public interface Model {
 
     void addSuperGroup(SuperGroup superGroup);
 
+    void addSuperGroup(String superGroup) throws ParseException;
+
     void deleteSuperGroup(SuperGroup superGroup);
 
-    SuperGroup findSuperGroup(String name);
-
-    SubGroup findSubGroup(String name);
-
-    void addSubGroup(SubGroup subGroup);
-
-    void deleteSubGroup(SubGroup subGroup);
-
-    //=========== Filtered Person List Accessors =============================================================
+    Group findGroup(String name);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -113,12 +108,27 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered group list
+     */
+    ObservableList<SuperGroup> getFilteredGroupList();
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 }
