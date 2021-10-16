@@ -20,7 +20,7 @@ public class Person {
     private final StudentId id;
     private final Phone phone;
     private final Email email;
-    private final boolean isFavourite;
+    private boolean isFavourite;
 
     // Data fields
     private final Set<Mod> mods = new HashSet<>();
@@ -84,6 +84,13 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    public void setFavourite() {
+        if (this.isFavourite) {
+
+        }
+        this.isFavourite = true;
     }
 
     /**
