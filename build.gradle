@@ -69,4 +69,8 @@ shadowJar {
     archiveName = 'managera.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
