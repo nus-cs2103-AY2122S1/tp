@@ -260,19 +260,22 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> periods} to a {@code period} from the earliest date to the
      * latest date in the collection.
-     * @throws DateTimeParseException When the input does not have the correct format.
+     * @throws ParseException When the input does not have the correct format.
      */
-    public static Period parsePeriod(Collection<String> periods) throws DateTimeParseException {
+    public static Period parsePeriod(Collection<String> periods) throws ParseException {
         LocalDate start = LocalDate.MAX;
         LocalDate end = LocalDate.MIN;
-
-        for (String periodName : periods) {
-            if (start.isAfter(LocalDate.parse(periodName))) {
-                start = LocalDate.parse(periodName);
+        try {
+            for (String periodName : periods) {
+                if (start.isAfter(LocalDate.parse(periodName))) {
+                    start = LocalDate.parse(periodName);
+                }
+                if (end.isBefore(LocalDate.parse(periodName))) {
+                    end = LocalDate.parse(periodName);
+                }
             }
-            if (end.isBefore(LocalDate.parse(periodName))) {
-                end = LocalDate.parse(periodName);
-            }
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
         }
 
         return new Period(start, end);
