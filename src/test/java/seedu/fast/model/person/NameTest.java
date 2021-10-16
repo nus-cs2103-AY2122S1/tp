@@ -37,4 +37,16 @@ public class NameTest {
         assertTrue(Name.isValidName("Capital Tan")); // with capital letters
         assertTrue(Name.isValidName("David Roger Jackson Ray Jr 2nd")); // long names
     }
+
+    @Test
+    public void hashcode() {
+        Name standard = new Name("peter jack");
+        Name nameWithSameValue = new Name("peter jack");
+        Name nameWithDifferentValue = new Name("Capital Tan");
+
+        assertTrue(standard.hashCode() == nameWithSameValue.hashCode());
+        assertTrue(standard.hashCode() == standard.hashCode());
+
+        assertFalse(standard.hashCode() == nameWithDifferentValue.hashCode());
+    }
 }
