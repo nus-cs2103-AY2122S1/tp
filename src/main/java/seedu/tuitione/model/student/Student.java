@@ -92,12 +92,12 @@ public class Student {
     }
 
     /**
-     * Returns an immutable lesson price set, which throws {@code UnsupportedOperationException}
+     * Returns a lesson price array, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public ArrayList<Price> getLessonPrices() {
         Collection<Price> values = lessonCodesAndPrices.values();
-        return new ArrayList<>(values); // equivalent generator to unmodifiable set
+        return new ArrayList<>(values);
     }
 
     /**

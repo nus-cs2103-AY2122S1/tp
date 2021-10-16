@@ -3,6 +3,7 @@ package seedu.tuitione.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
@@ -42,6 +43,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -145,15 +147,15 @@ public class EditCommand extends Command {
             setPhone(toCopy.parentContact);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
             setGrade(toCopy.grade);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, tags);
         }
 
         public void setName(Name name) {
@@ -232,6 +234,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getGrade().equals(e.getGrade())
                     && getTags().equals(e.getTags());
         }
     }
