@@ -96,7 +96,7 @@ public class MarkCommand extends Command {
             throw new CommandException(String.format(NOTHING_CHANGED, staffToModify));
         }
         model.setPerson(staffToModify, changedStaff);
-        return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, "\n" + changedStaff.getName()));
+        return new CommandResult(String.format(DEFAULT_EXECUTION, 1, period, changedStaff.getName()));
 
     }
 }
