@@ -8,7 +8,6 @@ import java.io.InputStreamReader;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -67,7 +66,9 @@ public class Cryptor implements Cryptable {
     @Override
     public String decrypt(String encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-        if (!isLegalFileFormat(encryptedSourceFilePath)) throw new IOException(); // Guard clause
+        if (!isLegalFileFormat(encryptedSourceFilePath)) {
+            throw new IOException(); // Guard clause
+        }
 
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath);
         byte[] fileIv = new byte[16];
