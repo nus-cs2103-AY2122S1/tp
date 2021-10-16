@@ -24,15 +24,16 @@ public class EncryptionTest {
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String TEST_STRING = "This is a test string\n";
 
-    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING = "src/test/data/EncryptionTest/testSimpleString.enc";
-    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE =
-            "src/test/data/EncryptionTest/testSimpleStringOne.enc";
-    private static final String ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO =
-            "src/test/data/EncryptionTest/testSimpleStringTwo.enc";
-    private static final String DECRYPTED_FILEPATH_JSON = "src/test/data/EncryptionTest/testJson.json";
-    private static final String DECRYPTED_FILEPATH_JSON_OUTPUT = "src/test/data/EncryptionTest/testJsonOutput.json";
-    private static final String ENCRYPTED_FILEPATH_JSON = "src/test/data/EncryptionTest/testJson.enc";
-    private static final String ILLEGAL_ENCRYPTED_FORMAT = "illegal.txt";
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "EncryptionTest");
+    private static final Path ENCRYPTED_FILEPATH_SIMPLE_STRING = TEST_DATA_FOLDER.resolve("testSimpleString.enc");
+    private static final Path ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE =
+            TEST_DATA_FOLDER.resolve("testSimpleStringOne.enc");
+    private static final Path ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO =
+            TEST_DATA_FOLDER.resolve("testSimpleStringTwo.enc");
+    private static final Path DECRYPTED_FILEPATH_JSON = TEST_DATA_FOLDER.resolve("testJson.json");
+    private static final Path DECRYPTED_FILEPATH_JSON_OUTPUT = TEST_DATA_FOLDER.resolve("testJsonOutput.json");
+    private static final Path ENCRYPTED_FILEPATH_JSON = TEST_DATA_FOLDER.resolve("testJson.enc");
+    private static final Path ILLEGAL_ENCRYPTED_FORMAT = TEST_DATA_FOLDER.resolve("illegal.txt");
 
     @Test
     public void whenEncryptingIntoFile_andDecryptingFileAgain_thenOriginalStringIsReturned()
@@ -46,7 +47,7 @@ public class EncryptionTest {
         String decryptedContent = cryptor.decrypt(ENCRYPTED_FILEPATH_SIMPLE_STRING);
         assertEquals(TEST_STRING, decryptedContent);
 
-        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING).delete(); // Cleanup
+        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING.toString()).delete(); // Cleanup
     }
 
     @Test
@@ -56,14 +57,14 @@ public class EncryptionTest {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
 
-        String content = FileUtil.readFromFile(Paths.get(DECRYPTED_FILEPATH_JSON));
+        String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
 
         cryptor.encrypt(content, ENCRYPTED_FILEPATH_JSON);
         String decryptedContent = cryptor.decrypt(ENCRYPTED_FILEPATH_JSON);
 
         assertEquals(content, decryptedContent);
 
-        new File(ENCRYPTED_FILEPATH_JSON).delete(); // Cleanup
+        new File(ENCRYPTED_FILEPATH_JSON.toString()).delete(); // Cleanup
     }
 
     @Test
@@ -73,19 +74,19 @@ public class EncryptionTest {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
 
-        String content = FileUtil.readFromFile(Paths.get(DECRYPTED_FILEPATH_JSON));
+        String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
 
         cryptor.encrypt(content, ENCRYPTED_FILEPATH_JSON);
         String decryptedContent = cryptor.decrypt(ENCRYPTED_FILEPATH_JSON);
-        FileUtil.writeToFile(Path.of(DECRYPTED_FILEPATH_JSON_OUTPUT), decryptedContent);
+        FileUtil.writeToFile(DECRYPTED_FILEPATH_JSON_OUTPUT, decryptedContent);
 
-        assertTrue(FileUtil.isFileExists(Path.of(DECRYPTED_FILEPATH_JSON_OUTPUT)));
+        assertTrue(FileUtil.isFileExists(DECRYPTED_FILEPATH_JSON_OUTPUT));
 
-        String copiedContent = FileUtil.readFromFile(Paths.get(DECRYPTED_FILEPATH_JSON_OUTPUT));
+        String copiedContent = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON_OUTPUT);
         assertEquals(content, copiedContent);
 
-        new File(DECRYPTED_FILEPATH_JSON_OUTPUT).delete(); // Cleanup
-        new File(ENCRYPTED_FILEPATH_JSON).delete(); // Cleanup
+        new File(DECRYPTED_FILEPATH_JSON_OUTPUT.toString()).delete(); // Cleanup
+        new File(ENCRYPTED_FILEPATH_JSON.toString()).delete(); // Cleanup
     }
 
     @Test
@@ -103,8 +104,8 @@ public class EncryptionTest {
         assertThrows(IOException.class, () -> cryptor2.decrypt(ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE));
         assertThrows(IOException.class, () -> cryptor1.decrypt(ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO));
 
-        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE).delete(); // Cleanup
-        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO).delete(); // Cleanup
+        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING_ONE.toString()).delete(); // Cleanup
+        new File(ENCRYPTED_FILEPATH_SIMPLE_STRING_TWO.toString()).delete(); // Cleanup
     }
 
     @Test

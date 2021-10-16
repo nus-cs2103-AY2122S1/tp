@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -19,7 +20,7 @@ public class Cryptor implements Cryptable {
     /**
      * File to be decrypted must have the {@code *.enc} extension.
      */
-    private static final String LEGAL_FILE_FORMAT = ".enc";
+    private static final String LEGAL_FILE_FORMAT_EXTENSION = ".enc";
 
     private final SecretKey secretKey;
     private final Cipher cipher;
@@ -43,11 +44,11 @@ public class Cryptor implements Cryptable {
      * @throws InvalidKeyException If the supplied secret key is not valid.
      */
     @Override
-    public void encrypt(String content, String destinationFilePath) throws InvalidKeyException {
+    public void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] iv = cipher.getIV();
 
-        try (FileOutputStream fileOut = new FileOutputStream(destinationFilePath);
+        try (FileOutputStream fileOut = new FileOutputStream(destinationFilePath.toString());
              CipherOutputStream cipherOut = new CipherOutputStream(fileOut, cipher)) {
             fileOut.write(iv);
             cipherOut.write(content.getBytes());
@@ -64,13 +65,13 @@ public class Cryptor implements Cryptable {
      * @throws InvalidKeyException If the supplied key is invalid.
      */
     @Override
-    public String decrypt(String encryptedSourceFilePath)
+    public String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-        if (!isLegalFileFormat(encryptedSourceFilePath)) {
+        if (!isLegalFileFormat(encryptedSourceFilePath.toString())) {
             throw new IOException(); // Guard clause
         }
 
-        FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath);
+        FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
         byte[] fileIv = new byte[16];
         fileIn.read(fileIv);
         cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileIv));
@@ -92,6 +93,6 @@ public class Cryptor implements Cryptable {
      * Checks if the file is in the legal format.
      */
     private boolean isLegalFileFormat(String filePath) {
-        return filePath.endsWith(LEGAL_FILE_FORMAT);
+        return filePath.endsWith(LEGAL_FILE_FORMAT_EXTENSION);
     }
 }
