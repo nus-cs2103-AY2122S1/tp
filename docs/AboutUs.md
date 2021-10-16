@@ -31,7 +31,7 @@ We are a team based in the [School of Computing, National University of Singapor
 [[github](http://github.com/ethanwong6362)]
 
 * Role: Developer
-* Responsibilities: Logic flow 
+* Responsibilities: Logic flow
 
 ### Ng Jia Yuan
 

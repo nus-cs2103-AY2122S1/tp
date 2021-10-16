@@ -30,8 +30,8 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 
    * **`list`** : Lists all people in your ModuLink favourites list.
 
-   * **`find`**`Joseph`: Finds people whose names contain the keyword 'Joseph' in all profiles in ModuLink. 
-   
+   * **`find`**`Joseph`: Finds people whose names contain the keyword 'Joseph' in all profiles in ModuLink.
+
    * **`filter`**`mod/CS2103T`: Filters to show all profiles taking the CS2103T module.
 
    * **`filter`**`mod/CS2103T group/SM`: Filters to show all profiles who are taking the CS2103T module and are seeking members.
@@ -144,7 +144,7 @@ Examples:
 * `find alex david` returns `Alex Berenson` and `David Li`
 
 ![result for 'find alex'](images/screenshots/findAlexResult.png)
-  
+
 ### Find profiles by student ID  : `findId`
 
 Finds persons whose student ID number matches any of the entered keywords.
@@ -210,7 +210,7 @@ Action | Format, Examples
 **Add Favourite** | `addfav STUDENT_ID` <br> e.g., `addfav A0222594A`
 **Remove Favourite** | `remfav STUDENT_ID` <br> e.g., `remfav A0222594A`
 **List** | `list`
-**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM` 
+**Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM`
 **Find by Name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
 **Find by Student Id** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `find A0222594A` returns person with student Id matching A0222594A.
 **Help** | `help`
