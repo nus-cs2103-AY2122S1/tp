@@ -21,7 +21,7 @@ public class FilterEventCommand extends Command {
             + " and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_DATE + "DATE"
-            + "[" + PREFIX_TIME + "TIME]\n"
+            + " [" + PREFIX_TIME + "TIME]\n"
             + "Example: " + COMMAND_WORD + " d/2021-09-20\n";
 
     private final EventDateTimePredicate predicate;
