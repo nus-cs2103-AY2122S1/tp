@@ -32,7 +32,7 @@ public class Students {
         }
 
         return otherStudents != null
-                && otherStudents.toString().equals(toString());
+                && otherStudents.equals(this);
     }
 
     @Override
