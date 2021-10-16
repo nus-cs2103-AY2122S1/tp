@@ -49,10 +49,14 @@ public class JsonAdaptedPolicy {
      */
     public JsonAdaptedPolicy(Policy source) {
         title = source.getTitle().toString();
-        price = source.getPrice().toString();
+        price = Integer.toString(source.getPrice().priceInCents);
         expiryDate = source.getExpiryDate().toString();
-        commission = source.getCommission().toString();
+        commission = Integer.toString(source.getCommission().commissionPercentage);
         owner = new JsonAdaptedPerson(source.getOwner());
+    }
+
+    public JsonAdaptedPerson getOwner() {
+        return owner;
     }
 
     /**
@@ -60,7 +64,7 @@ public class JsonAdaptedPolicy {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted policy.
      */
-    public Policy toModelType() throws IllegalValueException {
+    public Policy toModelType(Person policyOwner) throws IllegalValueException {
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Title.class.getSimpleName()));
         }
@@ -118,13 +122,10 @@ public class JsonAdaptedPolicy {
         final Commission modelCommission =
             new Commission(Integer.parseInt(commission.substring(0, commission.length() - 1)));
 
-        if (owner == null) {
+        if (policyOwner == null) {
             throw new IllegalValueException(
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
-
-        final Person modelOwner = owner.toModelType();
-
-        return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, modelOwner);
+        return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, policyOwner);
     }
 }

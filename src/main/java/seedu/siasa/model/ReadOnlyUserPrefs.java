@@ -13,6 +13,4 @@ public interface ReadOnlyUserPrefs {
 
     Path getSiasaFilePath();
 
-    Path getPolicyFilePath();
-
 }

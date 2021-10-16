@@ -26,7 +26,7 @@
                 </Label>
                 <Label fx:id="title" text="\$title" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="owner" styleClass="cell_small_label" text="\$owner" />
+            <Label fx:id="owner" id="policy_owner" styleClass="cell_small_label" text="\$owner" />
             <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
             <Label fx:id="expiryDate" styleClass="cell_small_label" text="\$expiryDate" />
             <Label fx:id="commission" styleClass="cell_small_label" text="\$commission" />
