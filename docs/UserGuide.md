@@ -228,6 +228,8 @@ Examples:
 * `done 1` updates the completed appointment counter of the first person.
 * `find Matthew` followed by `done 3` updates the completed appointment counter of the third person in the result of the `find` command.
 
+### Sorting contacts: `sort`
+
 ### Clearing all entries: `clear`
 
 Clears all entries from the address book.
