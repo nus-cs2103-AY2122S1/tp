@@ -6,6 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.AppointmentDate;
+import seedu.plannermd.model.appointment.Duration;
+import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.patient.Risk;
@@ -69,6 +73,21 @@ public class SampleDataUtil {
                     getTagSet("colleagues")) };
     }
 
+    public static Appointment[] getSampleAppointments() {
+        return new Appointment[] {
+                new Appointment(new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+                        new Address("Blk 30 Geylang Street 29, #06-40"), new BirthDate("27/10/1967"),
+                        new Remark("Prefer Dr. Lau"), getTagSet("friends"), new Risk("LOW")), new Doctor(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                        new Address("Blk 47 Tampines Street 20, #17-35"), new BirthDate("25/12/2000"), EMPTY_REMARK,
+                        getTagSet("classmates")), new AppointmentDate("25/12/2021"), new Session("11:30", new Duration(30)), EMPTY_REMARK),
+                new Appointment(new Patient(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new BirthDate("20/07/1964"),
+                        EMPTY_REMARK, getTagSet("family"), new Risk("LOW")), new Doctor(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                        new Address("Blk 47 Tampines Street 20, #17-35"), new BirthDate("25/12/2000"), EMPTY_REMARK,
+                        getTagSet("classmates")), new AppointmentDate("25/12/2021"), new Session("12:00", new Duration(30)), EMPTY_REMARK)
+        };
+    }
+
     public static ReadOnlyPlannerMd getSamplePlannerMd() {
         PlannerMd samplePm = new PlannerMd();
         for (Patient samplePatient : getSamplePatients()) {
@@ -76,6 +95,9 @@ public class SampleDataUtil {
         }
         for (Doctor sampleDoctor : getSampleDoctors()) {
             samplePm.addDoctor(sampleDoctor);
+        }
+        for (Appointment sampleAppointment: getSampleAppointments()) {
+            //TODO: add sample appointments
         }
         return samplePm;
     }
