@@ -13,8 +13,8 @@ public class RemoveParticipantFromEventByIndexParser implements Parser<RemovePar
         String[] sections = args.split(" ");
 
         if (sections.length != 3) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -22,8 +22,8 @@ public class RemoveParticipantFromEventByIndexParser implements Parser<RemovePar
             Index eventIndex = ParserUtil.parseIndex(sections[2]);
             return new RemoveParticipantFromEventByIndexCommand(participantIndex, eventIndex);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
         }
 
     }
