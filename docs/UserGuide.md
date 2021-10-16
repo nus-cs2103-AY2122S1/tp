@@ -123,6 +123,7 @@ Examples:
 * `filter mod/CS2030`
 * `filter mod/CS2030 group/SM`
 * `filter mod/CS2030 group/SG`
+
 <br>
    <br>
    ![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
@@ -145,6 +146,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `John` and `John Doe`
 * `find alex david` returns `Alex Berenson` and `David Li`
+
 <br>
   <br>
   ![result for 'find alex'](images/findAlexResult.png)
@@ -163,6 +165,7 @@ Format: `findId KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findId A0123456A` returns the person whose student Id number matches A0123456A
 * `findId A0123456A A0654321A` returns the persons whose student Id number matches either A0123456A or A0654321A.
+
 <br>
   <br>
   ![result for 'findId A0222594A'](images/findIdA0222594AResult.png)
