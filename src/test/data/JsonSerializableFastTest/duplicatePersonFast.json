@@ -8,7 +8,8 @@
     "tagged": [ "friends" ],
     "appointmentDate": "10 Oct 2021",
     "appointmentTime" : "",
-    "appointmentVenue" : ""
+    "appointmentVenue" : "",
+    "appointmentCount" : "10"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -17,6 +18,7 @@
     "remark": "",
     "appointmentDate": "10 Oct 2021",
     "appointmentTime" : "",
-    "appointmentVenue" : ""
+    "appointmentVenue" : "",
+    "appointmentCount" : "10"
   } ]
 }
