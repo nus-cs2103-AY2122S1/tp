@@ -3,7 +3,6 @@ package safeforhall.logic.parser;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

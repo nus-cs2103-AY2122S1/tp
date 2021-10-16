@@ -1,7 +1,6 @@
 package safeforhall.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_EVENT;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_RESIDENT;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
