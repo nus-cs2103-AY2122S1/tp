@@ -7,7 +7,7 @@ title: AddressBook Level-3
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W12-4/tp/branch/master/graph/badge.svg?token=RS2T7CZCPN)](https://codecov.io/gh/AY2122S1-CS2103T-W12-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/screenshots/Ui.png)
 
 **AddressBook is a desktop application for managing your contact details.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
