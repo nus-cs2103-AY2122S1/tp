@@ -124,12 +124,8 @@ Examples:
 * `filter mod/CS2030 group/SM`
 * `filter mod/CS2030 group/SG`
 
-<br>
-   <br>
-   ![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
-<br>
-   <br>
-   ![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
+![result for 'filter mod/CS2103T'](images/filterModOnlyResult.png)
+![result for 'filter mod/CS2101' group/SM](images/filterGroupResult.png)
 
 ### Find profiles by name  : `find`
 
@@ -147,9 +143,7 @@ Examples:
 * `find John` returns `John` and `John Doe`
 * `find alex david` returns `Alex Berenson` and `David Li`
 
-<br>
-  <br>
-  ![result for 'find alex'](images/findAlexResult.png)
+![result for 'find alex'](images/findAlexResult.png)
   
 ### Find profiles by student ID  : `findId`
 
@@ -166,9 +160,7 @@ Examples:
 * `findId A0123456A` returns the person whose student Id number matches A0123456A
 * `findId A0123456A A0654321A` returns the persons whose student Id number matches either A0123456A or A0654321A.
 
-<br>
-  <br>
-  ![result for 'findId A0222594A'](images/findIdA0222594AResult.png)
+![result for 'findId A0222594A'](images/findIdA0222594AResult.png)
 
 
 ### Viewing help : `help`
