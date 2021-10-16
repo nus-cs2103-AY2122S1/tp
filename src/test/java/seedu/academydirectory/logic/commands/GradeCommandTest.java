@@ -9,6 +9,8 @@ import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.academydirectory.testutil.TypicalStudents.getTypicalAcademyDirectory;
 
+import java.util.HashMap;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.commons.core.Messages;
@@ -25,6 +27,7 @@ import seedu.academydirectory.testutil.TypicalStudents;
 class GradeCommandTest {
 
     private Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
+    private final HashMap<String, Integer> assessmentHashMap = new Assessment().getAssessmentHashMap();
     private final String validAssessmentName1 = "RA1";
     private final String validAssessmentName2 = "MIDTERM";
     private final Integer validGrade1 = 10;
@@ -38,7 +41,8 @@ class GradeCommandTest {
     @Test
     void execute_addGrade_success() {
         Student firstStudent = model.getFilteredStudentList().get(0);
-        Student editedStudent = new StudentBuilder(firstStudent).withAssessment().build();
+        assessmentHashMap.replace(validAssessmentName1, validGrade1);
+        Student editedStudent = new StudentBuilder(firstStudent).withAssessment(assessmentHashMap).build();
         GradeCommand addGradeCommand =
                 new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName1, validGrade1);
         String expectedMessage =
