@@ -12,9 +12,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
     private final String optionalFilter;
 
+    /**
+     * @param keywords for finding the respective modules
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
-        optionalFilter = keywords.get(0);
+        optionalFilter = keywords.size() > 0 ? keywords.get(0) : "";
     }
 
     @Override
