@@ -24,7 +24,7 @@ public class ShowCommand extends Command {
     public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all inputs for a specific category, "
-            + "based on the given prefix"
+            + "based on the given prefix "
             + "and displays them as a list.\n"
             + "Parameters: PREFIX/KEYWORDS \n"
             + "Example: " + COMMAND_WORD + " r/";
