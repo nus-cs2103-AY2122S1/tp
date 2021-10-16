@@ -2,22 +2,18 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,7 +25,11 @@ public class ShowCommand extends Command {
 
     public static final String COMMAND_WORD = "show";
 
-    public static final String MESSAGE_USAGE = "SHOW MESSAGE USAGE TEST";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all inputs for a specific category, "
+            + "based on the given prefix"
+            + "and displays them as a list.\n"
+            + "Parameters: PREFIX/KEYWORDS \n"
+            + "Example: " + COMMAND_WORD + " r/";
 
     private final Prefix prefix;
 

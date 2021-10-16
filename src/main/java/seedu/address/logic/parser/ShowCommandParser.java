@@ -15,12 +15,12 @@ import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new ShowCommand object
  */
 public class ShowCommandParser implements Parser<ShowCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ShowCommand
+     * and returns a ShowCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      * @return
@@ -37,7 +37,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
                         PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
                         PREFIX_EXPERIENCE, PREFIX_TAG);
 
-        // If find command has no prefix, it is invalid
+        // If show command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
@@ -68,7 +68,6 @@ public class ShowCommandParser implements Parser<ShowCommand> {
 
 
         }
-
 
         public Prefix getPrefix() {
             return prefix;
