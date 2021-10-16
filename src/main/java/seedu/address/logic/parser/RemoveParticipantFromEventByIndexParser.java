@@ -14,7 +14,7 @@ public class RemoveParticipantFromEventByIndexParser implements Parser<RemovePar
 
         if (sections.length != 3) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -23,7 +23,7 @@ public class RemoveParticipantFromEventByIndexParser implements Parser<RemovePar
             return new RemoveParticipantFromEventByIndexCommand(participantIndex, eventIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
         }
 
     }

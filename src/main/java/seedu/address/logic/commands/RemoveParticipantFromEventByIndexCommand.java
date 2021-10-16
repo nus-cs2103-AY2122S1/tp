@@ -15,14 +15,14 @@ public class RemoveParticipantFromEventByIndexCommand extends Command {
     public static final String COMMAND_WORD = "removeParticipantByIndex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": remove Participant with specified index from another event with specified index.\n"
-        + "Parameters: \n"
-        + "PARTICIPANT_INDEX "
-        + "EVENT_INDEX "
-        + "Example: " + COMMAND_WORD + "1 2";
+            + ": remove Participant with specified index from another event with specified index.\n"
+            + "Parameters: \n"
+            + "PARTICIPANT_INDEX "
+            + "EVENT_INDEX "
+            + "Example: " + COMMAND_WORD + "1 2";
 
     public static final String MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS =
-        "Removed Participant: %1$s from event %2$s successfully";
+            "Removed Participant: %1$s from event %2$s successfully";
 
     private final Index participantIndex;
     private final Index eventIndex;
@@ -54,14 +54,14 @@ public class RemoveParticipantFromEventByIndexCommand extends Command {
         selectedEvent.getParticipants().remove(participantToRemove);
 
         return new CommandResult(String.format(MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS,
-            participantToRemove.getFullName(), selectedEvent.getName()));
+                participantToRemove.getFullName(), selectedEvent.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof RemoveParticipantFromEventByIndexCommand // instanceof handles nulls
-            && participantIndex.equals(((RemoveParticipantFromEventByIndexCommand) other).participantIndex))
-            && eventIndex.equals(((RemoveParticipantFromEventByIndexCommand) other).eventIndex); //state check
+                || (other instanceof RemoveParticipantFromEventByIndexCommand // instanceof handles nulls
+                && participantIndex.equals(((RemoveParticipantFromEventByIndexCommand) other).participantIndex))
+                && eventIndex.equals(((RemoveParticipantFromEventByIndexCommand) other).eventIndex); //state check
     }
 }

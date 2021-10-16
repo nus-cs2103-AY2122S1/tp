@@ -14,7 +14,7 @@ public class AddParticipantToEventByIndexParser implements Parser<AddParticipant
 
         if (sections.length != 3) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -23,7 +23,7 @@ public class AddParticipantToEventByIndexParser implements Parser<AddParticipant
             return new AddParticipantToEventByIndexCommand(participantIndex, eventIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
         }
 
     }

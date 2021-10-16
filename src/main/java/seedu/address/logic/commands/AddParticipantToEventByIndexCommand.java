@@ -15,14 +15,14 @@ public class AddParticipantToEventByIndexCommand extends Command {
     public static final String COMMAND_WORD = "addParticipantByIndex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": add Participant with specified index to another event with specified index.\n"
-        + "Parameters: \n"
-        + "PARTICIPANT_INDEX "
-        + "EVENT_INDEX "
-        + "Example: " + COMMAND_WORD + "1 2";
+            + ": add Participant with specified index to another event with specified index.\n"
+            + "Parameters: \n"
+            + "PARTICIPANT_INDEX "
+            + "EVENT_INDEX "
+            + "Example: " + COMMAND_WORD + "1 2";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-        "Added Participant: %1$s to event %2$s successfully";
+            "Added Participant: %1$s to event %2$s successfully";
 
     private final Index participantIndex;
     private final Index eventIndex;
@@ -54,14 +54,14 @@ public class AddParticipantToEventByIndexCommand extends Command {
         selectedEvent.getParticipants().add(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
-            participantToAdd.getFullName(), selectedEvent.getName()));
+                participantToAdd.getFullName(), selectedEvent.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof AddParticipantToEventByIndexCommand // instanceof handles nulls
-            && participantIndex.equals(((AddParticipantToEventByIndexCommand) other).participantIndex))
-            && eventIndex.equals(((AddParticipantToEventByIndexCommand) other).eventIndex); //state check
+                || (other instanceof AddParticipantToEventByIndexCommand // instanceof handles nulls
+                && participantIndex.equals(((AddParticipantToEventByIndexCommand) other).participantIndex))
+                && eventIndex.equals(((AddParticipantToEventByIndexCommand) other).eventIndex); //state check
     }
 }
