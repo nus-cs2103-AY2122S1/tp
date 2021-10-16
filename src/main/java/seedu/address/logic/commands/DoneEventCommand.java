@@ -22,7 +22,7 @@ public class DoneEventCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DONE_EVENT_SUCCESS = "Marked event as done: %1$s";
+    public static final String MESSAGE_DONE_EVENT_SUCCESS = "Marked event as done:\n%1$s";
 
     private final Index targetIndex;
 

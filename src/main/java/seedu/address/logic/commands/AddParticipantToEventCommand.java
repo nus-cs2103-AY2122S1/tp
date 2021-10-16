@@ -29,7 +29,7 @@ public class AddParticipantToEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + " 240Km Marathon";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-            "Added Participant: %1$s to event %2$s successfully";
+            "Added %1$s to %2$s successfully";
 
     private final ParticipantId participantId;
     private final EventName eventName;

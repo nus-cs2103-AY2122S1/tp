@@ -24,7 +24,7 @@ public class AddEventCommand extends Command {
             + "[" + PREFIX_TIME + "TIME]\n"
             + "Example: " + COMMAND_WORD + " n/CS2106 Finals d/2021-09-20 t/0900\n";
 
-    public static final String MESSAGE_ADD_EVENT_SUCCESS = "Got it, I have added this event to the Event List!\n %1$s";
+    public static final String MESSAGE_ADD_EVENT_SUCCESS = "Added Event:\n%1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists!";
 
     private final Event event;
