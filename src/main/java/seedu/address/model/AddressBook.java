@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -66,6 +67,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         if (this.order != null) {
             this.tuitions.sort(order);
         }
+    }
+
+
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return tuitions.getTodayTuition();
     }
 
     /**

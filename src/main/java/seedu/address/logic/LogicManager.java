@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,7 @@ public class LogicManager implements Logic {
     public ObservableList<TuitionClass> getFilteredTuitionList() {
         return model.getFilteredTuitionList();
     }
+
+    @Override
+    public ObservableList<TuitionClass> getTodayTuitionList() {return model.getTodayTuitionList();}
 }

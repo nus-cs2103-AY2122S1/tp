@@ -3,9 +3,12 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,6 +92,17 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     public void setTuitions(seedu.address.model.tuition.UniqueTuitionList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+    }
+
+    public ObservableList<TuitionClass> getTodayTuition() {
+        LocalDate localDate = LocalDate.now();
+        DayOfWeek weekday = localDate.getDayOfWeek();
+        String today = weekday.toString().substring(0,3);
+        List<TuitionClass> todayTuitionClass = internalList.stream().
+                filter(tuitionClass -> tuitionClass.matchtheDay(today)).collect(Collectors.toList());
+        ObservableList<TuitionClass> observableList = FXCollections.observableList(todayTuitionClass);
+        return observableList;
+
     }
 
     /**

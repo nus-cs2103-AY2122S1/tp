@@ -21,7 +21,7 @@ public class TuitionListPanel extends UiPart<Region> {
     private static final String TITLE_DEFAULT = "Classes";
     private static final String TITLE_FILTERED = "Classes (filtered)";
 
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(TuitionListPanel.class);
 
     @FXML
     private ListView<TuitionClass> tuitionListView;
