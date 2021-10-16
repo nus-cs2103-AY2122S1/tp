@@ -143,7 +143,7 @@ public class DeleteCommand extends Command {
         editPersonDescriptor.setModuleCodes(moduleCodes);
 
         Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
-                person.getTeleHandle(), person.getRemark(), person.getTags());
+                person.getTeleHandle(), person.getRemark());
         model.setPerson(person, editedPerson);
     }
 

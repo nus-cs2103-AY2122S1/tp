@@ -31,7 +31,6 @@ public class PersonBuilder {
     private Set<ModuleCode> moduleCodes;
     private Phone phone;
     private TeleHandle teleHandle;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,10 +39,10 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         remark = new Remark("");
-        moduleCodes = DEFAULT_MODULE_CODES.stream().map(ModuleCode::new).collect(Collectors.toSet());
+        moduleCodes = DEFAULT_MODULE_CODES.stream()
+                .map(m -> new ModuleCode(m, new HashSet<>())).collect(Collectors.toSet());
         phone = new Phone("");
         teleHandle = new TeleHandle("");
-        tags = new HashSet<>();
     }
 
     /**
@@ -56,7 +55,6 @@ public class PersonBuilder {
         moduleCodes = new HashSet<>(personToCopy.getModuleCodes());
         phone = personToCopy.getPhone();
         teleHandle = personToCopy.getTeleHandle();
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -64,14 +62,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -117,7 +107,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, moduleCodes, phone, teleHandle, remark, tags);
+        return new Person(name, email, moduleCodes, phone, teleHandle, remark);
     }
 
 }

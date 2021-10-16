@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -55,8 +54,6 @@ public class CommandTestUtil {
     public static final String MODULE_CODE_DESC_CS2040 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String TAG_DESC_LOCAL = " " + PREFIX_TAG + VALID_TAG_LOCAL;
-    public static final String TAG_DESC_INTERNATIONAL = " " + PREFIX_TAG + VALID_TAG_INTERNATIONAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -64,7 +61,6 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "yoz"; // missing '@' symbol
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "CS 50"; // space not allowed
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "Ãgent"; // non-ASCII character
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -75,10 +71,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_LOCAL).build();
+                .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_INTERNATIONAL, VALID_TAG_LOCAL).build();
+                .build();
     }
 
     /**

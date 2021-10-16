@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +13,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -28,12 +26,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer
-                .tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE, PREFIX_TAG);
+                .tokenize(args, PREFIX_NAME, PREFIX_MODULE_CODE);
         boolean isNamePrefixPresent = argMultimap.getValue(PREFIX_NAME).isPresent();
         boolean isModulePrefixPresent = argMultimap.getValue(PREFIX_MODULE_CODE).isPresent();
-        boolean isTagPrefixPresent = argMultimap.getValue(PREFIX_TAG).isPresent();
 
-        long numberOfValidPrefixes = countValidPrefixes(isNamePrefixPresent, isModulePrefixPresent, isTagPrefixPresent);
+        long numberOfValidPrefixes = countValidPrefixes(isNamePrefixPresent, isModulePrefixPresent);
 
         if (numberOfValidPrefixes == 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -49,10 +46,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return getFindNameCommand(argMultimap);
         } else if (isModulePrefixPresent) {
             return getFindModuleCommand(argMultimap);
-        } else {
-            // if tag prefix is not present
-            return getFindTagCommand(argMultimap);
         }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     private long countValidPrefixes (Boolean... prefixPresent) {
@@ -86,20 +81,5 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .collect(Collectors.toList());
 
         return new FindCommand(new ModuleCodesContainsKeywordsPredicate(moduleKeywordsList));
-    }
-
-    private FindCommand getFindTagCommand (ArgumentMultimap argMultimap) throws ParseException {
-        Optional<String> searchInput = argMultimap.getValue(PREFIX_TAG);
-        String tags = searchInput.get().trim();
-        if (tags.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        }
-
-        List<String> tagKeywordsList = Arrays.stream(tags.split("\\s+"))
-                .map(tag -> '[' + tag + ']')
-                .collect(Collectors.toList());
-
-        return new FindCommand(new TagsContainsKeywordsPredicate(tagKeywordsList));
     }
 }

@@ -32,7 +32,6 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
     private final String phone;
     private final String teleHandle;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -42,8 +41,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("moduleCodes") List<JsonAdaptedModuleCode> moduleCodes,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("teleHandle") String teleHandle,
-                             @JsonProperty("remark") String remark,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("remark") String remark) {
         this.name = name;
         this.email = email;
         this.remark = remark;
@@ -52,9 +50,6 @@ class JsonAdaptedPerson {
         }
         this.phone = phone;
         this.teleHandle = teleHandle;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
     }
 
     /**
@@ -69,9 +64,6 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         phone = source.getPhone().value;
         teleHandle = source.getTeleHandle().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -80,10 +72,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
 
         final List<ModuleCode> personModuleCodes = new ArrayList<>();
         for (JsonAdaptedModuleCode moduleCode : moduleCodes) {
@@ -128,9 +116,8 @@ class JsonAdaptedPerson {
         }
         final TeleHandle modelTeleHandle = new TeleHandle(teleHandle);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(personModuleCodes);
-        return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelRemark, modelTags);
+        return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelRemark);
     }
 
 }

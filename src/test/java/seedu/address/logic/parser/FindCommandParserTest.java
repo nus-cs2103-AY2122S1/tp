@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -15,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.TagsContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -66,19 +63,6 @@ public class FindCommandParserTest {
     public void parse_emptyTag_throwsParseException() {
         assertParseFailure(parser, "find t/",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parse_validTag_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new TagsContainsKeywordsPredicate(
-                        Arrays.asList(
-                                String.format("[%s]", VALID_TAG_LOCAL),
-                                String.format("[%s]", VALID_TAG_INTERNATIONAL)
-                        )
-                ));
-        String userInput = String.format(" t/%s %s", VALID_TAG_LOCAL, VALID_TAG_INTERNATIONAL);
-        assertParseSuccess(parser, userInput, expectedFindCommand);
     }
 
     @Test

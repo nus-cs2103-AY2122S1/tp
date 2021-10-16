@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -25,16 +24,14 @@ public class AddCommand extends Command {
             + PREFIX_MODULE_CODE + "MODULE_INFO... "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]\n "
             + "Example: add "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_MODULE_CODE + "CS2030S T12 "
             + PREFIX_MODULE_CODE + "CS2040 "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_TELE_HANDLE + "@Johntho "
-            + PREFIX_TAG + "local\n"
+            + PREFIX_TELE_HANDLE + "@Johntho\n"
             + "Note: MODULE_INFO must start with a module code";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
