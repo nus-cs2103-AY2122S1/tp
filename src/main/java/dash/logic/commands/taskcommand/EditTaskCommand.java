@@ -186,6 +186,7 @@ public class EditTaskCommand extends Command {
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getTaskDescription().equals(e.getTaskDescription())
+                    && getCompletionStatus().equals(e.getCompletionStatus())
                     && getTags().equals(e.getTags());
         }
     }
