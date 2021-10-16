@@ -65,11 +65,17 @@ Format: `editclass INDEX l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
 ### Deleting students/tuition classes
 Deletes a student or a tuition class given INDEX.
 
-#### Deleting a student: `delete`
-Format: `delete INDEX`
+#### Deleting students: `delete`
+Format: `delete STUDENT_INDEX STUDENT_INDEX`
 
-#### Deleting a tuition class: `deleteclass`
-Format: `deleteclass INDEX`
+Example:
+- `delete 1 2`
+
+#### Deleting tuition classes: `deleteclass`
+Format: `deleteclass CLASS_INDEX CLASS_INDEX`
+
+Example:
+- `deletclass 1 2`
 
 ### Adding/Removing an existing student from class
 Move a student to/from classes by adding or removing them.
@@ -93,6 +99,7 @@ Examples:
 
 #### Removing existing students from a class: `remove`
 Removes existing students from a tuition class using student INDEX.
+
 Format: `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 
 Examples:
@@ -112,6 +119,34 @@ Format: `remarkclass INDEX_CLASS r/REMARK`
 
 Examples:
 - `remarkclass 2 r/Math homework due Friday`
+
+### Finding students by name: `find`
+Filters the list of students to only display all students whose names contain any of the given keywords (case-insensitive).
+
+Format: `find NAME`
+
+Example: `find alice tan`
+
+TutAssitor will display a list of all students with 'alice' or 'tan' in their name.
+
+#### Listing all students: `list`
+Display list of all students after conducting a search with the `find` command.
+
+Format: `list`
+
+### Finding classes by name: `findclass`
+Filters the list of classes to only display all classes whose names contain any of the given keywords (case-insensitive).
+
+Format: `findclass NAME`
+
+Example: `findclass physics chemistry`
+
+TutAssitor will display a list of all classes with 'physics' or 'chemistry' in their name.
+
+#### Listing all classes: `listclass`
+Display list of all classes after conducting a search with the `find` command.
+
+Format: `listclass`
 
 ### Sorting tuition classes: `sort`
 Permanently sorts tuition class list according to time or alphabetical order.
@@ -145,12 +180,16 @@ Action | Format
 ***View Class*** | `class INDEX`
 ***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
 ***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-***Delete Student*** | `deletestudent INDEX`
-***Delete Class*** | `deleteclass INDEX`
+***Delete Student*** | `deletestudent INDEX_STUDENT INDEX_STUDENT`
+***Delete Class*** | `deleteclass INDEX_CLASS INDEX_CLASS`
 ***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
 ***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 ***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK`
 ***Add Remarks to Class*** | `remarkclass INDEX_CLASS r/REMARK`
+***Find Student by Name*** | `find NAME`
+***List all Students*** | `list`
+***Find Class by Name*** | `findclass NAME`
+***List all Classes*** | `listclass`
 ***Sort Tuition Class*** | `sort [o/ORDER]`
 ***Help*** | `help`
 ***Exit*** | `exit`

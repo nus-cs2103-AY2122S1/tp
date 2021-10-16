@@ -7,8 +7,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
 
-
-
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD

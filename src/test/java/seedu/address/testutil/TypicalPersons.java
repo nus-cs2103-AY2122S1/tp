@@ -14,14 +14,28 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
+import seedu.address.model.tuition.ClassLimit;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.StudentList;
+import seedu.address.model.tuition.Timeslot;
+import seedu.address.model.tuition.TuitionClass;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
+
+    public static final ArrayList<Integer> SAMPLE_CLASSES = new ArrayList<>() {
+        {
+            add(1234567);
+            add(2234567);
+        }
+    };
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
@@ -59,6 +73,19 @@ public class TypicalPersons {
 
     private TypicalPersons() {} // prevents instantiation
 
+    public static TuitionClass[] getSampleClass() {
+        List<String> students = getTypicalPersons()
+                .stream().map(p -> p.getName().fullName).collect(Collectors.toList());
+        return new TuitionClass[] {
+            new TuitionClass(new ClassName("Physics"),
+                    new ClassLimit(5), new Timeslot("Mon 10:00-12:00"),
+                    new StudentList(students), new Remark(""), 1234567),
+            new TuitionClass(new ClassName("Chemistry"),
+                    new ClassLimit(10), new Timeslot("Tue 10:00-12:00"),
+                    new StudentList(students), new Remark(""), 2234567)
+        };
+    }
+
     /**
      * Returns an {@code AddressBook} with all the typical persons.
      */
@@ -66,6 +93,9 @@ public class TypicalPersons {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+        }
+        for (TuitionClass tuitionClass: getSampleClass()) {
+            ab.addTuition(tuitionClass);
         }
         return ab;
     }
