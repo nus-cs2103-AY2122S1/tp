@@ -36,6 +36,7 @@ public class ResultDisplay extends UiPart<Region> {
                 // cast to float so Math round to int
                 int n = Math.round(feedbackToUser.length() * (float) frac);
                 resultDisplay.setText(feedbackToUser.substring(0, n));
+                resultDisplay.setWrapText(true);
             }
         };
 
