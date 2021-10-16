@@ -6,8 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
 
 import java.util.ArrayList;

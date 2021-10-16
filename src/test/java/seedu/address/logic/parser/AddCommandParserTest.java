@@ -25,8 +25,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOCAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -141,8 +139,8 @@ public class AddCommandParserTest {
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB
-                + VALID_TAG_LOCAL, Tag.MESSAGE_CONSTRAINTS);
+                + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
