@@ -312,7 +312,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ModuLink shows an error message.
     * 2a2. ModuLink requests for the correct details.
-    
+
     Steps 2a1 - 2a2 are repeated until the correct details are entered.
 
       Use case resumes at step 2.
@@ -332,12 +332,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The requested profile ID is invalid.
 
     * 1a1. ModuLink shows an error message.
-    * 1a2. ModuLink requests for the correct ID. 
-      
+    * 1a2. ModuLink requests for the correct ID.
+
     Steps 1a1 - 1a2 are repeated until the correct details are entered.
 
       Use case resumes at step 1.
-    
+
 
 **Use case: UC3 - Remove a profile from Favourites list**
 
@@ -354,7 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. ModuLink shows an error message.
     * 2a2. ModuLink requests for the correct ID.
-      
+
     Steps 2a1 - 2a2 are repeated until the correct details are entered.
 
       Use case resumes at step 1.
@@ -367,7 +367,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  ModuLink shows a list of all profiles that the user has added to their favourites list.
 
     Use case ends.
-    
+
 
 **Use case: UC5 - Remove a module from the user's profile**
 
@@ -449,7 +449,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The requested student ID does not exist as a profile.
 
     * 1a1. ModuLink shows an error message.
-    
+
       Use case ends.
 
 
