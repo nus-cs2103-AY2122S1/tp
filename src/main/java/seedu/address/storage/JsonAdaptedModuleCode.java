@@ -1,10 +1,13 @@
 package seedu.address.storage;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ModuleCode;
+import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link ModuleCode}.
@@ -12,6 +15,7 @@ import seedu.address.model.person.ModuleCode;
 public class JsonAdaptedModuleCode {
 
     private final String moduleCodeName;
+    private final Set<Tag> tags;
 
     /**
      * Constructs a {@code JsonAdaptedModuleCode} with the given {@code moduleCodeName}.
@@ -19,8 +23,9 @@ public class JsonAdaptedModuleCode {
      * @param moduleCodeName The given module code name.
      */
     @JsonCreator
-    public JsonAdaptedModuleCode(String moduleCodeName) {
+    public JsonAdaptedModuleCode(String moduleCodeName, Set<Tag> tags) {
         this.moduleCodeName = moduleCodeName;
+        this.tags = tags;
     }
 
     /**
@@ -30,11 +35,17 @@ public class JsonAdaptedModuleCode {
      */
     public JsonAdaptedModuleCode(ModuleCode source) {
         moduleCodeName = source.value;
+        tags = source.tags;
     }
 
     @JsonValue
     public String getModuleCodeName() {
         return moduleCodeName;
+    }
+
+    @JsonValue
+    public Set<Tag> getTags() {
+        return tags;
     }
 
     /**
@@ -47,6 +58,11 @@ public class JsonAdaptedModuleCode {
         if (!ModuleCode.isValidModuleCode(moduleCodeName)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(moduleCodeName);
+
+        // Throw exception if there is a tag that is not valid
+        if (!tags.stream().map(tag -> tag.tagName).allMatch(Tag::isValidTagName)) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleCode(moduleCodeName, tags);
     }
 }
