@@ -17,7 +17,7 @@ We are a team based in the [School of Computing, National University of Singapor
 * Responsibilities: Delivarables
 ### Charlton Tan
 
-<img src="images/charltonator.png" width="200px">
+<img src="images/developerPhotos/charltonator.png" width="200px">
 
 [[github](http://github.com/charltonator)]
 
@@ -26,7 +26,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Ethan Wong
 
-<img src="images/ethanwong6362.png" width="200px">
+<img src="images/developerPhotos/ethanwong6362.png" width="200px">
 
 [[github](http://github.com/ethanwong6362)]
 
@@ -35,7 +35,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Ng Jia Yuan
 
-<img src="images/ngjiayuan.png" width="200px">
+<img src="images/developerPhotos/ngjiayuan.png" width="200px">
 
 [[github](http://github.com/ngjiayuan)]
 
@@ -44,7 +44,7 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ### Zachary Lau
 
-<img src="images/zacharylwy.png" width="200px">
+<img src="images/developerPhotos/zacharylwy.png" width="200px">
 
 [[github](http://github.com/zacharylwy)]
 
