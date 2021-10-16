@@ -219,7 +219,7 @@ public class ParserUtil {
         }
 
         List<DayOfWeek> availability;
-        if (availabilityDaysWithNoDuplicates.size() <= 1) { // valid but empty
+        if (availabilityDaysWithNoDuplicates.get(0).isEmpty()) { // valid but empty
             availability = new ArrayList<>();
         } else {
             availability = Arrays.stream(trimmedAvailabilityString.split(" "))

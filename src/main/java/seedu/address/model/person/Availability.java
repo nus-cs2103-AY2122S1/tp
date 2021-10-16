@@ -35,7 +35,7 @@ public class Availability {
      */
     public static boolean isValidAvailability(List<String> test) {
         try {
-            if (test.size() <= 1) { // empty but valid
+            if (test.get(0).isEmpty()) { // empty but valid
                 return true;
             }
             for (String s : test) {
