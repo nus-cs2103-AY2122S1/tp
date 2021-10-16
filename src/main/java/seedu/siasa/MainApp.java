@@ -84,21 +84,10 @@ public class MainApp extends Application {
             initialData = siasaOptional.orElseGet(SampleDataUtil::getSampleSiasa);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialData = new Siasa();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-        }
-        try {
-            policyBookOptional = storage.readPolicyBook();
-            if (!policyBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with an empty PolicyBook");
-            } else {
-
-                initialData.mergePolicies(policyBookOptional.get());
-            }
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty PolicyBook");
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty PolicyBook");
+            initialData = new Siasa();
         }
 
         return new ModelManager(initialData, userPrefs);

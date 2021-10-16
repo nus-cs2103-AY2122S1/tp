@@ -76,31 +76,30 @@ public class JsonAdaptedPolicy {
         try {
             if (price == null) {
                 throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
             }
-
-            if (!Price.isValidPrice((int) Double.parseDouble(price.substring(1)))) {
+            if (!Price.isValidPrice(Integer.parseInt(price))) {
                 throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
-            throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(e.getMessage());
         }
-        final Price modelPrice = new Price((int) Double.parseDouble(price.substring(1)));
+
+        final Price modelPrice = new Price(Integer.parseInt(price));
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
-            LocalDate date = LocalDate.parse(expiryDate, formatter);
             if (expiryDate == null) {
                 throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpiryDate.class.getSimpleName()));
             }
-
+            LocalDate date = LocalDate.parse(expiryDate, formatter);
             if (!ExpiryDate.isValidExpiryDate(date)) {
                 throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | DateTimeParseException e) {
-            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(e.getMessage());
         }
 
         LocalDate date = LocalDate.parse(expiryDate, formatter);
@@ -109,22 +108,20 @@ public class JsonAdaptedPolicy {
         try {
             if (commission == null) {
                 throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
             }
-            String temp2 = commission.substring(0, commission.length() - 1);
-            if (!Commission.isValidCommission(Integer.parseInt(temp2))) {
+            if (!Commission.isValidCommission(Integer.parseInt(commission))) {
                 throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
-            throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(e.getMessage());
         }
 
-        final Commission modelCommission =
-            new Commission(Integer.parseInt(commission.substring(0, commission.length() - 1)));
+        final Commission modelCommission = new Commission(Integer.parseInt(commission));
 
         if (policyOwner == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Person.class.getSimpleName()));
         }
         return new Policy(modelTitle, modelPrice, modelExpiryDate, modelCommission, policyOwner);
     }

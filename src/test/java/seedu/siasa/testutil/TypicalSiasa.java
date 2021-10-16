@@ -13,6 +13,9 @@ public class TypicalSiasa {
         for (Person person : TypicalPersons.getTypicalPersons()) {
             siasa.addPerson(person);
         }
+        for (Policy policy : TypicalPolicies.getTypicalPolicies()) {
+            siasa.addPolicy(policy);
+        }
         return siasa;
     }
 }

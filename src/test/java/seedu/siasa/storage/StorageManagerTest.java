@@ -1,7 +1,6 @@
 package seedu.siasa.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.nio.file.Path;
@@ -14,6 +13,8 @@ import seedu.siasa.commons.core.GuiSettings;
 import seedu.siasa.model.ReadOnlySiasa;
 import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
+import seedu.siasa.model.person.Person;
+import seedu.siasa.model.policy.Policy;
 
 public class StorageManagerTest {
 
@@ -31,6 +32,11 @@ public class StorageManagerTest {
 
     private Path getTempFilePath(String fileName) {
         return testFolder.resolve(fileName);
+    }
+
+    @Test
+    public void getAddressBookFilePath() {
+        assertNotNull(storageManager.getSiasaFilePath());
     }
 
     @Test
@@ -57,32 +63,12 @@ public class StorageManagerTest {
         Siasa original = getTypicalSiasa();
         storageManager.saveSiasa(original);
         ReadOnlySiasa retrieved = storageManager.readSiasa().get();
-        assertEquals(original, new Siasa(retrieved));
+        for (Person person : retrieved.getPersonList()) {
+            assertTrue(original.hasPerson(person));
+        }
+        for (Policy policy : retrieved.getPolicyList()) {
+            assertTrue(original.hasPolicy(policy));
+        }
     }
 
-    /* TODO: Fix this test case
-    @Test
-    public void policyBookReadSave() throws Exception {
-
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonPolicyBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonPolicyBookStorageTest} class.
-
-        Siasa original = getTypicalPolicyBook();
-        storageManager.savePolicyBook(original);
-        ReadOnlySiasa retrieved = storageManager.readPolicyBook().get();
-
-        assertEquals(original, new Siasa(retrieved));
-    }
-    */
-
-    @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getSiasaFilePath());
-    }
-
-    @Test
-    public void getPolicyBookFilePath() {
-        assertNotNull(storageManager.getPolicyBookFilePath());
-    }
 }
