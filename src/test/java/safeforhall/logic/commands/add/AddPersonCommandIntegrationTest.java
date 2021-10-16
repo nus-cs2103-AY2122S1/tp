@@ -14,9 +14,9 @@ import safeforhall.testutil.PersonBuilder;
 import safeforhall.testutil.TypicalPersons;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddResidentCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddPersonCommand}.
  */
-public class AddResidentCommandIntegrationTest {
+public class AddPersonCommandIntegrationTest {
 
     private Model model;
 
@@ -32,14 +32,14 @@ public class AddResidentCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
-        assertCommandSuccess(new AddResidentCommand(validPerson), model,
-                String.format(AddResidentCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddPersonCommand(validPerson), model,
+                String.format(AddPersonCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddResidentCommand(personInList), model, AddResidentCommand.MESSAGE_DUPLICATE);
+        assertCommandFailure(new AddPersonCommand(personInList), model, AddPersonCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
 }

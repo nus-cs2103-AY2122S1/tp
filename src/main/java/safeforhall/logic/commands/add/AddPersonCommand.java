@@ -12,7 +12,7 @@ import safeforhall.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddResidentCommand extends Command {
+public class AddPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -38,14 +38,14 @@ public class AddResidentCommand extends Command {
             + CliSyntax.PREFIX_COLLECTIONDATE + "23-10-2021 ";
 
     public static final String MESSAGE_SUCCESS = "New resident added: %1$s";
-    public static final String MESSAGE_DUPLICATE = "This resident already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This resident already exists in the address book";
 
     private final Person toAdd;
 
     /**
-     * Creates an AddResidentCommand to add the specified {@code Person}
+     * Creates an AddPersonCommand to add the specified {@code Person}
      */
-    public AddResidentCommand(Person person) {
+    public AddPersonCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -55,7 +55,7 @@ public class AddResidentCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
@@ -65,7 +65,7 @@ public class AddResidentCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddResidentCommand // instanceof handles nulls
-                && toAdd.equals(((AddResidentCommand) other).toAdd));
+                || (other instanceof AddPersonCommand // instanceof handles nulls
+                && toAdd.equals(((AddPersonCommand) other).toAdd));
     }
 }

@@ -16,9 +16,9 @@ import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
-import safeforhall.logic.commands.add.AddResidentCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
-import safeforhall.logic.parser.add.AddResidentCommandParser;
+import safeforhall.logic.parser.add.AddPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
@@ -79,8 +79,8 @@ public class AddressBookParser {
     private Command parseResidentCommand(String commandWord, String arguments) throws ParseException {
         switch (commandWord) {
 
-        case AddResidentCommand.COMMAND_WORD:
-            return new AddResidentCommandParser().parse(arguments);
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

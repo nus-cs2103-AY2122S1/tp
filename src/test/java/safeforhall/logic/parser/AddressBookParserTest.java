@@ -25,7 +25,7 @@ import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.commands.add.AddResidentCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
@@ -43,8 +43,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddResidentCommand command = (AddResidentCommand) parser.parseCommand(PersonUtil.getAddCommand(person), true);
-        assertEquals(new AddResidentCommand(person), command);
+        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person), true);
+        assertEquals(new AddPersonCommand(person), command);
     }
 
     @Test

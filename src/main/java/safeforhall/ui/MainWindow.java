@@ -81,7 +81,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public boolean getIsResidentTab() {
-        System.out.println(tabPane.getSelectionModel().getSelectedIndex());
         // Dependent on the ordering of tabs in `MainWindow.fxml`
         // Resident is at index 0 and Event at index 1
         return tabPane.getSelectionModel().getSelectedIndex() == 0;

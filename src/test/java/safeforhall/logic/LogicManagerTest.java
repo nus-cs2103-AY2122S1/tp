@@ -22,7 +22,7 @@ import safeforhall.commons.core.Messages;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.commands.add.AddResidentCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.Model;
@@ -103,7 +103,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddResidentCommand.COMMAND_WORD + NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_AMY
+        String addCommand = AddPersonCommand.COMMAND_WORD + NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY + COLLECTION_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).build();
         ModelManager expectedModel = new ModelManager();
