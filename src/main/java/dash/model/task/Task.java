@@ -48,10 +48,6 @@ public class Task {
         return completionStatus;
     }
 
-    public void complete() {
-        completionStatus.complete();
-    }
-
     /**
      * Returns true if both tasks have the same task description and tags.
      */
@@ -66,6 +62,7 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getTaskDescription().equals(getTaskDescription())
+                && otherTask.getCompletionStatus().equals(getCompletionStatus())
                 && otherTask.getTags().equals(getTags());
     }
 

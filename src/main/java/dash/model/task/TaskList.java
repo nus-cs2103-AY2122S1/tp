@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Iterator;
 import java.util.List;
 
-import dash.commons.core.index.Index;
 import dash.commons.util.CollectionUtil;
 import dash.model.task.exceptions.TaskNotFoundException;
 import javafx.collections.FXCollections;
@@ -94,15 +93,6 @@ public class TaskList implements Iterable<Task> {
     public void setTasks(List<Task> tasks) {
         CollectionUtil.requireAllNonNull(tasks);
         internalList.setAll(tasks);
-    }
-
-    /**
-     * Completes the task at the given index in the list.
-     * @param targetIndex Index of the task in the list to be completed.
-     */
-    public void completeTask(Index targetIndex) {
-        Task toComplete = internalList.get(targetIndex.getZeroBased());
-        toComplete.complete();
     }
 
     /**
