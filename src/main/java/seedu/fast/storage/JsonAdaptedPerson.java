@@ -77,7 +77,7 @@ class JsonAdaptedPerson {
 
         // shows the appointment date if there is one, otherwise shows "No Appointment Scheduled"
         appointmentDate = source.getAppointment().getDate();
-        appointmentTime = source.getAppointment().getTimeFormatted();
+        appointmentTime = source.getAppointment().getTime();
         appointmentVenue = source.getAppointment().getVenue();
         appointmentCount = source.getCount().toString();
     }
