@@ -1,0 +1,15 @@
+{
+  "policies": [ {
+    "title" : "invalid&!^* name",
+    "price" : "$1200.00",
+    "expiryDate" : "2022-06-13",
+    "commission" : "20%",
+    "owner" : {
+      "name" : "Alex Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "address" : "Blk 30 Geylang Street 29, #06-40",
+      "tagged" : [ "friends" ]
+    }
+  } ]
+}

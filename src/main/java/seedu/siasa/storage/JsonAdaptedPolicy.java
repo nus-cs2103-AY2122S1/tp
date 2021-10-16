@@ -78,14 +78,14 @@ public class JsonAdaptedPolicy {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
             }
-            if (!Price.isValidPrice(Integer.parseInt(price))) {
+
+            if (!Price.isValidPrice((int) Double.parseDouble(price.substring(1)))) {
                 throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
             throw new IllegalValueException(Price.MESSAGE_CONSTRAINTS);
         }
-
-        final Price modelPrice = new Price(Integer.parseInt(price));
+        final Price modelPrice = new Price((int) Double.parseDouble(price.substring(1)));
 
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -111,14 +111,16 @@ public class JsonAdaptedPolicy {
                 throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Commission.class.getSimpleName()));
             }
-            if (!Commission.isValidCommission(Integer.parseInt(commission))) {
+            String temp2 = commission.substring(0, commission.length() - 1);
+            if (!Commission.isValidCommission(Integer.parseInt(temp2))) {
                 throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
             }
         } catch (IllegalValueException | NumberFormatException e) {
             throw new IllegalValueException(Commission.MESSAGE_CONSTRAINTS);
         }
 
-        final Commission modelCommission = new Commission(Integer.parseInt(commission));
+        final Commission modelCommission =
+            new Commission(Integer.parseInt(commission.substring(0, commission.length() - 1)));
 
         if (policyOwner == null) {
             throw new IllegalValueException(

@@ -26,13 +26,13 @@ public class Siasa implements ReadOnlySiasa {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         policies = new UniquePolicyList();
     }
 
-    public Siasa() {}
+    public Siasa() {
+    }
 
     /**
      * Creates an SIASA using the Persons and Policies in the {@code toBeCopied}
@@ -52,6 +52,14 @@ public class Siasa implements ReadOnlySiasa {
 
         setPersons(newData.getPersonList());
         setPolicies(newData.getPolicyList());
+    }
+
+    /**
+     * Replaces the policies of the current newData with {@code newData}.
+     */
+    public void mergePolicies(ReadOnlySiasa newData) {
+        requireNonNull(newData);
+        this.setPolicies(newData.getPolicyList());
     }
 
     //// person-level operations
@@ -116,6 +124,7 @@ public class Siasa implements ReadOnlySiasa {
     public void addPolicy(Policy policy) {
         policies.add(policy);
     }
+
     /**
      * Replaces the given policy {@code target} in the list with {@code editedPolicy}.
      * {@code target} must exist in the SIASA.
@@ -143,7 +152,7 @@ public class Siasa implements ReadOnlySiasa {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons; "
-                + policies.asUnmodifiableObservableList().size() + " policies;";
+            + policies.asUnmodifiableObservableList().size() + " policies;";
     }
 
     @Override
@@ -159,9 +168,9 @@ public class Siasa implements ReadOnlySiasa {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Siasa // instanceof handles nulls
-                && persons.equals(((Siasa) other).persons)
-                && policies.equals(((Siasa) other).policies));
+            || (other instanceof Siasa // instanceof handles nulls
+            && persons.equals(((Siasa) other).persons)
+            && policies.equals(((Siasa) other).policies));
     }
 
     @Override

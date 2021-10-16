@@ -6,16 +6,12 @@ import seedu.siasa.model.policy.Policy;
 
 public class TypicalSiasa {
     /**
-     * Returns an {@code Siasa} with all the typical persons and policies.
+     * Returns an {@code Siasa} with all the typical persons.
      */
     public static Siasa getTypicalSiasa() {
         Siasa siasa = new Siasa();
         for (Person person : TypicalPersons.getTypicalPersons()) {
             siasa.addPerson(person);
-        }
-        for (Policy policy : TypicalPolicies.getTypicalPolicies()) {
-            assert siasa.hasPerson(policy.getOwner());
-            siasa.addPolicy(policy);
         }
         return siasa;
     }
