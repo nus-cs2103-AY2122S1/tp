@@ -23,7 +23,6 @@ public class ShowCommandParser implements Parser<ShowCommand> {
      * and returns a ShowCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
-     * @return
      */
     public ShowCommand parse(String args) throws ParseException {
 
@@ -52,7 +51,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         private Prefix prefix;
 
 
-        ShowDescriptor(ArgumentMultimap argMultimap)  {
+        ShowDescriptor(ArgumentMultimap argMultimap) {
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 prefix = PREFIX_NAME;

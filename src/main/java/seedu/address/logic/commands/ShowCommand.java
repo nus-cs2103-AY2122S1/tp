@@ -2,14 +2,8 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
-
-
-import seedu.address.logic.parser.Prefix;
-import seedu.address.model.Model;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -17,6 +11,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import seedu.address.logic.parser.Prefix;
+import seedu.address.model.Model;
+
 
 /**
  * Lists all persons in the address book to the user.
