@@ -107,7 +107,8 @@ public class PersonTest {
         assertEquals(ALICE.getFormattedVisit(), visit);
 
         // with frequency and occurrence = 1
-        Person editedAlice = new PersonBuilder(ALICE).withFrequency(Frequency.DAILY.toString()).withOccurrence(1).build();
+        Person editedAlice = new PersonBuilder(ALICE).withFrequency(Frequency.DAILY.toString())
+                                 .withOccurrence(1).build();
         assertEquals(editedAlice.getFormattedVisit(), visit);
 
         // with frequency and occurrence > 1
