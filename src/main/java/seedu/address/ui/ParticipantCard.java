@@ -73,7 +73,8 @@ public class ParticipantCard extends UiPart<Region> {
         participant.getNotes().stream()
                 .sorted(Comparator.comparing(Note::toString))
                 .forEach(note -> notes.getChildren().add(noteLabel(note)));
-        nextOfKins.setText(participant.getNextOfKins().stream().map(NextOfKin::toString).collect(Collectors.joining()));
+        nextOfKins.setText(participant.getNextOfKins().stream().map(i -> i.toString() + "\n")
+                .collect(Collectors.joining()));
 
     }
 
