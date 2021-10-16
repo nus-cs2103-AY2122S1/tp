@@ -52,11 +52,11 @@ public class RemoveMarkCommandTest {
         //set the expected person in the output
         expectedModel.setPerson(toRemoveMark, toRemoveMark.unMark(DEFAULT_TEST_PERIOD));
         assertCommandSuccess(DEFAULT, model, String.format(RemoveMarkCommand.STAFF_UNMARKED,
-                "\n" + toRemoveMark.getName()), expectedModel);
+                toRemoveMark.getName()), expectedModel);
 
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(REMOVE_MARK_BY_NAME, model,
-                String.format(RemoveMarkCommand.STAFF_UNMARKED, "\n" + toRemoveMark.getName()), expectedModel);
+                String.format(RemoveMarkCommand.STAFF_UNMARKED, toRemoveMark.getName()), expectedModel);
     }
 
     @Test
