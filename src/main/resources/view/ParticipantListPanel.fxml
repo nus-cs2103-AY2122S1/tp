@@ -3,6 +3,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox style="-fx-background-radius: 18 18 18 18;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox style="-fx-background-radius: 18 18 18 18;" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1">
     <ListView fx:id="participantListView" style="-fx-background-radius: 18 18 18 18;" VBox.vgrow="ALWAYS" />
 </VBox>
