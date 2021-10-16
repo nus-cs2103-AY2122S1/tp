@@ -26,50 +26,44 @@ public class SplitCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-//    @Test
-//    @Disabled
-//    public void constructor_null_exceptionThrown() {
-//        assertThrows(NullPointerException.class, () -> new SplitCommand(null));
-//    }
+    @Test
+    public void constructor_null_exceptionThrown() {
+        // todo
+        assertTrue(true);
+    }
 
-//    @Test
-//    @Disabled
-//    public void execute_validDay_success() {
-//        SplitCommand command = new SplitCommand(4);
-//        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS, "Thu");
-//        Person person = new PersonBuilder().build();
-//        person.setDays(Arrays.asList("Mon", "Tue", "Thu"));
-//        model.setPerson(ALICE, person);
-//        expectedModel.setPerson(ALICE, person);
-//        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate("Thu");
-//        expectedModel.split(predicate);
-//        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-//    }
+    @Test
+    public void execute_validDay_success() {
+        // todo
+        SplitCommand command = new SplitCommand(4);
+        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS, 4);
+        Person person = new PersonBuilder().build();
+        model.setPerson(ALICE, person);
+        expectedModel.setPerson(ALICE, person);
+        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
+        expectedModel.split(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
 
-//    @Test
-//    @Disabled
-//    public void execute_invalidDay_exceptionThrown() {
-//        List<String> invalidDays = Arrays.asList("Monday", "MON", "mon");
-//        for (String invalidDay : invalidDays) {
-//            SplitCommand command = new SplitCommand(invalidDay);
-//            assertThrows(CommandException.class,
-//                    String.format(MESSAGE_INVALID_DAY, SplitCommand.MESSAGE_USAGE), () -> command.execute(model));
-//        }
-//    }
-//
-//    @Test
-//    @Disabled
-//    public void equals() {
-//        SplitCommand firstCommand = new SplitCommand("Mon");
-//        SplitCommand secondCommand = new SplitCommand("Tue");
-//
-//        assertTrue(firstCommand.equals(firstCommand));
-//
-//        SplitCommand firstCommandCopy = new SplitCommand("Mon");
-//        assertTrue(firstCommand.equals(firstCommandCopy));
-//
-//        assertFalse(firstCommand.equals(secondCommand));
-//        assertFalse(firstCommand.equals(null));
-//        assertFalse(firstCommand.equals(1));
-//    }
+    @Test
+    public void execute_invalidDay_exceptionThrown() {
+        String invalidDays = "8 9 10";
+        // todo
+        assertTrue(true);
+    }
+
+    @Test
+    public void equals() {
+        SplitCommand firstCommand = new SplitCommand(1);
+        SplitCommand secondCommand = new SplitCommand(2);
+
+        assertTrue(firstCommand.equals(firstCommand));
+
+        SplitCommand firstCommandCopy = new SplitCommand(1);
+        assertTrue(firstCommand.equals(firstCommandCopy));
+
+        assertFalse(firstCommand.equals(secondCommand));
+        assertFalse(firstCommand.equals(null));
+        assertFalse(firstCommand.equals(1));
+    }
 }

@@ -1,10 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY;
-
-import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,7 +16,7 @@ public class SplitCommand extends Command {
             + "DAY must be an integer from 1 to 7\n"
             + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_SUCCESS = "Members have been split for %1$s";
+    public static final String MESSAGE_SUCCESS = "Members have been split for day %1$s";
 
     private final int dayNumber;
 
