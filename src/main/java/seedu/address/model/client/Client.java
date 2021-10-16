@@ -108,11 +108,11 @@ public class Client implements Category {
         }
 
         Client otherClient = (Client) other;
-        return id.equals(otherClient.id)
+        return (id.equals(otherClient.id)
                        && name.equals(otherClient.name)
                        && phoneNumber.equals(otherClient.phoneNumber)
                        && email.equals(otherClient.email)
-                       && address.equals(otherClient.address);
+                       && address.equals(otherClient.address));
     }
 
     @Override

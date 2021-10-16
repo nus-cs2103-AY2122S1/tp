@@ -1,0 +1,13 @@
+{
+  "clients": [ {
+    "name" : "Elle Meyer",
+    "phoneNumber": "9482224",
+    "email" : "werner@example.com",
+    "address" : "michegan ave"
+  },{
+    "name": "Hans Muster",
+    "phone": "9482424",
+    "email": "invalid@email!3e",
+    "address": "4th street"
+  } ]
+}

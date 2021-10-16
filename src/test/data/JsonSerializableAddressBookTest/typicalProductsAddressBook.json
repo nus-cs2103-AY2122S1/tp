@@ -1,0 +1,33 @@
+{
+  "products" : [
+    {
+      "name": "IPhone 13",
+      "unitPrice": "1",
+      "quantity" : "1"
+    }, {
+      "name": "IPad Pro",
+      "unitPrice": "1",
+      "quantity" : "5"
+    }, {
+      "name": "Air Pods Pro",
+      "unitPrice": "200",
+      "quantity" : "20"
+    }, {
+      "name": "MacBook Pro",
+      "unitPrice": "2500",
+      "quantity" : "15"
+    }, {
+      "name": "Mechanical Keyboard",
+      "unitPrice": "250",
+      "quantity" : "30"
+    }, {
+      "name": "Panadol",
+      "unitPrice": "8",
+      "quantity" : "50"
+    }, {
+      "name": "Mask",
+      "unitPrice": "0",
+      "quantity" : "1000"
+    }
+  ]
+}
