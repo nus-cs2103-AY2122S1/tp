@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import safeforhall.logic.Logic;
 import safeforhall.logic.commands.CommandResult;
@@ -94,7 +95,7 @@ public class CommandBox extends UiPart<Region> {
                 String newText;
                 if (event.getCode() == KeyCode.UP) {
                     if (current > 0) {
-                        current--;                        
+                        current--;
                     }
                     newText = historicals.get(current);
                 } else {
@@ -110,7 +111,7 @@ public class CommandBox extends UiPart<Region> {
                 commandTextField.setText(newText);
                 commandTextField.end();
             }
-        });        
+        });
     }
 
     /**
