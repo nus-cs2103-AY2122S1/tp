@@ -12,7 +12,7 @@
         <padding>
             <Insets top="5" right="10" bottom="5" left="10"/>
         </padding>
-        <Label fx:id="text" styleClass="help-menu-text"/>
+        <Label fx:id="text" styleClass="help-menu-text" />
         <HBox>
             <Button fx:id="copyUserGuideButton" mnemonicParsing="false" onAction="#copyUserGuideUrl" text="Copy User Guide URL">
                 <VBox.margin>

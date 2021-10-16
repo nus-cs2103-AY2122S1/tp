@@ -67,6 +67,7 @@ public class HelpPanel extends UiPart<Region> {
         super(FXML);
         text.setText(HELP_CONTENT);
         this.resultDisplay = resultDisplay;
+        text.setWrapText(true);
     }
 
     /**
