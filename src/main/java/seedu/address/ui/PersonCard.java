@@ -14,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -133,8 +134,8 @@ public class PersonCard extends UiPart<Region> {
             tags.setManaged(false);
         } else {
             person.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .sorted(Comparator.comparing(Tag::getTagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
         }
 
         if (person.getLessons().isEmpty()) {

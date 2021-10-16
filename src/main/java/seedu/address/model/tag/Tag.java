@@ -11,11 +11,11 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String ASSERTION_ERROR_NEGATIVE_DUPLICATES =
-            "Number of students labelled under this tag should be non-negative.";
+    public static final String ASSERTION_ERROR_NON_POSITIVE_DUPLICATES =
+            "Number of students labelled under this tag should be positive.";
 
-    public final String tagName;
-    private int numStudents = 0;
+    private final String tagName;
+    private final int numStudents;
 
     /**
      * Constructs a {@code Tag}.
@@ -26,6 +26,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName.toUpperCase();
+        this.numStudents = 1;
     }
 
     /**
@@ -35,7 +36,10 @@ public class Tag {
      * @param numStudents Number of students labelled under this tag.
      */
     private Tag(String tagName, int numStudents) {
-        this(tagName);
+        assert numStudents > 0 : ASSERTION_ERROR_NON_POSITIVE_DUPLICATES;
+        requireNonNull(tagName);
+        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+        this.tagName = tagName;
         this.numStudents = numStudents;
     }
 
@@ -56,12 +60,8 @@ public class Tag {
      * @return Tag containing the original tag name and number of students under this tag.
      */
     public Tag createTagWithNum(int num) {
-        assert num >= 0 : ASSERTION_ERROR_NEGATIVE_DUPLICATES;
-        if (num == 0) {
-            return this;
-        } else {
-            return new Tag(tagName, num);
-        }
+        assert num > 0 : ASSERTION_ERROR_NON_POSITIVE_DUPLICATES;
+        return new Tag(tagName, num);
     }
 
     /**
@@ -73,11 +73,19 @@ public class Tag {
         return Integer.toString(numStudents);
     }
 
+    public String getTagName() {
+        return tagName;
+    }
+
+    public int getNumStudents() {
+        return numStudents;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+                        && getTagName().equals(((Tag) other).getTagName())); // state check
     }
 
     @Override

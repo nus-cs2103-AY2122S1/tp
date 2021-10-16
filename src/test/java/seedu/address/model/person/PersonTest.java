@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.EMPTY_FIELD;
@@ -14,9 +15,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalTags.TAG_FORGETFUL;
+import static seedu.address.testutil.TypicalTags.TAG_ZOOM;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -107,5 +114,47 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_ZOOM).build();
         assertFalse(ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void addTagsToTagList_nullTagList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ALICE.addTagsToTagList(null));
+    }
+
+    @Test
+    public void addTagsToTagList_success() {
+        UniqueTagList expectedTagList = new UniqueTagList();
+        UniqueTagList actualTagList = new UniqueTagList();
+
+        BOB.addTagsToTagList(actualTagList);
+        expectedTagList.addTag(TAG_ZOOM);
+        expectedTagList.addTag(TAG_FORGETFUL);
+        assertEquals(expectedTagList, actualTagList);
+    }
+
+    @Test
+    public void removeTagsFromTagList_nullTagList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ALICE.removeTagsFromTagList(null));
+    }
+
+    @Test
+    public void removeTagsToTagList_nonEmptyResultList_success() {
+        UniqueTagList expectedTagList = new UniqueTagList();
+        UniqueTagList actualTagList = new UniqueTagList();
+        actualTagList.setTags(Arrays.asList(TAG_ZOOM, TAG_FORGETFUL));
+
+        ALICE.removeTagsFromTagList(actualTagList);
+        expectedTagList.setTags(List.of(TAG_ZOOM));
+        assertEquals(expectedTagList, actualTagList);
+    }
+
+    @Test
+    public void removeTagsToTagList_emptyResultList_success() {
+        UniqueTagList expectedTagList = new UniqueTagList();
+        UniqueTagList actualTagList = new UniqueTagList();
+        actualTagList.setTags(List.of(TAG_FORGETFUL));
+
+        ALICE.removeTagsFromTagList(actualTagList);
+        assertEquals(expectedTagList, actualTagList);
     }
 }

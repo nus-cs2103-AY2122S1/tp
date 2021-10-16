@@ -14,6 +14,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
 
 /**
  * Wraps all data at the address-book level
@@ -23,6 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final CalendarEntryList entries;
+    private final UniqueTagList tags;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -33,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         entries = new CalendarEntryList();
+        tags = new UniqueTagList();
     }
 
     public AddressBook() {}
@@ -54,6 +57,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
         entries.resetLessons(persons);
+        tags.addTagFromPersonList(persons);
     }
 
     /**
@@ -98,6 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
         entries.addLessons(p);
+        tags.addTagFromPerson(p);
     }
 
     /**
@@ -106,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Index index, Person p) {
         persons.add(p, index);
+        tags.addTagFromPerson(p);
     }
 
     /**
@@ -117,6 +123,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
         persons.setPerson(target, editedPerson);
         entries.setLessons(target, editedPerson);
+        tags.editTagFromPerson(target, editedPerson);
     }
 
     /**
@@ -126,6 +133,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
         entries.removeLessons(key);
+        tags.removeTagFromPerson(key);
     }
 
     //// util methods
@@ -149,7 +157,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     @Override
     public ObservableList<Tag> getTagList() {
-        return persons.asUnmodifiableTagList();
+        return tags.asUnmodifiableTagList();
     }
 
     public Calendar getCalendar() {

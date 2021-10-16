@@ -3,18 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * A list of persons that enforces uniqueness between its elements, and does not allow nulls.
@@ -121,66 +117,6 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
-    }
-
-    /**
-     * Returns a list of distinct tags.
-     *
-     * @return A list of distinct tags.
-     */
-    public List<Tag> getDistinctTagList() {
-        return internalList.stream()
-                .flatMap(person -> person.getTags().stream())
-                .distinct()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Increments the number of students labelled under each tag entry in tagTableWithNum.
-     *
-     * @param tagTableWithNum Hashtable to store tag and number of students labelled with the corresponding tag.
-     * @param tag Tag to be checked.
-     * @param person Student to be checked.
-     */
-    private void incrementTagNumTable(HashMap<Tag, Integer> tagTableWithNum, Tag tag, Person person) {
-        if (person.containsTag(tag)) {
-            if (tagTableWithNum.containsKey(tag)) {
-                tagTableWithNum.put(tag, tagTableWithNum.get(tag) + 1);
-            } else {
-                tagTableWithNum.put(tag, 1);
-            }
-        }
-    }
-
-    /**
-     * Calculates the number of students labelled under each tag.
-     *
-     * @param tagList List of distinct tags to be checked against.
-     * @return List of tags with the calculated number of students labelled under each tag.
-     */
-    public List<Tag> calculateNumDuplicateTags(List<Tag> tagList) {
-        requireNonNull(tagList);
-        HashMap<Tag, Integer> tagTableWithNum = new HashMap<>();
-
-        return tagList.stream().map(t -> {
-            internalList.forEach(person -> incrementTagNumTable(tagTableWithNum, t, person));
-            return t.createTagWithNum(tagTableWithNum.get(t));
-        }).collect(Collectors.toList());
-    }
-
-    /**
-     * Returns an unmodifiable distinct tag list.
-     *
-     * @return An unmodifiable distinct tag observable list.
-     */
-    public ObservableList<Tag> asUnmodifiableTagList() {
-        List<Tag> tagList = getDistinctTagList();
-        List<Tag> tagListWithNum = calculateNumDuplicateTags(tagList);
-
-        ObservableList<Tag> tagObservableList = FXCollections.observableArrayList();
-        tagObservableList.setAll(tagListWithNum);
-        return FXCollections.unmodifiableObservableList(tagObservableList);
     }
 
     @Override

@@ -4,15 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNPAID;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -171,44 +166,5 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
-    }
-
-    @Test
-    public void getDistinctTagList_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.add(BENSON);
-        List<Tag> expectedList = new ArrayList<>();
-        expectedList.add(new Tag(VALID_TAG_FORGETFUL));
-        expectedList.add(new Tag(VALID_TAG_UNPAID));
-        assertEquals(expectedList, uniquePersonList.getDistinctTagList());
-    }
-
-    @Test
-    public void calculateNumDuplicateTags_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.add(BENSON);
-        Tag tagWithOneDuplicate = new Tag(VALID_TAG_UNPAID).createTagWithNum(1);
-        Tag tagWithTwoDuplicates = new Tag(VALID_TAG_FORGETFUL).createTagWithNum(2);
-        List<Tag> expectedList = new ArrayList<>(Arrays.asList(tagWithOneDuplicate, tagWithTwoDuplicates));
-
-        Tag tagWithOneDuplicateForCalculation = new Tag(VALID_TAG_UNPAID);
-        Tag tagWithTwoDuplicatesForCalculation = new Tag(VALID_TAG_FORGETFUL);
-        List<Tag> sampleList = new ArrayList<>(
-                Arrays.asList(tagWithOneDuplicateForCalculation, tagWithTwoDuplicatesForCalculation));
-        List<Tag> resultList = uniquePersonList.calculateNumDuplicateTags(sampleList);
-
-        assertEquals(expectedList, resultList);
-    }
-
-    @Test
-    public void calculateNumDuplicateTags_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                uniquePersonList.calculateNumDuplicateTags(null));
-    }
-
-    @Test
-    public void asUnmodifiableTagList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () ->
-                uniquePersonList.asUnmodifiableTagList().remove(0));
     }
 }
