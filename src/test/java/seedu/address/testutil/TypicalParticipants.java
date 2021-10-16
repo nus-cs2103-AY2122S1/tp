@@ -57,6 +57,49 @@ public class TypicalParticipants {
             Note.Importance.HIGH)),
             List.of(new NextOfKin(new Name("Rouse Balakrishnan"), new Phone("93822312"), new Tag("Brother"))));
 
+    public static final Participant ALEX_DIFFERENT_PHONE = new Participant(new Name("Alex Yeoh"), new Phone("87438808"),
+            new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_EMAIL = new Participant(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Email("alexyeoh2@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_ADDRESS = new Participant(new Name("Alex Yeoh"),
+            new Phone("87438807"), new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-42"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_TAGS = new Participant(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("notfriends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_BIRTHDATE = new Participant(new Name("Alex Yeoh"),
+            new Phone("87438807"), new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 3),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_NOTES = new Participant(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Email(
+            "alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegan", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Janette Yeoh"), new Phone("93822312"), new Tag("Spouse"))));
+
+    public static final Participant ALEX_DIFFERENT_NOK = new Participant(new Name("Alex Yeoh"), new Phone("87438807"),
+            new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
+            SampleDataUtil.getTagSet("friends"), BirthDate.of(2000, 8, 2),
+            SampleDataUtil.getNoteSet(new Note("Vegetarian", Note.Importance.VERY_HIGH)),
+            List.of(new NextOfKin(new Name("Jill Yeoh"), new Phone("93822313"), new Tag("Sister"))));
+
     /**
      * Returns an {@code AddressBook} with all the typical Participants.
      */
