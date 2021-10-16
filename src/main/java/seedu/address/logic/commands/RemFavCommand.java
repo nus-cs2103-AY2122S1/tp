@@ -1,27 +1,24 @@
 package seedu.address.logic.commands;
 
-
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-
 /**
- * Adds person whose student ID matches the user input to favourites..
+ * Removes person whose student ID matches the user input from favourites.
  * ID matching is case insensitive.
  */
-public class AddFavCommand extends Command {
+public class RemFavCommand extends Command {
+    public static final String COMMAND_WORD = "remfav";
 
-    public static final String COMMAND_WORD = "addfav";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person as a favourite. \n "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person as a favourite. \n "
             + "Parameters: Student_ID \n"
             + "Example: " + COMMAND_WORD + " A1234567X";
 
     private final String studentId;
 
-    public AddFavCommand(String studentId) {
+    public RemFavCommand(String studentId) {
         this.studentId = studentId;
     }
 
@@ -35,21 +32,20 @@ public class AddFavCommand extends Command {
         // return a message saying he already is.
         for (Person person : personList) {
             if (person.getStudentId().toString().equalsIgnoreCase(studentId)) {
-                if (person.getIsFavourite()) {
-                    return new CommandResult(String.format(Messages.MESSAGE_PERSON_ALREADY_FAVOURITE));
+                if (!person.getIsFavourite()) {
+                    return new CommandResult(Messages.MESSAGE_PERSON_IS_NOT_FAVOURITE);
                 } else {
-                    person.setFavouriteTrue();
+                    person.setFavouriteFalse();
                     noPersonFound = false;
                 }
             }
         }
 
         if (noPersonFound) {
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_NO_SUCH_ID_FOUND));
+            return new CommandResult(Messages.MESSAGE_NO_SUCH_ID_FOUND);
         } else {
             return new CommandResult(
-                    String.format(Messages.MESSAGE_FAVOURITE_ADDED, studentId));
+                    String.format(Messages.MESSAGE_FAVOURITE_REMOVED, studentId));
         }
 
     }
@@ -58,9 +54,7 @@ public class AddFavCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddFavCommand // instanceof handles nulls
-                && this.studentId.equals(((AddFavCommand) other).studentId));
+                || (other instanceof RemFavCommand // instanceof handles nulls
+                && this.studentId.equals(((RemFavCommand) other).studentId));
     }
-
-
 }

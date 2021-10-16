@@ -86,11 +86,12 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public void setFavourite() {
-        if (this.isFavourite) {
-
-        }
+    public void setFavouriteTrue() {
         this.isFavourite = true;
+    }
+
+    public void setFavouriteFalse() {
+        this.isFavourite = false;
     }
 
     /**
