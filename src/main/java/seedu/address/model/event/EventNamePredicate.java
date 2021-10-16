@@ -14,7 +14,7 @@ public class EventNamePredicate implements Predicate<Event> {
 
     @Override
     public boolean test(Event event) {
-        return eventName.equals(event.getName().eventName);
+        return eventName.equals(event.getNameString());
     }
 
     @Override

@@ -69,7 +69,7 @@ public class Event implements Comparable<Event> {
     }
 
     public String getNameString() {
-        return eventName.eventName;
+        return eventName.toString();
     }
 
     public EventDate getDate() {
@@ -195,11 +195,11 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event o) {
-        int compareDateResult = eventDate.date.compareTo(o.eventDate.date);
+        int compareDateResult = eventDate.compareTo(o.eventDate);
         if (compareDateResult == 0) { // same date
             int compareTimeResult = eventTime.compareTo(o.eventTime);
             if (compareTimeResult == 0) { // same time
-                return eventName.eventName.compareTo(o.eventName.eventName);
+                return eventName.compareTo(o.eventName);
             } else {
                 return compareTimeResult;
             }

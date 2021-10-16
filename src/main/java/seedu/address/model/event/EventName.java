@@ -3,22 +3,21 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-
 /**
  * Represents an Event's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEventName(String)}
  */
-public class EventName {
+public class EventName implements Comparable<EventName> {
     public static final String MESSAGE_CONSTRAINTS =
             "EventNames should only contain alphanumeric characters and spaces, and it should not be blank";
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String eventName;
+    private final String eventName;
 
     /**
      * Constructs an {@code EventName}.
@@ -57,5 +56,10 @@ public class EventName {
     @Override
     public int hashCode() {
         return eventName.hashCode();
+    }
+
+    @Override
+    public int compareTo(EventName o) {
+        return eventName.compareTo(o.eventName);
     }
 }

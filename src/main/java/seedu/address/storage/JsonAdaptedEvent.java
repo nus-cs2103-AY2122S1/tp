@@ -48,9 +48,9 @@ public class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName().eventName;
-        date = source.getDate().toString();
-        time = source.getTime().toString();
+        name = source.getNameString();
+        date = source.getDateString();
+        time = source.getTimeString();
         isDone = source.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED;
         participantIds.addAll(source.getParticipants().stream()
                 .map(Participant::getParticipantId).map(ParticipantId::toString)
