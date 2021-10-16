@@ -42,8 +42,6 @@ public class AppointmentCommandParserTest {
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_BOB, VALID_APPOINTMENT_VENUE_BOB));
-        System.out.println(userInput);
-        System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -64,8 +62,6 @@ public class AppointmentCommandParserTest {
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB));
-        System.out.println(userInput);
-        System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -78,8 +74,6 @@ public class AppointmentCommandParserTest {
                 + " " + PREFIX_APPOINTMENT_VENUE + VALID_APPOINTMENT_VENUE_BOB;
         AppointmentCommand expectedCommand = new AppointmentCommand(INDEX_FIRST_PERSON,
                 new Appointment(VALID_APPOINTMENT_BOB, VALID_APPOINTMENT_TIME_AMY, VALID_APPOINTMENT_VENUE_BOB));
-        System.out.println(userInput);
-        System.out.println(expectedCommand);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
