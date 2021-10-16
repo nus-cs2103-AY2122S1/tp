@@ -127,7 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        appointmentPanel = new AppointmentListPanel(logic.getFilteredPatientList());
+        // Add filtered appointment list here TODO
+        appointmentPanel = new AppointmentListPanel(null);
         appointmentTabPlaceholder.getChildren().add(appointmentPanel.getRoot());
     }
 
