@@ -35,6 +35,7 @@ public class AddEventCommand extends Command {
      * @param event to be added.
      */
     public AddEventCommand(Event event) {
+        requireNonNull(event);
         this.event = event;
     }
 

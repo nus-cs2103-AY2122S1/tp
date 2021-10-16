@@ -18,6 +18,7 @@ import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -73,8 +74,8 @@ public class JsonAdaptedParticipant {
         email = source.getEmailValue();
         address = source.getAddressValue();
         tagged.addAll(source.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList()));
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
         birthDate = source.getBirthDateString();
         notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
@@ -152,7 +153,12 @@ public class JsonAdaptedParticipant {
             modelNextOfKins.add(nok.toModelType());
         }
 
+        ParticipantId modelId = new ParticipantId(id);
+        if (!ParticipantId.isValidId(id)) {
+            throw new IllegalValueException(ParticipantId.MESSAGE_CONSTRAINTS);
+        }
+
         return new Participant(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-            modelBirthDate, notes, modelNextOfKins);
+                modelBirthDate, notes, modelNextOfKins, modelId);
     }
 }

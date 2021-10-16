@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
+import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -19,14 +22,14 @@ public class AddParticipantToEventCommand extends Command {
     public static final String COMMAND_WORD = "addParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": add Participant with matching ID to an Event.\n"
-        + "Parameters: \n"
-        + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
-        + PREFIX_EVENT + " EVENT_NAME "
-        + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + " 240Km Marathon";
+            + ": add Participant with matching ID to an Event.\n"
+            + "Parameters: \n"
+            + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
+            + PREFIX_EVENT + " EVENT_NAME "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + " 240Km Marathon";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-        "Added Participant: %1$s to event %2$s successfully";
+            "Added Participant: %1$s to event %2$s successfully";
 
     private final ParticipantId participantId;
     private final EventName eventName;
@@ -51,16 +54,15 @@ public class AddParticipantToEventCommand extends Command {
 
 
         if (!hasParticipant) {
-            throw new CommandException("Participant of id: " + participantId + " not found, consider relisting the "
-                    + "participants using 'list'");
+            throw new CommandException(
+                    String.format(MESSAGE_PARTICIPANT_NOT_FOUND, participantId, ListCommand.COMMAND_WORD));
         }
 
-        boolean hasEvent =
-            lastShownEventList.stream().anyMatch(e -> e.getName().equals(eventName));
+        boolean hasEvent = lastShownEventList.stream().anyMatch(e -> e.getName().equals(eventName));
 
         if (!hasEvent) {
-            throw new CommandException("Event " + eventName + "Not Found, consider relisting the events "
-                    + "using 'listEvents'");
+            throw new CommandException(
+                    String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName, ListEventCommand.COMMAND_WORD));
         }
 
 
@@ -72,12 +74,11 @@ public class AddParticipantToEventCommand extends Command {
                 .filter(e -> e.getName().equals(eventName))
                 .findFirst().get();
 
-        if (selectedEvent.getParticipants().contains(participantToAdd)) {
-            throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
+        if (selectedEvent.hasParticipant(participantToAdd)) {
+            throw new CommandException(Messages.showParticipantExists(participantToAdd.getFullName()));
         }
 
-        // add participant
-        selectedEvent.getParticipants().add(participantToAdd);
+        selectedEvent.addParticipant(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
                 participantToAdd.getFullName(), eventName));
@@ -86,8 +87,8 @@ public class AddParticipantToEventCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof AddParticipantToEventCommand // instanceof handles nulls
-            && participantId.equals(((AddParticipantToEventCommand) other).participantId))
-            && eventName.equals(((AddParticipantToEventCommand) other).eventName); //state check
+                || (other instanceof AddParticipantToEventCommand // instanceof handles nulls
+                && participantId.equals(((AddParticipantToEventCommand) other).participantId))
+                && eventName.equals(((AddParticipantToEventCommand) other).eventName); //state check
     }
 }

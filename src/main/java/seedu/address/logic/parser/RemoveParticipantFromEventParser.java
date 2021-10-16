@@ -16,10 +16,10 @@ public class RemoveParticipantFromEventParser implements Parser<RemoveParticipan
     @Override
     public RemoveParticipantFromEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_PARTICIPANT_ID, PREFIX_EVENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_PARTICIPANT_ID, PREFIX_EVENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PARTICIPANT_ID, PREFIX_EVENT)
-            || !argMultimap.getPreamble().isEmpty()) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 RemoveParticipantFromEventCommand.MESSAGE_USAGE));
         }

@@ -12,12 +12,12 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is an EventTime class that represents the Time of an Event.
  */
-public class EventTime {
+public class EventTime implements Comparable<EventTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
-    public static final String TIME_FORMAT = "HHmm";
+    private static final String TIME_FORMAT = "HHmm";
 
-    public final LocalTime time;
+    private final LocalTime time;
     private boolean hasTime;
 
     /**
@@ -69,11 +69,24 @@ public class EventTime {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof EventTime
-                && time.equals(((EventTime) other).time) && hasTime == ((EventTime) other).hasTime);
+                && hasTime == ((EventTime) other).hasTime && time.equals(((EventTime) other).time));
     }
 
     @Override
     public int hashCode() {
         return time.hashCode();
+    }
+
+    @Override
+    public int compareTo(EventTime o) {
+        if (hasTime && o.hasTime) {
+            return this.time.compareTo(o.time);
+        } else if (hasTime) {
+            return 1;
+        } else if (o.hasTime) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }

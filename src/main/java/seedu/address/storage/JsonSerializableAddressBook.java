@@ -66,14 +66,17 @@ class JsonSerializableAddressBook {
             }
             addressBook.addParticipant(participant);
         }
+        List<Participant> participantList = addressBook.getParticipantList();
+
         //Add on for Managera
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
-            Event event = jsonAdaptedEvent.toModelType(participants);
+            Event event = jsonAdaptedEvent.toModelType(participantList);
             if (addressBook.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
         }
+
         return addressBook;
     }
 

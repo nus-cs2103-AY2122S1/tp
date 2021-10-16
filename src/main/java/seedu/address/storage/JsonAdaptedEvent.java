@@ -27,7 +27,6 @@ public class JsonAdaptedEvent {
     private String date;
     private String time;
     private final List<String> participantIds = new ArrayList<>();
-    //Change to JsonAdaptedParticipants
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given Event details.
@@ -49,10 +48,10 @@ public class JsonAdaptedEvent {
      * Converts a given {@code Event} into this class for Jackson use.
      */
     public JsonAdaptedEvent(Event source) {
-        name = source.getName().eventName;
-        date = source.getDate().toString();
-        time = source.getTime().toString();
-        isDone = source.getIsDone() ? "Completed" : "Uncompleted";
+        name = source.getNameString();
+        date = source.getDateString();
+        time = source.getTimeString();
+        isDone = source.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED;
         participantIds.addAll(source.getParticipants().stream()
                 .map(Participant::getParticipantId).map(ParticipantId::toString)
                 .collect(Collectors.toList()));
@@ -64,14 +63,7 @@ public class JsonAdaptedEvent {
      * @return an Event instance representing the JsonAdaptedEvent.
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
-    public Event toModelType(List<JsonAdaptedParticipant> allParticipants) throws IllegalValueException {
-        final List<Participant> participants = new ArrayList<>();
-        // TODO: Optimise querying by using different data structures and algorithm in future updates
-        for (String participantId : participantIds) {
-            JsonAdaptedParticipant toAddParticipantJson =
-                allParticipants.stream().filter(p -> p.getId().equals(participantId)).findFirst().get();
-            participants.add(toAddParticipantJson.toModelType());
-        }
+    public Event toModelType(List<Participant> allParticipants) throws IllegalValueException {
 
         if (this.name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -105,12 +97,15 @@ public class JsonAdaptedEvent {
             throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
         }
 
-        Event event = new Event(eventName, eventDate, eventTime);
-        event.getParticipants().addAll(participants);
-        if (this.isDone.equals("Completed")) {
-            event.markAsDone();
-        }
+        boolean isDone = this.isDone.equals(Event.COMPLETED);
 
-        return event;
+        final Event eventModel = new Event(eventName, eventDate, eventTime, isDone, new ArrayList<>());
+
+        // TODO: Optimise querying by using different data structures and algorithm in future updates
+        for (String participantId : participantIds) {
+            allParticipants.stream().filter(p -> p.getIdValue().equals(participantId))
+                    .findFirst().ifPresent(eventModel::addParticipant);
+        }
+        return eventModel;
     }
 }

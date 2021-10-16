@@ -14,9 +14,28 @@ public class NoteTest {
     }
 
     @Test
-    public void equalityTest() {
-        assertEquals(new Note("test2", Note.Importance.VERY_HIGH), new Note("test2", Note.Importance.VERY_HIGH));
-        assertNotEquals(new Note("test3", Note.Importance.VERY_HIGH), new Note("Test3", Note.Importance.VERY_HIGH));
-        assertNotEquals(new Note("test4", Note.Importance.VERY_HIGH), new Note("test4", Note.Importance.HIGH));
+    public void testEquals() {
+        Note sampleNote = new Note("E flat", Note.Importance.VERY_HIGH);
+        Note sampleNoteCopy = new Note("E flat", Note.Importance.VERY_HIGH);
+        Note differentNameSampleNote = new Note("D flat", Note.Importance.VERY_HIGH);
+        Note differentImportanceSampleNote = new Note("E flat", Note.Importance.HIGH);
+
+        // same object -> return true
+        assertEquals(sampleNote, sampleNote);
+
+        // different object, same value -> return true
+        assertEquals(sampleNote, sampleNoteCopy);
+
+        // null object -> return false
+        assertNotEquals(sampleNote, null);
+
+        // different type -> return false
+        assertNotEquals(sampleNote, 5);
+
+        // different name -> return false
+        assertNotEquals(sampleNote, differentNameSampleNote);
+
+        // different importance -> return false
+        assertNotEquals(sampleNote, differentImportanceSampleNote);
     }
 }

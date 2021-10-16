@@ -12,12 +12,12 @@ import java.time.format.DateTimeFormatter;
 /**
  * This is an EventDate class representing the Date of an Event.
  */
-public class EventDate {
+public class EventDate implements Comparable<EventDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in YYYY-MM-DD format!";
     public static final String DATE_FORMAT = "y-M-d";
 
-    public final LocalDate date;
+    private final LocalDate date;
 
     /**
      * Constructs an {@code EventDate}
@@ -64,4 +64,8 @@ public class EventDate {
         return date.hashCode();
     }
 
+    @Override
+    public int compareTo(EventDate o) {
+        return date.compareTo(o.date);
+    }
 }

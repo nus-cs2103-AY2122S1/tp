@@ -2,6 +2,7 @@ package seedu.address.model.participant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -49,5 +50,42 @@ public class BirthDateTest {
         assertTrue(BirthDate.isPresentOrPast(LocalDate.now().minusYears(200)));
 
         assertTrue(BirthDate.isPresentOrPast(LocalDate.now().minusYears(50)));
+    }
+
+    @Test
+    public void testEquals() {
+        BirthDate sampleBirthDate = BirthDate.of(2020, 11, 11);
+        BirthDate sampleBirthDateCopy = BirthDate.of(2020, 11, 11);
+        BirthDate sampleBirthDateLocalDate = BirthDate.of(LocalDate.of(2020, 11, 11));
+        BirthDate differentSampleBirthDate = BirthDate.of(2020, 11, 12);
+        BirthDate nullSampleBirthDate = BirthDate.of(null);
+
+        // same object -> return true
+        assertEquals(sampleBirthDate, sampleBirthDate);
+
+        // different object, same value -> return true
+        assertEquals(sampleBirthDate, sampleBirthDateCopy);
+
+        // same object -> return true
+        assertEquals(sampleBirthDate, sampleBirthDate);
+
+        // null object -> return false
+        assertNotEquals(sampleBirthDate, null);
+
+        // different type -> return false
+        assertNotEquals(sampleBirthDate, 5);
+
+        // same value, different constructors -> return true
+        assertEquals(sampleBirthDate, sampleBirthDateLocalDate);
+
+        // different values -> return false
+        assertNotEquals(sampleBirthDate, differentSampleBirthDate);
+
+        // one null value -> return false
+        assertNotEquals(sampleBirthDate, nullSampleBirthDate);
+        assertNotEquals(nullSampleBirthDate, sampleBirthDate);
+
+        // both null values -> return true
+        assertEquals(nullSampleBirthDate, nullSampleBirthDate);
     }
 }

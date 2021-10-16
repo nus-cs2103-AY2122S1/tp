@@ -25,7 +25,6 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
     * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
-    * [Find Participant and access details: `findParticipant`](#find-participant-and-access-details-findparticipant)
     * [Exiting the program: `exit`](#exiting-the-program--exit)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -60,8 +59,6 @@ Managera is a **desktop app that provides event organisers with a convenient met
    * **`exit`** : Exits the app.
      
    * **`addEvent n/My First Event d/2021-01-01`** : Adds a new Event to the list called 'My First Event'.
-     
-   * **`findParticipant Arnold`** : Returns the details of Participants whose names include 'Arnold'.
      
    * **`sortEvents`** : Sorts the current list of Events in chronological order.
 
@@ -244,19 +241,19 @@ Format: `listEvent`
 Adds a Participant with matching participantID to Event.
 
 Format: 
-`addParticipant e/EVENT_NAME p/PARTICIPANT_ID`
+`addParticipant id/PARTICIPANT_ID ev/EVENT_NAME`
 
 Example Usage:
-* `addParticipant e/CS2103T Finals p/mikerowe1` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
+* `addParticipant id/mikerowe1 ev/CS2103T Finals` - Adds Mike Rowe whose participantID is mikerowe1 to Event CS2103T Finals.
 
 ### Remove Participant from Event: `removeParticipant`
 
 Removes a Participant with matching participantID from an Event.
 
-Format: `removeParticipant e/EVENT_NAME p/PARTICIPANT_ID` 
+Format: `removeParticipant id/PARTICIPANT_ID ev/EVENT_NAME` 
 
 Example Usage:
-* `removeParticipant e/CS2103T Finals p/mikerowe1` - Removes Mike Rowe whose participantID is mikerowe1 from Event CS2103T Finals.
+* `removeParticipant id/mikerowe1 ev/CS2103T Finals` - Removes Mike Rowe whose participantID is mikerowe1 from Event CS2103T Finals.
 
 ### Show Event details: `showDetails`
 
@@ -275,15 +272,6 @@ Format: `showParticipants EVENT_NAME`
 
 Example Usage:
 * `showParticipants CS2103T Finals` - Displays the list of participants of the ‘CS2103T Finals’ Event.
-
-### Find Participant and access details: `findParticipant`
-
-Finds the Participant whose name contains the given KEYWORD and returns the details about the Participant.
-
-Format: `findParticipant KEYWORD`
-
-Example Usage:
-* `findParticipant Mike` - Filters the list of Participants for Participants who have names containing “Mike”.
 
 ### Exiting the program : `exit`
 
@@ -337,5 +325,4 @@ Action | Format, Examples
 **remove Participant from Event** | `removeParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant ev/CS2103T Finals p/mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
-**Find Participants** | `findParticipant KEYWORD` <br> e.g., `findParticipant Mike`
 **exit** | `exit`

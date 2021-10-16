@@ -1,9 +1,12 @@
 package seedu.address.model.event;
 
-import java.util.ArrayList;
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.participant.Participant;
 
 /**
@@ -11,8 +14,10 @@ import seedu.address.model.participant.Participant;
  */
 public class Event implements Comparable<Event> {
 
-    private boolean isDone = false;
-    private ArrayList<Participant> participants = new ArrayList<>();
+    public static final String COMPLETED = "Completed";
+    public static final String UNCOMPLETED = "Uncompleted";
+    private boolean isDone;
+    private ObservableList<Participant> participants = FXCollections.observableArrayList();
     private EventName eventName;
     private EventDate eventDate;
     private EventTime eventTime;
@@ -28,7 +33,7 @@ public class Event implements Comparable<Event> {
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
@@ -38,12 +43,15 @@ public class Event implements Comparable<Event> {
      * @param date at which the Event occurs.
      * @param time of the Event.
      * @param isDone A boolean to indicate is the event is done.
+     * @param participants participants to be added
      */
-    public Event(EventName name, EventDate date, EventTime time, boolean isDone) {
+    public Event(EventName name, EventDate date, EventTime time, boolean isDone, List<Participant> participants) {
+        requireNonNull(participants);
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
         this.isDone = isDone;
+        this.participants.addAll(participants);
     }
 
     /**
@@ -57,23 +65,67 @@ public class Event implements Comparable<Event> {
     }
 
     public EventName getName() {
-        return this.eventName;
+        return eventName;
+    }
+
+    public String getNameString() {
+        return eventName.toString();
     }
 
     public EventDate getDate() {
-        return this.eventDate;
+        return eventDate;
+    }
+
+    public String getDateString() {
+        return eventDate.toString();
     }
 
     public EventTime getTime() {
-        return this.eventTime;
+        return eventTime;
+    }
+
+    public String getTimeString() {
+        return eventTime.toString();
     }
 
     public boolean getIsDone() {
-        return this.isDone;
+        return isDone;
     }
 
-    public List<Participant> getParticipants() {
-        return this.participants;
+    public ObservableList<Participant> getParticipants() {
+        return participants;
+    }
+
+    /**
+     * Adds the given participant to the list of participants.
+     *
+     * @param participant The participant to be added.
+     */
+    public void addParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.add(participant);
+        participant.addEvent(this);
+    }
+
+    /**
+     * Removes the given participant from the list of participants.
+     *
+     * @param participant The participant to be removed.
+     */
+    public void removeParticipant(Participant participant) {
+        requireNonNull(participant);
+        this.participants.remove(participant);
+        participant.removeEvent(this);
+    }
+
+    /** Returns true if the given participant is attending this event.
+     *
+     * @param participant The given participant.
+     * @return True if the participant is attending.
+     */
+    public boolean hasParticipant(Participant participant) {
+        requireNonNull(participant);
+        return this.participants.stream().anyMatch(p -> p.isSameParticipant(participant));
     }
 
     /**
@@ -82,7 +134,7 @@ public class Event implements Comparable<Event> {
      * @return An Event that is marked done.
      */
     public Event markAsDone() {
-        return new Event(this.eventName, this.eventDate, this.eventTime, true);
+        return new Event(eventName, eventDate, eventTime, true, participants);
     }
 
     /**
@@ -143,11 +195,11 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event o) {
-        int compareDateResult = this.eventDate.date.compareTo(o.eventDate.date);
+        int compareDateResult = eventDate.compareTo(o.eventDate);
         if (compareDateResult == 0) { // same date
-            int compareTimeResult = this.eventTime.time.compareTo(o.eventTime.time);
+            int compareTimeResult = eventTime.compareTo(o.eventTime);
             if (compareTimeResult == 0) { // same time
-                return this.eventName.eventName.compareTo(o.eventName.eventName);
+                return eventName.compareTo(o.eventName);
             } else {
                 return compareTimeResult;
             }
