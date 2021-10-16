@@ -16,6 +16,21 @@ public class CliSyntax {
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
     public static final Prefix PREFIX_BIRTH_DATE = new Prefix("dob/");
     public static final Prefix PREFIX_RISK = new Prefix("risk/");
+
+    /* Appointment Prefix definitions */
+    public static final Prefix PREFIX_PATIENT = new Prefix("pat/");
+    public static final Prefix PREFIX_DOCTOR = new Prefix("d/");
+    public static final Prefix PREFIX_START = new Prefix("s/");
+    public static final Prefix PREFIX_END = new Prefix("e/");
+
     /* Flag definitions */
+    public static final String FLAG_ADD = "-a";
     public static final Flag FLAG_DELETE = new Flag("-d");
+    public static final String FLAG_DELETE_STRING = "-d";
+    public static final String FLAG_EDIT = "-e";
+    public static final String FLAG_FILTER = "-f";
+    public static final String FLAG_LIST = "-l";
+
+    /* Appointment Flag definitions */
+    public static final String FLAG_FILTER_UPCOMING = "-u";
 }
