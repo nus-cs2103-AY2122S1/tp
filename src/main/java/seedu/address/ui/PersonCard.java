@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Visit;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -48,10 +47,6 @@ public class PersonCard extends UiPart<Region> {
     private Label lastVisit;
     @FXML
     private Label visit;
-    @FXML
-    private Label frequency;
-    @FXML
-    private Label occurrence;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
