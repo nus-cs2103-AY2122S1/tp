@@ -19,7 +19,7 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 1. Copy the file to the folder you want to use as the _home folder_ for your ModuLink.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/screenshots/Ui2.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -68,53 +68,47 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 
 ### Creating a profile with mods : `create`
 
-Creates your user profile. You can also choose to add mods to indicate your group availability.
+Creates your user profile. You can also choose to add mods to indicate your group availability. Note, in order to start using ModuLink, you area **required** to create a new profile should you not have one.
 
-Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/TAG]...`
 
 :information_source: Note: STUDENT_ID must be unique
 
 Examples:
-* `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com t/Need a team for CS2103T`
-* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com t/Need a member for CS2101`
+* `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2103T`
+* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101`
 * `create n/Betsy Crowe id/A0222594A p/24680135 e/betsycrowe@example.com`
 
-### Adding a person: `add`
+### Adding a person: `addfav`
 
 Adds a person to your favourites list.
 
-Format: `add id/STUDENT_ID`
+Format: `addfav STUDENT_ID`
 
 Examples:
-* `add n/John Doe id/A0222594A`
-* `add n/Betsy Crowe id/A0222594A`
+* `addfav A0222594A`
+* `addfav A1234567R`
+   <br>
+   ![result for 'addfav A0222594A'](images/screenshots/addFavResult.png)
 
-### Removing a favourite : `remove`
+### Removing a favourite : `remfav`
 
 Removes a favourited user from the favourites list.
 
-Format: `remove n/NAME id/STUDENT_ID`
+Format: `remfav STUDENT_ID`
 
 Examples:
-* `remove n/John Doe id/A0212345X`
-* `remove n/Betsy Crowe id/A0123456X`
+* `remove A0212345X`
+* `remove A0123456X`
 
 ### Listing all persons : `list`
 
 Shows a list of all persons that the user has added to their favourites list.
 
 Format: `list`
-
-### Viewing a user's profile in more detail  : `view`
-
-Opens the specified user's profile.
-
-Format: `view id/STUDENT_ID`
-
-Examples:
-* `view id/A0212345X`
-* `view id/A0123456X`
-
+<br>
+  <br>
+  ![result for 'list'](images/screenshots/listResult.png)
 
 ### Filter user profiles by module and group status : `filter`
 
@@ -128,32 +122,52 @@ Format: `filter mod/MODULE_CODE [group/GROUP_STATUS]`
 Examples:
 * `filter mod/CS2030`
 * `filter mod/CS2030 group/SM`
+* `filter mod/CS2030 group/SG`
+
+![result for 'filter mod/CS2103T'](images/screenshots/filterModOnlyResult.png)
+![result for 'filter mod/CS2101' group/SM](images/screenshots/filterGroupResult.png)
 
 ### Find profiles by name  : `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the entered keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g hans will match Hans
+* The search is not case-sensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * Only the name is searched.
 * Only full words will be matched e.g. Han will not match Hans
 * Persons matching at least one keyword will be returned (i.e. OR search).
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh, David Li`
-<br>
-  <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find John` returns `John` and `John Doe`
+* `find alex david` returns `Alex Berenson` and `David Li`
+
+![result for 'find alex'](images/screenshots/findAlexResult.png)
+  
+### Find profiles by student ID  : `findId`
+
+Finds persons whose student ID number matches any of the entered keywords.
+
+Format: `findId KEYWORD [MORE_KEYWORDS]`
+
+* The search is not case-sensitive. e.g a0123456a will match A023456A
+* The order of the keywords does not matter. e.g. `findId A0123456A A0654321A` will show the persons whose student Id number matches either A0123456A or A0654321A.
+* Only the student Id numbers are searched.
+* Persons matching any keywords will be returned.
+
+Examples:
+* `findId A0123456A` returns the person whose student Id number matches A0123456A
+* `findId A0123456A A0654321A` returns the persons whose student Id number matches either A0123456A or A0654321A.
+
+![result for 'findId A0222594A'](images/screenshots/findIdA0222594AResult.png)
 
 
 ### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/screenshots/helpMessage.png)
 
 Format: `help`
 
@@ -192,12 +206,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [t/TAG]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com t/Need a team for CS2103T`
-**Add** | `add id/STUDENT_ID` <br> e.g., `add id/A0222594A`
-**Remove** | `remove n/NAME id/STUDENT_ID`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/TAG]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Add Favourite** | `addfav STUDENT_ID` <br> e.g., `addfav A0222594A`
+**Remove Favourite** | `remfav STUDENT_ID` <br> e.g., `remfav A0222594A`
 **List** | `list`
-**View** | `view id/STUDENT_ID`
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM` 
-**Find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
+**Find by Name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
+**Find by Student Id** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `find A0222594A` returns person with student Id matching A0222594A.
 **Help** | `help`
 **Exit** | `exit`

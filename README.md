@@ -23,4 +23,4 @@ For a more detailed documentation of this project, please visit our [Product Web
 
 #### Ui Mockup for ModuLink
 
-![Ui Mockup](docs/images/Ui.png)
+![Ui Mockup](docs/images/screenshots/Ui.png)
