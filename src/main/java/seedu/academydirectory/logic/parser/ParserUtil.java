@@ -17,7 +17,6 @@ import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Phone;
 import seedu.academydirectory.model.student.Sortable;
-import seedu.academydirectory.model.student.SortableInformation;
 import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.student.Telegram;
 import seedu.academydirectory.model.tag.Tag;
@@ -194,7 +193,6 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String studioRecord} into a {@code Integer}.
-     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code studioRecord} is invalid.
      */
@@ -207,6 +205,12 @@ public class ParserUtil {
         return Integer.parseInt(trimmedStudioRecord);
     }
 
+    /**
+     * Parses a {@code String attribute} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attribute} is invalid.
+     */
     public static String parseAttribute(String attribute) throws ParseException {
         requireNonNull(attribute);
         String trimmedAttribute = attribute.trim();
@@ -216,6 +220,11 @@ public class ParserUtil {
         return trimmedAttribute.toUpperCase();
     }
 
+    /**
+     * Parses a {@code String order} into a {@code boolean}.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
     public static boolean parseOrder(String order) throws ParseException {
         requireNonNull(order);
         String trimmedOrder = order.trim();

@@ -3,14 +3,12 @@ package seedu.academydirectory.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADD_PARTICIPATON;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_STUDIO_ATTENDANCE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_STUDIO_SESSION;
 
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import seedu.academydirectory.commons.core.index.Index;
-import seedu.academydirectory.logic.commands.AttendanceCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 

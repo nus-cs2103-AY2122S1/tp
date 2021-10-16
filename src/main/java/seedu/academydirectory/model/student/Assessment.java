@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Represents a Student's assessment in the academy directory.
  */
-public class Assessment implements Information {
+public class Assessment extends SortableWrapper {
 
     public static final List<String> ASSESSMENT_LIST = Arrays.asList(
             "RA1",

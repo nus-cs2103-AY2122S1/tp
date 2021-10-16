@@ -4,7 +4,6 @@ import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMA
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ATTRIBUTE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ORDER;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.academydirectory.logic.commands.SortCommand;

@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-import seedu.academydirectory.testutil.StudentBuilder;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.academydirectory.testutil.StudentBuilder;
 
 public class NameTest {
 
@@ -49,7 +49,7 @@ public class NameTest {
     @Test
     public void getComparator() {
         Comparator<Student> ascendingComparator = Name.getComparator(true);
-        Comparator<Student> descendingComparator =  Name.getComparator(false);
+        Comparator<Student> descendingComparator = Name.getComparator(false);
 
         Student firstStudent = new StudentBuilder().withName("abc").build();
         Student middleStudent = new StudentBuilder().withName("ghi").build();
@@ -67,9 +67,9 @@ public class NameTest {
         );
 
         List<Student> expectedDescendingList = Arrays.asList(
-          lastStudent,
-          middleStudent,
-          firstStudent
+                lastStudent,
+                middleStudent,
+                firstStudent
         );
 
         assertNotEquals(studentList, expectedAscendingList);

@@ -5,19 +5,17 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ATTRIBUTE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Name;
 import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Student;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * A class that implements the command to show all the students' grades for an assessment.
@@ -48,8 +46,6 @@ public class SortCommand extends Command {
             + PREFIX_ATTRIBUTE + "name "
             + PREFIX_ORDER + "asc";
 
-    public static final String MESSAGE_SUCCESS = "Grades for %1$s displayed.";
-
     private final String attribute;
     private final boolean isAscendingOrder;
 
@@ -72,7 +68,7 @@ public class SortCommand extends Command {
     public String displayResult() {
         String result = "AcademyDirectory is now sorted by ";
         String orderString = isAscendingOrder ? "ascending" : "descending";
-        return result + attribute + " in " + orderString +" order!";
+        return result + attribute + " in " + orderString + " order!";
     }
 
     @Override

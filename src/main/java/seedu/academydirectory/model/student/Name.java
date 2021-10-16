@@ -1,9 +1,9 @@
 package seedu.academydirectory.model.student;
 
-import java.util.Comparator;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.AppUtil.checkArgument;
+
+import java.util.Comparator;
 
 /**
  * Represents a Student's name in the academy directory.
