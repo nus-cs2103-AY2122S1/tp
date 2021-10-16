@@ -18,7 +18,7 @@ public class RemarkClassCommandParser implements Parser<RemarkClassCommand> {
      */
     public RemarkClassCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_REMARK);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
         Index index;
         try {
@@ -28,8 +28,6 @@ public class RemarkClassCommandParser implements Parser<RemarkClassCommand> {
                     RemarkClassCommand.MESSAGE_USAGE), ive);
         }
 
-        String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
-
-        return new RemarkClassCommand(index, new Remark(remark));
+        return new RemarkClassCommand(index);
     }
 }
