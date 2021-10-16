@@ -24,6 +24,7 @@ public class Product implements Category {
     public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
         this(new ID(), name, unitPrice, quantity);
     }
+
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
         requireAllNonNull(id, name, unitPrice);
 
@@ -49,8 +50,24 @@ public class Product implements Category {
         return quantity;
     }
 
+    /**
+     * Returns a new copy of the {@code Product} with the same ID but the supplied data fields. <br>
+     * The only way to copy the ID of a {@code Product} over to another {@code Product}.
+     *
+     * @param product ID of the original product.
+     * @param name New name for the product.
+     * @param unitPrice New unit price for the product.
+     * @param quantity New quantity for the product.
+     */
     public static Product updateProduct(Product product, Name name, UnitPrice unitPrice, Quantity quantity) {
         return new Product(product.getId(), name, unitPrice, quantity);
+    }
+
+    /**
+     * @see #updateProduct(Product, Name, UnitPrice, Quantity)
+     */
+    public static Product updateProduct(Product copyTo, Product copyFrom) {
+        return new Product(copyTo.getId(), copyFrom.name, copyFrom.unitPrice, copyFrom.quantity);
     }
 
     /**

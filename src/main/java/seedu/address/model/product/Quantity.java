@@ -15,7 +15,7 @@ public class Quantity {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String quantity;
+    public final String value;
 
     /**
      * Constructs a {@code Quantity}.
@@ -25,7 +25,7 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        this.quantity = quantity;
+        value = quantity;
     }
 
     /**
@@ -39,18 +39,18 @@ public class Quantity {
 
     @Override
     public String toString() {
-        return quantity;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Quantity // instanceof handles nulls
-                && quantity.equals(((Quantity) other).quantity)); // state check
+                && value.equals(((Quantity) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return quantity.hashCode();
+        return value.hashCode();
     }
 }
