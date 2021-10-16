@@ -123,7 +123,7 @@ public class ParserUtil {
     public static Grade parseGrade(String grade) throws ParseException {
         requireNonNull(grade);
         String trimmedGrade = grade.trim();
-        if (!Grade.isValidGrade(grade)) {
+        if (!Grade.isValidGrade(trimmedGrade)) {
             throw new ParseException(Grade.GRADE_MESSAGE_CONSTRAINTS);
         }
         return new Grade(trimmedGrade);

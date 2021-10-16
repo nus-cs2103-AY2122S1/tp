@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -92,12 +93,16 @@ public class Student {
     }
 
     /**
-     * Returns an immutable lesson price set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson price list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public ArrayList<Price> getLessonPrices() {
+    public List<Price> getLessonPrices() {
         Collection<Price> values = lessonCodesAndPrices.values();
-        return new ArrayList<>(values); // equivalent generator to unmodifiable set
+        List<Price> listOfValues = new ArrayList<>();
+        for (Price p : values) {
+            listOfValues.add(p);
+        }
+        return Collections.unmodifiableList(listOfValues);
     }
 
     /**
@@ -116,6 +121,13 @@ public class Student {
      */
     public void enrollForLesson(Lesson lesson) {
         lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
+    }
+
+    /**
+     * Puts the lesson codes and prices of the given input into the current students' lesson codes and prices.
+     */
+    public void setLessonCodesAndPrices(Map<LessonCode, Price> map) {
+        lessonCodesAndPrices.putAll(map);
     }
 
     /**

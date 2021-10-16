@@ -3,6 +3,7 @@ package seedu.tuitione.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
@@ -11,6 +12,7 @@ import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,6 +21,8 @@ import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.CollectionUtil;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
+import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
@@ -42,6 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -64,6 +69,10 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
+        if (editStudentDescriptor.gradeIsEdited) {
+            this.editStudentDescriptor.setGradeIsEdited(true);
+        }
+
     }
 
     @Override
@@ -77,6 +86,12 @@ public class EditCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+
+        if (!editStudentDescriptor.gradeIsEdited) {
+            Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
+            editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
+        }
+
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -134,6 +149,8 @@ public class EditCommand extends Command {
         private Grade grade;
         private Set<Tag> tags;
 
+        private boolean gradeIsEdited = false;
+
         public EditStudentDescriptor() {}
 
         /**
@@ -145,15 +162,15 @@ public class EditCommand extends Command {
             setPhone(toCopy.parentContact);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
             setGrade(toCopy.grade);
+            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, tags);
         }
 
         public void setName(Name name) {
@@ -232,7 +249,16 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getGrade().equals(e.getGrade())
                     && getTags().equals(e.getTags());
         }
+
+        /**
+         * Toggles the gradeIsEdited value
+         */
+        public void setGradeIsEdited(boolean b) {
+            gradeIsEdited = b;
+        }
+
     }
 }
