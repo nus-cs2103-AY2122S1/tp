@@ -43,7 +43,6 @@ public class JsonAdaptedModuleCode {
         return moduleCodeName;
     }
 
-    @JsonValue
     public Set<Tag> getTags() {
         return tags;
     }
