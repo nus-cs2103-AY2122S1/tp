@@ -190,6 +190,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(target);
+        addressBook.setEvent(target, editedEvent);
+    }
+
+    @Override
     public void markEventAsDone(Event target) {
         requireNonNull(target);
         addressBook.markEventAsDone(target);
