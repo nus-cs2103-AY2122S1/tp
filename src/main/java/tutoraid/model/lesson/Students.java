@@ -1,9 +1,9 @@
 package tutoraid.model.lesson;
 
-import tutoraid.model.student.Student;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import tutoraid.model.student.Student;
 
 /**
  * Represents a Lesson's students in TutorAid.
