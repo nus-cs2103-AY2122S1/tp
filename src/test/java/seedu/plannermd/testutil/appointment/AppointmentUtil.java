@@ -27,7 +27,7 @@ public class AppointmentUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditDoctorDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditAppointmentDescriptor}'s details.
      */
     public static String getEditAppointmentDescriptorDetails(EditDoctorCommand.EditDoctorDescriptor descriptor) {
         //TODO: implement this
