@@ -133,19 +133,19 @@ Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag
 
 * Search for students by their name, NUSNET ID, tag, or the group they belong in. 
 Only one type of tag should be used for each search. 
-* To search with multiple keywords, separate keywords with spaces e.g. `search -g T02A R03C`
-* The search is case-insensitive. e.g `hans` will match `Hans`. 
+* To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
+* The search is case-insensitive. e.g. `hans` will match `Hans`. 
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search). 
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* For search with name or tag, only full words will be matched e.g. `Han` will not match `Hans`.
-* For search with NUSNET ID or group name, partial search is supported e.g. `T02` will match `T02A` and `T02B`. 
+* For search with name or tag, only full words will be matched. e.g. `Han` will not match `Hans`.
+* For search with NUSNET ID or group name, partial search is supported. e.g. `T02` will match `T02A` and `T02B`. 
 
 Examples:
 * `search -n John Doe`
 * `search -i E0123456`
 * `search -g T02B R03C`
-* `search -g friends colleagues`
+* `search -t friends colleagues`
 
 
 ### Importing data: `import`
@@ -209,6 +209,6 @@ Action | Format, Examples
 **Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
 **Add Assessment** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
-**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name>)` <br> e.g. `search -n John Doe` , `search -g T02B`
+**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` <br> e.g. `search -n John Doe` , `search -g T02B R04D`
 **Import data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
 **Clear** | `clear data`

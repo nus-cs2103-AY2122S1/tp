@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -17,6 +18,14 @@ public class IdTest {
     public void constructor_invalidID_throwsIllegalArgumentException() {
         String invalidID = "";
         assertThrows(IllegalArgumentException.class, () -> new ID(invalidID));
+    }
+
+    @Test
+    public void getValue() {
+        assertEquals(new ID("E1234567").getValue(), "E1234567");
+
+        // correctly format to capital letter
+        assertEquals(new ID("e1234567").getValue(), "E1234567");
     }
 
     @Test
@@ -38,4 +47,5 @@ public class IdTest {
         assertTrue(ID.isValidID("E1234567")); // upper case
         assertTrue(ID.isValidID("e7654321")); // lower case
     }
+
 }

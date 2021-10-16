@@ -1,8 +1,15 @@
 package seedu.address.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,6 +46,25 @@ public class GroupTest {
         assertTrue(Group.isValidGroup("r03 A")); // with spaces
         assertTrue(Group.isValidGroup("r")); // words only
         assertTrue(Group.isValidGroup("03")); // numbers only
+    }
+
+    @Test
+    public void getValue() {
+        assertEquals(new Group("T02A").getValue(), "T02A");
+    }
+
+    @Test
+    public void getStudents() {
+        List<ID> studentList = Arrays.asList(CARL.getId(), ELLE.getId(), FIONA.getId());
+        assertEquals(new Group("T02A", studentList).getStudents(), studentList);
+    }
+
+    @Test
+    public void removeStudent() {
+        Group group = new GroupBuilder().withStudents(CARL, ELLE, FIONA).build();
+        group.removeStudent(ELLE.getId());
+        Group result = new GroupBuilder().withStudents(CARL, FIONA).build();
+        assertTrue(group.equals(result));
     }
 
     @Test
