@@ -44,7 +44,8 @@
                     </HBox>
                 </children>
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="75"/>
+                    <ColumnConstraints hgrow="SOMETIMES" percentWidth="25"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
