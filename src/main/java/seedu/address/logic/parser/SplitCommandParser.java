@@ -16,6 +16,12 @@ public class SplitCommandParser implements Parser<SplitCommand> {
                     SplitCommand.MESSAGE_USAGE));
         }
 
-        return new SplitCommand(trimmedArgs);
+        try {
+            int dayNumber = Integer.parseInt(trimmedArgs);
+            return new SplitCommand(dayNumber);
+        } catch (NumberFormatException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SplitCommand.MESSAGE_USAGE));
+        }
     }
 }

@@ -8,6 +8,10 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.DayOfWeek;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -16,10 +20,11 @@ public class PersonTest {
 
     @Test
     public void constructor_null_throwsException() {
+        List<DayOfWeek> validAvailability = Arrays.asList(DayOfWeek.MONDAY);
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name(null), new Phone("92929292"), new Availability("Mon")));
+                new Person(new Name(null), new Phone("92929292"), new Availability(validAvailability)));
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name("Alice"), new Phone(null), new Availability("Mon")));
+                new Person(new Name("Alice"), new Phone(null), new Availability(validAvailability)));
         assertThrows(NullPointerException.class, () ->
                 new Person(new Name("Alice"), new Phone("92929292"), new Availability(null)));
     }
@@ -53,11 +58,12 @@ public class PersonTest {
     @Test
     public void isAvailableOnDay_success() {
         Person person = new PersonBuilder().build();
-        assertFalse(person.isAvailableOnDay("Mon"));
-        person = new PersonBuilder().withAvailability("Mon Tue").build();
-        assertTrue(person.isAvailableOnDay("Mon"));
-        assertTrue(person.isAvailableOnDay("Tue"));
-        assertFalse(person.isAvailableOnDay("Fri"));
+        assertFalse(person.isAvailableOnDay(1));
+        person = new PersonBuilder()
+                .withAvailability("1 2 4").build();
+        assertTrue(person.isAvailableOnDay(1));
+        assertTrue(person.isAvailableOnDay(2));
+        assertFalse(person.isAvailableOnDay(5));
     }
 
     @Test

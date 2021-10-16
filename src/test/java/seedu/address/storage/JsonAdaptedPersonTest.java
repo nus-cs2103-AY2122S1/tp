@@ -5,6 +5,9 @@ import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
+import java.time.DayOfWeek;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -17,7 +20,7 @@ public class JsonAdaptedPersonTest {
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_AVAILABILITY = BENSON.getAvailability().toString();
+    private static final List<DayOfWeek> VALID_AVAILABILITY = BENSON.getAvailability().values;
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {

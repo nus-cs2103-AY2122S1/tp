@@ -35,7 +35,7 @@ public class Availability {
      */
     public static boolean isValidAvailability(List<String> test) {
         try {
-            if (test.size() <= 1) {
+            if (test.size() <= 1) { // empty but valid
                 return true;
             }
             for (String s : test) {
@@ -51,7 +51,7 @@ public class Availability {
         return true;
     }
 
-    public boolean contains(String day) {
+    public boolean contains(DayOfWeek day) {
         return values.contains(day);
     }
 

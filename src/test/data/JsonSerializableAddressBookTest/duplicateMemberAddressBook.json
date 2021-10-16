@@ -2,11 +2,11 @@
   "members": [ {
     "name": "Alice Pauline",
     "phone": "94351253",
-    "availability": "mon"
+    "availability": []
   }, {
     "name": "Alice Pauline",
     "phone": "94343423",
-    "availability": "mon"
+    "availability": []
   } ],
   "facilities": []
 }
