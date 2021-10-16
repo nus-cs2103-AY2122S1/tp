@@ -29,7 +29,7 @@ public class RemoveMarkCommand extends Command {
             + COMMAND_WORD + " " + PREFIX_NAME + "NAME"
             + PREFIX_DAY_SHIFT + "DATE" + " " + PREFIX_DAY_SHIFT + "DATE";
     public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";
-    public static final String STAFF_UNMARKED = "Staff unmarked: %1$s";
+    public static final String STAFF_UNMARKED = "Staff unmarked:\n%1$s";
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
@@ -102,6 +102,7 @@ public class RemoveMarkCommand extends Command {
         StringBuilder result = new StringBuilder();
         for (String string : strings) {
             result.append(string);
+            result.append("\n");
         }
         return result.toString().trim();
     }
