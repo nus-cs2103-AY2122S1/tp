@@ -116,7 +116,6 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());

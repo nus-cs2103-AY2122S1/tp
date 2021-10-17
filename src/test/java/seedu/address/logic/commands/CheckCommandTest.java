@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.ParserUtil.DATE_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_BOB;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,8 +22,8 @@ import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.reservation.CustomerContainsReservationPredicate;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
-import seedu.address.model.reservation.PersonContainsReservationPredicate;
 import seedu.address.model.reservation.Reservation;
 
 class CheckCommandTest {
@@ -33,8 +33,8 @@ class CheckCommandTest {
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model resultModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Reservation reservation1 = new Reservation(ALICE.getPhone(), 5, LocalDateTime.of(date1, time));
-    private Reservation reservation2 = new Reservation(BOB.getPhone(), 10, LocalDateTime.of(date2, time));
+    private Reservation reservation1 = new Reservation(CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time));
+    private Reservation reservation2 = new Reservation(CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time));
 
     @Test
     void execute_validDateTime_success() {
@@ -47,12 +47,12 @@ class CheckCommandTest {
         ListContainsReservationPredicate predicate = new ListContainsReservationPredicate(date1, time, typeOfCheck);
         CheckCommand command = new CheckCommand(predicate);
         resultModel.updateFilteredReservationList(predicate);
-        resultModel.updateFilteredPersonList(
-                new PersonContainsReservationPredicate(resultModel.getFilteredReservationList()));
+        resultModel.updateFilteredCustomerList(
+                new CustomerContainsReservationPredicate(resultModel.getFilteredReservationList()));
         assertCommandSuccess(command, model, expectedMessage, resultModel);
         Model expectedModel = new ModelManager();
-        expectedModel.addPerson(ALICE);
-        assertEquals(expectedModel.getFilteredPersonList(), resultModel.getFilteredPersonList());
+        expectedModel.addCustomer(CUSTOMER_ALICE);
+        assertEquals(expectedModel.getFilteredCustomerList(), resultModel.getFilteredCustomerList());
     }
 
     @Test
@@ -64,10 +64,10 @@ class CheckCommandTest {
         ListContainsReservationPredicate predicate = new ListContainsReservationPredicate(date2, time, typeOfCheck);
         CheckCommand command = new CheckCommand(predicate);
         resultModel.updateFilteredReservationList(predicate);
-        resultModel.updateFilteredPersonList(
-                new PersonContainsReservationPredicate(resultModel.getFilteredReservationList()));
+        resultModel.updateFilteredCustomerList(
+                new CustomerContainsReservationPredicate(resultModel.getFilteredReservationList()));
         assertCommandSuccess(command, model, expectedMessage, resultModel);
-        assertEquals(Collections.emptyList(), resultModel.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), resultModel.getFilteredCustomerList());
     }
 
     @Test

@@ -1,8 +1,5 @@
 {
   "_comment": "AddressBook save file which contains the same Employees values as in TypicalEmployees#getTypicalAddressBook()",
-  "persons" : [
-
-  ],
   "employees" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
