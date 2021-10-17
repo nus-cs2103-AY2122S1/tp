@@ -73,8 +73,9 @@ Format:
 Notes:
 
 * Adds a client with name, phone number and optional email and address.
-* Adds a product with name , unit price and optional quantity.
+* Adds a product with name, unit price and optional quantity.
 * The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `price`.
+* The user will be informed if the client/product to be added already exits.
 
 Examples:
 
@@ -184,18 +185,22 @@ _Details coming soon ..._
 
 ## Command Summary
 
-Action | Format, Examples
---------|------------------
-**Add** | Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]` <br> e.g., `add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd` <br><br> Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]` <br> e.g., `add -p pen -$ 10.0 -q 120`
-**View** | View a client: `view -c ID` <br> e.g., `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc. <br><br> View a product: `view -p ID` <br> e.g., `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
-**List** | List all clients: `list -c` <br> List all products: `list -p`
-**Delete** | Delete a client: `delete -c ID` <br> e.g., `delete -c 20` Deletes all the details of the client with `ID` of `20` including name, address, etc. <br><br> Delete a product: `delete -p ID` <br> e.g., `delete -p 5` Deletes all the details of the product with `ID` of `5` including name, price, etc.
-**Exit** | `exit`
-
 <table>
     <tr>
         <th>Action</th>
         <th>Format, Examples</th>
+    </tr>
+    <tr>
+        <td>
+            <a href="#adding-add-coming-soon">Add</a>
+        </td>
+        <td>
+            Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]</code><br> 
+            e.g., <code>add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd</code><br>
+            <br> 
+            Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br> 
+            e.g., <code>add -p pen -$ 10.0 -q 120</code>
+        </td>
     </tr>
     <tr>
         <td>
@@ -209,6 +214,47 @@ Action | Format, Examples
             Edit a product: <code>edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]</code><br>
             e.g., <code>edit -p 3 -n Ben10 -q 20</code> Edits the name of the product with <code>ID</code> of
             <code>3</code> to <code>Ben10</code> and the quantity to <code>20</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#viewing-view-coming-soon">View</a>
+        </td>
+        <td>
+            View a client: <code>view -c ID</code><br>
+            e.g., <code>view -c 20</code> Views all the details of the client with <code>ID</code> of <code>20</code>
+            including name, address, etc.<br>
+            <br>
+            View a product: <code>view -p ID</code><br>
+            e.g., <code>view -p 5</code> Views all the details of the product with <code>ID</code> of
+            <code>5</code> including name, price, etc.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#listing-list-coming-soon">List</a>
+        </td>
+        <td>
+            List all client: <code>list -c</code><br>
+            e.g., <code>list -c</code> Lists all the clients in the application.<br>
+            <br>
+            List all product: <code>list -p</code><br>
+            e.g., <code>list -p</code> Lists all the products in the application.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#deleting-delete-coming-soon">Delete</a>
+        </td>
+        <td>
+            Delete a client: <code>delete -c ID </code><br> 
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>ID</code> of 
+            <code>20</code> including name, address, etc.<br>
+            <br>
+            Delete a product: <code>delete -p ID </code><br> 
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>ID</code> of 
+            <code>5</code> including name, price, etc.
+            <br>
         </td>
     </tr>
 </table>
