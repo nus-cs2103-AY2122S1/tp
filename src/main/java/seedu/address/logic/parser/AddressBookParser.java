@@ -27,6 +27,7 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TimetableCommand;
 import seedu.address.logic.commands.ViewClassCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewTodayTuitionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -112,6 +113,9 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case ViewTodayTuitionCommand.COMMAND_WORD:
+            return new ViewTodayTuitionCommandParser().parse(arguments);
 
         case TimetableCommand.COMMAND_WORD:
             return new TimetableParser().parse(arguments);
