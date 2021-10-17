@@ -88,4 +88,16 @@ public class VisitTest {
         // format displayed date for empty visit
         assertEquals("-", new Visit("").getFormatted());
     }
+
+    @Test
+    public void isOverdue() {
+        // no existing visit
+        assertFalse(new Visit("").isOverdue());
+
+        // overdue as of this module's time
+        assertTrue(new Visit("2000-01-01 08:00").isOverdue());
+
+        // not overdue in around 100 years
+        assertFalse(new Visit("2103-01-01 08:00").isOverdue());
+    }
 }
