@@ -234,9 +234,9 @@ This feature allows the users to view the details of the `Client` or `Product` o
 more details such as `Products` bought before, will be visible to the user. The user input is first handled and
 retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
 
-First, `LogicManage` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing the
-inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
-`CommandResult` which will be returned to the user. The flow of the UML diagram would be the same for viewing
+First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
+the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
+`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
 `Products`, but the UI displayed will be different.
 
 ![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
@@ -245,11 +245,11 @@ inputs and returning a `ViewClientCommand`. The command will then be executed in
 
 **Aspect : How `view` may be executed**
 
-* **Alternative 1 (current choice)** : User can view either a product or client
-    * Pros : Allows the user to focus on a particular product or client
-    * Cons : Unable to view multiple products or clients
-* **Alternative 2** : User can view multiple products or clients
-    * Pros : Easier comparisons between products or clients
+* **Alternative 1 (current choice)** : User can view either a client or product
+    * Pros : Allows the user to focus on a particular client or product
+    * Cons : Unable to view multiple clients or products
+* **Alternative 2** : User can view multiple clients or products
+    * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
 
 ### \[Proposed\] Undo/redo feature
