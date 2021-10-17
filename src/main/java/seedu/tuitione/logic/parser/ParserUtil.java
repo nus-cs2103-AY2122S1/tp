@@ -137,11 +137,11 @@ public class ParserUtil {
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
-        String trimmedTag = remark.trim();
-        if (!Remark.isValidRemarkName(trimmedTag)) {
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemarkName(trimmedRemark)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
-        return new Remark(trimmedTag);
+        return new Remark(trimmedRemark);
     }
 
     /**

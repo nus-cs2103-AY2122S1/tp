@@ -89,9 +89,9 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Remark> studentTags = new ArrayList<>();
+        final List<Remark> studentRemarks = new ArrayList<>();
         for (JsonAdaptedRemark remark : remarked) {
-            studentTags.add(remark.toModelType());
+            studentRemarks.add(remark.toModelType());
         }
 
         if (name == null) {
@@ -135,7 +135,7 @@ class JsonAdaptedStudent {
         }
         final Grade modelGrade = new Grade(grade);
 
-        final Set<Remark> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelTags);
+        final Set<Remark> modelRemarks = new HashSet<>(studentRemarks);
+        return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelRemarks);
     }
 }

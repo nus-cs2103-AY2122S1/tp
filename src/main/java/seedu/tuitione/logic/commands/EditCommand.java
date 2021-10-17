@@ -115,9 +115,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
-        Set<Remark> updatedTags = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
+        Set<Remark> updatedRemarks = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
 
-        return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress, updatedGrade, updatedTags);
+        return new Student(updatedName,
+                updatedParentContact,
+                updatedEmail,
+                updatedAddress,
+                updatedGrade,
+                updatedRemarks);
     }
 
     @Override
