@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_EXISTING_VISIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -52,7 +53,7 @@ public class DoneCommand extends Command {
         Person personToDone = lastShownList.get(targetIndex.getZeroBased());
 
         if (!personToDone.hasVisit()) {
-            throw new CommandException(Messages.MESSAGE_NO_SCHEDULED_VISIT);
+            throw new CommandException(String.format(MESSAGE_NO_EXISTING_VISIT, personToDone));
         }
 
         String newLastVisitedDate = personToDone.getVisit().orElse(new Visit("")).toString();
