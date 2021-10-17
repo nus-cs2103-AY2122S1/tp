@@ -219,6 +219,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void addToOrder(Item item) {
+        requireNonNull(item);
         assert hasUnclosedOrder();
 
         optionalOrder.get().addItem(item);
@@ -229,6 +230,7 @@ public class ModelManager implements Model {
      */
     @Override
     public void removeFromOrder(Item item) {
+        requireNonNull(item);
         assert hasUnclosedOrder();
 
         optionalOrder.get().removeItem(item);

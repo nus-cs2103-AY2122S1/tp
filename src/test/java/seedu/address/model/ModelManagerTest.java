@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +19,8 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InventoryBuilder;
+import seedu.address.testutil.TypicalItems;
+import seedu.address.testutil.TypicalOrders;
 
 public class ModelManagerTest {
 
@@ -151,6 +152,11 @@ public class ModelManagerTest {
     // ========= order related methods tests ==========
 
     @Test
+    public void setOrder_nullOrder_NullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setOrder(null));
+    }
+
+    @Test
     public void setOrder_emptyOrder_orderIsSet() {
         Order order = new Order();
         modelManager.setOrder(order);
@@ -159,13 +165,88 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void addToOrder_normalItem_itemAdded() {
-        Order expectedOrder = new Order();
-        Item milk = new Item(new Name("Milk"), "AS0123", 15, new HashSet<>());
+    public void setOrder_typicalOrder_orderIsSet() {
+        modelManager.setOrder(TypicalOrders.getTypicalOrder());
 
+        assertEquals(modelManager.getOrder(), TypicalOrders.getTypicalOrder());
+    }
+
+    @Test
+    public void addToOrder_nullItem_NullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addToOrder(null));
+    }
+
+    @Test
+    public void addToOrder_noOrderIsSetYet_AssertionError() {
+        ModelManager model = new ModelManager();
+        assertThrows(AssertionError.class, () -> model.addToOrder(APPLE_PIE));
+    }
+
+    @Test
+    public void addToOrder_normalItem_itemAdded() {
         modelManager.setOrder(new Order());
-        expectedOrder.addItem(milk);
-        modelManager.addToOrder(milk);
+        Order expectedOrder = new Order();
+        modelManager.addToOrder(APPLE_PIE);
+        expectedOrder.addItem(APPLE_PIE);
+
         assertEquals(modelManager.getOrder(), expectedOrder);
+    }
+
+//    @Test
+//    public void addToOrder_duplicateItem_itemCountIncrease() {
+//        // TODO: Implement duplicate item count increasing!
+//        modelManager.setOrder(TypicalOrders.getTypicalOrder());
+//        Order expectedOrder = TypicalOrders.getTypicalOrder();
+//        modelManager.addToOrder(APPLE_PIE);
+//        expectedOrder.addItem(APPLE_PIE);
+//
+//        assertEquals(modelManager.getOrder(), expectedOrder);
+//    }
+
+    @Test
+    public void removeFromOrder_nullItem_NullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.removeFromOrder(null));
+    }
+
+    @Test
+    public void removeFromOrder_noOrderIsSetYet_AssertionError() {
+        ModelManager model = new ModelManager();
+        assertThrows(AssertionError.class, () -> model.removeFromOrder(APPLE_PIE));
+    }
+
+    @Test
+    public void removeFromOrder_normalItem_itemRemoved() {
+        modelManager.setOrder(TypicalOrders.getTypicalOrder());
+        Order expectedOrder = TypicalOrders.getTypicalOrder();
+        modelManager.removeFromOrder(APPLE_PIE);
+        expectedOrder.removeItem(APPLE_PIE);
+
+        assertEquals(modelManager.getOrder(), expectedOrder);
+    }
+
+    @Test
+    public void removeFromOrder_nonExistingItem_orderNotChanged() {
+        modelManager.setOrder(TypicalOrders.getTypicalOrder());
+        Order expectedOrder = TypicalOrders.getTypicalOrder();
+        modelManager.removeFromOrder(TypicalItems.getRandomItem());
+
+        assertEquals(modelManager.getOrder(), expectedOrder);
+    }
+
+    @Test
+    public void transactAndClearOrder_noOrderIsSetYet_AssertionError() {
+        ModelManager model = new ModelManager();
+        assertThrows(AssertionError.class, model::transactAndClearOrder);
+    }
+
+    @Test
+    public void transactAndClearOrder_typicalOrder_inventoryIsClear() {
+        ModelManager model = new ModelManager();
+        model.setInventory(TypicalItems.getTypicalInventory());
+        model.setOrder(TypicalOrders.getTypicalOrder());
+        model.transactAndClearOrder();
+
+        assertFalse(model.hasUnclosedOrder());
+        assertEquals(model.getInventory(), new Inventory());
     }
 }

@@ -11,7 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Inventory;
 import seedu.address.model.Order;
 import seedu.address.model.item.Item;
@@ -84,5 +86,17 @@ public class TypicalItems {
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(Arrays.asList(APPLE_PIE.updateCount(5), BANANA_MUFFIN, CHOCOCHIP,
                 DALGONA_COFFEE, EGGNOG, FOREST_CAKE, GRANOLA_BAR));
+    }
+
+    /**
+     * Returns an item with random name and id.
+     * Used as unexisting item in tests.
+     */
+    public static Item getRandomItem() {
+        return new ItemBuilder()
+                .withName(StringUtil.generateRandomString())
+                .withId(UUID.randomUUID().toString())
+                .withCount("999")
+                .build();
     }
 }

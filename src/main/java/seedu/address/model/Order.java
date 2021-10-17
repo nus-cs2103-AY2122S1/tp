@@ -31,6 +31,7 @@ public class Order {
      * Add an {@code Item} to the order.
      */
     public void addItem(Item newItem) {
+        // TODO: Implement count increasing to duplicate item adding.
         requireNonNull(newItem);
         items.add(newItem);
     }
