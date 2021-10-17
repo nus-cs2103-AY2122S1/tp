@@ -89,7 +89,7 @@ public class TrieNode {
         return null;
     }
 
-    protected String find(String query) {
+    protected String findSingle(String query) {
         if (query.equals("")) {
             return getFirst();
         }
@@ -98,7 +98,34 @@ public class TrieNode {
         if (!children.containsKey(nextChar)) {
             return null;
         }
-        return children.get(nextChar).find(nextWord);
+        return children.get(nextChar).findSingle(nextWord);
+    }
+
+    protected List<String> findAllMatches(String query) {
+        List<String> matches = new ArrayList<>();
+        findAllMatches(query, matches);
+        return matches;
+    }
+
+    protected void findAllMatches(String query, List<String> matches) {
+        if (isWord) {
+            matches.add(value);
+        }
+        if (children.size() == 0) {
+            return;
+        }
+        if (query.equals("")) {
+            for (TrieNode child : children.values()) {
+                child.findAllMatches(query, matches);
+            }
+            return;
+        }
+        Character nextChar = query.charAt(0);
+        String nextWord = query.length() >= 2 ? query.substring(1) : "";
+        if (!children.containsKey(nextChar)) {
+            return;
+        }
+        children.get(nextChar).findAllMatches(nextWord, matches);
     }
 
     @Override

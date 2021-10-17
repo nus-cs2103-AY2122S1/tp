@@ -1,6 +1,7 @@
 package seedu.notor.commons.core.trie;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -16,6 +17,14 @@ public class Trie {
 
     private final Map<String, Integer> messageCounts = new HashMap<>();
     private final TrieNode root = TrieNode.create();
+
+    public static Trie createTrie(String... elements) {
+        Trie trie = new Trie();
+        for (String element : elements) {
+            trie.add(element);
+        }
+        return trie;
+    }
 
     /**
      * Sets up TrieNode class with the proper ordering for checking for children.
@@ -63,8 +72,12 @@ public class Trie {
      * @param query Message to search for in the Trie.
      * @return String starting with the query message.
      */
-    public String find(String query) {
-        return root.find(query);
+    public String findSingle(String query) {
+        return root.findSingle(query);
+    }
+
+    public List<String> findAllMatches(String query) {
+        return root.findAllMatches(query);
     }
 
     /**
