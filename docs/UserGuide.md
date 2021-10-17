@@ -326,11 +326,19 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing schedule: `schedule` [coming soon]
+#### Viewing schedule: `schedule`
 
-Displays a read-only weekly schedule.
+Displays a read-only schedule of your upcoming week.
 
 Format: `schedule`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `schedule` command:**<br>
+
+* Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+
+</div>
 
 ### Managing Data
 
