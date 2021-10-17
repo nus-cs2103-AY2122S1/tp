@@ -199,6 +199,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code alias} into String.
+     */
+    public static String parseAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+        String trimmedAlias = alias.trim();
+        if (trimmedAlias.isEmpty()) {
+            throw new ParseException("Alias should not be blank.");
+        }
+        return trimmedAlias;
+    }
+
+    /**
      * Parses an {@code String availability string} into an {@code Availability}.
      * Leading and trailing whitespaces will be trimmed.
      *

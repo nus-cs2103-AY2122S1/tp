@@ -91,6 +91,12 @@ public class ModelManager implements Model {
         userPrefs.addAlias(alias, commandWord);
     }
 
+    @Override
+    public String removeAlias(String alias) {
+        requireNonNull(alias);
+        return userPrefs.removeAlias(alias);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override

@@ -25,6 +25,16 @@ public class Aliases implements Serializable {
     }
 
     /**
+     * Removes the given alias from {@code Aliases}.
+     *
+     * @param alias the alias to remove.
+     * @return commandWord associated with {@code alias}, null if does not exist.
+     */
+    public String remove(String alias) {
+        return mappings.remove(alias);
+    }
+
+    /**
      * Replaces input with the original command if alias was defined for given input.
      */
     public String convertAliasIfPresent(String input) {
@@ -43,5 +53,14 @@ public class Aliases implements Serializable {
         Aliases o = (Aliases) other;
 
         return mappings.equals(o.mappings);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        mappings.entrySet().forEach(entry -> {
+            sb.append(entry.getKey() + ": " + entry.getValue() + "\n");
+        });
+        return sb.toString();
     }
 }

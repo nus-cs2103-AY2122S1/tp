@@ -60,6 +60,14 @@ public interface Model {
     void addAlias(String alias, String commandWord);
 
     /**
+     * Removes the given alias from user prefs.
+     *
+     * @param alias the alias to remove.
+     * @return commandWord associated with alias, null if alias does not exist.
+     */
+    String removeAlias(String alias);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);

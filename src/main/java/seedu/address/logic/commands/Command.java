@@ -18,7 +18,7 @@ public abstract class Command {
             ListMemberCommand.COMMAND_WORD, ListFacilityCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD, FindFacilityCommand.COMMAND_WORD, AddFacilityCommand.COMMAND_WORD,
             SetMemberAvailabilityCommand.COMMAND_WORD, SplitCommand.COMMAND_WORD,
-            AddAliasCommand.COMMAND_WORD);
+            AddAliasCommand.COMMAND_WORD, DeleteAliasCommand.COMMAND_WORD, ShowAliasesCommand.COMMAND_WORD);
 
     /**
      * Returns true if given string is a command word.

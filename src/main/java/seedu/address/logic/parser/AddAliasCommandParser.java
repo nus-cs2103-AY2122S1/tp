@@ -24,7 +24,7 @@ public class AddAliasCommandParser implements Parser<AddAliasCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAliasCommand.MESSAGE_USAGE));
         }
 
-        String alias = argMultiMap.getValue(PREFIX_ALIAS).get();
+        String alias = ParserUtil.parseAlias(argMultiMap.getValue(PREFIX_ALIAS).get());
         String commandWord = argMultiMap.getValue(PREFIX_COMMAND_WORD).get();
 
         return new AddAliasCommand(alias, commandWord);

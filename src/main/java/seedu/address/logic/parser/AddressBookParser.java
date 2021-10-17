@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteAliasCommand;
 import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditFacilityCommand;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
+import seedu.address.logic.commands.ShowAliasesCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Aliases;
@@ -103,6 +105,12 @@ public class AddressBookParser {
 
         case AddAliasCommand.COMMAND_WORD:
             return new AddAliasCommandParser().parse(arguments);
+
+        case DeleteAliasCommand.COMMAND_WORD:
+            return new DeleteAliasCommandParser().parse(arguments);
+
+        case ShowAliasesCommand.COMMAND_WORD:
+            return new ShowAliasesCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
