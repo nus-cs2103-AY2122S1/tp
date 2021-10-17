@@ -201,25 +201,56 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Edit Client/Product Feature
+
+This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
+`Product`, the user is required to enter at least 1 field to edit in the input command.
+
+The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
+`EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
+`LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
+book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display feedback of
+the `CommandResult` to the user.
+
+The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `edit -c 1 -n Sora` Command](images/EditClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `edit` may be executed**
+
+* **Alternative 1 (current choice)** : User can edit either a client or a product at a time
+    * Pros : Allows the user to focus on editing a particular client or product
+    * Cons : Unable to edit multiple clients or products at the same time
+* **Alternative 2** : User can edit multiple clients or products
+    * Pros : Saves time if the user wish to edit a field in all clients or products to the same value
+    * Cons : More complex code which would lead to higher amount of error
+
 ### View Client/Product Feature
-This feature allows the users to view the details of the `Client` or `Product` of their choice.
-When viewing a `Client`, more details such as `Products` bought before, will be visible to the user.
-The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to
-the `LogicManager` to execute. First, `LogicManage` will call `AddressBookParser`, which will pass the inputs to
-`ViewClientCommandParser`, parsing the inputs and returning a `ViewClientCommand`.
-The command will then be executed in `LogicManager`, returning a `CommandResult` which will be returned to the user.
-The flow of the UML diagram would be the same for viewing `Products`, but the UI displayed will be different.
+
+This feature allows the users to view the details of the `Client` or `Product` of their choice. When viewing a `Client`,
+more details such as `Products` bought before, will be visible to the user. The user input is first handled and
+retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
+
+First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
+the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
+`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
+`Products`, but the UI displayed will be different.
 
 ![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
 
 #### Design Considerations
+
 **Aspect : How `view` may be executed**
-* **Alternative 1 (current choice)** : User can view either a product or client
-  * Pros : Allows the user to focus on a particular product or client
-  * Cons : Unable to view multiple products or clients
-* **Alternative 2** : User can view multiple products or clients
-  * Pros : Easier comparisons between products or clients
-  * Cons : More complex code which would lead to higher amount of error
+
+* **Alternative 1 (current choice)** : User can view either a client or product
+    * Pros : Allows the user to focus on a particular client or product
+    * Cons : Unable to view multiple clients or products
+* **Alternative 2** : User can view multiple clients or products
+    * Pros : Easier comparisons between clients or products
+    * Cons : More complex code which would lead to higher amount of error
 
 ### \[Proposed\] Undo/redo feature
 
@@ -456,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. User request to see more information of a specific client/product in the list.
 4. Sellah shows the details of the product/item.
 
-  User story ends.
+User story ends.
 
 **Extensions**
 
@@ -482,9 +513,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 4a1. Sellah shows a placeholder value at the optional detail.
 
-      Use case ends. 
-
-
+      Use case ends.
 
 **Use case: UC04 - List all client/product**
 
@@ -493,11 +522,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list clients/products.
 2. Sellah shows a list of clients/products.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty. 
+* 2a. The list is empty.
 
     * 2a1. Sellah shows an error message.
 
