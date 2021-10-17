@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
+import static seedu.address.logic.parser.CliSyntax.anyPrefixesPresent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DeleteCommand;
@@ -45,14 +45,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         return new DeleteCommand(new PersonHasId(clientIdList));
-    }
-
-    /**
-     * Returns true if any of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }

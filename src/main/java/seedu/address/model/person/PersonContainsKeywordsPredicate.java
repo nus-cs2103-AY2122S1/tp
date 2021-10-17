@@ -1,6 +1,6 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.mapper.PrefixMapper.PREFIX_GET_MAP;
+import static seedu.address.commons.mapper.PrefixMapper.getAttributeFunction;
 import static seedu.address.commons.util.StringUtil.containsStringIgnoreCase;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
@@ -26,15 +26,16 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
         String[] generalKeywords = keywords.getPreamble().split(" ");
         boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x ->
             Arrays.stream(ALL_PREFIXES).anyMatch(prefix -> {
-                Function<Person, String> getAttribute = PREFIX_GET_MAP.get(prefix).andThen(Object::toString);
+                Function<Person, String> getAttribute = getAttributeFunction(prefix).andThen(Object::toString);
                 String personAttribute = getAttribute.apply(person);
                 return containsStringIgnoreCase(personAttribute, x);
             })
         );
 
-        boolean checkAttributes = Arrays.stream(ALL_PREFIXES)
+        boolean checkAttributes = Arrays
+                .stream(ALL_PREFIXES)
                 .map(prefix -> {
-                    Function<Person, String> getAttribute = PREFIX_GET_MAP.get(prefix).andThen(Object::toString);
+                    Function<Person, String> getAttribute = getAttributeFunction(prefix).andThen(Object::toString);
                     String personAttribute = getAttribute.apply(person);
                     Optional<String> keyword = keywords.getValue(prefix);
                     return keyword.map(x -> containsStringIgnoreCase(personAttribute, x)).orElse(true);

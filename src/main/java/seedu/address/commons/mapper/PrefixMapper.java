@@ -37,133 +37,163 @@ import seedu.address.model.tag.Tag;
  */
 public class PrefixMapper {
     // Person getter methods
-    public static final Function<Person, ClientId> GET_CLIENTID = Person::getClientId;
-    public static final Function<Person, Name> GET_NAME = Person::getName;
-    public static final Function<Person, Phone> GET_PHONE = Person::getPhone;
-    public static final Function<Person, Email> GET_EMAIL = Person::getEmail;
-    public static final Function<Person, Address> GET_ADDRESS = Person::getAddress;
-    public static final Function<Person, RiskAppetite> GET_RISKAPPETITE = Person::getRiskAppetite;
-    public static final Function<Person, DisposableIncome> GET_DISPOSABLEINCOME = Person::getDisposableIncome;
-    public static final Function<Person, LastMet> GET_LASTMET = Person::getLastMet;
-    public static final Function<Person, CurrentPlan> GET_CURRENTPLAN = Person::getCurrentPlan;
-    public static final Function<Person, Set<Tag>> GET_TAGS = Person::getTags;
+    private static final Function<Person, ClientId> GET_CLIENTID = Person::getClientId;
+    private static final Function<Person, Name> GET_NAME = Person::getName;
+    private static final Function<Person, Phone> GET_PHONE = Person::getPhone;
+    private static final Function<Person, Email> GET_EMAIL = Person::getEmail;
+    private static final Function<Person, Address> GET_ADDRESS = Person::getAddress;
+    private static final Function<Person, RiskAppetite> GET_RISKAPPETITE = Person::getRiskAppetite;
+    private static final Function<Person, DisposableIncome> GET_DISPOSABLEINCOME = Person::getDisposableIncome;
+    private static final Function<Person, LastMet> GET_LASTMET = Person::getLastMet;
+    private static final Function<Person, CurrentPlan> GET_CURRENTPLAN = Person::getCurrentPlan;
+    private static final Function<Person, Set<Tag>> GET_TAGS = Person::getTags;
 
     // EditPersonDescriptor setter methods
-    public static final BiConsumer<EditPersonDescriptor, Name> EDIT_SET_NAME = EditPersonDescriptor::setName;
-    public static final BiConsumer<EditPersonDescriptor, Phone> EDIT_SET_PHONE = EditPersonDescriptor::setPhone;
-    public static final BiConsumer<EditPersonDescriptor, Email> EDIT_SET_EMAIL = EditPersonDescriptor::setEmail;
-    public static final BiConsumer<EditPersonDescriptor, Address> EDIT_SET_ADDRESS = EditPersonDescriptor::setAddress;
-    public static final BiConsumer<EditPersonDescriptor, RiskAppetite> EDIT_SET_RISKAPPETITE =
+    private static final BiConsumer<EditPersonDescriptor, Name> EDIT_SET_NAME = EditPersonDescriptor::setName;
+    private static final BiConsumer<EditPersonDescriptor, Phone> EDIT_SET_PHONE = EditPersonDescriptor::setPhone;
+    private static final BiConsumer<EditPersonDescriptor, Email> EDIT_SET_EMAIL = EditPersonDescriptor::setEmail;
+    private static final BiConsumer<EditPersonDescriptor, Address> EDIT_SET_ADDRESS = EditPersonDescriptor::setAddress;
+    private static final BiConsumer<EditPersonDescriptor, RiskAppetite> EDIT_SET_RISKAPPETITE =
             EditPersonDescriptor::setRiskAppetite;
-    public static final BiConsumer<EditPersonDescriptor, DisposableIncome> EDIT_SET_DISPOSABLEINCOME =
+    private static final BiConsumer<EditPersonDescriptor, DisposableIncome> EDIT_SET_DISPOSABLEINCOME =
             EditPersonDescriptor::setDisposableIncome;
-    public static final BiConsumer<EditPersonDescriptor, LastMet> EDIT_SET_LASTMET =
+    private static final BiConsumer<EditPersonDescriptor, LastMet> EDIT_SET_LASTMET =
             EditPersonDescriptor::setLastMet;
-    public static final BiConsumer<EditPersonDescriptor, CurrentPlan> EDIT_SET_CURRENTPLAN =
+    private static final BiConsumer<EditPersonDescriptor, CurrentPlan> EDIT_SET_CURRENTPLAN =
             EditPersonDescriptor::setCurrentPlan;
-    public static final BiConsumer<EditPersonDescriptor, Set<Tag>> EDIT_SET_TAGS = EditPersonDescriptor::setTags;
+    private static final BiConsumer<EditPersonDescriptor, Set<Tag>> EDIT_SET_TAGS = EditPersonDescriptor::setTags;
 
     // EditPersonDescriptor getter methods
-    public static final Function<EditPersonDescriptor, Optional<Name>> EDIT_GET_NAME =
+    private static final Function<EditPersonDescriptor, Optional<Name>> EDIT_GET_NAME =
             EditPersonDescriptor::getName;
-    public static final Function<EditPersonDescriptor, Optional<Phone>> EDIT_GET_PHONE =
+    private static final Function<EditPersonDescriptor, Optional<Phone>> EDIT_GET_PHONE =
             EditPersonDescriptor::getPhone;
-    public static final Function<EditPersonDescriptor, Optional<Email>> EDIT_GET_EMAIL =
+    private static final Function<EditPersonDescriptor, Optional<Email>> EDIT_GET_EMAIL =
             EditPersonDescriptor::getEmail;
-    public static final Function<EditPersonDescriptor, Optional<Address>> EDIT_GET_ADDRESS =
+    private static final Function<EditPersonDescriptor, Optional<Address>> EDIT_GET_ADDRESS =
             EditPersonDescriptor::getAddress;
-    public static final Function<EditPersonDescriptor, Optional<RiskAppetite>> EDIT_GET_RISKAPPETITE =
+    private static final Function<EditPersonDescriptor, Optional<RiskAppetite>> EDIT_GET_RISKAPPETITE =
             EditPersonDescriptor::getRiskAppetite;
-    public static final Function<EditPersonDescriptor, Optional<DisposableIncome>> EDIT_GET_DISPOSABLEINCOME =
+    private static final Function<EditPersonDescriptor, Optional<DisposableIncome>> EDIT_GET_DISPOSABLEINCOME =
             EditPersonDescriptor::getDisposableIncome;
-    public static final Function<EditPersonDescriptor, Optional<LastMet>> EDIT_GET_LASTMET =
+    private static final Function<EditPersonDescriptor, Optional<LastMet>> EDIT_GET_LASTMET =
             EditPersonDescriptor::getLastMet;
-    public static final Function<EditPersonDescriptor, Optional<CurrentPlan>> EDIT_GET_CURRENTPLAN =
+    private static final Function<EditPersonDescriptor, Optional<CurrentPlan>> EDIT_GET_CURRENTPLAN =
             EditPersonDescriptor::getCurrentPlan;
-    public static final Function<EditPersonDescriptor, Optional<Set<Tag>>> EDIT_GET_TAGS =
+    private static final Function<EditPersonDescriptor, Optional<Set<Tag>>> EDIT_GET_TAGS =
             EditPersonDescriptor::getTags;
 
     // ParserUtil parser method
-    public static final Function<String, ClientId> PARSE_CLIENTID =
+    private static final Function<String, ClientId> PARSE_CLIENTID =
             throwableFunctionWrapper(ParserUtil::parseClientId);
-    public static final Function<String, Name> PARSE_NAME =
+    private static final Function<String, Name> PARSE_NAME =
             throwableFunctionWrapper(ParserUtil::parseName);
-    public static final Function<String, Phone> PARSE_PHONE =
+    private static final Function<String, Phone> PARSE_PHONE =
             throwableFunctionWrapper(ParserUtil::parsePhone);
-    public static final Function<String, Email> PARSE_EMAIL =
+    private static final Function<String, Email> PARSE_EMAIL =
             throwableFunctionWrapper(ParserUtil::parseEmail);
-    public static final Function<String, Address> PARSE_ADDRESS =
+    private static final Function<String, Address> PARSE_ADDRESS =
             throwableFunctionWrapper(ParserUtil::parseAddress);
-    public static final Function<String, RiskAppetite> PARSE_RISKAPPETITE =
+    private static final Function<String, RiskAppetite> PARSE_RISKAPPETITE =
             throwableFunctionWrapper(ParserUtil::parseRiskAppetite);
-    public static final Function<String, DisposableIncome> PARSE_DISPOSABLEINCOME =
+    private static final Function<String, DisposableIncome> PARSE_DISPOSABLEINCOME =
             throwableFunctionWrapper(ParserUtil::parseDisposableIncome);
-    public static final Function<String, LastMet> PARSE_LASTMET =
+    private static final Function<String, LastMet> PARSE_LASTMET =
             throwableFunctionWrapper(ParserUtil::parseLastMet);
-    public static final Function<String, CurrentPlan> PARSE_CURRENTPLAN =
+    private static final Function<String, CurrentPlan> PARSE_CURRENTPLAN =
             throwableFunctionWrapper(ParserUtil::parseCurrentPlan);
 
-    public static final Map<Prefix, Function<Person, ?>> PREFIX_GET_MAP = Map.of(
-            PREFIX_CLIENTID, GET_CLIENTID,
-            PREFIX_NAME, GET_NAME,
-            PREFIX_PHONE, GET_PHONE,
-            PREFIX_EMAIL, GET_EMAIL,
-            PREFIX_ADDRESS, GET_ADDRESS,
-            PREFIX_RISKAPPETITE, GET_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, GET_DISPOSABLEINCOME,
-            PREFIX_LASTMET, GET_LASTMET,
-            PREFIX_CURRENTPLAN, GET_CURRENTPLAN,
-            PREFIX_TAG, GET_TAGS
+    // PrefixMapperElement wrapping the different function together
+    private static final PrefixMapperElement<ClientId> PME_CLIENTID = new PrefixMapperElement<>(GET_CLIENTID,
+            null, null, PARSE_CLIENTID, "Client Id");
+    private static final PrefixMapperElement<Name> PME_NAME = new PrefixMapperElement<>(GET_NAME,
+            EDIT_SET_NAME, EDIT_GET_NAME, PARSE_NAME, "Name");
+    private static final PrefixMapperElement<Phone> PME_PHONE = new PrefixMapperElement<>(GET_PHONE,
+            EDIT_SET_PHONE, EDIT_GET_PHONE, PARSE_PHONE, "Phone");
+    private static final PrefixMapperElement<Email> PME_EMAIL = new PrefixMapperElement<>(GET_EMAIL,
+            EDIT_SET_EMAIL, EDIT_GET_EMAIL, PARSE_EMAIL, "Email");
+    private static final PrefixMapperElement<Address> PME_ADDRESS = new PrefixMapperElement<>(GET_ADDRESS,
+            EDIT_SET_ADDRESS, EDIT_GET_ADDRESS, PARSE_ADDRESS, "Address");
+    private static final PrefixMapperElement<RiskAppetite> PME_RISKAPPETITE = new PrefixMapperElement<>(
+            GET_RISKAPPETITE, EDIT_SET_RISKAPPETITE, EDIT_GET_RISKAPPETITE, PARSE_RISKAPPETITE, "Risk Appetite");
+    private static final PrefixMapperElement<DisposableIncome> PME_DISPOSABLEINCOME = new PrefixMapperElement<>(
+            GET_DISPOSABLEINCOME, EDIT_SET_DISPOSABLEINCOME, EDIT_GET_DISPOSABLEINCOME,
+            PARSE_DISPOSABLEINCOME, "Disposable Income");
+    private static final PrefixMapperElement<LastMet> PME_LASTMET = new PrefixMapperElement<>(GET_LASTMET,
+            EDIT_SET_LASTMET, EDIT_GET_LASTMET, PARSE_LASTMET, "Last Met");
+    private static final PrefixMapperElement<CurrentPlan> PME_CURRENTPLAN = new PrefixMapperElement<>(GET_CURRENTPLAN,
+            EDIT_SET_CURRENTPLAN, EDIT_GET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan");
+    private static final PrefixMapperElement<Set<Tag>> PME_TAG = new PrefixMapperElement<>(GET_TAGS, EDIT_SET_TAGS,
+            EDIT_GET_TAGS, null, "Tag");
+
+    // Maps prefix with their respective functions
+    private static final Map<Prefix, PrefixMapperElement<?>> PREFIX_MAP = Map.of(
+            PREFIX_CLIENTID, PME_CLIENTID,
+            PREFIX_NAME, PME_NAME,
+            PREFIX_PHONE, PME_PHONE,
+            PREFIX_EMAIL, PME_EMAIL,
+            PREFIX_ADDRESS, PME_ADDRESS,
+            PREFIX_RISKAPPETITE, PME_RISKAPPETITE,
+            PREFIX_DISPOSABLEINCOME, PME_DISPOSABLEINCOME,
+            PREFIX_LASTMET, PME_LASTMET,
+            PREFIX_CURRENTPLAN, PME_CURRENTPLAN,
+            PREFIX_TAG, PME_TAG
     );
 
-    public static final Map<Prefix, BiConsumer<EditPersonDescriptor, ?>> PREFIX_EDIT_SET_MAP = Map.of(
-            PREFIX_NAME, EDIT_SET_NAME,
-            PREFIX_PHONE, EDIT_SET_PHONE,
-            PREFIX_EMAIL, EDIT_SET_EMAIL,
-            PREFIX_ADDRESS, EDIT_SET_ADDRESS,
-            PREFIX_RISKAPPETITE, EDIT_SET_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, EDIT_SET_DISPOSABLEINCOME,
-            PREFIX_LASTMET, EDIT_SET_LASTMET,
-            PREFIX_CURRENTPLAN, EDIT_SET_CURRENTPLAN,
-            PREFIX_TAG, EDIT_SET_TAGS
-    );
+    public static Function<Person, ?> getAttributeFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).getAttributeFunction;
+    }
 
-    public static final Map<Prefix, Function<EditPersonDescriptor, ? extends Optional<?>>> PREFIX_EDIT_GET_MAP = Map.of(
-            PREFIX_NAME, EDIT_GET_NAME,
-            PREFIX_PHONE, EDIT_GET_PHONE,
-            PREFIX_EMAIL, EDIT_GET_EMAIL,
-            PREFIX_ADDRESS, EDIT_GET_ADDRESS,
-            PREFIX_RISKAPPETITE, EDIT_GET_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, EDIT_GET_DISPOSABLEINCOME,
-            PREFIX_LASTMET, EDIT_GET_LASTMET,
-            PREFIX_CURRENTPLAN, EDIT_GET_CURRENTPLAN,
-            PREFIX_TAG, EDIT_GET_TAGS
-    );
+    public static BiConsumer<EditPersonDescriptor, ?> getEditSetFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).editSetFunction;
+    }
 
-    public static final Map<Prefix, Function<String, ?>> PREFIX_PARSE_MAP = Map.of(
-            PREFIX_CLIENTID, PARSE_CLIENTID,
-            PREFIX_NAME, PARSE_NAME,
-            PREFIX_PHONE, PARSE_PHONE,
-            PREFIX_EMAIL, PARSE_EMAIL,
-            PREFIX_ADDRESS, PARSE_ADDRESS,
-            PREFIX_RISKAPPETITE, PARSE_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, PARSE_DISPOSABLEINCOME,
-            PREFIX_LASTMET, PARSE_LASTMET,
-            PREFIX_CURRENTPLAN, PARSE_CURRENTPLAN
-    );
+    public static Function<EditPersonDescriptor, ? extends Optional<?>> getEditGetFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).editGetFunction;
+    }
 
-    public static final Map<Prefix, String> PREFIX_NAME_MAP = Map.of(
-            PREFIX_CLIENTID, "Client Id",
-            PREFIX_NAME, "Name",
-            PREFIX_PHONE, "Phone",
-            PREFIX_EMAIL, "Email",
-            PREFIX_ADDRESS, "Address",
-            PREFIX_RISKAPPETITE, "Risk Appetite",
-            PREFIX_DISPOSABLEINCOME, "Disposable Income",
-            PREFIX_LASTMET, "Last Met",
-            PREFIX_CURRENTPLAN, "Current Plan",
-            PREFIX_TAG, "Tags"
-    );
+    public static Function<String, ?> getParseFunction(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).parseFunction;
+    }
+
+    public static String getName(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).name;
+    }
+
+    public static BiConsumer<EditPersonDescriptor, String> parseAndEditSet(Prefix prefix) {
+        return PREFIX_MAP.get(prefix).parseAndEditSet();
+    }
+
+    /**
+     * Wrapper class to wrap the different function related to an attribute
+     */
+    private static class PrefixMapperElement<T> {
+        private final Function<Person, T> getAttributeFunction;
+
+        private final BiConsumer<EditPersonDescriptor, T> editSetFunction;
+        private final Function<EditPersonDescriptor, Optional<T>> editGetFunction;
+        private final Function<String, T> parseFunction;
+        private final String name;
+        private PrefixMapperElement(Function<Person, T> getAttributeFunction,
+            BiConsumer<EditPersonDescriptor, T> editSetFunction, Function<EditPersonDescriptor,
+                Optional<T>> editGetFunction, Function<String, T> parseFunction, String name) {
+            this.getAttributeFunction = getAttributeFunction;
+            this.editSetFunction = editSetFunction;
+            this.editGetFunction = editGetFunction;
+            this.parseFunction = parseFunction;
+            this.name = name;
+        }
+
+        /**
+         * Returns a {@code BiConsumer<EditPersonDescriptor, String} that takes a {@code EditPersonDescriptor}
+         * to set with the result parsed from {@code parse_attribute} with the given {@code String}
+         */
+        private BiConsumer<EditPersonDescriptor, String> parseAndEditSet() {
+            return (editPersonDescriptor, s) ->
+                    editSetFunction.accept(editPersonDescriptor, parseFunction.apply(s));
+        }
+
+    }
 
     private static <T, R> Function<T, R> throwableFunctionWrapper(
             ThrowableFunction<T, R, ? extends Exception> throwableFunction) {

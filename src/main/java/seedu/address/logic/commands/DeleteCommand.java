@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.StringUtil.PERSON_DELIMITER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -22,10 +20,9 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the client id and/or email used in the displayed person list.\n"
+            + ": Deletes the person identified by the client id used in the displayed person list.\n"
             + "Parameters: "
-            + PREFIX_CLIENTID + "CLIENT ID "
-            + PREFIX_EMAIL + "EMAIL "
+            + "CLIENT ID "
             + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 

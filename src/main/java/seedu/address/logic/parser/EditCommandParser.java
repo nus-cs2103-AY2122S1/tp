@@ -2,8 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.mapper.PrefixMapper.PREFIX_EDIT_SET_MAP;
-import static seedu.address.commons.mapper.PrefixMapper.PREFIX_PARSE_MAP;
+import static seedu.address.commons.mapper.PrefixMapper.parseAndEditSet;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -57,14 +55,9 @@ public class EditCommandParser implements Parser<EditCommand> {
         Prefix[] prefixes = allPrefixLess(PREFIX_CLIENTID, PREFIX_TAG);
         for (Prefix prefix : prefixes) {
             if (argMultimap.getValue(prefix).isPresent()) {
-                // The output type of parser function will match with the setter function based on PrefixMapper
-                @SuppressWarnings("unchecked")
-                BiConsumer<EditPersonDescriptor, Object> setFunction =
-                        (BiConsumer<EditPersonDescriptor, Object>) PREFIX_EDIT_SET_MAP.get(prefix);
-                Function<String, ?> parseFunction = PREFIX_PARSE_MAP.get(prefix);
+                BiConsumer<EditPersonDescriptor, String> parseEditSetFunction = parseAndEditSet(prefix);
                 String toParse = argMultimap.getValue(prefix).get();
-                Object parsed = parseFunction.apply(toParse);
-                setFunction.accept(editPersonDescriptor, parsed);
+                parseEditSetFunction.accept(editPersonDescriptor, toParse);
             }
         }
 
@@ -83,7 +76,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * {@code Set<Tag>} containing zero tags.
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+        requireNonNull(tags);
 
         if (tags.isEmpty()) {
             return Optional.empty();
