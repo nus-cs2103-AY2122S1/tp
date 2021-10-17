@@ -1,10 +1,21 @@
 package seedu.fast.logic.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import seedu.fast.commons.util.TagUtil;
+import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
 public class TagCommandUtils {
+
+    public static List<String> tagNames = new ArrayList<>();
+    static{
+        tagNames.add(PriorityTag.HighPriority.NAME);
+        tagNames.add(PriorityTag.MediumPriority.NAME);
+        tagNames.add(PriorityTag.LowPriority.NAME);
+    };
 
     /**
      * Checks if a given Set of Tags contain a Tag that is equal to a given Tag.
@@ -20,6 +31,20 @@ public class TagCommandUtils {
                 return true;
             }
         }
+        return false;
+    }
+
+    public static boolean checkIfContainsPriorityTag(Set<Tag> tags) {
+        for (Tag tag : tags) {
+            if (tag.getPriority() != TagUtil.NO_PRIORITY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkIfContainsIPTag(Set<Tag> tags) {
+        //TODO: to be implemented when IP tags are added
         return false;
     }
 

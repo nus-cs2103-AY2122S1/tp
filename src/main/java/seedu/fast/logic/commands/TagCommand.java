@@ -29,7 +29,8 @@ public class TagCommand extends Command {
             + "add/Friend";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_ADD_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
+    public static final String MESSAGE_ADD_PRIORITY_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
+    public static final String MESSAGE_ADD_IP_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
 
     private final Index index;
     private Set<Tag> tags;
@@ -37,7 +38,7 @@ public class TagCommand extends Command {
     /**
      * Construct for a {@code RemarkCommand}
      *
-     * @param index index of the person in the filtered person list to edit the remark
+     * @param index index of the person in the filtered person list to add the tags
      * @param tags Tags of the person to be added
      */
     public TagCommand(Index index, Set<Tag> tags) {
@@ -58,6 +59,7 @@ public class TagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Set<Tag> newTags = personToEdit.getTags();
+        //preliminary checks:
         for (Tag tag: tags) {
             //check if any tags to be added already exist in the person's set of tags
             if (TagCommandUtils.checkIfContains(newTags, tag)) {
@@ -65,6 +67,12 @@ public class TagCommand extends Command {
                 throw new CommandException(errorMessage);
             }
         }
+
+        //check if multiple priority tags are to be added
+        if (TagCommandUtils.checkIfContainsPriorityTag())
+        //check if multiple IV tags are to be added
+
+
         //now all tags are safe to be added.
         for (Tag tag: tags) {
             newTags.add(tag);
