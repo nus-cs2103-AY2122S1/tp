@@ -11,7 +11,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Names should contain one or more nonempty blocks of alphanumeric characters, separated by"
-            + "at most one space";
+            + " at most one space";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -45,11 +45,14 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Note that names are equal regardless of case. i.e. JoHn dOe equals JOHN DOE equals john doe
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Name // instanceof handles nulls
-                && fullName.equals(((Name) other).fullName)); // state check
+                && fullName.equalsIgnoreCase(((Name) other).fullName)); // state check
     }
 
     @Override
