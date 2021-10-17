@@ -47,14 +47,14 @@ public class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         lessonName = source.getLessonName().lessonName;
-        capacity = source.getCapacity().value;
-        price = source.getPrice().value;
+        capacity = source.getCapacity().capacity;
+        price = source.getPrice().price;
         ArrayList<JsonAdaptedStudent> jsonAdaptedStudents = new ArrayList<>();
         for (Student student : source.getStudents().students) {
             jsonAdaptedStudents.add(new JsonAdaptedStudent(student));
         }
         students = jsonAdaptedStudents;
-        timing = source.getTiming().value;
+        timing = source.getTiming().timing;
     }
 
     /**
