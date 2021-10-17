@@ -1,6 +1,7 @@
 {
   "persons": [ {
     "name": "Alice Pauline",
+    "gender": "F",
     "phone": "94351253",
     "email": "alice@example.com",
     "nationality": "Singapore ",
@@ -10,6 +11,7 @@
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
+    "gender": "F",
     "phone": "94351253",
     "email": "pauline@example.com",
     "nationality": "Singapore ",
