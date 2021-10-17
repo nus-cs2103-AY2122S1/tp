@@ -53,6 +53,7 @@ public class SalesOrder {
         return this.customer;
     }
 
+    //SalesOrder string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
         if (isComplete) {
