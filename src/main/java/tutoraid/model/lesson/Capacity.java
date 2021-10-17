@@ -12,7 +12,7 @@ public class Capacity {
     public static final String MESSAGE_CONSTRAINTS =
             "Capacity should only contain numbers, and it should be at least 1 digit long";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
+    public final String capacity;
 
     /**
      * Constructs a {@code Capacity}.
@@ -22,7 +22,7 @@ public class Capacity {
     public Capacity(String capacity) {
         requireNonNull(capacity);
         checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
-        value = capacity;
+        this.capacity = capacity;
     }
 
     /**
@@ -34,19 +34,19 @@ public class Capacity {
 
     @Override
     public String toString() {
-        return value;
+        return capacity;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Capacity // instanceof handles nulls
-                && value.equals(((Capacity) other).value)); // state check
+                && capacity.equals(((Capacity) other).capacity)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return capacity.hashCode();
     }
 
 }
