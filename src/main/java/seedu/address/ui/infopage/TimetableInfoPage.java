@@ -219,7 +219,7 @@ public class TimetableInfoPage extends InfoPage {
         if (rows == 0) {
             return;
         }
-        if (col == 9) {
+        if (col == 8) {
             col = 1;
         }
         int fontSize = getFontSize(rows);
