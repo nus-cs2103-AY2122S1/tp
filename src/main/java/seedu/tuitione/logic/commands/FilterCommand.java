@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
-import seedu.tuitione.model.lesson.ClassIsOfSpecifiedGrade;
+import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
 
@@ -30,18 +30,13 @@ public class FilterCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
-        model.updateFilteredLessonList(new ClassIsOfSpecifiedGrade(grade));
-        String output = model.getFilteredStudentList().size() == 1
-                ? String.format(Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW,
+        model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
+        String output = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
                 model.getFilteredStudentList().size())
                     + "\n"
-                    + String.format(Messages.MESSAGE_SINGULAR_LESSON_LISTED_OVERVIEW,
-                    model.getFilteredLessonList().size())
-                : String.format(Messages.MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW,
-                model.getFilteredStudentList().size())
-                    + "\n"
-                    + String.format(Messages.MESSAGE_PLURAL_LESSON_LISTED_OVERVIEW,
-                model.getFilteredLessonList().size());
+                    + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW,
+                    model.getFilteredLessonList().size());
+
         return new CommandResult(output);
     }
 
