@@ -9,7 +9,7 @@ import java.util.Objects;
 /**
  * Represents a timeslot, for example 10pm - 12pm
  */
-public class Timeslot {
+public class Timeslot implements Comparable<Timeslot> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Timings must be in the 24H format HH:MM and the start time must be before the end time";
@@ -85,5 +85,15 @@ public class Timeslot {
     @Override
     public int hashCode() {
         return Objects.hash(startTime, endTime);
+    }
+
+    @Override
+    public int compareTo(Timeslot o) {
+        if (startTime.compareTo(o.startTime) == 0) {
+            // if same start time, use end time
+            return endTime.compareTo(o.endTime);
+        }
+        // compares based on start time
+        return startTime.compareTo(o.startTime);
     }
 }

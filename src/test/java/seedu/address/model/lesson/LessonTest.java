@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -9,6 +10,7 @@ import static seedu.address.testutil.TypicalLessons.MON_16_18_MATH;
 import static seedu.address.testutil.TypicalLessons.TUE_16_18_ENGLISH;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,7 @@ class LessonTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null));
+        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
     }
 
     @Test
@@ -38,9 +40,21 @@ class LessonTest {
     }
 
     @Test
+    void compareToTest() {
+        // Mon 10-12 is earlier than Tue 16-18
+        assertEquals(MON_10_12_BIOLOGY.compareTo(TUE_16_18_ENGLISH), -1);
+
+        // 16:00-18:00 is later than 10:00 - 12:00
+        assertEquals(MON_16_18_MATH.compareTo(MON_10_12_BIOLOGY), 1);
+
+        // equal
+        assertEquals(MON_10_12_BIOLOGY.compareTo(MON_10_12_BIOLOGY), 0);
+    }
+
+    @Test
     void testEquals_sameDetails_returnsTrue() {
-        Lesson l1 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5));
-        Lesson l2 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5));
+        Lesson l1 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5), new ArrayList<>());
+        Lesson l2 = new Lesson(new Timeslot("10:00", "14:00"), new Subject("Math"), DayOfWeek.of(5), new ArrayList<>());
         assertTrue(l1.equals(l2));
     }
 }

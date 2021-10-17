@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.logic.commands.persons.AddPersonCommand;
@@ -20,6 +22,7 @@ import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -50,9 +53,10 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<UniqueId> assignedTaskIds = new HashSet<>(); // add command does not allow assigning tasks straight away
-
+        NoOverlapLessonList noLessons = new NoOverlapLessonList();
+        List<Exam> noExams = new ArrayList<>();
         // default empty lessons list
-        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, new NoOverlapLessonList());
+        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, noLessons, noExams);
 
         return new AddPersonCommand(person);
     }
