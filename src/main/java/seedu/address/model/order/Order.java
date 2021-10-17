@@ -1,8 +1,8 @@
-package seedu.address.model.salesorder;
+package seedu.address.model.order;
 
 import seedu.address.model.Date;
 
-public class SalesOrder {
+public class Order {
     private static int count = 1;
 
     private final Customer customer;
@@ -12,17 +12,17 @@ public class SalesOrder {
     private boolean isComplete;
 
     /**
-     * Constructor creates a SalesOrder related to the customer, due on the given date, with the given amount.
+     * Constructor creates a Order related to the customer, due on the given date, with the given amount.
      * isComplete flag is set to False initially, and the id is automatically assigned.
      */
-    public SalesOrder(Customer customer, Date date, Amount amount) {
+    public Order(Customer customer, Date date, Amount amount) {
         this.customer = customer;
         this.date = date;
         this.amount = amount;
-        this.id = SalesOrder.count;
+        this.id = Order.count;
         this.isComplete = false;
 
-        SalesOrder.count++;
+        Order.count++;
     }
 
     public boolean getIsComplete() {
@@ -53,7 +53,7 @@ public class SalesOrder {
         return this.customer;
     }
 
-    //SalesOrder string representation is temporary, change as necessary for UI.
+    //Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
         if (isComplete) {
@@ -61,5 +61,23 @@ public class SalesOrder {
         } else {
             return "[ ]" + "SO" + id + ", due: " + date;
         }
+    }
+
+    //required for OrderList to check if a Order exists, before marking it.
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Order)) {
+            return false;
+        }
+
+        Order otherOrder = (Order) other;
+        return otherOrder.getCustomer().equals(getCustomer())
+                && otherOrder.getDate().equals(getDate())
+                && otherOrder.getAmount().equals(getAmount());
+
     }
 }
