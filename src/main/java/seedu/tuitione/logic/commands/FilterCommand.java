@@ -2,7 +2,9 @@ package seedu.tuitione.logic.commands;
 
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
-import seedu.tuitione.model.student.IsSpecifiedGrade;
+import seedu.tuitione.model.lesson.ClassIsOfSpecifiedGrade;
+import seedu.tuitione.model.student.Grade;
+import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
 
 import static java.util.Objects.requireNonNull;
 
@@ -15,16 +17,17 @@ public class FilterCommand extends Command{
             + "Parameters: GRADE \n"
             + "Example: " + COMMAND_WORD + " S2";
 
-    private final IsSpecifiedGrade predicate;
+    private final Grade grade;
 
-    public FilterCommand(IsSpecifiedGrade predicate) {
-        this.predicate = predicate;
+    public FilterCommand(Grade grade) {
+        this.grade = grade;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredStudentList(predicate);
+        model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
+        model.updateFilteredLessonList(new ClassIsOfSpecifiedGrade(grade));
         String output = model.getFilteredStudentList().size() == 0 || model.getFilteredStudentList().size() == 1
                 ? String.format(Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW,
                 model.getFilteredStudentList().size())
@@ -37,6 +40,6 @@ public class FilterCommand extends Command{
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FilterCommand // instanceof handles nulls
-                && predicate.equals(((FilterCommand) other).predicate)); // state check
+                && grade.equals(((FilterCommand) other).grade)); // state check
     }
 }

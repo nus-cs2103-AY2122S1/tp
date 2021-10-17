@@ -3,8 +3,6 @@ package seedu.tuitione.logic.parser;
 import seedu.tuitione.logic.commands.FilterCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.student.Grade;
-import seedu.tuitione.model.student.IsSpecifiedGrade;
-
 
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -24,8 +22,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-        IsSpecifiedGrade gradeToFilter = new IsSpecifiedGrade(new Grade(trimmedArgs));
-
-        return new FilterCommand(gradeToFilter);
+        return new FilterCommand(new Grade(trimmedArgs));
     }
 }

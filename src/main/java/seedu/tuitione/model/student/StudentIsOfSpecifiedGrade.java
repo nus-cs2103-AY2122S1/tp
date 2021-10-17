@@ -3,12 +3,12 @@ package seedu.tuitione.model.student;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s {@code grade} matches the given grade.
+ * Tests that a {@code Student}'s {@code Grade} matches the given grade.
  */
-public class IsSpecifiedGrade implements Predicate<Student> {
+public class StudentIsOfSpecifiedGrade implements Predicate<Student> {
     private final Grade grade;
 
-    public IsSpecifiedGrade(Grade grade) {
+    public StudentIsOfSpecifiedGrade(Grade grade) {
         this.grade = grade;
     }
 
@@ -20,7 +20,7 @@ public class IsSpecifiedGrade implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof IsSpecifiedGrade // instanceof handles nulls
-                && grade.equals(((IsSpecifiedGrade) other).grade)); // state check
+                || (other instanceof StudentIsOfSpecifiedGrade // instanceof handles nulls
+                && grade.equals(((StudentIsOfSpecifiedGrade) other).grade)); // state check
     }
 }
