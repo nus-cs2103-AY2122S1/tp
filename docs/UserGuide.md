@@ -3,38 +3,50 @@ layout: page
 title: User Guide
 ---
 
-Notor is a desktop app for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Notor allows you to take notes quickly and efficiently, and keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
+## Overview
 
-* Table of Contents 
-{:toc}
+Notor is a desktop application for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently, while keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
+
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+### 1. Setup
 
-2. Download the latest `notor.jar`.
+Ensure you have Java `11` or above installed in your Computer. You can install Java 11 from
+[here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Notor.
+### 2. Installing the project
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
-   contains some sample data.<br>
-   ![Ui](images/Ui.png)
+Download the latest `notor.jar` [here](), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
-   Some example commands you can try:
+### 3. Running the application
+Double-click the file to start the application.
+If you have set up Java `11` correctly, The application should open, and the GUI similar to below should appear in a few seconds. Note how the app
+contains some sample data.<br>
+![Ui](images/Ui.png)
 
-    * **`list`** : Lists all contacts.
+### 4. Try Running Examples!
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+open the help window.<br>
+Some example commands you can try:
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+* **`person /list`** : Lists all contacts.
+* **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
+* **`person User /create`** : Creates a person named `User`.
+* **`group Orbital /create t:Students`** : Creates a group named `Orbital` tagged with `Students`.
+* **`person 3 /add g:Orbital`** : Adds the person with index `3` to the group named `Orbital`.
+* **`group /list`** : Lists all groups (to show indexes of each existing group).
+* **`group 1 /note (Note)`** : Edits the group note for the group with index number `1`.
+* **`group 1 /create n:Artemis`** : Creates a subgroup `Artemis` inside the group with index number `1`.
+* **`group 1 /untag t:Students`** : Removes the tag `Students` from the group with index number `1`.
+* **`clear`** : Deletes all contacts.
+* **`exit`** : Exits the app.
 
-    * **`clear`** : Deletes all contacts.
-
-    * **`exit`** : Exits the app.
-
-6. Refer to the [Features](#Features) below for details of each command.
+Refer to the [Features](#Features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,19 +446,19 @@ Action                    | Format                                              
 **Find**                  | `person /find (n:QUERY)`                                                      | `p /f (n:QUERY)`
 
 ### Group
-Action                 | Format                                                      | Short Format
------------------------|-------------------------------------------------------------|---------------------------------------------------
-**Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]`              | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
-**Create Subgroup**    | `group (INDEX) /create (n:SUBGROUP_NAME) [t:TAG1,TAG2,...]` | `g (INDEX) /c (n:SUBGROUP_NAME) [t:TAG1,TAG2,...]`
-**Edit**               | `group (INDEX) /edit [n:NEW_NAME]`                          | `g (INDEX) /e [n:NEW_NAME]`
-**Delete**             | `group (INDEX) /delete`                                     | `g (INDEX) /d`
-**Note**               | `group (INDEX) /note (NOTE)`                                | `g (INDEX) /n (NOTE)`
-**Tag**                | `group (INDEX) /tag [t:TAG1,TAG2,...]`                      | `g (INDEX) /t [t:TAG1,TAG2,...]`
-**Untag**              | `group (INDEX) /untag [t:TAG1,TAG2,...]`                    | `g (INDEX) /u [t:TAG1,TAG2,...]`
-**Clear Tags**         | `group (INDEX) /cleartags`                                  | `g (INDEX) / ct`
-**List Groups**        | `group /list`                                               | `g /l`
-**List Out Subgroups** | `group (INDEX) /list`                                       | `g (INDEX) /l`
-**Find**               | `group /find (n:QUERY)`                                     | `g /f (n:QUERY)`
+Action                 | Format                                         | Short Format
+-----------------------|------------------------------------------------|---------------------------------------
+**Create Group**       | `group (GROUP_NAME) /create [t:TAG1,TAG2,...]` | `g (GROUP_NAME) /c  [t:TAG1,TAG2,...]`
+**Create Subgroup**    | `group (INDEX) /create n:SUBGROUP_NAME`        | `g (INDEX) /c n:SUBGROUP_NAME`
+**Edit**               | `group (INDEX) /edit [n:NEW_NAME]`             | `g (INDEX) /e [n:NEW_NAME]`
+**Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`
+**Note**               | `group (INDEX) /note (NOTE)`                   | `g (INDEX) /n (NOTE)`
+**Tag**                | `group (INDEX) /tag [t:TAG1,TAG2,...]`         | `g (INDEX) /t [t:TAG1,TAG2,...]`
+**Untag**              | `group (INDEX) /untag [t:TAG1,TAG2,...]`       | `g (INDEX) /u [t:TAG1,TAG2,...]`
+**Clear Tags**         | `group (INDEX) /cleartags`                     | `g (INDEX) / ct`
+**List Groups**        | `group /list`                                  | `g /l`
+**List Out Subgroups** | `group (INDEX) /list`                          | `g (INDEX) /l`
+**Find**               | `group /find (n:QUERY)`                        | `g /f (n:QUERY)`
 
 ### Tag
 **Note**: for the **List** command, the `INDEX` argument can be either a `Group` or a `Person`, depending on what you
