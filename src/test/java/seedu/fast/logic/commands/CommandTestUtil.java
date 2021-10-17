@@ -14,11 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.fast.commons.core.index.Index;
+import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
+import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,12 +40,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_REMARK_AMY = "Loves to eat!";
     public static final String VALID_REMARK_BOB = "Loves to talk to his plant!";
-    public static final String VALID_APPOINTMENT_AMY = ("No Appointment Scheduled Yet");
-    public static final String VALID_APPOINTMENT_TIME_AMY = ("");
-    public static final String VALID_APPOINTMENT_VENUE_AMY = ("");
-    public static final String VALID_APPOINTMENT_BOB = ("10 Oct 2021");
-    public static final String VALID_APPOINTMENT_TIME_BOB = ("05:30");
-    public static final String VALID_APPOINTMENT_VENUE_BOB = ("Suntec City");
+    public static final String VALID_APPOINTMENT_AMY = "No Appointment Scheduled Yet";
+    public static final String VALID_APPOINTMENT_TIME_AMY = "";
+    public static final String VALID_APPOINTMENT_VENUE_AMY = "";
+    public static final String VALID_APPOINTMENT_BOB = "10 Oct 2021";
+    public static final String VALID_APPOINTMENT_TIME_BOB = "0530";
+    public static final String VALID_APPOINTMENT_VENUE_BOB = "Suntec City";
+    public static final String VALID_APPOINTMENT_INPUT = "2021-10-10";
+    public static final String VALID_APPOINTMENT_TIME_INPUT = "05:30";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -76,6 +80,14 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    public static final EditAppointmentDescriptor APPT_DES_AMY = new EditAppointmentDescriptorBuilder()
+            .withDate(VALID_APPOINTMENT_AMY).withTime(VALID_APPOINTMENT_TIME_AMY)
+            .withVenue(VALID_APPOINTMENT_VENUE_AMY).build();
+
+    public static final EditAppointmentDescriptor APPT_DES_BOB = new EditAppointmentDescriptorBuilder()
+            .withDate(VALID_APPOINTMENT_BOB).withTime(VALID_APPOINTMENT_TIME_BOB)
+            .withVenue(VALID_APPOINTMENT_VENUE_BOB).build();
 
     /**
      * Executes the given {@code command}, confirms that <br>
