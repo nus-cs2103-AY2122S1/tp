@@ -113,8 +113,9 @@ public class Person {
      * Only the immediate visit will be examined, not the recurring ones that follow.
      */
     public boolean isVisitOverdue() {
-        if (this.visit.isEmpty())
+        if (this.visit.isEmpty()) {
             return false;
+        }
 
         return this.visit.get().isOverdue();
     }

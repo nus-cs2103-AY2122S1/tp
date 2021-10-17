@@ -2,13 +2,11 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.nio.file.FileVisitResult;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.commons.util.DateTimeUtil;
+import seedu.address.logic.parser.ParserUtil;
 
 /**
  * Represents a Person's visit in the address book.
@@ -49,8 +47,9 @@ public class Visit {
      * Compared against today's date.
      */
     public boolean isOverdue() {
-        if (!hasVisit())
+        if (!hasVisit()) {
             return false;
+        }
 
         LocalDateTime visitTime;
         try {
