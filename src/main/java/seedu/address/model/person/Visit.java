@@ -4,6 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.nio.file.FileVisitResult;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's visit in the address book.
@@ -37,6 +42,24 @@ public class Visit {
      */
     public boolean hasVisit() {
         return !(this.value == null || this.value.isEmpty());
+    }
+
+    /**
+     * Returns if the visit exists and is overdue.
+     * Compared against today's date.
+     */
+    public boolean isOverdue() {
+        if (!hasVisit())
+            return false;
+
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return DateTimeUtil.isPast(visitTime);
     }
 
     /**
