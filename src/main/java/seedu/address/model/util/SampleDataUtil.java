@@ -46,10 +46,10 @@ public class SampleDataUtil {
 
     public static ModuleClass[] getSampleModuleClasses() {
         return new ModuleClass[] {
-            new ModuleClass(parseModuleCode("CS2103T T17"), new Day("2"), new Time("10:00"), new Remark("T17")),
-            new ModuleClass(parseModuleCode("CS2100 T21"), new Day("2"), new Time("15:00"), new Remark("T21")),
-            new ModuleClass(parseModuleCode("CS2103 TG09"), new Day("1"), new Time("14:00"), new Remark("TG09")),
-            new ModuleClass(parseModuleCode("CS2106 TG01"), new Day("5"), new Time("10:00"), new Remark("T01")),
+            new ModuleClass(getModuleCodeSet("CS2040 T05"), new Day("2"), new Time("10:00"), new Remark("T17")),
+            new ModuleClass(getModuleCodeSet("CS2100 T21"), new Day("2"), new Time("15:00"), new Remark("T21")),
+            new ModuleClass(getModuleCodeSet("CS2103 TG09"), new Day("1"), new Time("14:00"), new Remark("TG09")),
+            new ModuleClass(getModuleCodeSet("CS2106 TG01"), new Day("5"), new Time("10:00"), new Remark("T01")),
         };
     }
 

@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.FlowPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -30,6 +31,11 @@
                         <Insets bottom="2.0" />
                     </padding></Label>
             </HBox>
+            <FlowPane fx:id="moduleCodes" />
+            <FlowPane fx:id="tags">
+                <padding>
+                    <Insets top="5.0" />
+                </padding></FlowPane>
          <HBox>
             <children>
                   <Label fx:id="day" styleClass="cell_small_label" text="\$day">
