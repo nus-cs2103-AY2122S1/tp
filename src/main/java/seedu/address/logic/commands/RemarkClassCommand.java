@@ -23,13 +23,13 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.ui.RemarkEditor;
+import seedu.address.ui.UiManager;
 
 public class RemarkClassCommand extends Command {
 
     public static final String COMMAND_WORD = "remarkclass";
     public static final String MESSAGE_UPDATE_REMARK_SUCCESS = "Remark updated for Tuition Class: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Tuition Class: %1$s";
-    public static final String REMARK_EDITOR_ERROR_MESSAGE = "Something went wrong with the remark editor!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tuition class identified "
             + "by the index number used in the last tuition classes listing. "
@@ -39,7 +39,7 @@ public class RemarkClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "physics homework: read chapter 3 pg 49-53.";
 
-    private static final Logger logger = LogsCenter.getLogger(RemarkEditor.class);
+    private static final Logger logger = LogsCenter.getLogger(RemarkClassCommand.class);
 
     private final Index index;
 
@@ -51,6 +51,7 @@ public class RemarkClassCommand extends Command {
 
         this.index = index;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<TuitionClass> lastShownList = model.getFilteredTuitionList();
@@ -61,12 +62,14 @@ public class RemarkClassCommand extends Command {
 
         TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
 
-        String name = classToEdit.getName().name;
-        String remarkToEdit = classToEdit.getRemark().value;
-        Remark newRemark = showRemarkEditor(name, remarkToEdit);
+        String name = String.valueOf(classToEdit.getName());
+        String remarkToEdit = String.valueOf(classToEdit.getRemark());
+        Remark newRemark = UiManager.showRemarkEditor(name, remarkToEdit);
 
         TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
                 classToEdit.getTimeslot(), classToEdit.getStudentList(), newRemark);
+
+        logger.info("Remark Editor closed.");
 
         model.setTuition(classToEdit, editedClass);
         model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
@@ -75,7 +78,7 @@ public class RemarkClassCommand extends Command {
     }
 
     private String generateSuccessMessage(TuitionClass classToEdit) {
-        String remark = classToEdit.getRemark().value;
+        String remark = String.valueOf(classToEdit.getRemark());
         String message = !remark.isEmpty() ? MESSAGE_UPDATE_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
         return String.format(message, classToEdit);
     }
@@ -96,39 +99,5 @@ public class RemarkClassCommand extends Command {
         // state check
         RemarkClassCommand e = (RemarkClassCommand) other;
         return index.equals(e.index);
-    }
-
-    /**
-     * Displays a dialog box for the user to edit remarks.
-     * @param name The name of the student or tuition class being modified.
-     * @param remarkToEdit The current remark of the student or tuition class.
-     * @return Returns the updated remark.
-     * @throws CommandException If unable to load the fxml file for the remark editor.
-     */
-    public Remark showRemarkEditor(String name, String remarkToEdit) throws CommandException {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/view/RemarkEditor.fxml"));
-            DialogPane remarkEditor = fxmlLoader.load();
-
-            logger.fine("Showing the remark editor");
-
-            RemarkEditor remarkController = fxmlLoader.getController();
-            remarkController.setRemark(name, remarkToEdit);
-
-            Dialog<ButtonType> dialog = new Dialog<>();
-            dialog.setDialogPane(remarkEditor);
-            dialog.setTitle("Remark Editor");
-            Stage stage = (Stage) remarkEditor.getScene().getWindow();
-            stage.getIcons().add(new Image(String.valueOf(this.getClass().getResource("/images/edit_icon.png"))));
-
-            Optional<ButtonType> clickedButton = dialog.showAndWait();
-            if (clickedButton.get() == ButtonType.OK) {
-                return remarkController.getNewRemark();
-            }
-        } catch (IOException e) {
-            throw new CommandException(REMARK_EDITOR_ERROR_MESSAGE, e);
-        }
-        return new Remark(remarkToEdit);
     }
 }
