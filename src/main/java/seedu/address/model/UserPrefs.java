@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Aliases aliases = new Aliases();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,8 +37,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAliases(newUserPrefs.getAliases());
     }
 
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -47,8 +50,23 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    @Override
+    public Aliases getAliases() {
+        return aliases;
+    }
+
+    public void setAliases(Aliases aliases) {
+        requireNonNull(aliases);
+        this.aliases = aliases;
+    }
+
+    public void addAlias(String alias, String keywords) {
+        aliases.add(alias, keywords);
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -68,7 +86,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath)
+                && aliases.equals(o.aliases);
     }
 
     @Override

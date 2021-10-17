@@ -80,6 +80,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    @Override
+    public Aliases getAliases() {
+        return userPrefs.getAliases();
+    }
+
+    @Override
+    public void addAlias(String alias, String commandWord) {
+        requireAllNonNull(alias, commandWord);
+        userPrefs.addAlias(alias, commandWord);
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override

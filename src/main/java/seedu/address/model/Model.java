@@ -50,6 +50,16 @@ public interface Model {
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
+     * Returns the user pref's aliases.
+     */
+    Aliases getAliases();
+
+    /**
+     * Adds the given alias to user prefs.
+     */
+    void addAlias(String alias, String commandWord);
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
