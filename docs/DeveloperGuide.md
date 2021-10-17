@@ -263,7 +263,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**:  
+**Value proposition**: 
 Since social workers need to contact many different elderly every day, we created this app to help them easily avoid missing out on any elderly while reducing the hassle of manually checking the frequency of contacts for each elderly.
 
 
@@ -293,24 +293,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User adds in a new senior’s name together with phone number, language and address
 2. SeniorLove shows a new entry for the elderly just added
-   
+
     Use case ends.
 
 **Extensions**
 
 * 1a. User also inputs last visited and visit date.
-    * 1a1. SeniorLoves shows a new entry for the elderly added, with the optional details as well. 
-      
+    * 1a1. SeniorLoves shows a new entry for the elderly added, with the optional details as well.
+
       Use case ends.
 
 * 2a. User inputs a name that is already inside SeniorLove’s list.
     * 2a1. SeniorLove shows an error message notifying the user that the name already exists.
-    
+
       Use case resumes at step 1.
 
 * 3a. User inputs a new senior’s name with some compulsory details missing.
     * 3a1. SeniorLove shows an error message notifying the user about the missing details.
-      
+
       Use case resumes at step 1.
 
 
@@ -322,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to list seniors
 2. SeniorLove shows a list of seniors
 3. User requests to delete a specific senior in the list
-4. SeniorLove deletes the senior 
+4. SeniorLove deletes the senior
 
     Use case ends.
 
