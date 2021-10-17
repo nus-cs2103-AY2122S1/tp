@@ -51,7 +51,14 @@ public class ModuleCode {
 
     @Override
     public String toString() {
-        return '[' + value + ']';
+        StringBuilder sb = new StringBuilder("[");
+        sb.append(value);
+        for (Tag tag: tags) {
+            sb.append(" ");
+            sb.append(tag);
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     @Override

@@ -48,7 +48,6 @@ public class JsonAdaptedModuleCode {
                 .collect(Collectors.toList()));
     }
 
-    @JsonValue
     public String getModuleCodeName() {
         return moduleCodeName;
     }
