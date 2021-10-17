@@ -9,6 +9,7 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 
@@ -45,15 +46,13 @@ public class DeleteProgressCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Progress deletedProgress = studentToEdit.getProgress();
 
-        Student editedStudent = new Student(
-                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), new Progress("No Progress"), studentToEdit.getPaymentStatus());
+        ProgressList progressList = studentToEdit.getProgressList();
+        Progress progressToDelete = progressList.getLatestProgress();
+        progressList.deleteLatestProgress();
 
-        model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, deletedProgress, studentToEdit));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, progressToDelete, studentToEdit));
     }
 }

@@ -9,6 +9,7 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 
@@ -23,7 +24,7 @@ public class AddProgressCommand extends Command {
             + "by the index number used in the last student listing. "
             + "Existing progress will be overwritten by the input.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
-            + "PROGRESS\n"
+            + "PROGRESS (must not be empty or 'No Progress')\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "Finishes Prelims.";
 
@@ -51,11 +52,10 @@ public class AddProgressCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Student editedStudent = new Student(
-                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), this.progress, studentToEdit.getPaymentStatus());
 
-        model.setStudent(studentToEdit, editedStudent);
+        ProgressList progressList = studentToEdit.getProgressList();
+        progressList.addProgress(this.progress);
+
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));

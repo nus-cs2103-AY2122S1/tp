@@ -59,7 +59,7 @@ public class StudentCard extends UiPart<Region> {
         studentPhone.setText(formatCardLabel(STUDENT_PHONE_LABEL, student.getStudentPhone().value));
         parentName.setText(formatCardLabel(PARENT_NAME_LABEL, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(PARENT_PHONE_LABEL, student.getParentPhone().value));
-        progress.setText(formatCardLabel(PROGRESS_LABEL, student.getProgress().toString()));
+        progress.setText(formatCardLabel(PROGRESS_LABEL, student.getLatestProgress().toString()));
         paymentStatus.setText(formatCardLabel(PAYMENT_STATUS_LABEL, student.getPaymentStatus().toString()));
     }
 
