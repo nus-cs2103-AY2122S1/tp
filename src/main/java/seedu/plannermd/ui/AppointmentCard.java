@@ -36,7 +36,7 @@ public class AppointmentCard extends UiPart<Region> {
     @FXML
     private Label doctorName;
     @FXML
-    private Label patientName;;
+    private Label patientName;
     @FXML
     private Label remarks;
 
