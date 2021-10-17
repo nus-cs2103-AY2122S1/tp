@@ -2,8 +2,7 @@ package seedu.tuitione.logic.commands;
 
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
-import seedu.tuitione.model.student.NameContainsKeywordsPredicate;
-import seedu.tuitione.model.student.isSpecifiedGrade;
+import seedu.tuitione.model.student.IsSpecifiedGrade;
 
 import static java.util.Objects.requireNonNull;
 
@@ -16,9 +15,9 @@ public class FilterCommand extends Command{
             + "Parameters: GRADE \n"
             + "Example: " + COMMAND_WORD + " S2";
 
-    private final isSpecifiedGrade predicate;
+    private final IsSpecifiedGrade predicate;
 
-    public FilterCommand(isSpecifiedGrade predicate) {
+    public FilterCommand(IsSpecifiedGrade predicate) {
         this.predicate = predicate;
     }
 
