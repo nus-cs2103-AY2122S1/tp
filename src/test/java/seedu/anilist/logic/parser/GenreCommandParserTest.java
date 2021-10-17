@@ -3,7 +3,7 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
 import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
-import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SUPERHERO;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_ACTION_NO_SUCH_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
@@ -37,7 +37,7 @@ public class GenreCommandParserTest {
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
         // no action specified
-        assertParseFailure(parser, "1" + GENRE_DESC_SUPERHERO, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1" + GENRE_DESC_SCIENCE_FICTION, MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -49,19 +49,19 @@ public class GenreCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + ACTION_DESC_ADD + GENRE_DESC_SUPERHERO, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + ACTION_DESC_ADD + GENRE_DESC_SUPERHERO, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser,
-                "1 some random string" + ACTION_DESC_ADD + GENRE_DESC_SUPERHERO,
+                "1 some random string" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser,
-                "1 i/ string" + ACTION_DESC_ADD + GENRE_DESC_SUPERHERO,
+                "1 i/ string" + ACTION_DESC_ADD + GENRE_DESC_SCIENCE_FICTION,
                 MESSAGE_INVALID_FORMAT);
     }
 
@@ -69,7 +69,7 @@ public class GenreCommandParserTest {
     public void parse_invalidValue_failure() {
         //invalid action
         assertParseFailure(parser,
-                "1" + INVALID_ACTION_DESC + GENRE_DESC_SUPERHERO,
+                "1" + INVALID_ACTION_DESC + GENRE_DESC_SCIENCE_FICTION,
                 String.format(Action.MESSAGE_INVALID_ACTION_FORMAT, INVALID_ACTION_NO_SUCH_ACTION));
 
         //invalid genre

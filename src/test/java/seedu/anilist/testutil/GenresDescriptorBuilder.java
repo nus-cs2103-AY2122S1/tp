@@ -4,6 +4,7 @@ import java.util.Set;
 
 import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.model.genre.Genre;
+import seedu.anilist.model.util.SampleDataUtil;
 
 
 /**
@@ -20,6 +21,14 @@ public class GenresDescriptorBuilder {
 
     public GenresDescriptorBuilder(GenreCommand.GenresDescriptor descriptor) {
         this.descriptor = new GenreCommand.GenresDescriptor(descriptor);
+    }
+
+    /**
+     * Sets the {@code Genres} of the {@code GenreDescriptor} that we are building.
+     */
+    public seedu.anilist.testutil.GenresDescriptorBuilder withGenre(String ... genres) {
+        descriptor.setGenres(SampleDataUtil.getGenreSet(genres));
+        return this;
     }
 
     /**
