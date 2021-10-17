@@ -96,7 +96,7 @@ public class FindCommandParserTest {
         findDescriptor = new FindDescriptor(argMultimap);
         assertFalse(findDescriptor.getPredicates().isEmpty());
 
-        String validLevelOfEducationPrefixInput = " l/PhD";
+        String validLevelOfEducationPrefixInput = " l/Masters";
         argMultimap = ArgumentTokenizer.tokenizeWithoutPreamble(validLevelOfEducationPrefixInput,
                 PREFIX_LEVEL_OF_EDUCATION);
         findDescriptor = new FindDescriptor(argMultimap);
@@ -282,6 +282,7 @@ public class FindCommandParserTest {
         String invalidTagPrefixInput = " t/old(70)"; // brackets
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidTagPrefixInput, PREFIX_TAG)));
+
 
         String multipleInvalidPrefixInput = " n/@#$ p/abc e/peterjack@ r/@#$%^&*() et/longterm s/-100 y/800 t/old(70)";
         assertThrows(ParseException.class, () ->
