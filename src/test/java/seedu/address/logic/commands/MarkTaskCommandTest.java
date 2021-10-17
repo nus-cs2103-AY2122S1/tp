@@ -17,7 +17,7 @@ import seedu.address.model.Date;
 import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
-class MarkDoneCommandTest {
+class MarkTaskCommandTest {
     private static final Task testTask = new Task(new Label("test label"), new Date("test date"));
 
     //I followed the style of AddCommand test instead of DeleteCommand test since I thought using a modelStub
@@ -31,9 +31,9 @@ class MarkDoneCommandTest {
         Task secondTestTask = new Task(new Label("test label"), new Date("test date"));
         secondTestTask.setIsDone(true);
 
-        CommandResult commandResult = new MarkDoneCommand(targetIndex).execute(modelStub);
+        CommandResult commandResult = new MarkTaskCommand(targetIndex).execute(modelStub);
 
-        assertEquals(String.format(MarkDoneCommand.MESSAGE_MARK_TASK_SUCCESS, testTask),
+        assertEquals(String.format(MarkTaskCommand.MESSAGE_MARK_TASK_SUCCESS, testTask),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(secondTestTask), modelStub.listWithOneTask);
     }
@@ -52,7 +52,7 @@ class MarkDoneCommandTest {
         private final ObservableList<Task> listWithOneTask = FXCollections.observableArrayList(testTask);
 
         @Override
-        public void markDone(Task task) {
+        public void markTask(Task task) {
             listWithOneTask.get(0).setIsDone(true);
         }
 

@@ -113,10 +113,10 @@ public interface Model {
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markDone(Task task);
+    void markTask(Task task);
 
     //======================================== Order FUNCTIONALITIES =================================================
     ObservableList<Order> getFilteredOrderList();
 
-    void markComplete(Order order);
+    void markOrder(Order order);
 }

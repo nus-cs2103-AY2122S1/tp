@@ -13,7 +13,7 @@ import seedu.address.model.order.Order;
 /**
  * Marks an order as complete, with the order identified using its displayed index from the application
  */
-public class MarkCompleteCommand extends Command {
+public class MarkOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "markcomplete";
 
@@ -26,7 +26,7 @@ public class MarkCompleteCommand extends Command {
 
     private final Index targetIndex;
 
-    public MarkCompleteCommand(Index targetIndex) {
+    public MarkOrderCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -40,15 +40,15 @@ public class MarkCompleteCommand extends Command {
         }
 
         Order orderToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markComplete(orderToMark);
+        model.markOrder(orderToMark);
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, orderToMark));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof MarkCompleteCommand
-                && targetIndex.equals(((MarkCompleteCommand) other).targetIndex));
+                || (other instanceof MarkOrderCommand
+                && targetIndex.equals(((MarkOrderCommand) other).targetIndex));
     }
 
 }

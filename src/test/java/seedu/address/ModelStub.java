@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -116,7 +117,17 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void markDone(Task task) {
+    public void markTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void markOrder(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
         throw new AssertionError("This method should not be called.");
     }
 }

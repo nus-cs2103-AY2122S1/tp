@@ -168,7 +168,7 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-    public void markDone(Task task) {
+    public void markTask(Task task) {
         addressBook.markDone(task);
     }
 
@@ -180,7 +180,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markComplete(Order order) {
+    public void markOrder(Order order) {
         this.orderBook.markComplete(order);
     }
 
