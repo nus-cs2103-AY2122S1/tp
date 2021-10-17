@@ -32,7 +32,8 @@ public class Siasa implements ReadOnlySiasa {
         policies = new UniquePolicyList();
     }
 
-    public Siasa() {}
+    public Siasa() {
+    }
 
     /**
      * Creates an SIASA using the Persons and Policies in the {@code toBeCopied}
@@ -52,6 +53,14 @@ public class Siasa implements ReadOnlySiasa {
 
         setPersons(newData.getPersonList());
         setPolicies(newData.getPolicyList());
+    }
+
+    /**
+     * Replaces the policies of the current newData with {@code newData}.
+     */
+    public void mergePolicies(ReadOnlySiasa newData) {
+        requireNonNull(newData);
+        this.setPolicies(newData.getPolicyList());
     }
 
     //// person-level operations
@@ -124,6 +133,7 @@ public class Siasa implements ReadOnlySiasa {
     public void addPolicy(Policy policy) {
         policies.add(policy);
     }
+
     /**
      * Replaces the given policy {@code target} in the list with {@code editedPolicy}.
      * {@code target} must exist in the SIASA.

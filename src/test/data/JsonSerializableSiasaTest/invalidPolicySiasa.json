@@ -1,0 +1,22 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "address": "123, Jurong West Ave 6, #08-111",
+    "tagged": [ "friends" ]
+  } ],
+  "policies" : [ {
+    "title" : "!nvalid N@me",
+    "price" : "100",
+    "expiryDate" : "2022-10-17",
+    "commission" : "10",
+    "owner" : {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "tagged" : [ "friends" ]
+    }
+  } ]
+}

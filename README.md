@@ -4,7 +4,7 @@
 
 SIASA is a desktop application that enables student financial advisors to quickly and easily keep track of their
 contacts and financial plans sold. It will provide them with insightful, actionable statistics and querying functionalities
-to aid their operations. 
+to aid their operations.
 
 # Application User Interface
 ![Ui](docs/images/Ui.png)

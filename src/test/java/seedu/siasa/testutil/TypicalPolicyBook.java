@@ -1,19 +1,16 @@
 package seedu.siasa.testutil;
 
 import seedu.siasa.model.Siasa;
-import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Policy;
 
-public class TypicalSiasa {
+public class TypicalPolicyBook {
     /**
-     * Returns an {@code Siasa} with all the typical persons.
+     * Returns an {@code Siasa} with all the typical policies.
      */
-    public static Siasa getTypicalSiasa() {
+    public static Siasa getTypicalPolicyBook() {
         Siasa siasa = new Siasa();
-        for (Person person : TypicalPersons.getTypicalPersons()) {
-            siasa.addPerson(person);
-        }
         for (Policy policy : TypicalPolicies.getTypicalPolicies()) {
+            assert siasa.hasPerson(policy.getOwner());
             siasa.addPolicy(policy);
         }
         return siasa;

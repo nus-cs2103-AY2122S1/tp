@@ -2,6 +2,8 @@ package seedu.siasa.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.siasa.testutil.TypicalSiasa.getTypicalSiasa;
 
 import java.nio.file.Path;
 
@@ -10,7 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.siasa.commons.core.GuiSettings;
+import seedu.siasa.model.ReadOnlySiasa;
+import seedu.siasa.model.Siasa;
 import seedu.siasa.model.UserPrefs;
+import seedu.siasa.model.person.Person;
+import seedu.siasa.model.policy.Policy;
 
 public class StorageManagerTest {
 
@@ -31,6 +37,11 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void getAddressBookFilePath() {
+        assertNotNull(storageManager.getSiasaFilePath());
+    }
+
+    @Test
     public void prefsReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
@@ -44,25 +55,22 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-    /*
-    TODO: Fix this test after refactoring storage.
     @Test
     public void addressBookReadSave() throws Exception {
-
+        /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
-
+         */
         Siasa original = getTypicalSiasa();
         storageManager.saveSiasa(original);
         ReadOnlySiasa retrieved = storageManager.readSiasa().get();
-        assertEquals(original, new Siasa(retrieved));
-    }
-     */
-
-    @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getSiasaFilePath());
+        for (Person person : retrieved.getPersonList()) {
+            assertTrue(original.hasPerson(person));
+        }
+        for (Policy policy : retrieved.getPolicyList()) {
+            assertTrue(original.hasPolicy(policy));
+        }
     }
 
 }
