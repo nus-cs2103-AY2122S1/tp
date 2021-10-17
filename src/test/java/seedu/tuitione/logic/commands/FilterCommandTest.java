@@ -1,24 +1,8 @@
 package seedu.tuitione.logic.commands;
 
-import org.junit.jupiter.api.Test;
-import seedu.tuitione.commons.core.Messages;
-import seedu.tuitione.model.Model;
-import seedu.tuitione.model.ModelManager;
-import seedu.tuitione.model.UserPrefs;
-import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
-import seedu.tuitione.model.student.Grade;
-import seedu.tuitione.model.student.NameContainsKeywordsPredicate;
-import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
-
-import java.util.Arrays;
-import java.util.Collections;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tuitione.commons.core.Messages.MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW;
-import static seedu.tuitione.commons.core.Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.testutil.TypicalTuition.ALICE;
 import static seedu.tuitione.testutil.TypicalTuition.BENSON;
@@ -26,6 +10,19 @@ import static seedu.tuitione.testutil.TypicalTuition.MATH_S2;
 import static seedu.tuitione.testutil.TypicalTuition.PHYSICS_S2;
 import static seedu.tuitione.testutil.TypicalTuition.SCIENCE_P2;
 import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.tuitione.commons.core.Messages;
+import seedu.tuitione.model.Model;
+import seedu.tuitione.model.ModelManager;
+import seedu.tuitione.model.UserPrefs;
+import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
+import seedu.tuitione.model.student.Grade;
+import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
 
 public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalTuitione(), new UserPrefs());
@@ -57,7 +54,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_gradeNotFoundInTuitione_noStudentFound_noLessonFound() {
+    public void execute_gradeNotFoundInTuitionenoStudentFound_noLessonFound() {
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
@@ -71,7 +68,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_gradeFoundInTuitione_oneStudentFound_oneLessonFound() {
+    public void execute_gradeFoundInTuitioneoneStudentFound_oneLessonFound() {
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
@@ -85,7 +82,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_gradeFoundInTuitione_oneStudentFound_multipleLessonFound() {
+    public void execute_gradeFoundInTuitione_oneStudentFoundmultipleLessonFound() {
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);

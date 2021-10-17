@@ -1,16 +1,13 @@
 package seedu.tuitione.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.tuitione.logic.commands.FilterCommand;
-import seedu.tuitione.logic.commands.FindCommand;
-import seedu.tuitione.model.student.Grade;
-import seedu.tuitione.model.student.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.tuitione.logic.commands.FilterCommand;
+import seedu.tuitione.model.student.Grade;
 
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();

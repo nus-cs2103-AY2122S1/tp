@@ -45,7 +45,8 @@ public class TypicalTuition {
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone(), PHYSICS_S2));
+        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone(),
+                PHYSICS_S2.createClone()));
     }
 
     public static List<Student> getTypicalStudents() {
