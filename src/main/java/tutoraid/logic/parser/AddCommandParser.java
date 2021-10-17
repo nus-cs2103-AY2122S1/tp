@@ -14,8 +14,6 @@ import tutoraid.logic.parser.exceptions.ParseException;
  * Checks if a given add command is to add a student to TutorAid or to add a progress note to a student.
  */
 public class AddCommandParser implements Parser<AddCommand> {
-    public static final String COMMAND_WORD = "add";
-
     /**
      * Used for initial separation of command flag ('-s' or '-p') and args.
      */

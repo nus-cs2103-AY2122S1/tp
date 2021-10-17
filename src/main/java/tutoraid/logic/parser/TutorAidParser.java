@@ -4,8 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import tutoraid.commons.core.Messages;
+import tutoraid.logic.commands.AddCommand;
 import tutoraid.logic.commands.ClearCommand;
 import tutoraid.logic.commands.Command;
+import tutoraid.logic.commands.DeleteCommand;
 import tutoraid.logic.commands.EditStudentCommand;
 import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.HelpCommand;
@@ -48,10 +50,10 @@ public class TutorAidParser {
 
         switch (commandWord) {
 
-        case AddCommandParser.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case DeleteCommandParser.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case EditStudentCommand.COMMAND_WORD:
