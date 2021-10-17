@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.GROUP_1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.REPORT_1;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -35,6 +37,7 @@ public class AddressBookTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
         assertEquals(Collections.emptyList(), addressBook.getTaskList());
+        assertEquals(Collections.emptyList(), addressBook.getGroupList());
     }
 
     @Test
@@ -56,7 +59,8 @@ public class AddressBookTest {
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         List<Task> sampleTaskList = List.of(REPORT_1);
-        AddressBookStub newData = new AddressBookStub(newPersons, sampleTaskList);
+        List<Group> sampleGroupList = List.of(GROUP_1);
+        AddressBookStub newData = new AddressBookStub(newPersons, sampleTaskList, sampleGroupList);
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
     }
@@ -67,7 +71,9 @@ public class AddressBookTest {
         Task editedReport1 = new TaskBuilder(REPORT_1).build();
         List<Task> newTaskList = List.of(REPORT_1, editedReport1);
         List<Person> samplePersonList = List.of(ALICE);
-        AddressBookStub newData = new AddressBookStub(samplePersonList, newTaskList);
+        // TODO: Add detailed skeleton for Group
+        List<Group> sampleGroupList = List.of(GROUP_1);
+        AddressBookStub newData = new AddressBookStub(samplePersonList, newTaskList, sampleGroupList);
 
         assertThrows(DuplicateTaskException.class, () -> addressBook.resetData(newData));
     }
@@ -129,16 +135,23 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getTaskList().remove(0));
     }
 
+    @Test
+    public void getGroupList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getGroupList().remove(0));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+        private final ObservableList<Group> groups = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Task> tasks) {
+        AddressBookStub(Collection<Person> persons, Collection<Task> tasks, Collection<Group> groups) {
             this.persons.setAll(persons);
             this.tasks.setAll(tasks);
+            this.groups.setAll(groups);
         }
 
         @Override
@@ -149,6 +162,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Task> getTaskList() {
             return tasks;
+        }
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            return groups;
         }
 
         @Override

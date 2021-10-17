@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.group.Group;
 
 /**
  * The API of the Model component.

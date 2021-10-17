@@ -3,10 +3,10 @@ package seedu.address.model;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
-import seedu.address.model.group.Group;
 
 /**
  * Unmodifiable view of an address book
