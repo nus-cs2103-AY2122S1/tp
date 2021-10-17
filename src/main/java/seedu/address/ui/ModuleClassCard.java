@@ -40,7 +40,9 @@ public class ModuleClassCard extends UiPart<Region> {
         super(FXML);
         this.moduleClass = moduleClass;
         id.setText(displayedIndex + ". ");
-        moduleCode.setText("Testing");
+        moduleClass.getModuleCodes().stream()
+                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
+                .forEach(moduleCode -> moduleCodeContainer.getChildren().add(new Label(moduleCode.value)));
 
         moduleClass.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
