@@ -5,15 +5,26 @@
     "email": "alice@example.com",
     "teleHandle": "",
     "remark" : "",
-    "moduleCodes": [ "CS2030S", "CS2040" ],
-    "tagged": [ "local" ]
+    "moduleCodes" : [ {
+      "moduleCode" : "CS2030S",
+      "tags" : [ "T12" ]
+    }, {
+      "moduleCode": "CS2040",
+      "tags": [ ]
+    } ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "remark" : "",
-    "moduleCodes": [ "CS2030S", "CS2040" ],
-    "teleHandle": ""
+    "teleHandle": "",
+    "moduleCodes" : [ {
+      "moduleCode" : "CS2030S",
+      "tags" : [ "T12" ]
+    }, {
+      "moduleCode": "CS2040",
+      "tags": [ ]
+    } ]
   } ],
-  "classes" : [ ]
+  "classes": [ ]
 }

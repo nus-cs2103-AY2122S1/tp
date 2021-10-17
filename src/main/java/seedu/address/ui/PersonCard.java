@@ -60,9 +60,10 @@ public class PersonCard extends UiPart<Region> {
                                 .forEach(moduleCode -> moduleCodes.getChildren().add(new Label(moduleCode.value)));
         phone.setText(person.getPhone().value);
         teleHandle.setText(person.getTeleHandle().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getModuleCodes().stream()
+                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
+                .map(moduleCode -> moduleCode.tags)
+                .forEach(t -> t.forEach(tag -> tags.getChildren().add(new Label(tag.tagName))));
     }
 
     @Override

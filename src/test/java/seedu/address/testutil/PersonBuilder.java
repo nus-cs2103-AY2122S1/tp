@@ -12,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -22,8 +21,8 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_REMARK = "She likes aardvarks.";
-    public static final Collection<String> DEFAULT_MODULE_CODES = Set.of("CS2030S", "CS2040");
+    public static final String DEFAULT_REMARK = "Can't attend midterms";
+    public static final Collection<String> DEFAULT_MODULE_CODES = Set.of("CS2030S T12", "CS2040");
 
     private Name name;
     private Email email;
@@ -31,7 +30,6 @@ public class PersonBuilder {
     private Set<ModuleCode> moduleCodes;
     private Phone phone;
     private TeleHandle teleHandle;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,11 +37,11 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
-        remark = new Remark("");
-        moduleCodes = DEFAULT_MODULE_CODES.stream().map(ModuleCode::new).collect(Collectors.toSet());
+        moduleCodes = DEFAULT_MODULE_CODES.stream()
+                .map(SampleDataUtil::parseModuleCode).collect(Collectors.toSet());
         phone = new Phone("");
         teleHandle = new TeleHandle("");
-        tags = new HashSet<>();
+        remark = new Remark("");
     }
 
     /**
@@ -56,22 +54,13 @@ public class PersonBuilder {
         moduleCodes = new HashSet<>(personToCopy.getModuleCodes());
         phone = personToCopy.getPhone();
         teleHandle = personToCopy.getTeleHandle();
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
-    /**
+    /**e
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -117,7 +106,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, moduleCodes, phone, teleHandle, remark, tags);
+        return new Person(name, email, moduleCodes, phone, teleHandle, remark);
     }
 
 }

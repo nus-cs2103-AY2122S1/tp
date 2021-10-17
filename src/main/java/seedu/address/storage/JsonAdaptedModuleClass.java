@@ -1,5 +1,10 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +14,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.Time;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -19,6 +25,7 @@ public class JsonAdaptedModuleClass {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module Class's %s field is missing!";
 
     private final String moduleCode;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String day;
     private final String time;
     private final String remark;
@@ -57,7 +64,12 @@ public class JsonAdaptedModuleClass {
         if (moduleCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
-        final ModuleCode classModuleCode = new ModuleCode(moduleCode);
+        final List<Tag> moduleCodeTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            moduleCodeTags.add(tag.toModelType());
+        }
+        final Set<Tag> classTags = new HashSet<>(moduleCodeTags);
+        final ModuleCode classModuleCode = new ModuleCode(moduleCode, classTags);
 
         if (day == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));

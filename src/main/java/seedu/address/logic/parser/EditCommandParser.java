@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.Collection;
@@ -36,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_MODULE_CODE, PREFIX_PHONE,
-                        PREFIX_TELE_HANDLE, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_TELE_HANDLE, PREFIX_REMARK);
 
         Index index;
 
@@ -65,7 +64,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseModuleCodesForEdit(argMultimap.getAllValues(PREFIX_MODULE_CODE))
                 .ifPresent(editPersonDescriptor::setModuleCodes);
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

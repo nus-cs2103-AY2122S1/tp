@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_INTERNATIONAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,8 +48,16 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_INTERNATIONAL).build();
+        // different tele handle -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTeleHandle(VALID_TELE_HANDLE_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different remark -> return false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRemark(VALID_REMARK_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different module codes -> return false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_CS2030S).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

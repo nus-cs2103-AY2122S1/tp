@@ -1,10 +1,17 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.ModuleCode;
+import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link ModuleCode}.
@@ -12,6 +19,7 @@ import seedu.address.model.person.ModuleCode;
 public class JsonAdaptedModuleCode {
 
     private final String moduleCodeName;
+    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedModuleCode} with the given {@code moduleCodeName}.
@@ -19,8 +27,12 @@ public class JsonAdaptedModuleCode {
      * @param moduleCodeName The given module code name.
      */
     @JsonCreator
-    public JsonAdaptedModuleCode(String moduleCodeName) {
+    public JsonAdaptedModuleCode(@JsonProperty("moduleCode") String moduleCodeName,
+                                 @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.moduleCodeName = moduleCodeName;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     /**
@@ -30,9 +42,11 @@ public class JsonAdaptedModuleCode {
      */
     public JsonAdaptedModuleCode(ModuleCode source) {
         moduleCodeName = source.value;
+        tags.addAll(source.getTags().stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
-    @JsonValue
     public String getModuleCodeName() {
         return moduleCodeName;
     }
@@ -44,9 +58,16 @@ public class JsonAdaptedModuleCode {
      * @throws IllegalValueException If there were any data constraints violated in the adapted module code.
      */
     public ModuleCode toModelType() throws IllegalValueException {
+
         if (!ModuleCode.isValidModuleCode(moduleCodeName)) {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(moduleCodeName);
+
+        final List<Tag> moduleCodeTags = new ArrayList<>();
+        for (JsonAdaptedTag tag: tags) {
+            moduleCodeTags.add(tag.toModelType());
+        }
+        final Set<Tag> modelTags = new HashSet<>(moduleCodeTags);
+        return new ModuleCode(moduleCodeName, modelTags);
     }
 }

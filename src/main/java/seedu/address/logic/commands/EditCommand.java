@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -28,7 +27,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -41,14 +39,13 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_CODE]... "
+            + "[" + PREFIX_MODULE_CODE + "MODULE_INFO]... "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TELE_HANDLE + "TELE_HANDLE] "
-            + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: edit 1 "
             + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_MODULE_CODE + "CS2103T "
+            + PREFIX_MODULE_CODE + "CS2103T T09"
             + PREFIX_PHONE + "91234567 ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -100,7 +97,6 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<ModuleCode> updatedModuleCodes = editPersonDescriptor.getModuleCodes()
                 .orElse(personToEdit.getModuleCodes());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
@@ -108,7 +104,7 @@ public class EditCommand extends Command {
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
 
         return new Person(updatedName, updatedEmail, updatedModuleCodes, updatedPhone, updatedTeleHandle,
-                updatedRemark, updatedTags);
+                updatedRemark);
     }
 
     @Override
@@ -140,7 +136,6 @@ public class EditCommand extends Command {
         private Phone phone;
         private TeleHandle teleHandle;
         private Remark remark;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -155,14 +150,13 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setTeleHandle(toCopy.teleHandle);
             setRemark(toCopy.remark);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, moduleCodes, phone, teleHandle, remark, tags);
+            return CollectionUtil.isAnyNonNull(name, email, moduleCodes, phone, teleHandle, remark);
         }
 
         public void setName(Name name) {
@@ -213,23 +207,6 @@ public class EditCommand extends Command {
             return Optional.ofNullable(remark);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -248,7 +225,9 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
-                    && getTags().equals(e.getTags());
+                    && getTeleHandle().equals(e.getTeleHandle())
+                    && getRemark().equals(e.getRemark())
+                    && getModuleCodes().equals(e.getModuleCodes());
         }
     }
 }

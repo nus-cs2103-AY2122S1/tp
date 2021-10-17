@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -76,10 +78,18 @@ public class ParserUtil {
     public static ModuleCode parseModuleCode(String moduleCode) throws ParseException {
         requireNonNull(moduleCode);
         String trimmedModuleCode = moduleCode.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedModuleCode)) {
+        String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
+        assert moduleCodeArr.length >= 1 : "Array should not be empty\n";
+        if (!ModuleCode.isValidModuleCode(moduleCodeArr[0])) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(trimmedModuleCode);
+        for (int i = 1; i < moduleCodeArr.length; i++) {
+            if (!Tag.isValidTagName(moduleCodeArr[i])) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
+        Set<Tag> tags = Arrays.stream(moduleCodeArr).skip(1).map(Tag::new).collect(Collectors.toSet());
+        return new ModuleCode(moduleCodeArr[0], tags);
     }
 
     /**
