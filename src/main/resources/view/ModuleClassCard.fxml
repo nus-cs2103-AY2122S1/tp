@@ -27,7 +27,7 @@
             </HBox>
             <FlowPane fx:id="tags">
                 <padding>
-                    <Insets top="5.0" />
+                    <Insets bottom="5.0" top="5.0" />
                 </padding>
          </FlowPane>
          <HBox>
@@ -42,7 +42,7 @@
          </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
                 <padding>
-                    <Insets bottom="2.0" />
+                    <Insets top="3.0" />
                 </padding></Label>
             <padding>
                 <Insets bottom="5.0" left="15.0" right="5.0" />
