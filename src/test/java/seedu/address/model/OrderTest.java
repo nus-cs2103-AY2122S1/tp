@@ -35,7 +35,7 @@ class OrderTest {
     @Test
     public void equals_ordersWithSameInternalList_equal() {
         Order order1 = TypicalOrders.getTypicalOrder();
-        Order order2 = TypicalOrders.getTypicalOrder();
+        Order order2 = new Order(TypicalItems.getTypicalItems());
         assertEquals(order1, order2);
     }
 
