@@ -109,6 +109,18 @@ public class Person {
     }
 
     /**
+     * Returns if the person has an existing visit that is overdue.
+     * Only the immediate visit will be examined, not the recurring ones that follow.
+     */
+    public boolean isVisitOverdue() {
+        if (this.visit.isEmpty()) {
+            return false;
+        }
+
+        return this.visit.get().isOverdue();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

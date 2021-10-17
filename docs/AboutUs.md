@@ -48,7 +48,7 @@ You can reach us through the following email addresses:
 
 <img src="images/huisthat.png" width="200px">
 
-[[github](http://github.com/huisthat)] 
+[[github](http://github.com/huisthat)]
 [[portfolio](team/huisthat.md)]
 
 * Role: Developer

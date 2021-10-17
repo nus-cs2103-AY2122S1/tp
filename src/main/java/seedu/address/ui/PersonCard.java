@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -14,6 +15,8 @@ import seedu.address.model.person.Person;
  * An UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
+
+    public static final String OVERDUE_STYLE_CLASS = "overdue";
 
     private static final String FXML = "PersonListCard.fxml";
     private static final String DISPLAY_LAST_VISIT = "Last visit: ";
@@ -64,6 +67,24 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        setVisitOverdueStyle(person.isVisitOverdue());
+    }
+
+    /**
+     * Updates the PersonCard visit field's style based on if it is overdue.
+     * Defensive programming involved here.
+     * @param isOverdue whether the visit is overdue
+     */
+    private void setVisitOverdueStyle(boolean isOverdue) {
+        ObservableList<String> styles = visit.getStyleClass();
+        if (!isOverdue) {
+            styles.remove(OVERDUE_STYLE_CLASS);
+        } else {
+            if (!styles.contains(OVERDUE_STYLE_CLASS)) {
+                styles.add(OVERDUE_STYLE_CLASS);
+            }
+        }
     }
 
     @Override

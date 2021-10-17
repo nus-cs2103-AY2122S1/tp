@@ -18,3 +18,7 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.overdue {
+    -fx-text-fill: #FF0000 !important;
+}

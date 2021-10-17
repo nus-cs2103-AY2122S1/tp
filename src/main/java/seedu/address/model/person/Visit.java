@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.ParserUtil;
 
@@ -37,6 +40,25 @@ public class Visit {
      */
     public boolean hasVisit() {
         return !(this.value == null || this.value.isEmpty());
+    }
+
+    /**
+     * Returns if the visit exists and is overdue.
+     * Compared against today's date.
+     */
+    public boolean isOverdue() {
+        if (!hasVisit()) {
+            return false;
+        }
+
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        return DateTimeUtil.isPast(visitTime);
     }
 
     /**
