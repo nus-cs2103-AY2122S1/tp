@@ -13,6 +13,7 @@ title: User Guide
     * [Editing a person](#editing-a-person-edit)
     * [Locating persons by name](#locating-persons-by-name-find)
     * [Deleting a person](#deleting-a-person-delete)
+    * [Adding a remark](#adding-a-remark)  
     * [Adding an appointment](#adding-an-appointment-appt)
     * [Editing an appointment](#editing-an-appointment-eppt)
     * [Deleting an appointment](#deleting-an-appointment-dappt)
@@ -82,6 +83,8 @@ Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* `INDEX` refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
 
@@ -162,6 +165,22 @@ Format: `del INDEX`
 Examples:
 * `list` followed by `del 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
+
+### Adding a remark: `rmk`
+
+Adds a remark to an existing person in the address book.
+
+Format: `rmk INDEX [r/REMARK]`
+
+* Adds a remark to the person at the specified `INDEX`.
+* Remarks have a character limit of 100 characters.
+* To delete a remark, leave the remark parameter `[r/REMARK]` empty. <br>
+  e.g. `rmk 1`.
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Adding an appointment: `appt`
 
