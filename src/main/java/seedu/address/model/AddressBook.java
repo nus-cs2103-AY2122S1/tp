@@ -98,6 +98,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
+     *
+     * @param p Person to be added to the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -108,6 +110,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a person to a specific index in address book.
      * Called when undoing a Delete Command.
+     *
+     * @param index Index in the list for which the person has to be added to.
+     * @param p Person to be added.
      */
     public void addPerson(Index index, Person p) {
         persons.add(p, index);

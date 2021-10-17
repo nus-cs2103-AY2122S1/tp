@@ -53,6 +53,7 @@ public class UniqueTagList {
 
     /**
      * Adds tags from the specified person to the internal tag list.
+     * Tag list will be sorted alphabetically after the addition of the tags.
      *
      * @param person Person whose tags are to be added to the tag list.
      */
@@ -64,6 +65,7 @@ public class UniqueTagList {
 
     /**
      * Adds tags from the specified list of persons to the internal tag list.
+     * Tag list will be sorted alphabetically.
      *
      * @param persons List of persons whose tags are to be added to the tag list.
      */
@@ -106,6 +108,7 @@ public class UniqueTagList {
     /**
      * Replaces the contents of this list with {@code tags}.
      * {@code tags} must not contain duplicate tags.
+     * Tag list will be sorted alphabetically.
      *
      * @param tags The Tags to be set.
      */
@@ -122,6 +125,7 @@ public class UniqueTagList {
 
     /**
      * Removes the tags from {@code target} and adds the tags from {@code editedPerson} to the tag list.
+     * Tag list will be sorted alphabetically.
      *
      * @param target Person whose tags are to be removed.
      * @param editedPerson Person whose tags are to be added.
