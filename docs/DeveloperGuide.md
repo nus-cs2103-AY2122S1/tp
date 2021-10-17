@@ -178,15 +178,15 @@ Given below is an example usage scenario:
 #### Design choices
 
 - Overloading `edit` to add/change visit:
-  
-  The `visit` command is similar to the `edit` command in the sense that they both alter the person's attributes, and it is possible to implement similar functionality without a new command. 
+
+  The `visit` command is similar to the `edit` command in the sense that they both alter the person's attributes, and it is possible to implement similar functionality without a new command.
   However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
-  
+
 - Implementing recurring visits with an occurrence counter and frequency attribute:
 
   Both methods can achieve the intended effect of implementing the recurring visits. However, we chose to go with an occurrence counter and frequency attribute because it requires less resources.
   We were concerned that the recurring visits could have many occurrences and at a high frequency, and this could lead to extra overhead in storing and accessing these arrays.
-  
+
 
 ### \[Proposed\] Undo/redo feature
 
