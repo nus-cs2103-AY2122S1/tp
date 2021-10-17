@@ -12,12 +12,13 @@ title: User Guide
     * [Listing all persons](#listing-all-persons-list)
     * [Editing a person](#editing-a-person-edit)
     * [Locating persons by name](#locating-persons-by-name-find)
-    * [Deleting a person](#deleting-a-person-delete)
-    * [Adding a remark](#adding-a-remark)  
+    * [Deleting a person](#deleting-a-person-del)
+    * [Adding a remark](#adding-a-remark-rmk)  
     * [Adding an appointment](#adding-an-appointment-appt)
     * [Editing an appointment](#editing-an-appointment-eppt)
     * [Deleting an appointment](#deleting-an-appointment-dappt)
     * [Updating completed appointment](#updating-completed-appointment-done)
+    * [Sorting all persons](#sorting-all-persons-sort)
     * [Clearing all entries](#clearing-all-entries-clear)
     * [Exiting the program](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
@@ -258,8 +259,9 @@ Sorts all existing person by the given keyword.
 
 Format: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
-* Existing details will be deleted.
-* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+* `name` : Sorts all persons in alphabetical order.
+* `appointment`: Sorts all persons by appointment date.
+* `priority` : Sorts all persons by the highest priority.
 
 Examples:
 * `sort priority` Sorts all existing persons by the priority from highest priority to lowest priority.
