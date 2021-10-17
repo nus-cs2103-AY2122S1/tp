@@ -24,11 +24,11 @@ public class JsonModuleTrackerStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readModuleTracker_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readModuleTracker(null));
     }
 
-    private java.util.Optional<ReadOnlyModuleTracker> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyModuleTracker> readModuleTracker(String filePath) throws Exception {
         return new JsonModuleTrackerStorage(Paths.get(filePath)).readModuleTracker(
                 addToTestDataPathIfNotNull(filePath));
     }
@@ -41,26 +41,26 @@ public class JsonModuleTrackerStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readModuleTracker("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatModuleTracker.json"));
+        assertThrows(DataConversionException.class, () -> readModuleTracker("notJsonFormatModuleTracker.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidModuleModuleTracker.json"));
+    public void readModuleTracker_invalidPersonModuleTracker_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModuleTracker("invalidModuleModuleTracker.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidModuleModuleTracker.json"));
+    public void readModuleTracker_invalidAndValidPersonModuleTracker_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readModuleTracker("invalidAndValidModuleModuleTracker.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveModuleTracker_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempModuleTracker.json");
         ModuleTracker original = getTypicalModuleTracker();
         JsonModuleTrackerStorage jsonModuleTrackerStorage = new JsonModuleTrackerStorage(filePath);
@@ -84,24 +84,24 @@ public class JsonModuleTrackerStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveModuleTracker_nullModuleTracker_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveModuleTracker(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code moduleTracker} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyModuleTracker addressBook, String filePath) {
+    private void saveModuleTracker(ReadOnlyModuleTracker moduleTracker, String filePath) {
         try {
             new JsonModuleTrackerStorage(Paths.get(filePath))
-                .saveModuleTracker(addressBook, addToTestDataPathIfNotNull(filePath));
+                .saveModuleTracker(moduleTracker, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new ModuleTracker(), null));
+    public void saveModuleTracker_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveModuleTracker(new ModuleTracker(), null));
     }
 }

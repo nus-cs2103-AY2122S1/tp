@@ -1,6 +1,8 @@
 package seedu.tracker.model.calendar;
 
 
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
@@ -40,4 +42,8 @@ public class AcademicYear {
                 && value == (((AcademicYear) other).value); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }

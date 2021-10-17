@@ -3,7 +3,9 @@ package seedu.tracker.storage;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.commons.exceptions.DataConversionException;
 import seedu.tracker.commons.exceptions.IllegalValueException;
+import seedu.tracker.commons.util.FileUtil;
 import seedu.tracker.commons.util.JsonUtil;
+import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserInfo;
 
 import java.io.IOException;
@@ -56,11 +58,19 @@ public class JsonUserInfoStorage implements UserInfoStorage {
 
     @Override
     public void saveUserInfo(ReadOnlyUserInfo userInfo) throws IOException {
-
+        saveUserInfo(userInfo, filePath);
     }
 
-    @Override
+    /**
+     * Similar to {@link #saveUserInfo(ReadOnlyUserInfo)}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
     public void saveUserInfo(ReadOnlyUserInfo userInfo, Path filePath) throws IOException {
+        requireNonNull(filePath);
+        requireNonNull(userInfo);
 
+        FileUtil.createIfMissing(filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableUserInfo(userInfo), filePath);
     }
 }

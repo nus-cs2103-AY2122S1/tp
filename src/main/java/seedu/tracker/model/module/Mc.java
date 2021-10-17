@@ -3,6 +3,8 @@ package seedu.tracker.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Module's MC credits in the module tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidMc(int)}
@@ -42,5 +44,10 @@ public class Mc {
         return other == this // short circuit if same object
                 || (other instanceof seedu.tracker.model.module.Mc // instanceof handles nulls
                 && value == (((seedu.tracker.model.module.Mc) other).value)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
