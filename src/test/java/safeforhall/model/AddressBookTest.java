@@ -89,9 +89,6 @@ public class AddressBookTest {
 
     @Test
     public void findEventSuccess() {
-//        EventName eventName = new EventName("powerlifting");
-//        System.out.println(addressBook.findEvent(eventName));
-//        assertTrue(addressBook.hasEvent());
     }
 
     @Test
