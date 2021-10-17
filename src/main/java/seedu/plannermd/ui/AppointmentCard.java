@@ -49,7 +49,7 @@ public class AppointmentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         apptDate.setText(formatApptDate(appointment.getAppointmentDate().date));
         apptTime.setText(formatApptTime(appointment.getSession()));
-        doctorName.setText("Doctor: Dr " + appointment.getDoctor().getName().fullName);
+        doctorName.setText("Doctor: " + appointment.getDoctor().getName().fullName);
         patientName.setText("Patient: " + appointment.getPatient().getName().fullName);
         setAppointmentRemark(appointment.getRemark().value);
     }
