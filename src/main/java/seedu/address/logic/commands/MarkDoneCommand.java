@@ -11,14 +11,14 @@ import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
 /**
- * Marks a task as complete, with the task identified using its displayed index from the address book.
+ * Marks a task as done, with the task identified using its displayed index from the application
  */
 public class MarkDoneCommand extends Command {
 
     public static final String COMMAND_WORD = "markdone";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks a task identified by the index number used in the displayed task list as complete.\n"
+            + ": Marks a task identified by the index number used in the displayed task list as done.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

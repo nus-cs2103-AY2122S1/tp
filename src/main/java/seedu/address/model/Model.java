@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -113,4 +114,9 @@ public interface Model {
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     void markDone(Task task);
+
+    //======================================== Order FUNCTIONALITIES =================================================
+    ObservableList<Order> getFilteredOrderList();
+
+    void markComplete(Order order);
 }

@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -25,6 +27,10 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
 
+    //pending re-wrapping by yuichiro
+    private final OrderBook orderBook;
+    private final FilteredList<Order> filteredOrders;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -36,6 +42,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+
+        //pending re-wrapping by Yuichiro
+        this.orderBook = new OrderBook();
+        filteredOrders = new FilteredList<>(orderBook.asUnmodifiableObservableList());
+
     }
 
     public ModelManager() {
@@ -159,6 +170,18 @@ public class ModelManager implements Model {
 
     public void markDone(Task task) {
         addressBook.markDone(task);
+    }
+
+
+    //=========== Order Management ==================================================================================
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        return filteredOrders;
+    }
+
+    @Override
+    public void markComplete(Order order) {
+        this.orderBook.markComplete(order);
     }
 
     //=========== Filtered Person List Accessors =============================================================
