@@ -62,4 +62,22 @@ public class SalesOrder {
             return "[ ]" + "SO" + id + ", due: " + date;
         }
     }
+
+    //required for SalesBook to check if a Order exists, before marking it.
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof SalesOrder)) {
+            return false;
+        }
+
+        SalesOrder otherOrder = (SalesOrder) other;
+        return otherOrder.getCustomer().equals(getCustomer())
+                && otherOrder.getDate().equals(getDate());
+                && otherOrder.getAmount().equals(getAmount());
+
+    }
 }
