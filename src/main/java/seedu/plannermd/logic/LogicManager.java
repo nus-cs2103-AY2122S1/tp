@@ -77,6 +77,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Doctor> getFilteredAppointmentList() {
+        return model.getFilteredDoctorList();
+    }
+
+    @Override
     public Path getPlannerMdFilePath() {
         return model.getPlannerMdFilePath();
     }

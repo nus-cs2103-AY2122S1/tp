@@ -122,6 +122,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredAppointmentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAppointmentList().remove(0));
+    }
+
+    @Test
     public void equals() {
         PlannerMd plannerMd = new PlannerMdBuilder()
                 .withPatient(ALICE).withPatient(BENSON)

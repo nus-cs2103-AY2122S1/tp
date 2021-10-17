@@ -42,8 +42,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of patients */
     ObservableList<Patient> getFilteredPatientList();
 
-    /** Returns an unmodifiable view of the filtered list of Doctors */
+    /** Returns an unmodifiable view of the filtered list of doctors */
     ObservableList<Doctor> getFilteredDoctorList();
+
+    /** Returns an unmodifiable view of the filtered list of appointments */
+    ObservableList<Doctor> getFilteredAppointmentList();
 
     /**
      * Returns the user prefs' plannermd file path.
