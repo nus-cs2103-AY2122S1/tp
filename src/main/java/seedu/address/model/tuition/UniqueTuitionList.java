@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -29,11 +30,24 @@ import seedu.address.model.tuition.exceptions.TuitionNotFoundException;
  * @see TuitionClass#isSameTuition(TuitionClass)
  */
 public class UniqueTuitionList implements Iterable<TuitionClass> {
+    private static ObservableList<TuitionClass> mostRecentTuitionClasses = FXCollections.observableArrayList();
 
     private final ObservableList<TuitionClass> internalList = FXCollections.observableArrayList();
     private final ObservableList<TuitionClass> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
     private SortCommandParser.Order order;
+
+    /**
+     * Constructor for UniqueTuitionList.
+     */
+    public UniqueTuitionList() {
+        internalList.addListener(new ListChangeListener<TuitionClass>() {
+            @Override
+            public void onChanged(Change<? extends TuitionClass> c) {
+                mostRecentTuitionClasses = internalList;
+            }
+        });
+    }
 
     /**
      * Returns true if the list contains an equivalent tuitionClass as the given argument.
@@ -158,6 +172,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         this.order = order;
         internalList.sort(new TuitionClassComparator(order));
     }
+
     class TuitionClassComparator implements Comparator<TuitionClass> {
         private SortCommandParser.Order order;
         public TuitionClassComparator(SortCommandParser.Order order) {
@@ -178,5 +193,14 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
             }
         }
     }
+
+    /**
+     * Returns all time slots that have been occupied from the most recent updates.
+     * @return all time slots in an arraylist.
+     */
+    public static ObservableList<TuitionClass> getMostRecentTuitionClasses() {
+        return mostRecentTuitionClasses;
+    }
+
 }
 
