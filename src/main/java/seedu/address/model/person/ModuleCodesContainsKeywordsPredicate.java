@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Tests that a {@code Person}'s {@code ModuleCode}s matches all of the keywords given.
  */
@@ -18,7 +20,7 @@ public class ModuleCodesContainsKeywordsPredicate implements Predicate<Person> {
         return keywords.stream()
                 .allMatch(keyword -> person.getModuleCodes()
                         .stream().anyMatch(moduleCode ->
-                                keyword.equalsIgnoreCase(moduleCode.toString())
+                                StringUtil.containsWordIgnoreCase(keyword, moduleCode.value)
                         )
                 );
     }
