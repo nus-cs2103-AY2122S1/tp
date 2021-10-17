@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 public class UntagCommandParser implements Parser<UntagCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the UntagCommand
+     * Parses the given {@code String} of arguments in the context of the {@code UntagCommand}
      * and returns an UntagCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
