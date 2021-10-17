@@ -48,11 +48,12 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-        
         <HBox VBox.vgrow="ALWAYS">
-          <TabPane fx:id = "tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" >
+          <TabPane fx:id = "tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="pane-with-border" HBox.hgrow="ALWAYS"
+                   VBox.vgrow="ALWAYS" >
             <Tab fx:id = "Clients" text="Clients">
-              <VBox fx:id="ClientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
+              <VBox fx:id="ClientList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                    HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
@@ -60,7 +61,8 @@
               </VBox>
             </Tab>
             <Tab fx:id = "Products" text = "Products">
-              <VBox fx:id="ProductList" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
+              <VBox fx:id="ProductList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                    HBox.hgrow="ALWAYS">
                 <padding>
                   <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>
