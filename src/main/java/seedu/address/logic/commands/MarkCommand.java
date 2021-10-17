@@ -21,12 +21,19 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  * Class representing the command for marking a person as absent.
  */
 public class MarkCommand extends Command {
+
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent!\n"
-            + "e.g. " + COMMAND_WORD + " " + PREFIX_INDEX + "INDEX"
-            + " " + PREFIX_DAY_SHIFT + "DATE" + ",\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "NAME"
-            + PREFIX_DAY_SHIFT + "DATE" + " " + PREFIX_DAY_SHIFT + "DATE";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n\n"
+            + "Parameters:\n"
+            + PREFIX_INDEX + "INDEX or "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_DAY_SHIFT + "DATE "
+            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + "Examples:\n"
+            + COMMAND_WORD + " " + PREFIX_INDEX + "1"
+            + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Jace "
+            + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
             + "%3$s";

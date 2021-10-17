@@ -243,7 +243,7 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Salary: ")
-                .append(getSalary())
+                .append(getSalary().convertToDollars())
                 .append("; Status: ")
                 .append(getStatus());
 

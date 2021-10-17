@@ -22,21 +22,21 @@ import seedu.address.model.person.exceptions.DuplicateShiftException;
  * Adds a shift to a staff's schedule.
  */
 public class AddShiftCommand extends Command {
+
     public static final String COMMAND_WORD = "addShift";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a shift to the staff identified "
-            + "by\nthe index number used in the displayed staff list or\nthe name of staff." + "\n"
-            + "Parameters: "
-            + "[" + PREFIX_INDEX + "INDEX] or "
-            + "[" + PREFIX_NAME + "NAME] + "
-            + "[" + PREFIX_DAY_SHIFT + "DAY AND\nSLOT OF A SHIFT]" + "\n"
-            + "Example: " + COMMAND_WORD + " "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
+            + "by the index number used in the displayed staff list or the name of staff." + "\n\n"
+            + "Parameters:\n"
+            + PREFIX_INDEX + "INDEX or "
+            + PREFIX_NAME + "NAME "
+             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n\n"
+            + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
-            + PREFIX_DAY_SHIFT + "monday-1" + "\n"
-            + "OR: " + COMMAND_WORD + " "
+            + PREFIX_DAY_SHIFT + "monday-1\n"
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "JOE "
             + PREFIX_DAY_SHIFT + "TUESDAY-0";
-
 
     public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";
     public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in the staff's schedule.";
