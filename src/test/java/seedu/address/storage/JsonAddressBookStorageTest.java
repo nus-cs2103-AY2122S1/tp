@@ -3,14 +3,14 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_HOON;
+import static seedu.address.testutil.TypicalCustomers.CUSTOMER_IDA;
+import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalEmployees.ALICE_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.HOON_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.IDA_EMPLOYEE;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalSuppliers.CHETWIN;
 import static seedu.address.testutil.TypicalSuppliers.HOON_SUPPLIER;
 import static seedu.address.testutil.TypicalSuppliers.IDA_SUPPLIER;
@@ -60,7 +60,7 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidCustomerAddressBook.json"));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class JsonAddressBookStorageTest {
 
     @Test
     public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidCustomerAddressBook.json"));
     }
 
     @Test
@@ -91,22 +91,22 @@ public class JsonAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempAddressBook.json");
-        AddressBook original = getTypicalAddressBook();
+        AddressBook originalCustomer = getTypicalAddressBook();
         AddressBook originalEmployee = getTypicalAddressBookEmployees();
         AddressBook originalSuppliers = getTypicalAddressBookSuppliers();
         JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        jsonAddressBookStorage.saveAddressBook(originalCustomer, filePath);
         ReadOnlyAddressBook readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(originalCustomer, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
+        originalCustomer.addCustomer(CUSTOMER_HOON);
+        originalCustomer.removeCustomer(CUSTOMER_ALICE);
+        jsonAddressBookStorage.saveAddressBook(originalCustomer, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(originalCustomer, new AddressBook(readBack));
 
         // Modify data, overwrite exiting file, and read back Employees test
         originalEmployee.addEmployee(HOON_EMPLOYEE);
@@ -124,10 +124,10 @@ public class JsonAddressBookStorageTest {
         assertEquals(originalSuppliers, new AddressBook(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
+        originalCustomer.addCustomer(CUSTOMER_IDA);
+        jsonAddressBookStorage.saveAddressBook(originalCustomer); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        assertEquals(originalCustomer, new AddressBook(readBack));
 
         // Save and read without specifying file path Employees test
         originalEmployee.addEmployee(IDA_EMPLOYEE);

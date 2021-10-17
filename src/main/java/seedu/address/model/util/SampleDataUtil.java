@@ -122,9 +122,6 @@ public class SampleDataUtil {
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
-        }
         for (Customer sampleCustomer : getSampleCustomers()) {
             sampleAb.addCustomer(sampleCustomer);
         }

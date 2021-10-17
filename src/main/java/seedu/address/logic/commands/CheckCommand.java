@@ -10,8 +10,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.Model;
+import seedu.address.model.reservation.CustomerContainsReservationPredicate;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
-import seedu.address.model.reservation.PersonContainsReservationPredicate;
 
 /**
  * Checks if there is an available slot for reservation in the specified date and time.
@@ -47,7 +47,7 @@ public class CheckCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.updateFilteredReservationList(predicate);
-        model.updateFilteredPersonList(new PersonContainsReservationPredicate(model.getFilteredReservationList()));
+        model.updateFilteredCustomerList(new CustomerContainsReservationPredicate(model.getFilteredReservationList()));
         return new CommandResult(String.format(getDisplayMessage(typeOfCheck),
                 model.getFilteredReservationList().size(),
                 convertToLocalDateTime(date, time)));
