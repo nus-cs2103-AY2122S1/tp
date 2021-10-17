@@ -64,6 +64,9 @@ public class DeleteCommand extends Command {
             model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         }
+        if (!invalidStudents.isEmpty() && removed.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_DELETE_STUDENTS_FAILURE, invalidStudents));
+        }
         String feedback = (!removed.isEmpty()
                 ? String.format(MESSAGE_DELETE_STUDENTS_SUCCESS, removed) : "")
                 + (!invalidStudents.isEmpty()

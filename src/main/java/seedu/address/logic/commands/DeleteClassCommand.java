@@ -57,6 +57,10 @@ public class DeleteClassCommand extends Command {
             removed.add(classToDelete.getName().name + "|" + classToDelete.getTimeslot());
             model.deleteTuition(classToDelete);
         }
+        if (!invalidClasses.isEmpty() && removed.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_DELETE_CLASSES_FAILURE, invalidClasses));
+        }
+
         String feedback = (!removed.isEmpty()
             ? String.format(MESSAGE_DELETE_CLASSES_SUCCESS, removed) : "")
                 + (!invalidClasses.isEmpty()

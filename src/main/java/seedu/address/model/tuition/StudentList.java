@@ -68,4 +68,16 @@ public class StudentList {
     public boolean isEmpty() {
         return students.isEmpty();
     }
+
+    /**
+     * Updates student name in the list.
+     * @param oldName
+     * @param newName
+     */
+    public void changeStudentName(String oldName, String newName) {
+        if (students.contains(oldName)) {
+            students.remove(oldName);
+            students.add(newName);
+        }
+    }
 }
