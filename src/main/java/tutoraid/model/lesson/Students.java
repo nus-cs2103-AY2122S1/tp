@@ -16,7 +16,7 @@ public class Students {
     /**
      * Constructs a {@code Students}.
      *
-     * @param students Valid students' indexes.
+     * @param students Valid arraylist of Student objects.
      */
     public Students(ArrayList<Student> students) {
         value = students;
@@ -31,8 +31,7 @@ public class Students {
             return true;
         }
 
-        return otherStudents != null
-                && otherStudents.equals(this);
+        return otherStudents.equals(this);
     }
 
     @Override
