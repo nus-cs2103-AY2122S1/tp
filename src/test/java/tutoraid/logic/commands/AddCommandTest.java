@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.StudentBook;
@@ -111,6 +112,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getLessonBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLessonBookFilePath(Path lessonBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addStudent(Student student) {
             throw new AssertionError("This method should not be called.");
         }
@@ -157,6 +168,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLessonBook(ReadOnlyLessonBook lessonBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyLessonBook getLessonBook() {
             throw new AssertionError("This method should not be called.");
         }
 

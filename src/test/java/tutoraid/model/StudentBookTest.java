@@ -95,11 +95,6 @@ public class StudentBookTest {
         public ObservableList<Student> getStudentList() {
             return students;
         }
-
-        @Override
-        public ObservableList<Lesson> getLessonList() {
-            return lessons;
-        }
     }
 
 }

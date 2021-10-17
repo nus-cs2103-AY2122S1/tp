@@ -7,6 +7,7 @@ import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ import tutoraid.model.student.Student;
  */
 public class ViewCommandTest {
 
-    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +34,7 @@ public class ViewCommandTest {
 
         String expectedMessage = "Viewing requested student";
 
-        ModelManager expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.viewStudent(studentToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
@@ -56,7 +57,7 @@ public class ViewCommandTest {
 
         String expectedMessage = "Viewing requested student";
 
-        Model expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.viewStudent(studentToView);
 
         assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);

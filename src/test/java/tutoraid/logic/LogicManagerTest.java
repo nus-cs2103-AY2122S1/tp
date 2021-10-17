@@ -24,10 +24,12 @@ import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
-import tutoraid.storage.JsonTutorAidStorage;
+import tutoraid.storage.JsonTutorAidLessonStorage;
+import tutoraid.storage.JsonTutorAidStudentStorage;
 import tutoraid.storage.JsonUserPrefsStorage;
 import tutoraid.storage.StorageManager;
 import tutoraid.testutil.StudentBuilder;
@@ -43,10 +45,12 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTutorAidStorage studentBookStorage =
-                new JsonTutorAidStorage(temporaryFolder.resolve("tutoraid.json"));
+        JsonTutorAidStudentStorage studentBookStorage =
+                new JsonTutorAidStudentStorage(temporaryFolder.resolve("tutorAidStudents.json"));
+        JsonTutorAidLessonStorage lessonBookStorage =
+                new JsonTutorAidLessonStorage(temporaryFolder.resolve("tutorAidLessons.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(studentBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -69,13 +73,15 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_studentsStorageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonTutorAidIoExceptionThrowingStub
-        JsonTutorAidStorage studentBookStorage =
-                new JsonTutorAidIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionStudentBook.json"));
+        JsonTutorAidStudentStorage studentBookStorage =
+                new JsonTutorAidStudentIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionStudentBook.json"));
+        JsonTutorAidLessonStorage lessonBookStorage =
+                new JsonTutorAidLessonIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionLessonBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(studentBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -129,7 +135,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -147,15 +153,29 @@ public class LogicManagerTest {
     }
 
     /**
-     * A stub class to throw an {@code IOException} when the save method is called.
+     * A stub class to throw an {@code IOException} when the save method is called on a student book.
      */
-    private static class JsonTutorAidIoExceptionThrowingStub extends JsonTutorAidStorage {
-        private JsonTutorAidIoExceptionThrowingStub(Path filePath) {
+    private static class JsonTutorAidStudentIoExceptionThrowingStub extends JsonTutorAidStudentStorage {
+        private JsonTutorAidStudentIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
         public void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException {
+            throw DUMMY_IO_EXCEPTION;
+        }
+    }
+
+    /**
+     * A stub class to throw an {@code IOException} when the save method is called on a lesson book.
+     */
+    private static class JsonTutorAidLessonIoExceptionThrowingStub extends JsonTutorAidLessonStorage {
+        private JsonTutorAidLessonIoExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveLessonBook(ReadOnlyLessonBook lessonBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

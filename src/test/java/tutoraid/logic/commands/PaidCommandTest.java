@@ -7,6 +7,7 @@ import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ import tutoraid.testutil.StudentBuilder;
  */
 public class PaidCommandTest {
 
-    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,7 +38,8 @@ public class PaidCommandTest {
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new StudentBook(model.getStudentBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(studentToEdit, editedStudent);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
@@ -62,7 +64,8 @@ public class PaidCommandTest {
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_SET_TO_PAID_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new StudentBook(model.getStudentBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
