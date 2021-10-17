@@ -53,6 +53,8 @@ public class PersonCard extends UiPart<Region> {
     private Label appointmentTime;
     @FXML
     private Label appointmentVenue;
+    @FXML
+    private Label appointmentCount;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,10 +73,11 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
 
         appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
-        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTime(), "Time",
+        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTimeFormatted(), "Time",
                 person.getAppointment().getDate()));
         appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
                 person.getAppointment().getDate()));
+        appointmentCount.setText("Appointment: " + person.getCount());
     }
 
     /**
@@ -121,7 +124,7 @@ public class PersonCard extends UiPart<Region> {
      */
     private String checkDateAndAddHeader(String date) {
         String emptyDate = "";
-        String header = "Date: ";
+        String header = "Date";
 
         if (date.equalsIgnoreCase(Appointment.NO_APPOINTMENT)) {
             appointmentHeader.setText(Appointment.NO_APPOINTMENT);

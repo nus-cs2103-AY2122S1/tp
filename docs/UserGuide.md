@@ -14,6 +14,10 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
     * [Editing a person](#editing-a-person-edit)
     * [Locating persons by name](#locating-persons-by-name-find)
     * [Deleting a person](#deleting-a-person-delete)
+    * [Adding an appointment](#adding-an-appointment-appt)
+    * [Editing an appointment](#editing-an-appointment-eppt)
+    * [Deleting an appointment](#deleting-an-appointment-dappt)
+    * [Updating completed appointment](#updating-completed-appointment-done)
     * [Clearing all entries](#clearing-all-entries-clear)
     * [Exiting the program](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
@@ -140,19 +144,89 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person: `delete`
+### Deleting a person: `del`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `del INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `del 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
+
+### Adding an appointment: `appt`
+
+Adds a scheduled appointment with the person.
+
+Format: `appt INDEX d/DATE [t/TIME] [v/VENUE]`
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+The order of the DATE, TIME and VENUE parameter be can interchanged.
+</div>
+
+* Adds a scheduled appointment with the person at the specified `INDEX` if no appointment exists yet.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+* `DATE`: the date of the appointment in the format **`yyyy-mm-dd`**.
+* `TIME`: the time of the appointment in the 24-hour format **`HH:mm`**.
+* `VENUE`: the location of the appointment, which can at most be 30 characters long (including whitespaces).
+* The `DATE` field **must be present**.
+* `TIME` and `VENUE` fields can be left out.
+
+Examples:
+* `appt 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first person in FAST.
+* `appt 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third person in FAST.
+* `find Matthew John` followed by `appt 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, time `1800hrs` and venue `Velocity` to the third person in the results of the `find` command.
+
+### Editing an appointment: `eppt`
+
+Edits a scheduled appointment with the person.
+
+Format: `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+The order of the DATE, TIME and VENUE parameter be can interchanged.
+</div>
+
+* Edits a scheduled appointment with the person at the specified `INDEX` if the appointment exist.
+* Existing details will be updated with the input data.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+* `DATE`: the date of the appointment in the format **`yyyy-mm-dd`**.
+* `TIME`: the time of the appointment in the 24-hour format **`HH:mm`**.
+* `VENUE`: the location of the appointment, which can at most be 30 characters long (including whitespaces).
+* At least **one** of the optional fields must be present.
+
+Examples:
+* `eppt 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first person.
+* `eppt 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third person.
+
+### Deleting an appointment: `dappt`
+
+Deletes a scheduled appointment with the person.
+
+Format: `dappt INDEX`
+
+* Deletes a scheduled appointment with the person at the specified `INDEX` if the appointment exist.
+* Existing details will be deleted.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+
+Examples:
+* `dappt 1` deletes the appointment of the first person.
+* `find Ben` followed by `dappt 3` deletes the appointment the third person in the result of the `find` command.
+
+### Updating completed appointment: `done`
+
+Updates the completed appointment counter with the person.
+
+Format: `done INDEX`
+* Increment the completed appointment count with the person at the specified `INDEX` if the appointment exist.
+* Existing details will be deleted.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+
+Examples:
+* `done 1` updates the completed appointment counter of the first person.
+* `find Matthew` followed by `done 3` updates the completed appointment counter of the third person in the result of the `find` command.
 
 ### Clearing all entries: `clear`
 
@@ -195,10 +269,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g., `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Appointment** | `dappt INDEX`<br> e.g., `dappt 1`
+**Delete Contact** | `del INDEX`<br> e.g., `del 3`
+**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**List** | `list`
+**Update Completed Appointment** | `done INDEX`<br> e.g., `done 5`
