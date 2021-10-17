@@ -38,7 +38,7 @@ public class TreeControllerTest {
 
         // Build from disk
         String hash = "34cb4b0c49f5ba8f1d052884440edd1045a4c558";
-        Tree builtTree = assertDoesNotThrow(() -> treeController.generate("34cb4b0c49f5ba8f1d052884440edd1045a4c558",
+        Tree builtTree = assertDoesNotThrow(() -> treeController.generate(hash,
                 new TreeParser()));
         assertEquals(hash, builtTree.getHash());
         assertEquals(builtTree.getHashMap().get("vc/54594835555fa465ebc6aad1c2b778da64d5f616"),
