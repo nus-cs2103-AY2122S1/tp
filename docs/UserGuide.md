@@ -82,11 +82,20 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
 
 ### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Opens a new window that contains command usage, and a quick start guide.
+In the help window, you can access all the command usages using the dropdown menu.
 
-![help message](images/helpMessage.png)
+![help window](images/helpWindow.png)
 
-Format: `help`
+Format: `help [COMMAND]`
+
+Examples:
+* `help` will just open the default help window
+* `help add` will open the help window and directly navigate to the `Add` command help page.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The help window can also be quickly accessed by entering using the F1 key on your keyboard!
+</div>
 
 
 ### Adding a person: `add`
