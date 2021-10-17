@@ -1,5 +1,7 @@
 package tutoraid.storage;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,6 +12,7 @@ import tutoraid.model.lesson.LessonName;
 import tutoraid.model.lesson.Price;
 import tutoraid.model.lesson.Students;
 import tutoraid.model.lesson.Timing;
+import tutoraid.model.student.Student;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -21,7 +24,7 @@ public class JsonAdaptedLesson {
     private final String lessonName;
     private final String capacity;
     private final String price;
-    private final String students;
+    private final ArrayList<Student> students;
     private final String timing;
 
     /**
@@ -30,7 +33,7 @@ public class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(
             @JsonProperty("lessonName") String lessonName, @JsonProperty("capacity") String capacity,
-            @JsonProperty("price") String price, @JsonProperty("students") String students,
+            @JsonProperty("price") String price, @JsonProperty("students") ArrayList<Student> students,
             @JsonProperty("timing") String timing) {
         this.lessonName = lessonName;
         this.capacity = capacity;
@@ -46,7 +49,7 @@ public class JsonAdaptedLesson {
         lessonName = source.getLessonName().lessonName;
         capacity = source.getCapacity().value;
         price = source.getPrice().value;
-        students = source.getStudents().value;
+        students = source.getStudents().students;
         timing = source.getTiming().value;
     }
 
@@ -75,8 +78,9 @@ public class JsonAdaptedLesson {
         }
         final Price modelLessonPrice = new Price(price);
 
-        if (!students.equals("") && !Students.isValidStudents(students)) {
-            throw new IllegalValueException(Students.MESSAGE_CONSTRAINTS);
+        if (students == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    LessonName.class.getSimpleName()));
         }
         final Students modelLessonStudents = new Students(students);
 
