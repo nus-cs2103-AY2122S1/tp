@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,6 +26,7 @@ public class HashGenerator {
             digest1 = digest;
             numHex1 = method.getNumHex();
         } catch (NoSuchAlgorithmException e) {
+            // Will not happen since HashMethod only includes supported algorithms
             e.printStackTrace();
             digest1 = null;
             numHex1 = 0;
@@ -53,16 +53,5 @@ public class HashGenerator {
         };
         dis.close();
         return String.format("%0" + numHex + "x", new BigInteger(1, dis.getMessageDigest().digest()));
-    }
-
-    // TODO: Implement this as a test code
-    public static void main(String[] argv) {
-        HashGenerator generator = new HashGenerator(HashMethod.SHA256);
-        Path path = Paths.get("data", "academydirectory.json");
-        try {
-            System.out.println(generator.generateHashFromFile(path));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
