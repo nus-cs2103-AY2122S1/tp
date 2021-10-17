@@ -21,6 +21,7 @@ import seedu.fast.logic.commands.ListCommand;
 import seedu.fast.logic.commands.MarkAppointmentCommand;
 import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
+import seedu.fast.logic.commands.TagCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,6 +92,9 @@ public class FastParser {
 
         case MarkAppointmentCommand.COMMAND_WORD:
             return new MarkAppointmentCommandParser().parse(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
