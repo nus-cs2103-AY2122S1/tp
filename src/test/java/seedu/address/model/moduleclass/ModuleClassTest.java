@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalModuleClasses.CS2100_LAB1;
 import static seedu.address.testutil.TypicalModuleClasses.CS2100_TUT1;
 import static seedu.address.testutil.TypicalModuleClasses.CS2103_TUT1;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ModuleClassBuilder;
@@ -49,7 +48,8 @@ public class ModuleClassTest {
     public void toStringTest() {
         assertEquals(CS2100_LAB1.toString(), "Module: [[CS2100 [B31]]]; Day: Tuesday; Time: 15:00; Remark: COM1 0113");
 
-        assertEquals(CS2100_TUT1.toString(), "Module: [[CS2100 [T18]]]; Day: Wednesday; Time: 17:00; Remark: COM1 01-20");
+        assertEquals(CS2100_TUT1.toString(), "Module: [[CS2100 [T18]]]; Day: Wednesday; Time: 17:00; "
+                + "Remark: COM1 01-20");
     }
 
 

@@ -15,17 +15,16 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class JsonAdaptedModuleClassTest {
 
+    private static final String INVALID_DAY = "8";
+    private static final String INVALID_TIME = "15:61";
+    private static final String INVALID_MODULE_CODE = "CS 50";
 
     private static final List<JsonAdaptedModuleCode> VALID_MODULE_CODES = BENSON.getModuleCodes().stream()
             .map(JsonAdaptedModuleCode::new)
             .collect(Collectors.toList());
-    public static final String INVALID_DAY = "8";
-    public static final String INVALID_TIME = "15:61";
-
-    private static final String INVALID_MODULE_CODE = "CS 50";
-    public static final String VALID_DAY = CS2100_LAB1.getDay().getDayAsIntString();
-    public static final String VALID_TIME = CS2100_LAB1.getTime().toString();
-    public static final String VALID_REMARK = CS2100_LAB1.getRemark().toString();
+    private static final String VALID_DAY = CS2100_LAB1.getDay().getDayAsIntString();
+    private static final String VALID_TIME = CS2100_LAB1.getTime().toString();
+    private static final String VALID_REMARK = CS2100_LAB1.getRemark().toString();
 
     @Test
     public void toModelType_validModuleClassDetails_returnsModuleClass() throws Exception {

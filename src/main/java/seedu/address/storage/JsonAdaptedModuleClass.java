@@ -15,7 +15,6 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.Time;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 
 /**

@@ -1,7 +1,6 @@
 package seedu.address.testutil;
 
 import static seedu.address.model.util.SampleDataUtil.getModuleCodeSet;
-import static seedu.address.testutil.TestUtil.getModuleCode;
 
 import java.util.Set;
 
