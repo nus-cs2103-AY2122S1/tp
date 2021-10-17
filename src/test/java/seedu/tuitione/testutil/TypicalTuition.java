@@ -27,7 +27,7 @@ public class TypicalTuition {
      * Returns an {@code Tuitione} with a typical tuition setup.
      */
     public static Tuitione getTypicalTuitione() {
-        Tuitione ab = new Tuitione();
+        Tuitione tuitione = new Tuitione();
 
         // set up associations
         List<Student> students = getTypicalStudents();
@@ -36,16 +36,16 @@ public class TypicalTuition {
                 .addStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased())); //BENSON enrolled in MATH_S2 lesson
 
         for (Student student : students) {
-            ab.addStudent(student);
+            tuitione.addStudent(student);
         }
         for (Lesson lesson : lessons) {
-            ab.addLesson(lesson);
+            tuitione.addLesson(lesson);
         }
-        return ab;
+        return tuitione;
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone(), PHYSICS_S2));
+        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(), MATH_S2.createClone(), PHYSICS_S2.createClone()));
     }
 
     public static List<Student> getTypicalStudents() {

@@ -7,10 +7,10 @@ import seedu.tuitione.model.student.Grade;
 /**
  * Tests that a {@code Lesson}'s {@code Grade} matches the given grade.
  */
-public class ClassIsOfSpecifiedGrade implements Predicate<Lesson> {
+public class LessonIsOfSpecifiedGrade implements Predicate<Lesson> {
     private final Grade grade;
 
-    public ClassIsOfSpecifiedGrade(Grade grade) {
+    public LessonIsOfSpecifiedGrade(Grade grade) {
         this.grade = grade;
     }
 
@@ -22,7 +22,7 @@ public class ClassIsOfSpecifiedGrade implements Predicate<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClassIsOfSpecifiedGrade // instanceof handles nulls
-                && grade.equals(((ClassIsOfSpecifiedGrade) other).grade)); // state check
+                || (other instanceof LessonIsOfSpecifiedGrade // instanceof handles nulls
+                && grade.equals(((LessonIsOfSpecifiedGrade) other).grade)); // state check
     }
 }

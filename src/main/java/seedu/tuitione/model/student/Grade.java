@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents the grade of the student
  */
 public class Grade {
-    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix should in capital letters, "
+    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix should be in capital letters, "
             + "and is either be S (to denote secondary) "
             + "or P (to denote Primary). "
             + "\nLevel number should be from 1 to 6 for primary and 1 to 4 for secondary.";
