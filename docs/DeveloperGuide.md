@@ -201,6 +201,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### View Client/Product Feature
+This feature allows the users to view the details of the `Client` or `Product` of their choice.
+When viewing a `Client`, more details such as `Products` bought before, will be visible to the user.
+The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to
+the `LogicManager` to execute. First, `LogicManage` will call `AddressBookParser`, which will pass the inputs to
+`ViewClientCommandParser`, parsing the inputs and returning a `ViewClientCommand`.
+The command will then be executed in `LogicManager`, returning a `CommandResult` which will be returned to the user.
+The flow of the UML diagram would be the same for viewing `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
+
+#### Design Considerations
+**Aspect : How `view` may be executed**
+* **Alternative 1 (current choice)** : User can view either a product or client
+  * Pros : Allows the user to focus on a particular product or client
+  * Cons : Unable to view multiple products or clients
+* **Alternative 2** : User can view multiple products or clients
+  * Pros : Easier comparisons between products or clients
+  * Cons : More complex code which would lead to higher amount of error
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -426,6 +446,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. Sellah shows an error message.
 
       Use case resumes at step 3.
+
+**Use case: UC03 - View a client/product**
+
+**MSS**
+
+1. User <ins> requests to list clients/products (UC04) </ins>
+2. Sellah shows a list of clients/products.
+3. User request to see more information of a specific client/product in the list.
+4. Sellah shows the details of the product/item.
+
+  User story ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    * 2a1. Sellah shows an error message.
+
+      Use case ends.
+
+* 3a. The input parameter(s) is/are invalid.
+
+    * 3a1. Sellah shows an error message.
+
+      Use case resumes at step 3.
+
+* 3b. The command format is incorrect.
+
+    * 3b1. Sellah shows an error message.
+
+      Use case resumes at step 3.
+
+* 4a. Some optional details are not present.
+
+    * 4a1. Sellah shows a placeholder value at the optional detail.
+
+      Use case ends. 
+
+
+
+**Use case: UC04 - List all client/product**
+
+**MSS**
+
+1. User requests to list clients/products.
+2. Sellah shows a list of clients/products.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty. 
+
+    * 2a1. Sellah shows an error message.
+
+      Use case ends.
 
 **Use case: UC05 - Delete a client/product**
 
