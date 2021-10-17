@@ -27,6 +27,12 @@ public class AddAliasCommand extends Command {
     private final String alias;
     private final String commandWord;
 
+    /**
+     * Creates {@code AddAliasCommand} object.
+     *
+     * @param alias the given alias.
+     * @param commandWord the command word to define alias for.
+     */
     public AddAliasCommand(String alias, String commandWord) {
         requireAllNonNull(alias, commandWord);
         this.alias = alias;

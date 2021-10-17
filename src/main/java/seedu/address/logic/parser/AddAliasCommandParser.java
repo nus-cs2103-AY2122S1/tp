@@ -19,7 +19,8 @@ public class AddAliasCommandParser implements Parser<AddAliasCommand> {
         ArgumentMultimap argMultiMap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ALIAS, PREFIX_COMMAND_WORD);
 
-        if (!arePrefixesPresent(argMultiMap, PREFIX_ALIAS, PREFIX_COMMAND_WORD) || !argMultiMap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultiMap, PREFIX_ALIAS, PREFIX_COMMAND_WORD)
+                || !argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAliasCommand.MESSAGE_USAGE));
         }
 

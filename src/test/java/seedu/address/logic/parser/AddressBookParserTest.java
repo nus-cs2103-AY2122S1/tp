@@ -51,7 +51,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addMember() throws Exception {
         Person person = new PersonBuilder().build();
-        AddMemberCommand command = (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person), aliases);
+        AddMemberCommand command =
+                (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person), aliases);
         assertEquals(new AddMemberCommand(person), command);
     }
 
@@ -70,7 +71,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD, aliases) instanceof ClearMembersCommand);
-        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases) instanceof ClearMembersCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases)
+                instanceof ClearMembersCommand);
     }
 
     @Test
@@ -169,7 +171,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_inputIsAnAlias_listf_success() throws Exception {
+    public void parseCommand_listfInputIsAnAlias_success() throws Exception {
         String alias = "lf";
         Aliases aliases = new Aliases();
         aliases.add(alias, "listf");
@@ -178,7 +180,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_inputIsAnAlias_addm_success() throws Exception {
+    public void parseCommand_addmInputIsAnAlias_success() throws Exception {
         String alias = "af";
         Aliases aliases = new Aliases();
         aliases.add(alias, "addf");
@@ -200,7 +202,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
-                () -> parser.parseCommand("unknownCommand", aliases));
+        assertThrows(ParseException.class,
+                MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", aliases));
     }
 }

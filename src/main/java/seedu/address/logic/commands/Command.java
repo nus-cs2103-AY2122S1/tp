@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public abstract class Command {
 
     /** All possible commands. */
-    public static List<String> commands = List.of(AddMemberCommand.COMMAND_WORD, EditMemberCommand.COMMAND_WORD,
+    private static List<String> commands = List.of(AddMemberCommand.COMMAND_WORD, EditMemberCommand.COMMAND_WORD,
             DeleteMemberCommand.COMMAND_WORD, DeleteFacilityCommand.COMMAND_WORD,
             EditFacilityCommand.COMMAND_WORD, ClearMembersCommand.COMMAND_WORD,
             ClearFacilitiesCommand.COMMAND_WORD, FindMemberCommand.COMMAND_WORD,
@@ -29,6 +29,7 @@ public abstract class Command {
     public static boolean isCommand(String command) {
         return commands.contains(command);
     }
+
 
     /**
      * Executes the command and returns the result message.
