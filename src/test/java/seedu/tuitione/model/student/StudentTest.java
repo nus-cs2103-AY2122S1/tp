@@ -92,7 +92,7 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertNotEquals(ALICE, editedAlice);
 
-        // different tags -> returns false
+        // different remarks -> returns false
         editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(ALICE, editedAlice);
     }

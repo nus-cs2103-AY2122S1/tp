@@ -9,7 +9,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Tag;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.util.SampleDataUtil;
 
 /**
@@ -28,7 +28,7 @@ public class StudentBuilder {
     private Email email;
     private Address address;
     private Grade grade;
-    private Set<Tag> tags;
+    private Set<Remark> remarks;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -39,7 +39,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         grade = new Grade(DEFAULT_GRADE);
-        tags = new HashSet<>();
+        remarks = new HashSet<>();
     }
 
     /**
@@ -51,7 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         grade = studentToCopy.getGrade();
-        tags = new HashSet<>(studentToCopy.getTags());
+        remarks = new HashSet<>(studentToCopy.getTags());
     }
 
     /**
@@ -63,10 +63,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Student} that we are building.
+     * Parses the {@code remarks} into a {@code Set<Remark>} and set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public StudentBuilder withTags(String ... remarks) {
+        this.remarks = SampleDataUtil.getTagSet(remarks);
         return this;
     }
 
@@ -103,7 +103,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, parentContact, email, address, grade, tags);
+        return new Student(name, parentContact, email, address, grade, remarks);
     }
 
 }

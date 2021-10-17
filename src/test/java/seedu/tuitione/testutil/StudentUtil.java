@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.tuitione.logic.commands.AddCommand;
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
  * A utility class for Student.
@@ -53,11 +53,11 @@ public class StudentUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.value).append(" "));
         if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
+            Set<Remark> remarks = descriptor.getTags().get();
+            if (remarks.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                remarks.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

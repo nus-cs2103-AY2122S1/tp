@@ -11,7 +11,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
@@ -82,11 +82,11 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
+     * Parses the {@code remarks} into a {@code Set<Remark>} and set it to the {@code EditStudentDescriptor}
      * that we are building.
      */
-    public EditStudentDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
+    public EditStudentDescriptorBuilder withTags(String... remarks) {
+        Set<Remark> tagSet = Stream.of(remarks).map(Remark::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
     }

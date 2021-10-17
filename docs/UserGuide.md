@@ -84,7 +84,7 @@ Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/TAG]…`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
-* A student can have any number of tags (including 0).
+* A student can have any number of remarks (including 0).
 </div>
 
 Examples:
