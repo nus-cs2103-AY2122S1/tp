@@ -22,7 +22,7 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a filtered list of staff that have the "
-            + "input parameters.\n"
+            + "input parameters.\n\n"
             + "Parameters:\n"
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_INDEX + "INDEX] "
@@ -32,7 +32,7 @@ public class ViewCommand extends Command {
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_ROLE + "ROLE]... "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

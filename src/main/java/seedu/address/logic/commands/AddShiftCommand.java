@@ -26,11 +26,11 @@ public class AddShiftCommand extends Command {
     public static final String COMMAND_WORD = "addShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff." + "\n"
+            + "by the index number used in the displayed staff list or the name of staff." + "\n\n"
             + "Parameters:\n"
             + PREFIX_INDEX + "INDEX or "
             + PREFIX_NAME + "NAME "
-             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n"
+             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n\n"
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
             + PREFIX_DAY_SHIFT + "monday-1\n"

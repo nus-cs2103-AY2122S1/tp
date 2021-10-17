@@ -23,13 +23,13 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n\n"
             + "Parameters:\n"
             + PREFIX_INDEX + "INDEX or "
             + PREFIX_NAME + "NAME "
             + PREFIX_DAY_SHIFT + "DATE "
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n"
-            + "Example:\n"
+            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
             + COMMAND_WORD + " " + PREFIX_NAME + "Jace "

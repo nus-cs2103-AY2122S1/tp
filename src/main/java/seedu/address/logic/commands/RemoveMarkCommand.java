@@ -23,12 +23,12 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
 public class RemoveMarkCommand extends Command {
 
     public static final String COMMAND_WORD = "unmark";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to remove the marking of an absentee.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to remove the marking of an absentee.\n\n"
             + "Parameters:\n"
             + PREFIX_INDEX + "INDEX or "
             + PREFIX_NAME + "NAME "
             + PREFIX_DAY_SHIFT + "DATE "
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n"
+            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
