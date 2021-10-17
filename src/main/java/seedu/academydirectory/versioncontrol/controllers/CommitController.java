@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
@@ -80,9 +81,10 @@ public class CommitController extends Controller<Commit> {
     public Commit generate(String hash, CommitParser currentCommitParser, CommitParser nextCommitParser,
                            TreeController treeController)
             throws IOException, ParseException {
+        Path headPath = vcPath.resolve(Paths.get(hash));
         String[] args = currentCommitParser.parse(vcPath.resolve(Paths.get(hash)));
-        assert hash.equals(args[0]);
 
+        hash = args[0];
         String author = args[1];
         Date date = df.parse(args[2]);
         String message = args[3];
@@ -90,11 +92,15 @@ public class CommitController extends Controller<Commit> {
         String treeHash = args[5];
 
         Supplier<Commit> parentCommitSupplier = () -> {
-            try {
-                return generate(parentHash, nextCommitParser, nextCommitParser, treeController);
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-                return null;
+            if (Objects.equals(parentHash, Commit.NULL.getHash())) {
+                return Commit.NULL;
+            } else {
+                try {
+                    return generate(parentHash, nextCommitParser, nextCommitParser, treeController);
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                    return Commit.NULL;
+                }
             }
         };
 
@@ -103,8 +109,8 @@ public class CommitController extends Controller<Commit> {
                 return treeController.makeTree(vcPath.resolve(Paths.get(treeHash)));
             } catch (IOException e) {
                 e.printStackTrace();
+                return Tree.NULL;
             }
-            return null;
         };
 
         return new Commit(hash, author, date, message, parentCommitSupplier, treeSupplier);

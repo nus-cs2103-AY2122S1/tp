@@ -47,6 +47,7 @@ public class VersionManager implements Version {
             if (file.exists()) {
                 Commit mostRecent = commitController.generate("HEAD",
                         new HeadParser(), new CommitParser(), treeController);
+                System.out.println("Commit is " + mostRecent);
                 moveHead(mostRecent);
             } else {
                 moveHead(Commit.NULL);
