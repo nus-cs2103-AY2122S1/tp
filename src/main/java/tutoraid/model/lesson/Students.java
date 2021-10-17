@@ -1,51 +1,54 @@
 package tutoraid.model.lesson;
 
-import static java.util.Objects.requireNonNull;
-import static tutoraid.commons.util.AppUtil.checkArgument;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import tutoraid.model.student.Student;
 
 /**
  * Represents a Lesson's students in TutorAid.
- * Guarantees: immutable; is valid as declared in {@link #isValidStudents(String)}
  */
 public class Students {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Students should only contain numbers";
-    public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
+    public final ArrayList<Student> students;
 
     /**
      * Constructs a {@code Students}.
      *
-     * @param students Valid students' indexes.
+     * @param students Valid arraylist of Student objects.
      */
-    public Students(String students) {
-        requireNonNull(students);
-        checkArgument(isValidStudents(students), MESSAGE_CONSTRAINTS);
-        value = students;
+    public Students(ArrayList<Student> students) {
+        this.students = students;
     }
 
     /**
-     * Returns true if a given string are valid students.
+     * Returns true if both sets of students have the same names.
+     * This defines a weaker notion of equality between two sets of students.
      */
-    public static boolean isValidStudents(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public boolean areSameStudents(Students otherStudents) {
+        if (otherStudents == this) {
+            return true;
+        }
+
+        return otherStudents.equals(this);
     }
 
     @Override
     public String toString() {
-        return value;
+        return students.stream().map(Object::toString)
+                .collect(Collectors.joining(", "));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Students // instanceof handles nulls
-                && value.equals(((Students) other).value)); // state check
+                && students.equals(((Students) other).students)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return students.hashCode();
     }
+
 }
