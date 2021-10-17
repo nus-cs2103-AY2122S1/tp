@@ -265,7 +265,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app. 
+**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
 The app is purely offline, and does not include any online feature.
 
 
@@ -368,7 +368,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The tasks list is empty.
 
   Use case ends.
-  
+
 * 4a. The students list is empty.
 
   Use case ends.
