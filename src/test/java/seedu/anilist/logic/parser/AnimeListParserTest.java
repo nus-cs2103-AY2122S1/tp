@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.ClearCommand;
 import seedu.anilist.logic.commands.DeleteCommand;
-import seedu.anilist.logic.commands.EditCommand;
 import seedu.anilist.logic.commands.ExitCommand;
 import seedu.anilist.logic.commands.FindCommand;
 import seedu.anilist.logic.commands.GenreAddCommand;
@@ -30,7 +29,6 @@ import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.AnimeUtil;
-import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
 
 public class AnimeListParserTest {
@@ -55,15 +53,6 @@ public class AnimeListParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_ANIME.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_ANIME), command);
-    }
-
-    @Test
-    public void parseCommand_edit() throws Exception {
-        Anime anime = new AnimeBuilder().build();
-        EditCommand.EditAnimeDescriptor descriptor = new EditAnimeDescriptorBuilder(anime).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ANIME.getOneBased() + " " + AnimeUtil.getEditAnimeDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_ANIME, descriptor), command);
     }
 
     @Test

@@ -19,8 +19,8 @@ import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
-import seedu.anilist.testutil.EditAnimeDescriptorBuilder;
 import seedu.anilist.testutil.EpisodeDescriptorBuilder;
+import seedu.anilist.testutil.GenresDescriptorBuilder;
 import seedu.anilist.testutil.NameDescriptorBuilder;
 import seedu.anilist.testutil.StatusDescriptorBuilder;
 
@@ -32,7 +32,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
     public static final String VALID_GENRE_SHOUNEN = "shounen";
-    public static final String VALID_GENRE_SUPERHERO = "superhero";
+    public static final String VALID_GENRE_SCIENCE_FICTION = "science fiction";
     public static final String VALID_EPISODE_ONE = "1";
     public static final String VALID_EPISODE_TWO = "2";
     public static final String VALID_ACTION_ADD = "add";
@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
     public static final String GENRE_DESC_SHOUNEN = " " + PREFIX_GENRE + VALID_GENRE_SHOUNEN;
-    public static final String GENRE_DESC_SUPERHERO = " " + PREFIX_GENRE + VALID_GENRE_SUPERHERO;
+    public static final String GENRE_DESC_SCIENCE_FICTION = " " + PREFIX_GENRE + VALID_GENRE_SCIENCE_FICTION;
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
     public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
@@ -66,23 +66,17 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditAnimeDescriptor DESC_AKIRA;
-    public static final EditCommand.EditAnimeDescriptor DESC_BNHA;
-
     public static final RenameCommand.NameDescriptor DESC_NAME_AKIRA;
     public static final RenameCommand.NameDescriptor DESC_NAME_BNHA;
-
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ZERO;
     public static final UpdateEpisodeCommand.EpisodeDescriptor DESC_EPISODE_ONE;
     public static final UpdateStatusCommand.StatusDescriptor DESC_TOWATCH;
     public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING;
     public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING_SHORTFORM;
+    public static final GenreCommand.GenresDescriptor DESC_GENRE_SHOUNEN;
+    public static final GenreCommand.GenresDescriptor DESC_GENRE_SCIENCE_FICTION;
 
     static {
-        DESC_AKIRA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_AKIRA)
-                .withGenres(VALID_GENRE_SHOUNEN).build();
-        DESC_BNHA = new EditAnimeDescriptorBuilder().withName(VALID_NAME_BNHA)
-                .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SUPERHERO).build();
         DESC_NAME_AKIRA = new NameDescriptorBuilder().withName(VALID_NAME_AKIRA).build();
         DESC_NAME_BNHA = new NameDescriptorBuilder().withName(VALID_NAME_BNHA).build();
         DESC_EPISODE_ZERO = new EpisodeDescriptorBuilder().withEpisode("0").build();
@@ -90,7 +84,8 @@ public class CommandTestUtil {
         DESC_TOWATCH = new StatusDescriptorBuilder().withStatus("towatch").build();
         DESC_WATCHING = new StatusDescriptorBuilder().withStatus("watching").build();
         DESC_WATCHING_SHORTFORM = new StatusDescriptorBuilder().withStatus("w").build();
-
+        DESC_GENRE_SHOUNEN = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SHOUNEN).build();
+        DESC_GENRE_SCIENCE_FICTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SCIENCE_FICTION).build();
     }
 
     /**
