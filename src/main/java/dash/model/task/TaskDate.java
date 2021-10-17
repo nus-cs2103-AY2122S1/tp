@@ -16,14 +16,14 @@ public class TaskDate {
         + "They should also follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
         + "If both Date and Time are included, Date should come first before Time and they should be separated "
         + "by a comma. A full list of available formats can be seen under the Help tab.";
-    private static final String[] dateFormats = {
+    private static final String[] DATE_FORMATS = {
         "dd/MM/yyyy",
         "dd-MM-yyyy",
         "yyyy/MM/dd",
         "yyyy-MM-dd",
         "dd MMM yyyy"
     };
-    private static final String[] timeFormats = {
+    private static final String[] TIME_FORMATS = {
         "HHmm",
         "hh:mm a"
     };
@@ -133,9 +133,9 @@ public class TaskDate {
     public static boolean isThisDate(String dateString) {
         boolean isDate = false;
 
-        for (String i : dateFormats) {
+        for (String dateFormat : DATE_FORMATS) {
             try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(i));
+                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
                 isDate = true;
             } catch (Exception e) {
                 System.out.println("wrong format");
@@ -147,10 +147,10 @@ public class TaskDate {
     private boolean isDate(String dateString) {
         boolean isDate = false;
 
-        for (String i : dateFormats) {
+        for (String dateFormat : DATE_FORMATS) {
             try {
-                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(i));
-                detectedDateFormat = i;
+                LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
+                detectedDateFormat = dateFormat;
                 isDate = true;
                 taskDateString = dateString;
             } catch (Exception e) {
@@ -169,9 +169,9 @@ public class TaskDate {
     public static boolean isThisTime(String timeString) {
         boolean isTime = false;
 
-        for (String i : timeFormats) {
+        for (String timeFormat : TIME_FORMATS) {
             try {
-                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(i));
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat));
                 isTime = true;
             } catch (Exception e) {
                 System.out.println("wrong format");
@@ -183,10 +183,10 @@ public class TaskDate {
     private boolean isTime(String timeString) {
         boolean isTime = false;
 
-        for (String i : timeFormats) {
+        for (String timeFormat : TIME_FORMATS) {
             try {
-                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(i));
-                detectedTimeFormat = i;
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat));
+                detectedTimeFormat = timeFormat;
                 isTime = true;
                 taskTimeString = timeString;
             } catch (Exception e) {
