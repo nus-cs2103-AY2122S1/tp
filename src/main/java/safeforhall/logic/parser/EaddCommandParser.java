@@ -3,6 +3,7 @@ package safeforhall.logic.parser;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_INFORMATION;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
@@ -14,6 +15,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
 /**
@@ -41,8 +43,10 @@ public class EaddCommandParser implements Parser<EaddCommand> {
         EventDate eventDate = ParserUtil.parseEventDate(argMultimap.getValue(PREFIX_DATE).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         Capacity capacity = ParserUtil.parseCapacity(argMultimap.getValue(PREFIX_CAPACITY).get());
+        ResidentList residents = ParserUtil.parseResidents(argMultimap.getValue(PREFIX_INFORMATION)
+                .orElse(ResidentList.DEFAULT_LIST));
 
-        Event event = new Event(eventName, eventDate, venue, capacity);
+        Event event = new Event(eventName, eventDate, venue, capacity, residents);
         return new EaddCommand(event);
     }
 

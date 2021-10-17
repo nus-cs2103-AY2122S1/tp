@@ -24,9 +24,11 @@ import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
@@ -113,6 +115,14 @@ public class AddressBookParserTest {
     public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 3") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_include() throws Exception {
+//        IncludeCommand command = (IncludeCommand) parser.parseCommand(
+//                IncludeCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_EVENT
+//                        + "powerlifting " + CliSyntax.PREFIX_INFORMATION + "Bernice Yu");
+//        assertEquals(command, new IncludeCommand(new Event()));
     }
 
     @Test

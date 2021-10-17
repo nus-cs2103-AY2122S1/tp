@@ -3,12 +3,18 @@ package safeforhall.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.UniqueEventList;
+import safeforhall.model.event.exceptions.EventNotFoundException;
+import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
 import safeforhall.model.person.UniquePersonList;
+import safeforhall.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -104,11 +110,58 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Finds the event list for an event from the given Event Name.
+     */
+    public Optional<Event> findEvent(EventName eventName) {
+        for (Event event : events) {
+            if (event.hasSameEventName(eventName)) {
+                return Optional.of(event);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Finds the person list for an event from the given Room.
+     */
+    public Optional<Person> findPerson(Room room) {
+        for (Person person : persons) {
+            if (person.isStayingInRoom(room)) {
+                return Optional.of(person);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Finds the person list for an event from the given Room.
+     */
+    public Optional<Person> findPerson(Name name) {
+        for (Person person : persons) {
+            if (person.hasTheName(name)) {
+                return Optional.of(person);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The event identity of {@code editedPerson} must not be the same as another existing event in the address book.
+     */
+    public void setEvent(Event target, Event editedEvent) throws EventNotFoundException {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) {
+    public void setPerson(Person target, Person editedPerson) throws PersonNotFoundException {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);

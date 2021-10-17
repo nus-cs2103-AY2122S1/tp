@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,8 +13,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
+import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -92,6 +99,57 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
+        requireNonNull(residentList);
+        ArrayList<String> residentInformation = residentList.residentInformation;
+        ArrayList<Person> personList = new ArrayList<>();
+
+        for (String information : residentInformation) {
+            Optional<Person> personFound;
+            if (Room.isValidRoom(information)) {
+                Room room = new Room(information);
+                personFound = addressBook.findPerson(room);
+            } else if (Name.isValidName(information)) {
+                Name name = new Name(information);
+                personFound = addressBook.findPerson(name);
+            } else {
+                throw new IllegalArgumentException();
+            }
+
+            if (personFound.isEmpty()) {
+                throw new CommandException(information + " person not found");
+            } else {
+                personList.add(personFound.get());
+            }
+        }
+        return personList;
+    }
+
+    @Override
+    public ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException {
+        requireNonNull(residentList);
+        String[] residentInformation = residentList.residents.split("\\s*,\\s*");
+
+        ArrayList<Person> personList = new ArrayList<>();
+        for (String information : residentInformation) {
+            Optional<Person> personFound;
+            if (Name.isValidName(information)) {
+                Name name = new Name(information);
+                personFound = addressBook.findPerson(name);
+            } else {
+                throw new IllegalArgumentException();
+            }
+
+            if (personFound.isEmpty()) {
+                throw new CommandException(information.toString() + " event not found");
+            } else {
+                personList.add(personFound.get());
+            }
+        }
+        return personList;
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
@@ -101,6 +159,17 @@ public class ModelManager implements Model {
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return addressBook.hasEvent(event);
+    }
+
+    @Override
+    public Event getEvent(EventName eventName) throws CommandException {
+        requireNonNull(eventName);
+        Optional<Event> eventOptional = addressBook.findEvent(eventName);
+        if (eventOptional.isEmpty()) {
+            throw new CommandException(eventName + " not found");
+        } else {
+            return eventOptional.get();
+        }
     }
 
     @Override
@@ -118,6 +187,13 @@ public class ModelManager implements Model {
     public void addEvent(Event event) {
         addressBook.addEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
     }
 
     @Override

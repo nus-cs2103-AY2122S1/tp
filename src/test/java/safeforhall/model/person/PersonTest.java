@@ -33,18 +33,36 @@ public class PersonTest {
                 .build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
+        // name differs in case, all other attributes same -> returns true
+        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
+        assertTrue(BOB.isSamePerson(editedBob));
+
         // different name, all other attributes same -> returns false
         editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
-
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
 
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
         assertFalse(BOB.isSamePerson(editedBob));
+    }
+
+    @Test
+    public void isStayingInRoom() {
+        // same object -> returns true
+        assertTrue(ALICE.isStayingInRoom(new Room("A100")));
+
+        // null -> returns false
+        assertFalse(ALICE.isStayingInRoom(null));
+    }
+
+    @Test
+    public void hasTheName() {
+        // same object -> returns true
+        assertTrue(ALICE.hasTheName(new Name("Alice Pauline")));
+
+        // null -> returns false
+        assertFalse(ALICE.hasTheName(null));
     }
 
     @Test

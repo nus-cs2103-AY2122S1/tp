@@ -11,13 +11,17 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
 import safeforhall.model.person.exceptions.DuplicatePersonException;
 import safeforhall.testutil.PersonBuilder;
 
@@ -82,6 +86,42 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
+
+    @Test
+    public void findEventSuccess() {
+//        EventName eventName = new EventName("powerlifting");
+//        System.out.println(addressBook.findEvent(eventName));
+//        assertTrue(addressBook.hasEvent());
+    }
+
+    @Test
+    public void findEventFailure() {
+        EventName eventName = new EventName("non existent event");
+        assertEquals(Optional.empty(), addressBook.findEvent(eventName));
+    }
+
+    @Test
+    public void findPersonByRoomSuccess() {
+
+    }
+
+    @Test
+    public void findPersonByRoomFailure() {
+        Room room = new Room("A401");
+        assertEquals(Optional.empty(), addressBook.findPerson(room));
+    }
+
+    @Test
+    public void findPersonByNameSuccess() {
+
+    }
+
+    @Test
+    public void findPersonByNameFailure() {
+        Name name = new Name("Johnny Lim");
+        assertEquals(Optional.empty(), addressBook.findPerson(name));
+    }
+
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
