@@ -12,7 +12,7 @@ public class Price {
     public static final String MESSAGE_CONSTRAINTS =
             "Price should only contain numbers, and it should be at least 1 digit long";
     public static final String VALIDATION_REGEX = "\\d+";
-    public final String value;
+    public final String price;
 
     /**
      * Constructs a {@code Price}.
@@ -22,7 +22,7 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
-        value = price;
+        this.price = price;
     }
 
     /**
@@ -34,18 +34,18 @@ public class Price {
 
     @Override
     public String toString() {
-        return value;
+        return price;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Price // instanceof handles nulls
-                && value.equals(((Price) other).value)); // state check
+                && price.equals(((Price) other).price)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return price.hashCode();
     }
 }
