@@ -1,6 +1,6 @@
 package seedu.address.model.salesorder;
 
-import seedu.address.model.task.Date;
+import seedu.address.model.Date;
 
 public class SalesOrder {
     private static int count = 1;
@@ -53,6 +53,7 @@ public class SalesOrder {
         return this.customer;
     }
 
+    //SalesOrder string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
         if (isComplete) {
