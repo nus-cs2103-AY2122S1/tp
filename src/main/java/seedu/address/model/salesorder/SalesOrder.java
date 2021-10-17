@@ -76,7 +76,7 @@ public class SalesOrder {
 
         SalesOrder otherOrder = (SalesOrder) other;
         return otherOrder.getCustomer().equals(getCustomer())
-                && otherOrder.getDate().equals(getDate());
+                && otherOrder.getDate().equals(getDate())
                 && otherOrder.getAmount().equals(getAmount());
 
     }
