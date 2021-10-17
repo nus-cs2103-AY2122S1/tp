@@ -26,14 +26,14 @@ public class DeleteShiftCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
             + "by\nthe index number used in the displayed staff list or\nthe name of staff." + "\n"
-            + "Parameters: "
+            + "Parameters:\n"
             + "[" + PREFIX_INDEX + "INDEX] or "
-            + "[" + PREFIX_NAME + "NAME] + "
-            + "[" + PREFIX_DAY_SHIFT + "DAY AND\nSLOT OF A SHIFT]" + "\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "[" + PREFIX_NAME + "NAME] "
+            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n"
+            + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_INDEX + "1 "
             + PREFIX_DAY_SHIFT + "monday-1" + "\n"
-            + "OR: " + COMMAND_WORD + " "
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "JOE "
             + PREFIX_DAY_SHIFT + "TUESDAY-0";
 

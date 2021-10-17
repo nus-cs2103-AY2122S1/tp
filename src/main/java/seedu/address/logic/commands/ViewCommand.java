@@ -21,7 +21,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a filtered list of staff that have the"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a filtered list of staff that have the "
             + "input parameters.\n"
             + "Parameters:\n"
             + "[" + PREFIX_NAME + "NAME] "

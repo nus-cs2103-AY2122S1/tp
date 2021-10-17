@@ -27,12 +27,12 @@ public class RemoveMarkCommand extends Command {
             + "Parameters:\n"
             + PREFIX_INDEX + "INDEX or "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DAY_SHIFT + "DATE\n"
+            + PREFIX_DAY_SHIFT + "DATE "
             + "[" + PREFIX_DAY_SHIFT + "END DATE]\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "Jace"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Jace "
             + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
 
     public static final String NO_STAFF_SATISFIES_QUERY = "No one satisfies the conditions specified";

@@ -32,7 +32,7 @@ public class MarkCommand extends Command {
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "Jace"
+            + COMMAND_WORD + " " + PREFIX_NAME + "Jace "
             + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"
