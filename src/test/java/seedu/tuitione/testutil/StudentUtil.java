@@ -5,7 +5,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.Set;
 
@@ -36,8 +36,8 @@ public class StudentUtil {
         sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
         sb.append(PREFIX_GRADE + student.getGrade().value + " ");
-        student.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.remarkName + " ")
+        student.getRemarks().stream().forEach(
+            s -> sb.append(PREFIX_REMARK + s.remarkName + " ")
         );
         return sb.toString();
     }
@@ -52,12 +52,12 @@ public class StudentUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getGrade().ifPresent(grade -> sb.append(PREFIX_GRADE).append(grade.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Remark> remarks = descriptor.getTags().get();
+        if (descriptor.getRemarks().isPresent()) {
+            Set<Remark> remarks = descriptor.getRemarks().get();
             if (remarks.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_REMARK);
             } else {
-                remarks.forEach(s -> sb.append(PREFIX_TAG).append(s.remarkName).append(" "));
+                remarks.forEach(s -> sb.append(PREFIX_REMARK).append(s.remarkName).append(" "));
             }
         }
         return sb.toString();

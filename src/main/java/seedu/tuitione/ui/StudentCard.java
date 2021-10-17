@@ -70,7 +70,7 @@ public class StudentCard extends UiPart<Region> {
         email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
         grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
 
-        student.getTags().stream()
+        student.getRemarks().stream()
                 .sorted(Comparator.comparing(remark -> remark.remarkName))
                 .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 

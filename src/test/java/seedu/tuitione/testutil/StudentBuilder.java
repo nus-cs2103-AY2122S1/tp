@@ -51,7 +51,7 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         grade = studentToCopy.getGrade();
-        remarks = new HashSet<>(studentToCopy.getTags());
+        remarks = new HashSet<>(studentToCopy.getRemarks());
     }
 
     /**
@@ -65,8 +65,8 @@ public class StudentBuilder {
     /**
      * Parses the {@code remarks} into a {@code Set<Remark>} and set it to the {@code Student} that we are building.
      */
-    public StudentBuilder withTags(String ... remarks) {
-        this.remarks = SampleDataUtil.getTagSet(remarks);
+    public StudentBuilder withRemarks(String ... remarks) {
+        this.remarks = SampleDataUtil.getRemarkSet(remarks);
         return this;
     }
 

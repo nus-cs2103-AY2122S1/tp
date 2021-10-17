@@ -7,7 +7,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_GRADE, PREFIX_TAG);
+                        PREFIX_GRADE, PREFIX_REMARK);
 
         Index index;
 
@@ -61,7 +61,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
             editStudentDescriptor.setGradeIsEdited(true);
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
+        parseRemarksForEdit(argMultimap.getAllValues(PREFIX_REMARK)).ifPresent(editStudentDescriptor::setRemarks);
 
         if (!editStudentDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -75,14 +75,14 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code remarks} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Remark>} containing zero remarks.
      */
-    private Optional<Set<Remark>> parseTagsForEdit(Collection<String> remarks) throws ParseException {
+    private Optional<Set<Remark>> parseRemarksForEdit(Collection<String> remarks) throws ParseException {
         assert remarks != null;
 
         if (remarks.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> remarkSet = remarks.size() == 1 && remarks.contains("") ? Collections.emptySet() : remarks;
-        return Optional.of(ParserUtil.parseTags(remarkSet));
+        return Optional.of(ParserUtil.parseRemarks(remarkSet));
     }
 
 }

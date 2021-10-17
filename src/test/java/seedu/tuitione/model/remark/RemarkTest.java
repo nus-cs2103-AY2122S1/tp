@@ -12,9 +12,9 @@ public class RemarkTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Remark(invalidTagName));
+    public void constructor_invalidRemarkName_throwsIllegalArgumentException() {
+        String invalidRemarkName = "";
+        assertThrows(IllegalArgumentException.class, () -> new Remark(invalidRemarkName));
     }
 
     @Test

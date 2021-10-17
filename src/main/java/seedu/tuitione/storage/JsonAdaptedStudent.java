@@ -66,7 +66,7 @@ class JsonAdaptedStudent {
         email = source.getEmail().value;
         address = source.getAddress().value;
         grade = source.getGrade().value;
-        remarked.addAll(source.getTags().stream()
+        remarked.addAll(source.getRemarks().stream()
                 .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
         lessonCodes.addAll(source.getLessonCodes().stream()

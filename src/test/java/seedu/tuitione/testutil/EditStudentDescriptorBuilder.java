@@ -37,7 +37,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getParentContact());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
-        descriptor.setTags(student.getTags());
+        descriptor.setRemarks(student.getRemarks());
         descriptor.setGrade(student.getGrade());
     }
 
@@ -85,9 +85,9 @@ public class EditStudentDescriptorBuilder {
      * Parses the {@code remarks} into a {@code Set<Remark>} and set it to the {@code EditStudentDescriptor}
      * that we are building.
      */
-    public EditStudentDescriptorBuilder withTags(String... remarks) {
-        Set<Remark> tagSet = Stream.of(remarks).map(Remark::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditStudentDescriptorBuilder withRemarks(String... remarks) {
+        Set<Remark> remarkSet = Stream.of(remarks).map(Remark::new).collect(Collectors.toSet());
+        descriptor.setRemarks(remarkSet);
         return this;
     }
 

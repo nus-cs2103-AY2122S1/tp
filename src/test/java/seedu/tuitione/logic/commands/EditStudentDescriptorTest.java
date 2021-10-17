@@ -8,7 +8,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +52,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different remarks -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withRemarks(VALID_REMARK_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

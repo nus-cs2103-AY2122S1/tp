@@ -8,7 +8,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_HUSBAND;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 import static seedu.tuitione.testutil.TypicalStudents.ALICE;
 import static seedu.tuitione.testutil.TypicalStudents.BOB;
@@ -22,7 +22,7 @@ public class StudentTest {
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Student student = new StudentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> student.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> student.getRemarks().remove(0));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class StudentTest {
 
         // same name, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withAddress(VALID_ADDRESS_BOB).withRemarks(VALID_REMARK_HUSBAND).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -93,7 +93,7 @@ public class StudentTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different remarks -> returns false
-        editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new StudentBuilder(ALICE).withRemarks(VALID_REMARK_HUSBAND).build();
         assertNotEquals(ALICE, editedAlice);
     }
 }

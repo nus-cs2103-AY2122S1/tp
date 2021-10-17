@@ -6,7 +6,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_GRADE,
-                        PREFIX_TAG);
+                        PREFIX_REMARK);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_GRADE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Remark> remarkList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Remark> remarkList = ParserUtil.parseRemarks(argMultimap.getAllValues(PREFIX_REMARK));
 
         Student student = new Student(name, parentContact, email, address, grade, remarkList);
 

@@ -6,7 +6,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE + "GRADE] "
-            + "[" + PREFIX_TAG + "REMARK]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
-        Set<Remark> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<Remark> updatedTags = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
 
         return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress, updatedGrade, updatedTags);
     }
@@ -164,7 +164,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
-            setTags(toCopy.remarks);
+            setRemarks(toCopy.remarks);
         }
 
         /**
@@ -218,7 +218,7 @@ public class EditCommand extends Command {
          * Sets {@code remarks} to this object's {@code remarks}.
          * A defensive copy of {@code remarks} is used internally.
          */
-        public void setTags(Set<Remark> remarks) {
+        public void setRemarks(Set<Remark> remarks) {
             this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
         }
 
@@ -227,7 +227,7 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code remarks} is null.
          */
-        public Optional<Set<Remark>> getTags() {
+        public Optional<Set<Remark>> getRemarks() {
             return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
@@ -251,7 +251,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
-                    && getTags().equals(e.getTags());
+                    && getRemarks().equals(e.getRemarks());
         }
 
         /**

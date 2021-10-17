@@ -135,7 +135,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code remark} is invalid.
      */
-    public static Remark parseTag(String remark) throws ParseException {
+    public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedTag = remark.trim();
         if (!Remark.isValidRemarkName(trimmedTag)) {
@@ -147,11 +147,11 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> remarks} into a {@code Set<Remark>}.
      */
-    public static Set<Remark> parseTags(Collection<String> remarks) throws ParseException {
+    public static Set<Remark> parseRemarks(Collection<String> remarks) throws ParseException {
         requireNonNull(remarks);
         final Set<Remark> remarkSet = new HashSet<>();
         for (String remarkName : remarks) {
-            remarkSet.add(parseTag(remarkName));
+            remarkSet.add(parseRemark(remarkName));
         }
         return remarkSet;
     }
