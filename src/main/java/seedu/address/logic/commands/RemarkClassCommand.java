@@ -4,21 +4,32 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUITIONS;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.TuitionClass;
+import seedu.address.ui.RemarkEditor;
 
 public class RemarkClassCommand extends Command {
 
     public static final String COMMAND_WORD = "remarkclass";
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Tuition Class: %1$s";
+    public static final String MESSAGE_UPDATE_REMARK_SUCCESS = "Remark updated for Tuition Class: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Tuition Class: %1$s";
-
+    public static final String REMARK_EDITOR_ERROR_MESSAGE = "Something went wrong with the remark editor!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tuition class identified "
             + "by the index number used in the last tuition classes listing. "
@@ -28,18 +39,17 @@ public class RemarkClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_REMARK + "physics homework: read chapter 3 pg 49-53.";
 
+    private static final Logger logger = LogsCenter.getLogger(RemarkEditor.class);
+
     private final Index index;
-    private final Remark remark;
 
     /**
      * @param index of the tuition class in the filtered tuition class list to edit the remark
-     * @param remark of the tuition class to be updated to
      */
-    public RemarkClassCommand(Index index, Remark remark) {
-        requireAllNonNull(index, remark);
+    public RemarkClassCommand(Index index) {
+        requireAllNonNull(index);
 
         this.index = index;
-        this.remark = remark;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -50,8 +60,13 @@ public class RemarkClassCommand extends Command {
         }
 
         TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
+
+        String name = classToEdit.getName().name;
+        String remarkToEdit = classToEdit.getRemark().value;
+        Remark newRemark = showRemarkEditor(name, remarkToEdit);
+
         TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
-                classToEdit.getTimeslot(), classToEdit.getStudentList(), remark);
+                classToEdit.getTimeslot(), classToEdit.getStudentList(), newRemark);
 
         model.setTuition(classToEdit, editedClass);
         model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
@@ -60,7 +75,8 @@ public class RemarkClassCommand extends Command {
     }
 
     private String generateSuccessMessage(TuitionClass classToEdit) {
-        String message = !remark.value.isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
+        String remark = classToEdit.getRemark().value;
+        String message = !remark.isEmpty() ? MESSAGE_UPDATE_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
         return String.format(message, classToEdit);
     }
 
@@ -79,7 +95,40 @@ public class RemarkClassCommand extends Command {
 
         // state check
         RemarkClassCommand e = (RemarkClassCommand) other;
-        return index.equals(e.index)
-                && remark.equals(e.remark);
+        return index.equals(e.index);
+    }
+
+    /**
+     * Displays a dialog box for the user to edit remarks.
+     * @param name The name of the student or tuition class being modified.
+     * @param remarkToEdit The current remark of the student or tuition class.
+     * @return Returns the updated remark.
+     * @throws CommandException If unable to load the fxml file for the remark editor.
+     */
+    public Remark showRemarkEditor(String name, String remarkToEdit) throws CommandException {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("/view/RemarkEditor.fxml"));
+            DialogPane remarkEditor = fxmlLoader.load();
+
+            logger.fine("Showing the remark editor");
+
+            RemarkEditor remarkController = fxmlLoader.getController();
+            remarkController.setRemark(name, remarkToEdit);
+
+            Dialog<ButtonType> dialog = new Dialog<>();
+            dialog.setDialogPane(remarkEditor);
+            dialog.setTitle("Remark Editor");
+            Stage stage = (Stage) remarkEditor.getScene().getWindow();
+            stage.getIcons().add(new Image(String.valueOf(this.getClass().getResource("/images/edit_icon.png"))));
+
+            Optional<ButtonType> clickedButton = dialog.showAndWait();
+            if (clickedButton.get() == ButtonType.OK) {
+                return remarkController.getNewRemark();
+            }
+        } catch (IOException e) {
+            throw new CommandException(REMARK_EDITOR_ERROR_MESSAGE, e);
+        }
+        return new Remark(remarkToEdit);
     }
 }
