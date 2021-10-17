@@ -53,7 +53,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing StudentBook ]===========================");
+        logger.info("==================[ Initializing StudentBook and LessonBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -116,7 +116,6 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty LessonBook");
             lessonsInitialData = new LessonBook();
         }
-
 
         return new ModelManager(studentsInitialData, lessonsInitialData, userPrefs);
     }

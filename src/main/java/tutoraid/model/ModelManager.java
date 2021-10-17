@@ -15,7 +15,6 @@ import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.ui.UiManager;
 
-
 /**
  * Represents the in-memory model of the student book data.
  */

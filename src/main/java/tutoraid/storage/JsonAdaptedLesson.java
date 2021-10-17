@@ -24,7 +24,7 @@ public class JsonAdaptedLesson {
     private final String lessonName;
     private final String capacity;
     private final String price;
-    private final ArrayList<Student> students;
+    private final ArrayList<JsonAdaptedStudent> students;
     private final String timing;
 
     /**
@@ -33,7 +33,7 @@ public class JsonAdaptedLesson {
     @JsonCreator
     public JsonAdaptedLesson(
             @JsonProperty("lessonName") String lessonName, @JsonProperty("capacity") String capacity,
-            @JsonProperty("price") String price, @JsonProperty("students") ArrayList<Student> students,
+            @JsonProperty("price") String price, @JsonProperty("students") ArrayList<JsonAdaptedStudent> students,
             @JsonProperty("timing") String timing) {
         this.lessonName = lessonName;
         this.capacity = capacity;
@@ -49,7 +49,11 @@ public class JsonAdaptedLesson {
         lessonName = source.getLessonName().lessonName;
         capacity = source.getCapacity().value;
         price = source.getPrice().value;
-        students = source.getStudents().students;
+        ArrayList<JsonAdaptedStudent> jsonAdaptedStudents = new ArrayList<>();
+        for (Student student : source.getStudents().students) {
+            jsonAdaptedStudents.add(new JsonAdaptedStudent(student));
+        }
+        students = jsonAdaptedStudents;
         timing = source.getTiming().value;
     }
 
@@ -82,7 +86,11 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LessonName.class.getSimpleName()));
         }
-        final Students modelLessonStudents = new Students(students);
+        ArrayList<Student> lessonStudents = new ArrayList<>();
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            lessonStudents.add(jsonAdaptedStudent.toModelType());
+        }
+        final Students modelLessonStudents = new Students(lessonStudents);
 
         if (timing == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timing.class.getSimpleName()));

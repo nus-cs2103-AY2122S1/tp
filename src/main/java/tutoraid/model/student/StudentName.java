@@ -3,6 +3,7 @@ package tutoraid.model.student;
 import tutoraid.commons.util.AppUtil;
 
 public class StudentName extends Name {
+
     /**
      * Constructs a {@code StudentName}.
      *
