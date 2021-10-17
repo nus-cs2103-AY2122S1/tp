@@ -31,6 +31,7 @@ public class Order {
      * Add an {@code Item} to the order.
      */
     public void addItem(Item newItem) {
+        requireNonNull(newItem);
         items.add(newItem);
     }
 
@@ -38,6 +39,8 @@ public class Order {
      * Remove the specified {@code Item} from order.
      */
     public void removeItem(Item toBeRemoved) {
+        requireNonNull(toBeRemoved);
+
         for (Item item : items.asUnmodifiableObservableList()) {
             if (item.isSameItem(toBeRemoved)) { // Same name OR same id
                 items.remove(item);
