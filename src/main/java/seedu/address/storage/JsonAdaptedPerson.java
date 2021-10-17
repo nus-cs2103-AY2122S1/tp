@@ -72,11 +72,6 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
 
-        final List<ModuleCode> personModuleCodes = new ArrayList<>();
-        for (JsonAdaptedModuleCode moduleCode : moduleCodes) {
-            personModuleCodes.add(moduleCode.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -115,6 +110,10 @@ class JsonAdaptedPerson {
         }
         final TeleHandle modelTeleHandle = new TeleHandle(teleHandle);
 
+        final List<ModuleCode> personModuleCodes = new ArrayList<>();
+        for (JsonAdaptedModuleCode moduleCode : moduleCodes) {
+            personModuleCodes.add(moduleCode.toModelType());
+        }
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(personModuleCodes);
         return new Person(modelName, modelEmail, modelModuleCodes, modelPhone, modelTeleHandle, modelRemark);
     }

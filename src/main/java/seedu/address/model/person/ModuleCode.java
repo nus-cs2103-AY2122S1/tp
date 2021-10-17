@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
@@ -42,6 +43,10 @@ public class ModuleCode {
      */
     public static boolean isValidModuleCode(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     @Override

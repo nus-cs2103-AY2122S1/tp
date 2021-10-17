@@ -76,7 +76,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidModuleCodes_throwsIllegalValueException() {
         List<JsonAdaptedModuleCode> invalidModuleCodes = new ArrayList<>(VALID_MODULE_CODES);
-        invalidModuleCodes.add(new JsonAdaptedModuleCode(INVALID_MODULE_CODE, new HashSet<>()));
+        invalidModuleCodes.add(new JsonAdaptedModuleCode(INVALID_MODULE_CODE, new ArrayList<>()));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_EMAIL, invalidModuleCodes,
                 VALID_PHONE, VALID_TELE_HANDLE, VALID_REMARK);
         assertThrows(IllegalValueException.class, person::toModelType);
