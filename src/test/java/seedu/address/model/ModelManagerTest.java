@@ -152,7 +152,7 @@ public class ModelManagerTest {
     // ========= order related methods tests ==========
 
     @Test
-    public void setOrder_nullOrder_NullPointerException() {
+    public void setOrder_nullOrder_throwNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.setOrder(null));
     }
 
@@ -172,12 +172,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void addToOrder_nullItem_NullPointerException() {
+    public void addToOrder_nullItem_throwNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.addToOrder(null));
     }
 
     @Test
-    public void addToOrder_noOrderIsSetYet_AssertionError() {
+    public void addToOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
         assertThrows(AssertionError.class, () -> model.addToOrder(APPLE_PIE));
     }
@@ -192,24 +192,25 @@ public class ModelManagerTest {
         assertEquals(modelManager.getOrder(), expectedOrder);
     }
 
-//    @Test
-//    public void addToOrder_duplicateItem_itemCountIncrease() {
-//        // TODO: Implement duplicate item count increasing!
-//        modelManager.setOrder(TypicalOrders.getTypicalOrder());
-//        Order expectedOrder = TypicalOrders.getTypicalOrder();
-//        modelManager.addToOrder(APPLE_PIE);
-//        expectedOrder.addItem(APPLE_PIE);
-//
-//        assertEquals(modelManager.getOrder(), expectedOrder);
-//    }
+    /*
+    @Test
+    public void addToOrder_duplicateItem_itemCountIncrease() {
+        // TODO: Implement duplicate item count increasing!
+        modelManager.setOrder(TypicalOrders.getTypicalOrder());
+        Order expectedOrder = TypicalOrders.getTypicalOrder();
+        modelManager.addToOrder(APPLE_PIE);
+        expectedOrder.addItem(APPLE_PIE);
+
+        assertEquals(modelManager.getOrder(), expectedOrder);
+    }*/
 
     @Test
-    public void removeFromOrder_nullItem_NullPointerException() {
+    public void removeFromOrder_nullItem_throwNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.removeFromOrder(null));
     }
 
     @Test
-    public void removeFromOrder_noOrderIsSetYet_AssertionError() {
+    public void removeFromOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
         assertThrows(AssertionError.class, () -> model.removeFromOrder(APPLE_PIE));
     }
@@ -234,7 +235,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void transactAndClearOrder_noOrderIsSetYet_AssertionError() {
+    public void transactAndClearOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
         assertThrows(AssertionError.class, model::transactAndClearOrder);
     }

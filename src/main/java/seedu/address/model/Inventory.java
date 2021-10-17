@@ -149,7 +149,7 @@ public class Inventory implements ReadOnlyInventory {
 
         int transactedQuantity = 0;
         for (Item item : items.asUnmodifiableObservableList()) {
-            if (item.isSameItem(toTransact) && item.getCount() > 0) {
+            if (item.isSameItem(toTransact) && toTransact.getCount() > 0) {
                 transactedQuantity = Math.min(item.getCount(), toTransact.getCount());
                 if (transactedQuantity == item.getCount()) {
                     items.remove(item);

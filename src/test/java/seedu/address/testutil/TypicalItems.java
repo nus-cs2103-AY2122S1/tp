@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Inventory;
-import seedu.address.model.Order;
 import seedu.address.model.item.Item;
 
 /**

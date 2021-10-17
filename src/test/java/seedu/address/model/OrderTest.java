@@ -40,7 +40,7 @@ class OrderTest {
     }
 
     @Test
-    public void addItem_nullItem_NullPointerExceptionThrown() {
+    public void addItem_nullItem_throwNullPointerException() {
         Order order = new Order();
         assertThrows(NullPointerException.class, () -> order.addItem(null));
     }
@@ -53,7 +53,7 @@ class OrderTest {
     }
 
     @Test
-    public void removeItem_nullItem_NullPointerExceptionThrown() {
+    public void removeItem_nullItem_throwNullPointerException() {
         Order order = new Order();
         assertThrows(NullPointerException.class, () -> order.removeItem(null));
     }
