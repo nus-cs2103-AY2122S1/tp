@@ -8,54 +8,54 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Date;
 
-class OrderBookTest {
-    private final OrderBook orderBook = new OrderBook();
+class OrderListTest {
+    private final OrderList orderList = new OrderList();
     // project checkstyle blocks me from naming this in all caps as per normal convention
     private final Order testorder = new Order(new Customer("John"), new Date("20th august 2021"),
             new Amount("100.25"));
 
     @Test
     public void hasOrder_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> orderBook.hasOrder(null));
+        assertThrows(NullPointerException.class, () -> orderList.hasOrder(null));
     }
 
     @Test
     public void hasOrder_orderInList_returnsTrue() {
-        orderBook.add(testorder);
-        assertTrue(orderBook.hasOrder(testorder));
+        orderList.add(testorder);
+        assertTrue(orderList.hasOrder(testorder));
     }
 
     @Test
     public void hasOrder_orderNotInList_returnsFalse() {
-        assertFalse(orderBook.hasOrder(testorder));
+        assertFalse(orderList.hasOrder(testorder));
     }
 
     @Test
     public void add_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> orderBook.add(null));
+        assertThrows(NullPointerException.class, () -> orderList.add(null));
     }
 
     @Test
     public void remove_nullOrder_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> orderBook.remove(null));
+        assertThrows(NullPointerException.class, () -> orderList.remove(null));
     }
 
     @Test
     public void remove_orderDoesNotExist_throwsOrderNotFoundException() {
-        assertThrows(OrderNotFoundException.class, () -> orderBook.remove(testorder));
+        assertThrows(OrderNotFoundException.class, () -> orderList.remove(testorder));
     }
 
     @Test
     public void remove_existingOrder_removesOrder() {
-        orderBook.add(testorder);
-        orderBook.remove(testorder);
-        assertFalse(orderBook.hasOrder(testorder));
+        orderList.add(testorder);
+        orderList.remove(testorder);
+        assertFalse(orderList.hasOrder(testorder));
     }
 
     @Test
     public void markComplete_existingOrder_marksOrder() {
-        orderBook.add(testorder);
-        orderBook.markComplete(testorder);
+        orderList.add(testorder);
+        orderList.markComplete(testorder);
         assertTrue(testorder.getIsComplete());
     }
 }

@@ -63,7 +63,7 @@ public class Order {
         }
     }
 
-    //required for OrderBook to check if a Order exists, before marking it.
+    //required for OrderList to check if a Order exists, before marking it.
     @Override
     public boolean equals(Object other) {
         if (other == this) {
