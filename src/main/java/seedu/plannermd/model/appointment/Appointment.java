@@ -2,6 +2,9 @@ package seedu.plannermd.model.appointment;
 
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.plannermd.model.doctor.Doctor;
@@ -81,6 +84,15 @@ public class Appointment {
                 && otherAppointment.getDoctor().equals(getDoctor())
                 && otherAppointment.getAppointmentDate().equals(getAppointmentDate())
                 && otherAppointment.getSession().equals(getSession());
+    }
+
+    /**
+     * Gets the start time of the appointment as a {@code LocalDateTime}
+     */
+    public LocalDateTime getAppointmentStartTime() {
+        LocalDate apptDate = date.date;
+        LocalTime apptTime = session.start;
+        return LocalDateTime.of(apptDate, apptTime);
     }
 
     /**
