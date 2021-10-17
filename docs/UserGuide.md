@@ -79,8 +79,8 @@ Format: `help`
 
 ### Toggling between tabs: `toggle`
 
-Toggles from the `Patients` tab to the `Doctors` tab and vice versa.<br>
-Commands entered in the `Patients` tab only affect the patients while commands entered in the `Doctors` tab only affect the doctors.
+Toggles between `Patients` tab and `Doctors` tab.<br>
+Commands entered while the `Patients` tab is displayed will only affect patients whereas commands entered while the `Doctors` tab is displayed will only affect doctors.
 
 Format: `toggle`
 
@@ -310,7 +310,7 @@ Format: `tag id/INDEX t/TAG`
 
 
 Examples:
-`tag id/1 t/Covid` tags doctor with id 1 with a *Covid* tag.
+`tag id/1 t/Pediatrician` tags doctor with id 1 with a *Pediatrician* tag.
 
 ### Deleting a doctor's tags : `tag -d`
 
@@ -324,7 +324,7 @@ Format: `tag -d id/INDEX t/TAG`
 
 
 Examples:
-`tag -d id/1 t/Covid` deletes the *Covid* tag from doctor with id 1.
+`tag -d id/1 t/Pediatrician` deletes the *Pediatrician* tag from doctor with id 1.
 
 ---
 
@@ -390,7 +390,7 @@ Action | Format, Examples
 --------|------------------
 **Add appointment** | 
 **Add doctor** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`<br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
-**Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 1234665 dob/20/07/1964 t/friend t/colleague risk/LOW`
+**Add patient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]` <br> e.g., `add n/James Ho p/98989898 e/jamesho@example.com a/123, Clementi Rd, 123466 dob/20/07/1964 t/vaccinated t/diabetic risk/LOW`
 **Add Tag** | `tag id/INDEX t/TAG`<br> e.g, `tag id/1 t/Unvaccinated`
 **Clear** | `clear`
 **Delete appointment** | 
