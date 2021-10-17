@@ -63,6 +63,13 @@ public class ShnPeriod {
         return isValidShnPeriod(testStartDate, testEndDate);
     }
 
+    /**
+     * Returns true if this SHN period is completed by the given date.
+     */
+    public boolean isCompletedBy(LocalDate dateToCompare) {
+        return endDate.isBefore(dateToCompare);
+    }
+
     @Override
     public String toString() {
         return String.format("%s => %s", startDate, endDate);

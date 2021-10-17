@@ -34,7 +34,7 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
 
     *  **`delete`** : Deletes a person at the specified index.
 
-    * **`clear`** : Deletes all contacts.
+    * **`clear`** : Deletes all contacts with SHN periods that are completed at time of command call.
 
     * **`exit`** : Exits the app.
 
@@ -129,7 +129,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contacts with SHN periods that are completed at time of command call from the app.
 
 Format: `clear`
 
