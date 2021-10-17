@@ -100,7 +100,7 @@ public class AddCommandParserTest {
 
         // multiple genders - last gender accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
-                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_AMY + GENDER_DESC_AMY + GENDER_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + GENDER_DESC_AMY + GENDER_DESC_BOB
                 + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple remarks - last remark accepted
@@ -252,7 +252,7 @@ public class AddCommandParserTest {
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_GENDER_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + INVALID_SOCIAL_HANDLE_DESC + REMARK_DESC_BOB
+                + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid phone

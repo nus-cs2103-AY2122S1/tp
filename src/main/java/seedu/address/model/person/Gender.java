@@ -34,6 +34,9 @@ public class Gender {
      * Returns true if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
