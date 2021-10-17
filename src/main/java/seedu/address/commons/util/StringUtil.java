@@ -12,6 +12,8 @@ import java.util.List;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    public static final String PERSON_DELIMITER = "\n";
+    public static final String CLIENTID_DELIMITER = ", ";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.

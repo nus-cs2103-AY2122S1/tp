@@ -151,7 +151,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Person with {@code clientId} and {@code email} must exist in the address book.
      */
-    public Person removePersonByFields(List<Predicate<Person>> predicates) {
+    public List<Person> removePersonByFields(Predicate<Person> predicates) {
         return persons.removeByFields(predicates);
     }
 

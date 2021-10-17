@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.PERSON_DELIMITER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -25,29 +27,29 @@ public class DeleteCommand extends Command {
             + PREFIX_CLIENTID + "CLIENT ID "
             + PREFIX_EMAIL + "EMAIL "
             + "\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CLIENTID + " 1" + " " + PREFIX_EMAIL
-            + " test@gmail.com";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_PERSON_FAILURE = "Person not found in list";
 
-    private final List<Predicate<Person>> predicates;
+    private final Predicate<Person> predicates;
 
-    public DeleteCommand(List<Predicate<Person>> predicates) {
+    public DeleteCommand(Predicate<Person> predicates) {
         this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToDelete;
+        List<Person> personToDelete;
         try {
             personToDelete = model.deletePersonByFields(predicates);
         } catch (PersonNotFoundException e) {
             throw new CommandException(MESSAGE_DELETE_PERSON_FAILURE);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        String personString = StringUtil.joinListToString(personToDelete, PERSON_DELIMITER);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personString));
     }
 
     @Override

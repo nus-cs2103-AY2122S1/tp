@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -113,16 +114,15 @@ public class UniquePersonList implements Iterable<Person> {
      * Removes the equivalent person with matching client id and/or email from the list.
      * The person must exist in the list.
      */
-    public Person removeByFields(List<Predicate<Person>> predicates) {
-        requireAllNonNull(predicates);
-        Predicate<Person> predicate = predicates.stream().reduce(x -> true, Predicate::and);
+    public List<Person> removeByFields(Predicate<Person> predicate) {
+        requireAllNonNull(predicate);
         FilteredList<Person> filteredList = internalList.filtered(predicate);
         if (filteredList.size() < 1) {
             throw new PersonNotFoundException();
         } else {
-            Person personToDelete = filteredList.get(0);
-            internalList.remove(personToDelete);
-            return personToDelete;
+            List<Person> personList = new ArrayList<>(filteredList);
+            personList.forEach(internalList::remove);
+            return personList;
         }
 
 

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.CLIENTID_DELIMITER;
+import static seedu.address.commons.util.StringUtil.PERSON_DELIMITER;
 import static seedu.address.commons.util.StringUtil.joinListToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
@@ -61,9 +63,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_CHANGE_CLIENTID = "Client's ID cannot be changed.";
-
-    private static final String PERSON_DELIMITER = "\n";
-    private static final String CLIENTID_DELIMITER = ", ";
 
     private final List<ClientId> clientIds;
     private final EditPersonDescriptor editPersonDescriptor;

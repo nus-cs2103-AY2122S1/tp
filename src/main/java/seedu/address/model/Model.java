@@ -74,7 +74,7 @@ public interface Model {
     /**
      * Deletes the person with the matching Client ID and Email and returns the deleted person
      */
-    Person deletePersonByFields(List<Predicate<Person>> predicates);
+    List<Person> deletePersonByFields(Predicate<Person> predicates);
 
     /**
      * Adds the given person.

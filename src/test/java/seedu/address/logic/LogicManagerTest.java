@@ -62,7 +62,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete i/9";
+        String deleteCommand = "delete 88";
         assertCommandException(deleteCommand, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
     }
 
