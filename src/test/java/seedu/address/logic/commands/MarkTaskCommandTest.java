@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,28 +24,26 @@ class MarkTaskCommandTest {
     //was more stylistically appropriate for testing.
 
     @Test
-    public void execute_validIndexMarkDone_success() throws Exception {
+    public void execute_validIndexMarkTask_success() throws Exception {
         Index targetIndex = Index.fromOneBased(1);
         ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
 
-        Task secondTestTask = new Task(new Label("test label"), new Date("test date"));
-        secondTestTask.setIsDone(true);
-
+        assertFalse(testTask.getIsDone());
         CommandResult commandResult = new MarkTaskCommand(targetIndex).execute(modelStub);
 
+        assertTrue(testTask.getIsDone());
         assertEquals(String.format(MarkTaskCommand.MESSAGE_MARK_TASK_SUCCESS, testTask),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(secondTestTask), modelStub.listWithOneTask);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(2);
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(outOfBoundIndex);
+        MarkTaskCommand markTaskCommand = new MarkTaskCommand(outOfBoundIndex);
         ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, (
-        ) -> deleteTaskCommand.execute(modelStub));
+        ) -> markTaskCommand.execute(modelStub));
     }
 
     private class ModelStubWithOnePerson extends ModelStub {

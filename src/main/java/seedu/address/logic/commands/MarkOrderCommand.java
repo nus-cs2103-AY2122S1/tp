@@ -15,7 +15,7 @@ import seedu.address.model.order.Order;
  */
 public class MarkOrderCommand extends Command {
 
-    public static final String COMMAND_WORD = "markcomplete";
+    public static final String COMMAND_WORD = "markorder";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks an order identified by the index number used in the displayed order list as complete.\n"

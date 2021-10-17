@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderBook;
+import seedu.address.model.order.OrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredTasks;
 
     //pending re-wrapping by yuichiro
-    private final OrderBook orderBook;
+    private final OrderList orderBook;
     private final FilteredList<Order> filteredOrders;
 
     /**
@@ -44,7 +44,7 @@ public class ModelManager implements Model {
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
 
         //pending re-wrapping by Yuichiro
-        this.orderBook = new OrderBook();
+        this.orderBook = new OrderList();
         filteredOrders = new FilteredList<>(orderBook.asUnmodifiableObservableList());
 
     }
