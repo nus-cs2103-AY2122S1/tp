@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.logic.parser.exceptions.ParseException;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
-import seedu.tuitione.model.remark.Remark;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -189,7 +189,8 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Remark> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Remark> expectedTagSet = new HashSet<Remark>(Arrays.asList(new Remark(VALID_TAG_1), new Remark(VALID_TAG_2)));
+        Set<Remark> expectedTagSet = new HashSet<>(Arrays.asList(new Remark(VALID_TAG_1),
+                new Remark(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

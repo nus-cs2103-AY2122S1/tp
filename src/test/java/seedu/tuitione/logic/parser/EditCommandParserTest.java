@@ -36,11 +36,11 @@ import org.junit.jupiter.api.Test;
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.logic.commands.EditCommand;
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
-import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.testutil.EditStudentDescriptorBuilder;
 
 public class EditCommandParserTest {

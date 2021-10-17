@@ -11,8 +11,8 @@ import java.util.Set;
 
 import seedu.tuitione.logic.commands.AddCommand;
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.remark.Remark;
+import seedu.tuitione.model.student.Student;
 
 /**
  * A utility class for Student.
@@ -37,7 +37,7 @@ public class StudentUtil {
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
         sb.append(PREFIX_GRADE + student.getGrade().value + " ");
         student.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.remarkName + " ")
         );
         return sb.toString();
     }
@@ -57,7 +57,7 @@ public class StudentUtil {
             if (remarks.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                remarks.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                remarks.forEach(s -> sb.append(PREFIX_TAG).append(s.remarkName).append(" "));
             }
         }
         return sb.toString();

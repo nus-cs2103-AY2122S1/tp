@@ -36,13 +36,13 @@ import static seedu.tuitione.testutil.TypicalStudents.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.logic.commands.AddCommand;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.testutil.StudentBuilder;
 
 public class AddCommandParserTest {

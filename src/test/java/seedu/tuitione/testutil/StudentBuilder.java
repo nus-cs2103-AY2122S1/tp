@@ -3,13 +3,13 @@ package seedu.tuitione.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.util.SampleDataUtil;
 
 /**

@@ -24,12 +24,12 @@ import seedu.tuitione.logic.commands.UnenrollCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
-import seedu.tuitione.model.remark.Remark;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -138,7 +138,7 @@ public class ParserUtil {
     public static Remark parseTag(String remark) throws ParseException {
         requireNonNull(remark);
         String trimmedTag = remark.trim();
-        if (!Remark.isValidTagName(trimmedTag)) {
+        if (!Remark.isValidRemarkName(trimmedTag)) {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedTag);
@@ -149,11 +149,11 @@ public class ParserUtil {
      */
     public static Set<Remark> parseTags(Collection<String> remarks) throws ParseException {
         requireNonNull(remarks);
-        final Set<Remark> tagSet = new HashSet<>();
-        for (String tagName : remarks) {
-            tagSet.add(parseTag(tagName));
+        final Set<Remark> remarkSet = new HashSet<>();
+        for (String remarkName : remarks) {
+            remarkSet.add(parseTag(remarkName));
         }
-        return tagSet;
+        return remarkSet;
     }
 
     /**

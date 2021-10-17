@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade" : "P2",
-    "tagged" : [ "friends" ],
+    "remarked" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "grade" : "S2",
-    "tagged" : [ "owesMoney", "friends" ],
+    "remarked" : [ "owesMoney", "friends" ],
     "lessonCodes" : [ "Mathematics-S2-Tue-0930" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "grade" : "P6",
-    "tagged" : [ ],
+    "remarked" : [ ],
     "lessonCodes" : [ ]
   } ],
   "lessons": [ {

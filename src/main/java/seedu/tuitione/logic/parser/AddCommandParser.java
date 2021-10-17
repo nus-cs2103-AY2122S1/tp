@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 
 import seedu.tuitione.logic.commands.AddCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
 
 
 /**
@@ -47,9 +47,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Remark> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Remark> remarkList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Student student = new Student(name, parentContact, email, address, grade, tagList);
+        Student student = new Student(name, parentContact, email, address, grade, remarkList);
 
         return new AddCommand(student);
     }

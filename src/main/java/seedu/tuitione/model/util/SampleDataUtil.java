@@ -12,13 +12,13 @@ import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonTime;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
 
 /**
  * Contains utility methods for populating {@code Tuitione} with sample data.

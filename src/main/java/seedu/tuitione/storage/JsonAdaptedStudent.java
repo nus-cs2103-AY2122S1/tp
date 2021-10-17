@@ -12,13 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.tuitione.commons.exceptions.IllegalValueException;
 import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -32,7 +32,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final String address;
     private final String grade;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedRemark> remarked = new ArrayList<>();
     private final List<String> lessonCodes = new ArrayList<>();
 
     /**
@@ -41,7 +41,7 @@ class JsonAdaptedStudent {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("tuitione") String address,
-            @JsonProperty("grade") String grade, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("grade") String grade, @JsonProperty("remarked") List<JsonAdaptedRemark> remarked,
             @JsonProperty("lessons") List<String> lessonCodes) {
 
         this.name = name;
@@ -49,8 +49,8 @@ class JsonAdaptedStudent {
         this.email = email;
         this.address = address;
         this.grade = grade;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (remarked != null) {
+            this.remarked.addAll(remarked);
         }
         if (lessonCodes != null) {
             this.lessonCodes.addAll(lessonCodes);
@@ -66,8 +66,8 @@ class JsonAdaptedStudent {
         email = source.getEmail().value;
         address = source.getAddress().value;
         grade = source.getGrade().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        remarked.addAll(source.getTags().stream()
+                .map(JsonAdaptedRemark::new)
                 .collect(Collectors.toList()));
         lessonCodes.addAll(source.getLessonCodes().stream()
                 .map(LessonCode::toString)
@@ -90,7 +90,7 @@ class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Remark> studentTags = new ArrayList<>();
-        for (JsonAdaptedTag remark : tagged) {
+        for (JsonAdaptedRemark remark : remarked) {
             studentTags.add(remark.toModelType());
         }
 

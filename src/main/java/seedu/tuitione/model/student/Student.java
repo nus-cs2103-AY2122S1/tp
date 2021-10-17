@@ -37,7 +37,12 @@ public class Student {
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, ParentContact parentContact, Email email, Address address, Grade grade, Set<Remark> remarks) {
+    public Student(Name name,
+                   ParentContact parentContact,
+                   Email email,
+                   Address address,
+                   Grade grade,
+                   Set<Remark> remarks) {
         requireAllNonNull(name, parentContact, email, address, remarks);
 
         this.name = name;

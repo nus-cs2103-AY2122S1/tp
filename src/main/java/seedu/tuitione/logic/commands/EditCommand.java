@@ -23,13 +23,14 @@ import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.remark.Remark;
+
 
 /**
  * Edits the details of an existing student in the tuitione book.

@@ -71,8 +71,8 @@ public class StudentCard extends UiPart<Region> {
         grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
 
         student.getTags().stream()
-                .sorted(Comparator.comparing(remark -> remark.tagName))
-                .forEach(remark -> remarks.getChildren().add(new Label(remark.tagName)));
+                .sorted(Comparator.comparing(remark -> remark.remarkName))
+                .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 
         if (student.getLessonCodesAndPrices().size() > 0) {
             lessons.setText(student.getLessonCodes().stream()
