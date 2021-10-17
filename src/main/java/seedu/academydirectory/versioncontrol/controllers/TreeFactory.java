@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.parsers.TreeParser;
@@ -31,35 +34,52 @@ public class TreeFactory {
 
     /**
      * Constructs a Tree object that is saved to disk.
-     * @param blobPath Path to blob to be duplicated
+     * @param blobPaths Path to blobs to be duplicated
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
      * @throws IOException if vcPath given is not writeable
      */
-    public Tree makeTree(Path blobPath) throws IOException {
+    public Tree makeTree(List<Path> blobPaths) throws IOException {
         // Make a blob snapshot
-        String blobHash = generator.generateHashFromFile(blobPath);
-        Path blobTargetPath = this.vcPath.resolve(Path.of(blobHash));
-        Files.copy(blobPath, blobTargetPath, REPLACE_EXISTING);
+        ArrayList<Path> blobTargetPaths = new ArrayList<>();
+        for (Path blobPath: blobPaths) {
+            String blobHash = generator.generateHashFromFile(blobPath);
+            Path blobTargetPath = this.vcPath.resolve(Path.of(blobHash));
 
-        // Make the tree
+            Files.copy(blobPath, blobTargetPath, REPLACE_EXISTING);
+            blobTargetPaths.add(blobTargetPath);
+        }
+
+        // Write tree to disk
+        Tree temp = new Tree("temp",
+                blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
+                blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
         String treeFileName = "temp";
 
         FileWriter writer = new FileWriter(treeFileName);
-        writer.append(blobHash).append(" ").append(String.valueOf(blobPath.getFileName()));
-        writer.flush();
+        List<List<String>> toBeWritten = temp.getWriteableFormat();
+        writeTree(toBeWritten, writer);
 
-        writer.close();
+        // Move tree file in disk
         Path treePath = Path.of(treeFileName);
         String treeHash = generator.generateHashFromFile(treePath);
         Path treeTargetPath = this.vcPath.resolve(Path.of(treeHash));
 
         Files.move(treePath, treeTargetPath, REPLACE_EXISTING);
 
-        System.out.println(blobPath);
-        System.out.println(blobTargetPath);
-        Tree test = new Tree(treeHash, "Null", "Null");
+        // Return final tree
+        return new Tree(treeHash,
+                blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
+                blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
+    }
 
-        return new Tree(treeHash, String.valueOf(blobPath), String.valueOf(blobTargetPath));
+    /**
+     * Constructs a Tree object that is saved to disk.
+     * @param blobPath Path to blob to be duplicated
+     * @return a Tree object which represents mapping between actual filename and version-controlled filename
+     * @throws IOException if vcPath given is not writeable
+     */
+    public Tree makeTree(Path blobPath) throws IOException {
+        return makeTree(List.of(blobPath));
     }
 
     /**
@@ -74,5 +94,19 @@ public class TreeFactory {
         System.out.println(Arrays.toString(args));
         assert hash.equals(args[0]);
         return new Tree(args[0], args[1], args[2]);
+    }
+
+    private void writeTree(List<List<String>> writeableTree, FileWriter writer) throws IOException {
+        writeableTree.stream()
+                .map(xs -> xs.get(0) + " " + xs.get(1))
+                .forEach(x -> {
+                    try {
+                        writer.append(x).append(System.lineSeparator());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        writer.close();
     }
 }
