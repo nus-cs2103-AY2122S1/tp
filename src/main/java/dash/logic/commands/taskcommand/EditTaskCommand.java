@@ -17,6 +17,7 @@ import dash.logic.commands.Command;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
 import dash.model.Model;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
@@ -88,7 +89,8 @@ public class EditTaskCommand extends Command {
                 .orElse(taskToEdit.getCompletionStatus());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedCompletionStatus, new TaskDate(), updatedTags);
+        return new Task(updatedDescription, updatedCompletionStatus,
+                new TaskDate(), new HashSet<Person>(), updatedTags);
     }
 
     @Override

@@ -10,12 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import dash.commons.exceptions.IllegalValueException;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
 import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 import dash.storage.JsonAdaptedTag;
+import dash.storage.addressbook.JsonAdaptedPerson;
 
 
 /**
@@ -26,8 +28,9 @@ class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's TaskDescription field is missing!";
 
     private final String description;
-    private final String taskDate;
     private final boolean isComplete;
+    private final String taskDate;
+    private final List<JsonAdaptedPerson> people = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -37,10 +40,14 @@ class JsonAdaptedTask {
     public JsonAdaptedTask(@JsonProperty("description") String description,
                            @JsonProperty("isComplete") boolean isComplete,
                            @JsonProperty("taskDate") String taskDate,
+                           @JsonProperty("people") List<JsonAdaptedPerson> people,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.description = description;
         this.isComplete = isComplete;
         this.taskDate = taskDate;
+        if (people != null) {
+            this.people.addAll(people);
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -53,6 +60,9 @@ class JsonAdaptedTask {
         description = source.getTaskDescription().description;
         taskDate = source.getTaskDate().toString();
         isComplete = source.getCompletionStatus().get();
+        people.addAll(source.getPeople().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -65,9 +75,14 @@ class JsonAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> taskTags = new ArrayList<>();
+        final List<Person> taskPeople = new ArrayList<>();
         TaskDate modelTaskDate;
         for (JsonAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedPerson person : people) {
+            taskPeople.add(person.toModelType());
         }
 
         if (description == null) {
@@ -94,9 +109,10 @@ class JsonAdaptedTask {
 
         final TaskDescription modelTaskDescription = new TaskDescription(description);
         final CompletionStatus modelCompletionStatus = new CompletionStatus(isComplete);
+        final Set<Person> modelPeople = new HashSet<>(taskPeople);
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
-        return new Task(modelTaskDescription, modelCompletionStatus, modelTaskDate, modelTags);
+        return new Task(modelTaskDescription, modelCompletionStatus, modelTaskDate, modelPeople, modelTags);
     }
 
 }

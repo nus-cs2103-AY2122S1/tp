@@ -129,18 +129,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
-        }
-        return tagSet;
-    }
-
-    /**
      * Parses a {@code String taskDate} into a {@code TaskDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -155,4 +143,29 @@ public class ParserUtil {
         return new TaskDate(trimmedTaskDate);
     }
 
+    /**
+     * Parses {@code Collection<String> personIndices} into a {@code Set<Index>}.
+     *
+     * @throws ParseException if the any given index is invalid.
+     */
+    public static Set<Index> parsePersonIndex(Collection<String> personIndices) throws ParseException {
+        requireNonNull(personIndices);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : personIndices) {
+            indexSet.add(parseIndex(index));
+        }
+        return indexSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
 }
