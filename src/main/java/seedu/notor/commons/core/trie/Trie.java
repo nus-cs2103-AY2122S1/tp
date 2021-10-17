@@ -18,6 +18,12 @@ public class Trie {
     private final Map<String, Integer> messageCounts = new HashMap<>();
     private final TrieNode root = TrieNode.create();
 
+    /**
+     * Creates a Trie with the specified elements.
+     *
+     * @param elements Elements to create the Trie with.
+     * @return Elements to create the Trie with.
+     */
     public static Trie createTrie(String... elements) {
         Trie trie = new Trie();
         for (String element : elements) {
