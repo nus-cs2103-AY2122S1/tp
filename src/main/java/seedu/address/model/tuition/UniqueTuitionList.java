@@ -163,7 +163,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
         DayOfWeek weekday = localDate.getDayOfWeek();
         String today = weekday.toString().substring(0, 3);
         List<TuitionClass> todayTuitionClass = internalList.stream()
-                .filter(tuitionClass -> tuitionClass.matchtheDay(today)).collect(Collectors.toList());
+                .filter(tuitionClass -> tuitionClass.matchTheDay(today)).collect(Collectors.toList());
         ObservableList<TuitionClass> observableList = FXCollections.observableList(todayTuitionClass);
         return observableList;
 

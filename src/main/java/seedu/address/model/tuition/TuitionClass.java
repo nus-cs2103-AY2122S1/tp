@@ -99,7 +99,7 @@ public class TuitionClass implements Nameable {
      * @param weekday
      * @return
      */
-    public boolean matchtheDay(String weekday) {
+    public boolean matchTheDay(String weekday) {
         return weekday.equals(this.timeslot.getTime().substring(0, 3).toUpperCase());
     }
 
