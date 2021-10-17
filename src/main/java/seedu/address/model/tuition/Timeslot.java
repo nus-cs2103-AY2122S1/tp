@@ -2,6 +2,7 @@ package seedu.address.model.tuition;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 
 
@@ -10,9 +11,7 @@ import java.util.HashMap;
  */
 public class Timeslot {
     public static final String TIME_FORMAT_INCORRECT = "The time format is not correct";
-    public final String time;
-    //used to sorting tuition classes by comparing date
-    private HashMap<String, Integer> days = new HashMap<>() {{
+    private static HashMap<String, Integer> days = new HashMap<>() {{
             put("Mon", 1);
             put("Tue", 2);
             put("Wed", 3);
@@ -21,6 +20,9 @@ public class Timeslot {
             put("Sat", 6);
             put("Sun", 7);
         }};
+    public final String time;
+    //used to sorting tuition classes by comparing date
+
 
 
     /**
@@ -83,6 +85,10 @@ public class Timeslot {
     @Override
     public String toString() {
         return time;
+    }
+
+    public String getDay() {
+        return (this.getTime().split(" "))[0];
     }
 
 
@@ -167,5 +173,28 @@ public class Timeslot {
 
     public String getTime() {
         return time;
+    }
+
+    /**
+     * Parses a time range in the form of string into LocalTime format.
+     * @return the starting time and end time in an array.
+     */
+    public LocalTime[] parseTime() {
+        String[] time = this.getTime().split(" ");
+        String start = time[1].substring(0, 5);
+        String end = time[1].substring(6, 11);
+        if (start.substring(0, 2).equals("24")) {
+            start = "00" + start.substring(2);
+        }
+        if (end.substring(0, 2).equals("24")) {
+            end = "00" + end.substring(2);
+        }
+        LocalTime localStart = LocalTime.parse(start);
+        LocalTime localEnd = LocalTime.parse(end);
+        return new LocalTime[]{localStart, localEnd};
+    }
+
+    public static HashMap<String, Integer> getDays() {
+        return days;
     }
 }

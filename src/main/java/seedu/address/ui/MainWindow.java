@@ -20,8 +20,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.tuition.TuitionClass;
+import seedu.address.model.tuition.UniqueTuitionList;
 import seedu.address.ui.infopage.InfoPage;
 import seedu.address.ui.infopage.StudentInfoPage;
+import seedu.address.ui.infopage.TimetableInfoPage;
 import seedu.address.ui.infopage.TodayTuitionClassInfoPage;
 import seedu.address.ui.infopage.TuitionClassInfoPage;
 
@@ -229,6 +231,9 @@ public class MainWindow extends UiPart<Stage> {
         case SHOW_TUITION_PAGE:
             showTuitionPage();
             break;
+        case SHOW_TIMETABLE:
+            showTimetable();
+            break;
         case SHOW_STUDENT_PAGE:
             showStudentPage();
             break;
@@ -249,6 +254,14 @@ public class MainWindow extends UiPart<Stage> {
             break;
         default:
             break;
+        }
+    }
+
+    private void showTimetable() {
+        try {
+            updateInfoPage(new TimetableInfoPage(UniqueTuitionList.getMostRecentTuitionClasses(), resultDisplay));
+        } catch (CommandException ce) {
+            resultDisplay.setFeedbackToUser(ce.getMessage());
         }
     }
 
