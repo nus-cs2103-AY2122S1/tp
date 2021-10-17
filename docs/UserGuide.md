@@ -8,16 +8,16 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 ## Table of Contents
 - [Quick Start](#quick-start)
 - [Features](#features)
-  1. [View Sample Data](#view-sample-data)
-  2. [Purge All Data: `purge`](#purge-all-data)
-  3. [Fill Sample Data: `fill`](#fill-sample-data)
-  4. [View Help: `help`](#view-help)
-  5. [Add Student: `add`](#add-student)
-  6. [View Student Details: `view`](#view-student)
-  7. [Edit Student Details: `update`](#edit-student)
-  8. [Delete Student: `delete`](#delete-student)
-  9. [Exit: `exit`](#exit)
-  10. [Save data](#save-data)
+    1. [View Sample Data](#view-sample-data)
+    2. [Purge All Data: `purge`](#purge-all-data)
+    3. [Fill Sample Data: `fill`](#fill-sample-data)
+    4. [View Help: `help`](#view-help)
+    5. [Add Student: `add`](#add-student)
+    6. [Filter List: `filter`](#filter-student)
+    7. [Edit Student Details: `edit`](#edit-student)
+    8. [Delete Student: `delete`](#delete-student)
+    9. [Exit: `exit`](#exit)
+    10. [Download data](#download-data)
 - [Command Summary](#command-summary)
 
 
@@ -34,19 +34,19 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and Class ID.
+    * **`add -n Sherwin -sid A1234567X -cid B01`**: Adds a student named `Sherwin` to the PE with his Student ID and Class ID.
 
-   * **`view -sid A1234567X`** Views a particular student's by its Student ID
+    * **`filter -sid A1234567X`** Filters the list to display student(s) whose student ID contains `A1234567X'
 
-   * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 with the `-n` flag
+    * **`edit 1 -n Sherwin`** Updates the name of the student at index 1 (1-indexed) with the `-n` flag
 
-   * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
+    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
 
-   * **`purge`**: Deletes all existing contacts
-    
-   * **`fill`**: Fills the app with sample data
+    * **`purge`**: Deletes all existing contacts
 
-   * **`exit`**: Exits the app.
+    * **`fill`**: Fills the app with sample data
+
+    * **`exit`**: Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -55,10 +55,12 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 **Notes about the command format (Unix Command Syntax):**
 
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify a student's student ID.
-- Parameters can be in any order.e.g. if the command specifies `-n NAME -sid STUDENT_ID`,
+- Parameters can be in any order.e.g. if the command specifies `-n NAME -sid STUDENT_ID`,
   `-sid STUDENT_ID -n NAME`is also acceptable.
-- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken. e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
-- Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be ignored. e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of
+  the parameter will be taken. e.g. if you specify `-n Allard -n Xian Yi` , only `-n Xian Yi` will be taken.
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `purge`) will be ignored.
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 ### <a name="view-sample-data"></a>1. View sample data
 
@@ -94,34 +96,35 @@ Examples:
 
 - `add -n Betsy -sid A2345678X -cid B02`: Adds the student called Betsy with student ID A2345678X and class ID B02 to ProgrammerError.
 
-### <a name="view-student"></a>5. View Students: `view`
+### <a name="filter-student"></a>5. Filter List: `filter`
 
-Views students in ProgrammerError whose details correspond to the specified arguments provided. Of the three arguments,
-at least one has to be provided. Arguments can be provided in any order. ProgrammerError will display
-the list of students whose details matches all the specified arguments.
+Filter the students in ProgrammerError based on the specified arguments provided (name, student ID or class ID).
+Of the three arguments, at least one has to be provided. Arguments can be provided in any order.
+ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
 
-Format: `view -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 
 Examples:
-- `view -sid A1234567X` Views all students whose student ID contains `A1234567X`.
-- `view -n abc` Views all students whose name contains `abc`.
-- `view -cid B01` Views all students whose class ID contains the character sequence `B01`.
-- `view -n Sherwin -cid B01` Views all students whose name contains the character sequence `Sherwin` and
+- `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
+- `filter -n abc` Lists all students whose name contains `abc`.
+- `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
+- `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and
   belongs to a class with the class ID containing the character sequence `B01`.
 
-### <a name="edit-student"></a>6. Edit Student Details : `edit`
+### <a name="edit-student"></a>6. Edit Student's Grade : `edit`
 
 Edits the grade of an existing student's in the PE.
+Take note that 1-indexing is used here as according to the displayed list.
 
-Format:`edit <INDEX> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+Format:`edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 
-- Updates the student with at the given `INDEX' with the arguments provided.
+- Updates the student with at the given `INDEX_IN_LIST' with the arguments provided.
 - Existing values will be updated to the input values.
 
 Examples:
 
-- `edit 1 -sid A1234567X` Updates the student ID of the student at index 1 to A1234567X.
-- `edit 2 -grade 97.5` Updates the grade of the student at index 2 to 97.5.
+- `edit 1 -sid A1234567X` Updates the student ID of the student at index 1 (1-indexed) to A1234567X.
+- `edit 2 -grade 97.5` Updates the grade of the student at index 2 (1-indexed) to 97.5.
 
 ### <a name="delete-student"></a>7. Delete Student: `delete`
 
@@ -140,20 +143,19 @@ Examples:
 
 Exits ProgrammerError and closes the GUI.
 
-### <a name="save-data"></a>9. Save Data
+### <a name="download-data"></a>9. Download Data
 
-ProgrammerError data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need to specify the directory to download the file to.
 
 ## <a name="command-summary"></a>Command Summary
 
 Command | Format & Examples
 --------| ----------------------
-**Purge** | `purge`
-**Fill** | `fill`
-**Help** | `help`
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-**View** | `view -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-**Edit** | `edit <INDEX> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
-**Update** | `update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
-**Delete** | `delete -sid <STUDENT_ID>`
+**Delete** | `delete <INDEX_IN_LIST>`
+**Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Exit** | `exit`
+**Fill** | `fill`
+**Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+**Help** | `help`
+**Purge** | `purge`
