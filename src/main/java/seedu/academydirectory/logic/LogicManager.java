@@ -43,7 +43,7 @@ public class LogicManager implements Logic {
     }
 
     public LogicManager(Model model, Storage storage) {
-        this(model, storage, null);
+        this(model, storage, OptionalVersion.ofNullable(null));
     }
 
     @Override
