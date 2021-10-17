@@ -54,7 +54,7 @@ public class FilterCommandTest {
     }
 
     @Test
-    public void execute_gradeNotFoundInTuitionenoStudentFound_noLessonFound() {
+    public void execute_gradeNotFoundInTuitione_noStudentFoundnoLessonFound() {
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
@@ -87,13 +87,15 @@ public class FilterCommandTest {
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);
         Grade grade = new Grade("S2");
+        MATH_S2.addStudent(BENSON);
         FilterCommand command = new FilterCommand(grade);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        BENSON.enrollForLesson(MATH_S2);
+
         assertEquals(Arrays.asList(BENSON), model.getFilteredStudentList());
-        assertEquals(Arrays.asList(MATH_S2, PHYSICS_S2).toString(), model.getFilteredLessonList().toString());
+        assertEquals(Arrays.asList(MATH_S2, PHYSICS_S2), model.getFilteredLessonList());
+        MATH_S2.removeStudent(BENSON);
     }
 
 }
