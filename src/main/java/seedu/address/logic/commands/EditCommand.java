@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +34,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -61,7 +61,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This operation will result in a"
+            + " duplicate in the address book.";
     public static final String MESSAGE_CHANGE_CLIENTID = "Client's ID cannot be changed.";
 
     private final List<ClientId> clientIds;
@@ -83,7 +84,8 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<ClientId> invalidClientIds = clientIds.stream()
+        List<ClientId> distinctClientIds = clientIds.stream().distinct().collect(Collectors.toList());
+        List<ClientId> invalidClientIds = distinctClientIds.stream()
                 .filter(c -> !model.hasClientId(c))
                 .collect(Collectors.toList());
 
@@ -92,18 +94,13 @@ public class EditCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, invalidClientIdsString));
         }
 
-        List<Person> editedPersons = new ArrayList<>();
-        for (ClientId c: clientIds) {
-            Person personToEdit = model.getAddressBook().getPerson(c);
-            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
-
-            model.setPerson(personToEdit, editedPerson);
-            editedPersons.add(editedPerson);
+        List<Person> editedPersons;
+        try {
+            editedPersons = model.setPersonByClientIds(clientIds, editPersonDescriptor);
+        } catch (DuplicatePersonException de) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
@@ -115,7 +112,7 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         ClientId oldClientId = personToEdit.getClientId();

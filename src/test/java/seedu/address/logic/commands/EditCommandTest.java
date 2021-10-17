@@ -50,7 +50,8 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getAddressBook().getPerson(clientId), editedPerson);
+
+        expectedModel.setPersonByClientIds(List.of(clientId), descriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -71,7 +72,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(thirdPerson, editedPerson);
+        expectedModel.setPersonByClientIds(List.of(clientId), descriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -110,15 +111,14 @@ public class EditCommandTest {
         Person editedPerson3 = new PersonBuilder(person3).withAddress(VALID_ADDRESS_AMY)
                 .withPhone(VALID_PHONE_BOB).build();
 
+        List<ClientId> clientIdlist = List.of(clientId1, clientId2, clientId3);
         List<Person> editPersonList = List.of(editedPerson1, editedPerson2, editedPerson3);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 StringUtil.joinListToString(editPersonList, "\n"));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(person1, editedPerson1);
-        expectedModel.setPerson(person2, editedPerson2);
-        expectedModel.setPerson(person3, editedPerson3);
+        expectedModel.setPersonByClientIds(clientIdlist, editPersonDescriptor);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

@@ -4,14 +4,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.function.Predicate;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonHasId;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -27,8 +25,7 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validClientId_returnsDeleteCommand() {
         ClientId clientId = new ClientId("1");
-        Predicate<Person> predicates = new PersonHasId(clientId);
-        assertParseSuccess(parser, " 1", new DeleteCommand(predicates));
+        assertParseSuccess(parser, " 1", new DeleteCommand(List.of(clientId)));
     }
 
     @Test

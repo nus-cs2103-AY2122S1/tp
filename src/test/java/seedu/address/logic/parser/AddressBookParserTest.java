@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,8 +70,7 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " 1");
         ClientId clientId = new ClientId("1");
-        Predicate<Person> predicates = new PersonHasId(clientId);
-        assertEquals(new DeleteCommand(predicates), command);
+        assertEquals(new DeleteCommand(List.of(clientId)), command);
     }
 
     @Test

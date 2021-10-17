@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
@@ -66,15 +67,9 @@ public interface Model {
     boolean hasClientId(ClientId clientId);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-     */
-    void deletePerson(Person target);
-
-    /**
      * Deletes the person with the matching Client ID and Email and returns the deleted person
      */
-    List<Person> deletePersonByFields(Predicate<Person> predicates);
+    List<Person> deletePersonByClientIds(List<ClientId> clientIds);
 
     /**
      * Adds the given person.
@@ -87,7 +82,7 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void setPerson(Person target, Person editedPerson);
+    List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editedPersonDescriptor);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

@@ -3,9 +3,9 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -123,11 +123,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * @return
      */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(target);
-
-        persons.setPerson(target, editedPerson);
+    public List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editedPersonDescriptor) {
+        requireNonNull(clientIds);
+        requireNonNull(editedPersonDescriptor);
+        return persons.setPersonByClientIds(clientIds, editedPersonDescriptor);
     }
 
     /**
@@ -151,8 +152,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Person with {@code clientId} and {@code email} must exist in the address book.
      */
-    public List<Person> removePersonByFields(Predicate<Person> predicates) {
-        return persons.removeByFields(predicates);
+    public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
+        return persons.deletePersonByClientIds(clientIds);
     }
 
     //// util methods
