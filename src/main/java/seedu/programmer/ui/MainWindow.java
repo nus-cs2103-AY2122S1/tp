@@ -230,11 +230,11 @@ public class MainWindow extends UiPart<Stage> {
      * @param popup Popup object to be displayed on the primaryStage
      */
     private void showPopupMessage(Popup popup) {
-        // Add some left padding
+        // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
 
-        // Set Y coordinate scaled according to primaryStage's Y coordinate
-        popup.setY(1.8 * primaryStage.getY());
+        // Set Y coordinate scaled according to primaryStage's height
+        popup.setY(primaryStage.getY() + 0.1 * primaryStage.getHeight());
         popup.show(primaryStage);
     }
 
