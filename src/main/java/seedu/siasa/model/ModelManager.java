@@ -143,6 +143,11 @@ public class ModelManager implements Model {
         siasa.setPolicy(target, editedPolicy);
     }
 
+    @Override
+    public void removePoliciesBelongingTo(Person target) {
+        siasa.removePoliciesBelongingTo(target);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

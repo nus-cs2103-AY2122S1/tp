@@ -102,6 +102,14 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     /**
+     * Removes all policies associated with {@code key}.
+     * {@code key} must exist in SIASA.
+     */
+    public void removePoliciesBelongingTo(Person key) {
+        policies.removeBelongingTo(key);
+    }
+
+    /**
      * Returns true if a policy with the same identity as {@code policy} exists in SIASA.
      */
     public boolean hasPolicy(Policy policy) {

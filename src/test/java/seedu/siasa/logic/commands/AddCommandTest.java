@@ -170,6 +170,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removePoliciesBelongingTo(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Policy> getFilteredPolicyList() {
             throw new AssertionError("This method should not be called.");
         }
