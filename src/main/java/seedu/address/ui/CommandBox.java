@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,6 +20,7 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
     private final ArrayList<String> commandHistory;
+    private Index index;
 
     @FXML
     private TextField commandTextField;
@@ -51,11 +53,27 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void showNextCommand() {
-        commandTextField.setText("next");
+        if (index == null) {
+            return;
+        } else if (index.getOneBased() == commandHistory.size()) {
+            index = Index.fromOneBased(index.getOneBased() + 1);
+            commandTextField.setText("");
+            return;
+        } else if (index.getOneBased() > commandHistory.size()) {
+            return;
+        }
+
+        index = Index.fromOneBased(index.getOneBased() + 1);
+        commandTextField.setText(commandHistory.get(index.getZeroBased()));
     }
 
     private void showPreviousCommand() {
-        commandTextField.setText("previous");
+        if (index == null || index.getOneBased() <= 1) {
+            return;
+        }
+
+        index = Index.fromOneBased(index.getOneBased() - 1);
+        commandTextField.setText(commandHistory.get(index.getZeroBased()));
     }
 
     /**
@@ -69,6 +87,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         commandHistory.add(commandText);
+        index = Index.fromOneBased(commandHistory.size());
 
         try {
             commandExecutor.execute(commandText);
