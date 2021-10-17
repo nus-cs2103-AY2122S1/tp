@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Date;
+import seedu.address.model.order.exceptions.OrderNotFoundException;
 
 class OrderListTest {
     private final OrderList orderList = new OrderList();
