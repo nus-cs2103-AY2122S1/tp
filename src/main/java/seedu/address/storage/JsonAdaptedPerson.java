@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String nationality;
     private final String tutorialGroup;
     private final String socialHandle;
+    private final String gender;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -40,16 +42,22 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("nationality") String nationality,
-            @JsonProperty("tutorialGroup") String tutorialGroup, @JsonProperty("socialHandle") String socialHandle,
-            @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("nationality") String nationality,
+                             @JsonProperty("tutorialGroup") String tutorialGroup,
+                             @JsonProperty("socialHandle") String socialHandle,
+                             @JsonProperty("gender") String gender,
+                             @JsonProperty("remark") String remark,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
         this.socialHandle = socialHandle;
+        this.gender = gender;
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -66,6 +74,7 @@ class JsonAdaptedPerson {
         nationality = source.getNationality().value;
         tutorialGroup = source.getTutorialGroup().value;
         socialHandle = source.getSocialHandle().value;
+        gender = source.getGender().gender;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -134,6 +143,15 @@ class JsonAdaptedPerson {
         }
         final SocialHandle modelSocialHandle = new SocialHandle(socialHandle);
 
+        if (gender == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_CONSTRAINTS);
+        }
+        final Gender modelGender = new Gender(gender);
+
         if (remark == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -145,7 +163,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelNationality,
-                modelTutorialGroup, modelSocialHandle, modelRemark, modelTags);
+                modelTutorialGroup, modelSocialHandle, modelGender, modelRemark, modelTags);
     }
 
 }

@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label socialHandle;
     @FXML
+    private Label gender;
+    @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
@@ -74,6 +76,10 @@ public class PersonCard extends UiPart<Region> {
         socialHandle.setText(person.getSocialHandle().value);
         if (person.getSocialHandle().value.isEmpty()) {
             socialHandle.setManaged(false);
+        }
+        gender.setText(person.getGender().gender);
+        if (person.getGender().gender.isEmpty()) {
+            gender.setManaged(false);
         }
         remark.setText(person.getRemark().value);
         if (person.getRemark().value.isEmpty()) {
