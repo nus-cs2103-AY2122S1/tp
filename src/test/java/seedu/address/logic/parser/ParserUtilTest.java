@@ -22,6 +22,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TaskTag;
+import seedu.address.model.task.Date;
+import seedu.address.model.task.Label;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -42,6 +45,14 @@ public class ParserUtilTest {
     private static final String VALID_REMARK = "loves pink colour";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+
+    private static final String INVALID_LABEL = "";
+    private static final String INVALID_DATE = "";
+    private static final String INVALID_TASK_TAG = "SG100";
+
+    private static final String VALID_LABEL = "Order cloth";
+    private static final String VALID_DATE = "19 September 2021";
+    private static final String VALID_TASK_TAG = "SO100";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -272,5 +283,74 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseLabel_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLabel((String) null));
+    }
+
+    @Test
+    public void parseLabel_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLabel(INVALID_LABEL));
+    }
+
+    @Test
+    public void parseLabel_validValueWithoutWhitespace_returnsLabel() throws Exception {
+        Label expectedLabel = new Label(VALID_LABEL);
+        assertEquals(expectedLabel, ParserUtil.parseLabel(VALID_LABEL));
+    }
+
+    @Test
+    public void parseLabel_validValueWithWhitespace_returnsTrimmedLabel() throws Exception {
+        String labelWithWhitespace = WHITESPACE + VALID_LABEL + WHITESPACE;
+        Label expectedLabel = new Label(VALID_LABEL);
+        assertEquals(expectedLabel, ParserUtil.parseLabel(labelWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseTaskTag_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskTag((String) null));
+    }
+
+    @Test
+    public void parseTaskTag_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskTag(INVALID_TASK_TAG));
+    }
+
+    @Test
+    public void parseTaskTag_validValueWithoutWhitespace_returnsTaskTag() throws Exception {
+        TaskTag expectedTaskTag = new TaskTag(VALID_TASK_TAG);
+        assertEquals(expectedTaskTag, ParserUtil.parseTaskTag(VALID_TASK_TAG));
+    }
+
+    @Test
+    public void parseTaskTag_validValueWithWhitespace_returnsTrimmedTaskTag() throws Exception {
+        String taskTagWithWhitespace = WHITESPACE + VALID_TASK_TAG + WHITESPACE;
+        TaskTag expectedTaskTag = new TaskTag(VALID_TASK_TAG);
+        assertEquals(expectedTaskTag, ParserUtil.parseTaskTag(taskTagWithWhitespace));
     }
 }

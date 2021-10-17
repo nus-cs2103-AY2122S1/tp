@@ -1,21 +1,27 @@
 package seedu.address.model.task;
 
+import java.util.Objects;
+
+import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.tag.TaskTag;
+
 /**
  * Basic Task class for v1.2 implementation
  */
 public class Task {
     private Label label;
     private Date date;
+    private TaskTag taskTag;
     private boolean isDone;
 
     /**
-     * Basic constructor, creates a task with the given label.
-     *
-     * @param label Label the task is created with. Not allowed to be empty.
+     * Every field must be present and not null.
      */
-    public Task(Label label, Date date) {
+    public Task(Label label, Date date, TaskTag taskTag) {
+        CollectionUtil.requireAllNonNull(label, date, taskTag);
         this.label = label;
         this.date = date;
+        this.taskTag = taskTag;
         this.isDone = false;
     }
 
@@ -47,16 +53,7 @@ public class Task {
     }
 
     /**
-     * Setter for label.
-     *
-     * @param label The new label of the task.
-     */
-    public void setLabel(Label label) {
-        this.label = label;
-    }
-
-    /**
-     * Getter for date. Not applicable for Todo tasks.
+     * Getter for date.
      *
      * @return A String representing the date associated with the Task.
      */
@@ -65,10 +62,10 @@ public class Task {
     }
 
     /**
-     * Setter for date. Not applicable for Todo tasks.
+     * Returns the task tag of the task
      */
-    public void setDate(Date date) {
-        this.date = date;
+    public TaskTag getTaskTag() {
+        return taskTag;
     }
 
     /**
@@ -78,11 +75,19 @@ public class Task {
      */
     @Override
     public String toString() {
+        final StringBuilder builder = new StringBuilder();
         if (isDone) {
-            return "[X] " + label + ", due: " + date;
+            builder.append("[X] ");
         } else {
-            return "[ ] " + label + ", due: " + date;
+            builder.append("[ ] ");
         }
+        builder.append(getLabel())
+                .append("; Date: ")
+                .append(getDate())
+                .append("; TaskTag: ")
+                .append(getTaskTag());
+
+        return builder.toString();
     }
 
     @Override
@@ -97,6 +102,13 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getLabel().equals(getLabel())
-                && otherTask.getDate().equals(getDate());
+                && otherTask.getDate().equals(getDate())
+                && otherTask.getTaskTag().equals(getTaskTag());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(label, date, taskTag);
     }
 }

@@ -13,12 +13,14 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Date;
 import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 class MarkDoneCommandTest {
-    private static final Task testTask = new Task(new Label("test label"), new Date("test date"));
+    private static final Task testTask = new Task(new Label("test label"),
+            new Date("test date"), new TaskTag("SO100"));
 
     //I followed the style of AddCommand test instead of DeleteCommand test since I thought using a modelStub
     //was more stylistically appropriate for testing.
@@ -28,7 +30,8 @@ class MarkDoneCommandTest {
         Index targetIndex = Index.fromOneBased(1);
         ModelStubWithOnePerson modelStub = new ModelStubWithOnePerson();
 
-        Task secondTestTask = new Task(new Label("test label"), new Date("test date"));
+        Task secondTestTask = new Task(new Label("test label"),
+                new Date("test date"), new TaskTag("SO100"));
         secondTestTask.setIsDone(true);
 
         CommandResult commandResult = new MarkDoneCommand(targetIndex).execute(modelStub);
