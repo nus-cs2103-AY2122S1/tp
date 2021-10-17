@@ -14,4 +14,5 @@ public class Messages {
     public static final String MESSAGE_STUDENT_NOT_FOUND = "This student is not found.";
     public static final String MESSAGE_CLASS_NOT_FOUND = "This tuition class is not found.";
     public static final String MESSAGE_STUDENT_NOT_IN_CLASS = "Student is not enrolled in this class.";
+    public static final String MESSAGE_NOT_EDITED = "Minimum one field to edit must be provided.";
 }
