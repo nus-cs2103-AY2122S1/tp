@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Inventory;
+import seedu.address.model.Order;
 import seedu.address.model.item.Item;
 
 /**
