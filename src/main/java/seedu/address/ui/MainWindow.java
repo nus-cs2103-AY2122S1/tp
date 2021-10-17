@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -22,6 +24,7 @@ import seedu.address.model.tuition.UniqueTuitionList;
 import seedu.address.ui.infopage.InfoPage;
 import seedu.address.ui.infopage.StudentInfoPage;
 import seedu.address.ui.infopage.TimetableInfoPage;
+import seedu.address.ui.infopage.TodayTuitionClassInfoPage;
 import seedu.address.ui.infopage.TuitionClassInfoPage;
 
 /**
@@ -138,6 +141,18 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        reminderDisplay();
+    }
+
+
+    /**
+     * Display a reminder to tutor about today tuition classes
+     */
+    public void reminderDisplay() {
+        ObservableList<TuitionClass> tuitionClasses = logic.getTodayTuitionList();
+        TodayTuitionClassInfoPage todayTuitionClassInfoPage = new TodayTuitionClassInfoPage(tuitionClasses);
+        updateInfoPage(todayTuitionClassInfoPage);
     }
 
     /**

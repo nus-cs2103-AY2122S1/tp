@@ -197,6 +197,11 @@ public class ModelManager implements Model {
         logger.info(filteredPersons.toString());
     }
 
+    @Override
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return addressBook.getTodayTuitionList();
+    }
+
     /*
 
     @Override

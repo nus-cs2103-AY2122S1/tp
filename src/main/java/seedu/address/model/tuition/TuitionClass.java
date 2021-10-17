@@ -94,6 +94,15 @@ public class TuitionClass implements Nameable {
         return id;
     }
 
+    /**
+     * determine whether this tuition happens today
+     * @param weekday
+     * @return
+     */
+    public boolean matchTheDay(String weekday) {
+        return weekday.equals(this.timeslot.getTime().substring(0, 3).toUpperCase());
+    }
+
     @Override
     public String getNameString() {
         return name.getName();

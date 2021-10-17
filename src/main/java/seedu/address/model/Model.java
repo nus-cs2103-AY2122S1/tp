@@ -92,6 +92,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered tuition list */
     ObservableList<TuitionClass> getFilteredTuitionList();
 
+    /** Returns an unmodifiable view of today tuition list */
+    ObservableList<TuitionClass> getTodayTuitionList();
+
     /**
      * Updates the filter of the filtered tuition list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -154,6 +157,8 @@ public interface Model {
      * @return the class if the id is present.
      */
     TuitionClass getClassById(Integer id);
+
+
 
     void sort(SortCommandParser.Order order);
 }

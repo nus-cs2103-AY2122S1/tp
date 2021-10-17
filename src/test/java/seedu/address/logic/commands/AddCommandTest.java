@@ -151,6 +151,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<TuitionClass> getTodayTuitionList() {
+            return null;
+        }
+
         /**
          * Returns an unmodifiable view of the filtered tuition list
          */
