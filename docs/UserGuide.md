@@ -2,9 +2,7 @@
 layout: page
 title: User Guide
 ---
-
-## Overview
-
+## Overview <br>
 Notor is a desktop application for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently, while keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
 
 * Table of Contents
@@ -13,24 +11,19 @@ Notor is a desktop application for mentors to keep tabs on their mentees, **opti
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-
 ### 1. Setup
-
 Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
-
 ### 2. Installing the project
-
 Download the latest `notor.jar` [here](), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
-
 ### 3. Running the application
-
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds. 
-Note how the app contains some sample data. <br>
+Note how the app contains some sample data. <br> 
 ![Ui](images/Ui.png)
 
-### 4. Try Running Examples!
 
-Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will open the help window. <br>
+### 4. Try Running Examples!
+Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will 
+open the help window. <br>
 Some example commands you can try: 
 
 * **`person /list`** : Lists all contacts.
