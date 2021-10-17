@@ -2,9 +2,10 @@ package seedu.address.testutil;
 
 import static seedu.address.model.id.UniqueId.DEFAULT_ID;
 
-import seedu.address.model.id.UniqueId;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.id.UniqueId;
+
 
 public class GroupBuilder {
     public static final String DEFAULT_NAME = "CS2103T";
