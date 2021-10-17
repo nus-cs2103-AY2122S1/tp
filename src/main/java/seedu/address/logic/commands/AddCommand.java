@@ -11,8 +11,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
 /**
@@ -48,12 +52,12 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final Function<ClientId, Person> toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddCommand(Function<ClientId, Person> person) {
         requireNonNull(person);
         toAdd = person;
     }
@@ -62,18 +66,23 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        String clientCounter = Optional.ofNullable(model.getAddressBook().getClientCounter()).orElse("0");
+        Person person = toAdd.apply(new ClientId(clientCounter));
+
+        if (model.hasPerson(person)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.addPerson(person);
+        model.getAddressBook().incrementClientCounter();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, person));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                && toAdd.apply(new ClientId("0")).equals(((AddCommand) other)
+                .toAdd.apply(new ClientId("0"))));
     }
 }
