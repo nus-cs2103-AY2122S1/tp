@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.ParserUtil.parseModuleCode;
+import static seedu.address.testutil.TestUtil.getModuleCode;
+
 import seedu.address.model.moduleclass.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.Time;
@@ -8,7 +11,7 @@ import seedu.address.model.person.Remark;
 
 public class ModuleClassBuilder {
 
-    public static final String DEFAULT_MODULE_CODE = "CS2103";
+    public static final String DEFAULT_MODULE_CODE = "CS2103 T17";
     public static final String DEFAULT_DAY = "2";
     public static final String DEFAULT_TIME = "15:00";
     public static final String DEFAULT_REMARK = "Location: COM1 113";
@@ -22,7 +25,7 @@ public class ModuleClassBuilder {
      * Creates a {@code ModuleClassBuilder} with the default details.
      */
     public ModuleClassBuilder() {
-        moduleCode = new ModuleCode(DEFAULT_MODULE_CODE);
+        moduleCode = getModuleCode(DEFAULT_MODULE_CODE);
         day = new Day(DEFAULT_DAY);
         time = new Time(DEFAULT_TIME);
         remark = new Remark(DEFAULT_REMARK);
@@ -42,7 +45,7 @@ public class ModuleClassBuilder {
      * Sets the {@code moduleCode} of the {@code ModuleClass} that we are building.
      */
     public ModuleClassBuilder withModuleCode(String moduleCode) {
-        this.moduleCode = new ModuleCode(moduleCode);
+        this.moduleCode = getModuleCode(moduleCode);
         return this;
     }
 
