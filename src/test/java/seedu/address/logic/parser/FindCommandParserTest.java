@@ -284,10 +284,11 @@ public class FindCommandParserTest {
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(invalidTagPrefixInput, PREFIX_TAG)));
 
 
-        String multipleInvalidPrefixInput = " n/@#$ p/abc e/peterjack@ r/@#$%^&*() et/longterm s/-100 y/800 t/old(70)";
+        String multipleInvalidPrefixInput =
+                " n/@#$ p/abc e/peterjack@ r/@#$%^&*() et/longterm s/-100 l/Kindergarten y/800 t/old(70)";
         assertThrows(ParseException.class, () ->
                 new FindDescriptor(ArgumentTokenizer.tokenizeWithoutPreamble(multipleInvalidPrefixInput,
                         PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
-                        PREFIX_EXPECTED_SALARY, PREFIX_EXPERIENCE, PREFIX_TAG)));
+                        PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG)));
     }
 }
