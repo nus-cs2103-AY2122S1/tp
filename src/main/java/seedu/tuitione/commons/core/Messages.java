@@ -11,6 +11,8 @@ public class Messages {
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d student(s) listed!";
     public static final String MESSAGE_INVALID_LESSON_CODE = "The lesson indicated by the lesson code does not exist!";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
-    public static final String MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW = "%1$d student(s) found!";
+    public static final String MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW = "%1$d students found!";
     public static final String MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW = "%1$d student found!";
+    public static final String MESSAGE_PLURAL_LESSON_LISTED_OVERVIEW = "%1$d lessons found!";
+    public static final String MESSAGE_SINGULAR_LESSON_LISTED_OVERVIEW = "%1$d lesson found!";
 }
