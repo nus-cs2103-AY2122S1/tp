@@ -48,6 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_RATING_AMY = "5";
     public static final String VALID_RATING_BOB = "3";
 
+    public static final String CATEGORY_EMPTY = "";
     public static final String CATEGORY_DESC_ATT = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_ATT;
     public static final String CATEGORY_DESC_FNB = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_FNB;
     public static final String CATEGORY_DESC_OTH = " " + PREFIX_CATEGORY_CODE + VALID_CATEGORY_CODE_OTH;

@@ -11,6 +11,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.CategoryCode;
+import seedu.address.model.person.Rating;
 
 class FilterCommandTest {
     @Test
@@ -18,15 +19,19 @@ class FilterCommandTest {
         Set<CategoryCode> firstCategoryCodeSet = Collections.singleton(new CategoryCode("att"));
         Set<CategoryCode> secondCategoryCodeSet = new HashSet<>(
                 Arrays.asList(new CategoryCode("fnb"), new CategoryCode("att")));
+        Rating firstRating = new Rating("2");
+        Rating secondRating = new Rating("4");
 
-        FilterCommand firstFilterCommand = new FilterCommand(firstCategoryCodeSet);
-        FilterCommand secondFilterCommand = new FilterCommand(secondCategoryCodeSet);
+        FilterCommand firstFilterCommand = new FilterCommand(firstCategoryCodeSet, firstRating);
+        FilterCommand secondFilterCommand = new FilterCommand(secondCategoryCodeSet, secondRating);
+        FilterCommand thirdFilterCommand = new FilterCommand(firstCategoryCodeSet, secondRating);
+        FilterCommand fourthFilterCommand = new FilterCommand(secondCategoryCodeSet, firstRating);
 
         // same object -> returns true
         assertTrue(firstFilterCommand.equals(firstFilterCommand));
 
         // same values -> returns true
-        FilterCommand firstFilterCommandCopy = new FilterCommand(firstCategoryCodeSet);
+        FilterCommand firstFilterCommandCopy = new FilterCommand(firstCategoryCodeSet, firstRating);
         assertTrue(firstFilterCommand.equals(firstFilterCommandCopy));
 
         // different types -> returns false
@@ -36,7 +41,10 @@ class FilterCommandTest {
         assertFalse(firstFilterCommand.equals(null));
 
         // different category codes -> returns false
-        assertFalse(firstFilterCommand.equals(secondFilterCommand));
+        assertFalse(firstFilterCommand.equals(fourthFilterCommand));
+
+        // different ratings -> returns false
+        assertFalse(firstFilterCommand.equals(thirdFilterCommand));
     }
 
     /*
@@ -60,8 +68,9 @@ class FilterCommandTest {
     @Test
     public void execute_multipleCategoryCode_multiplePersonsFound() {
     }
+
+    ** include ratings
+
     */
-
-
 
 }
