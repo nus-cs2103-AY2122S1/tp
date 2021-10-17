@@ -4,18 +4,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
 public class PieChartView extends UiPart<Region> {
-    private static String FXML = "PieChart.fxml";
+    private static String fxml = "PieChart.fxml";
 
     @FXML
-    private HBox cardPane;
-    @FXML
     private PieChart pieChart;
+
+    /**
+     * Constructor for the piechart
+     */
     public PieChartView() {
-        super(FXML);
+        super(fxml);
         // data to be changed
         ObservableList<PieChart.Data> pieChartData =
                 FXCollections.observableArrayList(
