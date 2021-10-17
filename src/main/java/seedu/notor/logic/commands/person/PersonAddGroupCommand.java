@@ -10,7 +10,7 @@ import seedu.notor.logic.executors.person.PersonAddGroupExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 public class PersonAddGroupCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "/add";
+    public static final String COMMAND_WORD = "add";
 
     // TODO: Change this to fit correct command structure
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to a group"

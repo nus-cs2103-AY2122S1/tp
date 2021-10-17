@@ -10,7 +10,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.executors.person.PersonRemoveGroupExecutor;
 
 public class PersonRemoveGroupCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "/remove";
+    public static final String COMMAND_WORD = "remove";
 
     // TODO: Change this to fit correct command structure
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person from a group"

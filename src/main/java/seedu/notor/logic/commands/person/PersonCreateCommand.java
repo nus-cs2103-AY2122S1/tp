@@ -18,7 +18,7 @@ import seedu.notor.model.person.Person;
  * Adds a person to the address book.
  */
 public class PersonCreateCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "/create";
+    public static final String COMMAND_WORD = "create";
 
     private static final String COMMAND_DESCRIPTION =
             ": Creates a person in the address book.\n";

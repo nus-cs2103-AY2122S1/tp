@@ -12,7 +12,7 @@ import seedu.notor.logic.executors.person.PersonNoteExecutor;
  *
  */
 public class PersonNoteCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "/note";
+    public static final String COMMAND_WORD = "note";
 
     private static final String COMMAND_DESCRIPTION =
             ": Edits the notes of the person identified by the index number used in the current person listing.\n";

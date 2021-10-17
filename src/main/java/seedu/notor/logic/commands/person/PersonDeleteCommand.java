@@ -13,7 +13,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  */
 public class PersonDeleteCommand extends PersonCommand {
 
-    public static final String COMMAND_WORD = "/delete";
+    public static final String COMMAND_WORD = "delete";
 
     private static final String COMMAND_DESCRIPTION =
             ": Deletes the person identified by the index number used in the displayed person list.\n";

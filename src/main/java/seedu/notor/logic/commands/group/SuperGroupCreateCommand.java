@@ -12,7 +12,7 @@ import seedu.notor.model.group.SuperGroup;
 
 public class SuperGroupCreateCommand extends GroupCommand {
 
-    public static final String COMMAND_WORD = "/create";
+    public static final String COMMAND_WORD = "create";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
             + "Parameters: "

@@ -16,7 +16,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  */
 public class PersonEditCommand extends PersonCommand {
 
-    public static final String COMMAND_WORD = "/edit";
+    public static final String COMMAND_WORD = "edit";
 
     private static final String COMMAND_DESCRIPTION =
             ": Edits the details of the person identified by the index number used in the displayed person list.\n"

@@ -11,7 +11,7 @@ import seedu.notor.logic.executors.group.SubGroupCreateExecutor;
 import seedu.notor.model.group.SubGroup;
 
 public class SubGroupCreateCommand extends GroupCommand {
-    public static final String COMMAND_WORD = "/create";
+    public static final String COMMAND_WORD = "create";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group. "
             + "Parameters: "

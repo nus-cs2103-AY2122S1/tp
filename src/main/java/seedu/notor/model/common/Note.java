@@ -58,16 +58,7 @@ public class Note {
 
     private static final class EmptyNote extends Note {
         public EmptyNote() {
-            super("", null);
-        }
-
-        /**
-         * Returns string representation of saved date.
-         *
-         * @return String representation of saved date
-         */
-        public String getSavedDate() {
-            return null;
+            super("", "");
         }
 
         @Override

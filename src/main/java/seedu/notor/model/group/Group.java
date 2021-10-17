@@ -23,6 +23,7 @@ public abstract class Group {
 
     protected HashMap<String, Person> people;
 
+    // TODO: RequireAllNonNull assertions/checks
     /**
      * Constructor for a Group instance.
      *
