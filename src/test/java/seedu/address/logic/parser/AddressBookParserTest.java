@@ -18,6 +18,7 @@ import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
+import seedu.address.logic.commands.DeleteAliasCommand;
 import seedu.address.logic.commands.DeleteFacilityCommand;
 import seedu.address.logic.commands.DeleteMemberCommand;
 import seedu.address.logic.commands.EditFacilityCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.ShowAliasesCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Aliases;
@@ -164,7 +166,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_alias() throws Exception {
+    public void parseCommand_addAlias() throws Exception {
         AddAliasCommand command = (AddAliasCommand) parser
                 .parseCommand(AddAliasCommand.COMMAND_WORD + " a/lf cw/listf", aliases);
         assertEquals(new AddAliasCommand("lf", "listf"), command);
@@ -192,6 +194,20 @@ public class AddressBookParserTest {
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("af "
                 + "n/Court 1 l/University Sports Hall t/1130 c/5", aliases);
         assertEquals(new AddFacilityCommand(facility), command);
+    }
+
+    @Test
+    public void parseCommand_deleteAlias_success() throws Exception {
+        DeleteAliasCommand command = (DeleteAliasCommand) parser
+                .parseCommand(DeleteAliasCommand.COMMAND_WORD + " lf", aliases);
+        assertEquals(new DeleteAliasCommand("lf"), command);
+    }
+
+    @Test
+    public void parseCommand_showAlias_success() throws Exception {
+        assertTrue(parser.parseCommand(ShowAliasesCommand.COMMAND_WORD, aliases) instanceof ShowAliasesCommand);
+        assertTrue(parser.parseCommand(
+                ShowAliasesCommand.COMMAND_WORD + " 3", aliases) instanceof ShowAliasesCommand);
     }
 
     @Test

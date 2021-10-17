@@ -69,6 +69,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         aliases.add(alias, keywords);
     }
 
+    public String removeAlias(String alias) {
+        return aliases.remove(alias);
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;

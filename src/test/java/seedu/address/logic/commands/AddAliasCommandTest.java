@@ -32,7 +32,7 @@ public class AddAliasCommandTest {
     @Test
     public void execute_invalidCommand_throwsCommandException() {
         ModelManager model = new ModelManager();
-        assertCommandFailure(new AddAliasCommand("listf", "random"), model,
+        assertCommandFailure(new AddAliasCommand("lf", "random"), model,
                 AddAliasCommand.MESSAGE_INVALID_COMMAND_WORD);
     }
 
