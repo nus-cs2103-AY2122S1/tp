@@ -30,6 +30,8 @@ import seedu.academydirectory.storage.StorageManager;
 import seedu.academydirectory.storage.UserPrefsStorage;
 import seedu.academydirectory.ui.Ui;
 import seedu.academydirectory.ui.UiManager;
+import seedu.academydirectory.versioncontrol.OptionalVersion;
+import seedu.academydirectory.versioncontrol.VersionManager;
 
 /**
  * Runs the application.
@@ -44,6 +46,7 @@ public class MainApp extends Application {
     protected Logic logic;
     protected Storage storage;
     protected Model model;
+    protected OptionalVersion<seedu.academydirectory.versioncontrol.Version> versionManager;
     protected Config config;
 
     @Override
@@ -62,9 +65,20 @@ public class MainApp extends Application {
 
         initLogging(config);
 
+        // TODO: Take CLI argument to use VersionManager or not
+        seedu.academydirectory.versioncontrol.Version vm;
+        boolean useVm = true;
+        if (useVm) {
+            vm = new VersionManager(storage.getAcademyDirectoryFilePath());
+        } else {
+            vm = null;
+        }
+
+        versionManager = OptionalVersion.<seedu.academydirectory.versioncontrol.Version>ofNullable(vm);
+
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, versionManager);
 
         ui = new UiManager(logic);
     }

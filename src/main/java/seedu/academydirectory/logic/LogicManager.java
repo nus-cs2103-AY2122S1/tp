@@ -2,6 +2,7 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -16,6 +17,8 @@ import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.storage.Storage;
+import seedu.academydirectory.versioncontrol.OptionalVersion;
+import seedu.academydirectory.versioncontrol.Version;
 
 /**
  * The main LogicManager of the app.
@@ -26,15 +29,21 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
+    private final OptionalVersion<Version> version;
     private final AcademyDirectoryParser academyDirectoryParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, OptionalVersion<Version> version) {
         this.model = model;
         this.storage = storage;
+        this.version = version;
         academyDirectoryParser = new AcademyDirectoryParser();
+    }
+
+    public LogicManager(Model model, Storage storage) {
+        this(model, storage, null);
     }
 
     @Override
@@ -47,6 +56,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAcademyDirectory(model.getAcademyDirectory());
+            logger.log(Level.INFO, "Commit successful? " + (version.commit("") ? "Yes" : "No"));
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
