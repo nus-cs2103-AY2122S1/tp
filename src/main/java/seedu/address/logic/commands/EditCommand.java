@@ -68,16 +68,16 @@ public class EditCommand extends UndoableCommand {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+            + "by the index number used in the displayed student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_CONTACT_REQUIRED = "This person must have at least one contact field.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited student: %1$s";
+    public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit!";
+    public static final String MESSAGE_CONTACT_REQUIRED = "This student must have at least one contact field!";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in TAB!";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -102,14 +102,14 @@ public class EditCommand extends UndoableCommand {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         personBeforeEdit = lastShownList.get(index.getZeroBased());
         personAfterEdit = createEditedPerson(personBeforeEdit, editPersonDescriptor);
 
         if (!personBeforeEdit.isSamePerson(personAfterEdit) && model.hasPerson(personAfterEdit)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
         if (!personAfterEdit.hasContactField()) {
             throw new CommandException(MESSAGE_CONTACT_REQUIRED);
@@ -117,7 +117,7 @@ public class EditCommand extends UndoableCommand {
 
         model.setPerson(personBeforeEdit, personAfterEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personAfterEdit));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, personAfterEdit));
     }
 
     /**

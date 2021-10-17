@@ -17,8 +17,8 @@ import java.util.Set;
 public abstract class Lesson implements Comparable<Lesson> {
 
     // Types of lesson
-    private static final String RECURRING = "Recurring Lesson";
-    private static final String MAKEUP = "Makeup Lesson";
+    private static final String RECURRING = "Recurring";
+    private static final String MAKEUP = "Makeup";
 
     // Time fields
     private final Date date;
@@ -126,7 +126,6 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(date, timeRange, subject, homework);
     }
 

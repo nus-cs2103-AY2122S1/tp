@@ -77,22 +77,12 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Update the date to the same day on the following week.
-     *
-     * @return newDate The date of the same day on the following week.
-     */
-    public Date updateDateWithWeek() {
-        Date newDate = new Date(getLocalDate().plusDays(7).format(FORMATTER));
-        return newDate;
-    }
-
-    /**
      * Check if the date has passed.
      *
      * @return true if date is earlier than now.
      */
     public boolean isOver() {
-        return getLocalDate().compareTo(LocalDate.now()) < 0;
+        return getLocalDate().isBefore(LocalDate.now());
     }
 
     @Override

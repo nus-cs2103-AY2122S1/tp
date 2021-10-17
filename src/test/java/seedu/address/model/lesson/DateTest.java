@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -8,8 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class DateTest {
-    private static final String DATE = "14 Jan 2022";
-
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Date(null));
@@ -19,12 +16,6 @@ public class DateTest {
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
         assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
-    }
-
-    @Test
-    public void updateDateWithWeek_validDate_success() {
-        String validOneWeekLaterDateString = "21 Jan 2022";
-        assertEquals(new Date(validOneWeekLaterDateString), (new Date(DATE)).updateDateWithWeek());
     }
 
     @Test
@@ -43,6 +34,5 @@ public class DateTest {
         assertTrue(Date.isValidDate("12 Jan 2022"));
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
     }
-
 }
 
