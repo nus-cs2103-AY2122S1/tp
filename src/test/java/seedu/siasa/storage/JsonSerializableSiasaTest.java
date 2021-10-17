@@ -19,7 +19,7 @@ public class JsonSerializableSiasaTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonSiasa.json");
     private static final Path DUPLICATE_POLICY_FILE = TEST_DATA_FOLDER.resolve("duplicatePolicySiasa.json");
 
-/*  TODO: Fix test case
+    /*  TODO: Fix test case
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
         JsonSerializableSiasa dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
@@ -28,7 +28,7 @@ public class JsonSerializableSiasaTest {
         Siasa typicalPersonsSiasa = TypicalSiasa.getTypicalSiasa();
         assertEquals(siasaFromFile, typicalPersonsSiasa);
     }
- */
+     */
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
