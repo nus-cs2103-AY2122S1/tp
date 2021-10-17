@@ -1,5 +1,4 @@
-package seedu.address.ui;
-
+package seedu.address.ui.infopage;
 
 import java.util.logging.Logger;
 
@@ -8,43 +7,38 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tuition.TuitionClass;
+import seedu.address.ui.TuitionCard;
 
-/**
- * Panel containing the list of persons.
- */
-public class TuitionListPanel extends UiPart<Region> {
-    private static final String FXML = "TuitionListPanel.fxml";
 
-    private static final String TITLE_DEFAULT = "Classes";
-    private static final String TITLE_FILTERED = "Classes (filtered)";
+public class TodayTuitionClassInfoPage extends InfoPage {
+    private static final String FXML = "TodayTuitionClassInfoPage.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(TuitionListPanel.class);
+    private static final Logger logger = LogsCenter.getLogger(TodayTuitionClassInfoPage.class);
 
     @FXML
-    private ListView<TuitionClass> tuitionListView;
+    private ListView<TuitionClass> todayTuitionInfoPageList;
 
     @FXML
     private Label title;
 
-    /**
-     * Creates a {@code TuitionListPanel} with the given {@code ObservableList}.
-     */
-    public TuitionListPanel(ObservableList<TuitionClass> tuitionList) {
-        super(FXML);
-        tuitionListView.setItems(tuitionList);
-        tuitionListView.setCellFactory(listView -> new TuitionListViewCell());
-        title.setText(TITLE_DEFAULT);
-    }
+    private ObservableList<TuitionClass> tuitionClassList;
 
-    public void setFiltered(boolean bool) {
-        if (bool) {
-            title.setText(TITLE_FILTERED);
-        } else {
-            title.setText(TITLE_DEFAULT);
-        }
+    /**
+     * Constructor fot TodayTuitionClassInfoPage
+     * @param tuitionClasses a list that contains today tuition classes
+     */
+    public TodayTuitionClassInfoPage(ObservableList<TuitionClass> tuitionClasses) {
+        super(FXML);
+        logger.info("TodayTuitionClassInfoPage " + tuitionClasses.toString());
+        this.tuitionClassList = tuitionClasses;
+
+        todayTuitionInfoPageList.setItems(tuitionClassList);
+        todayTuitionInfoPageList.setCellFactory(listView -> new TuitionListViewCell());
+
+        title.setText("Today Tuition Classes");
+
     }
 
     /**

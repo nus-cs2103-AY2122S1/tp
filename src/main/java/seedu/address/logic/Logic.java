@@ -51,4 +51,7 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /** Returns an unmodifiable view of the filtered list of today tuition classes */
+    ObservableList<TuitionClass> getTodayTuitionList();
 }

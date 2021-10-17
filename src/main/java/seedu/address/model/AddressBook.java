@@ -68,6 +68,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+
+
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -237,5 +239,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sort(SortCommandParser.Order order) {
         this.order = order;
         this.tuitions.sort(order);
+    }
+
+    /**
+     * Gets today tuition classes
+     * @return a list contains today tuition classes
+     */
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return tuitions.getTodayTuition();
     }
 }

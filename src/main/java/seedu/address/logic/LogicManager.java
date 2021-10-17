@@ -84,4 +84,13 @@ public class LogicManager implements Logic {
     public ObservableList<TuitionClass> getFilteredTuitionList() {
         return model.getFilteredTuitionList();
     }
+
+    @Override
+    public ObservableList<TuitionClass> getTodayTuitionList() {
+        return model.getTodayTuitionList();
+    }
 }
+
+
+
+
