@@ -3,9 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FAST can get your contact management tasks done faster than traditional GUI apps.
-
  Table of Contents
+- [Introduction](#introduction)
 - [Quick start](#quick-start)
 - [Features](#features)
     * [Viewing help](#viewing-help-help)
@@ -25,6 +24,12 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
+
+## Introduction
+Financial Advisor Smart Tracker (FAST) is a free open-source desktop app for Financial Advisors to manage their contacts. 
+More importantly, FAST is **optimized for those who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+For Financial Advisors that can type fast, FAST can get your contact management tasks done faster than traditional GUI apps. 
+Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 ## Quick start
 
@@ -228,7 +233,17 @@ Examples:
 * `done 1` updates the completed appointment counter of the first person.
 * `find Matthew` followed by `done 3` updates the completed appointment counter of the third person in the result of the `find` command.
 
-### Sorting contacts: `sort`
+### Sorting all persons: `sort`
+
+Sorts all existing person by the given keyword.
+
+Format: `sort KEYWORD`
+* There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
+* Existing details will be deleted.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+
+Examples:
+* `sort priority` Sorts all existing persons by the priority from highest priority to lowest priority.
 
 ### Clearing all entries: `clear`
 
