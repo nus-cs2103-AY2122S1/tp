@@ -18,7 +18,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
  * Contains utility methods for populating {@code Tuitione} with sample data.
@@ -98,11 +98,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a remark set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Remark> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Remark::new)
                 .collect(Collectors.toSet());
     }
 }

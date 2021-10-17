@@ -15,7 +15,7 @@ import java.util.Set;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
  * Represents a Student in the tuitione book.
@@ -31,21 +31,21 @@ public class Student {
     // Data fields
     private final Address address;
     private final Grade grade;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Remark> remarks = new HashSet<>();
     private final Map<LessonCode, Price> lessonCodesAndPrices = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, ParentContact parentContact, Email email, Address address, Grade grade, Set<Tag> tags) {
-        requireAllNonNull(name, parentContact, email, address, tags);
+    public Student(Name name, ParentContact parentContact, Email email, Address address, Grade grade, Set<Remark> remarks) {
+        requireAllNonNull(name, parentContact, email, address, remarks);
 
         this.name = name;
         this.parentContact = parentContact;
         this.email = email;
         this.address = address;
         this.grade = grade;
-        this.tags.addAll(tags);
+        this.remarks.addAll(remarks);
     }
 
     public Name getName() {
@@ -69,11 +69,11 @@ public class Student {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable remark set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Remark> getTags() {
+        return Collections.unmodifiableSet(remarks);
     }
 
     /**
@@ -142,7 +142,7 @@ public class Student {
      * Returns a clone of the Student instance.
      */
     public Student createClone() {
-        Student newStudent = new Student(name, parentContact, email, address, grade, tags);
+        Student newStudent = new Student(name, parentContact, email, address, grade, remarks);
         newStudent.lessonCodesAndPrices.putAll(lessonCodesAndPrices);
         return newStudent;
     }
@@ -165,14 +165,14 @@ public class Student {
                 && otherStudent.email.equals(email)
                 && otherStudent.address.equals(address)
                 && otherStudent.grade.equals(grade)
-                && otherStudent.tags.equals(tags)
+                && otherStudent.remarks.equals(remarks)
                 && otherStudent.lessonCodesAndPrices.equals(lessonCodesAndPrices);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, parentContact, email, address, tags, lessonCodesAndPrices);
+        return Objects.hash(name, parentContact, email, address, remarks, lessonCodesAndPrices);
     }
 
     @Override
@@ -183,9 +183,9 @@ public class Student {
                 .append("; Email: ").append(email)
                 .append("; Address: ").append(address)
                 .append("; Grade: ").append(grade);
-        if (!tags.isEmpty()) {
-            builder.append("; Tag(s): ");
-            tags.forEach(t -> builder.append(t).append(" "));
+        if (!remarks.isEmpty()) {
+            builder.append("; Remark(s): ");
+            remarks.forEach(t -> builder.append(t).append(" "));
         }
         if (!lessonCodesAndPrices.isEmpty()) {
             builder.append("; Lesson(s): ");

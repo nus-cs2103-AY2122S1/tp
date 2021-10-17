@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.tuitione.logic.commands.AddCommand;
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Tag;
 
 /**
  * A utility class for Student.

@@ -18,7 +18,7 @@ import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

@@ -18,7 +18,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -89,9 +89,9 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> studentTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            studentTags.add(tag.toModelType());
+        final List<Remark> studentTags = new ArrayList<>();
+        for (JsonAdaptedTag remark : tagged) {
+            studentTags.add(remark.toModelType());
         }
 
         if (name == null) {
@@ -135,7 +135,7 @@ class JsonAdaptedStudent {
         }
         final Grade modelGrade = new Grade(grade);
 
-        final Set<Tag> modelTags = new HashSet<>(studentTags);
+        final Set<Remark> modelTags = new HashSet<>(studentTags);
         return new Student(modelName, modelParentContact, modelEmail, modelAddress, modelGrade, modelTags);
     }
 }

@@ -11,7 +11,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Tag;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.

@@ -1,4 +1,4 @@
-package seedu.tuitione.model.tag;
+package seedu.tuitione.model.remark;
 
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
@@ -19,7 +19,7 @@ public class TagTest {
 
     @Test
     public void isValidTagName() {
-        // null tag name
+        // null remark name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
 

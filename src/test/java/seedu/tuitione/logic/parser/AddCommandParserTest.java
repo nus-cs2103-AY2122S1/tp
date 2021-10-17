@@ -42,7 +42,7 @@ import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Tag;
 import seedu.tuitione.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
@@ -143,7 +143,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + INVALID_GRADE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Grade.GRADE_MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + GRADE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 

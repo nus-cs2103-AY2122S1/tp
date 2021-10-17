@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.tuitione.commons.exceptions.IllegalValueException;
-import seedu.tuitione.model.tag.Tag;
+import seedu.tuitione.model.remark.Remark;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Remark}.
  */
 class JsonAdaptedTag {
 
@@ -22,9 +22,9 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Remark} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
+    public JsonAdaptedTag(Remark source) {
         tagName = source.tagName;
     }
 
@@ -34,15 +34,15 @@ class JsonAdaptedTag {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted remark object into the model's {@code Remark} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted remark.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Remark toModelType() throws IllegalValueException {
+        if (!Remark.isValidTagName(tagName)) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Remark(tagName);
     }
 
 }
