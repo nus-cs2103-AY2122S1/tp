@@ -37,8 +37,8 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
-        commandTextField.setOnKeyPressed(event -> {
-            switch (event.getCode()) {
+        commandTextField.setOnKeyPressed(keyEvent -> {
+            switch (keyEvent.getCode()) {
             case UP:
                 showPreviousCommand();
                 break;
@@ -47,11 +47,18 @@ public class CommandBox extends UiPart<Region> {
                 showNextCommand();
                 break;
 
-            default:
+            default: // Do nothing
             }
         });
     }
 
+    /**
+     * Displays the next command in command history, with respect to the command displayed currently. <br><br>
+     * This function will just return when the command history is empty.
+     * When the command displayed currently is the last command in the history, invoking this method will clear the
+     * value in commandTextField. Immediate invocation of this function, just after the value in commandTextField
+     * cleared due to the reason stated previously, will just return.
+     */
     private void showNextCommand() {
         if (index == null) {
             return;
@@ -67,6 +74,11 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.setText(commandHistory.get(index.getZeroBased()));
     }
 
+    /**
+     * Displays the previous command in command history, with respect to the command displayed currently. <br><br>
+     * This function will just return when the command history is empty; or when the command displayed currently is the
+     * first command in the history.
+     */
     private void showPreviousCommand() {
         if (index == null || index.getOneBased() <= 1) {
             return;
@@ -86,6 +98,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
+        // Store the command, even if invalid, and reset the index pointer to the end
         commandHistory.add(commandText);
         index = Index.fromOneBased(commandHistory.size());
 
@@ -109,7 +122,6 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
-
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
         }
@@ -129,5 +141,4 @@ public class CommandBox extends UiPart<Region> {
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
-
 }
