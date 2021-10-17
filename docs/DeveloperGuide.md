@@ -216,12 +216,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * No time/busy
 * Might not be tech-savvy
 * Many contacts to manage
-* has a need to manage a significant number of contacts
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-* Need to profile clients
-
+* Has a need to manage a significant number of contacts
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Needs to profile clients
 
 **Value proposition**: Financial Advisors are busy. We will help them save time by optimising our system for them. FAST keeps track of client details and information for them.
 
@@ -497,6 +496,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2b. No appointment scheduled yet.
     * 2b1. FAST shows an error message.
 
+      Use case ends.
+
+**Use case: UC11 - Sort contacts**
+
+**MSS**
+
+1. User requests to sort persons
+2. FAST displays a list of contacts sorted by the given keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given command syntax is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of sort command to user.
+
+* 2b. The list is empty.
       Use case ends.
 
 *{More to be added}*
