@@ -35,7 +35,7 @@ Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fast.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `fast.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FAST.
 
