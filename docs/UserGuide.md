@@ -12,39 +12,38 @@ Notor is a desktop application for mentors to keep tabs on their mentees, **opti
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 ### 1. Setup
 
-Ensure you have Java `11` or above installed in your Computer. You can install Java 11 from
-[here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
+Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
 
 ### 2. Installing the project
 
 Download the latest `notor.jar` [here](), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
 
 ### 3. Running the application
-Double-click the file to start the application.
-If you have set up Java `11` correctly, The application should open, and the GUI similar to below should appear in a few seconds. Note how the app
-contains some sample data.<br>
+
+Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds. 
+Note how the app contains some sample data. <br>
 ![Ui](images/Ui.png)
 
 ### 4. Try Running Examples!
-Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-open the help window.<br>
-Some example commands you can try:
+
+Type the command in the command box and press Enter to execute it. e.g. Typing **help** and pressing Enter will open the help window. <br>
+Some example commands you can try: 
 
 * **`person /list`** : Lists all contacts.
 * **`person 3 /delete`** : Deletes the 3rd contact (contact with index number `3`) shown in the current list.
 * **`person User /create`** : Creates a person named `User`.
 * **`group Orbital /create t:Students`** : Creates a group named `Orbital` tagged with `Students`.
-* **`person 3 /add g:Orbital`** : Adds the person with index `3` to the group named `Orbital`.
-* **`group /list`** : Lists all groups (to show indexes of each existing group).
+* **`person 3 /add g:Orbital`** : Adds the person with index `3` to the group `Orbital`.
+* **`group /list`** : Lists all groups.
 * **`group 1 /note (Note)`** : Edits the group note for the group with index number `1`.
 * **`group 1 /create n:Artemis`** : Creates a subgroup `Artemis` inside the group with index number `1`.
 * **`group 1 /untag t:Students`** : Removes the tag `Students` from the group with index number `1`.
 * **`clear`** : Deletes all contacts.
-* **`exit`** : Exits the app.
+* **`exit`** : Exits the application. <br>
 
 Refer to the [Features](#Features) below for details of each command.
 
@@ -247,7 +246,7 @@ Format: `person NAME /remove g:GROUP_NAME [sg:SUB_GROUP_NAME]`<br>
 Advanced user Format:`p NAME /r g:GROUP_NAME [g:SUB_GROUP_NAME]`
 
 * Removes an existing person with the `NAME` from a `GROUP_NAME`.
-* Optional Agrument:
+* Optional Argument:
     * `SUB_GROUP_NAME`: Removes an existing person with the name `NAME` from a `SUB_GROUP_NAME` in `GROUP_NAME`.
 
 Examples:
