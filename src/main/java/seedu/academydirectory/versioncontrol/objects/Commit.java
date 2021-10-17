@@ -18,7 +18,7 @@ public class Commit extends VcObject {
 
     /**
      * Creates a Commit object to work with programmatically. A Commit object SHOULD NOT be instantiated directly.
-     * Instead, use a CommitFactory object to ensure all Commit objects follow the established contract
+     * Instead, use a CommitController object to ensure all Commit objects follow the established contract
      * @param message commit message. May be omitted
      * @param date date and time when Commit object is created
      * @param hash commit hash

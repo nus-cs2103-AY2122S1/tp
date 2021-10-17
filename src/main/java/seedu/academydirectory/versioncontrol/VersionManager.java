@@ -9,8 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.academydirectory.versioncontrol.controllers.CommitFactory;
-import seedu.academydirectory.versioncontrol.controllers.TreeFactory;
+import seedu.academydirectory.versioncontrol.controllers.CommitController;
+import seedu.academydirectory.versioncontrol.controllers.TreeController;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.parsers.CommitParser;
@@ -23,8 +23,8 @@ public class VersionManager implements Version {
 
     private Commit head;
 
-    private final CommitFactory commitFactory;
-    private final TreeFactory treeFactory;
+    private final CommitController commitController;
+    private final TreeController treeController;
 
     private final Path storagePath;
 
@@ -34,8 +34,8 @@ public class VersionManager implements Version {
      */
     public VersionManager(Path storagePath) {
         HashGenerator generator = new HashGenerator(HashMethod.SHA1);
-        this.commitFactory = new CommitFactory(generator, vcPath);
-        this.treeFactory = new TreeFactory(generator, vcPath);
+        this.commitController = new CommitController(generator, vcPath);
+        this.treeController = new TreeController(generator, vcPath);
 
         this.storagePath = storagePath;
 
@@ -45,7 +45,8 @@ public class VersionManager implements Version {
             Path headPath = vcPath.resolve(Paths.get("HEAD"));
             File file = new File(String.valueOf(headPath));
             if (file.exists()) {
-                Commit mostRecent = commitFactory.makeCommit("HEAD", new HeadParser(), new CommitParser(), treeFactory);
+                Commit mostRecent = commitController.generate("HEAD",
+                        new HeadParser(), new CommitParser(), treeController);
                 moveHead(mostRecent);
             } else {
                 moveHead(Commit.NULL);
@@ -64,8 +65,15 @@ public class VersionManager implements Version {
     public boolean commit(String message) {
         Commit parentCommit = head;
         try {
-            Tree tree = treeFactory.makeTree(storagePath);
-            Commit newCommit = commitFactory.makeCommit(message, () -> tree, () -> parentCommit);
+            // Make VcObjects
+            Tree tree = treeController.makeTree(storagePath);
+            Commit newCommit = commitController.generate(message, () -> tree, () -> parentCommit);
+
+            // Write VcObjects to disk
+            treeController.write(tree);
+            commitController.write(newCommit);
+
+            // Move HEAD pointer
             moveHead(newCommit);
             return true;
         } catch (Exception e) {

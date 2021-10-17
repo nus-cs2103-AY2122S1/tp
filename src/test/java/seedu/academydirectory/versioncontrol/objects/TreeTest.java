@@ -53,17 +53,6 @@ public class TreeTest {
     }
 
     @Test
-    public void getWriteableFormat() {
-        // Null tree
-        assertEquals(Tree.NULL.getWriteableFormat(), List.of(List.of("null", "null")));
-
-        assertEquals(TREE1.getWriteableFormat(), List.of(List.of("world.hello", "hello.world")));
-        assertEquals(TREE2.getWriteableFormat(), List.of(
-                List.of("world_hello", "Hello.png"),
-                List.of("world_hello?", "Hello World.java")));
-    }
-
-    @Test
     public void constructor() {
         // Different list sizes
         assertThrows(IllegalArgumentException.class, () -> new Tree("testing", List.of("Test"), List.of()));

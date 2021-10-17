@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Tree extends VcObject {
     public static final Tree NULL = new Tree("NULL", "null", "null");
@@ -45,9 +44,7 @@ public class Tree extends VcObject {
         }
     }
 
-    public List<List<String>> getWriteableFormat() {
-        return hashMap.keySet().stream()
-                .map(key -> List.<String>of(key, hashMap.get(key)))
-                .collect(Collectors.toList());
+    public HashMap<String, String> getHashMap() {
+        return hashMap;
     }
 }

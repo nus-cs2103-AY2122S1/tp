@@ -2,13 +2,13 @@ package seedu.academydirectory.versioncontrol.controllers;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,23 +17,19 @@ import seedu.academydirectory.versioncontrol.parsers.TreeParser;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 
-public class TreeFactory {
-    private final HashGenerator generator;
-    private final Path vcPath;
-
+public class TreeController extends Controller<Tree> {
     /**
-     * Creates a Factory for Tree object. Use this object to create Tree objects and not by calling Tree's
+     * Creates a Controller for Tree object. Use this object to create Tree objects and not by calling Tree's
      * constructor.
      * @param generator produce hash of commit. Hashing algorithm defined in generator
      * @param vcPath general path to place version control related files
      */
-    public TreeFactory(HashGenerator generator, Path vcPath) {
-        this.generator = generator;
-        this.vcPath = vcPath;
+    public TreeController(HashGenerator generator, Path vcPath) {
+        super(generator, vcPath);
     }
 
     /**
-     * Constructs a Tree object that is saved to disk.
+     * Constructs a Tree object to be saved to disk
      * @param blobPaths Path to blobs to be duplicated
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
      * @throws IOException if vcPath given is not writeable
@@ -49,22 +45,17 @@ public class TreeFactory {
             blobTargetPaths.add(blobTargetPath);
         }
 
-        // Write tree to disk
-        Tree temp = new Tree("temp",
+        // Write a temporary tree to disk
+        String treeFileName = "temp";
+        Tree temp = new Tree(treeFileName,
                 blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
                 blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
-        String treeFileName = "temp";
+        Path treePath = this.vcPath.resolve(Path.of(treeFileName));
+        write(temp);
 
-        FileWriter writer = new FileWriter(treeFileName);
-        List<List<String>> toBeWritten = temp.getWriteableFormat();
-        writeTree(toBeWritten, writer);
-
-        // Move tree file in disk
-        Path treePath = Path.of(treeFileName);
+        // Delete temporarily created Tree
         String treeHash = generator.generateHashFromFile(treePath);
-        Path treeTargetPath = this.vcPath.resolve(Path.of(treeHash));
-
-        Files.move(treePath, treeTargetPath, REPLACE_EXISTING);
+        boolean deletedSuccessfully = treePath.toFile().delete();
 
         // Return final tree
         return new Tree(treeHash,
@@ -73,7 +64,7 @@ public class TreeFactory {
     }
 
     /**
-     * Constructs a Tree object that is saved to disk.
+     * Constructs a Tree object to be saved to disk.
      * @param blobPath Path to blob to be duplicated
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
      * @throws IOException if vcPath given is not writeable
@@ -96,17 +87,22 @@ public class TreeFactory {
         return new Tree(args[0], args[1], args[2]);
     }
 
-    private void writeTree(List<List<String>> writeableTree, FileWriter writer) throws IOException {
-        writeableTree.stream()
-                .map(xs -> xs.get(0) + " " + xs.get(1))
-                .forEach(x -> {
-                    try {
-                        writer.append(x).append(System.lineSeparator());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
 
-        writer.close();
+    public List<String> getWriteableFormat(Tree tree) {
+        HashMap<String, String> hashMap = tree.getHashMap();
+        return hashMap.keySet().stream()
+                .map(key -> key + " " + hashMap.get(key))
+                .collect(Collectors.toList());
     }
+
+//    @Test
+//    public void getWriteableFormat() {
+//        // Null tree
+//        assertEquals(Tree.NULL.getWriteableFormat(), List.of(List.of("null", "null")));
+//
+//        assertEquals(TREE1.getWriteableFormat(), List.of(List.of("world.hello", "hello.world")));
+//        assertEquals(TREE2.getWriteableFormat(), List.of(
+//                List.of("world_hello", "Hello.png"),
+//                List.of("world_hello?", "Hello World.java")));
+//    }
 }

@@ -31,7 +31,7 @@ public class CommitBuilder {
     private Supplier<Tree> treeSupplier;
 
     /**
-     * Creates a {@Code CommitBuilder} with the default details
+     * Creates a {@Code CommitController} with the default details
      */
     public CommitBuilder() {
         hash = DEFAULT_HASH;
@@ -43,7 +43,7 @@ public class CommitBuilder {
     }
 
     /**
-     * Initializes the CommitBuilder with the data of {@code commitToCopy}.
+     * Initializes the CommitController with the data of {@code commitToCopy}.
      */
     public CommitBuilder(Commit commitToCopy) {
         hash = commitToCopy.getHash();
