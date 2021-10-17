@@ -9,6 +9,7 @@ import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 
@@ -46,7 +47,7 @@ public interface Logic {
     ObservableList<Doctor> getFilteredDoctorList();
 
     /** Returns an unmodifiable view of the filtered list of appointments */
-    ObservableList<Doctor> getFilteredAppointmentList();
+    ObservableList<Appointment> getFilteredAppointmentList();
 
     /**
      * Returns the user prefs' plannermd file path.
