@@ -20,9 +20,9 @@ public class HashGeneratorTest {
 
         String[] actualHash = new String[3];
         String[] expectedHash = {
-                "00f8e0d3e2f06918e4b3f2ef2709e2df",
-                "1ba3aa88d488e76d30086af249a8d17072e04185",
-                "0c54914698ffaee27e52d66038ced1b69c2cea854c16c906c6764196514217d5"
+            "00f8e0d3e2f06918e4b3f2ef2709e2df",
+            "1ba3aa88d488e76d30086af249a8d17072e04185",
+            "0c54914698ffaee27e52d66038ced1b69c2cea854c16c906c6764196514217d5"
         };
 
         int idx = 0;

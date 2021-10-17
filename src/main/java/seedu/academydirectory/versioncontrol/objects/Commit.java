@@ -38,7 +38,7 @@ public class Commit extends VcObject {
     @Override
     public String toString() {
         return Arrays.toString(new String[]{getHash(), author, date.toString(),
-                message, parentSupplier.get().getHash(), treeSupplier.get().getHash()});
+            message, parentSupplier.get().getHash(), treeSupplier.get().getHash()});
     }
 
     public String getAuthor() {
