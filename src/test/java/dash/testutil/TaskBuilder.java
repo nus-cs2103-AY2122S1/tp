@@ -15,7 +15,6 @@ import dash.model.util.SampleDataUtil;
  */
 public class TaskBuilder {
     public static final String DEFAULT_DESCRIPTION = "Complete CS2103T Project";
-    public static final String DEFAULT_TASK_DATE = "21/10/2021";
 
     private TaskDescription taskDescription;
     private CompletionStatus completionStatus;
@@ -28,7 +27,7 @@ public class TaskBuilder {
     public TaskBuilder() {
         taskDescription = new TaskDescription(DEFAULT_DESCRIPTION);
         completionStatus = new CompletionStatus(false);
-        taskDate = new TaskDate(DEFAULT_TASK_DATE);
+        taskDate = new TaskDate();
         tags = new HashSet<>();
     }
 

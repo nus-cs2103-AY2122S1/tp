@@ -1,10 +1,10 @@
 package dash.model.task;
 
+import static dash.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import static dash.commons.util.AppUtil.checkArgument;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -16,24 +16,24 @@ public class TaskDate {
         + "They should also follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
         + "If both Date and Time are included, Date should come first before Time and they should be separated "
         + "by a comma. A full list of available formats can be seen under the Help tab.";
-
+    private static final String[] dateFormats = {
+        "dd/MM/yyyy",
+        "dd-MM-yyyy",
+        "yyyy/MM/dd",
+        "yyyy-MM-dd",
+        "dd MMM yyyy"
+    };
+    private static final String[] timeFormats = {
+        "HHmm",
+        "hh:mm a"
+    };
     private LocalDate date = null;
     private LocalTime time = null;
     private String taskDateString;
     private String taskTimeString;
     private String detectedDateFormat = null;
     private String detectedTimeFormat = null;
-    private static final String[] dateFormats = {
-            "dd/MM/yyyy",
-            "dd-MM-yyyy",
-            "yyyy/MM/dd",
-            "yyyy-MM-dd",
-            "dd MMM yyyy"
-    };
-    private static final String[] timeFormats = {
-            "HHmm",
-            "hh:mm a"
-    };
+
 
     /**
      * Constructs a {@code TaskDate}.
@@ -138,6 +138,7 @@ public class TaskDate {
                 LocalDate.parse(dateString, DateTimeFormatter.ofPattern(i));
                 isDate = true;
             } catch (Exception e) {
+                System.out.println("wrong format");
             }
         }
         return isDate;
@@ -153,6 +154,7 @@ public class TaskDate {
                 isDate = true;
                 taskDateString = dateString;
             } catch (Exception e) {
+                System.out.println("wrong format");
             }
         }
         return isDate;
@@ -172,6 +174,7 @@ public class TaskDate {
                 LocalTime.parse(timeString, DateTimeFormatter.ofPattern(i));
                 isTime = true;
             } catch (Exception e) {
+                System.out.println("wrong format");
             }
         }
         return isTime;
@@ -187,6 +190,7 @@ public class TaskDate {
                 isTime = true;
                 taskTimeString = timeString;
             } catch (Exception e) {
+                System.out.println("wrong format");
             }
         }
         return isTime;
@@ -223,14 +227,6 @@ public class TaskDate {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
                 && isSameDate && isSameTime); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        if (hasDate()) {
-            return date.hashCode();
-        }
-        return time.hashCode();
     }
 
     @Override

@@ -1,6 +1,8 @@
 package dash.logic.commands.taskcommand;
 
-import static dash.logic.parser.CliSyntax.*;
+import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
 import dash.logic.commands.Command;

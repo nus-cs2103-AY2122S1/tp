@@ -140,6 +140,12 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDate} is invalid.
+     */
     public static TaskDate parseTaskDate(String taskDate) throws ParseException {
         requireNonNull(taskDate);
         String trimmedTaskDate = taskDate.trim();

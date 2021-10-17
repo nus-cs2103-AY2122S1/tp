@@ -2,8 +2,8 @@ package dash.logic.parser.taskcommand;
 
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
-import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import java.util.Set;
 
