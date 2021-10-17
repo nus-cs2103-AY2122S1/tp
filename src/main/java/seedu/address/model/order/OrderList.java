@@ -12,13 +12,13 @@ import javafx.collections.ObservableList;
  * A list of orders supporting minimal list operations for v1.3.
  * Basic version does not support editing SalesOrders.
  */
-public class OrderBook implements Iterable<Order> {
+public class OrderList implements Iterable<Order> {
     private final ObservableList<Order> internalList = FXCollections.observableArrayList();
     private final ObservableList<Order> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Adds an order to the OrderBook.
+     * Adds an order to the OrderList.
      * @param toAdd order to add
      */
     public void add(Order toAdd) {
@@ -27,7 +27,7 @@ public class OrderBook implements Iterable<Order> {
     }
 
     /**
-     * Removes an order from the OrderBook.
+     * Removes an order from the OrderList.
      * @param toRemove order to remove
      */
     public void remove(Order toRemove) {
@@ -38,7 +38,7 @@ public class OrderBook implements Iterable<Order> {
     }
 
     /**
-     * Returns true if order is in the OrderBook
+     * Returns true if order is in the OrderList
      */
     public boolean hasOrder(Order order) {
         requireNonNull(order);
@@ -46,7 +46,7 @@ public class OrderBook implements Iterable<Order> {
     }
 
     /**
-     * Marks an order as complete, if it exists in the OrderBook
+     * Marks an order as complete, if it exists in the OrderList
      * @param toMark
      */
     public void markComplete(Order toMark) {
@@ -71,8 +71,8 @@ public class OrderBook implements Iterable<Order> {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof OrderBook
-                && internalList.equals(((OrderBook) other).internalList));
+                || (other instanceof OrderList
+                && internalList.equals(((OrderList) other).internalList));
     }
 
     @Override
