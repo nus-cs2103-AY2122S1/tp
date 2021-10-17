@@ -12,7 +12,8 @@ CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 
 Given below are my contributions to the project.
 
 * **New Feature**: Added a history command. (Pull request
-  [\#139](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/139))
+  [\#139](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/139),
+  [\#141](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/141))
     * What it does: allows the user to navigate to previous commands using up/down keys.
     * Justification: This feature allows user to reuse previous input commands quickly without the need to retype again.
       This is especially helpful if the previous command is very long (e.g.
