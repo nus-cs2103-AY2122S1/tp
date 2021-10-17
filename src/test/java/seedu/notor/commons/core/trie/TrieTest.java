@@ -42,7 +42,7 @@ public class TrieTest {
     @Test
     public void addItem() {
         setupOneElement();
-        Trie testTrie = TypicalTries.zeroItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(0);
         testTrie.add("aaaaa");
         assertEquals(testTrie.toString(), testMap.keySet().toString());
     }
@@ -51,21 +51,21 @@ public class TrieTest {
     public void deleteItem_singleItemTrie_success() throws IllegalValueException {
         setupOneElement();
         testMap.remove("aaaaa");
-        Trie testTrie = TypicalTries.oneItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(1);
         testTrie.remove("aaaaa");
         assertEquals(testTrie.toString(), testMap.keySet().toString());
     }
 
     @Test
     public void deleteItem_singleItemTrie_fail() {
-        Trie testTrie = TypicalTries.oneItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(0);
         assertThrows(IllegalValueException.class, () -> testTrie.remove("abc"));
     }
 
     @Test
     public void findItem_twoItemTrie_success() {
         setup();
-        Trie testTrie = TypicalTries.twoItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(2);
         assertEquals("aaaaa", testTrie.findSingle("aa"));
         assertEquals("bbbbb", testTrie.findSingle("b"));
         assertEquals("bbbbb", testTrie.findSingle("bbbbb"));
@@ -74,7 +74,7 @@ public class TrieTest {
     @Test
     public void findAllItems_fourItemTrie_success() {
         setup();
-        Trie testTrie = TypicalTries.fourItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(3);
         List<String> expectedSuccess = new ArrayList<>();
         expectedSuccess.add("aaaaa");
         expectedSuccess.add("aaabb");
@@ -87,7 +87,7 @@ public class TrieTest {
     @Test
     public void findAllItem_fourItemTrie_fail() {
         setup();
-        Trie testTrie = TypicalTries.fourItem;
+        Trie testTrie = TypicalTries.getTypicalTries().get(3);
         List<String> expectedFail = new ArrayList<>();
         assertEquals(expectedFail, testTrie.findAllMatches("abc"));
     }
