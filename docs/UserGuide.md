@@ -265,10 +265,10 @@ Format: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
 * `name` : Sorts all persons in alphabetical order.
 * `appointment`: Sorts all persons by appointment date.
-* `priority` : Sorts all persons by the highest priority.
+* `priority` : Sorts all persons by the highest priority tag.
 
 Examples:
-* `sort priority` Sorts all existing persons by the priority from highest priority to lowest priority.
+* `sort priority` Sorts all existing persons by the priority from highest priority tag to lowest priority tag.
 
 ### Clearing all entries: `clear`
 
