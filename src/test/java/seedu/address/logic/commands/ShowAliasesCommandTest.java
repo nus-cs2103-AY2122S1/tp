@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 
 public class ShowAliasesCommandTest {
     private Model model;
@@ -17,7 +20,7 @@ public class ShowAliasesCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        model.addAlias("lf", "listf");
+        model.addAlias(new Alias(new Shortcut("lf"), new CommandWord("listf")));
         expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
     }
 

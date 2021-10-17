@@ -33,7 +33,10 @@ import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Aliases;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -48,7 +51,7 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
-    private final Aliases aliases = new Aliases();
+    private final AliasMap aliases = new AliasMap();
 
     @Test
     public void parseCommand_addMember() throws Exception {
@@ -168,15 +171,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addAlias() throws Exception {
         AddAliasCommand command = (AddAliasCommand) parser
-                .parseCommand(AddAliasCommand.COMMAND_WORD + " a/lf cw/listf", aliases);
-        assertEquals(new AddAliasCommand("lf", "listf"), command);
+                .parseCommand(AddAliasCommand.COMMAND_WORD + " s/lf cw/listf", aliases);
+        assertEquals(new AddAliasCommand(new Alias(new Shortcut("lf"), new CommandWord("listf"))), command);
     }
 
     @Test
     public void parseCommand_listfInputIsAnAlias_success() throws Exception {
         String alias = "lf";
-        Aliases aliases = new Aliases();
-        aliases.add(alias, "listf");
+        AliasMap aliases = new AliasMap();
+        aliases.add(new Alias(new Shortcut(alias), new CommandWord("listf")));
         ListFacilityCommand command = (ListFacilityCommand) parser.parseCommand(alias, aliases);
         assertTrue(command instanceof ListFacilityCommand);
     }
@@ -184,8 +187,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addmInputIsAnAlias_success() throws Exception {
         String alias = "af";
-        Aliases aliases = new Aliases();
-        aliases.add(alias, "addf");
+        AliasMap aliases = new AliasMap();
+        aliases.add(new Alias(new Shortcut(alias), new CommandWord("addf")));
         Facility facility = new FacilityBuilder()
                 .withFacilityName("Court 1")
                 .withLocation("University Sports Hall")
@@ -200,7 +203,7 @@ public class AddressBookParserTest {
     public void parseCommand_deleteAlias_success() throws Exception {
         DeleteAliasCommand command = (DeleteAliasCommand) parser
                 .parseCommand(DeleteAliasCommand.COMMAND_WORD + " lf", aliases);
-        assertEquals(new DeleteAliasCommand("lf"), command);
+        assertEquals(new DeleteAliasCommand(new Shortcut("lf")), command);
     }
 
     @Test

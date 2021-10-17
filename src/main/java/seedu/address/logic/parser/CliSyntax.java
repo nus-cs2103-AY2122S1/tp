@@ -14,6 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TIME = new Prefix("t/");
     public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
     public static final Prefix PREFIX_AVAILABILITY = new Prefix("d/");
-    public static final Prefix PREFIX_ALIAS = new Prefix("a/");
+    public static final Prefix PREFIX_SHORTCUT = new Prefix("s/");
     public static final Prefix PREFIX_COMMAND_WORD = new Prefix("cw/");
 }

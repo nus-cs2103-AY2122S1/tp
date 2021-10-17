@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 
 /**
  * Represents User's preferences.
@@ -15,7 +19,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private Aliases aliases = new Aliases();
+    private AliasMap aliases = new AliasMap();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -56,21 +60,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     }
 
     @Override
-    public Aliases getAliases() {
+    public AliasMap getAliases() {
         return aliases;
     }
 
-    public void setAliases(Aliases aliases) {
+    public void setAliases(AliasMap aliases) {
         requireNonNull(aliases);
         this.aliases = aliases;
     }
 
-    public void addAlias(String alias, String keywords) {
-        aliases.add(alias, keywords);
+    public void addAlias(Alias alias) {
+        aliases.add(alias);
     }
 
-    public String removeAlias(String alias) {
-        return aliases.remove(alias);
+    public CommandWord removeAlias(Shortcut shortcut) {
+        return aliases.remove(shortcut);
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {

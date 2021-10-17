@@ -17,10 +17,13 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Aliases;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -112,17 +115,17 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public Aliases getAliases() {
+        public AliasMap getAliases() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addAlias(String alias, String keywords) {
+        public void addAlias(Alias alias) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public String removeAlias(String alias) {
+        public CommandWord removeAlias(Shortcut shortcut) {
             throw new AssertionError("This method should not be called.");
         }
 
