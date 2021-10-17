@@ -3,6 +3,8 @@ package seedu.programmer.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
@@ -46,6 +48,22 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Handles the Up and Down arrow keys pressed event.
+     * @param event The input event trigger this method to be invoked.
+     */
+    @FXML
+    private void handleKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.UP) {
+            commandTextField.setText("up");
+            event.consume(); // Consume Event
+        }
+        if (event.getCode() == KeyCode.DOWN) {
+            commandTextField.setText("down");
+            event.consume(); // Consume Event
         }
     }
 
