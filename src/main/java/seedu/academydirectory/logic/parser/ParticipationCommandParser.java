@@ -6,6 +6,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ADD_PARTICIPA
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_STUDIO_SESSION;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
@@ -23,6 +24,10 @@ public class ParticipationCommandParser implements Parser<ParticipationCommand> 
         ArgumentMultimap argMultimap = ArgumentTokenizer
                 .tokenize(args, PREFIX_STUDIO_SESSION, PREFIX_ADD_PARTICIPATON);
         ArrayList<Index> indexArrayList = new ArrayList<>();
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDIO_SESSION, PREFIX_ADD_PARTICIPATON)
+                || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ParticipationCommand.MESSAGE_USAGE));
+        }
         Integer participationUpdate;
         Integer studioSession;
 
@@ -42,5 +47,12 @@ public class ParticipationCommandParser implements Parser<ParticipationCommand> 
             );
         }
         return new ParticipationCommand(participationUpdate, studioSession, indexArrayList);
+    }
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
