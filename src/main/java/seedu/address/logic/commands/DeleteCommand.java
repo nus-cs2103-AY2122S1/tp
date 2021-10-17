@@ -95,7 +95,7 @@ public class DeleteCommand extends Command {
     private CommandResult executeBasedOnRole(Model model, List<Person> staffs) {
         StringBuilder deletedPeople = new StringBuilder(MESSAGE_DELETE_PEOPLE_SUCCESS);
         for (Person staff : staffs) {
-            if (staff.getRole() == role) {
+            if (staff.getRoles().contains(role)) {
                 model.deletePerson(staff);
                 deletedPeople.append(staff).append("\n\n");
             }

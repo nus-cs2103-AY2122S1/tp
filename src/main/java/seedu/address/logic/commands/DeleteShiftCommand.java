@@ -16,15 +16,15 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
-import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
- * Adds a shift to a staff's schedule.
+ * Deletes a shift from a staff's schedule.
  */
-public class AddShiftCommand extends Command {
-    public static final String COMMAND_WORD = "addShift";
+public class DeleteShiftCommand extends Command {
+    public static final String COMMAND_WORD = "deleteShift";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": adds a shift to the staff identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": deletes a shift from the staff identified "
             + "by\nthe index number used in the displayed staff list or\nthe name of staff." + "\n"
             + "Parameters: "
             + "[" + PREFIX_INDEX + "INDEX] or "
@@ -37,9 +37,8 @@ public class AddShiftCommand extends Command {
             + PREFIX_NAME + "JOE "
             + PREFIX_DAY_SHIFT + "TUESDAY-0";
 
-
-    public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";
-    public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in the staff's schedule.";
+    public static final String MESSAGE_DELETE_SHIFT_SUCCESS = "Shift deleted from the schedule of %s: %s, %s.";
+    public static final String MESSAGE_SHIFT_DOESNT_EXIST = "The shift that you are trying to delete does not exist!";
 
     private final Index index;
     private final Name name;
@@ -47,9 +46,9 @@ public class AddShiftCommand extends Command {
     private final Slot slot;
 
     /**
-     * Creates an AddShiftCommand to add the specified {@code Shift} to a {@code Person}.
+     * Creates a DeleteShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public AddShiftCommand(Index index, Name name, String shiftDateAndSlot) {
+    public DeleteShiftCommand(Index index, Name name, String shiftDateAndSlot) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
@@ -83,14 +82,13 @@ public class AddShiftCommand extends Command {
         }
 
         try {
-            model.addShift(staffToEdit, dayOfWeek, slot);
-        } catch (DuplicateShiftException de) {
-            throw new CommandException(MESSAGE_DUPLICATE_SHIFT);
+            model.deleteShift(staffToEdit, dayOfWeek, slot);
+        } catch (NoShiftException e) {
+            throw new CommandException(MESSAGE_SHIFT_DOESNT_EXIST);
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_SHIFT_SUCCESS, staffToEdit.getName(), dayOfWeek, slot));
-
+        return new CommandResult(String.format(MESSAGE_DELETE_SHIFT_SUCCESS, staffToEdit.getName(), dayOfWeek, slot));
     }
 
     @Override
@@ -101,12 +99,12 @@ public class AddShiftCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddShiftCommand)) {
+        if (!(other instanceof DeleteShiftCommand)) {
             return false;
         }
 
         // state check
-        AddShiftCommand command = (AddShiftCommand) other;
+        DeleteShiftCommand command = (DeleteShiftCommand) other;
         return ((index == null && command.index == null) || (index != null && index.equals(command.index)))
                 && ((name == null && command.name == null) || (name != null && name.equals(command.name)))
                 && dayOfWeek.equals(command.dayOfWeek)

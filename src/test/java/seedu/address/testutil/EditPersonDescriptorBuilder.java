@@ -39,10 +39,11 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setRole(person.getRole());
+        descriptor.setRoles(person.getRoles());
         descriptor.setSalary(person.getSalary());
         descriptor.setStatus(person.getStatus());
         descriptor.setTags(person.getTags());
+        descriptor.setPeriod(person.getAbsentDates());
     }
 
     /**
@@ -78,10 +79,12 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Role} of the {@code EditPersonDescriptor} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
      */
-    public EditPersonDescriptorBuilder withRole(String role) {
-        descriptor.setRole(Role.translateStringToRole(role));
+    public EditPersonDescriptorBuilder withRoles(String... roles) {
+        Set<Role> roleSet = Stream.of(roles).map(Role::translateStringToRole).collect(Collectors.toSet());
+        descriptor.setRoles(roleSet);
         return this;
     }
 
