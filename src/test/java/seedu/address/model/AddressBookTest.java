@@ -71,7 +71,6 @@ public class AddressBookTest {
         Task editedReport1 = new TaskBuilder(REPORT_1).build();
         List<Task> newTaskList = List.of(REPORT_1, editedReport1);
         List<Person> samplePersonList = List.of(ALICE);
-        // TODO: Add detailed skeleton for Group
         List<Group> sampleGroupList = List.of(GROUP_1);
         AddressBookStub newData = new AddressBookStub(samplePersonList, newTaskList, sampleGroupList);
 

@@ -1,11 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.model.id.UniqueId.DEFAULT_ID;
+import java.util.UUID;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.id.UniqueId;
-
 
 public class GroupBuilder {
     public static final String DEFAULT_NAME = "CS2103T";
@@ -18,7 +17,7 @@ public class GroupBuilder {
      */
     public GroupBuilder() {
         this.name = new GroupName(DEFAULT_NAME);
-        this.uniqueId = DEFAULT_ID;
+        this.uniqueId = UniqueId.generateId(UUID.randomUUID().toString());
     }
 
     /**
