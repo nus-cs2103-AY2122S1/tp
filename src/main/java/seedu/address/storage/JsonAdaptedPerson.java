@@ -134,7 +134,7 @@ class JsonAdaptedPerson {
         final Optional<Address> modelQuarantineAddress = Optional.ofNullable(quarantineAddress).map(Address::new);
 
         if (shnPeriod != null && !ShnPeriod.isValidShnPeriodString(shnPeriod)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ShnPeriod.MESSAGE_CONSTRAINTS);
         }
         final Optional<ShnPeriod> modelShnPeriod = Optional.ofNullable(shnPeriod).map(ShnPeriod::new);
 

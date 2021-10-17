@@ -13,6 +13,7 @@ import seedu.address.model.person.CaseNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ShnPeriod;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -23,7 +24,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_WORK_ADDRESS = " ";
     private static final String INVALID_QUARANTINE_ADDRESS = " ";
     private static final String INVALID_SHN_PERIOD = "12 May - 15 May 2020";
-    private static final String INVALID_NEXT_OF_KIN_NAME = "J0hn";
+    private static final String INVALID_NEXT_OF_KIN_NAME = "J-hn";
     private static final String INVALID_NEXT_OF_KIN_PHONE = "+526243";
     private static final String INVALID_NEXT_OF_KIN_ADDRESS = " ";
 
@@ -32,12 +33,14 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_CASE_NUMBER = BENSON.getCaseNumber().toString();
     private static final String VALID_HOME_ADDRESS = BENSON.getHomeAddress().toString();
-    private static final String VALID_WORK_ADDRESS = BENSON.getWorkAddress().toString();
-    private static final String VALID_QUARANTINE_ADDRESS = BENSON.getQuarantineAddress().toString();
-    private static final String VALID_SHN_PERIOD = BENSON.getShnPeriod().toString();
-    private static final String VALID_NEXT_OF_KIN_NAME = BENSON.getNextOfKinName().toString();
-    private static final String VALID_NEXT_OF_KIN_PHONE = BENSON.getNextOfKinPhone().toString();
-    private static final String VALID_NEXT_OF_KIN_ADDRESS = BENSON.getNextOfKinAddress().toString();
+    private static final String VALID_WORK_ADDRESS = BENSON.getWorkAddress().map(Object::toString).orElse(null);
+    private static final String VALID_QUARANTINE_ADDRESS =
+            BENSON.getQuarantineAddress().map(Object::toString).orElse(null);
+    private static final String VALID_SHN_PERIOD = BENSON.getShnPeriod().map(Object::toString).orElse(null);
+    private static final String VALID_NEXT_OF_KIN_NAME = BENSON.getNextOfKinName().map(Object::toString).orElse(null);
+    private static final String VALID_NEXT_OF_KIN_PHONE = BENSON.getNextOfKinPhone().map(Object::toString).orElse(null);
+    private static final String VALID_NEXT_OF_KIN_ADDRESS =
+            BENSON.getNextOfKinAddress().map(Object::toString).orElse(null);
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -132,6 +135,60 @@ public class JsonAdaptedPersonTest {
                 null, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
                 VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidWorkAddress_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, INVALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
+                VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidQuarantineAddress_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, INVALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
+                VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidShnPeriod_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, INVALID_SHN_PERIOD,
+                VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = ShnPeriod.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNextOfKinName_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
+                INVALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNextOfKinPhone_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
+                VALID_NEXT_OF_KIN_NAME, INVALID_NEXT_OF_KIN_PHONE, VALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidNextOfKinAddress_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_CASE_NUMBER,
+                VALID_HOME_ADDRESS, VALID_WORK_ADDRESS, VALID_QUARANTINE_ADDRESS, VALID_SHN_PERIOD,
+                VALID_NEXT_OF_KIN_NAME, VALID_NEXT_OF_KIN_PHONE, INVALID_NEXT_OF_KIN_ADDRESS);
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 }
