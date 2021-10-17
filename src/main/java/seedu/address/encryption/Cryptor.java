@@ -34,7 +34,7 @@ public class Cryptor implements Cryptable {
     public Cryptor(SecretKey secretKey, String transformation)
             throws NoSuchPaddingException, NoSuchAlgorithmException {
         this.secretKey = secretKey;
-        this.cipher = Cipher.getInstance(transformation);
+        cipher = Cipher.getInstance(transformation);
     }
 
     /**
@@ -67,8 +67,8 @@ public class Cryptor implements Cryptable {
     @Override
     public String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-        if (!isLegalFileFormat(encryptedSourceFilePath)) {
-            throw new IOException(); // Guard clause
+        if (!isLegalFileFormat(encryptedSourceFilePath)) { // Guard clause
+            throw new IOException();
         }
 
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
