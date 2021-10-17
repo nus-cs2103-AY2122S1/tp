@@ -145,7 +145,7 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON, true);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_NO_EXISTING_VISIT, editedPerson);
+        String expectedMessage = String.format(Messages.MESSAGE_NO_EXISTING_VISIT, editedPerson);
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 

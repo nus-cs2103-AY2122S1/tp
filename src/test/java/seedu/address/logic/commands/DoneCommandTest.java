@@ -64,7 +64,8 @@ public class DoneCommandTest {
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
-        assertCommandFailure(doneCommand, newModel, Messages.MESSAGE_NO_SCHEDULED_VISIT);
+        assertCommandFailure(doneCommand, newModel,
+                String.format(Messages.MESSAGE_NO_EXISTING_VISIT, personToDoneNoVisit));
     }
 
     @Test
