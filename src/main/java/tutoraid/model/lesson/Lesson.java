@@ -2,6 +2,8 @@ package tutoraid.model.lesson;
 
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
 /**
  * Represents a Lesson in the TutorAid.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -82,5 +84,46 @@ public class Lesson {
                 && otherLesson.getPrice().equals(getPrice())
                 && otherLesson.getStudents().equals(getStudents())
                 && otherLesson.getTiming().equals(getTiming());
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(lessonName, timing, capacity, price, students);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append(getLessonName());
+
+        if (lessonName != null) {
+            builder.append("; Lesson's name: ")
+                    .append(getLessonName());
+        }
+
+        if (timing != null) {
+            builder.append("; Lesson's timing: ")
+                    .append(getTiming());
+
+        }
+
+        if (capacity != null) {
+            builder.append("; Lesson's capacity: ")
+                    .append(getCapacity());
+        }
+
+        if (price != null) {
+            builder.append("; Lesson's price: ")
+                    .append(getCapacity());
+        }
+
+        if (students != null) {
+            builder.append("; Lesson's students: ")
+                    .append(getStudents());
+        }
+
+        return builder.toString();
     }
 }
