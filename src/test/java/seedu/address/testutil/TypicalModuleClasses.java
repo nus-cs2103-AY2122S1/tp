@@ -13,19 +13,19 @@ import seedu.address.model.moduleclass.ModuleClass;
 public class TypicalModuleClasses {
 
     public static final ModuleClass CS2100_LAB1 = new ModuleClassBuilder()
-            .withModuleCode("CS2100")
+            .withModuleCode("CS2100 B31")
             .withDay("2")
             .withTime("15:00")
             .withRemark("COM1 0113")
             .build();
     public static final ModuleClass CS2103_TUT1 = new ModuleClassBuilder()
-            .withModuleCode("CS2103")
+            .withModuleCode("CS2103 T09")
             .withDay("4")
             .withTime("09:00")
             .withRemark("online")
             .build();
     public static final ModuleClass CS2100_TUT1 = new ModuleClassBuilder()
-            .withModuleCode("CS2100")
+            .withModuleCode("CS2100 T18")
             .withDay("3")
             .withTime("17:00")
             .withRemark("COM1 01-20")
