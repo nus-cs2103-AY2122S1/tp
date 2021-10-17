@@ -1,14 +1,17 @@
 package seedu.tuitione.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.ClassIsOfSpecifiedGrade;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
 
-import static java.util.Objects.requireNonNull;
-
-public class FilterCommand extends Command{
+/**
+ * Filters out students and lessons in tuitione book whose grade is equal to the specified grade.
+ */
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
@@ -28,11 +31,17 @@ public class FilterCommand extends Command{
         requireNonNull(model);
         model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         model.updateFilteredLessonList(new ClassIsOfSpecifiedGrade(grade));
-        String output = model.getFilteredStudentList().size() == 0 || model.getFilteredStudentList().size() == 1
+        String output = model.getFilteredStudentList().size() == 1
                 ? String.format(Messages.MESSAGE_SINGULAR_STUDENT_LISTED_OVERVIEW,
                 model.getFilteredStudentList().size())
+                    + "\n"
+                    + String.format(Messages.MESSAGE_SINGULAR_LESSON_LISTED_OVERVIEW,
+                    model.getFilteredLessonList().size())
                 : String.format(Messages.MESSAGE_PLURAL_STUDENT_LISTED_OVERVIEW,
-                model.getFilteredStudentList().size());
+                model.getFilteredStudentList().size())
+                    + "\n"
+                    + String.format(Messages.MESSAGE_PLURAL_LESSON_LISTED_OVERVIEW,
+                model.getFilteredLessonList().size());
         return new CommandResult(output);
     }
 

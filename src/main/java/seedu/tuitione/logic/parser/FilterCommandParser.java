@@ -1,10 +1,10 @@
 package seedu.tuitione.logic.parser;
 
+import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.tuitione.logic.commands.FilterCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.student.Grade;
-
-import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Parses input arguments and creates a new {@code FilterCommand} object.

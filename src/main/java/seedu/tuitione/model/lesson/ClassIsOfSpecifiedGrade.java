@@ -1,8 +1,8 @@
 package seedu.tuitione.model.lesson;
 
-import seedu.tuitione.model.student.Grade;
-
 import java.util.function.Predicate;
+
+import seedu.tuitione.model.student.Grade;
 
 /**
  * Tests that a {@code Lesson}'s {@code Grade} matches the given grade.
