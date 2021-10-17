@@ -1,8 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.DayOfWeek;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,5 +34,14 @@ public class ScheduleTest {
         // valid addresses
         assertTrue(Schedule.isValidSchedule("monday-morning tuesday-afternoon"));
         assertTrue(Schedule.isValidSchedule("")); //empty schedule
+    }
+
+    @Test
+    public void getTotalWorkingHourTest() {
+        Schedule schedule = new Schedule();
+        assertEquals(0, schedule.getTotalWorkingHour());
+
+        schedule.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON);
+        assertEquals(4, schedule.getTotalWorkingHour());
     }
 }

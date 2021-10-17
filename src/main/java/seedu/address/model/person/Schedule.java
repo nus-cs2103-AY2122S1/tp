@@ -4,6 +4,7 @@ import java.time.DayOfWeek;
 import java.util.Objects;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
@@ -14,6 +15,8 @@ public class Schedule {
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
+    // Set the number of hours for a slot as 4 hours
+    private static final int HOURS_PER_SLOT = 4;
 
 
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
@@ -72,8 +75,12 @@ public class Schedule {
      *
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The period of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) {
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
+            throw new NoShiftException();
+        }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = null;
     }
 
@@ -122,6 +129,23 @@ public class Schedule {
                 formatShiftsToString(shifts[5]),
                 formatShiftsToString(shifts[6]));
 
+    }
+
+    /**
+     * Calculates the total working hours os one schedule.
+     *
+     * @return The total working hours.
+     */
+    public int getTotalWorkingHour() {
+        int totalHours = 0;
+        for (Shift[] dayShifts : shifts) {
+            for (Shift shift : dayShifts) {
+                if (shift != null) {
+                    totalHours += HOURS_PER_SLOT;
+                }
+            }
+        }
+        return totalHours;
     }
 
     /**

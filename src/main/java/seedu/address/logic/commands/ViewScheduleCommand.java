@@ -16,7 +16,7 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
 public class ViewScheduleCommand extends Command {
     public static final String DEFAULT_MESSAGE = "Schedule viewed of staff: %1$s\n";
     public static final String COMMAND_WORD = "viewSchedule";
-    public static final String HELP_MESSAGE = ": view the schedule of a staff\n"
+    public static final String HELP_MESSAGE = COMMAND_WORD + ": view the schedule of a staff\n"
             + "Method to use:\n"
             + "viewSchedule [" + PREFIX_NAME + "NAME]";
 

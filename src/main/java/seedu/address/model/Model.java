@@ -10,6 +10,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * The API of the Model component.
@@ -106,6 +107,17 @@ public interface Model {
      * @throws DuplicateShiftException Throws when there is already a shift at the target slot.
      */
     void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException;
+
+    /**
+     * Deletes a shift from a target staff's schedule.
+     * {@code target} must exist in the address book.
+     *
+     * @param target The target staff.
+     * @param dayOfWeek of the shift.
+     * @param slot of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
+     */
+    void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws NoShiftException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

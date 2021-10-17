@@ -14,7 +14,7 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
-    public static final String HELP_MESSAGE = ": Command to view a staff in the list view\n"
+    public static final String HELP_MESSAGE = COMMAND_WORD + ": Command to view a staff in the list view\n"
             + "Used with search queries\n"
             + "e.g. " + COMMAND_WORD + " " + "[" + PREFIX_TAG + "TAG]" + " [" + PREFIX_NAME + "NAME]\n"
             + "OR " + COMMAND_WORD + " " + "[" + PREFIX_EMAIL + "EMAIL]" + " [" + PREFIX_ADDRESS + "ADDRESS]";
