@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.parser.ParserCheckedFunction;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Field;
+import seedu.address.model.person.Person;
 
 /**
  * Predicate to check if the person contains the input fields.

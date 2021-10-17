@@ -16,7 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Field;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 
 

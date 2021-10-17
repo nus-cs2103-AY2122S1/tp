@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -97,6 +98,14 @@ public class Person {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
+        return schedule.isWorking(dayOfWeek, slotNum);
+    }
+
+    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time) {
+        return schedule.isWorking(dayOfWeek, time);
     }
 
     public boolean containsFields(List<Field> fields) {

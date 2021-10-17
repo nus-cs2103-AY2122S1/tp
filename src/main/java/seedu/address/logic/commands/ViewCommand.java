@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
 /**
  * Represents a command to view.
