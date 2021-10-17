@@ -124,7 +124,7 @@ public class ParserUtil {
             throw new ParseException(Review.MESSAGE_CONSTRAINTS);
         }
         if (trimmedReview.equals("")) {
-            trimmedReview = "- No Review -";
+            trimmedReview = Review.EMPTY_REVIEW;
         }
         return new Review(trimmedReview);
     }
