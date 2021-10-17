@@ -162,6 +162,13 @@ Examples: (examples below are all possible usages of `sort`)
 - `sort o/desc`
 - `sort o/time`
 
+### View timetable: `timetable`
+
+Example:
+- `timetable`
+<br>
+![Ui](images/time_table.png)
+
 ### Viewing help: `help`
 Shows a command summary and a link to the user guide. <br>
 ![Ui](images/helpWindow.png)
@@ -191,6 +198,7 @@ Action | Format
 ***Find Class by Name*** | `findclass NAME`
 ***List all Classes*** | `listclass`
 ***Sort Tuition Class*** | `sort [o/ORDER]`
+***View Timetable*** | `timetable`
 ***Help*** | `help`
 ***Exit*** | `exit`
 

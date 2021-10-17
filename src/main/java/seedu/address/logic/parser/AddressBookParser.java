@@ -24,6 +24,7 @@ import seedu.address.logic.commands.RemarkClassCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.RemoveStudentCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.TimetableCommand;
 import seedu.address.logic.commands.ViewClassCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.ViewTodayTuitionCommand;
@@ -116,6 +117,8 @@ public class AddressBookParser {
         case ViewTodayTuitionCommand.COMMAND_WORD:
             return new ViewTodayTuitionCommandParser().parse(arguments);
 
+        case TimetableCommand.COMMAND_WORD:
+            return new TimetableParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

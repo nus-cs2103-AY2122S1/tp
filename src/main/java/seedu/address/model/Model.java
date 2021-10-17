@@ -123,21 +123,21 @@ public interface Model {
     void setTuition(TuitionClass target, TuitionClass editedTuition);
 
     /**
-     * Check whether the list of students contains the index from input.
+     * Checks whether the list of students contains the index from input.
      * @param index the index of student to be checked.
      * @return the person if the index is present.
      */
     Person getStudent(Index index);
 
     /**
-     * Check whether the list of tuition classes contains the index from input.
+     * Checks whether the list of tuition classes contains the index from input.
      * @param index the index of class to be checked.
      * @return the class if the index is present.
      */
     TuitionClass getTuitionClass(Index index);
 
     /**
-     * Add a new student to an existing class.
+     * Adds a new student to an existing class.
      * @param tuitionClass an existing class.
      * @param person an existing student.
      * @return the tuition class after modification.
@@ -152,7 +152,7 @@ public interface Model {
     Person getSameNamePerson(Person otherPerson);
 
     /**
-     * Check whether the list of tuition classes contains the id from input.
+     * Checks whether the list of tuition classes contains the id from input.
      * @param id the id of class to be checked.
      * @return the class if the id is present.
      */
