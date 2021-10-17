@@ -189,6 +189,78 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Completed\] Filter Event feature
+
+This feature allows Managera users to filter the event list by date of event and by time.
+
+#### How the feature is implemented
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
+
+Since this feature requires us to take in user input and determine if the filter is by:
+
+1. Date only; or
+2. Date and Time
+
+A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser`
+parses user's input and determines the `predicate` which the `FilterEventCommand` will use to execute the filtering. 
+The `FilterEventCommand` is solely for filtering the event list.
+
+The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `predicate` to filter
+the event list. When it is executed, the `model` will pass all the events in the event list to the `predicate` and
+display only events that fulfils the `predicate` contained in `FilterEventCommand`.
+
+
+#### Why is this implemented this way
+
+With considerations to how the `Event` class is implemented, some events do not have time associated to them.
+The developer team feels that since all `Event` have a date associated through the `EventDate` class, filtering should
+be done primarily through date i.e. `EventDate`. However understanding that users might want to filter by time too, it is
+included as an optional criteria for filtering.
+
+
+#### Design Considerations:
+##### Aspect: What to filter by:
+
+* **Alternative 1 (Current Choice)**: By Date and optionally time:
+  * Pros: 
+    1. Filtering by date only allows users to see both events with or without time on the specific date.
+    2. Greater flexibility on how specific users want to filter the event list by.
+  * Cons:
+    1. Unable to filter for only events that do not have time associated.
+
+
+* **Alternative 2**: By Date and Time (both fields compulsory)
+  * Pros:
+    1. Able to filter for only events that do not have time on a specific date.
+  * Cons:
+    1. Unable to get a more general filter for events occurring on a specific date.
+    2. Compulsory time field is too specific and the number of events displayed for a filter attempt might be too low. 
+
+##### Aspect: With or without prefix:
+
+* **Alternative 1 (Current Choice)**: With prefixes:
+  * Pros:
+    1. Sequence of each field can be randomized, more flexible command syntax.
+    2. Clear to user which field is being keyed in.
+    3. Easy to implement with support of existing classes.
+  * Cons:
+    1. This adds up to the number of prefixes already present in the App which maybe hard to remember.
+
+
+* **Alternative 2**: Without prefix:
+  * Pros:
+    1. Clean and slightly shorter command syntax.
+    2. Less prefix to remember.
+  * Cons:
+    1. Rigid command syntax.
+    2. Requires more comprehensive implementation to deal with user input (E.g. Date Only or Date and Time)
+
+The following is the sequence diagram for how a `FilterEventCommand` works internally.
+
+![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
