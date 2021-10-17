@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.persons.PersonAddLessonCommand;
@@ -19,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Timeslot;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new PersonAddLessonCommand object
@@ -50,7 +52,7 @@ public class PersonAddLessonParser implements Parser<PersonAddLessonCommand> {
                 argMultimap.getValue(PREFIX_END_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
-        Lesson lesson = new Lesson(timeslot, subject, dayOfWeek);
+        Lesson lesson = new Lesson(timeslot, subject, dayOfWeek, new ArrayList<Name>());
         return new PersonAddLessonCommand(index, lesson);
     }
 }

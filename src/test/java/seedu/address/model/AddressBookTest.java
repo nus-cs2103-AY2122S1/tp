@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.task.Task;
@@ -149,6 +150,13 @@ public class AddressBookTest {
         public ObservableList<Task> getTaskList() {
             return tasks;
         }
+
+        @Override
+        public List<Lesson> getSortedLessons() {
+            // TODO let this do something!
+            throw new RuntimeException("Unsupported command!");
+        }
+
     }
 
 }

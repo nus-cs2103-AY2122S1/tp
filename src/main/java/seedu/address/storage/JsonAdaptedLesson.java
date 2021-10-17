@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.time.DayOfWeek;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,6 +13,7 @@ import seedu.address.logic.parser.ValidateUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.Timeslot;
+import seedu.address.model.person.Name;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -64,7 +66,7 @@ public class JsonAdaptedLesson {
 
         DayOfWeek dayOfWeek = DayOfWeek.of(this.dayOfWeek);
 
-        return new Lesson(timeslot, subject, dayOfWeek);
+        return new Lesson(timeslot, subject, dayOfWeek, new ArrayList<Name>());
     }
 
 

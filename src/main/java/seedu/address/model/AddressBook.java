@@ -2,9 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
@@ -161,6 +164,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public List<Lesson> getSortedLessons() {
+        List<Lesson> lessons = new ArrayList<>();
+        for (Person p : persons) {
+            lessons.addAll(p.getLessonsList().getLessons());
+        }
+        Collections.sort(lessons);
+        return lessons;
     }
 
     @Override
