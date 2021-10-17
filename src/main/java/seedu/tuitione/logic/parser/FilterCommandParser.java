@@ -18,13 +18,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        if (!Grade.isValidGrade(trimmedArgs)) {
-            throw new ParseException(Grade.GRADE_MESSAGE_CONSTRAINTS);
-        }
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
+        if (!Grade.isValidGrade(trimmedArgs)) {
+            throw new ParseException(Grade.GRADE_MESSAGE_CONSTRAINTS);
+        }
+
 
         return new FilterCommand(new Grade(trimmedArgs));
     }
