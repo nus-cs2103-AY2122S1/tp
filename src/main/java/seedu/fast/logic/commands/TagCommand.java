@@ -10,7 +10,6 @@ import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
-import seedu.fast.model.person.Remark;
 import seedu.fast.model.tag.Tag;
 
 /**
@@ -33,19 +32,19 @@ public class TagCommand extends Command {
     public static final String MESSAGE_ADD_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
 
     private final Index index;
-    private Tag tag;
+    private Set<Tag> tags;
 
     /**
      * Construct for a {@code RemarkCommand}
      *
      * @param index index of the person in the filtered person list to edit the remark
-     * @param tag remark of the person to be updated to
+     * @param tags Tags of the person to be added
      */
-    public TagCommand(Index index, Tag tag) {
-        requireAllNonNull(index, tag);
+    public TagCommand(Index index, Set<Tag> tags) {
+        requireAllNonNull(index, tags);
 
         this.index = index;
-        this.tag = tag;
+        this.tags = tags;
     }
 
     @Override
@@ -59,17 +58,22 @@ public class TagCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Set<Tag> newTags = personToEdit.getTags();
-        try {
-            boolean isSuccess = newTags.(tag);
-            assert(isSuccess);
-        } catch () {
-
+        for (Tag tag: tags) {
+            //check if any tags to be added already exist in the person's set of tags
+            if (TagCommandUtils.checkIfContains(newTags, tag)) {
+                String errorMessage = String.format(Messages.MESSAGE_TAGS_ARE_REPEATED, tag.tagName);
+                throw new CommandException(errorMessage);
+            }
+        }
+        //now all tags are safe to be added.
+        for (Tag tag: tags) {
+            newTags.add(tag);
         }
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getRemark(), personToEdit.getTags(), personToEdit.getAppointment(),
-                personToEdit.getCount());
+                personToEdit.getAddress(), personToEdit.getRemark(), newTags,
+                personToEdit.getAppointment(), personToEdit.getCount());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
@@ -100,7 +104,7 @@ public class TagCommand extends Command {
 
         // state check
         TagCommand e = (TagCommand) other;
-        return index.equals(e.index) && tag.equals(e.tag);
+        return index.equals(e.index) && tags.equals(e.tags);
     }
 
 }
