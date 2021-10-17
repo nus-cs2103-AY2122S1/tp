@@ -1,0 +1,25 @@
+@startuml
+start
+:user inputs visit command;
+:Logic executes visit command;
+:VisitCommandParser parses the command;
+
+if () then ([Visit date is specified in correct format])
+    if() then ([Frequency and occurrence present])
+        if() then ([Both frequency and occurrence are correctly specified])
+            :execute VisitCommand;
+        else ([Frequency or occurrence wrongly specified])
+            :Throw ParseException;
+        endif
+
+    else ([Not both frequency and occurrence present])
+        :Throw ParseException;
+    endif
+
+else ([Visit date is specified in wrong format])
+    :Throw ParseException;
+
+endif
+stop
+
+@enduml

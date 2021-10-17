@@ -154,6 +154,40 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Visit command
+
+#### Implementation details
+
+The visit command is used to add a visit to an existing person in SeniorLove.
+It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
+- `VisitCommand` extends `Command`
+- `VisitCommandParser` implements `Parser<VisitCommand>`
+
+The following activity diagram illustrates the activity flow of the visit command:
+![VisitCommandActivityDiagram](images/VisitCommandActivityDiagram.png)
+
+The following sequence diagram illustrates how different components of SeniorLove interact with each other:
+(Sequence diagram)
+
+Given below is an example usage scenario:
+1. User inputs the visit command, specifying the index of the elderly to visit and the datetime at which they will go for the visit. They may also optionally include the visitation frequency and number of occurrences at this specified frequency.
+2. After successfully parsing the user input, the `VisitCommand#execute(Model model)` method is called.
+3. The visit that the user wants to add to the elderly will be stored, and it will be converted into a separate format for displaying on the GUI.
+4. Upon successfully adding the visit to the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
+
+#### Design choices
+
+- Overloading `edit` to add/change visit:
+  
+  The `visit` command is similar to the `edit` command in the sense that they both alter the person's attributes, and it is possible to implement similar functionality without a new command. 
+  However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
+  
+- Implementing recurring visits with an occurrence counter and frequency attribute:
+
+  Both methods can achieve the intended effect of implementing the recurring visits. However, we chose to go with an occurrence counter and frequency attribute because it requires less resources.
+  We were concerned that the recurring visits could have many occurrences and at a high frequency, and this could lead to extra overhead in storing and accessing these arrays.
+  
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
