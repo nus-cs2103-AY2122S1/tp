@@ -1,5 +1,6 @@
 package seedu.academydirectory.versioncontrol.objects;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.function.Supplier;
 
@@ -12,8 +13,8 @@ public class Commit extends VcObject {
     private final String message;
 
     // References
-    private final Supplier<Commit> parent;
-    private final Supplier<Tree> blob;
+    private final Supplier<Commit> parentSupplier;
+    private final Supplier<Tree> treeSupplier;
 
     /**
      * Creates a Commit object to work with programmatically. A Commit object SHOULD NOT be instantiated directly.
@@ -21,20 +22,42 @@ public class Commit extends VcObject {
      * @param message commit message. May be omitted
      * @param date date and time when Commit object is created
      * @param hash commit hash
-     * @param parent parent Commit that current Commit object is pointing to
-     * @param blob file referenced by current Commit object
+     * @param parentSupplier  supplier to parent Commit that current Commit object is pointing to
+     * @param treeSupplier supplier to Tree referenced by current Commit object
      */
-    public Commit(String hash, String author, Date date, String message, Supplier<Commit> parent, Supplier<Tree> blob) {
+    public Commit(String hash, String author, Date date, String message, Supplier<Commit> parentSupplier,
+                  Supplier<Tree> treeSupplier) {
         super(hash);
         this.author = author;
         this.date = date;
         this.message = message == null ? "" : message;
-        this.parent = parent;
-        this.blob = blob;
+        this.parentSupplier = parentSupplier;
+        this.treeSupplier = treeSupplier;
     }
 
     @Override
     public String toString() {
-        return author + date.toString() + message + parent.get().getHash() + blob.get().getHash();
+        return Arrays.toString(new String[]{getHash(), author, date.toString(),
+                message, parentSupplier.get().getHash(), treeSupplier.get().getHash()});
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public Supplier<Commit> getParentSupplier() {
+        return parentSupplier;
+    }
+
+    public Supplier<Tree> getTreeSupplier() {
+        return treeSupplier;
     }
 }
