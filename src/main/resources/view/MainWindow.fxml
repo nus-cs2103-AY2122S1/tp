@@ -31,7 +31,6 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="View">
-            <MenuItem mnemonicParsing="false" onAction="#handleShowPerson" text="Persons" />
             <MenuItem mnemonicParsing="false" onAction="#handleShowCustomer" text="Customers" />
             <MenuItem mnemonicParsing="false" onAction="#handleShowEmployee" text="Employees" />
             <MenuItem mnemonicParsing="false" onAction="#handleShowSupplier" text="Suppliers" />
