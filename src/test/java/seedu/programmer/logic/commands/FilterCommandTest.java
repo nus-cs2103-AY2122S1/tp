@@ -24,9 +24,9 @@ import seedu.programmer.model.student.QueryStudentDescriptor;
 import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
  */
-public class ViewCommandTest {
+public class FilterCommandTest {
     private Model model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
@@ -46,38 +46,38 @@ public class ViewCommandTest {
         StudentDetailContainsQueryPredicate thirdPredicate = new StudentDetailContainsQueryPredicate(thirdQueryFields);
 
 
-        ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
-        ViewCommand viewThirdCommand = new ViewCommand(thirdPredicate);
+        FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
+        FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
+        FilterCommand filterThirdCommand = new FilterCommand(thirdPredicate);
 
         // same object -> returns true
-        assertEquals(viewFirstCommand, viewFirstCommand);
+        assertEquals(filterFirstCommand, filterFirstCommand);
 
         // same values -> returns true
-        ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
-        assertEquals(viewFirstCommand, viewFirstCommandCopy);
+        FilterCommand filterFirstCommandCopy = new FilterCommand(firstPredicate);
+        assertEquals(filterFirstCommand, filterFirstCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, viewFirstCommand);
+        assertNotEquals(1, filterFirstCommand);
 
         // null -> returns false
-        assertNotEquals(null, viewFirstCommand);
+        assertNotEquals(null, filterFirstCommand);
 
         // different student -> returns false
-        assertNotEquals(viewFirstCommand, viewSecondCommand);
+        assertNotEquals(filterFirstCommand, filterSecondCommand);
 
         // different student -> returns false
-        assertNotEquals(viewFirstCommand, viewThirdCommand);
+        assertNotEquals(filterFirstCommand, filterThirdCommand);
 
         // different student -> returns false
-        assertNotEquals(viewSecondCommand, viewThirdCommand);
+        assertNotEquals(filterSecondCommand, filterThirdCommand);
     }
 
     @Test
     public void execute_zeroQueryArg_allStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 7);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null);
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredStudentList());
@@ -87,7 +87,7 @@ public class ViewCommandTest {
     public void execute_singleNameQueryArg_oneStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         StudentDetailContainsQueryPredicate predicate = preparePredicate("Elle", null, null);
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ELLE), model.getFilteredStudentList());
@@ -97,7 +97,7 @@ public class ViewCommandTest {
     public void execute_singleCidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01");
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, ELLE), model.getFilteredStudentList());
@@ -107,7 +107,7 @@ public class ViewCommandTest {
     public void execute_singleSidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null);
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredStudentList());
@@ -117,7 +117,7 @@ public class ViewCommandTest {
     public void execute_multipleQueryArg_oneStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
         StudentDetailContainsQueryPredicate predicate = preparePredicate("Pauline", "A0212425H", null);
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE), model.getFilteredStudentList());
@@ -127,7 +127,7 @@ public class ViewCommandTest {
     public void execute_multipleQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
         StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "A02", "B0");
-        ViewCommand command = new ViewCommand(predicate);
+        FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredStudentList());
