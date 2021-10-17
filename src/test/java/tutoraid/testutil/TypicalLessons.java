@@ -1,5 +1,16 @@
 package tutoraid.testutil;
 
+import static tutoraid.logic.commands.CommandTestUtil.VALID_CAPACITY_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_CAPACITY_SCIENCE_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_LESSON_NAME_SCIENCE_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PRICE_SCIENCE_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENTS_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENTS_SCIENCE_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_MATHS_TWO;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_TIMING_SCIENCE_TWO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +24,7 @@ import tutoraid.model.student.Student;
  */
 public class TypicalLessons {
 
-    private static final Student ALICE = new StudentBuilder()
+    public static final Student ALICE = new StudentBuilder()
             .withStudentName("Alice Pauline")
             .withStudentPhone("94351234")
             .withParentName("Mrs Tan")
@@ -21,21 +32,52 @@ public class TypicalLessons {
             .withProgress("No Progress")
             .withPaymentStatus(false)
             .build();
-    private static ArrayList<Student> typicalStudentsInLesson = new ArrayList<>(Arrays.asList(ALICE));
 
     public static final Lesson MATHS_ONE = new LessonBuilder()
             .withLessonName("Maths 1")
             .withCapacity("50")
             .withPrice("100")
-            .withStudents(typicalStudentsInLesson)
+            .withStudents(new ArrayList<>(Arrays.asList(ALICE)))
             .withTiming("1000-1200")
             .build();
     public static final Lesson SCIENCE_ONE = new LessonBuilder()
             .withLessonName("Science 1")
             .withCapacity("50")
             .withPrice("125")
-            .withStudents(typicalStudentsInLesson)
+            .withStudents(new ArrayList<>(Arrays.asList(ALICE)))
             .withTiming("1400-1600")
+            .build();
+
+    // Manually added
+    public static final Lesson ENGLISH_ONE = new LessonBuilder()
+            .withLessonName("English 1")
+            .withCapacity("40")
+            .withPrice("110")
+            .withStudents(new ArrayList<>(Arrays.asList(ALICE)))
+            .withTiming("1300-1400")
+            .build();
+    public static final Lesson ENGLISH_TWO = new LessonBuilder()
+            .withLessonName("English 2")
+            .withCapacity("30")
+            .withPrice("130")
+            .withStudents(new ArrayList<>(Arrays.asList(ALICE)))
+            .withTiming("1800-1900")
+            .build();
+
+    // Manually added - Lesson's details found in {@code CommandTestUtil}
+    public static final Lesson MATHS_TWO = new LessonBuilder()
+            .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+            .withCapacity(VALID_CAPACITY_MATHS_TWO)
+            .withPrice(VALID_PRICE_MATHS_TWO)
+            .withStudents(VALID_STUDENTS_MATHS_TWO)
+            .withTiming(VALID_TIMING_MATHS_TWO)
+            .build();
+    public static final Lesson SCIENCE_TWO = new LessonBuilder()
+            .withLessonName(VALID_LESSON_NAME_SCIENCE_TWO)
+            .withCapacity(VALID_CAPACITY_SCIENCE_TWO)
+            .withPrice(VALID_PRICE_SCIENCE_TWO)
+            .withStudents(VALID_STUDENTS_SCIENCE_TWO)
+            .withTiming(VALID_TIMING_SCIENCE_TWO)
             .build();
 
     private TypicalLessons() {

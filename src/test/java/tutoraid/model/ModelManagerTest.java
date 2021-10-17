@@ -96,6 +96,40 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setLessonBookFilePath_nullPath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.setLessonBookFilePath(null));
+    }
+
+    @Test
+    public void setLessonBookFilePath_validPath_setsLessonBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setLessonBookFilePath(path);
+        assertEquals(path, modelManager.getLessonBookFilePath());
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInLessonBook_returnsFalse() {
+        assertFalse(modelManager.hasLesson(TypicalLessons.MATHS_ONE));
+    }
+
+    @Test
+    public void hasLesson_lessonInLessonBook_returnsTrue() {
+        modelManager.addLesson(TypicalLessons.MATHS_ONE);
+        assertTrue(modelManager.hasLesson(TypicalLessons.MATHS_ONE));
+    }
+
+    @Test
+    public void getFilteredLessonList_modifyList_throwsUnsupportedOperationException() {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredLessonList()
+                .remove(0));
+    }
+
+    @Test
     public void equals() {
         StudentBook studentBook = new StudentBookBuilder().withStudent(TypicalStudents.ALICE)
             .withStudent(TypicalStudents.BENSON).build();
