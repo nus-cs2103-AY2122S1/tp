@@ -15,6 +15,7 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.parsers.CommitParser;
 import seedu.academydirectory.versioncontrol.parsers.HeadParser;
+import seedu.academydirectory.versioncontrol.parsers.TreeParser;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -46,8 +47,7 @@ public class VersionManager implements Version {
             File file = new File(String.valueOf(headPath));
             if (file.exists()) {
                 Commit mostRecent = commitController.generate("HEAD",
-                        new HeadParser(), new CommitParser(), treeController);
-                System.out.println("Commit is " + mostRecent);
+                        new HeadParser(), new CommitParser(), new TreeParser(), treeController);
                 moveHead(mostRecent);
             } else {
                 moveHead(Commit.NULL);
@@ -67,7 +67,7 @@ public class VersionManager implements Version {
         Commit parentCommit = head;
         try {
             // Make VcObjects
-            Tree tree = treeController.makeTree(storagePath);
+            Tree tree = treeController.generate(storagePath);
             Commit newCommit = commitController.generate(message, () -> tree, () -> parentCommit);
 
             // Write VcObjects to disk

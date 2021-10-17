@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,7 +33,7 @@ public class TreeController extends Controller<Tree> {
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
      * @throws IOException if vcPath given is not writeable
      */
-    public Tree makeTree(List<Path> blobPaths) throws IOException {
+    public Tree generate(List<Path> blobPaths) throws IOException {
         // Make a blob snapshot
         ArrayList<Path> blobTargetPaths = new ArrayList<>();
         for (Path blobPath: blobPaths) {
@@ -69,8 +68,8 @@ public class TreeController extends Controller<Tree> {
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
      * @throws IOException if vcPath given is not writeable
      */
-    public Tree makeTree(Path blobPath) throws IOException {
-        return makeTree(List.of(blobPath));
+    public Tree generate(Path blobPath) throws IOException {
+        return generate(List.of(blobPath));
     }
 
     /**
@@ -80,29 +79,23 @@ public class TreeController extends Controller<Tree> {
      * @return Commit object of the given hash
      * @throws IOException if no tree of the same hash can be found in disk
      */
-    public Tree makeTree(String hash, TreeParser treeParser) throws IOException {
+    public Tree generate(String hash, TreeParser treeParser) throws IOException {
         String[] args = treeParser.parse(vcPath.resolve(Paths.get(hash)));
-        System.out.println(Arrays.toString(args));
-        assert hash.equals(args[0]);
-        return new Tree(args[0], args[1], args[2]);
+        List<String> vcNames = new ArrayList<>();
+        List<String> actualNames = new ArrayList<>();
+        for (String arg : args) {
+            String[] xs = arg.split(" ");
+            vcNames.add(xs[0]);
+            actualNames.add(xs[1]);
+        }
+        return new Tree(hash, actualNames, vcNames);
     }
 
-
+    @Override
     public List<String> getWriteableFormat(Tree tree) {
         HashMap<String, String> hashMap = tree.getHashMap();
         return hashMap.keySet().stream()
                 .map(key -> key + " " + hashMap.get(key))
                 .collect(Collectors.toList());
     }
-
-//    @Test
-//    public void getWriteableFormat() {
-//        // Null tree
-//        assertEquals(Tree.NULL.getWriteableFormat(), List.of(List.of("null", "null")));
-//
-//        assertEquals(TREE1.getWriteableFormat(), List.of(List.of("world.hello", "hello.world")));
-//        assertEquals(TREE2.getWriteableFormat(), List.of(
-//                List.of("world_hello", "Hello.png"),
-//                List.of("world_hello?", "Hello World.java")));
-//    }
 }

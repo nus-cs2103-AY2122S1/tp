@@ -2,7 +2,6 @@ package seedu.academydirectory.versioncontrol.parsers;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 

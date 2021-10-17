@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.parsers.CommitParser;
+import seedu.academydirectory.versioncontrol.parsers.TreeParser;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 public class CommitController extends Controller<Commit> {
@@ -79,6 +80,7 @@ public class CommitController extends Controller<Commit> {
      * @throws ParseException if date in the commit in disk cannot be understood
      */
     public Commit generate(String hash, CommitParser currentCommitParser, CommitParser nextCommitParser,
+                           TreeParser treeParser,
                            TreeController treeController)
             throws IOException, ParseException {
         Path headPath = vcPath.resolve(Paths.get(hash));
@@ -96,7 +98,7 @@ public class CommitController extends Controller<Commit> {
                 return Commit.NULL;
             } else {
                 try {
-                    return generate(parentHash, nextCommitParser, nextCommitParser, treeController);
+                    return generate(parentHash, nextCommitParser, nextCommitParser, treeParser, treeController);
                 } catch (IOException | ParseException e) {
                     e.printStackTrace();
                     return Commit.NULL;
@@ -106,7 +108,7 @@ public class CommitController extends Controller<Commit> {
 
         Supplier<Tree> treeSupplier = () -> {
             try {
-                return treeController.makeTree(vcPath.resolve(Paths.get(treeHash)));
+                return treeController.generate(treeHash, treeParser);
             } catch (IOException e) {
                 e.printStackTrace();
                 return Tree.NULL;
@@ -114,5 +116,9 @@ public class CommitController extends Controller<Commit> {
         };
 
         return new Commit(hash, author, date, message, parentCommitSupplier, treeSupplier);
+    }
+
+    public static DateFormat getDf() {
+        return df;
     }
 }

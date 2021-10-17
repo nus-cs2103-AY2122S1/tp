@@ -9,6 +9,6 @@ public class TreeParser extends VcParser<Tree> {
     @Override
     public String[] parse(Path filepath) throws IOException {
         String response = loadFile(filepath);
-        return response.split(" ");
+        return response.split(System.lineSeparator());
     }
 }
