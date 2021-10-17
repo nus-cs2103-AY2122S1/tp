@@ -35,4 +35,16 @@ public class TuitionClassTest {
         //different name but time slots overlap -> return True
         assertTrue(tuitionClass.isSameTuition(tuitionClass2));
     }
+
+    @Test
+    public void matchTheDay() {
+        TuitionClass tuitionClass = new TuitionClass(new ClassName("CS2103"),
+                new ClassLimit(10), new Timeslot("Mon 14:00-16:00"), null, null);
+
+        // tuitionClass is on Monday
+        assertTrue(tuitionClass.matchTheDay("MON"));
+
+        // tuitionClass is not on Tuesday
+        assertFalse(tuitionClass.matchTheDay("TUE"));
+    }
 }

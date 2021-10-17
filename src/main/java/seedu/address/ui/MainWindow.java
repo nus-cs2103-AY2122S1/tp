@@ -232,6 +232,9 @@ public class MainWindow extends UiPart<Stage> {
         case SHOW_STUDENT_PAGE:
             showStudentPage();
             break;
+        case SHOW_TODAY_TUITIONS_PAGE:
+            reminderDisplay();
+            break;
         case SET_TUITIONS_DEFAULT:
             updateTuitionListTitle(false);
             break;

@@ -6,26 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddClassCommand;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddToClassCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteClassCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindClassCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListClassCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RemarkClassCommand;
-import seedu.address.logic.commands.RemarkCommand;
-import seedu.address.logic.commands.RemoveStudentCommand;
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.ViewClassCommand;
-import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -111,6 +92,10 @@ public class AddressBookParser {
 
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
+
+        case ViewTodayTuitionCommand.COMMAND_WORD:
+            return new ViewTodayTuitionCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -15,6 +15,7 @@ public class CommandResult {
         SHOW_HELP,
         SHOW_TUITION_PAGE,
         SHOW_STUDENT_PAGE,
+        SHOW_TODAY_TUITIONS_PAGE,
         SET_TUITIONS_DEFAULT,
         SET_STUDENTS_DEFAULT,
         SET_TUITIONS_FILTERED,
