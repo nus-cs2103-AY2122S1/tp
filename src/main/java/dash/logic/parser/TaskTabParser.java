@@ -55,7 +55,7 @@ public class TaskTabParser {
             return new AddTaskCommandParser().parse(arguments, filteredPersonList);
 
         case EditTaskCommand.COMMAND_WORD:
-            return new EditTaskCommandParser().parse(arguments);
+            return new EditTaskCommandParser().parse(arguments, filteredPersonList);
 
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments);

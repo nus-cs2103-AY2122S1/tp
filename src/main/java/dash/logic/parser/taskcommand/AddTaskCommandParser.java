@@ -51,7 +51,7 @@ public class AddTaskCommandParser implements ParserRequiringPersonList<AddTaskCo
         }
         for (Index index : personIndices) {
             if (index.getZeroBased() < 0 || index.getZeroBased() >= filteredPersonList.size()) {
-                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + AddTaskCommand.MESSAGE_USAGE);
+                throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + "\n" + AddTaskCommand.MESSAGE_USAGE);
             }
             people.add(filteredPersonList.get(index.getZeroBased()));
         }

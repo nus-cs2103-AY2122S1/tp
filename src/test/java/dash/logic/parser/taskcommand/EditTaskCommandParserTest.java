@@ -1,5 +1,8 @@
 package dash.logic.parser.taskcommand;
 
+import static dash.logic.parser.CommandParserTestUtil.assertParseFailureWithPersonList;
+import static dash.logic.parser.CommandParserTestUtil.assertParseSuccessWithPersonList;
+
 import org.junit.jupiter.api.Test;
 
 import dash.commons.core.Messages;
@@ -7,11 +10,14 @@ import dash.commons.core.index.Index;
 import dash.logic.commands.CommandTestUtil;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.parser.CliSyntax;
-import dash.logic.parser.CommandParserTestUtil;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.TaskDescription;
 import dash.testutil.EditTaskDescriptorBuilder;
 import dash.testutil.TypicalIndexes;
+import dash.testutil.TypicalPersons;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 class EditTaskCommandParserTest {
 
@@ -21,56 +27,58 @@ class EditTaskCommandParserTest {
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE);
 
     private EditTaskCommandParser parser = new EditTaskCommandParser();
+    private ObservableList<Person> people = FXCollections.observableList(TypicalPersons.getTypicalPersons());
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        CommandParserTestUtil.assertParseFailure(parser, CommandTestUtil.VALID_TASK_DESCRIPTION_TP,
+        assertParseFailureWithPersonList(parser, CommandTestUtil.VALID_TASK_DESCRIPTION_TP, people,
                 MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        CommandParserTestUtil.assertParseFailure(parser, "1", EditTaskCommand.MESSAGE_NOT_EDITED);
+        assertParseFailureWithPersonList(parser, "1", people, EditTaskCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        CommandParserTestUtil.assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        assertParseFailureWithPersonList(parser, "", people, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        CommandParserTestUtil.assertParseFailure(parser, "-5" + CommandTestUtil.TASK_DESC_ASSIGNMENT,
+        assertParseFailureWithPersonList(parser, "-5" + CommandTestUtil.TASK_DESC_ASSIGNMENT, people,
                 MESSAGE_INVALID_FORMAT);
 
         // zero index
-        CommandParserTestUtil.assertParseFailure(parser, "0" + CommandTestUtil.TASK_DESC_ASSIGNMENT,
+        assertParseFailureWithPersonList(parser, "0" + CommandTestUtil.TASK_DESC_ASSIGNMENT, people,
                 MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
-        CommandParserTestUtil.assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailureWithPersonList(parser, "1 some random string", people, MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        CommandParserTestUtil.assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailureWithPersonList(parser, "1 i/ string", people, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TASK_DESC,
+        assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TASK_DESC, people,
                 TaskDescription.MESSAGE_CONSTRAINTS); // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, "1" + CommandTestUtil.INVALID_TAG_DESC,
+        assertParseFailureWithPersonList(parser, "1" + CommandTestUtil.INVALID_TAG_DESC, people,
                 Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid task description
-        CommandParserTestUtil.assertParseFailure(parser,
-                "1" + CommandTestUtil.INVALID_TASK_DESC, TaskDescription.MESSAGE_CONSTRAINTS);
+        assertParseFailureWithPersonList(parser,
+                "1" + CommandTestUtil.INVALID_TASK_DESC, people, TaskDescription.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
-        CommandParserTestUtil.assertParseFailure(parser,
-                "1" + CommandTestUtil.TAG_DESC_UNGRADED + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailureWithPersonList(parser,
+                "1" + CommandTestUtil.TAG_DESC_UNGRADED + TAG_EMPTY, people, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        CommandParserTestUtil.assertParseFailure(parser,
+        assertParseFailureWithPersonList(parser,
                 "1" + CommandTestUtil.INVALID_TASK_DESC + CommandTestUtil.TAG_DESC_UNGRADED + TAG_EMPTY,
+                people,
                 TaskDescription.MESSAGE_CONSTRAINTS);
     }
 
@@ -85,7 +93,7 @@ class EditTaskCommandParserTest {
                         .withTags(CommandTestUtil.VALID_TAG_UNGRADED).build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
     }
 
     @Test
@@ -100,7 +108,7 @@ class EditTaskCommandParserTest {
                         .withTaskDescription(CommandTestUtil.VALID_TASK_DESCRIPTION_ASSIGNMENT).build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + CommandTestUtil.TAG_DESC_QUIZ;
@@ -109,7 +117,7 @@ class EditTaskCommandParserTest {
                 new EditTaskDescriptorBuilder().withTags(CommandTestUtil.VALID_TAG_QUIZ).build();
         expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
 
     }
 
@@ -125,7 +133,7 @@ class EditTaskCommandParserTest {
                         .withTags(CommandTestUtil.VALID_TAG_UNGRADED, CommandTestUtil.VALID_TAG_QUIZ).build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
     }
 
     @Test
@@ -138,7 +146,7 @@ class EditTaskCommandParserTest {
                 new EditTaskDescriptorBuilder()
                         .withTaskDescription(CommandTestUtil.VALID_TASK_DESCRIPTION_ASSIGNMENT).build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
 
         // other valid values specified
         userInput =
@@ -148,7 +156,7 @@ class EditTaskCommandParserTest {
                 new EditTaskDescriptorBuilder().withTaskDescription(CommandTestUtil.VALID_TASK_DESCRIPTION_ASSIGNMENT)
                         .withTags(CommandTestUtil.VALID_TAG_GROUPWORK).build();
         expectedCommand = new EditTaskCommand(targetIndex, descriptor);
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
     }
 
     @Test
@@ -159,7 +167,7 @@ class EditTaskCommandParserTest {
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTags().build();
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
-        CommandParserTestUtil.assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccessWithPersonList(parser, userInput, people, expectedCommand);
     }
 
 }
