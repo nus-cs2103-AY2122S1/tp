@@ -54,7 +54,4 @@ public class JsonAdaptedUserInfo {
         return new UserInfo(infoSemester, infoMc);
     }
 
-    public static void main(String[] args) {
-
-    }
 }
