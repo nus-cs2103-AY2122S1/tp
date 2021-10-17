@@ -44,7 +44,7 @@ public class StorageManagerTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);
-        UserPrefs retrieved = storageManager.readUserPrefs().get();
+        UserPrefs retrieved = storageManager.readUserPrefs().orElse(null);
         assertEquals(original, retrieved);
     }
 
@@ -57,7 +57,7 @@ public class StorageManagerTest {
          */
         ProgrammerError original = getTypicalProgrammerError();
         storageManager.saveProgrammerError(original);
-        ReadOnlyProgrammerError retrieved = storageManager.readProgrammerError().get();
+        ReadOnlyProgrammerError retrieved = storageManager.readProgrammerError().orElse(null);
         assertEquals(original, new ProgrammerError(retrieved));
     }
 

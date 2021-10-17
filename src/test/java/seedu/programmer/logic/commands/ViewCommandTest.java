@@ -1,8 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
@@ -32,7 +31,7 @@ public class ViewCommandTest {
     private Model expectedModel = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
 
     @Test
-    public void equals() {
+    public void test_equals_returnsCorrectly() {
         QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor("first", null, null);
         QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor("second", "A123", "B01");
         QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor("second", "A123", null);
@@ -52,26 +51,26 @@ public class ViewCommandTest {
         ViewCommand viewThirdCommand = new ViewCommand(thirdPredicate);
 
         // same object -> returns true
-        assertTrue(viewFirstCommand.equals(viewFirstCommand));
+        assertEquals(viewFirstCommand, viewFirstCommand);
 
         // same values -> returns true
         ViewCommand viewFirstCommandCopy = new ViewCommand(firstPredicate);
-        assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
+        assertEquals(viewFirstCommand, viewFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(viewFirstCommand.equals(1));
+        assertNotEquals(1, viewFirstCommand);
 
         // null -> returns false
-        assertFalse(viewFirstCommand.equals(null));
+        assertNotEquals(null, viewFirstCommand);
 
         // different student -> returns false
-        assertFalse(viewFirstCommand.equals(viewSecondCommand));
+        assertNotEquals(viewFirstCommand, viewSecondCommand);
 
         // different student -> returns false
-        assertFalse(viewFirstCommand.equals(viewThirdCommand));
+        assertNotEquals(viewFirstCommand, viewThirdCommand);
 
         // different student -> returns false
-        assertFalse(viewSecondCommand.equals(viewThirdCommand));
+        assertNotEquals(viewSecondCommand, viewThirdCommand);
     }
 
     @Test

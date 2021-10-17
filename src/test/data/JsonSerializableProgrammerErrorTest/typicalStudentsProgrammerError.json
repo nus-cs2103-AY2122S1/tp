@@ -1,39 +1,39 @@
 {
-  "_comment": "ProgrammerError save file which contains the same Person values as in TypicalPersons#getTypicalProgrammerError()",
+  "_comment": "ProgrammerError save file which contains the same Person values as in TypicalStudents#getTypicalProgrammerError()",
   "students" : [ {
     "name" : "Alice Pauline",
-    "studentId": "A0212352F",
+    "studentId": "A0212425H",
     "classId": "B01",
     "grade": "A"
   }, {
     "name" : "Benson Meier",
-    "studentId": "A0312352F",
-    "classId": "B03",
-    "grade": "A"
+    "studentId": "A0212325H",
+    "classId": "B02",
+    "grade": "B+"
   }, {
     "name" : "Carl Kurz",
-    "studentId": "A0212332F",
-    "classId": "B02",
-    "grade": "A"
+    "studentId": "A0112425H",
+    "classId": "B03",
+    "grade": "A-"
   }, {
     "name" : "Daniel Meier",
-    "studentId": "A0212352H",
-    "classId": "B01",
-    "grade": "A"
-  }, {
-    "name" : "Elle Meyer",
-    "studentId": "A0215352R",
-    "classId": "B04",
-    "grade": "B-"
-  }, {
-    "name" : "Fiona Kunz",
-    "studentId": "A0244352F",
-    "classId": "B03",
+    "studentId": "A0512425H",
+    "classId": "B02",
     "grade": "A+"
   }, {
+    "name" : "Elle Meyer",
+    "studentId": "A0612425H",
+    "classId": "B01",
+    "grade": "D"
+  }, {
+    "name" : "Fiona Kunz",
+    "studentId": "A0912425H",
+    "classId": "B11",
+    "grade": "C"
+  }, {
     "name" : "George Best",
-    "studentId": "A0212354F",
-    "classId": "B02",
-    "grade": "A"
+    "studentId": "A0852425H",
+    "classId": "B11",
+    "grade": "B"
   } ]
 }

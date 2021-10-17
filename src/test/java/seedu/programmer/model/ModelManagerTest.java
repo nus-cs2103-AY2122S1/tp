@@ -2,6 +2,7 @@ package seedu.programmer.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -94,7 +95,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void test_equals_returnsCorrectly() {
         ProgrammerError programmerError = new ProgrammerErrorBuilder().withStudent(ALICE).withStudent(BENSON).build();
         ProgrammerError differentProgrammerError = new ProgrammerError();
         UserPrefs userPrefs = new UserPrefs();
@@ -102,24 +103,24 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(programmerError, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(programmerError, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different ProgrammerError -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentProgrammerError, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentProgrammerError, userPrefs));
 
         // different filteredList -> returns false
         QueryStudentDescriptor descriptor = new QueryStudentDescriptor(ALICE.getName().fullName, null, null);
         modelManager.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
-        assertFalse(modelManager.equals(new ModelManager(programmerError, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(programmerError, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -127,6 +128,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setProgrammerErrorFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(programmerError, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(programmerError, differentUserPrefs));
     }
 }

@@ -1,8 +1,7 @@
 package seedu.programmer.commons.core.index;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -38,23 +37,23 @@ public class IndexTest {
     }
 
     @Test
-    public void equals() {
-        final Index fifthstudentIndex = Index.fromOneBased(5);
+    public void test_equals_returnsCorrectly() {
+        final Index fifthStudentIndex = Index.fromOneBased(5);
 
         // same values -> returns true
-        assertTrue(fifthstudentIndex.equals(Index.fromOneBased(5)));
-        assertTrue(fifthstudentIndex.equals(Index.fromZeroBased(4)));
+        assertEquals(fifthStudentIndex, Index.fromOneBased(5));
+        assertEquals(fifthStudentIndex, Index.fromZeroBased(4));
 
         // same object -> returns true
-        assertTrue(fifthstudentIndex.equals(fifthstudentIndex));
+        assertEquals(fifthStudentIndex, fifthStudentIndex);
 
         // null -> returns false
-        assertFalse(fifthstudentIndex.equals(null));
+        assertNotEquals(null, fifthStudentIndex);
 
         // different types -> returns false
-        assertFalse(fifthstudentIndex.equals(5.0f));
+        assertNotEquals(5.0f, fifthStudentIndex);
 
         // different index -> returns false
-        assertFalse(fifthstudentIndex.equals(Index.fromOneBased(1)));
+        assertNotEquals(fifthStudentIndex, Index.fromOneBased(1));
     }
 }

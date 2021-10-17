@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
@@ -29,11 +29,7 @@ public class ShowCommandTest {
     public void execute_validIndex_success() {
         Student studentToShow = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         ShowCommand showCommand = new ShowCommand(INDEX_FIRST_STUDENT);
-
-        String expectedMessage = String.format(ShowCommand.MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow);
-
         ModelManager expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
-
         CommandResult expectedCommandResult = new CommandResult(ShowCommand.MESSAGE_SHOW_STUDENT_SUCCESS,
                 false, false, true, studentToShow);
 
@@ -49,25 +45,25 @@ public class ShowCommandTest {
     }
 
     @Test
-    public void equals() {
+    public void test_equals_returnsCorrectly() {
         ShowCommand showFirstCommand = new ShowCommand(INDEX_FIRST_STUDENT);
         ShowCommand showSecondCommand = new ShowCommand(INDEX_SECOND_STUDENT);
 
         // same object -> returns true
-        assertTrue(showFirstCommand.equals(showFirstCommand));
+        assertEquals(showFirstCommand, showFirstCommand);
 
         // same values -> returns true
         ShowCommand showFirstCommandCopy = new ShowCommand(INDEX_FIRST_STUDENT);
-        assertTrue(showFirstCommand.equals(showFirstCommandCopy));
+        assertEquals(showFirstCommand, showFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(showFirstCommand.equals(1));
+        assertNotEquals(1, showFirstCommand);
 
         // null -> returns false
-        assertFalse(showFirstCommand.equals(null));
+        assertNotEquals(null, showFirstCommand);
 
         // different student -> returns false
-        assertFalse(showFirstCommand.equals(showSecondCommand));
+        assertNotEquals(showFirstCommand, showSecondCommand);
     }
 
 }
