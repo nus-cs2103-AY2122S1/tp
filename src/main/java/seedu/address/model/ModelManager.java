@@ -129,11 +129,6 @@ public class ModelManager implements Model {
         return this.addressBook.getSameNamePerson(otherPerson);
     }
 
-    @Override
-    public TuitionClass getClassById(Integer id) {
-        requireAllNonNull(id);
-        return addressBook.getClassById(id);
-    }
 
     @Override
     public void sort(SortCommandParser.Order order) {
@@ -234,6 +229,12 @@ public class ModelManager implements Model {
     public TuitionClass getTuitionClass(Index index) {
         requireNonNull(index);
         return addressBook.getTuition(index);
+    }
+
+    @Override
+    public TuitionClass getClassById(Integer id) {
+        requireAllNonNull(id);
+        return addressBook.getClassById(id);
     }
 
     @Override

@@ -4,17 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TUITIONS;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Logger;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.DialogPane;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -22,7 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.TuitionClass;
-import seedu.address.ui.RemarkEditor;
 import seedu.address.ui.UiManager;
 
 public class RemarkClassCommand extends Command {
