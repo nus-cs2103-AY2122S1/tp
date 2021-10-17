@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAliasCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
@@ -30,6 +31,7 @@ import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Aliases;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -44,11 +46,12 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+    private final Aliases aliases = new Aliases();
 
     @Test
     public void parseCommand_addMember() throws Exception {
         Person person = new PersonBuilder().build();
-        AddMemberCommand command = (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person));
+        AddMemberCommand command = (AddMemberCommand) parser.parseCommand(PersonUtil.getAddMemberCommand(person), aliases);
         assertEquals(new AddMemberCommand(person), command);
     }
 
@@ -60,34 +63,34 @@ public class AddressBookParserTest {
                 .withCapacity("5")
                 .withTime("1130").build();
         AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("addf "
-                + "n/Court 1 l/University Sports Hall t/1130 c/5");
+                + "n/Court 1 l/University Sports Hall t/1130 c/5", aliases);
         assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD) instanceof ClearMembersCommand);
-        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3") instanceof ClearMembersCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD, aliases) instanceof ClearMembersCommand);
+        assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases) instanceof ClearMembersCommand);
     }
 
     @Test
     public void parseCommand_clearf() throws Exception {
-        assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD) instanceof ClearFacilitiesCommand);
-        assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD, aliases) instanceof ClearFacilitiesCommand);
+        assertTrue(parser.parseCommand(ClearFacilitiesCommand.COMMAND_WORD + " 3", aliases)
                 instanceof ClearFacilitiesCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteMemberCommand command = (DeleteMemberCommand) parser.parseCommand(
-                DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+                DeleteMemberCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), aliases);
         assertEquals(new DeleteMemberCommand(INDEX_FIRST), command);
     }
 
     @Test
     public void parseCommand_deletef() throws Exception {
         DeleteFacilityCommand command = (DeleteFacilityCommand) parser.parseCommand(
-                DeleteFacilityCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+                DeleteFacilityCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), aliases);
         assertEquals(new DeleteFacilityCommand(INDEX_FIRST), command);
     }
 
@@ -96,7 +99,7 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditMemberDescriptorBuilder(person).build();
         EditMemberCommand command = (EditMemberCommand) parser.parseCommand(EditMemberCommand.COMMAND_WORD + " "
-                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor), aliases);
         assertEquals(new EditMemberCommand(INDEX_FIRST, descriptor), command);
     }
 
@@ -106,21 +109,21 @@ public class AddressBookParserTest {
         EditFacilityCommand.EditFacilityDescriptor descriptor = new EditFacilityDescriptorBuilder(facility).build();
         EditFacilityCommand command = (EditFacilityCommand) parser.parseCommand(
                 EditFacilityCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + " "
-                        + FacilityUtil.getEditFacilityDescriptorDetails(descriptor));
+                        + FacilityUtil.getEditFacilityDescriptorDetails(descriptor), aliases);
         assertEquals(new EditFacilityCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, aliases) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", aliases) instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindMemberCommand command = (FindMemberCommand) parser.parseCommand(
-                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindMemberCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")), aliases);
         assertEquals(new FindMemberCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -129,42 +132,75 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindFacilityCommand command = (FindFacilityCommand) parser.parseCommand(
                 FindFacilityCommand.COMMAND_WORD
-                        + " " + keywords.stream().collect(Collectors.joining(" ")));
+                        + " " + keywords.stream().collect(Collectors.joining(" ")), aliases);
         assertEquals(new FindFacilityCommand(new LocationContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, aliases) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", aliases) instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_listm() throws Exception {
-        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD) instanceof ListMemberCommand);
-        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD + " 3") instanceof ListMemberCommand);
+        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD, aliases) instanceof ListMemberCommand);
+        assertTrue(parser.parseCommand(ListMemberCommand.COMMAND_WORD + " 3", aliases) instanceof ListMemberCommand);
     }
 
     @Test
     public void parseCommand_listf() throws Exception {
-        assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD) instanceof ListFacilityCommand);
+        assertTrue(parser.parseCommand(ListFacilityCommand.COMMAND_WORD, aliases) instanceof ListFacilityCommand);
         assertTrue(parser.parseCommand(
-                ListFacilityCommand.COMMAND_WORD + " 3") instanceof ListFacilityCommand);
+                ListFacilityCommand.COMMAND_WORD + " 3", aliases) instanceof ListFacilityCommand);
     }
 
     @Test
     public void parseCommand_split() throws Exception {
-        assertEquals(new SplitCommand("Mon"), parser.parseCommand(SplitCommand.COMMAND_WORD + " Mon"));
+        assertEquals(new SplitCommand("Mon"),
+                parser.parseCommand(SplitCommand.COMMAND_WORD + " Mon", aliases));
+    }
+
+    @Test
+    public void parseCommand_alias() throws Exception {
+        AddAliasCommand command = (AddAliasCommand) parser
+                .parseCommand(AddAliasCommand.COMMAND_WORD + " a/lf cw/listf", aliases);
+        assertEquals(new AddAliasCommand("lf", "listf"), command);
+    }
+
+    @Test
+    public void parseCommand_inputIsAnAlias_listf_success() throws Exception {
+        String alias = "lf";
+        Aliases aliases = new Aliases();
+        aliases.add(alias, "listf");
+        ListFacilityCommand command = (ListFacilityCommand) parser.parseCommand(alias, aliases);
+        assertTrue(command instanceof ListFacilityCommand);
+    }
+
+    @Test
+    public void parseCommand_inputIsAnAlias_addm_success() throws Exception {
+        String alias = "af";
+        Aliases aliases = new Aliases();
+        aliases.add(alias, "addf");
+        Facility facility = new FacilityBuilder()
+                .withFacilityName("Court 1")
+                .withLocation("University Sports Hall")
+                .withCapacity("5")
+                .withTime("1130").build();
+        AddFacilityCommand command = (AddFacilityCommand) parser.parseCommand("af "
+                + "n/Court 1 l/University Sports Hall t/1130 c/5", aliases);
+        assertEquals(new AddFacilityCommand(facility), command);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+            -> parser.parseCommand("", aliases));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
+                () -> parser.parseCommand("unknownCommand", aliases));
     }
 }
