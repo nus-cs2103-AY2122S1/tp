@@ -8,10 +8,9 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.UniqueLessonList;
+import seedu.tuitione.model.lesson.exceptions.DuplicateLessonException;
 import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.student.UniqueStudentList;
-import seedu.tuitione.model.student.exceptions.DuplicateLessonException;
-
 
 /**
  * Wraps all data at the tuitione-book level

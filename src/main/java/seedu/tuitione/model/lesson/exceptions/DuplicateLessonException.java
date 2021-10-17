@@ -1,4 +1,4 @@
-package seedu.tuitione.model.student.exceptions;
+package seedu.tuitione.model.lesson.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Lessons (Lessons are considered duplicates if they have the same
