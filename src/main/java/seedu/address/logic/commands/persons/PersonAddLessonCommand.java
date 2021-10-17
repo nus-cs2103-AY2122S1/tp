@@ -71,6 +71,7 @@ public class PersonAddLessonCommand extends Command {
             throw new CommandException(CANNOT_ATTEND);
         }
 
+        lessonToAdd.addAttendee(personToEdit.getName());
         NoOverlapLessonList newList = personToEdit.getLessonsList();
         newList = newList.addLesson(lessonToAdd);
         Person newPerson = personToEdit.updateLessonsList(newList);

@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -8,6 +10,7 @@ import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +35,7 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Set<UniqueId> assignedTaskIds;
     private NoOverlapLessonList lessonsList;
+    private List<Exam> exams;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,6 +49,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         assignedTaskIds = new HashSet<>();
         lessonsList = new NoOverlapLessonList();
+        exams = new ArrayList<>();
     }
 
     /**
@@ -59,6 +64,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
         lessonsList = personToCopy.getLessonsList();
+        exams = new ArrayList<>(personToCopy.getExams());
     }
 
     /**
@@ -126,12 +132,20 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code List<Exam} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withExams(List<Exam> exams) {
+        this.exams = new ArrayList<>(exams);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person} object from the {@code PersonBuilder}.
      *
      * @return A {@code Person} object.
      */
     public Person build() {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
     }
 
 }

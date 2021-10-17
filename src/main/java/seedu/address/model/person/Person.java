@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,29 +33,32 @@ public class Person implements HasUniqueId {
     private final Set<Tag> tags = new HashSet<>();
     private final Set<UniqueId> assignedTaskIds = new HashSet<>();
     private final NoOverlapLessonList lessonsList;
+    private final List<Exam> exams = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList,
+                  List<Exam> exams) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList);
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList, exams);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.assignedTaskIds.addAll(assignedTaskIds);
-        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+        this.lessonsList = lessonsList;
+        this.exams.addAll(exams);
     }
 
     /**
      * Every field must be present and not null.
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList) {
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList);
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList, List<Exam> exams) {
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList, exams);
         this.id = uniqueId;
         uniqueId.setOwner(this);
         this.name = name;
@@ -62,7 +67,8 @@ public class Person implements HasUniqueId {
         this.address = address;
         this.tags.addAll(tags);
         this.assignedTaskIds.addAll(assignedTaskIds);
-        this.lessonsList = lessonsList == null ? new NoOverlapLessonList() : lessonsList;
+        this.lessonsList = lessonsList;
+        this.exams.addAll(exams);
     }
 
     public Name getName() {
@@ -105,6 +111,10 @@ public class Person implements HasUniqueId {
         return lessonsList;
     }
 
+    public List<Exam> getExams() {
+        return Collections.unmodifiableList(exams);
+    }
+
     /**
      * Check if person can attend lesson
      *
@@ -122,7 +132,7 @@ public class Person implements HasUniqueId {
      * @return new Person instance with the updated lessons list
      */
     public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newLessonsList);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newLessonsList, exams);
     }
 
     /**
@@ -132,7 +142,7 @@ public class Person implements HasUniqueId {
      */
     public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
-        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList);
+        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList, exams);
     }
 
     /**
@@ -169,17 +179,19 @@ public class Person implements HasUniqueId {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getLessonsList().equals(lessonsList);
+                && otherPerson.getLessonsList().equals(lessonsList)
+                && otherPerson.getExams().equals(exams);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, id, phone, email, address, tags, lessonsList);
+        return Objects.hash(name, id, phone, email, address, tags, lessonsList, exams);
     }
 
     @Override
     public String toString() {
+        // TODO: Add individual exams in exams list to string representation!
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
@@ -189,7 +201,9 @@ public class Person implements HasUniqueId {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Lessons: ")
-                .append(getLessonsList());
+                .append(getLessonsList())
+                .append("; Exams: ")
+                .append(getExams());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
