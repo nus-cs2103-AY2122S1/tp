@@ -120,4 +120,19 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withVisit("").build();
         assertEquals(editedAlice.getFormattedVisit(), "-");
     }
+
+    @Test
+    public void isVisitOverdue() {
+        // no existing visit
+        Person editedAlice = new PersonBuilder(ALICE).withVisit("").build();
+        assertFalse(editedAlice.isVisitOverdue());
+
+        // overdue as of this module's time
+        editedAlice = new PersonBuilder(ALICE).withVisit("2000-01-01 08:00").build();
+        assertTrue(editedAlice.isVisitOverdue());
+
+        // not overdue in around 100 years
+        editedAlice = new PersonBuilder(ALICE).withVisit("2103-01-01 08:00").build();
+        assertFalse(editedAlice.isVisitOverdue());
+    }
 }
