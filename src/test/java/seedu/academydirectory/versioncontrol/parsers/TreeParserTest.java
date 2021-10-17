@@ -19,7 +19,7 @@ public class TreeParserTest {
         assertTrue(() -> filepath.toFile().exists());
 
         String[] actual = assertDoesNotThrow(() -> parser.parse(filepath));
-        String[] expected = {"922d4ff703f9b003da1962b1a2228371718e504a", "academydirectory.json"};
+        String[] expected = {"922d4ff703f9b003da1962b1a2228371718e504a academydirectory.json"};
         assertArrayEquals(actual, expected);
     }
 }
