@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,7 @@ import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -104,9 +106,10 @@ public class EditPersonCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds(); // not allowed to be edited here
         NoOverlapLessonList lessonList = editPersonDescriptor.getLessonsList().orElse(personToEdit.getLessonsList());
+        List<Exam> exams = editPersonDescriptor.getExams().orElse(personToEdit.getExams());
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList);
+                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams);
     }
 
     @Override
@@ -138,6 +141,7 @@ public class EditPersonCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private NoOverlapLessonList lessonsList;
+        private List<Exam> exams;
 
         public EditPersonDescriptor() {}
 
@@ -152,6 +156,7 @@ public class EditPersonCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setLessonsList(toCopy.lessonsList);
+            setExams(toCopy.exams);
         }
 
         /**
@@ -209,6 +214,14 @@ public class EditPersonCommand extends Command {
             this.lessonsList = lessonsList;
         }
 
+        public void setExams(List<Exam> exams) {
+            this.exams = (exams != null) ? new ArrayList<>(exams) : null;
+        }
+
+        public Optional<List<Exam>> getExams() {
+            return (exams != null) ? Optional.of(Collections.unmodifiableList(exams)) : Optional.empty();
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -238,7 +251,8 @@ public class EditPersonCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getLessonsList().equals(e.getLessonsList());
+                    && getLessonsList().equals(e.getLessonsList())
+                    && getExams().equals(e.getExams());
         }
 
     }
