@@ -88,25 +88,43 @@ public interface Model {
     void viewStudent(Student student);
 
     /**
-     * Returns true if a lesson with the same identity as {@code lesson} exists in the student book.
+     * Returns the user prefs' lesson book file path.
+     */
+    Path getLessonBookFilePath();
+
+    /**
+     * Sets the user prefs' lesson book file path.
+     */
+    void setLessonBookFilePath(Path lessonBookFilePath);
+
+    /**
+     * Replaces lesson book data with the data in {@code lessonBook}.
+     */
+    void setLessonBook(ReadOnlyLessonBook lessonBook);
+
+    /** Returns the LessonBook */
+    ReadOnlyLessonBook getLessonBook();
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the lesson book.
      */
     boolean hasLesson(Lesson lesson);
 
     /**
      * Deletes the given lesson.
-     * The lesson must exist in the student book.
+     * The lesson must exist in the lesson book.
      */
     void deleteLesson(Lesson target);
 
     /**
      * Adds the given lesson.
-     * {@code lesson} must not already exist in the student book.
+     * {@code lesson} must not already exist in the lesson book.
      */
     void addLesson(Lesson lesson);
 
     /**
      * Views the given lesson.
-     * {@code lesson} must exist in the student book.
+     * {@code lesson} must exist in the lesson book.
      */
     void viewLesson(Lesson lesson);
 

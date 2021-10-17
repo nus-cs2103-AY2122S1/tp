@@ -1,7 +1,6 @@
 package tutoraid.model;
 
 import javafx.collections.ObservableList;
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 
 /**
@@ -14,11 +13,4 @@ public interface ReadOnlyStudentBook {
      * This list will not contain any duplicate students.
      */
     ObservableList<Student> getStudentList();
-
-    /**
-     * Returns an unmodifiable view of the lessons list.
-     * This list will not contain any duplicate lessons.
-     */
-    ObservableList<Lesson> getLessonList();
-
 }

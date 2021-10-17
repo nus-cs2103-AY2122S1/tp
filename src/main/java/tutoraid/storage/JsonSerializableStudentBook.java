@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 
 /**
@@ -21,19 +20,15 @@ import tutoraid.model.student.Student;
 class JsonSerializableStudentBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
-    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableStudentBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableStudentBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                       @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+    public JsonSerializableStudentBook(@JsonProperty("students") List<JsonAdaptedStudent> students) {
         this.students.addAll(students);
-        this.lessons.addAll(lessons);
     }
 
     /**
@@ -43,7 +38,6 @@ class JsonSerializableStudentBook {
      */
     public JsonSerializableStudentBook(ReadOnlyStudentBook source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
-        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -59,13 +53,6 @@ class JsonSerializableStudentBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             studentBook.addStudent(student);
-        }
-        for (JsonAdaptedLesson jsonAdaptedLesson: lessons) {
-            Lesson lesson = jsonAdaptedLesson.toModelType();
-            if (studentBook.hasLesson(lesson)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
-            }
-            studentBook.addLesson(lesson);
         }
         return studentBook;
     }
