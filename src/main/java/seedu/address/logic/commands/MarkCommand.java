@@ -27,7 +27,7 @@ public class MarkCommand extends Command {
             + "Parameters:\n"
             + PREFIX_INDEX + "INDEX or "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DAY_SHIFT + "DATE"
+            + PREFIX_DAY_SHIFT + "DATE "
             + "[" + PREFIX_DAY_SHIFT + "END DATE]\n"
             + "Example:\n"
             + COMMAND_WORD + " " + PREFIX_INDEX + "1"
