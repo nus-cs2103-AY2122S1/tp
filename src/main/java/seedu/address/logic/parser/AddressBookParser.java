@@ -47,12 +47,14 @@ public class AddressBookParser {
         final String trimmedUserInput = userInput.trim();
         Matcher matcher = ADVANCED_COMMAND_FORMAT.matcher(trimmedUserInput);
 
+        // Switch to basic command format is fails
         if (!matcher.matches()) {
             matcher = BASIC_COMMAND_FORMAT.matcher(trimmedUserInput);
-        }
 
-        if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            // If basic command format also fails, then the command format is invalid
+            if (!matcher.matches()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            }
         }
 
         final String commandWord =

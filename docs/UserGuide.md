@@ -10,7 +10,7 @@ contains the contact information and order details related to clients and partne
     * [Quick Start](#quick-start)
     * [Features](#features)
         * [Add (Coming Soon)](#adding-add-coming-soon)
-        * [Edit (Coming Soon)](#editing-edit-coming-soon)
+        * [Edit](#editing-edit)
         * [View (Coming Soon)](#viewing-view-coming-soon)
         * [Delete (Coming Soon)](#deleting-delete-coming-soon)
         * [List (Coming Soon)](#listing-list-coming-soon)
@@ -83,27 +83,29 @@ Examples:
 * `add -p pen -$ 10.0 -q 150` adds a new `product` `pen` with a `unit price` of `$10.0` and there are `150`
   pens in stock.
 
-### Editing: `edit` [coming soon]
+### Editing: `edit`
 
 Edits an existing client or product in the application.
 
 Format:
 
-* Edit a client: `edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`
-* Edit a product: `edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
+* Edit a client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`
+* Edit a product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
 
 Notes:
 
-* Edits the client/product with the specified `ID`. The `ID` can be found by [`list`](#listing-list)
-  or [`view`](#viewing-view) commands.
+* Edits the client/product at the specified `INDEX`.
+    * The index refers to the index number shown in the displayed client/product list by
+      [`list`](#listing-list-coming-soon) or [`view`](#viewing-view-coming-soon) commands.
+    * The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* User will be informed if the client/product of the give `ID` does not exist.
+* User will be informed if the client/product of the give `INDEX` does not exist.
 
 Examples:
 
-* `edit -c 1 -n Ben` Edits the name of the client with `ID` of `1` to `Ben`.
-* `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `ID` of `3` to `Ben10` and the quantity to `20`.
+* `edit -c 1 -n Ben` Edits the name of the client with `INDEX` of `1` to `Ben`.
+* `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `INDEX` of `3` to `Ben10` and the quantity to `20`.
 
 ### Viewing: `view` [coming soon]
 
@@ -204,7 +206,7 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
-            <a href="#editing-edit-coming-soon">Edit</a>
+            <a href="#editing-edit">Edit</a>
         </td>
         <td>
             Edit a client: <code>edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]</code><br>
