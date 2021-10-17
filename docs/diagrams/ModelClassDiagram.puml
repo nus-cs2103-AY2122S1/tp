@@ -24,6 +24,11 @@ Class Name
 Class Phone
 Class Position
 
+Class UniqueEventList
+Class Event
+Class EventName
+Class EventDate
+
 }
 
 Class HiddenOutside #FFFFFF
@@ -45,6 +50,12 @@ Member *--> Phone
 Member *--> Email
 Member *--> Address
 Member *--> "*" Position
+
+AddressBook *--> "1" UniqueEventList
+UniqueEventList --> "~*" Event
+Event *--> EventName
+Event *--> EventDate
+Event --> "~*" Member
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
