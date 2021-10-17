@@ -1,7 +1,12 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Collections;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a module code that a Person is taking in the address book.
@@ -15,16 +20,19 @@ public class ModuleCode {
 
     public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]*";
     public final String value;
+    public final Set<Tag> tags;
 
     /**
      * Constructs a {@code ModuleCode}.
      *
      * @param moduleCode A valid module code.
      */
-    public ModuleCode(String moduleCode) {
-        requireNonNull(moduleCode);
+    public ModuleCode(String moduleCode, Set<Tag> tags) {
+        requireAllNonNull(moduleCode, tags);
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
+        tags.forEach(tag -> checkArgument(Tag.isValidTagName(tag.tagName)));
         value = moduleCode;
+        this.tags = tags;
     }
 
     /**
@@ -37,9 +45,20 @@ public class ModuleCode {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
     @Override
     public String toString() {
-        return '[' + value + ']';
+        StringBuilder sb = new StringBuilder("[");
+        sb.append(value);
+        for (Tag tag: tags) {
+            sb.append(" ");
+            sb.append(tag);
+        }
+        sb.append("]");
+        return sb.toString();
     }
 
     @Override
