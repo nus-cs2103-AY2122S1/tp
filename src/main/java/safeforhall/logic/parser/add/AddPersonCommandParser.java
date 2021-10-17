@@ -1,4 +1,4 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.add;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_COLLECTIONDATE;
@@ -12,7 +12,12 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
 import java.util.stream.Stream;
 
-import safeforhall.logic.commands.AddCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.parser.ArgumentMultimap;
+import safeforhall.logic.parser.ArgumentTokenizer;
+import safeforhall.logic.parser.Parser;
+import safeforhall.logic.parser.ParserUtil;
+import safeforhall.logic.parser.Prefix;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
@@ -24,16 +29,16 @@ import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddPersonCommand object
  */
-public class AddCommandParser implements Parser<AddCommand> {
+public class AddPersonCommandParser implements Parser<AddPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddPersonCommand
+     * and returns an AddPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddCommand parse(String args) throws ParseException {
+    public AddPersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY,
@@ -42,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ROOM, PREFIX_VACCSTATUS, PREFIX_FACULTY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
         }
 
         // Required fields
@@ -60,7 +65,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .orElse(LastDate.DEFAULT_DATE));
 
         Person person = new Person(name, room, phone, email, vaccStatus, faculty, lastFetDate, lastCollectionDate);
-        return new AddCommand(person);
+        return new AddPersonCommand(person);
     }
 
     /**
