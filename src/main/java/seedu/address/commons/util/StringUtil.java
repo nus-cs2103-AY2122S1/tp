@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -103,5 +104,18 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Joins the {@code list} into a single string separated by the delimiter.
+     *
+     *  @param list list of object to be joined to {@code String}
+     *  @param delimiter the delimiter that separates each element
+     */
+    public static <T> String joinListToString(List<T> list, String delimiter) {
+        requireNonNull(list);
+        requireNonNull(delimiter);
+        String[] stringArray = list.stream().map(Object::toString).toArray(String[]::new);
+        return String.join(delimiter, stringArray);
     }
 }

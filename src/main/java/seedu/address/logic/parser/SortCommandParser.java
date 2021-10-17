@@ -2,10 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FIELDS;
+import static seedu.address.commons.mapper.PrefixMapper.PREFIX_NAME_MAP;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.person.PrefixMapper.PREFIX_NAME_MAP;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -83,7 +83,8 @@ public class AddressBookParserTest {
 
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + CLIENTID_ZERO_PERSON.value + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(new ClientId(CLIENTID_ZERO_PERSON.value), descriptor), command);
+        List<ClientId> clientIds = List.of(new ClientId(CLIENTID_ZERO_PERSON.value));
+        assertEquals(new EditCommand(clientIds, descriptor), command);
     }
 
     @Test
