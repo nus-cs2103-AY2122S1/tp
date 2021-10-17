@@ -1,5 +1,9 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
@@ -7,8 +11,20 @@ import seedu.address.model.item.UniqueItemList;
 public class Order {
     private final UniqueItemList items;
 
+    /**
+     * Instantiates an empty order.
+     */
     public Order() {
         items = new UniqueItemList();
+    }
+
+    /**
+     * Instantiates an order with a list of ordered items.
+     */
+    public Order(List<Item> itemCollection) {
+        requireNonNull(itemCollection);
+        items = new UniqueItemList();
+        items.setItems(itemCollection);
     }
 
     /**

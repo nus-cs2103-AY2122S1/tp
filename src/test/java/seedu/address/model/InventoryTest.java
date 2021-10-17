@@ -21,6 +21,8 @@ import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.TypicalItems;
+import seedu.address.testutil.TypicalOrders;
 
 public class InventoryTest {
 
@@ -150,6 +152,46 @@ public class InventoryTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> inventory.getItemList().remove(0));
+    }
+
+    @Test
+    public void transactOrder_nullOrder_throwNullPointerException() {
+        assertThrows(NullPointerException.class, () -> inventory.transactOrder(null));
+    }
+
+    @Test
+    public void transactOrder_typicalOrder_itemsAllRemoved() {
+        // count of items in order matches that in inventory
+        Inventory typicalInventory = TypicalItems.getTypicalInventory();
+        Order typicalOrder = TypicalOrders.getTypicalOrder();
+        typicalInventory.transactOrder(typicalOrder);
+
+        assertEquals(typicalInventory.getItemList(), new Inventory().getItemList());
+    }
+
+    @Test
+    public void transactOrder_orderWithItemWithLargeCount_itemRemoved() {
+        // count of items in order matches that in inventory
+        Inventory typicalInventory = TypicalItems.getTypicalInventory();
+        Order abnormalOrder = TypicalOrders.getOrderWithItemWithLargeCount();
+        typicalInventory.transactOrder(abnormalOrder);
+
+        Inventory expectedInventory = TypicalItems.getTypicalInventory();
+        expectedInventory.removeItem(APPLE_PIE);
+
+        assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
+    }
+
+    @Test
+    public void transactOrder_orderWithItemWithNegativeCount_itemRemoved() {
+        // count of items in order matches that in inventory
+        Inventory typicalInventory = TypicalItems.getTypicalInventory();
+        Order abnormalOrder = TypicalOrders.getOrderWithItemWithNegativeCount();
+        typicalInventory.transactOrder(abnormalOrder);
+
+        Inventory expectedInventory = TypicalItems.getTypicalInventory();
+
+        assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
     }
 
     /**
