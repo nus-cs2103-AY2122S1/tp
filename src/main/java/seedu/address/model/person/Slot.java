@@ -16,7 +16,7 @@ public enum Slot {
     private int order;
     private LocalTime startTime;
     private LocalTime endTime;
-    DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
     private Slot(String period, int order) {
         this.period = period;
@@ -57,9 +57,15 @@ public enum Slot {
         return order;
     }
 
+    /**
+     * Checks if a specified timing is within the slot period.
+     *
+     * @param time The time which will be checked against.
+     * @return
+     */
     public boolean isWithinSlotPeriod(LocalTime time) {
-        return time.equals(startTime) || time.equals(endTime) ||
-                time.isBefore(endTime) && time.isAfter(startTime);
+        return time.equals(startTime) || time.equals(endTime)
+                || time.isBefore(endTime) && time.isAfter(startTime);
     }
 
     /**

@@ -21,9 +21,10 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
 public class FindScheduleCommand extends Command {
     public static final String DEFAULT_MESSAGE = "Staff working at that shift: \n";
     public static final String COMMAND_WORD = "findSchedule";
-    public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n"
-            + "Method to use:\n"
-            + COMMAND_WORD + " [TAG] [DAY]-[SHIFT NUMBER]\n\n"
+    public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
+            + "Parameters:\n"
+            + PREFIX_DASH_DAY_SHIFT + " [DAY]-[SLOT NUMBER]\n"
+            + PREFIX_DASH_TIME + " [DAY]-[TIME]" + " (TIME is in format HH:mm)\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " monday-0\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " TUESDAY-1\n"
@@ -118,5 +119,14 @@ public class FindScheduleCommand extends Command {
         } else {
             return new CommandResult(DEFAULT_MESSAGE + result.toString());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof FindScheduleCommand
+                && (this.dayOfWeek == null || this.dayOfWeek.equals(((FindScheduleCommand) other).dayOfWeek))
+                && (this.slotNum != INVALID_SLOT_NUMBER || this.slotNum == ((FindScheduleCommand) other).slotNum)
+                && (this.time == null || this.time.equals(((FindScheduleCommand) other).time)));
     }
 }

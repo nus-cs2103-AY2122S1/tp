@@ -1,12 +1,11 @@
 package seedu.address.model.person.predicates;
 
-import seedu.address.logic.commands.FindScheduleCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Person;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.function.Predicate;
+
+import seedu.address.logic.commands.FindScheduleCommand;
+import seedu.address.model.person.Person;
 
 public class PersonIsWorkingPredicate implements Predicate<Person> {
 
@@ -14,6 +13,15 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
     private final int slotNum;
     private final LocalTime time;
 
+    /**
+     * Constructs a PersonIsWorkingPredicate object which tests if a person is working on a specific day, at a
+     * specific time or slot number.
+     *
+     * @param dayOfWeek The day of week that will be checked.
+     * @param slotNum The slot number that will be checked. It will be {@code FindScheduleCommand.INVALID_SLOT_NUMBER}
+     *                if the FindSchedule is by time.
+     * @param time The time that will be checked. It will be null if the FindSchedule is by slot number.
+     */
     public PersonIsWorkingPredicate(DayOfWeek dayOfWeek, int slotNum, LocalTime time) {
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;

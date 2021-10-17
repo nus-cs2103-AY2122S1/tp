@@ -27,11 +27,11 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Period;
-import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
 import seedu.address.model.person.Status;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
