@@ -20,7 +20,7 @@ public class AddTaskCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK_DESCRIPTION + "CS2103T Quiz 9"
-            + PREFIX_TASK_DATE + "21/10/2021 1500"
+            + PREFIX_TASK_DATE + "21/10/2021, 1500"
             + PREFIX_TAG + "quizzes";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";

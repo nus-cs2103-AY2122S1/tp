@@ -12,10 +12,10 @@ import java.time.format.DateTimeFormatter;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}}
  */
 public class TaskDate {
-    public static final String MESSAGE_CONSTRAINTS = "Date/Time should not be blank."
-        + "They should also follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm)"
-        + "If both Date and Time are included, Date should come first before Time."
-        + "A full list of available formats can be seen under the Help tab.";
+    public static final String MESSAGE_CONSTRAINTS = "Date/Time should not be blank. "
+        + "They should also follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
+        + "If both Date and Time are included, Date should come first before Time and they should be separated "
+        + "by a comma. A full list of available formats can be seen under the Help tab.";
 
     private LocalDate date = null;
     private LocalTime time = null;
@@ -66,24 +66,24 @@ public class TaskDate {
      */
     public static boolean isValidTaskDate(String taskDate) {
 
-        if (!taskDate.contains(" ")) {
+        if (!taskDate.contains(",")) {
             return isThisDate(taskDate) || isThisTime(taskDate);
         }
 
-        String maybeDate = taskDate.split(" ", 2)[0];
-        String maybeTime = taskDate.split(" ", 2)[1];
+        String maybeDate = taskDate.split(",", 2)[0].trim();
+        String maybeTime = taskDate.split(",", 2)[1].trim();
 
         return isThisDate(maybeDate) && isThisTime(maybeTime);
     }
 
     private boolean isValidArgument(String taskDate) {
 
-        if (!taskDate.contains(" ")) {
+        if (!taskDate.contains(",")) {
             return isDate(taskDate) || isTime(taskDate);
         }
 
-        String maybeDate = taskDate.split(" ", 2)[0];
-        String maybeTime = taskDate.split(" ", 2)[1];
+        String maybeDate = taskDate.split(",", 2)[0].trim();
+        String maybeTime = taskDate.split(",", 2)[1].trim();
 
         return isDate(maybeDate) && isTime(maybeTime);
     }
@@ -138,7 +138,6 @@ public class TaskDate {
                 LocalDate.parse(dateString, DateTimeFormatter.ofPattern(i));
                 isDate = true;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
         return isDate;
@@ -154,7 +153,6 @@ public class TaskDate {
                 isDate = true;
                 taskDateString = dateString;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
         return isDate;
@@ -171,10 +169,9 @@ public class TaskDate {
 
         for (String i : timeFormats) {
             try {
-                LocalDate.parse(timeString, DateTimeFormatter.ofPattern(i));
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(i));
                 isTime = true;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
         return isTime;
@@ -185,12 +182,11 @@ public class TaskDate {
 
         for (String i : timeFormats) {
             try {
-                LocalDate.parse(timeString, DateTimeFormatter.ofPattern(i));
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(i));
                 detectedTimeFormat = i;
                 isTime = true;
                 taskTimeString = timeString;
             } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
         }
         return isTime;
@@ -206,10 +202,27 @@ public class TaskDate {
 
     @Override
     public boolean equals(Object other) {
+        TaskDate otherTaskDate = (TaskDate) other;
+        boolean isSameDate = true;
+        boolean isSameTime = true;
+
+        if (otherTaskDate.hasDate()) {
+            if (!this.hasDate()) {
+                return false;
+            }
+            isSameDate = date.equals(otherTaskDate.getDate());
+        }
+
+        if (otherTaskDate.hasTime()) {
+            if (!this.hasTime()) {
+                return false;
+            }
+            isSameTime = time.equals(otherTaskDate.getTime());
+        }
+
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && date.equals(((TaskDate) other).getDate())
-                && time.equals(((TaskDate) other).getTime())); // state check
+                && isSameDate && isSameTime); // state check
     }
 
     @Override
@@ -224,7 +237,7 @@ public class TaskDate {
     public String toString() {
 
         if (hasDate() && hasTime()) {
-            return String.format("%s %s", toDateString(), toTimeString());
+            return String.format("%s, %s", toDateString(), toTimeString());
         }
         if (hasDate()) {
             return String.format("%s", toDateString());

@@ -12,11 +12,14 @@ import dash.model.task.TaskList;
  */
 public class TypicalTasks {
 
-    public static final Task ASSIGNMENT = new TaskBuilder().withTaskDescription("Submit CS2100 Assignment by 23:59")
+    public static final Task ASSIGNMENT = new TaskBuilder().withTaskDescription("Submit CS2100 Assignment")
+            .withTaskDate("2359")
             .withTags("homework").build();
-    public static final Task LECTURE = new TaskBuilder().withTaskDescription("Catch up with ST2334 lectures").build();
+    public static final Task LECTURE = new TaskBuilder().withTaskDescription("Catch up with ST2334 lectures")
+            .withTaskDate("21/02/2021").build();
     public static final Task PR_REVIEW = new TaskBuilder().withTaskDescription("Do PR review")
-            .withTags("groupwork").build();
+            .withTags("groupwork")
+            .withTaskDate("21/02/2021, 10:00 PM").build();
     public static final Task QUIZ = new TaskBuilder().withTaskDescription("ST2334 quiz before Friday")
             .withTags("quiz").build();
 
