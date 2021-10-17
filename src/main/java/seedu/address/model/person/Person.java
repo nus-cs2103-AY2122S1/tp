@@ -56,7 +56,6 @@ public class Person {
     }
 
     public Phone getPhone() {
-
         return phone;
     }
 
@@ -106,8 +105,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
+        return otherPerson.getName().equals(getName())
                 && otherPerson.getClientId().equals(getClientId())
                 || otherPerson.getEmail().equals(getEmail());
     }
@@ -175,5 +173,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

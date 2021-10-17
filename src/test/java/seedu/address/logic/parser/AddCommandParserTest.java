@@ -41,12 +41,15 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.function.Function;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.ClientId;
 import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -59,7 +62,7 @@ import seedu.address.testutil.PersonBuilder;
 public class AddCommandParserTest {
 
     private ModelManager model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private AddCommandParser parser = new AddCommandParser(model);
+    private AddCommandParser parser = new AddCommandParser();
 
     @BeforeEach
     public void setUp() {
@@ -68,7 +71,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Function<ClientId, Person> expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).buildFunction();
 
         model.getAddressBook().setClientCounter("10");
         // whitespace only preamble
@@ -130,8 +133,8 @@ public class AddCommandParserTest {
 
         model.getAddressBook().setClientCounter("10");
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        Function<ClientId, Person> expectedPersonMultipleTags = new PersonBuilder(BOB)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).buildFunction();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
@@ -141,7 +144,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         model.getAddressBook().setClientCounter("9");
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Function<ClientId, Person> expectedPerson = new PersonBuilder(AMY).withTags().buildFunction();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + RISKAPPETITE_DESC_AMY + DISPOSABLEINCOME_DESC_AMY + CURRENTPLAN_DESC_AMY + LASTMET_DESC_AMY,
                 new AddCommand(expectedPerson));
