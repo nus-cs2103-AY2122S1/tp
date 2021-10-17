@@ -12,7 +12,7 @@ public class Timing {
     public static final String MESSAGE_CONSTRAINTS =
             "Timing should only contain a pair of 4 numbers each separated by a dash";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{4}";
-    public final String value;
+    public final String timing;
 
     /**
      * Constructs a {@code Timing}.
@@ -22,7 +22,7 @@ public class Timing {
     public Timing(String timing) {
         requireNonNull(timing);
         checkArgument(isValidTiming(timing), MESSAGE_CONSTRAINTS);
-        value = timing;
+        this.timing = timing;
     }
 
     /**
@@ -34,19 +34,19 @@ public class Timing {
 
     @Override
     public String toString() {
-        return value;
+        return timing;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Timing // instanceof handles nulls
-                && value.equals(((Timing) other).value)); // state check
+                && timing.equals(((Timing) other).timing)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return timing.hashCode();
     }
 
 }
