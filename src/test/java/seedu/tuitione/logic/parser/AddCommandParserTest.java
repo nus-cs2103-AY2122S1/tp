@@ -12,22 +12,22 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_GRADE_DESC;
 import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.tuitione.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.tuitione.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.tuitione.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.tuitione.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.REMARK_DESC_FRIEND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.REMARK_DESC_HUSBAND;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_FRIEND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_HUSBAND;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.tuitione.testutil.TypicalStudents.AMY;
@@ -36,13 +36,13 @@ import static seedu.tuitione.testutil.TypicalStudents.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.logic.commands.AddCommand;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
 import seedu.tuitione.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
@@ -50,43 +50,45 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        Student expectedStudent = new StudentBuilder(BOB).withRemarks(VALID_REMARK_FRIEND).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple addresses - last tuitione accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
         // multiple grades - last grade accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_AMY + GRADE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedStudent));
+                + GRADE_DESC_AMY + GRADE_DESC_BOB + REMARK_DESC_FRIEND, new AddCommand(expectedStudent));
 
-        // multiple tags - all accepted
-        Student expectedStudentMultipleTags = new StudentBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        // multiple remarks - all accepted
+        Student expectedStudentMultipleRemarks = new StudentBuilder(BOB).withRemarks(VALID_REMARK_FRIEND,
+                VALID_REMARK_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedStudentMultipleTags));
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
+                new AddCommand(expectedStudentMultipleRemarks));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Student expectedStudent = new StudentBuilder(AMY).withTags().build();
+        // zero remarks
+        Student expectedStudent = new StudentBuilder(AMY).withRemarks().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + GRADE_DESC_AMY, new AddCommand(expectedStudent));
     }
@@ -125,27 +127,27 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ParentContact.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, ParentContact.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid tuitione
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
 
         // invalid grade
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INVALID_GRADE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Grade.GRADE_MESSAGE_CONSTRAINTS);
+                + INVALID_GRADE_DESC + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND, Grade.GRADE_MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + GRADE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + GRADE_DESC_BOB + INVALID_REMARK_DESC + VALID_REMARK_FRIEND, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
@@ -153,7 +155,7 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + GRADE_DESC_BOB + REMARK_DESC_HUSBAND + REMARK_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

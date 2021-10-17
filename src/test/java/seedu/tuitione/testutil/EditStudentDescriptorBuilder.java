@@ -5,13 +5,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.tuitione.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
 
 /**
  * A utility class to help with building EditStudentDescriptor objects.
@@ -37,7 +37,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getParentContact());
         descriptor.setEmail(student.getEmail());
         descriptor.setAddress(student.getAddress());
-        descriptor.setTags(student.getTags());
+        descriptor.setRemarks(student.getRemarks());
         descriptor.setGrade(student.getGrade());
     }
 
@@ -82,12 +82,12 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
+     * Parses the {@code remarks} into a {@code Set<Remark>} and set it to the {@code EditStudentDescriptor}
      * that we are building.
      */
-    public EditStudentDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditStudentDescriptorBuilder withRemarks(String... remarks) {
+        Set<Remark> remarkSet = Stream.of(remarks).map(Remark::new).collect(Collectors.toSet());
+        descriptor.setRemarks(remarkSet);
         return this;
     }
 

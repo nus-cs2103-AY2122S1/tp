@@ -6,7 +6,7 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -23,13 +23,14 @@ import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing student in the tuitione book.
@@ -47,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_GRADE + "GRADE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_REMARK + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -114,9 +115,14 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
-        Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
+        Set<Remark> updatedRemarks = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
 
-        return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress, updatedGrade, updatedTags);
+        return new Student(updatedName,
+                updatedParentContact,
+                updatedEmail,
+                updatedAddress,
+                updatedGrade,
+                updatedRemarks);
     }
 
     @Override
@@ -147,7 +153,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Grade grade;
-        private Set<Tag> tags;
+        private Set<Remark> remarks;
 
         private boolean gradeIsEdited = false;
 
@@ -155,7 +161,7 @@ public class EditCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code remarks} is used internally.
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
@@ -163,14 +169,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
-            setTags(toCopy.tags);
+            setRemarks(toCopy.remarks);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, tags);
+            return CollectionUtil.isAnyNonNull(name, parentContact, email, address, grade, remarks);
         }
 
         public void setName(Name name) {
@@ -214,20 +220,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code remarks} to this object's {@code remarks}.
+         * A defensive copy of {@code remarks} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setRemarks(Set<Remark> remarks) {
+            this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Remark>> getRemarks() {
+            return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override
@@ -250,7 +256,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
-                    && getTags().equals(e.getTags());
+                    && getRemarks().equals(e.getRemarks());
         }
 
         /**

@@ -12,13 +12,13 @@ import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonTime;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
-import seedu.tuitione.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code Tuitione} with sample data.
@@ -33,27 +33,27 @@ public class SampleDataUtil {
             new Student(new Name("Alex Yeoh"), new ParentContact("87438807"),
                     new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), new Grade("S1"),
-                getTagSet("friends")),
+                getRemarkSet("friends")),
             new Student(new Name("Bernice Yu"), new ParentContact("99272758"),
                     new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Grade("P4"),
-                getTagSet("colleagues", "friends")),
+                getRemarkSet("colleagues", "friends")),
             new Student(new Name("Charlotte Oliveiro"), new ParentContact("93210283"),
                     new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Grade("S3"),
-                getTagSet("neighbours")),
+                getRemarkSet("neighbours")),
             new Student(new Name("David Li"), new ParentContact("91031282"),
                     new Email("lidavid@example.com"),
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Grade("P2"),
-                getTagSet("family")),
+                getRemarkSet("family")),
             new Student(new Name("Irfan Ibrahim"), new ParentContact("92492021"),
                     new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), new Grade("S2"),
-                getTagSet("classmates")),
+                getRemarkSet("classmates")),
             new Student(new Name("Roy Balakrishnan"), new ParentContact("92624417"),
                     new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), new Grade("P3"),
-                getTagSet("colleagues"))
+                getRemarkSet("colleagues"))
         };
     }
 
@@ -98,11 +98,11 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tag set containing the list of strings given.
+     * Returns a remark set containing the list of strings given.
      */
-    public static Set<Tag> getTagSet(String... strings) {
+    public static Set<Remark> getRemarkSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(Remark::new)
                 .collect(Collectors.toSet());
     }
 }

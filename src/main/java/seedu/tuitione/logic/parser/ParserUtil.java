@@ -24,12 +24,12 @@ import seedu.tuitione.logic.commands.UnenrollCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.lesson.Subject;
+import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
-import seedu.tuitione.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -130,30 +130,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code remark} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Remark.isValidRemarkName(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Remark(trimmedRemark);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> remarks} into a {@code Set<Remark>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Remark> parseRemarks(Collection<String> remarks) throws ParseException {
+        requireNonNull(remarks);
+        final Set<Remark> remarkSet = new HashSet<>();
+        for (String remarkName : remarks) {
+            remarkSet.add(parseRemark(remarkName));
         }
-        return tagSet;
+        return remarkSet;
     }
 
     /**

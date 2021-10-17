@@ -49,7 +49,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label grade;
     @FXML
-    private FlowPane tags;
+    private FlowPane remarks;
     @FXML
     private Label lessons;
     @FXML
@@ -70,9 +70,9 @@ public class StudentCard extends UiPart<Region> {
         email.setText(String.format(STRING_FORMAT_EMAIL, student.getEmail().value));
         grade.setText(String.format(STRING_FORMAT_GRADE, student.getGrade().value));
 
-        student.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getRemarks().stream()
+                .sorted(Comparator.comparing(remark -> remark.remarkName))
+                .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 
         if (student.getLessonCodesAndPrices().size() > 0) {
             lessons.setText(student.getLessonCodes().stream()
