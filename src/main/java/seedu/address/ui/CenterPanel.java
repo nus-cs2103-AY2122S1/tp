@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -17,6 +20,7 @@ import seedu.address.model.tag.Tag;
 public class CenterPanel extends UiPart<Region> {
 
     private static final String FXML = "CenterPanel.fxml";
+    private static final Logger logger = LogsCenter.getLogger(CenterPanel.class);
 
     private SchedulePanel schedulePanel;
 
@@ -53,6 +57,7 @@ public class CenterPanel extends UiPart<Region> {
      * Brings PersonListPanel to top of the stack's child list.
      */
     public void displayPersonListPanel() {
+        logger.info("Showing the list of students.");
         if (!centerPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
             centerPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
         }
@@ -62,6 +67,7 @@ public class CenterPanel extends UiPart<Region> {
      * Brings SchedulePanel to top of the stack's child list.
      */
     public void displaySchedulePanel() {
+        logger.info("Showing the schedule calendar.");
         if (!centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot())) {
             centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
         }
@@ -71,6 +77,7 @@ public class CenterPanel extends UiPart<Region> {
      * Brings TagListPanel to top of the stack's child list.
      */
     public void displayTagListPanel() {
+        logger.info("Showing the list of tags.");
         if (!centerPanelPlaceholder.getChildren().contains(tagListPanel.getRoot())) {
             centerPanelPlaceholder.getChildren().setAll(tagListPanel.getRoot());
         }
