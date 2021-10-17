@@ -6,8 +6,18 @@ import static seedu.programmer.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.programmer.logic.commands.*;
+import seedu.programmer.logic.commands.AddCommand;
+import seedu.programmer.logic.commands.Command;
+import seedu.programmer.logic.commands.CreateLabResultCommand;
+import seedu.programmer.logic.commands.DeleteCommand;
+import seedu.programmer.logic.commands.EditCommand;
+import seedu.programmer.logic.commands.ExitCommand;
+import seedu.programmer.logic.commands.FillCommand;
 import seedu.programmer.logic.commands.FilterCommand;
+import seedu.programmer.logic.commands.HelpCommand;
+import seedu.programmer.logic.commands.ListCommand;
+import seedu.programmer.logic.commands.PurgeCommand;
+import seedu.programmer.logic.commands.ShowCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
 /**
