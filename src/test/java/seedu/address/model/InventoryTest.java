@@ -183,10 +183,22 @@ public class InventoryTest {
     }
 
     @Test
-    public void transactOrder_orderWithItemWithNegativeCount_itemRemoved() {
+    public void transactOrder_orderWithItemWithNegativeCount_inventoryUnchanged() {
         // count of items in order matches that in inventory
         Inventory typicalInventory = TypicalItems.getTypicalInventory();
         Order abnormalOrder = TypicalOrders.getOrderWithItemWithNegativeCount();
+        typicalInventory.transactOrder(abnormalOrder);
+
+        Inventory expectedInventory = TypicalItems.getTypicalInventory();
+
+        assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
+    }
+
+    @Test
+    public void transactOrder_orderWithUnexistingItem_inventoryUnchanged() {
+        // count of items in order matches that in inventory
+        Inventory typicalInventory = TypicalItems.getTypicalInventory();
+        Order abnormalOrder = TypicalOrders.getOrderWithUnexistingItem();
         typicalInventory.transactOrder(abnormalOrder);
 
         Inventory expectedInventory = TypicalItems.getTypicalInventory();
