@@ -420,7 +420,7 @@ Square brackets `[]` refer to optional arguments.<p>
 
 Action                    | Format                                                                        | Advanced Format
 --------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------
-**Create**                | `person (NAME) /create [p:PHONE] [e:EMAIL] [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
+**Create**                | `person (NAME) /create (p:PHONE) (e:EMAIL) [t:TAG1,TAG2,...] [g:GROUP_INDEX]` | `p (NAME) /c [p:phone] [e:email] [t:TAG1,TAG2,...] [g:GROUP_INDEX]`
 **Edit**                  | `person (INDEX) /edit [n:NAME] [p:PHONE] [e:EMAIL]`                           | `p (INDEX) /e [n:NAME] [p:phone] [e:email]`
 **Delete**                | `person (INDEX) /delete`                                                      | `p (INDEX) /d`
 **Add**                   | `person (INDEX) /add (g:GROUP_NAME) `                                         | `p (INDEX) /a (g:GROUP_NAME)`
