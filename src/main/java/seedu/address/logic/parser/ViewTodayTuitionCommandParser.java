@@ -4,7 +4,7 @@ import seedu.address.logic.commands.ViewTodayTuitionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
-public class ViewTodayTuitionCommandParser implements Parser<ViewTodayTuitionCommand>{
+public class ViewTodayTuitionCommandParser implements Parser<ViewTodayTuitionCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewTodayTuitionCommand
      * and returns a ViewTodayTuitionCommand object for execution.
