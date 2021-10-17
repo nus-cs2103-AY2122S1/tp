@@ -1,6 +1,6 @@
 package seedu.address.model.salesorder;
 
-import seedu.address.model.task.Date;
+import seedu.address.model.Date;
 
 public class SalesOrder {
     private static int count = 1;

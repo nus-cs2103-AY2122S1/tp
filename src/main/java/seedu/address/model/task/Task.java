@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import seedu.address.model.Date;
+
 /**
  * Basic Task class for v1.2 implementation
  */
