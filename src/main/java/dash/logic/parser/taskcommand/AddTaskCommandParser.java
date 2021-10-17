@@ -1,11 +1,12 @@
 package dash.logic.parser.taskcommand;
 
+import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 
 import java.util.Set;
 
-import dash.commons.core.Messages;
 import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.parser.ArgumentMultimap;
 import dash.logic.parser.ArgumentTokenizer;
@@ -15,6 +16,7 @@ import dash.logic.parser.exceptions.ParseException;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
+import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 
 /**
@@ -29,12 +31,21 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddTaskCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TAG);
-        boolean isPrefixPresent = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent();
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_DATE, PREFIX_TAG);
+        boolean isDescriptionPrefixPresent = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent();
+        boolean isTaskDatePrefixPresent = argMultimap.getValue(PREFIX_TASK_DATE).isPresent();
+        TaskDate taskDate;
 
-        if (!isPrefixPresent || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+        if (!isDescriptionPrefixPresent || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTaskCommand.MESSAGE_USAGE));
+        }
+
+        if (isTaskDatePrefixPresent) {
+            taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get());
+        } else {
+            taskDate = new TaskDate();
         }
 
         TaskDescription description =
@@ -42,8 +53,9 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         CompletionStatus completionStatus = new CompletionStatus(false);
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Task task = new Task(description, completionStatus, tagList);
+        Task task = new Task(description, completionStatus, taskDate, tagList);
 
         return new AddTaskCommand(task);
     }
+
 }

@@ -20,6 +20,7 @@ import dash.model.Model;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
+import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 
 /**
@@ -46,7 +47,7 @@ public class EditTaskCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index                of the task in the filtered task list to edit
+     * @param index of the task in the filtered task list to edit
      * @param editTaskDescriptor details to edit the task with
      */
     public EditTaskCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
@@ -87,7 +88,7 @@ public class EditTaskCommand extends Command {
                 .orElse(taskToEdit.getCompletionStatus());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedCompletionStatus, updatedTags);
+        return new Task(updatedDescription, updatedCompletionStatus, new TaskDate(), updatedTags);
     }
 
     @Override

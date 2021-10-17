@@ -23,7 +23,7 @@ public class AddTaskCommandParserTest {
         // whitespace only preamble
         CommandParserTestUtil.assertParseSuccess(parser,
                 CommandTestUtil.PREAMBLE_WHITESPACE + CommandTestUtil.TASK_DESC_ASSIGNMENT
-                + CommandTestUtil.TAG_DESC_HOMEWORK,
+                        + CommandTestUtil.TAG_DESC_HOMEWORK,
                 new AddTaskCommand(expectedTask));
 
         // multiple task descriptions - last task description accepted

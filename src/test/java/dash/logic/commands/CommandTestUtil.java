@@ -51,10 +51,14 @@ public class CommandTestUtil {
 
     public static final String VALID_TASK_DESCRIPTION_TP = "Finish CS2103T tP";
     public static final String VALID_TASK_DESCRIPTION_TEST = "Study for CS2100 test";
-    public static final String VALID_TASK_DESCRIPTION_ASSIGNMENT = "Submit CS2100 Assignment by 23:59";
+    public static final String VALID_TASK_DESCRIPTION_ASSIGNMENT = "Submit CS2100 Assignment";
     public static final String VALID_TASK_DESCRIPTION_LECTURE = "Catch up with ST2334 lectures";
     public static final String VALID_TASK_DESCRIPTION_PR_REVIEW = "Do PR review";
     public static final String VALID_TASK_DESCRIPTION_QUIZ = "ST2334 quiz before Friday";
+
+    public static final String VALID_TASK_DATE_ASSIGNMENT = "2359";
+    public static final String VALID_TASK_DATE_LECTURE = "21/10/2021";
+    public static final String VALID_TASK_DATE_PR_REVIEW = "21/02/2021, 10:00 PM";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

@@ -14,6 +14,7 @@ import dash.model.person.Email;
 import dash.model.person.Name;
 import dash.model.person.Phone;
 import dash.model.tag.Tag;
+import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 
 /**
@@ -138,4 +139,20 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDate} is invalid.
+     */
+    public static TaskDate parseTaskDate(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedTaskDate = taskDate.trim();
+        if (!TaskDate.isValidTaskDate(trimmedTaskDate)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDate(trimmedTaskDate);
+    }
+
 }
