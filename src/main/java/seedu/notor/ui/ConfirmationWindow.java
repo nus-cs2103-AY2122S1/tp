@@ -34,10 +34,10 @@ public class ConfirmationWindow extends UiPart<Stage> {
     }
 
     /**
-     *
+     * Shows Confirmation Window.
      */
     public void show() {
-        getRoot().showAndWait();
+        getRoot().show();
         getRoot().centerOnScreen();
     }
 
@@ -47,7 +47,7 @@ public class ConfirmationWindow extends UiPart<Stage> {
      * @throws CommandException commandException
      */
     @FXML
-    public void onClickSave() throws CommandException {
+    public void onClickSave() throws CommandException, InterruptedException {
         getRoot().close();
         noteWindow.handleSaveAndExit();
     }
@@ -56,10 +56,9 @@ public class ConfirmationWindow extends UiPart<Stage> {
      * Exits both Note Window and Confirmation Window without saving note upon clicking don't save button.
      */
     @FXML
-    public void onClickDoNotSave() {
+    public void onClickDoNotSave() throws InterruptedException {
         getRoot().close();
-        noteWindow.setForceExit();
-        noteWindow.handleExit();
+        noteWindow.exit();
     }
 
     /**

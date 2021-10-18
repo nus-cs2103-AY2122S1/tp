@@ -3,6 +3,7 @@ package seedu.notor.ui;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
@@ -41,8 +42,6 @@ public class NoteWindow extends UiPart<Stage> {
     @FXML
     private TextArea noteTextArea;
 
-    private boolean isForceExit;
-
     private Person person;
 
     private final Logic logic;
@@ -61,10 +60,13 @@ public class NoteWindow extends UiPart<Stage> {
         this.resultDisplay = resultDisplay;
         this.person = person;
         this.logic = logic;
-        this.isForceExit = false;
         confirmationWindow = new ConfirmationWindow(person.getName().toString(), this);
         getRoot().setTitle(person.getName().toString());
         noteTextArea.setWrapText(true);
+        getRoot().setOnCloseRequest(e -> {
+            e.consume();
+            handleExit();
+        });
     }
 
     /**
@@ -133,22 +135,8 @@ public class NoteWindow extends UiPart<Stage> {
     /**
      * Checks if current Note is saved.
      */
-    public boolean isSave() {
+    private boolean isSave() {
         return person.getNote().value.equals(noteTextArea.getText());
-    }
-
-    /**
-     * Returns true if the user wants to exit without saving.
-     */
-    public boolean isForceExit() {
-        return isForceExit;
-    }
-
-    /**
-     * Sets isForceExit to be true.
-     */
-    public void setForceExit() {
-        isForceExit = true;
     }
 
     /**
@@ -157,13 +145,20 @@ public class NoteWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleExit() {
-        if (isSave() || isForceExit) {
-            getRoot().close();
-            OPENED_NOTE_WINDOWS.remove(this);
-            resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS, person));
+        if (isSave()) {
+            exit();
         } else {
             confirmationWindow.show();
         }
+
+    }
+    /**
+     * Exits the note Window.
+     */
+    public void exit() {
+        getRoot().close();
+        OPENED_NOTE_WINDOWS.remove(this);
+        resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS, person));
     }
     /**
      * Exits and saves the note window.
@@ -173,6 +168,7 @@ public class NoteWindow extends UiPart<Stage> {
         handleSave();
         handleExit();
     }
+
 
 
     private void timeStampNote() {
