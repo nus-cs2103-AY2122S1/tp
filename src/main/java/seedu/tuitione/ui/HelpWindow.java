@@ -1,10 +1,13 @@
 package seedu.tuitione.ui;
 
+import static seedu.tuitione.commons.util.AppUtil.getImage;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
@@ -20,12 +23,16 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final String HELP_COMMAND_IMAGE = "/images/help_commands.png";
 
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private ImageView helpCommands;
 
     /**
      * Creates a new HelpWindow.
@@ -35,6 +42,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        helpCommands.setImage(getImage(HELP_COMMAND_IMAGE));
     }
 
     /**
