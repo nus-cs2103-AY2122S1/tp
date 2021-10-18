@@ -325,6 +325,7 @@ Use case ends.
     * 1b1. contHACKS shows an error message<br />
     Use case ends.
 
+
 **Use case: Finding a contact**
 
 **MSS**
