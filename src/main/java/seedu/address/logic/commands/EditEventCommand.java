@@ -37,9 +37,9 @@ public class EditEventCommand extends Command {
             + PREFIX_NAME + "24Km Run "
             + PREFIX_TIME + "0000";
 
-    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event:\n%1$s";
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited event:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This Event already exists in Managera!";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in Managera";
 
     private final Index index;
     private final EditEventDescriptor editEventDescriptor;
@@ -89,7 +89,7 @@ public class EditEventCommand extends Command {
     }
 
     /**
-     * Creates and returns an editted Event instance.
+     * Creates and returns an edited Event instance.
      *
      * @param eventToEdit           The event instance to be edited.
      * @param editEventDescriptor   The instance containing fields of the event to be edited.
