@@ -4,10 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -131,9 +130,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Participant> findParticipants(Predicate<Participant> predicate) {
+    public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
         requireNonNull(predicate);
-        return filteredParticipants.stream().filter(predicate).collect(Collectors.toList());
+        return filteredParticipants.stream().filter(predicate).findFirst();
     }
 
     @Override

@@ -12,7 +12,7 @@ class ParticipantIdMatchesGivenIdPredicateTest {
     @Test
     public void test_idContainsGivenId_returnsTrue() {
         ParticipantIdMatchesGivenIdPredicate predicate =
-                new ParticipantIdMatchesGivenIdPredicate("ALEyeo1");
+                new ParticipantIdMatchesGivenIdPredicate(ALEX.getParticipantIdValue());
         assertTrue(predicate.test(ALEX));
     }
 

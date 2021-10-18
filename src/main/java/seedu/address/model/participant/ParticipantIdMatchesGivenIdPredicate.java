@@ -15,7 +15,7 @@ public class ParticipantIdMatchesGivenIdPredicate implements Predicate<Participa
     @Override
     public boolean test(Participant participant) {
         return participant.getParticipantIdValue().toLowerCase()
-                .contains(givenId.toLowerCase());
+                .matches(givenId.toLowerCase());
     }
 
     @Override

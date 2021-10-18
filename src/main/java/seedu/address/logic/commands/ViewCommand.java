@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
 
-import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,9 +22,7 @@ public class ViewCommand extends Command {
             + "Parameters: PARTICIPANT_ID\n"
             + "Example: " + COMMAND_WORD + " aleyeo1";
 
-    public static final String MULTIPLE_MATCHES_FOUND = "Multiple matches were found. Did you mean: \n";
-
-    private String givenId;
+    private final String givenId;
     private final ParticipantIdMatchesGivenIdPredicate predicate;
 
     /**
@@ -40,24 +38,14 @@ public class ViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Participant> matchingParticipants = model.findParticipants(this.predicate);
-        int numOfMatches = matchingParticipants.size();
+        Optional<Participant> matchingParticipant = model.findParticipant(predicate);
 
-        if (numOfMatches == 0) {
+        if (matchingParticipant.isEmpty()) {
             throw new CommandException(
                     String.format(MESSAGE_PARTICIPANT_NOT_FOUND, this.givenId, ListCommand.COMMAND_WORD));
 
-        } else if (numOfMatches > 1) {
-            StringBuilder matches = new StringBuilder();
-            for (int i = 0; i < numOfMatches; i++) {
-                matches.append(i + 1).append(". ")
-                        .append(matchingParticipants.get(i).getParticipantIdValue())
-                        .append("\n");
-            }
-            return new CommandResult(MULTIPLE_MATCHES_FOUND + matches);
-
         } else {
-            return new CommandResult(matchingParticipants.get(0).toString());
+            return new CommandResult(matchingParticipant.get().toString());
         }
     }
 

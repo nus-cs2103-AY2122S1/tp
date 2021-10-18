@@ -4,15 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
-import static seedu.address.logic.commands.ViewCommand.MULTIPLE_MATCHES_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
 import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -38,14 +37,6 @@ class ViewCommandTest {
         assertThrows(CommandException.class,
                 String.format(MESSAGE_PARTICIPANT_NOT_FOUND, "mikerowe1",
                         ListCommand.COMMAND_WORD), () -> viewCommand.execute(modelStub));
-    }
-
-    @Test
-    public void execute_multipleMatchesFound() throws Exception {
-        CommandResult commandResult = new ViewCommand("aleyeo").execute(modelStub);
-        String expectedString = MULTIPLE_MATCHES_FOUND + "1. aleyeo1\n" + "2. "
-                + participantWithSimilarId.getParticipantIdValue() + "\n";
-        assertEquals(expectedString, commandResult.getFeedbackToUser());
     }
 
     @Test
@@ -83,8 +74,8 @@ class ViewCommandTest {
         }
 
         @Override
-        public List<Participant> findParticipants(Predicate<Participant> predicate) {
-            return this.participantList.stream().filter(predicate).collect(Collectors.toList());
+        public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
+            return this.participantList.stream().filter(predicate).findFirst();
         }
     }
 }
