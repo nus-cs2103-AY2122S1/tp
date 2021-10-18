@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -16,6 +17,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -40,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NATIONALITY,
-                        PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_GENDER, PREFIX_REMARK, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -78,6 +80,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             socialHandle = ParserUtil.parseSocialHandle(argMultimap.getValue(PREFIX_SOCIAL_HANDLE).get());
         }
+        Gender gender;
+        if (argMultimap.getValue(PREFIX_GENDER).isEmpty()) {
+            gender = ParserUtil.parseGender("");
+        } else {
+            gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
+        }
         Remark remark;
         if (argMultimap.getValue(PREFIX_REMARK).isEmpty()) {
             remark = ParserUtil.parseRemark("");
@@ -86,7 +94,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tagList);
+        Person person = new Person(name, phone, email, nationality, tutorialGroup, socialHandle,
+                gender, remark, tagList);
         return new AddCommand(person);
     }
 

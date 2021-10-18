@@ -24,6 +24,7 @@ public class Person {
     private final Nationality nationality;
     private final TutorialGroup tutorialGroup;
     private final SocialHandle socialHandle;
+    private final Gender gender;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -31,14 +32,16 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Nationality nationality,
-                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tags);
+                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Gender gender,
+                  Remark remark, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, gender, remark, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
         this.socialHandle = socialHandle;
+        this.gender = gender;
         this.remark = remark;
         this.tags.addAll(tags);
     }
@@ -65,6 +68,10 @@ public class Person {
 
     public SocialHandle getSocialHandle() {
         return socialHandle;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public Remark getRemark() {
@@ -114,6 +121,7 @@ public class Person {
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getTutorialGroup().equals(getTutorialGroup())
                 && otherPerson.getSocialHandle().equals(getSocialHandle())
+                && otherPerson.getGender().equals(getGender())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -121,13 +129,16 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle, remark, tags);
+        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle,
+                gender, remark, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("; Gender: ")
+                .append(getGender())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
