@@ -13,6 +13,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,6 +43,7 @@ public class EditEmployeeDescriptorBuilder {
         descriptor.setLeaves(employee.getLeaves());
         descriptor.setSalary(employee.getSalary());
         descriptor.setJobTitle(employee.getJobTitle());
+        descriptor.setShifts(employee.getShifts());
         descriptor.setTags(employee.getTags());
     }
 
@@ -108,6 +110,16 @@ public class EditEmployeeDescriptorBuilder {
     public EditEmployeeDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditEmployeeDescriptor}
+     * that we are building.
+     */
+    public EditEmployeeDescriptorBuilder withShifts(String... shifts) {
+        Set<Shift> shiftSet = Stream.of(shifts).map(Shift::new).collect(Collectors.toSet());
+        descriptor.setShifts(shiftSet);
         return this;
     }
 

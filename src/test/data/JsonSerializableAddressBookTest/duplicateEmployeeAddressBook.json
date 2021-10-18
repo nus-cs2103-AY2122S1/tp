@@ -7,7 +7,8 @@
     "tagged": [ "friends" ],
     "leaves" : "14",
     "salary" : "5000",
-    "jobTitle" : "Account Manager"
+    "jobTitle" : "Account Manager",
+    "shifts" : [ "2021-12-10 0830" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -15,7 +16,8 @@
     "address": "4th street",
     "leaves" : "14",
     "salary" : "5000",
-    "jobTitle" : "Account Manager"
+    "jobTitle" : "Account Manager",
+    "shifts" : [ "2021-12-10 0830" ]
   } ],
   "customers": [
 

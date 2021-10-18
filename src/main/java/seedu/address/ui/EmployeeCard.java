@@ -45,6 +45,8 @@ public class EmployeeCard extends UiPart<Region> {
     private Label jobTitle;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane shifts;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -60,6 +62,9 @@ public class EmployeeCard extends UiPart<Region> {
         leaves.setText(employee.getLeaves().currentLeaves);
         salary.setText(employee.getSalary().currentSalary);
         jobTitle.setText(employee.getJobTitle().jobTitle);
+        employee.getShifts().stream()
+                .sorted(Comparator.comparing(shift -> shift.workingShift))
+                .forEach(shift -> shifts.getChildren().add(new Label(shift.shiftString)));
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
