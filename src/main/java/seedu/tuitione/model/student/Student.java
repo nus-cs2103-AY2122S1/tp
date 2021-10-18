@@ -2,8 +2,6 @@ package seedu.tuitione.model.student;
 
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -98,26 +96,27 @@ public class Student {
     }
 
     /**
-     * Returns the Student's weekly subscription price.
+     * Returns the number of lessons the Student has enrolled in.
      */
-    public double getSubscriptionPrice() {
-        return this.getLessonPrices().stream()
-                .map(e -> e.value)
-                .reduce(0.0, Double::sum);
+    public int getNumberOfLessonsEnrolled() {
+        return lessonCodesAndPrices.size();
     }
-
 
     /**
      * Returns an immutable lesson price list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public List<Price> getLessonPrices() {
-        Collection<Price> values = lessonCodesAndPrices.values();
-        List<Price> listOfValues = new ArrayList<>();
-        for (Price p : values) {
-            listOfValues.add(p);
-        }
-        return Collections.unmodifiableList(listOfValues);
+        return List.copyOf(lessonCodesAndPrices.values());
+    }
+
+    /**
+     * Returns the Student's weekly subscription price.
+     */
+    public double getSubscriptionPrice() {
+        return this.getLessonPrices().stream()
+                .map(e -> e.value)
+                .reduce(0.0, Double::sum);
     }
 
     /**
