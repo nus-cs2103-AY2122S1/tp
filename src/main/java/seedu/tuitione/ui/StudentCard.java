@@ -83,10 +83,7 @@ public class StudentCard extends UiPart<Region> {
             lessons.setText(STRING_FORMAT_LESSON + "\t-");
         }
 
-        double totalPrice = student.getLessonPrices().stream()
-                .map(e -> e.value)
-                .reduce(0.0, Double::sum);
-        subscription.setText(String.format(STRING_FORMAT_SUBSCRIPTION, totalPrice));
+        subscription.setText(String.format(STRING_FORMAT_SUBSCRIPTION, student.getSubscriptionPrice()));
     }
 
     @Override
