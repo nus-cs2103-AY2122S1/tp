@@ -23,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
+import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -97,6 +98,15 @@ public class AddressBookParserTest {
                 MarkStudentAttCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
         assertEquals(new MarkStudentAttCommand(INDEX_FIRST_STUDENT, validWeek), command);
+    }
+
+    @Test
+    public void parseCommand_markStudentParticipation() throws Exception {
+        int validWeek = 1;
+        MarkStudentPartCommand command = (MarkStudentPartCommand) parser.parseCommand(
+                MarkStudentPartCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_WEEK + validWeek);
+        assertEquals(new MarkStudentPartCommand(INDEX_FIRST_STUDENT, validWeek), command);
     }
 
     @Test
