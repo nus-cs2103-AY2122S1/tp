@@ -60,7 +60,7 @@
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
-                            <StackPane fx:id="moduleClassListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                            <StackPane fx:id="moduleLessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
 
                     </children>
