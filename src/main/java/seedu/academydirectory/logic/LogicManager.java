@@ -2,6 +2,7 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,8 +52,14 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = academyDirectoryParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        // Temporary hax
+        if (Objects.equals(commandText, "history")) {
+            logger.info("---------------[SHORT-CIRCUITING...]");
+            commandResult = new CommandResult(String.join("\n", version.retrieveHistory()));
+        } else {
+            Command command = academyDirectoryParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+        }
 
         try {
             storage.saveAcademyDirectory(model.getAcademyDirectory());

@@ -1,5 +1,7 @@
 package seedu.academydirectory.versioncontrol;
 
+import java.util.List;
+
 /**
  * API of the Version component
  */
@@ -9,4 +11,6 @@ public interface Version {
      * @param message Message attached to the Commit for a readable explanation
      */
     boolean commit(String message);
+
+    List<String> retrieveHistory();
 }

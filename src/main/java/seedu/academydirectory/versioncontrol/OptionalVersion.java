@@ -1,5 +1,8 @@
 package seedu.academydirectory.versioncontrol;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OptionalVersion<T extends Version> implements Version {
     private final T versionManager;
 
@@ -17,6 +20,15 @@ public class OptionalVersion<T extends Version> implements Version {
             return true;
         } else {
             return versionManager.commit(message);
+        }
+    }
+
+    @Override
+    public List<String> retrieveHistory() {
+        if (versionManager == null) {
+            return new ArrayList<>();
+        } else {
+            return versionManager.retrieveHistory();
         }
     }
 }

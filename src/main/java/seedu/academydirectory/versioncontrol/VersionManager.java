@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 
 import seedu.academydirectory.versioncontrol.controllers.CommitController;
 import seedu.academydirectory.versioncontrol.controllers.TreeController;
@@ -81,6 +84,25 @@ public class VersionManager implements Version {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private String getPresentableHistory(Commit commit) {
+        return commit.getHash().substring(0, 6) + ": " + commit.getMessage();
+    }
+    @Override
+    public List<String> retrieveHistory() {
+        Commit currentCommit = head;
+        List<String> history = new ArrayList<>();
+        history.add(getPresentableHistory(currentCommit));
+
+        Supplier<Commit> parentCommitSupplier = head.getParentSupplier();
+        while (parentCommitSupplier.get() != Commit.NULL) {
+            currentCommit = parentCommitSupplier.get();
+            history.add(getPresentableHistory(currentCommit));
+            parentCommitSupplier = currentCommit.getParentSupplier();
+        }
+
+        return history;
     }
 
     private void moveHead(Commit commit) throws IOException {
