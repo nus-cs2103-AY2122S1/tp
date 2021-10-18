@@ -10,9 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutoraid.commons.core.GuiSettings;
+import tutoraid.model.LessonBook;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class StorageManagerTest {
@@ -24,9 +27,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTutorAidStorage studentBookStorage = new JsonTutorAidStorage(getTempFilePath("ab"));
+        JsonTutorAidStudentStorage studentBookStorage = new JsonTutorAidStudentStorage(getTempFilePath("sb"));
+        JsonTutorAidLessonStorage lessonBookStorage = new JsonTutorAidLessonStorage(getTempFilePath("lb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(studentBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -51,7 +55,7 @@ public class StorageManagerTest {
     public void studentBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonTutorAidStorage} class.
+         * {@link JsonTutorAidStudentStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonStudentBookStorageTest} class.
          */
         StudentBook original = TypicalStudents.getTypicalStudentBook();
@@ -63,6 +67,24 @@ public class StorageManagerTest {
     @Test
     public void getStudentBookFilePath() {
         assertNotNull(storageManager.getStudentBookFilePath());
+    }
+
+    @Test
+    public void lessonBookReadSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link JsonTutorAidLessonStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonLessonBookStorageTest} class.
+         */
+        LessonBook original = TypicalLessons.getTypicalLessonBook();
+        storageManager.saveLessonBook(original);
+        ReadOnlyLessonBook retrieved = storageManager.readLessonBook().get();
+        assertEquals(original, new LessonBook(retrieved));
+    }
+
+    @Test
+    public void getLessonBookFilePath() {
+        assertNotNull(storageManager.getLessonBookFilePath());
     }
 
 }

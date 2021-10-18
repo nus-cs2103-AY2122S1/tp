@@ -11,6 +11,7 @@ import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.StudentBuilder;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 /**
@@ -22,14 +23,15 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
+        model = new ModelManager(TypicalStudents.getTypicalStudentBook(),
+                TypicalLessons.getTypicalLessonBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
         assertCommandSuccess(new AddStudentCommand(validStudent), model,

@@ -11,9 +11,9 @@ import javafx.collections.transformation.FilteredList;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.commons.core.LogsCenter;
 import tutoraid.commons.util.CollectionUtil;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.ui.UiManager;
-
 
 /**
  * Represents the in-memory model of the student book data.
@@ -22,25 +22,30 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final StudentBook studentBook;
+    private final LessonBook lessonBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Lesson> filteredLessons;
 
     /**
-     * Initializes a ModelManager with the given studentBook and userPrefs.
+     * Initializes a ModelManager with the given studentBook, lessonBook and userPrefs.
      */
-    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStudentBook studentBook, ReadOnlyLessonBook lessonBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        CollectionUtil.requireAllNonNull(studentBook, userPrefs);
+        CollectionUtil.requireAllNonNull(studentBook, lessonBook, userPrefs);
 
-        logger.fine("Initializing with student book: " + studentBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with student book: " + studentBook
+                + ", lesson book: " + lessonBook + " and user prefs " + userPrefs);
 
         this.studentBook = new StudentBook(studentBook);
+        this.lessonBook = new LessonBook(lessonBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.studentBook.getStudentList());
+        filteredLessons = new FilteredList<>(this.lessonBook.getLessonList());
     }
 
     public ModelManager() {
-        this(new StudentBook(), new UserPrefs());
+        this(new StudentBook(), new LessonBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -76,6 +81,17 @@ public class ModelManager implements Model {
     public void setStudentBookFilePath(Path studentBookFilePath) {
         requireNonNull(studentBookFilePath);
         userPrefs.setStudentBookFilePath(studentBookFilePath);
+    }
+
+    @Override
+    public Path getLessonBookFilePath() {
+        return userPrefs.getLessonBookFilePath();
+    }
+
+    @Override
+    public void setLessonBookFilePath(Path lessonBookFilePath) {
+        requireNonNull(lessonBookFilePath);
+        userPrefs.setLessonBookFilePath(lessonBookFilePath);
     }
 
     //=========== StudentBook ================================================================================
@@ -130,6 +146,42 @@ public class ModelManager implements Model {
         }
     }
 
+    //=========== LessonBook ================================================================================
+
+    @Override
+    public void setLessonBook(ReadOnlyLessonBook lessonBook) {
+        this.lessonBook.resetData(lessonBook);
+    }
+
+    @Override
+    public ReadOnlyLessonBook getLessonBook() {
+        return lessonBook;
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return lessonBook.hasLesson(lesson);
+    }
+
+    @Override
+    public void deleteLesson(Lesson target) {
+        lessonBook.removeLesson(target);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        lessonBook.addLesson(lesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
+    }
+
+    @Override
+    public void viewLesson(Lesson targetLesson) {
+        requireNonNull(targetLesson);
+        filteredLessons.setPredicate(lesson -> lesson.equals(targetLesson));
+        UiManager.showViewWindow();
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -147,6 +199,23 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
+    //=========== Filtered Lesson List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code versionedLessonBook}
+     */
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return filteredLessons;
+    }
+
+    @Override
+    public void updateFilteredLessonList(Predicate<Lesson> predicate) {
+        requireNonNull(predicate);
+        filteredLessons.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -162,8 +231,10 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return studentBook.equals(other.studentBook)
+                && lessonBook.equals(other.lessonBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredLessons.equals(other.filteredLessons);
     }
 
 }

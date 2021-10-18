@@ -17,7 +17,8 @@ import tutoraid.testutil.Assert;
 import tutoraid.testutil.TypicalStudents;
 
 public class JsonStudentBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonStudentBookStorageTest");
+    private static final Path TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonStudentBookStorageTest");
 
     @TempDir
     public Path testFolder;
@@ -28,7 +29,8 @@ public class JsonStudentBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyStudentBook> readStudentBook(String filePath) throws Exception {
-        return new JsonTutorAidStorage(Paths.get(filePath)).readStudentBook(addToTestDataPathIfNotNull(filePath));
+        return new JsonTutorAidStudentStorage(Paths.get(filePath))
+                .readStudentBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -62,24 +64,24 @@ public class JsonStudentBookStorageTest {
     public void readAndSaveStudentBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempStudentBook.json");
         StudentBook original = TypicalStudents.getTypicalStudentBook();
-        JsonTutorAidStorage jsonTutorAidStorage = new JsonTutorAidStorage(filePath);
+        JsonTutorAidStudentStorage jsonTutorAidStudentStorage = new JsonTutorAidStudentStorage(filePath);
 
         // Save in new file and read back
-        jsonTutorAidStorage.saveStudentBook(original, filePath);
-        ReadOnlyStudentBook readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
+        jsonTutorAidStudentStorage.saveStudentBook(original, filePath);
+        ReadOnlyStudentBook readBack = jsonTutorAidStudentStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(TypicalStudents.HOON);
         original.removeStudent(TypicalStudents.ALICE);
-        jsonTutorAidStorage.saveStudentBook(original, filePath);
-        readBack = jsonTutorAidStorage.readStudentBook(filePath).get();
+        jsonTutorAidStudentStorage.saveStudentBook(original, filePath);
+        readBack = jsonTutorAidStudentStorage.readStudentBook(filePath).get();
         assertEquals(original, new StudentBook(readBack));
 
         // Save and read without specifying file path
         original.addStudent(TypicalStudents.IDA);
-        jsonTutorAidStorage.saveStudentBook(original); // file path not specified
-        readBack = jsonTutorAidStorage.readStudentBook().get(); // file path not specified
+        jsonTutorAidStudentStorage.saveStudentBook(original); // file path not specified
+        readBack = jsonTutorAidStudentStorage.readStudentBook().get(); // file path not specified
         assertEquals(original, new StudentBook(readBack));
 
     }
@@ -94,7 +96,7 @@ public class JsonStudentBookStorageTest {
      */
     private void saveStudentBook(ReadOnlyStudentBook studentBook, String filePath) {
         try {
-            new JsonTutorAidStorage(Paths.get(filePath))
+            new JsonTutorAidStudentStorage(Paths.get(filePath))
                     .saveStudentBook(studentBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);

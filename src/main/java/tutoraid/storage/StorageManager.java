@@ -7,25 +7,31 @@ import java.util.logging.Logger;
 
 import tutoraid.commons.core.LogsCenter;
 import tutoraid.commons.exceptions.DataConversionException;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.UserPrefs;
 
 /**
- * Manages storage of StudentBook data in local storage.
+ * Manages storage of StudentBook and LessonBook data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private TutorAidStorage tutorAidStorage;
+    private TutorAidStudentStorage tutorAidStudentStorage;
+    private TutorAidLessonStorage tutorAidLessonStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code TutorAidStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code TutorAidStudentStorage},
+     * {@code TutorAidLessonStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(TutorAidStorage tutorAidStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TutorAidStudentStorage tutorAidStudentStorage,
+                          TutorAidLessonStorage tutorAidLessonStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
-        this.tutorAidStorage = tutorAidStorage;
+        this.tutorAidStudentStorage = tutorAidStudentStorage;
+        this.tutorAidLessonStorage = tutorAidLessonStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -51,29 +57,58 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getStudentBookFilePath() {
-        return tutorAidStorage.getStudentBookFilePath();
+        return tutorAidStudentStorage.getStudentBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyStudentBook> readStudentBook() throws DataConversionException, IOException {
-        return readStudentBook(tutorAidStorage.getStudentBookFilePath());
+        return readStudentBook(tutorAidStudentStorage.getStudentBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyStudentBook> readStudentBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return tutorAidStorage.readStudentBook(filePath);
+        return tutorAidStudentStorage.readStudentBook(filePath);
     }
 
     @Override
     public void saveStudentBook(ReadOnlyStudentBook studentBook) throws IOException {
-        saveStudentBook(studentBook, tutorAidStorage.getStudentBookFilePath());
+        saveStudentBook(studentBook, tutorAidStudentStorage.getStudentBookFilePath());
     }
 
     @Override
     public void saveStudentBook(ReadOnlyStudentBook studentBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        tutorAidStorage.saveStudentBook(studentBook, filePath);
+        tutorAidStudentStorage.saveStudentBook(studentBook, filePath);
+    }
+
+    // ================ LessonBook methods ==============================
+
+    @Override
+    public Path getLessonBookFilePath() {
+        return tutorAidLessonStorage.getLessonBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyLessonBook> readLessonBook() throws DataConversionException, IOException {
+        return readLessonBook(tutorAidLessonStorage.getLessonBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyLessonBook> readLessonBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return tutorAidLessonStorage.readLessonBook(filePath);
+    }
+
+    @Override
+    public void saveLessonBook(ReadOnlyLessonBook lessonBook) throws IOException {
+        saveLessonBook(lessonBook, tutorAidLessonStorage.getLessonBookFilePath());
+    }
+
+    @Override
+    public void saveLessonBook(ReadOnlyLessonBook lessonBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        tutorAidLessonStorage.saveLessonBook(lessonBook, filePath);
     }
 
 }
