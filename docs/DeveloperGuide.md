@@ -180,6 +180,8 @@ If the condition is met, a `CommandException` is thrown to let the user know tha
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of `Student` as we are creating a new `Student` instance. 
 
+ </div>
+ 
 ### ParticipationCommand
 
 This command serves to update the `Participation` score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
@@ -194,6 +196,8 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the `Attendance` and is only executed in the event that `participationUpdate` is more than 0. Otherwise, it will not run.
 
+ </div>
+ 
 ### SortCommand
 
 This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
