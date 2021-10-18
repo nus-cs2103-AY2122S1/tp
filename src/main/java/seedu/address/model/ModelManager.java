@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
@@ -102,6 +103,13 @@ public class ModelManager implements Model {
         requireNonNull(customer);
         return addressBook.hasCustomer(customer);
     }
+
+    @Override
+    public boolean hasCustomerWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.hasCustomerWithPhone(phone);
+    }
+
     @Override
     public boolean hasEmployee(Employee employee) {
         requireNonNull(employee);

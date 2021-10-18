@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
@@ -69,6 +70,12 @@ public interface Model {
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasCustomer(Customer customer);
+
+    /**
+     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     */
+    boolean hasCustomerWithPhone(Phone phone);
+
     /**
      * Returns true if an employee with the same identity as {@code employee} exists in the address book.
      */

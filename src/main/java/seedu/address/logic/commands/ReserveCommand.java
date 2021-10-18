@@ -25,7 +25,9 @@ public class ReserveCommand extends Command {
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
-    public static final String MESSAGE_UNSUCCESSFUL = "Reservation already exist: %1$s";
+    public static final String MESSAGE_RESERVATION_EXISTS = "Reservation already exist: %1$s";
+    public static final String MESSAGE_CUSTOMER_MISSING =
+            "No customer with phone number %1$s exist yet.\nUnable to create reservation.";
 
     private Phone phone;
     private int numberOfPeople;
@@ -48,10 +50,12 @@ public class ReserveCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // TODO: Check the time whether can add or not
-
+        if (!model.hasCustomerWithPhone(phone)) {
+            throw new CommandException(String.format(MESSAGE_CUSTOMER_MISSING, phone));
+        }
         Reservation reservation = new Reservation(phone, numberOfPeople, time);
         if (model.hasReservation(reservation)) {
-            throw new CommandException(String.format(MESSAGE_UNSUCCESSFUL, reservation));
+            throw new CommandException(String.format(MESSAGE_RESERVATION_EXISTS, reservation));
         }
         model.addReservation(reservation);
         return new CommandResult(String.format(MESSAGE_SUCCESS, reservation));

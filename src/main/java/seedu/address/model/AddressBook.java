@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.UniqueCustomerList;
 import seedu.address.model.person.employee.Employee;
@@ -99,6 +100,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return customers.contains(customer);
+    }
+
+    /**
+     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     */
+    public boolean hasCustomerWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return customers.containsCustomerWithPhone(phone);
     }
 
     /**
