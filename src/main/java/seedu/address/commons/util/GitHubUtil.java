@@ -140,7 +140,7 @@ public class GitHubUtil {
      * has made to date.
      *
      * @param userName The name of the user.
-     * @return The total number of commits.
+     * @return The total number of repos.
      */
     public int getRepoCount(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
