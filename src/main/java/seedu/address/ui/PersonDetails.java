@@ -103,8 +103,9 @@ public class PersonDetails extends UiPart<Region> {
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(image);
         // Please change when github profile usernames are added. (this for trial)
-        String userName = "jai2501";
+        String userName = "crypto-code";
         profileView.setImage(new GitHubUtil().getProfilePicture(userName));
+        profileView.setEffect(new DropShadow(20, Color.BLACK));
     }
 
     /**
