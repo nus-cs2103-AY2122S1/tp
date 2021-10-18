@@ -17,7 +17,6 @@ import java.util.List;
 
 import tutoraid.model.LessonBook;
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 /**
