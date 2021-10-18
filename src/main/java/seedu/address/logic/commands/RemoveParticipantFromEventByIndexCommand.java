@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,14 +16,14 @@ public class RemoveParticipantFromEventByIndexCommand extends Command {
     public static final String COMMAND_WORD = "removeParticipantByIndex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": remove Participant with specified index from another event with specified index.\n"
+            + ": remove the Participant with specified index from an event with another specified index.\n"
             + "Parameters: \n"
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX "
             + "Example: " + COMMAND_WORD + "1 2";
 
     public static final String MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS =
-            "Removed Participant: %1$s from event %2$s successfully";
+            "Removed %1$s from %2$s successfully";
 
     private final Index participantIndex;
     private final Index eventIndex;
@@ -42,16 +43,28 @@ public class RemoveParticipantFromEventByIndexCommand extends Command {
         List<Participant> lastShownParticipantList = model.getFilteredParticipantList();
         List<Event> lastShownEventList = model.getFilteredEventList();
 
-        Participant participantToRemove = lastShownParticipantList.get(participantIndex.getZeroBased());
+        Participant participantToRemove;
 
-        Event selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
+        try {
+            participantToRemove = lastShownParticipantList.get(participantIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
+        }
 
-        if (!selectedEvent.getParticipants().contains(participantToRemove)) {
-            throw new CommandException("Participant " + participantToRemove.getFullName() + " doesn't exist in event!");
+        Event selectedEvent;
+
+        try {
+            selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        if (!selectedEvent.hasParticipant(participantToRemove)) {
+            throw new CommandException(Messages.showParticipantDoesNotExist(participantToRemove.getFullName()));
         }
 
         // remove participant
-        selectedEvent.getParticipants().remove(participantToRemove);
+        selectedEvent.removeParticipant(participantToRemove);
 
         return new CommandResult(String.format(MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS,
                 participantToRemove.getFullName(), selectedEvent.getName()));

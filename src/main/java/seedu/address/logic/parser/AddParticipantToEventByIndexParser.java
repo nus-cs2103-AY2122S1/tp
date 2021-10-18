@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ZERO_BASED_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddParticipantToEventByIndexCommand;
@@ -22,8 +23,7 @@ public class AddParticipantToEventByIndexParser implements Parser<AddParticipant
             Index eventIndex = ParserUtil.parseIndex(sections[2]);
             return new AddParticipantToEventByIndexCommand(participantIndex, eventIndex);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_ZERO_BASED_INDEX);
         }
 
     }

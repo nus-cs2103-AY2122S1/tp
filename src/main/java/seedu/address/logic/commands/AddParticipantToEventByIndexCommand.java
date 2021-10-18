@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,14 +16,13 @@ public class AddParticipantToEventByIndexCommand extends Command {
     public static final String COMMAND_WORD = "addParticipantByIndex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": add Participant with specified index to another event with specified index.\n"
+            + ": adds Participant with specified index to an event with another specified index.\n"
             + "Parameters: \n"
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX "
             + "Example: " + COMMAND_WORD + "1 2";
 
-    public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-            "Added Participant: %1$s to event %2$s successfully";
+    public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS = "Added %1$s to %2$s successfully";
 
     private final Index participantIndex;
     private final Index eventIndex;
@@ -42,16 +42,28 @@ public class AddParticipantToEventByIndexCommand extends Command {
         List<Participant> lastShownParticipantList = model.getFilteredParticipantList();
         List<Event> lastShownEventList = model.getFilteredEventList();
 
-        Participant participantToAdd = lastShownParticipantList.get(participantIndex.getZeroBased());
+        Participant participantToAdd;
 
-        Event selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
+        try {
+            participantToAdd = lastShownParticipantList.get(participantIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
+        }
 
-        if (selectedEvent.getParticipants().contains(participantToAdd)) {
-            throw new CommandException("Participant " + participantToAdd.getFullName() + " already exists!");
+        Event selectedEvent;
+
+        try {
+            selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        if (selectedEvent.hasParticipant(participantToAdd)) {
+            throw new CommandException(Messages.showParticipantExists(participantToAdd.getFullName()));
         }
 
         // add participant
-        selectedEvent.getParticipants().add(participantToAdd);
+        selectedEvent.addParticipant(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
                 participantToAdd.getFullName(), selectedEvent.getName()));
