@@ -18,6 +18,7 @@ public class Person implements Comparable<Person> {
     // Identity fields
     private final Name name;
     private final Telegram telegram;
+    private final Github github;
     private final Phone phone;
     private final Email email;
 
@@ -28,10 +29,12 @@ public class Person implements Comparable<Person> {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Telegram telegram, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, telegram, phone, email, address, tags);
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
         this.name = name;
         this.telegram = telegram;
+        this.github = github;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -44,6 +47,10 @@ public class Person implements Comparable<Person> {
 
     public Telegram getTelegram() {
         return telegram;
+    }
+
+    public Github getGithub() {
+        return github;
     }
 
     public Phone getPhone() {
@@ -96,6 +103,7 @@ public class Person implements Comparable<Person> {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getTelegram().equals(getTelegram())
+                && otherPerson.getGithub().equals(getGithub())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
@@ -105,7 +113,7 @@ public class Person implements Comparable<Person> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, phone, email, address, tags);
+        return Objects.hash(name, telegram, github, phone, email, address, tags);
     }
 
     @Override
@@ -119,6 +127,8 @@ public class Person implements Comparable<Person> {
         builder.append(getName())
                 .append("; Telegram: ")
                 .append(getTelegram())
+                .append("; Github: ")
+                .append(getGithub())
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
