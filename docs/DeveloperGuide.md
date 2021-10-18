@@ -459,7 +459,7 @@ Precondition: CS2100 TA opens ProgrammerError for the first time
 6.  The software should follow the Object-oriented paradigm primarily. (with the possibility of allowing a mix of other styles when justifiable).
 7.  The final product should be a result of evolving the given code base. (i.e. allowed to replace all existing code with new code, as long as it is done incrementally)
 8.  The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for standard screen resolutions 1920x1080 and higher, and screen scales 100% and 125%.
-9. the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher, and screen scales 150%.
+9.  The GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for resolutions 1280x720 and higher, and screen scales 150%.
 
 ### Glossary
 
