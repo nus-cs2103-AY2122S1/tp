@@ -94,7 +94,8 @@ public class AddressBookParserTest {
         Employee employee = new EmployeeBuilder().build();
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(employee).build();
         System.out.println(EditEmployeeCommand.COMMAND_WORD
-                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " "
+                + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
         EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(EditEmployeeCommand.COMMAND_WORD
             + " " + INDEX_FIRST_PERSON.getOneBased() + " " + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
         System.out.println(new EditEmployeeCommand(INDEX_FIRST_PERSON, descriptor));
