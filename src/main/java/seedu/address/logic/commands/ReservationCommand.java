@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Switches to a the supplier view in the application.
+ * Switches to the reservation view in the application.
  */
 public class ReservationCommand extends Command {
 
