@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class LessonCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS = "Lesson codes should be alphanumeric";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String lessonCode;
@@ -17,7 +17,7 @@ public class LessonCode {
     /**
      * Constructs a {@code LessonCode}.
      *
-     * @param lessonCode A valid tag name.
+     * @param lessonCode A valid lesson code.
      */
     public LessonCode(String lessonCode) {
         requireNonNull(lessonCode);
