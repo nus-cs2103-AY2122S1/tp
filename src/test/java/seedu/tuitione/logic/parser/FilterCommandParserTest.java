@@ -23,14 +23,14 @@ public class FilterCommandParserTest {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
                 new FilterCommand(new Grade("S2"), null);
-        assertParseSuccess(parser, "S2", expectedFilterCommand);
+        assertParseSuccess(parser, "g/S2", expectedFilterCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, " S2   ", expectedFilterCommand);
+        assertParseSuccess(parser, " g/S2   ", expectedFilterCommand);
     }
 
     @Test
     public void parse_invalidGrade_throwsParseException() {
-        assertParseFailure(parser, "A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "g/A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
     }
 }
