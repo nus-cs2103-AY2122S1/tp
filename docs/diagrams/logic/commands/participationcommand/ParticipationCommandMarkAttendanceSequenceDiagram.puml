@@ -52,8 +52,5 @@ natt --> pc --
 pc -> ste ++ : setAttendance(newAttendance)
 ste --> pc --
 end
-
-
 end
-
 @enduml
