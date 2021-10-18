@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.person.UniquePersonList;
+import seedu.fast.model.tag.PriorityTag;
 
 /**
  * Wraps all data at the FAST level
@@ -21,6 +22,7 @@ public class Fast implements ReadOnlyFast {
 
     private final UniquePersonList persons;
     private final FilteredList<Person> filteredPersons;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -108,22 +110,25 @@ public class Fast implements ReadOnlyFast {
         persons.sortPersons(comparator);
     }
 
-    public int getHighPriorityCounts() {
-        String[] high = {"high"};
+    /**
+     * Returns the number of persons tagged with the respective PriorityTag.
+     */
+    public int getHighPriorityCount() {
+        String[] high = {PriorityTag.HighPriority.TERM};
         PriorityPredicate highPredicate = new PriorityPredicate(Arrays.asList(high));
         filteredPersons.setPredicate(highPredicate);
         return filteredPersons.size();
     }
 
-    public int getMediumPriorityCounts() {
-        String[] medium = {"med"};
+    public int getMediumPriorityCount() {
+        String[] medium = {PriorityTag.MediumPriority.TERM};
         PriorityPredicate mediumPredicate = new PriorityPredicate(Arrays.asList(medium));
         filteredPersons.setPredicate(mediumPredicate);
         return filteredPersons.size();
     }
 
-    public int getLowPriorityCounts() {
-        String[] low = {"low"};
+    public int getLowPriorityCount() {
+        String[] low = {PriorityTag.LowPriority.TERM};
         PriorityPredicate lowPredicate = new PriorityPredicate(Arrays.asList(low));
         filteredPersons.setPredicate(lowPredicate);
         return filteredPersons.size();

@@ -1,9 +1,9 @@
 package seedu.fast.ui;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
 import seedu.fast.model.ReadOnlyFast;
+import seedu.fast.model.tag.PriorityTag;
 
 
 /**
@@ -42,7 +43,6 @@ public class StatsWindow extends UiPart<Stage> {
 
         // Since StatsWindow receives a Fast instance, it is safe to typecast it
         this.fast = (Fast) fast;
-
         populatePriorityPieChart();
     }
 
@@ -93,21 +93,26 @@ public class StatsWindow extends UiPart<Stage> {
         getRoot().hide();
     }
 
+    /**
+     * Adds the data from Fast into the PieChart.
+     */
     public void populatePriorityPieChart() {
-        int highPriorityCount = this.fast.getHighPriorityCounts();
-        int mediumPriorityCount = this.fast.getHighPriorityCounts();
-        int lowPriorityCount = this.fast.getLowPriorityCounts();
+        priorityPieChart.getData().clear();
+        int highPriorityCount = this.fast.getHighPriorityCount();
+        int mediumPriorityCount = this.fast.getMediumPriorityCount();
+        int lowPriorityCount = this.fast.getLowPriorityCount();
 
+        // for each priority, check that it is non-zero to prevent "ghost" labels in the PieChart
         if (highPriorityCount > 0) {
-            PieChart.Data highData = new PieChart.Data("High Priority", highPriorityCount);
+            PieChart.Data highData = new PieChart.Data(PriorityTag.HighPriority.NAME, highPriorityCount);
             priorityPieChart.getData().add(highData);
         }
         if (mediumPriorityCount > 0) {
-            PieChart.Data mediumData = new PieChart.Data("Medium Priority", mediumPriorityCount);
+            PieChart.Data mediumData = new PieChart.Data(PriorityTag.MediumPriority.NAME, mediumPriorityCount);
             priorityPieChart.getData().add(mediumData);
         }
         if (lowPriorityCount > 0) {
-            PieChart.Data lowData = new PieChart.Data("Low Priority", highPriorityCount);
+            PieChart.Data lowData = new PieChart.Data(PriorityTag.LowPriority.NAME, lowPriorityCount);
             priorityPieChart.getData().add(lowData);
         }
     }
@@ -116,6 +121,7 @@ public class StatsWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
+        populatePriorityPieChart();
         getRoot().requestFocus();
     }
 
