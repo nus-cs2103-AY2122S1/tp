@@ -2,21 +2,19 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import seedu.address.model.group.Group;
+import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Group}.
+ * An UI component that displays information of a {@code Student}.
  */
-public class GroupCard extends UiPart<Region> {
+public class MemberCard extends UiPart<Region> {
 
-    private static final String FXML = "GroupListCard.fxml";
+    private static final String FXML = "MemberListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,39 +24,32 @@ public class GroupCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Group group;
-    private MemberListPanel memberListPanel;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label email;
     @FXML
-    private Label link;
+    private Label studentNumber;
     @FXML
     private FlowPane tags;
-    @FXML
-    private StackPane memberListPanelPlaceholder;
 
     /**
-     * Creates a {@code GroupCode} with the given {@code Group} and index to display.
+     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public GroupCard(Group group, int displayedIndex) {
+    public MemberCard(Student student, int displayedIndex) {
         super(FXML);
-        this.group = group;
-        id.setText(displayedIndex + ". ");
-        name.setText(group.getName().name);
-        link.setText(group.getGroupGithubLink());
-        memberListPanel = new MemberListPanel(FXCollections.observableArrayList(group.getMembers().studentList));
+        this.student = student;
+        name.setText(student.getName().fullName);
+        email.setText(student.getEmail().value);
+        studentNumber.setText(student.getStudentNumber().toString());
 
-        memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
-
-        group.getTags().stream()
+        student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
     }
 
     @Override
@@ -69,14 +60,12 @@ public class GroupCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof GroupCard)) {
+        if (!(other instanceof MemberCard)) {
             return false;
         }
 
         // state check
-        GroupCard card = (GroupCard) other;
-        return id.getText().equals(card.id.getText())
-                && group.equals(card.group);
+        MemberCard card = (MemberCard) other;
+        return student.equals(card.student);
     }
-
 }
