@@ -21,19 +21,19 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_CLASS = "Class list contains duplicate class(es)";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lesson list contains duplicate lesson(es)";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
-    private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
+    private final List<JsonAdaptedModuleLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons and classes.
+     * Constructs a {@code JsonSerializableAddressBook} with the given persons and lessons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("classes") List<JsonAdaptedModuleClass> classes) {
+                                       @JsonProperty("lessons") List<JsonAdaptedModuleLesson> lessons) {
         this.persons.addAll(persons);
-        this.classes.addAll(classes);
+        this.lessons.addAll(lessons);
     }
 
     /**
@@ -43,7 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        classes.addAll(source.getModuleLessonList().stream().map(JsonAdaptedModuleClass::new)
+        lessons.addAll(source.getModuleLessonList().stream().map(JsonAdaptedModuleLesson::new)
                 .collect(Collectors.toList()));
     }
 
@@ -62,10 +62,10 @@ class JsonSerializableAddressBook {
             addressBook.addPerson(person);
         }
 
-        for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
-            ModuleLesson moduleLesson = jsonAdaptedModuleClass.toModelType();
+        for (JsonAdaptedModuleLesson jsonAdaptedModuleLesson : lessons) {
+            ModuleLesson moduleLesson = jsonAdaptedModuleLesson.toModelType();
             if (addressBook.hasLesson(moduleLesson)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
             }
             addressBook.addLesson(moduleLesson);
         }
