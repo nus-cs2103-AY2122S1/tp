@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
+import seedu.anilist.model.anime.Anime;
+
+import java.util.List;
 
 /**
  * Clears the anime list.
@@ -17,7 +20,10 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setAnimeList(new AnimeList());
+        List<Anime> lastShownList = model.getFilteredAnimeList();
+        while (!model.getFilteredAnimeList().isEmpty()) {
+            model.deleteAnime(lastShownList.get(0));
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
