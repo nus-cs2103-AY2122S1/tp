@@ -2,28 +2,25 @@ package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
-import seedu.anilist.model.anime.Anime;
-
-import java.util.List;
 
 /**
  * Clears the anime list.
  */
 public class ClearCommand extends Command {
-
+    private boolean isIntermediate = true;
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Anime List has been cleared!";
+    public static final String MESSAGE_CLEAR_CONFIRMATION = "Are you sure you want to clear the displayed " +
+            "anime(s)?\nThis action is irreversible. [y/n]";
 
+    @Override
+    public boolean requiresConfirmation() {
+        return this.isIntermediate;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        List<Anime> lastShownList = model.getFilteredAnimeList();
-        while (!model.getFilteredAnimeList().isEmpty()) {
-            model.deleteAnime(lastShownList.get(0));
-        }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
     }
 }

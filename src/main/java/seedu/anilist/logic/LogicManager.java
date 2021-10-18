@@ -22,6 +22,9 @@ import seedu.anilist.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+
+    private Command lastCmd;
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -32,6 +35,7 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
+        this.lastCmd = null;
         this.model = model;
         this.storage = storage;
         animeListParser = new AnimeListParser();
@@ -40,10 +44,16 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
-        Command command = animeListParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        if (this.lastCmd == null || !this.lastCmd.requiresConfirmation()) {
+            Command command = animeListParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+            this.lastCmd = command;
+        } else {
+            Command command = animeListParser.parseConfirmationCommand(this.lastCmd, commandText);
+            commandResult = command.execute(model);
+            this.lastCmd = command;
+        }
 
         try {
             storage.saveAnimeList(model.getAnimeList());
