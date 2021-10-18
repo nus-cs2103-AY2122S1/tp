@@ -6,11 +6,11 @@ import java.util.ArrayList;
  * Class which stores previous commands which the user has entered.
  */
 public class CommandHistory {
+    public static final int EMPTY_INDEX = -1;
+    public static final int FIRST_INDEX = 0;
+
     /** ArrayList of all the previously entered userStrings. **/
     private final ArrayList<String> commands = new ArrayList<>();
-
-    private final int EMPTY_INDEX = -1;
-    private final int FIRST_INDEX = 0;
 
     /**
      * Current index of userString that is being pointed to.
@@ -50,10 +50,10 @@ public class CommandHistory {
      * @return next command.
      */
     public String getNext() {
-        final int LAST_INDEX = commands.size() - 1;
+        int lastIndex = commands.size() - 1;
         if (currentIndex == EMPTY_INDEX) {
             return "";
-        } else if (currentIndex == LAST_INDEX) {
+        } else if (currentIndex == lastIndex) {
             return "";
         }
         currentIndex++;
