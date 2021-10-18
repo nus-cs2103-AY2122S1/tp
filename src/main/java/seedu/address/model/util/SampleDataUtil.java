@@ -50,7 +50,7 @@ public class SampleDataUtil {
                     new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                     getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"),
-                    new Telegram("irfan-ibrahim"),
+                    new Telegram("irfan_ibrahim"),
                     new Github("irfan-ibrahim"),
                     new Phone("92492021"),
                     new Email("irfan@example.com"),
