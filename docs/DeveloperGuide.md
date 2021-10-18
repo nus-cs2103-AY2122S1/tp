@@ -176,11 +176,11 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] View Student feature
+### \[Proposed\] View Student/Lesson feature
 
 #### Proposed Implementation
 
-The proposed view student mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `tutorAidStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `ModelManager#viewStudent()` — Updates student panel with the student of interest
 
@@ -188,17 +188,15 @@ This operation is exposed in the `Model` interface as `Model#viewStudent()`.
 
 Given below is an example usage scenario and how the view student mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedStudentBook` StudentBook` will be initialized with the initial TutorAid state, and the `currentStatePointer` pointing to that single TutorAid state.
+Step 1. The user launches the application for the first time. The `ModelManager` will be initialized with the initial model manager state, and the `currentStatePointer` pointing to that single model manager state.
 
 ![ViewStudentViewClassState0](images/ViewStudentViewClassState0.png)
 
-Step 2. The user executes `view -s 1`/`view -l 1` command to view the 1st student/lesson in TutorAid. The `view` command calls `Model#viewStudent()`/`Model#viewLesson()`, causing the modified state of TutorAid after the `view -s 1`/`view -l 1` command executes to be saved in the `tutorAidStateList`, and the `currentStatePointer` pointing to that single TutorAid state.
+Step 2. The user executes `view -s 1`/`view -l 1` command to view the 1st student/lesson in TutorAid. The `view` command calls `Model#viewStudent()`/`Model#viewLesson()`, causing the modified state of model manager after the `view -s 1`/`view -l 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that single model manager state.
 
 The following sequence diagram shows how the view student operation works:
 
 ![ViewStudentSequenceDiagram](images/ViewStudentSequenceDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
 
 #### Design considerations:
 

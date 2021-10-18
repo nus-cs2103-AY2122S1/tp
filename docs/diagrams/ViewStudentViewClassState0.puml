@@ -5,8 +5,8 @@ skinparam ClassBorderColor #000000
 
 title Initial state
 
-package States {
-    class State1 as ":TutorAid"
+package State {
+    class State1 as ":ModelManager"
 }
 
 class Pointer as "Current State" #FFFFFF
