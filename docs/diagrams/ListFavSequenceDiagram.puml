@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListFavCommand" as ListFavCommand LOGIC_COLOR
+
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("listfav")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("listfav")
+activate AddressBookParser
+
+create ListFavCommand
+AddressBookParser -> ListFavCommand
+activate ListFavCommand
+
+ListFavCommand --> AddressBookParser
+deactivate ListFavCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> ListFavCommand : execute()
+activate ListFavCommand
+
+ListFavCommand -> Model : execute()
+activate Model
+
+Model --> ListFavCommand
+deactivate Model
+
+ListFavCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListFavCommand
+deactivate CommandResult
+
+ListFavCommand --> LogicManager
+deactivate ListFavCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

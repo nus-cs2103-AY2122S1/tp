@@ -154,6 +154,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List All Favourites
+#### Implementation
+The `listfav` mechanism will allow the user to view all the students that he/she has favourited.
+
+The implementation did not require the creation of a parser for `ListFavCommand` as the command does not take in any parameters.
+`ListFavCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then change the content to display all favourited profiles. 
+
+#### Usage
+To use this function to see all favourited profiles, simply enter `listfav` in the command line. 
+
+The following sequence diagram shows how the `listfav` mechanism works:
+![ListFavCommand0](images/ListFavSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
