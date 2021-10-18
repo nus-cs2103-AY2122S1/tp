@@ -28,9 +28,9 @@ import seedu.address.model.item.Name;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;
-import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class InventoryTest {
 
