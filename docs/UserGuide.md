@@ -179,13 +179,11 @@ Format: `rmk INDEX [r/REMARK]`
 
 * Adds a remark to the person at the specified `INDEX`.
 * Remarks have a character limit of 100 characters.
-* To delete a remark, leave the remark parameter `[r/REMARK]` empty. <br>
-  e.g. `rmk 1`.
+* To delete a remark, leave the remark parameter `[r/REMARK]` empty.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first person.
+* `rmk 1` removes the remark from the first person.<br>
 
 ### Adding an appointment: `appt`
 
