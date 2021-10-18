@@ -51,7 +51,7 @@ public class ViewGroupCommand extends Command {
     }
 
     public String getGroupInformation(Model model) {
-        ObservableList<Group> groupList = model.getAddressBook().getGroupList();
+        ObservableList<Group> groupList = model.getCsBook().getGroupList();
 
         // Finds group in the grouplist that has the given group name
         for (Group group : groupList) {

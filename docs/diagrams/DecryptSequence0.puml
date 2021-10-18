@@ -9,7 +9,7 @@ box Commons COMMONS_COLOR_T1
 participant "<<class>>\nEncryptedJsonUtil" as EncryptedJsonUtil COMMONS_COLOR
 end box
 
-[-> JsonCsBookStorage : readAddressBook()
+[-> JsonCsBookStorage : readCsBook()
 activate JsonCsBookStorage
 
 JsonCsBookStorage -> EncryptedJsonUtil : readEncryptedJsonFile(filePath, JsonSerializableCsBook.class)
