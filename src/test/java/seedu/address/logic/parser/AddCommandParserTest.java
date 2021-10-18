@@ -91,7 +91,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         Person expectedPerson = new PersonBuilder(AMY).build();
 
-        // missing phone prefix, telegram handle prefix and zero tags
+        // missing phone prefix, telegram handle prefix and zero lessonCodes
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2040,
                 new AddCommand(expectedPerson));
     }

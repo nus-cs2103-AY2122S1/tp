@@ -19,7 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.LessonCode;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -82,17 +82,19 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
+     * Parses {@code Collection<String> lessonCodes} into a {@code Set<LessonCode>} if {@code lessonCodes} is non-empty.
+     * If {@code lessonCodes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<LessonCode>} containing zero lessonCodes.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
+    private Optional<Set<LessonCode>> parseLessonCodesForEdit(Collection<String> lessonCodes) throws ParseException {
+        assert lessonCodes != null;
 
-        if (tags.isEmpty()) {
+        if (lessonCodes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = lessonCodes.size() == 1 && lessonCodes.contains("")
+                ? Collections.emptySet()
+                : lessonCodes;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 

@@ -30,7 +30,7 @@ public class ModuleLessonCard extends UiPart<Region> {
     @FXML
     private FlowPane moduleCodeContainer;
     @FXML
-    private FlowPane tags;
+    private FlowPane lessonCodes;
 
     /**
      * An UI component that displays information of a {@code moduleLesson}.
@@ -45,8 +45,8 @@ public class ModuleLessonCard extends UiPart<Region> {
 
         moduleLesson.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
-                .map(moduleCode -> moduleCode.tags)
-                .forEach(t -> t.forEach(tag -> tags.getChildren().add(new Label(tag.tagName))));
+                .map(moduleCode -> moduleCode.lessonCodes)
+                .forEach(t -> t.forEach(lessonCode -> lessonCodes.getChildren().add(new Label(lessonCode.lessonCode))));
         lessonDay.setText(moduleLesson.getDay().toString());
         lessonTime.setText(moduleLesson.getTime().toString());
         remark.setText(moduleLesson.getRemark().value);

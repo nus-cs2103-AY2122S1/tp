@@ -25,7 +25,7 @@
                 </Label>
                <FlowPane fx:id="moduleCodeContainer" />
             </HBox>
-            <FlowPane fx:id="tags">
+            <FlowPane fx:id="lessonCodes">
                 <padding>
                     <Insets bottom="5.0" top="5.0" />
                 </padding>

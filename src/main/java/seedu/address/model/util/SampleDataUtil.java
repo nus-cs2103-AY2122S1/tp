@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.LessonCode;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -86,8 +86,11 @@ public class SampleDataUtil {
         String trimmedModuleCode = moduleCode.trim();
         String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
         assert moduleCodeArr.length >= 1 : "Array should not be empty\n";
-        Set<Tag> tags = Arrays.stream(moduleCodeArr).skip(1).map(Tag::new).collect(Collectors.toSet());
-        return new ModuleCode(moduleCodeArr[0], tags);
+        Set<LessonCode> lessonCodes = Arrays.stream(moduleCodeArr)
+                .skip(1)
+                .map(LessonCode::new)
+                .collect(Collectors.toSet());
+        return new ModuleCode(moduleCodeArr[0], lessonCodes);
     }
 
 }
