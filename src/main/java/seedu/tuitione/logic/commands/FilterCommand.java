@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
+import seedu.tuitione.model.lesson.Subject;
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.StudentIsOfSpecifiedGrade;
 
@@ -21,20 +22,29 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " S2";
 
     private final Grade grade;
+    private final Subject subject;
 
-    public FilterCommand(Grade grade) {
+    public FilterCommand(Grade grade, Subject subject) {
         this.grade = grade;
+        this.subject = subject;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
-        model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
-        String output = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
-                model.getFilteredStudentList().size())
-                    + "\n"
-                    + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW,
+        String output = "";
+        if (grade != null) {
+            model.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
+            model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
+            output += String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
+                    model.getFilteredStudentList().size())
+                    + "\n";
+        }
+        if (subject != null) {
+            model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
+        }
+
+        output += String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW,
                     model.getFilteredLessonList().size());
 
         return new CommandResult(output);

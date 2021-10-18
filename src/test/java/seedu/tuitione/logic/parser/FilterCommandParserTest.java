@@ -22,7 +22,7 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new Grade("S2"));
+                new FilterCommand(new Grade("S2"), null);
         assertParseSuccess(parser, "S2", expectedFilterCommand);
 
         // multiple whitespaces
