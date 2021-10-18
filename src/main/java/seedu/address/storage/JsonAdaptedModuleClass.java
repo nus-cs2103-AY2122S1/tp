@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.modulelesson.Day;
+import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.ModuleCode;
@@ -74,9 +74,9 @@ public class JsonAdaptedModuleClass {
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(classModuleCodes);
 
         if (day == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonDay.class.getSimpleName()));
         }
-        final Day classDay = new Day(day);
+        final LessonDay lessonDay = new LessonDay(day);
 
         if (time == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
@@ -88,7 +88,7 @@ public class JsonAdaptedModuleClass {
         }
         final Remark classRemark = new Remark(remark);
 
-        return new ModuleLesson(modelModuleCodes, classDay, classTime, classRemark);
+        return new ModuleLesson(modelModuleCodes, lessonDay, classTime, classRemark);
     }
 
 }

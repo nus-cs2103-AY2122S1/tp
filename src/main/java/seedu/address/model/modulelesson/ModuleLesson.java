@@ -18,7 +18,7 @@ public class ModuleLesson {
 
     // Identity fields
     private final Set<ModuleCode> moduleCodes = new HashSet<>();
-    private final Day day;
+    private final LessonDay lessonDay;
     private final Time time;
     private final Remark remark;
 
@@ -26,11 +26,11 @@ public class ModuleLesson {
     /**
      * Every field must be present and not null.
      */
-    public ModuleLesson(Set<ModuleCode> moduleCode, Day day, Time time, Remark remark) {
-        requireAllNonNull(moduleCode, day, time, remark);
+    public ModuleLesson(Set<ModuleCode> moduleCode, LessonDay lessonDay, Time time, Remark remark) {
+        requireAllNonNull(moduleCode, lessonDay, time, remark);
         assert(moduleCode.size() == 1) : "Class should only contain 1 module code!";
         this.moduleCodes.addAll(moduleCode);
-        this.day = day;
+        this.lessonDay = lessonDay;
         this.time = time;
         this.remark = remark;
     }
@@ -43,8 +43,8 @@ public class ModuleLesson {
         return Collections.unmodifiableSet(moduleCodes);
     }
 
-    public Day getDay() {
-        return day;
+    public LessonDay getDay() {
+        return lessonDay;
     }
 
     public Time getTime() {
@@ -94,7 +94,7 @@ public class ModuleLesson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleCodes, day, time, remark);
+        return Objects.hash(moduleCodes, lessonDay, time, remark);
     }
 
     @Override
