@@ -124,11 +124,11 @@ public class SampleDataUtil {
 
     public static Reservation[] getSampleReservations() {
         return new Reservation[] {
-                new Reservation(new Phone("92492021"), 2, LocalDateTime.parse("2021-12-24T20:00")),
-                new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-11-11T13:00")),
-                new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:30")),
-                new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00")),
-                new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:30"))
+            new Reservation(new Phone("92492021"), 2, LocalDateTime.parse("2021-12-24T20:00")),
+            new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-11-11T13:00")),
+            new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:30")),
+            new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00")),
+            new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:30"))
         };
     }
 

@@ -10,7 +10,8 @@ import seedu.address.model.reservation.Reservation;
 
 public class ReservationCard extends UiPart<Region> {
     public static final String FXML = "ReservationListCard.fxml";
-    private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+    private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT =
+            DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
