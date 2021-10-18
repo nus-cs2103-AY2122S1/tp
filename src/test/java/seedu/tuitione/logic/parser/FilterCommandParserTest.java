@@ -7,7 +7,9 @@ import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSucce
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.logic.commands.FilterCommand;
+import seedu.tuitione.model.lesson.Subject;
 import seedu.tuitione.model.student.Grade;
+
 
 public class FilterCommandParserTest {
     private FilterCommandParser parser = new FilterCommandParser();
@@ -20,17 +22,31 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
-        // no leading and trailing whitespaces
-        FilterCommand expectedFilterCommand =
+        FilterCommand expectedFilterCommandTest1 =
                 new FilterCommand(new Grade("S2"), null);
-        assertParseSuccess(parser, "g/S2", expectedFilterCommand);
 
-        // multiple whitespaces
-        assertParseSuccess(parser, " g/S2   ", expectedFilterCommand);
+        // no leading and trailing whitespaces, only grade used to filter
+        assertParseSuccess(parser, " g/S2", expectedFilterCommandTest1);
+
+        // multiple whitespaces, only grade used to filter
+        assertParseSuccess(parser, "     g/S2   ", expectedFilterCommandTest1);
+
+        FilterCommand expectedFilterCommandTest2 =
+                new FilterCommand(null, new Subject("English"));
+
+        // only subject used to filter
+        assertParseSuccess(parser, " s/English", expectedFilterCommandTest2);
+
+
+        FilterCommand expectedFilterCommandTest3 =
+                new FilterCommand(new Grade("S2"), new Subject("English"));
+
+        // both grade and student used to filter
+        assertParseSuccess(parser, " g/S2 s/English", expectedFilterCommandTest3);
     }
 
     @Test
     public void parse_invalidGrade_throwsParseException() {
-        assertParseFailure(parser, "g/A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " g/A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
     }
 }

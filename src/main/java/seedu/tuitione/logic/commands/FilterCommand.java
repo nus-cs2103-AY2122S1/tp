@@ -25,7 +25,7 @@ public class FilterCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE + "S2 " + PREFIX_SUBJECT + "English" ;
+            + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE + "S2 " + PREFIX_SUBJECT + "English";
 
     private final Grade grade;
     private final Subject subject;
@@ -65,9 +65,20 @@ public class FilterCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FilterCommand // instanceof handles nulls
-                && grade.equals(((FilterCommand) other).grade)); // state check
+        if (other == this) { // short circuit if same object
+            return true;
+        } else if (other instanceof FilterCommand) { // instanceof handles nulls
+            if (subject == null) {
+                return grade.equals(((FilterCommand) other).grade);
+            } else if (grade == null) {
+                return subject.equals(((FilterCommand) other).subject);
+            } else {
+                return subject.equals(((FilterCommand) other).subject)
+                    && grade.equals(((FilterCommand) other).grade);
+            }
+        } else {
+            return false;
+        }
     }
 
     private String lessonFoundOutput (int size) {

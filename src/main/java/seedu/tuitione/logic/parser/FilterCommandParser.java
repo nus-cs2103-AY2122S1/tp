@@ -1,6 +1,5 @@
 package seedu.tuitione.logic.parser;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -12,7 +11,6 @@ import seedu.tuitione.logic.parser.exceptions.ParseException;
 import seedu.tuitione.model.lesson.Subject;
 import seedu.tuitione.model.student.Grade;
 
-
 /**
  * Parses input arguments and creates a new {@code FilterCommand} object.
  */
@@ -23,13 +21,13 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FilterCommand parse(String args) throws ParseException {
-        requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GRADE, PREFIX_SUBJECT);
         Grade grade = null;
         Subject subject = null;
 
-        if (!argMultimap.getPreamble().isEmpty()
-            || !areAnyPrefixesPresent(argMultimap, PREFIX_GRADE, PREFIX_SUBJECT)) {
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_GRADE, PREFIX_SUBJECT)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
@@ -40,11 +38,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             subject = ParserUtil.parseSubjectArgs(argMultimap.getValue(PREFIX_SUBJECT).get());
         }
 
+
         return new FilterCommand(grade, subject);
     }
 
-    private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }
