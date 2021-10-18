@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Function;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
@@ -175,4 +176,11 @@ public class PersonBuilder {
             disposableIncome, currentPlan, lastMet, nextMeeting, tags);
     }
 
+    /**
+     * @return {@code Person} function that we are building
+     */
+    public Function<ClientId, Person> buildFunction() {
+        return clientId -> new Person(clientId, name, phone, email, address, riskAppetite,
+                disposableIncome, currentPlan, lastMet, tags);
+    }
 }
