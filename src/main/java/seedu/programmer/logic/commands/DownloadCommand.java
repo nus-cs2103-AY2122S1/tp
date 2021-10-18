@@ -14,6 +14,6 @@ public class DownloadCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new DownloadCommandResult("");
+        return new DownloadCommandResult("Download command executed");
     }
 }
