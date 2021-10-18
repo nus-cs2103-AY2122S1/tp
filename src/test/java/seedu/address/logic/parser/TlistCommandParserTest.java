@@ -37,4 +37,10 @@ class TlistCommandParserTest {
         //invalid member id
         assertParseFailure(parser, INVALID_MEMBER_ID_DESC, MESSAGE_INVALID_INDEX);
     }
+
+    @Test
+    public void parse_preambleMissing_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TlistCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, Integer.toString(VALID_MEMBER_ID), expectedMessage);
+    }
 }
