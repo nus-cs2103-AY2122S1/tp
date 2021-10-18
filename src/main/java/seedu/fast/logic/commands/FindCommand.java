@@ -28,13 +28,21 @@ public class FindCommand extends Command {
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or priority tags, \n"
             + "tags or remarks and displays them as a list with index numbers.\n\n"
-            + "Parameters: \nKEYWORD [MORE_KEYWORDS]..."
-            + " OR " + PriorityTag.PRIORITY_TAG_PREFIX
-            + "PRIORITY [MORE_PRIORITIES]...\n\n"
+            + "Parameters: \nKEYWORD [MORE_KEYWORDS]...\n"
+            + " OR \n" + PriorityTag.PRIORITY_TAG_PREFIX
+            + "PRIORITY [MORE_PRIORITIES]...\n"
+            + " OR \n" + FindCommand.TAG_PREFIX
+            + "TAG [MORE_TAGS]...\n"
+            + " OR \n" + FindCommand.REMARK_PREFIX
+            + "REMARK [MORE_REMARKS]...\n\n"
             + "Examples: \n" + COMMAND_WORD + " alice bob charlie\n"
             + COMMAND_WORD + " "
             + PriorityTag.PRIORITY_TAG_PREFIX
-            + PriorityTag.LowPriority.TERM + "\n";
+            + PriorityTag.LowPriority.TERM + "\n"
+            + COMMAND_WORD + " "
+            + FindCommand.TAG_PREFIX + "friends\n"
+            + COMMAND_WORD + " "
+            + FindCommand.REMARK_PREFIX + "aardvark\n";
 
     private final Predicate<Person> predicate;
 
