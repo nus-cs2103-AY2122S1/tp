@@ -196,6 +196,39 @@ The following sequence diagram shows how the mark command works.
 
 ![Seq1](images/MarkSequenceDiagram.png)
 
+The `unmark` command does the opposite — it calls `Person#mark()`, which replaces the
+`Period` that are contained in the `Person` with the `Period` objects representing
+the initial `Period` without the input `Period`.
+
+
+#### Design considerations
+
+**Aspect: How to mark attendance**
+
+ * **Alternative 1 (current implementation):** Mark absent.
+   * Pros: Changes less amount of data in the case of high turnout rate.
+   * Cons: Harder to implement features that make use of a staff not being present.
+ * **Alternative 2**: Mark present.
+   * Pros: Easier to implement other features that make use of a staff being present. 
+   * Cons: Changes more data in the case of high turnout rate.
+
+**Aspect: How mark and unmark is represented**
+
+ * **Alternative 1 (current implementation):** Stored in the class for a staff.
+   * Pros: Easy to implement.
+   * Cons: Increased reliance on 
+ * **Alternative 2**: Stored in the class representing a shift. 
+   * Pros: Easier to implement features related to both shifts and attendance.
+   * Cons: More memory intensive.
+
+**Aspect: Representation of a `Period`**
+
+ * **Alternative 1(current implementation):** Use `LocalDate` to represent a period
+   * Pros: Makes the command easier to enter. 
+   * Cons: Makes shift related features and attendance related features harder to use.
+ * **Alternative 2(possible implementation):** Use `LocalDateTime` to represent a period
+   * Pros: Makes shift related features easier to implement.
+   * Cons: Parser becomes more complicated.
 
 
 --------------------------------------------------------------------------------------------------------------------
