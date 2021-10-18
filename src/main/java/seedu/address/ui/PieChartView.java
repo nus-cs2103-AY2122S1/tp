@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.Region;
 
-public class PieChartView extends UiPart<Region> {
+public class PieChartView extends UiPart<Region> implements SecondPanel {
     private static String fxml = "PieChart.fxml";
 
     @FXML
