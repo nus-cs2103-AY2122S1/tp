@@ -3,7 +3,8 @@
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "email": "hans@example.com",
     "tagged" : [ ],
-    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   } ],
   "tasks" : [ ]
 }

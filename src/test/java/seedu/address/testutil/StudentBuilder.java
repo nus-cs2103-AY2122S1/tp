@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
@@ -26,6 +27,7 @@ public class StudentBuilder {
     private StudentNumber studentNumber;
     private Set<Tag> tags;
     private Attendance attendance;
+    private Participation participation;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -36,6 +38,7 @@ public class StudentBuilder {
         studentNumber = new StudentNumber(DEFAULT_STUDENTNUMBER);
         tags = new HashSet<>();
         attendance = new Attendance();
+        participation = new Participation();
     }
 
     /**
@@ -47,6 +50,7 @@ public class StudentBuilder {
         studentNumber = studentToCopy.getStudentNumber();
         tags = new HashSet<>(studentToCopy.getTags());
         attendance = new Attendance(new ArrayList<>(studentToCopy.getAttendance().attendanceList));
+        participation = new Participation(new ArrayList<>(studentToCopy.getParticipation().participationList));
     }
 
     /**
@@ -89,8 +93,16 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Participation} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withParticipation(Integer... integers) {
+        this.attendance = SampleDataUtil.getAttendanceList(integers);
+        return this;
+    }
+
     public Student build() {
-        return new Student(name, email, studentNumber, tags, attendance);
+        return new Student(name, email, studentNumber, tags, attendance, participation);
     }
 
 }

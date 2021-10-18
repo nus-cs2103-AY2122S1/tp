@@ -42,7 +42,8 @@ public class Student {
     /**
      * Constructor for a re-stored Person object
      */
-    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags, Attendance attendance, Participation participation) {
+    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags,
+                   Attendance attendance, Participation participation) {
         requireAllNonNull(name, email, studentNumber, tags, attendance, participation);
         this.name = name;
         this.email = email;
