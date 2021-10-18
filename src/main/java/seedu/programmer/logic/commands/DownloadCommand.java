@@ -12,10 +12,8 @@ public class DownloadCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Downloads student data as CSV.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_DOWNLOAD_MESSAGE = "Downloaded student data.";
-
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_DOWNLOAD_MESSAGE, false, false, true);
+        return new CommandResult("", false, false, true);
     }
 }
