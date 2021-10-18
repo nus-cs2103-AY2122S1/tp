@@ -2,14 +2,12 @@ package seedu.address.ui;
 
 import java.util.ArrayList;
 
-import seedu.address.commons.core.index.Index;
-
 /**
  * Class which stores previous commands which the user has entered.
  */
-public class UserStringHistory {
+public class CommandHistory {
     /** ArrayList of all the previously entered userStrings. **/
-    private final ArrayList<String> userStrings = new ArrayList<>();
+    private final ArrayList<String> commands = new ArrayList<>();
 
     private final int EMPTY_INDEX = -1;
     private final int FIRST_INDEX = 0;
@@ -26,7 +24,7 @@ public class UserStringHistory {
      * @param s String to be added
      */
     public void add(String s) {
-        userStrings.add(s);
+        commands.add(s);
         currentIndex++;
     }
 
@@ -39,9 +37,9 @@ public class UserStringHistory {
         if (currentIndex == EMPTY_INDEX) {
             return "";
         } else if (currentIndex == FIRST_INDEX) {
-            return userStrings.get(FIRST_INDEX);
+            return commands.get(FIRST_INDEX);
         }
-        String currentString = userStrings.get(currentIndex);
+        String currentString = commands.get(currentIndex);
         currentIndex--;
         return currentString;
     }
@@ -52,14 +50,14 @@ public class UserStringHistory {
      * @return next command.
      */
     public String getNext() {
-        final int LAST_INDEX = userStrings.size() - 1;
+        final int LAST_INDEX = commands.size() - 1;
         if (currentIndex == EMPTY_INDEX) {
             return "";
         } else if (currentIndex == LAST_INDEX) {
             return "";
         }
         currentIndex++;
-        return userStrings.get(currentIndex);
+        return commands.get(currentIndex);
 
     }
 
@@ -67,7 +65,7 @@ public class UserStringHistory {
      * Resets the current index point to the latest user command.
      */
     public void resetIndex() {
-        currentIndex = userStrings.size() - 1;
+        currentIndex = commands.size() - 1;
     }
 
 }
