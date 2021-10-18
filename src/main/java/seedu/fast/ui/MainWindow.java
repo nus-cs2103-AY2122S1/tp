@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatsWindow statsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -68,6 +69,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow("");
+        statsWindow = new StatsWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -173,6 +176,19 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens the stats window.
+     *
+     */
+    @FXML
+    public void handleStats() {
+        if (!statsWindow.isShowing()) {
+            statsWindow.show();
+        } else {
+            statsWindow.focus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
