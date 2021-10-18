@@ -29,7 +29,7 @@ class TagPatientCommandParserTest {
     @Test
     void parse_addIndexAndTagSpecified_success() {
         Index index = INDEX_FIRST_PERSON;
-        String userInput = FLAG_ADD + " " + " " + index.getOneBased() + " " + PREFIX_TAG + VALID_TAG;
+        String userInput = FLAG_ADD + " " + index.getOneBased() + " " + PREFIX_TAG + VALID_TAG;
         AddPatientTagCommand addPatientTagCommand = new AddPatientTagCommand(index, new Tag(VALID_TAG));
 
         assertParseSuccess(parser, userInput, addPatientTagCommand);

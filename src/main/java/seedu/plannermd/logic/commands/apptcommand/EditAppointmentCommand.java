@@ -6,8 +6,6 @@ import seedu.plannermd.model.Model;
 
 public class EditAppointmentCommand extends AppointmentCommand {
 
-    public static final String COMMAND_FLAG = "-e";
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         return null;
