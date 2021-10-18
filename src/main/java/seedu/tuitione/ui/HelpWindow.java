@@ -18,21 +18,25 @@ import seedu.tuitione.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
+    public static final String HELP_HEADER = "Command Summary";
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to the user guide for more details: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
     private static final String HELP_COMMAND_IMAGE = "/images/help_commands.png";
 
     @FXML
+    private Label helpHeader;
+
+    @FXML
+    private ImageView helpCommands;
+
+    @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
-
-    @FXML
-    private ImageView helpCommands;
 
     /**
      * Creates a new HelpWindow.
@@ -41,8 +45,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpHeader.setText(HELP_HEADER);
         helpCommands.setImage(getImage(HELP_COMMAND_IMAGE));
+        helpMessage.setText(HELP_MESSAGE);
     }
 
     /**
