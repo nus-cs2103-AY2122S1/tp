@@ -10,6 +10,7 @@ import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.exceptions.RemarkContainsKeyWordsPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 
@@ -21,6 +22,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final String TAG_PREFIX = "t/";
+    public static final String REMARK_PREFIX = "r/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose names contain any of "
@@ -45,6 +47,10 @@ public class FindCommand extends Command {
     }
 
     public FindCommand(TagContainsKeyWordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    public FindCommand(RemarkContainsKeyWordsPredicate predicate) {
         this.predicate = predicate;
     }
 

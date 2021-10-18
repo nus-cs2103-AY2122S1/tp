@@ -9,6 +9,7 @@ import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.exceptions.RemarkContainsKeyWordsPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -46,6 +47,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             return new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList(tags)));
+
+        } else if (trimmedArgs.startsWith(FindCommand.REMARK_PREFIX)) {
+            String tokenizedArgs = trimmedArgs.substring(
+                    FindCommand.REMARK_PREFIX.length());
+            String[] queries = tokenizedArgs.split("\\s+");
+            // splits trimmedArgs according to whitespaces
+            return new FindCommand(new RemarkContainsKeyWordsPredicate(Arrays.asList(queries)));
 
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
