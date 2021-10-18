@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.ImportCommand;
@@ -20,18 +21,13 @@ public class ImportCommandParser {
 
     private CsvParser csvParser;
     private final List<Person> personsToAdd = new ArrayList<>();
-    private final ArrayList<String> wronglyFormattedEntries = new ArrayList<>();
-
-    private boolean isPhoneColumnPresent = false;
-    private boolean isEmailColumnPresent = false;
-    private boolean isAddressColumnPresent = false;
-    private boolean isTagsColumnPresent = false;
+    private final List<String> wronglyFormattedEntries = new ArrayList<>();
 
     private List<String> csvNames;
-    private List<String> csvPhones;
-    private List<String> csvEmails;
-    private List<String> csvAddresses;
-    private List<String> csvTags;
+    private Optional<List<String>> csvPhones;
+    private Optional<List<String>> csvEmails;
+    private Optional<List<String>> csvAddresses;
+    private Optional<List<String>> csvTags;
 
     private final List<Name> names = new ArrayList<>();
     private final List<Phone> phones = new ArrayList<>();
@@ -75,62 +71,39 @@ public class ImportCommandParser {
 
     private void parseHeader() throws ParseException {
         csvNames = csvParser.get("name");
-        csvPhones = csvParser.get("phone");
-        csvEmails = csvParser.get("email");
-        csvAddresses = csvParser.get("address");
-        csvTags = csvParser.get("tags");
+        csvPhones = Optional.of(csvParser.get("phone"));
+        csvEmails = Optional.of(csvParser.get("email"));
+        csvAddresses = Optional.of(csvParser.get("address"));
+        csvTags = Optional.of(csvParser.get("tags"));
 
         if (csvNames == null) {
             throw new ParseException("Name column is missing");
         }
-        if (csvPhones != null) {
-            isPhoneColumnPresent = true;
-        }
-        if (csvEmails != null) {
-            isEmailColumnPresent = true;
-        }
-        if (csvAddresses != null) {
-            isAddressColumnPresent = true;
-        }
-        if (csvTags != null) {
-            isTagsColumnPresent = true;
-        }
-
     }
 
     private void parseColumns() {
-        int i = 0;
-
-        while (i < csvParser.size()) {
+        for (int i = 0; i < csvParser.size(); i++) {
             try {
                 names.add(ParserUtil.parseName(csvNames.get(i)));
+                int finalI = i;
+                Optional<String> inputtedPhone = csvPhones.map(x -> x.get(finalI));
+                Optional<String> inputtedEmail = csvEmails.map(x -> x.get(finalI));
+                Optional<String> inputtedAddress = csvAddresses.map(x -> x.get(finalI));
+                Optional<List<String>> inputtedTags = csvTags.map(x -> {
+                    if (x.get(finalI).equals("")) {
+                        return new ArrayList<>();
+                    } else {
+                        return Arrays.asList(x.get(finalI).split(" "));
+                    }
+                });
 
-                String inputtedPhone = "";
-                String inputtedEmail = "";
-                String inputtedAddress = "";
-                List<String> inputtedTags = new ArrayList<>();
-
-                if (isPhoneColumnPresent) {
-                    inputtedPhone = csvPhones.get(i);
-                }
-                if (isEmailColumnPresent) {
-                    inputtedEmail = csvEmails.get(i);
-                }
-                if (isAddressColumnPresent) {
-                    inputtedAddress = csvAddresses.get(i);
-                }
-                if (isTagsColumnPresent && !csvTags.get(i).equals("")) {
-                    inputtedTags = Arrays.asList(csvTags.get(i).split(" "));
-                }
-
-                phones.add(ParserUtil.parsePhone(inputtedPhone));
-                emails.add(ParserUtil.parseEmail(inputtedEmail));
-                addresses.add(ParserUtil.parseAddress(inputtedAddress));
-                tags.add(ParserUtil.parseTags(inputtedTags));
+                phones.add(ParserUtil.parsePhone(inputtedPhone.orElse("")));
+                emails.add(ParserUtil.parseEmail(inputtedEmail.orElse("")));
+                addresses.add(ParserUtil.parseAddress(inputtedAddress.orElse("")));
+                tags.add(ParserUtil.parseTags(inputtedTags.orElse(new ArrayList<>())));
             } catch (ParseException e) {
                 wronglyFormattedEntries.add("Row" + (i + 2) + " : " + e.getLocalizedMessage());
             }
-            i++;
         }
 
     }

@@ -19,7 +19,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.CsvFileSelector;
 
-
 /**
  * Parses user input.
  */
