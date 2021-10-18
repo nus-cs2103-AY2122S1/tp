@@ -100,7 +100,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram1.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -186,6 +186,37 @@ Given below is an example usage scenario:
 
   Both methods can achieve the intended effect of implementing the recurring visits. However, we chose to go with an occurrence counter and frequency attribute because it requires less resources.
   We were concerned that the recurring visits could have many occurrences and at a high frequency, and this could lead to extra overhead in storing and accessing these arrays.
+
+### Delete command
+
+#### Implementation details
+
+Delete command is sued to delete an existing person or the next visit of a person in SeniorLove. It makes use of polymorphism and is similar to the other commands in SerniorLove:
+
+* `DeleteCommand` extends `Command`
+* `DeleteCommandParser` implements `Parser<DeleteCommand>`
+
+The following activity diagram illustrates the activity flow of the delete command:
+![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
+
+The following sequence diagram illustrate how the components interact with each other:
+![DeleteSequenceDiagram2](images/DeleteSequenceDiagram2.png)
+
+Given below is an example usage scenario:
+1. User inputs the delete command, specifying the visit flag and the index of the elderly to be removed visit from. (If user wants to remove the entry of the elderly entirely instead of only removing the visit, she/he only needs to specify the index without the visit flag.)
+2. After successfully parsing the user input, the `DeleteCommand#execute(Model model)` method is called.
+3. The person which the user wants to delete visit from will be replaced by a new entry of a copy of person without the existing next visit.
+4Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
+
+#### Design choices
+
+- Overloading `delete` to remove visit:
+
+  Deleting person and deleting visits are overlapping functionalities dealing with removing information. It is possible to overload the `delete` command to achieve both functionalities without creating new command.
+
+- Replace the exiting person with a new instance (if deleting a visit):
+
+  We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with removed visit to replace the previous Person object.
 
 
 ### \[Proposed\] Undo/redo feature
