@@ -20,6 +20,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
@@ -207,6 +210,46 @@ public class AddTaskCommandTest {
 
         @Override
         public DisplayType getDisplayType() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGroup(Group target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group target, Group editedGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addStudentGroup(Student target, Group group) {
             throw new AssertionError("This method should not be called.");
         }
     }

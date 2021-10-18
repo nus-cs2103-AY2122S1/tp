@@ -6,10 +6,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +36,8 @@ public class EditStudentDescriptorBuilder {
         descriptor = new EditCommand.EditStudentDescriptor();
         descriptor.setName(student.getName());
         descriptor.setEmail(student.getEmail());
+        descriptor.setUserName(student.getUserName());
+        descriptor.setRepoName(student.getRepoName());
         descriptor.setStudentNumber(student.getStudentNumber());
         descriptor.setTags(student.getTags());
     }
@@ -60,6 +64,22 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withStudentNumber(String studentNumber) {
         descriptor.setStudentNumber(new StudentNumber(studentNumber));
+        return this;
+    }
+
+    /**
+     * Sets the {@code UserName} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withUserName(String userName) {
+        descriptor.setUserName(new UserName(userName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code RepoName} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withRepoName(String repoName) {
+        descriptor.setRepoName(new RepoName(repoName));
         return this;
     }
 

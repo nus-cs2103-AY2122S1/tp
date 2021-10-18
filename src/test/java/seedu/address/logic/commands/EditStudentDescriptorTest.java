@@ -6,7 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,14 @@ public class EditStudentDescriptorTest {
 
         // different email -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different username -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withUserName(VALID_USERNAME_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different reponame -> returns false
+        editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withRepoName(VALID_REPONAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
 

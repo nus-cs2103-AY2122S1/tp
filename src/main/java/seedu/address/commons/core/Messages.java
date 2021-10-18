@@ -10,5 +10,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX = "The student index provided is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
     public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
+    public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
+    public static final String MESSAGE_INVALID_GROUP_DISPLAYED_NAME = "The group name provided is invalid";
 
 }

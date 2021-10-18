@@ -5,15 +5,24 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REPONAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_STUDENTNUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.REPONAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.STUDENTNUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.USERNAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -26,8 +35,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
@@ -72,6 +84,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_STUDENTNUMBER_DESC, StudentNumber.MESSAGE_CONSTRAINTS);
+        // invalid studentNumber
+        assertParseFailure(parser, "1" + INVALID_USERNAME_DESC, UserName.MESSAGE_CONSTRAINTS);
+        // invalid username
+        assertParseFailure(parser, "1" + INVALID_REPONAME_DESC, RepoName.MESSAGE_CONSTRAINTS);
+        // invalid reponame
 
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Student} being edited,
@@ -87,12 +105,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_STUDENT;
-        String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
+        String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND + EMAIL_DESC_AMY + USERNAME_DESC_AMY
+                + NAME_DESC_AMY + STUDENTNUMBER_DESC_AMY + REPONAME_DESC_AMY + TAG_DESC_FRIEND;
 
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENTNUMBER_AMY).withRepoName(VALID_REPONAME_AMY)
+                .withUserName(VALID_USERNAME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -122,6 +140,24 @@ public class EditCommandParserTest {
         // email
         userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
         descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // studentNumber
+        userInput = targetIndex.getOneBased() + STUDENTNUMBER_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withStudentNumber(VALID_STUDENTNUMBER_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // userName
+        userInput = targetIndex.getOneBased() + USERNAME_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withUserName(VALID_USERNAME_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // repoName
+        userInput = targetIndex.getOneBased() + REPONAME_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withRepoName(VALID_REPONAME_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 

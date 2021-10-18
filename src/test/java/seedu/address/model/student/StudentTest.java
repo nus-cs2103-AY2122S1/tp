@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTNUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
@@ -78,6 +80,13 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withStudentNumber(VALID_STUDENTNUMBER_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different username -> returns false
+        editedAlice = new StudentBuilder(ALICE).withUserName(VALID_USERNAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different reponame -> returns false
+        editedAlice = new StudentBuilder(ALICE).withRepoName(VALID_REPONAME_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
         editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();

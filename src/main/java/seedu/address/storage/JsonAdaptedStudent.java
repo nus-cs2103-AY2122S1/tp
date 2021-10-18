@@ -10,12 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,8 @@ class JsonAdaptedStudent {
     private final String name;
     private final String email;
     private final String studentNumber;
+    private final String username;
+    private final String repo;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final ArrayList<Integer> attendance = new ArrayList<>();
     private final ArrayList<Integer> participation = new ArrayList<>();
@@ -39,6 +43,8 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("email") String email,
                               @JsonProperty("studentNumber") String studentNumber,
+                              @JsonProperty("username") String username,
+                              @JsonProperty("repo") String repo,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("attendance") ArrayList<Integer> attendance,
                               @JsonProperty("participation") ArrayList<Integer> participation) {
@@ -50,6 +56,8 @@ class JsonAdaptedStudent {
         }
         this.attendance.addAll(attendance);
         this.participation.addAll(participation);
+        this.repo = repo;
+        this.username = username;
     }
 
     /**
@@ -59,6 +67,8 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         email = source.getEmail().value;
         studentNumber = source.getStudentNumber().toString();
+        username = source.getUserName().userName;
+        repo = source.getRepoName().repoName;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -75,6 +85,8 @@ class JsonAdaptedStudent {
         final List<Tag> studentTags = new ArrayList<>();
         final ArrayList<Integer> studentAttendance = new ArrayList<>();
         final ArrayList<Integer> studentParticipation = new ArrayList<>();
+        final RepoName modelRepoName;
+        final UserName modelUserName;
 
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
@@ -107,12 +119,25 @@ class JsonAdaptedStudent {
         }
         final StudentNumber modelStudentNumber = new StudentNumber(studentNumber);
 
+        if (username == null) {
+            modelUserName = new UserName();
+        } else {
+            modelUserName = new UserName(username);
+        }
+
+        if (repo == null) {
+            modelRepoName = new RepoName();
+        } else {
+            modelRepoName = new RepoName(repo);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
         final Attendance modelAttendance = new Attendance(studentAttendance);
 
         final Participation modelParticipation = new Participation(studentParticipation);
 
-        return new Student(modelName, modelEmail, modelStudentNumber, modelTags, modelAttendance, modelParticipation);
+        return new Student(modelName, modelEmail, modelStudentNumber, modelUserName, modelRepoName,
+                modelTags, modelAttendance, modelParticipation);
     }
 }

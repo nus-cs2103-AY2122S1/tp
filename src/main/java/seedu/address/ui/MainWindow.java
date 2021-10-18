@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static seedu.address.model.Model.DisplayType.GROUPS;
 import static seedu.address.model.Model.DisplayType.STUDENTS;
 import static seedu.address.model.Model.DisplayType.TASKS;
 
@@ -36,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private TaskListPanel taskListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -134,6 +136,9 @@ public class MainWindow extends UiPart<Stage> {
         } else if (logic.getDisplayType().equals(TASKS)) {
             taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
             studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+        } else if (logic.getDisplayType().equals(GROUPS)) {
+            groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+            studentListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
         }
     }
 
