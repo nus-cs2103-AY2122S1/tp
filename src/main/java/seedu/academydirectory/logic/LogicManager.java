@@ -2,7 +2,6 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +19,8 @@ import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.storage.Storage;
 import seedu.academydirectory.versioncontrol.OptionalVersion;
 import seedu.academydirectory.versioncontrol.Version;
+import seedu.academydirectory.versioncontrol.logic.commands.VcCommand;
+import seedu.academydirectory.versioncontrol.logic.parsers.AcademyDirectoryVcCommandParser;
 
 /**
  * The main LogicManager of the app.
@@ -32,6 +33,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final OptionalVersion<Version> version;
     private final AcademyDirectoryParser academyDirectoryParser;
+    private final AcademyDirectoryVcCommandParser versionControlParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -41,6 +43,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         this.version = version;
         academyDirectoryParser = new AcademyDirectoryParser();
+        versionControlParser = new AcademyDirectoryVcCommandParser();
     }
 
     public LogicManager(Model model, Storage storage) {
@@ -53,12 +56,12 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         // Temporary hax
-        if (Objects.equals(commandText, "history")) {
-            logger.info("---------------[SHORT-CIRCUITING...]");
-            commandResult = new CommandResult(String.join("\n", version.retrieveHistory()));
-        } else {
+        try {
             Command command = academyDirectoryParser.parseCommand(commandText);
             commandResult = command.execute(model);
+        } catch (ParseException e) {
+            VcCommand command = versionControlParser.parseCommand(commandText);
+            commandResult = command.execute(version);
         }
 
         try {
