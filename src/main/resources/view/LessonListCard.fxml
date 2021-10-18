@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -32,6 +31,7 @@
             <Label fx:id="dayOfWeek" styleClass="cell_small_label" text="\$dayOfWeek" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
+            <Label fx:id="numOfStudentsEnrolled" styleClass="cell_small_label" text="\$numOfStudentsEnrolled" />
         </VBox>
     </GridPane>
 </HBox>
