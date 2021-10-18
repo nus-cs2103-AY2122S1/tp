@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupGithub;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -64,6 +66,52 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gorupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedName = groupName.trim();
+        if (!GroupName.isValidName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String year} into an {@code LinkYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code year} is invalid.
+     */
+    public static GroupGithub.LinkYear parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        if (!GroupGithub.LinkYear.isValidYear(trimmedYear)) {
+            throw new ParseException(GroupGithub.LinkYear.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupGithub.LinkYear(trimmedYear);
+    }
+
+    /**
+     * Parses a {@code String repoName} into an {@code RepoName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code repoName} is invalid.
+     */
+    public static GroupGithub.RepoName parseRepo(String repoName) throws ParseException {
+        requireNonNull(repoName);
+        String trimmedRepoName = repoName.trim();
+        if (!GroupGithub.RepoName.isValidRepoName(trimmedRepoName)) {
+            throw new ParseException(GroupGithub.RepoName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupGithub.RepoName(trimmedRepoName);
+    }
+
 
     /**
      * Parses a {@code String name} into a {@code TaskName}.
