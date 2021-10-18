@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private EmployeeListPanel employeeListPanel;
     private SupplierListPanel supplierListPanel;
+    private ReservationListPanel reservationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -118,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
+        reservationListPanel = new ReservationListPanel(logic.getFilteredReservations());
         personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -188,6 +190,17 @@ public class MainWindow extends UiPart<Stage> {
         PersonType personType = new PersonType("Employee");
         personTypePlaceholder.getChildren().add(personType.getRoot());
         personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
+    }
+
+    /**
+     * Displays the Reservation list
+     */
+    @FXML
+    public void handleShowReservation() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Reservation");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
 
     void show() {

@@ -34,6 +34,7 @@
             <MenuItem mnemonicParsing="false" onAction="#handleShowCustomer" text="Customers" />
             <MenuItem mnemonicParsing="false" onAction="#handleShowEmployee" text="Employees" />
             <MenuItem mnemonicParsing="false" onAction="#handleShowSupplier" text="Suppliers" />
+            <MenuItem mnemonicParsing="false" onAction="#handleShowReservation" text="Reservations" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
