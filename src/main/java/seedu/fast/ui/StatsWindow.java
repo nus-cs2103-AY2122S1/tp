@@ -40,20 +40,10 @@ public class StatsWindow extends UiPart<Stage> {
     public StatsWindow(Stage root, ReadOnlyFast fast) {
         super(FXML, root);
 
-        // Since StatsWindow receives a Fast instance, it is safe to type cast it
+        // Since StatsWindow receives a Fast instance, it is safe to typecast it
         this.fast = (Fast) fast;
 
-        ObservableList<PieChart.Data> pieChartData =
-            FXCollections.observableArrayList(
-                new PieChart.Data("High Priority", this.fast.getHighPriorityCounts()),
-                new PieChart.Data("Medium Priority", this.fast.getMediumPriorityCounts()),
-                new PieChart.Data("Low Priority", this.fast.getLowPriorityCounts()));
-        priorityPieChart.getData().addAll(pieChartData);
-
-//        System.out.println(this.fast.getHighPriorityCounts());
-//        System.out.println(this.fast.getMediumPriorityCounts());
-//        System.out.println(this.fast.getLowPriorityCounts());
-
+        populatePriorityPieChart();
     }
 
 
@@ -101,6 +91,25 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public void hide() {
         getRoot().hide();
+    }
+
+    public void populatePriorityPieChart() {
+        int highPriorityCount = this.fast.getHighPriorityCounts();
+        int mediumPriorityCount = this.fast.getHighPriorityCounts();
+        int lowPriorityCount = this.fast.getLowPriorityCounts();
+
+        if (highPriorityCount > 0) {
+            PieChart.Data highData = new PieChart.Data("High Priority", highPriorityCount);
+            priorityPieChart.getData().add(highData);
+        }
+        if (mediumPriorityCount > 0) {
+            PieChart.Data mediumData = new PieChart.Data("Medium Priority", mediumPriorityCount);
+            priorityPieChart.getData().add(mediumData);
+        }
+        if (lowPriorityCount > 0) {
+            PieChart.Data lowData = new PieChart.Data("Low Priority", highPriorityCount);
+            priorityPieChart.getData().add(lowData);
+        }
     }
 
     /**
