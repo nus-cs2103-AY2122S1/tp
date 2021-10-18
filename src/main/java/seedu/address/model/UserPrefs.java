@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path applicantBookFilePath = Paths.get("data" , "applicantbook.json");
     private Path positionBookFilePath = Paths.get("data", "positionbook.json");
 
     /**
@@ -89,4 +90,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
+    public Path getApplicantBookFilePath() {
+        return applicantBookFilePath;
+    }
 }

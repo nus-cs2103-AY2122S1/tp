@@ -56,6 +56,10 @@ public class Application {
         return status;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -80,8 +84,8 @@ public class Application {
     @Override
     public String toString() {
         return "Application: {"
-                + "Applicant: " + applicant
-                + ", Position: " + position
+                + "Applicant: " + applicant.getName()
+                + ", Position: " + position.getTitle()
                 + ", Status: " + status
                 + "}";
     }
@@ -91,5 +95,3 @@ public class Application {
      */
     public enum ApplicationStatus { PENDING, ACCEPTED, REJECTED }
 }
-
-

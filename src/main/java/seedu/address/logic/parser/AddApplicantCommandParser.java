@@ -44,7 +44,7 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Position dummyPosition = ApplicantParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
 
-        Applicant applicant = new Applicant(name, phone, email, address);
+        Applicant applicant = new Applicant(name, phone, email, address, dummyPosition);
 
         return new AddApplicantCommand(applicant, dummyPosition);
     }
