@@ -11,7 +11,8 @@ import seedu.address.model.person.Person;
 import java.util.function.Predicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book who fulfills the criteria specified by the
+ * user. Only one parameter can be specified at a time, but multiple arguments can be specified.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
