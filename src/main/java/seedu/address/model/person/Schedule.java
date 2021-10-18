@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.person.Shift.isValidShift;
+
 import java.time.DayOfWeek;
 import java.util.Objects;
 
@@ -46,10 +48,14 @@ public class Schedule {
      * Alternate constructor for schedule object.
      */
     public Schedule(String loadString) {
+        if (!isValidSchedule(loadString)) {
+            throw new IllegalArgumentException("String does not match a valid schedule");
+        }
         String[] shiftArray = loadString.split(" ");
         for (String s : shiftArray) {
             String[] shiftString = s.split("-");
-            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
+            String shiftDayString = shiftString[0].toUpperCase();
+            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
             shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
@@ -175,7 +181,7 @@ public class Schedule {
         }
         String[] shiftSplit = test.split(" ");
         for (String s : shiftSplit) {
-            if (!Shift.isValidShift(s)) {
+            if (!isValidShift(s)) {
                 return false;
             }
         }
