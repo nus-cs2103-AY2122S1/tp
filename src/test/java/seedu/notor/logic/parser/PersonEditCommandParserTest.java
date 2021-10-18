@@ -22,6 +22,7 @@ import static seedu.notor.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
@@ -98,14 +99,14 @@ public class PersonEditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         String multipleInvalid = String.format("person 1 /edit%s%s%s", INVALID_NAME_DESC, PHONE_DESC_BOB,
-            INVALID_PHONE_DESC);
+                INVALID_PHONE_DESC);
         assertParseFailure(notorParser, multipleInvalid, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() throws ParseException {
         String allFields = String.format("person 2 /edit%s%s%s", PHONE_DESC_BOB,
-            EMAIL_DESC_AMY, NAME_DESC_AMY);
+                EMAIL_DESC_AMY, NAME_DESC_AMY);
 
         Index targetIndex = INDEX_SECOND_PERSON;
 
@@ -158,7 +159,7 @@ public class PersonEditCommandParserTest {
         String validEmail = String.format("person 3 /edit%s%s%s%s",
                 PHONE_DESC_BOB, PHONE_DESC_AMY, EMAIL_DESC_BOB, EMAIL_DESC_AMY);
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_AMY)
-                                                                            .withEmail(VALID_EMAIL_AMY).build();
+                .withEmail(VALID_EMAIL_AMY).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
         assertParseSuccess(notorParser.parseCommand(validEmail), expectedCommand);
     }
