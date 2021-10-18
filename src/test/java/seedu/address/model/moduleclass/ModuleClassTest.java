@@ -52,5 +52,4 @@ public class ModuleClassTest {
                 + "Remark: COM1 01-20");
     }
 
-
 }
