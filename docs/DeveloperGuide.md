@@ -163,7 +163,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
-Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the 
+Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the
 CSBook data to an encrypted JSON file are as follows:
 
 - `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)` — Saves the current CSBook data
@@ -181,7 +181,7 @@ encrypted JSON file to the CSBook are as follows:
 
 Given below is an example usage scenario and how encryption/decryption behaves at each step.
 
-Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to 
+Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to
 `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
 now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
 
@@ -193,7 +193,7 @@ which contains the encrypted JSON data.
 
 ![EncryptSequence1](images/EncryptSequence1.png)
 
-Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file. 
+Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file.
 `EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
 
 ![EncryptSequence2](images/EncryptSequence2.png)
@@ -217,7 +217,7 @@ encrypted CSBook data.
 ![DecryptSequence1](images/DecryptSequence1.png)
 
 Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
-object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then 
+object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then
 transformed by `JsonCsBookStorage#readCsBook()` into a `ReadOnlyCsBook` that is used to populate the model.
 
 ![DecryptSequence2](images/DecryptSequence2.png)
