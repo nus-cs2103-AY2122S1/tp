@@ -168,7 +168,7 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first lessonTime. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
@@ -259,7 +259,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * student
 * tech savvy
 * is a Teaching Assistant (TA)
-* does not have much time and wants to get things done fast
+* does not have much lessonTime and wants to get things done fast
 * lazy and do not want complicated steps
 
 
@@ -287,7 +287,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | be able to purge all current data | I can get rid of sample/experimental data i used for exploring the app |
 | `* *` | user | be able to search for contacts | I don’t have to scroll the entire contact list |
 | `* *` | organised user | be able to sort by modules | I can see the modules in order |
-| `* *` | user | be able to retrieve data fast | I can get the contact in the fastest time possible |
+| `* *` | user | be able to retrieve data fast | I can get the contact in the fastest lessonTime possible |
 | `* *` | user | be able to view by categories | I can ignore unrelated contact |
 | `* *` | user | be able to delete contacts by groups | I don’t have to delete one by one |
 | `* *` | user | be able to add a description about a contact | I can add more details about the contact |
@@ -295,7 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | user | have access to a help page | I can know how to navigate the app |
 | `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
 | `*` | user | be able to know which contact I retrieve frequently | I can know which contact is frequently contacted |
-| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
+| `*` | Long-lessonTime user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
 | `*` | user | be able to set up profile picture for the contact | I can recognise the person |
 | `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
 | `*` | Expert user | be able to set up shortcuts | I can do things faster |

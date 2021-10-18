@@ -37,7 +37,7 @@
                           <Insets right="5.0" />
                       </padding>
                </Label>
-                  <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+                  <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
             </children>
          </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">

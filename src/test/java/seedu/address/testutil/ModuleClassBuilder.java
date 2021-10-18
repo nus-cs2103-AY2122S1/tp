@@ -6,7 +6,7 @@ import java.util.Set;
 
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.ModuleLesson;
-import seedu.address.model.modulelesson.Time;
+import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
@@ -19,7 +19,7 @@ public class ModuleClassBuilder {
 
     private Set<ModuleCode> moduleCode;
     private LessonDay lessonDay;
-    private Time time;
+    private LessonTime lessonTime;
     private Remark remark;
 
     /**
@@ -28,7 +28,7 @@ public class ModuleClassBuilder {
     public ModuleClassBuilder() {
         moduleCode = DEFAULT_MODULE_CODE;
         lessonDay = new LessonDay(DEFAULT_DAY);
-        time = new Time(DEFAULT_TIME);
+        lessonTime = new LessonTime(DEFAULT_TIME);
         remark = new Remark(DEFAULT_REMARK);
     }
 
@@ -38,7 +38,7 @@ public class ModuleClassBuilder {
     public ModuleClassBuilder(ModuleLesson classToCopy) {
         moduleCode = classToCopy.getModuleCodes();
         lessonDay = classToCopy.getDay();
-        time = classToCopy.getTime();
+        lessonTime = classToCopy.getTime();
         remark = classToCopy.getRemark();
     }
 
@@ -63,7 +63,7 @@ public class ModuleClassBuilder {
      * Sets the {@code time} of the {@code ModuleClass} that we are building.
      */
     public ModuleClassBuilder withTime(String time) {
-        this.time = new Time(time);
+        this.lessonTime = new LessonTime(time);
         return this;
     }
 
@@ -76,7 +76,7 @@ public class ModuleClassBuilder {
     }
 
     public ModuleLesson build() {
-        return new ModuleLesson(moduleCode, lessonDay, time, remark);
+        return new ModuleLesson(moduleCode, lessonDay, lessonTime, remark);
     }
 
 

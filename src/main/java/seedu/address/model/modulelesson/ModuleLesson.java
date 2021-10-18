@@ -19,19 +19,19 @@ public class ModuleLesson {
     // Identity fields
     private final Set<ModuleCode> moduleCodes = new HashSet<>();
     private final LessonDay lessonDay;
-    private final Time time;
+    private final LessonTime lessonTime;
     private final Remark remark;
 
 
     /**
      * Every field must be present and not null.
      */
-    public ModuleLesson(Set<ModuleCode> moduleCode, LessonDay lessonDay, Time time, Remark remark) {
-        requireAllNonNull(moduleCode, lessonDay, time, remark);
+    public ModuleLesson(Set<ModuleCode> moduleCode, LessonDay lessonDay, LessonTime lessonTime, Remark remark) {
+        requireAllNonNull(moduleCode, lessonDay, lessonTime, remark);
         assert(moduleCode.size() == 1) : "Class should only contain 1 module code!";
         this.moduleCodes.addAll(moduleCode);
         this.lessonDay = lessonDay;
-        this.time = time;
+        this.lessonTime = lessonTime;
         this.remark = remark;
     }
 
@@ -47,8 +47,8 @@ public class ModuleLesson {
         return lessonDay;
     }
 
-    public Time getTime() {
-        return time;
+    public LessonTime getTime() {
+        return lessonTime;
     }
 
     public Remark getRemark() {
@@ -56,7 +56,7 @@ public class ModuleLesson {
     }
 
     /**
-     * Returns true if both classes have the same module code, day and time.
+     * Returns true if both classes have the same module code, day and lessonTime.
      * This defines a weaker notion of equality between two classes.
      */
     public boolean isSameModuleClass(ModuleLesson otherModuleLesson) {
@@ -94,7 +94,7 @@ public class ModuleLesson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleCodes, lessonDay, time, remark);
+        return Objects.hash(moduleCodes, lessonDay, lessonTime, remark);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class ModuleClassCard extends UiPart<Region> {
     @FXML
     private Label day;
     @FXML
-    private Label time;
+    private Label lessonTime;
     @FXML
     private Label remark;
     @FXML
@@ -48,7 +48,7 @@ public class ModuleClassCard extends UiPart<Region> {
                 .map(moduleCode -> moduleCode.tags)
                 .forEach(t -> t.forEach(tag -> tags.getChildren().add(new Label(tag.tagName))));
         day.setText(moduleLesson.getDay().toString());
-        time.setText(moduleLesson.getTime().toString());
+        lessonTime.setText(moduleLesson.getTime().toString());
         remark.setText(moduleLesson.getRemark().value);
     }
 
