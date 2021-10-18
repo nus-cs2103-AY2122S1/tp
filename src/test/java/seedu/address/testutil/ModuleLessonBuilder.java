@@ -10,7 +10,7 @@ import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
-public class ModuleClassBuilder {
+public class ModuleLessonBuilder {
 
     public static final Set<ModuleCode> DEFAULT_MODULE_CODE = getModuleCodeSet("CS2103 T17");
     public static final String DEFAULT_DAY = "2";
@@ -23,9 +23,9 @@ public class ModuleClassBuilder {
     private Remark remark;
 
     /**
-     * Creates a {@code ModuleClassBuilder} with the default details.
+     * Creates a {@code ModuleLessonBuilder} with the default details.
      */
-    public ModuleClassBuilder() {
+    public ModuleLessonBuilder() {
         moduleCode = DEFAULT_MODULE_CODE;
         lessonDay = new LessonDay(DEFAULT_DAY);
         lessonTime = new LessonTime(DEFAULT_TIME);
@@ -35,7 +35,7 @@ public class ModuleClassBuilder {
     /**
      * Initialises the ModuleClass with the data of {@code classToCopy}.
      */
-    public ModuleClassBuilder(ModuleLesson classToCopy) {
+    public ModuleLessonBuilder(ModuleLesson classToCopy) {
         moduleCode = classToCopy.getModuleCodes();
         lessonDay = classToCopy.getDay();
         lessonTime = classToCopy.getTime();
@@ -45,32 +45,32 @@ public class ModuleClassBuilder {
     /**
      * Sets the {@code moduleCode} of the {@code ModuleClass} that we are building.
      */
-    public ModuleClassBuilder withModuleCode(String moduleCode) {
+    public ModuleLessonBuilder withModuleCode(String moduleCode) {
         this.moduleCode = getModuleCodeSet(moduleCode);
         return this;
     }
 
 
     /**
-     * Sets the {@code day} of the {@code ModuleClass} that we are building.
+     * Sets the {@code lessonDay} of the {@code ModuleLesson} that we are building.
      */
-    public ModuleClassBuilder withDay(String day) {
-        this.lessonDay = new LessonDay(day);
+    public ModuleLessonBuilder withLessonDay(String lessonDay) {
+        this.lessonDay = new LessonDay(lessonDay);
         return this;
     }
 
     /**
-     * Sets the {@code time} of the {@code ModuleClass} that we are building.
+     * Sets the {@code lessonTime} of the {@code ModuleLesson} that we are building.
      */
-    public ModuleClassBuilder withTime(String time) {
-        this.lessonTime = new LessonTime(time);
+    public ModuleLessonBuilder withLessonTime(String lessonTime) {
+        this.lessonTime = new LessonTime(lessonTime);
         return this;
     }
 
     /**
-     * Sets the {@code Remark} of the {@code ModuleClass} that we are building.
+     * Sets the {@code Remark} of the {@code ModuleLesson} that we are building.
      */
-    public ModuleClassBuilder withRemark(String remark) {
+    public ModuleLessonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
         return this;
     }

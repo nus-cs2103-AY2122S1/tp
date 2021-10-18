@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClasses.CS2100_LAB1;
+import static seedu.address.testutil.TypicalModuleLessons.CS2100_LAB1;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;

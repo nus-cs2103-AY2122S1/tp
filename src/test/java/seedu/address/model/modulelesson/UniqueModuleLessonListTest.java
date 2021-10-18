@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalModuleClasses.CS2100_LAB1;
-import static seedu.address.testutil.TypicalModuleClasses.CS2100_TUT1;
+import static seedu.address.testutil.TypicalModuleLessons.CS2100_LAB1;
+import static seedu.address.testutil.TypicalModuleLessons.CS2100_TUT1;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.modulelesson.exceptions.DuplicateModuleLessonException;
 import seedu.address.model.modulelesson.exceptions.ModuleLessonNotFoundException;
-import seedu.address.testutil.ModuleClassBuilder;
+import seedu.address.testutil.ModuleLessonBuilder;
 
 public class UniqueModuleLessonListTest {
 
@@ -40,7 +40,7 @@ public class UniqueModuleLessonListTest {
     @Test
     public void contains_classWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClassList.add(CS2100_LAB1);
-        ModuleLesson editedCS2100Lab1 = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
+        ModuleLesson editedCS2100Lab1 = new ModuleLessonBuilder(CS2100_LAB1).withRemark("hello").build();
         assertTrue(uniqueClassList.contains(editedCS2100Lab1));
     }
 
