@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
@@ -25,7 +24,6 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
     private final FilteredList<Customer> filteredCustomers;
     private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
@@ -42,7 +40,6 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredCustomers = new FilteredList<>(this.addressBook.getCustomerList());
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
@@ -101,12 +98,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
-    }
-
-    @Override
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return addressBook.hasCustomer(customer);
@@ -124,11 +115,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
     public void deleteCustomer(Customer target) {
         addressBook.removeCustomer(target);
     }
@@ -140,12 +126,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteSupplier(Supplier target) {
         addressBook.removeSupplier(target);
-    }
-
-    @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
@@ -163,13 +143,6 @@ public class ModelManager implements Model {
     public void addSupplier(Supplier supplier) {
         addressBook.addSupplier(supplier);
         updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
-    }
-
-    @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
     }
 
     @Override
@@ -213,22 +186,6 @@ public class ModelManager implements Model {
         addressBook.setReservation(target, editedReservation);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
-        requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
 
     //=========== Filtered Employee List Accessors =============================================================
 
@@ -314,7 +271,6 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredEmployees.equals(other.filteredEmployees)
                 && filteredSuppliers.equals(other.filteredSuppliers)

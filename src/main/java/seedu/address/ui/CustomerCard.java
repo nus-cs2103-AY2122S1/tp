@@ -62,10 +62,10 @@ public class CustomerCard extends UiPart<Region> {
         customer.getAllergies().stream()
                 .sorted(Comparator.comparing(allergy -> allergy.allergyName))
                 .forEach(allergy -> allergies.getChildren().add(new Label(allergy.allergyName)));
-        customer.getTags().stream()
-                .sorted(Comparator.comparing(specialRequest -> specialRequest.tagName))
+        customer.getSpecialRequests().stream()
+                .sorted(Comparator.comparing(specialRequest -> specialRequest.specialRequestName))
                 .forEach(specialRequest -> specialRequests.getChildren()
-                        .add(new Label(specialRequest.tagName)));
+                        .add(new Label(specialRequest.specialRequestName)));
         customer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -79,7 +79,7 @@ public class CustomerCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof CustomerCard)) {
             return false;
         }
 

@@ -31,7 +31,6 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
     private CustomerListPanel customerListPanel;
     private EmployeeListPanel employeeListPanel;
     private SupplierListPanel supplierListPanel;
@@ -116,16 +115,15 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        PersonType personType = new PersonType("Person");
+        PersonType personType = new PersonType("Supplier");
         personTypePlaceholder.getChildren().add(personType.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -159,16 +157,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Displays the person list.
-     */
-    @FXML
-    public void handleShowPerson() {
-        personListPanelPlaceholder.getChildren().clear();
-        PersonType personType = new PersonType("Person");
-        personTypePlaceholder.getChildren().add(personType.getRoot());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-    }
     /**
      * Displays the Customer list.
      */
@@ -218,10 +206,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
     public EmployeeListPanel getEmployeeListPanel() {
         return employeeListPanel;
     }
@@ -243,10 +227,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
-            }
-
-            if (commandResult.isShowPerson()) {
-                handleShowPerson();
             }
 
             if (commandResult.isShowSupplier()) {

@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.UniqueCustomerList;
 import seedu.address.model.person.employee.Employee;
@@ -23,7 +21,6 @@ import seedu.address.model.reservation.ReservationList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniquePersonList persons;
     private final UniqueCustomerList customers;
     private final UniqueEmployeeList employees;
     private final UniqueSupplierList suppliers;
@@ -37,7 +34,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
         customers = new UniqueCustomerList();
         employees = new UniqueEmployeeList();
         suppliers = new UniqueSupplierList();
@@ -55,14 +51,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// list overwrite operations
-
-    /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
-    }
 
     public void setReservations(List<Reservation> reservations) {
         this.reservations.setReservations(reservations);
@@ -97,7 +85,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setPersons(newData.getPersonList());
         setCustomers(newData.getCustomerList());
         setEmployees(newData.getEmployeeList());
         setSuppliers(newData.getSupplierList());
@@ -105,14 +92,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// person-level operations
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
-    }
 
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
@@ -123,30 +102,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
-     */
-    public void addPerson(Person p) {
-        persons.add(p);
-    }
-
-    /**
      * Adds a customer to the address book.
      * The customer must not already exist in the address book.
      */
     public void addCustomer(Customer c) {
         customers.add(c);
-    }
-
-    /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
-     */
-    public void setPerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
-
-        persons.setPerson(target, editedPerson);
     }
 
     /**
@@ -159,14 +119,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedCustomer);
 
         customers.setCustomer(target, editedCustomer);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removePerson(Person key) {
-        persons.remove(key);
     }
 
     /// supplier level operations
@@ -249,17 +201,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         // TODO: refine later
         return String.format(
-                "%d persons\n%d customers\n%d employees\n%d suppliers\n%d reservations\n",
-                persons.asUnmodifiableObservableList().size(),
+                "%d customers\n%d employees\n%d suppliers\n%d reservations\n",
                 customers.asUnmodifiableObservableList().size(),
                 employees.asUnmodifiableObservableList().size(),
                 suppliers.asUnmodifiableObservableList().size(),
                 reservations.asUnmodifiableObservableList().size());
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -280,7 +226,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons)
                 && customers.equals(((AddressBook) other).customers)
                 && employees.equals(((AddressBook) other).employees)
                 && suppliers.equals(((AddressBook) other).suppliers)
@@ -319,6 +264,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, customers, employees, suppliers, reservations);
+        return Objects.hash(customers, employees, suppliers, reservations);
     }
 }

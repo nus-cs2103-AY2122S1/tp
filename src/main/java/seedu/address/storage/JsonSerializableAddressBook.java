@@ -11,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
@@ -23,12 +22,10 @@ import seedu.address.model.reservation.Reservation;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_CUSTOMER = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_EMPLOYEE = "Employees list contains duplicate employee(s).";
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "Suppliers list contains duplicate supplier(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedCustomer> customers = new ArrayList<>();
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
     private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
@@ -38,12 +35,10 @@ class JsonSerializableAddressBook {
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and employees.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("customers") List<JsonAdaptedCustomer> customers,
+    public JsonSerializableAddressBook(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
         @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
         @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
         @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
-        this.persons.addAll(persons);
         this.customers.addAll(customers);
         this.employees.addAll(employees);
         this.suppliers.addAll(suppliers);
@@ -56,7 +51,6 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         customers.addAll(source.getCustomerList().stream().map(JsonAdaptedCustomer::new).collect(Collectors.toList()));
         employees.addAll(source.getEmployeeList().stream().map(JsonAdaptedEmployee::new).collect(Collectors.toList()));
         suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
@@ -71,13 +65,6 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            }
-            addressBook.addPerson(person);
-        }
 
         for (JsonAdaptedCustomer jsonAdaptedCustomer : customers) {
             Customer customer = jsonAdaptedCustomer.toModelType();

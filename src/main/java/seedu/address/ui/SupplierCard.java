@@ -71,7 +71,7 @@ public class SupplierCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof SupplierCard)) {
             return false;
         }
 
