@@ -4,9 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Anime}'s {@code Status} matches the status provided.
+ */
 public class StatusEqualsPredicate implements Predicate<Anime> {
     private final Status status;
 
+    /**
+     * @param status to be matched.
+     */
     public StatusEqualsPredicate(Status status) {
         requireNonNull(status);
         this.status = status;

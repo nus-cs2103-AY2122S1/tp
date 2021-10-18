@@ -33,12 +33,6 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ACTION, PREFIX_GENRE);
-        if (argMultimap.getValue(PREFIX_ACTION).isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
-        }
-        if (!(argMultimap.getAllValues(PREFIX_GENRE).size() > 0)) {
-            throw new ParseException(GenreCommand.MESSAGE_GENRE_NOT_PROVIDED);
-        }
 
         Index index;
         try {
@@ -46,6 +40,12 @@ public class GenreCommandParser implements Parser<GenreCommand> {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GenreCommand.MESSAGE_USAGE), pe);
+        }
+        if (argMultimap.getValue(PREFIX_ACTION).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GenreCommand.MESSAGE_USAGE));
+        }
+        if (!(argMultimap.getAllValues(PREFIX_GENRE).size() > 0)) {
+            throw new ParseException(GenreCommand.MESSAGE_GENRE_NOT_PROVIDED);
         }
 
         GenreCommand.GenresDescriptor genresDescriptor = new GenreCommand.GenresDescriptor();

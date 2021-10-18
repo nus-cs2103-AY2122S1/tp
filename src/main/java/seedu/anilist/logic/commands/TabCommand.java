@@ -7,6 +7,9 @@ import seedu.anilist.commons.core.Messages;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.StatusEqualsPredicate;
 
+/**
+ * Filters the anime by its status and lists those anime with the specified status to the user.
+ */
 public class TabCommand extends Command {
 
     public static final String COMMAND_WORD = "tab";
@@ -18,6 +21,9 @@ public class TabCommand extends Command {
 
     private final StatusEqualsPredicate predicate;
 
+    /**
+     * @param predicate containing the status the user has specified
+     */
     public TabCommand(StatusEqualsPredicate predicate) {
         this.predicate = predicate;
     }
