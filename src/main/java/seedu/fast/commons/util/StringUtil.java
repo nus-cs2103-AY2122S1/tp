@@ -34,8 +34,16 @@ public class StringUtil {
         String preppedSentence = sentence;
         String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        for (String sentenceWord:wordsInPreppedSentence) {
+            String sentenceWordLowerCase = sentenceWord.toLowerCase();
+            String preppedWordLowerCase = preppedWord.toLowerCase();
+            //ignore case for search
+            if (sentenceWordLowerCase.startsWith(preppedWordLowerCase)
+                    || sentenceWord.equals(preppedWordLowerCase)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
