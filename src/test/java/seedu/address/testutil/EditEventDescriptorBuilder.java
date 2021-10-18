@@ -12,6 +12,9 @@ import seedu.address.model.event.EventTime;
 public class EditEventDescriptorBuilder {
     private EditEventDescriptor descriptor;
 
+    /**
+     * This is the constructor for EditEventDescriptorBuilder.
+     */
     public EditEventDescriptorBuilder() {
         this.descriptor = new EditEventDescriptor();
     }
@@ -50,6 +53,11 @@ public class EditEventDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Returns a EditEventDescriptor created using EditEventDescriptorBuilder.
+     *
+     * @return an instance of EditEventDescriptor.
+     */
     public EditEventDescriptor build() {
         return descriptor;
     }
