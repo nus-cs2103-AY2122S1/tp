@@ -56,7 +56,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAcademyDirectory(model.getAcademyDirectory());
-            logger.log(Level.INFO, "Commit successful? " + (version.commit("") ? "Yes" : "No"));
+            logger.log(Level.INFO, "Commit successful? " + (version.commit(commandText) ? "Yes" : "No"));
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
