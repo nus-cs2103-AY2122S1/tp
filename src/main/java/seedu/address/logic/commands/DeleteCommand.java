@@ -81,8 +81,8 @@ public class DeleteCommand extends Command {
         // visits, resets frequency and occurrence
         Person editedPerson =
                 new Person(personToDelete.getName(), personToDelete.getPhone(), personToDelete.getLanguage(),
-                personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT,
-                        Optional.of(Frequency.EMPTY), Optional.of(new Occurrence(1)), personToDelete.getTags());
+                personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT, Optional.of(Frequency.EMPTY),
+                        Optional.of(new Occurrence(1)), personToDelete.getHealthConditions());
         model.setPerson(personToDelete, editedPerson);
 
         return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));

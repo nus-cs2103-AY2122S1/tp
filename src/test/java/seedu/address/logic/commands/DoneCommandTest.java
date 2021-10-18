@@ -39,7 +39,7 @@ public class DoneCommandTest {
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
                 personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,
-                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getTags());
+                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getHealthConditions());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 
@@ -58,7 +58,7 @@ public class DoneCommandTest {
         Person personToDoneNoVisit = new Person(personToDone.getName(), personToDone.getPhone(),
                 personToDone.getLanguage(), personToDone.getAddress(),
                 personToDone.getLastVisit(), EMPTY_VISIT, personToDone.getFrequency(),
-                personToDone.getOccurrence(), personToDone.getTags());
+                personToDone.getOccurrence(), personToDone.getHealthConditions());
         ModelManager newModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         newModel.setPerson(personToDone, personToDoneNoVisit);
 
@@ -85,7 +85,7 @@ public class DoneCommandTest {
         Optional<LastVisit> personNewLastVisited = Optional.of(new LastVisit(personNewLastVisitedDate));
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
                 personToDone.getAddress(), personNewLastVisited, EMPTY_VISIT,
-                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getTags());
+                personToDone.getFrequency(), personToDone.getOccurrence(), personToDone.getHealthConditions());
 
         DoneCommand doneCommand = new DoneCommand(INDEX_FIRST_PERSON);
 

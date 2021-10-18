@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.healthcondition.HealthCondition;
 
 /**
  * Represents a Person in the address book.
@@ -27,15 +27,15 @@ public class Person {
     private final Optional<LastVisit> lastVisit;
     private final Optional<Occurrence> occurrence;
     private final Optional<Visit> visit;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<HealthCondition> healthConditions = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Language language, Address address, Optional<LastVisit> lastVisit,
                   Optional<Visit> visit, Optional<Frequency> frequency, Optional<Occurrence> occurrence,
-                  Set<Tag> tags) {
-        requireAllNonNull(name, phone, language, address, tags);
+                  Set<HealthCondition> healthConditions) {
+        requireAllNonNull(name, phone, language, address, healthConditions);
         this.name = name;
         this.phone = phone;
         this.language = language;
@@ -44,7 +44,7 @@ public class Person {
         this.visit = visit;
         this.frequency = frequency;
         this.occurrence = occurrence;
-        this.tags.addAll(tags);
+        this.healthConditions.addAll(healthConditions);
     }
 
 
@@ -81,11 +81,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable healthCondition set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<HealthCondition> getHealthConditions() {
+        return Collections.unmodifiableSet(healthConditions);
     }
 
     /**
@@ -141,13 +141,13 @@ public class Person {
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getLastVisit().equals(getLastVisit())
                 && otherPerson.getVisit().equals(getVisit())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getHealthConditions().equals(getHealthConditions());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, language, address, visit, lastVisit, tags);
+        return Objects.hash(name, phone, language, address, visit, lastVisit, healthConditions);
     }
 
     @Override
@@ -165,10 +165,10 @@ public class Person {
                 .append("; Visit: ")
                 .append(getVisit().get());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
+        Set<HealthCondition> healthConditions = getHealthConditions();
+        if (!healthConditions.isEmpty()) {
+            builder.append("; Health Conditions: ");
+            healthConditions.forEach(builder::append);
         }
         return builder.toString();
     }

@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
@@ -23,7 +24,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -113,30 +113,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String healthCondition} into a {@code HealthCondition}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code healthCondition} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static HealthCondition parseHealthCondition(String healthCondition) throws ParseException {
+        requireNonNull(healthCondition);
+        String trimmedHealthCondition = healthCondition.trim();
+        if (!HealthCondition.isValidHealthCondition(trimmedHealthCondition)) {
+            throw new ParseException(HealthCondition.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new HealthCondition(trimmedHealthCondition);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> healthConditions} into a {@code Set<HealthCondition>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<HealthCondition> parseHealthConditions(Collection<String> healthConditions)
+            throws ParseException {
+        requireNonNull(healthConditions);
+        final Set<HealthCondition> healthConditionSet = new HashSet<>();
+        for (String healthConditionName : healthConditions) {
+            healthConditionSet.add(parseHealthCondition(healthConditionName));
         }
-        return tagSet;
+        return healthConditionSet;
     }
 
     /**

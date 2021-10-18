@@ -77,7 +77,7 @@ public class DoneCommand extends Command {
 
         Person donePerson = new Person(personToDone.getName(), personToDone.getPhone(), personToDone.getLanguage(),
                 personToDone.getAddress(), newLastVisited, newVisit,
-                personToDone.getFrequency(), newOccurrence, personToDone.getTags());
+                personToDone.getFrequency(), newOccurrence, personToDone.getHealthConditions());
 
         model.setPerson(personToDone, donePerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
