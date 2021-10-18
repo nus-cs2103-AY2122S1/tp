@@ -176,6 +176,41 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] View Student/Lesson feature
+
+#### Proposed Implementation
+
+The proposed view student/lesson mechanism is facilitated by `VersionedStudentBook` and `VersionedLessonBook`. It extends `TutorAid`, stored internally as a `tutorAidStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedStudentBook#viewStudent()` — Updates student panel with the student of interest
+* `VersionedLessonBook#viewLesson()` — Updates lesson panel with the lesson of interest.
+
+These operations are exposed in the `Model` interface as `Model#viewStudent()` and `Model#viewLesson()` respectively.
+
+Given below is an example usage scenario and how the view student/lesson mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedStudentBook`/`VersionedLessonBook` will be initialized with the initial TutorAid state, and the `currentStatePointer` pointing to that single TutorAid state.
+
+Step 2. The user executes `view -s 1`/`view -l 1` command to view the 1st student/lesson in TutorAid. The `view` command calls `Model#viewStudent()`/`Model#viewLesson()`, causing the modified state of TutorAid after the `view -s 1`/`view -l 1` command executes to be saved in the `tutorAidStateList`, and the `currentStatePointer` pointing to that single TutorAid state.
+
+The following sequence diagram shows how the view operation works:
+
+![ViewStudentSequenceDiagram](images/ViewStudentSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+#### Design considerations:
+
+**Aspect: How view student/lesson executes:**
+
+* **Alternative 1 (current choice):** Filters and updates view panel on command.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Filter list beforehand and update view panel on command.
+    * Pros: Will use less memory (e.g. for `view -s`, just load the pre-generated student panel).
+    * Cons: We must ensure that all possible view panels combinations are covered and this might cause slower application initialization.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

@@ -1,0 +1,54 @@
+@startuml
+skinparam sequenceArrowThickness 2
+skinparam maxmessagesize 500
+
+participant "logic:LogicManager" as A
+participant "tutorAidParser:TutorAidParser" as B
+participant ":ViewStudentCommand" as C
+participant ":Model" as D
+participant ":ModelManager" as E
+participant "ui:UIManager" as F
+
+[-> A: execute(view -s 1)
+activate A
+
+A -> B: parseCommand(view -s 1)
+activate B
+
+create C
+B -> C:
+activate C
+
+B <-- C:
+deactivate C
+
+A <-- B:
+deactivate B
+
+A -> C: execute()
+activate C
+
+C -> D: viewStudent(student)
+activate D
+
+D -> E: viewStudent(student)
+activate E
+
+E -> F: showViewWindow()
+activate F
+
+E <-- F:
+deactivate F
+
+D <-- E:
+deactivate E
+
+C <-- D:
+deactivate D
+
+A <-- C: result
+deactivate C
+
+[<-- A:
+deactivate A
+@enduml
