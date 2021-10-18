@@ -168,9 +168,9 @@ The following sequence diagram describes what happens when `AttendanceCommand` i
 
 ![AttendanceCommandSequenceDiagram](images/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
 
-As seen from the diagram, the AttendanceCommand involves two for loops. In each of the loops there is a reference frame.
+As seen from the diagram, the `AttendanceCommand` involves two for loops. In each of the loops there is a reference frame.
 
-For IndexWithinRange and UpdateModelAttendanceSequenceDiagram, the sequential diagrams are as follows:
+For `IndexWithinRange` and `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams are as follows:
 
 ![IndexWithinRangeSequenceDiagram](images/logic/commands/attendancecommand/IndexWithinRangeSequenceDiagram.png)
 
@@ -178,11 +178,11 @@ If the condition is met, a `CommandException` is thrown to let the user know tha
 
 ![UpdateModelAttendanceSequenceDiagram](images/logic/commands/attendancecommand/UpdateModelAttendanceSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of :Student as we are creating a new :Student instance. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of `Student` as we are creating a new `Student` instance. 
 
 ### ParticipationCommand
 
-This command serves to update the participation score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
+This command serves to update the `Participation` score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
 
 #### Implementation
 
@@ -192,7 +192,7 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
 ![ParticipationCommandMarkAttendanceSequenceDiagram](images/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the Attendance and is only executed in the event that participationUpdate is more than 0. Otherwise, it will not run.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the `Attendance` and is only executed in the event that `participationUpdate` is more than 0. Otherwise, it will not run.
 
 ### SortCommand
 
