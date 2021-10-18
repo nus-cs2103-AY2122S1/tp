@@ -59,6 +59,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
+    
+    
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -109,6 +111,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
+    }
+
+    public void clearAllTask() {
+        tasks.removeAllTasks();
     }
 
 

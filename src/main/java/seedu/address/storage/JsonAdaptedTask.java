@@ -22,6 +22,7 @@ public class JsonAdaptedTask {
     private final String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String status;
+    private boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -47,7 +48,8 @@ public class JsonAdaptedTask {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        status = source.getStatus();
+        status = source.getStatusString();
+        this.isComplete = source.checkIsDone();
     }
 
     /**
@@ -78,9 +80,9 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
         }
         final Deadline modelDeadline = new Deadline(deadline);
-
+        System.out.println(status);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelDeadline, modelTags);
+        return new Task(modelName, modelDeadline, modelTags, isComplete);
     }
 }

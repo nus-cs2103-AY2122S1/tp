@@ -97,6 +97,10 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
+    
+    public void clearTasks() {
+        this.addressBook.clearAllTask();
+    }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
@@ -177,7 +181,7 @@ public class ModelManager implements Model {
         TaskName name = target.getName();
         Deadline deadline = target.getDeadline();
         Set<Tag> tags = target.getTags();
-        Task newTask = new Task(name, deadline, tags);
+        Task newTask = new Task(name, deadline, tags, true);
         newTask.markTaskComplete();
         addressBook.setTask(target, newTask);
     }
