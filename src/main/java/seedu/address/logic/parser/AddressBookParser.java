@@ -12,16 +12,19 @@ import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CustomerCommand;
 import seedu.address.logic.commands.DeleteCustomerCommand;
 import seedu.address.logic.commands.DeleteEmployeeCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCustomerCommand;
 import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.commands.EditSupplierCommand;
+import seedu.address.logic.commands.EmployeeCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCustomerCommand;
+import seedu.address.logic.commands.ReservationCommand;
 import seedu.address.logic.commands.ReserveCommand;
 import seedu.address.logic.commands.SupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -95,8 +98,17 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case CustomerCommand.COMMAND_WORD:
+            return new CustomerCommand();
+
+        case EmployeeCommand.COMMAND_WORD:
+            return new EmployeeCommand();
+
         case SupplierCommand.COMMAND_WORD:
             return new SupplierCommand();
+
+        case ReservationCommand.COMMAND_WORD:
+            return new ReservationCommand();
 
         case ReserveCommand.COMMAND_WORD:
             return new ReserveCommandParser().parse(arguments);

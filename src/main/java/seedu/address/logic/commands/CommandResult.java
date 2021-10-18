@@ -47,9 +47,9 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.showCustomer = showCustomer;
-        this.showReservation = showReservation;
         this.showEmployee = showEmployee;
         this.showSupplier = showSupplier;
+        this.showReservation = showReservation;
     }
 
     /**
@@ -57,7 +57,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false, false, false);
+        this(feedbackToUser, false, false, false, false,
+                false, false);
     }
 
     public String getFeedbackToUser() {
@@ -77,11 +78,11 @@ public class CommandResult {
     }
 
     public boolean isShowEmployee() {
-        return showCustomer;
+        return showEmployee;
     }
 
     public boolean isShowReservation() {
-        return showCustomer;
+        return showReservation;
     }
 
     public boolean isShowSupplier() {
