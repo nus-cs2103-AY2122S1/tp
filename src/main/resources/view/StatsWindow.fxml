@@ -8,17 +8,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/help_icon.png" /> <!-- Placeholder image!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <Image url="@/images/statsIcon.png" /> <!-- Placeholder image!!!!!!!!!!!!!!!!!!!!!!!! -->
   </icons>
   <scene>
     <Scene>
       <stylesheets>
         <URL value="@Fonts.css" />
+        <URL value="@DarkTheme.css" />
       </stylesheets>
 
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" styleClass="hbox">
         <opaqueInsets>
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </opaqueInsets>
@@ -26,7 +27,7 @@
           <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
         </padding>
             <children>
-               <PieChart fx:id="priorityPieChart" />
+               <PieChart fx:id="priorityPieChart" title="Priority Count" />
             </children>
       </HBox>
     </Scene>

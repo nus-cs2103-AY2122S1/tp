@@ -19,7 +19,6 @@ import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
-import seedu.fast.model.ModelManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
