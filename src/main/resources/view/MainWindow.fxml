@@ -45,21 +45,37 @@
         <BorderPane>
 
           <left>
-            <VBox fx:id="personList" minWidth="250" prefWidth="250" minHeight="450" prefHeight="450" style="-fx-background-color: #f4f4f4;">
+            <VBox fx:id="personList" minWidth="250" prefWidth="250" minHeight="400" prefHeight="400" style="-fx-background-color: #f4f4f4;">
               <padding>
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
               <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
+
           </left>
 
           <center>
-            <VBox fx:id="taskList" minWidth="250" prefWidth="250" minHeight="450" prefHeight="450" style="-fx-background-color: #f4f4f4;">
-              <padding>
-                <Insets bottom="10" left="10" right="10" top="10" />
-              </padding>
-              <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="NEVER" />
-            </VBox>
+
+            <BorderPane>
+              <top>
+                <VBox fx:id="taskList" minWidth="250" prefWidth="250" minHeight="220" prefHeight="220" style="-fx-background-color: transparent;">
+                  <StackPane fx:id="taskListPanelPlaceholder" VBox.vgrow="NEVER" />
+                  <padding>
+                    <Insets bottom="5" left="10" right="10" top="10" />
+                  </padding>
+                </VBox>
+              </top>
+              <bottom>
+
+                <VBox fx:id="groupList" minWidth="250" prefWidth="250" minHeight="220" prefHeight="220" style="-fx-background-color: transparent;">
+                  <StackPane fx:id="groupListPanelPlaceholder" VBox.vgrow="NEVER" />
+                  <padding>
+                    <Insets bottom="10" left="10" right="10" top="5" />
+                  </padding>
+                </VBox>
+              </bottom>
+            </BorderPane>
+
           </center>
 
           <right>
@@ -68,9 +84,13 @@
                 <Insets bottom="10" left="10" right="10" top="10" />
               </padding>
             </StackPane>
+
           </right>
 
         </BorderPane>
+
+
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

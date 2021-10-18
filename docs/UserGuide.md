@@ -91,7 +91,7 @@ Examples:
 
 ### Viewing a student: `student -v` `[coming in v1.2]`
 
-Views a particular student's details given by the specified index from the 
+Views a particular student's details given by the specified index from the
 persons list.
 
 Format: `student -v INDEX`
@@ -108,7 +108,7 @@ Edits the detail of a specific student.
 
 Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL]`
 
-* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a 
+* Edits the detail of the student specified by the `INDEX`. `INDEX` should be a
   positive number and refers to the index number of a student in the list of students.
 * `-e` refers to the edit command
 * It is a requirement that **at least one of the optional fields should be provided**.
@@ -118,7 +118,7 @@ Example:
 * `student -e 3 c/88888888 e/johnny@mail.com` Edits the contact number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
-  
+
 ### Adding a lesson to a student: `student -al` `[coming in v1.2]`
 
 Adds a lesson to the specific student
@@ -153,7 +153,7 @@ Deletes the specific student given by the specified index from the persons list.
 
 Format: `student -d INDEX`
 
-* Deletes the student specified by the `INDEX`. 
+* Deletes the student specified by the `INDEX`.
 * `-d` refers to the edit command
 * `INDEX` should be a positive number and refers to the index number of a student in the list of students.
 
@@ -256,7 +256,7 @@ Examples:
 
 Assigns a specific task to students’ task list.
 
-Format: `task -ass STUDENTINDEX TASKINDEX` 
+Format: `task -ass STUDENTINDEX TASKINDEX`
 
 * Assigns the task specified at index `TASKINDEX` to the “Student” object specified at index `STUDENTINDEX`.
 * `-ass` refers to the assignment command.
@@ -308,7 +308,7 @@ Action | Format, Examples
 --------|------------------
 **Help** | `help`
 **Adding a student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-**Edit a student** | `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]​` <br> e.g., `student -e 3 c/88888888 e/johnny@mail.com` 
+**Edit a student** | `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL] [s/DAY/START_TIME/END_TIME]​` <br> e.g., `student -e 3 c/88888888 e/johnny@mail.com`
 **View a student** | `student -v INDEX​` <br> e.g., `student -v 3`
 **Delete a student** | `student -d INDEX​` <br> e.g., `student -d 3`
 **Find a student** | `find KEYWORD [MORE_KEYWORDS]​` <br> e.g., `find alex david`
