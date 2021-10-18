@@ -18,7 +18,7 @@ public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates the user's profile in ModuLink. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_ID + "STUDENT ID "
@@ -33,7 +33,7 @@ public class CreateCommand extends Command {
             + PREFIX_MOD + "CS2100 "
             + PREFIX_MOD + "CS2101";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Profile created: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     private static final String MESSAGE_DUPLICATE_STUDENT_ID = "There is already a person with this Student ID.";
 
@@ -52,7 +52,6 @@ public class CreateCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            System.out.println("here");
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
