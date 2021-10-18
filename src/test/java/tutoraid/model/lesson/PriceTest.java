@@ -1,10 +1,11 @@
 package tutoraid.model.lesson;
 
-import org.junit.jupiter.api.Test;
-import tutoraid.testutil.Assert;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import tutoraid.testutil.Assert;
 
 public class PriceTest {
 
