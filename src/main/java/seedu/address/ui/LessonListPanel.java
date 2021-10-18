@@ -25,7 +25,7 @@ public class LessonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Lesson> lessonListView;
     @FXML
-    Label lessonListTitle;
+    private Label lessonListTitle;
     @FXML
     private Label placeholder;
 

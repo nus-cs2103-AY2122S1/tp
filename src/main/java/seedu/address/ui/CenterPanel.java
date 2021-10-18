@@ -3,7 +3,6 @@ package seedu.address.ui;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableListBase;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -59,6 +58,9 @@ public class CenterPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Bring PersonGridPanel to top of the stack's child list.
+     */
     public void displayPersonGridPanel() {
         if (!centerPanelPlaceholder.getChildren().contains(personGridPanel.getRoot())) {
             personGridPanel.setListPanels();
@@ -67,12 +69,16 @@ public class CenterPanel extends UiPart<Region> {
     }
 
 
+    /**
+     * Bring PersonGridPanel to top of the stack's child list.
+     *
+     * @param student Selected student to view.
+     * @param lessons Lessons of the student.
+     */
     public void displayPersonGridPanel(Person student, ObservableList<Lesson> lessons) {
-        if (!centerPanelPlaceholder.getChildren().contains(personGridPanel.getRoot())) {
-            personGridPanel.fillListPanels(student, lessons);
-            personGridPanel.setListPanels();
-            centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
-        }
+        personGridPanel.fillListPanels(student, lessons);
+        personGridPanel.setListPanels();
+        centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
     }
 
     /**

@@ -80,7 +80,7 @@ public class CommandResult {
     }
 
     public boolean isShowStudentList() {
-        return !showSchedule;
+        return !showSchedule && !isDisplayStudent();
     }
 
     public boolean isExit() {

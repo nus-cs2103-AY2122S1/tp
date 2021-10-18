@@ -75,7 +75,7 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Lesson> getLessonList(Person student) {
         ObservableList<Lesson> internalList = FXCollections.observableArrayList();
-        student.getLessons().forEach(lesson -> internalList.add(lesson));
+        internalList.addAll(student.getLessons());
         return FXCollections.unmodifiableObservableList(internalList);
     }
 

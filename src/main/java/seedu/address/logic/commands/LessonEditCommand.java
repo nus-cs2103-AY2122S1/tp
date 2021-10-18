@@ -19,7 +19,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -39,7 +38,6 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
             + "LESSON_INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_DATE + "dd MMM yyyy] "
             + "[" + PREFIX_TIME + "HHmm-HHmm] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
@@ -109,7 +107,7 @@ public class LessonEditCommand extends UndoableCommand {
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, toEdit,
-                editedLesson, personAfterLessonEdit));
+                editedLesson, personAfterLessonEdit), personAfterLessonEdit);
     }
 
     /**

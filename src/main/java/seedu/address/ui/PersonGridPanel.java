@@ -24,22 +24,26 @@ public class PersonGridPanel extends UiPart<Region> {
      *
      * @param personList The ObservableList of persons.
      */
-    public PersonGridPanel(ObservableList<Person> personList, ObservableList<Lesson> lessonList){
+    public PersonGridPanel(ObservableList<Person> personList, ObservableList<Lesson> lessonList) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
         lessonListPanel = new LessonListPanel(lessonList);
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
+    /**
+     * Initialise panels content.
+     * @param student Student to view.
+     * @param lessons Lessons of the student.
+     */
     public void fillListPanels(Person student, ObservableList<Lesson> lessons) {
         lessonListPanel = lessons.isEmpty()
                 ? new LessonListPanel(lessons, student, NO_EXISTING_LESSONS_MESSAGE)
                 : new LessonListPanel(lessons, student);
     }
 
+    /**
+     * Set the children of the panels.
+     */
     public void setListPanels() {
         personListPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
         lessonListPanelPlaceholder.getChildren().setAll(lessonListPanel.getRoot());

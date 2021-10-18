@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -197,10 +196,6 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
-    private void handlePersonGridPanel() {
-        centerPanel.displayPersonGridPanel();
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -218,13 +213,15 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowSchedule()) {
                 handleSchedule();
-            } else {
-                handlePersonList();
             }
 
             if (commandResult.isDisplayStudent()) {
                 Person student = commandResult.getStudent();
                 handlePersonGridPanel(student);
+            }
+
+            if (commandResult.isShowStudentList()) {
+                handlePersonList();
             }
 
             if (commandResult.isExit()) {
