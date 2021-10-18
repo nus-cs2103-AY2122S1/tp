@@ -54,7 +54,7 @@ public class StudentCard extends UiPart<Region> {
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().toString());
         attendance.setText(student.getAttendance().attendanceList.toString());
-        participation.setText(student.getParticipation().value.toString());
+        participation.setText(student.getParticipation().participationList.toString());
 
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
