@@ -4,9 +4,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +21,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -85,6 +90,26 @@ public class ShowCommand extends Command {
             uniqueInputs = getUniqueEmploymentTypeInputs(ol);
         }
 
+        if (prefixString.equals(PREFIX_EXPECTED_SALARY.getPrefix())) {
+            userText = "expected salaries";
+            uniqueInputs = getUniqueExpectedSalaryInputs(ol);
+        }
+
+        if (prefixString.equals(PREFIX_LEVEL_OF_EDUCATION.getPrefix())) {
+            userText = "levels of education";
+            uniqueInputs = getUniqueLevelOfEducationInputs(ol);
+        }
+
+        if (prefixString.equals(PREFIX_EXPERIENCE.getPrefix())) {
+            userText = "years of experience";
+            uniqueInputs = getUniqueExperienceInputs(ol);
+        }
+
+        if (prefixString.equals(PREFIX_TAG.getPrefix())) {
+            userText = "tags";
+            uniqueInputs = getUniqueTagInputs(ol);
+        }
+
         if (!uniqueInputs.isEmpty()) {
             StringBuilder sb = new StringBuilder("Here are all the " + userText + " present:\n");
             for (String uniqueInput: uniqueInputs) {
@@ -97,19 +122,9 @@ public class ShowCommand extends Command {
         }
     }
 
-    private Set<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
+    private Set<String> getUniqueNameInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getEmploymentType().toString()).collect(Collectors.toSet());
-    }
-
-    private Set<String> getUniqueRoleInputs(ObservableList<Person> ol) {
-        return ol.stream()
-                .map(x -> x.getRole().toString()).collect(Collectors.toSet());
-    }
-
-    private Set<String> getUniqueEmailInputs(ObservableList<Person> ol) {
-        return ol.stream()
-                .map(x -> x.getEmail().toString()).collect(Collectors.toSet());
+                .map(x -> x.getName().toString()).collect(Collectors.toSet());
     }
 
     private Set<String> getUniquePhoneInputs(ObservableList<Person> ol) {
@@ -117,9 +132,39 @@ public class ShowCommand extends Command {
                 .map(x -> x.getPhone().toString()).collect(Collectors.toSet());
     }
 
-    private Set<String> getUniqueNameInputs(ObservableList<Person> ol) {
+    private Set<String> getUniqueEmailInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getName().toString()).collect(Collectors.toSet());
+                .map(x -> x.getEmail().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueRoleInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getRole().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getEmploymentType().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueExpectedSalaryInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getExpectedSalary().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueLevelOfEducationInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getLevelOfEducation().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueExperienceInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getExperience().toString()).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueTagInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .flatMap(person -> person.getTags().stream().map(Tag::toString)).collect(Collectors.toSet());
     }
 
 }
