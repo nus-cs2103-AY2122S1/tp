@@ -34,16 +34,29 @@ public class TagCommandUtils {
         return false;
     }
 
-    public static boolean checkIfContainsPriorityTag(Set<Tag> tags) {
+    /**
+     * Checks if a given Set of Tags contains multiple Priority tags.
+     *
+     * @param tags The Set of Tags to be checked.
+     * @return A boolean indicating the result.
+     */
+    public static boolean hasMultiplePriorityTags(Set<Tag> tags) {
+        int numberOfPriorityTags = 0;
         for (Tag tag : tags) {
             if (tag.getPriority() != TagUtil.NO_PRIORITY) {
-                return true;
+                numberOfPriorityTags += 1;
             }
         }
-        return false;
+        return numberOfPriorityTags > 1;
     }
 
-    public static boolean checkIfContainsIPTag(Set<Tag> tags) {
+    /**
+     * Checks if a given Set of Tags contains multiple Investment Plan Tags.
+     *
+     * @param tags The Set of Tags to be checked.
+     * @return A boolean indicating the result.
+     */
+    public static boolean hasMultipleInvestmentPlanTags(Set<Tag> tags) {
         //TODO: to be implemented when IP tags are added
         return false;
     }

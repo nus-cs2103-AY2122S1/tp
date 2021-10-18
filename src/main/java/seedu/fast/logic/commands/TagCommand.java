@@ -2,6 +2,7 @@ package seedu.fast.logic.commands;
 
 import static seedu.fast.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,23 +30,29 @@ public class TagCommand extends Command {
             + "add/Friend";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
-    public static final String MESSAGE_ADD_PRIORITY_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
-    public static final String MESSAGE_ADD_IP_TAG_FAILURE = "Failed to add the tag to Person: %1$s";
+    public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
+    public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";
+    public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each person can only have one Priority tag!";
+    public static final String MESSAGE_MULTIPLE_INVESTMENT_PLAN_TAGS = "Each person can only have one Investment" +
+            " Plan Tag!";
 
     private final Index index;
-    private Set<Tag> tags;
+    private Set<Tag> addTags;
+    private Set<Tag> deleteTags;
 
     /**
      * Construct for a {@code RemarkCommand}
      *
      * @param index index of the person in the filtered person list to add the tags
-     * @param tags Tags of the person to be added
+     * @param addTags Tags of the person to be added
+     * @param deleteTags Tags of the person to be deleted
      */
-    public TagCommand(Index index, Set<Tag> tags) {
-        requireAllNonNull(index, tags);
+    public TagCommand(Index index, Set<Tag> addTags, Set<Tag> deleteTags) {
+        requireAllNonNull(index, addTags, deleteTags);
 
         this.index = index;
-        this.tags = tags;
+        this.addTags = addTags;
+        this.deleteTags = deleteTags;
     }
 
     @Override
@@ -57,19 +64,43 @@ public class TagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Set<Tag> oldTags = personToEdit.getTags();
+        Set<Tag> newTags = new HashSet<>(oldTags);
 
-        Set<Tag> newTags = personToEdit.getTags();
+        //attempt to delete tags
+        for (Tag tag: deleteTags) {
+            if (!newTags.remove(tag)) {
+                throw new CommandException(String.format(MESSAGE_TAG_DOES_NOT_EXIST, tag.tagName));
+            }
+        }
+
+        for (Tag tag: addTags) {
+            if (!newTags.add(tag)) {
+                throw new CommandException(String.format(MESSAGE_TAGS_ARE_REPEATED, tag.tagName));
+            }
+        }
+
+        if (TagCommandUtils.hasMultiplePriorityTags(newTags)) {
+            throw new CommandException(MESSAGE_MULTIPLE_PRIORITY_TAGS);
+        }
+
+        if (TagCommandUtils.hasMultipleInvestmentPlanTags(newTags)) {
+            throw new CommandException(MESSAGE_MULTIPLE_INVESTMENT_PLAN_TAGS);
+        }
+
+        /*
+
         //preliminary checks:
         for (Tag tag: tags) {
             //check if any tags to be added already exist in the person's set of tags
             if (TagCommandUtils.checkIfContains(newTags, tag)) {
-                String errorMessage = String.format(Messages.MESSAGE_TAGS_ARE_REPEATED, tag.tagName);
+                String errorMessage = String.format(MESSAGE_TAGS_ARE_REPEATED, tag.tagName);
                 throw new CommandException(errorMessage);
             }
         }
 
         //check if multiple priority tags are to be added
-        if (TagCommandUtils.checkIfContainsPriorityTag())
+
         //check if multiple IV tags are to be added
 
 
@@ -77,6 +108,7 @@ public class TagCommand extends Command {
         for (Tag tag: tags) {
             newTags.add(tag);
         }
+        */
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -112,7 +144,7 @@ public class TagCommand extends Command {
 
         // state check
         TagCommand e = (TagCommand) other;
-        return index.equals(e.index) && tags.equals(e.tags);
+        return index.equals(e.index) && addTags.equals(e.addTags) && deleteTags.equals(e.deleteTags);
     }
 
 }
