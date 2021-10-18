@@ -54,7 +54,8 @@ public class ReserveCommand extends Command {
             throw new CommandException(String.format(MESSAGE_UNSUCCESSFUL, reservation));
         }
         model.addReservation(reservation);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, reservation));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, reservation), false, false, false, false,
+                false, true);
     }
 
     /**

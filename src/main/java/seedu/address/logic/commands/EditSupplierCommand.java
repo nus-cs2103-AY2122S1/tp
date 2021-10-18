@@ -90,7 +90,7 @@ public class EditSupplierCommand extends Command {
         model.setSupplier(supplierToEdit, editedSupplier);
         model.updateFilteredSupplierList(PREDICATE_SHOW_ALL_SUPPLIERS);
         return new CommandResult(String.format(MESSAGE_EDIT_SUPPLIER_SUCCESS, editedSupplier),
-                false, false, false, true);
+                false, false, false, false, true, false);
     }
 
     /**

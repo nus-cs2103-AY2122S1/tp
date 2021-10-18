@@ -2,6 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_ALMONDS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_GRAPEFRUITS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LP_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_LIVEBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SPECIALREQUEST_ROCK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -19,14 +25,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditSupplierDescriptorBuilder;
+import seedu.address.model.person.customer.Customer;
+import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditCustomerDescriptorBuilder;
+
 
 /**
- * Contains helper methods for testing Supplier commands.
+ * Contains helper methods for testing Customer commands.
  */
-public class SupplierCommandTestUtil {
+public class ReservationCommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -72,18 +79,20 @@ public class SupplierCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditSupplierCommand.EditSupplierDescriptor DESC_AMY;
-    public static final EditSupplierCommand.EditSupplierDescriptor DESC_BOB;
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_AMY;
+    public static final EditCustomerCommand.EditCustomerDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditSupplierDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditCustomerDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_CHICKEN)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
-        DESC_BOB = new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_FRIEND).withAllergies(VALID_ALLERGY_ALMONDS)
+                .withLoyaltyPoints(VALID_LP_AMY).withSpecialRequests(VALID_SPECIALREQUEST_LIVEBAND)
+                .build();
+        DESC_BOB = new EditCustomerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_BEEF)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAllergies(VALID_ALLERGY_GRAPEFRUITS)
+                .withSpecialRequests(VALID_SPECIALREQUEST_ROCK).withLoyaltyPoints(VALID_LP_BOB)
+                .build();
     }
 
 
@@ -110,7 +119,7 @@ public class SupplierCommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, true, false);
+                false, false, false, false, false, true);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -124,24 +133,24 @@ public class SupplierCommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Supplier> expectedFilteredList = new ArrayList<>(actualModel.getFilteredSupplierList());
+        List<Customer> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCustomerList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredSupplierList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredCustomerList());
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the supplier at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the Customer at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showSupplierAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredSupplierList().size());
+    public static void showReservationAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCustomerList().size());
 
-        Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
-        final String[] splitName = supplier.getName().fullName.split("\\s+");
-        model.updateFilteredSupplierList(new SupplierNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
+        final String[] splitName = customer.getName().fullName.split("\\s+");
+        model.updateFilteredCustomerList(new CustomerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredSupplierList().size());
+        assertEquals(1, model.getFilteredCustomerList().size());
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.EmployeeCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEmployees.getTypicalAddressBookEmployees;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +28,7 @@ public class AddEmployeeCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newCustomer_success() {
+    public void execute_newEmployee_success() {
         Employee validEmployee = new EmployeeBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -39,7 +39,7 @@ public class AddEmployeeCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateCustomer_throwsCommandException() {
+    public void execute_duplicateEmployee_throwsCommandException() {
         ReadOnlyAddressBook temp = model.getAddressBook();
         Employee employeeInList = model.getAddressBook().getEmployeeList().get(0);
         assertCommandFailure(new AddEmployeeCommand(employeeInList), model,
