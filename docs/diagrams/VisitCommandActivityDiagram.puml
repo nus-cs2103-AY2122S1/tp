@@ -5,18 +5,22 @@ start
 :VisitCommandParser parses the command;
 
 if () then ([Visit date is specified in correct format])
-    if() then ([Frequency and occurrence present])
+    if() then ([Frequency and occurrence both present])
         if() then ([Both frequency and occurrence are correctly specified])
             :execute VisitCommand;
-        else ([Frequency or occurrence wrongly specified])
+        else ([else])
             :Throw ParseException;
         endif
 
-    else ([Not both frequency and occurrence present])
-        :Throw ParseException;
+    else ([else])
+        if() then ([Neither frequency nor occurrence present])
+            :execute VisitCommand;
+        else ([else])
+            :Throw ParseException;
+        endif
     endif
 
-else ([Visit date is specified in wrong format])
+else ([else])
     :Throw ParseException;
 
 endif
