@@ -50,7 +50,7 @@ public class CheckCommand extends Command {
         model.updateFilteredCustomerList(new CustomerContainsReservationPredicate(model.getFilteredReservationList()));
         return new CommandResult(String.format(getDisplayMessage(typeOfCheck),
                 model.getFilteredReservationList().size(),
-                convertToLocalDateTime(date, time)));
+                convertToLocalDateTime(date, time)), false, false, false, false, false, true);
     }
 
     private LocalDateTime convertToLocalDateTime(LocalDate date, LocalTime time) {

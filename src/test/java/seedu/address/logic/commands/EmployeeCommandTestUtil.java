@@ -2,6 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_JOBTITLE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY_DETAILS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -19,14 +25,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
-import seedu.address.testutil.EditSupplierDescriptorBuilder;
+import seedu.address.model.person.employee.Employee;
+import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditEmployeeDescriptorBuilder;
+
 
 /**
- * Contains helper methods for testing Supplier commands.
+ * Contains helper methods for testing Employee commands.
  */
-public class SupplierCommandTestUtil {
+public class EmployeeCommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -72,18 +79,18 @@ public class SupplierCommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditSupplierCommand.EditSupplierDescriptor DESC_AMY;
-    public static final EditSupplierCommand.EditSupplierDescriptor DESC_BOB;
+    public static final EditEmployeeCommand.EditEmployeeDescriptor DESC_AMY;
+    public static final EditEmployeeCommand.EditEmployeeDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditSupplierDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_CHICKEN)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
-        DESC_BOB = new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withTags(VALID_TAG_FRIEND).withSalary(VALID_SALARY_AMY)
+                .withJobTitle(VALID_JOBTITLE_AMY).withLeaves(VALID_LEAVES_AMY).build();
+        DESC_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_BEEF)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSalary(VALID_SALARY_BOB)
+                .withJobTitle(VALID_JOBTITLE_BOB).withLeaves(VALID_LEAVES_BOB).build();
     }
 
 
@@ -110,7 +117,7 @@ public class SupplierCommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
                                             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
-                false, false, false, false, true, false);
+                false, false, false, true, false, false);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 
@@ -124,24 +131,24 @@ public class SupplierCommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Supplier> expectedFilteredList = new ArrayList<>(actualModel.getFilteredSupplierList());
+        List<Employee> expectedFilteredList = new ArrayList<>(actualModel.getFilteredEmployeeList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredSupplierList());
+        assertEquals(expectedFilteredList, actualModel.getFilteredEmployeeList());
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the supplier at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered list to show only the Employee at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showSupplierAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredSupplierList().size());
+    public static void showEmployeeAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEmployeeList().size());
 
-        Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
-        final String[] splitName = supplier.getName().fullName.split("\\s+");
-        model.updateFilteredSupplierList(new SupplierNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
+        final String[] splitName = employee.getName().fullName.split("\\s+");
+        model.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredSupplierList().size());
+        assertEquals(1, model.getFilteredEmployeeList().size());
     }
 }
