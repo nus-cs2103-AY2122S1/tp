@@ -7,6 +7,8 @@ import static seedu.address.commons.util.StringUtil.isValidDate;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.commons.util.StringUtil;
+
 public class LastMet implements OptionalPersonNonStringField {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
@@ -36,6 +38,13 @@ public class LastMet implements OptionalPersonNonStringField {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             value = LocalDate.parse(lastMetDate, formatter);
         }
+    }
+
+    /**
+     * Returns if a given string is a valid lastMet.
+     */
+    public static boolean isValidLastMet(String test) {
+        return StringUtil.isValidDate(test);
     }
 
     @Override

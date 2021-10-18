@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -73,6 +74,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_LASTMET).isPresent()) {
             editPersonDescriptor.setLastMet(ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).get()));
+        }
+        if (argMultimap.getValue(PREFIX_NEXTMEETING).isPresent()) {
+            editPersonDescriptor.setNextMeeting(ParserUtil.parseNextMeetingString(
+                argMultimap.getValue(PREFIX_NEXTMEETING).get()
+            ));
         }
         if (argMultimap.getValue(PREFIX_CURRENTPLAN).isPresent()) {
             editPersonDescriptor.setCurrentPlan(ParserUtil.parseCurrentPlan(

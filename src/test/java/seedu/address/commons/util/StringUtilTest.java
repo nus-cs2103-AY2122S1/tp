@@ -1,10 +1,13 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -272,6 +275,59 @@ public class StringUtilTest {
     @Test
     public void isValidTime_emptyString_returnsTrue() {
         assertTrue(StringUtil.isValidDate(""));
+    }
+
+    //---------------- Tests for parseToLocalDate --------------------------------------
+
+    /*
+     * Equivalence Partitions: empty string, valid date
+     */
+
+    @Test
+    public void parseToLocalDate_emptyString_returnsNull() {
+        assertEquals(StringUtil.parseToLocalDate(""), null);
+    }
+
+    @Test
+    public void parseToLocalDate_validString_returnsCorrectLocalDate() {
+        assertTrue(LocalDate.of(2021, 10, 18).equals(StringUtil.parseToLocalDate("18-10-2021")));
+    }
+
+    //---------------- Tests for parseToLocalTime --------------------------------------
+
+    /*
+     * Equivalence Partitions: empty string, valid date
+     */
+
+    @Test
+    public void parseToLocalTime_emptyString_returnsNull() {
+        assertEquals(StringUtil.parseToLocalTime(""), null);
+    }
+
+    @Test
+    public void parseToLocalTime_validString_returnsCorrectLocalDate() {
+        assertTrue(LocalTime.of(20, 20).equals(StringUtil.parseToLocalTime("20:20")));
+    }
+
+    //---------------- Tests for convertEmptyStringIfNull --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, empty string, non-empty string
+     */
+
+    @Test
+    public void convertEmptyStringIfNull_null_returnsEmptyString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull(null), "");
+    }
+
+    @Test
+    public void convertEmptyStringIfNull_emptyString_returnsUnchangedString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull(""), "");
+    }
+
+    @Test
+    public void convertEmptyStringIfNull_nonEmptyString_returnsUnchangedString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull("test 123"), "test 123");
     }
 
     //---------------- Tests for getDetails --------------------------------------

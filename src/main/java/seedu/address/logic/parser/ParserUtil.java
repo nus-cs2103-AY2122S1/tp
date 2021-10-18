@@ -15,6 +15,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.person.SortDirection;
@@ -25,7 +26,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_CLIENT_ID = "Client ID is not a non-negative unsigned integer.";
 
     /**
@@ -130,6 +130,32 @@ public class ParserUtil {
             throw new ParseException(LastMet.MESSAGE_CONSTRAINTS);
         }
         return new LastMet(trimmedLastMet);
+    }
+
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code NextMeeting}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static NextMeeting parseNextMeetingString(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING)) {
+            return NextMeeting.NULL_MEETING;
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+            trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+            trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+        return new NextMeeting(date, startTime, endTime, location);
     }
 
     /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.

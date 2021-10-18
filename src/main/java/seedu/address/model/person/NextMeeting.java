@@ -2,23 +2,28 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
 import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.commons.util.StringUtil.isValidTime;
+import static seedu.address.commons.util.StringUtil.parseToLocalDate;
+import static seedu.address.commons.util.StringUtil.parseToLocalTime;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class NextMeeting implements OptionalPersonNonStringField {
+
     public static final String DATE_MESSAGE_CONSTRAINTS = "Next meeting date should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
     public static final String TIME_MESSAGE_CONSTRAINTS = "Next meeting time should be in the 24-hour format, "
         + "where Hour and Minutes should be numerical values.";
-
-    private static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
+    public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
+    public static final String NO_NEXT_MEETING = "No meeting planned.";
+    public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
         null);
-    private static final String NO_NEXT_MEETING = "No meeting planned.";
 
+    public static final String VALID_MEETING_STRING =
+        "([0-9]{2})-([0-9]{2})-([0-9]{4}) \\(([0-9]{2}):([0-9]{2})~([0-9]{2}):([0-9]{2})\\),(.|\\s)*\\S(.|\\s)*";
 
     public final LocalDate date;
     public final LocalTime startTime;
@@ -61,50 +66,12 @@ public class NextMeeting implements OptionalPersonNonStringField {
         this.endTime = parseToLocalTime(endTime);
     }
 
-    private LocalDate parseToLocalDate(String date) {
-        if (date.isEmpty()) {
-            return null;
-        } else {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            return LocalDate.parse(date, formatter);
-        }
-    }
-
-    private LocalTime parseToLocalTime(String time) {
-        if (time.isEmpty()) {
-            return null;
-        } else {
-            return LocalTime.parse(time);
-        }
-    }
-
-    /**
-     * Checks if {@code s} is null.
-     * Returns empty string if null, otherwise returns s.
-     */
-    private String convertEmptyStringIfNull(String s) {
-        if (s == null) {
-            return "";
-        }
-        return s;
-    }
-
-    /**
-     * Parses a given String {@code meeting} to return a {@code NextMeeting}
-     */
-    public static NextMeeting parseNextMeetingString(String meeting) {
-        if (meeting.equals(NO_NEXT_MEETING)) {
-            return NULL_MEETING;
-        }
-        String date = meeting.split(" ", 2)[0];
-        String startTime = meeting.substring(meeting.indexOf("(") + 1, meeting.indexOf("~"));
-        String endTime = meeting.substring(meeting.indexOf("~") + 1, meeting.indexOf(")"));
-        String location = meeting.split(", ", 2)[1];
-        return new NextMeeting(date, startTime, endTime, location);
-    }
-
     public static NextMeeting getNullMeeting() {
         return NULL_MEETING;
+    }
+
+    public static boolean isValidNextMeeting(String test) {
+        return test.matches(VALID_MEETING_STRING);
     }
 
     @Override
@@ -120,9 +87,9 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof NextMeeting // instanceof handles nulls
-            && date.equals(((NextMeeting) other).date)
-            && startTime.equals(((NextMeeting) other).startTime)
-            && endTime.equals(((NextMeeting) other).endTime)
+            && dateInString.equals(((NextMeeting) other).dateInString)
+            && startTimeInString.equals(((NextMeeting) other).startTimeInString)
+            && endTimeInString.equals(((NextMeeting) other).endTimeInString)
             && location.equals(((NextMeeting) other).location)); // state check
     }
 }

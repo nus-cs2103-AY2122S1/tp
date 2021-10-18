@@ -6,6 +6,9 @@ import static seedu.address.model.person.OptionalPersonNonStringField.IS_NULL_VA
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 /**
@@ -126,5 +129,41 @@ public class StringUtil {
     public static boolean isValidTime(String time) {
         return (IS_NULL_VALUE_ALLOWED && time.isEmpty())
             || time.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns {@code LocalDate} from a valid date.
+     * To use after isValidDate.
+     */
+    public static LocalDate parseToLocalDate(String date) {
+        if (date.isEmpty()) {
+            return null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return LocalDate.parse(date, formatter);
+        }
+    }
+
+    /**
+     * Returns {@code LocalTime} from a valid time in the 24hr format.
+     * To use after isValidTime.
+     */
+    public static LocalTime parseToLocalTime(String time) {
+        if (time.isEmpty()) {
+            return null;
+        } else {
+            return LocalTime.parse(time);
+        }
+    }
+
+    /**
+     * Checks if {@code s} is null.
+     * Returns empty string if null, otherwise returns s.
+     */
+    public static String convertEmptyStringIfNull(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s;
     }
 }

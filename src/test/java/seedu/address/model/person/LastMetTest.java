@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -17,23 +16,23 @@ public class LastMetTest {
 
     @Test
     public void isValidLastMet() {
-        // null email
-        assertThrows(NullPointerException.class, () -> isValidDate(null));
+        // null
+        assertThrows(NullPointerException.class, () -> LastMet.isValidLastMet(null));
 
-        // blank email
-        assertFalse(isValidDate(" ")); // empty string
+        // blank string
+        assertFalse(LastMet.isValidLastMet(" ")); // empty string
 
         // missing parts
-        assertFalse(isValidDate("20-30")); // missing local part
+        assertFalse(LastMet.isValidLastMet("20-30")); // missing local part
 
         // invalid parts
-        assertFalse(isValidDate("20-50-5050")); // invalid domain name
-        assertFalse(isValidDate("60-08-2010"));
-        assertFalse(isValidDate("5654-08-12"));
+        assertFalse(LastMet.isValidLastMet("20-50-5050")); // invalid domain name
+        assertFalse(LastMet.isValidLastMet("60-08-2010"));
+        assertFalse(LastMet.isValidLastMet("5654-08-12"));
 
-        // valid email
-        assertTrue(isValidDate("20-12-2021"));
-        assertTrue(isValidDate("20-09-2021"));
-        assertTrue(isValidDate("30-12-2021"));
+        // valid date
+        assertTrue(LastMet.isValidLastMet("20-12-2021"));
+        assertTrue(LastMet.isValidLastMet("20-09-2021"));
+        assertTrue(LastMet.isValidLastMet("30-12-2021"));
     }
 }

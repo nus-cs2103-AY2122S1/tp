@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -58,7 +60,13 @@ public class PersonBuilder {
         riskAppetite = new RiskAppetite(DEFAULT_RISKAPPETITE);
         disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
         lastMet = new LastMet(DEFAULT_LASTMET);
-        nextMeeting = NextMeeting.parseNextMeetingString(DEFAULT_NEXTMEETING);
+        try {
+            nextMeeting = ParserUtil.parseNextMeetingString(DEFAULT_NEXTMEETING);
+        } catch (ParseException pe) {
+            nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+                "Starbucks @ UTown");
+        }
+
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
     }
@@ -156,7 +164,12 @@ public class PersonBuilder {
      * Sets the {@code NextMeeting} of the {@code Person} that we are building.
      */
     public PersonBuilder withNextMeeting(String nextMeeting) {
-        this.nextMeeting = NextMeeting.parseNextMeetingString(nextMeeting);
+        try {
+            this.nextMeeting = ParserUtil.parseNextMeetingString(nextMeeting);
+        } catch (ParseException pe) {
+            this.nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+                "Starbucks @ UTown");
+        }
         return this;
     }
 
@@ -181,6 +194,6 @@ public class PersonBuilder {
      */
     public Function<ClientId, Person> buildFunction() {
         return clientId -> new Person(clientId, name, phone, email, address, riskAppetite,
-                disposableIncome, currentPlan, lastMet, tags);
+                disposableIncome, currentPlan, lastMet, nextMeeting, tags);
     }
 }
