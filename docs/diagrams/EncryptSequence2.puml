@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+
+box Commons COMMONS_COLOR_T1
+participant "<<class>>\nEncryptedJsonUtil" as EncryptedJsonUtil COMMONS_COLOR
+participant "<<class>>\nFileUtil" as FileUtil COMMONS_COLOR
+end box
+
+activate EncryptedJsonUtil
+EncryptedJsonUtil -> FileUtil : writeToEncryptedFile(filePath, sealedObject)
+activate FileUtil
+
+FileUtil --> EncryptedJsonUtil
+deactivate FileUtil
+
+@enduml

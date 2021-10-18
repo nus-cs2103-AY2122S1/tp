@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+
+box Commons COMMONS_COLOR_T1
+participant "<<class>>\nEncryptedJsonUtil" as EncryptedJsonUtil COMMONS_COLOR
+participant "<<class>>\nFileUtil" as FileUtil COMMONS_COLOR
+end box
+
+[-> EncryptedJsonUtil : readEncryptedJsonFile(filePath, JsonSerializableCsBook.class)
+activate EncryptedJsonUtil
+
+EncryptedJsonUtil -> FileUtil : readFromEncryptedFile(filePath)
+activate FileUtil
+
+FileUtil --> EncryptedJsonUtil : sealedObject
+deactivate FileUtil
+
+@enduml

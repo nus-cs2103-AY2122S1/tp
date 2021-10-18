@@ -162,50 +162,51 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The JSON encryption mechanism is facilitated by `JsonAddressBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
+The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
 Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the 
 CSBook data to an encrypted JSON file are as follows:
 
-- `JsonAddressBookStorage#saveAddressBook()` — Saves the current CSBook data
-- `EncryptedJsonUtil#saveEncryptedJsonFile()` — Saves the given data to a encrypted JSON file
-- `EncryptionUtil.encryptSerializableObject()` — Encrypts a `Serializable` object
-- `FileUtil#writeToEncryptedFile()` — Writes the encrypted object to a file
+- `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)` — Saves the current CSBook data
+- `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` — Saves the given data to a encrypted JSON file
+- `EncryptionUtil.encryptSerializableObject(Serializable)` — Encrypts a `Serializable` object
+- `FileUtil#writeToEncryptedFile(Path, SealedObject)` — Writes the encrypted object to a file
 
 Decrypting an encrypted JSON file goes through a similar process. The relevant operations for decrypting the
 encrypted JSON file to the CSBook are as follows:
 
-- `JsonAddressBookStorage#readAddressBook()` — Reads the CSBook data from the encrypted JSON file
-- `EncryptedJsonUtil#readEncryptedJsonFile()` — Reads the data from a encrypted JSON file
-- `EncryptionUtil#decryptSealedObject()` — Decrypts a `SealedObject`
-- `FileUtil#readFromEncryptedFile()` — Reads the encrypted object from a file
+- `JsonAddressBookStorage#readCsBook()` — Reads the CSBook data from the encrypted JSON file
+- `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` — Reads the data from a encrypted JSON file
+- `EncryptionUtil#decryptSealedObject(SealedObject)` — Decrypts a `SealedObject`
+- `FileUtil#readFromEncryptedFile(Path)` — Reads the encrypted object from a file
 
 Given below is an example usage scenario and how encryption/decryption behaves at each step.
 
-Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call
-to `StorageManager#saveAddressBook()` to save the new data, which subsequently calls `JsonAddressBookStorage#saveAddressBook()`.
+Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to 
+`JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
+now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
 
-Step 2. `JsonAddressBookStorage#saveAddressBook()` creates a new `JsonSerializableAddressBook` object, which is passed to
-`EncryptedJsonUtil#saveEncryptedJsonFile()` to be saved as an encrypted JSON file.
+Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a Serializable,
+and encrypts it using `EncryptionUtil.encryptSerializableObject(Serializable)`. The method returns a `SealedObject` object,
+which contains the encrypted JSON data.
 
-Step 3. `EncryptedJsonUtil#saveEncryptedJsonFile()` uses the `JsonSerializableAddressBook` object, which is a Serializable,
-and encrypts it using `EncryptionUtil.encryptSerializableObject()`. The data is now encrypted in a `SealedObject` object.
-
-Step 4. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file. This is
-achieved by `FileUtil#writeToEncryptedFile()`.
+Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file. 
+`EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
 
 The following sequence diagram shows how the encryption operation works:
 
 The decryption operation accomplishes the opposite of the encryption operation.
 
-Step 5. When a user launches the application for the first time, a call it made to `JsonAddressBookStorage#readAddressBook()`
-to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile()` with the given `filePath` to
+Step 4. When a user launches the application for the first time, a call it made to `JsonCsBookStorage#readAddressBook()`
+to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` to
 read the encrypted JSON file.
 
-Step 6. `EncryptedJsonUtil#readEncryptedJsonFile()` calls `FileUtil#readFromEncryptedFile()` with the given filePath to read the
-encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the encrypted CSBook data.
+Step 5. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
+read the encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the
+encrypted CSBook data.
 
-Step 7. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject()` to be decrypted into a `Serializable`
-object, which is then converted to a JSON string that is used to populate `csbook` of `ModelManager`.
+Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
+object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then 
+transformed by `JsonCsBookStorage#readAddressBook()` into a `ReadOnlyCsBook` that is used to populate `csbook` of `ModelManager`.
 
 The following sequence diagram shows how the decryption operation works:
 
