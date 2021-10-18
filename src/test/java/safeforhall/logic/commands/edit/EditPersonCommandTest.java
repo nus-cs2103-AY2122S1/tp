@@ -1,17 +1,11 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static safeforhall.logic.commands.CommandTestUtil.DESC_AMY;
-import static safeforhall.logic.commands.CommandTestUtil.DESC_BOB;
-import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-//import static safeforhall.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static safeforhall.logic.commands.CommandTestUtil.assertCommandFailure;
-import static safeforhall.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static safeforhall.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static safeforhall.logic.commands.CommandTestUtil.*;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static safeforhall.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static safeforhall.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -20,7 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
@@ -37,6 +31,8 @@ import safeforhall.testutil.PersonBuilder;
 public class EditPersonCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    public static final String MESSAGE_DUPLICATE_NAME = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+            "Name should not be changed for more than one person.\n" + EditPersonCommand.MESSAGE_USAGE);
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -116,7 +112,7 @@ public class EditPersonCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
+    public void execute_duplicateSinglePersonUnfilteredList_failure() {
         ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_SECOND_PERSON);
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

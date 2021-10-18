@@ -3,7 +3,6 @@ package safeforhall.logic.parser;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,14 +14,14 @@ import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.commands.edit.EditEventCommand;
-import safeforhall.logic.commands.edit.EditPersonCommand;
-import safeforhall.logic.parser.edit.EditEventCommandParser;
-import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.edit.EditEventCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
 import safeforhall.logic.parser.add.AddPersonCommandParser;
+import safeforhall.logic.parser.edit.EditEventCommandParser;
+import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**

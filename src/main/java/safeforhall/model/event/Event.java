@@ -46,18 +46,25 @@ public class Event {
     /**
      * Returns true if both events have the same name, date, venue and capacity.
      * This defines a weaker notion of equality between two events.
+     * @param other
      */
-    public boolean isSameEvent(Event otherEvent) {
-        if (otherEvent == this) {
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
             return true;
         }
 
-        return otherEvent != null
-                && otherEvent.getEventName().equals(getEventName())
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getEventDate().equals(getEventDate())
                 && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getCapacity().equals(getCapacity());
     }
+
 
     @Override
     public int hashCode() {
@@ -75,7 +82,6 @@ public class Event {
                 .append(getVenue())
                 .append("; Capacity: ")
                 .append(getCapacity());
-
         return builder.toString();
     }
 }

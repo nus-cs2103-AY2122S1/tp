@@ -21,7 +21,7 @@ import safeforhall.model.person.exceptions.DuplicatePersonException;
  *
  * Supports a minimal set of list operations.
  *
- * @see Event#isSameEvent(Event)
+ * @see Event#equals(Object)
  */
 public class UniqueEventList implements Iterable<Event> {
 
@@ -34,7 +34,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameEvent);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
     /**
@@ -62,7 +62,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new EventNotFoundException();
         }
 
-        if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
+        if (!target.equals(editedEvent) && contains(editedEvent)) {
             throw new DuplicatePersonException();
         }
 
@@ -128,7 +128,7 @@ public class UniqueEventList implements Iterable<Event> {
     private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {
             for (int j = i + 1; j < events.size(); j++) {
-                if (events.get(i).isSameEvent(events.get(j))) {
+                if (events.get(i).equals(events.get(j))) {
                     return false;
                 }
             }
