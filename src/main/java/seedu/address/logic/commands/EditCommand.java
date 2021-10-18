@@ -5,7 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOME_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUARANTINE_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORK_ADDRESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -40,6 +46,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_CASE_NUMBER + "CASE NUMBER] "
             + "[" + PREFIX_HOME_ADDRESS + "HOME ADDRESS] "
+            + "[" + PREFIX_WORK_ADDRESS + "WORK ADDRESS] "
+            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE ADDRESS] "
+            + "[" + PREFIX_SHN_PERIOD + "SHN PERIOD] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT OF KIN NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT OF KIN PHONE] "
+            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT OF KIN ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -96,32 +108,21 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         CaseNumber updatedCaseNumber = editPersonDescriptor.getCaseNumber().orElse(personToEdit.getCaseNumber());
         Address updatedHomeAddress = editPersonDescriptor.getHomeAddress().orElse(personToEdit.getHomeAddress());
-        Optional<Address> workAddress = editPersonDescriptor.getWorkAddress();
-        if (workAddress.isEmpty()) {
-            workAddress = personToEdit.getWorkAddress();
-        }
-        Optional<Address> quarantineAddress = editPersonDescriptor.getQuarantineAddress();
-        if (quarantineAddress.isEmpty()) {
-            quarantineAddress = personToEdit.getQuarantineAddress();
-        }
-        Optional<ShnPeriod> shnPeriod = editPersonDescriptor.getShnPeriod();
-        if (shnPeriod.isEmpty()) {
-            shnPeriod = personToEdit.getShnPeriod();
-        }
-        Optional<Name> nextOfKinName = editPersonDescriptor.getNextOfKinName();
-        if (nextOfKinName.isEmpty()) {
-            nextOfKinName = personToEdit.getNextOfKinName();
-        }
-        Optional<Phone> nextOfKinPhone = editPersonDescriptor.getNextOfKinPhone();
-        if (nextOfKinPhone.isEmpty()) {
-            nextOfKinPhone = personToEdit.getNextOfKinPhone();
-        }
-        Optional<Address> nextOfKinAddress = editPersonDescriptor.getNextOfKinAddress();
-        if (nextOfKinAddress.isEmpty()) {
-            nextOfKinAddress = personToEdit.getNextOfKinAddress();
-        }
+        Optional<Address> updatedWorkAddress = editPersonDescriptor.getWorkAddress()
+                .or(personToEdit::getWorkAddress);
+        Optional<Address> updatedQuarantineAddress = editPersonDescriptor.getQuarantineAddress()
+                .or(personToEdit::getQuarantineAddress);
+        Optional<ShnPeriod> updatedShnPeriod = editPersonDescriptor.getShnPeriod()
+                .or(personToEdit::getShnPeriod);
+        Optional<Name> updatedNextOfKinName = editPersonDescriptor.getNextOfKinName()
+                .or(personToEdit::getNextOfKinName);
+        Optional<Phone> updatedNextOfKinPhone = editPersonDescriptor.getNextOfKinPhone()
+                .or(personToEdit::getNextOfKinPhone);
+        Optional<Address> updatedNextOfKinAddress = editPersonDescriptor.getNextOfKinAddress()
+                .or(personToEdit::getNextOfKinAddress);
         return new Person(updatedName, updatedPhone, updatedEmail, updatedCaseNumber, updatedHomeAddress,
-                workAddress, quarantineAddress, shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress);
+                updatedWorkAddress, updatedQuarantineAddress, updatedShnPeriod, updatedNextOfKinName,
+                updatedNextOfKinPhone, updatedNextOfKinAddress);
     }
 
     @Override
