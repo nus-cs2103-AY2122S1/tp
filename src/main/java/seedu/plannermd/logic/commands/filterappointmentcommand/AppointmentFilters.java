@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 import seedu.plannermd.model.appointment.Appointment;
-import seedu.plannermd.model.appointment.AppointmentContainDoctorPredicate;
+import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
 import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
@@ -24,11 +24,11 @@ public class AppointmentFilters {
 
     private AppointmentFilters() {}
 
-    public AppointmentFilters allAppointmentsFilter() {
+    public static  AppointmentFilters allAppointmentsFilter() {
         return new AppointmentFilters();
     }
 
-    public AppointmentFilters upcomingAppointmentsFilter() {
+    public static AppointmentFilters upcomingAppointmentsFilter() {
         AppointmentFilters filter = new AppointmentFilters();
         filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
         return filter;
@@ -39,7 +39,7 @@ public class AppointmentFilters {
         hasPatient = predicate;
     }
 
-    public void setHasDoctor(AppointmentContainDoctorPredicate predicate) {
+    public void setHasDoctor(AppointmentContainsDoctorPredicate predicate) {
         requireNonNull(predicate);
         hasDoctor = predicate;
     }
