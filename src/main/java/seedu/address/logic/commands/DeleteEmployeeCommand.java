@@ -40,7 +40,8 @@ public class DeleteEmployeeCommand extends Command {
 
         Employee employeeToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteEmployee(employeeToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, employeeToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_EMPLOYEE_SUCCESS, employeeToDelete),
+                false, false, false, true, false, false);
     }
 
     @Override

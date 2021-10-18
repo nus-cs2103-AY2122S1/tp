@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.model.Model;
 
 /**
- * Switches to a the supplier view in the application.
+ * Switches to the supplier view in the application.
  */
 public class SupplierCommand extends Command {
 
@@ -16,7 +16,7 @@ public class SupplierCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_SWITCH_MESSAGE, false, false, false, true);
+        return new CommandResult(SHOWING_SWITCH_MESSAGE, false, false, false, false, true, false);
     }
 }
 

@@ -62,7 +62,8 @@ public class AddEmployeeCommand extends Command {
         }
 
         model.addEmployee(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                false, false, false, true, false, false);
     }
 
     @Override

@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ReservationCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.parser.ParserUtil.DATE_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 import static seedu.address.testutil.TypicalCustomers.CUSTOMER_ALICE;

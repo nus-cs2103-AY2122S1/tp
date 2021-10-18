@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_CUSTOMER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showCustomerAtIndex;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CustomerCommandTestUtil.showCustomerAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CUSTOMER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CUSTOMER;
 
