@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
-import safeforhall.logic.parser.delete.DeletePersonCommandParser;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

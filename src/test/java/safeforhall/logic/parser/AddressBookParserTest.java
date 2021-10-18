@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
-import safeforhall.logic.commands.delete.DeletePersonCommand;
 //import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
@@ -26,6 +25,7 @@ import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;

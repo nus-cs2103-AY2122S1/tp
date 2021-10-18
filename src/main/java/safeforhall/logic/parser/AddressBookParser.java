@@ -8,8 +8,6 @@ import java.util.regex.Pattern;
 
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
-import safeforhall.logic.commands.delete.DeleteEventCommand;
-import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
@@ -18,6 +16,8 @@ import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.delete.DeleteEventCommand;
+import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
 import safeforhall.logic.parser.add.AddPersonCommandParser;
 import safeforhall.logic.parser.delete.DeleteEventCommandParser;

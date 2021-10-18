@@ -1,5 +1,10 @@
 package safeforhall.logic.commands.delete;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.Command;
@@ -7,11 +12,6 @@ import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 public class DeleteEventCommand extends Command {
     public static final String COMMAND_WORD = "delete";

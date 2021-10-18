@@ -25,7 +25,8 @@ public class DeleteEventCommandParser implements Parser<DeleteEventCommand> {
             ArrayList<Index> indexArray = ParserUtil.parseIndexes(args.trim().split(" "));
             return new DeleteEventCommand(indexArray);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteEventCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteEventCommand.MESSAGE_USAGE), pe);
         }
     }
 

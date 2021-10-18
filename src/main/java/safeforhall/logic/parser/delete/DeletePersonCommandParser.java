@@ -25,7 +25,8 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             ArrayList<Index> indexArray = ParserUtil.parseIndexes(args.trim().split(" "));
             return new DeletePersonCommand(indexArray);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeletePersonCommand.MESSAGE_USAGE), pe);
         }
     }
 
