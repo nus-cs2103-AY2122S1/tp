@@ -3,8 +3,11 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,6 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueModuleClassList moduleClasses;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        moduleClasses = new UniqueModuleClassList();
     }
 
     public AddressBook() {}
@@ -48,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the class list with {@code classes}.
+     * {@code classes} must not contain duplicate class;
+     */
+    public void setModuleClasses(List<ModuleClass> classes) {
+        moduleClasses.setModuleClasses(classes);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setModuleClasses(newData.getModuleClassList());
     }
 
     /**
@@ -74,11 +88,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a class with the same identity as {@code ModuleClass} exists in the address book.
+     */
+    public boolean hasClass(ModuleClass moduleClass) {
+        requireNonNull(moduleClass);
+        return moduleClasses.contains(moduleClass);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
         persons.add(p);
+    }
+
+    /**
+     * Adds a class to the address book.
+     * The class must not already exist in the address book.
+     */
+    public void addClass(ModuleClass m) {
+        moduleClasses.add(m);
     }
 
     /**
@@ -93,11 +123,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the given class {@code target} in the list with {@code editedClass}.
+     * {@code target} must exist in the address book.
+     * The class information of {@code editedClass} must not be the same as another existing class in the address book.
+     */
+    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
+        requireNonNull(editedClass);
+
+        moduleClasses.setModuleClass(target, editedClass);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeClass(ModuleClass key) {
+        moduleClasses.remove(key);
     }
 
     //// util methods
@@ -114,14 +163,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<ModuleClass> getModuleClassList() {
+        return moduleClasses.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons))
+                && moduleClasses.equals(((AddressBook) other).moduleClasses);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, moduleClasses);
     }
 }
