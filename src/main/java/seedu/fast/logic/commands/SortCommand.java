@@ -19,7 +19,7 @@ public class SortCommand extends Command {
             + "Keyword: 'name', 'appointment', 'priority' \n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons by ";
+    public static final String MESSAGE_SUCCESS = "Sorted all persons by %1$s";
 
     private final Comparator<Person> comparator;
     private final String keyword;
@@ -39,6 +39,23 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortPerson(comparator);
-        return new CommandResult(MESSAGE_SUCCESS + keyword);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, keyword));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCommand e = (SortCommand) other;
+        return comparator.equals(e.comparator) && keyword.equals(e.keyword);
     }
 }

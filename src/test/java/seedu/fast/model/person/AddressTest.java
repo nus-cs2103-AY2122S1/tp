@@ -33,4 +33,16 @@ public class AddressTest {
         assertTrue(Address.isValidAddress("-")); // one character
         assertTrue(Address.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
+
+    @Test
+    public void hashcode() {
+        Address standardAddress = new Address("Blk 456, Den Road, #01-355");
+        Address addressWithSameValue = new Address("Blk 456, Den Road, #01-355");
+        Address addressWithDifferentValue = new Address("Blk 717, Den Road, #01-355");
+
+        assertTrue(standardAddress.hashCode() == addressWithSameValue.hashCode());
+        assertTrue(standardAddress.hashCode() == standardAddress.hashCode());
+
+        assertFalse(standardAddress.hashCode() == addressWithDifferentValue.hashCode());
+    }
 }

@@ -8,6 +8,8 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalPersons.ALICE;
 import static seedu.fast.testutil.TypicalPersons.BOB;
+import static seedu.fast.testutil.TypicalPersons.CARL;
+import static seedu.fast.testutil.TypicalPersons.GEORGE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.model.person.exceptions.DuplicatePersonException;
 import seedu.fast.model.person.exceptions.PersonNotFoundException;
 import seedu.fast.testutil.PersonBuilder;
@@ -160,6 +163,24 @@ public class UniquePersonListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Person> listWithDuplicatePersons = Arrays.asList(ALICE, ALICE);
         assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPersons(listWithDuplicatePersons));
+    }
+
+    @Test
+    public void sortPersons_nullComparator_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniquePersonList.sortPersons(null));
+    }
+
+    @Test
+    public void sortPersons_unsortedPersonList_success() {
+        uniquePersonList.add(GEORGE);
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(ALICE);
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(CARL);
+        expectedUniquePersonList.add(GEORGE);
+        uniquePersonList.sortPersons(new SortByName());
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
