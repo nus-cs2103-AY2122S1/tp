@@ -26,7 +26,7 @@ public class HashGeneratorTest {
 
         for (HashMethod hashMethod: supportedMethods) {
             HashGenerator generator = new HashGenerator(hashMethod);
-            String actualHash = assertDoesNotThrow(() -> generator.generateHashFromFile(filepath));
+            String actualHash = assertDoesNotThrow(() -> generator.generateHashFromFileV2(filepath));
             assertEquals(expectedHash.get(hashMethod), actualHash);
         }
     }
