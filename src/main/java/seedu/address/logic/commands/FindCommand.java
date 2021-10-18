@@ -18,30 +18,25 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n" + "Example: " + COMMAND_WORD + " n/alice bob charlie";
+            + "Parameters: FLAG KEYWORDS [MORE_FLAGS]\n" + "Example: " + COMMAND_WORD + " -n alex -a serangoon";
 
     private final Predicate<Person> predicate;
-    private final String output;
 
     /**
-     * Takes in a Predicate and the output string to be displayed.
+     * Takes in a Predicate.
      *
      * @param predicate input Predicate
-     * @param output Output message
      */
-    public FindCommand(Predicate<Person> predicate, String output) {
+    public FindCommand(Predicate<Person> predicate) {
         this.predicate = predicate;
-        this.output = output;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                "Showing results for: " + '\n' + output + '\n'
-                        + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size()));
+        return new CommandResult("Showing results for: " + '\n' + predicate + '\n'
+                + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
