@@ -18,7 +18,6 @@ import seedu.tuitione.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String HELP_HEADER = "Command Summary";
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-f13-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide for more details: " + USERGUIDE_URL;
 
@@ -45,7 +44,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpHeader.setText(HELP_HEADER);
         helpCommands.setImage(getImage(HELP_COMMAND_IMAGE));
         helpMessage.setText(HELP_MESSAGE);
     }

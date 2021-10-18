@@ -24,7 +24,7 @@
 
         <VBox alignment="BOTTOM_CENTER">
             <children>
-               <Label fx:id="helpHeader" text="Label">
+               <Label fx:id="helpHeader" text="Command Summary">
                   <padding>
                      <Insets bottom="5.0" />
                   </padding></Label>
