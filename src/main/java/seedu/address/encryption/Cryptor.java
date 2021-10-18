@@ -45,6 +45,9 @@ public class Cryptor implements Cryptable {
      */
     @Override
     public void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
+        assert content != null;
+        assert destinationFilePath != null;
+
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] iv = cipher.getIV();
 
@@ -67,6 +70,7 @@ public class Cryptor implements Cryptable {
     @Override
     public String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
+        assert encryptedSourceFilePath != null;
         if (!isLegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
@@ -93,6 +97,7 @@ public class Cryptor implements Cryptable {
      * Checks if the file is in the legal format.
      */
     private boolean isLegalFileFormat(Path filePath) {
+        assert filePath != null;
         return filePath.toString().endsWith(LEGAL_FILE_FORMAT_EXTENSION);
     }
 }
