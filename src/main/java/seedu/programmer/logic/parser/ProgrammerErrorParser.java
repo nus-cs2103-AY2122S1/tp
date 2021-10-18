@@ -10,6 +10,7 @@ import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.Command;
 import seedu.programmer.logic.commands.CreateLabResultCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
+import seedu.programmer.logic.commands.DownloadCommand;
 import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.ExitCommand;
 import seedu.programmer.logic.commands.FillCommand;
@@ -80,6 +81,9 @@ public class ProgrammerErrorParser {
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
+
+        case DownloadCommand.COMMAND_WORD:
+            return new DownloadCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

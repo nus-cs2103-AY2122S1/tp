@@ -338,6 +338,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleShowResult(commandResult.getTarget());
             }
 
+            if (commandResult.isDownloadData()) {
+                handleDownload();
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

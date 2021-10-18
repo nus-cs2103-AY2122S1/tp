@@ -22,17 +22,20 @@ public class CommandResult {
     /** The application should show student's result. */
     private final boolean showResult;
 
+    private final boolean downloadData;
+
     private final Student target;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean downloadData) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showResult = false;
         this.target = null;
+        this.downloadData = downloadData;
     }
 
 
@@ -45,6 +48,7 @@ public class CommandResult {
         this.exit = exit;
         this.showResult = showResult;
         this.target = target;
+        this.downloadData = false;
     }
 
 
@@ -74,6 +78,10 @@ public class CommandResult {
 
     public boolean isShowResult() {
         return showResult;
+    }
+
+    public boolean isDownloadData() {
+        return downloadData;
     }
 
     @Override
