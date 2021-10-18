@@ -21,14 +21,14 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the tag(s) of the person identified "
+            + ": Adds to or deletes the tag(s) of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing tags will not be overwritten by the input.\n\n"
             + "Parameters: \nINDEX (must be a postive integer) "
-            + "t/ [TAGNAME]\n\n"
+            + "a/[TAGNAME]\n"
+            + "d/[TAGNAME]\n\n"
             + "Example: \n" + COMMAND_WORD + " 1 "
-            + "add/Friend";
-
+            + "a/Friend d/Family";
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
     public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";

@@ -11,14 +11,18 @@ import seedu.fast.commons.util.TagUtil;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, or follow the specified "
-            + "format for a PriorityTag";
+            + "format for a PriorityTag or InvestmentPlanTag";
 
     public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
-        + "Tags can be applied using the Add or Edit command.\n\n"
+        + "Tags can be applied using the Add,Edit or Tag command.\n\n"
         + "Parameters (using Edit): \n"
         + "edit INDEX t/TAG\n\n"
         + "Example: \n"
-        + "edit 1 t/High Value Client";
+        + "edit 1 t/High Value Client\n\n"
+        + "Parameters (using Tag): \n"
+        + "tag INDEX a/ADD_TAG d/DELETE_TAG\n\n"
+        + "Example: \n"
+        + "tag 1 a/Low Value Client d/Medium Value Client";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
