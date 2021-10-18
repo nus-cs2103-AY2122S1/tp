@@ -49,7 +49,7 @@ public class TutorialGroupContainsKeywordsPredicateTest {
         assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
 
         // Only one matching keyword
-        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("T19", "908976"));
+        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("T19", "T32"));
         assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
     }
 
@@ -62,7 +62,7 @@ public class TutorialGroupContainsKeywordsPredicateTest {
 
         // Keywords does not match tutorial group
         predicate = new TutorialGroupContainsKeywordsPredicate(
-                Arrays.asList("99999", "123452354", "12345235", "12345253"));
+                Arrays.asList("T20", "T21", "T22", "T23"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").withPhone("12345")
                 .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("T19")
                 .withTags("Meh").build()));
