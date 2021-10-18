@@ -47,7 +47,7 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
-     * Converts a given {@code ModuleClass} into this class for Jackson use.
+     * Converts a given {@code ModuleLesson} into this class for Jackson use.
      */
     public JsonAdaptedModuleClass(ModuleLesson source) {
         moduleCodes.addAll(source.getModuleCodes().stream()
