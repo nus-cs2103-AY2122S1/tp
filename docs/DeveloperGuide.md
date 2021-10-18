@@ -323,7 +323,7 @@ Use case ends.
 
 * 1b. User gives data in a wrong format
     * 1b1. contHACKS shows an error message<br />
-      Use case ends.
+    Use case ends.
 
 **Use case: Finding a contact**
 
