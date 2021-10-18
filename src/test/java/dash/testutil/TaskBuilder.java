@@ -3,6 +3,7 @@ package dash.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
@@ -19,6 +20,7 @@ public class TaskBuilder {
     private TaskDescription taskDescription;
     private CompletionStatus completionStatus;
     private TaskDate taskDate;
+    private Set<Person> people;
     private Set<Tag> tags;
 
     /**
@@ -28,6 +30,7 @@ public class TaskBuilder {
         taskDescription = new TaskDescription(DEFAULT_DESCRIPTION);
         completionStatus = new CompletionStatus(false);
         taskDate = new TaskDate();
+        people = new HashSet<>();
         tags = new HashSet<>();
     }
 
@@ -38,6 +41,7 @@ public class TaskBuilder {
         taskDescription = taskToCopy.getTaskDescription();
         completionStatus = taskToCopy.getCompletionStatus();
         taskDate = taskToCopy.getTaskDate();
+        people = new HashSet<>(taskToCopy.getPeople());
         tags = new HashSet<>(taskToCopy.getTags());
     }
 
@@ -66,6 +70,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code People} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withPeople(Person... people) {
+        this.people = SampleDataUtil.getPersonSet(people);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Task} that we are building.
      */
     public TaskBuilder withTags(String... tags) {
@@ -74,7 +86,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(taskDescription, completionStatus, taskDate, tags);
+        return new Task(taskDescription, completionStatus, taskDate, people, tags);
     }
 
 }

@@ -57,7 +57,7 @@ public class LogicManager implements Logic {
             command = contactsTabParser.parseCommand(commandText);
             break;
         case (1):
-            command = taskTabParser.parseCommand(commandText);
+            command = taskTabParser.parseCommand(commandText, model.getFilteredPersonList());
             break;
         case (2):
             command = helpTabParser.parseCommand(commandText);

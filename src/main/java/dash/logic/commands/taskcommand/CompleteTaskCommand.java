@@ -54,7 +54,7 @@ public class CompleteTaskCommand extends Command {
      */
     private static Task createCompletedTask(Task taskToComplete) {
         return new Task(taskToComplete.getTaskDescription(), new CompletionStatus(true),
-                taskToComplete.getTaskDate(), taskToComplete.getTags());
+                taskToComplete.getTaskDate(), taskToComplete.getPeople(), taskToComplete.getTags());
     }
 
     @Override

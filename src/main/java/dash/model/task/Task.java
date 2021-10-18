@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 
 /**
@@ -15,22 +16,26 @@ import dash.model.tag.Tag;
  */
 public class Task {
     private final TaskDescription taskDescription;
-    private final Set<Tag> tags = new HashSet<>();
     private final CompletionStatus completionStatus;
     private final TaskDate taskDate;
+    private final Set<Person> people = new HashSet<>();
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a {@code Task}.
      * @param taskDescription A valid task description
-     * @param completionStatus A completion status
+     * @param completionStatus Completion status of task
+     * @param taskDate Date assigned to task
+     * @param people People assigned to task
      * @param tags A valid tag
      */
     public Task(TaskDescription taskDescription, CompletionStatus completionStatus, TaskDate taskDate,
-                Set<Tag> tags) {
+                Set<Person> people, Set<Tag> tags) {
         requireAllNonNull(taskDescription, completionStatus, taskDate, tags);
         this.taskDescription = taskDescription;
         this.completionStatus = completionStatus;
         this.taskDate = taskDate;
+        this.people.addAll(people);
         this.tags.addAll(tags);
     }
 
@@ -42,9 +47,6 @@ public class Task {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
 
     public CompletionStatus getCompletionStatus() {
         return completionStatus;
@@ -52,6 +54,14 @@ public class Task {
 
     public TaskDate getTaskDate() {
         return taskDate;
+    }
+
+    public Set<Person> getPeople() {
+        return Collections.unmodifiableSet(people);
+    }
+
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -70,12 +80,13 @@ public class Task {
         return otherTask.getTaskDescription().equals(getTaskDescription())
                 && otherTask.getCompletionStatus().equals(getCompletionStatus())
                 && otherTask.getTaskDate().equals(getTaskDate())
-                && otherTask.getTags().equals(getTags());
+                && otherTask.getTags().equals(getTags())
+                && otherTask.getPeople().equals(getPeople());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskDescription, taskDate, tags);
+        return Objects.hash(taskDescription, completionStatus, taskDate, people, tags);
     }
 
     @Override
@@ -97,6 +108,12 @@ public class Task {
         if (taskDate.hasTime()) {
             builder.append("; Time: ")
                     .append(getTaskDate().toTimeString());
+        }
+
+        Set<Person> people = getPeople();
+        if (!people.isEmpty()) {
+            builder.append("; People: ");
+            people.forEach(p -> builder.append(p.getName()));
         }
 
         Set<Tag> tags = getTags();

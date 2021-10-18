@@ -1,29 +1,35 @@
 package dash.logic.parser.taskcommand;
 
 import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import dash.commons.core.index.Index;
+import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand.EditTaskDescriptor;
 import dash.logic.parser.ArgumentMultimap;
 import dash.logic.parser.ArgumentTokenizer;
-import dash.logic.parser.Parser;
+import dash.logic.parser.ParserRequiringPersonList;
 import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
+import javafx.collections.ObservableList;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditTaskCommandParser implements Parser<EditTaskCommand> {
+public class EditTaskCommandParser implements ParserRequiringPersonList<EditTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -31,10 +37,11 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditTaskCommand parse(String args) throws ParseException {
+    @Override
+    public EditTaskCommand parse(String args, ObservableList<Person> filteredPersonList) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_PERSON, PREFIX_TAG);
 
         Index index;
 
@@ -51,6 +58,20 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             editTaskDescriptor.setTaskDescription(ParserUtil
                     .parseTaskDescription(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get()));
         }
+
+        if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
+            System.out.println("a");
+            Set<Index> personIndices = ParserUtil.parsePersonIndex(argMultimap.getAllValues(PREFIX_PERSON));
+            Set<Person> people = new HashSet<>();
+            for (Index i : personIndices) {
+                if (i.getZeroBased() < 0 || i.getZeroBased() >= filteredPersonList.size()) {
+                    throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + AddTaskCommand.MESSAGE_USAGE);
+                }
+                people.add(filteredPersonList.get(i.getZeroBased()));
+            }
+            editTaskDescriptor.setPeople(people);
+        }
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
@@ -58,6 +79,11 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         }
 
         return new EditTaskCommand(index, editTaskDescriptor);
+    }
+
+    @Override
+    public EditTaskCommand parse(String args) throws ParseException {
+        return null;
     }
 
     /**
@@ -74,5 +100,8 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
+
+
+
 
 }

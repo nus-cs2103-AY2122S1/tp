@@ -1,6 +1,7 @@
 package dash.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,13 +49,13 @@ public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[]{
             new Task(new TaskDescription("Submit CS2100 Assignment by 23:59"), new CompletionStatus(false),
-                    new TaskDate("21/10/2021"), getTagSet("homework")),
+                    new TaskDate("21/10/2021"), getPersonSetFromIndices(1, 2), getTagSet("homework")),
             new Task(new TaskDescription("ST2334 quiz before Friday"), new CompletionStatus(false),
-                    new TaskDate("21/01/2021, 1900"), getTagSet("homework")),
+                    new TaskDate("21/01/2021, 1900"), getPersonSetFromIndices(0, 3), getTagSet("homework")),
             new Task(new TaskDescription("Do PR review"), new CompletionStatus(true),
-                    new TaskDate("05/10/2021, 07:00 PM"), getTagSet("groupwork")),
+                    new TaskDate("05/10/2021, 07:00 PM"), getPersonSetFromIndices(4, 5), getTagSet("groupwork")),
             new Task(new TaskDescription("Catch up with ST lectures"), new CompletionStatus(false),
-                    new TaskDate("1500"), getTagSet("classmates"))
+                    new TaskDate("1500"), getPersonSetFromIndices(3, 4, 5), getTagSet("classmates"))
         };
     }
 
@@ -80,6 +81,22 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a person set from the people given.
+     */
+    public static Set<Person> getPersonSet(Person... people) {
+        return new HashSet<>(Arrays.asList(people));
+    }
+
+    /**
+     * Returns a person set from the indices given.
+     */
+    public static Set<Person> getPersonSetFromIndices(Integer... indices) {
+        return Arrays.stream(indices)
+                .map(i -> getSamplePersons()[i])
                 .collect(Collectors.toSet());
     }
 

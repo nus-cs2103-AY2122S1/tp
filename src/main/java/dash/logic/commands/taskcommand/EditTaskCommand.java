@@ -17,6 +17,7 @@ import dash.logic.commands.Command;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
 import dash.model.Model;
+import dash.model.person.Person;
 import dash.model.tag.Tag;
 import dash.model.task.CompletionStatus;
 import dash.model.task.Task;
@@ -86,9 +87,11 @@ public class EditTaskCommand extends Command {
                 .orElse(taskToEdit.getTaskDescription());
         CompletionStatus updatedCompletionStatus = editTaskDescriptor.getCompletionStatus()
                 .orElse(taskToEdit.getCompletionStatus());
+        Set<Person> updatedPeople = editTaskDescriptor.getPeople().orElse(taskToEdit.getPeople());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
-        return new Task(updatedDescription, updatedCompletionStatus, new TaskDate(), updatedTags);
+        return new Task(updatedDescription, updatedCompletionStatus,
+                new TaskDate(), updatedPeople, updatedTags);
     }
 
     @Override
@@ -115,6 +118,7 @@ public class EditTaskCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private TaskDescription taskDescription;
+        private Set<Person> people;
         private Set<Tag> tags;
         private CompletionStatus completionStatus;
 
@@ -127,6 +131,7 @@ public class EditTaskCommand extends Command {
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setTaskDescription(toCopy.taskDescription);
+            setPeople(toCopy.people);
             setTags(toCopy.tags);
             setCompletionStatus(toCopy.completionStatus);
         }
@@ -135,7 +140,7 @@ public class EditTaskCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskDescription, completionStatus, tags);
+            return CollectionUtil.isAnyNonNull(taskDescription, completionStatus, people, tags);
         }
 
         public void setTaskDescription(TaskDescription description) {
@@ -147,11 +152,28 @@ public class EditTaskCommand extends Command {
         }
 
         /**
+         * Sets {@code people} to this object's {@code people}.
+         * A defensive copy of {@code people} is used internally.
+         */
+        public void setPeople(Set<Person> people) {
+            this.people = (people != null) ? new HashSet<>(people) : null;
+        }
+
+        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Returns an unmodifiable people set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code people} is null.
+         */
+        public Optional<Set<Person>> getPeople() {
+            return (people != null) ? Optional.of(Collections.unmodifiableSet(people)) : Optional.empty();
         }
 
         /**
@@ -188,6 +210,7 @@ public class EditTaskCommand extends Command {
 
             return getTaskDescription().equals(e.getTaskDescription())
                     && getCompletionStatus().equals(e.getCompletionStatus())
+                    && getPeople().equals(e.getPeople())
                     && getTags().equals(e.getTags());
         }
     }
