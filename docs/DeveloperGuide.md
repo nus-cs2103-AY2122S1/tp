@@ -168,7 +168,7 @@ These operations are exposed in the `Model` interface as `Model#commitAcademyDir
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAcademyDirectory` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single academy directory state.
+Step 1. The user launches the application for the first time. The `VersionedAcademyDirectory` will be initialized with the initial academy directory state, and the `currentStatePointer` pointing to that single academy directory state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
