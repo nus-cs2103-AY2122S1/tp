@@ -13,8 +13,23 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddFacilityCommand;
+import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.ClearFacilitiesCommand;
+import seedu.address.logic.commands.ClearMembersCommand;
+import seedu.address.logic.commands.DeleteFacilityCommand;
+import seedu.address.logic.commands.DeleteMemberCommand;
+import seedu.address.logic.commands.EditFacilityCommand;
+import seedu.address.logic.commands.EditMemberCommand;
 import seedu.address.logic.commands.EditMemberCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindFacilityCommand;
+import seedu.address.logic.commands.FindMemberCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListFacilityCommand;
+import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.SortMemberCommand;
+import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.facility.LocationContainsKeywordsPredicate;
