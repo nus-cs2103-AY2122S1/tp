@@ -7,10 +7,11 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import javafx.scene.image.Image;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import javafx.scene.image.Image;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -22,7 +23,8 @@ public class GitHubUtil {
     private static final String URL_PREFIX = "https://api.github.com/users/";
     private static int responseCode;
     private static URL url;
-    private final Image defaultUserProfilePicture = new Image(this.getClass().getResourceAsStream("/images/profile.png"));
+    private final Image defaultUserProfilePicture = new Image(
+            this.getClass().getResourceAsStream("/images/profile.png"));
 
     /**
      * Initializes a GitHubUtil Object.
