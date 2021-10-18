@@ -127,7 +127,7 @@ public class ModelManager implements Model {
     @Override
     public void addStudent(Student student) {
         teachingAssistantBuddy.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -176,6 +176,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Module> getFilteredModuleList() {
         return filteredModules;
+    }
+
+    @Override
+    public void updateFilteredModuleList(Predicate<Module> predicate) {
+        requireNonNull(predicate);
+        filteredModules.setPredicate(predicate);
     }
 
     @Override

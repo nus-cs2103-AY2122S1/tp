@@ -26,6 +26,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
+     *
+     * @return DeleteCommand object.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String userInput) throws ParseException {
@@ -59,5 +61,4 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

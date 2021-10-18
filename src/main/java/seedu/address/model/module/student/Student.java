@@ -15,15 +15,15 @@ import seedu.address.model.task.UniqueTaskList;
 public class Student {
 
     // Identity fields
-    private final Name name;
-    private final TeleHandle teleHandle;
-    private final Email email;
+    private Name name;
+    private TeleHandle teleHandle;
+    private Email email;
 
     // Data fields
     private final StudentId studentId;
     //private final Set<Tag> tags = new HashSet<>();
 
-    private final UniqueTaskList taskList;
+    private UniqueTaskList taskList;
 
     /**
      * Every field must be present and not null.
@@ -54,6 +54,18 @@ public class Student {
         return studentId;
     }
 
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public void setTeleHandle(TeleHandle teleHandle) {
+        this.teleHandle = teleHandle;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
     /**
      * Adds a task to this student's task list.
      * The task must not already exist in this student's task list.
@@ -76,6 +88,10 @@ public class Student {
      */
     public UniqueTaskList getTaskList() {
         return this.taskList;
+    }
+
+    public void setTaskList(UniqueTaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**

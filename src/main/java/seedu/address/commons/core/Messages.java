@@ -11,4 +11,6 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "The student %1$s is not found";
     public static final String MESSAGE_MODULE_NAME_NOT_FOUND = "The module %1$s is not found";
+    public static final String MESSAGE_FIND_STUDENT_SUCCESS = "Student %1$s is found!";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Student %1$s is edited!";
 }

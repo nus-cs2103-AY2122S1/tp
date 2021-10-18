@@ -6,34 +6,36 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.StudentId;
 
-public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> {
+/**
+ * Parses input arguments and creates a new FindCommand object
+ */
+public class FindStudentCommandParser implements Parser<FindStudentCommand> {
+
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses the given {@code String} of arguments in the context of the FindCommand
+     * and returns a FindCommand object for execution.
      *
-     * @param args args for deleting a module
-     * @throws ParseException if {@code userInput} does not conform the expected format
-     * @return
+     * @return FindStudentCommand object.
+     * @throws ParseException if the user input does not conform the expected format
      */
-    @Override
-    public DeleteStudentCommand parse(String args) throws ParseException {
+    public FindStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_STUDENT_ID);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_STUDENT_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindStudentCommand.MESSAGE_USAGE));
         }
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
 
-        return new DeleteStudentCommand(studentId, moduleName);
+        return new FindStudentCommand(moduleName, studentId);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

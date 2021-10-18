@@ -9,26 +9,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Email;
 import seedu.address.model.module.student.Name;
-import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
 
-public class AddStudentCommandParser implements Parser<AddStudentCommand> {
+/**
+ * Parses input arguments and creates a new EditCommand object
+ */
+public class EditStudentCommandParser implements Parser<EditStudentCommand> {
+
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses the given {@code String} of arguments in the context of the EditCommand
+     * and returns an EditCommand object for execution.
      *
-     * @param args args for deleting a module
-     * @throws ParseException if {@code userInput} does not conform the expected format
-     * @return
+     * @return EditCommand object.
+     * @throws ParseException if the user input does not conform the expected format
      */
-    @Override
-    public AddCommand parse(String args) throws ParseException {
+    public EditCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_STUDENT_ID, PREFIX_NAME, PREFIX_TELE_HANDLE,
                         PREFIX_EMAIL);
@@ -36,7 +38,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_STUDENT_ID, PREFIX_NAME, PREFIX_TELE_HANDLE,
                 PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE));
         }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -44,11 +46,8 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENT_ID).get());
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
 
-        Student student = new Student(studentId, name, teleHandle, email);
-
-        return new AddStudentCommand(student, moduleName);
+        return new EditStudentCommand(moduleName, studentId, name, teleHandle, email);
     }
-
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
