@@ -3,9 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, FAST can get your contact management tasks done faster than traditional GUI apps.
-
  Table of Contents
+- [Introduction](#introduction)
 - [Quick start](#quick-start)
 - [Features](#features)
     * [Viewing help](#viewing-help-help)
@@ -13,11 +12,13 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
     * [Listing all persons](#listing-all-persons-list)
     * [Editing a person](#editing-a-person-edit)
     * [Locating persons by name](#locating-persons-by-name-find)
-    * [Deleting a person](#deleting-a-person-delete)
+    * [Deleting a person](#deleting-a-person-del)
+    * [Adding a remark](#adding-a-remark-rmk)  
     * [Adding an appointment](#adding-an-appointment-appt)
     * [Editing an appointment](#editing-an-appointment-eppt)
     * [Deleting an appointment](#deleting-an-appointment-dappt)
     * [Updating completed appointment](#updating-completed-appointment-done)
+    * [Sorting all persons](#sorting-all-persons-sort)
     * [Clearing all entries](#clearing-all-entries-clear)
     * [Exiting the program](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
@@ -26,16 +27,26 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
 - [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
+## Introduction
+Financial Advisor Smart Tracker (FAST) is a free open-source desktop app for Financial Advisors to manage their contacts. 
+More importantly, FAST is **optimized for those who prefer to work with a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+For Financial Advisors that can type fast, FAST can get your contact management tasks done faster than traditional GUI apps. 
+Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fast.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `fast.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your FAST.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   
+   <div markdown="block" class="alert alert-info">
+   :information_source: Icons shown above will be added in future iterations<br>
+   </div>
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -77,6 +88,8 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* `INDEX` refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 
 </div>
 
@@ -167,6 +180,20 @@ Examples:
 * `list` followed by `del 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `del 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a remark: `rmk`
+
+Adds a remark to an existing person in the address book.
+
+Format: `rmk INDEX [r/REMARK]`
+
+* Adds a remark to the person at the specified `INDEX`.
+* Remarks have a character limit of 100 characters.
+* To delete a remark, leave the remark parameter `[r/REMARK]` empty.
+
+Examples:
+* `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first person.
+* `rmk 1` removes the remark from the first person.<br>
+
 ### Adding an appointment: `appt`
 
 Adds a scheduled appointment with the person.
@@ -237,6 +264,19 @@ Examples:
 * `done 1` updates the completed appointment counter of the first person.
 * `find Matthew` followed by `done 3` updates the completed appointment counter of the third person in the result of the `find` command.
 
+### Sorting all persons: `sort`
+
+Sorts all existing person by the given keyword.
+
+Format: `sort KEYWORD`
+* There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
+* `name` : Sorts all persons in alphabetical order.
+* `appointment`: Sorts all persons by appointment date.
+* `priority` : Sorts all persons by the highest priority tag.
+
+Examples:
+* `sort priority` Sorts all existing persons by the priority from highest priority tag to lowest priority tag.
+
 ### Clearing all entries: `clear`
 
 Clears all entries from the address book.
@@ -288,4 +328,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
 **List** | `list`
+**Remark** | `rmk INDEX [r/REMARK]`
+**Sort** | `sort KEYWORD`
 **Update Completed Appointment** | `done INDEX`<br> e.g., `done 5`
