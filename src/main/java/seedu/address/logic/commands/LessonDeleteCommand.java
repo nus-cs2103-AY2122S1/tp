@@ -78,7 +78,8 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, personAfterLessonDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, personAfterLessonDelete),
+                personAfterLessonDelete);
     }
 
     /**
