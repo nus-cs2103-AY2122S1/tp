@@ -22,7 +22,7 @@ public class ModuleClassCard extends UiPart<Region> {
     @FXML
     private Label moduleCode;
     @FXML
-    private Label day;
+    private Label lessonDay;
     @FXML
     private Label lessonTime;
     @FXML
@@ -33,7 +33,7 @@ public class ModuleClassCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * An UI component that displays information of a {@code moduleClass}.
+     * An UI component that displays information of a {@code moduleLesson}.
      */
     public ModuleClassCard(ModuleLesson moduleLesson, int displayedIndex) {
         super(FXML);
@@ -47,7 +47,7 @@ public class ModuleClassCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
                 .map(moduleCode -> moduleCode.tags)
                 .forEach(t -> t.forEach(tag -> tags.getChildren().add(new Label(tag.tagName))));
-        day.setText(moduleLesson.getDay().toString());
+        lessonDay.setText(moduleLesson.getDay().toString());
         lessonTime.setText(moduleLesson.getTime().toString());
         remark.setText(moduleLesson.getRemark().value);
     }

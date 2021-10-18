@@ -11,14 +11,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 public class ModuleClassListPanel extends UiPart<Region> {
-    private static final String FXML = "ModuleClassListPanel.fxml";
+    private static final String FXML = "ModuleLessonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModuleClassListPanel.class);
 
     @FXML
     private ListView<ModuleLesson> moduleClassListView;
 
     /**
-     * Creates a {@code ModuleClassListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ModuleLessonListPanel} with the given {@code ObservableList}.
      */
     public ModuleClassListPanel(ObservableList<ModuleLesson> moduleLessonList) {
         super(FXML);
@@ -27,7 +27,7 @@ public class ModuleClassListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code ModuleClass} using a {@code ModuleClassCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ModuleLesson} using a {@code ModuleLessonCard}.
      */
     class ModuleClassListViewCell extends ListCell<ModuleLesson> {
         @Override
