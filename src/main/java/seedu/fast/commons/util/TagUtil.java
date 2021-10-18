@@ -10,6 +10,6 @@ public class TagUtil {
     public static final String LOW_PRIORITY = "LOWPRIORITY";
 
     public static final int NO_PRIORITY = 10;
-    public static final int MAX_LENGTH = 20;
+    public static final int MAX_LENGTH_TAG = 20;
 
 }
