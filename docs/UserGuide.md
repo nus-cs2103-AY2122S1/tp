@@ -209,6 +209,18 @@ Format: `doneTask INDEX`
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed.
 
+### Clearing all entries from student list : `clearStudents`
+
+Clears all entries from the student list.
+
+Format: `clearStudents`
+
+### Clearing all entries from task list : `clearTasks`
+
+Clears all entries from the task list.
+
+Format: `clear`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -264,13 +276,6 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-  
-[comment]: <> (TODO)
-### Clearing all entries from task list : `clear` `[coming in v1.3]`
-
-Clears all entries from the task list.
-
-Format: `clear`
 
 ### Editing the data file `[coming in v1.3]`
 
