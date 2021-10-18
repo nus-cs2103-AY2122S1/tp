@@ -1,5 +1,6 @@
 package seedu.anilist.ui;
 
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -20,6 +21,16 @@ public class AnimeListPanel extends UiPart<Region> {
     @FXML
     private ListView<Anime> animeListView;
 
+    @FXML
+    private ListView<Anime> watchingListView;
+
+    @FXML
+    private ListView<Anime> toWatchListView;
+
+    @FXML
+    private ListView<Anime> finishedListView;
+
+
     /**
      * Creates a {@code AnimeListPanel} with the given {@code ObservableList}.
      */
@@ -27,6 +38,9 @@ public class AnimeListPanel extends UiPart<Region> {
         super(FXML);
         animeListView.setItems(animeList);
         animeListView.setCellFactory(listView -> new AnimeListViewCell());
+
+        watchingListView.setItems(animeList);
+        watchingListView.setCellFactory(listView -> new AnimeListViewCell());
     }
 
     /**
@@ -45,5 +59,6 @@ public class AnimeListPanel extends UiPart<Region> {
             }
         }
     }
+
 
 }
