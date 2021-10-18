@@ -1,6 +1,5 @@
 package seedu.anilist.ui;
 
-import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
