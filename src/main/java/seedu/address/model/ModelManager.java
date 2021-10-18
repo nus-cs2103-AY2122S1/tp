@@ -163,4 +163,9 @@ public class ModelManager implements Model {
     public void setPersonListControl(PersonListPanel personListPanel) {
         this.personList = personListPanel;
     }
+
+    @Override
+    public PersonListPanel getPersonListControl() {
+        return this.personList;
+    }
 }

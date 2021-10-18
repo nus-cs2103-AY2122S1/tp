@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -93,5 +94,15 @@ public class LogicManager implements Logic {
     @Override
     public void setPersonList(PersonListPanel personListPanel) {
         model.setPersonListControl(personListPanel);
+    }
+
+    @Override
+    public PersonListPanel getPersonList() {
+        return model.getPersonListControl();
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
+        model.updateFilteredPersonList(predicate);
     }
 }

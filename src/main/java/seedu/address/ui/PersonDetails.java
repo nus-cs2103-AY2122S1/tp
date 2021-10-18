@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -36,6 +39,8 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private Label telegram;
     @FXML
+    private Label github;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -43,6 +48,8 @@ public class PersonDetails extends UiPart<Region> {
     private Label email;
     @FXML
     private ImageView profileView;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,6 +68,11 @@ public class PersonDetails extends UiPart<Region> {
         cardPane.setVisible(true);
         name.setText(person.getName().fullName);
         telegram.setText("@" + person.getTelegram().value);
+        github.setText("---------------");
+        tags.getChildren().removeIf(c -> true);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (person.getPhone().value.isBlank()) {
             phone.setText("-");
         } else {

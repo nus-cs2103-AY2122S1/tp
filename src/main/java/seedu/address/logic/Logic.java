@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -70,4 +71,17 @@ public interface Logic {
      * @param personListPanel the person list panel in GUI
      */
     void setPersonList(PersonListPanel personListPanel);
+
+    /**
+     * Returns the PersonListPanel used by Model
+     *
+     * @return PersonListPanel object
+     */
+    PersonListPanel getPersonList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
 }
