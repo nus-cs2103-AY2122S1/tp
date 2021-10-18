@@ -59,8 +59,8 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(otherTask.getName())
-                && otherTask.getModule().equals(otherTask.getModule());
+                && otherTask.getName().equals(this.getName())
+                && otherTask.getModule().equals(this.getModule());
     }
 
     /**
