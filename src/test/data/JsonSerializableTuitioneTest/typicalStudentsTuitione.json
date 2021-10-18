@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "grade" : "P2",
-    "tagged" : [ "friends" ],
+    "remarked" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "grade" : "S2",
-    "tagged" : [ "owesMoney", "friends" ],
+    "remarked" : [ "owesMoney", "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "grade" : "P6",
-    "tagged" : [ ],
+    "remarked" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "grade" : "S4",
-    "tagged" : [ "friends" ],
+    "remarked" : [ "friends" ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +38,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "grade" : "S1",
-    "tagged" : [ ],
+    "remarked" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -46,7 +46,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "grade" : "S2",
-    "tagged" : [ ],
+    "remarked" : [ ],
     "lessonCodes" : [ ]
   }, {
     "name" : "George Best",
@@ -54,7 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "grade" : "S3",
-    "tagged" : [ ],
+    "remarked" : [ ],
     "lessonCodes" : [ ]
   } ],
   "lessons": [ ]

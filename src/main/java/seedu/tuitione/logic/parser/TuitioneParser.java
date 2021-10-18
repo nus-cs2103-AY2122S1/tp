@@ -15,6 +15,7 @@ import seedu.tuitione.logic.commands.DeleteLessonCommand;
 import seedu.tuitione.logic.commands.EditCommand;
 import seedu.tuitione.logic.commands.EnrollCommand;
 import seedu.tuitione.logic.commands.ExitCommand;
+import seedu.tuitione.logic.commands.FilterCommand;
 import seedu.tuitione.logic.commands.FindCommand;
 import seedu.tuitione.logic.commands.HelpCommand;
 import seedu.tuitione.logic.commands.ListCommand;
@@ -84,6 +85,9 @@ public class TuitioneParser {
 
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);
+
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

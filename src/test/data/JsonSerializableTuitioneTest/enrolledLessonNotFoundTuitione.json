@@ -5,7 +5,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "grade" : "S2",
-    "tagged" : [ "owesMoney", "friends" ],
+    "remarked" : [ "owesMoney", "friends" ],
     "lessonCodes" : [ "Mathematics-S2-Tue-0930" ]
   } ],
   "lessons": [ ]

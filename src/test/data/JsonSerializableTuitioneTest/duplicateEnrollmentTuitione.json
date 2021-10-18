@@ -5,7 +5,7 @@
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "grade" : "S1",
-    "tagged": [ "friends" ],
+    "remarked": [ "friends" ],
     "lessonCodes" : [ "Science-S1-Wed-1230", "Science-S1-Wed-1230" ]
   } ],
   "lessons": [ {

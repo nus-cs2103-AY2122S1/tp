@@ -6,7 +6,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.tuitione.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.tuitione.logic.commands.CommandTestUtil.VALID_REMARK_HUSBAND;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tuitione.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -55,10 +55,10 @@ public class EditCommandTest {
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
         Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withRemarks(VALID_REMARK_HUSBAND).build();
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).withRemarks(VALID_REMARK_HUSBAND).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
