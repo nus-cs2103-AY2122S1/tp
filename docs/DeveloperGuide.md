@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,36 +23,37 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of gitGud.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of gitGud consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the gitGud.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the gitGud in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user 
+issues the command `friend --delete Draco`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -257,12 +258,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 * Gamer who plays competitive games
-* Student in a University
+* Computer Science university student
 * Busy (can only play at specific times based on a weekly schedule)
 * Plays multiple online competitive multiplayer games (e.g., Apex legends, Minecraft, Valorant, etc)
-* Has a group of similar persona gamer friends who like him are busy
+* Has a group of similar persona gamer friends who like him are busy with their computer science university degrees
 
-University student gamer who is busy but wants to keep track of equally busy friends who want to play online competitive multiplayer games together.
+Computer Science university student gamer who is busy but wants to keep track of equally busy friends who want to play 
+online competitive multiplayer games together.
 
 
 **Value proposition**:
@@ -272,8 +274,8 @@ often be challenging scheduling times to play games with friends out of a packed
 Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
-#### How gitGud solves the problem and make users' life easier:
-gitGud allows users to store both yours and your friends' available timeslots and find matching times to play multiplayer
+#### How gitGud solves the problem and make users' lives easier:
+gitGud allows users to store your friends' available timeslots and find matching times to play multiplayer
 competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
 after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
@@ -286,10 +288,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
 | ***      | user                  | be able to easily add my friends personal info/data (name, userid) | store a list of friends who I can possibly play with      |
-| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game               |
+| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
 | ***      | user                  | be able to view a list of my friends information                   | see who my friends are                                    |
 | ***      | user                  | be able to delete a friend from the contact list                   | remove friends that were mistakenly added                 |
 | ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
+| ***      | user                  | be able to easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
+| ***      | user                  | be able to view a list of my game information                      | see which of my friends play certain games                |
+| ***      | user                  | be able to delete a game from the contact list                     | remove games that were mistakenly added or due to typos   |
+| ***      | user                  | be able to see full information of a game from the games list      | see information about which friends play the game and their in-game usernames   |
 
 *{More to be added}*
 
@@ -371,7 +377,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`).
+1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`) and the username for that game 
+   (using `USERNAME`).
 2. gitGud associates the friend with the game provided.
 
     Use case ends.
@@ -453,22 +460,124 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a friend
+1. Adding a friend to gitGud
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all friends using the `friend --list` command. There should not be a friend with 
+       `FRIEND_ID` Draco already stored in gitGud.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `friend --add Draco --name Marcus`<br>
+       Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
+       
+    3. Test case: `friend --add MrFeely`<br>
+       Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
+       Expected: Similar to previous.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. _{ more test cases …​ }_
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+### Adding a game
+1. Adding a game to gitGud
+
+    1. Prerequisites: List all persons using the `list --game` command. There should not be a game with `GAME_NAME` 
+       Valorant already storied in gitGud.
+
+    2. Test case: `game --add Valorant`<br>
+       Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is deleted.
+
+    3. Test case: `game --add`<br>
+       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
+
+### Linking a friend to a game
+1. Linking a friend to a game in gitGud.
+
+    1. Prerequisites: There exist a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
+
+    2. Test case: `link --friend Draco --game Valorant --user Draconian`<br>
+       Expected: A link between Draco and Valorant is created and Draco's username for Valorant, Draconian, is 
+       stored in the link.
+
+    3. Test case: `link --friend Draco --game --Valorant`<br>
+       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
+       Draconian`, `link --friend`, ...
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Deleting a friend
+
+1. Deleting a friend from gitGud
+
+   1. Prerequisites: Only one friend with `FRIEND_ID` Draco exists in gitGud.
+
+   1. Test case: `friend --delete Draco`<br>
+      Expected: Friend with `FRIEND_ID` Draco is deleted. gitGud states that `FRIEND_ID` is deleted.
+
+   1. Test case: `friend --delete MrFeely`<br>
+      Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `friend --delete`, `...` 
       Expected: Similar to previous.
 
+2. _{ more test cases …​ }_
+
+### Deleting a game
+
+1. Deleting a game from gitGud
+
+    1. Prerequisites: Only one game with `GAME_ID` Valorant exists.
+
+    1. Test case: `game --delete Valorant`<br>
+       Expected: Game with `GAME_ID` Valorant is deleted. gitGud states that `GAME_ID` is deleted.
+
+    1. Test case: `game --delete CSGO`<br>
+       Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `game --delete`, `...`
+       Expected: Similar to previous.
+
 1. _{ more test cases …​ }_
+
+### Finding friends
+
+1. Finding friends using a keyword
+
+    1. Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
+
+    2. Test case: `friend --list`<br>
+       Expected: All friends are listed.
+
+    3. Test case: `friend --list Draco`<br>
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword Draco.
+
+    4. Test case: `friend --list Dra`<br>
+           Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `Dra`.
+
+    5. Test case: `friend --list co`<br>
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `co`.
+
+### Finding games
+
+1. Finding games using a keyword
+
+    1. Prerequisites: There exists more than one game in gitGud, one of which has the `FRIEND_ID` Valorant.
+
+    2. Test case: `game --list`<br>
+       Expected: All games are listed.
+
+    3. Test case: `game --list Valorant`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valorant`.
+
+    4. Test case: `game --list Valo`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valo`.
+
+    4. Test case: `game --list ant`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `ant`.
 
 ### Saving data
 
