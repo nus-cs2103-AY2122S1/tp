@@ -3,11 +3,16 @@ package seedu.address.model.item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.BANANA_MUFFIN;
 import static seedu.address.testutil.TypicalItems.CHOCOCHIP;
+import static seedu.address.testutil.TypicalItems.DONUT;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,6 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class UniqueItemListTest {
 
@@ -120,6 +126,53 @@ public class UniqueItemListTest {
         uniqueItemList.add(BANANA_MUFFIN);
         assertThrows(DuplicateItemException.class, () -> uniqueItemList.setItem(APPLE_PIE, BANANA_MUFFIN));
     }
+
+    @Test
+    public void getItem_itemInInventory_returnsItem() {
+        uniqueItemList.add(BAGEL);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of(BAGEL));
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of(BAGEL));
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of(BAGEL));
+    }
+
+    @Test
+    public void getItem_itemNotInInventory_returnEmptyList() {
+        uniqueItemList.add(DONUT);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of());
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of());
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of());
+    }
+
+    @Test
+    public void getItem_multipleMatches_returnMultiple() {
+        uniqueItemList.add(DONUT);
+        uniqueItemList.add(BAGEL);
+
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_DONUT).build();
+        assertEquals(uniqueItemList.get(descriptor), List.of(DONUT, BAGEL));
+    }
+
 
     @Test
     public void remove_nullItem_throwsNullPointerException() {

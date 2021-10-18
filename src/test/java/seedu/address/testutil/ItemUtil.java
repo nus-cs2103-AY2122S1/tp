@@ -9,8 +9,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,8 +21,10 @@ public class ItemUtil {
     /**
      * Returns an add command string for adding the {@code item}.
      */
-    public static String getAddCommand(Item item) {
-        return AddCommand.COMMAND_WORD + " " + getItemDetails(item);
+    public static String getAddCommand(ItemDescriptor itemDescriptor) {
+        String arguments = getItemDescriptorDetails(itemDescriptor);
+
+        return AddCommand.COMMAND_WORD + " " + arguments.substring(PREFIX_NAME.toString().length());
     }
 
     /**
@@ -49,12 +51,13 @@ public class ItemUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditItemDescriptor}'s details.
+     * Returns the part of command string for the given {@code ItemDescriptor}'s details.
      */
-    public static String getEditItemDescriptorDetails(EditItemDescriptor descriptor) {
+    public static String getItemDescriptorDetails(ItemDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id).append(" "));
+        descriptor.getCount().ifPresent(count -> sb.append(PREFIX_COUNT).append(count).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

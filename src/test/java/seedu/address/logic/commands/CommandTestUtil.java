@@ -17,8 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditItemDescriptorBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -32,6 +33,7 @@ public class CommandTestUtil {
     public static final String VALID_ID_BAGEL = "123456";
     public static final String VALID_ID_DONUT = "789012";
     public static final String VALID_COUNT_BAGEL = "5";
+    public static final String VALID_COUNT_DONUT = "6";
     public static final String VALID_TAG_BAKED = "baked";
     public static final String VALID_TAG_POPULAR = "popular";
 
@@ -40,10 +42,12 @@ public class CommandTestUtil {
     public static final String ID_DESC_BAGEL = " " + PREFIX_ID + VALID_ID_BAGEL;
     public static final String ID_DESC_DONUT = " " + PREFIX_ID + VALID_ID_DONUT;
     public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
+    public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Cake&"; // '&' not allowed in names
+    public static final String INVALID_NAME = "Cake$";
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_ID_BAGEL = " " + PREFIX_ID + "231";
     public static final String INVALID_ID_BAGEL_2 = " " + PREFIX_ID + "-123232";
@@ -53,13 +57,13 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditItemDescriptor DESC_BAGEL;
-    public static final EditCommand.EditItemDescriptor DESC_DONUT;
+    public static final ItemDescriptor DESC_BAGEL;
+    public static final ItemDescriptor DESC_DONUT;
 
     static {
-        DESC_BAGEL = new EditItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
+        DESC_BAGEL = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
                 .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
-        DESC_DONUT = new EditItemDescriptorBuilder().withName(VALID_NAME_DONUT)
+        DESC_DONUT = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
                 .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL)
                 .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
     }

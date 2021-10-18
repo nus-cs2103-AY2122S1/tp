@@ -7,18 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
@@ -45,18 +42,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
 
     private final Index index;
-    private final EditItemDescriptor editItemDescriptor;
+    private final ItemDescriptor itemDescriptor;
 
     /**
      * @param index of the item in the filtered item list to edit
-     * @param editItemDescriptor details to edit the item with
+     * @param itemDescriptor details to edit the item with
      */
-    public EditCommand(Index index, EditItemDescriptor editItemDescriptor) {
+    public EditCommand(Index index, ItemDescriptor itemDescriptor) {
         requireNonNull(index);
-        requireNonNull(editItemDescriptor);
+        requireNonNull(itemDescriptor);
 
         this.index = index;
-        this.editItemDescriptor = new EditItemDescriptor(editItemDescriptor);
+        this.itemDescriptor = new ItemDescriptor(itemDescriptor);
     }
 
     @Override
@@ -69,7 +66,7 @@ public class EditCommand extends Command {
         }
 
         Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = createEditedItem(itemToEdit, editItemDescriptor);
+        Item editedItem = createEditedItem(itemToEdit, itemDescriptor);
 
         if (!itemToEdit.isSameItem(editedItem) && model.hasItem(editedItem)) {
             throw new CommandException(MESSAGE_DUPLICATE_ITEM);
@@ -82,15 +79,15 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Item} with the details of {@code itemToEdit}
-     * edited with {@code editItemDescriptor}.
+     * edited with {@code itemDescriptor}.
      */
-    private static Item createEditedItem(Item itemToEdit, EditItemDescriptor editItemDescriptor) {
+    private static Item createEditedItem(Item itemToEdit, ItemDescriptor itemDescriptor) {
         assert itemToEdit != null;
 
-        Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
-        String updatedId = editItemDescriptor.getId().orElse(itemToEdit.getId());
-        Integer updatedCount = editItemDescriptor.getCount().orElse(itemToEdit.getCount());
-        Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
+        Name updatedName = itemDescriptor.getName().orElse(itemToEdit.getName());
+        String updatedId = itemDescriptor.getId().orElse(itemToEdit.getId());
+        Integer updatedCount = itemDescriptor.getCount().orElse(itemToEdit.getCount());
+        Set<Tag> updatedTags = itemDescriptor.getTags().orElse(itemToEdit.getTags());
 
         return new Item(updatedName, updatedId, updatedCount, updatedTags);
     }
@@ -110,98 +107,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editItemDescriptor.equals(e.editItemDescriptor);
+                && itemDescriptor.equals(e.itemDescriptor);
     }
 
-    /**
-     * Stores the details to edit the item with. Each non-empty field value will replace the
-     * corresponding field value of the item.
-     */
-    public static class EditItemDescriptor {
-        private Name name;
-        private String id;
-        private Set<Tag> tags;
-        private Integer count;
-
-        public EditItemDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public EditItemDescriptor(EditItemDescriptor toCopy) {
-            setName(toCopy.name);
-            setId(toCopy.id);
-            setCount(toCopy.count);
-            setTags(toCopy.tags);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, id, tags);
-        }
-
-        public void setName(Name name) {
-            this.name = name;
-        }
-
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public Optional<String> getId() {
-            return Optional.ofNullable(id);
-        }
-
-        public void setCount(Integer count) {
-            this.count = count;
-        }
-
-        public Optional<Integer> getCount() {
-            return Optional.ofNullable(count);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditItemDescriptor)) {
-                return false;
-            }
-
-            // state check
-            EditItemDescriptor e = (EditItemDescriptor) other;
-
-            return getName().equals(e.getName())
-                    && getId().equals(e.getId())
-                    && getTags().equals(e.getTags());
-        }
-    }
 }
