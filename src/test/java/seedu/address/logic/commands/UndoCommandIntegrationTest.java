@@ -1,13 +1,21 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -17,14 +25,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class UndoCommandIntegrationTest {
     private static final Model DEFAULT_MODEL = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -43,12 +43,13 @@ class UndoCommandIntegrationTest {
 
         //2 Undoable commands already called
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne)
-                , Collections.singletonList(dummyUndoableCommandTwo), undoRedoStack);
+        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne),
+                Collections.singletonList(dummyUndoableCommandTwo), undoRedoStack);
 
         //1 Undoable command already called
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Arrays.asList(dummyUndoableCommandTwo, dummyUndoableCommandOne), undoRedoStack);
+        assertStackStatus(Collections.emptyList(),
+                Arrays.asList(dummyUndoableCommandTwo, dummyUndoableCommandOne), undoRedoStack);
     }
 
     @Test

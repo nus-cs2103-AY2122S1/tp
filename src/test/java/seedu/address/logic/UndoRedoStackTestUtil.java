@@ -1,19 +1,19 @@
 package seedu.address.logic;
 
-import seedu.address.logic.commands.UndoableCommand;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import seedu.address.logic.commands.UndoableCommand;
 
 public class UndoRedoStackTestUtil {
     /**
      * Asserts that {@code undoRedoStack#undoStack} equals {@code undoElements}, and {@code undoRedoStack#redoStack}
      * equals {@code redoElements}.
      */
-    public static void assertStackStatus(List<UndoableCommand> undoElements, List<UndoableCommand> redoElements
-            , UndoRedoStack undoRedoStack) {
+    public static void assertStackStatus(List<UndoableCommand> undoElements, List<UndoableCommand> redoElements,
+            UndoRedoStack undoRedoStack) {
         assertEquals(prepareStack(undoElements, redoElements), undoRedoStack);
     }
 

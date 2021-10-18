@@ -1,14 +1,22 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
 import static seedu.address.logic.UndoRedoStackTestUtil.prepareStack;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.UndoRedoStack;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -19,13 +27,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.PersonBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 class RedoCommandTest {
     private static final Model DEFAULT_MODEL = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -71,7 +72,7 @@ class RedoCommandTest {
         //Add valid person to empty default model and empty undoRedoStack
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
-        RedoCommand redoCommand = prepareRedoCommandIntegrated(Collections.singletonList(addCommand),  1);
+        RedoCommand redoCommand = prepareRedoCommandIntegrated(Collections.singletonList(addCommand), 1);
 
         //Check stack after Command executed
         assertStackStatus(Collections.emptyList(), Collections.singletonList(addCommand), undoRedoStack);
@@ -183,7 +184,7 @@ class RedoCommandTest {
         expectedModel = snapshotModel();
 
         for (int i = 0; i < undoTimes; i++) {
-            if (commandsBeforeRedo.get(i) instanceof  UndoableCommand) {
+            if (commandsBeforeRedo.get(i) instanceof UndoableCommand) {
                 UndoCommand undoCommand = new UndoCommand();
                 undoCommand.setDependencies(model, undoRedoStack);
                 try {

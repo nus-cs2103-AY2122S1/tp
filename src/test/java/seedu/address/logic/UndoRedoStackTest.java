@@ -1,22 +1,22 @@
 package seedu.address.logic;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
+import static seedu.address.logic.UndoRedoStackTestUtil.prepareStack;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EmptyStackException;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.UndoableCommand;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
-import static seedu.address.logic.UndoRedoStackTestUtil.prepareStack;
 
 
 //Solution adapted from
@@ -29,7 +29,7 @@ class UndoRedoStackTest {
     private UndoRedoStack undoRedoStack = new UndoRedoStack();
 
     @Test
-    public void pushUndoableCommand_CommandNotAdded() {
+    public void pushUndoableCommand_added() {
         //push on empty undo & redo stack
         undoRedoStack = prepareStack(Collections.emptyList(), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyCommand);
@@ -41,7 +41,7 @@ class UndoRedoStackTest {
     }
 
     @Test
-    public void pushUndoableCommand_CommandAdded() {
+    public void pushUndoableCommand_notAdded() {
         //push on empty undo & redo stack
         undoRedoStack = prepareStack(Collections.emptyList(), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyUndoableCommandOne);
@@ -49,7 +49,8 @@ class UndoRedoStackTest {
         //push on non-empty undo stack
         undoRedoStack = prepareStack(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyUndoableCommandTwo);
-        assertStackStatus(Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo), Collections.emptyList(), undoRedoStack);
+        assertStackStatus(Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo),
+                Collections.emptyList(), undoRedoStack);
     }
 
     @Test
