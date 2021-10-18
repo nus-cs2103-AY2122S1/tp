@@ -5,7 +5,7 @@ import static seedu.address.model.util.SampleDataUtil.getModuleCodeSet;
 import java.util.Set;
 
 import seedu.address.model.modulelesson.Day;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
@@ -35,7 +35,7 @@ public class ModuleClassBuilder {
     /**
      * Initialises the ModuleClass with the data of {@code classToCopy}.
      */
-    public ModuleClassBuilder(ModuleClass classToCopy) {
+    public ModuleClassBuilder(ModuleLesson classToCopy) {
         moduleCode = classToCopy.getModuleCodes();
         day = classToCopy.getDay();
         time = classToCopy.getTime();
@@ -75,8 +75,8 @@ public class ModuleClassBuilder {
         return this;
     }
 
-    public ModuleClass build() {
-        return new ModuleClass(moduleCode, day, time, remark);
+    public ModuleLesson build() {
+        return new ModuleLesson(moduleCode, day, time, remark);
     }
 
 

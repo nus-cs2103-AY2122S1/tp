@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.UniqueModuleClassList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -56,7 +56,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the class list with {@code classes}.
      * {@code classes} must not contain duplicate class;
      */
-    public void setModuleClasses(List<ModuleClass> classes) {
+    public void setModuleClasses(List<ModuleLesson> classes) {
         moduleClasses.setModuleClasses(classes);
     }
 
@@ -90,9 +90,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a class with the same identity as {@code ModuleClass} exists in the address book.
      */
-    public boolean hasClass(ModuleClass moduleClass) {
-        requireNonNull(moduleClass);
-        return moduleClasses.contains(moduleClass);
+    public boolean hasClass(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return moduleClasses.contains(moduleLesson);
     }
 
     /**
@@ -107,7 +107,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a class to the address book.
      * The class must not already exist in the address book.
      */
-    public void addClass(ModuleClass m) {
+    public void addClass(ModuleLesson m) {
         moduleClasses.add(m);
     }
 
@@ -127,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The class information of {@code editedClass} must not be the same as another existing class in the address book.
      */
-    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
+    public void setModuleClass(ModuleLesson target, ModuleLesson editedClass) {
         requireNonNull(editedClass);
 
         moduleClasses.setModuleClass(target, editedClass);
@@ -145,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeClass(ModuleClass key) {
+    public void removeClass(ModuleLesson key) {
         moduleClasses.remove(key);
     }
 
@@ -163,7 +163,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ModuleClass> getModuleClassList() {
+    public ObservableList<ModuleLesson> getModuleClassList() {
         return moduleClasses.asUnmodifiableObservableList();
     }
 

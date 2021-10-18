@@ -7,13 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 
 public class ModuleClassCard extends UiPart<Region> {
 
     private static final String FXML = "ModuleClassCard.fxml";
 
-    public final ModuleClass moduleClass;
+    public final ModuleLesson moduleLesson;
 
     @FXML
     private HBox cardPane;
@@ -35,21 +35,21 @@ public class ModuleClassCard extends UiPart<Region> {
     /**
      * An UI component that displays information of a {@code moduleClass}.
      */
-    public ModuleClassCard(ModuleClass moduleClass, int displayedIndex) {
+    public ModuleClassCard(ModuleLesson moduleLesson, int displayedIndex) {
         super(FXML);
-        this.moduleClass = moduleClass;
+        this.moduleLesson = moduleLesson;
         id.setText(displayedIndex + ". ");
-        moduleClass.getModuleCodes().stream()
+        moduleLesson.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
                 .forEach(moduleCode -> moduleCodeContainer.getChildren().add(new Label(moduleCode.value)));
 
-        moduleClass.getModuleCodes().stream()
+        moduleLesson.getModuleCodes().stream()
                 .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
                 .map(moduleCode -> moduleCode.tags)
                 .forEach(t -> t.forEach(tag -> tags.getChildren().add(new Label(tag.tagName))));
-        day.setText(moduleClass.getDay().toString());
-        time.setText(moduleClass.getTime().toString());
-        remark.setText(moduleClass.getRemark().value);
+        day.setText(moduleLesson.getDay().toString());
+        time.setText(moduleLesson.getTime().toString());
+        remark.setText(moduleLesson.getRemark().value);
     }
 
     @Override
@@ -64,7 +64,7 @@ public class ModuleClassCard extends UiPart<Region> {
 
         ModuleClassCard card = (ModuleClassCard) other;
         return id.getText().equals(card.id.getText())
-                && moduleClass.equals(moduleClass);
+                && moduleLesson.equals(moduleLesson);
     }
 
 }

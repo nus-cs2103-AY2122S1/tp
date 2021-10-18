@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<ModuleClass> PREDICATE_SHOW_ALL_CLASSES = unused -> true;
+    Predicate<ModuleLesson> PREDICATE_SHOW_ALL_CLASSES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -74,7 +74,7 @@ public interface Model {
      * Deletes the given class.
      * The class must exist in the address book.
      */
-    void deleteClass(ModuleClass target);
+    void deleteClass(ModuleLesson target);
 
     /**
      * Adds the given person.
@@ -86,7 +86,7 @@ public interface Model {
      * Adds the given class.
      * {@code moduleClass} must not already exist in the address book.
      */
-    void addClass(ModuleClass moduleClass);
+    void addClass(ModuleLesson moduleLesson);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -100,14 +100,14 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedClass} must not be the same as another existing class in the address book.
      */
-    void setModuleClass(ModuleClass target, ModuleClass editedClass);
+    void setModuleClass(ModuleLesson target, ModuleLesson editedClass);
 
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered moduleClass list */
-    ObservableList<ModuleClass> getFilteredModuleClassList();
+    ObservableList<ModuleLesson> getFilteredModuleClassList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -119,5 +119,5 @@ public interface Model {
      * Updates the filter of the filtered moduleClass list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredModuleClassList(Predicate<ModuleClass> predicate);
+    void updateFilteredModuleClassList(Predicate<ModuleLesson> predicate);
 }

@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-public class JsonAdaptedModuleClassTest {
+public class JsonAdaptedModuleLessonTest {
 
     private static final String INVALID_DAY = "8";
     private static final String INVALID_TIME = "15:61";

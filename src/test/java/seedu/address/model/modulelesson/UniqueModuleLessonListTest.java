@@ -17,7 +17,7 @@ import seedu.address.model.modulelesson.exceptions.DuplicateModuleClassException
 import seedu.address.model.modulelesson.exceptions.ModuleClassNotFoundException;
 import seedu.address.testutil.ModuleClassBuilder;
 
-public class UniqueModuleClassListTest {
+public class UniqueModuleLessonListTest {
 
     private final UniqueModuleClassList uniqueClassList = new UniqueModuleClassList();
 
@@ -40,7 +40,7 @@ public class UniqueModuleClassListTest {
     @Test
     public void contains_classWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClassList.add(CS2100_LAB1);
-        ModuleClass editedCS2100Lab1 = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
+        ModuleLesson editedCS2100Lab1 = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
         assertTrue(uniqueClassList.contains(editedCS2100Lab1));
     }
 
@@ -131,13 +131,13 @@ public class UniqueModuleClassListTest {
 
     @Test
     public void setModuleClasses_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleClasses((List<ModuleClass>) null));
+        assertThrows(NullPointerException.class, () -> uniqueClassList.setModuleClasses((List<ModuleLesson>) null));
     }
 
     @Test
     public void setModuleClasses_list_replacesOwnListWithProvidedList() {
         uniqueClassList.add(CS2100_LAB1);
-        List<ModuleClass> classList = Collections.singletonList(CS2100_TUT1);
+        List<ModuleLesson> classList = Collections.singletonList(CS2100_TUT1);
         uniqueClassList.setModuleClasses(classList);
         UniqueModuleClassList expectedUniqueClassList = new UniqueModuleClassList();
         expectedUniqueClassList.add(CS2100_TUT1);
@@ -146,7 +146,7 @@ public class UniqueModuleClassListTest {
 
     @Test
     public void setClasses_listWithDuplicateModuleClasses_throwsDuplicateModuleClassException() {
-        List<ModuleClass> listWithDuplicateClasses = Arrays.asList(CS2100_LAB1, CS2100_LAB1);
+        List<ModuleLesson> listWithDuplicateClasses = Arrays.asList(CS2100_LAB1, CS2100_LAB1);
         assertThrows(DuplicateModuleClassException.class, () -> uniqueClassList.setModuleClasses(
                 listWithDuplicateClasses));
     }

@@ -14,7 +14,7 @@ import seedu.address.model.person.Remark;
  * Represents a ModuleClass in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class ModuleClass {
+public class ModuleLesson {
 
     // Identity fields
     private final Set<ModuleCode> moduleCodes = new HashSet<>();
@@ -26,7 +26,7 @@ public class ModuleClass {
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(Set<ModuleCode> moduleCode, Day day, Time time, Remark remark) {
+    public ModuleLesson(Set<ModuleCode> moduleCode, Day day, Time time, Remark remark) {
         requireAllNonNull(moduleCode, day, time, remark);
         assert(moduleCode.size() == 1) : "Class should only contain 1 module code!";
         this.moduleCodes.addAll(moduleCode);
@@ -59,15 +59,15 @@ public class ModuleClass {
      * Returns true if both classes have the same module code, day and time.
      * This defines a weaker notion of equality between two classes.
      */
-    public boolean isSameModuleClass(ModuleClass otherModuleClass) {
-        if (otherModuleClass == this) {
+    public boolean isSameModuleClass(ModuleLesson otherModuleLesson) {
+        if (otherModuleLesson == this) {
             return true;
         }
 
-        return otherModuleClass != null
-                && otherModuleClass.getModuleCodes().equals(getModuleCodes())
-                && otherModuleClass.getDay().equals(getDay())
-                && otherModuleClass.getTime().equals(getTime());
+        return otherModuleLesson != null
+                && otherModuleLesson.getModuleCodes().equals(getModuleCodes())
+                && otherModuleLesson.getDay().equals(getDay())
+                && otherModuleLesson.getTime().equals(getTime());
     }
 
     /**
@@ -80,15 +80,15 @@ public class ModuleClass {
             return true;
         }
 
-        if (!(other instanceof ModuleClass)) {
+        if (!(other instanceof ModuleLesson)) {
             return false;
         }
 
-        ModuleClass otherModuleClass = (ModuleClass) other;
-        return ((ModuleClass) other).getModuleCodes().equals(getModuleCodes())
-                && otherModuleClass.getDay().equals(getDay())
-                && otherModuleClass.getTime().equals(getTime())
-                && otherModuleClass.getRemark().equals(getRemark());
+        ModuleLesson otherModuleLesson = (ModuleLesson) other;
+        return ((ModuleLesson) other).getModuleCodes().equals(getModuleCodes())
+                && otherModuleLesson.getDay().equals(getDay())
+                && otherModuleLesson.getTime().equals(getTime())
+                && otherModuleLesson.getRemark().equals(getRemark());
     }
 
     @Override

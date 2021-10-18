@@ -11,14 +11,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.modulelesson.Day;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
 
 /**
- * Jackson-friendly version of {@link ModuleClass}.
+ * Jackson-friendly version of {@link ModuleLesson}.
  */
 public class JsonAdaptedModuleClass {
 
@@ -49,7 +49,7 @@ public class JsonAdaptedModuleClass {
     /**
      * Converts a given {@code ModuleClass} into this class for Jackson use.
      */
-    public JsonAdaptedModuleClass(ModuleClass source) {
+    public JsonAdaptedModuleClass(ModuleLesson source) {
         moduleCodes.addAll(source.getModuleCodes().stream()
                 .map(JsonAdaptedModuleCode::new)
                 .collect(Collectors.toList()));
@@ -63,7 +63,7 @@ public class JsonAdaptedModuleClass {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted module class.
      */
-    public ModuleClass toModelType() throws IllegalValueException {
+    public ModuleLesson toModelType() throws IllegalValueException {
         if (moduleCodes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
         }
@@ -88,7 +88,7 @@ public class JsonAdaptedModuleClass {
         }
         final Remark classRemark = new Remark(remark);
 
-        return new ModuleClass(modelModuleCodes, classDay, classTime, classRemark);
+        return new ModuleLesson(modelModuleCodes, classDay, classTime, classRemark);
     }
 
 }

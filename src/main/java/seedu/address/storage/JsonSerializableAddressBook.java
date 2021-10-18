@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -63,11 +63,11 @@ class JsonSerializableAddressBook {
         }
 
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
-            ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
-            if (addressBook.hasClass(moduleClass)) {
+            ModuleLesson moduleLesson = jsonAdaptedModuleClass.toModelType();
+            if (addressBook.hasClass(moduleLesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS);
             }
-            addressBook.addClass(moduleClass);
+            addressBook.addClass(moduleLesson);
         }
         return addressBook;
     }

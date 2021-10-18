@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.modulelesson.Day;
-import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
@@ -44,12 +44,12 @@ public class SampleDataUtil {
         };
     }
 
-    public static ModuleClass[] getSampleModuleClasses() {
-        return new ModuleClass[] {
-            new ModuleClass(getModuleCodeSet("CS2040 T05"), new Day("2"), new Time("10:00"), new Remark("COM1-113")),
-            new ModuleClass(getModuleCodeSet("CS2100 T21"), new Day("2"), new Time("15:00"), new Remark("COM2-0223")),
-            new ModuleClass(getModuleCodeSet("CS2103 TG09"), new Day("1"), new Time("14:00"), new Remark("I3 Audi")),
-            new ModuleClass(getModuleCodeSet("CS2106 TG01"), new Day("5"), new Time("10:00"), new Remark("COM1-120")),
+    public static ModuleLesson[] getSampleModuleClasses() {
+        return new ModuleLesson[] {
+            new ModuleLesson(getModuleCodeSet("CS2040 T05"), new Day("2"), new Time("10:00"), new Remark("COM1-113")),
+            new ModuleLesson(getModuleCodeSet("CS2100 T21"), new Day("2"), new Time("15:00"), new Remark("COM2-0223")),
+            new ModuleLesson(getModuleCodeSet("CS2103 TG09"), new Day("1"), new Time("14:00"), new Remark("I3 Audi")),
+            new ModuleLesson(getModuleCodeSet("CS2106 TG01"), new Day("5"), new Time("10:00"), new Remark("COM1-120")),
         };
     }
 
@@ -59,8 +59,8 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
 
-        for (ModuleClass sampleModuleClass : getSampleModuleClasses()) {
-            sampleAb.addClass(sampleModuleClass);
+        for (ModuleLesson sampleModuleLesson : getSampleModuleClasses()) {
+            sampleAb.addClass(sampleModuleLesson);
         }
         return sampleAb;
     }
