@@ -15,14 +15,20 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
 Class UniquePersonList
 Class Person
-Class Address
-Class Email
+Class UniqueModuleClassList
+Class ModuleClass
+
 Class Name
+Class Email
 Class Phone
-Class Tag
+Class TeleHandle
+Class Remark
+Class ModuleCode
+Class LessonCode
+Class LessonDay
+Class LessonTime
 
 }
 
@@ -40,15 +46,22 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> "1" Name
+Person *---> "1" Email
+Person *---> Phone
+Person *---> TeleHandle
+Person --> "1..*" ModuleCode
+Person *---> Remark
+AddressBook *--> "1" UniqueModuleClassList
+UniqueModuleClassList --> "~* all" ModuleClass
+ModuleClass *--> Remark
+ModuleClass --> "1" ModuleCode
+ModuleClass *---> "1" LessonCode
+ModuleClass *---> "1" LessonDay
+ModuleClass *--> "1" LessonTime
+ModuleCode --> LessonCode
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager --> "~* filtered" ModuleClass
 @enduml
