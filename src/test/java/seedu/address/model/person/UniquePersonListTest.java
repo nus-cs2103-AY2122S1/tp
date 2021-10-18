@@ -166,7 +166,7 @@ public class UniquePersonListTest {
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(BOB);
-        assertEquals(expectedUniquePersonList,uniquePersonList);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
