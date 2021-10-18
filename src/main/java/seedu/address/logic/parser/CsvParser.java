@@ -26,12 +26,18 @@ public class CsvParser {
     private String[] inputtedHeaders;
 
     /**
-     * Constructs instance of CsvParser and parses the provided file.
+     * Constructs instance of CsvParser
      */
     public CsvParser() {
         data = new HashMap<>();
     }
 
+    /**
+     * Parses file selected with fileSelector.
+     *
+     * @param fileSelector CsvFileSelector to select file to parse.
+     * @throws ParseException When file is not selected or empty.
+     */
     public void parse(CsvFileSelector fileSelector) throws ParseException {
         try {
             br = new BufferedReader(new FileReader(fileSelector.selectFile()));
@@ -72,8 +78,7 @@ public class CsvParser {
             for (int i = 0; i < values.length; i++) {
                 String entry = values[i];
                 entry = entry.replaceAll("\"", "");
-
-                data.get(inputtedHeaders[i]).add(entry);
+                data.get(inputtedHeaders[i]).add(values[i]);
             }
 
             // Case whereby final column was left blank

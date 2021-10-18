@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import seedu.address.ui.exceptions.FileSelectorException;
-
 import java.io.File;
+
+import seedu.address.ui.exceptions.FileSelectorException;
 
 /**
  * File Chooser Interface.

@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.CsvFileSelector;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.testutil.TypicalPersons;
+import seedu.address.ui.CsvFileSelector;
 
 public class CsvParserTest {
 
@@ -16,8 +17,8 @@ public class CsvParserTest {
     public void execute_emptyCsvFile_throwsParseException() throws Exception {
         CsvParser parser = new CsvParser();
         assertThrows(ParseException.class,
-                CsvParser.MESSAGE_CSV_FILE_IS_EMPTY,
-                () -> parser.parse(new CsvFileSelectorStubBypassesUi("emptyCsv.csv")));
+                CsvParser.MESSAGE_CSV_FILE_IS_EMPTY, (
+                ) -> parser.parse(new CsvFileSelectorStubBypassesUi("emptyCsv.csv")));
     }
 
     @Test

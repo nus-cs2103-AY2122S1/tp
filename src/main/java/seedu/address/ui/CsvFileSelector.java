@@ -6,7 +6,6 @@ import java.io.File;
 import java.util.Arrays;
 
 import javafx.stage.FileChooser;
-
 import seedu.address.ui.exceptions.FileSelectorException;
 
 public class CsvFileSelector implements FileSelector {

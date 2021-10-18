@@ -22,7 +22,10 @@ public class ImportCommandParser {
     private final List<Person> personsToAdd = new ArrayList<>();
     private final ArrayList<String> wronglyFormattedEntries = new ArrayList<>();
 
-    private boolean isTagColumnPresent = false;
+    private boolean isPhoneColumnPresent = false;
+    private boolean isEmailColumnPresent = false;
+    private boolean isAddressColumnPresent = false;
+    private boolean isTagsColumnPresent = false;
 
     private List<String> csvNames;
     private List<String> csvPhones;
@@ -77,21 +80,22 @@ public class ImportCommandParser {
         csvAddresses = csvParser.get("address");
         csvTags = csvParser.get("tags");
 
-        if (csvTags != null) {
-            isTagColumnPresent = true;
-        }
         if (csvNames == null) {
             throw new ParseException("Name column is missing");
         }
-        if (csvPhones == null) {
-            throw new ParseException("Phone Number column is missing");
+        if (csvPhones != null) {
+            isPhoneColumnPresent = true;
         }
-        if (csvEmails == null) {
-            throw new ParseException("Email column is missing");
+        if (csvEmails != null) {
+            isEmailColumnPresent = true;
         }
-        if (csvAddresses == null) {
-            throw new ParseException("Address column is missing");
+        if (csvAddresses != null) {
+            isAddressColumnPresent = true;
         }
+        if (csvTags != null) {
+            isTagsColumnPresent = true;
+        }
+
     }
 
     private void parseColumns() {
@@ -100,16 +104,28 @@ public class ImportCommandParser {
         while (i < csvParser.size()) {
             try {
                 names.add(ParserUtil.parseName(csvNames.get(i)));
-                phones.add(ParserUtil.parsePhone(csvPhones.get(i)));
-                emails.add(ParserUtil.parseEmail(csvEmails.get(i)));
-                addresses.add(ParserUtil.parseAddress(csvAddresses.get(i)));
 
+                String inputtedPhone = "";
+                String inputtedEmail = "";
+                String inputtedAddress = "";
                 List<String> inputtedTags = new ArrayList<>();
 
-                if (isTagColumnPresent && !csvTags.get(i).equals("")) {
+                if (isPhoneColumnPresent) {
+                    inputtedPhone = csvPhones.get(i);
+                }
+                if (isEmailColumnPresent) {
+                    inputtedEmail = csvEmails.get(i);
+                }
+                if (isAddressColumnPresent) {
+                    inputtedAddress = csvAddresses.get(i);
+                }
+                if (isTagsColumnPresent && !csvTags.get(i).equals("")) {
                     inputtedTags = Arrays.asList(csvTags.get(i).split(" "));
                 }
 
+                phones.add(ParserUtil.parsePhone(inputtedPhone));
+                emails.add(ParserUtil.parseEmail(inputtedEmail));
+                addresses.add(ParserUtil.parseAddress(inputtedAddress));
                 tags.add(ParserUtil.parseTags(inputtedTags));
             } catch (ParseException e) {
                 wronglyFormattedEntries.add("Row" + (i + 2) + " : " + e.getLocalizedMessage());
