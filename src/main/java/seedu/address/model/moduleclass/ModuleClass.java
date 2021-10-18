@@ -28,6 +28,7 @@ public class ModuleClass {
      */
     public ModuleClass(Set<ModuleCode> moduleCode, Day day, Time time, Remark remark) {
         requireAllNonNull(moduleCode, day, time, remark);
+        assert(moduleCode.size() == 1) : "Class should only contain 1 module code!";
         this.moduleCodes.addAll(moduleCode);
         this.day = day;
         this.time = time;
@@ -55,7 +56,7 @@ public class ModuleClass {
     }
 
     /**
-     * Returns true if both classes have the same module code and time.
+     * Returns true if both classes have the same module code, day and time.
      * This defines a weaker notion of equality between two classes.
      */
     public boolean isSameModuleClass(ModuleClass otherModuleClass) {
@@ -70,8 +71,8 @@ public class ModuleClass {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both classes have the same identity and data fields.
+     * This defines a stronger notion of equality between two moduleClasses.
      */
     @Override
     public boolean equals(Object other) {
@@ -86,7 +87,8 @@ public class ModuleClass {
         ModuleClass otherModuleClass = (ModuleClass) other;
         return ((ModuleClass) other).getModuleCodes().equals(getModuleCodes())
                 && otherModuleClass.getDay().equals(getDay())
-                && otherModuleClass.getTime().equals(getTime());
+                && otherModuleClass.getTime().equals(getTime())
+                && otherModuleClass.getRemark().equals(getRemark());
     }
 
     @Override

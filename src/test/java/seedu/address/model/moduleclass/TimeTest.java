@@ -39,13 +39,13 @@ public class TimeTest {
         assertFalse(Time.isValidTime("0:00")); //LocalTime cannot parse this
         assertFalse(Time.isValidTime("1:00")); //LocalTime cannot parse this
         assertFalse(Time.isValidTime("101:00"));
+        assertFalse(Time.isValidTime("15:00:15"));
 
         assertTrue(Time.isValidTime("00:00"));
         assertTrue(Time.isValidTime("01:00"));
         assertTrue(Time.isValidTime("15:00"));
         assertTrue(Time.isValidTime("12:31"));
         assertTrue(Time.isValidTime("23:59"));
-        assertTrue(Time.isValidTime("15:00:15"));
     }
 
     @Test

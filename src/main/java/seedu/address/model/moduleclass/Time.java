@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should only contain numbers in the following format: HH:mm";
+            "Time should only contain numbers in HH:MM format";
     public static final String VALIDATION_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     private final LocalTime value;
 
@@ -19,7 +19,7 @@ public class Time {
      */
     public Time(String time) {
         requireNonNull(time);
-        checkArgument(time.matches(VALIDATION_REGEX) && isValidTime(time), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
         this.value = LocalTime.parse(time);
     }
 
@@ -36,7 +36,7 @@ public class Time {
         } catch (DateTimeParseException e) {
             return false;
         }
-        return true;
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Locale;
 public class Day {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Days should only contain numbers";
+            "Days should only contain numbers between 1 to 7, inclusive";
     public static final String VALIDATION_REGEX = "[1-7]";
     public final DayOfWeek value;
 
@@ -30,7 +30,7 @@ public class Day {
      * Returns true if a given string is a valid day.
      */
     public static boolean isValidDay(String test) {
-        return test.equals("") || test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX);
     }
 
     public int getDayAsInt() {

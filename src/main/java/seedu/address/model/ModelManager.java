@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<ModuleClass> filteredModuleClass;
+    private final FilteredList<ModuleClass> filteredModuleClasses;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredModuleClass = new FilteredList<>(this.addressBook.getModuleClassList());
+        filteredModuleClasses = new FilteredList<>(this.addressBook.getModuleClassList());
     }
 
     public ModelManager() {
@@ -160,13 +160,13 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<ModuleClass> getFilteredModuleClassList() {
-        return filteredModuleClass;
+        return filteredModuleClasses;
     }
 
     @Override
     public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
         requireNonNull(predicate);
-        filteredModuleClass.setPredicate(predicate);
+        filteredModuleClasses.setPredicate(predicate);
     }
 
 
@@ -187,7 +187,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredModuleClass.equals(other.filteredModuleClass);
+                && filteredModuleClasses.equals(other.filteredModuleClasses);
     }
 
 }

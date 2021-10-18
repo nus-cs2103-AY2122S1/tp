@@ -51,7 +51,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     /**
      * Replaces the class {@code target} in the list with {@code editedClass}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedClass} must not be the same as another existing class in the list.
+     * The class identity of {@code editedClass} must not be the same as another existing class in the list.
      */
     public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
         requireAllNonNull(target, editedClass);
