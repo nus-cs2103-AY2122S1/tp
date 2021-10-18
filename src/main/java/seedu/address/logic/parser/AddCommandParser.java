@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,6 +27,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -42,10 +44,6 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     private Model model;
 
-    public AddCommandParser() {
-
-    }
-
     public AddCommandParser(Model model) {
         this.model = model;
     }
@@ -58,7 +56,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     @Override
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
+                ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID, PREFIX_NEXTMEETING));
         if (!arePrefixesPresent(argMultimap, REQUIRED_PREFIXES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -85,10 +83,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
         CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
                 .orElse(CurrentPlan.DEFAULT_VALUE));
+        NextMeeting nextMeeting = NextMeeting.getNullMeeting();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(clientId, name, phone, email, address, riskAppetite, disposableIncome,
-                currentPlan, lastMet, tagList);
+                currentPlan, lastMet, nextMeeting, tagList);
 
         return new AddCommand(person);
     }

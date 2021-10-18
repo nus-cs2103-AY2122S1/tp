@@ -157,7 +157,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
-    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+    //---------------- Tests for containsStringIgnoreCase --------------------------------------
 
     /*
      * Invalid equivalence partitions for word: null, empty, multiple words
@@ -166,17 +166,17 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containIgnoreCase_nullSentence_throwsNullPointerException() {
+    public void containsStringIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase(null, "a"));
     }
 
     @Test
-    public void containIgnoreCase_nullWord_throwsNullPointerException() {
+    public void containsStringIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase("a", null));
     }
 
     @Test
-    public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+    public void containsStringIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> StringUtil.containsStringIgnoreCase("a", ""));
     }
 
@@ -198,6 +198,80 @@ public class StringUtilTest {
 
         // match multiple
         assertTrue(StringUtil.containsStringIgnoreCase("acadffac", "ac"));
+    }
+
+    //---------------- Tests for isValidDate --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid date, invalid date in correct format, valid date in incorrect format,
+     * random string, empty string
+     */
+
+    @Test
+    public void isValidDate_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isValidDate(null));
+    }
+
+    @Test
+    public void isValidDate_validDate_returnsTrue() {
+        assertTrue(StringUtil.isValidDate("18-10-2021"));
+    }
+
+    @Test
+    public void isValidDate_validDateIncorrectFormat_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("2021-10-18"));
+    }
+
+    @Test
+    public void isValidDate_invalidDate_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("18-13-2021"));
+    }
+
+    @Test
+    public void isValidDate_randomString_returnsFalse() {
+        assertFalse(StringUtil.isValidDate(" "));
+    }
+
+    @Test
+    public void isValidDate_emptyString_returnsTrue() {
+        assertTrue(StringUtil.isValidDate(""));
+    }
+
+    //---------------- Tests for isValidTime --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid time, invalid time in correct format, valid time in incorrect format,
+     * random string, empty string
+     */
+
+    @Test
+    public void isValidTime_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isValidTime(null));
+    }
+
+    @Test
+    public void isValidTime_validTime_returnsTrue() {
+        assertTrue(StringUtil.isValidTime("23:59"));
+    }
+
+    @Test
+    public void isValidTime_validTimeIncorrectFormat_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("2359"));
+    }
+
+    @Test
+    public void isValidTime_invalidTime_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("24:00"));
+    }
+
+    @Test
+    public void isValidTime_randomString_returnsFalse() {
+        assertFalse(StringUtil.isValidDate(" "));
+    }
+
+    @Test
+    public void isValidTime_emptyString_returnsTrue() {
+        assertTrue(StringUtil.isValidDate(""));
     }
 
     //---------------- Tests for getDetails --------------------------------------

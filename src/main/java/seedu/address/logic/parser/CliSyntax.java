@@ -17,13 +17,14 @@ public class CliSyntax {
     public static final Prefix PREFIX_RISKAPPETITE = new Prefix("r/");
     public static final Prefix PREFIX_DISPOSABLEINCOME = new Prefix("d/");
     public static final Prefix PREFIX_LASTMET = new Prefix("l/");
+    public static final Prefix PREFIX_NEXTMEETING = new Prefix("m/");
     public static final Prefix PREFIX_CURRENTPLAN = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Array of all Prefix */
     public static final Prefix[] ALL_PREFIXES = {
         PREFIX_CLIENTID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_RISKAPPETITE,
-        PREFIX_DISPOSABLEINCOME, PREFIX_LASTMET, PREFIX_CURRENTPLAN, PREFIX_TAG
+        PREFIX_DISPOSABLEINCOME, PREFIX_LASTMET, PREFIX_NEXTMEETING, PREFIX_CURRENTPLAN, PREFIX_TAG
     };
 
 

@@ -10,6 +10,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -29,6 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_RISKAPPETITE = "3";
     public static final String DEFAULT_DISPOSABLEINCOME = "300";
     public static final String DEFAULT_LASTMET = "24-09-2021";
+    public static final String DEFAULT_NEXTMEETING = "24-09-2021 (10:00~12:00), Starbucks @ UTown";
     public static final String DEFAULT_CURRENTPLAN = "Prudential PRUwealth";
 
     private ClientId clientId;
@@ -37,6 +39,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private LastMet lastMet;
+    private NextMeeting nextMeeting;
     private CurrentPlan currentPlan;
     private RiskAppetite riskAppetite;
     private DisposableIncome disposableIncome;
@@ -54,6 +57,7 @@ public class PersonBuilder {
         riskAppetite = new RiskAppetite(DEFAULT_RISKAPPETITE);
         disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
         lastMet = new LastMet(DEFAULT_LASTMET);
+        nextMeeting = NextMeeting.parseNextMeetingString(DEFAULT_NEXTMEETING);
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
         tags = new HashSet<>();
     }
@@ -71,6 +75,7 @@ public class PersonBuilder {
         disposableIncome = personToCopy.getDisposableIncome();
         currentPlan = personToCopy.getCurrentPlan();
         lastMet = personToCopy.getLastMet();
+        nextMeeting = personToCopy.getNextMeeting();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -139,10 +144,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
+     * Sets the {@code LastMet} of the {@code Person} that we are building.
      */
     public PersonBuilder withLastMet(String lastMetDate) {
         this.lastMet = new LastMet(lastMetDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code NextMeeting} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNextMeeting(String nextMeeting) {
+        this.nextMeeting = NextMeeting.parseNextMeetingString(nextMeeting);
         return this;
     }
 
@@ -159,7 +172,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(clientId, name, phone, email, address, riskAppetite,
-            disposableIncome, currentPlan, lastMet, tags);
+            disposableIncome, currentPlan, lastMet, nextMeeting, tags);
     }
 
 }
