@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
@@ -109,13 +110,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public Person deletePersonByFields(List<Predicate<Person>> predicates) {
-        return addressBook.removePersonByFields(predicates);
+    public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
+        return addressBook.deletePersonByClientIds(clientIds);
     }
 
     @Override
@@ -125,10 +121,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editedPersonDescriptor) {
+        requireAllNonNull(clientIds, editedPersonDescriptor);
 
-        addressBook.setPerson(target, editedPerson);
+        return addressBook.setPersonByClientIds(clientIds, editedPersonDescriptor);
     }
 
     //=========== Filtered Person List Accessors =============================================================

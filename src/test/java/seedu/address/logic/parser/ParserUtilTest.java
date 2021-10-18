@@ -268,19 +268,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseNextMeeting_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseNextMeetingString((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNextMeeting((String) null));
     }
 
     @Test
     public void parseNextMeeting_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseNextMeetingString(INVALID_NEXTMEETING));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNextMeeting(INVALID_NEXTMEETING));
     }
 
     @Test
     public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
             "Starbucks @ UTown");
-        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeetingString(VALID_NEXTMEETING));
+        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(VALID_NEXTMEETING));
     }
 
     @Test
@@ -288,7 +288,7 @@ public class ParserUtilTest {
         String nextMeetingWithWhitespace = WHITESPACE + VALID_NEXTMEETING + WHITESPACE;
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
             "Starbucks @ UTown");
-        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeetingString(nextMeetingWithWhitespace));
+        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(nextMeetingWithWhitespace));
     }
 
     @Test

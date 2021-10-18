@@ -61,7 +61,7 @@ public class PersonBuilder {
         disposableIncome = new DisposableIncome(DEFAULT_DISPOSABLEINCOME);
         lastMet = new LastMet(DEFAULT_LASTMET);
         try {
-            nextMeeting = ParserUtil.parseNextMeetingString(DEFAULT_NEXTMEETING);
+            nextMeeting = ParserUtil.parseNextMeeting(DEFAULT_NEXTMEETING);
         } catch (ParseException pe) {
             nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
                 "Starbucks @ UTown");
@@ -165,7 +165,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withNextMeeting(String nextMeeting) {
         try {
-            this.nextMeeting = ParserUtil.parseNextMeetingString(nextMeeting);
+            this.nextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
         } catch (ParseException pe) {
             this.nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
                 "Starbucks @ UTown");

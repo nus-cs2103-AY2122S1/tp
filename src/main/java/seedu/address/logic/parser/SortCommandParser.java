@@ -2,10 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FIELDS;
+import static seedu.address.commons.mapper.PrefixMapper.getName;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_INVALID_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.person.PrefixMapper.PREFIX_NAME_MAP;
+import static seedu.address.logic.parser.CliSyntax.anyPrefixesPresent;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,14 +44,6 @@ public class SortCommandParser implements Parser<SortCommand> {
     }
 
     /**
-     * Returns true if any of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Returns the prefix from the given {@code ArgumentMultiMap} and throws {@code ParseException}
      * if there is more than one prefix is present.
      */
@@ -64,7 +57,7 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         Prefix result = resultList.get(0);
         if (result.equals(PREFIX_TAG)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PREFIX, PREFIX_NAME_MAP.get(result)));
+            throw new ParseException(String.format(MESSAGE_INVALID_PREFIX, getName(result)));
         }
 
         return result;

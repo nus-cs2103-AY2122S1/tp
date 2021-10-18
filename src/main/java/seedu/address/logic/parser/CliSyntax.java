@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
@@ -38,5 +39,22 @@ public class CliSyntax {
         List<Prefix> resultPrefix = new ArrayList<>(Arrays.asList(ALL_PREFIXES));
         resultPrefix.removeAll(excludePrefix);
         return resultPrefix.toArray(new Prefix[] {});
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean allPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix[] prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+
+    /**
+     * Returns true if any of the prefixes does not contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

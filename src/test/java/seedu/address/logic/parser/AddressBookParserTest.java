@@ -13,10 +13,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,12 +68,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " i/1");
+                DeleteCommand.COMMAND_WORD + " 1");
         ClientId clientId = new ClientId("1");
-        PersonHasId predicate = new PersonHasId(clientId);
-        List<Predicate<Person>> predicates = new ArrayList<>();
-        predicates.add(predicate);
-        assertEquals(new DeleteCommand(predicates), command);
+        assertEquals(new DeleteCommand(List.of(clientId)), command);
     }
 
     @Test
@@ -85,7 +80,8 @@ public class AddressBookParserTest {
 
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + CLIENTID_ZERO_PERSON.value + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(new ClientId(CLIENTID_ZERO_PERSON.value), descriptor), command);
+        List<ClientId> clientIds = List.of(new ClientId(CLIENTID_ZERO_PERSON.value));
+        assertEquals(new EditCommand(clientIds, descriptor), command);
     }
 
     @Test

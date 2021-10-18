@@ -137,7 +137,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 NextMeeting.class.getSimpleName()));
         }
-        final NextMeeting modelNextMeeting = ParserUtil.parseNextMeetingString(nextMeeting);
+        final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
 
         if (currentPlan == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

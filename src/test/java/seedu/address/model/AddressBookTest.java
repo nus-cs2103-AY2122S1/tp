@@ -101,10 +101,6 @@ public class AddressBookTest {
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
-        }
-
-        @Override
         public Person getPerson(ClientId clientId) {
             return persons.get(0);
         }

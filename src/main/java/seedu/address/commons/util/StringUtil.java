@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -19,6 +20,8 @@ public class StringUtil {
         "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
     public static final String TIME_VALIDATION_REGEX =
         "([01]?[0-9]|2[0-3]):[0-5][0-9]";
+    public static final String PERSON_DELIMITER = "\n";
+    public static final String CLIENTID_DELIMITER = ", ";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -165,5 +168,18 @@ public class StringUtil {
             return "";
         }
         return s;
+    }
+
+    /**
+     * Joins the {@code list} into a single string separated by the delimiter.
+     *
+     *  @param list list of object to be joined to {@code String}
+     *  @param delimiter the delimiter that separates each element
+     */
+    public static <T> String joinListToString(List<T> list, String delimiter) {
+        requireNonNull(list);
+        requireNonNull(delimiter);
+        String[] stringArray = list.stream().map(Object::toString).toArray(String[]::new);
+        return String.join(delimiter, stringArray);
     }
 }

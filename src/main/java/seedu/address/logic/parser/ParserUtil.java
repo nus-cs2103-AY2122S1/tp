@@ -138,7 +138,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code nextMeeting} is invalid.
      */
-    public static NextMeeting parseNextMeetingString(String nextMeeting) throws ParseException {
+    public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
         requireNonNull(nextMeeting);
         String trimmedNextMeeting = nextMeeting.trim();
         if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING)) {

@@ -13,10 +13,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.allPrefixLess;
+import static seedu.address.logic.parser.CliSyntax.allPrefixesPresent;
 
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
-        if (!arePrefixesPresent(argMultimap, REQUIRED_PREFIXES)
+        if (!allPrefixesPresent(argMultimap, REQUIRED_PREFIXES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -68,7 +68,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
         CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
                 .orElse(CurrentPlan.DEFAULT_VALUE));
-        NextMeeting nextMeeting = ParserUtil.parseNextMeetingString(argMultimap.getValue(PREFIX_NEXTMEETING)
+        NextMeeting nextMeeting = ParserUtil.parseNextMeeting(argMultimap.getValue(PREFIX_NEXTMEETING)
                 .orElse(NextMeeting.NO_NEXT_MEETING));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
@@ -77,13 +77,4 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         return new AddCommand(person);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix[] prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

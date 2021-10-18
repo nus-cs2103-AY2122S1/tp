@@ -2,13 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_NONEXISTENT_CLIENT_ID;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,10 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonHasEmail;
-import seedu.address.model.person.PersonHasId;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -32,86 +28,42 @@ public class DeleteCommandTest {
     @Test
     public void execute_validClientIdUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(2);
-        List<Predicate<Person>> predicates = new ArrayList<>();
         ClientId clientId = new ClientId(personToDelete.getClientId().value);
-        predicates.add(new PersonHasId(clientId));
 
-        DeleteCommand deleteCommand = new DeleteCommand(predicates);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_validEmailUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(3);
-        List<Predicate<Person>> predicates = new ArrayList<>();
-        Email email = new Email(personToDelete.getEmail().value);
-        predicates.add(new PersonHasEmail(email));
-
-        DeleteCommand deleteCommand = new DeleteCommand(predicates);
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(clientId));
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_validEmailAndClientIdUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(3);
-        List<Predicate<Person>> predicates = new ArrayList<>();
-        Email email = new Email(personToDelete.getEmail().value);
-        predicates.add(new PersonHasEmail(email));
-        ClientId clientId = new ClientId(personToDelete.getClientId().value);
-        predicates.add(new PersonHasId(clientId));
-
-        DeleteCommand deleteCommand = new DeleteCommand(predicates);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePersonByClientIds(List.of(clientId));
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidClientIdUnfilteredList_throwsCommandException() {
-        List<Predicate<Person>> predicates = new ArrayList<>();
         ClientId clientId = new ClientId("20");
-        predicates.add(new PersonHasId(clientId));
-        DeleteCommand deleteCommand = new DeleteCommand(predicates);
+        DeleteCommand deleteCommand = new DeleteCommand(List.of(clientId));
 
-        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_DELETE_PERSON_FAILURE);
+        assertCommandFailure(deleteCommand, model, String.format(MESSAGE_NONEXISTENT_CLIENT_ID, "20"));
     }
 
 
     @Test
     public void equals() {
-        List<Predicate<Person>> predicatesOne = new ArrayList<>();
+
         ClientId clientIdOne = new ClientId("1");
-        predicatesOne.add(new PersonHasId(clientIdOne));
-        DeleteCommand deleteFirstCommand = new DeleteCommand(predicatesOne);
-        List<Predicate<Person>> predicatesTwo = new ArrayList<>();
+        DeleteCommand deleteFirstCommand = new DeleteCommand(List.of(clientIdOne));
+
         ClientId clientIdTwo = new ClientId("2");
-        predicatesTwo.add(new PersonHasId(clientIdTwo));
-        DeleteCommand deleteSecondCommand = new DeleteCommand(predicatesTwo);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(List.of(clientIdTwo));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        List<Predicate<Person>> predicatesTest = new ArrayList<>();
         ClientId clientIdTest = new ClientId("1");
-        predicatesTest.add(new PersonHasId(clientIdTest));
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(predicatesTest);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(List.of(clientIdTest));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
