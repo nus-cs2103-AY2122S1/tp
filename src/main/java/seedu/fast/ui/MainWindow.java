@@ -19,6 +19,8 @@ import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
+import seedu.fast.model.ModelManager;
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -69,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow("");
-        statsWindow = new StatsWindow();
+        statsWindow = new StatsWindow(logic.getFast());
 
     }
 
@@ -185,6 +187,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleStats() {
         if (!statsWindow.isShowing()) {
+            statsWindow = new StatsWindow(logic.getFast());
             statsWindow.show();
         } else {
             statsWindow.focus();

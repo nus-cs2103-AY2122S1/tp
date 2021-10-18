@@ -10,7 +10,7 @@ import seedu.fast.model.person.Person;
 import seedu.fast.model.person.UniquePersonList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the FAST level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Fast implements ReadOnlyFast {
