@@ -154,6 +154,48 @@ Classes used by multiple components are in the `seedu.academydirectory.commons` 
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### AttendanceCommand
+
+This command serves to update the attendance status of students.
+
+#### Implementation
+
+`AttendanceCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The attendance mechanism is facilitated by adding a `StudioRecord` parameter to the `Student`. This `StudioRecord` has an `Attendance` object which we can use to track and update the `Attendance` of the `Student`. `Attendance` implements `Information` and the actual storing of the attendance status is done with a `boolean array`.
+
+The following sequence diagram describes what happens when `AttendanceCommand` is executed:
+
+![AttendanceCommandSequenceDiagram](images/logic/commands/attendancecommand/AttendanceCommandSequenceDiagram.png)
+
+As seen from the diagram, the AttendanceCommand involves two for loops. In each of the loops there is a reference frame.
+
+For IndexWithinRange and UpdateModelAttendanceSequenceDiagram, the sequential diagrams are as follows:
+
+![IndexWithinRangeSequenceDiagram](images/logic/commands/attendancecommand/IndexWithinRangeSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AttendanceCommand` should end in the first alt frame and restart in the second alt frame but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+![UpdateModelAttendanceSequenceDiagram](images/logic/commands/attendancecommand/UpdateModelAttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of :Student as we are creating a new :Student instance. 
+
+### SortCommand
+
+This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`.
+
+#### Implementation
+
+`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
+
+![SortCommandSequenceDiagram](images/logic/commands/sortcommand/SortCommandSequenceDiagram.png)
+
+The reference frame for GetComparator can be found below. It details the selection process based on the `attribute` of the `SortCommand`.
+
+![GetComparatorSequenceDiagram](images/logic/commands/sortcommand/GetComparatorSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
