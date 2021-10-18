@@ -1,0 +1,16 @@
+{
+  "students" : [ ],
+  "lessons" : [ {
+    "subject" : "Science",
+    "grade" : "P2",
+    "startTime" : "1230",
+    "day" : "Wed",
+    "price" : 10.5
+  }, {
+    "subject" : "Science",
+    "grade" : "P2",
+    "startTime" : "1230",
+    "day" : "Wed",
+    "price" : 10.5
+  } ]
+}
