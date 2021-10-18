@@ -167,7 +167,8 @@ Examples: (examples below are all possible usages of `sort`)
 Example:
 - `timetable`
 <br>
-Shows lessons scheduled in this week in a timetable.
+
+Shows lessons scheduled in this week in a timetable.<br>
 ![Ui](images/time_table.png)
 
 ### Viewing help: `help`
