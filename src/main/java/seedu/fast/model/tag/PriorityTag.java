@@ -24,7 +24,6 @@ public class PriorityTag extends Tag {
 
     /**
      * Constructs a {@code PriorityTag}.
-     *
      * @param tagName A valid tag name.
      */
     public PriorityTag(String tagName) {

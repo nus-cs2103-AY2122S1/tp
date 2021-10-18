@@ -5,9 +5,7 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_ADD_TAG;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_DELETE_TAG;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.fast.commons.core.index.Index;
@@ -31,8 +29,8 @@ public class TagCommandParser implements Parser<TagCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    TagCommand.MESSAGE_USAGE), ive);
+            String errorMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE);
+            throw new ParseException(errorMessage, ive);
         }
 
         Set<Tag> addTags = new HashSet<>();

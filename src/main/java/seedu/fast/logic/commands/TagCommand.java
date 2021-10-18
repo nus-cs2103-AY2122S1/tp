@@ -67,7 +67,6 @@ public class TagCommand extends Command {
         Set<Tag> oldTags = personToEdit.getTags();
         Set<Tag> newTags = new HashSet<>(oldTags);
 
-        //attempt to delete tags
         for (Tag tag: deleteTags) {
             if (!newTags.remove(tag)) {
                 throw new CommandException(String.format(MESSAGE_TAG_DOES_NOT_EXIST, tag.tagName));
@@ -87,28 +86,6 @@ public class TagCommand extends Command {
         if (TagCommandUtils.hasMultipleInvestmentPlanTags(newTags)) {
             throw new CommandException(MESSAGE_MULTIPLE_INVESTMENT_PLAN_TAGS);
         }
-
-        /*
-
-        //preliminary checks:
-        for (Tag tag: tags) {
-            //check if any tags to be added already exist in the person's set of tags
-            if (TagCommandUtils.checkIfContains(newTags, tag)) {
-                String errorMessage = String.format(MESSAGE_TAGS_ARE_REPEATED, tag.tagName);
-                throw new CommandException(errorMessage);
-            }
-        }
-
-        //check if multiple priority tags are to be added
-
-        //check if multiple IV tags are to be added
-
-
-        //now all tags are safe to be added.
-        for (Tag tag: tags) {
-            newTags.add(tag);
-        }
-        */
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),

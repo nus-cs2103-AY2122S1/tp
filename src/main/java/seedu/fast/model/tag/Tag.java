@@ -55,7 +55,8 @@ public class Tag {
      * Create either an instance of a Tag or a PriorityTag depending on the input term.
      */
     public static Tag createTag(String term) {
-        if (term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX)) {
+        boolean hasPriorityTagTerm = term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        if (hasPriorityTagTerm) {
             return new PriorityTag(term);
         }
         return new Tag(term);
