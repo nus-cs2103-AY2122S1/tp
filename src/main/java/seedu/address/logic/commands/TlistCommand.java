@@ -9,6 +9,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_Tasks;
 
+/**
+ * Lists all tasks of the user in the address book.
+ */
 public class TlistCommand extends Command{
     public static final String COMMAND_WORD = "tlist";
 
