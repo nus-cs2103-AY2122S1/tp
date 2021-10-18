@@ -18,7 +18,7 @@ public class FolderNameContainsKeywordsPredicate implements Predicate<Folder> {
     @Override
     public boolean test(Folder folder) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(folder.getFolderName().folderName, keyword));
+                .anyMatch(keyword -> StringUtil.containsTextIgnoreCase(folder.getFolderName().folderName, keyword));
     }
 
     @Override
