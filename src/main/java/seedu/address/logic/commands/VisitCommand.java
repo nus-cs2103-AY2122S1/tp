@@ -80,7 +80,7 @@ public class VisitCommand extends Command {
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getLanguage(),
                 personToEdit.getAddress(), personToEdit.getLastVisit(), visit,
-                frequency, occurrence, personToEdit.getTags());
+                frequency, occurrence, personToEdit.getHealthConditions());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

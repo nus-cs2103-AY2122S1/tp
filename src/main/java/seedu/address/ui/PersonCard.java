@@ -45,7 +45,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label language;
     @FXML
-    private FlowPane tags;
+    private FlowPane healthConditions;
     @FXML
     private Label lastVisit;
     @FXML
@@ -64,9 +64,10 @@ public class PersonCard extends UiPart<Region> {
         language.setText(person.getLanguage().value);
         lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).getFormatted());
         visit.setText(DISPLAY_NEXT_VISIT + person.getFormattedVisit());
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getHealthConditions().stream()
+                .sorted(Comparator.comparing(healthCondition -> healthCondition.healthCondition))
+                .forEach(healthCondition -> healthConditions.getChildren()
+                        .add(new Label(healthCondition.healthCondition)));
 
         setVisitOverdueStyle(person.isVisitOverdue());
     }

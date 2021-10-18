@@ -27,10 +27,10 @@ public class PersonAttributesContainsKeywordsPredicate implements Predicate<Pers
                     person.getLanguage().value, person.getAddress().value, person.getVisit().get().value,
                     person.getLastVisit().get().value)
                     .anyMatch(matching -> containsPartialWordIgnoreCase(matching, attribute));
-            boolean isAnyTagPresent = person.getTags().stream()
-                    .anyMatch(matching -> containsPartialWordIgnoreCase(matching.tagName, attribute));
+            boolean isAnyHealthConditionPresent = person.getHealthConditions().stream()
+                    .anyMatch(matching -> containsPartialWordIgnoreCase(matching.healthCondition, attribute));
 
-            return isAnyAttributePresent || isAnyTagPresent;
+            return isAnyAttributePresent || isAnyHealthConditionPresent;
         });
 
         return isMatching;

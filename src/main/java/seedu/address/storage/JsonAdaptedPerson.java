@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
@@ -20,7 +21,6 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String visit;
     private final String frequency;
     private final String occurrence;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedHealthCondition> healthConditions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
             @JsonProperty("language") String language, @JsonProperty("address") String address,
             @JsonProperty("lastVisit") String lastVisit, @JsonProperty("visit") String visit,
             @JsonProperty("frequency") String frequency, @JsonProperty("occurrence") String occurrence,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("healthConditions") List<JsonAdaptedHealthCondition> healthConditions) {
         this.name = name;
         this.phone = phone;
         this.language = language;
@@ -56,8 +56,8 @@ class JsonAdaptedPerson {
         this.visit = visit;
         this.frequency = frequency;
         this.occurrence = occurrence;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
+        if (healthConditions != null) {
+            this.healthConditions.addAll(healthConditions);
         }
     }
 
@@ -73,8 +73,8 @@ class JsonAdaptedPerson {
         visit = source.getVisit().orElse(new Visit("")).value;
         frequency = source.getFrequency().orElse(Frequency.EMPTY).value;
         occurrence = String.valueOf(source.getOccurrence().orElse(new Occurrence(1)).value);
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        healthConditions.addAll(source.getHealthConditions().stream()
+                .map(JsonAdaptedHealthCondition::new)
                 .collect(Collectors.toList()));
     }
 
@@ -84,9 +84,9 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        final List<HealthCondition> personHealthConditions = new ArrayList<>();
+        for (JsonAdaptedHealthCondition healthCondition : healthConditions) {
+            personHealthConditions.add(healthCondition.toModelType());
         }
 
         if (name == null) {
@@ -152,9 +152,9 @@ class JsonAdaptedPerson {
         int convertedOccurrence = Integer.parseInt(occurrence);
         final Optional<Occurrence> modelOccurrence = Optional.ofNullable(new Occurrence(convertedOccurrence));
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<HealthCondition> modelHealthConditions = new HashSet<>(personHealthConditions);
         return new Person(modelName, modelPhone, modelLanguage, modelAddress, modelLastVisit, modelVisit,
-                modelFrequency, modelOccurrence, modelTags);
+                modelFrequency, modelOccurrence, modelHealthConditions);
     }
 
 }

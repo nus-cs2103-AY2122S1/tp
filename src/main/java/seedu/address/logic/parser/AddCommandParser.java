@@ -2,11 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import java.util.Optional;
@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
@@ -24,7 +25,6 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -39,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_LANGUAGE, PREFIX_ADDRESS,
-                        PREFIX_VISIT, PREFIX_LAST_VISIT, PREFIX_TAG);
+                        PREFIX_VISIT, PREFIX_LAST_VISIT, PREFIX_HEALTH_CONDITION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_LANGUAGE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -50,13 +50,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Language language = ParserUtil.parseLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Optional<LastVisit> lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT).orElse(""));
+        Optional<LastVisit> lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT)
+                .orElse(""));
         Optional<Visit> visit = ParserUtil.parseVisitForAdd(argMultimap.getValue(PREFIX_VISIT).orElse(""));
         Optional<Frequency> frequency = Optional.empty();
         Optional<Occurrence> occurrence = Optional.empty();
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<HealthCondition> healthConditionList = ParserUtil
+                .parseHealthConditions(argMultimap.getAllValues(PREFIX_HEALTH_CONDITION));
 
-        Person person = new Person(name, phone, language, address, lastVisit, visit, frequency, occurrence, tagList);
+        Person person = new Person(name, phone, language, address, lastVisit, visit, frequency,
+                occurrence, healthConditionList);
 
         return new AddCommand(person);
     }

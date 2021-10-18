@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -41,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_LAST_VISIT_BOB = "2021-01-02 13:00";
     public static final String VALID_VISIT_AMY = DateTimeUtil.getValidVisitString();
     public static final String VALID_VISIT_BOB = DateTimeUtil.getValidVisitString2();
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_HEALTH_CONDITION_DIABETES = "diabetes";
+    public static final String VALID_HEALTH_CONDITION_DEMENTIA = "dementia";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,14 +56,17 @@ public class CommandTestUtil {
     public static final String VISIT_DESC_BOB = " " + PREFIX_VISIT + VALID_VISIT_BOB;
     public static final String LAST_VISIT_DESC_AMY = " " + PREFIX_LAST_VISIT + VALID_LAST_VISIT_AMY;
     public static final String LAST_VISIT_DESC_BOB = " " + PREFIX_LAST_VISIT + VALID_LAST_VISIT_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String HEALTH_CONDITION_DESC_DIABETES = " " + PREFIX_HEALTH_CONDITION
+            + VALID_HEALTH_CONDITION_DIABETES;
+    public static final String HEALTH_CONDITION_DESC_DEMENTIA = " " + PREFIX_HEALTH_CONDITION
+            + VALID_HEALTH_CONDITION_DEMENTIA;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_LANGUAGE_DESC = " " + PREFIX_LANGUAGE; // empty string not allowed for languages
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    // '*' not allowed in healthConditions
+    public static final String INVALID_HEALTH_CONDITION_DESC = " " + PREFIX_HEALTH_CONDITION + "heartCondition*";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -74,10 +77,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withLanguage(VALID_LANGUAGE_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withHealthConditions(VALID_HEALTH_CONDITION_DIABETES).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLanguage(VALID_LANGUAGE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withHealthConditions(VALID_HEALTH_CONDITION_DEMENTIA, VALID_HEALTH_CONDITION_DIABETES).build();
     }
 
     /**

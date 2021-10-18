@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
@@ -13,7 +14,6 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -36,7 +36,7 @@ public class PersonBuilder {
     private Optional<Visit> visit;
     private Optional<Frequency> frequency;
     private Optional<Occurrence> occurrence;
-    private Set<Tag> tags;
+    private Set<HealthCondition> healthConditions;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,7 +50,7 @@ public class PersonBuilder {
         visit = Optional.ofNullable(new Visit(DEFAULT_VISIT));
         frequency = Optional.ofNullable(Frequency.EMPTY);
         occurrence = Optional.ofNullable(new Occurrence(1));
-        tags = new HashSet<>();
+        healthConditions = new HashSet<>();
     }
 
     /**
@@ -65,7 +65,7 @@ public class PersonBuilder {
         visit = personToCopy.getVisit();
         frequency = personToCopy.getFrequency();
         occurrence = personToCopy.getOccurrence();
-        tags = new HashSet<>(personToCopy.getTags());
+        healthConditions = new HashSet<>(personToCopy.getHealthConditions());
     }
 
     /**
@@ -77,10 +77,11 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code healthConditions} into a {@code Set<HealthCondition>}
+     * and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public PersonBuilder withHealthConditions(String ... healthConditions) {
+        this.healthConditions = SampleDataUtil.getHealthConditionSet(healthConditions);
         return this;
     }
 
@@ -141,7 +142,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, language, address, lastVisit, visit, frequency, occurrence, tags);
+        return new Person(name, phone, language, address, lastVisit, visit, frequency, occurrence, healthConditions);
     }
 
 }

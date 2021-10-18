@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -19,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Language;
@@ -28,7 +29,6 @@ import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Visit;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_HEALTH_CONDITION + "HEALTH_CONDITION]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_LANGUAGE + "English";
@@ -109,10 +109,11 @@ public class EditCommand extends Command {
         Optional<Frequency> updatedFrequency = personToEdit.getFrequency();
         // edit command does not allow editing occurrence
         Optional<Occurrence> updatedOccurrence = personToEdit.getOccurrence();
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<HealthCondition> updatedHealthConditions = editPersonDescriptor.getHealthConditions()
+                .orElse(personToEdit.getHealthConditions());
 
         return new Person(updatedName, updatedPhone, updatedLanguage, updatedAddress,
-                updatedLastVisit, updatedVisit, updatedFrequency, updatedOccurrence, updatedTags);
+                updatedLastVisit, updatedVisit, updatedFrequency, updatedOccurrence, updatedHealthConditions);
     }
 
     @Override
@@ -142,27 +143,27 @@ public class EditCommand extends Command {
         private Phone phone;
         private Language language;
         private Address address;
-        private Set<Tag> tags;
+        private Set<HealthCondition> healthConditions;
 
         public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code healthConditions} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setLanguage(toCopy.language);
             setAddress(toCopy.address);
-            setTags(toCopy.tags);
+            setHealthConditions(toCopy.healthConditions);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, language, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, language, address, healthConditions);
         }
 
         public void setName(Name name) {
@@ -198,20 +199,21 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code healthConditions} to this object's {@code healthConditions}.
+         * A defensive copy of {@code healthConditions} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setHealthConditions(Set<HealthCondition> healthConditions) {
+            this.healthConditions = (healthConditions != null) ? new HashSet<>(healthConditions) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable healthCondition set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code healthConditions} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<HealthCondition>> getHealthConditions() {
+            return (healthConditions != null)
+                    ? Optional.of(Collections.unmodifiableSet(healthConditions)) : Optional.empty();
         }
 
         @Override
@@ -233,7 +235,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getLanguage().equals(e.getLanguage())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getHealthConditions().equals(e.getHealthConditions());
         }
     }
 }
