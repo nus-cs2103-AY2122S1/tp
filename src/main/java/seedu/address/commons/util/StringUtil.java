@@ -58,7 +58,7 @@ public class StringUtil {
         checkArgument(!preppedWord.isEmpty(), "Text parameter cannot be empty");
         checkArgument(preppedWord.split("\\s+").length == 1, "Text parameter should be a single word");
 
-        return sentence.contains(preppedWord);
+        return sentence.toLowerCase().contains(preppedWord.toLowerCase());
     }
 
     /**
