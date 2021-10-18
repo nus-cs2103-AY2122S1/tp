@@ -3,11 +3,11 @@ package seedu.notor.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.notor.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.testutil.Assert.assertThrows;
-import static seedu.notor.testutil.TypicalPersons.AMY;
+import static seedu.notor.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,11 +15,8 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.logic.commands.ListCommand;
 import seedu.notor.logic.commands.exceptions.CommandException;
-import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
@@ -60,19 +57,22 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "person 9 /delete";
         assertExecuteException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    }
+    // TODO: Add this back when list command is supported
+
+    //    @Test
+    //    public void execute_validCommand_success() throws Exception {
+    //        String listCommand = "person /list";
+    //        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    //    }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonNotorIoExceptionThrowingStub
+
         JsonNotorStorage notorStorage =
                 new JsonNotorIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionNotor.json"));
         JsonUserPrefsStorage userPrefsStorage =
@@ -81,8 +81,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = PersonCreateCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = String.format("person %s /create %s%s", VALID_NAME_BOB, PHONE_DESC_BOB, EMAIL_DESC_BOB);
+        Person expectedPerson = new PersonBuilder(BOB).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.createPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

@@ -1,4 +1,5 @@
 package seedu.notor.storage;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.notor.commons.exceptions.IllegalValueException;
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.common.Name;
-import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
@@ -40,9 +41,9 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("note") String note,
-            @JsonProperty("noteDate") String noteDate, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("superGroups") List<String> superGroups, @JsonProperty("subGroups") List<String> subGroups) {
+                             @JsonProperty("email") String email, @JsonProperty("note") String note,
+                             @JsonProperty("noteDate") String noteDate, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("superGroups") List<String> superGroups, @JsonProperty("subGroups") List<String> subGroups) {
         this.name = name;
         this.phone = phone;
         this.email = email;

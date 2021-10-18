@@ -20,6 +20,7 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
 
     public SuperGroup(Name name) {
         super(name, new HashSet<>());
+        subGroups = new UniqueList<>();
     }
 
     /**
@@ -74,7 +75,7 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
      */
     public SubGroup findSubGroup(String name) {
         for (SubGroup subGroup : subGroups) {
-            if (subGroup.name.equals(name)) {
+            if (subGroup.name.toString().equals(name)) {
                 return subGroup;
             }
         }

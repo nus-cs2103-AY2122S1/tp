@@ -16,8 +16,8 @@ import seedu.notor.model.util.SampleDataUtil;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-
-    public static final String DEFAULT_NAME = "Amy Bee";
+    // TODO: Can change it back to full name once Yukun refactors
+    public static final String DEFAULT_NAME = "Amy";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Why is her last name Bee tho?";
