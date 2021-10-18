@@ -40,7 +40,7 @@ public class ShowCommand extends Command {
         }
 
         Student studentToShow = lastShownList.get(targetIndex.getZeroBased());
-        return new CommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, false, false, true, studentToShow);
+        return new ShowCommandResult(MESSAGE_SHOW_STUDENT_SUCCESS, studentToShow);
     }
 
     @Override

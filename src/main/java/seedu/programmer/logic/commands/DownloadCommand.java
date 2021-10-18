@@ -14,6 +14,6 @@ public class DownloadCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("", false, false, true);
+        return new DownloadCommandResult("");
     }
 }
