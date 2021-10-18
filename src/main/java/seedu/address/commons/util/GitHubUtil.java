@@ -65,7 +65,7 @@ public class GitHubUtil {
      * @throws RuntimeException If the server did not respond well.
      */
     public JSONObject getProfile(String userName) throws RuntimeException {
-        assert userName != null && userName != "" : "No UserName Found";
+        assert userName != null && !userName.equals("") : "No UserName Found";
 
         establishConnection(userName);
         JSONObject data = null;
@@ -106,7 +106,7 @@ public class GitHubUtil {
      * @return An {@code Image} object with the users profile picture in it.
      */
     public Image getProfilePicture(String userName) {
-        assert userName != null && userName != "" : "No UserName Found";
+        assert userName != null && !userName.equals("") : "No UserName Found";
         JSONObject jsonObject = null;
 
         try {
@@ -133,5 +133,30 @@ public class GitHubUtil {
      */
     public int getCommits(String userName) {
         return 0;
+    }
+
+    /**
+     * Returns the total number of repos a person on GitHub
+     * has made to date.
+     *
+     * @param userName The name of the user.
+     * @return The total number of commits.
+     */
+    public int getRepoCount(String userName) {
+        assert userName != null && !userName.equals("") : "No UserName Found";
+        JSONObject jsonObject = null;
+
+        try {
+            jsonObject = getProfile(userName);
+        } catch (RuntimeException e) {
+            logger.severe("Repo Count Could not be obtained.");
+            return 0;
+        }
+
+        assert jsonObject != null : "No Data Found";
+
+        int repoCount = (Integer) jsonObject.get("public_repos");
+
+        return repoCount;
     }
 }
