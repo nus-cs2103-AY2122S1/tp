@@ -63,8 +63,7 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withTags(VALID_TAG_FRIEND).build();
-    // TODO: Fix Bob name. After Yukun is done with regex update.
-    public static final Person BOB = new PersonBuilder().withName("Bob ")
+    public static final Person BOB = new PersonBuilder().withName("Bob")
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)

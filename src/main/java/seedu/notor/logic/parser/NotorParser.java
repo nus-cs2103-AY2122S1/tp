@@ -50,7 +50,7 @@ public class NotorParser {
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command or trailing spaces
     private static final Pattern TARGETED_NAME_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>\\w+)\\s+" // command word and any trailing spaces
-                    + "(?<name>\\w+\\s+)" // index or name and any trailing spaces
+                    + "(?<name>[A-Z][a-zA-Z ]+\\s+)" // index or name and any trailing spaces
                     + "/(?<subCommandWord>\\w+)" // subcommand word and any trailing spaces
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command
 
@@ -82,26 +82,30 @@ public class NotorParser {
         }
 
         if (targetedNameMatcher.matches()) {
-            final String commandWord = targetedNameMatcher.group("commandWord");
-            final String name = targetedNameMatcher.group("name");
-            final String subCommandWord = targetedNameMatcher.group("subCommandWord");
+            final String commandWord = targetedNameMatcher.group("commandWord").trim();
+            final String name = targetedNameMatcher.group("name").trim();
+            final String subCommandWord = targetedNameMatcher.group("subCommandWord").trim();
             final String arguments = targetedNameMatcher.group("arguments");
             switch (commandWord) {
             case PersonCommand.COMMAND_WORD:
                 if (subCommandWord.equals(PersonCreateCommand.COMMAND_WORD)) {
                     return new PersonCreateCommandParser(name, arguments).parse();
                 }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             case GroupCommand.COMMAND_WORD:
                 if (subCommandWord.equals(SuperGroupCreateCommand.COMMAND_WORD)) {
                     return new SuperGroupCreateCommandParser(name, arguments).parse();
                 }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         }
 
         if (targetedIndexMatcher.matches()) {
-            final String commandWord = targetedIndexMatcher.group("commandWord");
-            final String index = targetedIndexMatcher.group("index");
-            final String subCommandWord = targetedIndexMatcher.group("subCommandWord");
+            final String commandWord = targetedIndexMatcher.group("commandWord").trim();
+            final String index = targetedIndexMatcher.group("index").trim();
+            final String subCommandWord = targetedIndexMatcher.group("subCommandWord").trim();
             final String arguments = targetedIndexMatcher.group("arguments");
             switch (commandWord) {
             case PersonCommand.COMMAND_WORD:
@@ -116,12 +120,16 @@ public class NotorParser {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 case PersonRemoveGroupCommand.COMMAND_WORD:
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             case GroupCommand.COMMAND_WORD:
                 if (subCommandWord.equals(SubGroupCreateCommand.COMMAND_WORD)) {
                     return new SubGroupCreateCommandParser(index, arguments).parse();
                 }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             case TagCommand.COMMAND_WORD:
+                // TODO: Implement tag command.
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }

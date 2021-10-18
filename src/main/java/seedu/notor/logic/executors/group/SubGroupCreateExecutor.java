@@ -13,6 +13,12 @@ public class SubGroupCreateExecutor extends GroupExecutor {
 
     private final SubGroup subGroup;
 
+    /**
+     * Constructor for a SubGroupCreateExecutor instance.
+     *
+     * @param index Index of the Group to create a SubGroup for.
+     * @param subGroup SubGroup to be created.
+     */
     public SubGroupCreateExecutor(Index index, SubGroup subGroup) {
         super(index);
         this.subGroup = subGroup;

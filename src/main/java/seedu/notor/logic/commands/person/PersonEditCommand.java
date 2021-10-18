@@ -5,6 +5,8 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Objects;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -15,14 +17,15 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  * Edits the details of an existing person in the notor.
  */
 public class PersonEditCommand extends PersonCommand {
-
     public static final String COMMAND_WORD = "edit";
+
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private static final String COMMAND_DESCRIPTION =
             ": Edits the details of the person identified by the index number used in the displayed person list.\n"
                     + "Existing values will be overwritten by the input values.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    private static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters:"
             + "[" + PREFIX_NAME + "NAME] "
@@ -32,8 +35,6 @@ public class PersonEditCommand extends PersonCommand {
             + PREFIX_NAME + "Jane Deh "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final PersonExecutor executor;
 
@@ -67,5 +68,10 @@ public class PersonEditCommand extends PersonCommand {
         // state check
         PersonEditCommand e = (PersonEditCommand) other;
         return super.equals(other) && executor.equals(e.executor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(executor);
     }
 }

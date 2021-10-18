@@ -30,6 +30,14 @@ public class SubGroup extends Group implements Unique<SubGroup> {
         this.parent = parent;
     }
 
+    /**
+     * Constructor for a SubGroup instance.
+     *
+     * @param name Name of the SubGroup.
+     * @param tags Tags included in the SubGroup.
+     * @param note Notes taken on the SubGroup.
+     * @param parent Parent of the SubGroup.
+     */
     public SubGroup(Name name, Set<Tag> tags, Note note, String parent) {
         super(name, tags, note);
         this.parent = parent;

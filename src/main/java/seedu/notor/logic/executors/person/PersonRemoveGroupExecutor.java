@@ -17,6 +17,12 @@ public class PersonRemoveGroupExecutor extends PersonExecutor {
 
     private final String groupName;
 
+    /**
+     * Constructor for a PersonRemoveGroupExecutor instance.
+     *
+     * @param index Index of the Person to remove a Group from.
+     * @param groupName Name of the Group to be removed from the Person.
+     */
     public PersonRemoveGroupExecutor(Index index, String groupName) {
         super(index);
         this.groupName = groupName;

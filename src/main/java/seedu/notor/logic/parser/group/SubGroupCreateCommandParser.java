@@ -5,6 +5,7 @@ import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -49,7 +50,10 @@ public class SubGroupCreateCommandParser extends GroupCommandParser {
         }
 
         Name name = new Name(uncheckedName);
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
+        }
 
         SubGroup subGroup = new SubGroup(name, tagList);
 

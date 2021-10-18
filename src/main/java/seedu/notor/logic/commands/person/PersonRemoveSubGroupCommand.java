@@ -50,9 +50,9 @@ public class PersonRemoveSubGroupCommand implements Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToEdit = model.findPerson(personName);
-//        SubGroup subGroup = model.findGroup(groupName).findSubGroup(subGroupName);
-//        subGroup.removePerson(personToEdit);
-//        personToEdit.removeSuperGroup(subGroup);
+        // SubGroup subGroup = model.findGroup(groupName).findSubGroup(subGroupName);
+        // subGroup.removePerson(personToEdit);
+        // personToEdit.removeSuperGroup(subGroup);
         model.setPerson(personToEdit, personToEdit);
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupName + "_" + subGroupName));
     }

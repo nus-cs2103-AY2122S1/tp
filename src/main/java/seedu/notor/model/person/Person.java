@@ -92,6 +92,12 @@ public class Person implements Unique<Person> {
         return note.getSavedDate();
     }
 
+    /**
+     * Adds a group to the current Person instance.
+     *
+     * @param group Group to be added to the current Person instance.
+     * @throws DuplicateItemException If group has already been added to the current Person instance.
+     */
     public void addGroup(Group group) throws DuplicateItemException {
         if (group instanceof SuperGroup) {
             addSuperGroup((SuperGroup) group);
@@ -164,7 +170,7 @@ public class Person implements Unique<Person> {
         if (!subGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
-        subGroups.remove(subGroup);
+        subGroups.remove(subGroup.toString());
     }
 
     public HashSet<String> getSuperGroups() {

@@ -18,6 +18,11 @@ import seedu.notor.model.util.UniqueList;
 public class SuperGroup extends Group implements Unique<SuperGroup> {
     protected UniqueList<SubGroup> subGroups;
 
+    /**
+     * Constructor for a SuperGroup instance.
+     *
+     * @param name Name of the SuperGroup to be created.
+     */
     public SuperGroup(Name name) {
         super(name, new HashSet<>());
         subGroups = new UniqueList<>();
@@ -26,13 +31,21 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
     /**
      * Creates a new SuperGroup where name is the name of the group.
      *
-     * @param name the name of the SuperGroup.
+     * @param name Name of the SuperGroup.
+     * @param tags Tags in the SuperGroup.
      */
     public SuperGroup(Name name, Set<Tag> tags) {
         super(name, tags);
         subGroups = new UniqueList<>();
     }
 
+    /**
+     * Constructor for a SuperGroup instance.
+     *
+     * @param name Name of the SuperGroup.
+     * @param tags Tags in the SuperGroup.
+     * @param note Notes taken on the SuperGroup.
+     */
     public SuperGroup(Name name, Set<Tag> tags, Note note) {
         super(name, tags, note);
         subGroups = new UniqueList<>();

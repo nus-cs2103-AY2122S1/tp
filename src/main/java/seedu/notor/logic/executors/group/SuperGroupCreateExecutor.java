@@ -12,6 +12,12 @@ public class SuperGroupCreateExecutor extends GroupExecutor {
 
     private final SuperGroup superGroup;
 
+    /**
+     * Constructor for a SuperGroupCreateExecutor instance.
+     *
+     * @param index Null value since Command requires no Index.
+     * @param superGroup SuperGroup to be created.
+     */
     public SuperGroupCreateExecutor(Index index, SuperGroup superGroup) {
         super(index);
         this.superGroup = superGroup;

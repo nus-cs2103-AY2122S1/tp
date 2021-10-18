@@ -10,15 +10,20 @@ import static seedu.notor.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.notor.logic.commands.CommandTestUtil.TAG_MULTIPLE_TAGS;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.notor.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.notor.logic.commands.HelpCommand;
+import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.person.Email;
@@ -34,33 +39,31 @@ public class PersonCreateCommandParserTest {
     public void parse_allFieldsPresent_success() throws ParseException {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
-        // TODO: Change name after Yukun's Regex Fix
         // multiple phones - last phone accepted
-        String multiplePhones = String.format("person %s /create %s%s%s%s", VALID_NAME_BOB,
+        String multiplePhones = String.format("person %s /create%s%s%s%s", VALID_NAME_BOB,
                 PHONE_DESC_AMY, PHONE_DESC_BOB, EMAIL_DESC_BOB, TAG_DESC_FRIEND);
         assertParseSuccess(notorParser.parseCommand(multiplePhones), new PersonCreateCommand(null, expectedPerson));
 
         // multiple emails - last email accepted
-        String multipleEmails = String.format("person %s /create %s%s%s%s", VALID_NAME_BOB,
+        String multipleEmails = String.format("person %s /create%s%s%s%s", VALID_NAME_BOB,
                 PHONE_DESC_BOB, EMAIL_DESC_AMY, EMAIL_DESC_BOB, TAG_DESC_FRIEND);
         assertParseSuccess(notorParser.parseCommand(multipleEmails), new PersonCreateCommand(null, expectedPerson));
 
-    // TODO: Multiple tag check after Yukun fix the bug.
         // multiple tags - all accepted
-        //        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-        //                .build();
-        //        String multipleTags = String.format("person %s /create %s%s%s", VALID_NAME_BOB,
-        //                PHONE_DESC_BOB, EMAIL_DESC_BOB, TAG_MULTIPLE_TAGS);
-        //        assertParseSuccess(notorParser.parseCommand(multipleTags),
-        //           new PersonCreateCommand(null, expectedPersonMultipleTags));
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .build();
+        String multipleTags = String.format("person %s /create%s%s%s", VALID_NAME_BOB,
+                PHONE_DESC_BOB, EMAIL_DESC_BOB, TAG_MULTIPLE_TAGS);
+        assertParseSuccess(notorParser.parseCommand(multipleTags),
+                new PersonCreateCommand(null, expectedPersonMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() throws ParseException {
         // zero tags
-        String noTag = String.format("person %s /create %s%s%s", VALID_NAME_BOB,
-                PHONE_DESC_BOB, EMAIL_DESC_AMY, EMAIL_DESC_BOB);
-        Person expectedPerson = new PersonBuilder(BOB).withTags().build();
+        String noTag = PersonCommand.COMMAND_WORD + " " + VALID_NAME_BOB + " /" + PersonCreateCommand.COMMAND_WORD
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB;
+        Person expectedPerson = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), new HashSet<>());
         assertParseSuccess(notorParser.parseCommand(noTag), new PersonCreateCommand(null, expectedPerson));
     }
 
@@ -70,7 +73,7 @@ public class PersonCreateCommandParserTest {
 
         // missing name prefix
         String noName = String.format("person /create %s%s%s", VALID_NAME_BOB,
-                PHONE_DESC_BOB, EMAIL_DESC_AMY, EMAIL_DESC_BOB);
+                PHONE_DESC_BOB, EMAIL_DESC_BOB);
         assertParseFailure(notorParser, noName, expectedMessage);
     }
 

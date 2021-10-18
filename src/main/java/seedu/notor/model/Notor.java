@@ -28,7 +28,8 @@ public class Notor implements ReadOnlyNotor {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         persons = new UniqueList<>();
         superGroups = new UniqueList<>();
     }

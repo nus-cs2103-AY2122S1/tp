@@ -2,7 +2,6 @@ package seedu.notor.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -116,10 +115,14 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Tag> parseTags(String tags) throws ParseException {
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        final String trimmedTags = tags.trim();
+        if (trimmedTags.equals("")) {
+            return tagSet;
+        }
+        String[] splitTags = tags.split(",");
+        for (String tagName : splitTags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;

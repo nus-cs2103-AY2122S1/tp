@@ -6,6 +6,7 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPINDEX;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.notor.logic.commands.person.PersonCreateCommand;
@@ -22,6 +23,13 @@ import seedu.notor.model.tag.Tag;
 public class PersonCreateCommandParser extends PersonCommandParser {
     private final String uncheckedName;
 
+    /**
+     * Constructor for a PersonCreateCommandParser instance.
+     *
+     * @param uncheckedName Unchecked name of the person to be created.
+     * @param arguments Arguments to be parsed.
+     * @throws ParseException If arguments cannot be successfully parsed.
+     */
     public PersonCreateCommandParser(String uncheckedName, String arguments) throws ParseException {
         super(null, arguments);
         this.uncheckedName = uncheckedName;
@@ -51,7 +59,10 @@ public class PersonCreateCommandParser extends PersonCommandParser {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         }
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
+        }
         if (argMultimap.getValue(PREFIX_GROUPINDEX).isPresent()) {
             index = ParserUtil.parseGroupIndex(argMultimap.getValue(PREFIX_GROUPINDEX).get());
         }

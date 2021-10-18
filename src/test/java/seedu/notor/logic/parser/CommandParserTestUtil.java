@@ -15,7 +15,7 @@ public class CommandParserTestUtil {
      * equals to {@code expectedCommand}.
      */
     public static void assertParseSuccess(Command commandCreated, Command expectedCommand) {
-        assertEquals(commandCreated, expectedCommand);
+        assertEquals(expectedCommand, commandCreated);
     }
 
     /**

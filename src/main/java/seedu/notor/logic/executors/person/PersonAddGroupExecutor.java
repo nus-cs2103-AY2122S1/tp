@@ -16,6 +16,12 @@ public class PersonAddGroupExecutor extends PersonExecutor {
 
     private final String groupName;
 
+    /**
+     * Constructor for a PersonAddGroupExecutor instance.
+     *
+     * @param index Index of Person to perform operation on.
+     * @param groupName Name of Group to be added to the Person.
+     */
     public PersonAddGroupExecutor(Index index, String groupName) {
         super(index);
         this.groupName = groupName;

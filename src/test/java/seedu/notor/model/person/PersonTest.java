@@ -45,11 +45,10 @@ public class PersonTest {
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
         assertFalse(BOB.isSame(editedBob));
 
-        // TODO: When trailing space is fix by Yukun
         // name has trailing spaces, all other attributes same -> returns false
-    //        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-    //        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-    //        assertFalse(BOB.isSame(editedBob));
+        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
+        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
+        assertFalse(BOB.isSame(editedBob));
     }
 
     @Test

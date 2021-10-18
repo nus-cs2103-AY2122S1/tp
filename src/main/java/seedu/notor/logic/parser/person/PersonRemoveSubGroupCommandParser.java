@@ -1,7 +1,5 @@
 package seedu.notor.logic.parser.person;
 
-import seedu.notor.logic.parser.exceptions.ParseException;
-
 /**
  * Deprecated for now.
  * TODO: move this functionality into PersonRemoveGroupCommandParser since we do not have remove subgroup command
@@ -9,12 +7,12 @@ import seedu.notor.logic.parser.exceptions.ParseException;
  */
 @Deprecated
 public class PersonRemoveSubGroupCommandParser {
-    /**
-     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
-     * and returns a {@code RemarkCommand} object for execution.
-     *
-     * @throws ParseException if the user input does not conform the expected format
-     */
+//    /**
+//     * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
+//     * and returns a {@code RemarkCommand} object for execution.
+//     *
+//     * @throws ParseException if the user input does not conform the expected format
+//     */
 //    public PersonRemoveSubGroupCommand parse(String args) throws ParseException {
 //        requireNonNull(args);
 //        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GROUP, PREFIX_SUBGROUP);

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.notor.logic.commands.group.GroupCommand;
@@ -23,6 +24,13 @@ import seedu.notor.model.tag.Tag;
 public class SuperGroupCreateCommandParser extends GroupCommandParser {
     private final String uncheckedName;
 
+    /**
+     * Constructor for a SuperGroupCreateCommandParser instance.
+     *
+     * @param uncheckedName Unchecked name of the SuperGroup to be parsed.
+     * @param arguments Arguments to be parsed.
+     * @throws ParseException If arguments could not be parsed.
+     */
     public SuperGroupCreateCommandParser(String uncheckedName, String arguments) throws ParseException {
         super(null, arguments);
         this.uncheckedName = uncheckedName;
@@ -44,7 +52,10 @@ public class SuperGroupCreateCommandParser extends GroupCommandParser {
 
         Name name = new Name(uncheckedName);
 
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = new HashSet<>();
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
+        }
 
         SuperGroup superGroup = new SuperGroup(name, tagList);
 

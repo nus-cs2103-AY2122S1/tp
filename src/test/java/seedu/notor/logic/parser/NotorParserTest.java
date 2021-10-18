@@ -8,25 +8,28 @@ import static seedu.notor.testutil.Assert.assertThrows;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.notor.logic.commands.ClearCommand;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.HelpCommand;
+import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Note;
+import seedu.notor.model.person.Person;
+import seedu.notor.testutil.PersonBuilder;
+import seedu.notor.testutil.PersonUtil;
 
 public class NotorParserTest {
     private final NotorParser parser = new NotorParser();
 
-    // TODO: Add this test case back when the trailing space in name if fixed.
-
-    //    @Test
-    //    public void parseCommand_add() throws Exception {
-    //        Person person = new PersonBuilder().build();
-    //        PersonCreateCommand command = (PersonCreateCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-    //        assertEquals(new PersonCreateCommand(null, person), command);
-    //    }
+    @Test
+    public void parseCommand_add() throws Exception {
+        Person person = new PersonBuilder().build();
+        PersonCreateCommand command = (PersonCreateCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        assertEquals(new PersonCreateCommand(null, person), command);
+    }
 
     @Test
     public void parseCommand_clear() throws Exception {
@@ -41,16 +44,15 @@ public class NotorParserTest {
 
     // TODO: Elton cannot fix this. This is caused by tags being different in both commands.
     // One has empty optional, the other has optional with empty set.
-    //    @Test
-    //    public void parseCommand_edit() throws Exception {
-    //        Person person = new PersonBuilder().build();
-    //        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(person).build();
-    //
-    //        PersonEditCommand
-    //                command = (PersonEditCommand)
-    //                    parser.parseCommand(PersonUtil.getEditPersonDescriptorCommand(1, descriptor));
-    //        assertEquals(new PersonEditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    //    }
+//    @Test
+//    public void parseCommand_edit() throws Exception {
+//        Person person = new PersonBuilder().build();
+//        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(person).build();
+//
+//        PersonEditCommand command =
+//                (PersonEditCommand) parser.parseCommand(PersonUtil.getEditPersonDescriptorCommand(1, descriptor));
+//        assertEquals(new PersonEditCommand(INDEX_FIRST_PERSON, descriptor), command);
+//    }
 
     @Test
     public void parseCommand_exit() throws Exception {

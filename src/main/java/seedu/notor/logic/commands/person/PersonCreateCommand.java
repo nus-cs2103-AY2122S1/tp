@@ -6,6 +6,8 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPINDEX;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Objects;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -58,5 +60,10 @@ public class PersonCreateCommand extends PersonCommand {
         return other == this // short circuit if same object
                 || (other instanceof PersonCreateCommand // instanceof handles nulls
                 && executor.equals(((PersonCreateCommand) other).executor));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(executor);
     }
 }
