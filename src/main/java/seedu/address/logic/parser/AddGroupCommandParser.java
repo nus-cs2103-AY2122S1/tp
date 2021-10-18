@@ -13,7 +13,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.tag.Tag;
 
-public class AddGroupCommandParser implements Parser<AddGroupCommand>{
+public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddGroupCommand

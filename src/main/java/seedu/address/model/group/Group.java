@@ -48,6 +48,9 @@ public class Group {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructor for a new Group object given only name and tags
+     */
     public Group(GroupName name, Set<Tag> tags) {
         requireAllNonNull(name);
         this.name = name;
@@ -96,6 +99,11 @@ public class Group {
         }
     }
 
+    /**
+     * Returns the formatted Github link with given inputs
+     * @param year A valid year to parse
+     * @param repoName A valid repoName to parse
+     */
     public String getGroupGithubLink(LinkYear year, RepoName repoName) {
         if (!year.isNull() && !repoName.isNull()) {
             return String.format(new GroupGithub(year, repoName).toString(), getName());

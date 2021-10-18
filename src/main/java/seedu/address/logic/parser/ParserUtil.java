@@ -124,7 +124,7 @@ public class ParserUtil {
         requireNonNull(userName);
         String trimmedUserName = userName.trim();
         if (!UserName.isValidUserName(trimmedUserName)) {
-            throw new ParseException(RepoName.MESSAGE_CONSTRAINTS);
+            throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
         }
         return new UserName(trimmedUserName);
     }

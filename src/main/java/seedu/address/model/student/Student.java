@@ -32,7 +32,8 @@ public class Student {
      * Every field must be present and not null.
      * Constructor for a new Person object
      */
-    public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName, Set<Tag> tags) {
+    public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
+                   Set<Tag> tags) {
         requireAllNonNull(name, email, studentNumber, tags);
         this.name = name;
         this.email = email;

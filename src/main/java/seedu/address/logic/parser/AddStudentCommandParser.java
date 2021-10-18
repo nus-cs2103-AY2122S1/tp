@@ -46,7 +46,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENTNUMBER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         UserName userName = null;
-        RepoName repoName  = null;
+        RepoName repoName = null;
 
         if (argMultimap.getValue(PREFIX_USERNAME).isPresent()) {
             userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USERNAME).get());

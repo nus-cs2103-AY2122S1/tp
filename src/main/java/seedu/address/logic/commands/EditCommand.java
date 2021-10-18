@@ -98,7 +98,8 @@ public class EditCommand extends Command {
         RepoName updatedRepoName = editStudentDescriptor.getRepoName().orElse(studentToEdit.getRepoName());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedEmail, updatedStudentNumber, updatedUserName, updatedRepoName, updatedTags);
+        return new Student(updatedName, updatedEmail, updatedStudentNumber, updatedUserName, updatedRepoName,
+                updatedTags);
     }
 
     @Override

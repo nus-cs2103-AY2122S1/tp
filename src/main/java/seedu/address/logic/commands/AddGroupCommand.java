@@ -11,7 +11,7 @@ import seedu.address.model.group.Group;
 /**
  * Adds a group to the group list in tApp.
  */
-public class AddGroupCommand extends Command{
+public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "addGroup";
 

@@ -17,7 +17,7 @@ import seedu.address.model.student.Student;
 public class MemberListPanel extends UiPart<Region> {
     private static final String FXML = "memberListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(MemberListPanel.class);
-    private final int CARD_HEIGHT = 100;
+    private final int cardHeight = 100;
 
     @FXML
     private ListView<Student> memberListView;
@@ -29,7 +29,7 @@ public class MemberListPanel extends UiPart<Region> {
         super(FXML);
         memberListView.setItems(studentList);
         memberListView.setCellFactory(listView -> new MemberListViewCell());
-        memberListView.prefHeightProperty().bind(Bindings.size(studentList).multiply(CARD_HEIGHT));
+        memberListView.prefHeightProperty().bind(Bindings.size(studentList).multiply(cardHeight));
     }
 
     /**

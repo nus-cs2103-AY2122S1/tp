@@ -38,7 +38,8 @@ public class AddGithubGroupCommandParser implements Parser<AddGithubGroupCommand
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_YEAR, PREFIX_REPO)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGithubGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddGithubGroupCommand.MESSAGE_USAGE));
         }
 
         LinkYear year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());

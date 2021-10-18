@@ -35,8 +35,8 @@ public class AddGithubGroupCommand extends Command {
     public static final String MESSAGE_ADD_LINK_SUCCESS = "Link: %1$s has been added to group %2$s!";
 
     private final Index index;
-    public final LinkYear year;
-    public final RepoName repoName;
+    private final LinkYear year;
+    private final RepoName repoName;
 
     /**
      * @param index of the student in the filtered student list to add to the group
@@ -63,7 +63,7 @@ public class AddGithubGroupCommand extends Command {
         model.addGithubGroup(year, repoName, groupToUpdate);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_ADD_LINK_SUCCESS,
-                groupToUpdate.getGroupGithubLink(year ,repoName), groupToUpdate.getName().name));
+                groupToUpdate.getGroupGithubLink(year, repoName), groupToUpdate.getName().name));
     }
 
     @Override
