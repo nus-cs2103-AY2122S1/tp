@@ -21,15 +21,10 @@ import seedu.fast.model.tag.PriorityTag;
  */
 public class StatsWindow extends UiPart<Stage> {
 
-    public static final String TEST_MESSAGE = "<<Insert Stats here filler >>";
-
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
 
     private Fast fast;
-
-    @FXML
-    private Label testMessage;
 
     @FXML
     private PieChart priorityPieChart;
