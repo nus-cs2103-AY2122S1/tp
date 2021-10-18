@@ -158,6 +158,72 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### JSON encryption feature
+
+#### Implementation
+
+The JSON encryption mechanism is facilitated by `JsonAddressBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
+Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the 
+CSBook data to an encrypted JSON file are as follows:
+
+- `JsonAddressBookStorage#saveAddressBook()` — Saves the current CSBook data
+- `EncryptedJsonUtil#saveEncryptedJsonFile()` — Saves the given data to a encrypted JSON file
+- `EncryptionUtil.encryptSerializableObject()` — Encrypts a `Serializable` object
+- `FileUtil#writeToEncryptedFile()` — Writes the encrypted object to a file
+
+Decrypting an encrypted JSON file goes through a similar process. The relevant operations for decrypting the
+encrypted JSON file to the CSBook are as follows:
+
+- `JsonAddressBookStorage#readAddressBook()` — Reads the CSBook data from the encrypted JSON file
+- `EncryptedJsonUtil#readEncryptedJsonFile()` — Reads the data from a encrypted JSON file
+- `EncryptionUtil#decryptSealedObject()` — Decrypts a `SealedObject`
+- `FileUtil#readFromEncryptedFile()` — Reads the encrypted object from a file
+
+Given below is an example usage scenario and how encryption/decryption behaves at each step.
+
+Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call
+to `StorageManager#saveAddressBook()` to save the new data, which subsequently calls `JsonAddressBookStorage#saveAddressBook()`.
+
+Step 2. `JsonAddressBookStorage#saveAddressBook()` creates a new `JsonSerializableAddressBook` object, which is passed to
+`EncryptedJsonUtil#saveEncryptedJsonFile()` to be saved as an encrypted JSON file.
+
+Step 3. `EncryptedJsonUtil#saveEncryptedJsonFile()` uses the `JsonSerializableAddressBook` object, which is a Serializable,
+and encrypts it using `EncryptionUtil.encryptSerializableObject()`. The data is now encrypted in a `SealedObject` object.
+
+Step 4. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file. This is
+achieved by `FileUtil#writeToEncryptedFile()`.
+
+The following sequence diagram shows how the encryption operation works:
+
+The decryption operation accomplishes the opposite of the encryption operation.
+
+Step 5. When a user launches the application for the first time, a call it made to `JsonAddressBookStorage#readAddressBook()`
+to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile()` with the given `filePath` to
+read the encrypted JSON file.
+
+Step 6. `EncryptedJsonUtil#readEncryptedJsonFile()` calls `FileUtil#readFromEncryptedFile()` with the given filePath to read the
+encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the encrypted CSBook data.
+
+Step 7. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject()` to be decrypted into a `Serializable`
+object, which is then converted to a JSON string that is used to populate `csbook` of `ModelManager`.
+
+The following sequence diagram shows how the decryption operation works:
+
+#### Design considerations
+
+**Aspect: How JSON encryption and decryption executes:**
+
+- **Alternative 1 (current choice):** Encrypts the entire CSBook data.
+
+    - Pros: More secure.
+    - Cons: May take up more storage due to excessive encryption.
+
+- **Alternative 2:** Encrypts individual fields.
+
+    - Pros: Uses less storage by encrypting data and not fields.
+      (e.g. `name: Jun Wei` is encrypted to become `name: ????????????????????`)
+    - Cons: Less secure compared to encrypting the entire JSON file.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
