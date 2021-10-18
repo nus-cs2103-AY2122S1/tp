@@ -515,6 +515,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC10 - Mark student as participated**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of students
+3.  User requests to mark a specific student as participated in the list
+4.  tApp marks the person as participated
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+  Use case ends.
+
+* 2b. User requests to mark a specific person as not participated in the list.
+
+    * 2b1. tApp marks the person as not participated.
+
+      Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+    
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -561,9 +590,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a student while all students are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all students using the `students` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
