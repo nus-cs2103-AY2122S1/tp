@@ -14,6 +14,7 @@ title: Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
+    * [Filter Event feature](#completed-filter-event-feature)
     * [Undo/redo feature](#proposed-undoredo-feature)
         + [Proposed implementation](#proposed-implementation)
         + [Design considerations](#design-considerations)
@@ -198,34 +199,34 @@ This feature allows Managera users to filter the event list by date of event and
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
 we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
 
-Since this feature requires us to take in user input and determine if the filter is by:
+Since this feature requires Managera to take in user input and determine if the filter is by:
 
 1. Date only; or
 2. Date and Time
 
 A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser`
-parses user's input and determines the `predicate` which the `FilterEventCommand` will use to execute the filtering. 
-The `FilterEventCommand` is solely for filtering the event list.
+parses user's input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
+`EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the event list. 
 
-The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `predicate` to filter
-the event list. When it is executed, the `model` will pass all the events in the event list to the `predicate` and
-display only events that fulfils the `predicate` contained in `FilterEventCommand`.
+The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `EventDateTimePredicate` to filter
+the event list. When the command is executed, the `model` will filter the `FilteredList<Event>` in the event list using
+the `EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in `FilterEventCommand`.
 
 
 #### Why is this implemented this way
 
 With considerations to how the `Event` class is implemented, some events do not have time associated to them.
-The developer team feels that since all `Event` have a date associated through the `EventDate` class, filtering should
-be done primarily through date i.e. `EventDate`. However understanding that users might want to filter by time too, it is
+We feel that since all `Event` have a date associated through the `EventDate` class, filtering should
+be done primarily through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is
 included as an optional criteria for filtering.
 
 
 #### Design Considerations:
-##### Aspect: What to filter by:
+##### Aspect: Criteria to filter by:
 
-* **Alternative 1 (Current Choice)**: By Date and optionally time:
+* **Alternative 1 (Current Choice)**: By date and optionally time:
   * Pros: 
-    1. Filtering by date only allows users to see both events with or without time on the specific date.
+    1. Filtering by "date only" allows users to see both events with or without time on the specific date.
     2. Greater flexibility on how specific users want to filter the event list by.
   * Cons:
     1. Unable to filter for only events that do not have time associated.
@@ -242,11 +243,11 @@ included as an optional criteria for filtering.
 
 * **Alternative 1 (Current Choice)**: With prefixes:
   * Pros:
-    1. Sequence of each field can be randomized, more flexible command syntax.
+    1. Sequence of parameters can be randomized, more flexible command syntax.
     2. Clear to user which field is being keyed in.
     3. Easy to implement with support of existing classes.
   * Cons:
-    1. This adds up to the number of prefixes already present in the App which maybe hard to remember.
+    1. This adds up to the number of prefixes already present in Managera which may be hard for users to remember.
 
 
 * **Alternative 2**: Without prefix:
