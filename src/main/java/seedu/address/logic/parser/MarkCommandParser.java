@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.parsePeriod;
 
 import java.util.List;
@@ -29,8 +29,10 @@ public class MarkCommandParser implements Parser<MarkCommand> {
     public MarkCommand parse(String userInput) throws ParseException {
         //created to test if there are any identifiers
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_NAME, PREFIX_PHONE, PREFIX_INDEX, PREFIX_DAY_SHIFT,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
+                ArgumentTokenizer.tokenize(userInput, PREFIX_DASH_NAME, PREFIX_DASH_PHONE,
+                        PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT,
+                        PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
+                        PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
         //created to test if there are
         List<String> periods = argMultimap.getAllValues(PREFIX_DAY_SHIFT);
         if ((periods.size() != 1 && periods.size() != 2)) {
@@ -40,8 +42,8 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
         PersonContainsFieldsPredicate predicate = ParserUtil.testByAllFields(argMultimap);
         //checks for index
-        if (argMultimap.getValue(PREFIX_INDEX).isPresent()) {
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+        if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             return new MarkCommand(index, period, predicate);
         }
         //checks for empty
