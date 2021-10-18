@@ -17,13 +17,13 @@ import tutoraid.model.ReadOnlyStudentBook;
 /**
  * A class to access StudentBook data stored as a json file on the hard disk.
  */
-public class JsonTutorAidStorage implements TutorAidStorage {
+public class JsonTutorAidStudentStorage implements TutorAidStudentStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonTutorAidStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonTutorAidStudentStorage.class);
 
     private Path filePath;
 
-    public JsonTutorAidStorage(Path filePath) {
+    public JsonTutorAidStudentStorage(Path filePath) {
         this.filePath = filePath;
     }
 

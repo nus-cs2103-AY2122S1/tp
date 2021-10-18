@@ -8,6 +8,7 @@ import static tutoraid.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static tutoraid.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static tutoraid.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static tutoraid.testutil.TypicalLessons.getTypicalLessonBook;
 import static tutoraid.testutil.TypicalStudents.getTypicalStudentBook;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ import tutoraid.testutil.StudentBuilder;
  */
 public class UnpaidCommandTest {
 
-    private Model model = new ModelManager(getTypicalStudentBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentBook(), getTypicalLessonBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -38,7 +39,8 @@ public class UnpaidCommandTest {
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_SET_TO_UNPAID_SUCCESS, editedStudent);
 
-        Model expectedModel = new ModelManager(new StudentBook(model.getStudentBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(
+                new StudentBook(model.getStudentBook()), model.getLessonBook(), new UserPrefs());
         expectedModel.setStudent(studentToEdit, editedStudent);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);

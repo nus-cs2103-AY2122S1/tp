@@ -8,7 +8,9 @@ import tutoraid.logic.commands.CommandResult;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.Model;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 
 
@@ -39,6 +41,21 @@ public interface Logic {
      * Returns the user prefs' student book file path.
      */
     Path getStudentBookFilePath();
+
+    /**
+     * Returns the LessonBook.
+     *
+     * @see Model#getLessonBook()
+     */
+    ReadOnlyLessonBook getLessonBook();
+
+    /** Returns an unmodifiable view of the filtered list of lessons */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    /**
+     * Returns the user prefs' lesson book file path.
+     */
+    Path getLessonBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
