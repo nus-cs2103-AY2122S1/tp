@@ -85,8 +85,7 @@ public class EditStudentCommand extends EditCommand {
                 StudentId copyStudentId = student.getStudentId();
                 Student editedStudent = new Student(copyStudentId, name, teleHandle, email);
                 editedStudent.setTaskList(student.getTaskList());
-                module.removeStudent(student);
-                module.addStudent(editedStudent);
+                module.setStudent(student, editedStudent);
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, studentId));
             }
         }
