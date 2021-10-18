@@ -1,20 +1,15 @@
 package seedu.fast.ui;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
 import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.tag.PriorityTag;
-
 
 /**
  * Controller for a stats page
@@ -124,11 +119,10 @@ public class StatsWindow extends UiPart<Stage> {
         priorityPieChart.getData().forEach(data ->
             data.nameProperty().bind(
                 Bindings.concat(
-                    data.getName(), ":\n", (int) data.getPieValue(),
-                    (data.getPieValue() == 1) ? " person" : " people" // check plural or singular
+                    data.getName(), ":\n", (int) data.getPieValue(), (data.getPieValue() == 1)
+                        ? " person" : " people" // check plural or singular
                 )
-            )
-        );
+            ));
     }
 
     /**
