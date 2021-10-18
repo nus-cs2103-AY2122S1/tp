@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
 import java.util.List;
 import java.util.stream.Collectors;

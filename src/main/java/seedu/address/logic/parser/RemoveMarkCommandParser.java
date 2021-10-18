@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
