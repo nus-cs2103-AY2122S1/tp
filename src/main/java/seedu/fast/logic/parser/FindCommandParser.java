@@ -8,6 +8,7 @@ import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.person.TagContainsKeyWordsPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -31,13 +32,21 @@ public class FindCommandParser implements Parser<FindCommand> {
                     PriorityTag.PRIORITY_TAG_PREFIX.length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            for (String tag:tags) {
-                if (isNotPriority(tag)) {
+            for (String tag : tags) {
+                if (!isPriority(tag)) {
                     throw new ParseException(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
                 }
             }
             return new FindCommand(new PriorityPredicate(Arrays.asList(tags)));
+
+        } else if (trimmedArgs.startsWith(FindCommand.TAG_PREFIX)) {
+            String tokenizedArgs = trimmedArgs.substring(
+                    FindCommand.TAG_PREFIX.length());
+            String[] tags = tokenizedArgs.split("\\s+");
+            // splits trimmedArgs according to whitespaces
+            return new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList(tags)));
+
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
@@ -45,10 +54,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
     }
 
-    private static boolean isNotPriority(String tag) {
-        return tag == PriorityTag.LowPriority.TERM
-                || tag == PriorityTag.MediumPriority.TERM
-                || tag == PriorityTag.HighPriority.TERM;
+    private static boolean isPriority(String tag) {
+        return PriorityTag.LowPriority.TERM.equals(tag)
+                || PriorityTag.MediumPriority.TERM.equals(tag)
+                || PriorityTag.HighPriority.TERM.equals(tag);
     }
 
 }
