@@ -85,7 +85,44 @@ public class PeriodTest {
         testPeriods = createPeriod(2, 6).union(testPeriods);
         assertEquals(expectedResult, testPeriods);
 
+
     }
+
+    @Test
+    public void test_complement() {
+        //testing equal periods
+        Period testPeriod = createPeriod(1, 5);
+        Collection<Period> expected = List.of(createPeriod(1, 4));
+        Collection<Period> actual = testPeriod.complement(createPeriod(5, 5));
+        assertEquals(expected, actual);
+
+        testPeriod = createPeriod(1, 2);
+        Period toRemove = createPeriod(1, 1);
+        expected = List.of(createPeriod(2, 2));
+        assertEquals(expected, testPeriod.complement(toRemove));
+
+        testPeriod = createPeriod(1, 20);
+        toRemove = createPeriod(5, 20);
+        expected = List.of(createPeriod(1, 4));
+        assertEquals(expected, testPeriod.complement(toRemove));
+
+        testPeriod = createPeriod(1, 20);
+        toRemove = createPeriod(3, 14);
+        expected = List.of(createPeriod(1, 2), createPeriod(15, 20));
+        assertEquals(expected, testPeriod.complement(toRemove));
+
+        testPeriod = createPeriod(11, 13);
+        toRemove = createPeriod(14, 15);
+        expected = List.of(testPeriod);
+        assertEquals(expected, testPeriod.complement(toRemove));
+
+        testPeriod = createPeriod(1, 20);
+        toRemove = createPeriod(1, 4);
+        expected = List.of(createPeriod(5, 20));
+        assertEquals(expected, testPeriod.complement(toRemove));
+
+    }
+
 
     /**
      * Convenience method to create test periods.
