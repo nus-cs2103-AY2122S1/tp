@@ -46,7 +46,6 @@ public class LessonCard extends Card<Lesson> {
      */
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML, lesson, displayedIndex);
-
         id.setText(displayedIndex + ". ");
         lessonName.setText(formatCardLabel(LESSON_NAME_LABEL, lesson.getLessonName().lessonName));
         timing.setText(formatCardLabel(TIMING_LABEL, lesson.getTiming().timing));

@@ -47,5 +47,4 @@ protected Label id = new Label();
                 ? value
                 : String.format("%s: %s", fieldName, value);
     }
-
 }
