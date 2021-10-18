@@ -30,17 +30,17 @@ public class GenderStatistic {
     }
 
     private float computePercentage(int amount) {
-        return (float) amount / total;
+        return (float) amount / total * 100;
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return String.format("Male: %f%% \nFemale: %f%% \nOthers: %f%%"
-                , computePercentage(numberOfMales)
-                , computePercentage(numberOfFemales)
-                , computePercentage(numberOfOthers));
+        return String.format("Gender statistics: \nMale: %.1f%% \nFemale: %.1f%% \nOthers: %.1f%%",
+                computePercentage(numberOfMales),
+                computePercentage(numberOfFemales),
+                computePercentage(numberOfOthers));
     }
 
 }
