@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a class with the same identity as {@code ModuleClass} exists in the address book.
+     * Returns true if a class with the same identity as {@code ModuleLesson} exists in the address book.
      */
     public boolean hasClass(ModuleLesson moduleLesson) {
         requireNonNull(moduleLesson);

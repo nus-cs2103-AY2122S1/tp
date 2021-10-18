@@ -74,8 +74,8 @@ public class UniqueModuleClassList implements Iterable<ModuleLesson> {
     }
 
     /**
-     * Replaces the contents of this list with {@code moduleClasses}.
-     * {@code moduleClasses} must not contain duplicate module classes.
+     * Replaces the contents of this list with {@code moduleLessons}.
+     * {@code moduleLessons} must not contain duplicate module lessons.
      */
     public void setModuleClasses(List<ModuleLesson> moduleLessons) {
         requireAllNonNull(moduleLessons);
@@ -111,7 +111,7 @@ public class UniqueModuleClassList implements Iterable<ModuleLesson> {
     }
 
     /**
-     * Returns true if {@code moduleClasses} contains only unique classes.
+     * Returns true if {@code moduleLessons} contains only unique classes.
      */
     private boolean moduleClassesAreUnique(List<ModuleLesson> moduleLessons) {
         for (int i = 0; i < moduleLessons.size() - 1; i++) {

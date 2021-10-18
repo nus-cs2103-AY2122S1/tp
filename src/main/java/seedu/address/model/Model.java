@@ -84,7 +84,7 @@ public interface Model {
 
     /**
      * Adds the given class.
-     * {@code moduleClass} must not already exist in the address book.
+     * {@code moduleLesson} must not already exist in the address book.
      */
     void addClass(ModuleLesson moduleLesson);
 
