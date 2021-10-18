@@ -1,7 +1,5 @@
 package seedu.plannermd.testutil.appointment;
 
-//import static seedu.plannermd.testutil.PersonUtil.getPersonDetails;
-
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;

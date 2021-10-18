@@ -68,12 +68,29 @@ public class AppointmentBuilder {
         return this;
     }
 
+
+    /**
+     * Sets the {@code Doctor} of the {@code Appointment} that we are building.
+     */
+    public AppointmentBuilder withDoctor(Doctor doctor) {
+        this.doctor = doctor;
+        return this;
+    }
+
     /**
      * Sets the {@code Patient} of the {@code Appointment} that we are building.
      */
     public AppointmentBuilder withPatient(Name name, Phone phone, Email email, Address address, BirthDate birthDate,
                                           Remark remark, Set<Tag> tags, Risk risk) {
         this.patient = new Patient(name, phone, email, address, birthDate, remark, tags, risk);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Patient} of the {@code Appointment} that we are building.
+     */
+    public AppointmentBuilder withPatient(Patient patient) {
+        this.patient = patient;
         return this;
     }
 

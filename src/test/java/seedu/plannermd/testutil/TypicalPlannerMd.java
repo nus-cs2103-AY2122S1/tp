@@ -8,7 +8,6 @@ import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
-//import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 
 public class TypicalPlannerMd {
 
@@ -58,7 +57,7 @@ public class TypicalPlannerMd {
      */
     public static PlannerMd getTypicalAppointmentsPlannerMd() {
         PlannerMd pm = new PlannerMd();
-        for (Appointment doctor : getTypicalAppointments()) {
+        for (Appointment appointment : getTypicalAppointments()) {
 
         }
         return pm;
