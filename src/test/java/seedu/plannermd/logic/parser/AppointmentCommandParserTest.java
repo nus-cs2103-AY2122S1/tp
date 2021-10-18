@@ -6,7 +6,7 @@ import static seedu.plannermd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.plannermd.logic.commands.HelpCommand;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 
 class AppointmentCommandParserTest {
@@ -46,8 +46,8 @@ class AppointmentCommandParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), (
-        ) -> parser.parseAppointmentCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AppointmentCommand.MESSAGE_USAGE), () -> parser.parseAppointmentCommand(""));
     }
 
     @Test

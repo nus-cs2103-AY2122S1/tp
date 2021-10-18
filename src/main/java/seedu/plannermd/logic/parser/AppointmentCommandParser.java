@@ -3,7 +3,7 @@ package seedu.plannermd.logic.parser;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_FLAG;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
-import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE_STRING;
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_EDIT;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_FILTER;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_FILTER_UPCOMING;
@@ -12,7 +12,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.FLAG_LIST;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.DeleteAppointmentCommand;
@@ -25,21 +24,21 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 public class AppointmentCommandParser {
 
     /**
-     * Used for initial separation of command word and args.
+     * Used for initial separation of flag and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<flag>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput user input string containing flag and arguments
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
     public AppointmentCommand parseAppointmentCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
 
         final String flag = matcher.group("flag");
@@ -52,7 +51,7 @@ public class AppointmentCommandParser {
         case FLAG_EDIT:
             return new EditAppointmentCommand();
 
-        case FLAG_DELETE_STRING:
+        case FLAG_DELETE:
             return new DeleteAppointmentCommand();
 
         case FLAG_FILTER:
