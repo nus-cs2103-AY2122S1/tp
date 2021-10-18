@@ -167,8 +167,9 @@ Examples: (examples below are all possible usages of `sort`)
 Example:
 - `timetable`
 <br>
-Shows lessons scheduled in this week.
-![Ui](../src/main/resources/images/time_table.png)
+
+Shows lessons scheduled in this week in a timetable.<br>
+![Ui](images/time_table.png)
 
 ### Viewing help: `help`
 Shows a command summary and a link to the user guide. <br>
