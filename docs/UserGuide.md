@@ -14,11 +14,11 @@ ________________________________________________________________________________
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `SportsPA.jar` (coming soon).
+1. Download the latest `SportsPA.jar` from [here](https://github.com/AY2122S1-CS2103T-W12-1/tp/releases/tag/v1.2.1).
 
 1. Copy the file to the folder you want to use as the _home folder_ for SportsPA.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -33,6 +33,8 @@ ________________________________________________________________________________
    * **`clearm`** : Clears the members list
 
    * **`exit`** : Exits the app.
+
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -75,8 +77,7 @@ Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
 
 <div markdown="block" class="alert alert-info">
    
-**:information_source: Note:** Facilities with the same `NAME` and `LOCATION` are considered duplicates and cannot exist in the facility list together
-   
+**:information_source: Note:** Facilities with the same `NAME` and `LOCATION` are considered duplicates and cannot exist in the facility list together.
 </div>
 
 * `TIME` specifies the start time and is to be inputted in the format HH:MM
@@ -145,7 +146,6 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
 <div markdown="block" class="alert alert-info">
    
 **:information_source: Note:** Members with the same `NAME` are considered duplicates and cannot exist in the member list together
-   
 </div>
 
 Examples:
@@ -230,6 +230,41 @@ Clears all members from the member list.
 
 Format: `clearm`
 
+### Creating an alias: `alias`
+
+Creates a shortcut name for any command.
+
+Format: `alias s/SHORTCUT cw/COMMAND_WORD`
+
+* Creates an alias that replaces the `COMMAND_WORD` with the given `SHORTCUT`
+* `SHORTCUT` must not be blank
+* `COMMAND_WORD` **must be an existing command**
+
+<div markdown="block" class="alert alert-info">
+   
+**:information_source: Note:** If an alias with the given `SHORTCUT` already exists, the newly created alias will replace the existing one.
+</div>
+
+Examples:
+* `alias s/lf cw/listf` creates an alias for `listf` command. Entering `lf` will call the `listf` command and a list of all facilities will be shown.
+
+### Listing all aliases: `aliases`
+
+Shows a list of all created aliases.
+
+Format: `aliases`
+
+### Deleting an alias: `unalias`
+
+Deletes the given user defined alias.
+
+Format: `unalias SHORTCUT`
+
+* Deletes the alias associated with the specified `SHORTCUT`
+
+Examples:
+* `unalias lf` deletes the alias with shortcut name `lf`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -272,3 +307,6 @@ Action | Format, Examples
 **List facilities**| `listf`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
 **Split members**| `split d/DAY` <br> eg. `split d/Mon`
+**Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> eg. `alias s/lf cw/listf`
+**List aliases**| `aliases` 
+**Deletes alias**| `unalias SHORTCUT` <br> eg. `unalias lf`
