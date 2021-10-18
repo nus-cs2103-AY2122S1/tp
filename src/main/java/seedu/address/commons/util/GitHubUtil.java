@@ -8,20 +8,18 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import org.json.JSONObject;
 //import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.address.commons.core.LogsCenter;
 
-import javax.imageio.ImageIO;
-
 public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
     private static final String URL_PREFIX = "https://api.github.com/users/";
-    private static URL url;
+    private final Image defaultUserProfilePicture = new Image(this.getClass().getResourceAsStream("/images/profile.png"));
     private static int responseCode;
+    private static URL url;
 
     private GitHubUtil(String userName) {
         String userUrl = URL_PREFIX + userName;
@@ -75,11 +73,25 @@ public class GitHubUtil {
         return data;
     }
 
-    public static ImageView getProfilePicture(String userName) {
-        JSONObject jsonObject = getProfile(userName);
-        String userProfileUrl = jsonObject.getString("avatar_url");
+    public static Image getProfilePicture(String userName) {
+        assert userName != null || userName != "" : "No UserName Found";
+        JSONObject jsonObject = null;
 
-        ImageView image = new ImageView(new Image(userProfileUrl));
+        try {
+            jsonObject = getProfile(userName);
+
+            if (responseCode != 200) {
+                return this.getClass().getResourceAsStream("/images/profile.png";
+            }
+        } catch (RuntimeException e) {
+            logger.severe("Profile Picture Could not be obtained. Using default.");
+        }
+
+        assert jsonObject != null;
+
+        String userProfileUrl = jsonObject.getString("avatar_url");
+        Image image = new Image(userProfileUrl);
+
         return image;
     }
 
