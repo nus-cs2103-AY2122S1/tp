@@ -42,7 +42,7 @@ public class DeleteSupplierCommand extends Command {
         Supplier supplierToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSupplier(supplierToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, supplierToDelete),
-                false, false, false, true);
+                false, false, false, false, true, false);
     }
 
     @Override

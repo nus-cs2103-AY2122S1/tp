@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SupplierCommand.SHOWING_SWITCH_MESSAGE;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +15,7 @@ public class SupplierCommandTest {
     @Test
     public void execute_supplierSwitch_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_SWITCH_MESSAGE,
-                false, false, false, true);
+                false, false, false, false, true, false);
         assertCommandSuccess(new SupplierCommand(), model, expectedCommandResult, expectedModel);
     }
 }
