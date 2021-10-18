@@ -30,7 +30,7 @@ import safeforhall.model.person.VaccStatus;
  */
 public class EditPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit" + " " + PREFIX_TYPE_RESIDENT;
+    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the residents identified "
             + "by the index numbers used in the displayed resident list. "
@@ -41,7 +41,7 @@ public class EditPersonCommand extends Command {
             + "[" + CliSyntax.PREFIX_EMAIL + "EMAIL] "
             + "[" + CliSyntax.PREFIX_ROOM + "ROOM] "
             + "[" + CliSyntax.PREFIX_VACCSTATUS + "VACCINATION STATUS] "
-            + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY]"
+            + "[" + CliSyntax.PREFIX_FACULTY + "FACULTY] "
             + "[" + CliSyntax.PREFIX_FETDATE + "LAST FET DATE] "
             + "[" + CliSyntax.PREFIX_COLLECTIONDATE + "LAST COLLECTION DATE] \n"
             + "Example: " + COMMAND_WORD + " 1 2 3 "

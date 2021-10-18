@@ -1,14 +1,16 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.add;
 
 import static java.util.Objects.requireNonNull;
 
+import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
 
-public class EaddCommand extends Command {
-    public static final String COMMAND_WORD = "eadd";
+public class AddEventCommand extends Command {
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book. "
             + "Parameters: "
@@ -29,9 +31,9 @@ public class EaddCommand extends Command {
     private final Event toAdd;
 
     /**
-     * Creates an EaddCommand to add the specified {@code Event}
+     * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public EaddCommand(Event event) {
+    public AddEventCommand(Event event) {
         requireNonNull(event);
         toAdd = event;
     }
@@ -51,7 +53,7 @@ public class EaddCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof EaddCommand // instanceof handles nulls
-                && toAdd.equals(((EaddCommand) other).toAdd));
+                || (other instanceof AddEventCommand // instanceof handles nulls
+                && toAdd.equals(((AddEventCommand) other).toAdd));
     }
 }

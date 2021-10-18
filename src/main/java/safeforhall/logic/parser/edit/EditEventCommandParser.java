@@ -10,6 +10,7 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.edit.EditEventCommand;
 import safeforhall.logic.commands.edit.EditEventCommand.EditEventDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.parser.ArgumentMultimap;
 import safeforhall.logic.parser.ArgumentTokenizer;
 import safeforhall.logic.parser.Parser;
@@ -35,9 +36,9 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            System.out.println(index);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEventCommand.MESSAGE_USAGE), pe);
+            String message = pe.getMessage() + "\n" + EditPersonCommand.MESSAGE_USAGE;
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message), pe);
         }
 
         EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
