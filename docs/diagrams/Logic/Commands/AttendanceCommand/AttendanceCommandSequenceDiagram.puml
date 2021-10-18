@@ -9,7 +9,7 @@ Participant ":Student" as st LOGIC_COLOR
 Participant ":StudioRecord" as sr LOGIC_COLOR
 Participant ":Attendance" as at LOGIC_COLOR
 Participant ":CommandResult" as cr LOGIC_COLOR
-
+Participant ":FilteredList" as fl LOGIC_COLOR
 
 [-> ac : execute(model)
 activate ac
@@ -34,7 +34,7 @@ loop for each Index in indexArrayList
     sr --> st --
     st --> ac -- : attendanceToEdit
     ac -> at ++ : update(studioSession, attendanceStatus)
-    at --
+    deactivate at
     ac -> st ++ : getParticipation
     st -> sr ++ : getParticipation
     sr --> st --
@@ -43,7 +43,9 @@ loop for each Index in indexArrayList
 end loop
 
 ac -> mm ++ : updateFilteredStudentsList(PREDICATE_SHOW_ALL_STUDENTS)
-mm--
+mm -> fl ++ : setPredicate(PREDICATE_SHOW_ALL_STUDENTS)
+fl --> mm --
+mm --> ac --
 
 create cr
 ac -> cr ++ : CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS)
