@@ -1,4 +1,4 @@
-package safeforhall.logic.commands.editcommands;
+package safeforhall.logic.commands.edit;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_TYPE_RESIDENT;

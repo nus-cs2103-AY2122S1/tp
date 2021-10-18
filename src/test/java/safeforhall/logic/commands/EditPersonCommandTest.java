@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.editcommands.EditPersonCommand;
-import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;

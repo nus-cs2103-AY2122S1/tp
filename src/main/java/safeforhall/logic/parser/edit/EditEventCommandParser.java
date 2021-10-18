@@ -1,4 +1,4 @@
-package safeforhall.logic.parser.editcommandparsers;
+package safeforhall.logic.parser.edit;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -8,8 +8,8 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.editcommands.EditEventCommand;
-import safeforhall.logic.commands.editcommands.EditEventCommand.EditEventDescriptor;
+import safeforhall.logic.commands.edit.EditEventCommand;
+import safeforhall.logic.commands.edit.EditEventCommand.EditEventDescriptor;
 import safeforhall.logic.parser.ArgumentMultimap;
 import safeforhall.logic.parser.ArgumentTokenizer;
 import safeforhall.logic.parser.Parser;

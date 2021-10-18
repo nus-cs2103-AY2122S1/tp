@@ -42,9 +42,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.editcommands.EditPersonCommand;
-import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
-import safeforhall.logic.parser.editcommandparsers.EditPersonCommandParser;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;

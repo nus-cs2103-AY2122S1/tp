@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.editcommands.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;

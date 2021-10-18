@@ -12,8 +12,8 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 
 import org.junit.jupiter.api.Test;
 
-import safeforhall.logic.commands.editcommands.EditPersonCommand;
-import safeforhall.logic.commands.editcommands.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

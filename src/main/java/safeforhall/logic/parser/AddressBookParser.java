@@ -17,10 +17,10 @@ import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
-import safeforhall.logic.commands.editcommands.EditEventCommand;
-import safeforhall.logic.commands.editcommands.EditPersonCommand;
-import safeforhall.logic.parser.editcommandparsers.EditEventCommandParser;
-import safeforhall.logic.parser.editcommandparsers.EditPersonCommandParser;
+import safeforhall.logic.commands.edit.EditEventCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.parser.edit.EditEventCommandParser;
+import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
