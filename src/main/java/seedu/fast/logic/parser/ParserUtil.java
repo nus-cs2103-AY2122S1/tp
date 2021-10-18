@@ -307,4 +307,8 @@ public class ParserUtil {
         return venue;
     }
 
+    public static String parseInvestmentPlanTag(String tagName) {
+        //TODO
+        return "";
+    }
 }
