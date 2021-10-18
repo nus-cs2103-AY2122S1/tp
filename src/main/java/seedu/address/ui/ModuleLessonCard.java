@@ -9,9 +9,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.modulelesson.ModuleLesson;
 
-public class ModuleClassCard extends UiPart<Region> {
+public class ModuleLessonCard extends UiPart<Region> {
 
-    private static final String FXML = "ModuleClassCard.fxml";
+    private static final String FXML = "ModuleLessonCard.fxml";
 
     public final ModuleLesson moduleLesson;
 
@@ -35,7 +35,7 @@ public class ModuleClassCard extends UiPart<Region> {
     /**
      * An UI component that displays information of a {@code moduleLesson}.
      */
-    public ModuleClassCard(ModuleLesson moduleLesson, int displayedIndex) {
+    public ModuleLessonCard(ModuleLesson moduleLesson, int displayedIndex) {
         super(FXML);
         this.moduleLesson = moduleLesson;
         id.setText(displayedIndex + ". ");
@@ -58,11 +58,11 @@ public class ModuleClassCard extends UiPart<Region> {
             return true;
         }
 
-        if (!(other instanceof ModuleClassCard)) {
+        if (!(other instanceof ModuleLessonCard)) {
             return false;
         }
 
-        ModuleClassCard card = (ModuleClassCard) other;
+        ModuleLessonCard card = (ModuleLessonCard) other;
         return id.getText().equals(card.id.getText())
                 && moduleLesson.equals(moduleLesson);
     }
