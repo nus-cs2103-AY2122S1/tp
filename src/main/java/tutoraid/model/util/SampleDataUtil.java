@@ -5,7 +5,6 @@ import tutoraid.model.StudentBook;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;

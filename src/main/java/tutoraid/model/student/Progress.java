@@ -12,13 +12,13 @@ public class Progress {
 
     public static final String EMPTY_PROGRESS_DESCRIPTION = "No Progress";
 
-    private static final Progress EMPTY_PROGRESS = new Progress(EMPTY_PROGRESS_DESCRIPTION);
-
     /*
      * The first character of the progress must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
+    private static final Progress EMPTY_PROGRESS = new Progress(EMPTY_PROGRESS_DESCRIPTION);
 
     public final String progress;
 

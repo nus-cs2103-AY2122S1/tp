@@ -2,6 +2,8 @@ package tutoraid.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import tutoraid.commons.exceptions.IllegalValueException;
@@ -9,8 +11,6 @@ import tutoraid.model.student.Name;
 import tutoraid.model.student.Phone;
 import tutoraid.testutil.Assert;
 import tutoraid.testutil.TypicalStudents;
-
-import java.util.ArrayList;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";

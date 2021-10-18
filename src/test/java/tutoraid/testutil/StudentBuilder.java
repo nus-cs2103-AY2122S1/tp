@@ -1,14 +1,13 @@
 package tutoraid.testutil;
 
+import java.util.ArrayList;
+
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
-
-import java.util.ArrayList;
 
 /**
  * A utility class to help with building Student objects.

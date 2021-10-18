@@ -2,6 +2,9 @@ package tutoraid.model.student;
 
 import java.util.ArrayList;
 
+/**
+ * Represents a student's list of progress in TutorAid.
+ */
 public class ProgressList {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -10,10 +13,18 @@ public class ProgressList {
 
     public final ArrayList<Progress> progressList;
 
+    /**
+     * Constructs a {@code ProgressList}.
+     */
     public ProgressList() {
         progressList = new ArrayList<>();
     }
 
+    /**
+     * Constructs a {@code ProgressList}.
+     *
+     * @param progressListInStringArrayList ProgressList of the student
+     */
     public ProgressList(ArrayList<String> progressListInStringArrayList) {
         this.progressList = new ArrayList<>();
 

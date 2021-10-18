@@ -1,5 +1,7 @@
 package tutoraid.storage;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,8 +14,6 @@ import tutoraid.model.student.Progress;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
-
-import java.util.ArrayList;
 
 /**
  * Jackson-friendly version of {@link Student}.
