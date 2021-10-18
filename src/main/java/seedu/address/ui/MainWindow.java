@@ -16,6 +16,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Category;
+import seedu.address.model.client.Client;
+import seedu.address.model.product.Product;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -36,6 +39,10 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PieChartView pieChartView;
+    private HelpMessage helpMessage;
+    private ViewMoreClient viewMoreClient;
+    private ViewMoreProduct viewMoreProduct;
+    private SecondPanel secondPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -56,7 +63,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane pieChartViewPlaceholder;
+    private StackPane secondPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -133,8 +140,15 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        pieChartView = new PieChartView();
-        pieChartViewPlaceholder.getChildren().add(pieChartView.getRoot());
+//        pieChartView = new PieChartView();
+//        pieChartViewPlaceholder.getChildren().add(pieChartView.getRoot());
+
+        helpMessage = new HelpMessage();
+        secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
+
+//        viewMore = new ViewMore();
+//        viewMorePlaceholder.getChildren().add(viewMore.getRoot());
+
     }
 
     /**
@@ -195,6 +209,24 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isViewMore()) {
+                Category category = commandResult.getInfo();
+                if (category instanceof Client) {
+                    viewMoreClient = new ViewMoreClient();
+                    viewMoreClient.setClientDetails((Client) category);
+                    secondPanelPlaceholder.getChildren().clear();
+                    secondPanelPlaceholder.getChildren().add(viewMoreClient.getRoot());
+                }
+
+                if (category instanceof Product) {
+                    viewMoreProduct = new ViewMoreProduct();
+                    viewMoreProduct.setProductDetails((Product) category);
+                    secondPanelPlaceholder.getChildren().clear();
+                    secondPanelPlaceholder.getChildren().add(viewMoreProduct.getRoot());
+                }
+
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

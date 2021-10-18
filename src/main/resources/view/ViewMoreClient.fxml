@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <Label fx:id="viewMore" VBox.vgrow="ALWAYS" />
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+    </padding>
+    <Label fx:id="id" styleClass="cell_small_label" text="\$unitPrice" />
+    <Label fx:id="name" styleClass="cell_small_label" text="\$unitPrice" />
+    <Label fx:id="phoneNumber" styleClass="cell_small_label" text="\$unitPrice" />
+    <Label fx:id="email" styleClass="cell_small_label" text="\$unitPrice" />
+    <Label fx:id="address" styleClass="cell_small_label" text="\$unitPrice" />
+</VBox>

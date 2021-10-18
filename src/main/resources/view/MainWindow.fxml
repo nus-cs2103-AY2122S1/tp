@@ -75,7 +75,7 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="pieChartViewPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="secondPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
           <!-- replace with help message and statistics -->
         </HBox>
