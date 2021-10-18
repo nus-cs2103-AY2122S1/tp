@@ -39,6 +39,6 @@ public class TlistCommand extends Command{
         ObservableList<Member> members = model.getFilteredMemberList();
         Member targetMember = members.get(targetMemberID.getZeroBased());
         model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_Tasks);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + " of " + targetMember.getName());
     }
 }
