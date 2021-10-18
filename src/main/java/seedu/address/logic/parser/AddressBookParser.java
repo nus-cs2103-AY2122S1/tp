@@ -69,7 +69,7 @@ public class AddressBookParser {
 
         case ClearAllCommand.COMMAND_WORD:
             return new ClearAllCommand();
-        
+
         case ClearAllTasksCommand.COMMAND_WORD:
             return new ClearAllTasksCommand();
 

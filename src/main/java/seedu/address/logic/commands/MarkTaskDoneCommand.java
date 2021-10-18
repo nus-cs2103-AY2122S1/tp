@@ -23,6 +23,10 @@ public class MarkTaskDoneCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Marks a task as completed
+     * @param targetIndex the index of the Task as displayed to the user
+     */
     public MarkTaskDoneCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

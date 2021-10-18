@@ -119,9 +119,11 @@ public class AddStudentCommandTest {
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
-        
+
         @Override
-        public void clearTasks() {throw new AssertionError("This method should not be called.");};
+        public void clearTasks() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {

@@ -16,7 +16,7 @@ public class MarkTaskDoneCommandParser {
      */
     public MarkTaskDoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        
+
         try {
             Index index = ParserUtil.parseIndex(args);
             return new MarkTaskDoneCommand(index);

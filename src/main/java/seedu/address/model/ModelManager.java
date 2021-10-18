@@ -97,7 +97,7 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
     }
-    
+
     public void clearTasks() {
         this.addressBook.clearAllTask();
     }
