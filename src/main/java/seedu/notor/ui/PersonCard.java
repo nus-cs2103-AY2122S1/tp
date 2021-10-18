@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 import seedu.notor.model.person.Person;
 
 /**
@@ -38,7 +40,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label noteLastSaved;
+    private Label note;
+    @FXML
+    private Label noteLastModified;
+    @FXML
+    private VBox vBox;
     @FXML
     private Label groups;
     @FXML
@@ -57,9 +63,13 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         if (!person.getNoteSavedDate().isEmpty()) {
-            noteLastSaved.setText(person.getNoteSavedDate());
+            note.setText(person.getNote().getNoEmptyLineNote());
+            noteLastModified.setText(person.getNoteSavedDate());
+            noteLastModified.setTextAlignment(TextAlignment.CENTER);
         } else {
-            noteLastSaved.setManaged(false);
+            vBox.setManaged(false);
+            note.setManaged(false);
+            noteLastModified.setManaged(false);
         }
         groups.setText(Arrays.toString(person.getSuperGroups().toArray()));
         subGroups.setText(Arrays.toString(person.getSubGroups().toArray()));

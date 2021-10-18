@@ -6,6 +6,8 @@ import static java.util.Objects.requireNonNull;
  * Represents a Person's note that is opened upon note command.
  */
 public class Note {
+    /** regex to remove newLine **/
+    private static String removeEmptyLines = "(?m)^\\s*$[\n\r]{1,}";
 
     /** content of note **/
     public final String value;
@@ -52,6 +54,10 @@ public class Note {
     @Override
     public String toString() {
         return value;
+    }
+
+    public String getNoEmptyLineNote() {
+        return value.replaceAll(removeEmptyLines, "");
     }
 
 
