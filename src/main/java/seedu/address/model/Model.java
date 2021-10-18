@@ -99,6 +99,18 @@ public interface Model {
      */
     void markStudentAttendance(Student target, int week);
 
+    /**
+     * Retrieve the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    String getStudentParticipation(Student target, int week);
+
+    /**
+     * Marks the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    void markStudentParticipation(Student target, int week);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 

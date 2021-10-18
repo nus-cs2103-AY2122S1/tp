@@ -142,6 +142,21 @@ public class ModelManager implements Model {
         return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
     }
 
+    @Override
+    public void markStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        Student newPerson = target;
+
+        newPerson.getParticipation().toggleParticipation(week);
+        addressBook.setStudent(target, newPerson);
+    }
+
+    @Override
+    public String getStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
+    }
+
     /**
      * Checks if a task exists
      *
