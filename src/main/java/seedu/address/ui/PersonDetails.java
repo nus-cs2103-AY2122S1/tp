@@ -1,5 +1,11 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Label;
@@ -10,7 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -18,7 +26,9 @@ import seedu.address.model.person.Person;
 public class PersonDetails extends UiPart<Region> {
 
     private static final String FXML = "PersonDetails.fxml";
+    private static final String TELEGRAM_URL_PREFIX = "https://t.me/";
 
+    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -60,7 +70,9 @@ public class PersonDetails extends UiPart<Region> {
         }
         cardPane.setVisible(true);
         name.setText(person.getName().fullName);
+        String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         telegram.setText("@" + person.getTelegram().value);
+        telegram.setOnMouseClicked((event) -> openTelegram(teleUrl));
         if (person.getPhone().value.isBlank()) {
             phone.setText("-");
         } else {
@@ -89,6 +101,21 @@ public class PersonDetails extends UiPart<Region> {
         profileView.setClip(null);
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(image);
+    }
+
+    /**
+     * Opens the t.me link to telegram in the default web browser on
+     * the system.
+     */
+    @FXML
+    public void openTelegram(String teleUrl) {
+        try {
+            Desktop.getDesktop().browse(new URL(teleUrl).toURI());
+        } catch (IOException e) {
+            logger.severe("Could not open browser to show link to telegram.");
+        } catch (URISyntaxException e) {
+            logger.severe("URL to telegram not formatted well.");
+        }
     }
 
     @Override
