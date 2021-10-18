@@ -13,11 +13,11 @@ import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.ExitCommand;
 import seedu.programmer.logic.commands.FillCommand;
+import seedu.programmer.logic.commands.FilterCommand;
 import seedu.programmer.logic.commands.HelpCommand;
 import seedu.programmer.logic.commands.ListCommand;
 import seedu.programmer.logic.commands.PurgeCommand;
 import seedu.programmer.logic.commands.ShowCommand;
-import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,8 +60,8 @@ public class ProgrammerErrorParser {
         case PurgeCommand.COMMAND_WORD:
             return new PurgeCommand();
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

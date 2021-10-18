@@ -13,9 +13,9 @@ import seedu.programmer.model.student.StudentDetailContainsQueryPredicate;
  * Finds and lists all students in ProgrammerError whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class ViewCommand extends Command {
+public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "filter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified arguments (case-insensitive) and displays them as a list with index numbers.\n"
@@ -27,10 +27,10 @@ public class ViewCommand extends Command {
     private final StudentDetailContainsQueryPredicate predicate;
 
     /**
-     * Initializes a a {@code ViewCommand} object with the {@code predicate} to test which students to be filtered.
+     * Initializes a a {@code FilterCommand} object with the {@code predicate} to test which students to be filtered.
      * @param predicate that filters the list of students to be displayed.
      */
-    public ViewCommand(StudentDetailContainsQueryPredicate predicate) {
+    public FilterCommand(StudentDetailContainsQueryPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -45,7 +45,7 @@ public class ViewCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ViewCommand // instanceof handles nulls
-                && predicate.equals(((ViewCommand) other).predicate)); // state check
+                || (other instanceof FilterCommand // instanceof handles nulls
+                && predicate.equals(((FilterCommand) other).predicate)); // state check
     }
 }
