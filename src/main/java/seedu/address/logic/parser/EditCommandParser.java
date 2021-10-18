@@ -19,7 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
-import seedu.address.model.tag.LessonCode;
+import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -95,7 +95,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = lessonCodes.size() == 1 && lessonCodes.contains("")
                 ? Collections.emptySet()
                 : lessonCodes;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(ParserUtil.parseLessonCodes(tagSet));
     }
 
 }

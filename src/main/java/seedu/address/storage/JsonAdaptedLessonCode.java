@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.LessonCode;
+import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Jackson-friendly version of {@link LessonCode}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedLessonCode {
 
-    private final String tagName;
+    private final String lessonCode;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedLessonCode} with the given {@code lessonCode}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedLessonCode(String lessonCode) {
+        this.lessonCode = lessonCode;
     }
 
     /**
      * Converts a given {@code LessonCode} into this class for Jackson use.
      */
-    public JsonAdaptedTag(LessonCode source) {
-        tagName = source.lessonCode;
+    public JsonAdaptedLessonCode(LessonCode source) {
+        lessonCode = source.lessonCode;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getLessonCode() {
+        return lessonCode;
     }
 
     /**
@@ -39,10 +39,10 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public LessonCode toModelType() throws IllegalValueException {
-        if (!LessonCode.isValidLessonCode(tagName)) {
+        if (!LessonCode.isValidLessonCode(lessonCode)) {
             throw new IllegalValueException(LessonCode.MESSAGE_CONSTRAINTS);
         }
-        return new LessonCode(tagName);
+        return new LessonCode(lessonCode);
     }
 
 }

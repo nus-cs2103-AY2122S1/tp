@@ -17,7 +17,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.LessonCode;
+import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -138,14 +138,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code LessonCode}.
+     * Parses a {@code String lessonCode} into a {@code LessonCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code lessonCode} is invalid.
      */
-    public static LessonCode parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
+    public static LessonCode parseLessonCode(String lessonCode) throws ParseException {
+        requireNonNull(lessonCode);
+        String trimmedTag = lessonCode.trim();
         if (!LessonCode.isValidLessonCode(trimmedTag)) {
             throw new ParseException(LessonCode.MESSAGE_CONSTRAINTS);
         }
@@ -155,11 +155,11 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> lessonCodes} into a {@code Set<LessonCode>}.
      */
-    public static Set<LessonCode> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<LessonCode> parseLessonCodes(Collection<String> lessonCodes) throws ParseException {
+        requireNonNull(lessonCodes);
         final Set<LessonCode> lessonCodeSet = new HashSet<>();
-        for (String tagName : tags) {
-            lessonCodeSet.add(parseTag(tagName));
+        for (String tagName : lessonCodes) {
+            lessonCodeSet.add(parseLessonCode(tagName));
         }
         return lessonCodeSet;
     }

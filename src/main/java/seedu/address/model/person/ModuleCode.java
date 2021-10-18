@@ -6,7 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Set;
 
-import seedu.address.model.tag.LessonCode;
+import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Represents a module code that a Person is taking in the address book.
@@ -49,7 +49,7 @@ public class ModuleCode {
         return value;
     }
 
-    public Set<LessonCode> getTags() {
+    public Set<LessonCode> getLessonCodes() {
         return Collections.unmodifiableSet(lessonCodes);
     }
 
