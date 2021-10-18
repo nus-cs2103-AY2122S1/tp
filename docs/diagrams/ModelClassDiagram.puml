@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyAcademyDirectory <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class AcademyDirectory
+Class ReadOnlyAcademyDirectory
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -18,39 +18,41 @@ Class ReadOnlyUserPrefs
 
 Class UniqueStudentList
 Class Student
-Class Address
+Class StudioRecord
 Class Email
 Class Telegram
 Class Name
 Class Phone
 Class Tag
+Class Assessment
 
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AcademyDirectory .up.|> ReadOnlyAcademyDirectory
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyAcademyDirectory
+ModelManager -left-> "1" AcademyDirectory
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueStudentList
+AcademyDirectory *--> "1" UniqueStudentList
 UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Telegram
-Student *--> Address
+Student *--> StudioRecord
+Student *--> Assessment
 Student *--> "*" Tag
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> StudioRecord
+StudioRecord -[hidden]right-> Email
 Email -[hidden]right-> Telegram
 
 ModelManager -->"~* filtered" Student

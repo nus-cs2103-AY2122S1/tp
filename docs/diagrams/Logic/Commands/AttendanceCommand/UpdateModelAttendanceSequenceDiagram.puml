@@ -1,0 +1,40 @@
+@startuml
+!include ../../../style.puml
+
+Participant ":AttendanceCommand" as ac LOGIC_COLOR
+Participant ":StudioRecord" as sr LOGIC_COLOR
+Participant ":Student" as st LOGIC_COLOR
+Participant ":Student" as est LOGIC_COLOR
+Participant ":ModelManager" as mm LOGIC_COLOR
+Participant ":AcademyDirectory" as ad LOGIC_COLOR
+Participant ":UniqueStudentList" as usl LOGIC_COLOR
+
+activate ac
+create sr
+ac -> sr ++ : StudioRecord(attendanceToEdit, participation)
+sr --> ac -- : newStudioRecord
+ac -> st ++ : getName
+st --> ac -- : name
+ac -> st ++ : getPhone
+st --> ac -- : phone
+ac -> st ++ : getEmail
+st --> ac -- : email
+ac -> st ++ : getTelegram
+st --> ac -- : telegram
+ac -> st ++ : getAssessment
+st --> ac -- : assessment
+ac -> st ++ : getTags
+st --> ac -- : tags
+
+create est
+ac -> est ++ :  Student(name, phone, email, telegram, newStudioRecord, assessment, tags)
+est --> ac -- : editedStudent
+
+ac -> mm ++ : setStudent(studentToEdit, editedStudent)
+mm -> ad ++ : setStudent(studentToEdit, editedStudent)
+ad -> usl ++ : setStudent(studentToEdit, editedStudent)
+usl --> ad --
+ad --> mm --
+mm --> ac --
+
+@enduml
