@@ -12,12 +12,14 @@ import dash.logic.commands.SwitchTabHelpCommand;
 import dash.logic.commands.SwitchTabTasksCommand;
 import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.commands.taskcommand.ClearTaskCommand;
+import dash.logic.commands.taskcommand.CompleteTaskCommand;
 import dash.logic.commands.taskcommand.DeleteTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
 import dash.logic.commands.taskcommand.ListTaskCommand;
 import dash.logic.parser.exceptions.ParseException;
 import dash.logic.parser.taskcommand.AddTaskCommandParser;
+import dash.logic.parser.taskcommand.CompleteTaskCommandParser;
 import dash.logic.parser.taskcommand.DeleteTaskCommandParser;
 import dash.logic.parser.taskcommand.EditTaskCommandParser;
 import dash.logic.parser.taskcommand.FindTaskCommandParser;
@@ -72,6 +74,9 @@ public class TaskTabParser {
         case ClearTaskCommand.COMMAND_WORD:
             return new ClearTaskCommand();
 
+        case CompleteTaskCommand.COMMAND_WORD:
+            return new CompleteTaskCommandParser().parse(arguments);
+
         case SwitchTabContactsCommand.COMMAND_WORD:
             return new SwitchTabContactsCommand(1);
 
@@ -85,5 +90,4 @@ public class TaskTabParser {
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
