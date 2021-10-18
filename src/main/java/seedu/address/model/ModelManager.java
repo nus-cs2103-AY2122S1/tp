@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredModuleLessons = new FilteredList<>(this.addressBook.getModuleClassList());
+        filteredModuleLessons = new FilteredList<>(this.addressBook.getModuleLessonList());
     }
 
     public ModelManager() {
@@ -111,8 +111,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteClass(ModuleLesson moduleLesson) {
-        addressBook.removeClass(moduleLesson);
+    public void deleteLesson(ModuleLesson moduleLesson) {
+        addressBook.removeLesson(moduleLesson);
     }
 
     @Override
@@ -122,9 +122,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addClass(ModuleLesson moduleLesson) {
-        addressBook.addClass(moduleLesson);
-        updateFilteredModuleClassList(PREDICATE_SHOW_ALL_CLASSES);
+    public void addLesson(ModuleLesson moduleLesson) {
+        addressBook.addLesson(moduleLesson);
+        updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -135,10 +135,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setModuleClass(ModuleLesson target, ModuleLesson editedClass) {
-        requireAllNonNull(target, editedClass);
+    public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
 
-        addressBook.setModuleClass(target, editedClass);
+        addressBook.setModuleLesson(target, editedLesson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -159,12 +159,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<ModuleLesson> getFilteredModuleClassList() {
+    public ObservableList<ModuleLesson> getFilteredModuleLessonList() {
         return filteredModuleLessons;
     }
 
     @Override
-    public void updateFilteredModuleClassList(Predicate<ModuleLesson> predicate) {
+    public void updateFilteredModuleLessonList(Predicate<ModuleLesson> predicate) {
         requireNonNull(predicate);
         filteredModuleLessons.setPredicate(predicate);
     }

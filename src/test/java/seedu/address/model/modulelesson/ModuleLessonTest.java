@@ -16,17 +16,17 @@ public class ModuleLessonTest {
 
     @Test
     public void isSameModuleClass() {
-        assertTrue(CS2100_LAB1.isSameModuleClass(CS2100_LAB1));
+        assertTrue(CS2100_LAB1.isSameModuleLesson(CS2100_LAB1));
 
-        assertFalse(CS2100_TUT1.isSameModuleClass(null));
+        assertFalse(CS2100_TUT1.isSameModuleLesson(null));
 
         // same module code, all other attributes same -> return true
         ModuleLesson editedCS2100Lab = new ModuleClassBuilder(CS2100_LAB1).withRemark("hello").build();
-        assertTrue(CS2100_LAB1.isSameModuleClass(editedCS2100Lab));
+        assertTrue(CS2100_LAB1.isSameModuleLesson(editedCS2100Lab));
 
         // name differs in case, all other attributes same -> returns false
         editedCS2100Lab = new ModuleClassBuilder(CS2100_LAB1).withModuleCode("cs2100").build();
-        assertFalse(CS2100_LAB1.isSameModuleClass(editedCS2100Lab));
+        assertFalse(CS2100_LAB1.isSameModuleLesson(editedCS2100Lab));
     }
 
     @Test

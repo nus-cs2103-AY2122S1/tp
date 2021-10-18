@@ -22,7 +22,7 @@ import seedu.address.model.person.Remark;
  */
 public class JsonAdaptedModuleClass {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module Class's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module Lesson's %s field is missing!";
 
     private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
     private final String day;

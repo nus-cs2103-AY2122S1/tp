@@ -116,7 +116,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<ModuleLesson> getModuleClassList() {
+        public ObservableList<ModuleLesson> getModuleLessonList() {
             return classes;
         }
     }

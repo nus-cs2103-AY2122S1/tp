@@ -43,7 +43,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        classes.addAll(source.getModuleClassList().stream().map(JsonAdaptedModuleClass::new)
+        classes.addAll(source.getModuleLessonList().stream().map(JsonAdaptedModuleClass::new)
                 .collect(Collectors.toList()));
     }
 
@@ -64,10 +64,10 @@ class JsonSerializableAddressBook {
 
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
             ModuleLesson moduleLesson = jsonAdaptedModuleClass.toModelType();
-            if (addressBook.hasClass(moduleLesson)) {
+            if (addressBook.hasLesson(moduleLesson)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLASS);
             }
-            addressBook.addClass(moduleLesson);
+            addressBook.addLesson(moduleLesson);
         }
         return addressBook;
     }

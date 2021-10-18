@@ -11,7 +11,7 @@ import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
 /**
- * Represents a ModuleClass in the address book.
+ * Represents a ModuleLesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class ModuleLesson {
@@ -56,10 +56,10 @@ public class ModuleLesson {
     }
 
     /**
-     * Returns true if both classes have the same module code, day and lessonTime.
-     * This defines a weaker notion of equality between two classes.
+     * Returns true if both lessons have the same module code, day and lessonTime.
+     * This defines a weaker notion of equality between two lessons.
      */
-    public boolean isSameModuleClass(ModuleLesson otherModuleLesson) {
+    public boolean isSameModuleLesson(ModuleLesson otherModuleLesson) {
         if (otherModuleLesson == this) {
             return true;
         }
@@ -71,8 +71,8 @@ public class ModuleLesson {
     }
 
     /**
-     * Returns true if both classes have the same identity and data fields.
-     * This defines a stronger notion of equality between two moduleClasses.
+     * Returns true if both lessons have the same identity and data fields.
+     * This defines a stronger notion of equality between two moduleLessons.
      */
     @Override
     public boolean equals(Object other) {

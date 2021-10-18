@@ -14,7 +14,7 @@ public class LessonTime {
     private final LocalTime value;
 
     /**
-     * Represents a moduleClass's time in the address book.
+     * Represents a moduleLesson's time in the address book.
      * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
      */
     public LessonTime(String time) {

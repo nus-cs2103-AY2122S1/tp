@@ -60,7 +60,7 @@ public class SampleDataUtil {
         }
 
         for (ModuleLesson sampleModuleLesson : getSampleModuleClasses()) {
-            sampleAb.addClass(sampleModuleLesson);
+            sampleAb.addLesson(sampleModuleLesson);
         }
         return sampleAb;
     }

@@ -19,6 +19,6 @@ public interface ReadOnlyAddressBook {
      * Returns an unmodifiable view of the moduleClass list.
      * This list will not contain any duplicate classes.
      */
-    ObservableList<ModuleLesson> getModuleClassList();
+    ObservableList<ModuleLesson> getModuleLessonList();
 
 }

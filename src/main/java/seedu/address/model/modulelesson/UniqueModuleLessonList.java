@@ -8,67 +8,67 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.modulelesson.exceptions.DuplicateModuleClassException;
-import seedu.address.model.modulelesson.exceptions.ModuleClassNotFoundException;
+import seedu.address.model.modulelesson.exceptions.DuplicateModuleLessonException;
+import seedu.address.model.modulelesson.exceptions.ModuleLessonNotFoundException;
 
-public class UniqueModuleClassList implements Iterable<ModuleLesson> {
+public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
 
     private final ObservableList<ModuleLesson> internalList = FXCollections.observableArrayList();
     private final ObservableList<ModuleLesson> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent module class as the given argument.
+     * Returns true if the list contains an equivalent module lesson as the given argument.
      */
     public boolean contains(ModuleLesson toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameModuleClass);
+        return internalList.stream().anyMatch(toCheck::isSameModuleLesson);
     }
 
     /**
-     * Adds a class to the list.
-     * The class must not already exist in the list.
+     * Adds a lesson to the list.
+     * The lesson must not already exist in the list.
      */
     public void add(ModuleLesson toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateModuleClassException();
+            throw new DuplicateModuleLessonException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Removes the equivalent class from the list.
-     * The class must exist in the list.
+     * Removes the equivalent lesson from the list.
+     * The lesson must exist in the list.
      */
     public void remove(ModuleLesson toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new ModuleClassNotFoundException();
+            throw new ModuleLessonNotFoundException();
         }
     }
 
     /**
-     * Replaces the class {@code target} in the list with {@code editedClass}.
+     * Replaces the lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the list.
-     * The class identity of {@code editedClass} must not be the same as another existing class in the list.
+     * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the list.
      */
-    public void setModuleClass(ModuleLesson target, ModuleLesson editedClass) {
-        requireAllNonNull(target, editedClass);
+    public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ModuleClassNotFoundException();
+            throw new ModuleLessonNotFoundException();
         }
 
-        if (!target.isSameModuleClass(editedClass) && contains(editedClass)) {
-            throw new DuplicateModuleClassException();
+        if (!target.isSameModuleLesson(editedLesson) && contains(editedLesson)) {
+            throw new DuplicateModuleLessonException();
         }
 
-        internalList.set(index, editedClass);
+        internalList.set(index, editedLesson);
     }
 
-    public void setModuleClasses(UniqueModuleClassList replacement) {
+    public void setModuleLessons(UniqueModuleLessonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -77,10 +77,10 @@ public class UniqueModuleClassList implements Iterable<ModuleLesson> {
      * Replaces the contents of this list with {@code moduleLessons}.
      * {@code moduleLessons} must not contain duplicate module lessons.
      */
-    public void setModuleClasses(List<ModuleLesson> moduleLessons) {
+    public void setModuleLessons(List<ModuleLesson> moduleLessons) {
         requireAllNonNull(moduleLessons);
-        if (!moduleClassesAreUnique(moduleLessons)) {
-            throw new DuplicateModuleClassException();
+        if (!moduleLessonsAreUnique(moduleLessons)) {
+            throw new DuplicateModuleLessonException();
         }
 
         internalList.setAll(moduleLessons);
@@ -101,8 +101,8 @@ public class UniqueModuleClassList implements Iterable<ModuleLesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueModuleClassList // instanceof handles nulls
-                && internalList.equals(((UniqueModuleClassList) other).internalList));
+                || (other instanceof UniqueModuleLessonList // instanceof handles nulls
+                && internalList.equals(((UniqueModuleLessonList) other).internalList));
     }
 
     @Override
@@ -111,12 +111,12 @@ public class UniqueModuleClassList implements Iterable<ModuleLesson> {
     }
 
     /**
-     * Returns true if {@code moduleLessons} contains only unique classes.
+     * Returns true if {@code moduleLessons} contains only unique lessons.
      */
-    private boolean moduleClassesAreUnique(List<ModuleLesson> moduleLessons) {
+    private boolean moduleLessonsAreUnique(List<ModuleLesson> moduleLessons) {
         for (int i = 0; i < moduleLessons.size() - 1; i++) {
             for (int j = i + 1; j < moduleLessons.size(); j++) {
-                if (moduleLessons.get(i).isSameModuleClass(moduleLessons.get(j))) {
+                if (moduleLessons.get(i).isSameModuleLesson(moduleLessons.get(j))) {
                     return false;
                 }
             }

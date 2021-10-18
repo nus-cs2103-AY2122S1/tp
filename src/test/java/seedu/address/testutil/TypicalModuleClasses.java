@@ -39,7 +39,7 @@ public class TypicalModuleClasses {
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (ModuleLesson moduleLesson : getTypicalModuleClasses()) {
-            ab.addClass(moduleLesson);
+            ab.addLesson(moduleLesson);
         }
         return ab;
     }
