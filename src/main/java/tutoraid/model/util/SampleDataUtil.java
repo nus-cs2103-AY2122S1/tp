@@ -66,7 +66,7 @@ public class SampleDataUtil {
         ArrayList<Student> sampleStudentInLesson = new ArrayList<>();
         Student sampleStudent = new Student(new StudentName("Alex Yeoh"), new Phone("87438807"),
                 new ParentName("Mr Yeoh"), new Phone("93726483"),
-                DEFAULT_PROGRESS, DEFAULT_PAYMENT_STATUS);
+                new ProgressList(), DEFAULT_PAYMENT_STATUS);
         sampleStudentInLesson.add(sampleStudent);
 
         return new Lesson[] {

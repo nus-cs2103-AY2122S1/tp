@@ -128,7 +128,6 @@ public class ProgressList {
 
     @Override
     public boolean equals(Object other) {
-        System.out.println(this.progressList.equals(((ProgressList) other).progressList));
         return other == this // short circuit if same object
                 || (other instanceof ProgressList // instanceof handles nulls
                 && this.progressList.equals(((ProgressList) other).progressList)); // state check

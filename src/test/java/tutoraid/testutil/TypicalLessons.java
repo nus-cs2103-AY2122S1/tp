@@ -17,6 +17,7 @@ import java.util.List;
 
 import tutoraid.model.LessonBook;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 /**
@@ -29,7 +30,7 @@ public class TypicalLessons {
             .withStudentPhone("94351234")
             .withParentName("Mrs Tan")
             .withParentPhone("94351253")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
 
