@@ -25,11 +25,13 @@ public class TutorialGroupTest {
         assertThrows(NullPointerException.class, () -> TutorialGroup.isValidTutorialGroup(null));
 
         // invalid tutorial group
-        assertFalse(TutorialGroup.isValidTutorialGroup("B")); // contains character
+        assertFalse(TutorialGroup.isValidTutorialGroup("B")); // one character only
+        assertFalse(TutorialGroup.isValidTutorialGroup("09")); // two digits only
+        assertFalse(TutorialGroup.isValidTutorialGroup("T124")); // length exceeds maximum
+        assertFalse(TutorialGroup.isValidTutorialGroup("t09")); // lowercase character
 
         // valid tutorial group
-        assertTrue(TutorialGroup.isValidTutorialGroup("09")); // more than one digit
-        assertTrue(TutorialGroup.isValidTutorialGroup("9")); // one digit
-        assertTrue(TutorialGroup.isValidTutorialGroup("")); // empty string
+        assertTrue(TutorialGroup.isValidTutorialGroup("T09")); // any uppercase character and two digits
+        assertTrue(TutorialGroup.isValidTutorialGroup("W20")); // any uppercase character and two digits
     }
 }

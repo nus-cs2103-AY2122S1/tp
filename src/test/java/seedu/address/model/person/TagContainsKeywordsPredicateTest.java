@@ -70,7 +70,7 @@ public class TagContainsKeywordsPredicateTest {
         // Keywords match phone, email and nationality, but does not match name
         predicate = new TagContainsKeywordsPredicate(Arrays.asList("Yes", "No", "Maybe"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("19")
+                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("T19")
                 .withTags("Meh").build()));
     }
 }

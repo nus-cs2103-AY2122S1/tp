@@ -34,7 +34,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_NATIONALITY = BENSON.getNationality().toString();
-    private static final String VALID_TUTORIAL_GROUP = "09";
+    private static final String VALID_TUTORIAL_GROUP = "T09";
     private static final String VALID_SOCIAL_HANDLE = "@benson";
     private static final String VALID_REMARK = BENSON.getRemark().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
