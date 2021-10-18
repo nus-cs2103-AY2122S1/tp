@@ -36,6 +36,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedUniqueId> assignedTaskIds = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessonsList = new ArrayList<>();
+    private final List<JsonAdaptedExam> exams = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +46,8 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("assignedTaskIds") List<JsonAdaptedUniqueId> assignedTaskIds,
-            @JsonProperty("lessonsList") List<JsonAdaptedLesson> lessonsList) {
+            @JsonProperty("lessonsList") List<JsonAdaptedLesson> lessonsList,
+            @JsonProperty("exams") List<JsonAdaptedExam> exams) {
         this.uniqueId = uniqueId;
         this.name = name;
         this.phone = phone;
@@ -59,6 +61,9 @@ class JsonAdaptedPerson {
         }
         if (lessonsList != null) {
             this.lessonsList.addAll(lessonsList);
+        }
+        if (exams != null) {
+            this.exams.addAll(exams);
         }
     }
 
@@ -79,6 +84,8 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         lessonsList.addAll(source.getLessonsList().getLessons().stream()
                 .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
+        exams.addAll(source.getExams().stream().map(JsonAdaptedExam::new)
                 .collect(Collectors.toList()));
     }
 
@@ -150,11 +157,13 @@ class JsonAdaptedPerson {
         }
         final UniqueId modelUniqueId = UniqueId.generateId(uniqueId);
 
-        // TODO actually store exams in storage
-        List<Exam> exams = new ArrayList<>();
+        final List<Exam> modelExams = new ArrayList<>();
+        for (JsonAdaptedExam e : exams) {
+            modelExams.add(e.toModelType());
+        }
 
         return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, exams);
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams);
     }
 
 }

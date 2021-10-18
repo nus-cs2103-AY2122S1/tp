@@ -14,7 +14,7 @@ import seedu.address.model.lesson.Subject;
  */
 public class Exam implements Comparable<Exam> {
 
-    private static final DateTimeFormatter examDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-DD HH:mm");
+    private static final DateTimeFormatter examDateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final Subject subject;
     private final LocalDateTime dateTime;
@@ -28,6 +28,14 @@ public class Exam implements Comparable<Exam> {
         requireAllNonNull(subject, dateTime);
         this.subject = subject;
         this.dateTime = dateTime;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     @Override
