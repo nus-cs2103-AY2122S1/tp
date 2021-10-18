@@ -201,6 +201,7 @@ public class Student {
             builder.append("; Remark(s): ");
             remarks.forEach(t -> builder.append(t).append(" "));
         }
+        builder.setLength(builder.length() - 1);
         if (!lessonCodesAndPrices.isEmpty()) {
             builder.append("; Lesson(s): ");
             lessonCodesAndPrices.keySet().forEach(l -> builder.append(l).append(" "));
