@@ -27,9 +27,9 @@ import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.InventoryBuilder;
+import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;
-import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class ModelManagerTest {
 
