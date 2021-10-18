@@ -52,7 +52,7 @@ public interface Model {
     /**
      * Adds imported data from {@code addressBook} to the current address book data.
      */
-    void importAddressBook(ReadOnlyAddressBook addressBook);
+    int importAddressBook(ReadOnlyAddressBook addressBook);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
