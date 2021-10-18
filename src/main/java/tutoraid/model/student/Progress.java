@@ -8,11 +8,17 @@ import static java.util.Objects.requireNonNull;
 public class Progress {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Progress can be anything";
+            "Progress should only contain alphanumeric characters and spaces, and it should not be blank";
 
     public static final String EMPTY_PROGRESS_DESCRIPTION = "No Progress";
 
     private static final Progress EMPTY_PROGRESS = new Progress(EMPTY_PROGRESS_DESCRIPTION);
+
+    /*
+     * The first character of the progress must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String progress;
 
@@ -32,7 +38,7 @@ public class Progress {
      * @return true if the string is not empty, false otherwise
      */
     public static boolean isValidProgress(String test) {
-        return !test.trim().equals("");
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
