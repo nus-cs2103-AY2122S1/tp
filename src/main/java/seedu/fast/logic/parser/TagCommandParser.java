@@ -10,9 +10,7 @@ import java.util.Set;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.exceptions.IllegalValueException;
-
 import seedu.fast.logic.commands.TagCommand;
-
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.tag.Tag;
 

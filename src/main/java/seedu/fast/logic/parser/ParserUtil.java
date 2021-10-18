@@ -308,6 +308,11 @@ public class ParserUtil {
         return venue;
     }
 
+    /**
+     * Parses {@code String tagName} and returns the corresponding investment plan tag name.
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
+     */
     public static String parseInvestmentPlanTag(String tagName) {
         switch (tagName) {
         case InvestmentPlanTag.LifeInsurance.COMMAND:
