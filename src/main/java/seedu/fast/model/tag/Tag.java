@@ -42,7 +42,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX) && isValidLength(test);
+        return test.matches(VALIDATION_REGEX) && isValidTagLength(test);
     }
 
     /**
@@ -50,13 +50,13 @@ public class Tag {
      */
     public static boolean isValidTagTerm(String test) {
         return (test.matches(VALIDATION_REGEX) || test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX))
-                && isValidLength(test);
+                && isValidTagLength(test);
     }
 
     /**
      * Returns true if a given string has a valid length.
      */
-    public static boolean isValidLength(String test) {
+    public static boolean isValidTagLength(String test) {
         return test.length() < TagUtil.MAX_LENGTH;
     }
 
