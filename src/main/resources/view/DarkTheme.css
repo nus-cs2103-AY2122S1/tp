@@ -36,7 +36,7 @@
 .chart-pie-label {
     -fx-fill: white;
     -fx-font-family: "Open Sans Light";
-    -fx-font-size: 12pt;
+    -fx-font-size: 10pt;
 }
 
 .default-color0.chart-pie { -fx-pie-color: red; }

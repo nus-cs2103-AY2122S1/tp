@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
@@ -44,6 +45,8 @@ public class StatsWindow extends UiPart<Stage> {
         // Since StatsWindow receives a Fast instance, it is safe to typecast it
         this.fast = (Fast) fast;
         populatePriorityPieChart();
+        labelPriorityPieChart();
+        priorityPieChart.setLegendVisible(false);
     }
 
 
@@ -115,6 +118,22 @@ public class StatsWindow extends UiPart<Stage> {
             PieChart.Data lowData = new PieChart.Data(PriorityTag.LowPriority.NAME, lowPriorityCount);
             priorityPieChart.getData().add(lowData);
         }
+    }
+
+    /**
+     * Adds the counts to the labels of the PieChart.
+     * Adapted from: https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart
+     * Credit: jewelsea
+     */
+    public void labelPriorityPieChart() {
+        priorityPieChart.getData().forEach(data ->
+            data.nameProperty().bind(
+                Bindings.concat(
+                    data.getName(), ":\n", (int) data.getPieValue(),
+                    (data.getPieValue() == 1) ? " person" : " people" // check plural or singular
+                )
+            )
+        );
     }
 
     /**
