@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalFolders.CCA;
+import static seedu.address.testutil.TypicalFolders.CS2103;
+import static seedu.address.testutil.TypicalFolders.EXCLUDED_FOLDER;
+import static seedu.address.testutil.TypicalFolders.getTypicalAddressBookWithFolders;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.CCA;
-import static seedu.address.testutil.TypicalPersons.CS2103;
-import static seedu.address.testutil.TypicalPersons.EXCLUDED_FOLDER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithFolders;
 
 import java.util.Arrays;
 import java.util.Collection;
