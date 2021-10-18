@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.moduleclass.Day;
-import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.Time;
+import seedu.address.model.modulelesson.Day;
+import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;

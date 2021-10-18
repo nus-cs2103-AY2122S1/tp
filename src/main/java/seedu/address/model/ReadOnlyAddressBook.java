@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleClass;
 import seedu.address.model.person.Person;
 
 /**

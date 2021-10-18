@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.moduleclass.Day;
-import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.Time;
+import seedu.address.model.modulelesson.Day;
+import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.Time;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 

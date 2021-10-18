@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleClass;
 
 public class ModuleClassListPanel extends UiPart<Region> {
     private static final String FXML = "ModuleClassListPanel.fxml";

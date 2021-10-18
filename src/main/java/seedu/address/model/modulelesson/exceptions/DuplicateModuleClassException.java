@@ -1,4 +1,4 @@
-package seedu.address.model.moduleclass.exceptions;
+package seedu.address.model.modulelesson.exceptions;
 
 public class DuplicateModuleClassException extends RuntimeException {
     /**

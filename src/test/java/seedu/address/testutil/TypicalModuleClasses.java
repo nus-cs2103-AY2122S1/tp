@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleClass;
 
 /**
  * A utility class containing a list of {@code ModuleClass} objects to be used in tests.

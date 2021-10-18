@@ -1,4 +1,4 @@
-package seedu.address.model.moduleclass;
+package seedu.address.model.modulelesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,8 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
-import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import seedu.address.model.modulelesson.exceptions.DuplicateModuleClassException;
+import seedu.address.model.modulelesson.exceptions.ModuleClassNotFoundException;
 import seedu.address.testutil.ModuleClassBuilder;
 
 public class UniqueModuleClassListTest {

@@ -1,4 +1,4 @@
-package seedu.address.model.moduleclass;
+package seedu.address.model.modulelesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
-import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import seedu.address.model.modulelesson.exceptions.DuplicateModuleClassException;
+import seedu.address.model.modulelesson.exceptions.ModuleClassNotFoundException;
 
 public class UniqueModuleClassList implements Iterable<ModuleClass> {
 

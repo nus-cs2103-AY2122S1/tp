@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.UniqueModuleClassList;
+import seedu.address.model.modulelesson.ModuleClass;
+import seedu.address.model.modulelesson.UniqueModuleClassList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
