@@ -131,6 +131,17 @@ public class AddressBookTest {
         assertTrue(addressBook.hasFolder(ccaDuplicate));
     }
 
+    @Test
+    public void withFolders_success() {
+        addressBook.addFolder(CS2103);
+        Model model = new ModelManager(addressBook, new UserPrefs());
+        Model actualModel = new ModelManager(AddressBook.withFolders(model), new UserPrefs());
+        AddressBook addressBookWithFolder = new AddressBook();
+        addressBookWithFolder.addFolder(CS2103);
+        Model expectedModel = new ModelManager(addressBookWithFolder, new UserPrefs());
+        assertEquals(actualModel, expectedModel);
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons and folders list can violate interface constraints.
      */
