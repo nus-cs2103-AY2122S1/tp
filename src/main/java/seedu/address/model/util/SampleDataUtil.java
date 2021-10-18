@@ -44,7 +44,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ModuleLesson[] getSampleModuleClasses() {
+    public static ModuleLesson[] getSampleModuleLessons() {
         return new ModuleLesson[] {
             new ModuleLesson(getModuleCodeSet("CS2040 T05"), new LessonDay("2"),
                     new LessonTime("10:00"), new Remark("COM1-113")),
@@ -63,7 +63,7 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
 
-        for (ModuleLesson sampleModuleLesson : getSampleModuleClasses()) {
+        for (ModuleLesson sampleModuleLesson : getSampleModuleLessons()) {
             sampleAb.addLesson(sampleModuleLesson);
         }
         return sampleAb;
