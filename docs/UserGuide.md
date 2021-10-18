@@ -42,6 +42,26 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 
 ## Features
 
+1. Profiles <br/>
+   1.1. Create your own profile <br/>
+   1.2. Edit your profile <br/>
+   1.3. View more details of a profile <br/>
+2. Manage your favourites <br/>
+   2.1. Add another profile as a favourite <br/>
+   2.2. Remove a profile from favourites <br/>
+3. Viewing options <br/>
+   3.1. List all profiles <br/>
+   3.2. List all favourited profiles <br/>
+   3.3. Find profiles by name <br/>
+   3.4. Find profiles by Student ID <br/>
+   3.5. Filter profiles by module <br/>
+   3.6. Filter profiles by group status <br/>
+4. Customising Module tags <br/>
+   4.1. Add module tags to your profile <br/>
+   4.2. Edit existing module tags on your profile <br/>
+   4.3. Remove module tags from your profile <br/>
+
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
