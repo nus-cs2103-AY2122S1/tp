@@ -139,13 +139,13 @@ public class StringUtilTest {
     @Test
     public void containsTextIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Text parameter cannot be empty", ()
-                -> StringUtil.containsTextIgnoreCase("typical sentence", "  "));
+            -> StringUtil.containsTextIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsTextIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Text parameter should be a single word", ()
-                -> StringUtil.containsTextIgnoreCase("typical sentence", "aaa BBB"));
+            -> StringUtil.containsTextIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test

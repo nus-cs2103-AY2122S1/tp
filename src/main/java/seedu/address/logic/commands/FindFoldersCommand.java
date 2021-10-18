@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderNameContainsKeywordsPredicate;
 
 /**
@@ -29,8 +31,10 @@ public class FindFoldersCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFolderList(predicate);
+        ObservableList<Folder> filteredFolders = model.getFilteredFolderList();
+        assert filteredFolders != null : "filteredFolders should not be null";
         return new CommandResult(
-                String.format(Messages.MESSAGE_FOLDERS_LISTED_OVERVIEW, model.getFilteredFolderList().size()));
+                String.format(Messages.MESSAGE_FOLDERS_LISTED_OVERVIEW, filteredFolders.size()));
     }
 
     @Override
