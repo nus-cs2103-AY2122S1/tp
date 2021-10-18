@@ -3,17 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.item.ItemDescriptor;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -27,35 +21,34 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
 
-        if ((!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_ID))
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        Name name = arePrefixesPresent(argMultimap, PREFIX_NAME)
-                ? ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get())
-                : new Name("dummy name");
-        String id = arePrefixesPresent(argMultimap, PREFIX_ID)
-                ? ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get())
-                : "999999";
-        Integer count = arePrefixesPresent(argMultimap, PREFIX_COUNT)
-                ? ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get())
-                : 1;
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        ItemDescriptor toAddDescriptor = new ItemDescriptor();
 
-        Item item = new Item(name, id, count, tagList);
+        // Parse name
+        if (!argMultimap.getPreamble().isEmpty()) {
+            toAddDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
+        }
+        // Parse Id
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            toAddDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
+        }
+        // Parse count
+        if (argMultimap.getValue(PREFIX_COUNT).isPresent()) {
+            toAddDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
+        } else {
+            toAddDescriptor.setCount(1);
+        }
+        // Parse tags
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            toAddDescriptor.setTags(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
+        }
 
-        return new AddCommand(item);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return new AddCommand(toAddDescriptor);
     }
 
 }

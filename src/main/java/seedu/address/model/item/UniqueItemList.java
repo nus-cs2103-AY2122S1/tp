@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,6 +54,16 @@ public class UniqueItemList implements Iterable<Item> {
     public boolean contains(String id) {
         requireNonNull(id);
         return internalList.stream().anyMatch(item -> id.equals(item.getId()));
+    }
+
+    /**
+     * Returns true if the list contains an item that matches the given {@code ItemDescriptor}
+     */
+    public List<Item> get(ItemDescriptor descriptor) {
+        requireNonNull(descriptor);
+        return internalList.stream()
+                .filter(descriptor::isMatch)
+                .collect(Collectors.toList());
     }
 
     /**

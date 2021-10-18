@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -14,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
 
 /**
@@ -112,6 +114,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Item> getItems(ItemDescriptor descriptor) {
+        requireNonNull(descriptor);
+        return inventory.getItems(descriptor);
+    }
+
+    @Override
     public Item deleteItem(Name name, int count) {
         return inventory.removeItem(name, count);
     }
@@ -132,6 +140,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedItem);
 
         inventory.setItem(target, editedItem);
+    }
+
+    @Override
+    public void restockItem(Item target, int amount) {
+        requireNonNull(target);
+        inventory.restockItem(target, amount);
     }
 
     @Override
