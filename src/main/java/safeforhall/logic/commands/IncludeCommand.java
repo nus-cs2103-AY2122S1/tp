@@ -3,12 +3,13 @@ package safeforhall.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 
@@ -21,24 +22,24 @@ public class IncludeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds resident to the given event. "
             + "Parameters: "
-            + CliSyntax.PREFIX_EVENT + "EVENT "
-            + CliSyntax.PREFIX_INFORMATION + "INFORMATION \n"
+            + CliSyntax.PREFIX_INDEX + "INDEX "
+            + CliSyntax.PREFIX_RESIDENTS + "INFORMATION \n"
 
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_EVENT + "basketball training "
-            + CliSyntax.PREFIX_INFORMATION + "A101, A102, A103";
+            + CliSyntax.PREFIX_INDEX + "1 "
+            + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
     public static final String MESSAGE_SUCCESS = "Residents ( %s ) added to event %s";
-    private final EventName eventName;
+    private final Index index;
     private final ResidentList residentList;
 
     /**
      * Creates an IncludeCommand to add the specified {@code EventName} and {@code InformationList}
      */
-    public IncludeCommand(EventName eventName, ResidentList residentList) {
-        requireNonNull(eventName);
+    public IncludeCommand(Index index, ResidentList residentList) {
+        requireNonNull(index);
         requireNonNull(residentList);
-        this.eventName = eventName;
+        this.index = index;
         this.residentList = residentList;
     }
 
@@ -69,9 +70,10 @@ public class IncludeCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Event> lastShownList = model.getFilteredEventList();
+        Event event = lastShownList.get(index.getZeroBased());
 
         ArrayList<Person> toAdd = model.toPersonList(residentList);
-        Event event = model.getEvent(eventName);
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
 
         checkForDuplicates(toAdd, currentResidents);
@@ -83,7 +85,7 @@ public class IncludeCommand extends Command {
 
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
         String resultMsg = String.format(MESSAGE_SUCCESS, toAdd.stream()
-                .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(), eventName);
+                .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(), event.getEventName());
         return new CommandResult(resultMsg);
     }
 
@@ -91,6 +93,6 @@ public class IncludeCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IncludeCommand // instanceof handles nulls
-                && eventName.equals(((IncludeCommand) other).eventName));
+                && index.equals(((IncludeCommand) other).index));
     }
 }

@@ -28,7 +28,6 @@ import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
@@ -121,9 +120,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_include() throws Exception {
         IncludeCommand command = (IncludeCommand) parser.parseCommand(
-                IncludeCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_EVENT
-                        + "weightlifting " + CliSyntax.PREFIX_INFORMATION + "a213", false);
-        assertEquals(command, new IncludeCommand(new EventName("weightlifting"), new ResidentList("a213")));
+                IncludeCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_INDEX
+                        + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
+        assertEquals(command, new IncludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
     }
 
     @Test

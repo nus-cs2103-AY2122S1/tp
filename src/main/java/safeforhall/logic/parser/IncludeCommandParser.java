@@ -1,14 +1,14 @@
 package safeforhall.logic.parser;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_EVENT;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_INFORMATION;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_INDEX;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_RESIDENTS;
 
 import java.util.stream.Stream;
 
+import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 
 /**
@@ -23,18 +23,18 @@ public class IncludeCommandParser implements Parser<IncludeCommand> {
      */
     public IncludeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_EVENT, PREFIX_INFORMATION);
+                ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_RESIDENTS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_EVENT, PREFIX_INFORMATION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_RESIDENTS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, IncludeCommand.MESSAGE_USAGE));
         }
 
         // Required fields
-        EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT).get());
-        ResidentList list = ParserUtil.parseResidents(argMultimap.getValue(PREFIX_INFORMATION).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+        ResidentList list = ParserUtil.parseResidents(argMultimap.getValue(PREFIX_RESIDENTS).get());
 
-        return new IncludeCommand(eventName, list);
+        return new IncludeCommand(index, list);
     }
 
     /**

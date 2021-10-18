@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
 import safeforhall.model.UserPrefs;
-import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.TypicalEvents;
@@ -32,7 +32,7 @@ public class IncludeCommandTest {
         toAdd.add(BENSON);
         ArrayList<Person> current = new ArrayList<>();
         current.add(BENSON);
-        IncludeCommand command = new IncludeCommand(new EventName("training"), new ResidentList("Benson"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("Benson"));
         assertThrows(CommandException.class, () -> command.checkForDuplicates(toAdd, current));
     }
 
@@ -43,7 +43,7 @@ public class IncludeCommandTest {
                 .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"), new ResidentList("a105"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("a105"));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
@@ -55,7 +55,7 @@ public class IncludeCommandTest {
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"), new ResidentList("a104, a105"));
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1), new ResidentList("a104, a105"));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
     }
@@ -67,7 +67,7 @@ public class IncludeCommandTest {
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"),
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList("Daniel Meier"));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
@@ -80,7 +80,7 @@ public class IncludeCommandTest {
                         .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(),
                 TypicalEvents.BASKETBALL.getEventName()));
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"),
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList("Daniel Meier, Elle Meyer"));
         CommandResult result = command.execute(model);
         assertEquals(result, expectedMessage);
@@ -89,7 +89,7 @@ public class IncludeCommandTest {
     @Test
     public void addExistingRoomTest() {
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"),
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList("A102"));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
@@ -97,21 +97,21 @@ public class IncludeCommandTest {
     @Test
     public void addExistingNameTest() {
         model.addEvent(TypicalEvents.BASKETBALL);
-        IncludeCommand command = new IncludeCommand(new EventName("basketball"),
+        IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList("Carl Kurz"));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void equals() {
-        IncludeCommand firstCommand = new IncludeCommand(new EventName("training"), new ResidentList("Alex"));
-        IncludeCommand secondCommand = new IncludeCommand(new EventName("band"), new ResidentList("Bernice"));
+        IncludeCommand firstCommand = new IncludeCommand(Index.fromOneBased(1), new ResidentList("Alex"));
+        IncludeCommand secondCommand = new IncludeCommand(Index.fromOneBased(2), new ResidentList("Bernice"));
 
         // same object -> returns true
         assertTrue(firstCommand.equals(firstCommand));
 
         // same values -> returns true
-        IncludeCommand firstCommandCopy = new IncludeCommand(new EventName("training"), new ResidentList("Alex"));
+        IncludeCommand firstCommandCopy = new IncludeCommand(Index.fromOneBased(1), new ResidentList("Alex"));
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         // different types -> returns false
