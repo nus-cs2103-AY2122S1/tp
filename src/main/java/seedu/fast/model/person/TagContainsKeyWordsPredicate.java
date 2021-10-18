@@ -12,7 +12,7 @@ import seedu.fast.model.tag.Tag;
 public class TagContainsKeyWordsPredicate implements Predicate<Person> {
     public final List<String> tags;
 
-    public TagContainsKeyWordsPredicate(List<String> tags){
+    public TagContainsKeyWordsPredicate(List<String> tags) {
         this.tags = tags;
     }
 
@@ -25,8 +25,11 @@ public class TagContainsKeyWordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         Set<Tag> personsTags = person.getTags();
         for (String predicateTagName:tags) {
+            String predicateTagNameLowerCase = predicateTagName.toLowerCase();
             for (Tag personsTag:personsTags) {
-                if (personsTag.tagName.equals(predicateTagName)) {
+                String personsTagLowerCase = personsTag.tagName.toLowerCase();
+                // ignore case
+                if (personsTagLowerCase.equals(predicateTagNameLowerCase)) {
                     return true;
                 } else {
                     continue;

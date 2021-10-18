@@ -1,13 +1,7 @@
-package seedu.fast.model.person.exceptions;
+package seedu.fast.model.person;
 
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
-
-import seedu.fast.model.person.Person;
-import seedu.fast.model.person.Remark;
-import seedu.fast.model.person.TagContainsKeyWordsPredicate;
-import seedu.fast.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Remark} contains any of the queries given.
@@ -26,9 +20,11 @@ public class RemarkContainsKeyWordsPredicate implements Predicate<Person> {
      */
     @Override
     public boolean test(Person person) {
-        String personsRemark = person.getRemark().value;
+        String personsRemarkLowerCase = person.getRemark().value.toLowerCase();
         for (String query:queries) {
-            if (personsRemark.contains(query)){
+            String queryLowerCase = query.toLowerCase();
+            // ignore case
+            if (personsRemarkLowerCase.contains(queryLowerCase)) {
                 return true;
             }
         }

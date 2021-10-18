@@ -109,7 +109,6 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
         assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
@@ -121,6 +120,10 @@ public class StringUtilTest {
 
         // Matches multiple words in sentence
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+
+        // Can search for the start of a sentence word
+        assertTrue(StringUtil.containsWordIgnoreCase("aab abc cca", "ab"));
+        assertTrue(StringUtil.containsWordIgnoreCase("aab aBc cca", "Ab"));
     }
 
     //---------------- Tests for getDetails --------------------------------------

@@ -8,8 +8,8 @@ import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.NameContainsKeywordsPredicate;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.person.RemarkContainsKeyWordsPredicate;
 import seedu.fast.model.person.TagContainsKeyWordsPredicate;
-import seedu.fast.model.person.exceptions.RemarkContainsKeyWordsPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -46,6 +46,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.TAG_PREFIX.length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
+            for (String tag : tags) {
+                if (isBlank(tag)) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                }
+            }
             return new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList(tags)));
 
         } else if (trimmedArgs.startsWith(FindCommand.REMARK_PREFIX)) {
@@ -53,6 +59,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.REMARK_PREFIX.length());
             String[] queries = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
+            for (String query : queries) {
+                if (isBlank(query)) {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                }
+            }
             return new FindCommand(new RemarkContainsKeyWordsPredicate(Arrays.asList(queries)));
 
         } else {
@@ -66,6 +78,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         return PriorityTag.LowPriority.TERM.equals(tag)
                 || PriorityTag.MediumPriority.TERM.equals(tag)
                 || PriorityTag.HighPriority.TERM.equals(tag);
+    }
+
+    private static boolean isBlank(String string) {
+        return string.trim().equals("");
     }
 
 }

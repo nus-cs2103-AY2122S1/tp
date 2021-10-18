@@ -5,7 +5,6 @@ import static seedu.fast.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
@@ -37,7 +36,7 @@ public class StringUtil {
         for (String sentenceWord:wordsInPreppedSentence) {
             String sentenceWordLowerCase = sentenceWord.toLowerCase();
             String preppedWordLowerCase = preppedWord.toLowerCase();
-            //ignore case for search
+            //ignore case
             if (sentenceWordLowerCase.startsWith(preppedWordLowerCase)
                     || sentenceWord.equals(preppedWordLowerCase)) {
                 return true;
