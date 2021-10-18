@@ -45,7 +45,7 @@ Finding your next lead has never been easier.
 
     * **`list`** : Lists all contacts.
 
-    * **`create`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Creates a contact named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Creates a contact named `John Doe` to the Address Book.
 
     * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -126,28 +126,28 @@ Update the information of existing users by using the “edit” command. This c
 attributes of a client, using the tag of the client’s attribute.
 
 * Multiple attributes could be changed with one command.
+* Multiple client can be edited at the same time with the provided attributes by indicating multiple client ids.
 
-Format: `update {CLIENT'S ID} <attribute>/{CHANGED VALUE OF ATTRIBUTE} ...`
+Format: `edit {CLIENT'S ID}... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...`
 
 Examples:
 
-* `update 15 n/Dominic` command changes the name of client 15 to “Dominic”.
-* `update 3 p/12345678 r/5` command changes the contact number to “12345678” and
+* `edit 15 n/Dominic` command changes the name of client 15 to “Dominic”.
+* `edit 3 p/12345678 r/5` command changes the contact number to “12345678” and
   the risk appetite to 5 for the client who’s id number is 3.
+* `edit 15 13 r/3` command changes the risk appetite of client 13 & 15 to “3”.
 
 ### Delete particular contact : `delete`
 
-Deletes an existing client from the address book using their either client id or email address identify the client.
-Both attributes can be given together.
+Deletes an existing client from the address book using their client id.
 
-Format: `delete <client id>/{CLIENT'S ID} <email>/{EMAIL}`
+Format: `delete {CLIENT'S ID}...`
 
-* Attributes would be limited to client id, email or both.
+* Multiple client can be deleted at the same time by indicating multiple client ids.
 
 Examples:
-* `delete i/7`(deletes client with client id 7)
-* `delete e/keithtan@gmail.com`(deletes the client whose email address is keithtan@gmail.com)
-* `delete i/4 e/johndoe@gmail.com`(deletes the client whose client id is 4 and email address is johndoe@gmail.com)
+* `delete 7` will deletes client with client id 7
+* `delete 4 8 6` will deletes the clients whose client id is 4, 6 and 8
 
 ### List all contacts : `list`
 
@@ -174,7 +174,7 @@ Examples:
 
 Finds clients whose contacts match with the given keywords.
 
-Format: `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
+Format: `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
 * `KEYWORD` will be used to match with all attribute of the person.
 * `<attribute>/` refers to the argument tag for the client's attribute.
@@ -195,7 +195,7 @@ Examples:
 
 Filter the current list by the given keywords.
 
-Format: `filter [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...`
+Format: `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
 * Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
 * `KEYWORD` will be used to match with all attribute of the person.
@@ -252,10 +252,10 @@ Action | Format | Examples
 --------|---------|---------
 **Create** | `add <name>/{CLIENT'S NAME} <email>/{EMAIL} <phone-no>/{PHONE NUMBER} <risk-appetite>/{RISK-APPETITE} ...`| add n/benedict e/benedict@gmail.com p/90909898 r/3 |
 **View** | `view {CLIENT'S ID}` | view 123 |
-**Delete** | `delete <client id>/{CLIENT'S ID} <email>/{EMAIL}` | delete i/4  |
-**Edit** | `update {CLIENT'S ID} <attribute>/{CHANGED VALUE OF ATTRIBUTE} ...` | update 1234 n/Dominic p/12345678 |
+**Delete** | `delete {CLIENT'S ID}...` | delete 4  |
+**Edit** | `edit {CLIENT'S ID}... <attribute>/{CHANGED VALUE OF ATTRIBUTE}...` | edit 1234 n/Dominic p/12345678 |
 **List** | `list` | - |
-**Search** | `search [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | search * e/doe@gmail.com r/5 |
-**Filter** | `filter [KEYWORD]... [<attribute>/{ATTRIBUTE_KEYWORD}]...` | filter * e/doe@gmail.com p/9 |
+**Search** | `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
+**Filter** | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
 **Exit** | `exit` | - |
