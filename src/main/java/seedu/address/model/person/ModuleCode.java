@@ -45,6 +45,10 @@ public class ModuleCode {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getModuleCodeName() {
+        return value;
+    }
+
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }

@@ -1,12 +1,16 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.ParserUtil.parseModuleCode;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,5 +55,18 @@ public class TestUtil {
      */
     public static Person getPerson(Model model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
+    }
+
+    /**
+     * Returns ModuleCode instance.
+     */
+    public static ModuleCode getModuleCode(String input) {
+        ModuleCode parsedModuleCode = null;
+        try {
+            parsedModuleCode = parseModuleCode(input);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return parsedModuleCode;
     }
 }
