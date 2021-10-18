@@ -512,7 +512,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Downloading data
 
 1. Dealing with missing/corrupted data files
 
