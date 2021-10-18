@@ -19,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
 
+    private final UserStringHistory userStringHistory = new UserStringHistory();
     private final CommandExecutor commandExecutor;
 
     @FXML
@@ -45,7 +46,11 @@ public class CommandBox extends UiPart<Region> {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.UP) {
-                    commandTextField.setText("previous command");
+                    String previousString = userStringHistory.getPrevious();
+                    commandTextField.setText(previousString);
+                } else if (event.getCode() == KeyCode.DOWN) {
+                    String nextString = userStringHistory.getNext();
+                    commandTextField.setText(nextString);
                 }
                 // do nothing if other arrows clicked
             }
@@ -57,11 +62,12 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
+        userStringHistory.resetIndex();
         String commandText = commandTextField.getText();
         if (commandText.equals("")) {
             return;
         }
-
+        userStringHistory.add(commandText);
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
