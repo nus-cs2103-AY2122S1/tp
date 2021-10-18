@@ -210,7 +210,6 @@ public class Person implements Unique<Person> {
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())

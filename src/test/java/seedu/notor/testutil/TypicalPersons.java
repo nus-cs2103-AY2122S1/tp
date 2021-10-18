@@ -3,7 +3,6 @@ package seedu.notor.testutil;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -64,7 +63,8 @@ public class TypicalPersons {
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY)
             .withTags(VALID_TAG_FRIEND).build();
-    public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
+    // TODO: Fix Bob name. After Yukun is done with regex update.
+    public static final Person BOB = new PersonBuilder().withName("Bob ")
             .withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
