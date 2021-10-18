@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.modulelesson.ModuleLesson;
@@ -18,7 +19,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
