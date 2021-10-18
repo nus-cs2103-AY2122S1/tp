@@ -98,6 +98,16 @@ public class Student {
     }
 
     /**
+     * Returns the Student's weekly subscription price.
+     */
+    public double getSubscriptionPrice() {
+        return this.getLessonPrices().stream()
+                .map(e -> e.value)
+                .reduce(0.0, Double::sum);
+    }
+
+
+    /**
      * Returns an immutable lesson price list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
