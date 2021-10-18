@@ -20,7 +20,7 @@ import seedu.address.model.participant.Participant;
 import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.ParticipantBuilder;
 
-class ViewCommandTest {
+public class ViewCommandTest {
     private static final Participant participantWithSimilarId =
             new ParticipantBuilder(ALEX).withName("Alex Yeo").build();
     private final ModelStubWithParticipants modelStub = new ModelStubWithParticipants();

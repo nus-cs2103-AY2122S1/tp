@@ -22,7 +22,7 @@ public class AddParticipantToEventCommand extends Command {
     public static final String COMMAND_WORD = "addParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": adda a participant with matching ID to an Event.\n"
+            + ": Adds a participant with matching ID to an Event.\n"
             + "Parameters: \n"
             + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
             + PREFIX_EVENT + " EVENT_NAME "

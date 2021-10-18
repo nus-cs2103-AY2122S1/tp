@@ -19,7 +19,7 @@ public class RemoveParticipantFromEventCommand extends Command {
     public static final String COMMAND_WORD = "removeParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": removes the participant with matching ID from an Event.\n"
+            + ": Removes the participant with matching ID from an Event.\n"
             + "Parameters: \n"
             + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
             + PREFIX_EVENT + "EVENT_NAME "
