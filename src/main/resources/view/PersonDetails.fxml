@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox id="cardDetailPane" style="-fx-background-color: #313131#313131;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<VBox id="cardDetailPane" style="-fx-background-color: #313131#313131;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="cardPane" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -93,7 +93,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
