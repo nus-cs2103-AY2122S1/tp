@@ -78,17 +78,12 @@ public class GitHubUtil {
     public static ImageView getProfilePicture(String userName) {
         JSONObject jsonObject = getProfile(userName);
         String userProfileUrl = jsonObject.getString("avatar_url");
-        ImageView image = null;
 
-        try {
-            URL userProfilePictureURL = new URL(userProfileUrl);
-
-            image = new ImageView(new Image(userProfileUrl));
-        } catch (MalformedURLException e) {
-            logger.severe("Improper URL Format.");
-        } catch (IOException e) {
-            logger.severe("A Connection with the server could not be established.");
-        }
+        ImageView image = new ImageView(new Image(userProfileUrl));
         return image;
+    }
+
+    public static int getCommits(String userName) {
+        return 0;
     }
 }
