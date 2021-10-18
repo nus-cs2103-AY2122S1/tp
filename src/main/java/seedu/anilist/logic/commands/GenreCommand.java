@@ -37,6 +37,8 @@ public abstract class GenreCommand extends Command {
             + PREFIX_GENRE + "Fantasy "
             + PREFIX_GENRE + "Action";
 
+    public static final String MESSAGE_GENRE_NOT_PROVIDED = "At least one genre should be provided.";
+
 
     private final GenreCommand.GenresDescriptor genresDescriptor;
     private final Index index;
@@ -82,13 +84,6 @@ public abstract class GenreCommand extends Command {
          */
         public GenresDescriptor(GenreCommand.GenresDescriptor toCopy) {
             setGenres(toCopy.genres);
-        }
-
-        /**
-         * Returns true if at least one genre is changed.
-         */
-        public boolean areGenresUpdated() {
-            return genres != null;
         }
 
         /**

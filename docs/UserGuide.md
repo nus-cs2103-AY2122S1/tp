@@ -97,7 +97,7 @@ Examples:
 ### Add/Delete a genre from an anime: `genre`
 
 Adds or deletes a genre from a specified anime.<br>
-All genres will be automatically changed to lowercase, and duplicate genres are not allowed.
+All genres will be automatically changed to lowercase, and duplicate genres are not allowed.<br>
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 
 - `ACTION` specifies whether you are adding or deleting genres.
@@ -106,7 +106,20 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 - The index must be a positive integer 1, 2, 3, ...
 - `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
 - You need to provide at least 1 `GENRE`.
-
-Examples:
+  
+  Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
+
+### Switch to a different status tab: `tab`
+
+Switch to a tab displaying all anime with the specified status.<br>
+Format: `tab s/STATUS`
+
+- `STATUS` refers to the updated status of the anime.
+- Available statuses: "towatch", "watching", "finished"
+- Shortforms: "t", "w", "f"
+
+Examples:
+*  `tab s/towatch`
+*  `tab s/t`
