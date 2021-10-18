@@ -22,11 +22,11 @@ public class IncludeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds resident to the given event. "
             + "Parameters: "
-            + CliSyntax.PREFIX_INDEX + "INDEX "
+            + "INDEX "
             + CliSyntax.PREFIX_RESIDENTS + "INFORMATION \n"
 
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_INDEX + "1 "
+            + "1 "
             + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
     public static final String MESSAGE_SUCCESS = "Residents ( %s ) added to event %s";
@@ -71,8 +71,12 @@ public class IncludeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
-        Event event = lastShownList.get(index.getZeroBased());
-
+        Event event;
+        try {
+            event = lastShownList.get(index.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException("Index given is invalid");
+        }
         ArrayList<Person> toAdd = model.toPersonList(residentList);
         ArrayList<Person> currentResidents = model.getCurrentEventResidents(event.getResidents());
 

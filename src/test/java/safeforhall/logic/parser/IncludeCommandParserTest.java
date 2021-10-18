@@ -11,6 +11,7 @@ import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.model.event.ResidentList;
 
 public class IncludeCommandParserTest {
+    private static final String DEFAULT_INDEX = "1";
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, IncludeCommand.MESSAGE_USAGE);
     private IncludeCommandParser parser = new IncludeCommandParser();
@@ -27,21 +28,21 @@ public class IncludeCommandParserTest {
         IncludeCommand expectedIncludeCommand = new IncludeCommand(Index.fromOneBased(1),
                 new ResidentList("Alex Yeoh, Bernice Yu"));
 
-        CommandParserTestUtil.assertParseSuccess(parser, " " + CliSyntax.PREFIX_INDEX + "1" + " "
+        CommandParserTestUtil.assertParseSuccess(parser, " " + "1" + " "
                         + CliSyntax.PREFIX_RESIDENTS + "Alex Yeoh , Bernice Yu",
                 expectedIncludeCommand);
 
         // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccess(parser, " " + CliSyntax.PREFIX_INDEX + "  1  " + " "
+        CommandParserTestUtil.assertParseSuccess(parser, " " + "  1  " + " "
                         + CliSyntax.PREFIX_RESIDENTS + " Alex Yeoh , Bernice Yu ",
                 expectedIncludeCommand);
 
-        CommandParserTestUtil.assertParseSuccess(parser, " " + CliSyntax.PREFIX_INDEX + "1" + " "
+        CommandParserTestUtil.assertParseSuccess(parser, " " + "1" + " "
                         + CliSyntax.PREFIX_RESIDENTS + "e417 , a213",
                 expectedIncludeCommand);
 
         // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccess(parser, " " + CliSyntax.PREFIX_INDEX + "  1  " + " "
+        CommandParserTestUtil.assertParseSuccess(parser, " " + "  1  " + " "
                         + CliSyntax.PREFIX_RESIDENTS + " e417 , a213 ",
                 expectedIncludeCommand);
     }
@@ -52,7 +53,7 @@ public class IncludeCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1",
+        assertParseFailure(parser, DEFAULT_INDEX,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, IncludeCommand.MESSAGE_USAGE));
     }
 
@@ -69,9 +70,9 @@ public class IncludeCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, " " + CliSyntax.PREFIX_INDEX + "1" + " "
+        assertParseFailure(parser, " " + DEFAULT_INDEX + " "
                 + CliSyntax.PREFIX_RESIDENTS + "e417 a213", ResidentList.MESSAGE_CONSTRAINTS); // no comma
-        assertParseFailure(parser, " " + CliSyntax.PREFIX_INDEX + "1" + " "
+        assertParseFailure(parser, " " + DEFAULT_INDEX + " "
                 + CliSyntax.PREFIX_RESIDENTS + "e417, roy",
                 ResidentList.MESSAGE_CONSTRAINTS_ROOM_AND_NAME); // room and name
     }
