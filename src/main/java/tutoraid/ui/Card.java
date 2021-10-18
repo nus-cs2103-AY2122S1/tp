@@ -3,11 +3,23 @@ package tutoraid.ui;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 
+/**
+ * A generic class to use as an abstraction for card-like objects.
+ * @param <T> The type of entity to be represented using a card
+ */
 public class Card<T> extends UiPart<Region> {
-public final T t;
-protected Label id = new Label();
-    public Card(String FXML, T t, int displayedIndex) {
-        super(FXML);
+    public final T t;
+    protected Label id = new Label();
+
+    /**
+     * Constructor for a card object.
+     *
+     * @param fxml The FXML file
+     * @param t The object to be represented using the card
+     * @param displayedIndex The index number of the card
+     */
+    public Card(String fxml, T t, int displayedIndex) {
+        super(fxml);
         this.t = t;
         id.setText(displayedIndex + ". ");
     }
