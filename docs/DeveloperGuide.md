@@ -185,14 +185,22 @@ Step 1. The user executes a command which causes the data in `csbook` of `ModelM
 `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
 now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
 
-Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a Serializable,
+![EncryptSequence0](images/EncryptSequence0.png)
+
+Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a `Serializable`,
 and encrypts it using `EncryptionUtil.encryptSerializableObject(Serializable)`. The method returns a `SealedObject` object,
 which contains the encrypted JSON data.
+
+![EncryptSequence1](images/EncryptSequence1.png)
 
 Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file. 
 `EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
 
-The following sequence diagram shows how the encryption operation works:
+![EncryptSequence2](images/EncryptSequence2.png)
+
+The following sequence diagram shows how the overall encryption operation works:
+
+![EncryptSequenceAll](images/EncryptSequenceAll.png)
 
 The decryption operation accomplishes the opposite of the encryption operation.
 
@@ -200,15 +208,23 @@ Step 4. When a user launches the application for the first time, a call it made 
 to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` to
 read the encrypted JSON file.
 
+![DecryptSequence0](images/DecryptSequence0.png)
+
 Step 5. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
 read the encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the
 encrypted CSBook data.
 
+![DecryptSequence1](images/DecryptSequence1.png)
+
 Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
 object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then 
-transformed by `JsonCsBookStorage#readAddressBook()` into a `ReadOnlyCsBook` that is used to populate `csbook` of `ModelManager`.
+transformed by `JsonCsBookStorage#readAddressBook()` into a `ReadOnlyCsBook` that is used to populate the model.
 
-The following sequence diagram shows how the decryption operation works:
+![DecryptSequence2](images/DecryptSequence2.png)
+
+The following sequence diagram shows how the overall decryption operation works:
+
+![DecryptSequenceAll](images/DecryptSequenceAll.png)
 
 #### Design considerations
 
