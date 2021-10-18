@@ -109,7 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// tutorialclass-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -117,17 +117,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a student to the address book.
-     * The student must not already exist in the address book.
+     * Adds a tutorialClass to the address book.
+     * The tutorialClass must not already exist in the address book.
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
     }
 
     /**
-     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * Replaces the given tutorialClass {@code target} in the list with {@code editedTutorialClass}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
+     * The tutorialClass identity of {@code editedTutorialClass} must not be the same
+     * as another existing tutorialClass in ClassMATE.
      */
     public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
         requireNonNull(editedTutorialClass);
