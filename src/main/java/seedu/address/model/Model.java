@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -18,8 +21,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     enum DisplayType {
-        STUDENTS, TASKS
+        STUDENTS, TASKS, GROUPS
     };
 
     /**
@@ -111,6 +117,13 @@ public interface Model {
      */
     void markStudentParticipation(Student target, int week);
 
+    /**
+     * Adds the given person {@code target} to a group of {@code name}.
+     * {@code target} must exist in the student list.
+     * A group of {@code name} must exist in the group list.
+     */
+    void addStudentGroup(Student target, Group group);
+
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
@@ -119,6 +132,45 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in tApp.
+     */
+    boolean hasGroup(Group group);
+
+    /**
+     * Deletes the given group.
+     * The group must exist in tApp.
+     */
+    void deleteGroup(Group target);
+
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in tApp.
+     */
+    void addGroup(Group group);
+
+    /**
+     * Replaces the given group {@code target} with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     */
+    void setGroup(Group target, Group editedGroup);
+
+    /**
+     * Adds the given github link {@code target} to a group of {@code name}.
+     * A group of {@code name} must exist in the group list.
+     */
+    void addGithubGroup(LinkYear year, RepoName repoName, Group group);
+
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList();
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the address book.

@@ -18,10 +18,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -92,9 +94,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
                 .orElse(studentToEdit.getStudentNumber());
+        UserName updatedUserName = editStudentDescriptor.getUserName().orElse(studentToEdit.getUserName());
+        RepoName updatedRepoName = editStudentDescriptor.getRepoName().orElse(studentToEdit.getRepoName());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedEmail, updatedStudentNumber, updatedTags);
+        return new Student(updatedName, updatedEmail, updatedStudentNumber, updatedUserName, updatedRepoName,
+                updatedTags);
     }
 
     @Override
@@ -123,6 +128,8 @@ public class EditCommand extends Command {
         private Name name;
         private Email email;
         private StudentNumber studentNumber;
+        private UserName userName;
+        private RepoName repoName;
         private Set<Tag> tags;
 
         public EditStudentDescriptor() {}
@@ -135,6 +142,8 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setEmail(toCopy.email);
             setStudentNumber(toCopy.studentNumber);
+            setUserName(toCopy.userName);
+            setRepoName(toCopy.repoName);
             setTags(toCopy.tags);
         }
 
@@ -142,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, studentNumber, tags);
+            return CollectionUtil.isAnyNonNull(name, email, studentNumber, userName, repoName, tags);
         }
 
         public void setName(Name name) {
@@ -169,6 +178,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentNumber);
         }
 
+        public void setUserName(UserName userName) {
+            this.userName = userName;
+        }
+
+        public Optional<UserName> getUserName() {
+            return Optional.ofNullable(userName);
+        }
+
+        public void setRepoName(RepoName repoName) {
+            this.repoName = repoName;
+        }
+
+        public Optional<RepoName> getRepoName() {
+            return Optional.ofNullable(repoName);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -205,6 +229,8 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getEmail().equals(e.getEmail())
                     && getStudentNumber().equals(e.getStudentNumber())
+                    && getUserName().equals(e.getUserName())
+                    && getRepoName().equals(e.getRepoName())
                     && getTags().equals(e.getTags());
         }
     }

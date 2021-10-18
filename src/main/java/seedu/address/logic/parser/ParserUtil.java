@@ -9,10 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.TaskName;
@@ -64,6 +68,67 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String name} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gorupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedName = groupName.trim();
+        if (!GroupName.isValidName(trimmedName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String year} into an {@code LinkYear}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code year} is invalid.
+     */
+    public static LinkYear parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        if (!LinkYear.isValidYear(trimmedYear)) {
+            throw new ParseException(LinkYear.MESSAGE_CONSTRAINTS);
+        }
+        return new LinkYear(trimmedYear);
+    }
+
+    /**
+     * Parses a {@code String repoName} into an {@code RepoName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code repoName} is invalid.
+     */
+    public static RepoName parseRepo(String repoName) throws ParseException {
+        requireNonNull(repoName);
+        String trimmedRepoName = repoName.trim();
+        if (!RepoName.isValidRepoName(trimmedRepoName)) {
+            throw new ParseException(RepoName.MESSAGE_CONSTRAINTS);
+        }
+        return new RepoName(trimmedRepoName);
+    }
+
+    /**
+     * Parses a {@code String userName} into an {@code UserName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userName} is invalid.
+     */
+    public static UserName parseUserName(String userName) throws ParseException {
+        requireNonNull(userName);
+        String trimmedUserName = userName.trim();
+        if (!UserName.isValidUserName(trimmedUserName)) {
+            throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
+        }
+        return new UserName(trimmedUserName);
+    }
+
 
     /**
      * Parses a {@code String name} into a {@code TaskName}.

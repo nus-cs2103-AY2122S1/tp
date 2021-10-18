@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.task.Task;
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
+    private final UniqueGroupList groups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         students = new UniqueStudentList();
         tasks = new UniqueTaskList();
+        groups = new UniqueGroupList();
     }
 
     public AddressBook() {}
@@ -61,6 +65,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -68,6 +80,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setStudents(newData.getStudentList());
         setTasks(newData.getTaskList());
+        setGroups(newData.getGroupList());
     }
 
 
@@ -151,6 +164,45 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    //// group-level operations
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Adds a group to the address book.
+     * The group must not already exist in the address book.
+     * @param g
+     */
+    public void addGroup(Group g) {
+        groups.add(g);
+    }
+
+    /**
+     * Replaces the given group {@code target} in the list with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the
+     * address book.
+     */
+    public void setGroup(Group target, Group editedGroup) {
+        requireNonNull(editedGroup);
+
+        groups.setGroup(target, editedGroup);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -171,10 +223,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Group> getGroupList() {
+        return groups.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && students.equals(((AddressBook) other).students)
+                && groups.equals(((AddressBook) other).groups)
                 && tasks.equals(((AddressBook) other).tasks));
     }
 

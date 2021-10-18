@@ -37,6 +37,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label studentNumber;
     @FXML
+    private Label githubLink;
+    @FXML
     private FlowPane tags;
     @FXML
     private Label attendance;
@@ -55,6 +57,7 @@ public class StudentCard extends UiPart<Region> {
         studentNumber.setText(student.getStudentNumber().toString());
         attendance.setText(student.getAttendance().attendanceList.toString());
         participation.setText(student.getParticipation().participationList.toString());
+        githubLink.setText(student.getStudentLink());
 
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

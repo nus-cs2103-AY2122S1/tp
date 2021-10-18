@@ -3,8 +3,11 @@
     "name": "Hans Muster",
     "email": "invalid@email!3e",
     "tagged" : [ ],
+    "username" : "!!!",
+    "repo" : "AA@@#",
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ],
     "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
-  "tasks" : [ ]
+  "tasks" : [ ],
+  "groups" : [ ]
 }

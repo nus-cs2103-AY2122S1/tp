@@ -14,20 +14,29 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_STUDENTNUMBER = "a91023b";
+    private static final String INVALID_USERNAME = "@a@";
+    private static final String INVALID_REPONAME = "}sad{P";
+    private static final String INVALID_GROUPNAME = "W1-2";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_STUDENTNUMBER = "A0123456A";
+    private static final String VALID_USERNAME = "racch";
+    private static final String VALID_REPONAME = "ab3";
+    private static final String VALID_GROUPNAME = "W01-4";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -120,6 +129,75 @@ public class ParserUtilTest {
         String studentNumberWithWhitespace = WHITESPACE + VALID_STUDENTNUMBER + WHITESPACE;
         StudentNumber expectedStudentNumber = new StudentNumber(VALID_STUDENTNUMBER);
         assertEquals(expectedStudentNumber, ParserUtil.parseStudentNumber(studentNumberWithWhitespace));
+    }
+
+    @Test
+    public void parseUserName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseUserName((String) null));
+    }
+
+    @Test
+    public void parseUserName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseUserName(INVALID_USERNAME));
+    }
+
+    @Test
+    public void parseUserName_validValueWithoutWhitespace_returnsUserName() throws Exception {
+        UserName expectedUserName = new UserName(VALID_USERNAME);
+        assertEquals(expectedUserName, ParserUtil.parseUserName(VALID_USERNAME));
+    }
+
+    @Test
+    public void parseUserName_validValueWithWhitespace_returnsTrimmedUserName() throws Exception {
+        String userNameWithWhitespace = WHITESPACE + VALID_USERNAME + WHITESPACE;
+        UserName expectedUserName = new UserName(VALID_USERNAME);
+        assertEquals(expectedUserName, ParserUtil.parseUserName(userNameWithWhitespace));
+    }
+
+    @Test
+    public void parseRepoName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRepo((String) null));
+    }
+
+    @Test
+    public void parseRepoName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRepo(INVALID_REPONAME));
+    }
+
+    @Test
+    public void parseRepoName_validValueWithoutWhitespace_returnsRepoName() throws Exception {
+        RepoName expectedRepoName = new RepoName(VALID_REPONAME);
+        assertEquals(expectedRepoName, ParserUtil.parseRepo(VALID_REPONAME));
+    }
+
+    @Test
+    public void parseRepoName_validValueWithWhitespace_returnsTrimmedRepoName() throws Exception {
+        String repoNameWithWhitespace = WHITESPACE + VALID_REPONAME + WHITESPACE;
+        RepoName expectedRepoName = new RepoName(VALID_REPONAME);
+        assertEquals(expectedRepoName, ParserUtil.parseRepo(repoNameWithWhitespace));
+    }
+
+    @Test
+    public void parseGroupName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroupName((String) null));
+    }
+
+    @Test
+    public void parseGroupName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGroupName(INVALID_GROUPNAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithoutWhitespace_returnsGroupName() throws Exception {
+        GroupName expectedGroupName = new GroupName(VALID_GROUPNAME);
+        assertEquals(expectedGroupName, ParserUtil.parseGroupName(VALID_GROUPNAME));
+    }
+
+    @Test
+    public void parseGroupName_validValueWithWhitespace_returnsTrimmedGroupName() throws Exception {
+        String groupNameWithWhitespace = WHITESPACE + VALID_GROUPNAME + WHITESPACE;
+        GroupName expectedGroupName = new GroupName(VALID_GROUPNAME);
+        assertEquals(expectedGroupName, ParserUtil.parseGroupName(groupNameWithWhitespace));
     }
 
     @Test

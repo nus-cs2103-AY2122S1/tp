@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,29 +24,30 @@ public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), new StudentNumber("A0123436B"),
-                    getTagSet("friends"),
+                    new UserName("ayeoh"), new RepoName("ip"), getTagSet("friends"),
                     getAttendanceList(0),
                     getParticipationList(0)),
             new Student(new Name("Bernice Yu"), new Email("berniceyu@example.com"), new StudentNumber("A0123456A"),
-                    getTagSet("colleagues", "friends"),
+                    new UserName("BYU"), null, getTagSet("colleagues", "friends"),
                     getAttendanceList(0),
                     getParticipationList(0)),
             new Student(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
-                    new StudentNumber("A0123450B"), getTagSet("neighbours"),
+                    new StudentNumber("A0123450B"), null, null, getTagSet("neighbours"),
                     getAttendanceList(0),
                     getParticipationList(0)),
             new Student(new Name("David Li"), new Email("lidavid@example.com"), new StudentNumber("A0123956B"),
-                    getTagSet("family"),
+                    null, new RepoName("repo"), getTagSet("family"),
                     getAttendanceList(0),
                     getParticipationList(0)),
             new Student(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), new StudentNumber("A0823456B"),
+                    new UserName("IrIb"), new RepoName("myRepo"),
                     getTagSet("classmates"),
                     getAttendanceList(0),
                     getParticipationList(0)),
             new Student(new Name("Roy Balakrishnan"), new Email("royb@example.com"), new StudentNumber("A1123456B"),
-                    getTagSet("colleagues"),
+                    null, null, getTagSet("colleagues"),
                     getAttendanceList(0),
-                    getParticipationList(0))
+                    getParticipationList(0)),
         };
     }
 
