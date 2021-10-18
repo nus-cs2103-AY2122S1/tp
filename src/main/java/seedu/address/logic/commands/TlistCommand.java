@@ -41,4 +41,11 @@ public class TlistCommand extends Command{
         model.updateFilteredTaskList(targetMember, PREDICATE_SHOW_ALL_Tasks);
         return new CommandResult(MESSAGE_SUCCESS + " of " + targetMember.getName());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TlistCommand // instanceof handles nulls
+                && targetMemberID.equals(((TlistCommand) other).targetMemberID));
+    }
 }
