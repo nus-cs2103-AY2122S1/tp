@@ -20,6 +20,8 @@ public class LessonCard extends UiPart<Region> {
     private static final String STRING_FORMAT_DAY = "Day: \t%s";
     private static final String STRING_FORMAT_TIME = "Time: \t%s - %s";
     private static final String STRING_FORMAT_PRICE = "Price: \t%s";
+    private static final String STRING_FORMAT_SIZE = "Size: \t%d";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -48,6 +50,8 @@ public class LessonCard extends UiPart<Region> {
     private Label price;
     @FXML
     private Label lessonCode;
+    @FXML
+    private Label numOfStudentsEnrolled;
 
     /**
      * Creates a {@code LessonCode} with the given {@code Lesson} and index to display.
@@ -68,6 +72,7 @@ public class LessonCard extends UiPart<Region> {
                 lesson.getLessonTime().startTime.format(TIME_FORMATTER),
                 lesson.getLessonTime().endTime.format(TIME_FORMATTER)));
         price.setText(String.format(STRING_FORMAT_PRICE, lesson.getPrice().toString()));
+        numOfStudentsEnrolled.setText(String.format(STRING_FORMAT_SIZE, lesson.getLessonSize()));
     }
 
     @Override

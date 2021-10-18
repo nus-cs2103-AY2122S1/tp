@@ -74,7 +74,7 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(remark -> remark.remarkName))
                 .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 
-        if (student.getLessonCodesAndPrices().size() > 0) {
+        if (student.getNumberOfLessonsEnrolled() > 0) {
             lessons.setText(student.getLessonCodes().stream()
                     .map(LessonCode::toString)
                     .sorted()
