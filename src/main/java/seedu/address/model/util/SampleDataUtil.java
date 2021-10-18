@@ -46,10 +46,14 @@ public class SampleDataUtil {
 
     public static ModuleLesson[] getSampleModuleClasses() {
         return new ModuleLesson[] {
-            new ModuleLesson(getModuleCodeSet("CS2040 T05"), new LessonDay("2"), new LessonTime("10:00"), new Remark("COM1-113")),
-            new ModuleLesson(getModuleCodeSet("CS2100 T21"), new LessonDay("2"), new LessonTime("15:00"), new Remark("COM2-0223")),
-            new ModuleLesson(getModuleCodeSet("CS2103 TG09"), new LessonDay("1"), new LessonTime("14:00"), new Remark("I3 Audi")),
-            new ModuleLesson(getModuleCodeSet("CS2106 TG01"), new LessonDay("5"), new LessonTime("10:00"), new Remark("COM1-120")),
+            new ModuleLesson(getModuleCodeSet("CS2040 T05"), new LessonDay("2"),
+                    new LessonTime("10:00"), new Remark("COM1-113")),
+            new ModuleLesson(getModuleCodeSet("CS2100 T21"), new LessonDay("2"),
+                    new LessonTime("15:00"), new Remark("COM2-0223")),
+            new ModuleLesson(getModuleCodeSet("CS2103 TG09"), new LessonDay("1"),
+                    new LessonTime("14:00"), new Remark("I3 Audi")),
+            new ModuleLesson(getModuleCodeSet("CS2106 TG01"), new LessonDay("5"),
+                    new LessonTime("10:00"), new Remark("COM1-120")),
         };
     }
 

@@ -74,12 +74,16 @@ public class JsonAdaptedModuleLesson {
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(lessonModuleCodes);
 
         if (day == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonDay.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonDay.class.getSimpleName())
+            );
         }
         final LessonDay lessonDay = new LessonDay(day);
 
         if (time == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonTime.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonTime.class.getSimpleName())
+            );
         }
         final LessonTime lessonTime = new LessonTime(time);
 

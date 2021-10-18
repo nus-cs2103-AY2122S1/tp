@@ -125,7 +125,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the address book.
-     * The lesson information of {@code editedLesson} must not be the same as another existing lesson in the address book.
+     * The lesson information of {@code editedLesson} must not be the same as another
+     * existing lesson in the address book.
      */
     public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
         requireNonNull(editedLesson);

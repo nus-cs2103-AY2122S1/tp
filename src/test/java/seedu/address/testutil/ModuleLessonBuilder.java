@@ -5,8 +5,8 @@ import static seedu.address.model.util.SampleDataUtil.getModuleCodeSet;
 import java.util.Set;
 
 import seedu.address.model.modulelesson.LessonDay;
-import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.LessonTime;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 
