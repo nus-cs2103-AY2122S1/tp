@@ -153,7 +153,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_oneTag_OnePersonFound() {
+    public void execute_oneTag_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         TagContainsKeyWordsPredicate predicate =
                 prepareTagContainsKeyWordsPredicate("owesMoney");
@@ -164,7 +164,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_twoTags_ThreePersonsFound() {
+    public void execute_twoTags_threePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         TagContainsKeyWordsPredicate predicate =
                 prepareTagContainsKeyWordsPredicate("friends");
