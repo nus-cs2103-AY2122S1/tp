@@ -3,7 +3,7 @@ layout: page
 title: "Tutorial: Tracing code"
 ---
 
-> Indeed, the ratio of lessonTime spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. …​\[Therefore,\] making it easy to read makes it easier to write.
+> Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. …​\[Therefore,\] making it easy to read makes it easier to write.
 >
 > —  Robert C. Martin Clean Code: A Handbook of Agile Software Craftsmanship
 
@@ -206,14 +206,14 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
      FYI, The 'filtered list' is the list of persons resulting from the most recent operation that will be shown to the user immediately after. For the `edit` command, we populate it with all the persons so that the user can see the edited person along with all other persons. If this was a `find` command, we would be setting that list to contain the search results instead.<br>
      To provide some context, given below is the class diagram of the `Model` component. See if you can figure out where the 'filtered list' of persons is being tracked.
      <img src="../images/ModelClassDiagram.png" width="450" /><br>
-   * :bulb: This may be a good lessonTime to read through the [`Model` component section of the DG](../DeveloperGuide.html#model-component)
+   * :bulb: This may be a good time to read through the [`Model` component section of the DG](../DeveloperGuide.html#model-component)
 
 1. As you step through the rest of the statements in the `EditCommand#execute()` method, you'll see that it creates a `CommandResult` object (containing information about the result of the execution) and returns it.<br>
    Advancing the debugger by one more step should take you back to the middle of the `LogicManager#execute()` method.<br>
 
 1. Given that you have already seen quite a few classes in the `Logic` component in action, see if you can identify in this partial class diagram some of the classes you've encountered so far, and see how they fit into the class structure of the `Logic` component:
     <img src="../images/LogicClassDiagram.png" width="550"/>
-   * :bulb: This may be a good lessonTime to read through the [`Logic` component section of the DG](../DeveloperGuide.html#logic-component)
+   * :bulb: This may be a good time to read through the [`Logic` component section of the DG](../DeveloperGuide.html#logic-component)
 
 1. Similar to before, you can step over/into statements in the `LogicManager#execute()` method to examine how the control is transferred to the `Storage` component and what happens inside that component.
 
@@ -244,7 +244,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
 
 1. While you are stepping through the classes in the `Storage` component, here is the component's class diagram to help you understand how those classes fit into the structure of the component.<br>
    <img src="../images/StorageClassDiagram.png" width="550" />
-   * :bulb: This may be a good lessonTime to read through the [`Storage` component section of the DG](../DeveloperGuide.html#storage-component)
+   * :bulb: This may be a good time to read through the [`Storage` component section of the DG](../DeveloperGuide.html#storage-component)
 
 1. We can continue to step through until you reach the end of the `LogicManager#execute()` method and return to the `MainWindow#executeCommand()` method (the place where we put the original breakpoint).
 
@@ -259,7 +259,7 @@ Recall from the User Guide that the `edit` command has the format: `edit INDEX [
     ```
 
 1. Finally, you can step through until you reach the end of`MainWindow#executeCommand()`.<br>
-   :bulb: This may be a good lessonTime to read through the [`UI` component section of the DG](../DeveloperGuide.html#ui-component)
+   :bulb: This may be a good time to read through the [`UI` component section of the DG](../DeveloperGuide.html#ui-component)
 
 
 ## Conclusion
@@ -290,7 +290,7 @@ Here are some quick questions you can try to answer based on your execution path
 
     1.  Make command words case-insensitive
 
-    2.  Allow `delete` to remove more than one index at a lessonTime
+    2.  Allow `delete` to remove more than one index at a time
 
     3.  Save the address book in the CSV format instead
 
