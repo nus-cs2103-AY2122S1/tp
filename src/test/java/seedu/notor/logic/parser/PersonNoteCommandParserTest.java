@@ -6,6 +6,7 @@ import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;

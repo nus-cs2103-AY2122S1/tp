@@ -44,15 +44,15 @@ public class NotorParserTest {
 
     // TODO: Elton cannot fix this. This is caused by tags being different in both commands.
     // One has empty optional, the other has optional with empty set.
-//    @Test
-//    public void parseCommand_edit() throws Exception {
-//        Person person = new PersonBuilder().build();
-//        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(person).build();
-//
-//        PersonEditCommand command =
-//                (PersonEditCommand) parser.parseCommand(PersonUtil.getEditPersonDescriptorCommand(1, descriptor));
-//        assertEquals(new PersonEditCommand(INDEX_FIRST_PERSON, descriptor), command);
-//    }
+    //    @Test
+    //    public void parseCommand_edit() throws Exception {
+    //        Person person = new PersonBuilder().build();
+    //        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(person).build();
+    //
+    //        PersonEditCommand command =
+    //                (PersonEditCommand) parser.parseCommand(PersonUtil.getEditPersonDescriptorCommand(1, descriptor));
+    //        assertEquals(new PersonEditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    //    }
 
     @Test
     public void parseCommand_exit() throws Exception {

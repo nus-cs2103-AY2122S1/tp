@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.notor.model.person.Email;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
+import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;

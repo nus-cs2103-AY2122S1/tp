@@ -19,7 +19,7 @@ public class PersonUtil {
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorCommand (int index, PersonEditExecutor.PersonEditDescriptor descriptor) {
+    public static String getEditPersonDescriptorCommand(int index, PersonEditExecutor.PersonEditDescriptor descriptor) {
         String command = String.format("person %d /edit n:%s p:%s e:%s", index, descriptor.getName().get(),
                 descriptor.getPhone().get(), descriptor.getEmail().get());
         return command;
