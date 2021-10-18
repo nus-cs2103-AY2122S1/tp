@@ -1,4 +1,4 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.add;
 
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
@@ -8,7 +8,12 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.stream.Stream;
 
-import safeforhall.logic.commands.EaddCommand;
+import safeforhall.logic.commands.add.AddEventCommand;
+import safeforhall.logic.parser.ArgumentMultimap;
+import safeforhall.logic.parser.ArgumentTokenizer;
+import safeforhall.logic.parser.Parser;
+import safeforhall.logic.parser.ParserUtil;
+import safeforhall.logic.parser.Prefix;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
@@ -17,16 +22,16 @@ import safeforhall.model.event.EventName;
 import safeforhall.model.event.Venue;
 
 /**
- * Parses input arguments and creates a new EaddCommand object
+ * Parses input arguments and creates a new AddEventCommand object
  */
-public class EaddCommandParser implements Parser<EaddCommand> {
+public class AddEventCommandParser implements Parser<AddEventCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EaddCommand
-     * and returns an EaddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddEventCommand
+     * and returns an AddEventCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EaddCommand parse(String args) throws ParseException {
+    public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
                         PREFIX_VENUE, PREFIX_CAPACITY);
@@ -34,7 +39,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_VENUE, PREFIX_CAPACITY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EaddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
         EventName eventName = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
@@ -43,7 +48,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
         Capacity capacity = ParserUtil.parseCapacity(argMultimap.getValue(PREFIX_CAPACITY).get());
 
         Event event = new Event(eventName, eventDate, venue, capacity);
-        return new EaddCommand(event);
+        return new AddEventCommand(event);
     }
 
     /**
