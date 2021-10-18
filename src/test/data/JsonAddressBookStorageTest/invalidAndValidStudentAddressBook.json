@@ -2,6 +2,9 @@
   "students": [ {
     "name": "Valid Student",
     "email": "hans@example.com",
+    "studentNumber" : "A0123456B",
+    "username" : "user",
+    "repo" : "ip",
     "tagged" : [ ],
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   }, {
@@ -10,5 +13,6 @@
     "tagged" : [ ],
     "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
-  "tasks" : [ ]
+  "tasks" : [ ],
+  "groups" : [ ]
 }

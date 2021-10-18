@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.DisplayType.GROUPS;
 import static seedu.address.model.Model.DisplayType.STUDENTS;
 import static seedu.address.model.Model.DisplayType.TASKS;
 
@@ -14,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
@@ -30,6 +34,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Group> filteredGroups;
     private DisplayType displayType;
 
     /**
@@ -46,6 +51,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
     }
 
     public ModelManager() {
@@ -142,6 +148,16 @@ public class ModelManager implements Model {
         return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
     }
 
+    @Override
+    public void addStudentGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        Group newGroup = group;
+        newGroup.getMembers().addMember(student);
+        addressBook.setGroup(group, newGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+
     /**
      * Checks if a task exists
      *
@@ -182,6 +198,38 @@ public class ModelManager implements Model {
         addressBook.setTask(target, newTask);
     }
 
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return addressBook.hasGroup(group);
+    }
+
+    @Override
+    public void deleteGroup(Group target) {
+        addressBook.removeGroup(target);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        addressBook.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void setGroup(Group target, Group editedGroup) {
+        requireAllNonNull(target, editedGroup);
+
+        addressBook.setGroup(target, editedGroup);
+    }
+
+    @Override
+    public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
+        requireAllNonNull(year, repoName, group);
+        Group newGroup = new Group(group.getName(), group.getMembers(), year, repoName, group.getTags());
+        addressBook.setGroup(group, newGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -217,6 +265,24 @@ public class ModelManager implements Model {
         displayType = TASKS;
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
+    }
+
+    //=========== Filtered Group List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        displayType = GROUPS;
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
 
