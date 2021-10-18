@@ -2,11 +2,15 @@ package seedu.fast.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.fast.model.person.Person;
+import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.person.UniquePersonList;
 
 /**
@@ -16,6 +20,7 @@ import seedu.fast.model.person.UniquePersonList;
 public class Fast implements ReadOnlyFast {
 
     private final UniquePersonList persons;
+    private final FilteredList<Person> filteredPersons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +31,7 @@ public class Fast implements ReadOnlyFast {
      */
     {
         persons = new UniquePersonList();
+        filteredPersons = new FilteredList<>(this.getPersonList());
     }
 
     public Fast() {}
@@ -100,6 +106,23 @@ public class Fast implements ReadOnlyFast {
     public void sortPersons(Comparator<Person> comparator) {
         requireNonNull(comparator);
         persons.sortPersons(comparator);
+    }
+
+    public ArrayList<Integer> getPriorityCounts() {
+        String[] high = {"high"};
+        String[] medium = {"med"};
+        String[] low = {"low"};
+        ArrayList<Integer> priorityCounts = new ArrayList<>();
+        PriorityPredicate highPredicate = new PriorityPredicate(Arrays.asList(high));
+        PriorityPredicate mediumPredicate = new PriorityPredicate(Arrays.asList(medium));
+        PriorityPredicate lowPredicate = new PriorityPredicate(Arrays.asList(low));
+        filteredPersons.setPredicate(highPredicate);
+        priorityCounts.add(filteredPersons.size());
+        filteredPersons.setPredicate(mediumPredicate);
+        priorityCounts.add(filteredPersons.size());
+        filteredPersons.setPredicate(lowPredicate);
+        priorityCounts.add(filteredPersons.size());
+        return priorityCounts;
     }
 
     //// util methods

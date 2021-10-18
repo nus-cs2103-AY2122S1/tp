@@ -2,7 +2,10 @@ package seedu.fast.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -29,10 +32,13 @@ public class StatsWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
 
-    private ReadOnlyFast fast;
+    private Fast fast;
 
     @FXML
     private Label testMessage;
+
+    @FXML
+    private PieChart priorityPieChart;
 
     /**
      * Creates a new StatsWindow.
@@ -41,8 +47,20 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public StatsWindow(Stage root, ReadOnlyFast fast) {
         super(FXML, root);
-        this.fast = fast;
-        testMessage.setText(String.valueOf(fast.getPersonList().size()));
+        this.fast = (Fast) fast;
+
+        ObservableList<PieChart.Data> pieChartData =
+            FXCollections.observableArrayList(
+                new PieChart.Data("Grapefruit", 13),
+                new PieChart.Data("Oranges", 25),
+                new PieChart.Data("Plums", 10),
+                new PieChart.Data("Pears", 22),
+                new PieChart.Data("Apples", 30));
+        priorityPieChart.getData().addAll(pieChartData);
+
+        System.out.println(this.fast.getPriorityCounts().toString());
+
+
     }
 
 //    /**
@@ -57,7 +75,6 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public StatsWindow(ReadOnlyFast fast) {
         this(new Stage(), fast);
-        System.out.println("test");
     }
 
 
@@ -107,6 +124,5 @@ public class StatsWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    public void calculatePriority(Model model) {
-    }
+
 }
