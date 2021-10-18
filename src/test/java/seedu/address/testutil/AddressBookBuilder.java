@@ -30,7 +30,7 @@ public class AddressBookBuilder {
     }
 
     /**
-     * Adds a new {@code ModuleClass} to the {@code AddressBook} that we are building.
+     * Adds a new {@code ModuleLesson} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withModuleClass(ModuleLesson moduleclass) {
         addressBook.addClass(moduleclass);
