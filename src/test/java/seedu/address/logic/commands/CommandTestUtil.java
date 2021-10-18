@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -59,6 +60,8 @@ public class CommandTestUtil {
     public static final String VALID_SALARY_BOB = "5000";
     public static final String VALID_JOBTITLE_AMY = "Account Manager";
     public static final String VALID_JOBTITLE_BOB = "UIUX Designer";
+    public static final String VALID_SHIFTS_AMY = "2021-12-25 0800";
+    public static final String VALID_SHIFTS_BOB = "2021-12-26 0800";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -89,6 +92,8 @@ public class CommandTestUtil {
     public static final String SALARY_DESC_BOB = " " + PREFIX_SALARY + VALID_SALARY_BOB;
     public static final String JOBTITLE_DESC_AMY = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_AMY;
     public static final String JOBTITLE_DESC_BOB = " " + PREFIX_JOBTITLE + VALID_JOBTITLE_BOB;
+    public static final String SHIFTS_DESC_AMY = " " + PREFIX_SHIFT + VALID_SHIFTS_AMY;
+    public static final String SHIFTS_DESC_BOB = " " + PREFIX_SHIFT + VALID_SHIFTS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -131,11 +136,11 @@ public class CommandTestUtil {
         DESC_EMPLOYEE_AMY = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withLeaves(VALID_LEAVES_AMY).withSalary(VALID_SALARY_AMY)
-                .withJobTitle(VALID_JOBTITLE_AMY).build();
+                .withJobTitle(VALID_JOBTITLE_AMY).withShifts(VALID_SHIFTS_AMY).build();
         DESC_EMPLOYEE_BOB = new EditEmployeeDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withLeaves(VALID_LEAVES_BOB).withSalary(VALID_SALARY_BOB)
-                .withJobTitle(VALID_JOBTITLE_BOB).build();
+                .withJobTitle(VALID_JOBTITLE_BOB).withShifts(VALID_SHIFTS_BOB).build();
     }
 
     /**
