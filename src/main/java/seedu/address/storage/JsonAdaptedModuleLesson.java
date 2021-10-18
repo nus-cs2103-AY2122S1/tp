@@ -25,8 +25,8 @@ public class JsonAdaptedModuleLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module Lesson's %s field is missing!";
 
     private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
-    private final String day;
-    private final String time;
+    private final String lessonDay;
+    private final String lessonTime;
     private final String remark;
 
     /**
@@ -35,14 +35,14 @@ public class JsonAdaptedModuleLesson {
      */
     @JsonCreator
     public JsonAdaptedModuleLesson(@JsonProperty("moduleCodes") List<JsonAdaptedModuleCode> moduleCodes,
-                                   @JsonProperty("day") String day,
-                                   @JsonProperty("time") String time,
+                                   @JsonProperty("lessonDay") String lessonDay,
+                                   @JsonProperty("lessonTime") String lessonTime,
                                    @JsonProperty("remark") String remark) {
         if (moduleCodes != null) {
             this.moduleCodes.addAll(moduleCodes);
         }
-        this.day = day;
-        this.time = time;
+        this.lessonDay = lessonDay;
+        this.lessonTime = lessonTime;
         this.remark = remark;
     }
 
@@ -53,8 +53,8 @@ public class JsonAdaptedModuleLesson {
         moduleCodes.addAll(source.getModuleCodes().stream()
                 .map(JsonAdaptedModuleCode::new)
                 .collect(Collectors.toList()));
-        day = source.getDay().getDayAsIntString();
-        time = source.getTime().toString();
+        lessonDay = source.getDay().getDayAsIntString();
+        lessonTime = source.getTime().toString();
         remark = source.getRemark().value;
     }
 
@@ -73,19 +73,19 @@ public class JsonAdaptedModuleLesson {
         }
         final Set<ModuleCode> modelModuleCodes = new HashSet<>(lessonModuleCodes);
 
-        if (day == null) {
+        if (lessonDay == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonDay.class.getSimpleName())
             );
         }
-        final LessonDay lessonDay = new LessonDay(day);
+        final LessonDay lessonDay = new LessonDay(this.lessonDay);
 
-        if (time == null) {
+        if (lessonTime == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonTime.class.getSimpleName())
             );
         }
-        final LessonTime lessonTime = new LessonTime(time);
+        final LessonTime lessonTime = new LessonTime(this.lessonTime);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
