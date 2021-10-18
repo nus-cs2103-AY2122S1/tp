@@ -156,7 +156,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### AttendanceCommand
 
-This command serves to update the attendance status of students.
+This command serves to update the attendance status of students. A student's `Attendance` can be either attended or unattended.
 
 #### Implementation
 
@@ -174,15 +174,29 @@ For IndexWithinRange and UpdateModelAttendanceSequenceDiagram, the sequential di
 
 ![IndexWithinRangeSequenceDiagram](images/logic/commands/attendancecommand/IndexWithinRangeSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AttendanceCommand` should end in the first alt frame and restart in the second alt frame but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+If the condition is met, a `CommandException` is thrown to let the user know that the `Index` input is invalid.
 
 ![UpdateModelAttendanceSequenceDiagram](images/logic/commands/attendancecommand/UpdateModelAttendanceSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of :Student as we are creating a new :Student instance. 
 
+### ParticipationCommand
+
+This command serves to update the participation score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
+
+#### Implementation
+
+`ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring is done. `ParticipationCommand` has an additional section in the sequence diagram and it is located between the two loops in `AttendanceCommand`:
+
+![ParticipationCommandMarkAttendanceSequenceDiagram](images/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the Attendance and is only executed in the event that participationUpdate is more than 0. Otherwise, it will not run.
+
 ### SortCommand
 
-This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`.
+This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
 
 #### Implementation
 
