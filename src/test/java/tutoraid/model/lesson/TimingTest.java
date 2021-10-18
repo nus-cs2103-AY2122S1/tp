@@ -30,7 +30,7 @@ public class TimingTest {
 
         // valid Timing numbers
         assertTrue(Timing.isValidTiming("0800-1000")); // exactly 3 numbers
-        assertTrue(Timing.isValidTiming("17/2 9-10"));
+        assertTrue(Timing.isValidTiming("17/2 9-10")); // forward slash
         assertTrue(Timing.isValidTiming("Monday 9am to 11am")); // long Timing numbers
     }
 }
