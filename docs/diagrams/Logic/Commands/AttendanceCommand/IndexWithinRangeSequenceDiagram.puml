@@ -1,0 +1,16 @@
+@startuml
+!include ../../../style.puml
+Participant ":AttendanceCommand" as ac LOGIC_COLOR
+Participant ":CommandException" as ce LOGIC_COLOR
+
+activate ac
+
+alt zero based index >= size of lastShownList
+create ce
+ac -> ce ++
+ce --> ac -- : throw command exception
+<- ac :throw command exception
+else  zero based index < size of lastShownList
+end
+ac--
+@enduml
