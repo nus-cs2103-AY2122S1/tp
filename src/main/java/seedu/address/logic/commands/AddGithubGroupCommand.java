@@ -12,8 +12,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupGithub;
+import seedu.address.model.group.LinkYear;
 
 /**
  * Adds an existing student in the student list to an existing group in the group list.
@@ -34,16 +35,18 @@ public class AddGithubGroupCommand extends Command {
     public static final String MESSAGE_ADD_LINK_SUCCESS = "Link: %1$s has been added to group %2$s!";
 
     private final Index index;
-    private final GroupGithub link;
+    public final LinkYear year;
+    public final RepoName repoName;
 
     /**
      * @param index of the student in the filtered student list to add to the group
      */
-    public AddGithubGroupCommand(Index index, GroupGithub link) {
-        requireAllNonNull(index, link);
+    public AddGithubGroupCommand(Index index, LinkYear year, RepoName repoName) {
+        requireAllNonNull(index, year, repoName);
 
         this.index = index;
-        this.link = link;
+        this.year = year;
+        this.repoName = repoName;
     }
 
     @Override
@@ -57,10 +60,10 @@ public class AddGithubGroupCommand extends Command {
 
         Group groupToUpdate = lastShownList.get(index.getZeroBased());
 
-        model.addGithubGroup(link, groupToUpdate);
+        model.addGithubGroup(year, repoName, groupToUpdate);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_ADD_LINK_SUCCESS,
-                link, groupToUpdate.getName().name));
+                groupToUpdate.getGroupGithubLink(year ,repoName), groupToUpdate.getName().name));
     }
 
     @Override

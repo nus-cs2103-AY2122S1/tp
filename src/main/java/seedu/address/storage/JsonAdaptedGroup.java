@@ -9,9 +9,10 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupGithub;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.group.Members;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
@@ -24,7 +25,8 @@ class JsonAdaptedGroup {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
 
     private final String name;
-    private final String link;
+    private final String year;
+    private final String repoName;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final ArrayList<JsonAdaptedStudent> members = new ArrayList<>();
 
@@ -35,13 +37,15 @@ class JsonAdaptedGroup {
     public JsonAdaptedGroup(@JsonProperty("name") String name,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("members") ArrayList<JsonAdaptedStudent> members,
-                              @JsonProperty("link") String link) {
+                              @JsonProperty("year") String year,
+                              @JsonProperty("repo") String repoName) {
         this.name = name;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
         this.members.addAll(members);
-        this.link = link;
+        this.year = year;
+        this.repoName = repoName;
     }
 
     /**
@@ -55,7 +59,8 @@ class JsonAdaptedGroup {
         members.addAll(source.getMembersSet().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
-        link = source.getGroupGithub().link;
+        year = source.getYear().year;
+        repoName = source.getRepoName().repoName;
     }
 
     /**
@@ -66,6 +71,8 @@ class JsonAdaptedGroup {
     public Group toModelType() throws IllegalValueException {
         final List<Tag> groupTags = new ArrayList<>();
         final ArrayList<Student> groupMembers = new ArrayList<>();
+        final LinkYear modelYear;
+        final RepoName modelRepoName;
 
         for (JsonAdaptedTag tag : tagged) {
             groupTags.add(tag.toModelType());
@@ -83,14 +90,20 @@ class JsonAdaptedGroup {
         }
         final GroupName modelName = new GroupName(name);
 
-        if (link == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupGithub.class.getSimpleName()));
+        if (year == null) {
+            modelYear = new LinkYear();
+        } else {
+            modelYear = new LinkYear(year);
         }
-        final GroupGithub modelLink = new GroupGithub(link);
+        if (repoName == null) {
+            modelRepoName = new RepoName();
+        } else {
+            modelRepoName = new RepoName(repoName);
+        }
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
         final Members modelMembers = new Members(groupMembers);
 
-        return new Group(modelName, modelMembers, modelLink, modelTags);
+        return new Group(modelName, modelMembers, modelYear, modelRepoName, modelTags);
     }
 }

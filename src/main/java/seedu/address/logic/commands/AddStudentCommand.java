@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,11 +24,15 @@ public class AddStudentCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_STUDENTNUMBER + "STUDENTNUMBER "
+            + PREFIX_USERNAME + "GITHUB USERNAME "
+            + PREFIX_REPO + "REPO NAME "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_STUDENTNUMBER + "A0123456B "
+            + PREFIX_USERNAME + "user "
+            + PREFIX_REPO + "ip "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

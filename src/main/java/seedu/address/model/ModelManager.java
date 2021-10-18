@@ -15,8 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupGithub;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
@@ -222,9 +223,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addGithubGroup(GroupGithub target, Group group) {
-        requireAllNonNull(target, group);
-        Group newGroup = new Group(group.getName(), group.getMembers(), target, group.getTags());
+    public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
+        requireAllNonNull(year, repoName, group);
+        Group newGroup = new Group(group.getName(), group.getMembers(), year, repoName, group.getTags());
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }

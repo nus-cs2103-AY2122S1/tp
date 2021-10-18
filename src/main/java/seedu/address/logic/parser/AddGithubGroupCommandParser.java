@@ -10,7 +10,8 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGithubGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GroupGithub;
+import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.LinkYear;
 
 /**
  * Parses input arguments and creates a new MarkStudentAttCommand object
@@ -40,13 +41,10 @@ public class AddGithubGroupCommandParser implements Parser<AddGithubGroupCommand
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGithubGroupCommand.MESSAGE_USAGE));
         }
 
-        GroupGithub.LinkYear year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
-        GroupGithub.RepoName repoName = ParserUtil.parseRepo(argMultimap.getValue(PREFIX_REPO).get());
+        LinkYear year = ParserUtil.parseYear(argMultimap.getValue(PREFIX_YEAR).get());
+        RepoName repoName = ParserUtil.parseRepo(argMultimap.getValue(PREFIX_REPO).get());
 
-
-        GroupGithub link = new GroupGithub(year, repoName);
-
-        return new AddGithubGroupCommand(index, link);
+        return new AddGithubGroupCommand(index, year, repoName);
 
     }
 

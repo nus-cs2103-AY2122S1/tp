@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -22,17 +23,28 @@ public class Group {
     // Data fields
     private final Members members;
     private final Set<Tag> tags = new HashSet<>();
-    private final GroupGithub link;
+    private final LinkYear year;
+    private final RepoName repoName;
 
     /**
      * Every field must be present and not null.
      * Constructor for a new Group object
      */
-    public Group(GroupName name, Members members, GroupGithub link, Set<Tag> tags) {
-        requireAllNonNull(name, members, link);
+    public Group(GroupName name, Members members, LinkYear year, RepoName repoName, Set<Tag> tags) {
+        requireAllNonNull(name, members);
         this.name = name;
         this.members = members;
-        this.link = link;
+        if (year != null) {
+            this.year = year;
+        } else {
+            this.year = new LinkYear();
+        }
+        if (repoName != null) {
+            this.repoName = repoName;
+        } else {
+            this.repoName = new RepoName();
+        }
+
         this.tags.addAll(tags);
     }
 
@@ -40,8 +52,9 @@ public class Group {
         requireAllNonNull(name);
         this.name = name;
         this.members = new Members();
-        this.link = new GroupGithub();
         this.tags.addAll(tags);
+        this.year = new LinkYear();
+        this.repoName = new RepoName();
     }
 
     public GroupName getName() {
@@ -63,18 +76,32 @@ public class Group {
         return Collections.unmodifiableSet(members.studentList);
     }
 
-    /**
-     * Returns the Github link
-     */
-    public GroupGithub getGroupGithub() {
-        return link;
+    public LinkYear getYear() {
+        return year;
     }
+
+    public RepoName getRepoName() {
+        return repoName;
+    }
+
 
     /**
      * Returns the formatted Github link
      */
     public String getGroupGithubLink() {
-        return String.format(link.toString(), getName());
+        if (!year.isNull() && !repoName.isNull()) {
+            return String.format(new GroupGithub(year, repoName).toString(), getName());
+        } else {
+            return "-";
+        }
+    }
+
+    public String getGroupGithubLink(LinkYear year, RepoName repoName) {
+        if (!year.isNull() && !repoName.isNull()) {
+            return String.format(new GroupGithub(year, repoName).toString(), getName());
+        } else {
+            return "-";
+        }
     }
 
 
@@ -116,14 +143,14 @@ public class Group {
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(getName())
                 && otherGroup.getMembers().equals(getMembers())
-                && otherGroup.getGroupGithub().equals(getGroupGithub())
+                && otherGroup.getGroupGithubLink().equals(getGroupGithubLink())
                 && otherGroup.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, members, tags, link);
+        return Objects.hash(name, members, tags, year, repoName);
     }
 
     @Override
@@ -133,7 +160,7 @@ public class Group {
                 .append("; Members: ")
                 .append(getMembers())
                 .append("; Github: ")
-                .append(getGroupGithub());;
+                .append(getGroupGithubLink());;
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -144,4 +171,48 @@ public class Group {
         return builder.toString();
     }
 
+    /**
+     * Represents a Group's name in tApp.
+     * Guarantees: immutable;
+     */
+    public static class GroupGithub {
+
+        public static final String GITHUB_ADDRESS = "https://github.com/";
+        public static final String MODULE_CODE = "CS2103";
+        public final LinkYear year;
+        public final RepoName repoName;
+
+        public final String link;
+
+        /**
+         * Constructs a {@code GroupGithub}.
+         *
+         * @param year A valid academic year.
+         * @param repoName A valid repo name.
+         */
+        public GroupGithub(LinkYear year, RepoName repoName) {
+            requireAllNonNull(year, repoName);
+            this.year = year;
+            this.repoName = repoName;
+            this.link = GITHUB_ADDRESS + year + "-" + MODULE_CODE + "-%1$s/" + repoName;
+        }
+
+        @Override
+        public String toString() {
+            return link;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof GroupGithub // instanceof handles nulls
+                    && link.equals(((GroupGithub) other).link)); // state check
+        }
+
+        @Override
+        public int hashCode() {
+            return link.hashCode();
+        }
+
+    }
 }

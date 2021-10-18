@@ -9,12 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.GroupGithub;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
+import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.TaskName;
@@ -88,13 +90,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code year} is invalid.
      */
-    public static GroupGithub.LinkYear parseYear(String year) throws ParseException {
+    public static LinkYear parseYear(String year) throws ParseException {
         requireNonNull(year);
         String trimmedYear = year.trim();
-        if (!GroupGithub.LinkYear.isValidYear(trimmedYear)) {
-            throw new ParseException(GroupGithub.LinkYear.MESSAGE_CONSTRAINTS);
+        if (!LinkYear.isValidYear(trimmedYear)) {
+            throw new ParseException(LinkYear.MESSAGE_CONSTRAINTS);
         }
-        return new GroupGithub.LinkYear(trimmedYear);
+        return new LinkYear(trimmedYear);
     }
 
     /**
@@ -103,13 +105,28 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code repoName} is invalid.
      */
-    public static GroupGithub.RepoName parseRepo(String repoName) throws ParseException {
+    public static RepoName parseRepo(String repoName) throws ParseException {
         requireNonNull(repoName);
         String trimmedRepoName = repoName.trim();
-        if (!GroupGithub.RepoName.isValidRepoName(trimmedRepoName)) {
-            throw new ParseException(GroupGithub.RepoName.MESSAGE_CONSTRAINTS);
+        if (!RepoName.isValidRepoName(trimmedRepoName)) {
+            throw new ParseException(RepoName.MESSAGE_CONSTRAINTS);
         }
-        return new GroupGithub.RepoName(trimmedRepoName);
+        return new RepoName(trimmedRepoName);
+    }
+
+    /**
+     * Parses a {@code String userName} into an {@code UserName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userName} is invalid.
+     */
+    public static UserName parseUserName(String userName) throws ParseException {
+        requireNonNull(userName);
+        String trimmedUserName = userName.trim();
+        if (!UserName.isValidUserName(trimmedUserName)) {
+            throw new ParseException(RepoName.MESSAGE_CONSTRAINTS);
+        }
+        return new UserName(trimmedUserName);
     }
 
 

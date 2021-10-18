@@ -90,7 +90,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, email, studentNumber, tags, attendance);
+        return new Student(name, email, studentNumber, , tags, attendance);
     }
 
 }

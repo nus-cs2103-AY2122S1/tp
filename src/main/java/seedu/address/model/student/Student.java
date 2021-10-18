@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,12 +25,14 @@ public class Student {
     private final Attendance attendance;
     private final Participation participation;
     private final Set<Tag> tags = new HashSet<>();
+    private final UserName userName;
+    private final RepoName repoName;
 
     /**
      * Every field must be present and not null.
      * Constructor for a new Person object
      */
-    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags) {
+    public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName, Set<Tag> tags) {
         requireAllNonNull(name, email, studentNumber, tags);
         this.name = name;
         this.email = email;
@@ -37,12 +40,24 @@ public class Student {
         this.tags.addAll(tags);
         this.attendance = new Attendance();
         this.participation = new Participation();
+        if (userName != null) {
+            this.userName = userName;
+        } else {
+            this.userName = new UserName();
+        }
+        if (repoName != null) {
+            this.repoName = repoName;
+        } else {
+            this.repoName = new RepoName();
+        }
+
     }
 
     /**
      * Constructor for a re-stored Person object
      */
-    public Student(Name name, Email email, StudentNumber studentNumber, Set<Tag> tags, Attendance attendance) {
+    public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
+                   Set<Tag> tags, Attendance attendance) {
         requireAllNonNull(name, email, studentNumber, tags, attendance);
         this.name = name;
         this.email = email;
@@ -50,6 +65,17 @@ public class Student {
         this.tags.addAll(tags);
         this.attendance = attendance;
         this.participation = new Participation();
+        if (userName != null) {
+            this.userName = userName;
+        } else {
+            this.userName = new UserName();
+        }
+        if (repoName != null) {
+            this.repoName = repoName;
+        } else {
+            this.repoName = new RepoName();
+        }
+
     }
 
     public Name getName() {
@@ -62,6 +88,22 @@ public class Student {
 
     public StudentNumber getStudentNumber() {
         return studentNumber;
+    }
+
+    public UserName getUserName() {
+        return userName;
+    }
+
+    public RepoName getRepoName() {
+        return repoName;
+    }
+
+    public String getStudentLink() {
+        if (!userName.isNull() && !repoName.isNull()) {
+            return new GithubLink(userName, repoName).toString();
+        } else {
+            return "-";
+        }
     }
 
     public Attendance getAttendance() {
@@ -111,13 +153,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getStudentNumber().equals((getStudentNumber()))
+                && otherStudent.getStudentLink().equals((getStudentLink()))
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, attendance, studentNumber);
+        return Objects.hash(name, email, tags, attendance, studentNumber, userName, repoName);
     }
 
     @Override
@@ -127,7 +170,9 @@ public class Student {
                 .append("; Email: ")
                 .append(getEmail())
                 .append("; Student Number: ")
-                .append(getStudentNumber());
+                .append(getStudentNumber())
+                .append("; Github Link: ")
+                .append(getStudentLink());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -137,4 +182,51 @@ public class Student {
         return builder.toString();
     }
 
+    /**
+     * Represents a Student's github ip link in tApp.
+     * Guarantees: immutable;
+     */
+    public static class GithubLink {
+
+        public static final String GITHUB_ADDRESS = "https://github.com/";
+
+        public final String fullLink;
+        public final UserName userName;
+        public final RepoName repoName;
+
+        /**
+         * Constructs a {@code GithubName}.
+         *
+         * @param userName A valid user name.
+         * @param repoName A valid repo name
+         */
+        public GithubLink(UserName userName, RepoName repoName) {
+            this.userName = userName;
+            this.repoName = repoName;
+            if (userName != null && repoName != null) {
+                this.fullLink = GITHUB_ADDRESS + userName + "/" + repoName;
+            } else {
+                this.fullLink = "-";
+            }
+        }
+
+
+        @Override
+        public String toString() {
+            return fullLink;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof GithubLink// instanceof handles nulls
+                    && fullLink.equals(((GithubLink) other).fullLink)); // state check
+        }
+
+        @Override
+        public int hashCode() {
+            return fullLink.hashCode();
+        }
+
+    }
 }

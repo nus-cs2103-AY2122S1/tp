@@ -5,8 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupGithub;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
@@ -148,7 +149,7 @@ public interface Model {
      * Adds the given github link {@code target} to a group of {@code name}.
      * A group of {@code name} must exist in the group list.
      */
-    void addGithubGroup(GroupGithub target, Group group);
+    void addGithubGroup(LinkYear year, RepoName repoName, Group group);
 
     /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
