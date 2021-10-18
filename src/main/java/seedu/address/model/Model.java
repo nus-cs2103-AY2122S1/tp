@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -83,6 +84,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered Participant list */
     ObservableList<Participant> getFilteredParticipantList();
+
+    /** Returns the Participant that satisfies the given predicate, if the Participant exists. */
+    Optional<Participant> findParticipant(Predicate<Participant> predicate);
 
     /**
      * Updates the filter of the filtered Participant list to filter by the given {@code predicate}.

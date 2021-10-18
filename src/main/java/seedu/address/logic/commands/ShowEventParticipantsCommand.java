@@ -23,7 +23,7 @@ public class ShowEventParticipantsCommand extends Command {
     public static final String COMMAND_WORD = "showParticipants";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays a list of Participants of the Event matching the given name.\n"
+            + ": Displays a list of participants of the event matching the given name.\n"
             + "Parameters: EVENT_NAME \n"
             + "Example: " + COMMAND_WORD + " CS2103T Finals ";
 
