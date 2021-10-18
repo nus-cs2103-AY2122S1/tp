@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.UndoRedoStack;
@@ -26,11 +26,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-class UndoCommandTest {
+class UndoCommandIntegrationTest {
     private static final Model DEFAULT_MODEL = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private DummyCommand dummyCommand = new DummyCommand();
-    private DummyUndoableCommand dummyUndoableCommandOne = new DummyUndoableCommand();
-    private DummyUndoableCommand dummyUndoableCommandTwo = new DummyUndoableCommand();
+    private final DummyCommand dummyCommand = new DummyCommand();
+    private final DummyUndoableCommand dummyUndoableCommandOne = new DummyUndoableCommand();
+    private final DummyUndoableCommand dummyUndoableCommandTwo = new DummyUndoableCommand();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private UndoRedoStack undoRedoStack = new UndoRedoStack();
@@ -38,29 +38,29 @@ class UndoCommandTest {
     @Test
     public void execute_success() {
         //Non-Undoable Command executed before undo chain
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Arrays.asList(dummyCommand,
+        UndoCommand undoCommand = prepareUndoCommand(Arrays.asList(dummyCommand,
                 dummyUndoableCommandOne, dummyUndoableCommandTwo));
 
         //2 Undoable commands already called
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
         assertStackStatus(Collections.singletonList(dummyUndoableCommandOne)
-                , Collections.singletonList(dummyUndoableCommandTwo));
+                , Collections.singletonList(dummyUndoableCommandTwo), undoRedoStack);
 
         //1 Undoable command already called
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Arrays.asList(dummyUndoableCommandTwo, dummyUndoableCommandOne));
+        assertStackStatus(Collections.emptyList(), Arrays.asList(dummyUndoableCommandTwo, dummyUndoableCommandOne), undoRedoStack);
     }
 
     @Test
     public void execute_failure() {
         //non-Undoable Command executed before undo
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(dummyCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(dummyCommand));
         assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_FAILURE);
-        assertStackStatus(Collections.emptyList(), Collections.emptyList());
+        assertStackStatus(Collections.emptyList(), Collections.emptyList(), undoRedoStack);
 
         //No commands to undo
         assertCommandFailure(undoCommand, model, UndoCommand.MESSAGE_FAILURE);
-        assertStackStatus(Collections.emptyList(), Collections.emptyList());
+        assertStackStatus(Collections.emptyList(), Collections.emptyList(), undoRedoStack);
     }
 
     @Test
@@ -68,41 +68,40 @@ class UndoCommandTest {
         //Add valid person to empty default model and empty undoRedoStack
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(addCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(addCommand));
 
         //Check stack after Add Command executed
-        assertStackStatus(Collections.singletonList(addCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(addCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Add Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(addCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(addCommand), undoRedoStack);
     }
 
     @Test
     public void execute_undoClearCommand() {
         ClearCommand clearCommand = new ClearCommand();
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(
-                Collections.singletonList(clearCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(clearCommand));
 
         //Check stack after Clear Command
-        assertStackStatus(Collections.singletonList(clearCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(clearCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Clear Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(clearCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(clearCommand), undoRedoStack);
     }
 
     @Test
     public void execute_undoDeleteCommand() {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(deleteCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(deleteCommand));
 
         //Check stack after Delete Command
-        assertStackStatus(Collections.singletonList(deleteCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(deleteCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Delete Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(deleteCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(deleteCommand), undoRedoStack);
     }
 
     @Test
@@ -110,28 +109,28 @@ class UndoCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(editCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(editCommand));
 
         //Check stack after Edit Command
-        assertStackStatus(Collections.singletonList(editCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(editCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Edit Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(editCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(editCommand), undoRedoStack);
     }
 
     @Test
     public void execute_undoLessonAddCommand() {
         Lesson sampleLesson = new LessonBuilder().build();
         LessonAddCommand lessonAddCommand = new LessonAddCommand(INDEX_FIRST_PERSON, sampleLesson);
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(lessonAddCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(lessonAddCommand));
 
         //Check stack after Lesson Add
-        assertStackStatus(Collections.singletonList(lessonAddCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(lessonAddCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Lesson Add Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, DEFAULT_MODEL);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonAddCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonAddCommand), undoRedoStack);
     }
 
     @Test
@@ -144,17 +143,17 @@ class UndoCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         LessonDeleteCommand lessonDeleteCommand = new LessonDeleteCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON);
-        UndoCommand undoCommand = prepareUndoCommandIntegrated(Collections.singletonList(lessonDeleteCommand));
+        UndoCommand undoCommand = prepareUndoCommand(Collections.singletonList(lessonDeleteCommand));
 
         //Check stack after Lesson Delete Command
-        assertStackStatus(Collections.singletonList(lessonDeleteCommand), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(lessonDeleteCommand), Collections.emptyList(), undoRedoStack);
 
         //Undo Lesson Delete Command
         assertCommandSuccess(undoCommand, model, UndoCommand.MESSAGE_SUCCESS, expectedModel);
-        assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonDeleteCommand));
+        assertStackStatus(Collections.emptyList(), Collections.singletonList(lessonDeleteCommand), undoRedoStack);
     }
 
-    private UndoCommand prepareUndoCommandIntegrated(List<Command> commandsBeforeUndo) {
+    private UndoCommand prepareUndoCommand(List<Command> commandsBeforeUndo) {
         //preparing the stack
         undoRedoStack = new UndoRedoStack();
         commandsBeforeUndo.forEach(command -> {
@@ -171,32 +170,6 @@ class UndoCommandTest {
         return undoCommand;
     }
 
-    /**
-     * Asserts that {@code undoRedoStack#undoStack} equals {@code undoElements}, and {@code undoRedoStack#redoStack}
-     * equals {@code redoElements}.
-     */
-    private void assertStackStatus(List<UndoableCommand> undoElements, List<UndoableCommand> redoElements) {
-        assertEquals(prepareStack(undoElements, redoElements), undoRedoStack);
-    }
-
-    /**
-     * Prepare Undo Redo stack with required undo and redo commands.
-     *
-     * @param undoCommands List of undo commands in desired sequence.
-     * @param redoCommands List of redo commands in desired redo sequence.
-     * @return prepared UndoRedoStack.
-     */
-    private UndoRedoStack prepareStack(List<UndoableCommand> undoCommands,
-                                       List<UndoableCommand> redoCommands) {
-        UndoRedoStack stack = new UndoRedoStack();
-        undoCommands.forEach(stack :: pushUndoableCommand);
-
-        Collections.reverse(redoCommands);
-        redoCommands.forEach(stack :: pushUndoableCommand);
-        redoCommands.forEach(toRedo -> stack.popUndo());
-
-        return stack;
-    }
 
     private class DummyCommand extends Command {
         @Override

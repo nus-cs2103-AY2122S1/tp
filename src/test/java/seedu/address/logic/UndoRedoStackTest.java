@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.UndoRedoStackTestUtil.assertStackStatus;
+import static seedu.address.logic.UndoRedoStackTestUtil.prepareStack;
 
 
 //Solution adapted from
@@ -31,11 +33,11 @@ class UndoRedoStackTest {
         //push on empty undo & redo stack
         undoRedoStack = prepareStack(Collections.emptyList(), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyCommand);
-        assertStackStatus(Collections.emptyList(), Collections.emptyList());
+        assertStackStatus(Collections.emptyList(), Collections.emptyList(), undoRedoStack);
         //push on non-empty undo stack
         undoRedoStack = prepareStack(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyCommand);
-        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList(), undoRedoStack);
     }
 
     @Test
@@ -43,11 +45,11 @@ class UndoRedoStackTest {
         //push on empty undo & redo stack
         undoRedoStack = prepareStack(Collections.emptyList(), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyUndoableCommandOne);
-        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList());
+        assertStackStatus(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList(), undoRedoStack);
         //push on non-empty undo stack
         undoRedoStack = prepareStack(Collections.singletonList(dummyUndoableCommandOne), Collections.emptyList());
         undoRedoStack.pushUndoableCommand(dummyUndoableCommandTwo);
-        assertStackStatus(Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo), Collections.emptyList());
+        assertStackStatus(Arrays.asList(dummyUndoableCommandOne, dummyUndoableCommandTwo), Collections.emptyList(), undoRedoStack);
     }
 
     @Test
@@ -145,7 +147,7 @@ class UndoRedoStackTest {
     private void assertPopUndoSuccess(UndoableCommand expectedCommand, List<UndoableCommand> expectedUndoElements,
                                       List<UndoableCommand> expectedRedoElements) {
         assertEquals(expectedCommand, undoRedoStack.popUndo());
-        assertStackStatus(expectedUndoElements, expectedRedoElements);
+        assertStackStatus(expectedUndoElements, expectedRedoElements, undoRedoStack);
     }
 
     /**
@@ -159,7 +161,7 @@ class UndoRedoStackTest {
             undoRedoStack.popUndo();
             fail("The expected EmptyStackException was not thrown.");
         } catch (EmptyStackException ese) {
-            assertStackStatus(expectedUndoElements, expectedRedoElements);
+            assertStackStatus(expectedUndoElements, expectedRedoElements, undoRedoStack);
         }
     }
 
@@ -171,7 +173,7 @@ class UndoRedoStackTest {
     private void assertPopRedoSuccess(UndoableCommand expectedCommand, List<UndoableCommand> expectedUndoElements,
                                       List<UndoableCommand> expectedRedoElements) {
         assertEquals(expectedCommand, undoRedoStack.popRedo());
-        assertStackStatus(expectedUndoElements, expectedRedoElements);
+        assertStackStatus(expectedUndoElements, expectedRedoElements, undoRedoStack);
     }
 
     /**
@@ -185,37 +187,10 @@ class UndoRedoStackTest {
             undoRedoStack.popRedo();
             fail("The expected EmptyStackException was not thrown.");
         } catch (EmptyStackException ese) {
-            assertStackStatus(expectedUndoElements, expectedRedoElements);
+            assertStackStatus(expectedUndoElements, expectedRedoElements, undoRedoStack);
         }
     }
 
-
-    /**
-     * Asserts that {@code undoRedoStack#undoStack} equals {@code undoElements}, and {@code undoRedoStack#redoStack}
-     * equals {@code redoElements}.
-     */
-    private void assertStackStatus(List<UndoableCommand> undoElements, List<UndoableCommand> redoElements) {
-        assertEquals(prepareStack(undoElements, redoElements), undoRedoStack);
-    }
-
-    /**
-     * Prepare Undo Redo stack with required undo and redo commands.
-     *
-     * @param undoElements List of undo commands in desired sequence.
-     * @param redoElements List of redo commands in desired redo sequence.
-     * @return prepared UndoRedoStack.
-     */
-    private UndoRedoStack prepareStack(List<UndoableCommand> undoElements,
-           List<UndoableCommand> redoElements) {
-        UndoRedoStack stack = new UndoRedoStack();
-        undoElements.forEach(stack :: pushUndoableCommand);
-
-        Collections.reverse(redoElements);
-        redoElements.forEach(stack :: pushUndoableCommand);
-        redoElements.forEach(toRedo -> stack.popUndo());
-
-        return stack;
-    }
 
     private class DummyCommand extends Command {
         @Override
