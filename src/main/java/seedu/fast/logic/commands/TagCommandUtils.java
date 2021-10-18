@@ -33,15 +33,4 @@ public class TagCommandUtils {
         return numberOfPriorityTags > 1;
     }
 
-    /**
-     * Checks if a given Set of Tags contains multiple Investment Plan Tags.
-     *
-     * @param tags The Set of Tags to be checked.
-     * @return A boolean indicating the result.
-     */
-    public static boolean hasMultipleInvestmentPlanTags(Set<Tag> tags) {
-        //TODO: to be implemented when IP tags are added
-        return false;
-    }
-
 }

@@ -19,7 +19,11 @@ public class InvestmentPlanTag extends Tag {
             + "edit INDEX t/ ip/INVESTMENT_PLAN\n\n"
             + "Example: \n"
             + "edit 1 t/ ip/life\n"
-            + "edit 3 t/ ip/motor"; //TODO further edit message usage after implementation
+            + "edit 3 t/ ip/motor\n\n"
+            + "Parameters (using Tag): \n"
+            + "tag INDEX t/ a/ ip/INVESTMENT_PLAN d/ ip/INVESTMENT_PLAN\n\n"
+            + "Example: \n"
+            + "t/ a/ ip/save d/ ip/property";
     public static final String INVESTMENT_PLAN_VALIDATION_REGEX = LifeInsurance.COMMAND + "|"
             + MotorInsurance.COMMAND + "|"
             + HealthInsurance.COMMAND + "|"

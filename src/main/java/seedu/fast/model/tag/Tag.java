@@ -63,6 +63,10 @@ public class Tag {
         if (hasPriorityTagTerm) {
             return new PriorityTag(term);
         }
+        boolean hasInvestmentPlanTerm = term.matches(InvestmentPlanTag.INVESTMENT_PLAN_VALIDATION_REGEX);
+        if (hasInvestmentPlanTerm) {
+            return new InvestmentPlanTag(term);
+        }
         return new Tag(term);
     }
 

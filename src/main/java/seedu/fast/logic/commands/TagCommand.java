@@ -33,8 +33,6 @@ public class TagCommand extends Command {
     public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";
     public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each person can only have one Priority tag!";
-    public static final String MESSAGE_MULTIPLE_INVESTMENT_PLAN_TAGS = "Each person can only have one Investment" +
-            " Plan Tag!";
 
     private final Index index;
     private Set<Tag> addTags;
@@ -79,12 +77,9 @@ public class TagCommand extends Command {
             }
         }
 
+        //add any additional tag constraint checks here, for priority and investment plan tags
         if (TagCommandUtils.hasMultiplePriorityTags(newTags)) {
             throw new CommandException(MESSAGE_MULTIPLE_PRIORITY_TAGS);
-        }
-
-        if (TagCommandUtils.hasMultipleInvestmentPlanTags(newTags)) {
-            throw new CommandException(MESSAGE_MULTIPLE_INVESTMENT_PLAN_TAGS);
         }
 
         Person editedPerson = new Person(

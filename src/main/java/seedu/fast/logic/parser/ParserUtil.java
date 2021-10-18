@@ -22,6 +22,7 @@ import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
+import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
@@ -308,7 +309,22 @@ public class ParserUtil {
     }
 
     public static String parseInvestmentPlanTag(String tagName) {
-        //TODO
-        return "";
+        switch (tagName) {
+        case InvestmentPlanTag.LifeInsurance.COMMAND:
+            return InvestmentPlanTag.LifeInsurance.NAME;
+        case InvestmentPlanTag.MotorInsurance.COMMAND:
+            return InvestmentPlanTag.MotorInsurance.NAME;
+        case InvestmentPlanTag.HealthInsurance.COMMAND:
+            return InvestmentPlanTag.HealthInsurance.NAME;
+        case InvestmentPlanTag.TravelInsurance.COMMAND:
+            return InvestmentPlanTag.TravelInsurance.NAME;
+        case InvestmentPlanTag.PropertyInsurance.COMMAND:
+            return InvestmentPlanTag.PropertyInsurance.NAME;
+        case InvestmentPlanTag.Investment.COMMAND:
+            return InvestmentPlanTag.Investment.NAME;
+        default:
+            return InvestmentPlanTag.Savings.NAME;
+            //it is guaranteed that the default case will always be an savings investment plan tag.
+        }
     }
 }
