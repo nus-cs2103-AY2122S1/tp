@@ -27,6 +27,7 @@ import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
 import seedu.address.logic.commands.ShowEventParticipantsCommand;
 import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -111,6 +112,9 @@ public class AddressBookParser {
 
         case RemoveParticipantFromEventByIndexCommand.COMMAND_WORD:
             return new RemoveParticipantFromEventByIndexParser().parse(arguments);
+
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommandParser().parse(arguments);
 
         case ShowEventDetailsCommand.COMMAND_WORD:
             return new ShowEventDetailsCommandParser().parse(arguments);
