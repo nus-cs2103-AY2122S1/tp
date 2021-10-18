@@ -8,20 +8,35 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import javafx.scene.image.Image;
-import org.json.JSONObject;
-//import org.json.simple.JSONObject;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import seedu.address.commons.core.LogsCenter;
 
+/**
+ * Helps in obtaining data from the GitHub API.
+ */
 public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
+
     private static final String URL_PREFIX = "https://api.github.com/users/";
-    private final Image defaultUserProfilePicture = new Image(this.getClass().getResourceAsStream("/images/profile.png"));
     private static int responseCode;
     private static URL url;
+    private final Image defaultUserProfilePicture = new Image(this.getClass().getResourceAsStream("/images/profile.png"));
 
-    private GitHubUtil(String userName) {
+    /**
+     * Initializes a GitHubUtil Object.
+     */
+    public GitHubUtil() {
+    }
+
+    /**
+     * Establishes a connection to the server, and
+     * updates the response code accordingly.
+     *
+     * @param userName The name of the user.
+     */
+    public void establishConnection(String userName) {
         String userUrl = URL_PREFIX + userName;
 
         try {
@@ -39,10 +54,18 @@ public class GitHubUtil {
         }
     }
 
-    public static JSONObject getProfile(String userName) throws RuntimeException {
-        assert userName != null || userName != "" : "No UserName Found";
+    /**
+     * Returns a {@code JSONObject} consisting of the user data
+     * obtained from the GitHub API.
+     *
+     * @param userName The name of the user.
+     * @return A {@code JSONObject} consisting of the user data.
+     * @throws RuntimeException If the server did not respond well.
+     */
+    public JSONObject getProfile(String userName) throws RuntimeException {
+        assert userName != null && userName != "" : "No UserName Found";
 
-        GitHubUtil g = new GitHubUtil(userName);
+        establishConnection(userName);
         JSONObject data = null;
 
         if (responseCode != 200) {
@@ -73,29 +96,40 @@ public class GitHubUtil {
         return data;
     }
 
-    public static Image getProfilePicture(String userName) {
-        assert userName != null || userName != "" : "No UserName Found";
+    /**
+     * Returns the profile picture of the requested
+     * user on GitHub.
+     *
+     * @param userName The name of the user.
+     * @return An {@code Image} object with the users profile picture in it.
+     */
+    public Image getProfilePicture(String userName) {
+        assert userName != null && userName != "" : "No UserName Found";
         JSONObject jsonObject = null;
 
         try {
             jsonObject = getProfile(userName);
-
-            if (responseCode != 200) {
-                return this.getClass().getResourceAsStream("/images/profile.png";
-            }
         } catch (RuntimeException e) {
             logger.severe("Profile Picture Could not be obtained. Using default.");
+            return defaultUserProfilePicture;
         }
 
-        assert jsonObject != null;
+        assert jsonObject != null : "No Data Found";
 
-        String userProfileUrl = jsonObject.getString("avatar_url");
+        String userProfileUrl = (String) jsonObject.get("avatar_url");
         Image image = new Image(userProfileUrl);
 
         return image;
     }
 
-    public static int getCommits(String userName) {
+    /**
+     * Returns the total number of commits a person on GitHub
+     * has made to date.
+     *
+     * @param userName The name of the user.
+     * @return The total number of commits.
+     */
+    public int getCommits(String userName) {
         return 0;
     }
 }
