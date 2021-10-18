@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     @Override
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID, PREFIX_NEXTMEETING));
+                ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
         if (!arePrefixesPresent(argMultimap, REQUIRED_PREFIXES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -68,7 +68,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
         CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
                 .orElse(CurrentPlan.DEFAULT_VALUE));
-        NextMeeting nextMeeting = NextMeeting.getNullMeeting();
+        NextMeeting nextMeeting = ParserUtil.parseNextMeetingString(argMultimap.getValue(PREFIX_NEXTMEETING)
+                .orElse(NextMeeting.NO_NEXT_MEETING));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Function<ClientId, Person> person = clientId -> new Person(clientId, name, phone, email, address, riskAppetite,

@@ -69,12 +69,26 @@ Email (**Compulsory**)| String (email address)| e/
 Contact number | Integer (8 digits long)| p/
 Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
 Last met/contacted | Date | l/
+Next Meeting | Composite (More information below table) | m/
 Current financial plans | List of Strings | c/
 Disposable Income | Integer | d/
 Address | String | a/
 Tag | String | t/
 
+### NextMeeting
+NextMeeting entails the next meeting's date, startTime, endTime and location.
+A NextMeeting needs to be inputted in the following form:
 
+`m/dd-mm-yyyy (hh:mm~hh:mm), {non-empty location string)`
+
+where
+* *date* is in the format `dd-mm-yyyy`
+* *startTime* and *endTime* are in `hh:mm` (24 hour format)
+* *location* is a non-empty string
+
+For example, a valid NextMeeting is:
+
+`m/25-12-2021 (00:00~23:59), Santa's Workshop`
 
 --------------------------------------------------------------------------------------------------------------------
 
