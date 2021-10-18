@@ -11,17 +11,22 @@ public class InvestmentPlanTag extends Tag {
     public static final String INVESTMENT_PLAN_TAG_PREFIX = "ip/";
 
     public static final String MESSAGE_USAGE = "Investment Plan tag: label a person with a investment plan. "
-            + "The priority can be high, med, or low\n"
-            + "Similar to tag, to apply an Investment Plan Tag, you have to use Add,Edit, or Tag command.\n\n"
+            + "The investment plans available are: \n"
+            + "Life Insurance, Motor insurance, Health insurance, Travel insurance, \n" +
+            "Property insurance, Investment and Savings.\n"
+            + "Similar to tag, to apply an Investment Plan Tag, you have to use Add, Edit, or Tag command.\n\n"
             + "Parameters (using Edit): \n"
-            + "edit INDEX t/ pr/PRIORITY\n\n"
+            + "edit INDEX t/ ip/INVESTMENT_PLAN\n\n"
             + "Example: \n"
-            + "edit 1 t/ pr/low\n"
-            + "edit 3 t/ pr/high";
-    public static final String PRIORITY_VALIDATION_REGEX = PriorityTag.LowPriority.COMMAND + "|"
-            + PriorityTag.MediumPriority.COMMAND + "|"
-            + PriorityTag.HighPriority.COMMAND;
-
+            + "edit 1 t/ ip/life\n"
+            + "edit 3 t/ ip/motor"; //TODO further edit message usage after implementation
+    public static final String INVESTMENT_PLAN_VALIDATION_REGEX = LifeInsurance.COMMAND + "|"
+            + MotorInsurance.COMMAND + "|"
+            + HealthInsurance.COMMAND + "|"
+            + TravelInsurance.COMMAND + "|"
+            + PropertyInsurance.COMMAND + "|"
+            + Investment.COMMAND + "|"
+            + Savings.COMMAND;
     /**
      * Constructs a {@code PriorityTag}.
      * @param tagName A valid tag name.
@@ -31,7 +36,94 @@ public class InvestmentPlanTag extends Tag {
     }
 
     /**
-     * Class containing relevant fields for a  Tag.
+     * Class containing relevant fields for a LifeInsurance Tag.
      */
+    public class LifeInsurance {
+
+        public static final String NAME = "LifeInsurance";
+
+        public static final String TERM = "life";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a MotorInsurance Tag.
+     */
+    public class MotorInsurance {
+
+        public static final String NAME = "MotorInsurance";
+
+        public static final String TERM = "motor";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a HealthInsurance Tag.
+     */
+    public class HealthInsurance {
+
+        public static final String NAME = "HealthInsurance";
+
+        public static final String TERM = "health";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a TravelInsurance Tag.
+     */
+    public class TravelInsurance {
+
+        public static final String NAME = "TravelInsurance";
+
+        public static final String TERM = "travel";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a PropertyInsurance Tag.
+     */
+    public class PropertyInsurance {
+
+        public static final String NAME = "PropertyInsurance";
+
+        public static final String TERM = "property";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a Investment Tag.
+     */
+    public class Investment {
+
+        public static final String NAME = "investment";
+
+        public static final String TERM = "invest";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
+
+    /**
+     * Class containing relevant fields for a Savings Tag.
+     */
+    public class Savings {
+
+        public static final String NAME = "Savings";
+
+        public static final String TERM = "save";
+
+        public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
+
+    }
 
 }
