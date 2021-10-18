@@ -33,14 +33,14 @@ public class FilterCommandTest {
         Grade firstGrade = new Grade("S1");
         Grade secondGrade = new Grade("S2");
 
-        FilterCommand filterFirstCommand = new FilterCommand(firstGrade);
-        FilterCommand filterSecondCommand = new FilterCommand(secondGrade);
+        FilterCommand filterFirstCommand = new FilterCommand(firstGrade, null);
+        FilterCommand filterSecondCommand = new FilterCommand(secondGrade, null);
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
         // same values -> returns true
-        FilterCommand filterFirstCommandCopy = new FilterCommand(firstGrade);
+        FilterCommand filterFirstCommandCopy = new FilterCommand(firstGrade, null);
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
         // different types -> returns false
@@ -59,7 +59,7 @@ public class FilterCommandTest {
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
         Grade grade = new Grade("S3");
-        FilterCommand command = new FilterCommand(grade);
+        FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -73,7 +73,7 @@ public class FilterCommandTest {
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
         Grade grade = new Grade("P2");
-        FilterCommand command = new FilterCommand(grade);
+        FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,7 +88,7 @@ public class FilterCommandTest {
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);
         Grade grade = new Grade("S2");
         MATH_S2.addStudent(BENSON);
-        FilterCommand command = new FilterCommand(grade);
+        FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
