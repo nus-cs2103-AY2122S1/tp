@@ -5,21 +5,13 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
-import seedu.fast.model.Model;
-import seedu.fast.model.ModelManager;
 import seedu.fast.model.ReadOnlyFast;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
-import seedu.fast.model.person.Person;
-import seedu.fast.model.person.PriorityPredicate;
-import seedu.fast.model.tag.PriorityTag;
-
 
 
 /**
@@ -47,28 +39,23 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public StatsWindow(Stage root, ReadOnlyFast fast) {
         super(FXML, root);
+
+        // Since StatsWindow receives a Fast instance, it is safe to type cast it
         this.fast = (Fast) fast;
 
         ObservableList<PieChart.Data> pieChartData =
             FXCollections.observableArrayList(
-                new PieChart.Data("Grapefruit", 13),
-                new PieChart.Data("Oranges", 25),
-                new PieChart.Data("Plums", 10),
-                new PieChart.Data("Pears", 22),
-                new PieChart.Data("Apples", 30));
+                new PieChart.Data("High Priority", this.fast.getHighPriorityCounts()),
+                new PieChart.Data("Medium Priority", this.fast.getMediumPriorityCounts()),
+                new PieChart.Data("Low Priority", this.fast.getLowPriorityCounts()));
         priorityPieChart.getData().addAll(pieChartData);
 
-        System.out.println(this.fast.getPriorityCounts().toString());
-
+//        System.out.println(this.fast.getHighPriorityCounts());
+//        System.out.println(this.fast.getMediumPriorityCounts());
+//        System.out.println(this.fast.getLowPriorityCounts());
 
     }
 
-//    /**
-//     * Creates a new HelpWindow.
-//     */
-//    public StatsWindow() {
-//        this(new Stage());
-//    }
 
     /**
      * Creates a new HelpWindow.
@@ -78,23 +65,22 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
 
-
     /**
      * Shows the stats window.
      *
      * @throws IllegalStateException <ul>
-     *                                   <li>
-     *                                       if this method is called on a thread other than the JavaFX Application Thread.
-     *                                   </li>
-     *                                   <li>
-     *                                       if this method is called during animation or layout processing.
-     *                                   </li>
-     *                                   <li>
-     *                                       if this method is called on the primary stage.
-     *                                   </li>
-     *                                   <li>
-     *                                       if {@code dialogStage} is already showing.
-     *                                   </li>
+     *                               <li>
+     *                               if this method is called on a thread other than the JavaFX Application Thread.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called during animation or layout processing.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called on the primary stage.
+     *                               </li>
+     *                               <li>
+     *                               if {@code dialogStage} is already showing.
+     *                               </li>
      *                               </ul>
      */
     public void show() {

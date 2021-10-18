@@ -108,21 +108,25 @@ public class Fast implements ReadOnlyFast {
         persons.sortPersons(comparator);
     }
 
-    public ArrayList<Integer> getPriorityCounts() {
+    public int getHighPriorityCounts() {
         String[] high = {"high"};
-        String[] medium = {"med"};
-        String[] low = {"low"};
-        ArrayList<Integer> priorityCounts = new ArrayList<>();
         PriorityPredicate highPredicate = new PriorityPredicate(Arrays.asList(high));
-        PriorityPredicate mediumPredicate = new PriorityPredicate(Arrays.asList(medium));
-        PriorityPredicate lowPredicate = new PriorityPredicate(Arrays.asList(low));
         filteredPersons.setPredicate(highPredicate);
-        priorityCounts.add(filteredPersons.size());
+        return filteredPersons.size();
+    }
+
+    public int getMediumPriorityCounts() {
+        String[] medium = {"med"};
+        PriorityPredicate mediumPredicate = new PriorityPredicate(Arrays.asList(medium));
         filteredPersons.setPredicate(mediumPredicate);
-        priorityCounts.add(filteredPersons.size());
+        return filteredPersons.size();
+    }
+
+    public int getLowPriorityCounts() {
+        String[] low = {"low"};
+        PriorityPredicate lowPredicate = new PriorityPredicate(Arrays.asList(low));
         filteredPersons.setPredicate(lowPredicate);
-        priorityCounts.add(filteredPersons.size());
-        return priorityCounts;
+        return filteredPersons.size();
     }
 
     //// util methods
