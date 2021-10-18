@@ -30,8 +30,8 @@ public class ShowCommandTest {
         Student studentToShow = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         ShowCommand showCommand = new ShowCommand(INDEX_FIRST_STUDENT);
         ModelManager expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
-        CommandResult expectedCommandResult = new CommandResult(ShowCommand.MESSAGE_SHOW_STUDENT_SUCCESS,
-                false, false, true, studentToShow);
+        ShowCommandResult expectedCommandResult = new ShowCommandResult(ShowCommand.MESSAGE_SHOW_STUDENT_SUCCESS,
+                                                                        studentToShow);
 
         assertCommandSuccess(showCommand, model, expectedCommandResult, expectedModel);
     }
