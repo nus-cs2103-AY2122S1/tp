@@ -24,10 +24,18 @@ public class HashGeneratorTest {
         Path filepath = Paths.get("src", "test", "data", "VersionControlTest", "ParserTest", filename);
         assertTrue(() -> filepath.toFile().exists());
 
-        for (HashMethod hashMethod: supportedMethods) {
-            HashGenerator generator = new HashGenerator(hashMethod);
-            String actualHash = assertDoesNotThrow(() -> generator.generateHashFromFileV2(filepath));
-            assertEquals(expectedHash.get(hashMethod), actualHash);
-        }
+        // SHA1
+        HashMethod hashMethod = HashMethod.SHA1;
+        HashGenerator generator = new HashGenerator(hashMethod);
+        HashGenerator finalGenerator = generator;
+        String actualHash = assertDoesNotThrow(() -> finalGenerator.generateHashFromFileV2(filepath));
+        assertEquals(expectedHash.get(hashMethod), actualHash);
+
+        // SHA256
+        hashMethod = HashMethod.SHA256;
+        generator = new HashGenerator(hashMethod);
+        HashGenerator finalGenerator1 = generator;
+        actualHash = assertDoesNotThrow(() -> finalGenerator1.generateHashFromFileV2(filepath));
+        assertEquals(expectedHash.get(hashMethod), actualHash);
     }
 }
