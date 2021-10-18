@@ -13,7 +13,9 @@ import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.TutorAidParser;
 import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.Model;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.storage.Storage;
 
@@ -47,6 +49,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveStudentBook(model.getStudentBook());
+            storage.saveLessonBook(model.getLessonBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -67,6 +70,21 @@ public class LogicManager implements Logic {
     @Override
     public Path getStudentBookFilePath() {
         return model.getStudentBookFilePath();
+    }
+
+    @Override
+    public ReadOnlyLessonBook getLessonBook() {
+        return model.getLessonBook();
+    }
+
+    @Override
+    public ObservableList<Lesson> getFilteredLessonList() {
+        return model.getFilteredLessonList();
+    }
+
+    @Override
+    public Path getLessonBookFilePath() {
+        return model.getLessonBookFilePath();
     }
 
     @Override

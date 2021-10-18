@@ -11,32 +11,28 @@ import java.util.Objects;
 public class Lesson {
 
     // Identity Fields
-    private final Name name;
+    private final LessonName lessonName;
 
     // Data Fields
-    private final Timing timing;
     private final Capacity capacity;
     private final Price price;
     private final Students students;
+    private final Timing timing;
 
     /**
      * Every field must be present and not null.
      */
-    public Lesson(Name name, Capacity capacity, Price price, Students students, Timing timing) {
-        requireAllNonNull(name, capacity, price, students, timing);
-        this.name = name;
-        this.timing = timing;
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
+        requireAllNonNull(lessonName, capacity, price, students, timing);
+        this.lessonName = lessonName;
         this.capacity = capacity;
         this.price = price;
         this.students = students;
+        this.timing = timing;
     }
 
-    public Name getName() {
-        return name;
-    }
-
-    public Timing getTiming() {
-        return timing;
+    public LessonName getLessonName() {
+        return lessonName;
     }
 
     public Capacity getCapacity() {
@@ -51,6 +47,10 @@ public class Lesson {
         return students;
     }
 
+    public Timing getTiming() {
+        return timing;
+    }
+
     /**
      * Returns true if both lessons have the same name.
      * This defines a weaker notion of equality between two lessons.
@@ -61,7 +61,7 @@ public class Lesson {
         }
 
         return otherLesson != null
-                && otherLesson.getName().equals(this.getName());
+                && otherLesson.getLessonName().equals(this.getLessonName());
     }
 
     /**
@@ -79,28 +79,28 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.getName().equals(getName())
-                && otherLesson.getTiming().equals(getTiming())
+        return otherLesson.getLessonName().equals(getLessonName())
                 && otherLesson.getCapacity().equals(getCapacity())
                 && otherLesson.getPrice().equals(getPrice())
-                && otherLesson.getStudents().equals(getStudents());
+                && otherLesson.getStudents().equals(getStudents())
+                && otherLesson.getTiming().equals(getTiming());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, timing, capacity, price, students);
+        return Objects.hash(lessonName, timing, capacity, price, students);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
 
-        builder.append(getName());
+        builder.append(getLessonName());
 
-        if (name != null) {
+        if (lessonName != null) {
             builder.append("; Lesson's name: ")
-                    .append(getName());
+                    .append(getLessonName());
         }
 
         if (timing != null) {
@@ -126,5 +126,4 @@ public class Lesson {
 
         return builder.toString();
     }
-
 }

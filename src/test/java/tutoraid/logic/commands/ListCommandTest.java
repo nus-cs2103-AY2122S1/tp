@@ -7,6 +7,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.testutil.TypicalIndexes;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 /**
@@ -19,8 +20,9 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        model = new ModelManager(TypicalStudents.getTypicalStudentBook(),
+                TypicalLessons.getTypicalLessonBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
     }
 
     @Test

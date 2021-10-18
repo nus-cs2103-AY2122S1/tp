@@ -14,7 +14,9 @@ import org.junit.jupiter.api.Test;
 import tutoraid.commons.core.GuiSettings;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.LessonBookBuilder;
 import tutoraid.testutil.StudentBookBuilder;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class ModelManagerTest {
@@ -94,15 +96,52 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setLessonBookFilePath_nullPath_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.setLessonBookFilePath(null));
+    }
+
+    @Test
+    public void setLessonBookFilePath_validPath_setsLessonBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setLessonBookFilePath(path);
+        assertEquals(path, modelManager.getLessonBookFilePath());
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> modelManager.hasLesson(null));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInLessonBook_returnsFalse() {
+        assertFalse(modelManager.hasLesson(TypicalLessons.MATHS_ONE));
+    }
+
+    @Test
+    public void hasLesson_lessonInLessonBook_returnsTrue() {
+        modelManager.addLesson(TypicalLessons.MATHS_ONE);
+        assertTrue(modelManager.hasLesson(TypicalLessons.MATHS_ONE));
+    }
+
+    @Test
+    public void getFilteredLessonList_modifyList_throwsUnsupportedOperationException() {
+        Assert.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredLessonList()
+                .remove(0));
+    }
+
+    @Test
     public void equals() {
         StudentBook studentBook = new StudentBookBuilder().withStudent(TypicalStudents.ALICE)
             .withStudent(TypicalStudents.BENSON).build();
+        LessonBook lessonBook = new LessonBookBuilder().withLesson(TypicalLessons.MATHS_ONE)
+            .withLesson(TypicalLessons.SCIENCE_ONE).build();
         StudentBook differentStudentBook = new StudentBook();
+        LessonBook differentLessonBook = new LessonBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(studentBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(studentBook, userPrefs);
+        modelManager = new ModelManager(studentBook, lessonBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(studentBook, lessonBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -115,13 +154,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different studentBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentStudentBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentStudentBook, differentLessonBook, userPrefs)));
 
-        //TODO: The only test that is failing
+        // TODO: The only test that is failing
         // different filteredList -> returns false
         String[] keywords = TypicalStudents.ALICE.getStudentName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(studentBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(studentBook, lessonBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -129,6 +168,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setStudentBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(studentBook, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(studentBook, lessonBook, differentUserPrefs)));
     }
 }

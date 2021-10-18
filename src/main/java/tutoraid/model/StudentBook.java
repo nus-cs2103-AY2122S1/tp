@@ -52,7 +52,6 @@ public class StudentBook implements ReadOnlyStudentBook {
      */
     public void resetData(ReadOnlyStudentBook newData) {
         requireNonNull(newData);
-
         setStudents(newData.getStudentList());
     }
 
@@ -70,8 +69,8 @@ public class StudentBook implements ReadOnlyStudentBook {
      * Adds a student to the student book.
      * The student must not already exist in the student book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**
