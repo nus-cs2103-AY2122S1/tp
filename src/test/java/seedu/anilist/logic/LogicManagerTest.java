@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.anilist.commons.core.Messages;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.ListCommand;
@@ -62,7 +63,9 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand,
+                String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW, model.getFilteredAnimeList().size()),
+                model);
     }
 
     @Test

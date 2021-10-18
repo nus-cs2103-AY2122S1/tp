@@ -64,7 +64,7 @@ public class AnimeListParser {
             return new GenreCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -80,9 +80,6 @@ public class AnimeListParser {
 
         case UpdateStatusCommand.COMMAND_WORD:
             return new UpdateStatusCommandParser().parse(arguments);
-
-        case TabCommand.COMMAND_WORD:
-            return new TabCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
