@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
+import static safeforhall.testutil.TypicalEvents.BASKETBALL;
+import static safeforhall.testutil.TypicalEvents.ROAD_RELAY;
 import static safeforhall.testutil.TypicalPersons.ALICE;
+import static safeforhall.testutil.TypicalPersons.BENSON;
 import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -89,6 +92,10 @@ public class AddressBookTest {
 
     @Test
     public void findEventSuccess() {
+        addressBook.addEvent(BASKETBALL);
+        addressBook.addEvent(ROAD_RELAY);
+        assertEquals(addressBook.findEvent(new EventName("basketball")).get(), BASKETBALL);
+        assertEquals(addressBook.findEvent(new EventName("road relay")).get(), ROAD_RELAY);
     }
 
     @Test
@@ -99,7 +106,10 @@ public class AddressBookTest {
 
     @Test
     public void findPersonByRoomSuccess() {
-
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BENSON);
+        assertEquals(addressBook.findPerson(new Room("A100")).get(), ALICE);
+        assertEquals(addressBook.findPerson(new Room("A101")).get(), BENSON);
     }
 
     @Test
@@ -110,7 +120,10 @@ public class AddressBookTest {
 
     @Test
     public void findPersonByNameSuccess() {
-
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BENSON);
+        assertEquals(addressBook.findPerson(new Name("Alice Pauline")).get(), ALICE);
+        assertEquals(addressBook.findPerson(new Name("Benson Meier")).get(), BENSON);
     }
 
     @Test

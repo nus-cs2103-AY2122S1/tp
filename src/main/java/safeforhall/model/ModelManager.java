@@ -98,6 +98,10 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    /**
+     * Converts a {@code ResidentList} that can have a String of Room or Name to an Arraylist of
+     * {@code Person}
+     */
     @Override
     public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);
@@ -125,6 +129,9 @@ public class ModelManager implements Model {
         return personList;
     }
 
+    /**
+     * Reads a string of name from {@code ResidentList} and return an Arraylist of {@code Person}
+     */
     @Override
     public ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);

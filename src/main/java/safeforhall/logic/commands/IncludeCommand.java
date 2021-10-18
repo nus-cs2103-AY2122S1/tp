@@ -82,8 +82,9 @@ public class IncludeCommand extends Command {
         model.setEvent(event, editedEvent);
 
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.stream()
-                .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(), eventName));
+        String resultMsg = String.format(MESSAGE_SUCCESS, toAdd.stream()
+                .map(p -> p.getName().toString()).reduce((x, y) -> x + ", " + y).get(), eventName);
+        return new CommandResult(resultMsg);
     }
 
     @Override
