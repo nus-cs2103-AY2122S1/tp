@@ -294,21 +294,44 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone, 
-without the need to include contact details. 
+The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
+without the need to include contact details.
 
-Given below is an example usage scenario and how the addCommand mechanism behaves at each step.
+#### Usage
 
-1. The user first launches Socius and wishes to add a new contact by name, without any contact details.
+Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
 
-2. The user executes the command add n/[NAME] add a new person with no/some contact details.
+1. The user first launches Socius and adds a new contact by name, without any contact details.
 
-3. If user input is valid, 
+2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+
+3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+   instantiating a new `Person` object.
+
+4. The command communicates with the `Model` to add the person to the existing AddressBook.
+
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the AddCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![UpdatedAddCommand](images/UpdatedAddCommand.png)
 
+#### Design considerations:
+
+**Aspect: How contacts are saved with optional arguments:**
+
+* **Alternative 1 (current choice):** Save a contact, with empty strings as arguments if argument is not included in
+  input.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Save all optional attributes of a contact as Optional type.
+    * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
+    * Cons: Harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 

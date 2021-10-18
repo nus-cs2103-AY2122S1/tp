@@ -6,7 +6,7 @@ if () is ([Valid Input]) then
 :Add contact to existing list of contacts;
 :Update GUI to display list of contacts;
 else ([Else])
-:Show error message;
+:Show Invalid Command Message;
 endif
 stop
 @enduml
