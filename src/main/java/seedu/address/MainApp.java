@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -17,6 +19,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.encryption.Cryptable;
+import seedu.address.encryption.Cryptor;
+import seedu.address.encryption.EncryptionKeyGenerator;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -39,8 +44,11 @@ import seedu.address.ui.UiManager;
  * Runs the application.
  */
 public class MainApp extends Application {
-
     public static final Version VERSION = new Version(0, 2, 1, true);
+
+    private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
+    // TODO: Remove password from production branch
+    private static final String PASSWORD = "password1234";
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -49,6 +57,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected Cryptable cryptor;
 
     @Override
     public void init() throws Exception {
@@ -59,6 +68,7 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
+        cryptor = new Cryptor(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
@@ -69,7 +79,7 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
 
         ui = new UiManager(logic);
     }
@@ -82,17 +92,25 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
+                FileUtil.createFile(userPrefs.getEncryptedFilePath());
+            } else {
+                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             }
+            addressBookOptional = storage.readAddressBook();
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            FileUtil.deleteFile(storage.getAddressBookFilePath());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialData = new AddressBook();
+        } catch (InvalidAlgorithmParameterException | InvalidKeyException e) { // will not be thrown
+            logger.warning("Encryption error. Will be starting with an empty AddressBook"); // in case thrown
             initialData = new AddressBook();
         }
 
@@ -136,6 +154,7 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
+
         return initializedConfig;
     }
 
@@ -147,8 +166,8 @@ public class MainApp extends Application {
     protected UserPrefs initPrefs(UserPrefsStorage storage) {
         Path prefsFilePath = storage.getUserPrefsFilePath();
         logger.info("Using prefs file : " + prefsFilePath);
-
         UserPrefs initializedPrefs;
+
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());

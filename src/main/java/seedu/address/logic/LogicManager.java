@@ -2,11 +2,15 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.encryption.Cryptable;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,13 +31,17 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final Cryptable cryptor;
+    private final Path encryptedFilePath;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, Cryptable cryptor, Path encryptedFilePath) {
         this.model = model;
         this.storage = storage;
+        this.cryptor = cryptor;
+        this.encryptedFilePath = encryptedFilePath;
         addressBookParser = new AddressBookParser();
     }
 
@@ -45,10 +53,15 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
-        try {
+        try { // decrypt -> modify -> encrypt -> delete subroutine
+            cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());
+            cryptor.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
+            FileUtil.deleteFile(storage.getAddressBookFilePath()); // Cleanup
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } catch (InvalidKeyException | InvalidAlgorithmParameterException e) { // will not be thrown
+            throw new CommandException(e.getMessage());
         }
 
         return commandResult;
