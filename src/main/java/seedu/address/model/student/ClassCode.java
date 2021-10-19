@@ -11,6 +11,7 @@ public class ClassCode {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode can take any values, and it should not be blank";
 
+    public static final String VALIDATION_REGEX = "[G].\\d{2}";
     public final String value;
 
     /**
