@@ -8,10 +8,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.json.CDL;
@@ -20,6 +16,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
@@ -116,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(KeyCombination keyCombination, Runnable runnable) {
-        primaryScene.getAccelerators().put(keyCombination,runnable);
+        primaryScene.getAccelerators().put(keyCombination, runnable);
     }
 
     /**
