@@ -140,7 +140,7 @@ Examples:
 
 ### Go to homepage: `home`
 
-Returns to homepage
+Returns to homepage which shows the complete list of modules and students along with their tasks
 
 Format: `home`
 

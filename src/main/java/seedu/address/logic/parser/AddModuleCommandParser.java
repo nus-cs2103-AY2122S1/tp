@@ -20,7 +20,7 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
-     * @return AddCommand object.
+     * @return AddCommand object created from the user input.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {

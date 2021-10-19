@@ -28,7 +28,9 @@ public class AddModuleCommand extends AddCommand {
     private final Module toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Module}
+     *
+     * @param module The module to be added to TAB.
      */
     public AddModuleCommand(Module module) {
         requireNonNull(module);

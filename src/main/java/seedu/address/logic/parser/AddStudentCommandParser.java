@@ -25,7 +25,7 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      *
      * @param args args for deleting a module
      * @throws ParseException if {@code userInput} does not conform the expected format
-     * @return
+     * @return AddCommand object created from the user input.
      */
     @Override
     public AddCommand parse(String args) throws ParseException {

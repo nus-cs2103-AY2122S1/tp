@@ -40,15 +40,18 @@ public class AddStudentCommand extends AddCommand {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the module";
 
-    private final Student toEdit;
+    private final Student toAdd;
     private ModuleName moduleName;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Student}
+     *
+     * @param student The student to be added to a module.
+     * @param moduleName The name of the module the student will be added to.
      */
     public AddStudentCommand(Student student, ModuleName moduleName) {
         requireNonNull(student);
-        toEdit = student;
+        toAdd = student;
         this.moduleName = moduleName;
     }
 
@@ -62,12 +65,12 @@ public class AddStudentCommand extends AddCommand {
             if (mod.getName().equals(moduleName)) {
                 module = mod;
 
-                if (module.hasStudent(toEdit)) {
+                if (module.hasStudent(toAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
                 }
 
-                module.addStudent(toEdit);
-                return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, toEdit));
+                module.addStudent(toAdd);
+                return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, toAdd));
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
@@ -77,6 +80,6 @@ public class AddStudentCommand extends AddCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddStudentCommand // instanceof handles nulls
-                && toEdit.equals(((AddStudentCommand) other).toEdit));
+                && toAdd.equals(((AddStudentCommand) other).toAdd));
     }
 }
