@@ -1,0 +1,25 @@
+@startuml
+
+title Initial state
+
+package Tuitione {
+    package Lessons {
+        object Lesson {
+        lessonCode = Math-P2-Wed-1800
+        grade = P2
+        size = 0
+        }
+    }
+    package Students {
+        object Student {
+        Name = Alice
+        Grade = P2
+        }
+    }
+
+    Lesson <-R->Student
+
+}
+
+
+@end
