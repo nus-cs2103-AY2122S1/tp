@@ -20,7 +20,7 @@ public class AddClassCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASSCODE + "G06 "
-            + PREFIX_SCHEDULE + "Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm"
+            + PREFIX_SCHEDULE + "Tuesday 12:00pm to 2:00pm, Friday 12:00pm to 2:00pm "
             + PREFIX_TAG + "Best class woohoo!";
 
     public static final String MESSAGE_SUCCESS = "New class added: %1$s";
