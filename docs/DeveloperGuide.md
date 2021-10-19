@@ -312,7 +312,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * NUS CS students
 * has a need to manage their Modular Credits(MCs)
 * has a need to track the compulsory modules they are required to take
-* has a need to track their current CAP
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 **Value proposition**: keeps track of the number of MCs completed and how many left to complete for the whole course
 of study, which is a feature lacking in current tools.
