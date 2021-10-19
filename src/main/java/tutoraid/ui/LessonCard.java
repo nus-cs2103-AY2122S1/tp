@@ -12,11 +12,11 @@ public class LessonCard extends Card<Lesson> {
 
     private static final String FXML = "LessonListCard.fxml";
 
-    private static final String LESSON_NAME_LABEL = "Lesson";
-    private static final String TIMING_LABEL = "Timing";
-    private static final String PRICE_LABEL = "Price";
-    private static final String CAPACITY_LABEL = "Capacity";
-    private static final String STUDENTS_LABEL = "Students";
+    private static final String LABEL_LESSON_NAME = "Lesson";
+    private static final String LABEL_TIMING = "Timing";
+    private static final String LABEL_PRICE = "Price";
+    private static final String LABEL_CAPACITY = "Capacity";
+    private static final String LABEL_STUDENTS = "Students";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -47,10 +47,10 @@ public class LessonCard extends Card<Lesson> {
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML, lesson, displayedIndex);
         id.setText(displayedIndex + ". ");
-        lessonName.setText(formatCardLabel(LESSON_NAME_LABEL, lesson.getLessonName().lessonName));
-        timing.setText(formatCardLabel(TIMING_LABEL, lesson.getTiming().timing));
-        price.setText(formatCardLabel(PRICE_LABEL, lesson.getPrice().price));
-        capacity.setText(formatCardLabel(CAPACITY_LABEL, lesson.getCapacity().capacity));
-        students.setText(formatCardLabel(STUDENTS_LABEL, lesson.getStudents().toString()));
+        lessonName.setText(formatCardLabel(LABEL_LESSON_NAME, lesson.getLessonName().lessonName));
+        timing.setText(formatCardLabel(LABEL_TIMING, lesson.getTiming().timing));
+        price.setText(formatCardLabel(LABEL_PRICE, lesson.getPrice().price));
+        capacity.setText(formatCardLabel(LABEL_CAPACITY, lesson.getCapacity().capacity));
+        students.setText(formatCardLabel(LABEL_STUDENTS, lesson.getStudents().toString()));
     }
 }
