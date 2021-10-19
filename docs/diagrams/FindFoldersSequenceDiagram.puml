@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindFoldersCommandParser" as FindFoldersCommandParser LOGIC_COLOR
+participant "f:FindFoldersCommand" as FindFoldersCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("find -folders CS")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("find -folders CS")
+activate AddressBookParser
+
+create FindFoldersCommandParser
+AddressBookParser -> FindFoldersCommandParser
+activate FindFoldersCommandParser
+
+FindFoldersCommandParser --> AddressBookParser
+deactivate FindFoldersCommandParser
+
+AddressBookParser -> FindFoldersCommandParser : parse("CS")
+activate FindFoldersCommandParser
+
+create FindFoldersCommand
+FindFoldersCommandParser -> FindFoldersCommand
+activate FindFoldersCommand
+
+FindFoldersCommand --> FindFoldersCommandParser : f
+deactivate FindFoldersCommand
+
+FindFoldersCommandParser --> AddressBookParser : f
+deactivate FindFoldersCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindFoldersCommandParser -[hidden]-> AddressBookParser
+destroy FindFoldersCommandParser
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> FindFoldersCommand : execute()
+activate FindFoldersCommand
+
+FindFoldersCommand -> Model : updateFilteredFolderList(predicate)
+activate Model
+
+Model --> FindFoldersCommand
+deactivate Model
+
+create CommandResult
+FindFoldersCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindFoldersCommand
+deactivate CommandResult
+
+FindFoldersCommand --> LogicManager : result
+deactivate FindFoldersCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

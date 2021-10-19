@@ -155,6 +155,29 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Locating folders by name: `find -folders`
+
+#### Implementation
+
+The Sequence Diagram below illustrates the interactions within the Logic component for the `execute("find -folders CS")` API call.
+
+![FindFoldersSequenceDiagram](images/FindFoldersSequenceDiagram.png)
+
+#### Design considerations
+
+When deciding on the design for `find -folders`, we considered the existing `find` command to search for persons by name. This `find` command uses `StringUtil.containsWordIgnoreCase` which only matches full words.
+
+However, one use case we wanted to cater to was students who group their contacts by shared modules. For example, students take CS2103T and CS2101 concurrently, and may wish to search for these two folders (and other CS modules) by using the keyword `CS`. If we only matched full words, `find -folders CS` would not contain *either* of the modules `CS2103T` or `CS2101`, which is undesirable.
+
+* **Alternative 1 (current choice)**: Match partial words
+    * Pros: More intuitive behaviour for the above use case
+    * Cons: Requires a new method to be implemented
+* **Alternative 2**: Match full words only
+    * Pros: Easy to implement as this uses the same logic as finding persons by name
+    * Cons: May lead to unexpected behaviour for the above use case
+    
+Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
