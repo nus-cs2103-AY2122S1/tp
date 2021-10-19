@@ -118,6 +118,18 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Person getProfile() {
+        Person profile = null;
+        for (Person p : this.addressBook.getPersonList()) {
+            if (p.getIsMyProfile()) {
+                profile = p;
+                break;
+            }
+        }
+
+        return profile;
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

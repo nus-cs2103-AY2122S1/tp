@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CS2103T;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,18 +28,18 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withFavourite(true)
-            .withTags("friends").build();
+            .withTags("CS2100").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withStudentId("A1234567B")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withFavourite(true)
-            .withTags("owesMoney", "friends").build();
+            .withTags("CS2103T", "CS2100").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withStudentId("A1234567C")
             .withEmail("heinz@example.com").withFavourite(true).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withStudentId("A1234567D").withEmail("cornelia@example.com")
-            .withFavourite(false).withTags("friends").build();
+            .withFavourite(false).withTags("CS2103T").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withStudentId("A1234567E").withFavourite(false).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -57,10 +57,10 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_ID_AMY)
-            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_CS2100).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withStudentId(VALID_ID_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

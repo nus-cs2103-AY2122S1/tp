@@ -109,4 +109,8 @@ public class PersonBuilder {
         return new Person(name, id, phone, email, isFavourite, mods, isMyProfile);
     }
 
+    public Person buildProfile() {
+        return new Person(name, id, phone, email, isFavourite, mods, true);
+    }
+
 }
