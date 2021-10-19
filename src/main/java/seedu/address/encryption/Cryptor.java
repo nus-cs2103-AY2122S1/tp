@@ -18,6 +18,7 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FileUtil;
 
 public class Cryptor implements Cryptable {
     /**
@@ -41,17 +42,28 @@ public class Cryptor implements Cryptable {
         cipher = Cipher.getInstance(transformation);
     }
 
+    @Override
+    public void encrypt(Path sourceFilePath, Path destinationFilePath) throws InvalidKeyException, IOException {
+        assert sourceFilePath != null;
+        assert destinationFilePath != null;
+
+        if (isIllegalFileFormat(destinationFilePath)) { // Guard clause
+            throw new IOException();
+        }
+
+        logger.fine("Encrypting content to: " + destinationFilePath);
+        String content = FileUtil.readFromFile(sourceFilePath);
+        encrypt(content, destinationFilePath);
+    }
+
     /**
-     * Encrypts a string and writes the encrypted string into a file.
-     * @param content The String to be encrypted.
+     * Encrypts a string into an encrypted file.
+     * @param content The content to be encrypted.
      * @param destinationFilePath The destination file path to be written to.
      * @throws InvalidKeyException If the supplied secret key is not valid.
      */
-    @Override
-    public void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
+    private void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
         assert content != null;
-        assert destinationFilePath != null;
-        logger.fine("Encrypting content to: " + destinationFilePath);
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] iv = cipher.getIV();
@@ -66,18 +78,12 @@ public class Cryptor implements Cryptable {
         }
     }
 
-    /**
-     * @param encryptedSourceFilePath The path to the encrypted source file.
-     * @return The decrypted contents of the source file as String.
-     * @throws IOException If an {@code IOException} occurs.
-     * @throws InvalidAlgorithmParameterException
-     * @throws InvalidKeyException If the supplied key is invalid.
-     */
     @Override
     public String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
         assert encryptedSourceFilePath != null;
-        if (!isLegalFileFormat(encryptedSourceFilePath)) { // Guard clause
+
+        if (isIllegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
 
@@ -101,10 +107,10 @@ public class Cryptor implements Cryptable {
     }
 
     /**
-     * Checks if the file is in the legal format.
+     * Checks if the file is in an illegal format.
      */
-    private boolean isLegalFileFormat(Path filePath) {
+    private boolean isIllegalFileFormat(Path filePath) {
         assert filePath != null;
-        return filePath.toString().endsWith(LEGAL_FILE_FORMAT_EXTENSION);
+        return !filePath.toString().endsWith(LEGAL_FILE_FORMAT_EXTENSION);
     }
 }
