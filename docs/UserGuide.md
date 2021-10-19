@@ -17,10 +17,12 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Clearing all Data: `clear`](#clearing-all-data--clear)
     * [Adding an event: `addEvent`](#adding-an-event-addevent)
     * [Removing an event: `removeEvent`](#removing-an-event--removeevent)
+    * [Editing an event: `editEvent`](#editing-an-event--editevent)
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
     * [Sort Events: `sortEvents`](#sort-events-sortevents)
     * [Filter Events: `filterEvents`](#filter-events-filterevents)
     * [Listing all Events: `listEvents`](#list-events-listevent)
+    * [Locating Events by name: `findEvent`](#locating-events-by-name-findevent)
     * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [View Participant details: `view`](#view-participant-details-view)
@@ -125,18 +127,18 @@ Format: `list`
 
 Edits an existing Participant in Managera.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tag/TAG]…​`
 
 * Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the Participant will be removed i.e. adding of tags is not cumulative.
-* You can remove all the Participant’s tags by typing `t/` without
+* You can remove all the Participant’s tags by typing `tag/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st Participant to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd Participant to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower tag/` - Edits the name of the 2nd Participant to be `Betsy Crower` and clears all existing tags.
 
 ### Locating Participants by name: `find`
 
@@ -200,6 +202,23 @@ Example Usage:
 * `listEvents` followed by `removeEvent 2` deletes the 2nd Event on the current list.
 * `filterEvents d/2021-09-18` followed by `delete 1` deletes the 1st Event in the results of the `filterEvents` command.
 
+### Editing an event : `editEvent`
+
+Edits an existing event in Managera.
+
+Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
+
+* Edits the Event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Events list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* You can remove the time of event by typing `t/` and leaving blank after it.
+
+Example Usage:
+* `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event to be `241Km Marathon`.
+* `editEvent 2 n/2103T milestone v1.3 d/2021-10-21 t/2359` - Edits the event name, event date and event time of the 2nd Event to be `2103T milestone v1.3`, `2021-10-21` and `2359` respectively.
+
 ### Mark an Event as done: `doneEvent`
 
 Marks the specified Event in Managera as done.
@@ -236,6 +255,23 @@ Example Usage:
 Show a list of all events in Managera.
 
 Format: `listEvent`
+
+### Locating Events by name: `findEvent`
+
+Finds Events whose names contain any of the given keywords.
+
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `marathon` will match `Marathon`
+* The order of the keywords does not matter. e.g. `Marathon Commencement` will match `Commencement Marathon`
+* Only the name is searched.
+* Only full words will be matched e.g. `Marath` will not match `Marathon`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
+
+Examples:
+* `findEvent party` returns `beach party` and `Christmas party`
+* `findEvent marathon meeting` returns `240Km Marathon`, `project meeting`<br>
 
 ### Add Participant to Event: `addParticipant`
 
@@ -319,18 +355,20 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tag/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 tag/friend tag/colleague`
 **List** | `list`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent INDEX`  <br> e.g., `removeEvent 1`
+**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent n/241Km Marathon`
 **Mark an Event as done** | `doneEvent INDEX` <br> e.g., `doneEvent 1`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
 **List Events** | `listEvents`
+**Find Events** | `findEvent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findEvent Marathon Commencement`
 **Add Participant to Event** | `addParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `addParticipant id/mikerowe1 ev/CS2103T Finals`
 **Remove Participant from Event** | `removeParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `removeParticipant id/mikerowe1 ev/CS2103T Finals`
 **Show Participant Details** | `view PARTICIPANT_ID` <br> e.g., `view mikerowe1`
