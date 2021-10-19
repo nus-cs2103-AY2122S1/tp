@@ -165,6 +165,10 @@ public class ParserUtil {
 
     /**
      * Parses {@code String tagName} and returns the corresponding priority tag name.
+     *
+     * Input will always be a valid priority tag command, as validated by Tag::createTag
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
      */
     public static String parsePriorityTag(String tagName) {
         switch (tagName) {
@@ -310,6 +314,8 @@ public class ParserUtil {
 
     /**
      * Parses {@code String tagName} and returns the corresponding investment plan tag name.
+     *
+     * Input will always be a valid investment plan tag command, as validated by Tag::createTag
      * @param tagName The tag term to be parsed.
      * @return The corresponding tag name.
      */
