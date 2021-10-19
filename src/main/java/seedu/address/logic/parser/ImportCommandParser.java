@@ -36,4 +36,20 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         return new ImportCommand(fileName);
     }
+
+
+    /**
+     * Checks if the given filename is a JSON file.
+     *
+     * @param fileName Name of the specified file.
+     * @return True if the file is a JSON file, false otherwise.
+     */
+    private boolean isJson(String fileName) {
+        int length = fileName.length();
+        if (length <= 5) {
+            return false;
+        }
+        String lastFiveChars = fileName.substring(length - 5);
+        return lastFiveChars.equalsIgnoreCase(".json");
+    }
 }
