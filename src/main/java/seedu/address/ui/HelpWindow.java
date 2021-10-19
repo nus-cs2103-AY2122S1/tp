@@ -1,13 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.CommandFormat.ADD_FORMAT;
-import static seedu.address.ui.CommandFormat.DELETE_FORMAT;
-import static seedu.address.ui.CommandFormat.EDIT_FORMAT;
-import static seedu.address.ui.CommandFormat.EXIT_FORMAT;
-import static seedu.address.ui.CommandFormat.MOVE_FORMAT;
-import static seedu.address.ui.CommandFormat.REMARK_FORMAT;
-import static seedu.address.ui.CommandFormat.SORT_FORMAT;
-import static seedu.address.ui.CommandFormat.VIEW_FORFMAT;
+import static seedu.address.ui.CommandFormat.*;
 
 import java.util.logging.Logger;
 
@@ -23,7 +16,7 @@ import seedu.address.commons.core.LogsCenter;
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html#command-summary";
     public static final String HELP_MESSAGE = "Refer to the user guide for more information:\n" + USERGUIDE_URL + "\n\n"
             + ADD_FORMAT
             + DELETE_FORMAT
@@ -32,6 +25,10 @@ public class HelpWindow extends UiPart<Stage> {
             + VIEW_FORFMAT
             + REMARK_FORMAT
             + SORT_FORMAT
+            + FIND_FORMAT
+            + LIST_FORMAT
+            + TIMETABLE_FORMAT
+            + TODAY_FORMAT
             + EXIT_FORMAT;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -42,6 +39,7 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
 
     /**
      * Creates a new HelpWindow.
