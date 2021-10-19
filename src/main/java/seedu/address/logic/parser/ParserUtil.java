@@ -37,8 +37,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a string of {@code oneBasedIndex}s into an ArrayList of {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses a string of {@code oneBasedIndex}s into an ArrayList of {@code Index} and returns it. Leading and
+     * trailing whitespaces will be trimmed.
      * @throws ParseException if the specified indices are invalid (not non-zero unsigned integer).
      */
     public static ArrayList<Index> parseIndices(String oneBasedIndices) throws ParseException {
