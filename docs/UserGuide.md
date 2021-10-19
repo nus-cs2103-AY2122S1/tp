@@ -176,8 +176,7 @@ Examples:\
 
 Edits an existing staff in the Staff List.
 
-Formats:
-
+Formats:\
 `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`\
 `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
@@ -187,8 +186,7 @@ The index refers to the index number shown in the displayed staff list. The inde
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
-
+Examples:\
 `edit -i 1 p/91234567 e/johndoe@example.com`\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice r/cook`
@@ -198,8 +196,7 @@ Examples:
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
-Format:
-
+Format:\
 `find -n KEYWORD [MORE_KEYWORDS]`
 `find -i INDEX`
 
@@ -247,8 +244,7 @@ Format: `exit`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
-Formats:
-
+Formats:\
 `addShift n/name d/fullDayName-shiftNumber` \
 `addShift i/index d/fullDayName-shiftNumber`
 
@@ -256,8 +252,7 @@ Formats:
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 
-Examples:
-
+Examples:\
 `addShift n/Candice d/Monday-1` \
 `addShift i/1234 d/tuesday-0`
 
@@ -265,13 +260,11 @@ Examples:
 
 Views a specific staff’s schedule.
 
-Formats:
+Formats:\
+`viewSchedule n/name` \
+`viewSchedule i/index`
 
-`viewSchedlue n/name` \
-`viewSchedlue i/index`
-
-Examples:
-
+Examples:\
 `viewSchedule n/Candice` \
 `viewSchedule i/123`
 
@@ -280,13 +273,11 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-Formats:
-
+Formats:\
 `deleteSchedule n/name d/fullDayName-shiftNumber` \
 `deleteSchedule i/index d/fullDayName-shiftNumber`
 
-Examples:
-
+Examples:\
 `deleteSchedule n/Joe d/tuesday-2` \
 `deleteSchedule i/1278 d/friday-1`
 
@@ -299,6 +290,7 @@ Formats:\
 `editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
 Examples:\
+
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2`\
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
@@ -321,6 +313,7 @@ Examples:\
 
 Demonstration:\
 ![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
+
 
 ### Saving the data
 
@@ -360,6 +353,7 @@ Action | Format, Examples
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
+**View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
