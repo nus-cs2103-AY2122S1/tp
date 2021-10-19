@@ -14,7 +14,7 @@ Please refer to the [User Guide](https://github.com/AY2122S1-CS2103T-T17-1/tp/bl
 
 ## Developer Guide
 
-Please refer to the [Developer Guide](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/docs/UserGuide.md) for specific details.
+Please refer to the [Developer Guide](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/docs/DeveloperGuide.md) for specific details.
 
 ## Acknowledgements
 
