@@ -66,10 +66,10 @@ public class TaskCard extends UiPart<Region> {
             setAsComplete();
         }
 
-        if (task.getTaskDate().getDate() != null) {
+        if (task.getTaskDate().hasDate()) {
             date.setText(task.getTaskDate().toDateString());
         }
-        if (task.getTaskDate().getTime() != null) {
+        if (task.getTaskDate().hasTime()) {
             time.setText(task.getTaskDate().toTimeString());
         }
 
