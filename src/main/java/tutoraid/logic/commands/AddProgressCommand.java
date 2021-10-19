@@ -15,16 +15,16 @@ import tutoraid.model.student.Student;
 /**
  * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
  */
-public class AddProgressCommand extends Command {
+public class AddProgressCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "add -p";
+    public static final String COMMAND_FLAG = "-p";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a progress for a student in TutorAid identified "
+    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a progress for a student in TutorAid identified "
             + "by the index number used in the last student listing. "
             + "Existing progress will be overwritten by the input.\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "PROGRESS\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_FLAG + " 1 "
             + "Finishes Prelims.";
 
     public static final String MESSAGE_SUCCESS = "Added progress: %1$s\nFor this student: %2$s";
