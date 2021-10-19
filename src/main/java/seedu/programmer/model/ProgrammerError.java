@@ -6,7 +6,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.programmer.model.student.LabResult;
-import seedu.programmer.model.student.LabResultList;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.UniqueStudentList;
 

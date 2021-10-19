@@ -1,12 +1,12 @@
 package seedu.programmer.model.student;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
