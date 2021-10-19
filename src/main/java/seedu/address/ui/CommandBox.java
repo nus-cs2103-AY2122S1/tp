@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +21,11 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+
+    // To keep track of input history so user can switch between past inputs
+    private final List<String> pastInputs = new ArrayList<>();
+    private int inputIndex = -1;
+    private String currentInput;
 
     @FXML
     private TextField commandTextField;
@@ -44,8 +53,41 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            pastInputs.add(0, commandText);
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Switches between past inputs when user keys up or down.
+     */
+    @FXML
+    private void handleUserKeystroke(KeyEvent keyEvent) {
+        if (inputIndex == -1) {
+            // save the current input so it's accessible when returning
+            currentInput = commandTextField.getText();
+        }
+
+        switch (keyEvent.getCode()) {
+        case UP:
+            if (inputIndex + 1 < pastInputs.size()) {
+                inputIndex++;
+                commandTextField.setText(pastInputs.get(inputIndex));
+                commandTextField.end();
+            }
+            break;
+        case DOWN:
+            if (inputIndex > -1) {
+                inputIndex--;
+                String newText = inputIndex == -1 ? currentInput : pastInputs.get(inputIndex);
+                commandTextField.setText(newText);
+                commandTextField.end();
+            }
+            break;
+        default:
+            // nothing special to do otherwise
+            break;
         }
     }
 
