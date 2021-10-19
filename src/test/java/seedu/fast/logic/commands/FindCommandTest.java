@@ -24,10 +24,10 @@ import org.junit.jupiter.api.Test;
 import seedu.fast.model.Model;
 import seedu.fast.model.ModelManager;
 import seedu.fast.model.UserPrefs;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.PriorityPredicate;
-import seedu.fast.model.person.RemarkContainsKeyWordsPredicate;
-import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -39,10 +39,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        NameContainsQueriesPredicate firstPredicate =
+                new NameContainsQueriesPredicate(Collections.singletonList("first"));
+        NameContainsQueriesPredicate secondPredicate =
+                new NameContainsQueriesPredicate(Collections.singletonList("second"));
 
         PriorityPredicate thirdPredicate =
                 new PriorityPredicate(Collections.singletonList("high"));
@@ -83,7 +83,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        NameContainsQueriesPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -93,7 +93,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsQueriesPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -144,7 +144,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroTags_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        TagContainsKeyWordsPredicate predicate =
+        TagMatchesKeywordPredicate predicate =
                 prepareTagContainsKeyWordsPredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -155,7 +155,7 @@ public class FindCommandTest {
     @Test
     public void execute_oneTag_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        TagContainsKeyWordsPredicate predicate =
+        TagMatchesKeywordPredicate predicate =
                 prepareTagContainsKeyWordsPredicate("owesMoney");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -166,7 +166,7 @@ public class FindCommandTest {
     @Test
     public void execute_twoTags_threePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagContainsKeyWordsPredicate predicate =
+        TagMatchesKeywordPredicate predicate =
                 prepareTagContainsKeyWordsPredicate("friends");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -177,7 +177,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroRemarks_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        RemarkContainsKeyWordsPredicate predicate =
+        RemarkContainsKeywordPredicate predicate =
                 prepareRemarkContainsKeyWordsPredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -190,7 +190,7 @@ public class FindCommandTest {
         model.addPerson(SUGON);
         expectedModel.addPerson(SUGON);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        RemarkContainsKeyWordsPredicate predicate =
+        RemarkContainsKeywordPredicate predicate =
                 prepareRemarkContainsKeyWordsPredicate("what's DN?");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -201,8 +201,8 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private NameContainsQueriesPredicate preparePredicate(String userInput) {
+        return new NameContainsQueriesPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
@@ -215,14 +215,14 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code TagContainsKeyWordsPredicate}.
      */
-    private TagContainsKeyWordsPredicate prepareTagContainsKeyWordsPredicate(String userInput) {
-        return new TagContainsKeyWordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private TagMatchesKeywordPredicate prepareTagContainsKeyWordsPredicate(String userInput) {
+        return new TagMatchesKeywordPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
     /**
      * Parses {@code userInput} into a {@code RemarkContainsKeyWordsPredicate}.
      */
-    private RemarkContainsKeyWordsPredicate prepareRemarkContainsKeyWordsPredicate(String userInput) {
-        return new RemarkContainsKeyWordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private RemarkContainsKeywordPredicate prepareRemarkContainsKeyWordsPredicate(String userInput) {
+        return new RemarkContainsKeywordPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

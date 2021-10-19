@@ -6,11 +6,11 @@ import java.util.function.Predicate;
 
 import seedu.fast.commons.core.Messages;
 import seedu.fast.model.Model;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
-import seedu.fast.model.person.RemarkContainsKeyWordsPredicate;
-import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 
@@ -38,7 +38,7 @@ public class FindCommand extends Command {
             + "Examples: \n" + COMMAND_WORD + " alice bob charlie\n"
             + COMMAND_WORD + " "
             + PriorityTag.PRIORITY_TAG_PREFIX
-            + PriorityTag.LowPriority.TERM + "\n"
+            + PriorityTag.LowPriority.TERM + " " + PriorityTag.MediumPriority.TERM + "\n"
             + COMMAND_WORD + " "
             + FindCommand.TAG_PREFIX + "friends\n"
             + COMMAND_WORD + " "
@@ -46,7 +46,7 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsQueriesPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -54,11 +54,11 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
-    public FindCommand(TagContainsKeyWordsPredicate predicate) {
+    public FindCommand(TagMatchesKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
-    public FindCommand(RemarkContainsKeyWordsPredicate predicate) {
+    public FindCommand(RemarkContainsKeywordPredicate predicate) {
         this.predicate = predicate;
     }
 
