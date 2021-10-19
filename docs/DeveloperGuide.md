@@ -14,6 +14,7 @@ title: Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
+    * [Filter Event feature](#completed-filter-event-feature)
     * [Undo/redo feature](#proposed-undoredo-feature)
         + [Proposed implementation](#proposed-implementation)
         + [Design considerations](#design-considerations)
@@ -108,7 +109,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ParticipantListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -151,19 +152,19 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="600" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Participant` objects (which are contained in a `UniqueParticipantList` object).
+* stores the currently 'selected' `Participant` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Participant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Participant` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Participant` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagram.png" width="600" />
 
 </div>
 
@@ -188,6 +189,78 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Completed\] Filter Event feature
+
+This feature allows Managera users to filter the event list by date of event and by time.
+
+#### How the feature is implemented
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
+
+Since this feature requires Managera to take in user input and determine if the filter is by:
+
+1. Date only; or
+2. Date and Time
+
+A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser`
+parses user's input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
+`EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the event list. 
+
+The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `EventDateTimePredicate` to filter
+the event list. When the command is executed, the `model` will filter the `FilteredList<Event>` using
+the `EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in `FilterEventCommand`.
+
+
+#### Why is this implemented this way
+
+With considerations to how the `Event` class is implemented, some events do not have time associated to them.
+We feel that since all `Event` have a date associated through the `EventDate` class, filtering should
+be done primarily through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is
+included as an optional criteria for filtering.
+
+
+#### Design Considerations:
+##### Aspect: Criteria to filter by:
+
+* **Alternative 1 (Current Choice)**: By date and optionally time:
+  * Pros: 
+    1. Filtering by "date only" allows users to see both events with or without time on the specific date.
+    2. Greater flexibility on how specific users want to filter the event list by.
+  * Cons:
+    1. Unable to filter for only events that do not have time associated.
+
+
+* **Alternative 2**: By Date and Time (both fields compulsory)
+  * Pros:
+    1. Able to filter for only events that do not have time on a specific date.
+  * Cons:
+    1. Unable to get a more general filter for events occurring on a specific date.
+    2. Compulsory time field is too specific and the number of events displayed for a filter attempt might be too low. 
+
+##### Aspect: With or without prefix:
+
+* **Alternative 1 (Current Choice)**: With prefixes:
+  * Pros:
+    1. Sequence of parameters can be randomized, more flexible command syntax.
+    2. Clear to user which field is being keyed in.
+    3. Easy to implement with support of existing classes.
+  * Cons:
+    1. This adds up to the number of prefixes already present in Managera which may be hard for users to remember.
+
+
+* **Alternative 2**: Without prefix:
+  * Pros:
+    1. Clean and slightly shorter command syntax.
+    2. Less prefix to remember.
+  * Cons:
+    1. Rigid command syntax.
+    2. Requires more comprehensive implementation to deal with user input (E.g. Date Only or Date and Time)
+
+The following is the sequence diagram for how a `FilterEventCommand` works internally.
+
+![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -555,7 +628,7 @@ Preconditions: At least one Event has been added to Managera.
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage. 
+2.  Should be able to hold up to 1000 participants without a noticeable sluggishness in performance for typical usage. 
 3.  Should be able to hold up to 100 events without a noticeable sluggishness in performance for typical usage.
 4.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 5.  Should work without having to use an installer or compiler.
@@ -599,17 +672,17 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a participant
 
-1. Deleting a person while all persons are being shown
+1. Deleting a participant while all participants are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all participants using the `list` command. Multiple participants in the list.
 
    1. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No participant is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
