@@ -227,6 +227,114 @@ to sort the list of persons by their name.<br>
     
 _{more aspects and alternatives to be added}_
 
+### Appointment feature
+
+#### Current Implementation
+The appointment status will be reflected on the right side of the contact status.
+Currently, the `appointment command` has 4 different sub-features: 
+
+1. `add appointment`
+2. `edit appointment` 
+3. `delete appointment` 
+4. `track completed appointment` 
+
+The implementation of `adding`, `editing` and `deleting` an appointment is fairly similar to the process of `adding`, 
+`editing` and `deleting` a contact. 
+
+`Adding appointment`: `date` field is compulsory. Parses the `date` string and `time` string by using the built-in 
+`LocalDate` parser. The `date` string and `time` string will then be formatted by built-in `DateTimeFormatter` to the 
+required format. Make use of `String::length` method to check for the character limit imposed on the `venue` field.
+Make use of `String::equalsIgnoreCase` method to prevent user from adding appointment if it already exists.
+If all input data fields fulfill the requirements, a new `Appointment` object will be created to store the data, 
+which will be added to the `model`.
+
+`Edit appointment`: Similar to `Adding appointment`, except that `date` field is no longer compulsory. 
+Included a `EditAppointmentDescriptor` class to duplicate data fields that are not modified. 
+`EditAppointmentDescriptor::isAnyFieldEmpty` is implemented to ensure that at least 1 data field is being edited.
+Make use of `String::equalsIgnoreCase` to prevent editing a non-existent appointment.
+If all input data fields fulfills the requirements, a new `EditAppointmentDescriptor` object will be created to store 
+the data, which will be used to update the `model`.
+
+`Delete appointment`: Make use of `String::equalsIgnoreCase` to prevent deleting a non-existent appointment.
+`deletes` an appointing by creating a new `Appointment` object with empty `date`, `time` and `venue` field for the 
+specified contact in the `model`.
+
+`Track Completed Status`: Make use of the `AppointmentCount` class to keep track of the number of completed appointment 
+with the specified contact. `AppointmentCount` will be increased by 1 each time the user enters the command.
+
+Below is an example usage scenario (`adding` / `editing`):
+1. The user launches the application for the first time.
+2. The user inputs `appt 1 d/2021-10-11 t/10:00 v/NUS` to add an appointment (on 11th October 2021, 10.00am at NUS) with 
+the first listed contact.
+3. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
+4. `FastParser::parseCommand` will determine that it is an add appointment command.
+5. `FastParser::parseCommand` will call `AppointmentCommandParser::parse`.
+   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
+   2. `ParserUtil::parseIndex`, `ParserUtil::parseDateString`, `ParserUtil::parseTimeString` and 
+   `ParserUtil::parseVenueString` will be called to check and parsed the input if it passes the check (for requirement).
+   3. A new `Appointment` object with the input `date`, `time` and `venue` will be created.
+6. `AppointmentCommandParser::parse` will return a new `AppointmentCommand` object that contains the position of the 
+specified contact and the `Appointment` object. 
+7. `LogicManager` then calls the method `AppointmentCommand::execute`, which will attempt to add the new `Appointment` 
+after verifying that no appointments had been created for the specified contact yet.
+   1. `Model::setPerson` will be called to update the contact details in the model.
+   2. `AppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
+   3. Message and changes will be reflected afterwards.
+   
+(`editing appointment` will follow a similar logic)
+
+Below is an example usage scenario (`deleting`):
+1.The user inputs `dappt 1` to delete an appointment with the first listed contact.
+2.This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
+3.`FastParser::parseCommand` will determine that it is a delete appointment command.
+4.`FastParser::parseCommand` will call `DeleteAppointmentCommandParser::parse`.
+    1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
+    2. `ParserUtil::parseIndex`, will be called to check and parsed the input if it passes the check (for requirement).
+    3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
+5.`DeleteAppointmentCommandParser::parse` will return a new `DeleteAppointmentCommand` object that contains the position of the
+   specified contact and the `Appointment` object.
+6.`LogicManager` then calls the method `DeleteAppointmentCommand::execute`, which will attempt to add the new `Appointment`
+   after verifying that an appointment exists (previously) for the specified contact.
+    1. `Model::setPerson` will be called to update the contact details in the model.
+    2. Success message and changes will be reflected afterwards.
+
+Below is an example usage scenario (`tracking completed appointment`):
+1. The user inputs `done 1` to delete an appointment with the first listed contact. 
+2. This calls `LogicManager::execute` which in turn calls `FastParser::parseCommand` to parse the given input.
+3. `FastParser::parseCommand` will determine that it is a mark appointment command.
+4. `FastParser::parseCommand` will call `MarkAppointmentCommandParser::parse`. 
+   1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
+   2. `ParserUtil::parseIndex`, will be called to check and parsed the input if it passes the check (for requirement).
+   3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
+5. `MarkAppointmentCommandParser::parse` will return a new `MarkAppointmentCommand` object that contains the position of the
+specified contact and the `Appointment` object. 
+6. .`LogicManager` then calls the method `MarkAppointmentCommand::execute`, which will attempt to increment the 
+7. `appointment count` by 1 through `AppointmentCount::incrementAppointmentCount` and updates the new `Appointment`
+after verifying that an appointment exists (previously) for the specified contact.
+   1. `Model::setPerson` will be called to update the contact details in the model.
+   2. `MarkAppointmentCommand::generateSuccessMessage` will be called to generate the message to be displayed.
+   3. Success message and changes will be reflected afterwards.
+
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Dividing the appointment features into 4 sub-features.
+    * Pros:
+        1. Isolation of a single sub-feature to a specific command: more intuitive to use.
+        2. Improvement for the command syntax. Less prefix required.
+        3. Improvement over `edit` command: retains data fields not directly affected by the command.
+    * Cons:
+        1. More classes added, resulting in more lines of codes in the program.
+        2. More checks and testcases needed.
+
+* **Alternative 2:** Combine all 4 sub-features into one appointment command.
+    * Pros:
+        1. Reduce the number of commands in the application: less to manage, easier to remember.
+    * Cons:
+        1. More prefixes required, more complex syntax: less intuitive to use. 
+        2. Less abstraction, more coupling and more bug-prone: The same command class and parser class will handle all 
+      the four different feature. 
+        3. Unnecessary code would be executed to check for the type of sub-features is called in the parser class.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
