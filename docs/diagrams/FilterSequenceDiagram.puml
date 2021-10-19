@@ -23,6 +23,12 @@ create FilterCommandParser
 TuitioneParser -> FilterCommandParser
 activate FilterCommandParser
 
+FilterCommandParser --> TuitioneParser
+deactivate FilterCommandParser
+
+TuitioneParser -> FilterCommandParser : parse([g/GRADE] [s/SUBJECT])
+activate FilterCommandParser
+
 create FilterCommand
 FilterCommandParser -> FilterCommand
 activate FilterCommand
@@ -32,6 +38,9 @@ deactivate FilterCommand
 
 FilterCommandParser --> TuitioneParser : f
 deactivate FilterCommandParser
+FilterCommandParser -[hidden]-> TuitioneParser
+destroy FilterCommandParser
+
 
 TuitioneParser --> LogicManager : f
 deactivate TuitioneParser
