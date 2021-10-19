@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,24 +37,24 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        String result = "";
+        StringBuilder result = new StringBuilder();
 
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            result = "\n" + personToDelete + result;
+            result.insert(0, personToDelete);
             model.deletePerson(personToDelete);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, result.toString()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndexes.equals(((DeleteCommand) other).targetIndexes)); // state check
+                && Arrays.equals(targetIndexes, ((DeleteCommand) other).targetIndexes)); // state check
     }
 }
