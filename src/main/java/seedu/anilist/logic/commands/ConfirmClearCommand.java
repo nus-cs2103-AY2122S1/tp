@@ -1,11 +1,11 @@
 package seedu.anilist.logic.commands;
 
-import seedu.anilist.model.Model;
-import seedu.anilist.model.anime.Anime;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.anilist.model.Model;
+import seedu.anilist.model.anime.Anime;
 
 public class ConfirmClearCommand extends Command {
     public static final String COMMAND_WORD = "y";
