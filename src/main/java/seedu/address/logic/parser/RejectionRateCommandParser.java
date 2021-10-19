@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.commands.RejectionRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.position.Position;
@@ -24,7 +23,7 @@ public class RejectionRateCommandParser implements Parser<RejectionRateCommand> 
 
         if (!arePrefixesPresent(argumentMultimap, PREFIX_POSITION)
                 || !argumentMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RejectionRateCommand.MESSAGE_USAGE));
         }
 
         Position dummyPosition = ApplicantParserUtil.parsePosition(argumentMultimap.getValue(PREFIX_POSITION).get());
