@@ -179,6 +179,11 @@ public class AddFriendCommandTest {
         }
 
         @Override
+        public void unlinkFriend(Friend toUnlink, Game game) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setGamesList(ReadOnlyGamesList readOnlyGamesList) {
             throw new AssertionError("This method should not be called.");
         }

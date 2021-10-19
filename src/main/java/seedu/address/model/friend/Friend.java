@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.game.Game;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -63,6 +64,21 @@ public class Friend {
      */
     public Set<GameFriendLink> getGameFriendLinks() {
         return Collections.unmodifiableSet(gameFriendLinks);
+    }
+
+    /**
+     * Returns true if the friend is currently associated with the game provided.
+     * @param game Game to check.
+     * @return True if the friend is associated with the game.
+     */
+    public boolean hasGameAssociation(Game game) {
+        Set<GameFriendLink> gameFriendLinks = this.getGameFriendLinks();
+        if (gameFriendLinks.stream().filter(gameFriendLink -> gameFriendLink
+                .getGameId().equals(game.getGameId())).count() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

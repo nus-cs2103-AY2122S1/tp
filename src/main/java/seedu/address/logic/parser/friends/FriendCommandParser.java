@@ -8,7 +8,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.friends.AddFriendCommand;
 import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.commands.friends.GetFriendCommand;
+import seedu.address.logic.commands.friends.LinkFriendCommand;
 import seedu.address.logic.commands.friends.ListFriendCommand;
+import seedu.address.logic.commands.friends.UnlinkFriendCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -43,6 +45,12 @@ public class FriendCommandParser implements Parser<Command> {
 
         case ListFriendCommand.COMMAND_WORD:
             return new ListFriendCommandParser().parse(arguments);
+
+        case LinkFriendCommand.COMMAND_WORD:
+            return new LinkFriendCommandParser().parse(arguments);
+
+        case UnlinkFriendCommand.COMMAND_WORD:
+            return new UnlinkFriendCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_FRIEND_FLAG);

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -24,7 +24,7 @@ import seedu.address.model.gamefriendlink.UserName;
  * Contains integration tests (interaction with the Model) and unit tests for
  * {@code DeleteFriendCommand}.
  */
-public class LinkCommandTest {
+public class LinkFriendCommandTest {
 
     private final Model model = new ModelManager(getTypicalFriendsList(), getTypicalGamesList(), new UserPrefs());
 
@@ -32,30 +32,33 @@ public class LinkCommandTest {
     public void execute_validFriendIdUnfilteredList_success() {
         Friend friendToLink = model.getFilteredFriendsList().get(INDEX_FIRST_ITEM.getZeroBased());
         UserName userName = new UserName("GoldNova");
-        LinkCommand linkCommand = new LinkCommand(friendToLink.getFriendId(), GENSHIN_IMPACT.getGameId(), userName);
+        LinkFriendCommand linkFriendCommand = new LinkFriendCommand(friendToLink.getFriendId(),
+                GENSHIN_IMPACT.getGameId(), userName);
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(),
                 model.getUserPrefs());
         GameFriendLink gameFriendLink = new GameFriendLink(GENSHIN_IMPACT.getGameId(), friendToLink.getFriendId(),
                 userName);
 
         expectedModel.linkFriend(friendToLink, gameFriendLink);
-        assertCommandSuccess(linkCommand, model, linkCommand.generateSuccessMessage(friendToLink), expectedModel);
+        assertCommandSuccess(linkFriendCommand, model, linkFriendCommand.generateSuccessMessage(friendToLink),
+                expectedModel);
     }
 
     @Test
     public void execute_nonExistentFriendIdUnfilteredList_throwsCommandException() {
         UserName userName = new UserName("Smurf");
-        LinkCommand linkCommand = new LinkCommand(AMY.getFriendId(), GENSHIN_IMPACT.getGameId(), userName);
+        LinkFriendCommand linkFriendCommand = new LinkFriendCommand(AMY.getFriendId(), GENSHIN_IMPACT.getGameId(),
+                userName);
 
-        assertCommandFailure(linkCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
+        assertCommandFailure(linkFriendCommand, model, Messages.MESSAGE_NONEXISTENT_FRIEND_ID);
     }
 
     @Test
     public void execute_nonExistentGameIdUnfilteredList_throwsCommandException() {
         UserName userName = new UserName("GoldNova");
-        LinkCommand linkCommand = new LinkCommand(ALICE.getFriendId(), CSGO.getGameId(), userName);
+        LinkFriendCommand linkFriendCommand = new LinkFriendCommand(ALICE.getFriendId(), CSGO.getGameId(), userName);
 
-        assertCommandFailure(linkCommand, model, Messages.MESSAGE_NONEXISTENT_GAME_ID);
+        assertCommandFailure(linkFriendCommand, model, Messages.MESSAGE_NONEXISTENT_GAME_ID);
     }
 
 }

@@ -114,11 +114,14 @@ public interface Model {
     void updateFilteredFriendsList(Predicate<Friend> predicate);
 
     /**
-     * Links the friend {@code toLink} with the games in the HashMap.
-     * The key in the HashMap represents a {@code GAME_NAME}, while the value represents
-     * the {@code IN_GAME_USERNAME} for that game.
+     * Links the friend {@code toLink} with the game in {@code gameFriendLink}.
      */
     void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
+
+    /**
+     * Unlinks the friend {@code toUnlink} with the Game {@code game}.
+     */
+    void unlinkFriend(Friend toUnlink, Game game);
 
     //=========== GamesBook ==================================================================================
 
