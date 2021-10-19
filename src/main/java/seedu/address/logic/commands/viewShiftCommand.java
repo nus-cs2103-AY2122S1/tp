@@ -18,9 +18,9 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
  * Class representing the view schedule command
  * which views the schedule by Person.
  */
-public class FindScheduleCommand extends Command {
+public class viewShiftCommand extends Command {
     public static final String DEFAULT_MESSAGE = "Staff working at that shift: \n";
-    public static final String COMMAND_WORD = "findSchedule";
+    public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_DAY_SHIFT + " [DAY]-[SLOT NUMBER]\n"
@@ -40,13 +40,13 @@ public class FindScheduleCommand extends Command {
     private final PersonIsWorkingPredicate isWorkingPredicate;
 
     /**
-     * Constructs a FindScheduleCommand object.
+     * Constructs a viewShiftCommand object.
      *
      * @param dayOfWeek The dayOfWeek that will be checked
      * @param slotNum The slot number that will be checked
      * @param time The time that will be checked
      */
-    public FindScheduleCommand(DayOfWeek dayOfWeek, int slotNum, LocalTime time) {
+    public viewShiftCommand(DayOfWeek dayOfWeek, int slotNum, LocalTime time) {
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;
         this.time = time;
@@ -63,23 +63,23 @@ public class FindScheduleCommand extends Command {
 
         model.updateFilteredPersonList(isWorkingPredicate);
 
-        // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by FindScheduleCommandParser)
+        // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by viewShiftCommandParser)
         if (time != null && dayOfWeek != null) {
-            return executeFindScheduleByTime(staffs);
+            return executeViewShiftByTime(staffs);
         } else if (slotNum != INVALID_SLOT_NUMBER && dayOfWeek != null) {
-            return executeFindScheduleBySlot(staffs);
+            return executeViewShiftBySlot(staffs);
         } else {
             throw new CommandException(HELP_MESSAGE);
         }
     }
 
     /**
-     * Executes FindSchedule by slot number, and finds the staff working at that day of the week and slot number
+     * Executes ViewShift by slot number, and finds the staff working at that day of the week and slot number
      *
      * @param staffs The staff list that will be checked
      * @return The staff working at that day of the week and slot number
      */
-    public CommandResult executeFindScheduleBySlot(ObservableList<Person> staffs) {
+    public CommandResult executeViewShiftBySlot(ObservableList<Person> staffs) {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Person p : staffs) {
@@ -98,12 +98,12 @@ public class FindScheduleCommand extends Command {
     }
 
     /**
-     * Executes FindSchedule by slot number, and finds the staff working at that day of the week and time
+     * Executes ViewShift by slot number, and finds the staff working at that day of the week and time
      *
      * @param staffs The staff list that will be checked
      * @return The staff working at that day of the week and time
      */
-    public CommandResult executeFindScheduleByTime(ObservableList<Person> staffs) {
+    public CommandResult executeViewShiftByTime(ObservableList<Person> staffs) {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Person p : staffs) {
@@ -124,9 +124,9 @@ public class FindScheduleCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof FindScheduleCommand
-                && (this.dayOfWeek == null || this.dayOfWeek.equals(((FindScheduleCommand) other).dayOfWeek))
-                && (this.slotNum != INVALID_SLOT_NUMBER || this.slotNum == ((FindScheduleCommand) other).slotNum)
-                && (this.time == null || this.time.equals(((FindScheduleCommand) other).time)));
+                || (other instanceof viewShiftCommand
+                && (this.dayOfWeek == null || this.dayOfWeek.equals(((viewShiftCommand) other).dayOfWeek))
+                && (this.slotNum != INVALID_SLOT_NUMBER || this.slotNum == ((viewShiftCommand) other).slotNum)
+                && (this.time == null || this.time.equals(((viewShiftCommand) other).time)));
     }
 }

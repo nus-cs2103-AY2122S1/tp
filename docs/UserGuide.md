@@ -293,21 +293,21 @@ Examples:\
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
-### Find the staff working a shift: `findSchedule`
+### View all the staff working a shift: `viewShift`
 
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
 Formats:\
-`findSchedule -d [DAY]-[SHIFT NUMBER]`
-`findSchedule -t [DAY]-[HH:mm]` (Note that this is in 24-hour format)
+`viewShift -d [DAY]-[SHIFT NUMBER]`
+`viewShift -t [DAY]-[HH:mm]` (Note that this is in 24-hour format)
 
 Note that [DAY] refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon). 
 
 Examples:\
-`findSchedule -d monday-1` \
-`findSchedule -d TUESDAY-0` \
-`findSchedule -t wednesday-12:00`\
-`findSchedule -t THURSDAY-16:30`
+`viewShift -d monday-1` \
+`viewShift -d TUESDAY-0` \
+`viewShift -t wednesday-12:00`\
+`viewShift -t THURSDAY-16:30`
 
 ### Saving the data
 
