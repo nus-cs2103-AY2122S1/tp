@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -29,6 +30,47 @@
                   </Label>
                </children>
             </HBox>
+            <FlowPane id="tags" fx:id="tags">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+            </FlowPane>
+            <VBox>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="TELEGRAM" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="GITHUB" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="github" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="20.0" left="5.0" />
+               </VBox.margin>
+            </VBox>
             <VBox>
                <VBox.margin>
                   <Insets bottom="20.0" left="5.0" />
@@ -76,24 +118,6 @@
                      </VBox.margin>
                   </Label>
                   <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
-                     <VBox.margin>
-                        <Insets bottom="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
-               </children>
-            </VBox>
-            <VBox>
-               <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
-               </VBox.margin>
-               <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="TELEGRAM" textFill="#e8e8e8">
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
