@@ -24,7 +24,7 @@ title: User Guide
     * [Saving the data](#saving-the-data)
     * [Archiving data files](#archiving-data-files-coming-in-v20)
 - [FAQ](#faq)
-- [Command Summary](#command-summary)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
