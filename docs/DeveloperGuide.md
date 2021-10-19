@@ -232,7 +232,7 @@ included as an optional criteria for filtering.
     1. Unable to filter for only events that do not have time associated.
 
 
-* **Alternative 2**: By Date and Time (both fields compulsory)
+* **Alternative 2**: By Date and Time: (both fields compulsory)
   * Pros:
     1. Able to filter for only events that do not have time on a specific date.
   * Cons:
@@ -261,6 +261,57 @@ included as an optional criteria for filtering.
 The following is the sequence diagram for how a `FilterEventCommand` works internally.
 
 ![FilterEventSequenceDiagram](images/FilterEventSequenceDiagram.png)
+
+### \[Completed\] View Participant's Details feature
+
+This feature allows Managera users to look for a specific participant and view their details. The search is done using
+the participant's ID since each participant has a unique ID.
+
+#### How the feature is implemented
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `ViewCommand` in `AddressBookParser`.
+
+A `ViewCommandParser` parses the user's input and creates the `ParticipantIdMatchesGivenIdPredicate` which the 
+`ViewCommand` will use to search for the participant. `ParticipantIdMatchesGivenIdPredicate` implements 
+`Predicate<Participant>` which can be passed to a `FilteredList<Participant>` to filter out the participant. Since the
+predicate searches for the exact match, it would return only one result in the filtered list.
+
+The `ViewCommand` created by `ViewCommandParser` will contain the `ParticipantIdMatchesGivenIdPredicate` to filter
+the participant list. When the command is executed, the `model` will filter the `FilteredList<Participant>` using
+the `ParticipantIdMatchesGivenIdPredicate` and display the participant that fulfils the 
+`ParticipantIdMatchesGivenIdPredicate` contained in `ViewCommand`.
+
+#### Why is this implemented this way
+
+Since each participant has a unique ID, it provides a convenient way for the user to look for a specific participant if
+matching ID is used as the criterion. The `findParticipant` command provides similar functionality, but returns a list 
+of participants instead because it uses names, which are more imprecise. Hence, a separate command was decidedly
+implemented to allow users the ability to sieve out a single participant for a more detailed view.
+
+#### Design Considerations:
+##### Aspect: Similar participant IDs:
+
+* **Alternative 1 (Current Choice)**: Exact match:
+    * Pros:
+        1. The details of the specific participant are returned immediately, provided that the user's input is an exact
+           match of the participant's ID.
+        2. Simpler implementation, simpler for the participant to use.
+    * Cons:
+        1. The user has to know the exact ID of the participant otherwise the wrong participant may be found.
+
+
+* **Alternative 2**: Find similar IDs:
+    * Pros:
+        1. A list of participants that contain the user's input in their IDs are returned, offering greater flexibility 
+        if the user does not fully recall the exact ID of the participant they are looking for. The search can be 
+           further refined by subsequent user input to narrow it down to the specific participant.
+    * Cons:
+        1. Significantly harder implementation.
+
+The following is the sequence diagram for how a `FilterEventCommand` works internally.
+
+The following activity diagram summarizes what happens when a user executes a new command:
 
 ### \[Proposed\] Undo/redo feature
 
