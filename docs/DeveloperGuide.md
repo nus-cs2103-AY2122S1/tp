@@ -3,30 +3,34 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+    - [Acknowledgements](#acknowledgements) 
+    - [Setting up, getting started](#setting-up)
+    - [Design](#design)
+    - [Architecture](#architecture)
+    - [UI Component](#ui)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **Acknowledgements** <a name="acknowledgements"/> 
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started** <a name="setting-up"/>
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Design** <a name="design"/>
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### Architecture <a name="architecture"/>
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -67,7 +71,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component <a name="ui"/>
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
