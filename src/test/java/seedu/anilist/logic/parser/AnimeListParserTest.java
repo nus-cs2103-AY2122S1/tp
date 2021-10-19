@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_ADD;
+import static seedu.anilist.logic.commands.CommandTestUtil.ACTION_DESC_DELETE;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
 import static seedu.anilist.testutil.Assert.assertThrows;
-import static seedu.anilist.testutil.TypicalAnimes.BNHA;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
 import java.util.Arrays;
@@ -71,9 +75,12 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_genreAdd() throws Exception {
-        GenreCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder().withGenre(BNHA.getGenres()).build();
+        GenreCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder()
+                .withGenre(VALID_GENRE_SCIENCE_FICTION)
+                .build();
         GenreCommand command = (GenreCommand) parser.parseCommand(GenreCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ANIME.getOneBased() + " " + "c/add " + AnimeUtil.getGenreDescriptorDetails(descriptor));
+                + INDEX_FIRST_ANIME.getOneBased() + ACTION_DESC_ADD
+                + GENRE_DESC_SCIENCE_FICTION);
 
         GenreCommand expectedCommand = new GenreAddCommand(INDEX_FIRST_ANIME, descriptor);
         assertEquals(expectedCommand, command);
@@ -81,11 +88,12 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_genreDelete() throws Exception {
-        GenreCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder().withGenre(BNHA.getGenres()).build();
+        GenreCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder()
+                .withGenre(VALID_GENRE_SCIENCE_FICTION)
+                .build();
         GenreCommand command = (GenreCommand) parser.parseCommand(GenreCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ANIME.getOneBased() + " " + "c/delete "
-                + AnimeUtil.getGenreDescriptorDetails(descriptor));
-
+                + INDEX_FIRST_ANIME.getOneBased() + ACTION_DESC_DELETE
+                + GENRE_DESC_SCIENCE_FICTION);
         assertEquals(new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor), command);
     }
 
@@ -98,7 +106,7 @@ public class AnimeListParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + STATUS_DESC_WATCHING) instanceof ListCommand);
     }
 
     @Test

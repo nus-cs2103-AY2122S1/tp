@@ -12,21 +12,22 @@ import seedu.anilist.model.anime.Status;
 import seedu.anilist.ui.TabOption;
 
 /**
- * Lists all animes in the anime list to the user.
+ * Lists all animes or those anime with a matching status in the anime list to the user.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all animes. An optional status parameter can be"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all animes. An optional status parameter can be "
             + "provided and only animes with that status will be listed.\n"
             + "Parameters: [" + PREFIX_STATUS + "STATUS]\n"
-            + "Example: " + COMMAND_WORD + PREFIX_STATUS + "watching\n";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_STATUS + "watching\n";
     private final Predicate<Anime> predicate;
     private final Status statusToMatch;
 
     /**
      * Constructor for ListCommand. Sets predicate for filtered list
      * and sets the statusToMatch to change tabs.
+     * @param predicate containing the status the user has specified, or a predicate to show all anime
      */
     public ListCommand(Predicate<Anime> predicate, Status statusToMatch) {
         this.predicate = predicate;
@@ -48,5 +49,12 @@ public class ListCommand extends Command {
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW, model.getFilteredAnimeList().size()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ListCommand// instanceof handles nulls
+                && predicate.equals(((ListCommand) other).predicate)); // state check
     }
 }
