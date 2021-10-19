@@ -218,9 +218,15 @@ Command syntax
 
 #### Implementation
 
+The filter feature is facilitated by `FilterComnmand` and `FilterCommandParser`. The filter performs differently based on the
+types of inputs given:
+
+
+
 Object diagram
 
-Sequence diagram
+The following sequence diagram shows how the filter operation works:
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
 Activity diagram
 
