@@ -201,7 +201,7 @@ Given below is an example usage scenario:
   However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
 
 
-- Replace the exiting person with a new instance with the visit changed:
+- Replace the existing person with a new instance with the visit changed:
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with modified visit to replace the previous Person object.
 
