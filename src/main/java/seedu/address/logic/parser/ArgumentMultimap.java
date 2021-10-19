@@ -59,4 +59,12 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns true if the argMultiMap is empty.
+     */
+    public boolean isEmpty() {
+        return argMultimap.size() == 1;
+    }
+
 }

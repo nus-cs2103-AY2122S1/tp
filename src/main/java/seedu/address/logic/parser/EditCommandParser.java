@@ -3,9 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -17,6 +22,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,17 +40,24 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_NAME,
+                        PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_SALARY,
+                        PREFIX_ROLE);
 
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+        if (!argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()
+                && !argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
+            editPersonDescriptor.setStatus(ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SALARY).isPresent()) {
+            editPersonDescriptor.setSalary(ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get()));
+        }
+        if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            parseRolesForEdit(argMultimap.getAllValues(PREFIX_ROLE)).ifPresent(editPersonDescriptor::setRoles);
+        }
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -61,8 +75,21 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
+        try {
+            if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+                Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
+                return new EditCommand(index, editPersonDescriptor);
+            }
+            if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
+                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
+                return new EditCommand(name, editPersonDescriptor);
+            }
 
-        return new EditCommand(index, editPersonDescriptor);
+        } catch (ParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), e);
+        }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+
     }
 
     /**
@@ -80,4 +107,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>} if {@code roles} is non-empty.
+     * If {@code roles} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Role>} containing zero tags.
+     */
+    private Optional<Set<Role>> parseRolesForEdit(Collection<String> roles) throws ParseException {
+        assert roles != null;
+
+        if (roles.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> roleSet = roles.size() == 1 && roles.contains("") ? Collections.emptySet() : roles;
+        return Optional.of(ParserUtil.parseRoles(roleSet));
+    }
 }

@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -25,19 +26,24 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person staff;
+    private int displayedIndex;
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private FlowPane roles;
+    @FXML
+    private Label salary;
+    @FXML
+    private Label status;
     @FXML
     private FlowPane tags;
 
@@ -47,14 +53,24 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person staff, int displayedIndex) {
         super(FXML);
         this.staff = staff;
-        id.setText(displayedIndex + ". ");
-        name.setText(staff.getName().fullName);
+        this.displayedIndex = displayedIndex;
+        name.setText(displayedIndex + ". " + staff.getName().fullName);
         phone.setText(staff.getPhone().value);
         address.setText(staff.getAddress().value);
         email.setText(staff.getEmail().value);
+        salary.setText(staff.getSalary().convertToDollars());
+        status.setText(staff.getStatus().getValue());
+
+        staff.getRoles().stream()
+                .sorted(Comparator.comparing(Role::toString))
+                .forEach(role -> roles.getChildren().add(new Label(role.toString())));
         staff.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public int getDisplayedIndex() {
+        return displayedIndex;
     }
 
     @Override
@@ -71,7 +87,7 @@ public class PersonCard extends UiPart<Region> {
 
         // state check
         PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
+        return displayedIndex == card.getDisplayedIndex()
                 && staff.equals(card.staff);
     }
 }

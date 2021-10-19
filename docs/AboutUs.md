@@ -5,21 +5,7 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
-
 ## Project team
-
-[comment]: <> (### John Doe)
-
-[comment]: <> (<img src="images/johndoe.png" width="200px">)
-
-[comment]: <> ([[homepage]&#40;http://www.comp.nus.edu.sg/~damithch&#41;])
-
-[comment]: <> ([[github]&#40;https://github.com/johndoe&#41;])
-
-[comment]: <> ([[portfolio]&#40;team/johndoe.md&#41;])
-
-[comment]: <> (* Role: Project Advisor)
 
 ### Gabriel Au
 
@@ -31,31 +17,32 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: UI, Code Quality, Testing and Integration
 
-### Johnny Doe
+### Jonathan Tan
 
 <img src="images/fullfatwasabi.png" width="200px">
-[[github](http://github.com/fullfatwasabi)][[portfolio](team/fullfatwasabi.md)]
 
+[[github](http://github.com/fullfatwasabi)]
+[[portfolio](team/fullfatwasabi.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Tool, Documentation, Scheduling and tracking
 
-[comment]: <> (### Jean Doe)
+### Sreenivasa Kalpana Surya
 
-[comment]: <> (<img src="images/johndoe.png" width="200px">)
+<img src="images/tetrerox.png" width="200px">
 
-[comment]: <> ([[github]&#40;http://github.com/johndoe&#41;])
+[[github](http://github.com/tetrerox)]
+[[portfolio](team/tetrerox.md)]
 
-[comment]: <> (* Role: Developer)
-
-[comment]: <> (* Responsibilities: Dev Ops + Threading)
+* Role: Developer
+* Responsibilities: Integration, Code Quality and Documentation
 
 ### He Outong
 
 <img src="images/irvinghe000.png" width="200px">
 
 [[github](http://github.com/IrvingHe000)]
-[[portfolio](team/outong.md)]
+[[portfolio](team/irvinghe000.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Integration, Tool expert
