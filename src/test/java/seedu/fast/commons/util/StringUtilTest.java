@@ -61,13 +61,13 @@ public class StringUtilTest {
 
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
+        assertThrows(IllegalArgumentException.class, "Query parameter cannot be empty", ()
             -> StringUtil.containsQueryIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
+        assertThrows(IllegalArgumentException.class, "Query parameter should be a single word", ()
             -> StringUtil.containsQueryIgnoreCase("typical sentence", "aaa BBB"));
     }
 
