@@ -27,13 +27,15 @@ public class Person {
     private final DisposableIncome disposableIncome;
     private final CurrentPlan currentPlan;
     private final LastMet lastMet;
+    private final NextMeeting nextMeeting;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
+                  DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, NextMeeting nextMeeting,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.clientId = clientId;
         this.name = name;
@@ -44,7 +46,12 @@ public class Person {
         this.disposableIncome = disposableIncome;
         this.currentPlan = currentPlan;
         this.lastMet = lastMet;
-        this.tags.addAll(tags);
+        this.nextMeeting = nextMeeting;
+        addTags(tags);
+    }
+
+    public void delete() {
+        this.tags.forEach(t -> t.removePerson(this));
     }
 
     public ClientId getClientId() {
@@ -56,7 +63,6 @@ public class Person {
     }
 
     public Phone getPhone() {
-
         return phone;
     }
 
@@ -70,6 +76,10 @@ public class Person {
 
     public LastMet getLastMet() {
         return lastMet;
+    }
+
+    public NextMeeting getNextMeeting() {
+        return nextMeeting;
     }
 
     public CurrentPlan getCurrentPlan() {
@@ -93,6 +103,16 @@ public class Person {
     }
 
     /**
+     * Assigns {@code tags} to the {@code Person}.
+     *
+     * @param tags Tags to be added.
+     */
+    public void addTags(Set<Tag> tags) {
+        this.tags.addAll(tags);
+        this.tags.forEach(t -> t.addPerson(this));
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -106,10 +126,8 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getClientId().equals(getClientId())
-                || otherPerson.getEmail().equals(getEmail());
+        return otherPerson.getName().equals(getName())
+            || otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -128,15 +146,15 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getClientId().equals(getClientId())
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getRiskAppetite().equals(getRiskAppetite())
-                && otherPerson.getDisposableIncome().equals(getDisposableIncome())
-                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
-                && otherPerson.getLastMet().equals(getLastMet())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getName().equals(getName())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getRiskAppetite().equals(getRiskAppetite())
+            && otherPerson.getDisposableIncome().equals(getDisposableIncome())
+            && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+            && otherPerson.getLastMet().equals(getLastMet())
+            && otherPerson.getTags().equals(getTags());
 
     }
 
@@ -150,23 +168,25 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Client ID: ")
-                .append(getClientId())
-                .append("; Name: ")
-                .append(getName())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Risk Appetite: ")
-                .append(getRiskAppetite())
-                .append("; Disposable Income: ")
-                .append(getDisposableIncome())
-                .append("; current plans: ")
-                .append(getCurrentPlan())
-                .append("; Last Met: ")
-                .append(getLastMet());
+            .append(getClientId())
+            .append("; Name: ")
+            .append(getName())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Address: ")
+            .append(getAddress())
+            .append("; Risk Appetite: ")
+            .append(getRiskAppetite())
+            .append("; Disposable Income: ")
+            .append(getDisposableIncome())
+            .append("; current plans: ")
+            .append(getCurrentPlan())
+            .append("; Last Met: ")
+            .append(getLastMet())
+            .append("; Next Meeting: ")
+            .append(getNextMeeting());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -175,5 +195,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

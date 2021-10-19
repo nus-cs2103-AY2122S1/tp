@@ -2,14 +2,16 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -39,6 +41,38 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the list.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     */
+    public List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editPersonDescriptor) {
+        requireAllNonNull(clientIds, editPersonDescriptor);
+        List<Person> duplicateList = new ArrayList<>(internalList);
+        // Check for duplicate
+        List<Person> editedPersonList = clientIds.stream().map(clientId -> {
+            Person person = getPerson(clientId);
+            Person editedPerson = createEditedPerson(person, editPersonDescriptor);
+            int index = duplicateList.indexOf(person);
+            duplicateList.set(index, editedPerson);
+            return editedPerson;
+        }).collect(Collectors.toList());
+
+        if (!personsAreUnique(duplicateList)) {
+            throw new DuplicatePersonException();
+        }
+
+        // set if no duplicate
+        clientIds.forEach(clientId -> {
+            Person person = getPerson(clientId);
+            Person editedPerson = createEditedPerson(person, editPersonDescriptor);
+            int index = internalList.indexOf(person);
+            internalList.set(index, editedPerson);
+        });
+
+        return editedPersonList;
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
@@ -51,32 +85,11 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
-     */
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new PersonNotFoundException();
-        }
-
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalList.set(index, editedPerson);
-    }
-
-    /**
-     * returns the person with the corresponding ClientId.
+     * Returns the person with the corresponding {@code clientId}.
      */
     public Person getPerson(ClientId clientId) {
-        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
-            return person.getClientId().equals(clientId);
-        });
+        ObservableList<Person> personInQuestion = internalList
+                .filtered(person -> person.getClientId().equals(clientId));
         if (personInQuestion.isEmpty()) {
             throw new PersonNotFoundException();
         }
@@ -84,28 +97,28 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * returns true if a client with the given clientId exists.
-     * @param clientId of the client
+     * Returns true if a client with the given {@code clientId} exists.
+     *
+     * @param clientId Id of the client
      * @return true if a client with the clientId exists
      */
     public boolean hasClientId(ClientId clientId) {
-        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
-            return person.getClientId().equals(clientId);
-        });
-        if (personInQuestion.isEmpty()) {
-            return false;
-        }
-        return true;
+        ObservableList<Person> personInQuestion = internalList
+                .filtered(person -> person.getClientId().equals(clientId));
+        return !personInQuestion.isEmpty();
     }
 
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
+    // XXX: when is this used?
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
+        } else {
+            toRemove.delete();
         }
     }
 
@@ -113,19 +126,26 @@ public class UniquePersonList implements Iterable<Person> {
      * Removes the equivalent person with matching client id and/or email from the list.
      * The person must exist in the list.
      */
-    public Person removeByFields(List<Predicate<Person>> predicates) {
-        requireAllNonNull(predicates);
-        Predicate<Person> predicate = predicates.stream().reduce(x -> true, Predicate::and);
-        FilteredList<Person> filteredList = internalList.filtered(predicate);
-        if (filteredList.size() < 1) {
-            throw new PersonNotFoundException();
-        } else {
-            Person personToDelete = filteredList.get(0);
-            internalList.remove(personToDelete);
-            return personToDelete;
+    public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
+        requireAllNonNull(clientIds);
+        List<Person> personFound = new ArrayList<>();
+        List<ClientId> clientIdNotFound = new ArrayList<>();
+        for (ClientId clientId: clientIds) {
+            ObservableList<Person> personInQuestion = internalList
+                    .filtered(person -> person.getClientId().equals(clientId));
+            if (personInQuestion.isEmpty()) {
+                clientIdNotFound.add(clientId);
+            } else {
+                personFound.add(personInQuestion.get(0));
+            }
         }
 
+        if (!clientIdNotFound.isEmpty()) {
+            throw new PersonNotFoundException(clientIdNotFound);
+        }
 
+        personFound.forEach(internalList::remove);
+        return personFound;
     }
 
     public void setPersons(UniquePersonList replacement) {

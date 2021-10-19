@@ -13,7 +13,6 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
@@ -56,28 +55,25 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser(model).parse(arguments);
+            return new AddCommandParser().parse(arguments, model);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments, model);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments, model);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
         case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+            return new SearchCommandParser().parse(arguments, model);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            return new SortCommandParser().parse(arguments, model);
 
         case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
+            return new FilterCommandParser().parse(arguments, model);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -89,7 +85,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+            return new ViewCommandParser().parse(arguments, model);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

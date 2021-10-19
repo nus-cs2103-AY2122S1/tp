@@ -14,8 +14,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +30,7 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> personToView;
+    private final FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +45,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -109,13 +113,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-    }
-
-    @Override
-    public Person deletePersonByFields(List<Predicate<Person>> predicates) {
-        return addressBook.removePersonByFields(predicates);
+    public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
+        return addressBook.deletePersonByClientIds(clientIds);
     }
 
     @Override
@@ -125,10 +124,41 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editedPersonDescriptor) {
+        requireAllNonNull(clientIds, editedPersonDescriptor);
 
-        addressBook.setPerson(target, editedPerson);
+        return addressBook.setPersonByClientIds(clientIds, editedPersonDescriptor);
+    }
+
+    @Override
+    public Person getPerson(ClientId clientId) {
+        requireNonNull(clientId);
+        return addressBook.getPerson(clientId);
+    }
+
+    @Override
+    public boolean hasTagName(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.hasTagName(tagName);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public Tag getTag(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.getTag(tagName);
+    }
+
+    // TODO: divider here
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -176,7 +206,7 @@ public class ModelManager implements Model {
 
     @Override
     public boolean isPersonExistToView() {
-        return personToView.size() == 1 && personToView.get(0) != null;
+        return personToView.size() == 1;
     }
 
     @Override
@@ -205,9 +235,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
-                && personToView.equals(other.personToView);
+            && userPrefs.equals(other.userPrefs)
+            && filteredPersons.equals(other.filteredPersons)
+            && filteredTags.equals(other.filteredTags)
+            && personToView.equals(other.personToView);
     }
-
 }

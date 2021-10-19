@@ -1,19 +1,13 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.StringUtil.containsIgnoreCase;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.commons.mapper.PrefixMapper.getAttributeFunction;
+import static seedu.address.commons.util.StringUtil.containsStringIgnoreCase;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import seedu.address.logic.parser.ArgumentMultimap;
 
@@ -30,39 +24,25 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         String[] generalKeywords = keywords.getPreamble().split(" ");
-        boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x -> {
-                boolean checkAttribute = Stream.of(person.getName(), person.getPhone(),
-                        person.getEmail(), person.getAddress(), person.getRiskAppetite(),
-                        person.getDisposableIncome(), person.getLastMet(), person.getCurrentPlan())
-                        .map(Object::toString).anyMatch(y -> containsIgnoreCase(y, x));
-
-                boolean checkAttributeTag = person.getTags().stream()
-                    .anyMatch(y -> containsIgnoreCase(y.tagName, x));
-                return checkAttribute || checkAttributeTag;
-            }
+        boolean checkGeneral = generalKeywords[0].isBlank() || Arrays.stream(generalKeywords).anyMatch(x ->
+            Arrays.stream(ALL_PREFIXES).anyMatch(prefix -> {
+                Function<Person, String> getAttribute = getAttributeFunction(prefix).andThen(Object::toString);
+                String personAttribute = getAttribute.apply(person);
+                return containsStringIgnoreCase(personAttribute, x);
+            })
         );
 
-        boolean checkName = keywords.getValue(PREFIX_NAME)
-                .map(x -> containsIgnoreCase(person.getName().toString(), x)).orElse(true);
-        boolean checkPhone = keywords.getValue(PREFIX_PHONE)
-                .map(x -> containsIgnoreCase(person.getPhone().toString(), x)).orElse(true);
-        boolean checkEmail = keywords.getValue(PREFIX_EMAIL)
-                .map(x -> containsIgnoreCase(person.getEmail().toString(), x)).orElse(true);
-        boolean checkAddress = keywords.getValue(PREFIX_ADDRESS)
-                .map(x -> containsIgnoreCase(person.getAddress().toString(), x)).orElse(true);
-        boolean checkRiskAppetite = keywords.getValue(PREFIX_RISKAPPETITE)
-                .map(x -> containsIgnoreCase(person.getRiskAppetite().toString(), x)).orElse(true);
-        boolean checkDisposableIncome = keywords.getValue(PREFIX_DISPOSABLEINCOME)
-                .map(x -> containsIgnoreCase(person.getDisposableIncome().toString(), x)).orElse(true);
-        boolean checkLastMet = keywords.getValue(PREFIX_LASTMET)
-                .map(x -> containsIgnoreCase(person.getLastMet().toString(), x)).orElse(true);
-        boolean checkCurrentPlan = keywords.getValue(PREFIX_CURRENTPLAN)
-                .map(x -> containsIgnoreCase(person.getCurrentPlan().toString(), x)).orElse(true);
-        boolean checkTags = keywords.getValue(PREFIX_TAG)
-                .map(x -> person.getTags().stream().anyMatch(y -> containsIgnoreCase(y.tagName, x))).orElse(true);
+        boolean checkAttributes = Arrays
+                .stream(ALL_PREFIXES)
+                .map(prefix -> {
+                    Function<Person, String> getAttribute = getAttributeFunction(prefix).andThen(Object::toString);
+                    String personAttribute = getAttribute.apply(person);
+                    Optional<String> keyword = keywords.getValue(prefix);
+                    return keyword.map(x -> containsStringIgnoreCase(personAttribute, x)).orElse(true);
+                })
+                .reduce(true, Boolean::logicalAnd);
 
-        return checkGeneral && checkName && checkPhone && checkEmail && checkAddress && checkRiskAppetite
-                && checkDisposableIncome && checkLastMet && checkCurrentPlan && checkTags;
+        return checkGeneral && checkAttributes;
     }
 
     @Override

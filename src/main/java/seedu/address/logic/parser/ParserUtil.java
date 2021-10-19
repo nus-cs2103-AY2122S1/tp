@@ -6,9 +6,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -16,9 +16,10 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
-import seedu.address.model.person.comparators.SortDirection;
+import seedu.address.model.person.SortDirection;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,22 +27,7 @@ import seedu.address.model.tag.Tag;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_CLIENT_ID = "Client ID is not a non-negative unsigned integer.";
-
-    /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     *
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
-    }
 
     /**
      * Parses {@code clientId} into an {@code ClientId} and returns it. Leading and trailing whitespaces will be
@@ -141,13 +127,40 @@ public class ParserUtil {
     public static LastMet parseLastMet(String lastMet) throws ParseException {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
-        if (!LastMet.isValidLastMet(trimmedLastMet)) {
+        if (!StringUtil.isValidDate(trimmedLastMet)) {
             throw new ParseException(LastMet.MESSAGE_CONSTRAINTS);
         }
         return new LastMet(trimmedLastMet);
     }
 
-    /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code NextMeeting}
+     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING)) {
+            return NextMeeting.NULL_MEETING;
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+            trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+            trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+        return new NextMeeting(date, startTime, endTime, location);
+    }
+
+    /**
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.
@@ -184,11 +197,11 @@ public class ParserUtil {
      */
     public static SortDirection parseSortDirection(String sortDirection) throws ParseException {
         requireNonNull(sortDirection);
-        String trimmedSortDirection = sortDirection.trim();
+        String trimmedSortDirection = sortDirection.trim().toLowerCase();
         if (!SortDirection.isValidDirection(trimmedSortDirection)) {
             throw new ParseException(SortDirection.MESSAGE_CONSTRAINTS);
         }
-        return new SortDirection(trimmedSortDirection);
+        return SortDirection.of(trimmedSortDirection);
     }
 
     /**
@@ -197,24 +210,34 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag, Model model) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        if (model.hasTagName(tag)) {
+            return model.getTag(tag);
+        } else {
+            Tag newTag = new Tag(trimmedTag);
+            model.addTag(newTag);
+            return newTag;
+        }
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<String> tags, Model model) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName, model));
         }
+
         return tagSet;
     }
 }

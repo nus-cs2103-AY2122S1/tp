@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 /**
  * Contains helper methods for testing command parsers.
@@ -15,8 +17,10 @@ public class CommandParserTestUtil {
      * equals to {@code expectedCommand}.
      */
     public static void assertParseSuccess(Parser parser, String userInput, Command expectedCommand) {
+        // XXX: use stub?
+        Model model = new ModelManager();
         try {
-            Command command = parser.parse(userInput);
+            Command command = parser.parse(userInput, model);
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
             throw new IllegalArgumentException("Invalid userInput.", pe);
@@ -28,11 +32,15 @@ public class CommandParserTestUtil {
      * equals to {@code expectedMessage}.
      */
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
+        Model model = new ModelManager();
         try {
-            parser.parse(userInput);
+            parser.parse(userInput, model);
             throw new AssertionError("The expected ParseException was not thrown.");
-        } catch (ParseException pe) {
-            assertEquals(expectedMessage, pe.getMessage());
+        } catch (ParseException | RuntimeException e) {
+            if (e instanceof RuntimeException && !(e.getCause() instanceof ParseException)) {
+                throw new AssertionError("The expected ParseException was not thrown.");
+            }
+            assertEquals(expectedMessage, e.getMessage());
         }
     }
 }

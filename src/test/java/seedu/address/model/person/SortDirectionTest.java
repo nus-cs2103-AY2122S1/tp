@@ -6,23 +6,21 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.comparators.SortDirection;
-
 public class SortDirectionTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new SortDirection(null));
+        assertThrows(NullPointerException.class, () -> SortDirection.of(null));
     }
 
     @Test
     public void constructor_invalidSortDirection_throwsIllegalArgumentException() {
         String invalidSortDirection = "asec";
-        assertThrows(IllegalArgumentException.class, () -> new SortDirection(invalidSortDirection));
+        assertThrows(IllegalArgumentException.class, () -> SortDirection.of(invalidSortDirection));
     }
 
     @Test
-    public void isValidRiskAppetite() {
+    public void isValidSortDirection() {
         // null phone number
         assertThrows(NullPointerException.class, () -> SortDirection.isValidDirection(null));
 

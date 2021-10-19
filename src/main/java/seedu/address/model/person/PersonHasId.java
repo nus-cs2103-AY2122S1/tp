@@ -1,20 +1,25 @@
 package seedu.address.model.person;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s attributes matches any of the keywords given.
  */
 public class PersonHasId implements Predicate<Person> {
-    private final ClientId clientId;
+    private final List<ClientId> clientId;
+
+    public PersonHasId(List<ClientId> clientId) {
+        this.clientId = clientId;
+    }
 
     public PersonHasId(ClientId clientId) {
-        this.clientId = clientId;
+        this.clientId = List.of(clientId);
     }
 
     @Override
     public boolean test(Person person) {
-        return person.getClientId().equals(clientId);
+        return clientId.contains(person.getClientId());
     }
 
     @Override

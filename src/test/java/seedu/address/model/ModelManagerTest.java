@@ -16,8 +16,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.PersonHasId;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -97,6 +99,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void test_isPersonExistToView() {
+        // predicate returns empty list -> false
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.updatePersonToView(new PersonHasId(CARL.getClientId()));
+        assertFalse(modelManager.isPersonExistToView());
+
+        // predicate returns 1 person in list -> true
+        modelManager.updatePersonToView(new PersonHasId(ALICE.getClientId()));
+        assertTrue(modelManager.isPersonExistToView());
+    }
+
+    @Test
     public void getPersonToView_viewFirstClient_returnsTrue() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         UserPrefs userPrefs = new UserPrefs();
@@ -140,8 +156,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        ArgumentMultimap aMM = ArgumentTokenizer.tokenize(ALICE.getName().fullName);
+        modelManager.updateFilteredPersonList(new PersonContainsKeywordsPredicate(aMM));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

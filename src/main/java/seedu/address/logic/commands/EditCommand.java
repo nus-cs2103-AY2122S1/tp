@@ -1,19 +1,25 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.CLIENTID_DELIMITER;
+import static seedu.address.commons.util.StringUtil.PERSON_DELIMITER;
+import static seedu.address.commons.util.StringUtil.joinListToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -26,9 +32,11 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,6 +55,7 @@ public class EditCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_LASTMET + "LAST MET "
+            + PREFIX_NEXTMEETING + "NEXT MEETING "
             + PREFIX_CURRENTPLAN + "CURRENTPLAN "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + " 1 "
@@ -55,48 +64,58 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This operation will result in a"
+            + " duplicate in the address book.";
     public static final String MESSAGE_CHANGE_CLIENTID = "Client's ID cannot be changed.";
 
-    private final ClientId clientId;
+    private final List<ClientId> clientIds;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param clientId of the person in the filtered person list to edit
+     * @param clientIds of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(ClientId clientId, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(clientId);
+    public EditCommand(List<ClientId> clientIds, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(clientIds);
         requireNonNull(editPersonDescriptor);
 
-        this.clientId = clientId;
+        this.clientIds = clientIds;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasClientId(clientId)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_CLIENTID);
+
+        List<ClientId> distinctClientIds = clientIds.stream().distinct().collect(Collectors.toList());
+        List<ClientId> invalidClientIds = distinctClientIds.stream()
+                .filter(c -> !model.hasClientId(c))
+                .collect(Collectors.toList());
+
+        if (!invalidClientIds.isEmpty()) {
+            String invalidClientIdsString = joinListToString(invalidClientIds, CLIENTID_DELIMITER);
+            throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, invalidClientIdsString));
         }
 
-        Person personToEdit = model.getAddressBook().getPerson(clientId);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        List<Person> editedPersons;
+        try {
+            editedPersons = model.setPersonByClientIds(clientIds, editPersonDescriptor);
+        } catch (DuplicatePersonException de) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        String personsString = joinListToString(editedPersons, PERSON_DELIMITER);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personsString));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         ClientId oldClientId = personToEdit.getClientId();
@@ -105,15 +124,16 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         RiskAppetite updateRiskAppetite = editPersonDescriptor.getRiskAppetite()
-                .orElse(personToEdit.getRiskAppetite());
+            .orElse(personToEdit.getRiskAppetite());
         DisposableIncome updatedDisposableIncome = editPersonDescriptor.getDisposableIncome()
-                .orElse(personToEdit.getDisposableIncome());
+            .orElse(personToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editPersonDescriptor.getCurrentPlan().orElse(personToEdit.getCurrentPlan());
         LastMet updatedLastMet = editPersonDescriptor.getLastMet().orElse(personToEdit.getLastMet());
+        NextMeeting updatedNextMeeting = editPersonDescriptor.getNextMeeting().orElse(personToEdit.getNextMeeting());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
-            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedTags);
+            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
     }
 
     @Override
@@ -130,8 +150,8 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return clientId.equals(e.clientId)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return clientIds.equals(e.clientIds)
+            && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
@@ -147,6 +167,7 @@ public class EditCommand extends Command {
         private DisposableIncome disposableIncome;
         private Set<Tag> tags;
         private LastMet lastMet;
+        private NextMeeting nextMeeting;
         private CurrentPlan currentPlan;
 
         public EditPersonDescriptor() {}
@@ -163,6 +184,7 @@ public class EditCommand extends Command {
             setDisposableIncome(toCopy.disposableIncome);
             setRiskAppetite(toCopy.riskAppetite);
             setLastMet(toCopy.lastMet);
+            setNextMeeting(toCopy.nextMeeting);
             setCurrentPlan(toCopy.currentPlan);
             setDisposableIncome(toCopy.disposableIncome);
             setRiskAppetite(toCopy.riskAppetite);
@@ -174,7 +196,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome,
-                currentPlan, lastMet, tags);
+                currentPlan, lastMet, nextMeeting, tags);
         }
 
         public void setName(Name name) {
@@ -209,6 +231,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(lastMet);
         }
 
+        public void setNextMeeting(NextMeeting nextMeeting) {
+            this.nextMeeting = nextMeeting;
+        }
+
+        public Optional<NextMeeting> getNextMeeting() {
+            return Optional.ofNullable(nextMeeting);
+        }
+
         public void setCurrentPlan(CurrentPlan currentPlan) {
             this.currentPlan = currentPlan;
         }
@@ -240,6 +270,7 @@ public class EditCommand extends Command {
         public Optional<DisposableIncome> getDisposableIncome() {
             return Optional.ofNullable(disposableIncome);
         }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -277,6 +308,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getLastMet().equals(e.getLastMet())
+                    && getNextMeeting().equals(e.getNextMeeting())
                     && getCurrentPlan().equals(e.getCurrentPlan())
                     && getDisposableIncome().equals(e.getDisposableIncome())
                     && getRiskAppetite().equals(e.getRiskAppetite())

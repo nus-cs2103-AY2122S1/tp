@@ -10,14 +10,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.function.Function;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,15 +26,14 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.model.person.PersonHasId;
@@ -57,9 +53,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
+        Function<ClientId, Person> personFunction = new PersonBuilder().buildFunction();
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        assertEquals(new AddCommand(personFunction), command);
     }
 
     @Test
@@ -71,12 +68,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " i/1");
+                DeleteCommand.COMMAND_WORD + " 1");
         ClientId clientId = new ClientId("1");
-        PersonHasId predicate = new PersonHasId(clientId);
-        List<Predicate<Person>> predicates = new ArrayList<>();
-        predicates.add(predicate);
-        assertEquals(new DeleteCommand(predicates), command);
+        assertEquals(new DeleteCommand(List.of(clientId)), command);
     }
 
     @Test
@@ -85,23 +79,15 @@ public class AddressBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
 
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(new ClientId(Integer.toString(INDEX_FIRST_PERSON.getOneBased())), descriptor),
-                command);
+                + CLIENTID_ZERO_PERSON.value + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        List<ClientId> clientIds = List.of(new ClientId(CLIENTID_ZERO_PERSON.value));
+        assertEquals(new EditCommand(clientIds, descriptor), command);
     }
 
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
-    }
-
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -122,6 +108,15 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new FilterCommand(new PersonContainsKeywordsPredicate(aMM)), command);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        String input = "1";
+        ClientId clientId = new ClientId(input);
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+            ViewCommand.COMMAND_WORD + " " + input);
+        assertEquals(new ViewCommand(clientId, new PersonHasId(clientId)), command);
     }
 
     @Test
