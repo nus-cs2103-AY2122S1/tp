@@ -104,6 +104,11 @@ public class DefaultModelStub implements Model {
     }
 
     @Override
+    public void setEvent(Event target, Event editedEvent) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void markEventAsDone(Event target) {
         throw new AssertionError("This method should not be called.");
     }

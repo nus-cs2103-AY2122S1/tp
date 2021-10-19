@@ -111,6 +111,14 @@ public interface Model {
     void removeEvent(Event target);
 
     /**
+     * Replaces the given Event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in Managera.
+     * This Event identity of {@code editedEvent} must not be the same
+     * as another existing Event in Managera.
+     */
+    void setEvent(Event target, Event editedEvent);
+
+    /**
      * Marks the given Event {@code target} as done.
      * {@code target} must exist in Managera.
      */

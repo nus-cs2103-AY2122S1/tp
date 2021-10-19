@@ -29,6 +29,15 @@ public class EventBuilder {
     }
 
     /**
+     * Initializes the EventBuilder with the data of {@code eventToCopy}.
+     */
+    public EventBuilder(Event eventToCopy) {
+        eventName = eventToCopy.getName();
+        eventDate = eventToCopy.getDate();
+        eventTime = eventToCopy.getTime();
+    }
+
+    /**
      * Adds a Participant to the list of participants.
      *
      * @param participant to be added.
