@@ -97,7 +97,7 @@ public class PersonDetails extends UiPart<Region> {
 
         // To Obtain the user GitHub username and to fetch and display it.
         String userName = person.getGithub().toString();
-        Image userGitHubProfilePicture = new GitHubUtil().getProfilePicture(userName);
+        Image userGitHubProfilePicture = GitHubUtil.getProfilePicture(userName);
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(userGitHubProfilePicture);
     }

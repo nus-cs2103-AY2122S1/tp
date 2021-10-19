@@ -21,15 +21,15 @@ public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
 
     private static final String URL_PREFIX = "https://api.github.com/users/";
+    private static final Image defaultUserProfilePicture = new Image(
+            GitHubUtil.class.getResourceAsStream("/images/profile.png"));
     private static int responseCode;
     private static URL url;
-    private final Image defaultUserProfilePicture = new Image(
-            this.getClass().getResourceAsStream("/images/profile.png"));
 
     /**
      * Initializes a GitHubUtil Object.
      */
-    public GitHubUtil() {
+    private GitHubUtil() {
     }
 
     /**
@@ -38,7 +38,7 @@ public class GitHubUtil {
      *
      * @param userName The name of the user.
      */
-    public void establishConnection(String userName) {
+    private static void establishConnection(String userName) {
         String userUrl = URL_PREFIX + userName;
 
         try {
@@ -64,7 +64,7 @@ public class GitHubUtil {
      * @return A {@code JSONObject} consisting of the user data.
      * @throws RuntimeException If the server did not respond well.
      */
-    public JSONObject getProfile(String userName) throws RuntimeException {
+    public static JSONObject getProfile(String userName) throws RuntimeException {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
         establishConnection(userName);
@@ -105,7 +105,7 @@ public class GitHubUtil {
      * @param userName The name of the user.
      * @return An {@code Image} object with the users profile picture in it.
      */
-    public Image getProfilePicture(String userName) {
+    public static Image getProfilePicture(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
         JSONObject jsonObject = null;
 
@@ -131,7 +131,7 @@ public class GitHubUtil {
      * @param userName The name of the user.
      * @return The total number of commits.
      */
-    public int getCommits(String userName) {
+    public static int getCommits(String userName) {
         return 0;
     }
 
@@ -142,7 +142,7 @@ public class GitHubUtil {
      * @param userName The name of the user.
      * @return The total number of repos.
      */
-    public int getRepoCount(String userName) {
+    public static int getRepoCount(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
         JSONObject jsonObject = null;
 
