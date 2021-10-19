@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -216,7 +217,7 @@ public class ParserUtil {
         if (strings.length != 2) {
             throw new ParseException(messageConstraints);
         }
-        if (!isValidDayOfWeek(strings[0]) {
+        if (!isValidDayOfWeek(strings[0])) {
             throw new ParseException(messageConstraints);
         }
 

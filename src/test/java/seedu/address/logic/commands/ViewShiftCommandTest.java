@@ -6,12 +6,14 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
 
 
 public class ViewShiftCommandTest {
@@ -30,6 +32,7 @@ public class ViewShiftCommandTest {
             LocalTime.of(10, 0));
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    String expectedMessage = String.format(ViewShiftCommand.DEFAULT_MESSAGE, 0);
 
     @Test
     public void equals() {
@@ -46,5 +49,31 @@ public class ViewShiftCommandTest {
 
         // Not equal null
         assertNotEquals(null, firstCommand);
+    }
+
+    @Test
+    public void test_executeViewShiftByTime() {
+        // Test successes
+        PersonIsWorkingPredicate predicate1 = new PersonIsWorkingPredicate(DayOfWeek.MONDAY,
+                ViewShiftCommand.INVALID_SLOT_NUMBER, LocalTime.NOON);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredPersonList());
+
+        PersonIsWorkingPredicate predicate2 = new PersonIsWorkingPredicate(DayOfWeek.TUESDAY,
+                ViewShiftCommand.INVALID_SLOT_NUMBER, LocalTime.of(17, 0));
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredPersonList());
+    }
+
+    @Test
+    public void test_executeViewShiftBySlotNum() {
+        // Test successes
+        PersonIsWorkingPredicate predicate1 = new PersonIsWorkingPredicate(DayOfWeek.WEDNESDAY, 0, null);
+        expectedModel.updateFilteredPersonList(predicate1);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredPersonList());
+
+        PersonIsWorkingPredicate predicate2 = new PersonIsWorkingPredicate(DayOfWeek.THURSDAY, 0, null);
+        expectedModel.updateFilteredPersonList(predicate2);
+        assertEquals(Collections.emptyList(), expectedModel.getFilteredPersonList());
     }
 }
