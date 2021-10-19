@@ -59,7 +59,7 @@ deactivate Model
 DeleteLessonCommand -> Lesson : removeAllStudents()
 activate Lesson
 
-loop all student s in l1 are unenrolled
+loop all student s in l1
     Lesson -> Student
     activate Student
 
@@ -82,10 +82,10 @@ end
 Lesson --> DeleteLessonCommand
 deactivate Lesson
 
-DeleteLessonCommand -> Model : deleteLesson(1)
+DeleteLessonCommand -> Model : deleteLesson(l1)
 activate Model
 
-Model -> Lesson : removeLesson(1)
+Model -> Lesson : removeLesson(l1)
 activate Lesson
 
 Lesson --> Model
