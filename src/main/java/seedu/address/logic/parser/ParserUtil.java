@@ -216,16 +216,8 @@ public class ParserUtil {
         if (strings.length != 2) {
             throw new ParseException(messageConstraints);
         }
-        switch (strings[0]) {
-        case "monday":
-        case "tuesday":
-        case "wednesday":
-        case "thursday":
-        case "friday":
-        case "saturday":
-        case "sunday":
-            break;
-        default: throw new ParseException(messageConstraints);
+        if (!isValidDayOfWeek(strings[0]) {
+            throw new ParseException(messageConstraints);
         }
 
         try {
