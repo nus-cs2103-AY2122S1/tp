@@ -13,7 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
 /**
  * Class representing the parser for the view command.
