@@ -1,0 +1,42 @@
+package seedu.address.logic.parser;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+
+import seedu.address.logic.commands.AddApplicantCommand;
+import seedu.address.logic.commands.RejectionRateCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.position.Position;
+
+import java.util.stream.Stream;
+
+/**
+ * Parses input arguments and creates a new RejectionRateCommand object
+ */
+public class RejectionRateCommandParser implements Parser<RejectionRateCommand> {
+    /**
+     * Parses the given {@code String} of arguments in the context of the RejectionRateCommand
+     * and returns a RejectionRateCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public RejectionRateCommand parse(String args) throws ParseException {
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POSITION);
+
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_POSITION)
+                || !argumentMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddApplicantCommand.MESSAGE_USAGE));
+        }
+
+        Position dummyPosition = ApplicantParserUtil.parsePosition(argumentMultimap.getValue(PREFIX_POSITION).get());
+
+        return new RejectionRateCommand(dummyPosition);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+}
