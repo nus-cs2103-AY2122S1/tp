@@ -29,15 +29,19 @@ public class TypicalStudents {
             .withStudentNumber("A0000000B").withUserName("paulice").withRepoName("ip").withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withStudentNumber("A0000000B")
             .withEmail("johnd@example.com").withTags("owesMoney", "friends").withUserName("benben")
-            .withRepoName("ip").build();
+            .withGroupName("w14-4").withRepoName("ip").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withUserName("cark")
-            .withRepoName("ip").withStudentNumber("A0000000B").withEmail("heinz@example.com").build();
+            .withGroupName("w14-4").withRepoName("ip").withStudentNumber("A0000000B").withEmail("heinz@example.com")
+            .build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")
-            .withStudentNumber("A0000000B").withUserName("danmei").withRepoName("ip").withTags("friends").build();
+            .withGroupName("w14-4").withStudentNumber("A0000000B").withUserName("danmei").withRepoName("ip")
+            .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withUserName("em")
-            .withRepoName("ip").withStudentNumber("A0000000B").withEmail("werner@example.com").build();
+            .withGroupName("w15-5").withRepoName("ip").withStudentNumber("A0000000B").withEmail("werner@example.com")
+            .build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withUserName("fku")
-            .withRepoName("ip").withStudentNumber("A0000000B").withEmail("lydia@example.com").build();
+            .withGroupName("w15-5").withRepoName("ip").withStudentNumber("A0000000B").withEmail("lydia@example.com")
+            .build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withUserName("user")
             .withRepoName("ipppp").withStudentNumber("A0000000B").withEmail("anna@example.com").build();
 

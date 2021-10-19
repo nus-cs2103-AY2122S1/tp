@@ -19,6 +19,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.NameContainsGroupKeywordsPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.NameContainsTestKeywordsPredicate;
@@ -166,6 +168,20 @@ public class CommandTestUtil {
         model.updateFilteredTaskList(new NameContainsTestKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredTaskList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the groups at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGroupAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
+
+        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        final String[] splitName = group.getName().name.split("\\s+");
+        model.updateFilteredGroupList(new NameContainsGroupKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 
 }
