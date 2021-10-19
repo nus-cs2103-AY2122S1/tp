@@ -98,6 +98,18 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Replaces the contents of this list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void emptyGroups(List<Group> groups) {
+        requireAllNonNull(groups);
+        for (Group group : groups) {
+            group.removeAllMembers();
+        }
+        internalList.setAll(groups);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Group> asUnmodifiableObservableList() {

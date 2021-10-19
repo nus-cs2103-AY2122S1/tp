@@ -19,6 +19,7 @@ public class ClearStudentsCommand extends Command {
 
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setTasks(model.getFilteredTaskList());
+        newAddressBook.emptyGroups(model.getFilteredGroupList());
 
         model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
