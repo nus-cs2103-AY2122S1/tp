@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 
-public class DeadlineTaskCard extends UiPart<Region> {
+public class DeadlineAndEventTaskCard extends UiPart<Region> {
 
     private static final String FXML = "DeadlineTaskListCard.fxml";
 
@@ -31,7 +31,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label deadline;
+    private Label taskDate;
     @FXML
     private Label status;
     @FXML
@@ -43,14 +43,15 @@ public class DeadlineTaskCard extends UiPart<Region> {
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public DeadlineTaskCard(Task task, int displayedIndex) {
+    public DeadlineAndEventTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
-        status.setText(task.getStatusString());
         DeadlineTask deadlineTask = (DeadlineTask) task;
-        deadline.setText(deadlineTask.getDeadline().toString());
+        status.setText(task.getStatusString());
+
+        taskDate.setText(deadlineTask.getDeadline().toString());
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -65,12 +66,12 @@ public class DeadlineTaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeadlineTaskCard)) {
+        if (!(other instanceof DeadlineAndEventTaskCard)) {
             return false;
         }
 
         // state check
-        DeadlineTaskCard card = (DeadlineTaskCard) other;
+        DeadlineAndEventTaskCard card = (DeadlineAndEventTaskCard) other;
         return id.getText().equals(card.id.getText())
                 && task.equals(card.task);
     }
