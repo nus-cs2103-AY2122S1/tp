@@ -27,7 +27,7 @@ import seedu.address.commons.core.LogsCenter;
 public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
 
-    private static final String API_URL_PREFIX = "https://api.github.com/users/";
+    private static final String API_URL_PREFIX = "https://api.github.com/";
     private static final String GITHUB_URL_PREFIX = "https://www.github.com/";
     private static final Image defaultUserProfilePicture = new Image(
             GitHubUtil.class.getResourceAsStream("/images/profile.png"));
@@ -46,7 +46,7 @@ public class GitHubUtil {
      *
      * @param extension The extension of the url to go to.
      */
-    public static void establishConnectionForWebsite(String extension) {
+    private static void establishConnectionForWebsite(String extension) {
         try {
             url = new URL(GITHUB_URL_PREFIX + extension);
 
@@ -99,7 +99,7 @@ public class GitHubUtil {
     public static JSONObject getProfile(String userName) throws RuntimeException {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
-        establishConnectionForApi(userName);
+        establishConnectionForApi( "users/" + userName);
         JSONObject data = null;
 
         if (responseCode != 200) {
@@ -164,7 +164,7 @@ public class GitHubUtil {
      * @return An {@code ArrayList<String>} consisting of user repositories.
      */
     public static ArrayList<String> getRepoNames(String userName, int page) throws RuntimeException {
-        establishConnectionForApi(userName + "/repos?per_page=100&page=" + page);
+        establishConnectionForApi("users/" + userName + "/repos?per_page=100&page=" + page);
 
         JSONArray data = null;
 
