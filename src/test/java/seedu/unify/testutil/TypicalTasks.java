@@ -59,7 +59,7 @@ public class TypicalTasks {
     /**
      * Returns an {@code DateBook} with all the typical tasks.
      */
-    public static UniFy getTypicalAddressBook() {
+    public static UniFy getTypicalUniFy() {
         UniFy ab = new UniFy();
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);

@@ -21,7 +21,7 @@ import seedu.unify.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class UniFyParser {
 
     /**
      * Used for initial separation of command word and args.

@@ -1,7 +1,7 @@
 package seedu.unify.logic.commands;
 
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import seedu.unify.model.UserPrefs;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyUniFy_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -21,9 +21,9 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    public void execute_nonEmptyUniFy_success() {
+        Model model = new ModelManager(getTypicalUniFy(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalUniFy(), new UserPrefs());
         expectedModel.setUniFy(new UniFy());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
