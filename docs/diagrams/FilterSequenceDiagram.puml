@@ -52,7 +52,6 @@ activate FilterCommand
 FilterCommand -> Model
 activate Model
 alt "grade != null"
-
     Model -> Model : updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade))
     Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade))
 else "subject != null"
@@ -77,6 +76,7 @@ FilterCommand --> LogicManager : commandResult
 deactivate FilterCommand
 FilterCommand -[hidden]-> LogicManager
 destroy FilterCommand
+
 [<--LogicManager
 deactivate LogicManager
 @enduml
