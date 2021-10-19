@@ -1,5 +1,8 @@
 package seedu.plannermd.logic.commands.tagcommand;
 
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Set;
@@ -18,6 +21,19 @@ public abstract class TagCommand extends Command {
     public static final String TOO_MANY_TAGS_MESSAGE = "Please enter only one tag.";
 
     public static final String COMMAND_WORD = "tag";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + "{FLAG} {ARGUMENTS}: Executes tag command given by flag tag\n"
+            + "Commands: \n"
+            + "tag -a: "
+                    + "Adds a tag to the person identified by the index number used in the displayed person list.\n"
+                    + "Parameters: "
+                    + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
+                    + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + "1 " + PREFIX_TAG + "healthy"
+            + "tag -d: "
+                    + "Deletes a tag to the person identified by the index number used in the displayed person list.\n"
+                    + "Parameters: "
+                    + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
+                    + "Example: " + COMMAND_WORD + " " + FLAG_DELETE + " " + "1 " + PREFIX_TAG + "healthy";
 
     /**
      * Updates the tags of the given doctor in the {@code model} and returns the edited doctor
