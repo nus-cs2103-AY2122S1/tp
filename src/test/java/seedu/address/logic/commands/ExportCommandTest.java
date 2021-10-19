@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -19,7 +20,6 @@ import seedu.address.model.UserPrefs;
 public class ExportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
     private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/FolderWithJson/";
-    private static final String TEST_FILE_NAME = "testFile";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -52,12 +52,12 @@ public class ExportCommandTest {
      */
     @Test
     public void execute_fileName_fileCreated() {
-        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, TEST_FILE_NAME);
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, VALID_FILENAME_JSON);
 
-        ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, TEST_FILE_NAME);
+        ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_JSON);
         assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
         try {
-            FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + TEST_FILE_NAME + ".json"));
+            FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_JSON));
         } catch (IOException ioe) {
             System.out.println("Error deleting testFile.json");
         }
@@ -69,8 +69,8 @@ public class ExportCommandTest {
      */
     @Test
     public void execute_fileName_fileExists() {
-        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FAILURE, TEST_FILE_NAME);
-        ExportCommand exportCommand = new ExportCommand(PATH_FOLDER_WITH_JSON, TEST_FILE_NAME);
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_FAILURE, VALID_FILENAME_JSON);
+        ExportCommand exportCommand = new ExportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_JSON);
         assertCommandFailure(exportCommand, model, expectedMessage);
     }
 }
