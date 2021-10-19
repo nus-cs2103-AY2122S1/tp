@@ -17,7 +17,7 @@ public class HelpCommand extends Command {
         + COMMAND_WORD + " add" + "\n"
         + COMMAND_WORD + " Add";
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String SHOWING_HELP_MESSAGE = "Opened help window";
 
     private String command;
 

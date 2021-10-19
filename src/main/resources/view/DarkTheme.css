@@ -24,6 +24,25 @@
     -fx-opacity: 1;
 }
 
+.chart {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.chart-title {
+  -fx-text-fill: white;
+  -fx-font-size: 1.6em;
+}
+
+.chart-pie-label {
+    -fx-fill: white;
+    -fx-font-family: "Open Sans Light";
+    -fx-font-size: 10pt;
+}
+
+.default-color0.chart-pie { -fx-pie-color: red; }
+.default-color1.chart-pie { -fx-pie-color: orange; }
+.default-color2.chart-pie { -fx-pie-color: green; }
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";
@@ -339,6 +358,10 @@
     -fx-font-style: italic;
     -fx-fill: white;
     -fx-text-fill: white;
+}
+
+.hbox {
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .scroll-bar {

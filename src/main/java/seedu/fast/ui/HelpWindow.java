@@ -72,22 +72,6 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private ComboBox<String> commandList;
 
-    /**
-     * Creates a new HelpWindow.
-     *
-     * @param root Stage to use as the root of the HelpWindow.
-     */
-    public HelpWindow(Stage root) {
-        super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
-        commandList.setItems(FXCollections.observableArrayList(COMMAND_LIST));
-        commandInstruction.setText(QUICK_START_MESSAGE);
-
-        // show different command usage depending on the selected command
-        EventHandler<ActionEvent> event =
-            e -> commandInstruction.setText(showCommandUsage(commandList.getValue()));
-        commandList.setOnAction(event);
-    }
 
     /**
      * Creates a new HelpWindow.
