@@ -103,7 +103,7 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`. 
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`.
 * `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31 17:00 h/dementia` adds an elderly and details without the `VISIT`.
 * `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31 09:00 h/dementia` adds an elderly and details without the `LAST_VISITED`.
 * `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 10:00 v/2021-10-31 16:00` adds an elderly and details without the `HEALTH_CONDITION`.
