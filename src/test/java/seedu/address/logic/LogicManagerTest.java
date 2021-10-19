@@ -12,11 +12,18 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.util.FileUtil;
+import seedu.address.encryption.Cryptable;
+import seedu.address.encryption.Cryptor;
+import seedu.address.encryption.EncryptionKeyGenerator;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -34,20 +41,27 @@ import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
+    private static final String PASSWORD = "password1234";
+    private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
 
     @TempDir
     public Path temporaryFolder;
 
     private Model model = new ModelManager();
     private Logic logic;
+    private Cryptable cryptor;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp()
+            throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException, IOException {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        cryptor = new Cryptor(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
+        FileUtil.createFile(temporaryFolder.resolve("addressBook.enc"));
+        Path encryptedFilePath = temporaryFolder.resolve("addressBook.enc");
+        logic = new LogicManager(model, storage, cryptor, encryptedFilePath);
     }
 
     @Test
@@ -69,14 +83,16 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_storageThrowsIoException_throwsCommandException() {
+    public void execute_storageThrowsIoException_throwsCommandException() throws IOException {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        Path encryptedFilePath = temporaryFolder.resolve("addressBook.enc");
+        FileUtil.createFile(temporaryFolder.resolve("addressBook.enc"));
+        logic = new LogicManager(model, storage, cryptor, encryptedFilePath);
 
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
