@@ -48,5 +48,4 @@ public class Timing {
     public int hashCode() {
         return timing.hashCode();
     }
-
 }

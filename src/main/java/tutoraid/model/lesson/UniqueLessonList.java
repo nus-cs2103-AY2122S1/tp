@@ -14,9 +14,10 @@ import tutoraid.model.lesson.exceptions.LessonNotFoundException;
 /**
  * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
  * A lesson is considered unique by comparing using {@code Lesson#isSameLesson(Lesson)}. As such, adding and updating of
- * lessons uses Lesson#isSameLesson(Lesson) for equality to ensure that the person being added or updated is
- * unique in terms of identity in the UniqueLessonList. However, the removal of a lesson uses Lesson#equals(Object)
- * to ensure that the lesson with exactly the same fields will be removed.
+ * lessons uses Lesson#isSameLesson(Lesson) for equality so as to ensure that the lesson being added or updated is
+ * unique in terms of identity in the UniqueLessonList. However, the removal of a lesson uses Lesson#equals(Object) so
+ * as to ensure that the lesson with exactly the same fields will be removed.
+ *
  * Supports a minimal set of list operations.
  *
  * @see Lesson#isSameLesson(Lesson)
@@ -78,7 +79,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
-    public void setLessons(tutoraid.model.lesson.UniqueLessonList replacement) {
+    public void setLessons(UniqueLessonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -111,8 +112,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof tutoraid.model.lesson.UniqueLessonList // instanceof handles nulls
-                && internalList.equals(((tutoraid.model.lesson.UniqueLessonList) other).internalList));
+                || (other instanceof UniqueLessonList // instanceof handles nulls
+                && internalList.equals(((UniqueLessonList) other).internalList));
     }
 
     @Override

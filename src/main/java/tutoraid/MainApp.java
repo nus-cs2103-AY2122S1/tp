@@ -15,18 +15,22 @@ import tutoraid.commons.util.ConfigUtil;
 import tutoraid.commons.util.StringUtil;
 import tutoraid.logic.Logic;
 import tutoraid.logic.LogicManager;
+import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
+import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.ReadOnlyUserPrefs;
 import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.util.SampleDataUtil;
-import tutoraid.storage.JsonTutorAidStorage;
+import tutoraid.storage.JsonTutorAidLessonStorage;
+import tutoraid.storage.JsonTutorAidStudentStorage;
 import tutoraid.storage.JsonUserPrefsStorage;
 import tutoraid.storage.Storage;
 import tutoraid.storage.StorageManager;
-import tutoraid.storage.TutorAidStorage;
+import tutoraid.storage.TutorAidLessonStorage;
+import tutoraid.storage.TutorAidStudentStorage;
 import tutoraid.storage.UserPrefsStorage;
 import tutoraid.ui.Ui;
 import tutoraid.ui.UiManager;
@@ -49,7 +53,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing StudentBook ]===========================");
+        logger.info("==================[ Initializing StudentBook and LessonBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -57,8 +61,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        TutorAidStorage tutorAidStorage = new JsonTutorAidStorage(userPrefs.getStudentBookFilePath());
-        storage = new StorageManager(tutorAidStorage, userPrefsStorage);
+        TutorAidStudentStorage tutorAidStudentStorage =
+                new JsonTutorAidStudentStorage(userPrefs.getStudentBookFilePath());
+        TutorAidLessonStorage tutorAidLessonStorage = new JsonTutorAidLessonStorage(userPrefs.getLessonBookFilePath());
+        storage = new StorageManager(tutorAidStudentStorage, tutorAidLessonStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -70,28 +76,48 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s student and lesson books
+     * and {@code userPrefs}. <br>
+     * The data from the sample student book will be used instead if {@code storage}'s student book is not found,
+     * or an empty student book will be used instead if errors occur when reading {@code storage}'s student book.
+     * This applies to the lesson book too.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyStudentBook> addressBookOptional;
-        ReadOnlyStudentBook initialData;
+        Optional<ReadOnlyStudentBook> studentBookOptional;
+        ReadOnlyStudentBook studentsInitialData;
+
         try {
-            addressBookOptional = storage.readStudentBook();
-            if (!addressBookOptional.isPresent()) {
+            studentBookOptional = storage.readStudentBook();
+            if (!studentBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample StudentBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleStudentBook);
+            studentsInitialData = studentBookOptional.orElseGet(SampleDataUtil::getSampleStudentBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty StudentBook");
-            initialData = new StudentBook();
+            studentsInitialData = new StudentBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty StudentBook");
-            initialData = new StudentBook();
+            studentsInitialData = new StudentBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<ReadOnlyLessonBook> lessonBookOptional;
+        ReadOnlyLessonBook lessonsInitialData;
+
+        try {
+            lessonBookOptional = storage.readLessonBook();
+            if (!lessonBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample LessonBook");
+            }
+            lessonsInitialData = lessonBookOptional.orElseGet(SampleDataUtil::getSampleLessonBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty LessonBook");
+            lessonsInitialData = new LessonBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty LessonBook");
+            lessonsInitialData = new LessonBook();
+        }
+
+        return new ModelManager(studentsInitialData, lessonsInitialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -168,7 +194,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting StudentBook " + MainApp.VERSION);
+        logger.info("Starting StudentBook and LessonBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

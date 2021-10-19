@@ -48,5 +48,4 @@ public class Capacity {
     public int hashCode() {
         return capacity.hashCode();
     }
-
 }
