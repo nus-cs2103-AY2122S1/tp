@@ -3,7 +3,6 @@ package seedu.notor.logic.parser.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPNAME;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -31,8 +30,7 @@ public class PersonRemoveGroupCommandParser extends PersonCommandParser {
         requireNonNull(arguments);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_GROUPNAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNAME, PREFIX_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PersonRemoveGroupCommand.MESSAGE_USAGE));
         }
