@@ -15,9 +15,9 @@ import seedu.address.model.task.UniqueTaskList;
 public class Student {
 
     // Identity fields
-    private Name name;
-    private TeleHandle teleHandle;
-    private Email email;
+    private final Name name;
+    private final TeleHandle teleHandle;
+    private final Email email;
 
     // Data fields
     private final StudentId studentId;
