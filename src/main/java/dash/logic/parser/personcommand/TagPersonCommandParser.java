@@ -22,8 +22,8 @@ import dash.model.tag.Tag;
 public class TagPersonCommandParser implements Parser<TagPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the TagParserCommand
-     * and returns a TagParserCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the TagPersonCommand
+     * and returns a TagPersonCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
