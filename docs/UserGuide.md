@@ -109,15 +109,15 @@ Examples:
 
 ### Edit a student's information: `edit student`
 
-Edits a student's information
+Edits a student's information (at least one field (name/tele handle/email) should be provided)
 
 Format: `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
 
 Examples:
-* `edit student m/CS2103 i/A0123456A n/John Doe t/@johndoe e/john.doe@u.nus.edu`: Edits student with id
-  A0123456A's information in module CS2103
-* `edit student m/CS2100 i/A0123457A n/Amy t/@amylee e/amy@u.nus.edu`: Edits student with id
-  A0123457A's information in module CS2100
+* `edit student m/CS2103 i/A0123456A n/John Doe`: Edits the name of the student with id
+  A0123456A in module CS2103 to John Doe
+* `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`: Edits the tele handle and email of the student with id
+  A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
 
 ### Find a student: `find`
 
