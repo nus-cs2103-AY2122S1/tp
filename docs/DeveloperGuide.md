@@ -165,7 +165,7 @@ After creating a profile, the user can now use other commands in ModuLink.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
-`create n/NAME id/STUDENT_ID p/PHONE e/EMAIL [mod/TAG]...`
+`create n/NAME id/STUDENT_ID p/PHONE e/EMAIL [mod/TAG]...` <br/>
 Example: `create n/John Doe id/A1234567Z p/98765432 e/johnd@example.com mod/CS2100 mod/CS2101`
 
 The following sequence diagram shows how the `create` mechanism works: ZACHARY
@@ -182,7 +182,7 @@ The GUI will then update to include the tags for the user profile.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
-`addMod [mod/MOD]...`
+`addMod [mod/MOD]...` <br/>
 Example: `addMod mod/CS2103T`
 
 The following sequence diagram shows how the `addMod` mechanism works: ZACHARY
@@ -199,7 +199,7 @@ The GUI will then update to show the specified profile as a favourite.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
-`addFav Student_ID`
+`addFav Student_ID` <br/>
 Example: `addFav A1234567X`
 
 The following sequence diagram shows how the `addFav` mechanism works: ZACHARY
@@ -231,7 +231,7 @@ The GUI will then update to show the profiles that contain the specified name.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
-`find NAME`
+`find NAME` <br/>
 Example: `find Charlotte`
 
 The following sequence diagram shows how the `find` mechanism works: ZACHARY
