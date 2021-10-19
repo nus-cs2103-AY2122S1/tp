@@ -176,6 +176,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Card-like UI Elements
+
+Card-like UI elements are objects that are shown to the user in the their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
+
+These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
+
+![CardClassDiagram](C:\Users\Ivan\Documents\GitHub\tp\docs\images\CardClassDiagram.png)
+
+At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
+
+There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. 
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -376,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from step 2.
-      
+    
 * 4a. TutorAid detects an error in the command to delete a student.
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -644,7 +658,7 @@ Preconditions: There is at least one student added to TutorAid.
 * 4a. TutorAid detects an error in the reset payment command
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-  
+    
     * 4a2. Tutor re-enters the command.
 
       Steps 4a1-4a2 are repeated until the data entered are correct.
@@ -808,7 +822,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
       Steps 4a1-4a2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
-      
+    
 * 7a. TutorAid detects an error in the command to remove a student from a class.
 
     * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.
