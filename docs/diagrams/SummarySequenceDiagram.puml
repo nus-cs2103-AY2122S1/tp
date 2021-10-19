@@ -74,8 +74,4 @@ deactivate Summary
 MainApp <-- ModelManager
 deactivate ModelManager
 
-
-
-
-
 @enduml

@@ -278,14 +278,12 @@ Step 2. The user can click on the contact on the GUI to expand it and display th
 * **Alternative 2:** Separate command for review
     * Pros: Increases modularity by making review an entirely new command.
     * Cons: Too many commands which may confuse the User.
-    
 ### Summary Feature
 
 #### Implementation
 
 The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to 
 obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
-
 * `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
 * `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
 * `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
