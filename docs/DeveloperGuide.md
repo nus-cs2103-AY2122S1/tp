@@ -633,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
-**Use case: UC13 - Find Contact by remark**
+**Use case: UC14 - Find Contact by remark**
 
 **MSS**
 
