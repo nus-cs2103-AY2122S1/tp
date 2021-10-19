@@ -86,10 +86,6 @@ DeleteLessonCommand -> Model : deleteLesson(l1)
 activate Model
 
 Model -> Lesson : removeLesson(l1)
-activate Lesson
-
-Lesson --> Model
-deactivate Lesson
 destroy Lesson
 
 Model --> DeleteLessonCommand
