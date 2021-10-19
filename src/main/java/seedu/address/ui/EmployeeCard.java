@@ -60,7 +60,7 @@ public class EmployeeCard extends UiPart<Region> {
         address.setText("Address: " + employee.getAddress().value);
         email.setText("Email: " + employee.getEmail().value);
         leaves.setText("Leaves: " + employee.getLeaves().currentLeaves + " days");
-        salary.setText("Salary: SGD" + employee.getSalary().currentSalary);
+        salary.setText("Salary: S$" + employee.getSalary().currentSalary);
         jobTitle.setText("Job Title: " + employee.getJobTitle().jobTitle);
         employee.getShifts().stream()
                 .sorted(Comparator.comparing(shift -> shift.shiftString))

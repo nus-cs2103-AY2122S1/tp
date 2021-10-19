@@ -27,7 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.Employee;
-import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditCustomerDescriptorBuilder;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
@@ -212,7 +212,7 @@ public class CommandTestUtil {
 
         Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
         final String[] splitName = employee.getName().fullName.split("\\s+");
-        model.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEmployeeList(new EmployeeClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEmployeeList().size());
     }
