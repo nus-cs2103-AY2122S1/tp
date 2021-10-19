@@ -58,7 +58,7 @@ public class HelpWindow extends AnchorPane {
     private static final Hashtable<String, CommandDetail> commandTable = new Hashtable<>();
 
     private static Stage stage;
-    private static boolean isActive = false;
+    private static final boolean isActive = false;
     private static HelpWindow helpWindow;
 
     private interface CommandDetail {
@@ -306,9 +306,9 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleFind() {
-        additionalInfo.setText(
-                "Format: find KEYWORD [MORE_KEYWORDS]\n"
-                        + "Only full words will be matched and persons matching at least one keyword will be returned"
+        additionalInfo.setText("Format: find FLAG KEYWORD [MORE_KEYWORDS]\n"
+                + "Persons matching all the keywords will be returned\n"
+                + "The flags available to use are -a, -e, -n, -p and -t"
         );
     }
 

@@ -1,29 +1,31 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.AttributeContainsKeywordsPredicate;
+
+import static java.util.Objects.requireNonNull;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book whose specified attribute contains any of the argument keywords.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String DESCRIPTION = "Finds all persons whose names contain the specified keywords";
+    public static final String DESCRIPTION =
+            "Finds all persons whose specified detail contain any of the specified keywords (case-insensitive)";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all persons whose specified detail contain any of the specified keywords (case-insensitive) "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: FLAG KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " -n alex yeoh";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final AttributeContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(AttributeContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

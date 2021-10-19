@@ -1,11 +1,12 @@
 package seedu.address.commons.util;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Helper functions for handling strings.
@@ -13,29 +14,58 @@ import java.util.Arrays;
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if the {@code sentence} contains the {@code stringOfWords} in the expected order.
+     *   Ignores case, but words in the stringOfWords need to partially match words in the sentence and their relative
+     *   ordering.
+     *
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsWordsInOrderIgnoreCase("ABc def", "abc") == true
+     *       containsWordsInOrderIgnoreCase("ABc def", "ab d") == true
+     *       containsWordsInOrderIgnoreCase("ABc def", "def abc") == false
      *       </pre>
      * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param wordsList cannot be null, cannot be empty
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
+    public static boolean containsWordsInOrderIgnoreCase(String sentence, List<String> wordsList) {
         requireNonNull(sentence);
-        requireNonNull(word);
+        requireNonNull(wordsList);
+        checkArgument(!wordsList.isEmpty(), "Words parameter cannot be empty");
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        List<String> wordsInPreppedSentence = new ArrayList<>(List.of(sentence.split("\\s+")));
+        int wordsIndex = 0;
+        for (int i = 0; i < wordsList.size(); i++) {
+            wordsList.set(i, wordsList.get(i).trim().toLowerCase());
+        }
+        for (int i = 0; i < wordsInPreppedSentence.size(); i++) {
+            wordsInPreppedSentence.set(i, wordsInPreppedSentence.get(i).trim().toLowerCase());
+        }
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        for (String s : wordsInPreppedSentence) {
+            if (s.startsWith(wordsList.get(wordsIndex))) {
+                if (++wordsIndex == wordsList.size()) {
+                    return true;
+                }
+            }
+        }
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return false;
+    }
+
+    public static boolean isSubsequence(String subsequence, String word) {
+        int index = -1;
+        for (int i = 0; i < subsequence.length(); i++) {
+            index = word.indexOf(subsequence.charAt(i), index + 1);
+            if (index == -1)  {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean haveSameFirstCharacter(String word1, String word2) {
+        requireNonNull(word1);
+        requireNonNull(word2);
+        return word1.charAt(0) == word2.charAt(0);
     }
 
     /**
