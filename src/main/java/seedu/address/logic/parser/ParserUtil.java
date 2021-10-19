@@ -1,14 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
@@ -325,15 +325,15 @@ public class ParserUtil {
     public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
         requireNonNull(argMultimap);
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME), ParserUtil::parseName);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS), ParserUtil::parseAddress);
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG), ParserUtil::parseTag);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_NAME), ParserUtil::parseName);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_PHONE), ParserUtil::parsePhone);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_EMAIL), ParserUtil::parseEmail);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ADDRESS), ParserUtil::parseAddress);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_TAG), ParserUtil::parseTag);
         try {
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_ROLE), Role::translateStringToRole);
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_SALARY), Salary::new);
-            predicate.addFieldToTest(argMultimap.getValue(PREFIX_STATUS), Status::translateStringToStatus);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_SALARY), Salary::new);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_DASH_STATUS), Status::translateStringToStatus);
         } catch (IllegalArgumentException iae) {
             throw new ParseException(iae.getMessage());
         }

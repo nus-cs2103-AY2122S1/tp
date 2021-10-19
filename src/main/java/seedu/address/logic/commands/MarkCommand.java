@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,14 +25,14 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n\n"
             + "Parameters:\n"
-            + PREFIX_INDEX + "INDEX or "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_DASH_INDEX + "INDEX or "
+            + PREFIX_DASH_NAME + "NAME "
             + PREFIX_DAY_SHIFT + "DATE "
-            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
+            + "[" + PREFIX_DASH_INDEX + "END DATE]\n\n"
             + "Examples:\n"
-            + COMMAND_WORD + " " + PREFIX_INDEX + "1"
+            + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "Jace "
+            + COMMAND_WORD + " " + PREFIX_DASH_NAME + "Jace "
             + PREFIX_DAY_SHIFT + "2021-11-11" + " " + PREFIX_DAY_SHIFT + "2021-11-13";
 
     public static final String DEFAULT_EXECUTION = "%1$d number of staff have been marked for the period %2$s\n"

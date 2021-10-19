@@ -1,14 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,8 +31,10 @@ public class ViewCommandParser implements Parser<ViewCommand> {
     public ViewCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_NAME, PREFIX_DASH_PHONE,
+                        PREFIX_DASH_INDEX,
+                        PREFIX_DASH_EMAIL, PREFIX_DASH_ADDRESS, PREFIX_DASH_TAG,
+                        PREFIX_DASH_STATUS, PREFIX_DASH_ROLE, PREFIX_DASH_SALARY);
         if (argMultimap.isEmpty()) {
             throw NO_FIELD_EXCEPTION;
         }

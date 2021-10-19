@@ -20,6 +20,13 @@ public class CliSyntax {
     // Used when searching
     public static final Prefix PREFIX_DASH_INDEX = new Prefix("-i");
     public static final Prefix PREFIX_DASH_NAME = new Prefix("-n");
+    public static final Prefix PREFIX_DASH_PHONE = new Prefix("-p");
+    public static final Prefix PREFIX_DASH_EMAIL = new Prefix("-e");
+    public static final Prefix PREFIX_DASH_ADDRESS = new Prefix("-a");
+    public static final Prefix PREFIX_DASH_ROLE = new Prefix("-r");
+    public static final Prefix PREFIX_DASH_SALARY = new Prefix("-$");
+    public static final Prefix PREFIX_DASH_TAG = new Prefix("-t");
+    public static final Prefix PREFIX_DASH_STATUS = new Prefix("-s");
     public static final Prefix PREFIX_DASH_DAY_SHIFT = new Prefix("-d");
     public static final Prefix PREFIX_DASH_TIME = new Prefix("-t");
 
