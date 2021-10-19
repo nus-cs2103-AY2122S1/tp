@@ -11,6 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -36,6 +37,7 @@ public class PersonBuilder {
     private Set<Role> roles;
     private Salary salary;
     private Status status;
+    private Schedule schedule;
     private Set<Period> absentDates;
 
     /**
@@ -49,9 +51,10 @@ public class PersonBuilder {
         tags = new HashSet<>();
         absentDates = new HashSet<>();
         roles = new HashSet<>();
-        roles.add(Role.NO_ROLE);
+        roles.add(Role.translateStringToRole(DEFAULT_ROLE));
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
+        schedule = new Schedule();
     }
 
     /**
@@ -67,6 +70,7 @@ public class PersonBuilder {
         salary = personToCopy.getSalary();
         status = personToCopy.getStatus();
         absentDates = personToCopy.getAbsentDates();
+        schedule = personToCopy.getSchedule();
     }
 
     /**
@@ -143,8 +147,20 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, roles, salary, status, tags, absentDates);
+    /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(String schedule) {
+        this.schedule = new Schedule(schedule);
+        return this;
     }
 
+    /**
+     * Returns a new Person object with the fields set in this PersonBuilder object.
+     */
+    public Person build() {
+        Person builtPerson = new Person(name, phone, email, address, roles, salary, status, tags, absentDates);
+        builtPerson.setSchedule(schedule);
+        return builtPerson;
+    }
 }

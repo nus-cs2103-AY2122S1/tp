@@ -78,7 +78,6 @@ public class Person {
         return email;
     }
 
-
     public Address getAddress() {
         return address;
     }
@@ -97,6 +96,14 @@ public class Person {
 
     public Schedule getSchedule() {
         return schedule;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     public boolean containsFields(List<Field> fields) {
@@ -131,13 +138,6 @@ public class Person {
                 roles, salary, status, tags, result);
     }
 
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
 
     /**
      * Returns an immutable period set, which throws {@code UnsupportedOperationException}
@@ -243,7 +243,7 @@ public class Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Salary: ")
-                .append(getSalary())
+                .append(getSalary().convertToDollars())
                 .append("; Status: ")
                 .append(getStatus());
 
