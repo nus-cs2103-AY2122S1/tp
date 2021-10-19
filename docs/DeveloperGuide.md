@@ -178,12 +178,10 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
 
     public abstract class UndoableCommand extends Command {
         protected abstract CommandResult executeUndoableCommand();
-    
         @Override
         public CommandResult execute() {
             return executeUndoableCommand();
         }
-    
         protected abstract void undo;
     }
     
