@@ -20,6 +20,7 @@ TutAssistor is a ***desktop app for private tutors to manage tuition class time 
 ## Features
 
 ### Adding students/tuition classes
+
 #### Adding a student: `add`
 
 Command Shortcut: `a`
@@ -60,6 +61,7 @@ ac n/Math l/8 ts/Mon 11:00-14:00 r/Quiz on final lesson
 ```
 
 ### Viewing students/tuition classes
+
 Provides a view of a student or class if an INDEX is provided. Otherwise, a full list is provided.
 
 #### Viewing a student: `student`
@@ -93,6 +95,7 @@ vc 3
 ```
 
 ### Editing students/tuition classes
+
 Edits a student’s information such as n/NAME, p/PHONE_NUMBER.
 Edits a tuition class at specified t/TIME.
 
@@ -125,6 +128,7 @@ ec 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
 
 ### Deleting students/tuition classes
+
 Deletes a student or a tuition class of a given INDEX.
 
 #### Deleting students: `delete`
@@ -156,6 +160,7 @@ delc 4
 ```
 
 ### Adding/Removing an existing student from class
+
 Move a student to/from classes by adding or removing them.
 
 #### Adding existing students to a class: `addtoclass`
@@ -307,23 +312,25 @@ when adding and editing classes after the tutor sorted the list.
 Format: `sort [o/ORDER]`
 
 Examples: (examples below are all possible usages of `sort`)
-- `sort` (without order being specified, TutAssistor will sort the list by time)
-- `sort o/asc`
-- `sort o/desc`
-- `sort o/time`
+* `sort` (without order being specified, TutAssistor will sort the list by time)
+* `sort o/asc` (sort by ascending alphabetical order)
+* `sort o/desc` (sort by descending alphabetical order)
+* `sort o/time` (sort by time)
 
 ### View timetable: `timetable`
 
 Command Shortcut: `tt`
 
 Example:
-- `timetable`
-<br>
+```
+timetable
+```
 
 Shows lessons scheduled in this week in a timetable.<br>
 ![Ui](images/time_table.png)
 
 ### View today tuition classes: `today`
+
 Shows all the tuition classes happens today
 
 Format: `today`
@@ -336,6 +343,7 @@ Shows a command summary and a link to the user guide. <br>
 ![Ui](images/helpWindow.png)
 
 ### Exiting the app: `exit`
+
 Exits the program.<br>
 Format: `exit`
 

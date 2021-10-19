@@ -261,11 +261,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void showTimetable() {
-        try {
-            updateInfoPage(new TimetableInfoPage(UniqueTuitionList.getMostRecentTuitionClasses(), resultDisplay));
-        } catch (CommandException ce) {
-            resultDisplay.setFeedbackToUser(ce.getMessage());
-        }
+        updateInfoPage(new TimetableInfoPage(UniqueTuitionList.getMostRecentTuitionClasses(), resultDisplay));
     }
 
     private void showStudentPage() {
