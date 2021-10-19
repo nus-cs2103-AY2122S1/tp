@@ -1,9 +1,9 @@
 * {
-    -fx-base1: #05668d;
-    -fx-base2: #028090;
-    -fx-base3: #00a896;
-    -fx-base4: #02c39a;
-    -fx-base5: #f0f3bd;
+    -fx-base1: #cb997e;
+    -fx-base2: #eddcd2;
+    -fx-base3: #fff1e6;
+    -fx-base4: #f0efeb;
+    -fx-base5: #ddbea9;
 } /* Based on https://coolors.co/05668d-028090-00a896-02c39a-f0f3bd */
 
 .background {
@@ -139,7 +139,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: gray;
 }
 
 .cell_big_label {
