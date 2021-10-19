@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -11,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.UntagCommand.MESSAGE_REMOVE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.UntagCommand.MESSAGE_REMOVE_TAG_SUCCESS;
 import static seedu.address.logic.commands.UntagCommand.MESSAGE_TAG_NOT_IN_PERSON;
 import static seedu.address.logic.commands.UntagCommand.getNotFoundTags;
 import static seedu.address.logic.commands.UntagCommand.getRemovedTags;
@@ -24,6 +25,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -60,7 +62,7 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
                 editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -81,7 +83,7 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
                 editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -102,7 +104,7 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
                 editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -123,7 +125,7 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_STUDENT, VALID_TAG_TEACHING_ASSISTANT).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_THIRD_PERSON, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
                 editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -144,11 +146,32 @@ class UntagCommandTest {
                 .withTags(VALID_TAG_HUSBAND).build();
         UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_REMOVE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
                 editedPerson.getName(), getRemovedTags(descriptor));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noTagsSupplied_success() {
+        Model model = generateFriendAndHusbandTaggedModel();
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(secondPerson);
+        Person editedPerson = personInList.withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
+                .withTags().build();
+        UntagCommand untagCommand = new UntagCommand(INDEX_SECOND_PERSON, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_REMOVE_TAG_SUCCESS,
+                editedPerson.getName(), getRemovedTags(descriptor));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(secondPerson, editedPerson);
 
         assertCommandSuccess(untagCommand, model, expectedMessage, expectedModel);
     }
@@ -159,13 +182,41 @@ class UntagCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
                 .withTags(VALID_TAG_STUDENT).build();
-        UntagCommand editCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
+        UntagCommand untagCommand = new UntagCommand(INDEX_FIRST_PERSON, descriptor);
 
         String tagsNotFound = getNotFoundTags(firstPerson.getTags(),
                 descriptor.getTags().orElse(new HashSet<Tag>()));
         String message = String.format(MESSAGE_TAG_NOT_IN_PERSON, firstPerson.getName(),
                 tagsNotFound);
-        assertCommandFailure(editCommand, model, message);
+        assertCommandFailure(untagCommand, model, message);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Model model = generateFriendTaggedModel();
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_WIFE).build();
+        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex, descriptor);
+
+        assertCommandFailure(untagCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    /**
+     * Edit filtered list where index is larger than size of filtered list,
+     * but smaller than size of address book
+     */
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        Model model = generateFriendTaggedModel();
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        // ensures that outOfBoundIndex is still in bounds of address book list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        UntagCommand untagCommand = new UntagCommand(outOfBoundIndex,
+                new EditPersonDescriptorBuilder().withTags(VALID_TAG_WIFE).build());
+
+        assertCommandFailure(untagCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
