@@ -47,7 +47,7 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueParticipantList
-AddressBook *-left-> "1" UniqueEventList
+AddressBook *--> "1" UniqueEventList
 UniqueEventList --> "~* all" Event
 Event *--> EventName
 Event *--> EventDate
@@ -62,11 +62,12 @@ Participant *--> BirthDate
 Participant *--> "*" Tag
 Participant *--> "*" Note
 Participant *--> "*" NextOfKin
-Participant *--> "*" Event
+Participant *-left-> "*" Event
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Participant
+ModelManager -->"~* filtered" Event
 @enduml
