@@ -91,14 +91,14 @@ Format: `tasks`
 
 ### Adding a task with a date: `addTask n/TASK_NAME by/DATE`
 
-Adds a task with the given name and a specified deadline.
+Adds a task with the given name and a specified taskDate.
 
 Format: `addTask n/TASK_NAME by/DATE`
 Format: `addTask n/TASK_NAME by/DATE`
 
 * Adds a task with the specified `TASK_NAME`
-* The task has the deadline `DATE`
-* The deadline must be in the format `YYYY-MM-dd`
+* The task has the taskDate `DATE`
+* The taskDate must be in the format `YYYY-MM-dd`
 
 Examples:
 * `add n/grade scripts by/2021-09-23` creates the task "grade scripts", which is to be completed by the given date.

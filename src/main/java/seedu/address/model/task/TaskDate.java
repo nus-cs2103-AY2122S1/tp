@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline {
+public class TaskDate {
 
     public static final String MESSAGE_CONSTRAINTS = "Deadlines should be in the format yyyy-MM-dd";
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -20,7 +20,7 @@ public class Deadline {
      *
      * @param deadline A valid deadline date.
      */
-    public Deadline(String deadline) {
+    public TaskDate(String deadline) {
         requireNonNull(deadline);
         this.value = deadline;
         try {
@@ -57,8 +57,8 @@ public class Deadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Deadline // instanceof handles nulls
-                && deadline.equals(((Deadline) other).deadline)); // state check
+                || (other instanceof TaskDate // instanceof handles nulls
+                && deadline.equals(((TaskDate) other).deadline)); // state check
     }
 
     @Override

@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
 | `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
-| `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
+| `* *`    | expert user         | sort tasks by earliest taskDate                      | know what tasks need to be completed urgently                          |
 | `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
 | `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
 | `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
@@ -450,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to create a task with the specified deadline
+1.  User requests to create a task with the specified taskDate
 2.  tApp creates the task and stores it in the task list
 3.  tApp displays the task that was just created
 

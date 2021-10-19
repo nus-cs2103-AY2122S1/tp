@@ -14,32 +14,27 @@ import seedu.address.model.tag.Tag;
 public class Task {
 
     private final TaskName name;
-    private final Deadline deadline;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isDone;
+//    TaskDueDate dueDate;
 
     /**
      * Constructs a {@code Task}.
      *
      * @param name A valid TaskName.
-     * @param deadline A valid Deadline.
      * @param tags A valid Set of Tags.
      */
-    public Task(TaskName name, Deadline deadline, Set<Tag> tags, boolean isDone) {
+    public Task(TaskName name, Set<Tag> tags, boolean isDone) {
         this.name = name;
-        this.deadline = deadline;
         this.tags.addAll(tags);
         this.isDone = isDone;
+//        this.dueDate = new TaskDueDate("2000-02-02");
     }
 
     public TaskName getName() {
         return name;
     }
-
-    public Deadline getDeadline() {
-        return deadline;
-    }
-
+    
     public String getStatusString() {
         return this.isDone ? "Completed" : "Pending";
     }
@@ -59,6 +54,10 @@ public class Task {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
+//    public TaskDueDate getDeadline() {
+//        return dueDate;
+//    }
 
     /**
      * Returns true if both Tasks have the same name.
@@ -89,7 +88,6 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getTags().equals(getTags());
     }
 
@@ -98,21 +96,19 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline, tags, isDone);
+        return Objects.hash(name, tags, isDone);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Deadline: ")
-                .append(getDeadline())
-                .append("; Status: ")
+                .append("\nStatus: ")
                 .append(getStatusString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
+            builder.append("\nTags: ");
             tags.forEach(builder::append);
         }
 

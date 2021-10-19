@@ -20,7 +20,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
@@ -195,9 +194,9 @@ public class ModelManager implements Model {
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
         TaskName name = target.getName();
-        Deadline deadline = target.getDeadline();
+//        TaskDueDate taskDueDate = target.getDeadline();
         Set<Tag> tags = target.getTags();
-        Task newTask = new Task(name, deadline, tags, true);
+        Task newTask = new Task(name, tags, true);
         newTask.markTaskComplete();
         addressBook.setTask(target, newTask);
     }

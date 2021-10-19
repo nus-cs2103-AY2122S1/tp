@@ -1,0 +1,81 @@
+package seedu.address.model.task;
+
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
+public class DeadlineTask extends Task{
+    private final TaskDate dueDate;
+    
+    /**
+     * Constructs a {@code Task}.
+     *
+     * @param name A valid TaskName.
+     * @param tags A valid Set of Tags.
+     */
+    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate dueDate) {
+        super(name, tags, isDone);
+        this.dueDate = dueDate;
+    }
+    
+    public TaskDate getDeadline() {
+        return dueDate;
+    }
+
+    /**
+     * Returns true if both Tasks have the same name.
+     * This defines a weaker notion of equality between two Task.
+     */
+    public boolean isSameTask(DeadlineTask otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both tasks have the same identity and data fields.
+     * This defines a stronger notion of equality between two tasks.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof DeadlineTask)) {
+            return false;
+        }
+
+        DeadlineTask otherTask = (DeadlineTask) other;
+        return otherTask.getName().equals(getName())
+                && otherTask.getDeadline().equals(getDeadline())
+                && otherTask.getTags().equals(getTags());
+    }
+    
+//    @Override
+//    public int hashCode() {
+//        // use this method for custom fields hashing instead of implementing your own
+//        return Objects.hash(name, tags, isDone, dueDate);
+//    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName())
+                .append("\nDeadline: ")
+                .append(getDeadline().toString())
+                .append("\nStatus: ")
+                .append(getStatusString());
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("\nTags: ");
+            tags.forEach(builder::append);
+        }
+
+        return builder.toString();
+    }
+}

@@ -27,46 +27,46 @@ import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
-public class AddTaskCommandTest {
+public class AddTodoTaskCommandTest {
 
     @Test
     public void constructor_nullTask_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTaskCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddTodoTaskCommand(null));
     }
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        AddTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddTaskCommandTest.ModelStubAcceptingTaskAdded();
+        AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
         Task validTask = new TaskBuilder().build();
 
-        CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
+        CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);
 
-        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddTodoTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
         Task validTask = new TaskBuilder().build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-        AddTaskCommandTest.ModelStub modelStub = new AddTaskCommandTest.ModelStubWithTask(validTask);
+        AddTodoTaskCommand addTodoTaskCommand = new AddTodoTaskCommand(validTask);
+        AddTodoTaskCommandTest.ModelStub modelStub = new AddTodoTaskCommandTest.ModelStubWithTask(validTask);
 
         assertThrows(CommandException.class,
-                AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(modelStub));
+                AddTodoTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTodoTaskCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Task alice = new TaskBuilder().withName("Alice").build();
         Task bob = new TaskBuilder().withName("Bob").build();
-        AddTaskCommand addAliceCommand = new AddTaskCommand(alice);
-        AddTaskCommand addBobCommand = new AddTaskCommand(bob);
+        AddTodoTaskCommand addAliceCommand = new AddTodoTaskCommand(alice);
+        AddTodoTaskCommand addBobCommand = new AddTodoTaskCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddTaskCommand addAliceCommandCopy = new AddTaskCommand(alice);
+        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -252,7 +252,7 @@ public class AddTaskCommandTest {
     /**
      * A Model stub that contains a single task.
      */
-    private class ModelStubWithTask extends AddTaskCommandTest.ModelStub {
+    private class ModelStubWithTask extends AddTodoTaskCommandTest.ModelStub {
         private final Task task;
 
         ModelStubWithTask(Task task) {
@@ -270,7 +270,7 @@ public class AddTaskCommandTest {
     /**
      * A Model stub that always accept the task being added.
      */
-    private class ModelStubAcceptingTaskAdded extends AddTaskCommandTest.ModelStub {
+    private class ModelStubAcceptingTaskAdded extends AddTodoTaskCommandTest.ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
