@@ -14,6 +14,8 @@ import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
+import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
+import seedu.address.model.person.exceptions.CannotAttendException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -123,6 +125,60 @@ public class Person implements HasUniqueId {
      */
     public boolean canAttendLesson(Lesson lesson) {
         return !lessonsList.doesLessonOverlap(lesson);
+    }
+
+    /**
+     * Immutable way of adding a lesson
+     * @param lesson to add
+     * @return Person with added lesson
+     * @throws CannotAttendException if person is unable to attend lesson
+     */
+    public Person attendLesson(Lesson lesson) throws CannotAttendException {
+        NoOverlapLessonList newList;
+        try {
+            newList = lessonsList.addLesson(lesson);
+        } catch (OverlappingLessonsException e) {
+            throw new CannotAttendException(e.getMessage());
+        }
+
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
+    }
+
+    /**
+     * Immutable way of removing a lesson
+     * @param index of lesson to remove
+     * @return Person with removed lesson
+     * @throws IndexOutOfBoundsException if index specified is out of bounds
+     */
+    public Person unAttendLesson(int index) throws IndexOutOfBoundsException {
+        NoOverlapLessonList newList = lessonsList.removeLesson(index);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
+    }
+
+    /**
+     * Immutable way of adding an exam
+     * @param e exam to add
+     * @return Person with exam added
+     */
+    public Person addExam(Exam e) {
+        Person newPerson = new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
+        newPerson.exams.add(e);
+        return newPerson;
+    }
+
+    /**
+     * Immutable way of removing an exam
+     * @param index of exam to remove
+     * @return Person with examed removed
+     * @throws IndexOutOfBoundsException if specified index is out of bounds
+     */
+    public Person removeExam(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= exams.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        Person newPerson = new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
+        newPerson.exams.remove(index);
+        return newPerson;
     }
 
     /**

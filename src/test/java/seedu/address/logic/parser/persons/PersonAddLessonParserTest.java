@@ -22,7 +22,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.persons.PersonAddLessonCommand;
+import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
@@ -39,13 +39,16 @@ class PersonAddLessonParserTest {
                 .withTimeslot(VALID_TIME_10, VALID_TIME_12).withDayOfWeek(ParserUtil.parseDayOfWeek(VALID_DAY_MON))
                 .build();
         Index targetIndex = INDEX_FIRST_PERSON;
+        EditPersonCommand.EditPersonDescriptor editPersonDesc = new EditPersonCommand.EditPersonDescriptor();
+        editPersonDesc.addLesson(expectedLesson);
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + targetIndex.getOneBased() + SUBJECT_DESC_MATH
-                + TIMESLOT_DESC_10_12 + DAY_MON, new PersonAddLessonCommand(targetIndex, expectedLesson));
+                + TIMESLOT_DESC_10_12 + DAY_MON, new EditPersonCommand(targetIndex, editPersonDesc,
+                PersonAddLessonParser.ADD_LESSON_SUCCESS));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddLessonCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonAddLessonParser.MESSAGE_USAGE);
         Index targetIndex = INDEX_FIRST_PERSON;
 
         assertParseFailure(parser, PREAMBLE_WHITESPACE + SUBJECT_DESC_MATH + DAY_MON

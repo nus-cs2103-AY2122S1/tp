@@ -23,6 +23,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -30,6 +31,7 @@ import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.exceptions.CannotAttendException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,23 +54,24 @@ public class EditPersonCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+    private final String successMsg;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditPersonCommand(Index index, EditPersonDescriptor editPersonDescriptor, String successMsg) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
-
+        requireNonNull(successMsg);
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.successMsg = successMsg;
     }
 
     @Override
@@ -89,14 +92,15 @@ public class EditPersonCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(successMsg, editedPerson));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -105,11 +109,14 @@ public class EditPersonCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds(); // not allowed to be edited here
-        NoOverlapLessonList lessonList = editPersonDescriptor.getLessonsList().orElse(personToEdit.getLessonsList());
-        List<Exam> exams = editPersonDescriptor.getExams().orElse(personToEdit.getExams());
+        NoOverlapLessonList lessonList = personToEdit.getLessonsList();
+        List<Exam> exams = personToEdit.getExams();
 
-        return new Person(updatedName, updatedPhone, updatedEmail,
+        Person newPerson = new Person(updatedName, updatedPhone, updatedEmail,
                 updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams);
+        newPerson = editPersonDescriptor.updateLessons(newPerson);
+        newPerson = editPersonDescriptor.updateExams(newPerson);
+        return newPerson;
     }
 
     @Override
@@ -127,7 +134,8 @@ public class EditPersonCommand extends Command {
         // state check
         EditPersonCommand e = (EditPersonCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editPersonDescriptor.equals(e.editPersonDescriptor)
+                && successMsg.equals(successMsg);
     }
 
     /**
@@ -135,13 +143,19 @@ public class EditPersonCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
+
+        public static final String INVALID_LESSON_INDEX = "Lesson index provided is invalid!";
+        public static final String INVALID_EXAM_INDEX = "Exam index provided is invalid!";
+
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private NoOverlapLessonList lessonsList;
-        private List<Exam> exams;
+        private List<Index> lessonsToRemove = new ArrayList<>();
+        private List<Lesson> lessonsToAdd = new ArrayList<>();
+        private List<Index> examsToRemove = new ArrayList<>();
+        private List<Exam> examsToAdd = new ArrayList<>();
 
         public EditPersonDescriptor() {}
 
@@ -155,8 +169,10 @@ public class EditPersonCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setLessonsList(toCopy.lessonsList);
-            setExams(toCopy.exams);
+            lessonsToRemove.addAll(toCopy.lessonsToRemove);
+            lessonsToAdd.addAll(toCopy.lessonsToAdd);
+            examsToRemove.addAll(toCopy.examsToRemove);
+            examsToAdd.addAll(toCopy.examsToAdd);
         }
 
         /**
@@ -206,22 +222,6 @@ public class EditPersonCommand extends Command {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
-        public Optional<NoOverlapLessonList> getLessonsList() {
-            return Optional.ofNullable(lessonsList);
-        }
-
-        public void setLessonsList(NoOverlapLessonList lessonsList) {
-            this.lessonsList = lessonsList;
-        }
-
-        public void setExams(List<Exam> exams) {
-            this.exams = (exams != null) ? new ArrayList<>(exams) : null;
-        }
-
-        public Optional<List<Exam>> getExams() {
-            return (exams != null) ? Optional.of(Collections.unmodifiableList(exams)) : Optional.empty();
-        }
-
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
@@ -229,6 +229,86 @@ public class EditPersonCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Adds a lesson to be added to the person later
+         */
+        public void addLesson(Lesson l) {
+            requireNonNull(l);
+            lessonsToAdd.add(l);
+        }
+
+        /**
+         * Adds an index of a lesson to be removed from the person later
+         */
+        public void removeLesson(Index index) {
+            requireNonNull(index);
+            lessonsToRemove.add(index);
+        }
+
+        /**
+         * Adds an exam to be added to the person later
+         */
+        public void addExam(Exam e) {
+            requireNonNull(e);
+            examsToAdd.add(e);
+        }
+
+        /**
+         * Adds an index of an exam to be removed from the person later
+         */
+        public void removeExam(Index index) {
+            requireNonNull(index);
+            examsToRemove.add(index);
+        }
+
+        /**
+         * Updates the lesson of a person according to the specified order previously.
+         * @param personToEdit person to update lessons list.
+         * @return Person with updated lessons list, removal is done before adding.
+         * @throws CommandException if any specified index or lesson is invalid
+         */
+        public Person updateLessons(Person personToEdit) throws CommandException {
+            try {
+                // removes lesson first before adding lessons
+                for (Index i : lessonsToRemove) {
+                    personToEdit = personToEdit.unAttendLesson(i.getZeroBased());
+                }
+            } catch (IndexOutOfBoundsException index) {
+                throw new CommandException(INVALID_LESSON_INDEX);
+            }
+
+            try {
+                for (Lesson l : lessonsToAdd) {
+                    l = l.withAttendee(personToEdit.getName());
+                    personToEdit = personToEdit.attendLesson(l);
+                }
+            } catch (CannotAttendException e) {
+                throw new CommandException(e.getMessage());
+            }
+            return personToEdit;
+        }
+
+        /**
+         * Updates the exams of a person according to the specified order previously.
+         * @param personToEdit person to update exams list.
+         * @return Person with updated exams list, removal is done before adding.
+         * @throws CommandException if any specified index is invalid
+         */
+        public Person updateExams(Person personToEdit) throws CommandException {
+            try {
+                // removes lesson first before adding lessons
+                for (Index i : examsToRemove) {
+                    personToEdit = personToEdit.removeExam(i.getZeroBased());
+                }
+            } catch (IndexOutOfBoundsException index) {
+                throw new CommandException(INVALID_EXAM_INDEX);
+            }
+            for (Exam e : examsToAdd) {
+                personToEdit = personToEdit.addExam(e);
+            }
+            return personToEdit;
         }
 
         @Override
@@ -251,9 +331,10 @@ public class EditPersonCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
-                    && getLessonsList().equals(e.getLessonsList())
-                    && getExams().equals(e.getExams());
+                    && lessonsToAdd.equals(e.lessonsToAdd)
+                    && lessonsToRemove.equals(lessonsToRemove)
+                    && examsToAdd.equals(e.examsToAdd)
+                    && examsToRemove.equals(e.examsToRemove);
         }
-
     }
 }
