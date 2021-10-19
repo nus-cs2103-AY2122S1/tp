@@ -54,19 +54,18 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * Removes the equivalent tag based on predicates from the list.
-     * The tag must exist in the list.
+     * Removes the tags based on predicates from the list.
+     * The tags must exist in the list.
      */
-    public Tag removeByFields(List<Predicate<Tag>> predicates) {
+    public FilteredList<Tag> removeByFields(List<Predicate<Tag>> predicates) {
         requireAllNonNull(predicates);
         Predicate<Tag> predicate = predicates.stream().reduce(x -> true, Predicate::and);
         FilteredList<Tag> filteredList = internalList.filtered(predicate);
         if (filteredList.size() < 1) {
             throw new TagNotFoundException();
         } else {
-            Tag tagToDelete = filteredList.get(0);
-            internalList.remove(tagToDelete);
-            return tagToDelete;
+            filteredList.forEach(internalList::remove);
+            return filteredList;
         }
     }
 

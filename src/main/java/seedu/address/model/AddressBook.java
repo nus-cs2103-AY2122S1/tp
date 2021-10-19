@@ -5,8 +5,12 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
@@ -21,6 +25,8 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
@@ -171,12 +177,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes tags that are unreferenced from the list.
      */
     public void removeUnreferencedTags() {
+        logger.info("Cleaning unreferenced tags...");
         ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
         predicatesToDelete.add(new TagIsUnreferenced());
         try {
-            removeTagByFields(predicatesToDelete);
+            FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
+            logger.info(removedTags.size() + " unreferenced tags are cleared.");
         } catch (TagNotFoundException ignored) {
-            // TODO: log here
+            logger.info("0 unreferenced tags are cleared.");
         }
     }
 
@@ -216,7 +224,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Person with {@code clientId} and {@code email} must exist in the address book.
      */
-    public Tag removeTagByFields(List<Predicate<Tag>> predicates) {
+    public FilteredList<Tag> removeTagByFields(List<Predicate<Tag>> predicates) {
         return tags.removeByFields(predicates);
     }
 
