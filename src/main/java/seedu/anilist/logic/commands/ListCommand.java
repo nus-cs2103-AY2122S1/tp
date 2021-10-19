@@ -8,6 +8,8 @@ import java.util.function.Predicate;
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Status;
+import seedu.anilist.ui.TabOption;
 
 /**
  * Lists all animes in the anime list to the user.
@@ -20,15 +22,30 @@ public class ListCommand extends Command {
             + "Parameters: [" + PREFIX_STATUS + "STATUS]\n"
             + "Example: " + COMMAND_WORD + PREFIX_STATUS + "watching\n";
     private final Predicate<Anime> predicate;
+    private final Status statusToMatch;
 
-    public ListCommand(Predicate<Anime> predicate) {
+    /**
+     * Constructor for ListCommand. Sets predicate for filtered list
+     * and sets the statusToMatch to change tabs.
+     */
+    public ListCommand(Predicate<Anime> predicate, Status statusToMatch) {
         this.predicate = predicate;
+        this.statusToMatch = statusToMatch;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredAnimeList(predicate);
+        if (statusToMatch == null) {
+            model.setCurrentTab(TabOption.TabOptions.ALL);
+        } else if (statusToMatch.toString().equals("towatch")) {
+            model.setCurrentTab(TabOption.TabOptions.TOWATCH);
+        } else if (statusToMatch.toString().equals("watching")) {
+            model.setCurrentTab(TabOption.TabOptions.WATCHING);
+        } else if (statusToMatch.toString().equals("finished")) {
+            model.setCurrentTab(TabOption.TabOptions.FINISHED);
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW, model.getFilteredAnimeList().size()));
     }

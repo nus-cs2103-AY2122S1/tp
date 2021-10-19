@@ -16,7 +16,6 @@ import seedu.anilist.logic.commands.GenreCommand;
 import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.commands.RenameCommand;
-import seedu.anilist.logic.commands.TabCommand;
 import seedu.anilist.logic.commands.UpdateEpisodeCommand;
 import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;

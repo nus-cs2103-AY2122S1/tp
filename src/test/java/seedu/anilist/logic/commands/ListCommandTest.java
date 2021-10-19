@@ -1,6 +1,5 @@
 package seedu.anilist.logic.commands;
 
-import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
 import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;

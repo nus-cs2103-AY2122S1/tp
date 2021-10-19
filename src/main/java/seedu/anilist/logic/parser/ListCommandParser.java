@@ -15,7 +15,7 @@ public class ListCommandParser implements Parser<ListCommand> {
     @Override
     public ListCommand parse(String args) throws ParseException {
         if (args.trim().length() == 0) {
-            return new ListCommand(PREDICATE_SHOW_ALL_ANIME);
+            return new ListCommand(PREDICATE_SHOW_ALL_ANIME, null);
         }
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -29,6 +29,6 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         statusToMatch = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
 
-        return new ListCommand(new StatusEqualsPredicate(statusToMatch));
+        return new ListCommand(new StatusEqualsPredicate(statusToMatch), statusToMatch);
     }
 }
