@@ -62,7 +62,6 @@ class JsonSerializableNotor {
                 notor.addSuperGroup(superGroup);
             }
         }
-        System.out.println(notor.getSuperGroups());
 
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
@@ -70,7 +69,6 @@ class JsonSerializableNotor {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             for (String superGroup : person.getSuperGroups()) {
-                System.out.println(notor.findSuperGroup(superGroup));
                 notor.findSuperGroup(superGroup).addPerson(person);
             }
             for (String subGroup : person.getSubGroups()) {

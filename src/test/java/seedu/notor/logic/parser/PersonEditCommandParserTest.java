@@ -6,20 +6,15 @@ import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.notor.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.notor.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.notor.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.notor.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.notor.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.notor.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.notor.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.notor.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,171 +24,160 @@ import static seedu.notor.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.notor.commons.core.index.Index;
+import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.executors.person.PersonEditExecutor.PersonEditDescriptor;
-import seedu.notor.logic.parser.person.PersonEditCommandParser;
+import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
 import seedu.notor.model.person.Phone;
-import seedu.notor.model.tag.Tag;
 import seedu.notor.testutil.PersonEditDescriptorBuilder;
 
 public class PersonEditCommandParserTest {
 
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, PersonEditCommand.MESSAGE_USAGE);
-
-    private final PersonEditCommandParser parser = new PersonEditCommandParser();
+    private final NotorParser notorParser = new NotorParser();
 
     @Test
     public void parse_missingParts_failure() {
+
         // no index specified
-        assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
+        String invalidCommand = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+        String noIndex = String.format("person /edit%s", NAME_DESC_BOB);
+
+        assertParseFailure(notorParser, noIndex, invalidCommand);
 
         // no field specified
-        assertParseFailure(parser, "1", PersonEditCommand.MESSAGE_NOT_EDITED);
+        String noField = "person 1 /edit";
+        assertParseFailure(notorParser, noField, PersonEditCommand.MESSAGE_NOT_EDITED);
 
         // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        String noIndexField = "person /edit";
+        assertParseFailure(notorParser, noIndexField, invalidCommand);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        String invalidCommand = String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE);
+        String negativeIndex = String.format("person -1 /edit%s", NAME_DESC_BOB);
+        assertParseFailure(notorParser, negativeIndex, invalidCommand);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        String zeroIndex = String.format("person -1 /edit%s", NAME_DESC_BOB);
+        assertParseFailure(notorParser, zeroIndex, invalidCommand);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
+        String invalidIndex = String.format("person 1 some random string /edit%s", NAME_DESC_BOB);
+        assertParseFailure(notorParser, invalidIndex, invalidCommand);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        String invalidPrefix = String.format("person 1 n:apple /edit%s", NAME_DESC_BOB);
+        assertParseFailure(notorParser, invalidPrefix, invalidCommand);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        // invalid Name
+        String invalidName = String.format("person 1 /edit%s", INVALID_NAME_DESC);
+        assertParseFailure(notorParser, invalidName, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid phone
+        String invalidPhone = String.format("person 1 /edit%s", INVALID_PHONE_DESC);
+        assertParseFailure(notorParser, invalidPhone, Phone.MESSAGE_CONSTRAINTS);
+
+        // invalid email
+        String invalidEmail = String.format("person 1 /edit%s", INVALID_EMAIL_DESC);
+        assertParseFailure(notorParser, invalidEmail, Email.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        String invalidPhoneValidTag = String.format("person 1 /edit%s%s", PHONE_DESC_BOB, VALID_EMAIL_AMY);
+        assertParseFailure(notorParser, invalidPhoneValidTag, Phone.MESSAGE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
-        // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + PHONE_DESC_BOB + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
-
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        // valid phone followed by invalid phone.
+        String invalidPhoneValidPhone = String.format("person 1 /edit%s%s", PHONE_DESC_BOB, INVALID_PHONE_DESC);
+        assertParseFailure(notorParser, invalidPhoneValidPhone, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        String multipleInvalid = String.format("person 1 /edit%s%s%s", INVALID_NAME_DESC, PHONE_DESC_BOB,
+                INVALID_PHONE_DESC);
+        assertParseFailure(notorParser, multipleInvalid, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() {
+    public void parse_allFieldsSpecified_success() throws ParseException {
+        String allFields = String.format("person 2 /edit%s%s%s", PHONE_DESC_BOB,
+                EMAIL_DESC_AMY, NAME_DESC_AMY);
+
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND;
 
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(allFields), expectedCommand);
     }
 
     @Test
-    public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+    public void parse_someFieldsSpecified_success() throws ParseException {
+        String someFields = String.format("person 2 /edit%s%s", PHONE_DESC_BOB, NAME_DESC_AMY);
+        Index targetIndex = INDEX_SECOND_PERSON;
 
-        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_AMY).build();
+        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_BOB).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(someFields), expectedCommand);
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() {
+    public void parse_oneFieldSpecified_success() throws ParseException {
         Index targetIndex = INDEX_THIRD_PERSON;
 
         // name
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
+        String validName = String.format("person 3 /edit%s", NAME_DESC_AMY);
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withName(VALID_NAME_AMY).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(validName), expectedCommand);
 
         // phone
-        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY;
+        String validPhone = String.format("person 3 /edit%s", PHONE_DESC_AMY);
         descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
         expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(validPhone), expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        String validEmail = String.format("person 3 /edit%s", EMAIL_DESC_AMY);
         descriptor = new PersonEditDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
         expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new PersonEditDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(validEmail), expectedCommand);
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + TAG_DESC_HUSBAND;
+    public void parse_multipleRepeatedFields_acceptsLast() throws ParseException {
+        Index targetIndex = INDEX_THIRD_PERSON;
 
-        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        String validEmail = String.format("person 3 /edit%s%s%s%s",
+                PHONE_DESC_BOB, PHONE_DESC_AMY, EMAIL_DESC_BOB, EMAIL_DESC_AMY);
+        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(validEmail), expectedCommand);
     }
 
     @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
+    public void parse_invalidValueFollowedByValidValue_success() throws ParseException {
         Index targetIndex = INDEX_FIRST_PERSON;
 
         // no other valid values specified
-        String userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String invalidPhoneValidPhone = String.format("person 1 /edit%s%s", INVALID_PHONE_DESC, PHONE_DESC_BOB);
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_BOB).build();
         PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(invalidPhoneValidPhone), expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB + INVALID_PHONE_DESC + PHONE_DESC_BOB;
+        String otherValid = String.format("person 1 /edit%s%s%s", EMAIL_DESC_BOB, INVALID_PHONE_DESC, PHONE_DESC_BOB);
         descriptor = new PersonEditDescriptorBuilder().withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-    }
-
-    @Test
-    public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
-        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
-
-        PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withTags().build();
-        PersonEditCommand expectedCommand = new PersonEditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(notorParser.parseCommand(otherValid), expectedCommand);
     }
 }

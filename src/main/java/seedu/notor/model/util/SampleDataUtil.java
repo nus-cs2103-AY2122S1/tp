@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
-import seedu.notor.model.person.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;

@@ -1,4 +1,5 @@
 package seedu.notor.storage;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.notor.commons.exceptions.IllegalValueException;
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
-import seedu.notor.model.person.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;

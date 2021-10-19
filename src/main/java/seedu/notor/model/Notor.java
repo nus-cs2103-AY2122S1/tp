@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.notor.logic.parser.ParserUtil;
+import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.util.UniqueList;
@@ -91,7 +94,7 @@ public class Notor implements ReadOnlyNotor {
      * Gets Person based on name.
      */
     public Person findPerson(String name) {
-        for (Person person: persons) {
+        for (Person person : persons) {
             if (person.getName().fullName.equals(name)) {
                 return person;
             }
@@ -122,6 +125,7 @@ public class Notor implements ReadOnlyNotor {
 
     /**
      * Adds superGroup into the Notor.
+     *
      * @param sg the SuperGroup to be added into Notor.
      */
     public void addSuperGroup(SuperGroup sg) {
@@ -130,10 +134,11 @@ public class Notor implements ReadOnlyNotor {
 
     /**
      * Adds superGroup into the Notor.
+     *
      * @param sg the name of the SuperGroup to be added into Notor.
      */
-    public void addSuperGroup(String sg) {
-        superGroups.add(new SuperGroup(sg));
+    public void addSuperGroup(String sg) throws ParseException {
+        superGroups.add(ParserUtil.parseSuperGroup(sg));
     }
 
     public void deleteSuperGroup(SuperGroup sg) {
@@ -141,11 +146,25 @@ public class Notor implements ReadOnlyNotor {
     }
 
     /**
+     * Finds a Group based on display name.
+     *
+     * @param name Display name of the Group.
+     * @return Group with the specified display name.
+     */
+    public Group findGroup(String name) {
+        if (name.contains(":")) {
+            String[] splitName = name.split(":");
+            return findSuperGroup(splitName[0]).findSubGroup(splitName[1]);
+        }
+        return findSuperGroup(name);
+    }
+
+    /**
      * Gets SuperGroup based on group name.
      */
     public SuperGroup findSuperGroup(String name) {
         // TODO: Change this method when UniqueList is updated.
-        for (SuperGroup superGroup: superGroups) {
+        for (SuperGroup superGroup : superGroups) {
             if (superGroup.getName().equals(name)) {
                 return superGroup;
             }

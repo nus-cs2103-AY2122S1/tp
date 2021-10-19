@@ -24,6 +24,7 @@ import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -151,7 +152,7 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public SuperGroup findSuperGroup(String name) {
+        public Group findGroup(String name) {
             return null;
         }
 
@@ -188,6 +189,16 @@ public class PersonCreateCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<SuperGroup> getFilteredGroupList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+
         }
     }
 

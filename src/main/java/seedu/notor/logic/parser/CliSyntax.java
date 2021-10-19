@@ -4,13 +4,11 @@ package seedu.notor.logic.parser;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
-
     /* Prefix definitions */
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_EMAIL = new Prefix("e/");
-    public static final Prefix PREFIX_NOTE = new Prefix("n/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
-    public static final Prefix PREFIX_GROUP = new Prefix("g:");
-    public static final Prefix PREFIX_SUBGROUP = new Prefix("sg:");
+    public static final Prefix PREFIX_NAME = new Prefix("n:");
+    public static final Prefix PREFIX_PHONE = new Prefix("p:");
+    public static final Prefix PREFIX_EMAIL = new Prefix("e:");
+    public static final Prefix PREFIX_TAG = new Prefix("t:");
+    public static final Prefix PREFIX_GROUPINDEX = new Prefix("g:");
+    public static final Prefix PREFIX_GROUPNAME = new Prefix("g:");
 }

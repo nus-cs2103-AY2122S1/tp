@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 public class ConfigTest {
-
     @Test
     public void toString_defaultObject_stringReturned() {
         String defaultConfigAsString = "Current log level : INFO\n"
@@ -21,6 +20,4 @@ public class ConfigTest {
         assertNotNull(defaultConfig);
         assertEquals(defaultConfig, defaultConfig);
     }
-
-
 }

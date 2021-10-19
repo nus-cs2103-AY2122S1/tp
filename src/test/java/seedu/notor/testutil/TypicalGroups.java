@@ -3,11 +3,12 @@ package seedu.notor.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.notor.model.common.Name;
 import seedu.notor.model.group.SuperGroup;
 
 public class TypicalGroups {
-    public static final SuperGroup ORBITAL = new SuperGroup("Orbital");
-    public static final SuperGroup CS2103 = new SuperGroup("CS2103");
+    public static final SuperGroup ORBITAL = new SuperGroup(new Name("Orbital"));
+    public static final SuperGroup CS2103 = new SuperGroup(new Name("CS2103"));
 
 
     public static final List<SuperGroup> getSuperGroups() {

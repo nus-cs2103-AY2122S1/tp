@@ -41,7 +41,6 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException, ExecuteException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
         Command command = notorParser.parseCommand(commandText);
         commandResult = command.execute(model);

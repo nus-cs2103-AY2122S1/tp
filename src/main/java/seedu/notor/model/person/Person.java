@@ -7,8 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.exceptions.DuplicateItemException;
 import seedu.notor.model.exceptions.ItemNotFoundException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.tag.Tag;
@@ -26,10 +29,21 @@ public class Person implements Unique<Person> {
     private final Email email;
 
     // Data fields
-    private final Note note;
     private final Set<Tag> tags = new HashSet<>();
+    private Note note = Note.EMPTY_NOTE;
     private HashSet<String> superGroups = new HashSet<>();
     private HashSet<String> subGroups = new HashSet<>();
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+    }
 
     /**
      * Every field must be present and not null.
@@ -47,7 +61,7 @@ public class Person implements Unique<Person> {
      * Creates a person with groups and subgroups.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags,
-        HashSet<String> superGroups, HashSet<String> subGroups) {
+            HashSet<String> superGroups, HashSet<String> subGroups) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
@@ -73,12 +87,29 @@ public class Person implements Unique<Person> {
     public Note getNote() {
         return note;
     }
+
     public String getNoteSavedDate() {
         return note.getSavedDate();
     }
 
     /**
+     * Adds a group to the current Person instance.
+     *
+     * @param group Group to be added to the current Person instance.
+     * @throws DuplicateItemException If group has already been added to the current Person instance.
+     */
+    public void addGroup(Group group) throws DuplicateItemException {
+        if (group instanceof SuperGroup) {
+            addSuperGroup((SuperGroup) group);
+        }
+        if (group instanceof SubGroup) {
+            addSubGroup((SubGroup) group);
+        }
+    }
+
+    /**
      * Adds a SuperGroup to person.
+     *
      * @param superGroup the SuperGroup to be added to that person.
      * @throws DuplicateItemException if person is already in the group.
      */
@@ -91,6 +122,7 @@ public class Person implements Unique<Person> {
 
     /**
      * Adds a SuperGroup to person.
+     *
      * @param superGroup the name of the SuperGroup to be added to that person.
      * @throws DuplicateItemException if person is already in the group.
      */
@@ -103,6 +135,7 @@ public class Person implements Unique<Person> {
 
     /**
      * Adds a SubGroup to person.
+     *
      * @param subGroup the SubGroup to be added to that person.
      * @throws DuplicateItemException if person is already in the group.
      */
@@ -115,6 +148,7 @@ public class Person implements Unique<Person> {
 
     /**
      * Removes a SuperGroup from the person.
+     *
      * @param superGroup the name of the SuperGroup to be removed to that person.
      * @throws ItemNotFoundException if person is not in in the group.
      */
@@ -128,6 +162,7 @@ public class Person implements Unique<Person> {
 
     /**
      * Removes a subgroup from the person.
+     *
      * @param subGroup the subgroup to be removed.
      * @throws ItemNotFoundException if SubGroup is not found.
      */
@@ -135,7 +170,7 @@ public class Person implements Unique<Person> {
         if (!subGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
-        subGroups.remove(subGroup);
+        subGroups.remove(subGroup.toString());
     }
 
     public HashSet<String> getSuperGroups() {
@@ -181,7 +216,6 @@ public class Person implements Unique<Person> {
         if (!(other instanceof Person)) {
             return false;
         }
-
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
