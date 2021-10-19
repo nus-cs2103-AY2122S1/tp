@@ -155,6 +155,7 @@ Adds tag to an existing person in the address book.
 Notes:
 * Adds tag to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * New tags will be added on top of existing tags i.e. tags added is cumulative.
+* Adding new tags which already exist will succeed with a warning letting you know that the person already had those tags
 
 **Sample Usage:**
 * `tag 2 t/friend t/NUS`
