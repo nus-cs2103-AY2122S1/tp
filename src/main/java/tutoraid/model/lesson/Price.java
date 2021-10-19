@@ -36,7 +36,7 @@ public class Price {
 
     /**
      * Takes in a double in the form of a String and returns the same string with comma grouping and $ sign.
-     * @param price The price to be formatted
+     *
      * @return Formatted string with $ symbol and comma between groups of 3 digits
      */
     public String formatPrice() {
