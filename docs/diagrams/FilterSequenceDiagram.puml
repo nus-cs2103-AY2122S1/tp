@@ -44,27 +44,13 @@ activate Model
 alt "grade != null"
 
     Model -> Model : updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade))
-    activate Model
-    Model --> Model
-    deactivate Model
     Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade))
-    activate Model
-    Model --> Model
-    deactivate Model
 else "subject != null"
     Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject))
-    activate Model
-    Model --> Model
-    deactivate Model
+
 else "grade != null && subject != null"
     Model -> Model : updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade))
-    activate Model
-    Model --> Model
-    deactivate Model
     Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject))
-    activate Model
-    Model --> Model
-    deactivate Model
 end
 
 Model --> FilterCommand
