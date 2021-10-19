@@ -19,10 +19,10 @@ public class StatsWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
-    public static final String PRIORITY_CHART_MESSAGE_INTRO = "You currently have a total of: ";
-    public static final String HIGH_PRIORITY_MESSAGE = "Good job! You have a large proportion of high value clients!\n"
+    private static final String PRIORITY_CHART_MESSAGE_INTRO = "You currently have a total of: ";
+    private static final String HIGH_PRIORITY_MESSAGE = "Good job! You have a large proportion of high value clients!\n"
         + "However, this means that you need to be sure to put in extra effort to maintain it!";
-    public static final String MEDIUM_PRIORITY_MESSAGE = "Nice! You have a sizeable portion of medium value clients!\n"
+    private static final String MEDIUM_PRIORITY_MESSAGE = "Nice! You have a sizeable portion of medium value clients!\n"
         + "This is a great base for your portfolio!";
     private static final String LOW_PRIORITY_MESSAGE = "Keep it up! Focus on developing your client base to boost \n"
         + "your client portfolio!";
