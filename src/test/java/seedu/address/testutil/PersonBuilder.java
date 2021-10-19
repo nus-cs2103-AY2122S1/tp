@@ -1,5 +1,9 @@
 package seedu.address.testutil;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -12,7 +16,7 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_AVAILABILITY = "";
+    public static final List<DayOfWeek> DEFAULT_AVAILABILITY = new ArrayList<>();
 
     private Name name;
     private Phone phone;
@@ -55,7 +59,20 @@ public class PersonBuilder {
     /**
      * Sets the {@code Availability} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAvailability(String availability) {
+    public PersonBuilder withAvailability(List<DayOfWeek> availability) {
+        this.availability = new Availability(availability);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Availability} of the {@code Person} that we are building.
+     * Used with string input.
+     */
+    public PersonBuilder withAvailability(String availabilityString) {
+        List<DayOfWeek> availability = new ArrayList<>();
+        for (String dayNumber : availabilityString.split(" ")) {
+            availability.add(DayOfWeek.of(Integer.parseInt(dayNumber)));
+        }
         this.availability = new Availability(availability);
         return this;
     }

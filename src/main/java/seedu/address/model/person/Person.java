@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
 import java.util.List;
 import java.util.Objects;
 
@@ -55,8 +56,8 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public boolean isAvailableOnDay(String day) {
-        return availability.contains(day);
+    public boolean isAvailableOnDay(int dayNumber) {
+        return availability.contains(DayOfWeek.of(dayNumber));
     }
 
     public void setDays(List<String> days) {

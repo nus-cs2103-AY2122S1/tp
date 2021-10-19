@@ -43,7 +43,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        availability.setText(person.getAvailability().values);
+        availability.setText(person.getAvailability().toString());
     }
 
     @Override

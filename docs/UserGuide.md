@@ -50,7 +50,7 @@ ________________________________________________________________________________
   e.g. in `findm KEYWORD`, `KEYWORD` is a parameter which can be used as `findm Ben`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME p/PHONE_NUMBER [d/DAYS]` can be used as `n/Ben p/91111111 d/Mon` or as `n/John p/91111111`.
+  e.g `n/NAME p/PHONE_NUMBER [d/DAY(S)]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111`.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
@@ -139,7 +139,8 @@ Examples:
 Adds a member to the members list
 
 Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
-* `[d/DAYS]` is an optional field indicating a list of days for which the member is available for that week
+* `[d/DAY(S)]` is an optional field indicating a list of days for which the member is available for that week
+* `1` represents Monday, `2` represents Tuesday … and `7` represents Sunday
 * Members added without availability will have an empty list of days
 
 <div markdown="block" class="alert alert-info">
@@ -149,7 +150,7 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
 </div>
 
 Examples:
-* `addm n/John p/91234567 d/Mon Tue Fri` adds John to the member list and indicates his availability on Monday, Tuesday
+* `addm n/John p/91234567 d/1 3 5` adds John to the member list and indicates his availability on Monday, Tuesday
    and Friday.
 * `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default
 
@@ -190,21 +191,21 @@ Examples:
 
 ### Setting member availability: `setm`
 
-Sets the availability of a given member.
+Sets the availability of given member(s).
 
 Format: `setm INDEX/INDICES d/DAY(S)`
 
-* Sets the availability of the member at the specified `INDEX/INDICES` to be the specified `DAY(s)`
+* Sets the availability of the member(s) at the specified `INDEX/INDICES` to be the specified `DAY(s)`
 * Availability is defined as days of the week when member is free
-* `DAY` **must be one of the following(case-insensitive):** Mon, Tue, Wed, Thu, Fri, Sat, Sun
-* `DAYS` **must be separated by a single space** Mon Tue Wed
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+* `DAYS` **must be separated by a single space** 1 2 3 …​
 * `INDEX` refers to the index number shown in the displayed member list
 * `INDICES` **must be positive integers** 1, 2, 3, …​
-* `INDICES` **must be separated by a single space** 1 2 3 …​
+* `INDICES` **must be separated by a single space** 
 
 Examples:
-* `listm` followed by `setm 5 d/Mon Tue` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
-* `findm John` followed by `setm 2 d/Mon` sets the availability of the person at index 2 in the results of the `findm` command to be Monday
+* `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and Tuesday
+* `findm John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm` command to be Monday
 
 ### Splitting members into facilities : `split`
 
@@ -213,10 +214,10 @@ Splits members into facilities based on its capacity and members' availability.
 Format: `split DAY`
 
 * Allocate members available at the specified `DAY` to each facility
-* `DAY` **must be one of the following:** Mon, Tue, Wed, Thu, Fri, Sat, Sun
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
 Examples:
-* `split Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
+* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
 ### Clearing all entries in facility list: `clearf`
 
@@ -259,7 +260,7 @@ If changes made to the data file makes its format invalid, SportsPA will discard
 Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAYS]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/Mon`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`
 **Clear facilities**|`clearf`
 **Clear member**| `clearm`
 **Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
@@ -270,5 +271,5 @@ Action | Format, Examples
 **Help**| `help`
 **List members**| `listm`
 **List facilities**| `listf`
-**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
-**Split members**| `split d/DAY` <br> eg. `split d/Mon`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
+**Split members**| `split d/DAY` <br> eg. `split d/1`

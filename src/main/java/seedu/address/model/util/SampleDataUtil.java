@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,16 +24,17 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Availability SAMPLE_AVAILABILITY = new Availability("Mon Wed Fri");
+    public static final List<DayOfWeek> SAMPLE_AVAILABILITY =
+            Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.WEDNESDAY, DayOfWeek.FRIDAY);
 
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), SAMPLE_AVAILABILITY),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), SAMPLE_AVAILABILITY),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), SAMPLE_AVAILABILITY),
-            new Person(new Name("David Li"), new Phone("91031282"), SAMPLE_AVAILABILITY),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), SAMPLE_AVAILABILITY),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), SAMPLE_AVAILABILITY)
+            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Availability(SAMPLE_AVAILABILITY)),
+            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Availability(SAMPLE_AVAILABILITY)),
+            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Availability(SAMPLE_AVAILABILITY)),
+            new Person(new Name("David Li"), new Phone("91031282"), new Availability(SAMPLE_AVAILABILITY)),
+            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Availability(SAMPLE_AVAILABILITY)),
+            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Availability(SAMPLE_AVAILABILITY))
         };
     }
 
