@@ -185,6 +185,13 @@ public class ModelManager implements Model {
         applicantBook.setApplicant(target, editedApplicant);
     }
 
+    @Override
+    public void setPosition(Position target, Position editedPosition) {
+        requireAllNonNull(target, editedPosition);
+        positionBook.setPosition(target, editedPosition);
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -269,4 +276,9 @@ public class ModelManager implements Model {
         return userPrefs.getApplicantBookFilePath();
     }
 
+    @Override
+    public void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition) {
+        requireAllNonNull(positionToEdit, editedPosition);
+        applicantBook.updateApplicantsWithPosition(positionToEdit, editedPosition);
+    }
 }

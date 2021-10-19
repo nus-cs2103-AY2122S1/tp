@@ -110,6 +110,15 @@ public interface Model {
      */
     public void setApplicant(Applicant target, Applicant editedApplicant);
 
+    /**
+     * Replaces the given position {@code target} with {@code editedPosition}.
+     * {@code target} must exist in MrTechRecruiter.
+     * The position identity of {@code editedPosition} must not be the same as another existing position in
+     * MrTechRecruiter.
+     */
+    public void setPosition(Position position, Position editedPosition);
+
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -138,4 +147,6 @@ public interface Model {
 
     // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
+
+    void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
 }
