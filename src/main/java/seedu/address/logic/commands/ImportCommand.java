@@ -24,9 +24,9 @@ public class ImportCommand extends Command {
             + "Parameters: FILENAME\n"
             + "Example: " + COMMAND_WORD + " friends";
 
-    public static final String MESSAGE_IMPORT_SUCCESS = "Imported from file: %s.json";
+    public static final String MESSAGE_IMPORT_SUCCESS = "Imported from file: %s";
 
-    public static final String MESSAGE_IMPORT_FILE_NOT_FOUND = "File with name &s.json could not be found!";
+    public static final String MESSAGE_IMPORT_FILE_NOT_FOUND = "File with name %s could not be found!";
 
     public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
 
@@ -59,7 +59,7 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path filePath = Path.of(testPath + fileName + ".json");
+        Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook fileData;
