@@ -311,6 +311,8 @@ implemented to allow users the ability to sieve out a single participant for a m
 
 The following is the sequence diagram for how a `FilterEventCommand` works internally.
 
+![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ### \[Proposed\] Undo/redo feature
