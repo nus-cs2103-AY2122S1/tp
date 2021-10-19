@@ -6,7 +6,7 @@ import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.ALICE;
 import static seedu.unify.testutil.TypicalTasks.HOON;
 import static seedu.unify.testutil.TypicalTasks.IDA;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +63,7 @@ public class JsonUniFyStorageTest {
     @Test
     public void readAndSaveUniFy_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempUniFy.json");
-        UniFy original = getTypicalAddressBook();
+        UniFy original = getTypicalUniFy();
         JsonUniFyStorage jsonUniFyStorage = new JsonUniFyStorage(filePath);
 
         // Save in new file and read back

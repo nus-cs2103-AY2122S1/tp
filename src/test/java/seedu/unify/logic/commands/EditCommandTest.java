@@ -12,7 +12,7 @@ import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.unify.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_SECOND_TASK;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,7 @@ import seedu.unify.testutil.TaskBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalUniFy(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -111,7 +111,7 @@ public class EditCommandTest {
     public void execute_duplicateTaskFilteredList_failure() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
-        // edit task in filtered list into a duplicate in address book
+        // edit task in filtered list into a duplicate in UniFy
         Task taskInList = model.getUniFy().getTaskList().get(INDEX_SECOND_TASK.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_TASK,
                 new EditTaskDescriptorBuilder(taskInList).build());
@@ -130,13 +130,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of UniFy
      */
     @Test
     public void execute_invalidTaskIndexFilteredList_failure() {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
         Index outOfBoundIndex = INDEX_SECOND_TASK;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of UniFy list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getUniFy().getTaskList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

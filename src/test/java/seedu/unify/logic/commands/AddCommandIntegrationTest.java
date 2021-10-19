@@ -2,7 +2,7 @@ package seedu.unify.logic.commands;
 
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.unify.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.unify.testutil.TypicalTasks.getTypicalAddressBook;
+import static seedu.unify.testutil.TypicalTasks.getTypicalUniFy;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalUniFy(), new UserPrefs());
     }
 
     @Test
