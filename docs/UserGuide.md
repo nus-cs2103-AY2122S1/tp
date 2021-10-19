@@ -101,11 +101,11 @@ Command aliases: `man` `h`
 
 Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and remarks are **optional**. Parameters can be in any order.
 
-Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
+Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
-* `add n/Ben e/ben123@gmail.com m/CS2103T T12 B14 p/91238456 h/@BenIsHere r/Overseas`
-* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100`
+* `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`
+* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100 m/CS2030S B09`
 
 Command aliases: `a`
 
@@ -149,15 +149,14 @@ Edits the person at the specified index.
 * The index number must be a positive integer 1,2,3…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing remark, the existing remark of the person will be overwritten.
 
-Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
+Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE} {LESSON_CODE}..].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
 * `edit 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
-* `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
-* `edit 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
+* `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe`.
+* `edit 3 h/@BenWasHere r/Overseas` Edits the telegram handle and remark of the 3rd person to be `@BenWasHere` and `Overseas` respectively.
 
 Command aliases: `update` `e`
 
