@@ -257,42 +257,59 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage lessons and contact details for a significant number of students
+* has a need to assign tasks to many students
+* wants to keep track of students' progress easily
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
+The app is purely offline, and does not include any online feature.
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                           | So that I can…​                                                     |
+| -------- | ------------------------------------------ | -------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                       | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new student                            |                                                                        |
+| `* * *`  | user                                       | delete a student                             | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a student by name                       | locate details of persons without having to go through the entire list |
+| `* * *`  | user                                       | group students together                      | locate similar through their groupings easily                          |
+| `* * *`  | tutor                                      | add a new task                               | remember tasks I have created easily                                   |
+| `* * *`  | tutor                                      | assign tasks to students                     | reuse similar tasks for my students                                    |
+| `* * *`  | tutor                                      | mark tasks as completed                      | track my students' task progress                                       |
+| `* * *`  | user                                       | delete a task                                | remove tasks that I no longer need                                     |
+| `* * *`  | busy tutor                                 | view current lesson schedules                | plan my working and resting hours accordingly                          |
+| `* *`    | tutor                                      | set deadlines for tasks                      | collect assignments in a timely manner                                 |
+| `* *`    | tutor                                      | input students' grade for tasks              | track how my students are coping                                       |
+| `* *`    | user                                       | hide private contact details                 | minimize chance of someone else seeing them by accident                |
+| `* *`    | tutor                                      | store exam dates of students                 | prioritize and help a large number of students better                  |
+| `* *`    | busy tutor                                 | be warned if schedules clash                 | minimize error in my planning                                          |
+| `* *`    | busy tutor                                 | track who has paid their fees                | send reminders to students who have not paid                           |
+| `*`      | tutor                                      | record students' attendance                  | track which lessons students have missed and help them catch up        |
+| `*`      | user with many persons in the address book | sort persons by name                         | locate a person easily                                                 |
+| `*`      | tutor                                      | monitor number of tasks assigned to a student| assign tasks to students while ensuring they can manage the workload   |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `TutorMaster` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list all students
+2.  TutorMaster shows a list of students in the students list
+3.  User requests to delete a specific student in the list
+4.  TutorMaster deletes the student from the students list
 
     Use case ends.
 
@@ -304,11 +321,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TutorMaster shows an error message.
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Delete a task**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to delete a specific task in the list
+4.  TutorMaster deletes the task from the tasks list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TutorMaster shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Assign a task to a student**
+
+**MSS**
+
+1.  User requests to list all tasks
+2.  TutorMaster shows a list of tasks in the tasks list
+3.  User requests to list all students
+4.  TutorMaster shows a list of students in the students list
+5.  User requests to assign a task to a student
+6.  TutorMaster assigns the task to the student
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The tasks list is empty.
+
+  Use case ends.
+
+* 4a. The students list is empty.
+
+  Use case ends.
+
+* 5a. The given task name or student name is invalid.
+
+    * 5a1. TutorMaster shows an error message.
+
+      Use case resumes at step 4.
 
 ### Non-Functional Requirements
 
