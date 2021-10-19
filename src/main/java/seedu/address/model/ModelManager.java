@@ -170,18 +170,37 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        Student newPerson = target;
+
+        newPerson.getParticipation().toggleParticipation(week);
+        addressBook.setStudent(target, newPerson);
+    }
+
+    @Override
+    public String getStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
+    }
+
+    /**
+     * Adds a student group.
+     *
+     * @param student student to add to group
+     * @param group student group to add student into
+     */
     public void addStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
         Group newGroup = group;
         Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
                 student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                group.getName());
+                student.getParticipation(), group.getName());
         newGroup.getMembers().addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
-
 
     /**
      * Checks if a task exists

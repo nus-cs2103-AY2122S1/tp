@@ -54,21 +54,21 @@ public class Student {
             this.repoName = new RepoName();
         }
         this.groupName = new GroupName();
-
     }
 
     /**
      * Constructor for a re-stored Person object
      */
+
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
-                   Set<Tag> tags, Attendance attendance, GroupName groupName) {
+                   Set<Tag> tags, Attendance attendance, Participation participation, GroupName groupName) {
         requireAllNonNull(name, email, studentNumber, tags, attendance);
         this.name = name;
         this.email = email;
         this.studentNumber = studentNumber;
         this.tags.addAll(tags);
         this.attendance = attendance;
-        this.participation = new Participation();
+        this.participation = participation;
         if (userName != null) {
             this.userName = userName;
         } else {
@@ -80,7 +80,6 @@ public class Student {
             this.repoName = new RepoName();
         }
         this.groupName = groupName;
-
     }
 
     public Name getName() {
@@ -170,7 +169,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, attendance, studentNumber, userName, repoName, groupName);
+        return Objects.hash(name, email, tags, attendance, participation, studentNumber, userName, repoName, groupName);
     }
 
     @Override
@@ -222,7 +221,6 @@ public class Student {
             }
         }
 
-
         @Override
         public String toString() {
             return fullLink;
@@ -239,6 +237,5 @@ public class Student {
         public int hashCode() {
             return fullLink.hashCode();
         }
-
     }
 }

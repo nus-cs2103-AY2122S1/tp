@@ -6,7 +6,8 @@
     "username" : "user",
     "repo" : "ip",
     "tagged": [ "friends" ],
-    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ],
+    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1 ]
   }, {
     "name": "Alice Pauline",
     "email": "pauline@example.com",
@@ -14,7 +15,8 @@
     "username" : "user",
     "repo" : "ip",
     "tagged": [ "friends" ],
-    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ]
+    "attendance" : [ 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1 ],
+    "participation" : [ 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1 ]
   } ],
   "tasks" : [ ],
   "groups" : [ ]

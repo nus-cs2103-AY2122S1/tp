@@ -8,6 +8,7 @@
     "repo" : "ip",
     "tagged" : [ "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : null
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "repo" : "ip",
     "tagged" : [ "owesMoney", "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W14-4"
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "repo" : "ip",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W14-4"
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "repo" : "ip",
     "tagged" : [ "friends" ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W14-4"
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "repo" : "ip",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W15-5"
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "repo" : "ip",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : "W15-5"
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "repo" : "ipppp",
     "tagged" : [ ],
     "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "participation" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
     "groupName" : null
   } ],
   "tasks" : [ ],

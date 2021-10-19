@@ -106,6 +106,18 @@ public interface Model {
     void markStudentAttendance(Student target, int week);
 
     /**
+     * Retrieve the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    String getStudentParticipation(Student target, int week);
+
+    /**
+     * Marks the attendance of the given person {@code target} for {@code week}.
+     * {@code target} must exist in the student list.
+     */
+    void markStudentParticipation(Student target, int week);
+
+    /**
      * Adds the given person {@code target} to a group of {@code name}.
      * {@code target} must exist in the student list.
      * A group of {@code name} must exist in the group list.

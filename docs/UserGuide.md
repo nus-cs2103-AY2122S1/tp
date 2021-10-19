@@ -104,11 +104,11 @@ Examples:
 * `add n/grade scripts by/2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
 * `add n/tutorial preparation by/2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
 
-### Marking a student as present: `mark`
+### Marking a student as present: `marka`
 
 Marks the specified student in the student list as present or absent.
 
-Format: `mark INDEX /wWEEK NUMBER`
+Format: `marka INDEX /wWEEK NUMBER`
 
 * Marks the person as present in the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
@@ -117,18 +117,44 @@ Format: `mark INDEX /wWEEK NUMBER`
 
 Examples:
 
-* `students` followed by `mark 1 /w1` marks the 1st person in the students list as present in week 1.
-* Another `mark 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
+* `students` followed by `marka 1 /w1` marks the 1st person in the students list as present in week 1.
+* Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
 
 Sample Usage:
 
-`> mark 1 /w1`
+`> marka 1 /w1`
 
     > Kho Tze Jit is marked as present for week 1!
 
-`> mark 1 /w1`
+`> marka 1 /w1`
     
     > Kho Tze Jit is marked as absent for week 1!
+
+### Marking a student's participation: `markp`
+
+Marks the specified student in the student list as participated or not participated.
+
+Format: `markp INDEX /wWEEK NUMBER`
+
+* Marks the person as present in the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+
+Examples:
+
+* `students` followed by `markp 1 /w1` marks the 1st person in the students list as participated in week 1.
+* Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
+
+Sample Usage:
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as participated for week 1!
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as not participated for week 1!
 
 ### Deleting a student contact: `delete INDEX`
 
