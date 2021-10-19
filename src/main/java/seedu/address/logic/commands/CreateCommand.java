@@ -58,7 +58,7 @@ public class CreateCommand extends Command {
 
         // Problem with this if statement:
         // Since the model person already in the system has this student ID,
-        // creating another model person fail make the "execute_personAcceptedByModel_addSuccessful" test
+        // creating another model person makes the "execute_personAcceptedByModel_addSuccessful" test fail
         // Don't know what to do about this rn
         if (model.hasStudentId(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
