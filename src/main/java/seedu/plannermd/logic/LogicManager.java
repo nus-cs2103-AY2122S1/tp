@@ -31,7 +31,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final PlannerMdParser plannerMdParser;
 
-    /**ge
+    /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
