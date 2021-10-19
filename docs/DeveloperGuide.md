@@ -170,7 +170,7 @@ Activity diagram
 
 Command syntax
 
-### Enroll feature
+### Delete Lesson feature
 
 Description
 
@@ -186,7 +186,7 @@ Activity diagram
 
 Command syntax
 
-### Delete Lesson feature
+### Enroll feature
 
 Description
 
@@ -219,38 +219,6 @@ Activity diagram
 Command syntax
 
 ### Filter feature
-
-Description
-
-#### Implementation
-
-Object diagram
-
-Sequence diagram
-
-Activity diagram
-
-#### Design considerations:
-
-Command syntax
-
-### Enroll feature
-
-Description
-
-#### Implementation
-
-Object diagram
-
-Sequence diagram
-
-Activity diagram
-
-#### Design considerations:
-
-Command syntax
-
-### Delete Lesson feature
 
 Description
 
