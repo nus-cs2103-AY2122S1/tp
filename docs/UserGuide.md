@@ -357,8 +357,8 @@ Action | Format | Shortcut
 ***Add Remarks to Class*** | `remarkclass INDEX` | `rec`
 ***Find Student by Name*** | `find NAME` | `f`
 ***List all Students*** | `list` | `l`
-***Find Class by Name*** | `findclass NAME` | `fc`
 ***List all Classes*** | `listclass` | `lc`
+***Find Class by Name*** | `findclass NAME` | `fc`
 ***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
 ***View Timetable*** | `timetable` | `tt`
 ***View Today's Classes*** | `today`
