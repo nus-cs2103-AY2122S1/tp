@@ -10,6 +10,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getNoTagTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTaggedTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -76,8 +80,16 @@ public class TagCommandIntegrationTest {
                     + " " + PREFIX_TAG + VALID_TAG_FRIEND);
             CommandResult parserResult = tagCommand.execute(model);
 
-            String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+            Set<Tag> overlapTags = new HashSet<>();
+            overlapTags.add(new Tag(VALID_TAG_WIFE));
+
+            String expectedSuccessMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
                     editedPerson.getName(), editedPerson.getTags());
+            String expectedOverlapMessage = String.format(TagCommand.MESSAGE_TAG_ADD_EXISTS,
+                    editedPerson.getName(), overlapTags);
+            String expectedMessage = expectedSuccessMessage + "\n"
+                    + expectedOverlapMessage;
+
             CommandResult expectedResult = new CommandResult(expectedMessage);
             assertEquals(expectedResult, parserResult);
         } catch (ParseException e) {
@@ -98,8 +110,15 @@ public class TagCommandIntegrationTest {
                     + " " + PREFIX_TAG + VALID_TAG_FRIEND + " " + PREFIX_TAG + VALID_TAG_HUSBAND);
             CommandResult parserCommandResult = tagCommand.execute(model);
 
-            String expectedMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
+            Set<Tag> overlapTags = new HashSet<>();
+            overlapTags.add(new Tag(VALID_TAG_WIFE));
+
+            String expectedSuccessMessage = String.format(TagCommand.MESSAGE_TAG_ADD_SUCCESS,
                     editedPerson.getName(), editedPerson.getTags());
+            String expectedOverlapMessage = String.format(TagCommand.MESSAGE_TAG_ADD_EXISTS,
+                    editedPerson.getName(), overlapTags);
+            String expectedMessage = expectedSuccessMessage + "\n"
+                    + expectedOverlapMessage;
 
             CommandResult expectedCommandResult = new CommandResult(expectedMessage);
             assertEquals(expectedCommandResult, parserCommandResult);
