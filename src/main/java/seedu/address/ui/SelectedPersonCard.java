@@ -2,19 +2,18 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class SelectedPersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -35,8 +34,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
-    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -50,40 +47,41 @@ public class PersonCard extends UiPart<Region> {
     private Label rating;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode}.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public SelectedPersonCard() {
         super(FXML);
-        this.person = person;
-        id.setText(displayedIndex + ". ");
+        this.person = null;
+    }
+
+    /**
+     * Sets the details of Selected Person with the given {@code Person}.
+     */
+    public void setPersonDetails(Person person) {
         category.setText(person.getCategoryCode().toString());
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         review.setText(person.getReview().value);
         email.setText(person.getEmail().value);
+        tags.getChildren().clear();
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         rating.setText(person.getRating().value + "\u2B50");
     }
 
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
-            return false;
-        }
-
-        // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+    /**
+     * Sets the empty Selected Person details.
+     */
+    public void setEmptyPersonDetails() {
+        category.setText("NIL");
+        name.setText("NIL");
+        phone.setText("NIL");
+        address.setText("NIL");
+        review.setText("NIL");
+        email.setText("NIL");
+        tags.getChildren().clear();
+        rating.setText("NIL" + "\u2B50");
     }
 }

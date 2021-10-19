@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <SplitPane dividerPositions="0.5, 0.5" prefHeight="160.0" prefWidth="200.0">
+     <items>
+        <ListView fx:id="personListView" />
+         <StackPane prefHeight="150.0" prefWidth="200.0" />
+         <StackPane fx:id="selectedPersonPanelPlaceholder" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="200.0" />
+     </items>
+   </SplitPane>
+</VBox>
