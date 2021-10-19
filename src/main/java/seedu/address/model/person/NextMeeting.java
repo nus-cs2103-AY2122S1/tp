@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
 import static seedu.address.commons.util.StringUtil.isValidDate;
 import static seedu.address.commons.util.StringUtil.isValidTime;
@@ -41,10 +41,7 @@ public class NextMeeting implements OptionalPersonNonStringField {
      */
     public NextMeeting(String date, String startTime, String endTime, String location) {
         if (!IS_NULL_VALUE_ALLOWED) {
-            requireNonNull(date);
-            requireNonNull(startTime);
-            requireNonNull(endTime);
-            requireNonNull(location);
+            requireAllNonNull(date, startTime, endTime, location);
         }
 
         date = convertEmptyStringIfNull(date);
