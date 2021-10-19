@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
+participant ":FindIdCommandParser" as FindIdCommandParser LOGIC_COLOR
+participant "f:FindIdCommand" as FindIdCommand LOGIC_COLOR
+participant "pred:StudentIdContainsKeywordsPredicate" as StudentIdContainsKeywordsPredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findId A0123456A")
+activate LogicManager
+
+LogicManager -> ModuLinkParser : parseCommand("findId A0123456A")
+activate ModuLinkParser
+
+create FindIdCommandParser
+ModuLinkParser -> FindIdCommandParser
+activate FindIdCommandParser
+
+FindIdCommandParser --> ModuLinkParser
+deactivate FindIdCommandParser
+
+ModuLinkParser -> FindIdCommandParser : parse("A0123456A")
+activate FindIdCommandParser
+
+create FindIdCommand
+FindIdCommandParser -> FindIdCommand
+activate FindIdCommand
+
+
+create StudentIdContainsKeywordsPredicate
+FindIdCommand -> StudentIdContainsKeywordsPredicate
+activate StudentIdContainsKeywordsPredicate
+
+StudentIdContainsKeywordsPredicate --> FindIdCommand : pred
+deactivate StudentIdContainsKeywordsPredicate
+
+FindIdCommand --> FindIdCommandParser : f
+deactivate FindIdCommand
+
+FindIdCommandParser --> ModuLinkParser : f
+deactivate FindIdCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+FindIdCommandParser -[hidden]-> ModuLinkParser
+destroy FindIdCommandParser
+
+ModuLinkParser --> LogicManager : f
+deactivate ModuLinkParser
+
+LogicManager -> FindIdCommand : execute()
+activate FindIdCommand
+
+
+FindIdCommand -> Model : updateFilteredPersonList(pred)
+activate Model
+
+Model --> FindIdCommand
+deactivate Model
+
+create CommandResult
+FindIdCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> FindIdCommand
+deactivate CommandResult
+
+FindIdCommand --> LogicManager : result
+deactivate FindIdCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

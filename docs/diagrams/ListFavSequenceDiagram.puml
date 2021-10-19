@@ -3,8 +3,9 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ModuLinkParser" as ModuLinkParser LOGIC_COLOR
 participant ":ListFavCommand" as ListFavCommand LOGIC_COLOR
+participant "pred:IsFavouritePredicate" as IsFavouritePredicate LOGIC_COLOR
 
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -16,28 +17,36 @@ end box
 [-> LogicManager : execute("listfav")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("listfav")
-activate AddressBookParser
+LogicManager -> ModuLinkParser : parseCommand("listfav")
+activate ModuLinkParser
 
 create ListFavCommand
-AddressBookParser -> ListFavCommand
+ModuLinkParser -> ListFavCommand
 activate ListFavCommand
 
-ListFavCommand --> AddressBookParser
+ListFavCommand --> ModuLinkParser
 deactivate ListFavCommand
 
-AddressBookParser --> LogicManager
-deactivate AddressBookParser
+ModuLinkParser --> LogicManager
+deactivate ModuLinkParser
 
 LogicManager -> ListFavCommand : execute()
 activate ListFavCommand
 
-ListFavCommand -> Model : execute()
+create IsFavouritePredicate
+ListFavCommand -> IsFavouritePredicate
+activate IsFavouritePredicate
+
+IsFavouritePredicate --> ListFavCommand :pred
+deactivate IsFavouritePredicate
+
+ListFavCommand -> Model : updateFilteredPersonList(pred)
 activate Model
 
 Model --> ListFavCommand
 deactivate Model
 
+create CommandResult
 ListFavCommand -> CommandResult
 activate CommandResult
 
