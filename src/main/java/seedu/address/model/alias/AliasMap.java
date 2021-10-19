@@ -39,6 +39,9 @@ public class AliasMap implements Serializable {
      * Replaces input with the original command if alias was defined for given input.
      */
     public String convertAliasIfPresent(String input) {
+        if (!Shortcut.isValidShortcut(input)) {
+            return input;
+        }
         CommandWord output = mappings.get(new Shortcut(input));
         if (Objects.isNull(output)) {
             return input;

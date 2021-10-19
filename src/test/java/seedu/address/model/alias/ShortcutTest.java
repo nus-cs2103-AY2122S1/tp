@@ -26,6 +26,7 @@ public class ShortcutTest {
         // invalid shortcut
         assertFalse(Shortcut.isValidShortcut("")); // empty string
         assertFalse(Shortcut.isValidShortcut(" ")); // spaces only
+        assertFalse(Shortcut.isValidShortcut("listf"));
 
         // valid shortcut
         assertTrue(Shortcut.isValidShortcut("lf")); // alphabets only
