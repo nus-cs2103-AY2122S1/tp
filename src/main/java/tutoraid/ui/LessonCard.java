@@ -47,10 +47,10 @@ public class LessonCard extends Card<Lesson> {
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML, lesson, displayedIndex);
         id.setText(displayedIndex + ". ");
-        lessonName.setText(formatCardLabel(LABEL_LESSON_NAME, lesson.getLessonName().lessonName));
-        timing.setText(formatCardLabel(LABEL_TIMING, lesson.getTiming().timing));
-        price.setText(formatCardLabel(LABEL_PRICE, lesson.getPrice().price));
-        capacity.setText(formatCardLabel(LABEL_CAPACITY, lesson.getCapacity().capacity));
+        lessonName.setText(formatCardLabel(LABEL_LESSON_NAME, lesson.getLessonName().toString()));
+        timing.setText(formatCardLabel(LABEL_TIMING, lesson.getTiming().toString()));
+        price.setText(formatCardLabel(LABEL_PRICE, lesson.getPrice().toString()));
+        capacity.setText(formatCardLabel(LABEL_CAPACITY, lesson.getCapacity().toString()));
         students.setText(formatCardLabel(LABEL_STUDENTS, lesson.getStudents().toString()));
     }
 }

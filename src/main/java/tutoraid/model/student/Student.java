@@ -100,6 +100,10 @@ public class Student {
         return Objects.hash(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
     }
 
+    public String toNameString() {
+        return this.getStudentName().toString();
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
