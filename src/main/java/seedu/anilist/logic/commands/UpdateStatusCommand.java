@@ -30,7 +30,7 @@ public class UpdateStatusCommand extends Command {
             + PREFIX_STATUS + "\n "
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_STATUS + "finished";
 
-    public static final String MESSAGE_UPDATE_ANIME_STATUS_SUCCESS = "Updated Anime: %1$s";
+    public static final String MESSAGE_UPDATE_ANIME_STATUS_SUCCESS = "Updated Anime status: %1$s";
     public static final String MESSAGE_NOT_EDITED = "An updated status should be provided.";
 
     private final Index index;
