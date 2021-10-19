@@ -9,9 +9,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCustomerCommand object
  */
-public class FindCommandParser implements Parser<FindCustomerCommand> {
+public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
