@@ -26,7 +26,6 @@ public class Person {
     private final Review review;
     private final Set<Tag> tags = new HashSet<>();
     private final Rating rating;
-    public boolean isSelectedForView = false;
 
     /**
      * Every field must be present and not null.

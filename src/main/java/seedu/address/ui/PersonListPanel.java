@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
-import java.awt.event.MouseEvent;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

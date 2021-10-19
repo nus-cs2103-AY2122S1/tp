@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
@@ -58,30 +55,14 @@ public class SelectedPersonCard extends UiPart<Region> {
      * Sets the details of Selected Person with the given {@code Person}.
      */
     public void setPersonDetails(Person person) {
-        category.setText(person.getCategoryCode().toString());
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        review.setText(person.getReview().value);
-        email.setText(person.getEmail().value);
-        tags.getChildren().clear();
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rating.setText(person.getRating().value + "\u2B50");
+        // TODO: complete implementation of person details
     }
 
     /**
      * Sets the empty Selected Person details.
      */
+
     public void setEmptyPersonDetails() {
-        category.setText("NIL");
-        name.setText("NIL");
-        phone.setText("NIL");
-        address.setText("NIL");
-        review.setText("NIL");
-        email.setText("NIL");
-        tags.getChildren().clear();
-        rating.setText("NIL" + "\u2B50");
+        // TODO: complete implementation of empty details
     }
 }
