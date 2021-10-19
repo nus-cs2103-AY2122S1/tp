@@ -14,27 +14,14 @@ import dash.logic.commands.taskcommand.EditTaskCommand.EditTaskDescriptor;
 import dash.logic.commands.taskcommand.TagTaskCommand;
 import dash.logic.parser.ArgumentMultimap;
 import dash.logic.parser.ArgumentTokenizer;
-import dash.logic.parser.ParserRequiringPersonList;
+import dash.logic.parser.Parser;
 import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
-import dash.model.person.Person;
 import dash.model.tag.Tag;
-import javafx.collections.ObservableList;
 
-public class TagTaskCommandParser implements ParserRequiringPersonList<TagTaskCommand> {
+public class TagTaskCommandParser implements Parser<TagTaskCommand> {
     @Override
-    public TagTaskCommand parse(String userInput) throws ParseException {
-        return null;
-    }
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the TagTaskCommand
-     * and returns a TagTaskCommand object for execution.
-     *
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    @Override
-    public TagTaskCommand parse(String args, ObservableList<Person> filteredPersonList) throws ParseException {
+    public TagTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
