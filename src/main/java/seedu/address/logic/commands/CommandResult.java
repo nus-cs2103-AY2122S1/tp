@@ -23,19 +23,22 @@ public class CommandResult {
 
     private final boolean stat;
 
+    private final boolean list;
+
     private final Category info;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewMore, Category info,
-                         boolean stat) {
+                         boolean stat, boolean list) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.viewMore = viewMore;
         this.info = info;
         this.stat = stat;
+        this.list = list;
     }
 
     /**
@@ -43,7 +46,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null, false);
+        this(feedbackToUser, false, false, false, null, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -70,6 +73,10 @@ public class CommandResult {
         return stat;
     }
 
+    public boolean isList() {
+        return list;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -89,7 +96,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, viewMore, info);
+        return Objects.hash(feedbackToUser, showHelp, exit, viewMore, info, stat, list);
     }
 
 }

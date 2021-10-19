@@ -19,6 +19,7 @@ public class ListProductCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false,
+                false, false, model.getFilteredProductList().get(0), false, true);
     }
 }
