@@ -59,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -96,7 +96,7 @@ How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -186,6 +186,39 @@ Given below is an example usage scenario:
 
   Both methods can achieve the intended effect of implementing the recurring visits. However, we chose to go with an occurrence counter and frequency attribute because it requires less resources.
   We were concerned that the recurring visits could have many occurrences and at a high frequency, and this could lead to extra overhead in storing and accessing these arrays.
+
+
+### Done Command
+
+#### Implementation details
+The done command is used to mark a person's existing visit as done, and update the person's `LastVisit` datetime value with that of the completed `Visit`. 
+The `Visit` field will also be updated or deleted depending on the `Occurrence` field's value.
+It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
+- `DoneCommand` extends `Command`
+- `DoneCommandParser` implements `Parser<DoneCommand>`
+
+The following activity diagram illustrates the activity flow of the done command:
+![DoneCommandActivityDiagram](images/DoneCommandActivityDiagram.png)
+
+#### Design choices
+
+- Overloading `edit` to change person:
+
+    The `done` command makes use of the `edit` command to get a new copy of the `Person` object with the `Visit` and `LastVisit` fields being updated.
+
+- Defensive Programming used:
+
+    Execution of the `done` command makes use of defensive programming techniques to handle situations where `Visit` or its related `Frequency` and `Occurrence` fields are empty.
+
+### Datetime for Visit and LastVisit
+
+#### Implementation details
+Static class `DateTimeUtil` uses the library `java.time.LocalDateTime` and `java.time.format.DateTimeFormatter` to handle all datetime-related parsing and operations for `Visit` and `LastVisit` timings.
+The datetime is stored and displayed differently in the system for both efficiency and readability:
+- It is stored as `yyyy-MM-dd HH:mm` in the system and for parsing of commands.
+- It is displayed as `dd LLL yyyy HH:mm` on the GUI.
+
+For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`
 
 
 ### \[Proposed\] Undo/redo feature
