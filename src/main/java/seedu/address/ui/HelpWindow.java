@@ -1,6 +1,17 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.CommandFormat.*;
+import static seedu.address.ui.CommandFormat.ADD_FORMAT;
+import static seedu.address.ui.CommandFormat.DELETE_FORMAT;
+import static seedu.address.ui.CommandFormat.EDIT_FORMAT;
+import static seedu.address.ui.CommandFormat.EXIT_FORMAT;
+import static seedu.address.ui.CommandFormat.FIND_FORMAT;
+import static seedu.address.ui.CommandFormat.LIST_FORMAT;
+import static seedu.address.ui.CommandFormat.MOVE_FORMAT;
+import static seedu.address.ui.CommandFormat.REMARK_FORMAT;
+import static seedu.address.ui.CommandFormat.SORT_FORMAT;
+import static seedu.address.ui.CommandFormat.TIMETABLE_FORMAT;
+import static seedu.address.ui.CommandFormat.TODAY_FORMAT;
+import static seedu.address.ui.CommandFormat.VIEW_FORFMAT;
 
 import java.util.logging.Logger;
 
@@ -16,7 +27,8 @@ import seedu.address.commons.core.LogsCenter;
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
-    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html#command-summary";
+    public static final String USERGUIDE_URL =
+            "https://ay2122s1-cs2103t-t12-4.github.io/tp/UserGuide.html#command-summary";
     public static final String HELP_MESSAGE = "Refer to the user guide for more information:\n" + USERGUIDE_URL + "\n\n"
             + ADD_FORMAT
             + DELETE_FORMAT
