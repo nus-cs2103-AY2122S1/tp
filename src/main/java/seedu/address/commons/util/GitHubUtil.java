@@ -152,48 +152,9 @@ public class GitHubUtil {
 
         String userProfileUrl = (String) jsonObject.get("avatar_url");
         Image image = new Image(userProfileUrl);
-        //getFamiliarProgrammingLanguages(userName);
 
         return image;
     }
-
-    /**
-     * Returns the total number of commits a person on GitHub
-     * has made to date.
-     *
-     * @param userName The name of the user.
-     * @return The total number of commits.
-     */
-    public static int getCommits(String userName) {
-        return 0;
-    }
-
-    /**
-     * Returns the total number of repos a person on GitHub
-     * has made to date.
-     *
-     * @param userName The name of the user.
-     * @return The total number of repos found on GitHub.
-     */
-    /*
-    public static int getRepoCount(String userName) {
-        assert userName != null && !userName.equals("") : "No UserName Found";
-        JSONObject jsonObject = null;
-
-        try {
-            jsonObject = getProfile(userName);
-        } catch (RuntimeException e) {
-            logger.severe("Repo Count Could not be obtained.");
-            return 0;
-        }
-
-        assert jsonObject != null : "No Data Found";
-
-        int repoCount = (Integer) jsonObject.get("public_repos");
-
-        return repoCount;
-    }
-     */
 
     /**
      * Returns a list of user repositories present on their GitHub.
@@ -327,7 +288,7 @@ public class GitHubUtil {
      * @return The total contributions found on GitHub else -1, if any error occurred.
      * @throws RuntimeException If the server did not respond well.
      */
-    public static int getContributions(String userName) throws RuntimeException {
+    public static int getContributionsCount(String userName) throws RuntimeException {
         establishConnectionForWebsite(userName);
 
         if (responseCode != 200) {
