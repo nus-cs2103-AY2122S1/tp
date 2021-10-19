@@ -328,32 +328,26 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 1a. Wrong syntax for add command.
-
     * 1a1. TuitiONE shows an error message.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 1b. Missing compulsory details in command.
-
     * 1b1. TuitiONE shows an error message.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 1c. Student already exists.
-
     * 1c1. TuitiONE shows an error message.
 
-      Use case ends.
+    Use case ends.
 
 **UC02: Look up student details**
 
 **MSS**
 1. CSO inputs command to find a specific student.
-
 2. TuitiONE shows a list of relevant students.
-
 3. CSO looks through the given results of students.
-
 4. CSO views desired student’s details, such as:
     1. Their grade
     2. Their enrolled lessons
@@ -366,28 +360,22 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 1a. TuitiONE detects and error in the command formatting.
-
     * 1a1. TuitiONE reminds CSO of correct input format.
-
     * 1a2. CSO inputs search keywords with correct formatting.
+    * Steps 1a1-1a2 are repeated until the input is of the correct format.
 
-      Steps 1a1-1a2 are repeated until the input is of the correct format.
-
-      Use case resumes from step 2.
+    Use case resumes from step 2.
 
 * 2a. TuitiONE cannot find any results relevant to the search keyword.
-
     * 2a1. TuitiONE displays a “No students found” message to CSO.
 
-      Use case ends.
+    Use case ends.
 
 * *a. At any time, the CSO can go back to the default TuitiONE page.
-
     * *a1. CSO types in list.
-
     * *a2. TuitiONE goes back to displaying list of all student details.
 
-      Use case ends.
+    Use case ends.
 
 **UC03: Delete a student**
 
@@ -407,10 +395,9 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
   Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. TuitiONE shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **UC04: Enroll a student in a lesson**
 
@@ -418,20 +405,19 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1. CSO views a list of lessons.
 2. CSO adds the student to be enrolled in lesson.
 3. TuitiONE adds the student to the lesson.  
+
    Use case ends.
 
 **Extensions**
 * 2a. TuitiONE cannot find lesson.
-
     * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
     
 * 2b. TuitiONE cannot find the student.
-
     * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 2c. Student is already enrolled to lesson.
 
@@ -444,19 +430,19 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 2. CSO views list of students enrolled in selected lesson.
 3. CSO requests for student to be unenrolled from the lesson.
 4. TuitiONE removes the student from the lesson.
+
    Use case ends.
 
 **Extensions**
 * 2a. TuitiONE cannot find lesson.
-
     * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
 
-      Use case resumes from step 1.
+    Use case resumes from step 1.
 
 * 2b. TuitiONE cannot find the student.
-
     * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.  
-      Use case resumes from step 1.
+
+    Use case resumes from step 1.
 
 * 2c. Student is not enrolled to lesson.
 
@@ -480,18 +466,18 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 **MSS**
 
-1.  CSO views a list of lessons.
-2.  TuitiONE shows a list of lessons.
-3.  CSO requests to add a lesson with relevant details.
-4.  TuitiONE adds the lesson.  
+1. CSO views a list of lessons.
+2. TuitiONE shows a list of lessons.
+3. CSO requests to add a lesson with relevant details.
+4. TuitiONE adds the lesson.  
+
     Use case ends.
 
 **Extensions**
 * 3a. Relevant details for lesson are invalid.
-
     * 3a1. TuitiONE shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
     
 **UC08: Delete a lesson**
 
@@ -502,6 +488,8 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 3.  CSO requests to delete a specific lesson in the list.
 4.  TuitiONE deletes the lesson.
 
+    Use case ends.
+
 **Extensions**
 
 * 2a. The list is empty.
@@ -509,10 +497,9 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
     Use case ends.
 
 * 3a. The given lesson is invalid.
-
     * 3a1. TuitiONE shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **UC09 - Update Specific Student’s Details**
 
@@ -527,41 +514,38 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extension**
 
 * 2a. Details entered are invalid.
-
     * 2a1. TuitiONE shows an error message.
 
-      Use case resumes at step 2. 
+    Use case resumes at step 2. 
 
 **UC10: Review commands**
 
 **MSS**
 
-1.  CSO selects help option.
-2.  TuitiONE lists basic commands and descriptions, as well as the user guide link.  
+1. CSO selects help option.
+2. TuitiONE lists basic commands and descriptions, as well as the user guide link.  
+
     Use case ends.
-    
+
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-    1. Performance requirements: the system should respond within 2 seconds.
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
-5. Quality requirements:
-
-    1. User interface not produce excessive colour changes/flashing on command execution
-
-    1. The user interface should use readable text styling, i.e. appropriate size and font
-
-    1. All string output must be in UTF-8 encoding.
-
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.  
+    * Performance requirements: the system should respond within 2 seconds.  
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.  
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.  
+5. Quality requirements:  
+    * User interface not produce excessive colour changes/flashing on command execution.  
+    * The user interface should use readable text styling, i.e. appropriate size and font.  
+    * All string output must be in UTF-8 encoding.  
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **CSO**: Customer Service Officer
-* **GUI**: Graphical User Interface
+* **Mainstream OS**: Windows, Linux, Unix, OS-X  
+* **Private contact detail**: A contact detail that is not meant to be shared with others  
+* **CSO**: Customer Service Officer  
+* **GUI**: Graphical User Interface  
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
