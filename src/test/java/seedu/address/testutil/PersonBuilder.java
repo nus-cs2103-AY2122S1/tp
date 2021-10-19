@@ -11,7 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.Util;
 
 /**
  * A utility class to help with building Person objects.
