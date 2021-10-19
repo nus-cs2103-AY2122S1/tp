@@ -28,7 +28,7 @@ public class SelectedPersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    private final Person person;
+    private Person person;
 
     @FXML
     private HBox cardPane;
@@ -50,7 +50,7 @@ public class SelectedPersonCard extends UiPart<Region> {
     private Label rating;
 
     /**
-     * Creates a {@code PersonCode}.
+     * Creates an empty {@code PersonCode}.
      */
     public SelectedPersonCard() {
         super(FXML);
@@ -58,27 +58,40 @@ public class SelectedPersonCard extends UiPart<Region> {
     }
 
     /**
+     * Sets the person of Selected Person with the given {@code Person}.
+     */
+    public void updatePerson(Person person) {
+        this.person = person;
+        logger.info("Updated SelectedPersonCard");
+        //setPersonDetails();
+    }
+
+
+    /**
      * Sets the details of Selected Person with the given {@code Person}.
      */
-    public void setPersonDetails(Person person) {
-        category.setText(person.getCategoryCode().toString());
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        review.setText(person.getReview().value);
-        email.setText(person.getEmail().value);
-        tags.getChildren().clear();
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rating.setText(person.getRating().value + "\u2B50");
-        logger.info("Person details set " + person);
+    public void setPersonDetails() {
+        if (person == null) {
+            setEmptyPersonDetails();
+        } else {
+            category.setText(person.getCategoryCode().toString());
+            name.setText(person.getName().fullName);
+            phone.setText(person.getPhone().value);
+            address.setText(person.getAddress().value);
+            review.setText(person.getReview().value);
+            email.setText(person.getEmail().value);
+            tags.getChildren().clear();
+            person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            rating.setText(person.getRating().value + "\u2B50");
+            logger.info("Person details set " + person);
+        }
     }
 
     /**
      * Sets the empty Selected Person details.
      */
-
     public void setEmptyPersonDetails() {
         category.setText("NIL");
         name.setText("NIL");
@@ -89,5 +102,12 @@ public class SelectedPersonCard extends UiPart<Region> {
         tags.getChildren().clear();
         rating.setText("NIL" + "\u2B50");
         logger.info("Empty person set");
+    }
+
+    /**
+     * Returns the selected person.
+     */
+    public Person getPerson() {
+        return person;
     }
 }
