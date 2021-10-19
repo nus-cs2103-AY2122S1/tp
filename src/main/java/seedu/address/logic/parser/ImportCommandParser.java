@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.logic.commands.ImportCommand;
@@ -20,15 +21,13 @@ public class ImportCommandParser {
 
     private CsvParser csvParser;
     private final List<Person> personsToAdd = new ArrayList<>();
-    private final ArrayList<String> wronglyFormattedEntries = new ArrayList<>();
-
-    private boolean isTagColumnPresent = false;
+    private final List<String> wronglyFormattedEntries = new ArrayList<>();
 
     private List<String> csvNames;
-    private List<String> csvPhones;
-    private List<String> csvEmails;
-    private List<String> csvAddresses;
-    private List<String> csvTags;
+    private Optional<List<String>> csvPhones;
+    private Optional<List<String>> csvEmails;
+    private Optional<List<String>> csvAddresses;
+    private Optional<List<String>> csvTags;
 
     private final List<Name> names = new ArrayList<>();
     private final List<Phone> phones = new ArrayList<>();
@@ -72,49 +71,39 @@ public class ImportCommandParser {
 
     private void parseHeader() throws ParseException {
         csvNames = csvParser.get("name");
-        csvPhones = csvParser.get("phone");
-        csvEmails = csvParser.get("email");
-        csvAddresses = csvParser.get("address");
-        csvTags = csvParser.get("tags");
+        csvPhones = Optional.of(csvParser.get("phone"));
+        csvEmails = Optional.of(csvParser.get("email"));
+        csvAddresses = Optional.of(csvParser.get("address"));
+        csvTags = Optional.of(csvParser.get("tags"));
 
-        if (csvTags != null) {
-            isTagColumnPresent = true;
-        }
         if (csvNames == null) {
             throw new ParseException("Name column is missing");
-        }
-        if (csvPhones == null) {
-            throw new ParseException("Phone Number column is missing");
-        }
-        if (csvEmails == null) {
-            throw new ParseException("Email column is missing");
-        }
-        if (csvAddresses == null) {
-            throw new ParseException("Address column is missing");
         }
     }
 
     private void parseColumns() {
-        int i = 0;
-
-        while (i < csvParser.size()) {
+        for (int i = 0; i < csvParser.size(); i++) {
             try {
                 names.add(ParserUtil.parseName(csvNames.get(i)));
-                phones.add(ParserUtil.parsePhone(csvPhones.get(i)));
-                emails.add(ParserUtil.parseEmail(csvEmails.get(i)));
-                addresses.add(ParserUtil.parseAddress(csvAddresses.get(i)));
+                int finalI = i;
+                Optional<String> inputtedPhone = csvPhones.map(x -> x.get(finalI));
+                Optional<String> inputtedEmail = csvEmails.map(x -> x.get(finalI));
+                Optional<String> inputtedAddress = csvAddresses.map(x -> x.get(finalI));
+                Optional<List<String>> inputtedTags = csvTags.map(x -> {
+                    if (x.get(finalI).equals("")) {
+                        return new ArrayList<>();
+                    } else {
+                        return Arrays.asList(x.get(finalI).split(" "));
+                    }
+                });
 
-                List<String> inputtedTags = new ArrayList<>();
-
-                if (isTagColumnPresent && !csvTags.get(i).equals("")) {
-                    inputtedTags = Arrays.asList(csvTags.get(i).split(" "));
-                }
-
-                tags.add(ParserUtil.parseTags(inputtedTags));
+                phones.add(ParserUtil.parsePhone(inputtedPhone.orElse("")));
+                emails.add(ParserUtil.parseEmail(inputtedEmail.orElse("")));
+                addresses.add(ParserUtil.parseAddress(inputtedAddress.orElse("")));
+                tags.add(ParserUtil.parseTags(inputtedTags.orElse(new ArrayList<>())));
             } catch (ParseException e) {
                 wronglyFormattedEntries.add("Row" + (i + 2) + " : " + e.getLocalizedMessage());
             }
-            i++;
         }
 
     }

@@ -19,7 +19,11 @@ public class ImportCommand extends Command {
 
     private List<Person> personsToAdd;
 
+    /**
+     * Creates an ImportCommand to add the specified list of {@code Person}.
+     */
     public ImportCommand(List<Person> personsToAdd) {
+        requireNonNull(personsToAdd);
         this.personsToAdd = personsToAdd;
     }
 
@@ -34,7 +38,14 @@ public class ImportCommand extends Command {
             }
             model.addPerson(person);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(personsToAdd.size() + " " + MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportCommand // instanceof handles nulls
+                && personsToAdd.equals(((ImportCommand) other).personsToAdd));
     }
 
 }
