@@ -3,31 +3,31 @@ package seedu.anilist.logic.parser;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_ONE;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_STATUS_DESC_ALPHA;
-import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_WATCHING;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.anilist.logic.commands.TabCommand;
+import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.anime.StatusEqualsPredicate;
 
-public class TabCommandParserTest {
+public class ListCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TabCommand.MESSAGE_USAGE);
-
-    private TabCommandParser parser = new TabCommandParser();
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
+    private ListCommandParser parser = new ListCommandParser();
 
     @Test
-    public void parse_missingParts_failure() {
-        // no status specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
-        assertParseFailure(parser, NAME_DESC_AKIRA, MESSAGE_INVALID_FORMAT);
+    public void parse_wrongFieldSpecified_failure() {
+        // wrong field specified
+        assertParseFailure(parser, EPISODE_DESC_EPISODE_ONE, MESSAGE_INVALID_FORMAT);
+        // extra random characters
+        assertParseFailure(parser, "asdfg", MESSAGE_INVALID_FORMAT);
     }
 
     @Test void parse_invalidValue_failure() {
@@ -39,9 +39,16 @@ public class TabCommandParserTest {
         assertParseFailure(parser, PREFIX_STATUS + "", MESSAGE_INVALID_FORMAT);
     }
 
+    @Test
+    public void parse_noFieldSpecified_success() {
+        ListCommand expectedCommand = new ListCommand(PREDICATE_SHOW_ALL_ANIME);
+        // no status specified
+        assertParseSuccess(parser, "", expectedCommand);
+    }
+
     @Test void parse_validStatusSpecified_success() {
         StatusEqualsPredicate expectedPredicate = new StatusEqualsPredicate(new Status(VALID_STATUS_WATCHING));
-        TabCommand expectedCommand = new TabCommand(expectedPredicate);
+        ListCommand expectedCommand = new ListCommand(expectedPredicate);
 
         assertParseSuccess(parser, STATUS_DESC_WATCHING, expectedCommand);
         //extra fields specified before status
