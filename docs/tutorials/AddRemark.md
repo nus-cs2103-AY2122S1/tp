@@ -195,7 +195,7 @@ Now that we have the know-how to extract the data that we need from the user’s
 **`RemarkCommandParser.java`:**
 
 ``` java
-public RemarkCommand parse(String args) throws ParseException {
+public RemarkCommand parse(String args, Model model) throws ParseException {
     requireNonNull(args);
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
         PREFIX_REMARK);

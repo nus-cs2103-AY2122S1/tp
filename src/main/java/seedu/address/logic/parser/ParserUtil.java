@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -132,7 +133,8 @@ public class ParserUtil {
         return new LastMet(trimmedLastMet);
     }
 
-    /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+    /**
+     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.
@@ -182,24 +184,34 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag, Model model) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        if (model.hasTagName(tag)) {
+            return model.getTag(tag);
+        } else {
+            Tag newTag = new Tag(trimmedTag);
+            model.addTag(newTag);
+            return newTag;
+        }
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<String> tags, Model model) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName, model));
         }
+
         return tagSet;
     }
 }

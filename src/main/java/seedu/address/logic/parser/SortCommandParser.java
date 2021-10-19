@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.SortByAttribute;
 import seedu.address.model.person.SortDirection;
 
@@ -20,13 +21,15 @@ public class SortCommandParser implements Parser<SortCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a SortCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SortCommand parse(String args) throws ParseException {
+    @Override
+    public SortCommand parse(String args, Model model) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
@@ -56,7 +59,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      */
     private static Prefix getPrefix(ArgumentMultimap argumentMultimap, Prefix... prefixes) throws ParseException {
         List<Prefix> resultList = Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent())
-                .collect(Collectors.toList());
+            .collect(Collectors.toList());
 
         if (resultList.size() > 1) {
             throw new ParseException(String.format(MESSAGE_TOO_MANY_FIELDS, SortCommand.MESSAGE_USAGE));

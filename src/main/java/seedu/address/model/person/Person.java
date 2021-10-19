@@ -33,7 +33,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
+                  DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.clientId = clientId;
         this.name = name;
@@ -44,7 +44,16 @@ public class Person {
         this.disposableIncome = disposableIncome;
         this.currentPlan = currentPlan;
         this.lastMet = lastMet;
+        addTags(tags);
+    }
+
+    public void addTags(Set<Tag> tags) {
         this.tags.addAll(tags);
+        this.tags.forEach(t -> t.addPerson(this));
+    }
+
+    public void delete() {
+        this.tags.forEach(t -> t.removePerson(this));
     }
 
     public ClientId getClientId() {
@@ -106,8 +115,8 @@ public class Person {
         }
 
         return otherPerson.getName().equals(getName())
-                && otherPerson.getClientId().equals(getClientId())
-                || otherPerson.getEmail().equals(getEmail());
+            && otherPerson.getClientId().equals(getClientId())
+            || otherPerson.getEmail().equals(getEmail());
     }
 
     /**
@@ -126,15 +135,15 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getClientId().equals(getClientId())
-                && otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getRiskAppetite().equals(getRiskAppetite())
-                && otherPerson.getDisposableIncome().equals(getDisposableIncome())
-                && otherPerson.getCurrentPlan().equals(getCurrentPlan())
-                && otherPerson.getLastMet().equals(getLastMet())
-                && otherPerson.getTags().equals(getTags());
+            && otherPerson.getName().equals(getName())
+            && otherPerson.getPhone().equals(getPhone())
+            && otherPerson.getEmail().equals(getEmail())
+            && otherPerson.getAddress().equals(getAddress())
+            && otherPerson.getRiskAppetite().equals(getRiskAppetite())
+            && otherPerson.getDisposableIncome().equals(getDisposableIncome())
+            && otherPerson.getCurrentPlan().equals(getCurrentPlan())
+            && otherPerson.getLastMet().equals(getLastMet())
+            && otherPerson.getTags().equals(getTags());
 
     }
 
@@ -148,23 +157,23 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Client ID: ")
-                .append(getClientId())
-                .append("; Name: ")
-                .append(getName())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Risk Appetite: ")
-                .append(getRiskAppetite())
-                .append("; Disposable Income: ")
-                .append(getDisposableIncome())
-                .append("; current plans: ")
-                .append(getCurrentPlan())
-                .append("; Last Met: ")
-                .append(getLastMet());
+            .append(getClientId())
+            .append("; Name: ")
+            .append(getName())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Address: ")
+            .append(getAddress())
+            .append("; Risk Appetite: ")
+            .append(getRiskAppetite())
+            .append("; Disposable Income: ")
+            .append(getDisposableIncome())
+            .append("; current plans: ")
+            .append(getCurrentPlan())
+            .append("; Last Met: ")
+            .append(getLastMet());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

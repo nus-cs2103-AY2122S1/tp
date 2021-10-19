@@ -39,19 +39,19 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the client's ID. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + " CLIENT ID (must be a positive integer) "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_LASTMET + "LAST MET "
-            + PREFIX_CURRENTPLAN + "CURRENTPLAN "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+        + "by the client's ID. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: " + " CLIENT ID (must be a positive integer) "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_PHONE + "PHONE "
+        + PREFIX_EMAIL + "EMAIL "
+        + PREFIX_ADDRESS + "ADDRESS "
+        + PREFIX_LASTMET + "LAST MET "
+        + PREFIX_CURRENTPLAN + "CURRENTPLAN "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " " + " 1 "
+        + PREFIX_PHONE + "91234567 "
+        + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -62,7 +62,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param clientId of the person in the filtered person list to edit
+     * @param clientId             of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(ClientId clientId, EditPersonDescriptor editPersonDescriptor) {
@@ -80,8 +80,9 @@ public class EditCommand extends Command {
             throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, clientId));
         }
 
-        Person personToEdit = model.getAddressBook().getPerson(clientId);
+        Person personToEdit = model.getPerson(clientId);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -105,9 +106,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         RiskAppetite updateRiskAppetite = editPersonDescriptor.getRiskAppetite()
-                .orElse(personToEdit.getRiskAppetite());
+            .orElse(personToEdit.getRiskAppetite());
         DisposableIncome updatedDisposableIncome = editPersonDescriptor.getDisposableIncome()
-                .orElse(personToEdit.getDisposableIncome());
+            .orElse(personToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editPersonDescriptor.getCurrentPlan().orElse(personToEdit.getCurrentPlan());
         LastMet updatedLastMet = editPersonDescriptor.getLastMet().orElse(personToEdit.getLastMet());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -131,7 +132,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return clientId.equals(e.clientId)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+            && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
@@ -149,7 +150,8 @@ public class EditCommand extends Command {
         private LastMet lastMet;
         private CurrentPlan currentPlan;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -240,6 +242,7 @@ public class EditCommand extends Command {
         public Optional<DisposableIncome> getDisposableIncome() {
             return Optional.ofNullable(disposableIncome);
         }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -273,14 +276,14 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
-                    && getLastMet().equals(e.getLastMet())
-                    && getCurrentPlan().equals(e.getCurrentPlan())
-                    && getDisposableIncome().equals(e.getDisposableIncome())
-                    && getRiskAppetite().equals(e.getRiskAppetite())
-                    && getTags().equals(e.getTags());
+                && getPhone().equals(e.getPhone())
+                && getEmail().equals(e.getEmail())
+                && getAddress().equals(e.getAddress())
+                && getLastMet().equals(e.getLastMet())
+                && getCurrentPlan().equals(e.getCurrentPlan())
+                && getDisposableIncome().equals(e.getDisposableIncome())
+                && getRiskAppetite().equals(e.getRiskAppetite())
+                && getTags().equals(e.getTags());
         }
     }
 }

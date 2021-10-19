@@ -71,12 +71,11 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * returns the person with the corresponding ClientId.
+     * Returns the person with the corresponding {@code clientId}.
      */
     public Person getPerson(ClientId clientId) {
-        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
-            return person.getClientId().equals(clientId);
-        });
+        ObservableList<Person> personInQuestion =
+            internalList.filtered(person -> person.getClientId().equals(clientId));
         if (personInQuestion.isEmpty()) {
             throw new PersonNotFoundException();
         }
@@ -84,28 +83,28 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * returns true if a client with the given clientId exists.
-     * @param clientId of the client
+     * Returns true if a client with the given {@code clientId} exists.
+     *
+     * @param clientId Id of the client
      * @return true if a client with the clientId exists
      */
     public boolean hasClientId(ClientId clientId) {
-        ObservableList<Person> personInQuestion = internalList.filtered(person -> {
-            return person.getClientId().equals(clientId);
-        });
-        if (personInQuestion.isEmpty()) {
-            return false;
-        }
-        return true;
+        ObservableList<Person> personInQuestion =
+            internalList.filtered(person -> person.getClientId().equals(clientId));
+        return !personInQuestion.isEmpty();
     }
 
     /**
      * Removes the equivalent person from the list.
      * The person must exist in the list.
      */
+    // XXX: when is this used?
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
+        } else {
+            toRemove.delete();
         }
     }
 
@@ -122,10 +121,9 @@ public class UniquePersonList implements Iterable<Person> {
         } else {
             Person personToDelete = filteredList.get(0);
             internalList.remove(personToDelete);
+            personToDelete.delete();
             return personToDelete;
         }
-
-
     }
 
     public void setPersons(UniquePersonList replacement) {

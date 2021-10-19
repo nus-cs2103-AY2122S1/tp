@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -9,6 +10,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.tag.TagIsUnreferenced;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -17,6 +22,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueTagList tags;
 
     private String clientCounter;
 
@@ -26,12 +32,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
+        tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -49,20 +56,18 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
+        removeUnreferencedTags();
     }
 
     /**
      * Replaces the clientCounter of the address book with {@code clientCounter}.
-     *
      */
-    @Override
     public void setClientCounter(String clientCounter) {
         this.clientCounter = clientCounter;
     }
 
     /**
      * Increments the clientCounter of the address book by 1 {@code clientCounter}.
-     *
      */
     @Override
     public void incrementClientCounter() {
@@ -76,12 +81,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Gets the clientCounter of the address book.
-     *
      */
     @Override
     public String getClientCounter() {
         return this.clientCounter;
     }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -104,6 +109,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * returns true if a client with the given clientId exists.
+     *
      * @param clientId of client
      * @return true if a client with the given clientId exists
      */
@@ -128,14 +134,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(target);
 
         persons.setPerson(target, editedPerson);
+        target.delete();
+        removeUnreferencedTags();
     }
 
     /**
      * returns person with corresponding clientId.
+     *
      * @param clientId clientId of client
      * @return client with given clientId
      */
     public Person getPerson(ClientId clientId) {
+        requireNonNull(clientId);
         return persons.getPerson(clientId);
     }
 
@@ -145,7 +155,48 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        removeUnreferencedTags();
     }
+
+    //// tag-level operations
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public void removeUnreferencedTags() {
+        ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
+        predicatesToDelete.add(new TagIsUnreferenced());
+        try {
+            removeTagByFields(predicatesToDelete);
+        } catch (TagNotFoundException ignored) {
+            // TODO: log here
+        }
+    }
+
+    /**
+     * returns true if a tag with the given tagName exists.
+     *
+     * @param tagName name of the tag
+     * @return true if a tag with the given tagName exists
+     */
+    public boolean hasTagName(String tagName) {
+        return tags.hasTagName(tagName);
+    }
+
+    /**
+     * returns person with corresponding clientId.
+     *
+     * @param tagName name of the tag
+     * @return tag with given tagName
+     */
+    public Tag getTag(String tagName) {
+        requireNonNull(tagName);
+        return tags.getTag(tagName);
+    }
+
+
+    //// util methods
 
     /**
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
@@ -155,7 +206,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.removeByFields(predicates);
     }
 
-    //// util methods
+    /**
+     * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
+     * Person with {@code clientId} and {@code email} must exist in the address book.
+     */
+    public Tag removeTagByFields(List<Predicate<Tag>> predicates) {
+        return tags.removeByFields(predicates);
+    }
+
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Tag> getTagList() {
+        return tags.asUnmodifiableObservableList();
+    }
 
     @Override
     public String toString() {
@@ -164,16 +230,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+            || (other instanceof AddressBook // instanceof handles nulls
+            && persons.equals(((AddressBook) other).persons));
     }
+
 
     @Override
     public int hashCode() {
