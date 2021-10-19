@@ -9,41 +9,22 @@ import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.commands.ClearCommand;
-import tutoraid.logic.commands.DeleteStudentCommand;
 import tutoraid.logic.commands.ExitCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.commands.ListCommand;
 import tutoraid.logic.commands.PaidCommand;
 import tutoraid.logic.commands.UnpaidCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.model.student.Student;
-import tutoraid.testutil.StudentBuilder;
-import tutoraid.testutil.StudentUtil;
 
 public class TutorAidParserTest {
 
     private final TutorAidParser parser = new TutorAidParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Student student = new StudentBuilder().build();
-        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
-        assertEquals(new AddStudentCommand(student), command);
-    }
-
-    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
-    }
-
-    @Test
-    public void parseCommand_delete() throws Exception {
-        DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
-                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
-        assertEquals(new DeleteStudentCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
