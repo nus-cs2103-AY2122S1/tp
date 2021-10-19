@@ -237,8 +237,8 @@ Creates a shortcut name for any command.
 
 Format: `alias s/SHORTCUT cw/COMMAND_WORD`
 
-* Creates an alias that replaces the `COMMAND_WORD` with the given `SHORTCUT`
-* `SHORTCUT` must not be blank
+* Creates an alias that allows the `COMMAND_WORD` to be executed with the given `SHORTCUT`
+* `SHORTCUT` must not an existing command
 * `COMMAND_WORD` **must be an existing command**
 
 <div markdown="block" class="alert alert-info">
