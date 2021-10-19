@@ -11,17 +11,17 @@ public class PriorityTag extends Tag {
     public static final String PRIORITY_TAG_PREFIX = "pr/";
 
     public static final String MESSAGE_USAGE = "Priority tag: label a person with a priority. "
-        + "The priority can be high, med, or low\n"
-        + "Similar to tag, to apply a priority tag, you have to use Add,Edit or Tag command.\n\n"
-        + "Parameters (using Edit): \n"
-        + "edit INDEX t/ pr/PRIORITY\n\n"
-        + "Example: \n"
-        + "edit 1 t/ pr/low\n"
-        + "edit 3 t/ pr/high\n\n"
-        + "Parameters (using Tag): \n"
-        + "tag INDEX a/ pr/PRIORITY d/ pr/PRIORITY\n\n"
-        + "Example: \n"
-        + "tag 1 a/ pr/low d/ pr/high";;
+            + "The priority can be high, med, or low\n"
+            + "Similar to tag, to apply a priority tag, you have to use Add,Edit or Tag command.\n\n"
+            + "Parameters (using Edit): \n"
+            + "edit INDEX t/ pr/PRIORITY\n\n"
+            + "Example: \n"
+            + "edit 1 t/ pr/low\n"
+            + "edit 3 t/ pr/high\n\n"
+            + "Parameters (using Tag): \n"
+            + "tag INDEX a/ pr/PRIORITY d/ pr/PRIORITY\n\n"
+            + "Example: \n"
+            + "tag 1 a/ pr/low d/ pr/high";;
 
 
     public static final String PRIORITY_VALIDATION_REGEX = LowPriority.COMMAND + "|"
@@ -41,6 +41,10 @@ public class PriorityTag extends Tag {
      */
     public class LowPriority {
 
+        //prevent instantiation of this class
+        private LowPriority() {
+        }
+
         public static final String NAME = "LowPriority";
 
         public static final String TERM = "low";
@@ -56,6 +60,10 @@ public class PriorityTag extends Tag {
      */
     public class MediumPriority {
 
+        //prevent instantiation of this class
+        private MediumPriority() {
+        }
+
         public static final String NAME = "MediumPriority";
 
         public static final String TERM = "med";
@@ -69,6 +77,10 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a High Priority Tag.
      */
     public class HighPriority {
+
+        //prevent instantiation of this class
+        private HighPriority() {
+        }
 
         public static final String NAME = "HighPriority";
 

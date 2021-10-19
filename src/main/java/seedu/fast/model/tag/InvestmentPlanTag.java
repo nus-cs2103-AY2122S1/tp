@@ -44,6 +44,10 @@ public class InvestmentPlanTag extends Tag {
      */
     public class LifeInsurance {
 
+        //prevent instantiation of this class
+        private LifeInsurance() {
+        }
+
         public static final String NAME = "LifeInsurance";
 
         public static final String TERM = "life";
@@ -56,6 +60,10 @@ public class InvestmentPlanTag extends Tag {
      * Class containing relevant fields for a MotorInsurance Tag.
      */
     public class MotorInsurance {
+
+        //prevent instantiation of this class
+        private MotorInsurance() {
+        }
 
         public static final String NAME = "MotorInsurance";
 
@@ -70,6 +78,10 @@ public class InvestmentPlanTag extends Tag {
      */
     public class HealthInsurance {
 
+        //prevent instantiation of this class
+        private HealthInsurance() {
+        }
+
         public static final String NAME = "HealthInsurance";
 
         public static final String TERM = "health";
@@ -82,6 +94,10 @@ public class InvestmentPlanTag extends Tag {
      * Class containing relevant fields for a TravelInsurance Tag.
      */
     public class TravelInsurance {
+
+        //prevent instantiation of this class
+        private TravelInsurance() {
+        }
 
         public static final String NAME = "TravelInsurance";
 
@@ -96,6 +112,10 @@ public class InvestmentPlanTag extends Tag {
      */
     public class PropertyInsurance {
 
+        //prevent instantiation of this class
+        private PropertyInsurance() {
+        }
+
         public static final String NAME = "PropertyInsurance";
 
         public static final String TERM = "property";
@@ -109,6 +129,10 @@ public class InvestmentPlanTag extends Tag {
      */
     public class Investment {
 
+        //prevent instantiation of this class
+        private Investment() {
+        }
+
         public static final String NAME = "investment";
 
         public static final String TERM = "invest";
@@ -121,6 +145,10 @@ public class InvestmentPlanTag extends Tag {
      * Class containing relevant fields for a Savings Tag.
      */
     public class Savings {
+
+        //prevent instantiation of this class
+        private Savings() {
+        }
 
         public static final String NAME = "Savings";
 
