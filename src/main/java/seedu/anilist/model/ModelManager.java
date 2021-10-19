@@ -81,6 +81,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setCurrentTab(TabOption.TabOptions newCurrentTab) {
+        requireNonNull(newCurrentTab);
         currentTab.setCurrentTab(newCurrentTab);
     }
 
