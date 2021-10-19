@@ -17,12 +17,14 @@ import dash.logic.commands.taskcommand.DeleteTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
 import dash.logic.commands.taskcommand.ListTaskCommand;
+import dash.logic.commands.taskcommand.TagTaskCommand;
 import dash.logic.parser.exceptions.ParseException;
 import dash.logic.parser.taskcommand.AddTaskCommandParser;
 import dash.logic.parser.taskcommand.CompleteTaskCommandParser;
 import dash.logic.parser.taskcommand.DeleteTaskCommandParser;
 import dash.logic.parser.taskcommand.EditTaskCommandParser;
 import dash.logic.parser.taskcommand.FindTaskCommandParser;
+import dash.logic.parser.taskcommand.TagTaskCommandParser;
 import dash.model.person.Person;
 import javafx.collections.ObservableList;
 
@@ -61,6 +63,9 @@ public class TaskTabParser {
 
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments);
+
+        case TagTaskCommand.COMMAND_WORD:
+            return new TagTaskCommandParser().parse(arguments, filteredPersonList);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
