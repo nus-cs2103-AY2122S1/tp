@@ -196,9 +196,9 @@ Given below is an example usage scenario and how the sort mechanism behaves at e
 Step 1. The user launches the application for the first time. <br>
 Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
 calls `FastParser::parseCommand` to parse the given input. <br>
-Step 3. `FastParser` will determine that it is a  sort command and will call `SortCommandParser::parse`. From the given input,
+Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
 `SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
-Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(modal)` where modal contains methods that mutate 
+Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate 
 the state of our contacts. <br>
 Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
 to sort the list of persons by their name.<br>
@@ -226,6 +226,47 @@ to sort the list of persons by their name.<br>
     * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
     
 _{more aspects and alternatives to be added}_
+
+### Find feature
+
+#### Current implementation
+
+The find mechanism uses a few implementations of Predicate<Person> using the inbuilt `Predicate` class.
+It uses these predicates to determine which persons to display in the search results.
+There are currently 4 custom predicates implemented in FAST:
+- `NameContainsQueriesPredicate` -- checks if the person's name contains the query.
+- `PriorityPredicate` -- checks if the person has the given priority tag.
+- `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
+- `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
+
+`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
+Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate 
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
+of the search.<br>
+
+#### Design Considerations
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
+  * Pros: Easy to implement.
+  * Cons: For every type of find added, a new class must be made.
+
+* **Alternative 2:** Implement a custom Find method.
+  * Pros: May be able to condense into 1 class
+  * Cons: Very complicated and difficult to implement.
 
 ### \[Proposed\] Data archiving
 
@@ -396,12 +437,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC05 - Find Contact**
+**Use case: UC05 - Find Contact by name**
 
 **MSS**
 
 1. User searches for a name.
-2. FAST shows a list of persons with the specified name or people whose name contains the search query.
+2. FAST shows a list of persons with the specified name or people whose name starts with the search query.
 
    Use case ends.
 
@@ -418,7 +459,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. FAST displays a message to inform user no contacts that matches the query was found.
 
       Use case ends.
-
 
 **Use case: UC06 - List Contacts**
 
@@ -534,6 +574,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. FAST shows an error message.
 
       Use case ends.
+      
 
 **Use case: UC11 - Sort contacts**
 
@@ -550,6 +591,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a2. FAST shows an example of sort command to user.
 
 * 2b. The list is empty.
+      Use case ends.
+      
+**Use case: UC12 - Find Contact by priority**
+
+**MSS**
+
+1. User searches for a priority.
+2. FAST shows a list of persons with the specified priority.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given priority is invalid and does not follow the format of a priority tag.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command and correct format for priority to user.
+
+      Use case ends.
+
+
+* 1b FAST cannot find any contacts with the given priority.
+    * 1b1. FAST displays a message to inform user no contacts with the given priority were found.
+
+      Use case ends.
+      
+**Use case: UC13 - Find Contact by tag**
+
+**MSS**
+
+1. User searches for some tags.
+2. FAST shows a list of persons with the specified tags.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given tags are invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command.
+
+      Use case ends.
+      
+**Use case: UC14 - Find Contact by remark**
+
+**MSS**
+
+1. User searches for a remark.
+2. FAST shows a list of persons whose remarks contain the searched remark.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given remark is invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command.
+
+      Use case ends.
+
+
+* 1b FAST cannot find any contacts with the given remark.
+    * 1b1. FAST displays a message to inform user no contacts with the given remark were found.
+
       Use case ends.
 
 *{More to be added}*
