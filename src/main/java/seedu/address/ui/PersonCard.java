@@ -48,6 +48,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label currentPlan;
     @FXML
+    private Label nextMeeting;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -65,6 +67,7 @@ public class PersonCard extends UiPart<Region> {
         disposableIncome.setText(person.getDisposableIncome().value);
         currentPlan.setText(person.getCurrentPlan().toString());
         lastMet.setText(person.getLastMet().toString());
+        nextMeeting.setText(person.getNextMeeting().toString());
         person.getTags().stream()
             .sorted(Comparator.comparing(Tag::getName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));

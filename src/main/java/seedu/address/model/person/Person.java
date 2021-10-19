@@ -27,13 +27,15 @@ public class Person {
     private final DisposableIncome disposableIncome;
     private final CurrentPlan currentPlan;
     private final LastMet lastMet;
+    private final NextMeeting nextMeeting;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(ClientId clientId, Name name, Phone phone, Email email, Address address, RiskAppetite riskAppetite,
-                  DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, Set<Tag> tags) {
+        DisposableIncome disposableIncome, CurrentPlan currentPlan, LastMet lastMet, NextMeeting nextMeeting,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.clientId = clientId;
         this.name = name;
@@ -44,6 +46,7 @@ public class Person {
         this.disposableIncome = disposableIncome;
         this.currentPlan = currentPlan;
         this.lastMet = lastMet;
+		this.nextMeeting = nextMeeting;
         addTags(tags);
     }
 
@@ -73,6 +76,10 @@ public class Person {
 
     public LastMet getLastMet() {
         return lastMet;
+    }
+
+    public NextMeeting getNextMeeting() {
+        return nextMeeting;
     }
 
     public CurrentPlan getCurrentPlan() {
@@ -161,23 +168,25 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Client ID: ")
-            .append(getClientId())
-            .append("; Name: ")
-            .append(getName())
-            .append("; Email: ")
-            .append(getEmail())
-            .append("; Phone: ")
-            .append(getPhone())
-            .append("; Address: ")
-            .append(getAddress())
-            .append("; Risk Appetite: ")
-            .append(getRiskAppetite())
-            .append("; Disposable Income: ")
-            .append(getDisposableIncome())
-            .append("; current plans: ")
-            .append(getCurrentPlan())
-            .append("; Last Met: ")
-            .append(getLastMet());
+                .append(getClientId())
+                .append("; Name: ")
+                .append(getName())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Risk Appetite: ")
+                .append(getRiskAppetite())
+                .append("; Disposable Income: ")
+                .append(getDisposableIncome())
+                .append("; current plans: ")
+                .append(getCurrentPlan())
+                .append("; Last Met: ")
+                .append(getLastMet())
+                .append("; Next Meeting: ")
+                .append(getNextMeeting());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

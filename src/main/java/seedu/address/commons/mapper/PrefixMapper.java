@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +28,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -45,6 +47,7 @@ public class PrefixMapper {
     private static final Function<Person, RiskAppetite> GET_RISKAPPETITE = Person::getRiskAppetite;
     private static final Function<Person, DisposableIncome> GET_DISPOSABLEINCOME = Person::getDisposableIncome;
     private static final Function<Person, LastMet> GET_LASTMET = Person::getLastMet;
+    private static final Function<Person, NextMeeting> GET_NEXTMEETING = Person::getNextMeeting;
     private static final Function<Person, CurrentPlan> GET_CURRENTPLAN = Person::getCurrentPlan;
     private static final Function<Person, Set<Tag>> GET_TAGS = Person::getTags;
 
@@ -59,6 +62,8 @@ public class PrefixMapper {
             EditPersonDescriptor::setDisposableIncome;
     private static final BiConsumer<EditPersonDescriptor, LastMet> EDIT_SET_LASTMET =
             EditPersonDescriptor::setLastMet;
+    private static final BiConsumer<EditPersonDescriptor, NextMeeting> EDIT_SET_NEXTMEETING =
+        EditPersonDescriptor::setNextMeeting;
     private static final BiConsumer<EditPersonDescriptor, CurrentPlan> EDIT_SET_CURRENTPLAN =
             EditPersonDescriptor::setCurrentPlan;
     private static final BiConsumer<EditPersonDescriptor, Set<Tag>> EDIT_SET_TAGS = EditPersonDescriptor::setTags;
@@ -78,6 +83,8 @@ public class PrefixMapper {
             EditPersonDescriptor::getDisposableIncome;
     private static final Function<EditPersonDescriptor, Optional<LastMet>> EDIT_GET_LASTMET =
             EditPersonDescriptor::getLastMet;
+    private static final Function<EditPersonDescriptor, Optional<NextMeeting>> EDIT_GET_NEXTMEETING =
+        EditPersonDescriptor::getNextMeeting;
     private static final Function<EditPersonDescriptor, Optional<CurrentPlan>> EDIT_GET_CURRENTPLAN =
             EditPersonDescriptor::getCurrentPlan;
     private static final Function<EditPersonDescriptor, Optional<Set<Tag>>> EDIT_GET_TAGS =
@@ -100,6 +107,8 @@ public class PrefixMapper {
             throwableFunctionWrapper(ParserUtil::parseDisposableIncome);
     private static final Function<String, LastMet> PARSE_LASTMET =
             throwableFunctionWrapper(ParserUtil::parseLastMet);
+    private static final Function<String, NextMeeting> PARSE_NEXTMEETING =
+        throwableFunctionWrapper(ParserUtil::parseNextMeeting);
     private static final Function<String, CurrentPlan> PARSE_CURRENTPLAN =
             throwableFunctionWrapper(ParserUtil::parseCurrentPlan);
 
@@ -121,23 +130,26 @@ public class PrefixMapper {
             PARSE_DISPOSABLEINCOME, "Disposable Income");
     private static final PrefixMapperElement<LastMet> PME_LASTMET = new PrefixMapperElement<>(GET_LASTMET,
             EDIT_SET_LASTMET, EDIT_GET_LASTMET, PARSE_LASTMET, "Last Met");
+    private static final PrefixMapperElement<NextMeeting> PME_NEXTMEETING = new PrefixMapperElement<>(GET_NEXTMEETING,
+            EDIT_SET_NEXTMEETING, EDIT_GET_NEXTMEETING, PARSE_NEXTMEETING, "Next Meeting");
     private static final PrefixMapperElement<CurrentPlan> PME_CURRENTPLAN = new PrefixMapperElement<>(GET_CURRENTPLAN,
             EDIT_SET_CURRENTPLAN, EDIT_GET_CURRENTPLAN, PARSE_CURRENTPLAN, "Current Plan");
     private static final PrefixMapperElement<Set<Tag>> PME_TAG = new PrefixMapperElement<>(GET_TAGS, EDIT_SET_TAGS,
             EDIT_GET_TAGS, null, "Tag");
 
     // Maps prefix with their respective functions
-    private static final Map<Prefix, PrefixMapperElement<?>> PREFIX_MAP = Map.of(
-            PREFIX_CLIENTID, PME_CLIENTID,
-            PREFIX_NAME, PME_NAME,
-            PREFIX_PHONE, PME_PHONE,
-            PREFIX_EMAIL, PME_EMAIL,
-            PREFIX_ADDRESS, PME_ADDRESS,
-            PREFIX_RISKAPPETITE, PME_RISKAPPETITE,
-            PREFIX_DISPOSABLEINCOME, PME_DISPOSABLEINCOME,
-            PREFIX_LASTMET, PME_LASTMET,
-            PREFIX_CURRENTPLAN, PME_CURRENTPLAN,
-            PREFIX_TAG, PME_TAG
+    private static final Map<Prefix, PrefixMapperElement<?>> PREFIX_MAP = Map.ofEntries(
+            Map.entry(PREFIX_CLIENTID, PME_CLIENTID),
+            Map.entry(PREFIX_NAME, PME_NAME),
+            Map.entry(PREFIX_PHONE, PME_PHONE),
+            Map.entry(PREFIX_EMAIL, PME_EMAIL),
+            Map.entry(PREFIX_ADDRESS, PME_ADDRESS),
+            Map.entry(PREFIX_RISKAPPETITE, PME_RISKAPPETITE),
+            Map.entry(PREFIX_DISPOSABLEINCOME, PME_DISPOSABLEINCOME),
+            Map.entry(PREFIX_LASTMET, PME_LASTMET),
+            Map.entry(PREFIX_NEXTMEETING, PME_NEXTMEETING),
+            Map.entry(PREFIX_CURRENTPLAN, PME_CURRENTPLAN),
+            Map.entry(PREFIX_TAG, PME_TAG)
     );
 
     public static Function<Person, ?> getAttributeFunction(Prefix prefix) {
