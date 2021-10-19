@@ -13,21 +13,21 @@ if () then ([lesson exists in Tuitione])
 
     :Find students
     enrolled in lesson;
-    
+
     if () then ([there are students enrolled])
         :Unenroll students
         from lesson;
 
     else ([else])
-        
+
     endif
-    
+
     :Remove lesson
     from Tuitione;
 
     :Save new Tuitione
     to Storage;
-    
+
     :Update UI with
     new Tuitione;
 
