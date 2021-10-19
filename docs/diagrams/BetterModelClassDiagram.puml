@@ -27,5 +27,5 @@ Participant *--> "*" NextOfKin
 Participant *--> "*" Event
 Event *--> "1" EventName
 Event *--> "1" EventDate
-Event *--> "0..1" EventTime
+Event --> "0..1" EventTime
 @enduml

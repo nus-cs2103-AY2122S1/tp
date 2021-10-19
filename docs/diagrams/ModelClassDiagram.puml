@@ -49,8 +49,8 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniqueParticipantList
 AddressBook *-left-> "1" UniqueEventList
 UniqueEventList --> "~* all" Event
-Event --> EventName
-Event --> EventDate
+Event *--> EventName
+Event *--> EventDate
 Event --> "0..1" EventTime
 UniqueParticipantList --> "~* all" Participant
 Participant *--> Name
