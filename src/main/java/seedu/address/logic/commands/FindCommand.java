@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -25,7 +24,10 @@ public class FindCommand extends Command {
             + "criteria specified by the user. " + "User should specify only one parameter from the "
             + "following: "
             + "1. Name: \"" + PREFIX_NAME + "\" KEYWORD [MORE_KEYWORDS] "
-            + "2. Case Number: Use \"" + PREFIX_CASE_NUMBER  + "\" CASE_NUMBER [MORE_CASE_NUMBER]. "
+            + "2. Phone: \"" + PREFIX_PHONE + "\" KEY_NUMBERS [MORE_KEY_NUMBERS] "
+            + "3. Case Number: \"" + PREFIX_CASE_NUMBER  + "\" KEY_NUMBERS [MORE_KEY_NUMBERS] "
+            + "4. Shn Period (start): \"" + PREFIX_SHN_PERIOD_START + "\" KEY_DATE [MORE_KEY_DATES] "
+            + "5. Shn Period (end): \"" + PREFIX_SHN_PERIOD_END + "\" KEY_DATE [MORE_KEY_DATES] \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " alice bob charlie";
 
     private final Predicate<Person> predicate;
