@@ -160,6 +160,7 @@ public class ParserUtil {
         return new NextMeeting(date, startTime, endTime, location);
     }
 
+    /**
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.
