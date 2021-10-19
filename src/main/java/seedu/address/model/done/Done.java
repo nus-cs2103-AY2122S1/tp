@@ -38,8 +38,8 @@ public class Done {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.done.Done // instanceof handles nulls
-                && (isDone.equals(((seedu.address.model.person.done.Done) other).isDone))); // state check
+                || (other instanceof Done // instanceof handles nulls
+                && (isDone.equals(((Done) other).isDone))); // state check
     }
 
     @Override
