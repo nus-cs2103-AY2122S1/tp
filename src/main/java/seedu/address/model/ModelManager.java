@@ -11,6 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -78,6 +82,23 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public AliasMap getAliases() {
+        return userPrefs.getAliases();
+    }
+
+    @Override
+    public void addAlias(Alias alias) {
+        requireNonNull(alias);
+        userPrefs.addAlias(alias);
+    }
+
+    @Override
+    public CommandWord removeAlias(Shortcut shortcut) {
+        requireNonNull(shortcut);
+        return userPrefs.removeAlias(shortcut);
     }
 
     //=========== AddressBook ================================================================================

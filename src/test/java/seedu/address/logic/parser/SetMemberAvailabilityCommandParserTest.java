@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.AVAILABILITY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AVAILABILITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -56,7 +56,7 @@ public class SetMemberAvailabilityCommandParserTest {
         assertParseFailure(parser, AVAILABILITY_DESC_BOB, expectedMessage);
 
         // missing availability prefix
-        assertParseFailure(parser, "1 2 3" + ADDRESS_DESC_BOB, expectedMessage);
+        assertParseFailure(parser, "1 2 3" + NAME_DESC_BOB, expectedMessage);
     }
 
     @Test

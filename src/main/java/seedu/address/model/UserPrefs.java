@@ -7,6 +7,10 @@ import java.nio.file.Paths;
 import java.util.Objects;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 
 /**
  * Represents User's preferences.
@@ -15,6 +19,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private AliasMap aliases = new AliasMap();
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,8 +41,10 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setAliases(newUserPrefs.getAliases());
     }
 
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -47,8 +54,27 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
+    }
+
+    @Override
+    public AliasMap getAliases() {
+        return aliases;
+    }
+
+    public void setAliases(AliasMap aliases) {
+        requireNonNull(aliases);
+        this.aliases = aliases;
+    }
+
+    public void addAlias(Alias alias) {
+        aliases.add(alias);
+    }
+
+    public CommandWord removeAlias(Shortcut shortcut) {
+        return aliases.remove(shortcut);
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -68,7 +94,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath)
+                && aliases.equals(o.aliases);
     }
 
     @Override
