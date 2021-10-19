@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DISPOSABLEINCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKAPPETITE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -27,6 +28,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -66,11 +68,13 @@ public class AddCommandParser implements Parser<AddCommand> {
             .getValue(PREFIX_DISPOSABLEINCOME).orElse(DisposableIncome.DEFAULT_VALUE));
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
         CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
-            .orElse(CurrentPlan.DEFAULT_VALUE));
+                .orElse(CurrentPlan.DEFAULT_VALUE));
+        NextMeeting nextMeeting = ParserUtil.parseNextMeeting(argMultimap.getValue(PREFIX_NEXTMEETING)
+                .orElse(NextMeeting.NO_NEXT_MEETING));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG), model);
 
         Function<ClientId, Person> person = clientId -> new Person(clientId, name, phone, email, address, riskAppetite,
-            disposableIncome, currentPlan, lastMet, tagList);
+                disposableIncome, currentPlan, lastMet, nextMeeting, tagList);
 
         return new AddCommand(person);
     }

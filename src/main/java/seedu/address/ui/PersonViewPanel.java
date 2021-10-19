@@ -82,7 +82,7 @@ public class PersonViewPanel extends UiPart<Region> {
             clientRiskAppetite.setText(person.getRiskAppetite().toString());
             clientCurrentPlans.setText(person.getCurrentPlan().toString());
             clientDisposableIncome.setText(person.getDisposableIncome().toString());
-            nextMeeting.setText("-");
+            nextMeeting.setText(person.getNextMeeting().toString());
             clientEmail.setText(person.getEmail().toString());
             clientPhoneNumber.setText(person.getPhone().toString());
         }

@@ -2,9 +2,13 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.person.OptionalPersonNonStringField.IS_NULL_VALUE_ALLOWED;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +16,10 @@ import java.util.List;
  * Helper functions for handling strings.
  */
 public class StringUtil {
+    public static final String DATE_VALIDATION_REGEX =
+        "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
+    public static final String TIME_VALIDATION_REGEX =
+        "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String PERSON_DELIMITER = "\n";
     public static final String CLIENTID_DELIMITER = ", ";
 
@@ -106,6 +114,60 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if a {@code date} is a valid date.
+     * A valid date is in the form of DD/MM/YYYY.
+     */
+    public static boolean isValidDate(String date) {
+        return (IS_NULL_VALUE_ALLOWED && date.isEmpty())
+            || date.matches(DATE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a {@code time} is a valid time in the 24hr format.
+     * A valid time is in the form of HH:MM.
+     */
+    public static boolean isValidTime(String time) {
+        return (IS_NULL_VALUE_ALLOWED && time.isEmpty())
+            || time.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns {@code LocalDate} from a valid date.
+     * To use after isValidDate.
+     */
+    public static LocalDate parseToLocalDate(String date) {
+        if (date.isEmpty()) {
+            return null;
+        } else {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            return LocalDate.parse(date, formatter);
+        }
+    }
+
+    /**
+     * Returns {@code LocalTime} from a valid time in the 24hr format.
+     * To use after isValidTime.
+     */
+    public static LocalTime parseToLocalTime(String time) {
+        if (time.isEmpty()) {
+            return null;
+        } else {
+            return LocalTime.parse(time);
+        }
+    }
+
+    /**
+     * Checks if {@code s} is null.
+     * Returns empty string if null, otherwise returns s.
+     */
+    public static String convertEmptyStringIfNull(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s;
     }
 
     /**

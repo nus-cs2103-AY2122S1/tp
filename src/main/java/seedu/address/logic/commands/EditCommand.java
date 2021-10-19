@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LASTMET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXTMEETING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -31,6 +32,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -45,19 +47,20 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-        + "by the client's ID. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: " + " CLIENT ID (must be a positive integer) "
-        + PREFIX_NAME + "NAME "
-        + PREFIX_PHONE + "PHONE "
-        + PREFIX_EMAIL + "EMAIL "
-        + PREFIX_ADDRESS + "ADDRESS "
-        + PREFIX_LASTMET + "LAST MET "
-        + PREFIX_CURRENTPLAN + "CURRENTPLAN "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + " 1 "
-        + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the client's ID. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + " CLIENT ID (must be a positive integer) "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_LASTMET + "LAST MET "
+            + PREFIX_NEXTMEETING + "NEXT MEETING "
+            + PREFIX_CURRENTPLAN + "CURRENTPLAN "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " " + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -126,10 +129,11 @@ public class EditCommand extends Command {
             .orElse(personToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editPersonDescriptor.getCurrentPlan().orElse(personToEdit.getCurrentPlan());
         LastMet updatedLastMet = editPersonDescriptor.getLastMet().orElse(personToEdit.getLastMet());
+        NextMeeting updatedNextMeeting = editPersonDescriptor.getNextMeeting().orElse(personToEdit.getNextMeeting());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
-            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedTags);
+            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
     }
 
     @Override
@@ -163,6 +167,7 @@ public class EditCommand extends Command {
         private DisposableIncome disposableIncome;
         private Set<Tag> tags;
         private LastMet lastMet;
+        private NextMeeting nextMeeting;
         private CurrentPlan currentPlan;
 
         public EditPersonDescriptor() {}
@@ -179,6 +184,7 @@ public class EditCommand extends Command {
             setDisposableIncome(toCopy.disposableIncome);
             setRiskAppetite(toCopy.riskAppetite);
             setLastMet(toCopy.lastMet);
+            setNextMeeting(toCopy.nextMeeting);
             setCurrentPlan(toCopy.currentPlan);
             setDisposableIncome(toCopy.disposableIncome);
             setRiskAppetite(toCopy.riskAppetite);
@@ -190,7 +196,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome,
-                currentPlan, lastMet, tags);
+                currentPlan, lastMet, nextMeeting, tags);
         }
 
         public void setName(Name name) {
@@ -223,6 +229,14 @@ public class EditCommand extends Command {
 
         public Optional<LastMet> getLastMet() {
             return Optional.ofNullable(lastMet);
+        }
+
+        public void setNextMeeting(NextMeeting nextMeeting) {
+            this.nextMeeting = nextMeeting;
+        }
+
+        public Optional<NextMeeting> getNextMeeting() {
+            return Optional.ofNullable(nextMeeting);
         }
 
         public void setCurrentPlan(CurrentPlan currentPlan) {
@@ -290,14 +304,15 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getAddress().equals(e.getAddress())
-                && getLastMet().equals(e.getLastMet())
-                && getCurrentPlan().equals(e.getCurrentPlan())
-                && getDisposableIncome().equals(e.getDisposableIncome())
-                && getRiskAppetite().equals(e.getRiskAppetite())
-                && getTags().equals(e.getTags());
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getLastMet().equals(e.getLastMet())
+                    && getNextMeeting().equals(e.getNextMeeting())
+                    && getCurrentPlan().equals(e.getCurrentPlan())
+                    && getDisposableIncome().equals(e.getDisposableIncome())
+                    && getRiskAppetite().equals(e.getRiskAppetite())
+                    && getTags().equals(e.getTags());
         }
     }
 }
