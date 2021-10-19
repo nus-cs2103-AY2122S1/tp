@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Logger;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
@@ -16,11 +17,14 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+import seedu.address.commons.core.LogsCenter;
+
 public class Cryptor implements Cryptable {
     /**
      * File to be decrypted must have the {@code *.enc} extension.
      */
     private static final String LEGAL_FILE_FORMAT_EXTENSION = ".enc";
+    private static final Logger logger = LogsCenter.getLogger(Cryptor.class);
 
     private final SecretKey secretKey;
     private final Cipher cipher;
@@ -47,6 +51,7 @@ public class Cryptor implements Cryptable {
     public void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
         assert content != null;
         assert destinationFilePath != null;
+        logger.fine("Encrypting content to: " + destinationFilePath);
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] iv = cipher.getIV();
@@ -55,6 +60,7 @@ public class Cryptor implements Cryptable {
              CipherOutputStream cipherOut = new CipherOutputStream(fileOut, cipher)) {
             fileOut.write(iv);
             cipherOut.write(content.getBytes());
+            logger.fine("Content encrypted.");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,6 +81,7 @@ public class Cryptor implements Cryptable {
             throw new IOException();
         }
 
+        logger.fine("Decrypting content from: " + encryptedSourceFilePath);
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
         byte[] fileIv = new byte[16];
         fileIn.read(fileIv);
