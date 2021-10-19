@@ -19,6 +19,7 @@ import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.logic.parser.exceptions.HelpParseException;
 import seedu.fast.logic.parser.exceptions.ParseException;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -36,12 +37,16 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatsWindow statsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem statsMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -68,6 +73,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow("");
+        statsWindow = new StatsWindow(logic.getFast());
+
     }
 
     public Stage getPrimaryStage() {
@@ -76,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(statsMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -173,6 +181,20 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens the stats window.
+     *
+     */
+    @FXML
+    public void handleStats() {
+        if (!statsWindow.isShowing()) {
+            statsWindow = new StatsWindow(logic.getFast());
+            statsWindow.show();
+        } else {
+            statsWindow.focus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {

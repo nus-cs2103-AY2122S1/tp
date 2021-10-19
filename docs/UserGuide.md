@@ -22,9 +22,10 @@ title: User Guide
     * [Clearing all entries](#clearing-all-entries-clear)
     * [Exiting the program](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
-    * [Archiving data files](#archiving-data-files-coming-in-v20)
+    * [Editing the data file](#editing-the-data-file)
+    * [Viewing statistics](#viewing-statistics)
 - [FAQ](#faq)
-- [Command Summary](#command-summary)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
@@ -95,11 +96,20 @@ Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 ### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Opens a new window that contains command usage, and a quick start guide.
+In the help window, you can access all the command usages using the dropdown menu.
 
-![help message](images/helpMessage.png)
+![help window](images/helpWindow.png)
 
-Format: `help`
+Format: `help [COMMAND]`
+
+Examples:
+* `help` will just open the default help window
+* `help add` will open the help window and directly navigate to the `Add` command help page.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The help window can also be quickly accessed by entering using the F1 key on your keyboard!
+</div>
 
 
 ### Adding a person: `add`
@@ -282,19 +292,26 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FAST data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+FAST data are saved as a JSON file `[JAR file location]/data/fast.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, FAST will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Viewing statistics
 
-_Details coming soon ..._
+FAST comes with built-in statistics to provide you with an overview of your data. 
+To view the statistics, simply click the "Stats" menu item on the top bar or press F2.
+Currently, FAST supports these statistics:
+* Priority Tag Chart
+* Insurance Plan Chart (Coming soon!)
+
+![stats window](images/statsWindow.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -309,16 +326,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g., `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
-**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `dappt INDEX`<br> e.g., `dappt 1`
-**Delete Contact** | `del INDEX`<br> e.g., `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
-**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Help** | `help`
+**Delete Appointment** | `dappt INDEX`<br> e.g. `dappt 1`
+**Delete Contact** | `del INDEX`<br> e.g. `del 3`
+**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**Help** | `help [COMMAND]` <br> e.g. `help add`
 **List** | `list`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Update Completed Appointment** | `done INDEX`<br> e.g., `done 5`
+**Update Completed Appointment** | `done INDEX`<br> e.g. `done 5`

@@ -10,4 +10,4 @@
   * It comes with a **reasonable level of user and developer documentation**.
   * It has added features that are useful for financial advisors.
 * It is named `Financial Advisor Smart Tracker` (`FAST` for short) because it is intended to be an address book app specifically for financial advisors to use.
-* For the detailed documentation of this project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+* For the detailed documentation of this project, see the **[FAST Product Website](https://ay2122s1-cs2103t-t09-4.github.io/tp/)**.
