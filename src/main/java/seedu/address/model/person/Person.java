@@ -44,6 +44,14 @@ public class Person {
         return name;
     }
 
+    public String getFullName() {
+        return name.fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phone.value;
+    }
+
     public Phone getPhone() {
         return phone;
     }

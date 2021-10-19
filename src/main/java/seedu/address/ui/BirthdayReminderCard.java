@@ -37,10 +37,11 @@ public class BirthdayReminderCard extends UiPart<Region> {
     public BirthdayReminderCard(Person person) {
         super(FXML);
         this.person = person;
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+        name.setText(person.getFullName());
+        phone.setText(person.getPhoneNumber());
         Optional<Birthday> possibleBirthday = person.getBirthday();
-        birthday.setText(possibleBirthday.map(Birthday::display).orElse(""));
+        assert possibleBirthday.isPresent();
+        birthday.setText(possibleBirthday.map(Birthday::display).get());
     }
 
     @Override
