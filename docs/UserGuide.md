@@ -313,6 +313,11 @@ Example:
 Shows lessons scheduled in this week in a timetable.<br>
 ![Ui](images/time_table.png)
 
+### View today tuition classes: `today`
+Shows all the tuition classes happens today
+
+Format: `today`
+
 ### Viewing help: `help`
 
 Command Shortcut: `h`
@@ -346,7 +351,7 @@ Action | Format | Shortcut
 ***List all Classes*** | `listclass` | `lc`
 ***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
 ***View Timetable*** | `timetable` | `tt`
+***View Today's Classes*** | `today`
 ***Help*** | `help` | `h`
 ***Exit*** | `exit` | -
-
 
