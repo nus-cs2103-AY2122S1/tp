@@ -30,7 +30,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-        String command = args.split(" ")[0];
 
         final String commandWord = "edit " + matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
