@@ -195,7 +195,7 @@ public class ModelManager implements Model {
         Group newGroup = group;
         Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
                 student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                group.getName());
+                student.getParticipation(), group.getName());
         newGroup.getMembers().addMember(updatedStudent);
         addressBook.setStudent(student, updatedStudent);
         addressBook.setGroup(group, newGroup);
