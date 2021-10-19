@@ -24,19 +24,6 @@ public class Anime {
     private final Set<Genre> genres = new HashSet<>();
 
     /**
-     * Every field must be present and not null
-     * except Episode which defaults to 0,
-     * and Status which defaults to "watching".
-     */
-    public Anime(Name name, Set<Genre> genres) {
-        requireAllNonNull(name, genres);
-        this.name = name;
-        this.episode = new Episode("0");
-        this.status = new Status("watching");
-        this.genres.addAll(genres);
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Anime(Name name, Episode episode, Status status, Set<Genre> genres) {
