@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_CLIENT_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommandTest;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentPlan;
@@ -76,7 +79,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -140,7 +143,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -176,7 +179,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortDirection((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortDirection(null));
     }
 
     @Test
@@ -199,7 +202,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseRiskAppetite_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskAppetite((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskAppetite(null));
     }
 
     @Test
@@ -245,7 +248,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLastMet_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastMet((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastMet(null));
     }
 
     @Test
@@ -293,52 +296,86 @@ public class ParserUtilTest {
 
     @Test
     public void parseDisposableIncome_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisposableIncome((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisposableIncome(null));
     }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null, modelStub));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG, modelStub));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, modelStub));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace, modelStub));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null, modelStub));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG), modelStub));
     }
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertTrue(ParserUtil.parseTags(Collections.emptyList(), modelStub).isEmpty());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2), modelStub);
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    /**
+     * A Model stub that always accept the tag being added.
+     */
+    private class ModelStubAcceptingTags extends AddCommandTest.ModelStub {
+
+        final ArrayList<Tag> tagsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasTagName(String tagName) {
+            requireNonNull(tagName);
+            return tagsAdded.stream().anyMatch(t -> t.getName().equals(tagName));
+        }
+
+        @Override
+        public Tag getTag(String tagName) {
+            return new Tag(tagName);
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            tagsAdded.add(tag);
+        }
     }
 }

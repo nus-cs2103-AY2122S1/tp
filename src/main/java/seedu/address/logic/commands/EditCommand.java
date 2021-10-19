@@ -124,9 +124,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         RiskAppetite updateRiskAppetite = editPersonDescriptor.getRiskAppetite()
-                .orElse(personToEdit.getRiskAppetite());
+            .orElse(personToEdit.getRiskAppetite());
         DisposableIncome updatedDisposableIncome = editPersonDescriptor.getDisposableIncome()
-                .orElse(personToEdit.getDisposableIncome());
+            .orElse(personToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editPersonDescriptor.getCurrentPlan().orElse(personToEdit.getCurrentPlan());
         LastMet updatedLastMet = editPersonDescriptor.getLastMet().orElse(personToEdit.getLastMet());
         NextMeeting updatedNextMeeting = editPersonDescriptor.getNextMeeting().orElse(personToEdit.getNextMeeting());
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return clientIds.equals(e.clientIds)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+            && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
@@ -270,6 +270,7 @@ public class EditCommand extends Command {
         public Optional<DisposableIncome> getDisposableIncome() {
             return Optional.ofNullable(disposableIncome);
         }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.

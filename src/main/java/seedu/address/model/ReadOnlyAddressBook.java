@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,19 +20,9 @@ public interface ReadOnlyAddressBook {
     String getClientCounter();
 
     /**
-     * Sets the client counter stored with the new client counter
-     */
-    void setClientCounter(String clientCounter);
-
-    /**
-     * Returns the person with {@code clientId}
-     */
-    Person getPerson(ClientId clientId);
-
-    /**
      * Increments the clientCounter of the address book by 1 {@code clientCounter}.
-     *
      */
     void incrementClientCounter();
 
+    void setClientCounter(String s);
 }

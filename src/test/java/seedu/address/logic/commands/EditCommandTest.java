@@ -59,14 +59,14 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecified_success() {
         ClientId clientId = CLIENTID_THIRD_PERSON;
-        Person thirdPerson = model.getAddressBook().getPerson(clientId);
+        Person thirdPerson = model.getPerson(clientId);
 
         PersonBuilder personInList = new PersonBuilder(thirdPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(List.of(clientId), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -81,7 +81,7 @@ public class EditCommandTest {
     public void execute_noFieldSpecified_success() {
         ClientId clientId = CLIENTID_FIRST_PERSON;
         EditCommand editCommand = new EditCommand(List.of(clientId), new EditPersonDescriptor());
-        Person editedPerson = model.getAddressBook().getPerson(clientId);
+        Person editedPerson = model.getPerson(clientId);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
@@ -97,25 +97,25 @@ public class EditCommandTest {
         ClientId clientId3 = CLIENTID_SECOND_PERSON;
         List<ClientId> clientIdList = List.of(clientId1, clientId2, clientId3);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder()
-                .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
+            .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
 
         EditCommand editCommand = new EditCommand(clientIdList, editPersonDescriptor);
-        Person person1 = model.getAddressBook().getPerson(clientId1);
-        Person person2 = model.getAddressBook().getPerson(clientId2);
-        Person person3 = model.getAddressBook().getPerson(clientId3);
+        Person person1 = model.getPerson(clientId1);
+        Person person2 = model.getPerson(clientId2);
+        Person person3 = model.getPerson(clientId3);
 
         Person editedPerson1 = new PersonBuilder(person1).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Person editedPerson2 = new PersonBuilder(person2).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Person editedPerson3 = new PersonBuilder(person3).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
 
         List<ClientId> clientIdlist = List.of(clientId1, clientId2, clientId3);
         List<Person> editPersonList = List.of(editedPerson1, editedPerson2, editedPerson3);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                StringUtil.joinListToString(editPersonList, "\n"));
+            StringUtil.joinListToString(editPersonList, "\n"));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPersonByClientIds(clientIdlist, editPersonDescriptor);
@@ -123,10 +123,11 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+
     @Test
     public void execute_duplicatePerson_failure() {
         ClientId clientId = CLIENTID_FIRST_PERSON;
-        Person firstPerson = model.getAddressBook().getPerson(clientId);
+        Person firstPerson = model.getPerson(clientId);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(List.of(CLIENTID_THIRD_PERSON), descriptor);
 

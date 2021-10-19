@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> personToView;
+    private final FilteredList<Tag> filteredTags;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +45,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -127,6 +130,37 @@ public class ModelManager implements Model {
         return addressBook.setPersonByClientIds(clientIds, editedPersonDescriptor);
     }
 
+    @Override
+    public Person getPerson(ClientId clientId) {
+        requireNonNull(clientId);
+        return addressBook.getPerson(clientId);
+    }
+
+    @Override
+    public boolean hasTagName(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.hasTagName(tagName);
+    }
+
+    @Override
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
+        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+    }
+
+    @Override
+    public Tag getTag(String tagName) {
+        requireNonNull(tagName);
+        return addressBook.getTag(tagName);
+    }
+
+    // TODO: divider here
+    @Override
+    public void updateFilteredTagList(Predicate<Tag> predicate) {
+        requireNonNull(predicate);
+        filteredTags.setPredicate(predicate);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -201,9 +235,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons)
-                && personToView.equals(other.personToView);
+            && userPrefs.equals(other.userPrefs)
+            && filteredPersons.equals(other.filteredPersons)
+            && filteredTags.equals(other.filteredTags)
+            && personToView.equals(other.personToView);
     }
-
 }

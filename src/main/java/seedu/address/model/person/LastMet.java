@@ -49,13 +49,11 @@ public class LastMet implements OptionalPersonNonStringField {
 
     @Override
     public String toString() {
-
         if (value == null) {
             return DEFAULT_VALUE;
         } else {
             return this.dateInString;
         }
-
     }
 
     @Override
@@ -67,6 +65,9 @@ public class LastMet implements OptionalPersonNonStringField {
 
     @Override
     public int hashCode() {
+        if (value == null) {
+            return 0;
+        }
         return value.hashCode();
     }
 }

@@ -20,6 +20,7 @@ import java.util.function.Function;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -49,11 +50,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AddCommand parse(String args) throws ParseException {
+    public AddCommand parse(String args, Model model) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
         if (!allPrefixesPresent(argMultimap, REQUIRED_PREFIXES)
-                || !argMultimap.getPreamble().isEmpty()) {
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -62,15 +63,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(Phone.DEFAULT_VALUE));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(Address.DEFAULT_VALUE));
         RiskAppetite riskAppetite = ParserUtil.parseRiskAppetite(argMultimap
-                .getValue(PREFIX_RISKAPPETITE).orElse(RiskAppetite.DEFAULT_VALUE));
+            .getValue(PREFIX_RISKAPPETITE).orElse(RiskAppetite.DEFAULT_VALUE));
         DisposableIncome disposableIncome = ParserUtil.parseDisposableIncome(argMultimap
-                .getValue(PREFIX_DISPOSABLEINCOME).orElse(DisposableIncome.DEFAULT_VALUE));
+            .getValue(PREFIX_DISPOSABLEINCOME).orElse(DisposableIncome.DEFAULT_VALUE));
         LastMet lastMet = ParserUtil.parseLastMet(argMultimap.getValue(PREFIX_LASTMET).orElse(LastMet.DEFAULT_VALUE));
         CurrentPlan currentPlan = ParserUtil.parseCurrentPlan(argMultimap.getValue(PREFIX_CURRENTPLAN)
                 .orElse(CurrentPlan.DEFAULT_VALUE));
         NextMeeting nextMeeting = ParserUtil.parseNextMeeting(argMultimap.getValue(PREFIX_NEXTMEETING)
                 .orElse(NextMeeting.NO_NEXT_MEETING));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG), model);
 
         Function<ClientId, Person> person = clientId -> new Person(clientId, name, phone, email, address, riskAppetite,
                 disposableIncome, currentPlan, lastMet, nextMeeting, tagList);
