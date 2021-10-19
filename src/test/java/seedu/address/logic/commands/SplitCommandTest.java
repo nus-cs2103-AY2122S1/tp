@@ -15,34 +15,25 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.PersonBuilder;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 public class SplitCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void constructor_null_exceptionThrown() {
-        // todo
-        assertTrue(true);
-    }
-
-    @Test
     public void execute_validDay_success() {
-        // todo
         SplitCommand command = new SplitCommand(4);
-        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS, 4);
+        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS,
+                DayOfWeek.of(4).getDisplayName(TextStyle.FULL, Locale.getDefault()));
         Person person = new PersonBuilder().build();
         model.setPerson(ALICE, person);
         expectedModel.setPerson(ALICE, person);
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
         expectedModel.split(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidDay_exceptionThrown() {
-        String invalidDays = "8 9 10";
-        // todo
-        assertTrue(true);
     }
 
     @Test
