@@ -34,6 +34,10 @@ public class Members {
         this.studentList.removeIf(s -> s.isSameStudent(student));
     }
 
+    public void removeAllMembers() {
+        this.studentList.clear();
+    }
+
     /**
      * Updates a group member when edited
      * @param target group member to be edited

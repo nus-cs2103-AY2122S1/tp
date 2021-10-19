@@ -170,6 +170,6 @@ public class MarkStudentAttCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ClearStudentsCommand()));
     }
 }

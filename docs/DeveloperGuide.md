@@ -543,7 +543,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. tApp shows an error message.
 
       Use case resumes at step 2.
-    
+
+**Use case: UC11 - Clear student list**
+
+**MSS**
+
+1.  User requests to view students (UC2)
+2.  tApp shows a list of students
+3.  User requests clear the student list
+4.  tApp clears the student list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
