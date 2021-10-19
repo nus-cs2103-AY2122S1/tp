@@ -2,13 +2,12 @@ package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import javafx.collections.ObservableList;
-import seedu.address.model.person.ClientId;
+
 import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents a Tag in the address book.

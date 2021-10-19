@@ -67,7 +67,7 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // FIXME: encapsulate 0 within addressbook, orElse("abcd") will cause RuntimeError
+        // TODO: encapsulate 0 within addressbook, orElse("abcd") will cause RuntimeError
         String clientCounter = Optional.ofNullable(model.getAddressBook().getClientCounter()).orElse("0");
         Person person = toAdd.apply(new ClientId(clientCounter));
 
@@ -77,7 +77,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(person);
-        // FIXME: model.incrementClientCounter should not be exposed, instead increment directly within addPerson
+        // TODO: model.incrementClientCounter should not be exposed, instead increment directly within addPerson
         model.getAddressBook().incrementClientCounter();
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));
     }

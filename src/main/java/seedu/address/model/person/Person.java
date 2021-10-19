@@ -47,11 +47,6 @@ public class Person {
         addTags(tags);
     }
 
-    public void addTags(Set<Tag> tags) {
-        this.tags.addAll(tags);
-        this.tags.forEach(t -> t.addPerson(this));
-    }
-
     public void delete() {
         this.tags.forEach(t -> t.removePerson(this));
     }
@@ -98,6 +93,16 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Assigns {@code tags} to the {@code Person}.
+     *
+     * @param tags Tags to be added.
+     */
+    public void addTags(Set<Tag> tags) {
+        this.tags.addAll(tags);
+        this.tags.forEach(t -> t.addPerson(this));
     }
 
     /**

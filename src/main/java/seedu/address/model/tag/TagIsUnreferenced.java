@@ -2,8 +2,6 @@ package seedu.address.model.tag;
 
 import java.util.function.Predicate;
 
-import seedu.address.logic.parser.ArgumentMultimap;
-
 /**
  * Tests if {@code Tag} is unreferenced by persons.
  */

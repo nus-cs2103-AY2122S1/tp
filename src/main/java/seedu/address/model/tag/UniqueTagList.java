@@ -18,6 +18,12 @@ public class UniqueTagList implements Iterable<Tag> {
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Returns true if the list contains {@code toCheck}.
+     *
+     * @param toCheck Tag to be checked.
+     * @return true if the list contains {@code toCheck}.
+     */
     public boolean contains(Tag toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameTag);
@@ -30,12 +36,15 @@ public class UniqueTagList implements Iterable<Tag> {
      * @return true if a tag with the tagName exists
      */
     public boolean hasTagName(String tagName) {
-        ObservableList<Tag> tagInQuestion = internalList.filtered(tag -> {
-            return tag.getName().equals(tagName);
-        });
+        ObservableList<Tag> tagInQuestion = internalList.filtered(tag -> tag.getName().equals(tagName));
         return !tagInQuestion.isEmpty();
     }
 
+    /**
+     * Adds {@code toAdd} to the list.
+     *
+     * @param toAdd Tag to be added.
+     */
     public void add(Tag toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {

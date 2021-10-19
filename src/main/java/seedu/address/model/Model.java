@@ -117,7 +117,7 @@ public interface Model {
      * Adds the given Tag.
      * {@code Tag} must not already exist in the address book.
      */
-    void addTag(Tag Tag);
+    void addTag(Tag tag);
 
     /**
      * Returns Tag with corresponding tagName.

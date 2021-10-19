@@ -11,8 +11,8 @@ import seedu.address.model.person.ClientId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.TagIsUnreferenced;
+import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
@@ -26,13 +26,14 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private String clientCounter;
 
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */ {
+    {
+        /*
+         * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+         * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+         *
+         * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+         *   among constructors.
+         */
         persons = new UniquePersonList();
         tags = new UniqueTagList();
     }
@@ -62,6 +63,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the clientCounter of the address book with {@code clientCounter}.
      */
+    @Override
     public void setClientCounter(String clientCounter) {
         this.clientCounter = clientCounter;
     }
@@ -164,6 +166,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         tags.add(tag);
     }
 
+    /**
+     * Removes tags that are unreferenced from the list.
+     */
     public void removeUnreferencedTags() {
         ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
         predicatesToDelete.add(new TagIsUnreferenced());

@@ -147,8 +147,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addTag(Tag Tag) {
-        addressBook.addTag(Tag);
+    public void addTag(Tag tag) {
+        addressBook.addTag(tag);
         updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
