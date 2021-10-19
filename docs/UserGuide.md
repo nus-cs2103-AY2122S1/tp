@@ -24,8 +24,6 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * Tag a contact: [tag](#tag)
 
-   * Add contact to favourite: [fav](#fav)
-
    * Exiting the app: [exit / quit](#exit)
 
 * [Saving the data](#saving-data)
