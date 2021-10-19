@@ -87,6 +87,9 @@ public class Group {
         return repoName;
     }
 
+    public void removeAllMembers() {
+        members.removeAllMembers();
+    }
 
     /**
      * Returns the formatted Github link

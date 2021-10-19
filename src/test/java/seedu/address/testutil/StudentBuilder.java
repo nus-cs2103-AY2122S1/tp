@@ -5,9 +5,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Participation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UserName;
@@ -32,6 +34,8 @@ public class StudentBuilder {
     private RepoName repoName;
     private Set<Tag> tags;
     private Attendance attendance;
+    private Participation participation;
+    private GroupName groupName;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -44,6 +48,8 @@ public class StudentBuilder {
         repoName = new RepoName(DEFAULT_REPO);
         tags = new HashSet<>();
         attendance = new Attendance();
+        participation = new Participation();
+        groupName = new GroupName();
     }
 
     /**
@@ -57,6 +63,8 @@ public class StudentBuilder {
         repoName = studentToCopy.getRepoName();
         tags = new HashSet<>(studentToCopy.getTags());
         attendance = new Attendance(new ArrayList<>(studentToCopy.getAttendance().attendanceList));
+        participation = new Participation(new ArrayList<>(studentToCopy.getParticipation().participationList));
+        groupName = studentToCopy.getGroupName();
     }
 
     /**
@@ -116,8 +124,23 @@ public class StudentBuilder {
         return this;
     }
 
-    public Student build() {
-        return new Student(name, email, studentNumber, userName, repoName , tags, attendance);
+    /**
+     * Sets the {@code Participation} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withParticipation(Integer... integers) {
+        this.attendance = SampleDataUtil.getAttendanceList(integers);
+        return this;
     }
 
+    /**
+     * Sets the {@code Attendance} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withGroupName(String groupName) {
+        this.groupName = new GroupName(groupName);
+        return this;
+    }
+
+    public Student build() {
+        return new Student(name, email, studentNumber, userName, repoName , tags, attendance, participation, groupName);
+    }
 }

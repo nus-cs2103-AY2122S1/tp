@@ -30,6 +30,24 @@ public class Members {
         this.studentList.add(student);
     }
 
+    public void removeMember(Student student) {
+        this.studentList.removeIf(s -> s.isSameStudent(student));
+    }
+
+    public void removeAllMembers() {
+        this.studentList.clear();
+    }
+
+    /**
+     * Updates a group member when edited
+     * @param target group member to be edited
+     * @param student edited group member
+     */
+    public void updateMember(Student target, Student student) {
+        removeMember(target);
+        addMember(student);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

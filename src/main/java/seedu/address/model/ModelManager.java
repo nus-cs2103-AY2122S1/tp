@@ -7,6 +7,7 @@ import static seedu.address.model.Model.DisplayType.STUDENTS;
 import static seedu.address.model.Model.DisplayType.TASKS;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -121,6 +122,18 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
+        if (!(target.getGroupName().isNull())) {
+            List<Group> groupList = getFilteredGroupList();
+            Group group = groupList.stream()
+                                          .filter(g -> g.getName().equals(target.getGroupName()))
+                                          .findAny()
+                                          .orElse(null);
+            Group updatedGroup = group;
+            updatedGroup.getMembers().removeMember(target);
+            addressBook.setGroup(group, updatedGroup);
+        }
+
+
     }
 
     @Override
@@ -132,6 +145,14 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
+        if (!(target.getGroupName().isNull())) {
+            List<Group> groupList = getFilteredGroupList();
+            Group updatedGroup = groupList.stream()
+                    .filter(g -> g.getName().equals(target.getGroupName()))
+                    .findAny()
+                    .orElse(null);
+            updatedGroup.getMembers().updateMember(target, editedStudent);
+        }
 
         addressBook.setStudent(target, editedStudent);
     }
@@ -152,14 +173,37 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void markStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        Student newPerson = target;
+
+        newPerson.getParticipation().toggleParticipation(week);
+        addressBook.setStudent(target, newPerson);
+    }
+
+    @Override
+    public String getStudentParticipation(Student target, int week) {
+        requireAllNonNull(target);
+        return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
+    }
+
+    /**
+     * Adds a student group.
+     *
+     * @param student student to add to group
+     * @param group student group to add student into
+     */
     public void addStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
         Group newGroup = group;
-        newGroup.getMembers().addMember(student);
+        Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
+                student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
+                student.getParticipation(), group.getName());
+        newGroup.getMembers().addMember(updatedStudent);
+        addressBook.setStudent(student, updatedStudent);
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
-
 
     /**
      * Checks if a task exists

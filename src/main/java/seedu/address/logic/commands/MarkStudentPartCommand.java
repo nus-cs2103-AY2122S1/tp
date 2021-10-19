@@ -13,16 +13,16 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Marks the attendance (present/absent) of an existing student in the student list.
+ * Marks the participation (present/absent) of an existing student in the student list.
  */
-public class MarkStudentAttCommand extends Command {
+public class MarkStudentPartCommand extends Command {
 
-    public static final String COMMAND_WORD = "marka";
+    public static final String COMMAND_WORD = "markp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the attendance of the student identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the participation of the student identified "
             + "by the index number used in the displayed student list.\n"
-            + "Marking a student who is absent will change his attendance to present.\n"
-            + "Marking a student who is present will change his attendance to absent.\n"
+            + "Marking a student will change his participation status to 1.\n"
+            + "Marking a student again will change his participation status to 0.\n"
             + "Parameters: INDEX (must be a positive integer)"
             + " [" + PREFIX_WEEK + "WEEK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -34,9 +34,9 @@ public class MarkStudentAttCommand extends Command {
     private final int week;
 
     /**
-     * @param index of the student in the filtered student list to mark attendance
+     * @param index of the student in the filtered student list to mark participation
      */
-    public MarkStudentAttCommand(Index index, int week) {
+    public MarkStudentPartCommand(Index index, int week) {
         requireNonNull(index);
         requireNonNull(week);
 
@@ -55,8 +55,8 @@ public class MarkStudentAttCommand extends Command {
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
 
-        model.markStudentAttendance(studentToUpdate, week);
-        String type = model.getStudentAttendance(studentToUpdate, week);
+        model.markStudentParticipation(studentToUpdate, week);
+        String type = model.getStudentParticipation(studentToUpdate, week);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS,
                 studentToUpdate.getName(), type, week + 1));
@@ -70,12 +70,12 @@ public class MarkStudentAttCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof MarkStudentAttCommand)) {
+        if (!(other instanceof MarkStudentPartCommand)) {
             return false;
         }
 
         // state check
-        MarkStudentAttCommand e = (MarkStudentAttCommand) other;
+        MarkStudentPartCommand e = (MarkStudentPartCommand) other;
         return index.equals(e.index);
     }
 }

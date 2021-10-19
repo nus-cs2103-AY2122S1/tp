@@ -25,58 +25,58 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.GroupBuilder;
 
-public class AddStudentCommandTest {
+public class AddGroupCommandTest {
 
     @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddStudentCommand(null));
+    public void constructor_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
-        Student validStudent = new StudentBuilder().build();
+    public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Group validGroup = new GroupBuilder().build();
 
-        CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
+        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
-        assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+        assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
-        Student validStudent = new StudentBuilder().build();
-        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithStudent(validStudent);
+    public void execute_duplicateGroup_throwsCommandException() {
+        Group validGroup = new GroupBuilder().build();
+        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
+        AddGroupCommandTest.ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
         assertThrows(CommandException.class,
-                AddStudentCommand.MESSAGE_DUPLICATE_STUDENT, () -> addStudentCommand.execute(modelStub));
+                AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () -> addGroupCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Student alice = new StudentBuilder().withName("Alice").build();
-        Student bob = new StudentBuilder().withName("Bob").build();
-        AddStudentCommand addAliceCommand = new AddStudentCommand(alice);
-        AddStudentCommand addBobCommand = new AddStudentCommand(bob);
+        Group g1 = new GroupBuilder().withName("w14-4").build();
+        Group g2 = new GroupBuilder().withName("w11-1").build();
+        AddGroupCommand addG1Command = new AddGroupCommand(g1);
+        AddGroupCommand addG2Command = new AddGroupCommand(g2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addG1Command.equals(addG1Command));
 
         // same values -> returns true
-        AddStudentCommand addAliceCommandCopy = new AddStudentCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddGroupCommand addG1CommandCopy = new AddGroupCommand(g1);
+        assertTrue(addG1Command.equals(addG1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addG1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addG1Command.equals(null));
 
-        // different student -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different task -> returns false
+        assertFalse(addG1Command.equals(addG2Command));
     }
 
     /**
@@ -120,11 +120,6 @@ public class AddStudentCommandTest {
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void clearTasks() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -260,39 +255,39 @@ public class AddStudentCommandTest {
     }
 
     /**
-     * A Model stub that contains a single student.
+     * A Model stub that contains a single task.
      */
-    private class ModelStubWithStudent extends ModelStub {
-        private final Student student;
+    private class ModelStubWithGroup extends AddGroupCommandTest.ModelStub {
+        private final Group group;
 
-        ModelStubWithStudent(Student student) {
-            requireNonNull(student);
-            this.student = student;
+        ModelStubWithGroup(Group group) {
+            requireNonNull(group);
+            this.group = group;
         }
 
         @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return this.student.isSameStudent(student);
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.isSameGroup(group);
         }
     }
 
     /**
-     * A Model stub that always accept the student being added.
+     * A Model stub that always accept the group being added.
      */
-    private class ModelStubAcceptingStudentAdded extends ModelStub {
-        final ArrayList<Student> studentsAdded = new ArrayList<>();
+    private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
+        final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasStudent(Student student) {
-            requireNonNull(student);
-            return studentsAdded.stream().anyMatch(student::isSameStudent);
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return groupsAdded.stream().anyMatch(group::isSameGroup);
         }
 
         @Override
-        public void addStudent(Student student) {
-            requireNonNull(student);
-            studentsAdded.add(student);
+        public void addGroup(Group group) {
+            requireNonNull(group);
+            groupsAdded.add(group);
         }
 
         @Override

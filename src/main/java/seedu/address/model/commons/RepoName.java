@@ -53,6 +53,6 @@ public class RepoName {
 
     @Override
     public int hashCode() {
-        return repoName.hashCode();
+        return isNull() ? 0 : repoName.hashCode();
     }
 }

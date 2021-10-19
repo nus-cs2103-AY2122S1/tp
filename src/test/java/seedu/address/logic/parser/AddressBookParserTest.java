@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.logic.commands.ClearAllCommand;
+import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -23,6 +23,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
+import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -42,9 +43,9 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearAllCommand.COMMAND_WORD) instanceof ClearAllCommand);
-        assertTrue(parser.parseCommand(ClearAllCommand.COMMAND_WORD + " 3") instanceof ClearAllCommand);
+    public void parseCommand_clearStudents() throws Exception {
+        assertTrue(parser.parseCommand(ClearStudentsCommand.COMMAND_WORD) instanceof ClearStudentsCommand);
+        assertTrue(parser.parseCommand(ClearStudentsCommand.COMMAND_WORD + " 3") instanceof ClearStudentsCommand);
     }
 
     @Test
@@ -97,6 +98,15 @@ public class AddressBookParserTest {
                 MarkStudentAttCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
         assertEquals(new MarkStudentAttCommand(INDEX_FIRST_STUDENT, validWeek), command);
+    }
+
+    @Test
+    public void parseCommand_markStudentParticipation() throws Exception {
+        int validWeek = 1;
+        MarkStudentPartCommand command = (MarkStudentPartCommand) parser.parseCommand(
+                MarkStudentPartCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_WEEK + validWeek);
+        assertEquals(new MarkStudentPartCommand(INDEX_FIRST_STUDENT, validWeek), command);
     }
 
     @Test
