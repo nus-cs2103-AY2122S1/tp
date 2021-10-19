@@ -60,18 +60,16 @@ public class CommandBox extends UiPart<Region> {
      * cleared due to the reason stated previously, will just return.
      */
     private void showNextCommand() {
-        if (index == null) {
-            return;
-        } else if (index.getOneBased() == commandHistory.size()) {
-            index = Index.fromOneBased(index.getOneBased() + 1);
-            commandTextField.setText("");
-            return;
-        } else if (index.getOneBased() > commandHistory.size()) {
+        if (index == null || index.getOneBased() > commandHistory.size()) {
             return;
         }
 
-        index = Index.fromOneBased(index.getOneBased() + 1);
-        commandTextField.setText(commandHistory.get(index.getZeroBased()));
+        index.increaseByOne();
+
+        String text = index.getOneBased() == commandHistory.size()
+                      ? ""
+                      : commandHistory.get(index.getZeroBased());
+        commandTextField.setText(text);
     }
 
     /**
@@ -84,7 +82,7 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        index = Index.fromOneBased(index.getOneBased() - 1);
+        index.decreaseByOne();
         commandTextField.setText(commandHistory.get(index.getZeroBased()));
     }
 
@@ -105,7 +103,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-            index = Index.fromOneBased(index.getOneBased() + 1);
+            index.increaseByOne();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
