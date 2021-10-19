@@ -7,7 +7,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -32,8 +31,8 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
 
     private boolean hasStartFilter = false;
     private boolean hasEndFilter = false;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String messageToUser = "Filtering all appointments according to these arguments:\n";
 
     /**
@@ -58,13 +57,13 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
             messageToUser += "Patient: " + patientKeywords + " ";
         }
         if (argumentMultimap.getValue(PREFIX_START).isPresent()) {
-            startDate = stringToDate(argumentMultimap.getValue(PREFIX_START).get()).atStartOfDay();
+            startDate = stringToDate(argumentMultimap.getValue(PREFIX_START).get());
             filters.setStartAfter(new AppointmentIsAfterPredicate(startDate));
             hasStartFilter = true;
             messageToUser += "Starting from: " + startDate.format(DISPLAY_FORMATTER) + " ";
         }
         if (argumentMultimap.getValue(PREFIX_END).isPresent()) {
-            endDate = stringToDate(argumentMultimap.getValue(PREFIX_END).get()).atTime( 23, 59, 59);
+            endDate = stringToDate(argumentMultimap.getValue(PREFIX_END).get());
             filters.setStartBefore(new AppointmentIsBeforePredicate(endDate));
             hasEndFilter = true;
             messageToUser += "Ending at: " + endDate.format(DISPLAY_FORMATTER) + " ";

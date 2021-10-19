@@ -2,6 +2,7 @@ package seedu.plannermd.model.appointment;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
@@ -9,9 +10,11 @@ public class AppointmentIsBeforePredicate implements Predicate<Appointment> {
 
     private final LocalDateTime filerEndDateTime;
 
-    public AppointmentIsBeforePredicate(LocalDateTime filerEndDateTime) {
-        requireNonNull(filerEndDateTime);
-        this.filerEndDateTime = filerEndDateTime;
+    public AppointmentIsBeforePredicate(LocalDate filterEndDateTime) {
+        requireNonNull(filterEndDateTime);
+        // The filter end date should be the last moment of the day since the filter is inclusive
+        // of the end date itself.
+        this.filerEndDateTime = filterEndDateTime.atTime(23, 59, 59, 99);
     }
 
     @Override

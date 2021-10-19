@@ -24,7 +24,7 @@ public class AppointmentFilters {
 
     private AppointmentFilters() {}
 
-    public static  AppointmentFilters allAppointmentsFilter() {
+    public static AppointmentFilters allAppointmentsFilter() {
         return new AppointmentFilters();
     }
 
@@ -32,6 +32,15 @@ public class AppointmentFilters {
         AppointmentFilters filter = new AppointmentFilters();
         filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
         return filter;
+    }
+
+    public static AppointmentFilters copyAppointmentFilters(AppointmentFilters filterToCopy) {
+        AppointmentFilters filters = new AppointmentFilters();
+        filters.startAfter = filterToCopy.startAfter;
+        filters.startBefore = filterToCopy.startBefore;
+        filters.hasPatient = filterToCopy.hasPatient;
+        filters.hasDoctor = filterToCopy.hasDoctor;
+        return filters;
     }
 
     public void setHasPatient(AppointmentContainsPatientPredicate predicate) {
@@ -77,5 +86,21 @@ public class AppointmentFilters {
     @Override
     public int hashCode() {
         return Objects.hash(startAfter, startBefore, hasPatient, hasDoctor);
+    }
+
+    public Predicate<Appointment> getStartAfter() {
+        return startAfter;
+    }
+
+    public Predicate<Appointment> getStartBefore() {
+        return startBefore;
+    }
+
+    public Predicate<Appointment> getHasPatient() {
+        return hasPatient;
+    }
+
+    public Predicate<Appointment> getHasDoctor() {
+        return hasDoctor;
     }
 }
