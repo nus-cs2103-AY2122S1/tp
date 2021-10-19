@@ -166,13 +166,13 @@ Delete the specified contact(s) from the address book. It can also be used to de
 * Deletes the person at the specified index (inclusive).
 * Index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1,2,3...
-* `INDEX_B` should be a positive integer strictly greater than `INDEX_A`.
+* `INDEX_B` should be a positive integer greater than or equal to `INDEX_A`.
 
-Format: `delete {INDEX}`/ `delete {INDEX_A-INDEX_B}` / `delete m/{MODULE_CODE}`
+Format: `delete {INDEX}`/ `delete {INDEX_A}-{INDEX_B}` / `delete m/{MODULE_CODE}`
 
 Examples:
 * `delete 2` deletes the 2nd contact.
-* `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
+* `delete 2-5` deletes the 2nd, 3rd, 4th and 5th contacts.
 * `delete m/CS2103T` deletes all the contacts from CS2103T.
 
 Command aliases: `rm` `d`
@@ -234,16 +234,15 @@ contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json
 If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
 </div>
 
-
 ## Command Summary <a name="summary"></a>
 
 | Command           | Format                                                                                                    | Example                   |
 |-------------------|-----------------------------------------------------------------------------------------------------------| --------------------------|
 | help / man  / h   | `help`                                                                                                    | `help`                    |
-| add / a           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                      | `add n/Ben Davies e/ben123@gmail.com m/cs2103t`|
+| add / a           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`     | `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`|
 | list / ls         | `list`                                                                                                    | `list`                    |
 | find / f          | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
-| edit / update / e | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
+| edit / update / e | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE} {LESSON_CODE..}].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
 | delete / rm / d   | `delete {INDEX}`/`delete {INDEX_A}-{INDEX_B}`/`delete m/{MODULE_CODE}`                                    | `delete 2`/`delete 2-5`/`delete m/CS2103T`|
 | clear / clr       | `clear`                                                                                                   | `clear`                    |
 | remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
