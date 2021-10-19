@@ -17,12 +17,12 @@ import seedu.address.testutil.OrderBuilder;
 
 public class AddOrderCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddOrderCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_orderAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingOrderAdded modelStub = new ModelStubAcceptingOrderAdded();
         Order validOrder = new OrderBuilder().build();
 
@@ -52,7 +52,7 @@ public class AddOrderCommandTest {
         // null -> returns false
         assertFalse(addOrder1Command.equals(null));
 
-        // different person -> returns false
+        // different order -> returns false
         assertFalse(addOrder1Command.equals(addOrder2Command));
     }
 
