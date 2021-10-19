@@ -1,5 +1,7 @@
 package seedu.fast.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 
 import seedu.fast.commons.util.TagUtil;
@@ -14,6 +16,7 @@ public class TagCommandUtils {
      * @return A boolean indicating the result.
      */
     public static boolean hasMultiplePriorityTags(Set<Tag> tags) {
+        requireNonNull(tags);
         int numberOfPriorityTags = 0;
         for (Tag tag : tags) {
             if (tag.getPriority() != TagUtil.NO_PRIORITY) {
