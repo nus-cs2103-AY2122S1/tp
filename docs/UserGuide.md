@@ -213,7 +213,7 @@ Format: `task -a n/NAME d/DEADLINE`
 Examples:
 * `task -a n/CS2100 Lab 1` adds the task "CS2100 Lab 1"
 
-### Viewing a task `[coming in v1.2]`
+### Viewing a task `[coming in v1.3]`
 
 Views a task in the task list.
 
@@ -225,11 +225,11 @@ Format: `task -v INDEX`
 Examples:
 * `task -v 2` shows the attributes of the 2nd task on the student’s task list
 
-### Editing a task `[coming in v1.2]`
+### Editing a task `[coming in v1.3]`
 
 Edits a task in the task list.
 
-Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
+Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 
 * Edits a task with the index `INDEX`. The index should be a positive number and refers to the index number of the task in the students’ task list
 * `-e` refers to the edit command
@@ -237,9 +237,9 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/20211231 c/t` edits the deadline and status of completion of the 4th task on the students’ task list to 20211231 and true respectively
+* `task -e 4 d/20211231` edits the deadline to 20211231 
 
-### Deleting a task `[coming in v1.2]`
+### Deleting a task `[coming in v1.3]`
 
 Deletes the specific task from the students' task list.
 
