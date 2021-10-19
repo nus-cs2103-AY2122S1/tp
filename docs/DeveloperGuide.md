@@ -3,15 +3,34 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents {:toc}
+* Table of Contents 
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
 
-## **Acknowledgements**
+Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles scaffolding Notor are as follows.
+
+1. **Efficient UX for the User:** 
+   - You shouldn't have to wait for Notor; it should simply run -- quickly and without hassle.
+   - Look for how you can make the process faster, more streamlined, or more effective for our clients: mentors.
+2. **CLI-first**
+   - We target fast-typers who are comfortable taking notes on their computer.
+
+In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely to personally know or even contact often outside of the mentor relationship. Key features of Notor which scaffold this are:
+
+1. Powerful Organisation which is up to the user
+   - useful for managing many mentees
+2. A clean note-taking system
+   - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
+3. A last-contact / next-contact model
+   - helps them contact the mentee regularly
+
+### **Acknowledgements**
 
 This project is a further iteration of the [_AddressBook-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
-those already present in AB-3. Removed features are listed as well.
+those already present in AB-3. Removed features may or may not be listed as well.
 
 --------------------------------------------------------------------------------------------------------------------
 
