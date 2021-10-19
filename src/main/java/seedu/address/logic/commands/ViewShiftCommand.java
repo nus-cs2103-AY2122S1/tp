@@ -5,12 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_DAY_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TIME;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.PersonIsWorkingPredicate;

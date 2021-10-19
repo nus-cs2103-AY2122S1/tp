@@ -120,7 +120,7 @@ public class FindCommand extends Command {
     public void checkIndex(Model model) throws CommandException {
         int personListSize = model.getFilteredPersonList().size();
         if (index > personListSize - 1) { // -1 so that index starts from 0
-            throw new CommandException(MESSAGE_USAGE);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
