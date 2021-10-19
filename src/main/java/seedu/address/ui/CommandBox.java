@@ -69,7 +69,7 @@ public class CommandBox extends UiPart<Region> {
         String text = index.getZeroBased() == commandHistory.size()
                       ? ""
                       : commandHistory.get(index.getZeroBased());
-        commandTextField.setText(text);
+        updateCommandTextField(text);
     }
 
     /**
@@ -83,7 +83,19 @@ public class CommandBox extends UiPart<Region> {
         }
 
         index.decreaseByOne();
-        commandTextField.setText(commandHistory.get(index.getZeroBased()));
+
+        String text = commandHistory.get(index.getZeroBased());
+        updateCommandTextField(text);
+    }
+
+    /**
+     * Displays the input text in commandTextField and set cursor to the end.
+     *
+     * @param text Text to be displayed.
+     */
+    private void updateCommandTextField(String text) {
+        commandTextField.setText(text);
+        commandTextField.positionCaret(text.length());
     }
 
     /**
