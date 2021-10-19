@@ -252,6 +252,34 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
     * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
 
+### Delete Client/Product Feature
+
+This feature allows the users to delete a `Client` or `Product` of their choice. When deleting a `Client` or
+`Product`, the user is required to list all clients/products using the `list -p` or `list -c` command
+
+The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
+`DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be 
+executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state 
+of address book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display 
+feedback of the `CommandResult` to the user.
+
+The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `delete` may be executed**
+
+* **Alternative 1 (current choice)** : User can delete either a client or a product at a time
+    * Pros : Allows the user to focus on deleting a particular client or product
+    * Cons : Unable to delete multiple clients or products at the same time
+* **Alternative 2** : User can delete multiple clients or products
+    * Pros : Saves time if the user wish to delete multiple clients or products at the same time
+    * Cons : More complex code which would lead to higher amount of error
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -549,7 +577,7 @@ User story ends.
 
   Use case ends.
 
-* 3a. The input ID is invalid.
+* 3a. The input INDEX is invalid.
 
     * 3a1. Sellah shows an error message.
 
@@ -606,22 +634,36 @@ expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a client/product
 
-1. Deleting a person while all persons are being shown
+1. Deleting a client while all clients are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    1. Prerequisites: List all clients using the `list -c` command. Multiple clients in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+    1. Test case: `delete -c 1`<br>
+       Expected: First client is deleted from the list. Details of the deleted client shown in the status message.
        Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    1. Test case: `delete -c 0`<br>
+       Expected: No client is deleted. Error details shown in the status message. Status bar remains the same.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
+1. Deleting a product while all products are being shown
+
+    1. Prerequisites: List all products using the `list -p` command. Multiple products in the list.
+
+    1. Test case: `delete -p 2`<br>
+       Expected: Second product is deleted from the list. Details of the deleted product shown in the status message.
+       Timestamp in the status bar is updated.
+
+    1. Test case: `delete -p 0`<br>
+       Expected: No product is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+       Expected: Similar to previous.
+       
 1. _{ more test cases …​ }_
 
 ### Saving data
