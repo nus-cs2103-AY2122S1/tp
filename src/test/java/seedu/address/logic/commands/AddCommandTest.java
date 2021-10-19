@@ -74,6 +74,13 @@ public class AddCommandTest {
                 == new AddCommand(alice).hashCode());
     }
 
+    @Test
+    public void testToString() {
+        Participant validParticipant = new ParticipantBuilder().build();
+        AddCommand addCommand = new AddCommand(validParticipant);
+        assertEquals("AddCommand{toAdd=" + validParticipant + "}", addCommand.toString());
+    }
+
     /**
      * A Model stub that contains a single participant.
      */

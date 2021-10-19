@@ -14,7 +14,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Editing a Participant: `edit`](#editing-a-participant--edit)
     * [Locating Participants by name: `find`](#locating-participants-by-name-find)
     * [Deleting a Participant: `delete`](#deleting-a-participant--delete)
-    * [Clearing all Participants: `clear`](#clearing-all-participants--clear)
+    * [Clearing all Data: `clear`](#clearing-all-data--clear)
     * [Adding an event: `addEvent`](#adding-an-event-addevent)
     * [Removing an event: `removeEvent`](#removing-an-event--removeevent)
     * [Mark an Event as done: `doneEvent`](#mark-an-event-as-done-doneevent)
@@ -23,6 +23,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Listing all Events: `listEvents`](#list-events-listevent)
     * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
+    * [View Participant details: `view`](#view-participant-details-view)
     * [Show Event details: `showDetails`](#show-event-details-showdetails)
     * [Show Event Participants: `showParticipants`](#show-event-participants-showparticipants)
     * [Exiting the program: `exit`](#exiting-the-program--exit)
@@ -185,7 +186,7 @@ Example Usage:
 * `addEvent n/CS2100 Finals d/2021-11-20 t/0900` - Creates an Event "CS2100 Finals" on 20th November 2021 9:00am.
 * `addEvent n/240Km Marathon d/2022-08-20` - Creates a full day Event "240 km Marathon" on 20th August 2022.
 
-### Deleting an event : `removeEvent`
+### Removing an event : `removeEvent`
 
 Deletes the specified Event from Managera.
 
@@ -255,6 +256,15 @@ Format: `removeParticipant id/PARTICIPANT_ID ev/EVENT_NAME`
 Example Usage:
 * `removeParticipant id/mikerowe1 ev/CS2103T Finals` - Removes Mike Rowe whose participantID is mikerowe1 from Event CS2103T Finals.
 
+### View Participant details: `view`
+
+Displays the details of the Participant whose ID matches the given ID.
+
+Format: `view PARTICIPANT_ID`
+
+Example Usage:
+* `view mikerowe1` - Displays the details of Participant Mike Rowe.
+
 ### Show Event details: `showDetails`
 
 Displays the details of the Event matching the given name.
@@ -321,8 +331,9 @@ Action | Format, Examples
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
 **List Events** | `listEvents`
-**add Participant to Event** | `addParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `addParticipant ev/2103T Finals p/mikerowe1`
-**remove Participant from Event** | `removeParticipant ev/EVENT_NAME p/PARTICIPANT_ID` <br> e.g. `removeParticipant ev/CS2103T Finals p/mikerowe1`
+**Add Participant to Event** | `addParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `addParticipant id/mikerowe1 ev/CS2103T Finals`
+**Remove Participant from Event** | `removeParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `removeParticipant id/mikerowe1 ev/CS2103T Finals`
+**Show Participant Details** | `view PARTICIPANT_ID` <br> e.g., `view mikerowe1`
 **Show Event Details** | `showDetails EVENT_NAME` <br> e.g., `showDetails CS2103T Finals`
 **Show Event Participants** | `showParticipants EVENT_NAME` <br> e.g., `showParticipants CS2103T Finals`
 **exit** | `exit`

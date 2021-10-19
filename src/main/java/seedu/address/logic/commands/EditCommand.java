@@ -38,7 +38,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the participant identified "
-            + "by the index number used in the displayed Participant list. "
+            + "by the index number used in the displayed participant list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -50,7 +50,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PARTICIPANT_SUCCESS = "Edited Participant:\n%1$s";
+    public static final String MESSAGE_EDIT_PARTICIPANT_SUCCESS = "Edited participant:\n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PARTICIPANT = "This participant already exists in Managera.";
 
