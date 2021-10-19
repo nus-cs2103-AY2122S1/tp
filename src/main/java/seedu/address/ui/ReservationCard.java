@@ -45,9 +45,9 @@ public class ReservationCard extends UiPart<Region> {
         super(FXML);
         this.reservation = reservation;
         id.setText(displayedIndex + ". ");
-        phone.setText(reservation.getPhone().value);
+        phone.setText("Phone: " + reservation.getPhone().value);
         numberOfPeople.setText(String.format("Table for %d", reservation.getNumberOfPeople()));
-        dateTime.setText(reservation.getDateTime().format(DATE_TIME_PRINTING_FORMAT));
+        dateTime.setText("Date and Time: " + reservation.getDateTime().format(DATE_TIME_PRINTING_FORMAT));
     }
 
     @Override
