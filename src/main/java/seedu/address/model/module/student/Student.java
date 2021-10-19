@@ -54,18 +54,6 @@ public class Student {
         return studentId;
     }
 
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setTeleHandle(TeleHandle teleHandle) {
-        this.teleHandle = teleHandle;
-    }
-
-    public void setEmail(Email email) {
-        this.email = email;
-    }
-
     /**
      * Adds a task to this student's task list.
      * The task must not already exist in this student's task list.

@@ -13,10 +13,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
-import seedu.address.model.module.ModuleNameContainsKeywordsPredicate;
+import seedu.address.model.module.ModuleNameEqualsKeywordsPredicate;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
-import seedu.address.model.module.student.StudentIdContainsKeywordsPredicate;
+import seedu.address.model.module.student.StudentIdEqualsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -56,8 +56,8 @@ public class FindStudentCommand extends Command {
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
                 String[] moduleNameKeywords = new String[]{moduleName.moduleName};
-                ModuleNameContainsKeywordsPredicate predicate =
-                        new ModuleNameContainsKeywordsPredicate(Arrays.asList(moduleNameKeywords));
+                ModuleNameEqualsKeywordsPredicate predicate =
+                        new ModuleNameEqualsKeywordsPredicate(Arrays.asList(moduleNameKeywords));
                 model.updateFilteredModuleList(predicate);
                 findStudentFromModule(module);
                 return new CommandResult(String.format(MESSAGE_FIND_STUDENT_SUCCESS, studentId));
@@ -76,8 +76,8 @@ public class FindStudentCommand extends Command {
         List<Student> studentList = module.getFilteredStudentList();
         for (Student student : studentList) {
             if (student.getStudentId().equals(studentId)) {
-                StudentIdContainsKeywordsPredicate predicate =
-                        new StudentIdContainsKeywordsPredicate(studentId.value);
+                StudentIdEqualsKeywordsPredicate predicate =
+                        new StudentIdEqualsKeywordsPredicate(studentId.value);
                 module.updateFilteredStudentList(predicate);
                 return;
             }
