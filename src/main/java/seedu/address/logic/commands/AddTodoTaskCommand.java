@@ -15,11 +15,9 @@ public class AddTodoTaskCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a todo task to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-//            + PREFIX_DEADLINE + "DEADLINE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tutorial Prep "
-//            + PREFIX_DEADLINE + "2021-09-12 "
             + PREFIX_TAG + "W1404";
 
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";

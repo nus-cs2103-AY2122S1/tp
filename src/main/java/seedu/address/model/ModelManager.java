@@ -194,7 +194,6 @@ public class ModelManager implements Model {
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
         TaskName name = target.getName();
-//        TaskDueDate taskDueDate = target.getDeadline();
         Set<Tag> tags = target.getTags();
         Task newTask = new Task(name, tags, true);
         newTask.markTaskComplete();

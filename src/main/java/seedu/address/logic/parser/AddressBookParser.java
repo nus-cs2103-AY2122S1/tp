@@ -6,7 +6,30 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddDeadlineTaskCommand;
+import seedu.address.logic.commands.AddEventTaskCommand;
+import seedu.address.logic.commands.AddGithubGroupCommand;
+import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.AddStudentGroupCommand;
+import seedu.address.logic.commands.AddTodoTaskCommand;
+import seedu.address.logic.commands.BackCommand;
+import seedu.address.logic.commands.ClearAllCommand;
+import seedu.address.logic.commands.ClearAllTasksCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteGroupCommand;
+import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupCommand;
+import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.MarkStudentAttCommand;
+import seedu.address.logic.commands.MarkTaskDoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 

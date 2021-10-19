@@ -7,12 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 
-public class DeadlineTaskCard extends UiPart<Region> {
+public class EventTaskCard extends UiPart<Region> {
 
-    private static final String FXML = "DeadlineTaskListCard.fxml";
+    private static final String FXML = "EventTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
 
     public final Task task;
 
-    @FXML
+    @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
     private Label id;
@@ -38,14 +38,14 @@ public class DeadlineTaskCard extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code TaskCode} with the given {@code Student} and index to display.
+     * Creates a {@code TaskCode} with the given {@code Task} and index to display.
      */
-    public DeadlineTaskCard(Task task, int displayedIndex) {
+    public EventTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [D]");
+        id.setText(displayedIndex + ". [E]");
         name.setText(task.getName().toString());
-        DeadlineTask deadlineTask = (DeadlineTask) task;
+        EventTask deadlineTask = (EventTask) task;
         status.setText(task.getStatusString());
 
         taskDate.setText(deadlineTask.getDeadline().toString());
@@ -68,7 +68,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
         }
 
         // state check
-        DeadlineTaskCard card = (DeadlineTaskCard) other;
+        EventTaskCard card = (EventTaskCard) other;
         return id.getText().equals(card.id.getText())
                 && task.equals(card.task);
     }

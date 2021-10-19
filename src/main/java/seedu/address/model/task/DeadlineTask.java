@@ -1,12 +1,12 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
 
-public class DeadlineTask extends Task{
+import seedu.address.model.tag.Tag;
+
+public class DeadlineTask extends Task {
     private final TaskDate dueDate;
-    
+
     /**
      * Constructs a {@code Task}.
      *
@@ -17,7 +17,7 @@ public class DeadlineTask extends Task{
         super(name, tags, isDone);
         this.dueDate = dueDate;
     }
-    
+
     public TaskDate getDeadline() {
         return dueDate;
     }
@@ -54,12 +54,6 @@ public class DeadlineTask extends Task{
                 && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getTags().equals(getTags());
     }
-    
-//    @Override
-//    public int hashCode() {
-//        // use this method for custom fields hashing instead of implementing your own
-//        return Objects.hash(name, tags, isDone, dueDate);
-//    }
 
     @Override
     public String toString() {

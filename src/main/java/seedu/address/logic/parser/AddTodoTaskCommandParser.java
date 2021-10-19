@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,7 +29,6 @@ public class AddTodoTaskCommandParser implements Parser<AddTodoTaskCommand> {
         }
 
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
-//        TaskDueDate taskDueDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Task task = new Task(name, tagList, false);
 

@@ -1,10 +1,10 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.Tag;
-
 import java.util.Set;
 
-public class EventTask extends Task{
+import seedu.address.model.tag.Tag;
+
+public class EventTask extends Task {
     private final TaskDate dueDate;
 
     /**
@@ -56,11 +56,6 @@ public class EventTask extends Task{
                 && otherTask.getTags().equals(getTags());
     }
 
-//    @Override
-//    public int hashCode() {
-//        // use this method for custom fields hashing instead of implementing your own
-//        return Objects.hash(name, tags, isDone, dueDate);
-//    }
 
     @Override
     public String toString() {
@@ -72,7 +67,7 @@ public class EventTask extends Task{
                 .append(getStatusString());
 
         Set<Tag> tags = getTags();
-        
+
         if (!tags.isEmpty()) {
             builder.append("\nTags: ");
             tags.forEach(builder::append);

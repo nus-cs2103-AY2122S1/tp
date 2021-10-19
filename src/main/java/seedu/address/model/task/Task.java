@@ -16,7 +16,6 @@ public class Task {
     private final TaskName name;
     private final Set<Tag> tags = new HashSet<>();
     private boolean isDone;
-//    TaskDueDate dueDate;
 
     /**
      * Constructs a {@code Task}.
@@ -28,13 +27,12 @@ public class Task {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
-//        this.dueDate = new TaskDueDate("2000-02-02");
     }
 
     public TaskName getName() {
         return name;
     }
-    
+
     public String getStatusString() {
         return this.isDone ? "Completed" : "Pending";
     }
@@ -55,9 +53,6 @@ public class Task {
         return Collections.unmodifiableSet(tags);
     }
 
-//    public TaskDueDate getDeadline() {
-//        return dueDate;
-//    }
 
     /**
      * Returns true if both Tasks have the same name.

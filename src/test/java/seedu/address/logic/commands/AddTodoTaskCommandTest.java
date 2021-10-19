@@ -36,7 +36,8 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
+        AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
+                new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
         Task validTask = new TaskBuilder().build();
 
         CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);

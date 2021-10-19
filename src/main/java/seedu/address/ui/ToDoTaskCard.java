@@ -43,7 +43,7 @@ public class ToDoTaskCard extends UiPart<Region> {
     public ToDoTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ". [T]");
         name.setText(task.getName().toString());
         status.setText(task.getStatusString());
 

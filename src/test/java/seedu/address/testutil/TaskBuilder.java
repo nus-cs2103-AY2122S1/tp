@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -37,7 +37,6 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         this.taskName = taskToCopy.getName();
-//        this.taskTaskDueDate = taskToCopy.getDeadline();
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
     }

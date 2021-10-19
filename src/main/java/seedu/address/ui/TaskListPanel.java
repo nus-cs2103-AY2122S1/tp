@@ -40,6 +40,10 @@ public class TaskListPanel extends UiPart<Region> {
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
 
+            if (!(task instanceof TodoTask) && !(task instanceof EventTask) && !(task instanceof DeadlineTask)) {
+                setGraphic(null);
+                setText(null);
+            }
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
@@ -47,6 +51,10 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(new ToDoTaskCard(task, getIndex() + 1).getRoot());
             } else if (task instanceof DeadlineTask) {
                 setGraphic(new DeadlineTaskCard(task, getIndex() + 1).getRoot());
+            } else if (task instanceof EventTask) {
+                setGraphic(new EventTaskCard(task, getIndex() + 1).getRoot());
+            } else {
+                setGraphic(new ToDoTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }

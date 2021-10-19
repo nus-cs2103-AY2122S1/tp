@@ -11,17 +11,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TodoTask;
 
 public class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
-    private final int i = 0;
-    private final Task task;
+    private int i;
     private final String name;
     private String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final String status;
     private boolean isComplete;
 
     /**
@@ -30,33 +33,35 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                           Task task, @JsonProperty("status") String status) {
-        this.name = task.getName().toString();
+                                       @JsonProperty("status") String status) {
+        this.name = name;
         this.deadline = deadline;
-        this.task = task;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.status = status;
+        i = 0;
     }
 
     /**
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
-        this.task = source;
         name = source.getName().toString();
         if (source instanceof DeadlineTask) {
+            this.i = 1;
             DeadlineTask task = (DeadlineTask) source;
             deadline = task.getDeadline().toString();
-        } 
-//        else {
-//            deadline = "2222-01-01";
-//        }
+        }
+        if (source instanceof EventTask) {
+            this.i = 2;
+            EventTask task = (EventTask) source;
+            deadline = task.getDeadline().toString();
+        } else {
+            i = 0;
+        }
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        status = source.getStatusString();
         this.isComplete = source.checkIsDone();
     }
 
@@ -70,20 +75,21 @@ public class JsonAdaptedTask {
         for (JsonAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        
+
         if (name == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskName.class.getSimpleName()));
         }
-        
+
         if (!TaskName.isValidName(name)) {
             throw new IllegalValueException(TaskName.MESSAGE_CONSTRAINTS);
         }
         final TaskName modelName = new TaskName(name);
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        
-        if (task instanceof DeadlineTask) {
+
+        //if (task instanceof DeadlineTask) {
+        if (i == 1) {
             if (deadline == null) {
                 throw new IllegalValueException(
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
@@ -95,7 +101,8 @@ public class JsonAdaptedTask {
             final TaskDate modelTaskDate = new TaskDate(deadline);
             return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate);
         }
-        if (task instanceof EventTask) {
+        //if (task instanceof EventTask) {
+        if (i == 2) {
             if (deadline == null) {
                 throw new IllegalValueException(
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
@@ -107,7 +114,7 @@ public class JsonAdaptedTask {
             final TaskDate modelTaskDate = new TaskDate(deadline);
             return new EventTask(modelName, modelTags, isComplete, modelTaskDate);
         }
-        
+
         return new TodoTask(modelName, modelTags, isComplete);
     }
 }
