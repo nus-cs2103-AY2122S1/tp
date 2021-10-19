@@ -561,6 +561,138 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC12 - View group list**
+
+**MSS**
+
+1.  User requests to view the list of groups
+2.  tApp displays all the groups currently in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The group list is empty.
+
+    * 2a1. tApp displays an empty list
+
+      Use case ends.
+
+**Use case: UC13 - Add a group**
+
+**MSS**
+
+1.  User requests to create a group with the specified name
+2.  tApp creates the group and stores it in the group list
+3.  tApp displays the group that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The group name is empty.
+
+    * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+* 1b. The group name is invalid.
+
+    * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+**Use case: UC14 - Delete a group**
+
+**MSS**
+
+1.  User requests to view their list of groups
+2.  tApp displays all the groups currently in the list
+3.  User requests to delete a specific group from the list of groups
+4.  tApp deletes the group
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC15 - Add a student to a group**
+
+**MSS**
+
+1.  User requests to view their list of students
+2.  tApp displays all the students currently in the list
+3.  User requests to add a specific student from the list of students to a specific group from the list of groups
+4.  tApp adds the student to the group
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The group name is empty or invalid.
+
+    * 3a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+* 3b. The student index is empty or invalid.
+
+    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+
+      Use case ends.
+    
+* 3c. The group name is valid but the group does not exist.
+
+    * 3c1. tApp displays an error message stating that the group does not exist
+
+    Use case ends.
+  
+* 3d. The student index is valid but the student does not exist.
+
+    * 3d1. tApp displays an error message stating that the student already has a group
+
+    Use case ends.
+
+**Use case: UC16 - Add a Github link to a group**
+
+**MSS**
+
+1.  User requests to view their list of groups
+2.  tApp displays all the groups currently in the list
+3.  User requests to add a Github link to a specific group from the list of groups
+4.  tApp adds the link to the group
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The link fields are invalid.
+
+    * 3a1. tApp displays an error message stating that the link fields are invalid and to follow the correct format.
+
+      Use case ends.
+
+* 3b. The group index is invalid or missing.
+
+    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+
+      Use case ends.
+
+* 3c. The group specified already has an existing Github link.
+
+    * 3c1. tApp overwrites the link in the group with the one provided
+
+  Use case ends.
+
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
