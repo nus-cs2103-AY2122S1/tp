@@ -51,9 +51,10 @@ PersonCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 ModuleLessonListPanel --|> UiPart
+ModuleLessonCard ---|> UiPart
 
 PersonCard ..> Model
-ModuleLessonCard ...> Model
+ModuleLessonCard ....> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
@@ -61,6 +62,8 @@ PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+ModuleLessonListPanel -[hidden]left- PersonListPanel
+ModuleLessonCard -[hidden]left- PersonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml
