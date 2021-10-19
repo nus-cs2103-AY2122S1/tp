@@ -753,7 +753,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
     * Performance requirements: the system should respond within 2 seconds.
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) 
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
 5. Quality requirements:
