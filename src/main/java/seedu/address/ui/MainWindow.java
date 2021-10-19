@@ -202,13 +202,19 @@ public class MainWindow extends UiPart<Stage> {
         if (category instanceof Client) {
             logger.info("List all clients");
             if (selectedTab == 1) {
+                //tpb.selectNextTab();
+                tabPane.setDisable(true);
                 tpb.selectNextTab();
+                tabPane.setDisable(false);
             }
         }
         if (category instanceof Product) {
             logger.info("List all products");
             if (selectedTab == 0) {
+                //tpb.selectNextTab();
+                tabPane.setDisable(true);
                 tpb.selectNextTab();
+                tabPane.setDisable(false);
             }
         }
     }
@@ -222,7 +228,9 @@ public class MainWindow extends UiPart<Stage> {
             secondPanelPlaceholder.getChildren().add(viewMoreClient.getRoot());
 
             if (selectedTab == 1) {
+                tabPane.setDisable(true);
                 tpb.selectNextTab();
+                tabPane.setDisable(false);
             }
         }
 
@@ -234,7 +242,9 @@ public class MainWindow extends UiPart<Stage> {
             secondPanelPlaceholder.getChildren().add(viewMoreProduct.getRoot());
 
             if (selectedTab == 0) {
+                tabPane.setDisable(true);
                 tpb.selectNextTab();
+                tabPane.setDisable(false);
             }
         }
     }
