@@ -20,6 +20,13 @@ import dash.logic.parser.exceptions.ParseException;
 import dash.model.tag.Tag;
 
 public class TagTaskCommandParser implements Parser<TagTaskCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the TagTaskCommand
+     * and returns a TagTaskCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public TagTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
