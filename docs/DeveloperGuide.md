@@ -315,6 +315,8 @@ The following is the sequence diagram for how a `FilterEventCommand` works inter
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
+![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
