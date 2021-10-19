@@ -154,6 +154,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Take a module feature
+
+#### Implementation
+
+The `take` command is implemented via the `TakeCommand` and `TakeCommandParser` classes.
+
+The `TakeCommandParser` class implements the `Parser` interface and is responsible for parsing the user input to retrieve the index and `AcademicYear` object which represents the year and semester. <br>
+The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object with the index and the `AcademicYear` object as arguments.
+
+The `TakeCommand` class extends the `Command` class and implements the `TakeCommand#execute()` method which handles the main logic of the class. <br>
+It contains non-null `index` and `academicCalendar` fields. <br>
+When the `TakeCommand#execute()` method is called,
+
+- The `Module` object corresponding to the `index` is found from the `Model`.
+- A copy of the `Module` object is made with the value of `academicCalendar`, which is stored in its corresponding field in the copy.
+- The `Module` object in the Model is then replaced by this copy.
+
+Note:
+
+- When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
+- Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
+- If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
+
+#### Design considerations:
+
+**Aspect: How the user can take a module**
+
+- **Alternative 1 (current choice):** User uses a separate command (`take`) to take a module
+    - Pros:
+        - Allows some flexibility for the user if he has not decided when to take the module.
+    - Cons:
+        - More steps involved for the user to take a module.
+- **Alternative 2:** User indicates the year and semester when adding the module to the tracker.
+    - Pros:
+        - Easier for the user to take a module as there are less steps involved.
+    - Cons:
+        - The `add` command will contain many arguments, which might make it difficult for users to remember.
+
+**Aspect: Format of user input**
+
+- **Alternative 1 (current choice):** Users use `y/`, `s/` prefixes to specify year and semester.
+    - Pros:
+        - Easier to parse user inputs to get the needed data.
+    - Cons:
+        - Less flexible for the user.
+- **Alternative 2:** Users are allowed to specify the year and semester using string inputs (i.e. y1s2, year 1 semester 2)
+    - Pros:
+        - Greater flexibility for the user.
+    - Cons:
+        - More difficult to parse the user input to extract the needed data.
+        - Is inconsistent with the format of other commands.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
