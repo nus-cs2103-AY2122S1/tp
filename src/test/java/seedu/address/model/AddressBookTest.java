@@ -48,6 +48,7 @@ public class AddressBookTest {
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+            .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPersons);
 
@@ -108,6 +109,7 @@ public class AddressBookTest {
             return clientCounter;
         }
 
+        @Override
         public void setClientCounter(String clientCounter) {
             this.clientCounter = clientCounter;
         }

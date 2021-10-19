@@ -134,6 +134,9 @@ public class ModelManager implements Model {
     public Person getPerson(ClientId clientId) {
         requireNonNull(clientId);
         return addressBook.getPerson(clientId);
+    }
+
+    @Override
     public boolean hasTagName(String tagName) {
         requireNonNull(tagName);
         return addressBook.hasTagName(tagName);
