@@ -45,5 +45,4 @@ public class MemberListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

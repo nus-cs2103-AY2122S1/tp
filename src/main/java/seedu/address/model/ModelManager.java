@@ -112,6 +112,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteMember(Member target) {
         addressBook.removeMember(target);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
     }
 
     @Override
@@ -206,6 +207,7 @@ public class ModelManager implements Model {
     public void addTask(Member member, Task task) {
         loadTaskList(member);
         taskListManager.addTask(task);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     /**
@@ -216,6 +218,7 @@ public class ModelManager implements Model {
     public void deleteTask(Member member, Task task) {
         loadTaskList(member);
         taskListManager.removeTask(task);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     /**
@@ -226,6 +229,7 @@ public class ModelManager implements Model {
     public void deleteTask(Member member, int index) {
         loadTaskList(member);
         taskListManager.removeTask(index);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     /**
