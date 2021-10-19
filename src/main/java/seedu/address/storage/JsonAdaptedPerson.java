@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import java.time.DayOfWeek;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,14 +21,14 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String phone;
-    private final String availability;
+    private final List<DayOfWeek> availability;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("availability") String availability) {
+            @JsonProperty("availability") List<DayOfWeek> availability) {
         this.name = name;
         this.phone = phone;
         this.availability = availability;

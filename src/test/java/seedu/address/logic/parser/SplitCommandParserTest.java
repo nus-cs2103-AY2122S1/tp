@@ -19,8 +19,17 @@ public class SplitCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSplitCommand() {
-        SplitCommand expectedSplitCommand = new SplitCommand("Mon");
-        assertParseSuccess(parser, "Mon", expectedSplitCommand);
-        assertParseSuccess(parser, "\n  \t Mon  \t ", expectedSplitCommand);
+        SplitCommand expectedSplitCommand = new SplitCommand(1);
+        assertParseSuccess(parser, "1", expectedSplitCommand);
+        assertParseSuccess(parser, "\n  \t 1  \t ", expectedSplitCommand);
+    }
+
+    @Test
+    public void parse_invalidArgs_returnsSplitCommand() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SplitCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "0", expectedMessage);
+        assertParseFailure(parser, "8", expectedMessage);
+        assertParseFailure(parser, "one", expectedMessage);
+        assertParseFailure(parser, "seven", expectedMessage);
     }
 }
