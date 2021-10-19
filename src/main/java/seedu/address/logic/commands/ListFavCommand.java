@@ -11,7 +11,7 @@ import seedu.address.model.person.IsFavouritePredicate;
  */
 public class ListFavCommand extends Command {
 
-    public static final String COMMAND_WORD = "listfav";
+    public static final String COMMAND_WORD = "listFav";
 
     public static final String MESSAGE_SUCCESS = "Listed all favourites";
 

@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
  * ID matching is case insensitive.
  */
 public class RemFavCommand extends Command {
-    public static final String COMMAND_WORD = "remfav";
+    public static final String COMMAND_WORD = "remFav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a person as a favourite. \n "
             + "Parameters: Student_ID \n"

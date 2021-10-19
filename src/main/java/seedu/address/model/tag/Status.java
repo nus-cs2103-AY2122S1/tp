@@ -48,7 +48,8 @@ public enum Status {
      * @return the matching status
      */
     public static Status parseStatusFromString(String s) {
-        if (s == null || s.trim().isEmpty() || !s.contains("need")) {
+        if (s == null || s.trim().isEmpty() || !s.contains("need")
+                || s.contains("don't") || s.contains("no need")) {
             return Status.NONE;
         } else if (s.contains("group")) {
             return Status.NEED_GROUP;
