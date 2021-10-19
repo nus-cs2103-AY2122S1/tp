@@ -25,8 +25,9 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      *
+     * @param args Args for editing a student's information.
      * @return EditStudentCommand object created from the user input.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);

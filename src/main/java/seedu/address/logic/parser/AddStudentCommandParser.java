@@ -22,9 +22,9 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param args args for deleting a module
-     * @throws ParseException if {@code userInput} does not conform the expected format
+     * @param args Args for deleting a module.
      * @return AddStudentCommand object created from the user input.
+     * @throws ParseException if {@code userInput} does not conform the expected format.
      */
     @Override
     public AddStudentCommand parse(String args) throws ParseException {

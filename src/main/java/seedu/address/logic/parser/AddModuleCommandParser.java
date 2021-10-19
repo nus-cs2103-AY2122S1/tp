@@ -19,8 +19,9 @@ public class AddModuleCommandParser implements Parser<AddModuleCommand> {
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
+     * @param args Args for adding a module.
      * @return AddModuleCommand object created from the user input.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public AddModuleCommand parse(String args) throws ParseException {

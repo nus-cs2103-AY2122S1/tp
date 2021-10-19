@@ -16,8 +16,8 @@ public class DeleteStudentCommandParser implements Parser<DeleteStudentCommand> 
      * Parses {@code userInput} into a command and returns it.
      *
      * @param args args for deleting a module.
-     * @throws ParseException if {@code userInput} does not conform the expected format.
      * @return DeleteStudentCommand object created from user input.
+     * @throws ParseException if {@code userInput} does not conform the expected format.
      */
     @Override
     public DeleteStudentCommand parse(String args) throws ParseException {
