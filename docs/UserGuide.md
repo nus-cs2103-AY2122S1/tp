@@ -22,6 +22,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
     * [Sort Events: `sortEvents`](#sort-events-sortevents)
     * [Filter Events: `filterEvents`](#filter-events-filterevents)
     * [Listing all Events: `listEvents`](#list-events-listevent)
+    * [Locating Events by name: `findEvent`](#locating-events-by-name-findevent)
     * [Add Participant to Event: `addParticipant`](#add-participant-to-event-addparticipant)
     * [Remove Participant from Event: `removeParticipant`](#remove-participant-from-event-removeparticipant)
     * [View Participant details: `view`](#view-participant-details-view)
@@ -255,6 +256,23 @@ Show a list of all events in Managera.
 
 Format: `listEvent`
 
+### Locating Events by name: `findEvent`
+
+Finds Events whose names contain any of the given keywords.
+
+Format: `findEvent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `marathon` will match `Marathon`
+* The order of the keywords does not matter. e.g. `Marathon Commencement` will match `Commencement Marathon`
+* Only the name is searched.
+* Only full words will be matched e.g. `Marath` will not match `Marathon`
+* Events matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Marathon Commencement` will return `240Km Marathon`, `Marathon Commencement`
+
+Examples:
+* `findEvent party` returns `beach party` and `Christmas party`
+* `findEvent marathon meeting` returns `240Km Marathon`, `project meeting`<br>
+
 ### Add Participant to Event: `addParticipant`
 
 Adds a Participant with matching participantID to Event.
@@ -350,6 +368,7 @@ Action | Format, Examples
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
 **List Events** | `listEvents`
+**Find Events** | `findEvent KEYWORD [MORE_KEYWORDS]`<br> e.g., `findEvent Marathon Commencement`
 **Add Participant to Event** | `addParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `addParticipant id/mikerowe1 ev/CS2103T Finals`
 **Remove Participant from Event** | `removeParticipant id/PARTICIPANT_ID ev/EVENT_NAME` <br> e.g. `removeParticipant id/mikerowe1 ev/CS2103T Finals`
 **Show Participant Details** | `view PARTICIPANT_ID` <br> e.g., `view mikerowe1`
