@@ -12,6 +12,7 @@ import tutoraid.model.ModelManager;
 import tutoraid.model.UserPrefs;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.TypicalIndexes;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 /**
@@ -20,7 +21,8 @@ import tutoraid.testutil.TypicalStudents;
  */
 public class DeleteStudentCommandTest {
 
-    private Model model = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
+    private Model model = new ModelManager(TypicalStudents.getTypicalStudentBook(),
+            TypicalLessons.getTypicalLessonBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -29,7 +31,7 @@ public class DeleteStudentCommandTest {
 
         String expectedMessage = String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
@@ -53,7 +55,7 @@ public class DeleteStudentCommandTest {
 
         String expectedMessage = String.format(DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
 
-        Model expectedModel = new ModelManager(model.getStudentBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getStudentBook(), model.getLessonBook(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
         showNoStudent(expectedModel);
 

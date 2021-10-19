@@ -14,7 +14,8 @@ import tutoraid.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path studentBookFilePath = Paths.get("data" , "tutoraid.json");
+    private Path studentBookFilePath = Paths.get("data" , "tutorAidStudents.json");
+    private Path lessonBookFilePath = Paths.get("data", "tutorAidLessons.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setStudentBookFilePath(newUserPrefs.getStudentBookFilePath());
+        setLessonBookFilePath(newUserPrefs.getLessonBookFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +58,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.studentBookFilePath = studentBookFilePath;
     }
 
+    public Path getLessonBookFilePath() {
+        return lessonBookFilePath;
+    }
+
+    public void setLessonBookFilePath(Path lessonBookFilePath) {
+        requireNonNull(lessonBookFilePath);
+        this.lessonBookFilePath = lessonBookFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -68,19 +79,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && studentBookFilePath.equals(o.studentBookFilePath);
+                && studentBookFilePath.equals(o.studentBookFilePath)
+                && lessonBookFilePath.equals(o.lessonBookFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, studentBookFilePath);
+        return Objects.hash(guiSettings, studentBookFilePath, lessonBookFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location : " + studentBookFilePath);
+        sb.append("\nLocal student data file location : " + studentBookFilePath);
+        sb.append("\nLocal lesson data file location : " + lessonBookFilePath);
         return sb.toString();
     }
 

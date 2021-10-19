@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import tutoraid.commons.core.GuiSettings;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 
 /**
@@ -13,6 +14,9 @@ import tutoraid.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Lesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,6 +88,47 @@ public interface Model {
     void viewStudent(Student student);
 
     /**
+     * Returns the user prefs' lesson book file path.
+     */
+    Path getLessonBookFilePath();
+
+    /**
+     * Sets the user prefs' lesson book file path.
+     */
+    void setLessonBookFilePath(Path lessonBookFilePath);
+
+    /**
+     * Replaces lesson book data with the data in {@code lessonBook}.
+     */
+    void setLessonBook(ReadOnlyLessonBook lessonBook);
+
+    /** Returns the LessonBook */
+    ReadOnlyLessonBook getLessonBook();
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the lesson book.
+     */
+    boolean hasLesson(Lesson lesson);
+
+    /**
+     * Deletes the given lesson.
+     * The lesson must exist in the lesson book.
+     */
+    void deleteLesson(Lesson target);
+
+    /**
+     * Adds the given lesson.
+     * {@code lesson} must not already exist in the lesson book.
+     */
+    void addLesson(Lesson lesson);
+
+    /**
+     * Views the given lesson.
+     * {@code lesson} must exist in the lesson book.
+     */
+    void viewLesson(Lesson lesson);
+
+    /**
      * Views the list of students in the database. The viewAll flag determines whether student details should be shown.
      */
     void viewList(boolean viewAll);
@@ -91,12 +136,19 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
 
-
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
+    /** Returns an unmodifiable view of the filtered lesson list */
+    ObservableList<Lesson> getFilteredLessonList();
+
+    /**
+     * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLessonList(Predicate<Lesson> predicate);
 
 }

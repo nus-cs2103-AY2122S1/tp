@@ -1,0 +1,30 @@
+{
+  "_comment": "TutorAid save file which contains the same Lesson values as in TypicalLessons#getTypicalLessonBook()",
+  "lessons" : [ {
+    "lessonName" : "Maths 1",
+    "capacity" : "50",
+    "price" : "100",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progress" : "No Progress",
+      "hasPaid" : false
+    } ],
+    "timing" : "1000-1200"
+  }, {
+    "lessonName" : "Science 1",
+    "capacity" : "50",
+    "price" : "125",
+    "students" : [ {
+      "studentName" : "Alice Pauline",
+      "studentPhone" : "94351234",
+      "parentName" : "Mrs Tan",
+      "parentPhone" : "94351253",
+      "progress" : "No Progress",
+      "hasPaid" : false
+    } ],
+    "timing" : "1400-1600"
+  } ]
+}

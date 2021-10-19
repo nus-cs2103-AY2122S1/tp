@@ -13,5 +13,4 @@ public interface ReadOnlyStudentBook {
      * This list will not contain any duplicate students.
      */
     ObservableList<Student> getStudentList();
-
 }
