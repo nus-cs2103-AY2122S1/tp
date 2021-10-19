@@ -12,7 +12,7 @@ public class LessonCard extends Card<Lesson> {
 
     private static final String FXML = "LessonListCard.fxml";
 
-    private static final String LABEL_LESSON_NAME = "Lesson";
+    private static final String LABEL_LESSON_NAME = "";
     private static final String LABEL_TIMING = "Timing";
     private static final String LABEL_PRICE = "Price";
     private static final String LABEL_CAPACITY = "Capacity";

@@ -25,10 +25,9 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="studentName" text="\$studentName" styleClass="cell_big_label" />
+        <Label fx:id="lessonName" styleClass="cell_big_label" text="\$lessonName" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="lessonName" styleClass="cell_small_label" text="\$lessonName" />
       <Label fx:id="timing" styleClass="cell_small_label" text="\$timing" />
       <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
       <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
