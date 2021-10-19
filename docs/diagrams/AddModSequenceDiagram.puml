@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addmod mod/CS2101")
+[-> LogicManager : execute("addMod mod/CS2101")
 activate LogicManager
 
-LogicManager -> ModuLinkParser : parseCommand("addmod mod/CS2101")
+LogicManager -> ModuLinkParser : parseCommand("addMod mod/CS2101")
 activate ModuLinkParser
 
 create AddModCommandParser
@@ -48,7 +48,7 @@ deactivate ModuLinkParser
 LogicManager -> AddModCommand : execute()
 activate AddModCommand
 
-AddModCommand -> Model : setPerson(myProfile, newProfile)
+AddModCommand -> Model : setPerson(myProfile, editedProfile)
 activate Model
 
 Model --> AddModCommand

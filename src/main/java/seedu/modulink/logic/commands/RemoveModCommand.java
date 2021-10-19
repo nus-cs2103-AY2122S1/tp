@@ -50,15 +50,15 @@ public class RemoveModCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToEdit = model.getProfile();
+        Person myProfile = model.getProfile();
 
-        if (!personToEdit.getMods().containsAll(editPersonDescriptor.getTags().get())) {
+        if (!myProfile.getMods().containsAll(editPersonDescriptor.getTags().get())) {
             throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
         }
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedProfile = createEditedPerson(myProfile, editPersonDescriptor);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(myProfile, editedProfile);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, editPersonDescriptor.getTags().get()));
     }

@@ -53,21 +53,21 @@ public class AddModCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Person personToEdit = model.getProfile();
+        Person myProfile = model.getProfile();
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedProfile = createEditedPerson(myProfile, editPersonDescriptor);
 
-        if (personToEdit.equals(editedPerson)) {
+        if (myProfile.equals(editedProfile)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(myProfile, editedProfile);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, editPersonDescriptor.getTags().get()));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Person} with the details of {@code myProfile}
      * edited with {@code editPersonDescriptor}.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
