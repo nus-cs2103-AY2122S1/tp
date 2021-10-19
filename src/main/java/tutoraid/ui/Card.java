@@ -8,19 +8,19 @@ import javafx.scene.layout.Region;
  * @param <T> The type of entity to be represented using a card
  */
 public class Card<T> extends UiPart<Region> {
-    public final T t;
+    public final T entry;
     protected Label id = new Label();
 
     /**
      * Constructor for a card object.
      *
      * @param fxml The FXML file
-     * @param t The object to be represented using the card
+     * @param entry The object to be represented using the card
      * @param displayedIndex The index number of the card
      */
-    public Card(String fxml, T t, int displayedIndex) {
+    public Card(String fxml, T entry, int displayedIndex) {
         super(fxml);
-        this.t = t;
+        this.entry = entry;
         id.setText(displayedIndex + ". ");
     }
 
@@ -39,7 +39,7 @@ public class Card<T> extends UiPart<Region> {
         // state check
         Card<?> card = (Card<?>) other;
         return id.getText().equals(card.id.getText())
-                && t.equals(card.t);
+                && entry.equals(card.entry);
     }
 
     /**
