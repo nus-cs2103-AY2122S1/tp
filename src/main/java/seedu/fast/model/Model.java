@@ -46,34 +46,34 @@ public interface Model {
     void setFastFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces FAST data with the data in {@code FAST}.
      */
     void setFast(ReadOnlyFast fast);
 
-    /** Returns the AddressBook */
+    /** Returns FAST */
     ReadOnlyFast getFast();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in FAST.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in FAST.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in FAST.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in FAST.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in FAST.
      */
     void setPerson(Person target, Person editedPerson);
 

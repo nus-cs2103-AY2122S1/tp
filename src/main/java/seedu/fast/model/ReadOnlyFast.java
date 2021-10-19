@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.fast.model.person.Person;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of FAST
  */
 public interface ReadOnlyFast {
 
