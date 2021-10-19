@@ -257,12 +257,12 @@ Use case ends.
      Use case resumes from step 2.
 
 * 1b. TutAssistor does not detect existing Student/Tuition Class with names indicated by the user.
-	   * 1b1. TutAssistor alerts that the Student/Class does not exist.
-  	 * 1b2. Tutor keys in new command.
+  * 1b1. TutAssistor alerts that the Student/Class does not exist.
+  * 1b2. Tutor keys in new command.
 
-    Steps 1b1-1b2 are repeated until the Tutor keys in the existing student/class.
+      Steps 1b1-1b2 are repeated until the Tutor keys in the existing student/class.
 
-    Use case resumes from step 2.
+      Use case resumes from step 2.
 
 **Use Case: UC03 - Add student to a tuition class**
 
