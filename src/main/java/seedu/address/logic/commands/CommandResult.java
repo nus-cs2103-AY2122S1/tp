@@ -21,17 +21,21 @@ public class CommandResult {
 
     private final boolean viewMore;
 
+    private final boolean stat;
+
     private final Category info;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewMore, Category info) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewMore, Category info,
+                         boolean stat) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.viewMore = viewMore;
         this.info = info;
+        this.stat = stat;
     }
 
     /**
@@ -39,7 +43,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, false, false, false, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -60,6 +64,10 @@ public class CommandResult {
 
     public boolean isViewMore() {
         return viewMore;
+    }
+
+    public boolean isStat() {
+        return stat;
     }
 
     @Override

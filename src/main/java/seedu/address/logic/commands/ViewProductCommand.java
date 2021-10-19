@@ -58,7 +58,7 @@ public class ViewProductCommand extends Command {
         model.updateFilteredProductList(productPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()),
-                false, false, true, model.getFilteredProductList().get(0)
+                false, false, true, model.getFilteredProductList().get(0), false
         );
     }
 
