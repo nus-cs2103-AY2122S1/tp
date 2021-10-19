@@ -120,12 +120,12 @@ public class MainWindow extends UiPart<Stage> {
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
         reservationListPanel = new ReservationListPanel(logic.getFilteredReservations());
-        personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        PersonType personType = new PersonType("Supplier");
+        PersonType personType = new PersonType("Customer");
         personTypePlaceholder.getChildren().add(personType.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -242,8 +242,20 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowCustomer()) {
+                handleShowCustomer();
+            }
+
+            if (commandResult.isShowEmployee()) {
+                handleShowEmployee();
+            }
+
             if (commandResult.isShowSupplier()) {
                 handleShowSupplier();
+            }
+
+            if (commandResult.isShowReservation()) {
+                handleShowReservation();
             }
 
             return commandResult;

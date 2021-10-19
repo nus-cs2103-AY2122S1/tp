@@ -20,6 +20,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplyType;
@@ -73,22 +74,27 @@ public class SampleDataUtil {
     }
 
     public static Employee[] getSampleEmployees() {
-        return new Employee[]{
+        return new Employee[] {
             new Employee(new Name("Javier Phon"), new Phone("81234567"), new Email("javphon@example.com"),
-                new Address("Blk 5 Bukit Batok St 2, #177-35"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("8000"), new JobTitle("Team Lead")),
+                    new Address("Blk 5 Bukit Batok St 2, #177-35"), getTagSet("Employee"), new Leaves("14"),
+                    new Salary("8000"), new JobTitle("Team Lead"),
+                    getShiftSet("2020-12-04 0800")),
             new Employee(new Name("Chetwin Low"), new Phone("85555555"), new Email("chetlqh@example.com"),
-                new Address("Blk 7 Yew Tee St 10, #10-35"), getTagSet("Employee"), new Leaves("10"),
-                new Salary("1200"), new JobTitle("Intern")),
+                    new Address("Blk 7 Yew Tee St 10, #10-35"), getTagSet("Employee"), new Leaves("10"),
+                    new Salary("1200"), new JobTitle("Intern"),
+                        getShiftSet("2020-12-04 0800")),
             new Employee(new Name("Clement Kong"), new Phone("99999999"), new Email("clementk@example.com"),
-                new Address("Blk 20 Bishan St 37, #03-10"), getTagSet("Employee", "Myself"), new Leaves("14"),
-                new Salary("5500"), new JobTitle("Project Manager")),
+                    new Address("Blk 20 Bishan St 37, #03-10"), getTagSet("Employee", "Myself"), new Leaves("14"),
+                    new Salary("5500"), new JobTitle("Project Manager"),
+                    getShiftSet("2020-12-04 0800")),
             new Employee(new Name("Pham Ba Thang"), new Phone("82974023"), new Email("pham@example.com"),
-                new Address("Blk 17 Bukit Gombat St 20, #01-02"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("6000"), new JobTitle("Senior Developer")),
+                    new Address("Blk 17 Bukit Gombat St 20, #01-02"), getTagSet("Employee"), new Leaves("14"),
+                    new Salary("6000"), new JobTitle("Senior Developer"),
+                    getShiftSet("2020-12-04 0800")),
             new Employee(new Name("Lee Hern Ping"), new Phone("90000000"), new Email("Leehp@example.com"),
-                new Address("Blk 1 Seragoon St 3, #05-05"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("5000"), new JobTitle("Junior Developer"))
+                    new Address("Blk 1 Seragoon St 3, #05-05"), getTagSet("Employee"), new Leaves("14"),
+                    new Salary("5000"), new JobTitle("Junior Developer"),
+                    getShiftSet("2020-12-04 0800"))
         };
     }
 
@@ -173,6 +179,15 @@ public class SampleDataUtil {
     public static Set<SpecialRequest> getSpecialRequestSet(String... strings) {
         return Arrays.stream(strings)
                 .map(SpecialRequest::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a shifts set containing the list of strings given.
+     */
+    public static Set<Shift> getShiftSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Shift::new)
                 .collect(Collectors.toSet());
     }
 

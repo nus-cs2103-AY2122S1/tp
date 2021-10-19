@@ -23,7 +23,7 @@ public class TypicalReservation {
     // prevent initialization
     private TypicalReservation() {}
 
-    public AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Reservation res : getTypicalReservations()) {
             ab.addReservation(res);
@@ -31,7 +31,7 @@ public class TypicalReservation {
         return ab;
     }
 
-    public List<Reservation> getTypicalReservations() {
+    public static List<Reservation> getTypicalReservations() {
         return new ArrayList<>(Arrays.asList(ALICE_RESERVATION, BENSON_RESERVATION, CARL_RESERVATION));
     }
 }

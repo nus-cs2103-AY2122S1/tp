@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -23,6 +24,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +39,7 @@ public class AddEmployeeCommandParser implements Parser<AddEmployeeCommand> {
     public AddEmployeeCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_LEAVES, PREFIX_SALARY, PREFIX_JOBTITLE, PREFIX_TAG);
+                        PREFIX_LEAVES, PREFIX_SALARY, PREFIX_JOBTITLE, PREFIX_SHIFT, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_LEAVES, PREFIX_SALARY, PREFIX_JOBTITLE)
@@ -53,9 +55,9 @@ public class AddEmployeeCommandParser implements Parser<AddEmployeeCommand> {
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
         JobTitle jobTitle = ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOBTITLE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Shift> shiftList = ParserUtil.parseShifts(argMultimap.getAllValues(PREFIX_SHIFT));
 
-        Employee employee = new Employee(name, phone, email, address, tagList, leaves, salary, jobTitle);
-
+        Employee employee = new Employee(name, phone, email, address, tagList, leaves, salary, jobTitle, shiftList);
         return new AddEmployeeCommand(employee);
     }
 

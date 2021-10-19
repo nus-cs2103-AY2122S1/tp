@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddEmployeeCommand;
 import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import seedu.address.model.person.employee.Employee;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -59,6 +61,14 @@ public class EmployeeUtil {
         descriptor.getSalary().ifPresent(salary -> sb.append(PREFIX_SALARY).append(salary.currentSalary).append(" "));
         descriptor.getJobTitle().ifPresent(jobTitle -> sb.append(PREFIX_JOBTITLE).append(jobTitle.jobTitle)
                                                                                     .append(" "));
+        if (descriptor.getShifts().isPresent()) {
+            Set<Shift> shifts = descriptor.getShifts().get();
+            if (shifts.isEmpty()) {
+                sb.append(PREFIX_SHIFT).append(" ");
+            } else {
+                shifts.forEach(s -> sb.append(PREFIX_SHIFT).append(s.shiftString).append(" "));
+            }
+        }
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

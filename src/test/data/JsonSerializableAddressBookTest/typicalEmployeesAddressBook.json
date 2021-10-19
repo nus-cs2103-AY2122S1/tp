@@ -8,6 +8,7 @@
     "leaves" : "14",
     "salary" : "3000",
     "jobTitle" : "Team lead",
+    "shifts" : [ "2021-12-10 0800" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "leaves" : "13",
     "salary" : "4000",
     "jobTitle" : "Second lead",
+    "shifts" : [ "2021-12-11 0800" ],
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "leaves" : "12",
     "salary" : "5000",
     "jobTitle" : "Third lead",
+    "shifts" : [ "2021-12-12 0800" ],
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "leaves" : "11",
     "salary" : "6000",
     "jobTitle" : "Fourth lead",
+    "shifts" : [ "2021-12-13 0800" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "leaves" : "10",
     "salary" : "9000",
     "jobTitle" : "Product lead",
+    "shifts" : [ "2021-12-14 0800" ],
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "leaves" : "9",
     "salary" : "5000",
     "jobTitle" : "Project Manager",
+    "shifts" : [ "2021-12-15 0800" ],
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "leaves" : "8",
     "salary" : "10000",
     "jobTitle" : "CEO",
+    "shifts" : [ "2021-12-16 0800" ],
     "tagged" : [ ]
   } ],
   "customers": [

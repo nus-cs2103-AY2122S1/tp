@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_NONSENSE;
@@ -126,7 +127,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addEmployeeCommand = AddEmployeeCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + SHIFTS_DESC_AMY
+                + TAG_DESC_FRIEND;
         Employee expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addEmployee(expectedEmployee);

@@ -36,6 +36,22 @@ public class CommandResultTest {
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback",
                 false, true, false, false, false, false)));
+
+        // different showCustomer value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, true, false, false, false)));
+
+        // different showEmployee value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, true, false, false)));
+
+        // different showSupplier value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, false, true, false)));
+
+        // different showSupplier value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback",
+                false, false, false, false, false, true)));
     }
 
     @Test
@@ -55,5 +71,21 @@ public class CommandResultTest {
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("exit",
                         false, true, false, false, false, false).hashCode());
+
+        // different showCustomer value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("exit",
+                false, false, true, false, false, false).hashCode());
+
+        // different showEmployee value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("exit",
+                false, false, false, true, false, false).hashCode());
+
+        // different showSupplier value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("exit",
+                false, false, false, false, true, false).hashCode());
+
+        // different showReservation value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("exit",
+                false, false, false, false, false, true).hashCode());
     }
 }
