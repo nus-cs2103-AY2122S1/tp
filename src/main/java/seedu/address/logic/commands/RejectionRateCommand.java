@@ -11,9 +11,7 @@ import seedu.address.model.position.Position;
  * Returns the rejection rate of a given position to the user.
  */
 public class RejectionRateCommand extends Command {
-    public final Position position;
-
-    public static int rejectionRate;
+    private static int rejectionRate;
 
     public static final String COMMAND_WORD = "rate-position";
 
@@ -29,6 +27,8 @@ public class RejectionRateCommand extends Command {
     public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
+
+    private final Position position;
 
     /**
      * Creates an RejectionRateCommand to get the specified rejection rate.
