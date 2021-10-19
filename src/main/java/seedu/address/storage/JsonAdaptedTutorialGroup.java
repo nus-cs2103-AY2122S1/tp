@@ -1,11 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -72,7 +66,7 @@ public class JsonAdaptedTutorialGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
 
-        final GroupType modelGroupType = groupType.equals("OP1") ? GroupType.OP1: GroupType.OP2;
+        final GroupType modelGroupType = groupType.equals("OP1") ? GroupType.OP1 : GroupType.OP2;
 
         return new TutorialGroup(modelGroupName, modelClassCode, modelGroupType);
     }

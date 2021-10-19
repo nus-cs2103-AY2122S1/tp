@@ -2,8 +2,6 @@ package seedu.address.model.tutorialgroup;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.student.ClassCode;
-
 public class GroupName {
     public static final String MESSAGE_CONSTRAINTS = "GroupName can take any values, and it should not be blank";
 

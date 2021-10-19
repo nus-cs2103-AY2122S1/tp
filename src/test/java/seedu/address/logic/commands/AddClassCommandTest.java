@@ -76,7 +76,7 @@ public class AddClassCommandTest {
     /**
      * A Model stub that contains a single TutorialClass.
      */
-    private class ModelStubWithTutorialClass extends ModelStub {
+    private abstract class ModelStubWithTutorialClass extends ModelStub {
         private final TutorialClass tutorialClass;
 
         ModelStubWithTutorialClass(TutorialClass tutorialClass) {
@@ -90,7 +90,7 @@ public class AddClassCommandTest {
         }
     }
 
-    private class ModelStubAcceptingTutorialClass extends ModelStub {
+    private abstract class ModelStubAcceptingTutorialClass extends ModelStub {
         final ArrayList<TutorialClass> tutorialClassesAdded = new ArrayList<>();
 
         @Override
