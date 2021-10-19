@@ -172,19 +172,47 @@ Command syntax
 
 #### Implementation
 
+The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before removal.
+
+Given below is an example usage scenario and how the delete lesson operation behaves.  
+_Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
+
+Step 1:
+
 Object diagram
+
+Step 2:
+
+Object diagram
+
 
 Sequence diagram
 
-Activity diagram
+The following activity diagram summarizes what happens when a user executes the delete lesson command:
+TODO: IMAGE HERE
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>  
+* Option 1: `delete-l LESSON_INDEX`
+  * Pros:
+    * Non-space-separated word allows easier parsing of command word
+    * Unique command word allows command keys to be easily distinguished
+  * Cons: 
+    * Redundant creation of a new command word, when there is an existing `delete STUDENT_INDEX` command.
+    * Might not be as intuitive as there are now 2 delete commands with different keywords.
+* Option 2: `delete -l LESSON_INDEX`
+  * Pros: 
+    * More intuitive, `-l` flag can be used to determine that a lesson is to be deleted, while omitting it means a student is to be deleted.
+  * Cons: 
+    * Harder to parse, as the `-l` flag is space separated from the command keyword.
+    * User might forget to include the `-l` flag, accidentally deleting a student instead.
+
+<ins>Decision</ins>  
+Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.  
+Additionally, there is not much significance in having an especially pretty command syntax as efficiency (i.e. entering commands fast and correctly) is desired. At the same time, the accidental deletion of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`delete -l LESSON_INDEX`) should only be implemented once an undo/redo feature is implemented.
 
 ### Enroll feature
-
-Description
 
 #### Implementation
 
@@ -292,7 +320,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+<ins> Aspect: How undo & redo executes:</ins>
 
 * **Alternative 1 (current choice):** Saves the entire tuitione.
     * Pros: Easy to implement.
