@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -45,7 +46,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_DATE + "BIRTHDATE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -166,7 +168,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, birthDate);
         }
 
         public void setName(Name name) {
@@ -197,7 +199,6 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
@@ -205,7 +206,6 @@ public class EditCommand extends Command {
         public void setBirthDate(BirthDate birthDate) {
             this.birthDate = birthDate;
         }
-
 
         public Optional<BirthDate> getBirthDate() {
             return Optional.ofNullable(birthDate);
@@ -228,7 +228,6 @@ public class EditCommand extends Command {
             return (nextOfKins != null) ? Optional.of(new ArrayList<>((nextOfKins))) : Optional.empty();
 
         }
-
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
@@ -263,10 +262,11 @@ public class EditCommand extends Command {
             EditParticipantDescriptor e = (EditParticipantDescriptor) other;
 
             return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getAddress().equals(e.getAddress())
-                && getTags().equals(e.getTags());
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getTags().equals(e.getTags())
+                    && getBirthDate().equals(e.getBirthDate());
         }
     }
 }

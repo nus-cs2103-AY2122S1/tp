@@ -290,6 +290,8 @@ public class Participant {
             tags.forEach(builder::append);
         }
 
+        builder.append("\nDate of birth: ").append(getBirthDate());
+
         Set<Note> notes = getNotes();
         if (!notes.isEmpty()) {
             builder.append("\nNotes: ");
