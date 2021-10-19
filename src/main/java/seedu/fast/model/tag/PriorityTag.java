@@ -40,11 +40,6 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a Low Priority Tag.
      */
     public class LowPriority {
-
-        //prevent instantiation of this class
-        private LowPriority() {
-        }
-
         public static final String NAME = "LowPriority";
 
         public static final String TERM = "low";
@@ -53,17 +48,15 @@ public class PriorityTag extends Tag {
 
         public static final int PRIORITY = 3;
 
+        //prevent instantiation of this class
+        private LowPriority() {
+        }
     }
 
     /**
      * Class containing relevant fields for a Medium Priority Tag.
      */
     public class MediumPriority {
-
-        //prevent instantiation of this class
-        private MediumPriority() {
-        }
-
         public static final String NAME = "MediumPriority";
 
         public static final String TERM = "med";
@@ -71,17 +64,16 @@ public class PriorityTag extends Tag {
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
         public static final int PRIORITY = 2;
+
+        //prevent instantiation of this class
+        private MediumPriority() {
+        }
     }
 
     /**
      * Class containing relevant fields for a High Priority Tag.
      */
     public class HighPriority {
-
-        //prevent instantiation of this class
-        private HighPriority() {
-        }
-
         public static final String NAME = "HighPriority";
 
         public static final String TERM = "high";
@@ -89,6 +81,10 @@ public class PriorityTag extends Tag {
         public static final String COMMAND = PRIORITY_TAG_PREFIX + TERM;
 
         public static final int PRIORITY = 1;
+
+        //prevent instantiation of this class
+        private HighPriority() {
+        }
     }
 
 }

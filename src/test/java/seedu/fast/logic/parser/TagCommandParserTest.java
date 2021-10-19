@@ -6,13 +6,13 @@ import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.model.tag.Tag.MESSAGE_CONSTRAINTS;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Collections;
+import java.util.HashSet;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.logic.commands.TagCommand;
 import seedu.fast.model.tag.Tag;
-
-import java.util.Collections;
-import java.util.HashSet;
 
 public class TagCommandParserTest {
 
@@ -69,31 +69,31 @@ public class TagCommandParserTest {
         HashSet<Tag> emptyTagSet = new HashSet<>();
 
         //expected instances of TagCommand
-        TagCommand expectedTagCommand_AddTag = new TagCommand(
+        TagCommand expectedTagCommandAddTag = new TagCommand(
                 INDEX_FIRST_PERSON, Collections.singleton(Tag.createTag("fat")), emptyTagSet);
-        TagCommand expectedTagCommand_AddPriorityTag = new TagCommand(
+        TagCommand expectedTagCommandAddPriorityTag = new TagCommand(
                 INDEX_FIRST_PERSON, Collections.singleton(Tag.createTag("pr/low")), emptyTagSet);
-        TagCommand expectedTagCommand_AddInvestmentPlanTag = new TagCommand(
+        TagCommand expectedTagCommandAddInvestmentPlanTag = new TagCommand(
                 INDEX_FIRST_PERSON, Collections.singleton(Tag.createTag("ip/life")), emptyTagSet);
-        TagCommand expectedTagCommand_DeleteTag = new TagCommand(
+        TagCommand expectedTagCommandDeleteTag = new TagCommand(
                 INDEX_FIRST_PERSON, emptyTagSet, Collections.singleton(Tag.createTag("fat")));
-        TagCommand expectedTagCommand_DeletePriorityTag = new TagCommand(
+        TagCommand expectedTagCommandDeletePriorityTag = new TagCommand(
                 INDEX_FIRST_PERSON, emptyTagSet, Collections.singleton(Tag.createTag("pr/low")));
-        TagCommand expectedTagCommand_DeleteInvestmentPlanTag = new TagCommand(
+        TagCommand expectedTagCommandDeleteInvestmentPlanTag = new TagCommand(
                 INDEX_FIRST_PERSON, emptyTagSet, Collections.singleton(Tag.createTag("ip/life")));
-        TagCommand expectedTagCommand_Mixed = new TagCommand(
+        TagCommand expectedTagCommandMixed = new TagCommand(
                 INDEX_FIRST_PERSON,
                 Collections.singleton(Tag.createTag("pr/low")),
                 Collections.singleton(Tag.createTag("ip/life")));
 
-        assertParseSuccess(parser, addTagInput, expectedTagCommand_AddTag);
-        assertParseSuccess(parser, addPriorityTagInput, expectedTagCommand_AddPriorityTag);
-        assertParseSuccess(parser, addInvestmentPlanTagInput, expectedTagCommand_AddInvestmentPlanTag);
-        assertParseSuccess(parser, deleteTagInput, expectedTagCommand_DeleteTag);
-        assertParseSuccess(parser, deletePriorityTagInput, expectedTagCommand_DeletePriorityTag);
-        assertParseSuccess(parser, deleteInvestmentPlanTagInput, expectedTagCommand_DeleteInvestmentPlanTag);
-        assertParseSuccess(parser, mixedInput, expectedTagCommand_Mixed);
-        assertParseSuccess(parser, mixedInputWithWhitespace, expectedTagCommand_Mixed);
+        assertParseSuccess(parser, addTagInput, expectedTagCommandAddTag);
+        assertParseSuccess(parser, addPriorityTagInput, expectedTagCommandAddPriorityTag);
+        assertParseSuccess(parser, addInvestmentPlanTagInput, expectedTagCommandAddInvestmentPlanTag);
+        assertParseSuccess(parser, deleteTagInput, expectedTagCommandDeleteTag);
+        assertParseSuccess(parser, deletePriorityTagInput, expectedTagCommandDeletePriorityTag);
+        assertParseSuccess(parser, deleteInvestmentPlanTagInput, expectedTagCommandDeleteInvestmentPlanTag);
+        assertParseSuccess(parser, mixedInput, expectedTagCommandMixed);
+        assertParseSuccess(parser, mixedInputWithWhitespace, expectedTagCommandMixed);
     }
 
 }

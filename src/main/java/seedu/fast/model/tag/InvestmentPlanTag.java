@@ -43,119 +43,105 @@ public class InvestmentPlanTag extends Tag {
      * Class containing relevant fields for a LifeInsurance Tag.
      */
     public class LifeInsurance {
-
-        //prevent instantiation of this class
-        private LifeInsurance() {
-        }
-
         public static final String NAME = "LifeInsurance";
 
         public static final String TERM = "life";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private LifeInsurance() {
+        }
     }
 
     /**
      * Class containing relevant fields for a MotorInsurance Tag.
      */
     public class MotorInsurance {
-
-        //prevent instantiation of this class
-        private MotorInsurance() {
-        }
-
         public static final String NAME = "MotorInsurance";
 
         public static final String TERM = "motor";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private MotorInsurance() {
+        }
     }
 
     /**
      * Class containing relevant fields for a HealthInsurance Tag.
      */
     public class HealthInsurance {
-
-        //prevent instantiation of this class
-        private HealthInsurance() {
-        }
-
         public static final String NAME = "HealthInsurance";
 
         public static final String TERM = "health";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private HealthInsurance() {
+        }
     }
 
     /**
      * Class containing relevant fields for a TravelInsurance Tag.
      */
     public class TravelInsurance {
-
-        //prevent instantiation of this class
-        private TravelInsurance() {
-        }
-
         public static final String NAME = "TravelInsurance";
 
         public static final String TERM = "travel";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private TravelInsurance() {
+        }
     }
 
     /**
      * Class containing relevant fields for a PropertyInsurance Tag.
      */
     public class PropertyInsurance {
-
-        //prevent instantiation of this class
-        private PropertyInsurance() {
-        }
-
         public static final String NAME = "PropertyInsurance";
 
         public static final String TERM = "property";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private PropertyInsurance() {
+        }
     }
 
     /**
      * Class containing relevant fields for a Investment Tag.
      */
     public class Investment {
-
-        //prevent instantiation of this class
-        private Investment() {
-        }
-
         public static final String NAME = "investment";
 
         public static final String TERM = "invest";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private Investment() {
+        }
     }
 
     /**
      * Class containing relevant fields for a Savings Tag.
      */
     public class Savings {
-
-        //prevent instantiation of this class
-        private Savings() {
-        }
-
         public static final String NAME = "Savings";
 
         public static final String TERM = "save";
 
         public static final String COMMAND = INVESTMENT_PLAN_TAG_PREFIX + TERM;
 
+        //prevent instantiation of this class
+        private Savings() {
+        }
     }
 
 }
