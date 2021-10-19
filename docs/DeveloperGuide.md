@@ -218,8 +218,10 @@ Command syntax
 
 #### Implementation
 
-The filter feature is facilitated by `FilterCommand` and `FilterCommandParser`. The filter performs differently based on the
-inputs given (grade, subject, or both):
+The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user 
+input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
+the `LogicManager` class to filter the `uniqueStudentList` and/or the `uniqueLessonList` of the `model` based on the given user inputs.
+The filter performs differently based on the inputs given (grade, subject, or both):
 * If only grade is given as input, TuitiONE filters both the students list and the lesson list based on the given grade.
 * If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
 * If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based 
@@ -245,7 +247,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
 
-Command syntax
+Command syntax: `filter [g/GRADE] [s/SUBJECT]`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -471,11 +473,11 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC04: Filter Student(s) by their Grade**
+**UC04: Filter Students and/or Lessons by grade and/or subject**
 
 **MSS**
-1. CSO enters a grade to filter for students by.
-2. TuitiONE lists the students that matches the grade.
+1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
+2. TuitiONE lists the students and/or lessons that matches the filter criteria.
 
     Use case ends.
 
@@ -487,7 +489,23 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
       Steps 1a1-1a2 are repeated until the data entered are correct.
 
     Use case resumes at step 2.
+    
+* 1b. CSO decides to filter by grade only
+    * 1b1. TuitiONE filters the student and lesson list based on the given grade.
 
+    Use case resumes at step 2.
+
+* 1c. CSO decides to filter by subject only
+    * 1c1. TuitiONE filters the lesson list based on the given subject.
+
+    Use case resumes at step 2.
+ 
+* 1d. CSO decides to filter by grade and subject
+    * 1d1. TuitiONE filters the student list based on the given grade, and filters the lesson list based on both the
+      given grade and subject.
+ 
+    Use case resumes at step 2.
+    
 **UC05: Delete a Student**
 
 **MSS**
