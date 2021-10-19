@@ -281,7 +281,7 @@ public class ModelManager implements Model {
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
             Position currentPosition = a.getPosition();
-            if (currentPosition == p) {
+            if (currentPosition.isSamePosition(p)) {
                 total++;
                 if (a.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
                     count++;
