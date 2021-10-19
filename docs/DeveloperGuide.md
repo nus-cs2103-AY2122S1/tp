@@ -156,8 +156,6 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Lesson feature
 
-Description
-
 #### Implementation
 
 Object diagram
@@ -171,8 +169,6 @@ Activity diagram
 Command syntax
 
 ### Delete Lesson feature
-
-Description
 
 #### Implementation
 
@@ -204,8 +200,6 @@ Command syntax
 
 ### Unenroll feature
 
-Description
-
 #### Implementation
 
 Object diagram
@@ -219,8 +213,6 @@ Activity diagram
 Command syntax
 
 ### Filter feature
-
-Description
 
 #### Implementation
 
