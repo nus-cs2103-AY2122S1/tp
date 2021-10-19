@@ -188,6 +188,39 @@ Given below is an example usage scenario:
   We were concerned that the recurring visits could have many occurrences and at a high frequency, and this could lead to extra overhead in storing and accessing these arrays.
 
 
+### Done Command
+
+#### Implementation details
+The done command is used to mark a person's existing visit as done, and update the person's `LastVisit` datetime value with that of the completed `Visit`. 
+The `Visit` field will also be updated or deleted depending on the `Occurrence` field's value.
+It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
+- `DoneCommand` extends `Command`
+- `DoneCommandParser` implements `Parser<DoneCommand>`
+
+The following activity diagram illustrates the activity flow of the done command:
+![DoneCommandActivityDiagram](images/DoneCommandActivityDiagram.png)
+
+#### Design choices
+
+- Overloading `edit` to change person:
+
+    The `done` command makes use of the `edit` command to get a new copy of the `Person` object with the `Visit` and `LastVisit` fields being updated.
+
+- Defensive Programming used:
+
+    Execution of the `done` command makes use of defensive programming techniques to handle situations where `Visit` or its related `Frequency` and `Occurence` fields are empty.
+
+### Datetime for Visit and LastVisit
+
+#### Implementation details
+Static class `DateTimeUtil` uses the library `java.time.LocalDateTime` and `java.time.format.DateTimeFormatter` to handle all datetime-related parsing and operations for `Visit` and `LastVisit` timings.
+The datetime is stored and displayed differently in the system for both efficiency and readability:
+- It is stored as `yyyy-MM-dd HH:mm` in the system and for parsing of commands.
+- It is displayed as `dd LLL yyyy HH:mm` on the GUI.
+
+For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
