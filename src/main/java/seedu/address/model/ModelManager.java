@@ -108,6 +108,8 @@ public class ModelManager implements Model {
     @Override
     public void addParticipant(Participant participant) {
         addressBook.addParticipant(participant);
+        logger.info("Participant " + participant.getParticipantIdValue()
+                + " was successfully added to AddressBook");
         updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
