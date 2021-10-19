@@ -11,7 +11,7 @@ public class TutorialGroup {
     private final GroupType groupType;
 
     /**
-     * @param groupName groupName of Tutorial Group.
+     * @param groupName GroupName of Tutorial Group.
      * @param classCode ClassCode of Tutorial Group.
      */
     public TutorialGroup(GroupName groupName, ClassCode classCode, GroupType groupType) {
@@ -73,8 +73,11 @@ public class TutorialGroup {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getGroupName())
+        builder.append("; name: ")
+                .append(getGroupName())
+                .append("; class: ")
                 .append(getClassCode())
+                .append("; type: ")
                 .append(getGroupType());
 
         return builder.toString();

@@ -11,13 +11,13 @@ public class GroupName {
     public final String value;
 
     /**
-     * Constructs an {@code ClassCode}.
+     * Constructs an {@code GroupName}.
      *
-     * @param classCode A valid classcode.
+     * @param groupName A valid groupName.
      */
-    public GroupName (String classCode) {
-        requireNonNull(classCode);
-        value = classCode;
+    public GroupName (String groupName) {
+        requireNonNull(groupName);
+        value = groupName;
     }
 
 
@@ -29,8 +29,8 @@ public class GroupName {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClassCode // instanceof handles nulls
-                && value.equals(((ClassCode) other).value)); // state check
+                || (other instanceof GroupName // instanceof handles nulls
+                && value.equals(((GroupName) other).value)); // state check
     }
 
     @Override

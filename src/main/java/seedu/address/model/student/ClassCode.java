@@ -11,7 +11,6 @@ public class ClassCode {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode can take any values, and it should not be blank";
 
-
     public final String value;
 
     /**
