@@ -1,23 +1,101 @@
 package tutoraid.ui;
 
+import static tutoraid.commons.core.HelpGuide.ADD_P_COMMAND;
+import static tutoraid.commons.core.HelpGuide.ADD_P_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_P_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.ADD_P_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_P_TITLE;
+import static tutoraid.commons.core.HelpGuide.ADD_S_COMMAND;
+import static tutoraid.commons.core.HelpGuide.ADD_S_DESC;
+import static tutoraid.commons.core.HelpGuide.ADD_S_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.ADD_S_TITLE;
+import static tutoraid.commons.core.HelpGuide.CLEAR_COMMAND;
+import static tutoraid.commons.core.HelpGuide.CLEAR_DESC;
+import static tutoraid.commons.core.HelpGuide.CLEAR_TITLE;
+import static tutoraid.commons.core.HelpGuide.DEL_P_COMMAND;
+import static tutoraid.commons.core.HelpGuide.DEL_P_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_P_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.DEL_P_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_P_TITLE;
+import static tutoraid.commons.core.HelpGuide.DEL_S_COMMAND;
+import static tutoraid.commons.core.HelpGuide.DEL_S_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_S_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.DEL_S_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.DEL_S_TITLE;
+import static tutoraid.commons.core.HelpGuide.EDIT_CAUTION;
+import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC1;
+import static tutoraid.commons.core.HelpGuide.EDIT_DATA_DESC2;
+import static tutoraid.commons.core.HelpGuide.EDIT_DATA_TITLE;
+import static tutoraid.commons.core.HelpGuide.EDIT_FILEPATH;
+import static tutoraid.commons.core.HelpGuide.EDIT_S_COMMAND;
+import static tutoraid.commons.core.HelpGuide.EDIT_S_DESC;
+import static tutoraid.commons.core.HelpGuide.EDIT_S_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.EDIT_S_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.EDIT_S_TITLE;
+import static tutoraid.commons.core.HelpGuide.EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.EXIT_COMMAND;
+import static tutoraid.commons.core.HelpGuide.EXIT_DESC;
+import static tutoraid.commons.core.HelpGuide.EXIT_TITLE;
+import static tutoraid.commons.core.HelpGuide.FAQ_A;
+import static tutoraid.commons.core.HelpGuide.FAQ_Q;
+import static tutoraid.commons.core.HelpGuide.FAQ_TITLE;
+import static tutoraid.commons.core.HelpGuide.FEATURES_POINT1;
+import static tutoraid.commons.core.HelpGuide.FEATURES_POINT2;
+import static tutoraid.commons.core.HelpGuide.FEATURES_POINT3;
+import static tutoraid.commons.core.HelpGuide.FEATURES_POINT4;
+import static tutoraid.commons.core.HelpGuide.FEATURES_POINT5;
+import static tutoraid.commons.core.HelpGuide.FEATURES_TITLE;
+import static tutoraid.commons.core.HelpGuide.FORMAT;
+import static tutoraid.commons.core.HelpGuide.FULL_USER_GUIDE;
+import static tutoraid.commons.core.HelpGuide.HELP_COMMAND;
+import static tutoraid.commons.core.HelpGuide.HELP_DESC;
+import static tutoraid.commons.core.HelpGuide.HELP_TITLE;
+import static tutoraid.commons.core.HelpGuide.LIST_A_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.LIST_A_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.LIST_DESC;
+import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.LIST_GENERAL_COMMAND;
+import static tutoraid.commons.core.HelpGuide.LIST_TITLE;
+import static tutoraid.commons.core.HelpGuide.OVERVIEW;
+import static tutoraid.commons.core.HelpGuide.PAID_COMMAND;
+import static tutoraid.commons.core.HelpGuide.PAID_DESC;
+import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.PAID_TITLE;
+import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP1;
+import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP2;
+import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP3;
+import static tutoraid.commons.core.HelpGuide.QUICK_START_TITLE;
+import static tutoraid.commons.core.HelpGuide.SAVING_DATA_DESC;
+import static tutoraid.commons.core.HelpGuide.SAVING_DATA_TITLE;
+import static tutoraid.commons.core.HelpGuide.UNPAID_COMMAND;
+import static tutoraid.commons.core.HelpGuide.UNPAID_DESC;
+import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.UNPAID_TITLE;
+import static tutoraid.commons.core.HelpGuide.USER_GUIDE_TITLE;
+import static tutoraid.commons.core.HelpGuide.VIEW_S_COMMAND;
+import static tutoraid.commons.core.HelpGuide.VIEW_S_DESC;
+import static tutoraid.commons.core.HelpGuide.VIEW_S_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.VIEW_S_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.VIEW_S_TITLE;
+
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tutoraid.commons.core.LogsCenter;
-
-import java.util.logging.Logger;
-
-import static tutoraid.commons.core.HelpGuide.*;
-
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w16-3.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -32,75 +110,243 @@ public class HelpWindow extends UiPart<Stage> {
     private Label fullUserGuide;
 
     @FXML
-    private Label quickStartTitle, quickStartStep1, quickStartStep2, quickStartStep3;
+    private Label quickStartTitle;
+    @FXML
+    private Label quickStartStep1;
+    @FXML
+    private Label quickStartStep2;
+    @FXML
+    private Label quickStartStep3;
 
     @FXML
-    private Label featuresTitle, featuresPoint1, featuresPoint2, featuresPoint3, featuresPoint4, featuresPoint5;
+    private Label featuresTitle;
+    @FXML
+    private Label featuresPoint1;
+    @FXML
+    private Label featuresPoint2;
+    @FXML
+    private Label featuresPoint3;
+    @FXML
+    private Label featuresPoint4;
+    @FXML
+    private Label featuresPoint5;
 
     @FXML
-    private Label format, format1, format2, format3, format4, format5, format6, format7, format8, format9,
-            format10, format11;
+    private Label format;
+    @FXML
+    private Label format1;
+    @FXML
+    private Label format2;
+    @FXML
+    private Label format3;
+    @FXML
+    private Label format4;
+    @FXML
+    private Label format5;
+    @FXML
+    private Label format6;
+    @FXML
+    private Label format7;
+    @FXML
+    private Label format8;
+    @FXML
+    private Label format9;
+    @FXML
+    private Label format10;
+    @FXML
+    private Label format11;
 
     @FXML
-    private Label example, example1, example2, example3, example4, example5, example6, example7, example8, example9,
-            example10;
+    private Label example;
+    @FXML
+    private Label example1;
+    @FXML
+    private Label example2;
+    @FXML
+    private Label example3;
+    @FXML
+    private Label example4;
+    @FXML
+    private Label example5;
+    @FXML
+    private Label example6;
+    @FXML
+    private Label example7;
+    @FXML
+    private Label example8;
+    @FXML
+    private Label example9;
+    @FXML
+    private Label example10;
 
     @FXML
-    private Label helpTitle, helpCommand, helpDesc;
+    private Label helpTitle;
+    @FXML
+    private Label helpCommand;
+    @FXML
+    private Label helpDesc;
 
     @FXML
-    private Label addSTitle, addSCommand, addSDesc, addSExample;
+    private Label addSTitle;
+    @FXML
+    private Label addSCommand;
+    @FXML
+    private Label addSDesc;
+    @FXML
+    private Label addSExample;
 
     @FXML
-    private Label listTitle, listDesc, listGeneralCommand, listExample, listExampleDesc, listAExample, listAExampleDesc;
+    private Label listTitle;
+    @FXML
+    private Label listDesc;
+    @FXML
+    private Label listGeneralCommand;
+    @FXML
+    private Label listExample;
+    @FXML
+    private Label listExampleDesc;
+    @FXML
+    private Label listAExample;
+    @FXML
+    private Label listAExampleDesc;
+
 
     @FXML
-    private Label delSTitle, delSCommand, delSDesc, delSExample, delSExampleDesc;
+    private Label delSTitle;
+    @FXML
+    private Label delSCommand;
+    @FXML
+    private Label delSDesc;
+    @FXML
+    private Label delSExample;
+    @FXML
+    private Label delSExampleDesc;
+
 
     @FXML
-    private Label editSTitle, editSCommand, editSDesc, editSExample, editSExampleDesc;
+    private Label editSTitle;
+    @FXML
+    private Label editSCommand;
+    @FXML
+    private Label editSDesc;
+    @FXML
+    private Label editSExample;
+    @FXML
+    private Label editSExampleDesc;
 
     @FXML
-    private Label viewSTitle, viewSCommand, viewSDesc, viewSExample, viewSExampleDesc;
+    private Label viewSTitle;
+    @FXML
+    private Label viewSCommand;
+    @FXML
+    private Label viewSDesc;
+    @FXML
+    private Label viewSExample;
+    @FXML
+    private Label viewSExampleDesc;
 
     @FXML
-    private Label addPTitle, addPCommand, addPDesc, addPExample, addPExampleDesc;
+    private Label addPTitle;
+    @FXML
+    private Label addPCommand;
+    @FXML
+    private Label addPDesc;
+    @FXML
+    private Label addPExample;
+    @FXML
+    private Label addPExampleDesc;
 
     @FXML
-    private Label delPTitle, delPCommand, delPDesc, delPExample, delPExampleDesc;
+    private Label delPTitle;
+    @FXML
+    private Label delPCommand;
+    @FXML
+    private Label delPDesc;
+    @FXML
+    private Label delPExample;
+    @FXML
+    private Label delPExampleDesc;
 
     @FXML
-    private Label paidTitle, paidCommand, paidDesc, paidExample, paidExampleDesc;
+    private Label paidTitle;
+    @FXML
+    private Label paidCommand;
+    @FXML
+    private Label paidDesc;
+    @FXML
+    private Label paidExample;
+    @FXML
+    private Label paidExampleDesc;
 
     @FXML
-    private Label unpaidTitle, unpaidCommand, unpaidDesc, unpaidExample, unpaidExampleDesc;
+    private Label unpaidTitle;
+    @FXML
+    private Label unpaidCommand;
+    @FXML
+    private Label unpaidDesc;
+    @FXML
+    private Label unpaidExample;
+    @FXML
+    private Label unpaidExampleDesc;
+
 
     @FXML
-    private Label clearTitle, clearCommand, clearDesc;
+    private Label clearTitle;
+    @FXML
+    private Label clearCommand;
+    @FXML
+    private Label clearDesc;
 
     @FXML
-    private Label exitTitle, exitCommand, exitDesc;
+    private Label exitTitle;
+    @FXML
+    private Label exitCommand;
+    @FXML
+    private Label exitDesc;
 
     @FXML
-    private Label savingDataTitle, savingDataDesc;
+    private Label savingDataTitle;
+    @FXML
+    private Label savingDataDesc;
 
     @FXML
-    private Label editDataTitle, editDataDesc1, editDataDesc2, editFilePath, editCaution;
+    private Label editDataTitle;
+    @FXML
+    private Label editDataDesc1;
+    @FXML
+    private Label editDataDesc2;
+    @FXML
+    private Label editFilePath;
+    @FXML
+    private Label editCaution;
 
     @FXML
-    private Label faqTitle, faqQ, faqA;
+    private Label faqTitle;
+    @FXML
+    private Label faqQ;
+    @FXML
+    private Label faqA;
+
+    @FXML
+    private VBox helpWindow;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new HelpWindow by calling on individual helper functions to set up the different sections of the
+     * user guide in the help window.
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+
+        //Setting up the start of the user guide
         userGuide();
         overview();
         quickStart();
+
         featureNotes();
+
+        //Setting a section for each of the features that have been implemented thus far
         helpFeature();
         addStudentFeature();
         deleteStudentFeature();
@@ -113,6 +359,8 @@ public class HelpWindow extends UiPart<Stage> {
         unpaidFeature();
         clearFeature();
         exitFeature();
+
+        //Setting up the end of the user guide
         savingData();
         editData();
         faq();
@@ -182,7 +430,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the user guide section.
+     * Creates the user guide title.
      */
     public void userGuide() {
         userGuideTitle.setText(USER_GUIDE_TITLE);
@@ -207,7 +455,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the 'feature notes' section.
+     * Creates the 'features' section.
      */
     public void featureNotes() {
         featuresTitle.setText(FEATURES_TITLE);
@@ -219,7 +467,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates the 'help' section.
+     * Creates the 'help feature' section.
      */
     public void helpFeature() {
         format.setText(FORMAT);
