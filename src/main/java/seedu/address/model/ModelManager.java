@@ -146,7 +146,6 @@ public class ModelManager implements Model {
         return addressBook.hasTagName(tagName);
     }
 
-
     @Override
     public void addTag(Tag Tag) {
         addressBook.addTag(Tag);

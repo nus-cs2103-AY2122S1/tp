@@ -101,7 +101,7 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * returns person with corresponding clientId.
+     * Returns person with corresponding clientId.
      *
      * @param clientId clientId of client
      * @return client with given clientId
@@ -120,7 +120,7 @@ public interface Model {
     void addTag(Tag Tag);
 
     /**
-     * returns Tag with corresponding tagName.
+     * Returns Tag with corresponding tagName.
      *
      * @param tagName tagName of client
      * @return client with given tagName

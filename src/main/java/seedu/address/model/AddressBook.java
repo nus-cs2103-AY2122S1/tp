@@ -108,7 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * returns true if a client with the given clientId exists.
+     * Returns true if a client with the given clientId exists.
      *
      * @param clientId of client
      * @return true if a client with the given clientId exists
@@ -139,7 +139,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * returns person with corresponding clientId.
+     * Returns person with corresponding clientId.
      *
      * @param clientId clientId of client
      * @return client with given clientId
@@ -175,7 +175,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * returns true if a tag with the given tagName exists.
+     * Returns true if a tag with the given {@code tagName} exists.
      *
      * @param tagName name of the tag
      * @return true if a tag with the given tagName exists
@@ -185,7 +185,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * returns person with corresponding clientId.
+     * Returns tag with the corresponding {@code tagName}.
      *
      * @param tagName name of the tag
      * @return tag with given tagName

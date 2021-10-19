@@ -24,7 +24,7 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
-     * returns true if a tag with the given tagName exists.
+     * Returns true if a tag with the given tagName exists.
      *
      * @param tagName name of the tag
      * @return true if a tag with the tagName exists
@@ -71,7 +71,6 @@ public class UniqueTagList implements Iterable<Tag> {
         }
         return tagInQuestion.get(0);
     }
-
 
     public ObservableList<Tag> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
