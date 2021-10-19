@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 
 /**
  * Represents a piece of work for a staff.
@@ -38,10 +39,13 @@ public class Shift {
         return this.slot.getValue().equals("afternoon");
     }
 
+    public boolean isWorking(LocalTime time) {
+        return slot.isWithinSlotPeriod(time);
+    }
 
     @Override
     public String toString() {
-        return dayOfWeek.toString() + "-" + slot.getValue();
+        return dayOfWeek.toString() + "-" + slot.getValue() + ": " + slot.toString();
     }
 
     /**

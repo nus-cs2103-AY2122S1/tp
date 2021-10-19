@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
 /**
  * Class representing the command to remove a mark.
