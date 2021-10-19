@@ -9,6 +9,7 @@ import seedu.anilist.commons.core.Messages;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Status;
+import seedu.anilist.model.anime.StatusEqualsPredicate;
 import seedu.anilist.ui.TabOption;
 
 /**
@@ -28,9 +29,13 @@ public class ListCommand extends Command {
      * Constructor for ListCommand. Sets predicate for filtered list
      * and sets the statusToMatch to change tabs.
      */
-    public ListCommand(Predicate<Anime> predicate, Status statusToMatch) {
+    public ListCommand(Predicate<Anime> predicate) {
         this.predicate = predicate;
-        this.statusToMatch = statusToMatch;
+        if (predicate instanceof StatusEqualsPredicate) {
+            this.statusToMatch = ((StatusEqualsPredicate) predicate).getStatus();
+        } else {
+            this.statusToMatch = null;
+        }
     }
 
     @Override

@@ -1,15 +1,19 @@
 package seedu.anilist.ui;
 
-import seedu.anilist.model.anime.Status;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
+
+import seedu.anilist.model.anime.Status;
 
 /**
  * This class keeps track of which tab is the current active tab.
  * The current active tab will be the currentTab value.
  */
 public class TabOption {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Status should only be one of 'all', 'towatch', 'watching' or 'finished'";
+    public static final String[] VALID_TAB_STRING = {"towatch", "t", "watching", "w", "finished", "f", "all", "a"};
+
     private TabOptions currentTab;
 
     public enum TabOptions {
@@ -18,9 +22,6 @@ public class TabOption {
         FINISHED,
         ALL
     }
-
-    public static final String[] VALID_TAB_STRING = {"towatch", "t", "watching", "w", "finished", "f", "all", "a"};
-    public static final String MESSAGE_CONSTRAINTS = "Status should only be one of 'all', 'towatch', 'watching' or 'finished'";
 
     /**
      * Constructs a {@code TabOption}.
@@ -47,21 +48,21 @@ public class TabOption {
 
     private TabOptions parseTabStatus(String tabString) {
         switch(tabString.toLowerCase()) {
-            case "t":
-            case "towatch":
-                return TabOptions.TOWATCH;
-            case "w":
-            case "watching":
-                return TabOptions.WATCHING;
-            case "f":
-            case "finished":
-                return TabOptions.FINISHED;
-            case "a":
-            case "all":
-                return TabOptions.ALL;
-            default:
-                assert false : "Invalid tab option";
-                return null;
+        case "t":
+        case "towatch":
+            return TabOptions.TOWATCH;
+        case "w":
+        case "watching":
+            return TabOptions.WATCHING;
+        case "f":
+        case "finished":
+            return TabOptions.FINISHED;
+        case "a":
+        case "all":
+            return TabOptions.ALL;
+        default:
+            assert false : "Invalid tab option";
+            return null;
         }
     }
 
@@ -75,17 +76,17 @@ public class TabOption {
     @Override
     public String toString() {
         switch (this.currentTab) {
-            case TOWATCH:
-                return VALID_TAB_STRING[0];
-            case WATCHING:
-                return VALID_TAB_STRING[2];
-            case FINISHED:
-                return VALID_TAB_STRING[4];
-            case ALL:
-                return VALID_TAB_STRING[6];
-            default:
-                assert false : "Invalid tab option";
-                return null;
+        case TOWATCH:
+            return VALID_TAB_STRING[0];
+        case WATCHING:
+            return VALID_TAB_STRING[2];
+        case FINISHED:
+            return VALID_TAB_STRING[4];
+        case ALL:
+            return VALID_TAB_STRING[6];
+        default:
+            assert false : "Invalid tab option";
+            return null;
         }
     }
 
