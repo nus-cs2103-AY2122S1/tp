@@ -46,12 +46,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.TAG_PREFIX.length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            for (String tag : tags) {
-                if (isBlank(tag)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-                }
-            }
+            checkForBlanks(tags);
             return new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList(tags)));
 
         } else if (trimmedArgs.startsWith(FindCommand.REMARK_PREFIX)) {
@@ -59,18 +54,22 @@ public class FindCommandParser implements Parser<FindCommand> {
                     FindCommand.REMARK_PREFIX.length());
             String[] queries = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            for (String query : queries) {
-                if (isBlank(query)) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-                }
-            }
+            checkForBlanks(queries);
             return new FindCommand(new RemarkContainsKeyWordsPredicate(Arrays.asList(queries)));
 
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        }
+    }
+
+    private void checkForBlanks(String[] tags) throws ParseException {
+        for (String tag : tags) {
+            if (isBlank(tag)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
         }
     }
 
