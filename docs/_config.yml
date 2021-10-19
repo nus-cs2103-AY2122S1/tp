@@ -1,5 +1,5 @@
 title: "FAST"
-theme: minima
+theme: jekyll-theme-slate
 
 header_pages:
   - UserGuide.md
