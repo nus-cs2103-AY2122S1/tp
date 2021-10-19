@@ -125,6 +125,7 @@ public class ParserUtil {
     }
 
     // All position related methods
+
     /**
      * Parses a {@code String title} into a {@code Title}.
      * Leading and trailing whitespaces will be trimmed.

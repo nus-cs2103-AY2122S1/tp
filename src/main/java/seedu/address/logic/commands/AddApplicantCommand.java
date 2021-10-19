@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.position.Position;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 
 /**
  * Adds an applicant to the address book.
@@ -37,40 +37,37 @@ public class AddApplicantCommand extends Command {
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in MrTechRecruiter";
     public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
-    private final Applicant toAdd;
-    private final Position dummyPosition;
+    private final ApplicantParticulars applicantParticulars;
 
     /**
      * Creates an AddApplicantCommand to add the specified {@code Applicant}
      */
-    public AddApplicantCommand(Applicant applicant, Position dummyPosition) {
-        requireNonNull(applicant);
-        this.toAdd = applicant;
-        this.dummyPosition = dummyPosition;
+    public AddApplicantCommand(ApplicantParticulars applicantParticulars) {
+        requireNonNull(applicantParticulars);
+        this.applicantParticulars = applicantParticulars;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasApplicant(toAdd)) {
+        if (model.hasApplicantWithName(applicantParticulars.getName())) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-        if (!model.hasPosition(dummyPosition)) {
+        if (!model.hasPositionWithTitle(applicantParticulars.getPositionTitle())) {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        model.addApplicantToPosition(toAdd, dummyPosition);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        Applicant applicant = model.addApplicantWithParticulars(applicantParticulars);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, applicant));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddApplicantCommand // instanceof handles nulls
-                && toAdd.equals(((AddApplicantCommand) other).toAdd)
-                && dummyPosition.equals(((AddApplicantCommand) other).dummyPosition));
+                && applicantParticulars.equals(((AddApplicantCommand) other).applicantParticulars));
     }
 
 }

@@ -6,8 +6,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * The API of the Model component.
@@ -85,15 +88,15 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given applicant to the given position.
-     * {@code applicant} must not already exist in the applicant book.
+     * Adds a new applicant to MrTechRecruiter with the given particulars.
+     * The intended applicant must not already exist in the applicant book.
      */
-    void addApplicantToPosition(Applicant applicant, Position position);
+    Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
 
     /**
-     * Returns true if an applicant with the same identity as {@code applicant} exists MrTechRecruiter.
+     * Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter.
      */
-    boolean hasApplicant(Applicant applicant);
+    boolean hasApplicantWithName(Name applicantName);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -108,7 +111,7 @@ public interface Model {
      * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
      * MrTechRecruiter.
      */
-    public void setApplicant(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -125,7 +128,9 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
 
     // Position related methods
-    boolean hasPosition(Position toAdd);
+
+    boolean hasPosition(Position position);
+    boolean hasPositionWithTitle(Title title);
 
     void addPosition(Position toAdd);
 

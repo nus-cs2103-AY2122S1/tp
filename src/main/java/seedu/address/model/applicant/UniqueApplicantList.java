@@ -39,6 +39,14 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     }
 
     /**
+     * Returns true if the list contains an applicant with the given name.
+     */
+    public boolean containsApplicantWithName(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(applicant -> applicant.getName().equals(toCheck));
+    }
+
+    /**
      * Adds an applicant to the list.
      * The applicant must not already exist in the list.
      */

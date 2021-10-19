@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.application.Application;
 import seedu.address.model.position.Position;
 
@@ -20,18 +21,31 @@ public class Applicant {
 
     // Data fields
     private final Address address;
-    private Application application;
+    private final Application application;
 
     /**
-     * Every field must be present and not null
+     * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Position dummyPosition) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.application = new Application(this, dummyPosition);
+        this.application = new Application(position);
+    }
+
+    /**
+     * Constructor for an applicant given the applicant's particulars.
+     */
+    public Applicant(ApplicantParticulars applicantParticulars, Position position) {
+        this(
+                applicantParticulars.getName(),
+                applicantParticulars.getPhone(),
+                applicantParticulars.getEmail(),
+                applicantParticulars.getAddress(),
+                position
+        );
     }
 
     public Name getName() {
@@ -52,10 +66,6 @@ public class Applicant {
 
     public Application getApplication() {
         return application;
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
     }
 
     /**
@@ -96,13 +106,14 @@ public class Applicant {
         return name.equals(otherApplicant.name)
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
-                && address.equals(otherApplicant.address);
+                && address.equals(otherApplicant.address)
+                && application.equals(otherApplicant.application);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(name, phone, email, address, application);
     }
 
     @Override

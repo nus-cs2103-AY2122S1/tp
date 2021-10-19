@@ -39,6 +39,14 @@ public class UniquePositionList implements Iterable<Position> {
     }
 
     /**
+     * Returns true if the list contains a position titled {@code toCheck}.
+     */
+    public boolean containsPositionWithTitle(Title toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(position -> position.getTitle().equals(toCheck));
+    }
+
+    /**
      * Adds a position to the list.
      * The position must not already exist in the list.
      */
@@ -51,13 +59,12 @@ public class UniquePositionList implements Iterable<Position> {
     }
 
     /**
-     * Searches for a position matching the given {@code dummyPosition}.
-     * Positions are compared with {@code Position::isSamePosition}.
+     * Searches for a position with the given {@code title}.
      */
-    public Position getPosition(Position dummyPosition) {
-        requireNonNull(dummyPosition);
+    public Position getPositionByTitle(Title title) {
+        requireNonNull(title);
         return internalList.stream()
-                .filter(position -> position.isSamePosition(dummyPosition))
+                .filter(position -> position.getTitle().equals(title))
                 .findFirst()
                 .orElseThrow(PositionNotFoundException::new);
     }

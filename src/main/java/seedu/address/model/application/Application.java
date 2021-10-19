@@ -2,7 +2,6 @@ package seedu.address.model.application;
 
 import java.util.Objects;
 
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.position.Position;
 
 /**
@@ -14,7 +13,6 @@ import seedu.address.model.position.Position;
  * If either the Applicant or Position is deleted, the Application should also be deleted.
  */
 public class Application {
-    private final Applicant applicant;
     private final Position position;
     private ApplicationStatus status;
 
@@ -22,8 +20,7 @@ public class Application {
      * Constructor for a job application.
      * Invoked whenever the add-applicant command is called.
       */
-    public Application(Applicant applicant, Position position) {
-        this.applicant = applicant;
+    public Application(Position position) {
         this.position = position;
         this.status = ApplicationStatus.PENDING;
     }
@@ -71,20 +68,18 @@ public class Application {
         }
 
         Application otherApplication = (Application) other;
-        return applicant.equals(otherApplication.applicant)
-                && position.equals(otherApplication.position)
+        return position.equals(otherApplication.position)
                 && status.equals(otherApplication.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicant, position, status);
+        return Objects.hash(position, status);
     }
 
     @Override
     public String toString() {
         return "Application: {"
-                + "Applicant: " + applicant.getName()
                 + ", Position: " + position.getTitle()
                 + ", Status: " + status
                 + "}";
