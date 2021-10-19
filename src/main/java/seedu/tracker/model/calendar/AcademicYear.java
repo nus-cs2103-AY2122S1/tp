@@ -10,7 +10,7 @@ public class AcademicYear {
     public static final String MESSAGE_CONSTRAINTS =
             "Academic Year should only contain numbers from 1 to 6, and it should not be blank";
 
-    public final int value;
+    public final int year;
 
     /**
      * Constructs an academic year.
@@ -19,7 +19,7 @@ public class AcademicYear {
     public AcademicYear(int year) {
         requireNonNull(year);
         checkArgument(isValidAcademicYear(year), MESSAGE_CONSTRAINTS);
-        this.value = year;
+        this.year = year;
     }
 
     /**
@@ -32,18 +32,18 @@ public class AcademicYear {
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return Integer.toString(year);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AcademicYear) // instanceof handles nulls
-                && value == (((AcademicYear) other).value); // state check
+                && year == (((AcademicYear) other).year); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(year);
     }
 }

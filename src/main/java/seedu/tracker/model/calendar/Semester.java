@@ -11,7 +11,7 @@ public class Semester {
     public static final String MESSAGE_CONSTRAINTS =
             "Semester should only contain numbers from 1 to 4, and it should not be blank";
 
-    public final int value;
+    public final int semester;
 
     /**
      * Constructs a semester.
@@ -20,7 +20,7 @@ public class Semester {
     public Semester(int semester) {
         requireNonNull(semester);
         checkArgument(isValidSemester(semester), MESSAGE_CONSTRAINTS);
-        this.value = semester;
+        this.semester = semester;
     }
 
     /**
@@ -32,18 +32,18 @@ public class Semester {
 
     @Override
     public String toString() {
-        return Integer.toString(value);
+        return Integer.toString(semester);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Semester) // instanceof handles nulls
-                && value == (((Semester) other).value); // state check
+                && semester == (((Semester) other).semester); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(semester);
     }
 }

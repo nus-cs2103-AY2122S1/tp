@@ -14,7 +14,8 @@ public class Mc {
 
     public static final String MESSAGE_CONSTRAINTS =
             "MC credit should only be an Integer, and it should not be less than 0.";
-    public final int value;
+    public final int mc;
+
 
     /**
      * Constructs a {@code Phone}.
@@ -24,7 +25,7 @@ public class Mc {
     public Mc(int mc) {
         requireNonNull(mc);
         checkArgument(isValidMc(mc), MESSAGE_CONSTRAINTS);
-        this.value = mc;
+        this.mc = mc;
     }
 
     /**
@@ -36,18 +37,18 @@ public class Mc {
 
     @Override
     public String toString() {
-        return value + "MC(s)";
+        return mc + "MC(s)";
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.tracker.model.module.Mc // instanceof handles nulls
-                && value == (((seedu.tracker.model.module.Mc) other).value)); // state check
+                && mc == (((seedu.tracker.model.module.Mc) other).mc)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(mc);
     }
 }

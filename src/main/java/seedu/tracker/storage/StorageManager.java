@@ -7,9 +7,7 @@ import java.util.logging.Logger;
 
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.commons.exceptions.DataConversionException;
-import seedu.tracker.model.ReadOnlyModuleTracker;
-import seedu.tracker.model.ReadOnlyUserPrefs;
-import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.*;
 
 /**
  * Manages storage of ModuleTracker data in local storage.
@@ -19,6 +17,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private ModuleTrackerStorage moduleTrackerStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserInfoStorage userInfoStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code ModuleTrackerStorage} and {@code UserPrefStorage}.
@@ -44,6 +43,23 @@ public class StorageManager implements Storage {
     @Override
     public void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException {
         userPrefsStorage.saveUserPrefs(userPrefs);
+    }
+
+    // ================ UserInfo methods ==============================
+
+    @Override
+    public Path getUserInfoFilePath() {
+        return userInfoStorage.getUserInfoFilePath();
+    }
+
+    @Override
+    public Optional<UserInfo> readUserInfo() throws DataConversionException, IOException {
+        return userInfoStorage.readUserInfo();
+    }
+
+    @Override
+    public void saveUserInfo(ReadOnlyUserInfo userInfo) throws IOException {
+        userInfoStorage.saveUserInfo(userInfo);
     }
 
 

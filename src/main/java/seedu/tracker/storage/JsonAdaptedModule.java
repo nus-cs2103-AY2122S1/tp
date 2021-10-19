@@ -61,11 +61,11 @@ class JsonAdaptedModule {
         code = source.getCode().value;
         title = source.getTitle().value;
         description = source.getDescription().value;
-        mc = source.getMc().value;
+        mc = source.getMc().mc;
 
         if (source.hasAcademicCalendar()) {
-            academicYear = source.getAcademicCalendar().getAcademicYear().value;
-            semester = source.getAcademicCalendar().getSemester().value;
+            academicYear = source.getAcademicCalendar().getAcademicYear().year;
+            semester = source.getAcademicCalendar().getSemester().semester;
         } else {
             academicYear = 0;
             semester = 0;

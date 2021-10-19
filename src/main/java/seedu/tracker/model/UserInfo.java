@@ -17,13 +17,13 @@ import static java.util.Objects.requireNonNull;
  */
 public class UserInfo implements ReadOnlyUserInfo {
     AcademicCalendar currentSemester;
-    Mc McGoal;
+    Mc mcGoal;
 
     public UserInfo() {}
 
-    public UserInfo(AcademicCalendar currentSemester, Mc McGoal) {
+    public UserInfo(AcademicCalendar currentSemester, Mc mcGoal) {
         this.currentSemester = currentSemester;
-        this.McGoal = McGoal;
+        this.mcGoal = mcGoal;
     }
 
     /**
@@ -39,7 +39,7 @@ public class UserInfo implements ReadOnlyUserInfo {
      */
     public void setUserInfo(UserInfo details) {
         this.currentSemester = details.getCurrentSemester();
-        this.McGoal = details.getMcGoal();
+        this.mcGoal = details.getMcGoal();
     }
 
     /**
@@ -70,11 +70,11 @@ public class UserInfo implements ReadOnlyUserInfo {
     }
 
     public Mc getMcGoal() {
-        return McGoal;
+        return mcGoal;
     }
 
     public void setMcGoal(Mc mcGoal) {
-        McGoal = mcGoal;
+        this.mcGoal = mcGoal;
     }
 
     @Override
@@ -106,6 +106,6 @@ public class UserInfo implements ReadOnlyUserInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(currentSemester, McGoal);
+        return Objects.hash(currentSemester, mcGoal);
     }
 }
