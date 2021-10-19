@@ -125,14 +125,22 @@ public class AddressBook implements ReadOnlyAddressBook {
         events.add(e);
     }
 
-    //setEvent omitted for future implementation
-
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in Managera.
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    /**
+     * Replaces the given Event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in Managera.
+     * This Event identity of {@code editedEvent} must not be the same
+     * as another existing Event in Managera.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        events.setEvent(target, editedEvent);
     }
 
     /**
