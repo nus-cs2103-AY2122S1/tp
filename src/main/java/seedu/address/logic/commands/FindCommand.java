@@ -25,12 +25,23 @@ public class FindCommand extends Command {
 
     private final ArrayList<Predicate<Person>> predicates;
 
+    /**
+     * Constructor for FindCommand.
+     * predicates should not be null.
+     *
+     * @param predicates A list of predicates to filter applicants by.
+     */
     public FindCommand(ArrayList<Predicate<Person>> predicates) {
+        requireNonNull(predicates);
+
         this.predicates = predicates;
     }
 
     @Override
     public CommandResult execute(Model model) {
+
+        assert predicates != null : "predicates should not be null";
+
         requireNonNull(model);
 
         // Accumulate the predicates via stream

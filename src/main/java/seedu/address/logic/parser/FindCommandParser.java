@@ -81,6 +81,8 @@ public class FindCommandParser implements Parser<FindCommand> {
          */
         FindDescriptor(ArgumentMultimap argMultimap) throws ParseException {
 
+            assert !argMultimap.isEmpty() : "FindDescriptor should not be created with empty ArgumentMultimap";
+
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 addToPredicateList(extractNamePrefixInput(argMultimap));
             }
