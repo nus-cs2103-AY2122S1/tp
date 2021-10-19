@@ -49,11 +49,11 @@ public class TuitionClassInfoPage extends InfoPage {
 
         this.tuitionClass = tuitionClass;
         this.name.setText(tuitionClass.getName().toString());
-        this.sizeLimit.setText("Maximum students: " + tuitionClass.getLimit());
-        this.studentCount.setText("No. of students: " + tuitionClass.getStudentCount());
-        this.timeSlot.setText("Timeslot: " + tuitionClass.getTimeslot());
-        this.students.setText("Students: " + tuitionClass.listStudents());
-        this.remark.setText("Remark: " + tuitionClass.getRemark());
+        this.sizeLimit.setText(tuitionClass.getLimit().toString());
+        this.studentCount.setText("" + tuitionClass.getStudentCount());
+        this.timeSlot.setText(tuitionClass.getTimeslot().toString());
+        this.students.setText(tuitionClass.listStudents());
+        this.remark.setText(tuitionClass.getRemark().toString());
     }
 
 
