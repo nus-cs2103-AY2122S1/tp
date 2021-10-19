@@ -2,6 +2,7 @@ package tutoraid.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutoraid.testutil.TypicalStudents.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,8 +11,10 @@ import java.util.List;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.logic.parser.CliSyntax;
+import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.StudentBook;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
@@ -54,6 +57,20 @@ public class CommandTestUtil {
     public static final String INVALID_PARENT_PHONE_DESC =
             " " + CliSyntax.PREFIX_PARENT_PHONE + "911a"; // 'a' not allowed in phones
 
+    public static final String VALID_LESSON_NAME_MATHS_TWO = "Maths 2";
+    public static final String VALID_LESSON_NAME_SCIENCE_TWO = "Science 2";
+
+    public static final String VALID_CAPACITY_MATHS_TWO = "40";
+    public static final String VALID_CAPACITY_SCIENCE_TWO = "45";
+
+    public static final String VALID_PRICE_MATHS_TWO = "130";
+    public static final String VALID_PRICE_SCIENCE_TWO = "145";
+
+    public static final ArrayList<Student> VALID_STUDENTS_MATHS_TWO = new ArrayList<>(Arrays.asList(ALICE));
+    public static final ArrayList<Student> VALID_STUDENTS_SCIENCE_TWO = new ArrayList<>(Arrays.asList(ALICE));
+
+    public static final String VALID_TIMING_MATHS_TWO = "1000-1200";
+    public static final String VALID_TIMING_SCIENCE_TWO = "1400-1600";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -112,11 +129,16 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         StudentBook expectedStudentBook = new StudentBook(actualModel.getStudentBook());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Student> expectedFilteredStudentList = new ArrayList<>(actualModel.getFilteredStudentList());
+
+        LessonBook expectedLessonBook = new LessonBook(actualModel.getLessonBook());
+        List<Lesson> expectedFilteredLessonList = new ArrayList<>(actualModel.getFilteredLessonList());
 
         Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedStudentBook, actualModel.getStudentBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredStudentList, actualModel.getFilteredStudentList());
+        assertEquals(expectedLessonBook, actualModel.getLessonBook());
+        assertEquals(expectedFilteredLessonList, actualModel.getFilteredLessonList());
     }
 
     /**

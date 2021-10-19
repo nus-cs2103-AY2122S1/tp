@@ -48,5 +48,4 @@ public class Price {
     public int hashCode() {
         return price.hashCode();
     }
-
 }

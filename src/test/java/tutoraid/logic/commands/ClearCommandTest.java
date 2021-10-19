@@ -8,6 +8,7 @@ import tutoraid.model.Model;
 import tutoraid.model.ModelManager;
 import tutoraid.model.StudentBook;
 import tutoraid.model.UserPrefs;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class ClearCommandTest {
@@ -22,8 +23,10 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyStudentBook_success() {
-        Model model = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(TypicalStudents.getTypicalStudentBook(), new UserPrefs());
+        Model model = new ModelManager(TypicalStudents.getTypicalStudentBook(),
+                TypicalLessons.getTypicalLessonBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(TypicalStudents.getTypicalStudentBook(),
+                TypicalLessons.getTypicalLessonBook(), new UserPrefs());
         expectedModel.setStudentBook(new StudentBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
