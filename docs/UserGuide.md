@@ -171,11 +171,11 @@ When adding student indexes, using space to separate indexes.
 
 Format:
 
-`addtoclass si/STUDENT_INDEX [STUDENT_INDEX]... tc/INDEX_CLASS`
+`addtoclass si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX`
 
 or
 
-`addtoclass s/NAME[,NAME,NAME...] tc/INDEX_CLASS`
+`addtoclass s/NAME[,NAME,NAME...] tc/CLASS_INDEX`
 
 Examples:
 ```
@@ -197,7 +197,7 @@ Command Shortcut: `rm`
 
 Removes existing students from a tuition class using student INDEX.
 
-Format: `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
+Format: `remove si/INDEX_STUDENT INDEX_STUDENT tc/CLASS_INDEX`
 
 Examples:
 ```
@@ -207,37 +207,45 @@ remove si/1 tc/1
 rm si/1 2 3 4 tc/2
 ```
 
-### Adding remarks to a student: `remark`
+### Adding remark to a student/tuition class
+Upon entering the command, a pop-up window is displayed for the user to edit the remarks.
+
+#### Adding remarks to a student: `remark`
 
 Command Shortcut: `re`
 
-Adds a remark to the identified student.
+Add a remark to the identified student.
 
-Format: `remark STUDENT_INDEX r/REMARK`
+Format: `remark STUDENT_INDEX`
 
 Examples:
 ```
-remark 1 r/Hasn't paid last week's fee
+remark 1
 ```
 ```
-re 2 r/Exam on 28 Oct
+re 2
 ```
 
 #### Adding remarks to a tuition class: `remarkclass`
 
 Command Shortcut: `rec`
 
-Format: `remarkclass INDEX_CLASS r/REMARK`
+Format: `remarkclass CLASS_INDEX`
 
 Examples:
 ```
-remarkclass 2 r/Math homework due Friday
+remarkclass 2
 ```
 ```
-rec 1 r/No class on week 7
+rec 1
 ```
+<br>
 
-### Finding students by name: `find`
+![Ui](images/remarkEditor.png)
+
+### Finding students/tuition classes by name
+
+#### Finding students by name: `find`
 
 Command Shortcut: `f`
 
@@ -255,13 +263,7 @@ f alice tan
 ```
 TutAssitor will display a list of all students with `alice` or `tan` in their name.
 
-#### Listing all students: `list`
-
-Command Shortcut: `l`
-
-Display list of all students after conducting a search with the `find` command.
-
-### Finding classes by name: `findclass`
+#### Finding classes by name: `findclass`
 
 Command Shortcut: `fc`
 
@@ -278,6 +280,13 @@ or
 fc physics chemistry
 ```
 TutAssitor will display a list of all classes with `physics` or `chemistry` in their name.
+
+#### Listing all students: `list`
+
+Command Shortcut: `l`
+
+Display list of all students after conducting a search with the `find` command.
+
 
 #### Listing all classes: `listclass`
 
@@ -339,12 +348,12 @@ Action | Format | Shortcut
 ***View Class*** | `class INDEX` | `vc`
 ***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…` | `e`
 ***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `ec`
-***Delete Student*** | `deletestudent INDEX_STUDENT INDEX_STUDENT` | `del`
-***Delete Class*** | `deleteclass INDEX_CLASS INDEX_CLASS` | `delc`
-***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS` | `atc`
-***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` | `rm`
-***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK` | `re`
-***Add Remarks to Class*** | `remarkclass INDEX_CLASS r/REMARK` | `rec`
+***Delete Student*** | `deletestudent INDEX [INDEX]...` | `del`
+***Delete Class*** | `deleteclass INDEX [INDEX]...` | `delc`
+***Add Student to Class*** | `addtoclass si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX` <br /> or `addtoclass s/NAME,NAME... tc/CLASS_INDEX` | `atc`
+***Remove Students from Class*** | `remove si/STUDENT_INDEX [STUDENT_INDEX]... tc/CLASS_INDEX` | `rm`
+***Add Remarks to Student*** | `remark INDEX` | `re`
+***Add Remarks to Class*** | `remarkclass INDEX` | `rec`
 ***Find Student by Name*** | `find NAME` | `f`
 ***List all Students*** | `list` | `l`
 ***Find Class by Name*** | `findclass NAME` | `fc`
