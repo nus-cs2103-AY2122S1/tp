@@ -28,7 +28,7 @@ public class HelpPanel extends UiPart<Region> {
             + "4. Find by name -> find NAME\n"
             + "5. Find by other info -> find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]\n"
             + "6. Clear Contacts -> clear\n"
-            + "7. Tag Person -> tag INDEX [t/TAG]"
+            + "7. Tag Person -> tag INDEX [t/TAG]\n"
             + "Tasks Tab:\n"
             + "1. Add -> add d/DESCRIPTION [t/TAG]\n"
             + "2. Edit -> edit INDEX [d/DESCRIPTION] [t/TAG]\n"
@@ -37,7 +37,8 @@ public class HelpPanel extends UiPart<Region> {
             + "5. Find by tag -> find [t/TAG]\n"
             + "6. Clear Tasks -> clear\n"
             + "7. Tag Tasks -> tag INDEX [t/TAG]\n"
-            + "8. Complete Tasks -> complete INDEX\n\n"
+            + "8. Assign People to Tasks -> assign INDEX [p/INDEX]\n"
+            + "9. Complete Tasks -> complete INDEX\n\n"
             + "For more detailed information,"
             + " visit our User Guide or Developer Guide by clicking the buttons below to copy \n"
             + " their URLs. \n\n";

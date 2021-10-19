@@ -3,7 +3,6 @@ package dash.logic.commands.taskcommand;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,8 +37,8 @@ public class TagTaskCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index of the task in the filtered task list to edit
-     * @param editTaskDescriptor details to edit the task with
+     * @param index of the task in the filtered task list to tag
+     * @param editTaskDescriptor tags to add to the task
      */
     public TagTaskCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(index);
@@ -79,6 +78,6 @@ public class TagTaskCommand extends Command {
         updatedTags.addAll(newTags);
 
         return new Task(taskToEdit.getTaskDescription(), taskToEdit.getCompletionStatus(),
-                taskToEdit.getTaskDate(), taskToEdit.getPeople(), Collections.unmodifiableSet(updatedTags));
+                taskToEdit.getTaskDate(), taskToEdit.getPeople(), updatedTags);
     }
 }
