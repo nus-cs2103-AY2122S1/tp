@@ -12,7 +12,7 @@ import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate
  */
 public class FindCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose names contain "
             + "any of "
