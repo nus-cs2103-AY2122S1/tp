@@ -16,8 +16,11 @@ import seedu.fast.model.tag.Tag;
 
 public class TagCommandParser implements Parser<TagCommand> {
 
-
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the TagCommand
+     * and returns a TagCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     @Override
     public TagCommand parse(String arg) throws ParseException {
         requireNonNull(arg);
@@ -34,17 +37,23 @@ public class TagCommandParser implements Parser<TagCommand> {
         Set<Tag> addTags = new HashSet<>();
         Set<Tag> deleteTags = new HashSet<>();
 
-        if (argMultimap.getValue(PREFIX_ADD_TAG).isPresent()) {
-            for (String str: argMultimap.getAllValues(PREFIX_ADD_TAG)) {
-                addTags.add(Tag.createTag(str));
+        try {
+            if (argMultimap.getValue(PREFIX_ADD_TAG).isPresent()) {
+                for (String str: argMultimap.getAllValues(PREFIX_ADD_TAG)) {
+                    addTags.add(Tag.createTag(str));
+                }
             }
+
+            if (argMultimap.getValue(PREFIX_DELETE_TAG).isPresent()) {
+                for (String str: argMultimap.getAllValues(PREFIX_DELETE_TAG)) {
+                    deleteTags.add(Tag.createTag(str));
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            //TODO: logging
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
 
-        if (argMultimap.getValue(PREFIX_DELETE_TAG).isPresent()) {
-            for (String str: argMultimap.getAllValues(PREFIX_DELETE_TAG)) {
-                deleteTags.add(Tag.createTag(str));
-            }
-        }
 
         return new TagCommand(index, addTags, deleteTags);
     }

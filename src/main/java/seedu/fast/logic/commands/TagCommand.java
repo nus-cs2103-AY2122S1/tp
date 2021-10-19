@@ -110,7 +110,7 @@ public class TagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemarkCommand)) {
+        if (!(other instanceof TagCommand)) {
             return false;
         }
 
