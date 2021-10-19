@@ -18,7 +18,7 @@ public class Done {
         this.isDone = false;
     }
 
-    public Boolean applicantIsDone() {
+    public Boolean applicantDoneStatus() {
         return isDone;
     }
 
