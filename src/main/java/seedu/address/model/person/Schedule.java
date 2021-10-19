@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.person.Shift.isValidShift;
+
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Objects;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -30,7 +33,6 @@ public class Schedule {
 
     private Shift[][] shifts = new Shift[7][2];
 
-
     /**
      * Initialize schedule object.
      */
@@ -46,10 +48,14 @@ public class Schedule {
      * Alternate constructor for schedule object.
      */
     public Schedule(String loadString) {
+        if (!isValidSchedule(loadString)) {
+            throw new IllegalArgumentException("String does not match a valid schedule");
+        }
         String[] shiftArray = loadString.split(" ");
         for (String s : shiftArray) {
             String[] shiftString = s.split("-");
-            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
+            String shiftDayString = shiftString[0].toUpperCase();
+            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
             shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
@@ -92,6 +98,34 @@ public class Schedule {
      */
     public boolean isWorking(DayOfWeek dayOfWeek, Slot slot) {
         return shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null;
+    }
+
+    /**
+     * Checks whether a staff is working in a certain period.
+     *
+     * @param dayOfWeek The day want to check.
+     * @param slotNum The slot number want to check.
+     */
+    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
+        // TODO change from slots 0 and 1 to checking by a specific timing?
+        return shifts[dayOfWeek.getValue() - 1][slotNum] != null;
+    }
+
+    /**
+     * Checks whether a staff is working in a certain period.
+     *
+     * @param time The time to check if the staff is working at
+     */
+    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time) {
+        for (Shift s : shifts[dayOfWeek.getValue() - 1]) {
+            if (s == null) {
+                continue;
+            }
+            if (s.isWorking(time)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -175,7 +209,7 @@ public class Schedule {
         }
         String[] shiftSplit = test.split(" ");
         for (String s : shiftSplit) {
-            if (!Shift.isValidShift(s)) {
+            if (!isValidShift(s)) {
                 return false;
             }
         }
