@@ -1,6 +1,7 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -37,8 +38,7 @@ public class EnrollCommand extends Command {
      * Creates an EnrollCommand for a Student with a given index to a specified {@code Lesson}.
      */
     public EnrollCommand(Index indexStudent, Index indexLesson) {
-        requireNonNull(indexStudent);
-        requireNonNull(indexLesson);
+        requireAllNonNull(indexStudent, indexLesson);
 
         this.indexStudent = indexStudent;
         this.indexLesson = indexLesson;
