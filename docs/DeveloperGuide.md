@@ -186,7 +186,7 @@ Command syntax
 
 #### Implementation
 
-The Enroll feature establishes a bi-directional relationship 
+The Enroll feature establishes a bi-directional relationship
 between a student and a specific lesson. This student to be enrolled must meet a set of conditions.
 1. The student has to have the same `Grade` as specified in the lesson.
 2. The student cannot already be enrolled in the lesson.
@@ -194,14 +194,14 @@ between a student and a specific lesson. This student to be enrolled must meet a
 When enrolled, the student will have that lesson added to their list
 of existing lessons, while the lesson size would increase by 1.
 
-Given below is an example usage scenario and how the enroll operation behaves.  
-_Note: For this usage, we only consider the main success scenario 
+Given below is an example usage scenario and how the enroll operation behaves.
+_Note: For this usage, we only consider the main success scenario
 (i.e. the student exists, has the same `grade` as the specific lesson,
 and has not been enrolled in the lesson yet)._
 
 <ins>Step 1:</ins>
 
-User has a list of students and lessons presented in their 
+User has a list of students and lessons presented in their
 TuitiONE application. The user has one has a `Lesson` with the lessoncode Math-P2-Wed-1800 and `grade`
 P2 that they would like to enroll a `Student` named Alice of `grade` P2 into.
 The object state diagram is as such:
@@ -229,7 +229,7 @@ The following sequence diagram shows how the enroll lesson operation works:
 
 ![EnrollLessonSequenceDiagram](images/EnrollLessonSequenceDiagram.png)
 
-The following activity diagram summarizes what 
+The following activity diagram summarizes what
 happens when a user executes the enroll lesson command:
 
 ![EnrollLessonActivityDiagram](images/EnrollLessonActivityDiagram.png)
@@ -252,7 +252,7 @@ happens when a user executes the enroll lesson command:
         * Less intuitive for the user as they have to refer to the GUI to ensure they have the correct lesson before enrolling
         * Might require user to filter lesson first before referring to GUI, incurring an extra step
 
-<ins>Decision</ins>  
+<ins>Decision</ins>
 Ultimately, Option 2 (`enroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as our team felt that a user would value efficiency when typing multiple enroll commands rather than typing out an entire lesson code.
 The user is still able to refer to the GUI in this instance, with the help with filter commands, making it rather easy for the user to achieve the same result as using a lesson code.
 
@@ -540,7 +540,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 1a. The list is empty.
-  
+
     Use case ends.
 
 * 2a. TuitiONE detects an error in entered command.
@@ -560,7 +560,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO requests to add a lesson with relevant details.
-2. TuitiONE adds the lesson.  
+2. TuitiONE adds the lesson.
 
     Use case ends.
 
@@ -576,7 +576,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1b. Lesson already exists in TuitiONE.
     * 1b1. TuitiONE informs that there already exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC07: View details of a Lesson**
 
@@ -635,7 +635,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 2b. Lesson does not exists in TuitiONE.
     * 2b1. TuitiONE informs that there does not exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC10 - Update a specific Student’s Details**
 
@@ -651,7 +651,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * 2a. TuitiONE detects an error in entered command.
       * 2a1. TuitiONE requests CSO to input a valid command.
-      * 2a2. CSO enters new command. 
+      * 2a2. CSO enters new command.
         Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
@@ -744,28 +744,29 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO enters help.
-2. TuitiONE provides the basic commands, as well as the user guide link.  
+2. TuitiONE provides the basic commands, as well as the user guide link.
 
     Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.  
-    * Performance requirements: the system should respond within 2 seconds.  
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.  
-4. Technical requirements: The system should work in both 32-bit and 64-bit environments.  
-5. Quality requirements:  
-    * User interface not produce excessive colour changes/flashing on command execution.  
-    * The user interface should use readable text styling, i.e. appropriate size and font.  
-    * All string output must be in UTF-8 encoding.  
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+    * Performance requirements: the system should respond within 2 seconds.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) 
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
+5. Quality requirements:
+    * User interface not produce excessive colour changes/flashing on command execution.
+    * The user interface should use readable text styling, i.e. appropriate size and font.
+    * All string output must be in UTF-8 encoding.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X  
-* **Private contact detail**: A contact detail that is not meant to be shared with others  
-* **CSO**: Customer Service Officer  
-* **GUI**: Graphical User Interface  
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CSO**: Customer Service Officer
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
