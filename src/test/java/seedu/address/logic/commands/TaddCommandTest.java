@@ -43,7 +43,30 @@ class TaddCommandTest {
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
+        ModelStubAcceptingTaskAdded modelStub =
+                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
+        CommandResult commandResult = new TaddCommand(validMemberIdList, validTask).execute(modelStub);
+
+        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_taskForMultipleMembersAcceptedByModel_addSuccessful() throws Exception {
+        Index validMemberID1 = Index.fromOneBased(1);
+        Index validMemberID2 = Index.fromOneBased(2);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberID1);
+        validMemberIdList.add(validMemberID2);
+        Task validTask = new Task("Do homework");
+        Member validMember1 = new MemberBuilder().build();
+        Member validMember2 = new MemberBuilder()
+                .withName("Amy").withEmail("amy@fakemail")
+                .withPhone("12312312").withAddress("Block23 St Andrew Street").build();
+        AddressBook addressBook = new AddressBookBuilder().withMember(validMember1).build();
+        addressBook.addMember(validMember2);
+        ModelStubAcceptingTaskAdded modelStub =
+                new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberIdList);
         CommandResult commandResult = new TaddCommand(validMemberIdList, validTask).execute(modelStub);
 
         assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
@@ -241,17 +264,20 @@ class TaddCommandTest {
      */
     private class ModelStubAcceptingTaskAdded extends ModelStub {
         private final AddressBook addressBook;
-        private final Member member;
+        private final Set<Member> members = new HashSet<>();
         private final Task task;
         private final TaskListManager taskListManager;
         private final FilteredList<Member> filteredMembers;
 
 
-        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
+        ModelStubAcceptingTaskAdded(ReadOnlyAddressBook addressBook, Task task, Set<Index> memberIdList) {
             this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
+            requireNonNull(memberIdList);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
+            for (Index memberId: memberIdList) {
+                this.members.add(filteredMembers.get(memberId.getZeroBased()));
+            }
+
             requireNonNull(task);
             this.task = task;
             this.taskListManager = new TaskListManager();
