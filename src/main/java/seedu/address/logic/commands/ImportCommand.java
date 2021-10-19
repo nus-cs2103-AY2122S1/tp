@@ -38,7 +38,7 @@ public class ImportCommand extends Command {
             }
             model.addPerson(person);
         }
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(personsToAdd.size() + " " + MESSAGE_SUCCESS);
     }
 
     @Override
