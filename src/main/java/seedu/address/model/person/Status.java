@@ -3,7 +3,7 @@ package seedu.address.model.person;
 /**
  * This class stands for every possible status for a staff
  */
-public enum Status {
+public enum Status implements Field {
     //Can add more later
     FULL_TIME("fulltime"), PART_TIME("parttime"), NO_STATUS("nostatus");
 

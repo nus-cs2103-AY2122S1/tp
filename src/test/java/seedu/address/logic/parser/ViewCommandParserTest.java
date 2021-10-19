@@ -32,7 +32,7 @@ public class ViewCommandParserTest {
     public void test_no_input() {
         String userInput = COMMAND_WORD;
         ViewCommandParser parser = new ViewCommandParser();
-        assertParseFailure(parser, userInput, ViewCommand.HELP_MESSAGE);
+        assertParseFailure(parser, userInput, ViewCommand.MESSAGE_USAGE);
     }
 
     @Test

@@ -5,25 +5,31 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.PersonContainsFieldsPredicate;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
-import seedu.address.model.person.Slot;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
@@ -109,22 +115,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String role} into an {@code Role}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code role} is invalid.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
-    public static Role parseRoles(List<String> role) throws ParseException {
-        int length = role.size();
-        if (length == 0) {
-            return Role.NO_ROLE;
+    public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
+        requireNonNull(roles);
+        final Set<Role> roleSet = new HashSet<>();
+        for (String roleName : roles) {
+            roleSet.add(parseRole(roleName));
         }
-        String roleLast = role.get(role.size() - 1);
-        String trimmedRole = roleLast.trim();
-        if (!Role.isValidRole(trimmedRole)) {
-            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-        }
-        return Role.translateStringToRole(trimmedRole);
+        return roleSet;
     }
 
     /**
@@ -175,6 +174,9 @@ public class ParserUtil {
         requireNonNull(shiftDay);
         String trimmedStr = shiftDay.trim().toLowerCase();
         String[] strings = trimmedStr.split("-");
+        if (strings.length != 2) {
+            throw new ParseException(messageConstraints);
+        }
         switch (strings[0]) {
         case "monday":
         case "tuesday":
@@ -195,22 +197,6 @@ public class ParserUtil {
         return trimmedStr;
     }
 
-    /**
-     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
-     * Leading and trailing whitespaces will be trimmed.
-     * This parser is not case sensitive.
-     *
-     * @throws ParseException if the given {@code dayOfWeek} is invalid.
-     */
-    public static Slot parseSlot(String slot) throws ParseException {
-        requireNonNull(slot);
-        String trimmedSlot = slot.trim();
-        if (!Slot.isValidSlot(trimmedSlot)) {
-            throw new ParseException(Slot.MESSAGE_CONSTRAINTS);
-        }
-        //maybe need to assert slot cannot be null
-        return Slot.translateStringToSlot(slot);
-    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -231,7 +217,7 @@ public class ParserUtil {
      * Parses a {@code String status} into a {@code Status}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code status} is invalud
+     * @throws ParseException if the given {@code status} is invalid
      */
     public static Status parseStatus(String status) throws ParseException {
         requireNonNull(status);
@@ -273,25 +259,59 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> periods} to a {@code period} from the earliest date to the
+     * latest date in the collection.
+     * @throws ParseException When the input does not have the correct format.
+     */
+    public static Period parsePeriod(Collection<String> periods) throws ParseException {
+        LocalDate start = LocalDate.MAX;
+        LocalDate end = LocalDate.MIN;
+        try {
+            for (String periodName : periods) {
+                if (start.isAfter(LocalDate.parse(periodName))) {
+                    start = LocalDate.parse(periodName);
+                }
+                if (end.isBefore(LocalDate.parse(periodName))) {
+                    end = LocalDate.parse(periodName);
+                }
+            }
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_DATE_PARSED);
+        }
+
+        return new Period(start, end);
+    }
+
+
+
+    /**
      * Parses {@code args} into {@code PersonContainsFieldsPredicate} which tests a person for all
      * of the qualifiers of the predicate.
-     * @throws ParseException
+     * @throws ParseException Throws parse exception when the input is not something needed.
      */
-    public static PersonContainsFieldsPredicate testByAllFields(String args) throws ParseException {
-        requireNonNull(args);
+    public static PersonContainsFieldsPredicate testByAllFields(ArgumentMultimap argMultimap) throws ParseException {
+        requireNonNull(argMultimap);
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate();
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
-        //when no argument is given to the argMultiMap
-        if (argMultimap.isEmpty()) {
-            throw new ParseException(ViewCommand.HELP_MESSAGE);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME), ParserUtil::parseName);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS), ParserUtil::parseAddress);
+        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG), ParserUtil::parseTag);
+        try {
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_ROLE), Role::translateStringToRole);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_SALARY), Salary::new);
+            predicate.addFieldToTest(argMultimap.getValue(PREFIX_STATUS), Status::translateStringToStatus);
+        } catch (IllegalArgumentException iae) {
+            throw new ParseException(iae.getMessage());
         }
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_NAME).map(Name::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_PHONE).map(Phone::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_EMAIL).map(Email::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_ADDRESS).map(Address::new));
-        predicate.addFieldToTest(argMultimap.getValue(PREFIX_TAG).map(Tag::new));
         return predicate;
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

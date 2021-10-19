@@ -4,7 +4,7 @@
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street",
-    "role": "hr",
+    "role": [ "floor" ],
     "status": "fulltime",
     "salary": "600000"
   }, {
@@ -12,7 +12,7 @@
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",
-    "role": "director",
+    "role": [ "bartender" ],
     "status": "parttime",
     "salary": "800000"
   } ]

@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,12 +22,25 @@ import seedu.address.model.person.PersonContainsFieldsPredicate;
  * which views the schedule by Person.
  */
 public class ViewScheduleCommand extends Command {
+
     public static final String DEFAULT_MESSAGE = "Schedule viewed of staff: %1$s\n";
     public static final String COMMAND_WORD = "viewSchedule";
-    public static final String HELP_MESSAGE = ": view the schedule of a staff\n"
-            + "Method to use:\n"
-            + "viewSchedule [" + PREFIX_NAME + "NAME]";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the schedules of the staff that have the"
+            + "input parameters.\n\n"
+            + "Parameters:\n"
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_INDEX + "INDEX] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SALARY + "SALARY] "
+            + "[" + PREFIX_STATUS + "STATUS] "
+            + "[" + PREFIX_ROLE + "ROLE]... "
+            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "Example:\n" + COMMAND_WORD + " "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
     private static final String NAME_NOT_IN_LIST_ERROR = "Name used not in dataset.";
 
     private final PersonContainsFieldsPredicate predicate;

@@ -1,9 +1,12 @@
 package seedu.address.model.person;
 
+import static seedu.address.model.person.Shift.isValidShift;
+
 import java.time.DayOfWeek;
 import java.util.Objects;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
+import seedu.address.model.person.exceptions.NoShiftException;
 
 /**
  * Represents the schedule for the staff, which contains all the task for the staff.
@@ -14,6 +17,8 @@ public class Schedule {
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
+    // Set the number of hours for a slot as 4 hours
+    private static final int HOURS_PER_SLOT = 4;
 
 
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
@@ -43,10 +48,14 @@ public class Schedule {
      * Alternate constructor for schedule object.
      */
     public Schedule(String loadString) {
+        if (!isValidSchedule(loadString)) {
+            throw new IllegalArgumentException("String does not match a valid schedule");
+        }
         String[] shiftArray = loadString.split(" ");
         for (String s : shiftArray) {
             String[] shiftString = s.split("-");
-            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftString[0]);
+            String shiftDayString = shiftString[0].toUpperCase();
+            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
             Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
             shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
         }
@@ -72,8 +81,12 @@ public class Schedule {
      *
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The period of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) {
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
+            throw new NoShiftException();
+        }
         shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = null;
     }
 
@@ -125,6 +138,23 @@ public class Schedule {
     }
 
     /**
+     * Calculates the total working hours os one schedule.
+     *
+     * @return The total working hours.
+     */
+    public int getTotalWorkingHour() {
+        int totalHours = 0;
+        for (Shift[] dayShifts : shifts) {
+            for (Shift shift : dayShifts) {
+                if (shift != null) {
+                    totalHours += HOURS_PER_SLOT;
+                }
+            }
+        }
+        return totalHours;
+    }
+
+    /**
      * Returns String representation of the schedule object.
      *
      * @return String representation of all existing shifts in the schedule, concatenated with a whitespace.
@@ -151,7 +181,7 @@ public class Schedule {
         }
         String[] shiftSplit = test.split(" ");
         for (String s : shiftSplit) {
-            if (!Shift.isValidShift(s)) {
+            if (!isValidShift(s)) {
                 return false;
             }
         }

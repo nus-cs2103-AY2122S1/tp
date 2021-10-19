@@ -6,10 +6,12 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Salary;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -23,8 +25,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_ROLE = "floor";
     public static final String DEFAULT_SALARY = "900000";
+    public static final String DEFAULT_ROLE = "floor";
     public static final String DEFAULT_STATUS = "parttime";
 
     private Name name;
@@ -32,9 +34,11 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private Role role;
+    private Set<Role> roles;
     private Salary salary;
     private Status status;
+    private Schedule schedule;
+    private Set<Period> absentDates;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -45,9 +49,12 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        role = Role.translateStringToRole(DEFAULT_ROLE);
+        absentDates = new HashSet<>();
+        roles = new HashSet<>();
+        roles.add(Role.translateStringToRole(DEFAULT_ROLE));
         salary = new Salary(DEFAULT_SALARY);
         status = Status.translateStringToStatus(DEFAULT_STATUS);
+        schedule = new Schedule();
     }
 
     /**
@@ -59,10 +66,22 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        role = personToCopy.getRole();
+        roles = new HashSet<>(personToCopy.getRoles());
         salary = personToCopy.getSalary();
         status = personToCopy.getStatus();
+        absentDates = personToCopy.getAbsentDates();
+        schedule = personToCopy.getSchedule();
     }
+
+    /**
+     * Parses the {@code periods} into a {@code Set<Period>} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withAbsentDates(String ... periods) {
+        this.absentDates = SampleDataUtil.getPeriodSet(periods);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Name} of the {@code Person} that we are building.
@@ -105,10 +124,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Role} of the {@code Person} that we are building.
+     * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withRole(String role) {
-        this.role = Role.translateStringToRole(role);
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
 
@@ -128,8 +147,20 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, role, salary, status, tags);
+    /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(String schedule) {
+        this.schedule = new Schedule(schedule);
+        return this;
     }
 
+    /**
+     * Returns a new Person object with the fields set in this PersonBuilder object.
+     */
+    public Person build() {
+        Person builtPerson = new Person(name, phone, email, address, roles, salary, status, tags, absentDates);
+        builtPerson.setSchedule(schedule);
+        return builtPerson;
+    }
 }
