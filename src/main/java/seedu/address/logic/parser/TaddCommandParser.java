@@ -33,9 +33,9 @@ public class TaddCommandParser implements Parser<TaddCommand> {
         }
 
         Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_NAME).get());
-        Set<Index> memberIDList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
+        Set<Index> memberIdList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
 
-        return new TaddCommand(memberIDList, task);
+        return new TaddCommand(memberIdList, task);
     }
 
     /**

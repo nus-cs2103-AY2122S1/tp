@@ -5,14 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
-
-import java.util.Set;
 
 /**
  * Adds a task to the task list of a person.
@@ -30,15 +30,15 @@ public class TaddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 
-    public final Set<Index> targetMemberIDList;
+    public final Set<Index> targetMemberIdList;
     public final Task toAdd;
 
     /**
      * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
-    public TaddCommand(Set<Index> memberIDList, Task task) {
-        requireAllNonNull(memberIDList, task);
-        targetMemberIDList = memberIDList;
+    public TaddCommand(Set<Index> memberIdList, Task task) {
+        requireAllNonNull(memberIdList, task);
+        targetMemberIdList = memberIdList;
         toAdd = task;
     }
 
@@ -47,7 +47,7 @@ public class TaddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getFilteredMemberList();
-        for (Index targetMemberID: targetMemberIDList) {
+        for (Index targetMemberID: targetMemberIdList) {
             Member targetMember = members.get(targetMemberID.getZeroBased());
             model.addTask(targetMember, toAdd);
         }

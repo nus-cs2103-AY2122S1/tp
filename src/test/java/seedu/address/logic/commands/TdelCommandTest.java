@@ -40,13 +40,13 @@ class TdelCommandTest {
     @Test
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
-        Set<Index> validMemberIDList = new HashSet<>();
-        validMemberIDList.add(validMemberID);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberID);
         Index validTaskID = Index.fromOneBased(1);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand tAddCommand = new TaddCommand(validMemberIDList, validTask);
+        TaddCommand tAddCommand = new TaddCommand(validMemberIdList, validTask);
         ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberID);
         tAddCommand.execute(modelStub);
         CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);

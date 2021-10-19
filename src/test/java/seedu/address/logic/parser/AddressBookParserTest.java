@@ -50,11 +50,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add_task() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
-        Set<Index> validMemberIDList = new HashSet<>();
-        validMemberIDList.add(validMemberID);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberID);
         Task validTask = new Task("do homework");
         TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
-        assertEquals(new TaddCommand(validMemberIDList, validTask), command);
+        assertEquals(new TaddCommand(validMemberIdList, validTask), command);
     }
 
     @Test

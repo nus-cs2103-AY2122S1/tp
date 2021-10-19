@@ -38,13 +38,13 @@ class TaddCommandTest {
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
-        Set<Index> validMemberIDList = new HashSet<>();
-        validMemberIDList.add(validMemberID);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberID);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
-        CommandResult commandResult = new TaddCommand(validMemberIDList, validTask).execute(modelStub);
+        CommandResult commandResult = new TaddCommand(validMemberIdList, validTask).execute(modelStub);
 
         assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
                 commandResult.getFeedbackToUser());
@@ -53,20 +53,20 @@ class TaddCommandTest {
     @Test
     public void equals() {
         Index validMemberID = Index.fromOneBased(1);
-        Set<Index> validMemberIDList = new HashSet<>();
-        validMemberIDList.add(validMemberID);
+        Set<Index> validMemberIdList = new HashSet<>();
+        validMemberIdList.add(validMemberID);
         Task validTask1 = new Task("Do homework");
         Task validTask2 = new Task("Write a poem");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand addHomeworkCommand = new TaddCommand(validMemberIDList, validTask1);
-        TaddCommand addPoemCommand = new TaddCommand(validMemberIDList, validTask2);
+        TaddCommand addHomeworkCommand = new TaddCommand(validMemberIdList, validTask1);
+        TaddCommand addPoemCommand = new TaddCommand(validMemberIdList, validTask2);
 
         // same object -> returns true
         assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberIDList, validTask1);
+        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberIdList, validTask1);
         assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false
