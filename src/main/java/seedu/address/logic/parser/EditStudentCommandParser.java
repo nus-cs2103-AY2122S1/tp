@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
