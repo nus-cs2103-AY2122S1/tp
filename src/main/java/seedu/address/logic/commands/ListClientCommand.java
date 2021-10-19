@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import seedu.address.model.Model;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Lists all Clients in the application to the user.
@@ -20,6 +21,6 @@ public class ListClientCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
         return new CommandResult(MESSAGE_SUCCESS, false,
-                false, false, model.getFilteredClientList().get(0), false, true);
+                false, false, SampleDataUtil.getSampleClients()[0], false, true);
     }
 }
