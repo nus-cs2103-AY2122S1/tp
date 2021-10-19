@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -94,7 +95,8 @@ public class EditClientCommand extends Command {
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
 
-        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress);
+        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress,
+                new HashSet<>());
     }
 
     @Override

@@ -2,11 +2,14 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.Category;
 import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 /**
  * Represents a Client in the app.
@@ -21,12 +24,13 @@ public class Client implements Category {
     private final PhoneNumber phoneNumber;
     private final Email email;
     private final Address address;
+    private final Set<Order> orders;
 
-    public Client(Name name, PhoneNumber phoneNumber, Email email, Address address) {
-        this(new ID(), name, phoneNumber, email, address);
+    public Client(Name name, PhoneNumber phoneNumber, Email email, Address address, Set<Order> orders) {
+        this(new ID(), name, phoneNumber, email, address, orders);
     }
 
-    private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address) {
+    private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address, Set<Order> orders) {
         requireAllNonNull(id, name, phoneNumber);
 
         this.id = id;
@@ -34,6 +38,8 @@ public class Client implements Category {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+        this.orders = new HashSet<>();
+        this.orders.addAll(orders);
     }
 
     public ID getId() {
@@ -56,6 +62,28 @@ public class Client implements Category {
         return address;
     }
 
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    /**
+     * Add orders in a set into the client's orders.
+     *
+     * @param ordersToAdd A set of orders to be added.
+     */
+    public void addOrders(Set<Order> ordersToAdd) {
+        orders.addAll(ordersToAdd);
+    }
+
+    /**
+     * Remove orders in a set from the client's orders.
+     *
+     * @param ordersToRemove A set of orders to be removed.
+     */
+    public void removeOrders(Set<Order> ordersToRemove) {
+        orders.removeAll(ordersToRemove);
+    }
+
     /**
      * Returns a new copy of the {@code Client} with the same ID but the supplied data fields. <br>
      * The only way to copy the ID of a {@code Client} over to another {@code Client}.
@@ -66,15 +94,17 @@ public class Client implements Category {
      * @param email New email for the client.
      * @param address New address for the client.
      */
-    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email, Address address) {
-        return new Client(client.getId(), name, phoneNumber, email, address);
+    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email,
+                                      Address address, Set<Order> orders) {
+        return new Client(client.getId(), name, phoneNumber, email, address, orders);
     }
 
     /**
-     * @see #updateClient(Client, Name, PhoneNumber, Email, Address)
+     * @see #updateClient(Client, Name, PhoneNumber, Email, Address, Set<Order>)
      */
     public static Client updateClient(Client copyTo, Client copyFrom) {
-        return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email, copyFrom.address);
+        return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email,
+                copyFrom.address, copyFrom.orders);
     }
 
     /**
@@ -108,17 +138,18 @@ public class Client implements Category {
         }
 
         Client otherClient = (Client) other;
-        return (id.equals(otherClient.id)
-                       && name.equals(otherClient.name)
-                       && phoneNumber.equals(otherClient.phoneNumber)
-                       && email.equals(otherClient.email)
-                       && address.equals(otherClient.address));
+        return id.equals(otherClient.id)
+                && name.equals(otherClient.name)
+                && phoneNumber.equals(otherClient.phoneNumber)
+                && email.equals(otherClient.email)
+                && address.equals(otherClient.address)
+                && orders.equals(otherClient.orders);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(id, name, phoneNumber, email, address);
+        return Objects.hash(id, name, phoneNumber, email, address, orders);
     }
 
     @Override
@@ -137,6 +168,11 @@ public class Client implements Category {
 
         if (address != null) {
             builder.append("; Address: ").append(address);
+        }
+
+        if (!orders.isEmpty()) {
+            builder.append("; Orders: ");
+            orders.forEach(builder::append);
         }
 
         return builder.toString();
