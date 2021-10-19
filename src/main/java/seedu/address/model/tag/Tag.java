@@ -65,6 +65,7 @@ public class Tag {
      * @param person The person to be added to the list.
      */
     public void addPerson(Person person) {
+        requireNonNull(person);
         persons.add(person);
     }
 
