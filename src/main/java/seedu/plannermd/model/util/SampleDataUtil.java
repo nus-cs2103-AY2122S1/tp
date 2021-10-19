@@ -95,7 +95,7 @@ public class SampleDataUtil {
                     new BirthDate("20/07/1964"), EMPTY_REMARK, getTagSet("family"), new Risk("LOW")),
                     new Doctor(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                             new Address("Blk 45 Aljunied Street 85, #11-31"), new BirthDate("09/08/1965"), EMPTY_REMARK,
-                            getTagSet("colleagues")), new AppointmentDate("25/12/2021"),
+                            getTagSet("colleagues")), new AppointmentDate("26/12/2021"),
                     new Session("12:00", new Duration(30)), EMPTY_REMARK)
         };
     }
