@@ -185,7 +185,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
   * Cons: 
   	* Diverts from target user profile by utilising GUI for commands.
 
-* **Alternative 2:** Csv file path to be inputted after `import` in command call
+* **Alternative 2:** Csv file path to be inputted after `import` in command call.
   * Pros: 
   	* Meets target user profile by utilising CLI rather than GUI.
   * Cons: 
