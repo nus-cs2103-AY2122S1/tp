@@ -21,6 +21,7 @@ import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 
@@ -130,6 +131,16 @@ public class AddCommandTest {
 
         @Override
         public AcademicCalendar getCurrentSemester() {
+            return null;
+        }
+
+        @Override
+        public void setMcGoal(Mc mcGoal) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Mc getMcGoal() {
             return null;
         }
 

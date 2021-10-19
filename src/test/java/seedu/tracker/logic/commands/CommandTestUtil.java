@@ -50,6 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_UE = "ue";
     public static final Integer VALID_ACADEMIC_YEAR = 2;
     public static final Integer VALID_SEMESTER = 1;
+    public static final Integer VALID_MC_GOAL = 188;
 
 
     public static final String CODE_DESC_CS2103T = " " + PREFIX_CODE + VALID_CODE_CS2103T;
@@ -63,6 +64,7 @@ public class CommandTestUtil {
     public static final String MC_DESC_CS2103T = " " + PREFIX_MC + VALID_MC_CS2103T;
     public static final String MC_DESC_GEQ1000 = " " + PREFIX_MC + VALID_MC_GEQ1000;
     public static final String MC_DESC_CP3108A = " " + PREFIX_MC + VALID_MC_CP3108A;
+    public static final String MC_DESC_GOAL = " " + PREFIX_MC + VALID_MC_GOAL;
     public static final String TAG_DESC_CORE = " " + PREFIX_TAG + VALID_TAG_CORE;
     public static final String TAG_DESC_GE = " " + PREFIX_TAG + VALID_TAG_GE;
     public static final String ACADEMIC_YEAR_DESC = " " + PREFIX_ACADEMIC_YEAR + VALID_ACADEMIC_YEAR;

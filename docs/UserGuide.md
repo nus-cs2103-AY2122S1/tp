@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their academic progress.**
+NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User 
 Interface (GUI).
 
@@ -120,6 +120,38 @@ Example:
 * `delete 2` deletes the 2nd module in the module tracker.
 
 
+### Taking a module : `take`
+
+Take a module in the specified semester.
+
+Format: `take INDEX y/YEAR s/SEMESTER`
+
+* Schedules the module at the specified `INDEX` for the specified `YEAR` and `SEMESTER`.
+* If the specified module has already been scheduled, its schedule will be overridden.
+* The `INDEX` refers to the index number shown in the displayed module list.
+* The `INDEX` **must be a positive integer** (1, 2, 3 ...).
+* The `YEAR` must be a positive integer from 1-6.
+* The `SEMESTER` must be a positive integer from 1-4.
+* Special semesters 1 and 2 are represented by integer values 3 and 4 respectively (see examples below).
+
+Example:
+* `take 2 y/2 s/1` schedules the 2nd module in the module tracker for year 2 semester 1.
+* `take 1 y/1 s/3` schedules the 1st module in the module tracker for year 1 special semester 1.
+* `take 1 y/1 s/4` schedules the 1st module in the module tracker for year 1 special semester 2.
+
+
+### Remove the schedule from ("untake") a module : `untake`
+
+Remove the schedule from a module in the module tracker.
+
+Format: `untake INDEX`
+
+* Removes the schedule from the module at the specified `INDEX`.
+* The `INDEX` refers to the index number shown in the displayed module list.
+* The `INDEX` **must be a positive integer** (1, 2, 3 ...).
+
+Example:
+* `untake 1` removes the schedule from the 1st module in the module tracker.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,4 +171,6 @@ Action | Format, Examples
 **Edit** [Coming soon] | `edit`
 **Find** | `find [code] [title] [description] [mc] [tag] KEYWORD` <br> e.g. `find code CS2040S`
 **List** | `list`
+**Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
+**Untake** | `untake INDEX` <br> e.g. `untake 1`
 **Help** [Coming soon] | `help`

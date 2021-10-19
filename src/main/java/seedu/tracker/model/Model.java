@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -56,6 +57,10 @@ public interface Model {
     void setCurrentSemester(AcademicCalendar academicCalendar);
 
     AcademicCalendar getCurrentSemester();
+
+    void setMcGoal(Mc mc);
+
+    Mc getMcGoal();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.

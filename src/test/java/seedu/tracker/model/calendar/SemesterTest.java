@@ -32,10 +32,21 @@ class SemesterTest {
     }
 
     @Test
-    public void equals_sameSemester_true() {
+    public void equalsTest() {
+        //same value, different object -> true
         Semester test1 = new Semester(1);
         Semester test2 = new Semester(1);
         assertEquals(true, test1.equals(test2));
+
+        //same object -> true
+        assertEquals(true, test1.equals(test1));
+
+        //null -> false
+        assertEquals(false, test1.equals(null));
+
+        //different value -> false
+        test2 = new Semester(2);
+        assertEquals(false, test1.equals(test2));
     }
 
     @Test
