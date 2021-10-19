@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Person> getSelectedPersonList() {
+        return model.getSelectedPersonList();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
