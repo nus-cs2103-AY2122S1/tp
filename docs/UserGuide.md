@@ -175,7 +175,7 @@ Examples:
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
 * `delete m/CS2103T` deletes all the contacts from CS2103T.
 
-Command aliases: `del` `del` `rm` 
+Command aliases: `rm` `d`
 
 ***
 
@@ -239,13 +239,13 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 
 | Command           | Format                                                                                                    | Example                   |
 |-------------------|-----------------------------------------------------------------------------------------------------------| --------------------------|
-| help / man        | `help`                                                                                                    | `help`                    |
-| add               | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                      | `add n/Ben Davies e/ben123@gmail.com m/cs2103t`|
+| help / man  / h   | `help`                                                                                                    | `help`                    |
+| add / a           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                      | `add n/Ben Davies e/ben123@gmail.com m/cs2103t`|
 | list / ls         | `list`                                                                                                    | `list`                    |
-| find              | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
-| edit / update     | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
-| delete / del / rm | `delete {INDEX}`/`delete {INDEX_A}-{INDEX_B}`/`delete m/{MODULE_CODE}`                                           | `delete 2`/`delete 2-5`/`delete m/CS2103T`|
+| find / f          | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
+| edit / update / e | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
+| delete / rm / d   | `delete {INDEX}`/`delete {INDEX_A}-{INDEX_B}`/`delete m/{MODULE_CODE}`                                    | `delete 2`/`delete 2-5`/`delete m/CS2103T`|
 | clear / clr       | `clear`                                                                                                   | `clear`                    |
 | remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
 | tag               | `tag {INDEX} {TAG}`                                                                                       | `tag 2 overseas`           |
-| exit / quit       | `exit`                                                                                                    | `exit`                     |
+| exit / quit / q   | `exit`                                                                                                    | `exit`                     |
