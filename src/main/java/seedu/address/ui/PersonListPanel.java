@@ -41,6 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
             @Override
             public void handle(Event event) {
                 Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+                logger.info("selected " + selectedPerson);
                 selected.setPersonDetails(selectedPerson);
             }
         });

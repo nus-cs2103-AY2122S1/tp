@@ -1,10 +1,15 @@
 package seedu.address.ui;
 
+
+import java.util.Comparator;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,6 +18,7 @@ import seedu.address.model.person.Person;
 public class SelectedPersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(SelectedPersonCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,7 +28,7 @@ public class SelectedPersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    private final Person person;
 
     @FXML
     private HBox cardPane;
@@ -55,7 +61,18 @@ public class SelectedPersonCard extends UiPart<Region> {
      * Sets the details of Selected Person with the given {@code Person}.
      */
     public void setPersonDetails(Person person) {
-        // TODO: complete implementation of person details
+        category.setText(person.getCategoryCode().toString());
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        review.setText(person.getReview().value);
+        email.setText(person.getEmail().value);
+        tags.getChildren().clear();
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        rating.setText(person.getRating().value + "\u2B50");
+        logger.info("Person details set " + person);
     }
 
     /**
@@ -63,6 +80,14 @@ public class SelectedPersonCard extends UiPart<Region> {
      */
 
     public void setEmptyPersonDetails() {
-        // TODO: complete implementation of empty details
+        category.setText("NIL");
+        name.setText("NIL");
+        phone.setText("NIL");
+        address.setText("NIL");
+        review.setText("NIL");
+        email.setText("NIL");
+        tags.getChildren().clear();
+        rating.setText("NIL" + "\u2B50");
+        logger.info("Empty person set");
     }
 }
