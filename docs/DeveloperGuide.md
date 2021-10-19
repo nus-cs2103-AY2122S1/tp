@@ -150,12 +150,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
-
+## Implementation
 This section describes some noteworthy details on how certain features are implemented.
 
-TBA
+### [Developed] Time conflict management
+The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
+defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
+- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
 
+Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
+
+Step1: The user enters `addclass` command. The `Timeslot` will check whehter the format of the
+time slot entered by user is correct. If it is incorrect, a `CommandException` will be thrown and user will receive
+a guidance to correct the time slot format.
+
+Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
+time slot exists. If there is a conflict, a `CommandException` will be thrown.
+
+Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
+
+### [Developed] Adding remarks with an editor
+Users can add, edit, or remove remarks for students or tuition classes, which is facilitated by `RemarkEditor`. The `UIManager` displays a dialog box with a text area for users to type in the description of the remark. Additionally, the `RemarkEditor` supports the following operations:
+
+- `RemarkEditor#setRemark()` — Sets the name and remarks of the identified student or tuition class.
+- `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
+
+The interactions between the components during the execution of the `RemarkCommand` is show in the sequence diagram below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
+![Ui](images/RemarkCommandSequenceDiagram.png)
+
+Given below is an example usage scenario of how a user can interact with the `RemarkEditor` dialog.
+
+Step 1. The user executes `remark 1` to edit the remark of the 1st student. A dialog box pops up for the user to edit the remark description.
+
+Step 2.1. The user clicks `Ok`  and the remark for the student is automatically updated to the new description.
+
+Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the remark will remain unchanged.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -379,28 +409,6 @@ Use case ends.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Implementation
-This section describes some noteworthy details on how certain features are implemented.
-
-### [Developed] Time conflict management
-The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
-defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
-- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
-- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
-
-Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
-
-Step1: The user enters `addclass` command. The `Timeslot` will check whehter the format of the
-time slot entered by user is correct. If it is incorrect, a `CommandException` will be thrown and user will receive
-a guidance to correct the time slot format.
-
-Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
-time slot exists. If there is a conflict, a `CommandException` will be thrown.
-
-Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
-
-
 
 ## **Appendix: Instructions for manual testing**
 
