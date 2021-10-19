@@ -108,7 +108,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: #cbc3e3;
 }
 
 .list-cell:filled:selected #cardPane {
