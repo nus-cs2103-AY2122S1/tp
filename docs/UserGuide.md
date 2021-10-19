@@ -160,7 +160,7 @@ Format: `delete-l INDEX`
 * Deletes the lesson of the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** 1, 2, 3, …
- 
+
 Examples:
 * `delete-l 1` deletes the lesson with corresponding index.
 
