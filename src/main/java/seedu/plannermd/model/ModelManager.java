@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.plannermd.commons.core.GuiSettings;
 import seedu.plannermd.commons.core.LogsCenter;
+import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
     private final FilteredList<Doctor> filteredDoctors;
+    private final FilteredList<Appointment> filteredAppointments;
     private State state;
 
     /**
@@ -41,6 +43,10 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(this.plannerMd.getPatientList());
         filteredDoctors = new FilteredList<>(this.plannerMd.getDoctorList());
+
+        // Wrap the FilteredList over a SortedList such that list is always sorted
+        // UniqueAppointmentList is sorted using its natural ordering as per Appointment#compareTo
+        filteredAppointments = new FilteredList<>(this.plannerMd.getAppointmentList().sorted());
     }
 
     public ModelManager() {
@@ -163,6 +169,32 @@ public class ModelManager implements Model {
         plannerMd.setDoctor(target, editedDoctor);
     }
 
+    //// appointment methods
+
+    @Override
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return plannerMd.hasAppointment(appointment);
+    }
+
+    @Override
+    public void deleteAppointment(Appointment target) {
+        plannerMd.removeAppointment(target);
+    }
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+        plannerMd.addAppointment(appointment);
+        updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
+    }
+
+    @Override
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireAllNonNull(target, editedAppointment);
+
+        plannerMd.setAppointment(target, editedAppointment);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -196,6 +228,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return filteredAppointments;
+    }
+
+    @Override
+    public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+        requireNonNull(predicate);
+        filteredAppointments.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -213,6 +256,7 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && state.equals(other.state)
                 && filteredPatients.equals(other.filteredPatients)
-                && filteredDoctors.equals(other.filteredDoctors);
+                && filteredDoctors.equals(other.filteredDoctors)
+                && filteredAppointments.equals(other.filteredAppointments);
     }
 }

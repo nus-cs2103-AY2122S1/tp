@@ -7,14 +7,16 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.plannermd.logic.commands.filterappointmentcommand.AppointmentFilters;
-import seedu.plannermd.logic.commands.filterappointmentcommand.FilterUpcomingAppointmentCommand;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
+import seedu.plannermd.logic.commands.apptcommand.FilterUpcomingAppointmentCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
 import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
 
 public class FilterUpcomingAppointmentCommandParser implements
         Parser<FilterUpcomingAppointmentCommand> {
+
+    private String messageToUser = "Filtering all upcoming appointments according to these arguments:\n";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterUpcomingAppointmentCommand
@@ -27,14 +29,16 @@ public class FilterUpcomingAppointmentCommandParser implements
 
         AppointmentFilters filters = AppointmentFilters.upcomingAppointmentsFilter();
         if (argumentMultimap.getValue(PREFIX_DOCTOR).isPresent()) {
-            List<String> doctorKeywords = stringToList(argumentMultimap.getValue(PREFIX_DOCTOR).get());
-            filters.setHasDoctor(new AppointmentContainsDoctorPredicate(doctorKeywords));
+            String doctorKeywords = argumentMultimap.getValue(PREFIX_DOCTOR).get();
+            filters.setHasDoctor(new AppointmentContainsDoctorPredicate(stringToList(doctorKeywords)));
+            messageToUser += "Doctor: " + doctorKeywords + " ";
         }
         if (argumentMultimap.getValue(PREFIX_PATIENT).isPresent()) {
-            List<String> patientKeywords = stringToList(argumentMultimap.getValue(PREFIX_PATIENT).get());
-            filters.setHasPatient(new AppointmentContainsPatientPredicate(patientKeywords));
+            String patientKeywords = argumentMultimap.getValue(PREFIX_PATIENT).get();
+            filters.setHasPatient(new AppointmentContainsPatientPredicate(stringToList(patientKeywords)));
+            messageToUser += "Patient: " + patientKeywords + " ";
         }
-        return null;
+        return new FilterUpcomingAppointmentCommand(filters, messageToUser);
     }
 
     private List<String> stringToList(String string) throws ParseException {

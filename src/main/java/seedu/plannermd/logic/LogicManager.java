@@ -15,6 +15,7 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.Model.State;
 import seedu.plannermd.model.ReadOnlyPlannerMd;
+import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.storage.Storage;
@@ -74,6 +75,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Doctor> getFilteredDoctorList() {
         return model.getFilteredDoctorList();
+    }
+
+    @Override
+    public ObservableList<Appointment> getFilteredAppointmentList() {
+        return model.getFilteredAppointmentList();
     }
 
     @Override

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.exceptions.DuplicatePersonException;
@@ -116,10 +117,12 @@ public class PlannerMdTest {
     private static class PlannerMdStub implements ReadOnlyPlannerMd {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
         private final ObservableList<Doctor> doctors = FXCollections.observableArrayList();
+        private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
         PlannerMdStub() {
             this.patients.setAll(patients);
             this.doctors.setAll(doctors);
+            this.appointments.setAll(appointments);
         }
 
         public PlannerMdStub setPatients(Collection<Patient> patients) {
@@ -132,6 +135,11 @@ public class PlannerMdTest {
             return this;
         }
 
+        public PlannerMdStub setAppointments(Collection<Appointment> appointments) {
+            this.appointments.setAll(appointments);
+            return this;
+        }
+
         @Override
         public ObservableList<Patient> getPatientList() {
             return patients;
@@ -140,6 +148,11 @@ public class PlannerMdTest {
         @Override
         public ObservableList<Doctor> getDoctorList() {
             return doctors;
+        }
+
+        @Override
+        public ObservableList<Appointment> getAppointmentList() {
+            return appointments;
         }
     }
 
