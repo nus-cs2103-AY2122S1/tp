@@ -12,8 +12,8 @@ Financial Advisor Smart Tracker (FAST) is a **desktop app for managing clients, 
     * [Adding a person](#adding-a-person-add)
     * [Listing all persons](#listing-all-persons-list)
     * [Editing a person](#editing-a-person-edit)
-    * [Locating persons by name](#locating-persons-by-name-find)
-    * [Deleting a person](#deleting-a-person-delete)
+    * [Searching for people](#searching-for-people-find)
+    * [Deleting a person](#deleting-a-person-del)
     * [Adding an appointment](#adding-an-appointment-appt)
     * [Editing an appointment](#editing-an-appointment-eppt)
     * [Deleting an appointment](#deleting-an-appointment-dappt)
@@ -126,23 +126,29 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Searching for people: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds people by their name, priority, tags or remarks.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
+OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* You can search by name, priority, tags or remarks using the formats shown above.
+* Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
+* For priority searches, there are 3 priorities, `pr/low`, `pr/med`, or `pr/high`.
+* Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
+* Persons matching at least one search query will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find pr/high med` returns all entries with `HighPriority` and `MediumPriority`.
+* `find t/friends enemies` returns all entries tagged with `friends` or `enemies`.
+* `find r/good` returns all entries with remarks containing `good`.
 
 ### Deleting a person: `del`
 
@@ -274,9 +280,10 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete Appointment** | `dappt INDEX`<br> e.g., `dappt 1`
 **Delete Contact** | `del INDEX`<br> e.g., `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g., `rmk 1 r/likes dogs`
+**Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g., `find James Jake`
 **Help** | `help`
 **List** | `list`
 **Update Completed Appointment** | `done INDEX`<br> e.g., `done 5`

@@ -360,12 +360,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC05 - Find Contact**
+**Use case: UC05 - Find Contact by name**
 
 **MSS**
 
 1. User searches for a name.
-2. FAST shows a list of persons with the specified name or people whose name contains the search query.
+2. FAST shows a list of persons with the specified name or people whose name starts with the search query.
 
    Use case ends.
 
@@ -382,7 +382,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. FAST displays a message to inform user no contacts that matches the query was found.
 
       Use case ends.
-
 
 **Use case: UC06 - List Contacts**
 
@@ -498,6 +497,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. FAST shows an error message.
 
       Use case ends.
+      
 
 *{More to be added}*
 

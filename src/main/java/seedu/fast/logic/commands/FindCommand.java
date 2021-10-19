@@ -28,7 +28,7 @@ public class FindCommand extends Command {
             + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) or priority tags, \n"
             + "tags or remarks and displays them as a list with index numbers.\n\n"
-            + "Parameters: \nKEYWORD [MORE_KEYWORDS]...\n"
+            + "Parameters: \nQUERY [MORE_QUERIES]...\n"
             + " OR \n" + PriorityTag.PRIORITY_TAG_PREFIX
             + "PRIORITY [MORE_PRIORITIES]...\n"
             + " OR \n" + FindCommand.TAG_PREFIX
