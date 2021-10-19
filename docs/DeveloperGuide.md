@@ -410,7 +410,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
 
-**UC01: View all Students and Lessons**
+#### UC01: View all Students and Lessons
 
 **MSS**
 
@@ -419,7 +419,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC02: Add a Student**
+#### UC02: Add a Student
 
 **MSS**
 
@@ -449,7 +449,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC03: Look up Student(s)**
+#### UC03: Look up Student(s)
 
 **MSS**
 
@@ -478,7 +478,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC04: Filter Student(s) by their Grade**
+#### UC04: Filter Student(s) by their Grade
 
 **MSS**
 1. CSO enters a grade to filter for students by.
@@ -495,7 +495,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-**UC05: Delete a Student**
+#### UC05: Delete a Student
 
 **MSS**
 
@@ -523,7 +523,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC06: Add a Lesson**
+#### UC06: Add a Lesson
 
 **MSS**
 
@@ -546,7 +546,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.  
 
-**UC07: View details of a Lesson**
+#### UC07: View details of a Lesson
 
 **MSS**
 
@@ -560,7 +560,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC08: Filter Lesson(s) by their Grade and/or Subject**
+#### UC08: Filter Lesson(s) by their Grade and/or Subject
 
 **MSS**
 1. CSO enters grade and/or subject to filter lessons by.
@@ -577,7 +577,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-**UC09: Delete a Lesson**
+#### UC09: Delete a Lesson
 
 **MSS**
 
@@ -605,7 +605,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.  
 
-**UC10 - Update a specific Student’s Details**
+#### UC10 - Update a specific Student’s Details
 
 **MSS**
 
@@ -618,18 +618,18 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
   **Extension**
 
 * 2a. TuitiONE detects an error in entered command.
-      * 2a1. TuitiONE requests CSO to input a valid command.
-      * 2a2. CSO enters new command. 
-        Steps 2a1-2a2 are repeated until the data entered are correct.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command. 
+      Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
 
 * 2b. The student requested to edit is not present in the list.
-      * 2b1. TuitiONE informs that there is no such student.
+    * 2b1. TuitiONE informs that there is no such student.
 
     Use case ends.
 
-**UC11: Enroll a Student to a Lesson**
+#### UC11: Enroll a Student to a Lesson
 
 **MSS**
 
@@ -668,7 +668,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC12: Unenroll a Student from a Lesson**
+#### UC12: Unenroll a Student from a Lesson
 
 **MSS**
 
@@ -707,7 +707,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC13: Review Commands**
+#### UC13: Review Commands
 
 **MSS**
 
