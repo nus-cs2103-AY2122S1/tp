@@ -29,6 +29,14 @@ public class CsvParserTest {
     }
 
     @Test
+    public void execute_missingHeader_throwsParseException() throws Exception {
+        CsvParser parser = new CsvParser();
+        assertThrows(ParseException.class,
+                CsvParser.MESSAGE_CSV_FILE_MISSING_HEADERS, (
+                ) -> parser.parse(new CsvFileSelectorStubBypassesUi("missingHeaderCsv.csv")));
+    }
+
+    @Test
     public void execute_size_success() throws Exception {
         CsvParser parser = new CsvParser();
         parser.parse(new CsvFileSelectorStubBypassesUi("validCsv.csv"));

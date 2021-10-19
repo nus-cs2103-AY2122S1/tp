@@ -19,6 +19,9 @@ public class CsvParser {
     public static final String MESSAGE_CSV_FILE_IS_EMPTY = "Failed!"
             + System.lineSeparator()
             + "Csv file is empty";
+    public static final String MESSAGE_CSV_FILE_MISSING_HEADERS = "Failed!"
+            + System.lineSeparator()
+            + "Csv file has no headers";
     public static final String MESSAGE_FILE_UNREADABLE = "File could not be read";
 
     private final Map<String, List<String>> data;
@@ -52,12 +55,14 @@ public class CsvParser {
 
     private void parseHeader() throws IOException, ParseException {
         String headerRow = br.readLine();
-
         if (headerRow == null) {
             throw new ParseException(MESSAGE_CSV_FILE_IS_EMPTY);
         }
 
         inputtedHeaders = headerRow.split(",");
+        if (inputtedHeaders.length == 0) {
+            throw new ParseException(MESSAGE_CSV_FILE_MISSING_HEADERS);
+        }
 
         for (String header: inputtedHeaders) {
             data.put(header, new ArrayList<>());
@@ -78,7 +83,7 @@ public class CsvParser {
             for (int i = 0; i < values.length; i++) {
                 String entry = values[i];
                 entry = entry.replaceAll("\"", "");
-                data.get(inputtedHeaders[i]).add(values[i]);
+                data.get(inputtedHeaders[i]).add(entry);
             }
 
             // Case whereby final column was left blank
