@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -140,7 +143,7 @@ public class GitHubUtil {
      * has made to date.
      *
      * @param userName The name of the user.
-     * @return The total number of repos.
+     * @return The total number of repos found on GitHub.
      */
     public static int getRepoCount(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
@@ -158,5 +161,129 @@ public class GitHubUtil {
         int repoCount = (Integer) jsonObject.get("public_repos");
 
         return repoCount;
+    }
+
+    /**
+     * Returns a list of user repositories present on their GitHub.
+     *
+     * @param userName The name of the user.
+     * @param page The page to start to get data from.
+     * @return An {@code ArrayList<String>} consisting of user repositories.
+     */
+    public static ArrayList<String> getRepoNames(String userName, int page) throws RuntimeException {
+        establishConnection(userName + "/repos?per_page=100&page=" + page);
+
+        JSONArray data = null;
+
+        if (responseCode != 200) {
+            logger.severe("Server responded with error code " + responseCode);
+            throw new RuntimeException("Data could not be obtained.");
+        } else {
+            StringBuilder inline = new StringBuilder();
+
+            try {
+                Scanner scanner = new Scanner(url.openStream());
+
+                while (scanner.hasNext()) {
+                    inline.append(scanner.nextLine());
+                }
+
+                scanner.close();
+            } catch (IOException e) {
+                logger.severe("Data could not be obtained from the URL.");
+            }
+
+            try {
+                JSONParser jsonParser = new JSONParser();
+                data = (JSONArray) jsonParser.parse(inline.toString());
+            } catch (ParseException e) {
+                logger.severe("Data obtained could not be parsed into JSON Format.");
+            }
+        }
+        ArrayList<String> repos = new ArrayList<>();
+        assert data != null : "No Data Found";
+
+        for (Object o : data) {
+            JSONObject repo = (JSONObject) o;
+            repos.add(repo.get("name").toString());
+        }
+
+        if (repos.size() == 100) {
+            ArrayList<String> extras = getRepoNames(userName, page + 1);
+            repos.addAll(extras);
+        }
+
+        return repos;
+    }
+
+    /**
+     * Returns a boolean indicating whether the programming language has
+     * already been added to the list or not.
+     *
+     * @param language The language to check for.
+     * @param listOfLanguages The list consisting of programming languages.
+     * @return A boolean, indicating whether the language is present in the list or not.
+     */
+    public static boolean isProgrammingLanguagePresent(String language, ArrayList<String> listOfLanguages) {
+        for (int j = 0; j < listOfLanguages.size(); j++) {
+            if (listOfLanguages.get(j).equals(language)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a list of programming languages the user has used
+     * and is familiar with.
+     *
+     * @param userName The name of the user.
+     * @return An {@code ArrayList<String>} consisting of programming languages.
+     */
+    public static ArrayList<String> getFamiliarProgrammingLanguages(String userName) throws RuntimeException {
+        ArrayList<String> programmingLanguages = new ArrayList<>();
+        ArrayList<String> userRepos = getRepoNames(userName, 0);
+
+        for (int i = 0; i < userRepos.size(); i++) {
+            establishConnection("repos/" + userName + "/" + userRepos.get(i) + "/languages");
+
+            JSONObject data = null;
+
+            if (responseCode != 200) {
+                logger.severe("Server responded with error code " + responseCode);
+                throw new RuntimeException("Data could not be obtained.");
+            } else {
+                StringBuilder inline = new StringBuilder();
+
+                try {
+                    Scanner scanner = new Scanner(url.openStream());
+
+                    while (scanner.hasNext()) {
+                        inline.append(scanner.nextLine());
+                    }
+
+                    scanner.close();
+                } catch (IOException e) {
+                    logger.severe("Data could not be obtained from the URL.");
+                }
+
+                try {
+                    JSONParser jsonParser = new JSONParser();
+                    data = (JSONObject) jsonParser.parse(inline.toString());
+                } catch (ParseException e) {
+                    logger.severe("Data obtained could not be parsed into JSON Format.");
+                }
+            }
+            assert data != null : "No Data Found";
+
+            Iterator<String> languages = data.keySet().iterator();
+            while(languages.hasNext()) {
+                String languageToAdd = (String) languages.next();
+                if (!isProgrammingLanguagePresent(languageToAdd, programmingLanguages)) {
+                    programmingLanguages.add(languageToAdd);
+                }
+            }
+        }
+        return programmingLanguages;
     }
 }
