@@ -164,8 +164,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_split() throws Exception {
-        assertEquals(new SplitCommand("Mon"),
-                parser.parseCommand(SplitCommand.COMMAND_WORD + " Mon", aliases));
+        assertEquals(new SplitCommand(1),
+                parser.parseCommand(SplitCommand.COMMAND_WORD + " 1", aliases));
     }
 
     @Test

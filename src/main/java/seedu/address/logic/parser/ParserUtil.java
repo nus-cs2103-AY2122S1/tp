@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -232,7 +235,7 @@ public class ParserUtil {
      */
     public static Availability parseAvailability(String availabilityString) throws ParseException {
         requireNonNull(availabilityString);
-        String trimmedAvailabilityString = availabilityString.trim().toUpperCase();
+        String trimmedAvailabilityString = availabilityString.trim();
         List<String> availabilityDaysWithNoDuplicates =
                 Arrays.stream(trimmedAvailabilityString.split(" "))
                 .distinct().collect(Collectors.toList());
@@ -241,8 +244,15 @@ public class ParserUtil {
             throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
         }
 
-        String availability = Arrays.stream(trimmedAvailabilityString.split(" "))
-                .distinct().collect(Collectors.joining(" "));
+        List<DayOfWeek> availability;
+        if (availabilityDaysWithNoDuplicates.get(0).isEmpty()) { // valid but empty
+            availability = new ArrayList<>();
+        } else {
+            availability = Arrays.stream(trimmedAvailabilityString.split(" "))
+                    .distinct().map(dayNumber -> DayOfWeek.of(Integer.parseInt(dayNumber)))
+                    .collect(Collectors.toList());
+        }
+        Collections.sort(availability);
         return new Availability(availability);
     }
 }
