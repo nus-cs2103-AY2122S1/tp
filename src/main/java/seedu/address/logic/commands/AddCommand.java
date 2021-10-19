@@ -67,7 +67,7 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // TODO: encapsulate 0 within addressbook, orElse("abcd") will cause RuntimeError
+        // HACK: getClientCounter() should encapsulate the default
         String clientCounter = Optional.ofNullable(model.getAddressBook().getClientCounter()).orElse("0");
         Person person = toAdd.apply(new ClientId(clientCounter));
 
