@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CALL_STATUS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CASE_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CASE_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -66,7 +67,7 @@ public class TypicalPersons {
             .withWorkAddress(VALID_WORK_ADDRESS_BOB).withQuarantineAddress(VALID_QUARANTINE_ADDRESS_BOB)
             .withShnPeriod(VALID_SHN_PERIOD_BOB).withNextOfKinName(VALID_NEXT_OF_KIN_NAME_BOB)
             .withNextOfKinPhone(VALID_NEXT_OF_KIN_PHONE_BOB).withNextOfKinAddress(VALID_NEXT_OF_KIN_ADDRESS_BOB)
-            .build();
+            .withCallStatus(VALID_CALL_STATUS_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

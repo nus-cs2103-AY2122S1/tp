@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.Optional;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CallStatus;
 import seedu.address.model.person.CaseNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -20,6 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_CASE_NUMBER = "456";
     public static final String DEFAULT_HOME_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_CALL_STATUS = "0 false";
 
     private Name name;
     private Phone phone;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Optional<Name> nextOfKinName;
     private Optional<Phone> nextOfKinPhone;
     private Optional<Address> nextOfKinAddress;
+    private CallStatus callStatus;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,6 +51,7 @@ public class PersonBuilder {
         nextOfKinName = Optional.empty();
         nextOfKinPhone = Optional.empty();
         nextOfKinAddress = Optional.empty();
+        callStatus = new CallStatus(DEFAULT_CALL_STATUS);
     }
 
     /**
@@ -65,6 +69,7 @@ public class PersonBuilder {
         nextOfKinName = personToCopy.getNextOfKinName();
         nextOfKinPhone = personToCopy.getNextOfKinPhone();
         nextOfKinAddress = personToCopy.getNextOfKinAddress();
+        callStatus = personToCopy.getCallStatus();
     }
 
     /**
@@ -156,13 +161,21 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code callStatus} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCallStatus(String callStatus) {
+        this.callStatus = new CallStatus(callStatus);
+        return this;
+    }
+
+    /**
      * Creates {@code Person} with attributes corresponding to those set by the builder.
      *
      * @return built custom {@code Person}
      */
     public Person build() {
         return new Person(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress,
-                shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress);
+                shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress, callStatus);
     }
 
 }

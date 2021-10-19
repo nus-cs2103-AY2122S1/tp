@@ -25,6 +25,7 @@ public class Person implements Comparable<Person> {
     private final Optional<Name> nextOfKinName;
     private final Optional<Phone> nextOfKinPhone;
     private final Optional<Address> nextOfKinAddress;
+    private final CallStatus callStatus;
 
     /**
      * Constructor for Person.
@@ -33,9 +34,10 @@ public class Person implements Comparable<Person> {
      */
     public Person(Name name, Phone phone, Email email, CaseNumber caseNumber, Address homeAddress,
                   Optional<Address> workAddress, Optional<Address> quarantineAddress, Optional<ShnPeriod> shnPeriod,
-                  Optional<Name> nextOfKinName, Optional<Phone> nextOfKinPhone, Optional<Address> nextOfKinAddress) {
+                  Optional<Name> nextOfKinName, Optional<Phone> nextOfKinPhone, Optional<Address> nextOfKinAddress,
+                  CallStatus callStatus) {
         requireAllNonNull(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress,
-                shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress);
+                shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress, callStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +49,27 @@ public class Person implements Comparable<Person> {
         this.nextOfKinName = nextOfKinName;
         this.nextOfKinPhone = nextOfKinPhone;
         this.nextOfKinAddress = nextOfKinAddress;
+        this.callStatus = callStatus;
+    }
+
+    /**
+     * Default constructor for Person that uses a default call status.
+     */
+    public Person(Name name, Phone phone, Email email, CaseNumber caseNumber, Address homeAddress,
+                  Optional<Address> workAddress, Optional<Address> quarantineAddress, Optional<ShnPeriod> shnPeriod,
+                  Optional<Name> nextOfKinName, Optional<Phone> nextOfKinPhone, Optional<Address> nextOfKinAddress) {
+        this(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress, shnPeriod,
+            nextOfKinName, nextOfKinPhone, nextOfKinAddress, new CallStatus(0, false));
+    }
+
+    /**
+     * Constuctor for Person to create a copy that uses a new counter. Used to update immutable call status.
+     * @param old the previous version of the person.
+     * @param newCallStatus the new counter to be used.
+     */
+    public Person(Person old, CallStatus newCallStatus) {
+        this(old.name, old.phone, old.email, old.caseNumber, old.homeAddress, old.workAddress, old.quarantineAddress,
+             old.shnPeriod, old.nextOfKinName, old.nextOfKinPhone, old.nextOfKinAddress, newCallStatus);
     }
 
     /**
@@ -101,6 +124,10 @@ public class Person implements Comparable<Person> {
         return nextOfKinAddress;
     }
 
+    public CallStatus getCallStatus() {
+        return callStatus;
+    }
+
     /**
      * Returns true if both persons have the same case number.
      * This defines a weaker notion of equality between two persons.
@@ -138,14 +165,15 @@ public class Person implements Comparable<Person> {
                 && otherPerson.getShnPeriod().equals(getShnPeriod())
                 && otherPerson.getNextOfKinName().equals(getNextOfKinName())
                 && otherPerson.getNextOfKinPhone().equals(getNextOfKinPhone())
-                && otherPerson.getNextOfKinAddress().equals(getNextOfKinAddress());
+                && otherPerson.getNextOfKinAddress().equals(getNextOfKinAddress())
+                && otherPerson.getCallStatus().equals(getCallStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, caseNumber, homeAddress, workAddress, quarantineAddress, shnPeriod,
-            nextOfKinName, nextOfKinPhone, nextOfKinAddress);
+            nextOfKinName, nextOfKinPhone, nextOfKinAddress, callStatus);
     }
 
     @Override
@@ -171,7 +199,9 @@ public class Person implements Comparable<Person> {
                 .append("; Next of Kin Phone: ")
                 .append(getNextOfKinPhone())
                 .append("; Next of Kin Address: ")
-                .append(getNextOfKinAddress());
+                .append(getNextOfKinAddress())
+                .append("; Call Status: ")
+                .append(getCallStatus());
         return builder.toString();
     }
 

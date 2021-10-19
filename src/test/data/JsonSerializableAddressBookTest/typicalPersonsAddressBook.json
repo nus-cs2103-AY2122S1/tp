@@ -11,7 +11,8 @@
     "shnPeriod": "2020-09-23 => 2020-10-07",
     "nextOfKinName": "Anthony Reed",
     "nextOfKinPhone": "92456234",
-    "nextOfKinAddress": "4 Jalan Besut"
+    "nextOfKinAddress": "4 Jalan Besut",
+    "callStatus" : "0 false"
   }, {
     "name": "Benson Meier",
     "phone": "98765432",
@@ -23,37 +24,43 @@
     "shnPeriod": "2020-04-13 => 2020-04-27",
     "nextOfKinName": "John Green",
     "nextOfKinPhone": "84515153",
-    "nextOfKinAddress": "120 Hillview Avenue #06-02"
+    "nextOfKinAddress": "120 Hillview Avenue #06-02",
+    "callStatus": "0 false"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "caseNumber" : "6",
     "homeAddress" : "wall street",
-    "shnPeriod": "2020-04-13 => 2021-04-27"
+    "shnPeriod": "2020-04-13 => 2021-04-27",
+    "callStatus" : "0 false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "caseNumber" : "200",
-    "homeAddress" : "10th street"
+    "homeAddress" : "10th street",
+    "callStatus": "0 false"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "caseNumber" : "9",
-    "homeAddress" : "michegan ave"
+    "homeAddress" : "michegan ave",
+    "callStatus" : "0 false"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "caseNumber" : "444442",
-    "homeAddress" : "little tokyo"
+    "homeAddress" : "little tokyo",
+    "callStatus": "0 false"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "caseNumber" : "11",
-    "homeAddress" : "4th street"
+    "homeAddress" : "4th street",
+    "callStatus" : "0 false"
   } ]
 }

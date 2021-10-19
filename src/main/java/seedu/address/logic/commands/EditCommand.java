@@ -23,6 +23,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CallStatus;
 import seedu.address.model.person.CaseNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,9 +121,10 @@ public class EditCommand extends Command {
                 .or(personToEdit::getNextOfKinPhone);
         Optional<Address> updatedNextOfKinAddress = editPersonDescriptor.getNextOfKinAddress()
                 .or(personToEdit::getNextOfKinAddress);
+        CallStatus updatedCallStatus = editPersonDescriptor.getCallStatus().orElse(personToEdit.getCallStatus());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedCaseNumber, updatedHomeAddress,
                 updatedWorkAddress, updatedQuarantineAddress, updatedShnPeriod, updatedNextOfKinName,
-                updatedNextOfKinPhone, updatedNextOfKinAddress);
+                updatedNextOfKinPhone, updatedNextOfKinAddress, updatedCallStatus);
     }
 
     @Override
@@ -159,6 +161,7 @@ public class EditCommand extends Command {
         private Name nextOfKinName;
         private Phone nextOfKinPhone;
         private Address nextOfKinAddress;
+        private CallStatus callStatus;
 
         public EditPersonDescriptor() {}
 
@@ -177,6 +180,7 @@ public class EditCommand extends Command {
             setNextOfKinName(toCopy.nextOfKinName);
             setNextOfKinPhone(toCopy.nextOfKinPhone);
             setNextOfKinAddress(toCopy.nextOfKinAddress);
+            setCallStatus(toCopy.callStatus);
         }
 
         /**
@@ -275,6 +279,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(nextOfKinAddress);
         }
 
+        public void setCallStatus(CallStatus callStatus) {
+            this.callStatus = callStatus;
+        }
+
+        public Optional<CallStatus> getCallStatus() {
+            return Optional.ofNullable(callStatus);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -300,7 +312,8 @@ public class EditCommand extends Command {
                     && getShnPeriod().equals(e.getShnPeriod())
                     && getNextOfKinName().equals(e.getNextOfKinName())
                     && getNextOfKinPhone().equals(e.getNextOfKinPhone())
-                    && getNextOfKinAddress().equals(e.getNextOfKinAddress());
+                    && getNextOfKinAddress().equals(e.getNextOfKinAddress())
+                    && getCallStatus().equals(e.getCallStatus());
         }
     }
 }
