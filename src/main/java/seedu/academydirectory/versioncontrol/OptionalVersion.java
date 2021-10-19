@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
-import seedu.academydirectory.versioncontrol.objects.Tree;
 
 public class OptionalVersion<T extends Version> implements Version {
     private final T versionManager;
