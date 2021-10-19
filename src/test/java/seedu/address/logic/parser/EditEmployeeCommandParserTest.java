@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_BOB;
@@ -22,6 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
@@ -37,6 +39,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -58,6 +61,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
@@ -106,7 +110,8 @@ public class EditEmployeeCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         assertParseFailure(parser, "1" + INVALID_LEAVES_DESC, Leaves.MESSAGE_CONSTRAINTS); // invalid leaves
         assertParseFailure(parser, "1" + INVALID_SALARY_DESC, Salary.MESSAGE_CONSTRAINTS); //invalid salary
-        assertParseFailure(parser, "1" + INVALID_JOBTITLE_DESC, JobTitle.MESSAGE_CONSTRAINTS); //invalid job
+        assertParseFailure(parser, "1" + INVALID_JOBTITLE_DESC, JobTitle.MESSAGE_CONSTRAINTS); // invalid job
+        assertParseFailure(parser, "1" + INVALID_SHIFT_DESC, Shift.MESSAGE_CONSTRAINTS); // invalid shift
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -204,6 +209,12 @@ public class EditEmployeeCommandParserTest {
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditEmployeeDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        expectedCommand = new EditEmployeeCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shifts
+        userInput = targetIndex.getOneBased() + SHIFTS_DESC_AMY;
+        descriptor = new EditEmployeeDescriptorBuilder().withShifts(VALID_SHIFTS_AMY).build();
         expectedCommand = new EditEmployeeCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -5,6 +5,7 @@ import static seedu.address.storage.JsonAdaptedEmployee.MISSING_FIELD_MESSAGE_FO
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEmployees.BENSON_EMPLOYEE;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -174,6 +175,26 @@ public class JsonAdaptedEmployeeTest {
                         VALID_LEAVES, VALID_SALARY, null, VALID_SHIFTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, JobTitle.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, employee::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTags_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        JsonAdaptedEmployee employee =
+                new JsonAdaptedEmployee(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags,
+                        VALID_LEAVES, VALID_SALARY, VALID_JOBTITLE, VALID_SHIFTS);
+        assertThrows(IllegalValueException.class, employee::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidShifts_throwsIllegalValueException() {
+        List<JsonAdaptedShift> invalidShifts = new ArrayList<>(VALID_SHIFTS);
+        invalidShifts.add(new JsonAdaptedShift(INVALID_SHIFT));
+        JsonAdaptedEmployee employee =
+                new JsonAdaptedEmployee(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
+                        VALID_LEAVES, VALID_SALARY, VALID_JOBTITLE, invalidShifts);
+        assertThrows(IllegalValueException.class, employee::toModelType);
     }
 
 }

@@ -37,7 +37,6 @@ public class EditEmployeeCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Employee editedEmployee = new EmployeeBuilder().build();
-        System.out.println("edited: " + editedEmployee);
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(editedEmployee).build();
         EditEmployeeCommand editEmployeeCommand = new EditEmployeeCommand(INDEX_FIRST_PERSON, descriptor);
 
