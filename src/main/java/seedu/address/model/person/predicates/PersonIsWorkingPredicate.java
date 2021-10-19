@@ -4,7 +4,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.viewShiftCommand;
+import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.model.person.Person;
 
 public class PersonIsWorkingPredicate implements Predicate<Person> {
@@ -18,7 +18,7 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
      * specific time or slot number.
      *
      * @param dayOfWeek The day of week that will be checked.
-     * @param slotNum The slot number that will be checked. It will be {@code viewShiftCommand.INVALID_SLOT_NUMBER}
+     * @param slotNum The slot number that will be checked. It will be {@code ViewShiftCommand.INVALID_SLOT_NUMBER}
      *                if the viewShift is by time.
      * @param time The time that will be checked. It will be null if the viewShift is by slot number.
      */
@@ -42,7 +42,7 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
 
         if (time != null && dayOfWeek != null) {
             return person.isWorking(dayOfWeek, time);
-        } else if (slotNum != viewShiftCommand.INVALID_SLOT_NUMBER && dayOfWeek != null) {
+        } else if (slotNum != ViewShiftCommand.INVALID_SLOT_NUMBER && dayOfWeek != null) {
             return person.isWorking(dayOfWeek, slotNum);
         } else {
             return false; // can consider throwing an exception?

@@ -10,5 +10,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_PERSON_SEARCHED = "This staff does not exist in the address book!";
+    public static final String MESSAGE_INVALID_DATE_PARSED = "This date cannot be parsed, expected: YYYY-MM-DD";
 
 }

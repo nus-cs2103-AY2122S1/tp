@@ -21,7 +21,7 @@ import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
 
     private static final ParseException NO_FIELD_EXCEPTION =
-            new ParseException(ViewScheduleCommand.HELP_MESSAGE);
+            new ParseException(ViewScheduleCommand.MESSAGE_USAGE);
 
     @Override
     public ViewScheduleCommand parse(String args) throws ParseException {
@@ -31,7 +31,7 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_STATUS, PREFIX_ROLE, PREFIX_SALARY);
         if (argMultimap.isEmpty()) {
-            throw new ParseException(ViewScheduleCommand.HELP_MESSAGE);
+            throw new ParseException(ViewScheduleCommand.MESSAGE_USAGE);
         }
         PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
         return new ViewScheduleCommand(predicate);
