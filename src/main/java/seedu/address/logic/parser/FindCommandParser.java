@@ -82,164 +82,238 @@ public class FindCommandParser implements Parser<FindCommand> {
         FindDescriptor(ArgumentMultimap argMultimap) throws ParseException {
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_NAME).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Name.isValidName(keyword)) {
-                            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractNamePrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_PHONE).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Phone.isValidPhone(keyword)) {
-                            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new PhoneContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractPhonePrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_EMAIL).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Email.isValidEmail(keyword)) {
-                            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new EmailContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractEmailPrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_ROLE).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Role.isValidRole(keyword)) {
-                            throw new ParseException(Role.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new RoleContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractRolePrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    List<String> keywords = new ArrayList<>();
-                    Pattern r = Pattern.compile(EmploymentType.Type.getRegex());
-                    Matcher m = r.matcher(trimmedArg);
-
-                    ArrayList<String> terms = EmploymentType.Type.getTerms();
-
-                    while (m.find()) {
-                        if (!m.group().isEmpty()) {
-                            boolean contains = false;
-                            for (String term: terms) {
-                                if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
-                                    contains = true;
-                                    break;
-                                }
-                            }
-
-                            if (!contains) {
-                                throw new ParseException(EmploymentType.FIND_MESSAGE_CONSTRAINTS);
-                            } else {
-                                keywords.add(m.group());
-                            }
-                        }
-                    }
-                    predicateList.add(new EmploymentTypeContainsKeywordsPredicate(keywords));
-                }
+                addToPredicateList(extractEmploymentTypePrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_EXPECTED_SALARY).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!ExpectedSalary.isValidExpectedSalary(keyword)) {
-                            throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractExpectedSalaryPrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    List<String> keywords = new ArrayList<>();
-                    Pattern r = Pattern.compile(LevelOfEducation.Education.getRegex());
-                    Matcher m = r.matcher(trimmedArg);
-
-                    ArrayList<String> terms = LevelOfEducation.Education.getEducationLevels();
-
-                    while (m.find()) {
-                        if (!m.group().isEmpty()) {
-                            boolean contains = false;
-                            for (String term: terms) {
-                                if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
-                                    contains = true;
-                                    break;
-                                }
-                            }
-
-                            if (!contains) {
-                                throw new ParseException(LevelOfEducation.FIND_MESSAGE_CONSTRAINTS);
-                            } else {
-                                keywords.add(m.group());
-                            }
-                        }
-                    }
-                    predicateList.add(new LevelOfEducationContainsKeywordsPredicate(keywords));
-                }
+                addToPredicateList(extractLevelOfEducationPrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_EXPERIENCE).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Experience.isValidExperience(keyword)) {
-                            throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
-                        }
-                    }
-                    predicateList.add(new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords)));
-                }
+                addToPredicateList(extractExperiencePrefixInput(argMultimap));
             }
 
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-                String arg = argMultimap.getValue(PREFIX_TAG).get();
-                String trimmedArg = arg.trim();
-                if (!trimmedArg.isEmpty()) {
-                    String[] keywords = splitByWhiteSpace(trimmedArg);
-                    for (String keyword : keywords) {
-                        if (!Tag.isValidTagName(keyword)) {
-                            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                addToPredicateList(extractTagPrefixInput(argMultimap));
+            }
+        }
+
+        private void addToPredicateList(Predicate<Person> predicate) {
+            if (predicate != null) {
+                this.predicateList.add(predicate);
+            }
+        }
+
+        private NameContainsKeywordsPredicate extractNamePrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_NAME).isPresent() : "No inputs for Prefix Name exist.";
+            String arg = argMultimap.getValue(PREFIX_NAME).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Name.isValidName(keyword)) {
+                        throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new NameContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private PhoneContainsKeywordsPredicate extractPhonePrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_PHONE).isPresent() : "No inputs for Prefix Phone exist.";
+            String arg = argMultimap.getValue(PREFIX_PHONE).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Phone.isValidPhone(keyword)) {
+                        throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new PhoneContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private EmailContainsKeywordsPredicate extractEmailPrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_EMAIL).isPresent() : "No inputs for Prefix Email exist.";
+            String arg = argMultimap.getValue(PREFIX_EMAIL).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Email.isValidEmail(keyword)) {
+                        throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new EmailContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private RoleContainsKeywordsPredicate extractRolePrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_ROLE).isPresent() : "No inputs for Prefix Role exist.";
+            String arg = argMultimap.getValue(PREFIX_ROLE).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Role.isValidRole(keyword)) {
+                        throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new RoleContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private EmploymentTypeContainsKeywordsPredicate extractEmploymentTypePrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()
+                    : "No inputs for Prefix Employment Type exists.";
+            String arg = argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                List<String> keywords = new ArrayList<>();
+                Pattern r = Pattern.compile(EmploymentType.Type.getRegex());
+                Matcher m = r.matcher(trimmedArg);
+
+                ArrayList<String> terms = EmploymentType.Type.getTerms();
+
+                while (m.find()) {
+                    if (!m.group().isEmpty()) {
+                        boolean isTermContained = false;
+                        for (String term: terms) {
+                            if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
+                                isTermContained = true;
+                                break;
+                            }
+                        }
+
+                        if (!isTermContained) {
+                            throw new ParseException(EmploymentType.FIND_MESSAGE_CONSTRAINTS);
+                        } else {
+                            keywords.add(m.group());
                         }
                     }
-                    predicateList.add(new TagContainsKeywordsPredicate(Arrays.asList(keywords)));
                 }
+                return new EmploymentTypeContainsKeywordsPredicate(keywords);
             }
+            return null;
+        }
+
+        private ExpectedSalaryWithinRangePredicate extractExpectedSalaryPrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()
+                    : "No inputs for Prefix Expected Salary exists.";
+            String arg = argMultimap.getValue(PREFIX_EXPECTED_SALARY).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!ExpectedSalary.isValidExpectedSalary(keyword)) {
+                        throw new ParseException(ExpectedSalary.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new ExpectedSalaryWithinRangePredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private LevelOfEducationContainsKeywordsPredicate
+            extractLevelOfEducationPrefixInput(ArgumentMultimap argMultimap) throws ParseException {
+            assert argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()
+                    : "No inputs for Prefix Level Of Education exists.";
+            String arg = argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                List<String> keywords = new ArrayList<>();
+                Pattern r = Pattern.compile(LevelOfEducation.Education.getRegex());
+                Matcher m = r.matcher(trimmedArg);
+
+                ArrayList<String> terms = LevelOfEducation.Education.getEducationLevels();
+
+                while (m.find()) {
+                    if (!m.group().isEmpty()) {
+                        boolean isTermContained = false;
+                        for (String term: terms) {
+                            if (term.toLowerCase().startsWith(m.group().toLowerCase())) {
+                                isTermContained = true;
+                                break;
+                            }
+                        }
+
+                        if (!isTermContained) {
+                            throw new ParseException(LevelOfEducation.FIND_MESSAGE_CONSTRAINTS);
+                        } else {
+                            keywords.add(m.group());
+                        }
+                    }
+                }
+                return new LevelOfEducationContainsKeywordsPredicate(keywords);
+            }
+            return null;
+        }
+
+        private ExperienceContainsKeywordsPredicate extractExperiencePrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()
+                    : "No inputs for Prefix Experience exists.";
+            String arg = argMultimap.getValue(PREFIX_EXPERIENCE).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Experience.isValidExperience(keyword)) {
+                        throw new ParseException(Experience.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new ExperienceContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private TagContainsKeywordsPredicate extractTagPrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_TAG).isPresent()
+                    : "No inputs for Prefix Tag exists.";
+            String arg = argMultimap.getValue(PREFIX_TAG).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!Tag.isValidTagName(keyword)) {
+                        throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new TagContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
         }
 
         public ArrayList<Predicate<Person>> getPredicates() {
