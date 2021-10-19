@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -32,6 +33,7 @@ class JsonAdaptedStudent {
     private final String studentNumber;
     private final String username;
     private final String repo;
+    private final String groupName;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final ArrayList<Integer> attendance = new ArrayList<>();
     private final ArrayList<Integer> participation = new ArrayList<>();
@@ -45,6 +47,7 @@ class JsonAdaptedStudent {
                               @JsonProperty("studentNumber") String studentNumber,
                               @JsonProperty("username") String username,
                               @JsonProperty("repo") String repo,
+                              @JsonProperty("group") String groupName,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                               @JsonProperty("attendance") ArrayList<Integer> attendance,
                               @JsonProperty("participation") ArrayList<Integer> participation) {
@@ -58,6 +61,7 @@ class JsonAdaptedStudent {
         this.participation.addAll(participation);
         this.repo = repo;
         this.username = username;
+        this.groupName = groupName;
     }
 
     /**
@@ -74,6 +78,7 @@ class JsonAdaptedStudent {
                 .collect(Collectors.toList()));
         attendance.addAll(source.getAttendance().attendanceList);
         participation.addAll(source.getParticipation().participationList);
+        groupName = source.getGroupName().name;
     }
 
     /**
@@ -87,6 +92,7 @@ class JsonAdaptedStudent {
         final ArrayList<Integer> studentParticipation = new ArrayList<>();
         final RepoName modelRepoName;
         final UserName modelUserName;
+        final GroupName modelGroupName;
 
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
@@ -131,6 +137,12 @@ class JsonAdaptedStudent {
             modelRepoName = new RepoName(repo);
         }
 
+        if (groupName == null) {
+            modelGroupName = new GroupName();
+        } else {
+            modelGroupName = new GroupName(groupName);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
         final Attendance modelAttendance = new Attendance(studentAttendance);
@@ -138,6 +150,6 @@ class JsonAdaptedStudent {
         final Participation modelParticipation = new Participation(studentParticipation);
 
         return new Student(modelName, modelEmail, modelStudentNumber, modelUserName, modelRepoName,
-                modelTags, modelAttendance, modelParticipation);
+                modelTags, modelAttendance, modelParticipation, modelGroupName);
     }
 }

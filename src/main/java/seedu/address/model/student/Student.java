@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.commons.RepoName;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +28,7 @@ public class Student {
     private final Set<Tag> tags = new HashSet<>();
     private final UserName userName;
     private final RepoName repoName;
+    private final GroupName groupName;
 
     /**
      * Every field must be present and not null.
@@ -51,6 +53,7 @@ public class Student {
         } else {
             this.repoName = new RepoName();
         }
+        this.groupName = new GroupName();
     }
 
     /**
@@ -58,7 +61,7 @@ public class Student {
      */
 
     public Student(Name name, Email email, StudentNumber studentNumber, UserName userName, RepoName repoName,
-                   Set<Tag> tags, Attendance attendance, Participation participation) {
+                   Set<Tag> tags, Attendance attendance, Participation participation, GroupName groupName) {
         requireAllNonNull(name, email, studentNumber, tags, attendance);
         this.name = name;
         this.email = email;
@@ -76,6 +79,7 @@ public class Student {
         } else {
             this.repoName = new RepoName();
         }
+        this.groupName = groupName;
     }
 
     public Name getName() {
@@ -112,6 +116,10 @@ public class Student {
 
     public Participation getParticipation() {
         return participation;
+    }
+
+    public GroupName getGroupName() {
+        return groupName;
     }
 
     /**
@@ -154,13 +162,14 @@ public class Student {
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getStudentNumber().equals((getStudentNumber()))
                 && otherStudent.getStudentLink().equals((getStudentLink()))
+                && otherStudent.getGroupName().equals(getGroupName())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, tags, attendance, participation, studentNumber, userName, repoName);
+        return Objects.hash(name, email, tags, attendance, participation, studentNumber, userName, repoName, groupName);
     }
 
     @Override
@@ -172,7 +181,9 @@ public class Student {
                 .append("; Student Number: ")
                 .append(getStudentNumber())
                 .append("; Github Link: ")
-                .append(getStudentLink());
+                .append(getStudentLink())
+                .append("; Group Name: ")
+                .append(getGroupName());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

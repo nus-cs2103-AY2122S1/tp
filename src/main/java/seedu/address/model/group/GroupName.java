@@ -31,6 +31,14 @@ public class GroupName {
         this.name = name.toUpperCase();
     }
 
+    public GroupName() {
+        this.name = null;
+    }
+
+    public boolean isNull () {
+        return name == null ? true : false;
+    }
+
     /**
      * Returns true if a given string is a valid name.
      */
@@ -41,19 +49,20 @@ public class GroupName {
 
     @Override
     public String toString() {
-        return name;
+        return isNull() ? "-" : name;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupName // instanceof handles nulls
-                && name.equals(((GroupName) other).name)); // state check
+                && ((isNull() && ((GroupName) other).isNull())
+                || (name.equals(((GroupName) other).name)))); // state check
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return isNull() ? 0 : name.hashCode();
     }
 
 }
