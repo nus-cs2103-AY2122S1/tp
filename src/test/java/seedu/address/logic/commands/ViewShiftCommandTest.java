@@ -32,7 +32,6 @@ public class ViewShiftCommandTest {
             LocalTime.of(10, 0));
 
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    String expectedMessage = String.format(ViewShiftCommand.DEFAULT_MESSAGE, 0);
 
     @Test
     public void equals() {
