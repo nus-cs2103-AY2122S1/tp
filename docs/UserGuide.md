@@ -137,5 +137,6 @@ Action | Format, Examples
 **Add** | `add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference n/4`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** [Coming soon] | `edit`
+**Find** | `find [code] [title] [description] [mc] [tag] KEYWORD` <br> e.g. `find code CS2040S`
 **List** | `list`
 **Help** [Coming soon] | `help`
