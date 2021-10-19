@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -46,6 +49,8 @@ public class PersonDetails extends UiPart<Region> {
     @FXML
     private Label telegram;
     @FXML
+    private Label github;
+    @FXML
     private Label phone;
     @FXML
     private Label address;
@@ -53,6 +58,8 @@ public class PersonDetails extends UiPart<Region> {
     private Label email;
     @FXML
     private ImageView profileView;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -72,6 +79,11 @@ public class PersonDetails extends UiPart<Region> {
         name.setText(person.getName().fullName);
         String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         telegram.setText("@" + person.getTelegram().value);
+        github.setText(person.getGithub().value);
+        tags.getChildren().removeIf(c -> true);
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         telegram.setOnMouseClicked((event) -> openTelegram(teleUrl));
         if (person.getPhone().value.isBlank()) {
             phone.setText("-");

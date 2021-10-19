@@ -7,12 +7,16 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="800.0" minWidth="950.0" onCloseRequest="#handleExit" title="CohortConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<fx:root maxHeight="1000.0" maxWidth="1200.0" minHeight="910.0" minWidth="950.0" onCloseRequest="#handleExit" title="CohortConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/logo.png" />
   </icons>
@@ -24,15 +28,24 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox style="-fx-background-color: #121212#121212;">
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-          <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-          </Menu>
-        </MenuBar>
+      <VBox fx:id="mainWindow" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;">
+            <HBox fx:id="menuHolder" alignment="CENTER_LEFT" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 20%);">
+               <children>
+              <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS">
+                <Menu mnemonicParsing="false" text="File">
+                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+                </Menu>
+              </MenuBar>
+                  <ImageView fx:id="eventsIcon" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/events.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
 
         <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
@@ -45,14 +58,26 @@
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <HBox minWidth="940.0" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <HBox fx:id="mainHBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="940.0" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                <children>
-             <StackPane fx:id="personListPanelPlaceholder" minWidth="500.0" style="-fx-background-color: #121212#121212;">
-                     <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="5.0" top="10.0" />
-                     </HBox.margin>
-                  </StackPane>
-                  <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" minWidth="400.0" style="-fx-background-color: #121212#121212;">
+                  <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <StackPane fx:id="tabPanePlaceholder" GridPane.hgrow="ALWAYS">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </StackPane>
+                   <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" style="-fx-background-color: #121212#121212;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                     </children>
+                  </GridPane>
+                  <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" minWidth="400.0" style="-fx-background-color: #121212;">
                      <HBox.margin>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
                      </HBox.margin>
@@ -62,8 +87,17 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+            <HBox fx:id="footerHBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 25%);">
+               <children>
+              <StackPane fx:id="statusbarPlaceholder" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></StackPane>
+               </children>
+               <padding>
+                  <Insets bottom="2.0" top="2.0" />
+               </padding>
+            </HBox>
       </VBox>
     </Scene>
   </scene>

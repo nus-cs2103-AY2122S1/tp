@@ -106,4 +106,11 @@ public interface Model {
      * @param personListPanel the person list panel in GUI
      */
     void setPersonListControl(PersonListPanel personListPanel);
+
+    /**
+     * Returns the PersonListPanel used by Model
+     *
+     * @return PersonListPanel object
+     */
+    PersonListPanel getPersonListControl();
 }
