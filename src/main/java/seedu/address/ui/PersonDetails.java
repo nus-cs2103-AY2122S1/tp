@@ -78,7 +78,7 @@ public class PersonDetails extends UiPart<Region> {
         name.setText(person.getName().fullName);
         String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         telegram.setText("@" + person.getTelegram().value);
-        github.setText("---------------");
+        github.setText(person.getGithub().value);
         tags.getChildren().removeIf(c -> true);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

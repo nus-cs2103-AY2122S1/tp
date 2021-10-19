@@ -52,11 +52,12 @@ public class CsvUtil {
             try {
                 String name = fields[headerIndex.get("Name")];
                 String tele = StringUtil.clean(fields[headerIndex.get("Telegram")], "@");
+                String github = StringUtil.clean(fields[headerIndex.get("Github")], "@");
                 String phone = fields[headerIndex.get("Phone Number")];
                 String email = fields[headerIndex.get("Email")];
                 String address = StringUtil.clean(fields[headerIndex.get("Address")], "\"");
                 List<String> tags = Arrays.asList(fields[headerIndex.get("Tags")].split(" "));
-                temp = constructorOfObjectToDeserialize.newInstance(name, tele, phone, email, address, tags);
+                temp = constructorOfObjectToDeserialize.newInstance(name, tele, github, phone, email, address, tags);
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 temp = null;
             }

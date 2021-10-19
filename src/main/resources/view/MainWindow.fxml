@@ -89,7 +89,6 @@
             </HBox>
             <HBox fx:id="footerHBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 25%);">
                <children>
-      
               <StackPane fx:id="statusbarPlaceholder" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <HBox.margin>
                         <Insets left="10.0" />
