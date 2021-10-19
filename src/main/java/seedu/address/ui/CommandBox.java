@@ -60,18 +60,16 @@ public class CommandBox extends UiPart<Region> {
      * cleared due to the reason stated previously, will just return.
      */
     private void showNextCommand() {
-        if (index == null) {
-            return;
-        } else if (index.getOneBased() == commandHistory.size()) {
-            index = Index.fromOneBased(index.getOneBased() + 1);
-            commandTextField.setText("");
-            return;
-        } else if (index.getOneBased() > commandHistory.size()) {
+        if (index == null || index.getOneBased() > commandHistory.size()) {
             return;
         }
 
-        index = Index.fromOneBased(index.getOneBased() + 1);
-        commandTextField.setText(commandHistory.get(index.getZeroBased()));
+        index.increaseByOne();
+
+        String text = index.getZeroBased() == commandHistory.size()
+                      ? ""
+                      : commandHistory.get(index.getZeroBased());
+        updateCommandTextField(text);
     }
 
     /**
@@ -84,8 +82,20 @@ public class CommandBox extends UiPart<Region> {
             return;
         }
 
-        index = Index.fromOneBased(index.getOneBased() - 1);
-        commandTextField.setText(commandHistory.get(index.getZeroBased()));
+        index.decreaseByOne();
+
+        String text = commandHistory.get(index.getZeroBased());
+        updateCommandTextField(text);
+    }
+
+    /**
+     * Displays the input text in commandTextField and set cursor to the end.
+     *
+     * @param text Text to be displayed.
+     */
+    private void updateCommandTextField(String text) {
+        commandTextField.setText(text);
+        commandTextField.positionCaret(text.length());
     }
 
     /**
@@ -105,7 +115,7 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
-            index = Index.fromOneBased(index.getOneBased() + 1);
+            index.increaseByOne();
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }

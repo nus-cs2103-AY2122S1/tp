@@ -50,7 +50,6 @@ public class ViewClientCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
         List<Client> lastShownList = model.getFilteredClientList();
-        System.out.println(this.index.getZeroBased());
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }

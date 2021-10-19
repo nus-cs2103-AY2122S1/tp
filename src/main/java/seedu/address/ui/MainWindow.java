@@ -42,7 +42,6 @@ public class MainWindow extends UiPart<Stage> {
     private HelpMessage helpMessage;
     private ViewMoreClient viewMoreClient;
     private ViewMoreProduct viewMoreProduct;
-    private SecondPanel secondPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -140,14 +139,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-//        pieChartView = new PieChartView();
-//        pieChartViewPlaceholder.getChildren().add(pieChartView.getRoot());
-
         helpMessage = new HelpMessage();
         secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
-
-//        viewMore = new ViewMore();
-//        viewMorePlaceholder.getChildren().add(viewMore.getRoot());
 
     }
 
@@ -220,6 +213,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isViewMore()) {
                 Category category = commandResult.getInfo();
                 if (category instanceof Client) {
+                    logger.info("View client's details: " + category.toString());
                     viewMoreClient = new ViewMoreClient();
                     viewMoreClient.setClientDetails((Client) category);
                     secondPanelPlaceholder.getChildren().clear();
@@ -227,6 +221,7 @@ public class MainWindow extends UiPart<Stage> {
                 }
 
                 if (category instanceof Product) {
+                    logger.info("View product's details: " + category.toString());
                     viewMoreProduct = new ViewMoreProduct();
                     viewMoreProduct.setProductDetails((Product) category);
                     secondPanelPlaceholder.getChildren().clear();
