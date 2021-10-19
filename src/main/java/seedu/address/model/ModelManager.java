@@ -165,12 +165,6 @@ public class ModelManager implements Model {
         applicantBook.addApplicant(applicant);
         applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
-
-        position.updateNoOfApplicants(position.getNoOfApplicants() + 1);
-        if (applicant.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
-            position.updateNoOfRejectedApplicants(position.getNoOfRejectedApplicants() + 1);
-        }
-        position.updateRejectionRate();
     }
 
     @Override
@@ -281,7 +275,8 @@ public class ModelManager implements Model {
      *
      * @param p The position to be initialised.
      */
-    public void initialiseRejectionRate(Position p) {
+    @Override
+    public int initialiseRejectionRate(Position p) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
@@ -293,19 +288,6 @@ public class ModelManager implements Model {
                 }
             }
         }
-        p.updateNoOfApplicants(total);
-        p.updateNoOfRejectedApplicants(count);
-        p.updateRejectionRate();
-    }
-
-
-
-    /**
-     * Updates all rejection rates for all current positions.
-     */
-    public void initialiseAllRejectionRates() {
-        for (Position p: positionBook.getPositionList()) {
-            initialiseRejectionRate(p);
-        }
+        return Calculator.calculateRejRate(total, count);
     }
 }
