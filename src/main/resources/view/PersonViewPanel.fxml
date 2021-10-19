@@ -111,8 +111,8 @@
             </HBox>
             <HBox prefHeight="20.0" prefWidth="363.0">
                <children>
-                  <Label styleClass="label-view" text="Next Meeting:" />
-                  <Label fx:id="nextMeeting" styleClass="label-view">
+                  <Label minHeight="-Infinity" minWidth="-Infinity" styleClass="label-view" text="Next Meeting:" />
+                  <Label minHeight="-Infinity" fx:id="nextMeeting" styleClass="label-view" wrapText="true">
                      <HBox.margin>
                         <Insets left="4.0" />
                      </HBox.margin>
