@@ -15,7 +15,7 @@ public class DeleteAliasCommand extends Command {
     public static final String COMMAND_WORD = "unalias";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes specified alias (case-sensitive).\n"
             + "Parameters: "
-            + "ALIAS\n"
+            + "SHORTCUT\n"
             + "Example: " + COMMAND_WORD + " lf";
     public static final String MESSAGE_ALIAS_DOES_NOT_EXIST = "The given alias '%1$s' does not exist.";
     public static final String MESSAGE_SUCCESS = "Alias for %1$s defined as %2$s successfully removed.";
