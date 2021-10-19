@@ -16,4 +16,6 @@ Class AddShiftCommandParser {
 
 Parser <|.. AddShiftCommandParser
 Command <|-- AddShiftCommand
-@enduml
+
+@end
+
