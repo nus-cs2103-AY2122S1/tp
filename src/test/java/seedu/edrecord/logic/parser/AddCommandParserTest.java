@@ -9,7 +9,6 @@ import static seedu.edrecord.logic.commands.CommandTestUtil.INFO_DESC_AMY;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INFO_DESC_BOB;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_GROUP_DESC;
-import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_INFO_DESC;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_MODULE_DESC;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.edrecord.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -45,7 +44,6 @@ import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.Email;
-import seedu.edrecord.model.person.Info;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.model.person.Phone;
 import seedu.edrecord.model.tag.Tag;
@@ -119,10 +117,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + INFO_DESC_BOB
                 + MODULE_DESC_BOB + GROUP_DESC_BOB, expectedMessage);
 
-        // missing info prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_INFO_BOB
-                + MODULE_DESC_BOB + GROUP_DESC_BOB, expectedMessage);
-
         // missing module prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INFO_DESC_BOB
                 + VALID_MODULE_BOB + GROUP_DESC_BOB, expectedMessage);
@@ -152,10 +146,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + INFO_DESC_BOB
                 + MODULE_DESC_BOB + GROUP_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
-        // invalid info
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_INFO_DESC
-                + MODULE_DESC_BOB + GROUP_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Info.MESSAGE_CONSTRAINTS);
-
         // invalid module
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INFO_DESC_BOB
                 + INVALID_MODULE_DESC + GROUP_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
@@ -171,7 +161,7 @@ public class AddCommandParserTest {
                 + MODULE_DESC_BOB + GROUP_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_INFO_DESC
+        assertParseFailure(parser, INVALID_NAME_DESC + INVALID_PHONE_DESC + EMAIL_DESC_BOB + VALID_INFO_BOB
                 + INVALID_MODULE_DESC + GROUP_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
