@@ -18,3 +18,23 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #ff7bad;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #ff7bad;
+    -fx-background-radius: 20.0 0.0 20.0 0.0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #ffcfe5;
+}
+
+.tab-pane .tab-label {
+    -fx-font-family: "Open Sans Bold Italic";
+    -fx-font-size: 14px;
+}
