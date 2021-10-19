@@ -63,10 +63,19 @@ Examples:
 Lists all currently supports commands, and provides a link to this user guide.<br>
 Format: `help`
 
-### Listing all anime: `list`
+### Listing anime: `list`
 
 Shows a list of all anime names the user has added.<br>
-Format: `list`
+An additional status parameter can be specified to show only anime with that status.<br>
+Format: `list [s/STATUS]`
+
+- `STATUS` refers to the updated status of the anime.
+- Available statuses: "towatch", "watching", "finished"
+- Shortforms: "t", "w", "f"
+
+Examples:
+*  `list`
+*  `list s/towatch`
 
 ### Updating an anime's episode: `update`
 
@@ -110,16 +119,3 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
   Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
-
-### Switch to a different status tab: `tab`
-
-Switch to a tab displaying all anime with the specified status.<br>
-Format: `tab s/STATUS`
-
-- `STATUS` refers to the updated status of the anime.
-- Available statuses: "towatch", "watching", "finished"
-- Shortforms: "t", "w", "f"
-
-Examples:
-*  `tab s/towatch`
-*  `tab s/t`

@@ -12,7 +12,11 @@ import seedu.anilist.model.anime.StatusEqualsPredicate;
 
 
 public class ListCommandParser implements Parser<ListCommand> {
-    @Override
+    /**
+     * Parses the given {@code String} of arguments in the context of the ListCommand
+     * and returns a ListCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public ListCommand parse(String args) throws ParseException {
         if (args.trim().length() == 0) {
             return new ListCommand(PREDICATE_SHOW_ALL_ANIME);
