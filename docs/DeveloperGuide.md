@@ -121,8 +121,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object) and `Folder` objects (which are contained in a `UniqueFolderList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Folder` objects (e.g., results of a search query)) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Folder>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -137,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="../images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -238,6 +239,33 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Create folder feature
+
+#### Implementation
+
+Folders are saved in a `UniqueFolderList` in `AddressBook`.
+
+The following diagram shows how `mkdir` works:
+
+![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice)**: Folders hold references to contacts
+  * Pros: Easier management of folders
+  * Cons: More difficult to implement
+    
+Diagram:
+
+![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
+
+* **Alternative 2**: Contacts hold references to folders
+    * Pros: Easy to implement
+    * Cons: More complex management of folders, Similar to tags which is already implemented
+    
+Diagram:
+
+![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
