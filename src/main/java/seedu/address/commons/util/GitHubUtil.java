@@ -99,7 +99,7 @@ public class GitHubUtil {
     public static JSONObject getProfile(String userName) throws RuntimeException {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
-        establishConnectionForApi( "users/" + userName);
+        establishConnectionForApi("users/" + userName);
         JSONObject data = null;
 
         if (responseCode != 200) {
