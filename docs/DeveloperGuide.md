@@ -218,13 +218,13 @@ Command syntax
 
 #### Implementation
 
-The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user 
+The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user
 input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
 the `LogicManager` class to filter the `uniqueStudentList` and/or the `uniqueLessonList` of the `model` based on the given user inputs.
 The filter performs differently based on the inputs given (grade, subject, or both):
 * If only grade is given as input, TuitiONE filters both the students list and the lesson list based on the given grade.
 * If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
-* If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based 
+* If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based
 on both the given grade and subject.
 
 #### Object diagram
@@ -489,7 +489,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
       Steps 1a1-1a2 are repeated until the data entered are correct.
 
     Use case resumes at step 2.
-    
+
 * 1b. CSO decides to filter by grade only
     * 1b1. TuitiONE filters the student and lesson list based on the given grade.
 
@@ -499,13 +499,13 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
     * 1c1. TuitiONE filters the lesson list based on the given subject.
 
     Use case resumes at step 2.
- 
+
 * 1d. CSO decides to filter by grade and subject
     * 1d1. TuitiONE filters the student list based on the given grade, and filters the lesson list based on both the
       given grade and subject.
  
     Use case resumes at step 2.
-    
+
 **UC05: Delete a Student**
 
 **MSS**
@@ -519,7 +519,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 1a. The list is empty.
-  
+
     Use case ends.
 
 * 2a. TuitiONE detects an error in entered command.
@@ -539,7 +539,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO requests to add a lesson with relevant details.
-2. TuitiONE adds the lesson.  
+2. TuitiONE adds the lesson.
 
     Use case ends.
 
@@ -555,7 +555,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1b. Lesson already exists in TuitiONE.
     * 1b1. TuitiONE informs that there already exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC07: View details of a Lesson**
 
@@ -614,7 +614,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 2b. Lesson does not exists in TuitiONE.
     * 2b1. TuitiONE informs that there does not exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC10 - Update a specific Student’s Details**
 
@@ -630,7 +630,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * 2a. TuitiONE detects an error in entered command.
       * 2a1. TuitiONE requests CSO to input a valid command.
-      * 2a2. CSO enters new command. 
+      * 2a2. CSO enters new command.
         Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
@@ -723,28 +723,28 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO enters help.
-2. TuitiONE provides the basic commands, as well as the user guide link.  
+2. TuitiONE provides the basic commands, as well as the user guide link.
 
     Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.  
-    * Performance requirements: the system should respond within 2 seconds.  
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.  
-4. Technical requirements: The system should work in both 32-bit and 64-bit environments.  
-5. Quality requirements:  
-    * User interface not produce excessive colour changes/flashing on command execution.  
-    * The user interface should use readable text styling, i.e. appropriate size and font.  
-    * All string output must be in UTF-8 encoding.  
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+    * Performance requirements: the system should respond within 2 seconds.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
+5. Quality requirements:
+    * User interface not produce excessive colour changes/flashing on command execution.
+    * The user interface should use readable text styling, i.e. appropriate size and font.
+    * All string output must be in UTF-8 encoding.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X  
-* **Private contact detail**: A contact detail that is not meant to be shared with others  
-* **CSO**: Customer Service Officer  
-* **GUI**: Graphical User Interface  
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CSO**: Customer Service Officer
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 

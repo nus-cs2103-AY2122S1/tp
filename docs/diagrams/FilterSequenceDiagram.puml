@@ -80,4 +80,5 @@ destroy FilterCommand
 
 [<--LogicManager
 deactivate LogicManager
+
 @enduml
