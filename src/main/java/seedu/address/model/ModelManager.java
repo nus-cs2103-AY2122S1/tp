@@ -4,14 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.MonthDay;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.PersonBirthdayComparator;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> birthdayReminders;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +44,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.birthdayReminders = generateBirthdayReminderList(addressBook);
     }
 
     public ModelManager() {
@@ -127,6 +137,46 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Birthday Reminder List Accessors ===========================================================
+    private static FilteredList<Person> generateBirthdayReminderList(ReadOnlyAddressBook addressBook) {
+
+        // Retrieves birthdays that have yet to pass
+        CompletableFuture<Stream<Person>> beforeCurrentDay = CompletableFuture.supplyAsync(() ->
+            addressBook
+                .getPersonList()
+                .stream()
+                .filter(p -> p.getBirthday().isPresent() && !haveBirthdayAfterCurrentDay(p))
+                .sorted(new PersonBirthdayComparator())
+        );
+
+        // Retrieves birthdays that have passed
+        CompletableFuture<Stream<Person>> currentDayOnwards = CompletableFuture.supplyAsync(() ->
+            addressBook
+                .getPersonList()
+                .stream()
+                .filter(p -> p.getBirthday().isPresent() && haveBirthdayAfterCurrentDay(p))
+                .sorted(new PersonBirthdayComparator())
+        );
+        Stream<Person> concatStream = Stream.concat(beforeCurrentDay.join(), currentDayOnwards.join());
+
+        return new FilteredList<>(
+                concatStream.collect(Collectors.toCollection(FXCollections::observableArrayList))
+        );
+    }
+
+    private static boolean haveBirthdayAfterCurrentDay(Person p) {
+        MonthDay currentMonthDay = MonthDay.now();
+        Optional<Birthday> possibleBirthday = p.getBirthday();
+        return possibleBirthday
+            .map(birthday -> currentMonthDay.isAfter(MonthDay.from((birthday.birthdate))))
+            .orElse(false);
+    }
+
+    @Override
+    public ObservableList<Person> getBirthdayReminderList() {
+        return birthdayReminders;
     }
 
     @Override
