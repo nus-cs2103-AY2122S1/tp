@@ -20,6 +20,9 @@ import javax.crypto.spec.IvParameterSpec;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 
+/**
+ * The object that encrypts and decrypts
+ */
 public class Cryptor implements Cryptable {
     /**
      * File to be decrypted must have the {@code *.enc} extension.
@@ -79,7 +82,12 @@ public class Cryptor implements Cryptable {
     }
 
     @Override
-    public String decrypt(Path encryptedSourceFilePath)
+    public void decrypt(Path encryptedSourceFilePath, Path destinationFilePath)
+            throws InvalidAlgorithmParameterException, IOException, InvalidKeyException {
+        FileUtil.writeToFile(destinationFilePath, decrypt(encryptedSourceFilePath));
+    }
+
+    private String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
         assert encryptedSourceFilePath != null;
 
@@ -102,6 +110,8 @@ public class Cryptor implements Cryptable {
         while ((line = reader.readLine()) != null) {
             sb.append(line).append(System.lineSeparator());
         }
+
+        logger.fine("Content decrypted.");
 
         return sb.toString();
     }
