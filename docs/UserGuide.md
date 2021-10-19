@@ -25,7 +25,7 @@ title: User Guide
     * [Editing the data file](#editing-the-data-file)
     * [Viewing statistics](#viewing-statistics)
 - [FAQ](#faq)
-- [Command Summary](#command-summary)
+- [Command summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
