@@ -31,6 +31,7 @@ public class Student {
     private final Grade grade;
     private final Set<Remark> remarks = new HashSet<>();
     private final Map<LessonCode, Price> lessonCodesAndPrices = new HashMap<>();
+    private final Set<Lesson> lessons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -111,6 +112,14 @@ public class Student {
     }
 
     /**
+     * Returns an immutable lessons set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    /**
      * Returns the Student's weekly subscription price.
      */
     public double getSubscriptionPrice() {
@@ -134,6 +143,7 @@ public class Student {
      * Adds lesson to student instance. Student instance holds a weaker linkage to Lessons, using its lesson code.
      */
     public void enrollForLesson(Lesson lesson) {
+        lessons.add(lesson);
         lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
     }
 
@@ -145,11 +155,19 @@ public class Student {
     }
 
     /**
+     * Puts the lessons of the given input into the current students' lessons set.
+     */
+    public void setLessons(Set<Lesson> newLessons) {
+        lessons.addAll(newLessons);
+    }
+
+    /**
      * Remove lesson from student instance. Student instance uses a weaker linkage to Lessons, using its lesson code.
      */
     public void unenrollFromLesson(Lesson lesson) {
         LessonCode codeToUnenroll = lesson.getLessonCode();
         lessonCodesAndPrices.remove(codeToUnenroll);
+        lessons.remove(lesson);
     }
 
     /**
@@ -158,6 +176,7 @@ public class Student {
     public Student createClone() {
         Student newStudent = new Student(name, parentContact, email, address, grade, remarks);
         newStudent.lessonCodesAndPrices.putAll(lessonCodesAndPrices);
+        newStudent.lessons.addAll(lessons);
         return newStudent;
     }
 

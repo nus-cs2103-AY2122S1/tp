@@ -1,12 +1,14 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
@@ -21,6 +23,7 @@ import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.commons.util.CollectionUtil;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
+import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.remark.Remark;
@@ -65,8 +68,7 @@ public class EditCommand extends Command {
      * @param editStudentDescriptor details to edit the student with
      */
     public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editStudentDescriptor);
+        requireAllNonNull(index, editStudentDescriptor);
 
         this.index = index;
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
@@ -86,20 +88,37 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Set<Lesson> studentLessons = studentToEdit.getLessons();
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
-
-        if (!editStudentDescriptor.gradeIsEdited) {
-            Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
-            editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
-        }
-
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
+        if (!editStudentDescriptor.gradeIsEdited) {
+            Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
+            editedStudent.setLessons(studentLessons);
+            editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
+
+            for (Lesson lesson : studentLessons) {
+                Lesson lessonClone = lesson.createClone();
+                lessonClone.removeStudent(studentToEdit);
+                lessonClone.addStudentNoConstraint(editedStudent); // editedStudent will be able to enroll
+                model.setLesson(lesson, lessonClone);
+            }
+        }
+
+        if (editStudentDescriptor.gradeIsEdited) {
+            for (Lesson lesson : studentLessons) {
+                Lesson lessonClone = lesson.createClone();
+                lessonClone.removeStudent(studentToEdit);
+                model.setLesson(lesson, lessonClone);
+            }
+        }
+
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
