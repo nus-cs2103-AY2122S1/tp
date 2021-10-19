@@ -31,7 +31,7 @@ public class AddGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLASS = "This group already exists in Classmate";
-    public static final String MESSAGE_CLASS_NOT_EXIST = "Thie class does not exist in Classmate";
+    public static final String MESSAGE_CLASS_NOT_EXIST = "The class does not exist in Classmate";
 
     private final TutorialGroup toAdd;
     private final TutorialClass toAddTutorialClass;
@@ -49,6 +49,7 @@ public class AddGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // check if tutorial class already exists in ClassMATE
         if (!model.hasTutorialClass(toAddTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }

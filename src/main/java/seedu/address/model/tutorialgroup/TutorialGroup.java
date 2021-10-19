@@ -73,7 +73,7 @@ public class TutorialGroup {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("; name: ")
+        builder.append("name: ")
                 .append(getGroupName())
                 .append("; class: ")
                 .append(getClassCode())
