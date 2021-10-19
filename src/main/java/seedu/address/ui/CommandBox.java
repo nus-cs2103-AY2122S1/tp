@@ -66,7 +66,7 @@ public class CommandBox extends UiPart<Region> {
 
         index.increaseByOne();
 
-        String text = index.getOneBased() == commandHistory.size()
+        String text = index.getZeroBased() == commandHistory.size()
                       ? ""
                       : commandHistory.get(index.getZeroBased());
         commandTextField.setText(text);
