@@ -8,7 +8,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -72,22 +71,6 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Returns true if an item with the given {@code name} exists in the inventory.
-     */
-    public boolean hasItem(Name name) {
-        requireNonNull(name);
-        return items.contains(name);
-    }
-
-    /**
-     * Returns true if an item with the given {@code id} exists in the inventory.
-     */
-    public boolean hasItem(String id) {
-        requireNonNull(id);
-        return items.contains(id);
-    }
-
-    /**
      * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
      * @see ItemDescriptor#isMatch(Item)
      */
@@ -96,33 +79,6 @@ public class Inventory implements ReadOnlyInventory {
         return items.get(descriptor);
     }
 
-    /**
-     * Returns the item with the same name as {@code item} that exists in the inventory.
-     */
-    public Item getItemWithName(String name) {
-        requireNonNull(name);
-        ObservableList<Item> ls = items.asUnmodifiableObservableList();
-        for (Item item : ls) {
-            if (item.getName().toString().equals(name)) {
-                return item;
-            }
-        }
-        throw new AssertionError("unreachable code (if implemented correctly)");
-    }
-
-    /**
-     * Returns the item with the same id as {@code item} that exists in the inventory.
-     */
-    public Item getItemWithId(String id) {
-        requireNonNull(id);
-        ObservableList<Item> ls = items.asUnmodifiableObservableList();
-        for (Item item : ls) {
-            if (item.getId().toString().equals(id)) {
-                return item;
-            }
-        }
-        throw new AssertionError("unreachable code (if implemented correctly)");
-    }
 
     /**
      * Adds an item to the inventory.
@@ -205,7 +161,7 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Increments the count of the given item {@code target} by {@code amount}.
+     * Increments the count of the given {@code target} in the inventory by {@code amount}.
      * {@code target} must exist in the inventory.
      */
     public void restockItem(Item target, int amount) {
@@ -216,61 +172,28 @@ public class Inventory implements ReadOnlyInventory {
     }
 
     /**
-     * Removes the specified amount of item with the given {@code name} from this {@code Inventory}.
-     * If amount of item drops to 0 or less, remove the entire item from inventory
-     * The specified item must exist in the inventory.
-     * @param name name of item to remove
-     * @param amount number of the item to remove, set to -1 to remove all.
-     * @returns the deleted item
+     * Decrements the count of the given {@code target} in the inventory by {@code amount}.
+     * {@code target} must exist in the inventory.
+     * @throws IllegalArgumentException if {@code target}'s count less than amount.
      */
-    public Item removeItem(Name name, Integer amount) {
-        requireNonNull(name);
+    public void removeItem(Item target, int amount) {
+        requireNonNull(target);
 
-        Item existingItem = items.getItem(name).get();
-        items.remove(existingItem);
-
-        int amountDeleted = (amount == -1)
-                ? existingItem.getCount() : Math.min(amount, existingItem.getCount());
-
-        int newCount = existingItem.getCount() - amountDeleted;
-        if (newCount > 0) {
-            items.add(existingItem.updateCount(newCount));
+        if (target.getCount() < amount) {
+            throw new IllegalArgumentException();
         }
 
-        return existingItem.updateCount(amountDeleted);
+        Item newItem = target.updateCount(target.getCount() - amount);
+        items.setItem(target, newItem);
     }
 
     /**
-     * Removes the specified amount of item with the given {@code id} from this {@code Inventory}.
-     * If amount of item drops to 0 or less, remove the entire item from inventory
-     * The specified item must exist in the inventory.
-     * @param id id of item to remove
-     * @param amount amount of the item to remove, set to -1 to remove all.
-     * @returns the deleted item
+     * Deletes the specified item entirely from inventory.
      */
-    public Item removeItem(String id, Integer amount) {
-        requireNonNull(id);
-
-        Item existingItem = items.getItem(id).get();
-        items.remove(existingItem);
-
-        int amountDeleted = (amount == -1)
-                ? existingItem.getCount() : Math.min(amount, existingItem.getCount());
-
-        int newCount = existingItem.getCount() - amountDeleted;
-        if (newCount > 0) {
-            items.add(existingItem.updateCount(newCount));
-        }
-
-        return existingItem.updateCount(amountDeleted);
-    }
-
-    /**
-     * Removes the specified item entirely from inventory.
-     */
-    public Item removeItem(Item toRemove) {
+    public void deleteItem(Item toRemove) {
         requireNonNull(toRemove);
-        return removeItem(toRemove.getName(), toRemove.getCount());
+
+        items.remove(toRemove);
     }
 
     //// util methods

@@ -76,7 +76,7 @@ public class Item {
      * @return
      */
     public Item updateCount(int newCount) {
-        assert(newCount > 0);
+        assert(newCount >= 0);
 
         return new Item(name, id, newCount, tags);
     }
