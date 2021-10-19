@@ -19,6 +19,9 @@ title: User Guide
     * [Deleting an appointment](#deleting-an-appointment-dappt)
     * [Updating completed appointment](#updating-completed-appointment-done)
     * [Sorting all persons](#sorting-all-persons-sort)
+    * [Editing a tag](#editing-a-tag-tag)
+    * [Using Priority tags](#using-priority-tags-pr)
+    * [Using Investment Plan tags](#using-investment-plan-tags-ip)
     * [Clearing all entries](#clearing-all-entries-clear)
     * [Exiting the program](#exiting-the-program-exit)
     * [Saving the data](#saving-the-data)
@@ -268,6 +271,51 @@ Format: `sort KEYWORD`
 Examples:
 * `sort priority` Sorts all existing persons by the priority from highest priority tag to lowest priority tag.
 
+### Editing a tag: `tag`
+
+Adds or removes tags from a specified contact.
+
+Format: `tag INDEX a/[TAG] d/[TAG]`
+* Use `a/` to add a tag, and `d/` to delete a tag.
+* Does not affect any unmentioned tags, unlike `edit`.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+* Delete operations are performed first before add operations, regardless of their order in the input.
+
+Example: 
+* `tag 1 a/thin d/fat` will add the `thin` tag while deleting the `fat` tag, given the `fat` tag already exists..
+* `tag 1 d/pr/low a/pr/high` will delete the `LowPriority` tag before adding the `HighPriority` tag.
+* `tag 1 a/ip/property` will add a `PropertyInsurance` tag to the contact.
+
+### Using Priority tags: `pr/`
+
+A set of fixed tags to indicate the priority level of contacts.
+
+Usage: replace any fields requiring `[TAG]` with one of the following terms:
+* LowPriority: `pr/low`
+* MediumPriority: `pr/med`
+* HighPriority: `pr/high`
+
+Example:
+* `tag 2 a/pr/low` will add a `LowPriority` tag to the specified contact.
+* `edit 1 t/pr/med` will set the specified contact to have only the `MediumPriority` tag.
+
+### Using Investment Plan tags: `ip/`
+
+A set of fixed tags to indicate the type of investment plans purchased by contacts.
+
+Usage: replace any fields requiring `[TAG]` with one of the following terms:
+* HealthInsurance: `ip/health`
+* Investment: `ip/invest`
+* LifeInsurance: `ip/life`
+* MotorInsurance: `ip/motor`
+* PropertyInsurance: `ip/property`
+* Savings: `ip/save`
+* TravelInsurance: `ip/travel`
+
+Example: 
+* `tag 2 a/ip/life` will add a `LifeInsurance` tag to the specified contact.
+* `edit 1 t/ip/motor` will set the specified contact to have only the `MotorInsurance` tag.
+
 ### Clearing all entries: `clear`
 
 Clears all entries from the address book.
@@ -316,6 +364,9 @@ Action | Format, Examples
 **Delete Contact** | `del INDEX`<br> e.g., `del 3`
 **Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
+**Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
+**Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`
 **List** | `list`
