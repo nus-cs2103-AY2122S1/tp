@@ -209,7 +209,7 @@ parses user's input and creates the `EventDateTimePredicate` which the `FilterEv
 `EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the event list. 
 
 The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `EventDateTimePredicate` to filter
-the event list. When the command is executed, the `model` will filter the `FilteredList<Event>` in the event list using
+the event list. When the command is executed, the `model` will filter the `FilteredList<Event>` using
 the `EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in `FilterEventCommand`.
 
 
