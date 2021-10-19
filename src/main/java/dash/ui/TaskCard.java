@@ -31,8 +31,8 @@ public class TaskCard extends UiPart<Region> {
     public final Task task;
 
     private int cardIndex = 0;
-    private Image checkmark_orange = new Image("/images/checkmark.png", 20, 20, false, true);
-    private Image checkmark_grey = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
+    private Image checkmarkOrange = new Image("/images/checkmark.png", 20, 20, false, true);
+    private Image checkmarkGrey = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
 
     @FXML
     private HBox cardPane;
@@ -59,10 +59,10 @@ public class TaskCard extends UiPart<Region> {
         this.cardIndex = displayedIndex;
         desc.setText(task.getTaskDescription().description);
 
-        ImageView checkmark = new ImageView(checkmark_grey);
+        ImageView checkmark = new ImageView(checkmarkGrey);
         completionStatus.setText(" ");
         completionStatus.setGraphic(checkmark);
-        if(this.task.getCompletionStatus().get()) {
+        if (this.task.getCompletionStatus().get()) {
             setAsComplete();
         }
 
@@ -86,7 +86,7 @@ public class TaskCard extends UiPart<Region> {
         }
         this.desc.setStyle("-fx-text-fill: #878787");
         this.id.setStyle("-fx-text-fill: #878787");
-        ImageView checkmark = new ImageView(checkmark_orange);
+        ImageView checkmark = new ImageView(checkmarkOrange);
         completionStatus.setText(" ");
         completionStatus.setGraphic(checkmark);
         this.date.setStyle("-fx-text-fill: #878787");
