@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.ReserveCommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalReservation.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
@@ -17,9 +18,9 @@ public class DeleteReservationCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        final Index FIRST_INDEX = Index.fromOneBased(1);
-        Reservation toDelete = model.getFilteredReservationList().get(FIRST_INDEX.getZeroBased());
-        DeleteReservationCommand command = new DeleteReservationCommand(FIRST_INDEX);
+        Index firstIndex = Index.fromOneBased(1);
+        Reservation toDelete = model.getFilteredReservationList().get(firstIndex.getZeroBased());
+        DeleteReservationCommand command = new DeleteReservationCommand(firstIndex);
 
         String expectedMessage = String.format(
                 DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
