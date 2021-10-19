@@ -63,7 +63,8 @@ public class TypicalPersons {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    public static final Task REPORT_1 = new TaskBuilder().withName("Report 1").withDeadline("2021-10-10").build();
+    public static final Task REPORT_1 = new TaskBuilder().withDescription("Report 1")
+            .withDeadline("2021-10-10").build();
 
     private TypicalPersons() {} // prevents instantiation
 

@@ -28,7 +28,7 @@ public class TaskBuilder {
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(Task taskToCopy) {
-        description = taskToCopy.getName();
+        description = taskToCopy.getDescription();
         deadline = taskToCopy.getDeadline();
         uniqueId = taskToCopy.getId();
     }
@@ -36,8 +36,8 @@ public class TaskBuilder {
     /**
      * Sets the {@code Description} of the {@code Task} that we are building.
      */
-    public TaskBuilder withName(String name) {
-        this.description = new Description(name);
+    public TaskBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 

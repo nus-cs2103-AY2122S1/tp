@@ -18,17 +18,17 @@ public class Description {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String name;
+    public final String description;
 
     /**
      * Constructs a {@code Description}.
      *
-     * @param name A valid name.
+     * @param description A valid description.
      */
-    public Description(String name) {
-        requireNonNull(name);
-        checkArgument(isValidDescription(name), MESSAGE_CONSTRAINTS);
-        this.name = name;
+    public Description(String description) {
+        requireNonNull(description);
+        checkArgument(isValidDescription(description), MESSAGE_CONSTRAINTS);
+        this.description = description;
     }
 
     /**
@@ -41,18 +41,18 @@ public class Description {
 
     @Override
     public String toString() {
-        return name;
+        return description;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && name.equals(((Description) other).name)); // state check
+                && description.equals(((Description) other).description)); // state check
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return description.hashCode();
     }
 }
