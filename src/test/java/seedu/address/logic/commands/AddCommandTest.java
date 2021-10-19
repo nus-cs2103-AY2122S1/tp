@@ -163,6 +163,11 @@ public class AddCommandTest {
         public void setPersonListControl(PersonListPanel personListPanel) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public PersonListPanel getPersonListControl() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

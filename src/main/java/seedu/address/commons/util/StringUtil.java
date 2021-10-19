@@ -68,4 +68,12 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static String clean(String s) {
+        return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll("[\t\\s+]", " ");
+    }
+
+    public static String clean(String s, String toRemove) {
+        return clean(s).replaceAll(toRemove, "");
+    }
 }
