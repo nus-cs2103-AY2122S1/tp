@@ -126,7 +126,7 @@ public class AddressBookParser {
 
         case FindEventCommand.COMMAND_WORD:
             return new FindEventCommandParser().parse(arguments);
-            
+
         case EditEventCommand.COMMAND_WORD:
             return new EditEventCommandParser().parse(arguments);
 
