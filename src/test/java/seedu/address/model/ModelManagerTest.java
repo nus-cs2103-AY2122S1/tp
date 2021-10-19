@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
-import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -207,7 +207,7 @@ public class ModelManagerTest {
 
         // different filteredList for employees -> returns false
         String[] employeeKeywords = ALICE_EMPLOYEE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(
+        modelManager.updateFilteredEmployeeList(new EmployeeClassContainsKeywordsPredicate(
                 Arrays.asList(employeeKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
