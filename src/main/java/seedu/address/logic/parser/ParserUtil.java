@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
@@ -199,6 +201,30 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String shortcut} into Shortcut.
+     */
+    public static Shortcut parseShortcut(String shortcut) throws ParseException {
+        requireNonNull(shortcut);
+        String trimmedShortcut = shortcut.trim();
+        if (!Shortcut.isValidShortcut(trimmedShortcut)) {
+            throw new ParseException(Shortcut.MESSAGE_CONSTRAINTS);
+        }
+        return new Shortcut(trimmedShortcut);
+    }
+
+    /**
+     * Parses a {@code String commandWord} into commandWord.
+     */
+    public static CommandWord parseCommandWord(String commandWord) throws ParseException {
+        requireNonNull(commandWord);
+        String trimmedCommandWord = commandWord.trim();
+        if (!CommandWord.isValidCommandWord(trimmedCommandWord)) {
+            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+        }
+        return new CommandWord(trimmedCommandWord);
     }
 
     /**
