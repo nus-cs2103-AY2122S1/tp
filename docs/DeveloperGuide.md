@@ -214,6 +214,23 @@ Below is an example usage scenario:
 6. If there are no issues, the command will finish executing, and a message indicating success will appear.
    Any changes to the tags will be reflected immediately: In this case, the tag `fat` will be added while the
    tag `thin` will be deleted.
+   
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Implement a dedicated Tag command.
+    * Pros: 
+      1. Isolation of a single feature to a specific command: more intuitive to use.
+      2. Improvement over `edit` command: retains tags not directly affected by the command
+    * Cons:
+      1. Repeated functionality that already exists in `edit` command
+    
+* **Alternative 2:** Augment the `edit` command.
+    * Pros:
+      1. Reduce the number of commands in the application: less to manage, easier to remember.
+    * Cons:
+      1. Overloading the `edit` command, which already accepts many parameters and modifiers in its
+         command format, could make it much more confusing to use, especially for newer users.
+      2. Harder to implement, as many existing dependencies could be affected.   
 
 ### \[Proposed\] Data archiving
 
