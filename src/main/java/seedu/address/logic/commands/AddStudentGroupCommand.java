@@ -56,12 +56,23 @@ public class AddStudentGroupCommand extends Command {
 
         Student studentToAdd = lastShownStudentList.get(index.getZeroBased());
 
+        if (!(studentToAdd.getGroupName().isNull())) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_MEMBER_INDEX);
+        }
+
         Group groupToUpdate = lastShownGroupList.stream()
                                                 .filter(g -> group.equals(g.getName()))
                                                 .findAny()
                                                 .orElse(null);
         if (groupToUpdate == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_NAME);
+        }
+        Student existingStudent = groupToUpdate.getMembers().studentList.stream()
+                                                                        .filter(s -> s.isSameStudent(studentToAdd))
+                                                                        .findAny()
+                                                                        .orElse(null);
+        if (existingStudent != null) {
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_GROUP_MEMBER_INDEX);
         }
 
         model.addStudentGroup(studentToAdd, groupToUpdate);
