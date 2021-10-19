@@ -139,7 +139,7 @@ public class Module {
     }
 
     /**
-     * Adds a task to this module.
+     * Adds a task to this module and add the task to all students in this module.
      * The task must not already exist in this module.
      * @param task The task to be added.
      */

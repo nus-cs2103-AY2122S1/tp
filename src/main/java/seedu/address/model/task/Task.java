@@ -36,6 +36,10 @@ public class Task {
         return this.module.toString();
     }
 
+    public ModuleName getModuleName() {
+        return this.module;
+    }
+
     public String getName() {
         return name;
     }
