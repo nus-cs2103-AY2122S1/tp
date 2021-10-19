@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
+import seedu.address.model.position.Position;
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
@@ -87,6 +88,12 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     public void removeIf(Predicate<? super Applicant> condition) {
         requireNonNull(condition);
         internalList.removeIf(condition);
+    }
+
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
+
     }
 
     public void setApplicants(UniqueApplicantList replacement) {

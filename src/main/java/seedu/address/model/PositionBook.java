@@ -93,6 +93,7 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.remove(key);
     }
 
+
     //// util methods
 
     @Override
