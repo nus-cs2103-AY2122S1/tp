@@ -57,4 +57,17 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
+
+    /**
+     * Returns the number of prefix(es) entered by the user.
+     */
+    public int numOfPrefix() {
+        int count = 0;
+        for (Prefix p: argMultimap.keySet()) {
+            if (getValue(p).isPresent()) {
+                count++;
+            }
+        }
+        return count;
+    }
 }
