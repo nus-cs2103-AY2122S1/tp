@@ -172,13 +172,13 @@ Step 1. The user launches the application for the first time. `UserPrefs` is ini
 
 ![AliasState0](images/AliasState0.png)
 
-Step 2. The user executes the `alias s/l cw/listf` command to create a shortcut `lf` for the `listf` command. The `alias` command calls `Model#addAlias(Alias)`, causing a mapping between `l` and `listf` to be stored in `AliasMap`. 
+Step 2. The user executes the `alias s/l cw/listf` command to create a shortcut `l` for the `listf` command. The `alias` command calls `Model#addAlias(Alias)`, causing a mapping between `l` and `listf` to be stored in `AliasMap`. 
 
 ![AliasState1](images/AliasState1.png)
 
 Step 3. The user now wants to use the shortcut `l` for a different command, `listm`, instead. The user executes `alias s/l cw/listm`. `Model#addAlias(Alias)` is called again and the mapping from `l` to `listf` is replaced with `l` to `listm` in `AliasMap`.
 
-![AliasState3](images/AliasState3.png)
+![AliasState2](images/AliasState2.png)
 
 Step 4. The user enters `l`, which the system understands as `listm` and executes the `listm` command, displaying all members in the member list.
 
@@ -192,7 +192,7 @@ The following sequence diagram shows how the system understands aliases:
 
 Step 5. The user then realises that the shortcut `l` was not to their liking and deletes the alias by executing `unalias l`. The `unalias` command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`.     
 
-![AliasState4](images/AliasState4.png)
+![AliasState3](images/AliasState3.png)
 
 Step 6. The user finally decides to use the shortcut `lm` for `listm` and executes `alias s/lm cw/lsitm`. The user closes the application and the alias defined are saved into `UserPrefStorage`, available for use at the next launch.
 
