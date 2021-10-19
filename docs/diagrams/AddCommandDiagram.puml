@@ -19,7 +19,7 @@ LogicManager -> AddressBookParser : parseCommand("add n/[NAME]")
 activate AddressBookParser
 
 create AddCommandParser
-AddressBookParser -> AddCommandParser 
+AddressBookParser -> AddCommandParser
 activate AddCommandParser
 
 AddCommandParser --> AddressBookParser
@@ -45,11 +45,11 @@ deactivate AddressBookParser
 LogicManager -> AddCommand : execute(model)
 activate AddCommand
 
-AddCommand -> Model : addPerson(person) 
+AddCommand -> Model : addPerson(person)
 activate Model
 
 
-Model --> AddCommand 
+Model --> AddCommand
 deactivate Model
 
 create CommandResult
