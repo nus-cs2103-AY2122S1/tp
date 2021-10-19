@@ -53,6 +53,6 @@ public class LinkYear {
 
     @Override
     public int hashCode() {
-        return year.hashCode();
+        return isNull() ? 0 : year.hashCode();
     }
 }
