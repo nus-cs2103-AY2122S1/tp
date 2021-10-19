@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.CLIENTID_DELIMITER;
+import static seedu.address.commons.util.StringUtil.PERSON_DELIMITER;
+import static seedu.address.commons.util.StringUtil.joinListToString;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CURRENTPLAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -12,8 +15,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -29,6 +34,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,49 +61,58 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This operation will result in a"
+            + " duplicate in the address book.";
     public static final String MESSAGE_CHANGE_CLIENTID = "Client's ID cannot be changed.";
 
-    private final ClientId clientId;
+    private final List<ClientId> clientIds;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param clientId             of the person in the filtered person list to edit
+     * @param clientIds of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(ClientId clientId, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(clientId);
+    public EditCommand(List<ClientId> clientIds, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(clientIds);
         requireNonNull(editPersonDescriptor);
 
-        this.clientId = clientId;
+        this.clientIds = clientIds;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasClientId(clientId)) {
-            throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, clientId));
+
+        List<ClientId> distinctClientIds = clientIds.stream().distinct().collect(Collectors.toList());
+        List<ClientId> invalidClientIds = distinctClientIds.stream()
+                .filter(c -> !model.hasClientId(c))
+                .collect(Collectors.toList());
+
+        if (!invalidClientIds.isEmpty()) {
+            String invalidClientIdsString = joinListToString(invalidClientIds, CLIENTID_DELIMITER);
+            throw new CommandException(String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, invalidClientIdsString));
         }
 
-        Person personToEdit = model.getPerson(clientId);
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+        List<Person> editedPersons;
+        try {
+            editedPersons = model.setPersonByClientIds(clientIds, editPersonDescriptor);
+        } catch (DuplicatePersonException de) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(personToEdit, editedPerson);
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+        String personsString = joinListToString(editedPersons, PERSON_DELIMITER);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personsString));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         ClientId oldClientId = personToEdit.getClientId();
@@ -131,7 +146,7 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return clientId.equals(e.clientId)
+        return clientIds.equals(e.clientIds)
             && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
@@ -150,8 +165,7 @@ public class EditCommand extends Command {
         private LastMet lastMet;
         private CurrentPlan currentPlan;
 
-        public EditPersonDescriptor() {
-        }
+        public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.

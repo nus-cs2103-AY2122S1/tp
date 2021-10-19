@@ -1,12 +1,23 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_FIRST_PERSON;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_SECOND_PERSON;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.ClientId;
+import seedu.address.model.person.Person;
 
 public class StringUtilTest {
 
@@ -217,4 +228,34 @@ public class StringUtilTest {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
 
+    //---------------- Tests for joinListToString --------------------------------------
+
+    /**
+     * Equivalence Partitions: null, valid throwable object
+     */
+
+    @Test
+    public void joinListToString_listNull_throwNullPointersException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.joinListToString(null, ""));
+    }
+
+    @Test
+    public void joinListToString_delimiterNull_throwNullPointersException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.joinListToString(List.of(""), null));
+    }
+
+    @Test
+    public void joinListToString_validInputs_correctResult() {
+        List<Person> personList = List.of(ALICE, BENSON, ELLE);
+        String personDelimiter = "\n";
+        String personResult = ALICE + personDelimiter + BENSON + personDelimiter + ELLE;
+        assertEquals(StringUtil.joinListToString(personList, personDelimiter), personResult);
+
+        List<ClientId> clientIdList = List.of(CLIENTID_ZERO_PERSON, CLIENTID_FIRST_PERSON, CLIENTID_SECOND_PERSON);
+        String clientIdDelimiter = ", ";
+        String clientIdResult = CLIENTID_ZERO_PERSON + clientIdDelimiter + CLIENTID_FIRST_PERSON
+                + clientIdDelimiter + CLIENTID_SECOND_PERSON;
+        assertEquals(StringUtil.joinListToString(clientIdList, clientIdDelimiter), clientIdResult);
+
+    }
 }

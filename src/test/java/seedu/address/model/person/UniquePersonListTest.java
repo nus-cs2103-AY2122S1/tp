@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -60,23 +62,27 @@ public class UniquePersonListTest {
 
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(null, ALICE));
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .setPersonByClientIds(null, new EditPersonDescriptorBuilder(AMY).build()));
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniquePersonList.setPerson(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniquePersonList
+                .setPersonByClientIds(List.of(ALICE.getClientId()), null));
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.setPerson(ALICE, ALICE));
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList
+                .setPersonByClientIds(List.of(ALICE.getClientId()), new EditPersonDescriptorBuilder(AMY).build()));
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, ALICE);
+        uniquePersonList.setPersonByClientIds(List.of(ALICE.getClientId()),
+                new EditPersonDescriptorBuilder(ALICE).build());
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -87,7 +93,8 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniquePersonList.setPerson(ALICE, editedAlice);
+        uniquePersonList.setPersonByClientIds(List.of(ALICE.getClientId()),
+                new EditPersonDescriptorBuilder(editedAlice).build());
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(editedAlice);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -95,8 +102,11 @@ public class UniquePersonListTest {
 
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
-        uniquePersonList.add(ALICE);
-        uniquePersonList.setPerson(ALICE, BOB);
+        uniquePersonList.add(BOB);
+        uniquePersonList.setPersonByClientIds(List.of(BOB.getClientId()),
+                new EditPersonDescriptorBuilder(ALICE).build());
+        uniquePersonList.setPersonByClientIds(List.of(BOB.getClientId()),
+                new EditPersonDescriptorBuilder(BOB).build());
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(BOB);
         assertEquals(expectedUniquePersonList, uniquePersonList);
@@ -106,7 +116,8 @@ public class UniquePersonListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniquePersonList.add(ALICE);
         uniquePersonList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniquePersonList.setPerson(ALICE, BOB));
+        assertThrows(DuplicatePersonException.class, () -> uniquePersonList
+                .setPersonByClientIds(List.of(ALICE.getClientId()), new EditPersonDescriptorBuilder(BOB).build()));
     }
 
     @Test

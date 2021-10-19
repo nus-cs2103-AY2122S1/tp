@@ -100,9 +100,6 @@ public class AddressBookTest {
             return persons;
         }
 
-        public void setPerson(Person target, Person editedPerson) {
-        }
-
         public Person getPerson(ClientId clientId) {
             return persons.get(0);
         }

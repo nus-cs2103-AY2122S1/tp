@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.person.PrefixMapper.PREFIX_FUNCTION_MAP;
-import static seedu.address.model.person.PrefixMapper.PREFIX_NAME_MAP;
+import static seedu.address.commons.mapper.PrefixMapper.getAttributeFunction;
+import static seedu.address.commons.mapper.PrefixMapper.getName;
 
 import java.util.Comparator;
 import java.util.function.Function;
@@ -29,12 +29,12 @@ public class SortByAttribute implements Comparator<Person> {
     }
 
     public String getPrefixName() {
-        return PREFIX_NAME_MAP.get(prefix);
+        return getName(prefix);
     }
 
     @Override
     public int compare(Person a, Person b) {
-        Function<Person, String> getAttribute = PREFIX_FUNCTION_MAP.get(prefix).andThen(Object::toString);
+        Function<Person, String> getAttribute = getAttributeFunction(prefix).andThen(Object::toString);
 
         String sa = getAttribute.apply(a);
         String sb = getAttribute.apply(b);

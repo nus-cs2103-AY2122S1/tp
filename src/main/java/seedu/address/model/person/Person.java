@@ -120,8 +120,7 @@ public class Person {
         }
 
         return otherPerson.getName().equals(getName())
-            && otherPerson.getClientId().equals(getClientId())
-            || otherPerson.getEmail().equals(getEmail());
+                || otherPerson.getEmail().equals(getEmail());
     }
 
     /**
