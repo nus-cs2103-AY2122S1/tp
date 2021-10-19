@@ -9,7 +9,10 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+list of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
+
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,43 +26,45 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** 
+The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/docs/diagrams) folder. 
+You can refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The *Architecture Diagram* given above explains the high-level design of the App.
 
-Given below is a quick overview of main components and how they interact with each other.
+Given below is a quick overview of the components and how they interact with each other.
 
-**Main components of the architecture**
+**Key components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for the following:
+* At app launch: Initializes the components in the correct sequence, and connects them with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/commons) represents a collection of classes used by multiple other components. In particular, the `LogsCenter` class plays an important role in the high-level design of the App as it is used to write log messages to the App's log file, which will be helpful for tracing and debugging.
 
 The rest of the App consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Ui`**](#ui-component): Handles the _UI_ of the App.
+* [**`Logic`**](#logic-component): Executes the user's commands.
+* [**`Model`**](#model-component): Holds the data of the App in memory while the App is running.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk. Allows the user to save and load data.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below is an example of how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the four main components (also shown in the diagram above)
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -67,36 +72,37 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### Ui component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The *API* of this component is specified in the [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java) interface.
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The `Ui` component uses the JavaFX framework and consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CenterPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible _GUI_.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The layout of these _UI_ parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-F13-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `Ui` component
 
 * executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* listens for changes to `Model` data so that the _UI_ can be updated with the modified data.
+* keeps a reference to the `Logic` component, as it relies on `Logic` to execute commands.
+* depends on some classes in the `Model` component, as it displays `Person` and `Calendar` objects residing in the `Model`.
+* chooses which component it displays based on the `CommandResult` returned by `Logic` component after executing the user command (e.g., `CommandResult#isShowSchedule()` tells the `Ui` to display the user's schedule. See also: [Schedule feature](#schedule-feature)). 
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-Here's a (partial) class diagram of the `Logic` component:
+Here's a (partial) *class diagram* of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -114,17 +120,18 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
 
-The `Model` component,
+The `Model` component
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the tuition address book data, i.e., all `Person` and calendar `Entry` objects (which are contained in a `UniquePersonList` object and `CalendarEntryList` object respectively).
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
@@ -135,14 +142,14 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
+The `Storage` component
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
@@ -153,6 +160,76 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Schedule feature
+
+Users can view a calendar that contains all existing lessons to visualise their schedule and plan ahead.
+
+#### Current Implementation
+
+TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its schedule view.
+Each lesson stored in the `Model` component is also converted to a CalendarFX `Entry` and maintained in the `CalendarEntryList` of `AddressBook`. 
+The `Ui` component shows this list of entries in the `SchedulePanel` using CalendarFX's `DetailedWeekView`.
+
+The following code snippet shows how `SchedulePanel` is initialised from the `Model` component's `Calendar`.
+
+```java
+public class SchedulePanel extends UiPart<Region> {
+
+    private static final String FXML = "SchedulePanel.fxml";
+
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
+
+    private final DetailedWeekView calendarView;
+
+    @FXML
+    private StackPane scheduleView;
+
+    /**
+     * Creates a {@code SchedulePanel} with the given {@code Calendar}.
+     */
+    public SchedulePanel(Calendar calendar) {
+        super(FXML);
+        calendarView = new DetailedWeekView();
+        initialiseCalendar(calendar);
+        createTimeThread();
+    }
+
+    /**
+     * Sets up CalendarFX.
+     * Adapted from CalendarFX developer manual.
+     * http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start
+     */
+    public void initialiseCalendar(Calendar calendar) {
+        CalendarSource calendarSource = new CalendarSource();
+        calendarSource.getCalendars().addAll(calendar);
+        calendarView.getCalendarSources().addAll(calendarSource);
+        
+        calendarView.setStartTime(TimeRange.DAY_START);
+        calendarView.setEndTime(TimeRange.DAY_END);
+        // other settings...
+        
+    }
+    
+    // other SchedulePanel methods...
+}
+```
+When `SchedulePanel` is initialised, it sets up a `CalendarSource` and `DetailedWeekView` with our custom display settings.
+Any changes made to the `Calendar` in `Model` will automatically update the `DetailedWeekView` in the `SchedulePanel` through CalendarFX's internal implementation (see how in the [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
+
+####Design considerations:
+
+**Aspect: How schedule is implemented:**
+
+* **Alternative 1:**  Create a calendar view using JavaFX.
+    * Pros: More customisable as we are not limited by CalendarFX's API.
+    * Cons: Much more difficult to implement.
+
+* **Alternative 2 (current choice):** Use CalendarFX to display entries while storing entry data locally.
+    * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
+    * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
+
+We chose alternative 2 and integrated CalendarFX into our app as the possibility of introducing bugs seems small due to it being a well-used and well-tested library. Furthermore, the schedule feature will be much more robust and can be implemented much faster as compared with alternative 1.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -270,8 +347,8 @@ A private 1-to-1 home tuition teacher in Singapore that:
 9. is reasonably comfortable using CLI apps
 10. tutors students belonging to Singapore’s education system
 
-**Value proposition**: Use **TAB** to manage customer contacts and customer relationships faster than 
-a typical mouse/GUI driven app. **TAB** effortlessly keeps track of large amounts of necessary 
+**Value proposition**: TAB is an all-in-one app that manages work schedule and client relationships faster than 
+a typical mouse/_GUI_ driven app. TAB effortlessly keeps track of large amounts of necessary 
 student and lesson information, to empower tutors to provide the best quality home tuition service.  
 
 
@@ -280,14 +357,14 @@ student and lesson information, to empower tutors to provide the best quality ho
 We categorise our user stories into three main epics:
 1. [S] - Keeping track of student information
 2. [L] - Keeping track of lesson information
-3. [U] - Having a simple, efficient, and intuitive UI/UX
+3. [U] - Having a simple, efficient, and intuitive _UI/UX_
 
 Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 | ID  | Priority | As a …​                                 | I want to …​                                                     | So that I can…​                                                      |
 |-----| -------- | ------------------------------------------ | ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| S1  | `HIGH`   | user                                       | add a new student                                                   | track student information with **TAB**                                  |
-| S2  | `HIGH`   | user                                       | view a student                                                      | track student information with **TAB**                                  |
+| S1  | `HIGH`   | user                                       | add a new student                                                   | track student information with TAB                                  |
+| S2  | `HIGH`   | user                                       | view a student                                                      | track student information with TAB                                  |
 | S3  | `HIGH`   | user                                       | delete a student                                                    | remove entries that I no longer need                                    |
 | S4  | `HIGH`   | user                                       | edit a student                                                      | update student information                                              |
 | S5  | `HIGH`   | user                                       | categorise my students with tags                                    |                                                                         |
@@ -299,33 +376,33 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | S11 | `HIGH`   | user                                       | view a student's contacts                                           |                                                                         |
 | S12 | `HIGH`   | user                                       | edit a student's contacts                                           |                                                                         |
 | S13 | `HIGH`   | user                                       | delete a student's contacts                                         |                                                                         |
-| S10 | `HIGH`   | user                                       | add a student's parent contacts                                     | maintain direct avenues of contact with their parents                   |
-| S11 | `HIGH`   | user                                       | view a student's parent contacts                                    |                                                                         |
-| S12 | `HIGH`   | user                                       | edit a student's parent contacts                                    |                                                                         |
-| S13 | `HIGH`   | user                                       | delete a student's parent contacts                                  |                                                                         |
-| S14 | `HIGH`   | user                                       | add a student's address                                             | know where to go to conduct my home tuition service                     |
-| S15 | `HIGH`   | user                                       | view a student's address                                            |                                                                         |
-| S16 | `HIGH`   | user                                       | edit a student's address                                            |                                                                         |
-| S17 | `HIGH`   | user                                       | delete a student's address                                          |                                                                         |
-| S18 | `HIGH`   | user                                       | add a student's school                                              | be reminded of the content that is relevant to the student              |
-| S19 | `HIGH`   | user                                       | view a student's school                                             |                                                                         |
-| S20 | `HIGH`   | user                                       | edit a student's school                                             |                                                                         |
-| S21 | `HIGH`   | user                                       | delete a student's school                                           |                                                                         |
-| S22 | `HIGH`   | user                                       | add a student's academic stream                                     | be reminded of the content that is relevant to the student              |
-| S23 | `HIGH`   | user                                       | view a student's academic stream                                    |                                                                         |
-| S24 | `HIGH`   | user                                       | edit a student's academic stream                                    |                                                                         |
-| S25 | `HIGH`   | user                                       | delete a student's academic stream                                  |                                                                         |
-| S26 | `HIGH`   | user                                       | add a student's academic level                                      | be reminded of the content that is relevant to the student              |
-| S27 | `HIGH`   | user                                       | view a student's academic level                                     |                                                                         |
-| S28 | `HIGH`   | user                                       | edit a student's academic level                                     |                                                                         |
-| S29 | `HIGH`   | user                                       | delete a student's academic level                                   |                                                                         |
-| S30 | `HIGH`   | user                                       | add a student's outstanding fees                                    | be reminded of the fees I have yet to collect                           |
-| S31 | `HIGH`   | user                                       | view a student's outstanding fees                                   |                                                                         |
-| S32 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
-| S33 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
-| S34 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
-| S35 | `LOW`    | user with many students stored in **TAB**  | sort students by name                                               | locate a student easily                                                 |
-| S36 | `LOW`    | user with many students stored in **TAB**  | sort students by tag                                                | locate a student easily                                                 |
+| S14 | `HIGH`   | user                                       | add a student's parent contacts                                     | maintain direct avenues of contact with their parents                   |
+| S15 | `HIGH`   | user                                       | view a student's parent contacts                                    |                                                                         |
+| S16 | `HIGH`   | user                                       | edit a student's parent contacts                                    |                                                                         |
+| S17 | `HIGH`   | user                                       | delete a student's parent contacts                                  |                                                                         |
+| S18 | `HIGH`   | user                                       | add a student's address                                             | know where to go to conduct my home tuition service                     |
+| S19 | `HIGH`   | user                                       | view a student's address                                            |                                                                         |
+| S20 | `HIGH`   | user                                       | edit a student's address                                            |                                                                         |
+| S21 | `HIGH`   | user                                       | delete a student's address                                          |                                                                         |
+| S22 | `HIGH`   | user                                       | add a student's school                                              | be reminded of the content that is relevant to the student              |
+| S23 | `HIGH`   | user                                       | view a student's school                                             |                                                                         |
+| S24 | `HIGH`   | user                                       | edit a student's school                                             |                                                                         |
+| S25 | `HIGH`   | user                                       | delete a student's school                                           |                                                                         |
+| S26 | `HIGH`   | user                                       | add a student's academic stream                                     | be reminded of the content that is relevant to the student              |
+| S27 | `HIGH`   | user                                       | view a student's academic stream                                    |                                                                         |
+| S28 | `HIGH`   | user                                       | edit a student's academic stream                                    |                                                                         |
+| S29 | `HIGH`   | user                                       | delete a student's academic stream                                  |                                                                         |
+| S30 | `HIGH`   | user                                       | add a student's academic level                                      | be reminded of the content that is relevant to the student              |
+| S31 | `HIGH`   | user                                       | view a student's academic level                                     |                                                                         |
+| S32 | `HIGH`   | user                                       | edit a student's academic level                                     |                                                                         |
+| S33 | `HIGH`   | user                                       | delete a student's academic level                                   |                                                                         |
+| S34 | `HIGH`   | user                                       | add a student's outstanding fees                                    | be reminded of the fees I have yet to collect                           |
+| S35 | `HIGH`   | user                                       | view a student's outstanding fees                                   |                                                                         |
+| S36 | `HIGH`   | user                                       | edit a student's outstanding fees                                   |                                                                         |
+| S37 | `HIGH`   | user                                       | delete a student's outstanding fees                                 |                                                                         |
+| S38 | `LOW`    | user                                       | have an archive for removed students                                | revisit the archived data if the need arises                            |
+| S39 | `LOW`    | user with many students stored in TAB  | sort students by name                                               | locate a student easily                                                 |
+| S40 | `LOW`    | user with many students stored in TAB  | sort students by tag                                                | locate a student easily                                                 |
 | L1  | `HIGH`   | user                                       | add lessons for a student                                           | keep track of the lessons each student has                              |
 | L2  | `HIGH`   | user                                       | add recurring lessons for a student                                 | keep track of the regular lessons                                       |
 | L3  | `HIGH`   | user                                       | add makeup lessons for a student                                    | track lessons outside of my usual lesson schedule                       |
@@ -345,13 +422,13 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 | L17 | `MEDIUM` | user                                       | edit a student's assigned homework for a particular lesson          |                                                                         |
 | L18 | `MEDIUM` | user                                       | view the assigned homework of a particular lesson                   |                                                                         |
 | L19 | `MEDIUM` | user                                       | view a calendar of my scheduled lessons                             | plan ahead while managing my schedule                                   |
-| U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use **TAB**    |
-| U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring **TAB**      |
+| U1  | `HIGH`   | new user                                   | see usage instructions                                              | refer to instructions whenever I need guidance on how to use TAB    |
+| U2  | `HIGH`   | new user                                   | purge all current data                                              | remove all sample/experimental data I used while exploring TAB      |
 | U3  | `HIGH`   | user                                       | find a student by keyword                                           | locate details of students without having to go through the entire list |
 | U4  | `HIGH`   | user                                       | undo accidental changes                                             |                                                                         |
 | U5  | `MEDIUM` | user                                       | filter students by tags                                             | view a list of all the students that feature the specified tags         |
 | U6  | `MEDIUM` | user with incomplete information           | skip less important information to add                              | update later when I have the rest of the information                    |
-| U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard                           | paste and use the data outside of **TAB**                               |
+| U7  | `MEDIUM` | user                                       | select and copy data to desktop clipboard                           | paste and use the data outside of TAB                               |
 | U8  | `LOW`    | user who uses many tags                    | view all tags                                                       | remember my tags easily                                                 |
 | U9  | `LOW`    | expert user                                | customise the commands and input fields                             | choose not to follow the given template                                 |
 | U10 | `LOW`    | user                                       | be reminded to update data after a lesson                           | ensure that data stays up to date                                       |
@@ -360,7 +437,7 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 ### Use cases
 
-(For all use cases below, the **System** is the `TuitionAddressBook` aka `TAB`, and the **Actor** is the tutor `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TuitionAddressBook` aka TAB, and the **Actor** is the tutor `user`, unless specified otherwise)
 
 <br/>
 
@@ -655,12 +732,15 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 * **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Outstanding fees**: Tuition fees that have yet to be collected.
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
 * **Session**: A session begins when the app is started and ends when the app is exited.
+* **UI**: User Interface - the means by which the user and the app interact.
+* **UX**: User Experience - The experience a user has when using the app.
 * **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
   UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 
@@ -681,7 +761,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the _GUI_ with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
