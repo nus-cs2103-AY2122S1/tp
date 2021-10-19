@@ -46,7 +46,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getAddressBook().getPerson(clientId), editedPerson);
+        expectedModel.setPerson(model.getPerson(clientId), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -54,14 +54,14 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecified_success() {
         ClientId clientId = CLIENTID_THIRD_PERSON;
-        Person thirdPerson = model.getAddressBook().getPerson(clientId);
+        Person thirdPerson = model.getPerson(clientId);
 
         PersonBuilder personInList = new PersonBuilder(thirdPerson);
         Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(clientId, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
@@ -76,7 +76,7 @@ public class EditCommandTest {
     public void execute_noFieldSpecified_success() {
         ClientId clientId = CLIENTID_FIRST_PERSON;
         EditCommand editCommand = new EditCommand(clientId, new EditPersonDescriptor());
-        Person editedPerson = model.getAddressBook().getPerson(clientId);
+        Person editedPerson = model.getPerson(clientId);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
@@ -89,7 +89,7 @@ public class EditCommandTest {
     @Test
     public void execute_duplicatePerson_failure() {
         ClientId clientId = CLIENTID_FIRST_PERSON;
-        Person firstPerson = model.getAddressBook().getPerson(clientId);
+        Person firstPerson = model.getPerson(clientId);
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
         EditCommand editCommand = new EditCommand(CLIENTID_THIRD_PERSON, descriptor);
 

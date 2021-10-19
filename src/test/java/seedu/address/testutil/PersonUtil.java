@@ -42,7 +42,7 @@ public class PersonUtil {
         sb.append(PREFIX_DISPOSABLEINCOME + person.getDisposableIncome().value + " ");
         sb.append(PREFIX_CURRENTPLAN + person.getCurrentPlan().value + " ");
         sb.append(PREFIX_LASTMET + person.getLastMet().dateInString + " ");
-        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.getName() + " "));
         return sb.toString();
     }
 
@@ -56,19 +56,19 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getRiskAppetite().ifPresent(riskAppetite -> sb.append(PREFIX_RISKAPPETITE)
-                .append(riskAppetite.value).append(" "));
+            .append(riskAppetite.value).append(" "));
         descriptor.getDisposableIncome().ifPresent(disposableIncome -> sb.append(PREFIX_DISPOSABLEINCOME)
-                .append(disposableIncome.value).append(" "));
+            .append(disposableIncome.value).append(" "));
         descriptor.getCurrentPlan().ifPresent(currentPlan -> sb.append(PREFIX_CURRENTPLAN)
-                .append(currentPlan.value).append(" "));
+            .append(currentPlan.value).append(" "));
         descriptor.getLastMet().ifPresent(lastMet -> sb.append(PREFIX_LASTMET)
-                .append(lastMet.dateInString).append(" "));
+            .append(lastMet.dateInString).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.getName()).append(" "));
             }
         }
         return sb.toString();

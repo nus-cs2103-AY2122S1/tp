@@ -26,4 +26,5 @@ public interface ReadOnlyAddressBook {
      */
     void incrementClientCounter();
 
+    void setClientCounter(String s);
 }
