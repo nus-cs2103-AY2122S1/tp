@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutoraid.model.lesson.Price.formatPrice;
 import static tutoraid.model.lesson.Price.isValidPrice;
 
 import org.junit.jupiter.api.Test;
@@ -43,22 +42,27 @@ class PriceTest {
 
     @Test
     void formatPrice_smallNumber() {
-        assertEquals("$1", formatPrice("1"));
+        Price p = new Price("1");
+        assertEquals("$1", p.formatPrice());
     }
 
     @Test
     void formatPrice_largeNumber() {
-        assertEquals("$1,234,567", formatPrice("1234567"));
+        Price p = new Price("1234567");
+        assertEquals("$1,234,567", p.formatPrice());
     }
 
     @Test
     void formatPrice_cents() {
-        assertEquals("$0.12", formatPrice("0.12"));
+        Price p = new Price("0.12");
+        assertEquals("$0.12", p.formatPrice());
     }
 
     @Test
     void toString_priceObject() {
-        assertEquals(new Price("1.23").toString(), formatPrice("1.23"));
+        String s = "1.23";
+        Price p = new Price(s);
+        assertEquals(p.toString(), s);
     }
 
     @Test

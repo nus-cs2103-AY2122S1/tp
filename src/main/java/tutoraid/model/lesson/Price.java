@@ -39,7 +39,7 @@ public class Price {
      * @param price The price to be formatted
      * @return Formatted string with $ symbol and comma between groups of 3 digits
      */
-    public static String formatPrice(String price) {
+    public String formatPrice() {
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         decimalFormat.setGroupingUsed(true);
         decimalFormat.setGroupingSize(3);
@@ -48,7 +48,7 @@ public class Price {
 
     @Override
     public String toString() {
-        return formatPrice(price);
+        return price;
     }
 
     @Override
