@@ -3,50 +3,67 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalItems.BAGEL;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
-/**
- * As we are only doing white-box testing, our test cases do not cover path variations
- * outside of the DeleteCommand code. For example, inputs "apple" and "apple t/fruit" take the
- * same path through the DeleteCommand, and therefore we test only one of them.
- * The path variation for those two cases occur inside the ParserUtil, and
- * therefore should be covered by the ParserUtilTest.
- */
 public class DeleteCommandParserTest {
-
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_nameNoId_returnsDeleteCommand() {
-        // name only
-        assertParseSuccess(parser, VALID_NAME_BAGEL, new DeleteCommand(new Name(VALID_NAME_BAGEL), -1));
-        // name and count
-        assertParseSuccess(parser, VALID_NAME_BAGEL + " " + COUNT_DESC_BAGEL,
-                new DeleteCommand(new Name(VALID_NAME_BAGEL), BAGEL.getCount()));
+    public void parse_nameAndId_success() {
+        ItemDescriptor expectedDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL, new DeleteCommand(expectedDescriptor));
     }
 
     @Test
-    public void parse_idNoName_returnsDeleteCommand() {
-        // id only
-        assertParseSuccess(parser, ID_DESC_BAGEL, new DeleteCommand(VALID_ID_BAGEL, -1));
-        // id and count
-        assertParseSuccess(parser, ID_DESC_BAGEL + " " + COUNT_DESC_BAGEL,
-                new DeleteCommand(VALID_ID_BAGEL, BAGEL.getCount()));
+    public void parse_nameOnly_success() {
+        ItemDescriptor expectedDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).build();
+
+        assertParseSuccess(parser, VALID_NAME_BAGEL, new DeleteCommand(expectedDescriptor));
     }
 
+    @Test
+    public void parse_idOnly_success() {
+        ItemDescriptor expectedDescriptor = new ItemDescriptorBuilder()
+                .withId(VALID_ID_BAGEL).build();
+
+        assertParseSuccess(parser, ID_DESC_BAGEL, new DeleteCommand(expectedDescriptor));
+    }
 
     @Test
-    public void parse_bothNameOrId_throwsParseException() {
-        assertParseFailure(parser, VALID_NAME_BAGEL + " " + ID_DESC_BAGEL,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_noNameNorId_failure() {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
+
+        // both name and id prefix missing
+        assertParseFailure(parser, COUNT_DESC_BAGEL, expectedMessage);
+    }
+
+    @Test
+    public void parse_invalidValue_failure() {
+        // invalid name
+        assertParseFailure(parser, INVALID_NAME + ID_DESC_BAGEL, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid id with negative number
+        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL_2,
+                Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+
+        // invalid id with 3 numbers
+        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL,
+                Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
     }
 }
