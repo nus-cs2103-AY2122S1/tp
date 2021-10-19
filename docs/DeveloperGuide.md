@@ -404,24 +404,26 @@ Step3: If time slot follows the format and no conflict exist, a new `TuitionClas
 
 ### [Developed] Display of Timetable
 
-The construction of the read-only timetable is mainly facilitated by the `TimetableInfoPage` class.
-It receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable accordingly.
-It generates a timetable with the following operations:
-* `TimetableInfoPage#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`
-* `TimetableInfoPage#setTableTime(start, end)` - Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list
-* `TimetableInfoPage#insertSlot()` - Inserts all tuition classes into the timetable
+The construction of the read-only timetable is mainly facilitated by the `Timetable` class which is encapsulated in the `Tuition` package.
+The `Timetable` receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
+It generates a timetable with the help of the `TimetableInfoPage` class using the following operations:
+* `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list 
+* `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time
+* `Timetable#insertSlot()` - Inserts all tuition classes into the timetable
 
 Given below is an example usage scenario and how the timetable is generated.
 
-Step1: The user enters `timetable` command. The `TimetableInfoPage` will first check whether the tuition class list received is empty.
+Step1: The user enters `timetable` command. The `TimetableCommand` class will first check whether the tuition class list received is empty.
 If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
 
-Step2: Upon ensuring there are tuition classes, the `TimetableInfoPage` will proceed to parse the `TimeSlot` in each tuition class.
+Step2: Upon ensuring there are tuition classes, the list of tuition classes are passed to the `Timetable` class.
+It will proceed to parse the `TimeSlot` in each tuition class. 
 After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided. 
 
-Step3: Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable.
+Step3: The intended size of timetable is then passed to the `TimetableInfoPage` class. 
+Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by the `TimetableInfoPage` class.
 
-Step4: The complete timetable is then displayed to user through the `UI` component.
+Step4: The complete timetable is displayed to user through the `UI` component.
 
 ## **Appendix: Instructions for manual testing**
 
