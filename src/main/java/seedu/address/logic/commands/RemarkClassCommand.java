@@ -19,6 +19,8 @@ import seedu.address.ui.UiManager;
 public class RemarkClassCommand extends Command {
 
     public static final String COMMAND_WORD = "remarkclass";
+    public static final String SHORTCUT = "rec";
+
     public static final String MESSAGE_UPDATE_REMARK_SUCCESS = "Remark updated for Tuition Class: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Tuition Class: %1$s";
 

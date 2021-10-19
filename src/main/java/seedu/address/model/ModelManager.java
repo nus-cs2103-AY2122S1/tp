@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private FilteredList<Person> filteredPersons;
-    private final FilteredList<TuitionClass> filteredTuition;
+    private FilteredList<TuitionClass> filteredTuition;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -196,27 +196,6 @@ public class ModelManager implements Model {
     public ObservableList<TuitionClass> getTodayTuitionList() {
         return addressBook.getTodayTuitionList();
     }
-
-    /*
-
-    @Override
-    public boolean equals(Object obj) {
-    // short circuit if same object
-        if (obj == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
-            return false;
-        }
-
-       // state check
-       ModelManager other = (ModelManager) obj;
-       return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
-    }
-    */
 
     @Override
     public boolean hasTuition(TuitionClass tuitionClass) {

@@ -218,7 +218,7 @@ public class TuitionClass implements Nameable {
         for (String name: studentList.getStudents()) {
             studentString += name;
             if (!name.equals(lastStudent)) {
-                studentString += ", ";
+                studentString += "\n";
             }
         }
         return studentString;

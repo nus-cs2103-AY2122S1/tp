@@ -14,6 +14,7 @@ import seedu.address.model.tuition.TuitionClass;
 
 public class AddClassCommand extends Command {
     public static final String COMMAND_WORD = "addclass";
+    public static final String SHORTCUT = "ac";
 
     public static final String MESSAGE_SUCCESS = "New tuition class added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLASS = "This time slot has already been taken";

@@ -10,11 +10,12 @@ import seedu.address.model.tuition.TuitionClass;
 
 public class ViewTodayTuitionCommand extends Command {
     public static final String COMMAND_WORD = "today";
+    public static final String SHORTCUT = "td";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all tuition classes on today "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows all tuition classes for today "
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Today tuition classes are shown below \n"
+    public static final String MESSAGE_SUCCESS = "Today's tuition classes are shown below \n"
             + "Number of tuition classes today: ";
 
     /**

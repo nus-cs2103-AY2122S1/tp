@@ -16,6 +16,7 @@ import seedu.address.model.tuition.TuitionClass;
 
 public class RemoveStudentCommand extends Command {
     public static final String COMMAND_WORD = "remove";
+    public static final String SHORTCUT = "rm";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes a student from a tuition class.\n"

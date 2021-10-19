@@ -37,7 +37,7 @@ public class TodayTuitionClassInfoPage extends InfoPage {
         todayTuitionInfoPageList.setItems(tuitionClassList);
         todayTuitionInfoPageList.setCellFactory(listView -> new TuitionListViewCell());
 
-        title.setText("Today Tuition Classes");
+        title.setText("Today's Tuition Classes");
 
     }
 
