@@ -13,6 +13,7 @@ if () then ([valid argument])
         : Display error message;
     endif
 else ([else])
+    : Display error message;
 endif
 stop
 @enduml
