@@ -55,10 +55,10 @@ public class AppointmentCommandParser {
             return new DeleteAppointmentCommand();
 
         case FLAG_FILTER:
-            return new FilterAppointmentCommand();
+            return new FilterAppointmentCommandParser().parse(arguments);
 
         case FLAG_FILTER_UPCOMING:
-            return new FilterUpcomingAppointmentCommand();
+            return new FilterUpcomingAppointmentCommandParser().parse(arguments);
 
         case FLAG_LIST:
             return new ListAppointmentCommand();

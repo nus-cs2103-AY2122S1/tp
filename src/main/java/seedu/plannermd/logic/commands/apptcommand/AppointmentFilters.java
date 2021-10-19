@@ -1,4 +1,4 @@
-package seedu.plannermd.logic.commands.filterappointmentcommand;
+package seedu.plannermd.logic.commands.apptcommand;
 
 import static java.util.Objects.requireNonNull;
 
