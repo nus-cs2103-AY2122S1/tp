@@ -345,7 +345,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Add Event** | `addEvent n/NAME d/DATE [t/TIME]` <br> e.g., `addEvent n/CS2100 Finals d/2021-11-20 t/0900`
 **Remove Event** | `removeEvent INDEX`  <br> e.g., `removeEvent 1`
-**Edit an Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent n/241Km Marathon`
+**Edit Event** | `editEvent INDEX [n/EVENT_NAME] [d/EVENT_DATE] [t/EVENT_TIME]` <br> e.g., `editEvent n/241Km Marathon`
 **Mark an Event as done** | `doneEvent INDEX` <br> e.g., `doneEvent 1`
 **Sort Events** | `sortEvents`
 **Filter Events** | `filterEvents d/DATE [t/TIME]` <br> e.g., `filterEvents d/2021-09-18`
