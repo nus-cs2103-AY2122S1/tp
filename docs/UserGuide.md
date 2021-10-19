@@ -83,6 +83,7 @@ Format: `help`
 |-n|Name|
 |-i|Index|
 |-d|Day Of the Week|
+|-t|Time|
 
 
 ### View a staff - `view`
@@ -98,12 +99,10 @@ Examples:\
 * Adds a staff to the system. The tags and information are optional and can be presented in any order.
 * Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
 
-Format:
-
+Format:\
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 
-Examples:
-
+Examples:\
 `add n/Joe s/fulltime r/manager p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
 `add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
 
@@ -122,12 +121,9 @@ The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
 
-The format of the input date is in:
+The format of the input date is in: `YYYY-MM-DD`
 
-`YYYY-MM-DD`
-
-Format:
-
+Format:\
 `mark i/index d/startDate d/endDate`  
 `mark n/name d/startDate d/endDate`  
 `mark t/tag d/startDate d/endDate`
@@ -135,27 +131,22 @@ Format:
 Possible to mark a single date  
 `mark t/tag d/date`
 
-Examples:
-
+Examples:\
 `mark i/1 d/2020-01-03 d/2021-01-03`  
 `mark d/Alex Yeoh d/2020-01-03`  
 
 
 ### Removing the absent mark `unmark`
 
-Removes the period that was marked by the
-`mark` command.
+Removes the period that was marked by the `mark` command.
 
-The format of the input date is in:
+The format of the input date is in: `YYYY-MM-DD`
 
-`YYYY-MM-DD`
-
-Format:
-
+Format:\
 `unmark n/name d/startDate d/endDate`  
 `unmark i/index d/startDate d/endDate`  
 
-Examples:  
+Examples:\
 `unmark i/1 d/2020-01-03 d/2021-01-03`  
 `unmark t/friends d/2020-01-03`  
 
@@ -163,8 +154,7 @@ Examples:
 
 Deletes the specified staff from the staff list.
 
-Formats:
-
+Formats:\
 `delete n/name`\
 `delete i/index`\
 `delete r/role`\
@@ -173,8 +163,7 @@ Formats:
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-
+Examples:\
 `delete n/Candice`\
 `delete i/12345678`\
 `delete r/cashiers`\
@@ -233,8 +222,11 @@ Examples:
 * `find -n alex david` returns `Alex Yeoh`, `David Li`
 * `find -i 3` returns the staff at the 3rd position on the list
 
+List before using Find command:
+  ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+List after using Find coma  
+![List after find command is called](images/findCommand/AfterFindCommand.jpg)
 
 
 ### Clearing all entries : `clear`
@@ -302,18 +294,32 @@ Examples:
 
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
-Formats:
-
+Formats:\
 `editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` \
 `editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
-Examples:
-
-`editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
+Examples:\
+`editSchedule n/Candice old/tuesday-1 new/tuesday-2`\
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
+### View all the staff working a shift: `viewShift`
 
-Demo:\
+Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
+
+Formats:\
+`viewShift -d day-shift_number`\
+`viewShift -t day-HH:mm` (Note that this is in 24-hour format)\
+`viewShift` [This also displays the staff working during the current shift]
+
+Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
+
+Examples:\
+`viewShift -d monday-1`\
+`viewShift -d TUESDAY-0`\
+`viewShift -t wednesday-12:00`\
+`viewShift -t THURSDAY-16:30`\
+
+Demonstration:\
 ![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
 
 ### Saving the data
@@ -347,7 +353,7 @@ Action | Format, Examples
 --------|------------------
 **View** | `view n/name` <br> `view i/index`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Delete** | `delete n/name` <br> `delete i/index` <br> `delete r/role` <br> `delete s/status`
+**Delete** | `delete n/name` <br> `delete i/index` <br> ` delete r/role` <br> `delete s/status`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedlue n/name` <br> `viewSchedlue i/index`
