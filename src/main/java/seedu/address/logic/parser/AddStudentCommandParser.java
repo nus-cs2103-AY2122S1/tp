@@ -25,10 +25,10 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
      *
      * @param args args for deleting a module
      * @throws ParseException if {@code userInput} does not conform the expected format
-     * @return AddCommand object created from the user input.
+     * @return AddStudentCommand object created from the user input.
      */
     @Override
-    public AddCommand parse(String args) throws ParseException {
+    public AddStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_STUDENT_ID, PREFIX_NAME, PREFIX_TELE_HANDLE,
                         PREFIX_EMAIL);

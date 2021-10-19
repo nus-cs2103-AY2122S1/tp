@@ -23,7 +23,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
-    public AddCommand parse(String args) throws ParseException {
+    public AddTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_TASK_NAME, PREFIX_TASK_DEADLINE);
 
