@@ -449,7 +449,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample friends. The window size may not be 
+      optimum.
 
 1. Saving window preferences
 
@@ -464,7 +465,7 @@ testers are expected to do more *exploratory* testing.
 1. Adding a friend to gitGud
 
     1. Prerequisites: List all friends using the `friend --list` command. There should not be a friend with 
-       `FRIEND_ID` Draco already stored in gitGud.
+       `FRIEND_ID` Draco as well as friend with `FRIEND_ID` MrFeely already stored in gitGud. 
 
     2. Test case: `friend --add Draco --name Marcus`<br>
        Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
@@ -473,34 +474,37 @@ testers are expected to do more *exploratory* testing.
        Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
 
     4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
-       Expected: Similar to previous.
+       Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
 
 2. _{ more test cases …​ }_
 
 ### Adding a game
 1. Adding a game to gitGud
 
-    1. Prerequisites: List all persons using the `list --game` command. There should not be a game with `GAME_NAME` 
-       Valorant already storied in gitGud.
+    1. Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_NAME` 
+       Valorant already stored in gitGud.
 
     2. Test case: `game --add Valorant`<br>
-       Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is deleted.
+       Expected: Game with `GAME_NAME` Valorant is added. gitGud states that `GAME_NAME` is added.
 
     3. Test case: `game --add`<br>
-       Expected: No person is added. Error details shown in the status message. Status bar remains the same.
+       Expected: No game is added. Error details shown in the status message. Status bar remains the same.
 
 2. _{ more test cases …​ }_
 
 ### Linking a friend to a game
 1. Linking a friend to a game in gitGud.
 
-    1. Prerequisites: There exist a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
+    1. Prerequisites: There exists a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
 
     2. Test case: `link --friend Draco --game Valorant --user Draconian`<br>
        Expected: A link between Draco and Valorant is created and Draco's username for Valorant, Draconian, is 
        stored in the link.
 
-    3. Test case: `link --friend Draco --game --Valorant`<br>
+    3. Test case: `link --game Valorant --name Draco --user Draconian`<br>
+       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+
+    3. Test case: `link --friend Draco --game Valorant`<br>
        Expected: No link is added. Error details shown in the status message. Status bar remains the same.
 
     4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
@@ -530,10 +534,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a game from gitGud
 
-    1. Prerequisites: Only one game with `GAME_ID` Valorant exists.
+    1. Prerequisites: Only one game with `GAME_NAME` Valorant exists.
 
     1. Test case: `game --delete Valorant`<br>
-       Expected: Game with `GAME_ID` Valorant is deleted. gitGud states that `GAME_ID` is deleted.
+       Expected: Game with `GAME_NAME` Valorant is deleted. gitGud states that `GAME_NAME` is deleted.
 
     1. Test case: `game --delete CSGO`<br>
        Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
@@ -543,9 +547,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Finding friends
+### Filtering friends in friends' list using a keyword
 
-1. Finding friends using a keyword
+1. Filtering friends' list using a keyword
 
     1. Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
 
@@ -556,16 +560,16 @@ testers are expected to do more *exploratory* testing.
        Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword Draco.
 
     4. Test case: `friend --list Dra`<br>
-           Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `Dra`.
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `Dra`.
 
     5. Test case: `friend --list co`<br>
        Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `co`.
 
-### Finding games
+### Filtering friends in games' list using a keyword
 
-1. Finding games using a keyword
+1. Filtering games' list using a keyword
 
-    1. Prerequisites: There exists more than one game in gitGud, one of which has the `FRIEND_ID` Valorant.
+    1. Prerequisites: There exists more than one game in gitGud, one of which has the `GAME_NAME` Valorant.
 
     2. Test case: `game --list`<br>
        Expected: All games are listed.
@@ -578,6 +582,42 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `game --list ant`<br>
        Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `ant`.
+
+### Viewing a friend's full data
+
+1. View a friend's full game information, including their in-game usernames
+
+    1. Prerequisites: A friend with `FRIEND_ID` Draco exists in gitGud.
+
+    2. Test case: `friend --get Draco`<br>
+       Expected: The full information about friend with `FRIEND_ID` Draco is listed.
+
+    3. Test case: `friend --get Dra`<br>
+        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `friend --get co`<br>
+       Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
+
+    5. \Other incorrect delete commands to try: `friend --get`, `...`
+       Expected: Similar to previous.
+   
+2. ### Viewing a game's full data
+
+1. View a game's full information, including the friends which play that game.
+
+    1. Prerequisites: A game with `GAME_NAME` Valorant exists in gitGud.
+
+    2. Test case: `game --get Valorant`<br>
+       Expected: The full information about game with `GAME_NAME` Valorant is listed.
+
+    3. Test case: `game --get Valo`<br>
+       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `game --get rant`<br>
+       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
+
+    5. \Other incorrect delete commands to try: `game --get`, `...`
+       Expected: Similar to previous.
 
 ### Saving data
 
