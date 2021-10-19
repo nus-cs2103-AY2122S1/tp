@@ -114,7 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](images/ModelClassDiagram.png)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -232,13 +232,16 @@ The following sequence diagram shows how the filter operation works:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 The following activity diagram summarizes what happens when a user executes the filter command:
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
 
 
 #### Design considerations:
-* Alternative 1 (current choice): one filter command that handles both grade and subject filtering
+
+**Aspect: How to implement filter**
+* **Alternative 1 (current choice)**: one filter command that handles both grade and subject filtering
     * Pros: Less commands to remember, user will not feel overwhelmed.
     * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
-* Alternative 2: 3 separate filter commands, one for each scenario stated above
+* **Alternative 2**: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
 

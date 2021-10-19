@@ -2,36 +2,24 @@
 'https://plantuml.com/activity-diagram-beta
 
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
+if () then ([filter grade & subject])
+    if () then ([valid grade])
+        : lesson & student list filtered by grade & subject;
+    else ([invalid grade])
+        : throw error;
     endif
+else ([filter by single variable])
+    if () then ([filter by grade])
+        if () then ([valid grade])
+            : lesson & student list filtered by grade;
+        else ([invalid grade])
+            : throw error;
+        endif
+    else ([filter by subject])
+        : lesson list filtered by subject;
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
     endif
-    :Page.onRender();
-  endif
-else (false)
 endif
-
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
-
 stop
 
 @enduml
