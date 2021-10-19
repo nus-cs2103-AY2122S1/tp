@@ -7,7 +7,6 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_WATCHING;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.TypicalAnimes.CSM;
