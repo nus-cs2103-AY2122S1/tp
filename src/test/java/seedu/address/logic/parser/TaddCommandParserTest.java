@@ -17,6 +17,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TaddCommand;
 import seedu.address.model.task.Task;
 
+import java.util.HashSet;
+import java.util.Set;
+
 class TaddCommandParserTest {
     private TaddCommandParser parser = new TaddCommandParser();
 
@@ -24,9 +27,11 @@ class TaddCommandParserTest {
     void parse_allFieldsPresent_success() {
         Task expectedTask = new Task(VALID_TASK_NAME);
         Index expectedMemberID = Index.fromOneBased(VALID_MEMBER_ID);
+        Set<Index> expectedMemberIDList = new HashSet<>();
+        expectedMemberIDList.add(expectedMemberID);
 
         assertParseSuccess(parser, TASK_NAME_DESC_POEM + MEMBER_ID_DESC_ONE,
-                new TaddCommand(expectedMemberID, expectedTask));
+                new TaddCommand(expectedMemberIDList, expectedTask));
     }
 
     @Test

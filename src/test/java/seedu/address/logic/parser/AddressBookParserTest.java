@@ -8,7 +8,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -48,9 +50,11 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add_task() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
+        Set<Index> validMemberIDList = new HashSet<>();
+        validMemberIDList.add(validMemberID);
         Task validTask = new Task("do homework");
         TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
-        assertEquals(new TaddCommand(validMemberID, validTask), command);
+        assertEquals(new TaddCommand(validMemberIDList, validTask), command);
     }
 
     @Test

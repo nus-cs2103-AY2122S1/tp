@@ -12,6 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
 
+import java.util.Set;
+
 /**
  * Adds a task to the task list of a person.
  */
@@ -26,17 +28,17 @@ public class TaddCommand extends Command {
             + PREFIX_NAME + " Submit form "
             + PREFIX_MEMBER_ID + " 2";
 
-    public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
 
-    public final Index targetMemberID;
+    public final Set<Index> targetMemberIDList;
     public final Task toAdd;
 
     /**
      * Creates an TaddCommand to add the specified {@code Task} to the member with specified {@code MemberID}.
      */
-    public TaddCommand(Index memberID, Task task) {
-        requireAllNonNull(memberID, task);
-        targetMemberID = memberID;
+    public TaddCommand(Set<Index> memberIDList, Task task) {
+        requireAllNonNull(memberIDList, task);
+        targetMemberIDList = memberIDList;
         toAdd = task;
     }
 
@@ -45,10 +47,12 @@ public class TaddCommand extends Command {
         requireNonNull(model);
 
         ObservableList<Member> members = model.getFilteredMemberList();
-        Member targetMember = members.get(targetMemberID.getZeroBased());
-        model.addTask(targetMember, toAdd);
+        for (Index targetMemberID: targetMemberIDList) {
+            Member targetMember = members.get(targetMemberID.getZeroBased());
+            model.addTask(targetMember, toAdd);
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName(), toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

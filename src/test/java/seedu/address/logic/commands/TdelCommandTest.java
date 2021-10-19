@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -39,11 +40,13 @@ class TdelCommandTest {
     @Test
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
+        Set<Index> validMemberIDList = new HashSet<>();
+        validMemberIDList.add(validMemberID);
         Index validTaskID = Index.fromOneBased(1);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
+        TaddCommand tAddCommand = new TaddCommand(validMemberIDList, validTask);
         ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberID);
         tAddCommand.execute(modelStub);
         CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);

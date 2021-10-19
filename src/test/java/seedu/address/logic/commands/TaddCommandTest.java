@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -37,31 +38,35 @@ class TaddCommandTest {
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
+        Set<Index> validMemberIDList = new HashSet<>();
+        validMemberIDList.add(validMemberID);
         Task validTask = new Task("Do homework");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
-        CommandResult commandResult = new TaddCommand(validMemberID, validTask).execute(modelStub);
+        CommandResult commandResult = new TaddCommand(validMemberIDList, validTask).execute(modelStub);
 
-        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validMember.getName(), validTask),
+        assertEquals(String.format(TaddCommand.MESSAGE_SUCCESS, validTask),
                 commandResult.getFeedbackToUser());
     }
 
     @Test
     public void equals() {
         Index validMemberID = Index.fromOneBased(1);
+        Set<Index> validMemberIDList = new HashSet<>();
+        validMemberIDList.add(validMemberID);
         Task validTask1 = new Task("Do homework");
         Task validTask2 = new Task("Write a poem");
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand addHomeworkCommand = new TaddCommand(validMemberID, validTask1);
-        TaddCommand addPoemCommand = new TaddCommand(validMemberID, validTask2);
+        TaddCommand addHomeworkCommand = new TaddCommand(validMemberIDList, validTask1);
+        TaddCommand addPoemCommand = new TaddCommand(validMemberIDList, validTask2);
 
         // same object -> returns true
         assertTrue(addHomeworkCommand.equals(addHomeworkCommand));
 
         // same values -> returns true
-        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberID, validTask1);
+        TaddCommand addHomeworkCommandCopy = new TaddCommand(validMemberIDList, validTask1);
         assertTrue(addHomeworkCommand.equals(addHomeworkCommandCopy));
 
         // different types -> returns false

@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -32,9 +33,9 @@ public class TaddCommandParser implements Parser<TaddCommand> {
         }
 
         Task task = ParserUtil.parseTask(argMultimap.getValue(PREFIX_NAME).get());
-        Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
+        Set<Index> memberIDList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_MEMBER_ID));
 
-        return new TaddCommand(memberID, task);
+        return new TaddCommand(memberIDList, task);
     }
 
     /**
