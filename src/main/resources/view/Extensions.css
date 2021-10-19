@@ -23,6 +23,10 @@
     -fx-background-color: #ff7bad;
 }
 
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 10;
+}
+
 .tab-pane .tab {
     -fx-background-color: #ff7bad;
     -fx-background-radius: 20.0 0.0 20.0 0.0;
