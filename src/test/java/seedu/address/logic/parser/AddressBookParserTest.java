@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -24,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
@@ -54,9 +57,23 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        Item item = new ItemBuilder().build();
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+
+        Item item = new ItemBuilder().withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
         DeleteCommand command = (DeleteCommand) parser.parseCommand(ItemUtil.getDeleteCommand(item));
-        assertEquals(new DeleteCommand(item.getName(), item.getCount()), command);
+        assertEquals(new DeleteCommand(descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_remove() throws Exception {
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL).build();
+
+        Item item = new ItemBuilder().withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        RemoveCommand command = (RemoveCommand) parser.parseCommand(ItemUtil.getRemoveCommand(item));
+        assertEquals(new RemoveCommand(descriptor), command);
     }
 
     @Test
