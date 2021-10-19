@@ -135,13 +135,13 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both tuitione data and user preference data in json format, and read them back into corresponding objects.
+* inherits from both `TuitioneStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -154,42 +154,113 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Lesson feature
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Delete Lesson feature
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Enroll feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Unenroll feature
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Filter feature
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedTuitione`. It extends `Tuitione` with an undo/redo history, stored internally as an `tuitioneStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedTuitione#commit()` — Saves the current tuitione state in its history.
+* `VersionedTuitione#undo()` — Restores the previous tuitione state from its history.
+* `VersionedTuitione#redo()` — Restores a previously undone tuitione state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitTuitione()`, `Model#undoTuitione()` and `Model#redoTuitione()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedTuitione` will be initialized with the initial tuitione state, and the `currentStatePointer` pointing to that single tuitione state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commit**Tuitione**()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitTuitione()`, causing another modified tuitione state to be saved into the `tuitioneStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitTuitione()`, so the tuitione state will not be saved into the `tuitioneStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTuitione()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tuitione state, and restores the tuitione to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Tuitione state, then there are no previous Tuitione states to restore. The `undo` command uses `Model#canUndoTuitione()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 </div>
 
@@ -201,17 +272,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoTuitione()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the tuitione to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `tuitioneStateList.size() - 1`, pointing to the latest tuitione state, then there are no undone Tuitione states to restore. The `redo` command uses `Model#canRedoTuitione()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the tuitione, such as `list`, will usually not call `Model#commitTuitione()`, `Model#undoTuitione()` or `Model#redoTuitione()`. Thus, the `tuitioneStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitTuitione()`. Since the `currentStatePointer` is not pointing at the end of the `tuitioneStateList`, all tuitione states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -223,7 +294,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire tuitione.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
@@ -233,11 +304,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -293,6 +359,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Customer Service Officer                   | update the email of a student’s parent | ensure the details are updated to date                         |
 | `* *`    | Customer Service Officer                   | filter students by their grade       | categorise students by their grades                              |
 | `* *`    | Customer Service Officer                   | filter lessons by their grade        | categorise lessons by their grades                               |
+| `* *`    | Customer Service Officer                   | filter lessons by their subject        | categorise lessons by their subjects                               |
 | `* *`    | Customer Service Officer                   | know how many students are in the lesson | help tutors plan resources accordingly for the lesson        |
 | `* *`    | Customer Service Officer                   | know the command format to enter     | learn to use the application                                     |
 | `* *`    | Customer Service Officer                   | know how much a student has to pay per week | remind the parents to pay punctually                      |
@@ -315,252 +382,331 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
 
-**UC01: Add a student**
+**UC01: View all Students and Lessons**
 
 **MSS**
 
-1. CSO requests to add a student.
-2. TuitiONE adds a student to the list.
+1. CSO enters to view all information.
+2. TuitiONE displays all students and lessons present.
+
+    Use case ends.
+
+**UC02: Add a Student**
+
+**MSS**
+
+1. CSO enters details to add a student.
+2. TuitiONE adds specified student to the list.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Wrong syntax for add command.
+* 1a. Missing compulsory details in command.
+    * 1a1. TuitiONE requests CSO to input a valid command.
+    * 1a2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the data entered are correct.
 
-    * 1a1. TuitiONE shows an error message.
+    Use case resumes from step 2.
 
-      Use case resumes from step 1.
+* 1b. TuitiONE detects an error in entered command.
+    * 1b1. TuitiONE requests CSO to input a valid command.
+    * 1b2. CSO enters new command.
+      Steps 1b1-1b2 are repeated until the data entered are correct.
 
-* 1b. Missing compulsory details in command.
+    Use case resumes at step 2.
 
-    * 1b1. TuitiONE shows an error message.
+* 1c. Student already exists in TuitiONE.
+    * 1c1. TuitiONE informs that there already exist such a student.
 
-      Use case resumes from step 1.
+    Use case ends.
 
-* 1c. Student already exists.
-
-    * 1c1. TuitiONE shows an error message.
-
-      Use case ends.
-
-**UC02: Look up student details**
+**UC03: Look up Student(s)**
 
 **MSS**
-1. CSO inputs command to find a specific student.
 
+1. CSO enters keywords(s) to find specific student(s).
 2. TuitiONE shows a list of relevant students.
-
-3. CSO looks through the given results of students.
-
-4. CSO views desired student’s details, such as:
-    1. Their grade
-    2. Their enrolled lessons
-    3. Their parent’s contact number
-    4. Their house address
-    5. Their tuition fees
+3. CSO looks through the given results of student(s) and their details, such as:
+    * Their grade
+    * Their parent’s contact number
+    * Their address
+    * Their enrolled lessons
+    * Their tuition subscription
 
     Use case ends.
 
 **Extensions**
 
-* 1a. TuitiONE detects and error in the command formatting.
+* 1a. TuitiONE detects an error in entered command.
+    * 1a1. TuitiONE requests CSO to input a valid command.
+    * 1a2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the data entered are correct.
 
-    * 1a1. TuitiONE reminds CSO of correct input format.
-
-    * 1a2. CSO inputs search keywords with correct formatting.
-
-      Steps 1a1-1a2 are repeated until the input is of the correct format.
-
-      Use case resumes from step 2.
+    Use case resumes at step 2.
 
 * 2a. TuitiONE cannot find any results relevant to the search keyword.
-
-    * 2a1. TuitiONE displays a “No students found” message to CSO.
-
-      Use case ends.
-
-* *a. At any time, the CSO can go back to the default TuitiONE page.
-
-    * *a1. CSO types in list.
-
-    * *a2. TuitiONE goes back to displaying list of all student details.
-
-      Use case ends.
-
-**UC03: Delete a student**
-
-**MSS**
-
-1. CSO <ins>searches for student (UC02)</ins>.
-2. TuitiONE shows a list of relevant students.
-3. CSO requests to delete a specific student in the list.
-4. TuitiONE deletes the student.
+    * 2a1. TuitiONE informs that there are no such students.
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The list is empty.
-  
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. TuitiONE shows an error message.
-
-      Use case resumes at step 2.
-
-**UC04: Enroll a student in a lesson**
+**UC04: Filter Student(s) by their Grade**
 
 **MSS**
-1. CSO views a list of lessons.
-2. CSO adds the student to be enrolled in lesson.
-3. TuitiONE adds the student to the lesson.  
-   Use case ends.
-
-**Extensions**
-* 2a. TuitiONE cannot find lesson.
-
-    * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
-
-      Use case resumes from step 1.
-    
-* 2b. TuitiONE cannot find the student.
-
-    * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.
-
-      Use case resumes from step 1.
-
-* 2c. Student is already enrolled to lesson.
-
-    Use case ends.
-
-**UC05: Unenroll a student in a lesson**
-
-**MSS**
-1. CSO views a list of lessons.
-2. CSO views list of students enrolled in selected lesson.
-3. CSO requests for student to be unenrolled from the lesson.
-4. TuitiONE removes the student from the lesson.
-   Use case ends.
-
-**Extensions**
-* 2a. TuitiONE cannot find lesson.
-
-    * 2a1. TuitiONE returns error message, requesting CSO to input a valid lesson.
-
-      Use case resumes from step 1.
-
-* 2b. TuitiONE cannot find the student.
-
-    * 2b1. TuitiONE returns error message, requesting CSO to input a valid student.  
-      Use case resumes from step 1.
-
-* 2c. Student is not enrolled to lesson.
-
-    Use case ends.
-      
-**UC06: View details of a lesson**
-
-**MSS**
-
-1. CSO views a list of lessons.
-2. TuitiONE shows a list of lessons, with their respective details:
-   1. Lesson subject
-   2. Grade
-   3. Start time 
-   4. Price
-   5. Students attending
-
-    Use case ends.
-
-**UC07: Add a lesson**
-
-**MSS**
-
-1.  CSO views a list of lessons.
-2.  TuitiONE shows a list of lessons.
-3.  CSO requests to add a lesson with relevant details.
-4.  TuitiONE adds the lesson.  
-    Use case ends.
-
-**Extensions**
-* 3a. Relevant details for lesson are invalid.
-
-    * 3a1. TuitiONE shows an error message.
-
-      Use case resumes at step 2.
-    
-**UC08: Delete a lesson**
-
-**MSS**
-
-1.  CSO views a list of lessons.
-2.  TuitiONE shows a list of lessons.
-3.  CSO requests to delete a specific lesson in the list.
-4.  TuitiONE deletes the lesson.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-    Use case ends.
-
-* 3a. The given lesson is invalid.
-
-    * 3a1. TuitiONE shows an error message.
-
-      Use case resumes at step 2.
-
-**UC09 - Update Specific Student’s Details**
-
-**MSS**
-
-1.  CSO <ins>looks for the student to update (UC02)</ins>.
-2.  CSO updates the details of the specific student.
-3.  TuitiONE reflects the updated details of the student.
+1. CSO enters a grade to filter for students by.
+2. TuitiONE lists the students that matches the grade.
 
     Use case ends.
 
 **Extension**
 
-* 2a. Details entered are invalid.
+* 1a. TuitiONE detects an error in entered command.
+    * 1a1. TuitiONE requests CSO to input a valid command.
+    * 1a2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the data entered are correct.
 
-    * 2a1. TuitiONE shows an error message.
+    Use case resumes at step 2.
 
-      Use case resumes at step 2. 
-
-**UC10: Review commands**
+**UC05: Delete a Student**
 
 **MSS**
 
-1.  CSO selects help option.
-2.  TuitiONE lists basic commands and descriptions, as well as the user guide link.  
+1. CSO views the current list of students, <ins>look up student(s) (UC03)</ins>, or <ins>filter student(s) by their grade (UC04)</ins>.
+2. CSO enters a specific student to delete from the list.
+3. TuitiONE deletes the student.
+
     Use case ends.
-    
+
+**Extensions**
+
+* 1a. The list is empty.
+  
+    Use case ends.
+
+* 2a. TuitiONE detects an error in entered command.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command.
+      Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
+* 2b. The student provided is not present in the list.
+    * 2b1. TuitiONE informs that there is no such student.
+
+    Use case ends.
+
+**UC06: Add a Lesson**
+
+**MSS**
+
+1. CSO requests to add a lesson with relevant details.
+2. TuitiONE adds the lesson.  
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. TuitiONE detects an error in entered command.
+    * 1a1. TuitiONE requests CSO to input a valid command.
+    * 1a2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 2.
+
+* 1b. Lesson already exists in TuitiONE.
+    * 1b1. TuitiONE informs that there already exist such a Lesson.
+
+    Use case ends.  
+
+**UC07: View details of a Lesson**
+
+**MSS**
+
+1. CSO views a list of lessons.
+2. TuitiONE shows a list of lessons, with their respective details:
+    * Lesson subject
+    * Grade
+    * Time period
+    * Price
+    * Number of students enrolled
+
+    Use case ends.
+
+**UC08: Filter Lesson(s) by their Grade and/or Subject**
+
+**MSS**
+1. CSO enters grade and/or subject to filter lessons by.
+2. TuitiONE lists the lessons that matches the grade and/or subject.
+
+    Use case ends.
+
+**Extension**
+
+* 1a. TuitiONE detects an error in entered command.
+    * 1a1. TuitiONE requests CSO to input a valid command.
+    * 1a2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 2.
+
+**UC09: Delete a Lesson**
+
+**MSS**
+
+1. CSO views the current list of lessons, or <ins>filter lesson(s) by their grade and/or subject (UC08)</ins>.
+2. CSO requests to delete a specific lesson in the list.
+3. TuitiONE deletes the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The list is empty.
+
+    Use case ends.
+
+* 2a. TuitiONE detects an error in entered command.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command.
+      Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
+* 2b. Lesson does not exists in TuitiONE.
+    * 2b1. TuitiONE informs that there does not exist such a Lesson.
+
+    Use case ends.  
+
+**UC10 - Update a specific Student’s Details**
+
+**MSS**
+
+1. CSO finds a student to update from the existing list, by <ins>looking up student(s) (UC03)</ins>, or by <ins>filtering student(s) by their grade (UC04)</ins>.
+2. CSO enters the student and the details to update.
+3. TuitiONE reflects the updated details of the student.
+
+    Use case ends.
+
+  **Extension**
+
+* 2a. TuitiONE detects an error in entered command.
+      * 2a1. TuitiONE requests CSO to input a valid command.
+      * 2a2. CSO enters new command. 
+        Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
+* 2b. The student requested to edit is not present in the list.
+      * 2b1. TuitiONE informs that there is no such student.
+
+    Use case ends.
+
+**UC11: Enroll a Student to a Lesson**
+
+**MSS**
+
+1. CSO finds a student to enroll from the existing list, by <ins>looking up student(s) (UC03)</ins>, or by <ins>filtering student(s) by their grade (UC04)</ins>.
+2. CSO finds a lesson for the student to enroll to based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC08)</ins>.
+3. CSO enters a student and a lesson to enroll the student to the said lesson.
+4. TuitiONE adds the student to the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. TuitiONE detects an error in entered command.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command.
+      Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 4.
+
+* 3b. TuitiONE cannot find the lesson.
+    * 3b1. TuitiONE requests CSO to enter a valid lesson.
+    * 3b2. CSO enters new command.
+      Steps 3b1-3b2 are repeated until the data entered are valid.
+
+    Use case resumes at step 4.
+
+* 3c. TuitiONE cannot find the student.
+    * 3c1. TuitiONE requests CSO to enter a valid student.
+    * 3c2. CSO enters new command.
+      Steps 3c1-3c2 are repeated until the data entered are valid.
+
+    Use case resumes at step 4.
+
+* 3d. Student is already enrolled to lesson.
+    * 3d1. TuitiONE informs that student is already enrolled to lesson.
+
+    Use case ends.
+
+**UC12: Unenroll a Student from a Lesson**
+
+**MSS**
+
+1. CSO finds a student to unenroll from the existing list, by <ins>looking up student(s) (UC03)</ins>, or by <ins>filtering student(s) by their grade (UC04)</ins>.
+2. CSO finds a lesson for the student to unenroll from based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC08)</ins>.
+3. CSO requests for student to be unenrolled from the lesson.
+4. TuitiONE removes the student from the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. TuitiONE detects an error in entered command.
+    * 3a1. TuitiONE requests CSO to input a valid command.
+    * 3a2. CSO enters new command.
+      Steps 3a1-3a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 4.
+
+* 3b. TuitiONE cannot find the lesson.
+    * 3b1. TuitiONE requests CSO to enter a valid lesson.
+    * 3b2. CSO enters new command.
+      Steps 3b1-3b2 are repeated until the data entered are valid.
+
+    Use case resumes at step 4.
+
+* 3c. TuitiONE cannot find the student.
+    * 3c1. TuitiONE requests CSO to enter a valid student.
+    * 3c2. CSO enters new command.
+      Steps 3c1-3c2 are repeated until the data entered are valid.
+
+    Use case resumes at step 4.
+
+* 3d. Student is not enrolled to lesson.
+    * 3d1. TuitiONE informs that student is not enrolled to lesson.
+
+    Use case ends.
+
+**UC13: Review Commands**
+
+**MSS**
+
+1. CSO enters help.
+2. TuitiONE provides the basic commands, as well as the user guide link.  
+
+    Use case ends.
+
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
-    1. Performance requirements: the system should respond within 2 seconds.
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
-5. Quality requirements:
-
-    1. User interface not produce excessive colour changes/flashing on command execution
-
-    1. The user interface should use readable text styling, i.e. appropriate size and font
-
-    1. All string output must be in UTF-8 encoding.
-
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.  
+    * Performance requirements: the system should respond within 2 seconds.  
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.  
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.  
+5. Quality requirements:  
+    * User interface not produce excessive colour changes/flashing on command execution.  
+    * The user interface should use readable text styling, i.e. appropriate size and font.  
+    * All string output must be in UTF-8 encoding.  
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **CSO**: Customer Service Officer
-* **GUI**: Graphical User Interface
+* **Mainstream OS**: Windows, Linux, Unix, OS-X  
+* **Private contact detail**: A contact detail that is not meant to be shared with others  
+* **CSO**: Customer Service Officer  
+* **GUI**: Graphical User Interface  
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

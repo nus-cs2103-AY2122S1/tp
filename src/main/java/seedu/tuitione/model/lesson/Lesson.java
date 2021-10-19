@@ -157,6 +157,16 @@ public class Lesson {
     }
 
     /**
+     * Add student to the lesson instance, without any checks
+     * Lesson instance holds a stronger linkage to Students, storing Student entities.
+     */
+    public void addStudentNoConstraint(Student student) {
+        requireNonNull(student);
+        students.add(student);
+        student.enrollForLesson(this);
+    }
+
+    /**
      * Removes student from the lesson instance.
      * Lesson instance holds a stronger linkage to Students, tracking Student entities.
      */
