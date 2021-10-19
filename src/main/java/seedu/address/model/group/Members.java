@@ -56,6 +56,19 @@ public class Members {
     }
 
     @Override
+    public String toString() {
+        if (studentList.isEmpty()) {
+            return "No members";
+        }
+        StringBuilder sb = new StringBuilder();
+        for (Student m : studentList) {
+            sb.append(m.getName().fullName).append(", ");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
+    }
+
+    @Override
     public int hashCode() {
         return studentList.hashCode();
     }

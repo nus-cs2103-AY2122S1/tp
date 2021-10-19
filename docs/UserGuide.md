@@ -73,14 +73,91 @@ Format: `students`
 Examples:
 * `students` returns a list of all students with their information and attendance scores
 
-### Add a student : `add`
+### Add a student : `addStudent`
 
-Adds a student to the student list.
+Adds a student to the student list. 
 
-Format: `add NAME`
+Format: `addStudent n/NAME e/EMAIL s/STUDENTNUMBER [u/GITHUB USERNAME] [r/REPO NAME] [t/TAG]...`
+
+* Github link will only be shown if both `GITHUB USERNAME` and `REPO NAME` are specified.
+* `STUDENTNUMBER` must consist of a character, followed by 7 digits, followed by another character. 
+  Case of character does not matter.
+* If only either `GITHUB USERNAME` or `REPO NAME` are specified, the data will still be saved but not shown.
+* If the same person is edited and the remaining empty data field is entered, a proper Github link will be shown.
 
 Examples:
-* `add Tom Lim` adds Tom Lim to the list and displays a confirmation output
+* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user r/ip t/friends t/owesMoney` adds John Doe to the list 
+  and displays a confirmation output with a proper Github link
+* `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
+  output without a proper Github link, but storing the `GITHUB USERNAME` in memory nonetheless.
+
+
+### Lists all groups: `groups`
+
+Shows a list of all groups inputted into tApp together with its group members and group Github link if any are added.
+
+Format: `groups`
+
+Examples:
+* `groups` returns a list of all groups with their information.
+
+### Add a group: `addGroup`
+
+Adds a group to the group list. The group will only be initialized with a `GROUP NAME` and `TAG` if any.
+
+Format: `addGroup g/GROUP NAME [t/TAG]...`
+
+* `GROUP NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit. 
+  The case of the character does not matter.
+
+Examples:
+* `addGroup g/W14-4 t/tApp` adds group W14-4 to the list and displays a confirmation output with no Github link and
+  group members
+
+### Delete a group: `deleteGroup`
+
+Deletes the specified group from the group list.
+
+Format: `deleteGroup INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed group list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and Github
+link of the group deleted
+
+### Add a student to a group: `addSG`
+
+Adds a student in student list to an existing group in the group list. 
+
+Format: `addSG INDEX g/GROUP`
+
+* Adds the student specified at `INDEX` to the group with name specified by `GROUP`.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+* `GROUP` must be an existing group in the displayed group list.
+
+Examples:
+* `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output
+  that the student has been added to the group
+
+
+### Add a Github link to a group: `addGG`
+
+Adds a Github link to a specified group.
+
+Format: `addGG INDEX y/YEAR r/REPO NAME`
+
+* Add a Github link to the group specified at `INDEX`.
+* The index refers to the index number shown in the displayed group list.
+* The index must be a positive integer 1, 2, 3, …​
+* The formatted Github link is of the form https://github.com/ `YEAR`-CS2103-`GROUP NAME`/`REPO NAME`
+
+Examples:
+* `addGG 1 y/AY20212022 r/tp` adds a Github link in the above format to the group with index 1 in the group list and
+displays a confirmation output the link has been added to the group.
 
 
 ### Listing the task list : `tasks`

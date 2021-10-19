@@ -24,7 +24,7 @@ public class AddStudentGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an existing student to an existing group "
             + "by the index number used in the displayed group list.\n"
             + "Parameters: INDEX (must be a positive integer)"
-            + " [" + PREFIX_GROUP + "GROUP]\n"
+            + PREFIX_GROUP + "GROUP\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GROUP + "W14-4";
 
