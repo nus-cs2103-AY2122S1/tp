@@ -154,6 +154,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add command
+
+#### Implementation details
+
+The add command is used to add a person to SeniorLove.
+It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
+- `AddCommand` extends `Command`
+- `AddCommandParser` implements `Parser<AddCommand>`
+
+The following activity diagram illustrates the activity flow of the add command:
+(activity diagram here)
+
+
+The following sequence diagram illustrates how different components of SeniorLove interact with each other:
+![VisitSequenceDiagram](images/AddSequenceDiagram.png)
+
+
+
 ### Visit command
 
 #### Implementation details
@@ -166,8 +184,8 @@ It makes use of polymorphism and interfaces, and is similar in implementation to
 The following activity diagram illustrates the activity flow of the visit command:
 ![VisitCommandActivityDiagram](images/VisitCommandActivityDiagram.png)
 
-The following sequence diagram illustrates how different components of SeniorLove interact with each other:
-(Sequence diagram)
+The following sequence diagram illustrates how different components of SeniorLove interact with each other when a visit with a visitation frequency and number of occurrence specified is called:
+![VisitSequenceDiagram](images/VisitSequenceDiagram.png)
 
 Given below is an example usage scenario:
 1. User inputs the visit command, specifying the index of the elderly to visit and the datetime at which they will go for the visit. They may also optionally include the visitation frequency and number of occurrences at this specified frequency.
@@ -181,6 +199,12 @@ Given below is an example usage scenario:
 
   The `visit` command is similar to the `edit` command in the sense that they both alter the person's attributes, and it is possible to implement similar functionality without a new command.
   However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
+
+
+- Replace the exiting person with a new instance with the visit changed:
+
+  We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with modified visit to replace the previous Person object.
+
 
 - Implementing recurring visits with an occurrence counter and frequency attribute:
 
