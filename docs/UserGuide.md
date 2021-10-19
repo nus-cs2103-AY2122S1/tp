@@ -83,6 +83,23 @@ Format: `FORMAT: add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]`
 Examples:
 * `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`
 
+### Finding a module: `find`
+
+Shows a list of all the modules that contains the given keyword.
+
+Format: `FORMAT: find [code] [title] [description] [mc] [tag] KEYWORD`
+* **KEYWORD** refers to the word that the application will search the modules by.
+* If no optional parameters are entered, the application will search within all the modules'
+  components for a matching **KEYWORD**
+* If optional parameters are entered, the application will search within the modules'
+  specified components for a matching **KEYWORD**
+
+Examples:
+* `find CS` displays any modules that contain the word "CS" in the code, title, description, mc or tag.
+* `find code title CS` displays any modules that contain the word "CS" in the code or title.
+* `find code CS2040S` displays any modules that contain the word "CS2040S" in the code.
+* `find tag UE` displays any modules that contain the word "UE" in the tag.
+
 
 ### Editing a module : `edit` [Coming soon]
 
