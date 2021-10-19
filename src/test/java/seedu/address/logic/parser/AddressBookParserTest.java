@@ -33,7 +33,7 @@ import seedu.address.logic.commands.ReserveCommand;
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.testutil.CustomerBuilder;
@@ -107,7 +107,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
                 FindCustomerCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCustomerCommand(new CustomerNameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCustomerCommand(new CustomerClassContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
