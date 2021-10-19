@@ -50,12 +50,16 @@ public class Applicant {
         return address;
     }
 
-    public Application getApplication() {
-        return application;
+    public Application.ApplicationStatus getApplicationStatus() {
+        return application.getStatus();
     }
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public Position getPosition() {
+        return application.getPosition();
     }
 
     /**
