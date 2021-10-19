@@ -12,7 +12,7 @@ import seedu.address.logic.parser.ParserUtil;
  * Represents a Person's visit in the address book.
  * Guarantees: immutable; is always valid
  */
-public class Visit {
+public class Visit implements Comparable<Visit> {
     public static final String MESSAGE_CONSTRAINTS = "Visit date should be of the format yyyy-MM-dd HH:mm";
 
     public final String value;
@@ -88,5 +88,23 @@ public class Visit {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public LocalDateTime getDateTime() {
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return LocalDateTime.MAX;
+        }
+        return visitTime;
+    }
+
+    @Override
+    public int compareTo(Visit o) {
+        LocalDateTime visitTimeThis = this.getDateTime();
+        LocalDateTime visitTimeOther = o.getDateTime();
+
+        return visitTimeThis.compareTo(visitTimeOther);
     }
 }
