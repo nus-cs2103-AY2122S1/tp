@@ -218,19 +218,29 @@ Command syntax
 
 #### Implementation
 
-The filter feature is facilitated by `FilterComnmand` and `FilterCommandParser`. The filter performs differently based on the
-types of inputs given:
+The filter feature is facilitated by `FilterCommand` and `FilterCommandParser`. The filter performs differently based on the
+inputs given (grade, subject, or both):
+* If only grade is given as input, TuitiONE filters both the students list and the lesson list based on the given grade.
+* If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
+* If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based 
+on both the given grade and subject.
 
-
-
-Object diagram
+#### Object diagram
 
 The following sequence diagram shows how the filter operation works:
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-Activity diagram
+The following activity diagram summarizes what happens when a user executes the filter command:
+
 
 #### Design considerations:
+* Alternative 1 (current choice): one filter command that handles both grade and subject filtering
+    * Pros: Less commands to remember, user will not feel overwhelmed.
+    * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
+* Alternative 2: 3 separate filter commands, one for each scenario stated above
+    * Pros: Slightly more straightforward to implement.
+    * Cons: Too many existing commands in the application, and may not be as intuitive to use.
 
 Command syntax
 
