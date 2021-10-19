@@ -166,7 +166,11 @@ Once a file is selected, the command is supported by two parsers.
 
 * `ImportCommandParser` — Retrieves the relevant entries from `CsvParser` then checks if the necessary fields are present and correctly formatted before creating the `Person` objects that will be added to the `Model` in `ImportCommand`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `ImportCommandParser` finds any wrongly formatted fields in any of the entries, the `ImportCommand` is not created and executed. Instead a CommandException is thrown describing the entries that are wrongly formated and the field in the entry that is responsible. 
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("import")` API call.
+
+![Interactions Inside the Logic Component for the `import` Command](images/ImportSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `ImportCommandParser` finds any wrongly formatted fields in any of the entries, the `ImportCommand` is not created and executed. Instead a CommandException is thrown describing the entries that are wrongly formatted and the field in the entry that is responsible for it. 
 
 </div>
 
