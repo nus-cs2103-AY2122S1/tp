@@ -32,6 +32,7 @@ public class LessonBuilder {
         timeRange = new TimeRange(DEFAULT_TIME_RANGE);
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
+        homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
     }
 
     /**

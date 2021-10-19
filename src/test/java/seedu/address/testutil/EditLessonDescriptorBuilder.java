@@ -1,0 +1,83 @@
+package seedu.address.testutil;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeRange;
+
+public class EditLessonDescriptorBuilder {
+
+    private EditLessonDescriptor descriptor;
+
+    public EditLessonDescriptorBuilder() {
+        descriptor = new EditLessonDescriptor();
+    }
+
+    public EditLessonDescriptorBuilder(EditLessonDescriptor descriptor) {
+        this.descriptor = new EditLessonDescriptor(descriptor);
+    }
+
+    /**
+     * Returns an {@code EditLessonDescriptor} with fields containing {@code lesson}'s details
+     */
+    public EditLessonDescriptorBuilder(Lesson lesson) {
+        descriptor = new EditLessonDescriptor();
+        descriptor.setRecurring(lesson.isRecurring());
+        descriptor.setDate(lesson.getStartDate());
+        descriptor.setTimeRange(lesson.getTimeRange());
+        descriptor.setSubject(lesson.getSubject());
+        descriptor.setHomeworkSet(lesson.getHomework());
+    }
+
+    /**
+     * Sets the {@code EditLessonDescriptor} that we are building as recurring.
+     */
+    public EditLessonDescriptorBuilder withRecurrence() {
+        descriptor.setRecurring(true);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Date} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withDate(String date) {
+        descriptor.setDate(new Date(date));
+        return this;
+    }
+
+    /**
+     * Sets the {@code TimeRange} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withTimeRange(String timeRange) {
+        descriptor.setTimeRange(new TimeRange(timeRange));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Subject} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withSubject(String subject) {
+        descriptor.setSubject(new Subject(subject));
+        return this;
+    }
+
+    /**
+     * Parses the {@code homework pieces} into a {@code Set<Homework>} and set it to the {@code EditLessonDescriptor}
+     * that we are building.
+     */
+    public EditLessonDescriptorBuilder withHomeworkSet(String... homeworkList) {
+        Set<Homework> homeworkSet = Stream.of(homeworkList).map(Homework::new).collect(Collectors.toSet());
+        descriptor.setHomeworkSet(homeworkSet);
+        return this;
+    }
+
+    public EditLessonDescriptor build() {
+        return descriptor;
+    }
+}
