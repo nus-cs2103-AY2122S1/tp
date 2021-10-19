@@ -95,19 +95,9 @@ public class StatsWindow extends UiPart<Stage> {
         int mediumPriorityCount = this.fast.getMediumPriorityCount();
         int lowPriorityCount = this.fast.getLowPriorityCount();
 
-        // for each priority, check that it is non-zero to prevent "ghost" labels in the PieChart
-        if (highPriorityCount > 0) {
-            PieChart.Data highData = new PieChart.Data(PriorityTag.HighPriority.NAME, highPriorityCount);
-            priorityPieChart.getData().add(highData);
-        }
-        if (mediumPriorityCount > 0) {
-            PieChart.Data mediumData = new PieChart.Data(PriorityTag.MediumPriority.NAME, mediumPriorityCount);
-            priorityPieChart.getData().add(mediumData);
-        }
-        if (lowPriorityCount > 0) {
-            PieChart.Data lowData = new PieChart.Data(PriorityTag.LowPriority.NAME, lowPriorityCount);
-            priorityPieChart.getData().add(lowData);
-        }
+        addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
+        addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
+        addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
     }
 
     /**
@@ -126,10 +116,21 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
+     * Adds the data elements {@code name} and {@code count} to {@code pc}
+     */
+    public void addPieChartData(String name, int count, PieChart pc) {
+        if (count > 0) {
+            PieChart.Data data = new PieChart.Data(name, count);
+            pc.getData().add(data);
+        }
+    }
+
+    /**
      * Focuses on the help window.
      */
     public void focus() {
         populatePriorityPieChart();
+        labelPriorityPieChart();
         getRoot().requestFocus();
     }
 

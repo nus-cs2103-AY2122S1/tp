@@ -112,25 +112,23 @@ public class Fast implements ReadOnlyFast {
     /**
      * Returns the number of persons tagged with the respective PriorityTag.
      */
-    public int getHighPriorityCount() {
-        String[] high = {PriorityTag.HighPriority.TERM};
-        PriorityPredicate highPredicate = new PriorityPredicate(Arrays.asList(high));
-        filteredPersons.setPredicate(highPredicate);
+    public int getPriorityCount(String term) {
+        String[] priority = {term};
+        PriorityPredicate predicate = new PriorityPredicate(Arrays.asList(priority));
+        filteredPersons.setPredicate(predicate);
         return filteredPersons.size();
+    }
+
+    public int getHighPriorityCount() {
+        return getPriorityCount(PriorityTag.HighPriority.TERM);
     }
 
     public int getMediumPriorityCount() {
-        String[] medium = {PriorityTag.MediumPriority.TERM};
-        PriorityPredicate mediumPredicate = new PriorityPredicate(Arrays.asList(medium));
-        filteredPersons.setPredicate(mediumPredicate);
-        return filteredPersons.size();
+        return getPriorityCount(PriorityTag.MediumPriority.TERM);
     }
 
     public int getLowPriorityCount() {
-        String[] low = {PriorityTag.LowPriority.TERM};
-        PriorityPredicate lowPredicate = new PriorityPredicate(Arrays.asList(low));
-        filteredPersons.setPredicate(lowPredicate);
-        return filteredPersons.size();
+        return getPriorityCount(PriorityTag.LowPriority.TERM);
     }
 
     //// util methods
