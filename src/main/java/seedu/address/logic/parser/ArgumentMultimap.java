@@ -59,15 +59,4 @@ public class ArgumentMultimap {
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
     }
-
-    /**
-     * Returns the number of prefix(es) entered by the user.
-     */
-    public int numOfPrefix() {
-        int numOfPrefixEnteredByUser = argMultimap.values().stream()
-                .mapToInt(list -> list.isEmpty() ? 0 : 1).sum();
-        // Subtract by 1 to take into account the preamble prefix.
-        return numOfPrefixEnteredByUser - 1;
-    }
 }
-

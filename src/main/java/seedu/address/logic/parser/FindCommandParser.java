@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_START;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,8 +25,6 @@ import seedu.address.model.person.predicates.ShnPeriodStartContainsKeysPredicate
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
-    public static int INDEX_ARGUMENT = 1;
-    public static int INPUT_SIZE = 2;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -36,14 +35,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_CASE_NUMBER, PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
 
-        if (!isOnlyOnePrefixEntered(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
+        boolean hasOnlyOnePrefix = isOnlyOnePrefixEntered(argMultimap, PREFIX_NAME, PREFIX_PHONE,
+                PREFIX_CASE_NUMBER, PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
+
+        if (!hasOnlyOnePrefix || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String trimmedArgs = args.trim();
-        String trimmedUserInputNoPrefix = removePrefixFromUserInput(trimmedArgs, argMultimap).trim();
-
+        String trimmedUserInputNoPrefix = removePrefixFromUserInput(args.trim(), argMultimap).trim();
         if (trimmedUserInputNoPrefix.isBlank()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -112,9 +112,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Returns true if user enters only one prefix.
+     * Returns true if user enters only one of the prefix is non-empty.
      */
-    private boolean isOnlyOnePrefixEntered(ArgumentMultimap argumentMultimap) {
-        return argumentMultimap.numOfPrefix() == FindCommand.REQUIRED_NUMBER_OF_PREFIX;
+    private boolean isOnlyOnePrefixEntered(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        int numOfPrefixEntered =  Stream.of(prefixes)
+                .mapToInt(prefix -> argumentMultimap.getValue(prefix).isPresent() ? 1 : 0).sum();
+        return numOfPrefixEntered == FindCommand.REQUIRED_NUMBER_OF_PREFIX;
     }
 }
