@@ -19,12 +19,12 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the current list of contacts to a specified filename.\n"
-            + "Parameters: FILENAME\n"
+            + "Parameters: FILENAME.json or FILENAME.csv\n"
             + "Example: " + COMMAND_WORD + " friends";
 
-    public static final String MESSAGE_EXPORT_SUCCESS = "Exported to file: %s.json";
+    public static final String MESSAGE_EXPORT_SUCCESS = "Exported to file: %s";
 
-    public static final String MESSAGE_EXPORT_FAILURE = "File with name %s.json already exists!";
+    public static final String MESSAGE_EXPORT_FAILURE = "File with name %s already exists!";
 
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
 
@@ -56,7 +56,7 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path filePath = Path.of(testPath + fileName + ".json");
+        Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         try {
             temporaryStorage.exportToJson(model.getAddressBook());

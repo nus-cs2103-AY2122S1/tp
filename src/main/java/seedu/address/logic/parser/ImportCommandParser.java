@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.util.StringUtil.isJson;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -34,7 +34,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         }
 
         String fileName = fileNameKeywords[0];
-        if (!isJson(fileName)) {
+        if (!StringUtil.isJson(fileName)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
