@@ -184,6 +184,13 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleStat() {
+        pieChartView = new PieChartView();
+        secondPanelPlaceholder.getChildren().clear();
+        secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
+    }
+
     public ClientListPanel getClientListPanel() {
         return clientListPanel;
     }
@@ -229,6 +236,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isStat()) {
+                handleStat();
             }
 
             return commandResult;

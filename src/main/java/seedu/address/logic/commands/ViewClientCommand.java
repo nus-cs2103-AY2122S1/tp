@@ -59,7 +59,7 @@ public class ViewClientCommand extends Command {
         model.updateFilteredClientList(clientPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size()),
-                false, false, true, model.getFilteredClientList().get(0)
+                false, false, true, model.getFilteredClientList().get(0), false
         );
     }
 
