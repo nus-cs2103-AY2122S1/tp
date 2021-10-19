@@ -41,6 +41,6 @@ public class RevertCommand extends VcCommand {
         if (relevantCommit.equals(Commit.NULL)) {
             return new CommandResult(REVERT_REQUEST_REJECTED, true, false);
         }
-        return new CommandResult(REVERT_SUCCESSFUL_ACKNOWLEDGEMENT, false, false);
+        return new CommandResult(REVERT_SUCCESSFUL_ACKNOWLEDGEMENT, false, true);
     }
 }
