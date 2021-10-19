@@ -48,7 +48,7 @@ public class GitHubUtil {
      */
     public static void establishConnectionForWebsite(String extension) {
         try {
-            url = new URL(API_URL_PREFIX + extension);
+            url = new URL(GITHUB_URL_PREFIX + extension);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -270,7 +270,7 @@ public class GitHubUtil {
             assert data != null : "No Data Found";
 
             Iterator<String> languages = data.keySet().iterator();
-            while(languages.hasNext()) {
+            while (languages.hasNext()) {
                 String languageToAdd = (String) languages.next();
                 if (!isProgrammingLanguagePresent(languageToAdd, programmingLanguages)) {
                     programmingLanguages.add(languageToAdd);
@@ -333,7 +333,7 @@ public class GitHubUtil {
      * @return The total number of repos found on GitHub else -1, if any error occurred.
      * @throws RuntimeException If the server did not respond well.
      */
-    public static int getRepoCount(String userName) throws RuntimeException{
+    public static int getRepoCount(String userName) throws RuntimeException {
         establishConnectionForWebsite(userName);
 
         if (responseCode != 200) {
