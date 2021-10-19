@@ -2,7 +2,6 @@ package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_CONFIRMATION_COMMAND;
 
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -99,16 +98,12 @@ public class AnimeListParser {
      */
     public Command parseConfirmationCommand(Command cmdInProgress, String userInput) throws ParseException {
         String cmdWord = userInput.trim().toLowerCase(Locale.ROOT);
-        //TODO extend to delete command
+        //Extendable to future commands that require confirmation
         switch (cmdWord) {
-        case AbortClearCommand.COMMAND_WORD:
-            return new AbortClearCommand();
-
         case ConfirmClearCommand.COMMAND_WORD:
             return new ConfirmClearCommand();
-
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_CONFIRMATION_COMMAND);
+            return new AbortClearCommand();
         }
     }
 }

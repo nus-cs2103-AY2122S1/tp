@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.anilist.model.Model;
 
 public class AbortClearCommand extends Command {
-    public static final String COMMAND_WORD = "n";
     public static final String MESSAGE_ABORTED = "Clear command aborted.";
 
     @Override
