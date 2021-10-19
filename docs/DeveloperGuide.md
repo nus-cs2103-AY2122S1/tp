@@ -176,6 +176,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+
 ### Card-like UI Elements
 
 Card-like UI elements are objects that are shown to the user in the their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
@@ -186,9 +188,19 @@ These UI elements inherit the `Card` class, which in turn inherits `UiPart<Regio
 
 At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
 
-There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. 
+There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow::fillStudentCard` and `MainWindow::fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
 
+![CardUiSequence](C:\Users\Ivan\Documents\GitHub\tp\docs\images\CardUiSequence.png)
 
+When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes. The correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
+
+Conversely, if a user chooses to hide the details, `UiManager.hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
+
+The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. On launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow::fillInnerParts`. The details are shown below:
+
+![CardUiSequenceLaunch](C:\Users\Ivan\Documents\GitHub\tp\docs\images\CardUiSequenceLaunch.png)
+
+The panels default to the minimal panels for the application launch.
 
 ### \[Proposed\] Undo/redo feature
 
