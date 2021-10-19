@@ -307,8 +307,8 @@ public class ParserUtilTest {
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
         AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
-        assertThrows(ParseException.class,
-            () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG), modelStub));
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG), modelStub));
     }
 
     @Test
