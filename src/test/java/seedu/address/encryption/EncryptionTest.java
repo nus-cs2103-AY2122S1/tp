@@ -1,10 +1,10 @@
 package seedu.address.encryption;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,10 +18,13 @@ import javax.crypto.SecretKey;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.FileUtil;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 
 public class EncryptionTest {
     private static final String ENCRYPTION_ALGORITHM = "AES";
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
+    private static final String PASSWORD_ONE = "password_one";
+    private static final String PASSWORD_TWO = "password_two";
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "EncryptionTest");
     private static final Path DECRYPTED_FILEPATH_JSON = TEST_DATA_FOLDER.resolve("testJson.json");
@@ -40,11 +43,13 @@ public class EncryptionTest {
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
-        String decryptedContent = cryptor.decrypt(ENCRYPTED_FILEPATH_JSON);
+
+        cryptor.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON);
+        String decryptedContent = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
 
         assertEquals(content, decryptedContent);
 
-        new File(ENCRYPTED_FILEPATH_JSON.toString()).delete(); // Cleanup
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON); // Cleanup
     }
 
     @Test
@@ -56,16 +61,27 @@ public class EncryptionTest {
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
-        String decryptedContent = cryptor.decrypt(ENCRYPTED_FILEPATH_JSON);
-        FileUtil.writeToFile(DECRYPTED_FILEPATH_JSON_OUTPUT, decryptedContent);
+        cryptor.decrypt(ENCRYPTED_FILEPATH_JSON, DECRYPTED_FILEPATH_JSON_OUTPUT);
 
         assertTrue(FileUtil.isFileExists(DECRYPTED_FILEPATH_JSON_OUTPUT));
 
         String copiedContent = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON_OUTPUT);
         assertEquals(content, copiedContent);
 
-        new File(DECRYPTED_FILEPATH_JSON_OUTPUT.toString()).delete(); // Cleanup
-        new File(ENCRYPTED_FILEPATH_JSON.toString()).delete(); // Cleanup
+        FileUtil.deleteFile(DECRYPTED_FILEPATH_JSON_OUTPUT); // Cleanup
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON); // Cleanup
+    }
+
+    @Test
+    public void keyGenerator_producesIdenticalKeys_usingSameString() throws UnsupportedPasswordException {
+        SecretKey key1 = EncryptionKeyGenerator.generateKey(PASSWORD_ONE);
+        SecretKey key2 = EncryptionKeyGenerator.generateKey(PASSWORD_TWO);
+        assertNotEquals(key1, key2);
+
+        SecretKey duplicate1 = EncryptionKeyGenerator.generateKey(PASSWORD_ONE);
+        SecretKey duplicate2 = EncryptionKeyGenerator.generateKey(PASSWORD_TWO);
+        assertEquals(key1, duplicate1);
+        assertEquals(key2, duplicate2);
     }
 
     @Test
@@ -80,11 +96,13 @@ public class EncryptionTest {
         cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
         cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
 
-        assertThrows(IOException.class, () -> cryptor2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE));
-        assertThrows(IOException.class, () -> cryptor1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO));
+        assertThrows(IOException.class, () ->
+                cryptor2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
+        assertThrows(IOException.class, () ->
+                cryptor1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
 
-        new File(ENCRYPTED_FILEPATH_JSON_ONE.toString()).delete(); // Cleanup
-        new File(ENCRYPTED_FILEPATH_JSON_TWO.toString()).delete(); // Cleanup
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_ONE); // Cleanup
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_TWO); // Cleanup
     }
 
     @Test
@@ -93,6 +111,26 @@ public class EncryptionTest {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
 
-        assertThrows(IOException.class, () -> cryptor.decrypt(ILLEGAL_ENCRYPTED_FORMAT));
+        assertThrows(IOException.class, () -> cryptor.decrypt(ILLEGAL_ENCRYPTED_FORMAT, DECRYPTED_FILEPATH_JSON));
+    }
+
+    @Test
+    public void failure_whenWrongKeyIsSuppliedToDecrypt_usingKeyGenerator()
+            throws NoSuchPaddingException, NoSuchAlgorithmException, IOException, InvalidKeyException,
+            UnsupportedPasswordException {
+        SecretKey key1 = EncryptionKeyGenerator.generateKey(PASSWORD_ONE);
+        SecretKey key2 = EncryptionKeyGenerator.generateKey(PASSWORD_TWO);
+
+        Cryptable cryptor1 = new Cryptor(key1, CIPHER_TRANSFORMATION);
+        Cryptable cryptor2 = new Cryptor(key2, CIPHER_TRANSFORMATION);
+
+        cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
+        cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
+
+        assertThrows(IOException.class, () -> cryptor2.decrypt(ENCRYPTED_FILEPATH_JSON_ONE, DECRYPTED_FILEPATH_JSON));
+        assertThrows(IOException.class, () -> cryptor1.decrypt(ENCRYPTED_FILEPATH_JSON_TWO, DECRYPTED_FILEPATH_JSON));
+
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_ONE); // Cleanup
+        FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_TWO); // Cleanup
     }
 }
