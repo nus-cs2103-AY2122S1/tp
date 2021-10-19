@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `ZACHARY`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -98,15 +98,15 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("ZACHARY")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `ZACHARY 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-
+ZACHARY ADD THE DIAGRAM HERE
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
@@ -146,7 +146,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.modulink.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -154,25 +154,94 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### List All Favourites
+### Create A Profile
 #### Implementation
-The `listfav` mechanism will allow the user to view all the students that he/she has favourited.
+The `create` mechanism will allow the user to create a personal profile.
+
+The implementation required the creation of a parser for `CreateCommand` as the command does takes in parameters (personal information, module information etc..).
+`CreateCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to include the created profile and the current user's profile will be highlighted in the GUI.
+After creating a profile, the user can now use other commands in ModuLink.
+
+#### Usage
+To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+`create n/NAME id/STUDENT_ID p/PHONE e/EMAIL [mod/TAG]...`
+Example: `create n/John Doe id/A1234567Z p/98765432 e/johnd@example.com mod/CS2100 mod/CS2101`
+
+The following sequence diagram shows how the `create` mechanism works: ZACHARY
+![ListFavCommand0](images/ListFavSequenceDiagram.png)
+
+
+### Add A Module Tag
+#### Implementation
+The `addMod` mechanism will allow the user to add a module tag to their profile.
+
+The implementation required the creation of a parser for `addModCommand` as the command does takes in parameters.
+`addModCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to include the tags for the user profile.
+
+#### Usage
+To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+`addMod [mod/MOD]...`
+Example: `addMod mod/CS2103T`
+
+The following sequence diagram shows how the `addMod` mechanism works: ZACHARY
+![ListFavCommand0](images/ListFavSequenceDiagram.png)
+
+
+### Add A Profile As Favourite
+#### Implementation
+The `addFav` mechanism will allow the user to add a module tag to their profile.
+
+The implementation required the creation of a parser for `addFavCommand` as the command does takes in parameters.
+`addFavCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to show the specified profile as a favourite.
+
+#### Usage
+To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+`addFav Student_ID`
+Example: `addFav A1234567X`
+
+The following sequence diagram shows how the `addFav` mechanism works: ZACHARY
+![ListFavCommand0](images/ListFavSequenceDiagram.png)
+
+
+### List All Favourited Profiles
+#### Implementation
+The `listFav` mechanism will allow the user to view all the students that he/she has favourited.
 
 The implementation did not require the creation of a parser for `ListFavCommand` as the command does not take in any parameters.
 `ListFavCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
 The GUI will then change the content to display all favourited profiles. 
 
 #### Usage
-To use this function to see all favourited profiles, simply enter `listfav` in the command line. 
+To use this function to see all favourited profiles, simply enter `listFav` in the command line. 
 
-The following sequence diagram shows how the `listfav` mechanism works:
+The following sequence diagram shows how the `listFav` mechanism works:
+![ListFavCommand0](images/ListFavSequenceDiagram.png)
+
+
+### Filter Profiles By Name
+#### Implementation
+The `find` mechanism will allow the user to filter profiles by name.
+
+The implementation required the creation of a parser for `findCommand` as the command does takes in parameters.
+`findCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to show the profiles that contain the specified name.
+
+#### Usage
+To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+`find NAME`
+Example: `find Charlotte`
+
+The following sequence diagram shows how the `find` mechanism works: ZACHARY
 ![ListFavCommand0](images/ListFavSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedModuLink`. It extends `ModuLink` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedModuLink`. It extends `ModuLink` with an undo/redo history, stored internally as an `moduLinkStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `VersionedModuLink#commit()` — Saves the current address book state in its history.
 * `VersionedModuLink#undo()` — Restores the previous address book state from its history.
@@ -183,23 +252,23 @@ These operations are exposed in the `Model` interface as `Model#commitModuLink()
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedModuLink` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
+ZACHARY
 ![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitModuLink()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
+ZACHARY
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitModuLink()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `moduLinkStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+ZACHARY
 ![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitModuLink()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
+ZACHARY
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitModuLink()`, causing another modified address book state to be saved into the `moduLinkStateList`.
+ZACHARY
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitModuLink()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitModuLink()`, so the address book state will not be saved into the `moduLinkStateList`.
 
 </div>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoModuLink()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
+ZACHARY
 ![UndoRedoState3](images/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial ModuLink state, then there are no previous ModuLink states to restore. The `undo` command uses `Model#canUndoModuLink()` to check if this is the case. If so, it will return an error to the user rather
@@ -208,7 +277,7 @@ than attempting to perform the undo.
 </div>
 
 The following sequence diagram shows how the undo operation works:
-
+ZACHARY
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -217,16 +286,16 @@ The following sequence diagram shows how the undo operation works:
 
 The `redo` command does the opposite — it calls `Model#redoModuLink()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone ModuLink states to restore. The `redo` command uses `Model#canRedoModuLink()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `moduLinkStateList.size() - 1`, pointing to the latest address book state, then there are no undone ModuLink states to restore. The `redo` command uses `Model#canRedoModuLink()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitModuLink()`, `Model#undoModuLink()` or `Model#redoModuLink()`. Thus, the `addressBookStateList` remains unchanged.
-
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitModuLink()`, `Model#undoModuLink()` or `Model#redoModuLink()`. Thus, the `moduLinkStateList` remains unchanged.
+ZACHARY
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitModuLink()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
+Step 6. The user executes `clear`, which calls `Model#commitModuLink()`. Since the `currentStatePointer` is not pointing at the end of the `moduLinkStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+ZACHARY
 ![UndoRedoState5](images/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
