@@ -17,7 +17,7 @@ public class ProgressTest {
     @Test
     public void constructor_invalidProgress_throwsIllegalArgumentException() {
         String invalidProgress = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new StudentName(invalidProgress));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Progress(invalidProgress));
     }
 
     @Test

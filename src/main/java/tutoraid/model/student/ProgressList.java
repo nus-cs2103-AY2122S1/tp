@@ -1,5 +1,7 @@
 package tutoraid.model.student;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -23,9 +25,11 @@ public class ProgressList {
     /**
      * Constructs a {@code ProgressList}.
      *
-     * @param progressListInStringArrayList ProgressList of the student
+     * @param progressListInStringArrayList an arraylist of progress descriptions of the student
      */
     public ProgressList(ArrayList<String> progressListInStringArrayList) {
+        requireNonNull(progressListInStringArrayList);
+
         this.progressList = new ArrayList<>();
 
         if (!isValidProgressList(progressListInStringArrayList)) {
@@ -33,7 +37,8 @@ public class ProgressList {
         }
 
         for (int i = 0; i < progressListInStringArrayList.size(); i++) {
-            Progress currentProgress = new Progress(progressListInStringArrayList.get(i));
+            String currentProgressDescription = progressListInStringArrayList.get(i);
+            Progress currentProgress = new Progress(currentProgressDescription);
 
             if (!currentProgress.isEmptyProgress()) {
                 this.addProgress(currentProgress);
@@ -53,7 +58,13 @@ public class ProgressList {
         }
 
         for (int i = 0; i < progressListInStringArrayList.size(); i++) {
-            if (!Progress.isValidProgress(progressListInStringArrayList.get(i))) {
+            if (progressListInStringArrayList.get(i) == null) {
+                return false;
+            }
+        }
+
+        for (int j = 0; j < progressListInStringArrayList.size(); j++) {
+            if (!Progress.isValidProgress(progressListInStringArrayList.get(j))) {
                 return false;
             }
         }

@@ -2,6 +2,8 @@ package tutoraid.model.student;
 
 import static java.util.Objects.requireNonNull;
 
+import tutoraid.commons.util.AppUtil;
+
 /**
  * Represents a student's progress in TutorAid.
  */
@@ -29,6 +31,7 @@ public class Progress {
      */
     public Progress(String progress) {
         requireNonNull(progress);
+        AppUtil.checkArgument(isValidProgress(progress), MESSAGE_CONSTRAINTS);
         this.progress = progress;
     }
 
@@ -59,6 +62,9 @@ public class Progress {
 
     @Override
     public String toString() {
+        if (progress.equals("")) {
+            return "No Progress";
+        }
         return progress;
     }
 
