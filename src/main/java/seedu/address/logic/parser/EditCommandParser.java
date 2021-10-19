@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -80,22 +79,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         return Optional.of(ParserUtil.parseModuleCodes(moduleCodes));
     }
-
-    /**
-     * Parses {@code Collection<String> lessonCodes} into a {@code Set<LessonCode>} if {@code lessonCodes} is non-empty.
-     * If {@code lessonCodes} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<LessonCode>} containing zero lessonCodes.
-     */
-    private Optional<Set<LessonCode>> parseLessonCodesForEdit(Collection<String> lessonCodes) throws ParseException {
-        assert lessonCodes != null;
-
-        if (lessonCodes.isEmpty()) {
-            return Optional.empty();
-        }
-        Collection<String> tagSet = lessonCodes.size() == 1 && lessonCodes.contains("")
-                ? Collections.emptySet()
-                : lessonCodes;
-        return Optional.of(ParserUtil.parseLessonCodes(tagSet));
-    }
-
 }
