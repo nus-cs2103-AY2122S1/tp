@@ -171,6 +171,11 @@ Example:
 Shows lessons scheduled in this week in a timetable.<br>
 ![Ui](images/time_table.png)
 
+### View today tuition classes: `today`
+Shows all the tuition classes happens today
+
+Format: `today`
+
 ### Viewing help: `help`
 Shows a command summary and a link to the user guide. <br>
 ![Ui](images/helpWindow.png)
@@ -201,6 +206,7 @@ Action | Format
 ***List all Classes*** | `listclass`
 ***Sort Tuition Class*** | `sort [o/ORDER]`
 ***View Timetable*** | `timetable`
+***View Today Classes*** | `today`
 ***Help*** | `help`
 ***Exit*** | `exit`
 

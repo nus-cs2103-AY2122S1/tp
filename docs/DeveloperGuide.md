@@ -380,6 +380,28 @@ Use case ends.
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Implementation
+This section describes some noteworthy details on how certain features are implemented.
+
+### [Developed] Time conflict management
+The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
+defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
+- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+
+Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
+
+Step1: The user enters `addclass` command. The `Timeslot` will check whehter the format of the
+time slot entered by user is correct. If it is incorrect, a `CommandException` will be thrown and user will receive
+a guidance to correct the time slot format.
+
+Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
+time slot exists. If there is a conflict, a `CommandException` will be thrown.
+
+Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
+
+
+
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
