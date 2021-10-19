@@ -35,6 +35,7 @@ public class HelpPanel extends UiPart<Region> {
             + "4. Find by description -> find DESCRIPTION\n"
             + "5. Find by tag -> find [t/TAG]\n"
             + "6. Clear Tasks -> clear\n\n"
+            + "7. Tag Tasks -> tag INDEX [t/TAG]"
             + "For more detailed information,"
             + " visit our User Guide or Developer Guide by clicking the buttons below to copy \n"
             + " their URLs. \n\n";
