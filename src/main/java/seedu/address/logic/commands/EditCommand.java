@@ -47,8 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_DATE + "BIRTHDATE]...\n"
+            + "[" + PREFIX_DATE + "BIRTHDATE] "
+            + "[" + PREFIX_TAG + "TAG] ...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         BirthDate updatedBirthDate = editParticipantDescriptor.getBirthDate().orElse(participantToEdit.getBirthDate());
         Set<Note> updatedNotes = editParticipantDescriptor.getNotes().orElse(participantToEdit.getNotes());
         ArrayList<NextOfKin> updatedNextOfKins =
-            editParticipantDescriptor.getNextOfKins().orElse(participantToEdit.getNextOfKins());
+                editParticipantDescriptor.getNextOfKins().orElse(participantToEdit.getNextOfKins());
 
         if (isIdUnchanged(participantToEdit.getName(), updatedName)) {
             return new Participant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
