@@ -20,7 +20,7 @@ public class ViewShiftCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         String userInput = COMMAND_WORD;
-        assertParseFailure(parser, userInput, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
     }
 
     @Test
@@ -50,18 +50,18 @@ public class ViewShiftCommandParserTest {
     @Test
     public void test_failures() {
         String userInput1 = " saturday-12:00";
-        assertParseFailure(parser, userInput1, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput1, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput2 = " " + PREFIX_DASH_TIME + " " + PREFIX_DASH_DAY_SHIFT + " saturday-12:00";
-        assertParseFailure(parser, userInput2, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput2, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput3 = " ";
-        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput4 = " -d monday-12:00";
-        assertParseFailure(parser, userInput4, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput4, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput5 = " -t WEDNESDAY-0";
-        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
     }
 }

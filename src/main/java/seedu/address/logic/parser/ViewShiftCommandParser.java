@@ -9,28 +9,43 @@ import static seedu.address.logic.parser.ParserUtil.parseDayOfWeekAndSlot;
 import static seedu.address.logic.parser.ParserUtil.parseDayOfWeekAndTime;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.ViewShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * Class representing the find schedule command parser.
  */
 public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
 
-    public static final String INVALID_FIND_SCHEDULE_COMMAND =
+    public static final String INVALID_VIEW_SHIFT_COMMAND =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewShiftCommand.HELP_MESSAGE);
     public static final ParseException INVALID_FIND_SCHEDULE_COMMAND_EXCEPTION =
-            new ParseException(INVALID_FIND_SCHEDULE_COMMAND);
+            new ParseException(INVALID_VIEW_SHIFT_COMMAND);
+
+    LocalTime currTime = LocalTime.now();
+    DayOfWeek currDayOfWeek = DayOfWeek.from(LocalDate.now());
+    public final ViewShiftCommand errorCommand = new ViewShiftCommand(currDayOfWeek,
+            ViewShiftCommand.INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES, currTime);
 
     @Override
     public ViewShiftCommand parse(String args) throws ParseException {
+        // If it is empty, return a viewShift with the current day and time
+        if (args.equals("")) {
+            return errorCommand;
+        }
+
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DASH_DAY_SHIFT, PREFIX_DASH_TIME);
-        checkPrefixes(argMultimap); // throws an error if prefixes are inputted wrong
 
         int slotNum = ViewShiftCommand.INVALID_SLOT_NUMBER;
         DayOfWeek dayOfWeek = null; // should not be null when ViewShiftCommand object is created
@@ -61,17 +76,5 @@ public class ViewShiftCommandParser implements Parser<ViewShiftCommand> {
         }
 
         return new ViewShiftCommand(dayOfWeek, slotNum, time);
-    }
-
-    private void checkPrefixes(ArgumentMultimap argMultimap) throws ParseException {
-        // Exactly one of PREFIX_DASH_DAY_SHIFT or PREFIX_DASH_TIME must exist
-        if (!arePrefixesPresent(argMultimap, PREFIX_DASH_DAY_SHIFT)
-                && !arePrefixesPresent(argMultimap, PREFIX_DASH_TIME)) {
-            throw INVALID_FIND_SCHEDULE_COMMAND_EXCEPTION;
-        }
-        if (arePrefixesPresent(argMultimap, PREFIX_DASH_TIME)
-                && arePrefixesPresent(argMultimap, PREFIX_DASH_DAY_SHIFT)) {
-            throw INVALID_FIND_SCHEDULE_COMMAND_EXCEPTION;
-        }
     }
 }
