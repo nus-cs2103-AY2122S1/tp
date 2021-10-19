@@ -5,7 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOME_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUARANTINE_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WORK_ADDRESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -22,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ShnPeriod;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -39,6 +46,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_CASE_NUMBER + "CASE NUMBER] "
             + "[" + PREFIX_HOME_ADDRESS + "HOME ADDRESS] "
+            + "[" + PREFIX_WORK_ADDRESS + "WORK ADDRESS] "
+            + "[" + PREFIX_QUARANTINE_ADDRESS + "QUARANTINE ADDRESS] "
+            + "[" + PREFIX_SHN_PERIOD + "SHN PERIOD] "
+            + "[" + PREFIX_NEXT_OF_KIN_NAME + "NEXT OF KIN NAME] "
+            + "[" + PREFIX_NEXT_OF_KIN_PHONE + "NEXT OF KIN PHONE] "
+            + "[" + PREFIX_NEXT_OF_KIN_ADDRESS + "NEXT OF KIN ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -95,8 +108,21 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         CaseNumber updatedCaseNumber = editPersonDescriptor.getCaseNumber().orElse(personToEdit.getCaseNumber());
         Address updatedHomeAddress = editPersonDescriptor.getHomeAddress().orElse(personToEdit.getHomeAddress());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedCaseNumber, updatedHomeAddress);
+        Optional<Address> updatedWorkAddress = editPersonDescriptor.getWorkAddress()
+                .or(personToEdit::getWorkAddress);
+        Optional<Address> updatedQuarantineAddress = editPersonDescriptor.getQuarantineAddress()
+                .or(personToEdit::getQuarantineAddress);
+        Optional<ShnPeriod> updatedShnPeriod = editPersonDescriptor.getShnPeriod()
+                .or(personToEdit::getShnPeriod);
+        Optional<Name> updatedNextOfKinName = editPersonDescriptor.getNextOfKinName()
+                .or(personToEdit::getNextOfKinName);
+        Optional<Phone> updatedNextOfKinPhone = editPersonDescriptor.getNextOfKinPhone()
+                .or(personToEdit::getNextOfKinPhone);
+        Optional<Address> updatedNextOfKinAddress = editPersonDescriptor.getNextOfKinAddress()
+                .or(personToEdit::getNextOfKinAddress);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedCaseNumber, updatedHomeAddress,
+                updatedWorkAddress, updatedQuarantineAddress, updatedShnPeriod, updatedNextOfKinName,
+                updatedNextOfKinPhone, updatedNextOfKinAddress);
     }
 
     @Override
@@ -127,6 +153,12 @@ public class EditCommand extends Command {
         private Email email;
         private CaseNumber caseNumber;
         private Address homeAddress;
+        private Address workAddress;
+        private Address quarantineAddress;
+        private ShnPeriod shnPeriod;
+        private Name nextOfKinName;
+        private Phone nextOfKinPhone;
+        private Address nextOfKinAddress;
 
         public EditPersonDescriptor() {}
 
@@ -139,13 +171,20 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setCaseNumber(toCopy.caseNumber);
             setHomeAddress(toCopy.homeAddress);
+            setWorkAddress(toCopy.workAddress);
+            setQuarantineAddress(toCopy.quarantineAddress);
+            setShnPeriod(toCopy.shnPeriod);
+            setNextOfKinName(toCopy.nextOfKinName);
+            setNextOfKinPhone(toCopy.nextOfKinPhone);
+            setNextOfKinAddress(toCopy.nextOfKinAddress);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, caseNumber, homeAddress);
+            return CollectionUtil.isAnyNonNull(name, phone, email, caseNumber, homeAddress,
+                    workAddress, quarantineAddress, shnPeriod, nextOfKinName, nextOfKinPhone, nextOfKinAddress);
         }
 
         public void setName(Name name) {
@@ -188,6 +227,54 @@ public class EditCommand extends Command {
             return Optional.ofNullable(homeAddress);
         }
 
+        public void setWorkAddress(Address workAddress) {
+            this.workAddress = workAddress;
+        }
+
+        public Optional<Address> getWorkAddress() {
+            return Optional.ofNullable(workAddress);
+        }
+
+        public void setQuarantineAddress(Address quarantineAddress) {
+            this.quarantineAddress = quarantineAddress;
+        }
+
+        public Optional<Address> getQuarantineAddress() {
+            return Optional.ofNullable(quarantineAddress);
+        }
+
+        public void setShnPeriod(ShnPeriod shnPeriod) {
+            this.shnPeriod = shnPeriod;
+        }
+
+        public Optional<ShnPeriod> getShnPeriod() {
+            return Optional.ofNullable(shnPeriod);
+        }
+
+        public void setNextOfKinName(Name nextOfKinName) {
+            this.nextOfKinName = nextOfKinName;
+        }
+
+        public Optional<Name> getNextOfKinName() {
+            return Optional.ofNullable(nextOfKinName);
+        }
+
+        public void setNextOfKinPhone(Phone nextOfKinPhone) {
+            this.nextOfKinPhone = nextOfKinPhone;
+        }
+
+        public Optional<Phone> getNextOfKinPhone() {
+            return Optional.ofNullable(nextOfKinPhone);
+        }
+
+        public void setNextOfKinAddress(Address nextOfKinAddress) {
+            this.nextOfKinAddress = nextOfKinAddress;
+        }
+
+        public Optional<Address> getNextOfKinAddress() {
+            return Optional.ofNullable(nextOfKinAddress);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -207,7 +294,13 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getCaseNumber().equals(e.getCaseNumber())
-                    && getHomeAddress().equals(e.getHomeAddress());
+                    && getHomeAddress().equals(e.getHomeAddress())
+                    && getWorkAddress().equals(e.getWorkAddress())
+                    && getQuarantineAddress().equals(e.getQuarantineAddress())
+                    && getShnPeriod().equals(e.getShnPeriod())
+                    && getNextOfKinName().equals(e.getNextOfKinName())
+                    && getNextOfKinPhone().equals(e.getNextOfKinPhone())
+                    && getNextOfKinAddress().equals(e.getNextOfKinAddress());
         }
     }
 }
