@@ -211,7 +211,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseBirthDate_notSpecifiedValidDate_returnsBirthDate() throws Exception {
-        BirthDate actualBirthDate = ParserUtil.parseBirthDate("NA");
+        BirthDate actualBirthDate = ParserUtil.parseBirthDate("N/A");
         BirthDate expectedBirthDate = BirthDate.notSpecified();
         assertEquals(expectedBirthDate, actualBirthDate);
     }
