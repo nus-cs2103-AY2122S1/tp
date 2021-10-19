@@ -11,6 +11,7 @@ import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 import seedu.academydirectory.versioncontrol.logic.commands.HistoryCommand;
+import seedu.academydirectory.versioncontrol.logic.commands.RevertCommand;
 import seedu.academydirectory.versioncontrol.logic.commands.VcCommand;
 
 /**
@@ -45,6 +46,8 @@ public class AcademyDirectoryVcCommandParser {
         switch (commandWord) {
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
+        case RevertCommand.COMMAND_WORD:
+            return new RevertCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

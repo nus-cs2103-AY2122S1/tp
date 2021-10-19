@@ -1,5 +1,6 @@
 package seedu.academydirectory.versioncontrol.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +18,7 @@ import seedu.academydirectory.versioncontrol.parsers.CommitParser;
 import seedu.academydirectory.versioncontrol.parsers.TreeParser;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
+@SuppressWarnings("checkstyle:Regexp")
 public class CommitController extends Controller<Commit> {
     private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -83,7 +85,12 @@ public class CommitController extends Controller<Commit> {
                            TreeParser treeParser,
                            TreeController treeController)
             throws IOException, ParseException {
-        Path headPath = vcPath.resolve(Paths.get(hash));
+        // Allow for 5 digit hash to be used
+        File f = new File(String.valueOf(vcPath));
+        String finalHash = hash;
+        File matchingFiles = Objects.requireNonNull(f.listFiles((x, name) -> name.startsWith(finalHash)))[0];
+
+        Path headPath = matchingFiles.toPath(); // vcPath.resolve(Paths.get(hash));
         String[] args = currentCommitParser.parse(vcPath.resolve(Paths.get(hash)));
 
         hash = args[0];
@@ -116,6 +123,18 @@ public class CommitController extends Controller<Commit> {
         };
 
         return new Commit(hash, author, date, message, parentCommitSupplier, treeSupplier);
+    }
+
+    /**
+     * Generate a new file with the given name corresponding to the given commit
+     * @param name filename
+     * @param commit Commit to be written
+     * @return written Commit
+     * @throws IOException thrown if unable to write
+     */
+    public Commit generate(String name, Commit commit) throws IOException {
+        write(name, commit);
+        return commit;
     }
 
     public static DateFormat getDf() {

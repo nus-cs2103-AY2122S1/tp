@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -66,6 +67,7 @@ public class VersionManager implements Version {
      * @param message Message attached to the Commit for a readable explanation
      * @return whether commit is successful
      */
+    @Override
     public boolean commit(String message) {
         Commit parentCommit = head;
         try {
@@ -87,8 +89,9 @@ public class VersionManager implements Version {
     }
 
     private String getPresentableHistory(Commit commit) {
-        return commit.getHash().substring(0, 6) + ": " + commit.getMessage();
+        return commit.getHash().substring(0, 5) + ": " + commit.getMessage();
     }
+
     @Override
     public List<String> retrieveHistory() {
         Commit currentCommit = head;
@@ -103,6 +106,43 @@ public class VersionManager implements Version {
         }
 
         return history;
+    }
+
+    @Override
+    public Commit revert(String fiveCharHash) throws IOException, ParseException {
+        Commit mainCommit = commitController.generate("temp/latest", head);
+
+        Commit relevantCommit = fetchCommit(fiveCharHash);
+        if (relevantCommit.equals(Commit.NULL)) {
+            return Commit.NULL;
+        }
+
+        Tree relevantTree = relevantCommit.getTreeSupplier().get();
+        treeController.regenerateBlobs(relevantTree);
+        moveHead(relevantCommit);
+        return relevantCommit;
+    }
+
+
+    private Commit fetchCommit(String hash) throws IOException, ParseException {
+        Commit currentCommit = head;
+        String currentHash = currentCommit.getHash();
+        if (currentHash.substring(0, 5).equals(hash)) {
+            return currentCommit;
+        }
+
+        Supplier<Commit> parentCommitSupplier = head.getParentSupplier();
+        while (parentCommitSupplier.get() != Commit.NULL) {
+            currentCommit = parentCommitSupplier.get();
+            currentHash = currentCommit.getHash();
+
+            if (currentHash.substring(0, 5).equals(hash)) {
+                return currentCommit;
+            }
+            parentCommitSupplier = currentCommit.getParentSupplier();
+        }
+
+        return Commit.NULL;
     }
 
     private void moveHead(Commit commit) throws IOException {

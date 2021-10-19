@@ -30,7 +30,17 @@ public abstract class Controller<T extends VcObject> {
      * @throws IOException Unable to write to file
      */
     public void write(T vcObject) throws IOException {
-        Path commitPath = this.vcPath.resolve(Path.of(vcObject.getHash()));
+        write(vcObject.getHash(), vcObject);
+    }
+
+    /**
+     * Writes a given VcObject to file, with filename being the given name
+     * @param name Filename
+     * @param vcObject to be written to file
+     * @throws IOException Unable to write to file
+     */
+    public void write(String name, T vcObject) throws IOException {
+        Path commitPath = this.vcPath.resolve(Path.of(name));
         FileWriter writer = new FileWriter(String.valueOf(commitPath));
 
         List<String> writeableVcObject = this.getWriteableFormat(vcObject);

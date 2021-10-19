@@ -55,20 +55,21 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        // Temporary hax
         try {
-            Command command = academyDirectoryParser.parseCommand(commandText);
-            commandResult = command.execute(model);
-        } catch (ParseException e) {
             VcCommand command = versionControlParser.parseCommand(commandText);
             commandResult = command.execute(version);
-        }
-
-        try {
-            storage.saveAcademyDirectory(model.getAcademyDirectory());
-            logger.log(Level.INFO, "Commit successful? " + (version.commit(commandText) ? "Yes" : "No"));
-        } catch (IOException ioe) {
+        } catch (IOException | java.text.ParseException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        } catch (ParseException e) {
+            Command command = academyDirectoryParser.parseCommand(commandText);
+            commandResult = command.execute(model);
+
+            try {
+                storage.saveAcademyDirectory(model.getAcademyDirectory());
+                logger.log(Level.INFO, "Commit successful? " + (version.commit(commandText) ? "Yes" : "No"));
+            } catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            }
         }
         return commandResult;
     }

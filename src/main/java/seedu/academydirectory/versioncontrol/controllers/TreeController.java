@@ -98,4 +98,19 @@ public class TreeController extends Controller<Tree> {
                 .map(key -> key + " " + hashMap.get(key))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Regenerate all blobs pointed at by a @code{Tree}
+     * @param tree Mapping containing all the blobs to be regenerated
+     * @throws IOException thrown when unable to regenerate
+     */
+    public void regenerateBlobs(Tree tree) throws IOException {
+        HashMap<String, String> hashMap = tree.getHashMap();
+        for (String vcFilename : hashMap.keySet()) {
+            String actualFilename = hashMap.get(vcFilename);
+            Path actualFilepath = Paths.get(actualFilename);
+            Path vcFilepath = Paths.get(vcFilename);
+            Files.copy(vcFilepath, actualFilepath, REPLACE_EXISTING);
+        }
+    }
 }

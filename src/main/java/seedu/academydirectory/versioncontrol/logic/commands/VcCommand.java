@@ -1,5 +1,8 @@
 package seedu.academydirectory.versioncontrol.logic.commands;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.versioncontrol.OptionalVersion;
@@ -17,6 +20,7 @@ public abstract class VcCommand {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(OptionalVersion<Version> version) throws CommandException;
+    public abstract CommandResult execute(OptionalVersion<Version> version) throws CommandException,
+            IOException, ParseException;
 
 }
