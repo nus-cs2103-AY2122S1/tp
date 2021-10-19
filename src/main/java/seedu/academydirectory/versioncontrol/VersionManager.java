@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
@@ -25,6 +26,7 @@ import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
 public class VersionManager implements Version {
     private static final Path vcPath = Paths.get("vc");
+    private static final SimpleDateFormat DF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 
     private Commit head;
 
@@ -89,7 +91,9 @@ public class VersionManager implements Version {
     }
 
     private String getPresentableHistory(Commit commit) {
-        return commit.getHash().substring(0, 5) + ": " + commit.getMessage();
+        String firstLine = commit.getHash().substring(0, 5) + " - " + DF.format(commit.getDate());
+        String secondLine = commit.getMessage();
+        return firstLine + System.lineSeparator() + secondLine;
     }
 
     @Override
@@ -110,7 +114,7 @@ public class VersionManager implements Version {
 
     @Override
     public Commit revert(String fiveCharHash) throws IOException, ParseException {
-        Commit mainCommit = commitController.generate("temp/latest", head);
+        Commit mainCommit = commitController.generate("temp_LATEST", head);
 
         Commit relevantCommit = fetchCommit(fiveCharHash);
         if (relevantCommit.equals(Commit.NULL)) {
