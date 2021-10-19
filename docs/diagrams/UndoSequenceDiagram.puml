@@ -29,6 +29,4 @@ logic -->[
 destroy u
 deactivate logic
 
-
-
 @enduml
