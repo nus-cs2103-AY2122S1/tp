@@ -1,6 +1,8 @@
 package seedu.anilist.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
@@ -79,6 +81,9 @@ public class ModelManagerTest {
     @Test
     public void hasAnime_animeNotInAnimeList_returnsFalse() {
         assertFalse(modelManager.hasAnime(AOT));
+    }
+
+    private void assertFalse(boolean hasAnime) {
     }
 
     @Test
