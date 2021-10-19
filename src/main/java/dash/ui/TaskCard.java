@@ -4,7 +4,10 @@ import java.util.Comparator;
 
 import dash.model.task.Task;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -27,12 +30,22 @@ public class TaskCard extends UiPart<Region> {
 
     public final Task task;
 
+    private int cardIndex = 0;
+    private Image checkmarkOrange = new Image("/images/checkmark.png", 20, 20, false, true);
+    private Image checkmarkGrey = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
+
     @FXML
     private HBox cardPane;
     @FXML
     private Label desc;
     @FXML
     private Label id;
+    @FXML
+    private Label completionStatus;
+    @FXML
+    private Label date;
+    @FXML
+    private Label time;
     @FXML
     private FlowPane tags;
 
@@ -43,10 +56,46 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
+        this.cardIndex = displayedIndex;
         desc.setText(task.getTaskDescription().description);
+
+        ImageView checkmark = new ImageView(checkmarkGrey);
+        completionStatus.setText(" ");
+        completionStatus.setGraphic(checkmark);
+        if (this.task.getCompletionStatus().get()) {
+            setAsComplete();
+        }
+
+        if (task.getTaskDate().getDate() != null) {
+            date.setText(task.getTaskDate().toDateString());
+        }
+        if (task.getTaskDate().getTime() != null) {
+            time.setText(task.getTaskDate().toTimeString());
+        }
+
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    public void setAsComplete() {
+        if (this.cardIndex % 2 == 0) {
+            this.cardPane.setStyle("-fx-background-color: #ebcbae;");
+        } else {
+            this.cardPane.setStyle("-fx-background-color: #ffe6cf;");
+        }
+        this.desc.setStyle("-fx-text-fill: #878787");
+        this.id.setStyle("-fx-text-fill: #878787");
+        ImageView checkmark = new ImageView(checkmarkOrange);
+        completionStatus.setText(" ");
+        completionStatus.setGraphic(checkmark);
+        this.date.setStyle("-fx-text-fill: #878787");
+        this.time.setStyle("-fx-text-fill: #878787");
+        for (Node n: tags.getChildren()) {
+            Label l = (Label) n;
+            l.setStyle("-fx-background-color: #bf9284");
+        }
+
     }
 
     @Override

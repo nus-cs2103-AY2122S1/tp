@@ -25,7 +25,10 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="desc" text="\$first" styleClass="cell_big_label"/>
+                <Label fx:id="completionStatus"/>
             </HBox>
+            <Label fx:id="date"/>
+            <Label fx:id="time"/>
             <FlowPane fx:id="tags"/>
         </VBox>
     </GridPane>
