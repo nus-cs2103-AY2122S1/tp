@@ -238,6 +238,71 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add shift to staff's schedule
+
+#### Implementation
+
+`addShift` is a command for the app to add a shift into a staff's schedule.
+When the user want to use this command, the target staff, and the specific shift should
+be indicated. 
+
+The add shift functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
+
+- `ModelManager#findPersonByName()` — Find the first person with given Name from the address book. If the person is
+not found, null will be returned.
+  
+- `ModelManager#addShift()` — Add a shift to the target person's schedule. If that shift has already existed, a 
+`DuplicateShiftException` will be thrown.
+  
+Also, `AddShiftCommandParser` and `AddShiftCommand` are created to achieve this functionality.
+
+![AddShiftClass](images/AddShiftClassDiagram.png)
+  
+The way of implementing `addShift` functionality follows the architecture
+of the app. Given below is an example usage scenario and the workflow of the 
+`addShift` command.
+
+Step 1. The user executes command `addShift -n Steve d/Monday-0`.
+`Ui` component reads the command as a string from user's input. After that, `MainWindow`
+passes the string to `LogicManager` to manipulate the command.
+
+Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command.
+Since the command starts with `addShift`, a new `AddShiftCommandParser` is created to parse the command further. 
+
+Step 3. `AddShiftCommandParser` uses `ArgumentMultimap` to tokenize the prefixes part the 
+command. After extracting the information the target staff and the shift, A new 
+`AddShiftCommand` is created with the information. In this case, the name of the target staff is "Steve", and the
+proposed shift is on Monday morning.
+
+Step 4. `AddShiftCommand` passes the given name to `ModelManager#findPersonByName()`. 
+After finding the specific staff, `AddShiftCommand` passes the staff, 
+`DayOfWeek`, and the `Slot` of the shift to `ModelManager#addShift()`.
+
+Step 5. `Modelmanager#addShift()` updates the schedule of the target staff with a new `Shift` created with
+the given `DayOfWeek` and `Slot`.
+
+The activity diagram of this `addShift` command is shown below:
+
+![AddShiftActivity](images/AddShiftSequenceDiagram.png)
+
+Notes:
+1. User can also search the target staff with the staff's index in `lastShownList`
+2. A command is considered as a valid `addShift` command if it follows these formats:
+ - `addShift -n name d/fullDayName-slotNumber` 
+ - `addShift -i index d/fullDayName-slotNumber`
+3. `fullDayName` can be any day from "monday" to "sunday". Noticed that it's not case-sensitive.
+4. `slotNumber` can only be 0 or 1 currently.
+
+#### Design considerations
+**Aspect: Add the shift to a group of staffs**
+* **Alternative 1 (current implementation):** Add one by one
+    * Pros: Easy to implemented. Decrease the chance to add shift to a wrong person.
+    * Cons: Time consuming for user to add one by one.
+* **Alternative 2 (proposed implementation):** Add shift to a group of staffs.
+    * Pros: Save time for users.
+    * Cons: User need to specify the group of staffs before adding shift to their schedules.
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
