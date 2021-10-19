@@ -23,6 +23,7 @@ public class StatisticsCommand extends Command {
             + "Example: " + COMMAND_WORD + " T09";
 
     public static final String MESSAGE_STATISTICS = "Statistics: \n%s";
+    public static final String MESSAGE_TUTORIAL_GROUP_NOT_FOUND = "Tutorial group not found";
 
     private final TutorialGroup tutorialGroup;
 
@@ -31,10 +32,10 @@ public class StatisticsCommand extends Command {
      *
      * @param tutorialGroup The tutorialGroup that the user wants to find the statistics for.
      */
-    public StatisticsCommand(String tutorialGroup) {
+    public StatisticsCommand(TutorialGroup tutorialGroup) {
         requireNonNull(tutorialGroup);
 
-        this.tutorialGroup = new TutorialGroup(tutorialGroup);
+        this.tutorialGroup = tutorialGroup;
     }
 
     @Override
@@ -43,6 +44,9 @@ public class StatisticsCommand extends Command {
 
         model.updateFilteredPersonList(p -> p.getTutorialGroup().equals(tutorialGroup));
         List<Person> filteredPersonList = model.getFilteredPersonList();
+        if (filteredPersonList.size() == 0) {
+            throw new CommandException(MESSAGE_TUTORIAL_GROUP_NOT_FOUND);
+        }
         model.updateFilteredPersonList(p -> true);
 
         Statistic statistic = new Statistic(filteredPersonList);
