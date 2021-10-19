@@ -55,7 +55,8 @@ public class LogicManagerTest {
     private static final Path MAIN_PREF_FILE_PATH = MAIN_TEST_PATH.resolve(USER_PREFERENCE_FILENAME);
     private static final Path IO_EXCEPTION_TEST_PATH = TEST_PATH.resolve("IoExceptionDirectory");
     private static final Path IO_EXCEPTION_JSON_FILE_PATH = IO_EXCEPTION_TEST_PATH.resolve(ADDRESS_BOOK_JSON_FILENAME);
-    private static final Path IO_EXCEPTION_ENCRYPTED_FILE_PATH = IO_EXCEPTION_TEST_PATH.resolve(ADDRESS_BOOK_ENCRYPTED_FILENAME);
+    private static final Path IO_EXCEPTION_ENCRYPTED_FILE_PATH =
+            IO_EXCEPTION_TEST_PATH.resolve(ADDRESS_BOOK_ENCRYPTED_FILENAME);
     private static final Path IO_EXCEPTION_PREF_FILE_PATH = IO_EXCEPTION_TEST_PATH.resolve(USER_PREFERENCE_FILENAME);
 
     private static final Model MODEL = new ModelManager();
@@ -64,7 +65,8 @@ public class LogicManagerTest {
     private Cryptable cryptor;
 
     @BeforeEach
-    public void setUp() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException, IOException {
+    public void setUp()
+            throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException, IOException {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(MAIN_JSON_FILE_PATH);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(MAIN_PREF_FILE_PATH);
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
