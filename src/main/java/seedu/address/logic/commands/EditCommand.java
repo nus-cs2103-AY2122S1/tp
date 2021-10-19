@@ -28,6 +28,7 @@ import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
+import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -110,8 +111,25 @@ public class EditCommand extends Command {
         ArrayList<NextOfKin> updatedNextOfKins =
             editParticipantDescriptor.getNextOfKins().orElse(participantToEdit.getNextOfKins());
 
+        if (isIdUnchanged(participantToEdit.getName(), updatedName)) {
+            return new Participant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                    updatedBirthDate, updatedNotes, updatedNextOfKins, participantToEdit.getParticipantId());
+        }
+
         return new Participant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedBirthDate,
                 updatedNotes, updatedNextOfKins);
+    }
+
+    /**
+     * Checks if the edited {@code Participant} needs to be assigned a new Participant ID.
+     *
+     * @param currentName Current Participant name.
+     * @param updatedName Updated Participant name.
+     * @return true if the Participant ID is unchanged.
+     */
+    private static boolean isIdUnchanged(Name currentName, Name updatedName) {
+        return ParticipantId.generateIdString(currentName.toString())
+                .equals(ParticipantId.generateIdString(updatedName.toString()));
     }
 
     @Override

@@ -55,19 +55,8 @@ public class ParticipantId {
      * @return the id for given participant.
      */
     public static String encode(Participant p) {
-        // may change in the future
         StringBuilder idString = new StringBuilder();
-        String[] sections = p.getFullName().trim().split(" ");
-        if (sections.length == 1) {
-            String name = sections[0];
-            idString.append(name.length() < 6 ? name.toLowerCase() : name.substring(0, 6).toLowerCase());
-        } else {
-            String first = sections[0];
-            String last = sections[sections.length - 1];
-            String firstPart = first.length() < 3 ? first : first.substring(0, 3);
-            String lastPart = last.length() < 3 ? last : last.substring(0, 3);
-            idString.append((firstPart + lastPart).toLowerCase());
-        }
+        idString.append(generateIdString(p.getFullName()));
 
         if (ParticipantId.idMap.containsKey(idString.toString())) {
             int count = ParticipantId.idMap.get(idString.toString());
@@ -79,6 +68,26 @@ public class ParticipantId {
         }
 
         return idString.toString();
+    }
+
+    /**
+     * Generates the name part of the Participant ID.
+     *
+     * @param fullName of the Participant.
+     * @return the name part of the Participant ID.
+     */
+    public static String generateIdString(String fullName) {
+        String[] sections = fullName.trim().split(" ");
+        if (sections.length == 1) {
+            String name = sections[0];
+            return name.length() < 6 ? name.toLowerCase() : name.substring(0, 6).toLowerCase();
+        } else {
+            String first = sections[0];
+            String last = sections[sections.length - 1];
+            String firstPart = first.length() < 3 ? first : first.substring(0, 3);
+            String lastPart = last.length() < 3 ? last : last.substring(0, 3);
+            return (firstPart + lastPart).toLowerCase();
+        }
     }
 
     /**
