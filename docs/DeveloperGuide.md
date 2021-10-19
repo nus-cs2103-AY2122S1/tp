@@ -138,7 +138,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="../images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -248,6 +248,24 @@ Folders are saved in a `UniqueFolderList` in `AddressBook`.
 The following diagram shows how `mkdir` works:
 
 ![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice)**: Folders hold references to contacts
+  * Pros: Easier management of folders
+  * Cons: More difficult to implement
+    
+Diagram:
+
+![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
+
+* **Alternative 2**: Contacts hold references to folders
+    * Pros: Easy to implement
+    * Cons: More complex management of folders, Similar to tags which is already implemented
+    
+Diagram:
+
+![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
