@@ -182,15 +182,18 @@ This section describes some noteworthy details on how certain features are imple
 
 This feature adds a student contact to TutorAid, which includes details such as the student's name, contact 
 number, the parent's name and contact number. It is mainly implemented by `AddStudentCommand#execute()` in the 
-`AddStudentCommand` class. Additionally, it also facilitated by the following methods:
-* 
-
-
-It also extends the `AddCommand` class, which acts as the parent class for all command 
-classes that begin with the keyword `add`.
+`AddStudentCommand` class. It also facilitated by the following methods:
+* `TutorAidParser#parseCommand`
+* `AddCommandParser#parse`
 
 Given below is an example of what happens when the user attempts to add a student to TutorAid:
 
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add -s sn/John Doe …​` to add this student to TutorAid. 
+This command is first passed to `TutorAidParser#parseCommand`, which extracts the first keyword of every command. One 
+the keyword `add` has been parsed, the remaining arguments of the command (`-s sn/John Doe …​`) are passed into
+`AddCommandParser#parse`.
 
 
 
