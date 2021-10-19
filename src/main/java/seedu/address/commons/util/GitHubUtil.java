@@ -1,6 +1,8 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -23,7 +27,8 @@ import seedu.address.commons.core.LogsCenter;
 public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
 
-    private static final String URL_PREFIX = "https://api.github.com/users/";
+    private static final String API_URL_PREFIX = "https://api.github.com/users/";
+    private static final String GITHUB_URL_PREFIX = "https://www.github.com/";
     private static final Image defaultUserProfilePicture = new Image(
             GitHubUtil.class.getResourceAsStream("/images/profile.png"));
     private static int responseCode;
@@ -39,10 +44,34 @@ public class GitHubUtil {
      * Establishes a connection to the server, and
      * updates the response code accordingly.
      *
+     * @param extension The extension of the url to go to.
+     */
+    public static void establishConnectionForWebsite(String extension) {
+        try {
+            url = new URL(API_URL_PREFIX + extension);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) "
+                    + "Gecko/20100316 Firefox/3.6.2");
+            conn.connect();
+
+            responseCode = conn.getResponseCode();
+        } catch (MalformedURLException e) {
+            logger.severe("Improper URL Format.");
+        } catch (IOException e) {
+            logger.severe("A Connection with the server could not be established.");
+        }
+    }
+
+    /**
+     * Establishes a connection to the server via API, and
+     * updates the response code accordingly.
+     *
      * @param userName The name of the user.
      */
-    private static void establishConnection(String userName) {
-        String userUrl = URL_PREFIX + userName;
+    private static void establishConnectionForApi(String userName) {
+        String userUrl = API_URL_PREFIX + userName;
 
         try {
             url = new URL(userUrl);
@@ -70,7 +99,7 @@ public class GitHubUtil {
     public static JSONObject getProfile(String userName) throws RuntimeException {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
-        establishConnection(userName);
+        establishConnectionForApi(userName);
         JSONObject data = null;
 
         if (responseCode != 200) {
@@ -123,6 +152,7 @@ public class GitHubUtil {
 
         String userProfileUrl = (String) jsonObject.get("avatar_url");
         Image image = new Image(userProfileUrl);
+        //getFamiliarProgrammingLanguages(userName);
 
         return image;
     }
@@ -145,6 +175,7 @@ public class GitHubUtil {
      * @param userName The name of the user.
      * @return The total number of repos found on GitHub.
      */
+    /*
     public static int getRepoCount(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
         JSONObject jsonObject = null;
@@ -162,6 +193,7 @@ public class GitHubUtil {
 
         return repoCount;
     }
+     */
 
     /**
      * Returns a list of user repositories present on their GitHub.
@@ -171,7 +203,7 @@ public class GitHubUtil {
      * @return An {@code ArrayList<String>} consisting of user repositories.
      */
     public static ArrayList<String> getRepoNames(String userName, int page) throws RuntimeException {
-        establishConnection(userName + "/repos?per_page=100&page=" + page);
+        establishConnectionForApi(userName + "/repos?per_page=100&page=" + page);
 
         JSONArray data = null;
 
@@ -245,7 +277,7 @@ public class GitHubUtil {
         ArrayList<String> userRepos = getRepoNames(userName, 0);
 
         for (int i = 0; i < userRepos.size(); i++) {
-            establishConnection("repos/" + userName + "/" + userRepos.get(i) + "/languages");
+            establishConnectionForApi("repos/" + userName + "/" + userRepos.get(i) + "/languages");
 
             JSONObject data = null;
 
@@ -286,4 +318,96 @@ public class GitHubUtil {
         }
         return programmingLanguages;
     }
+
+    /**
+     * Returns the total number of commits/contributions a person on GitHub
+     * has made to date.
+     *
+     * @param userName The name of the user.
+     * @return The total contributions found on GitHub else -1, if any error occurred.
+     * @throws RuntimeException If the server did not respond well.
+     */
+    public static int getContributions(String userName) throws RuntimeException {
+        establishConnectionForWebsite(userName);
+
+        if (responseCode != 200) {
+            logger.severe("Server responded with error code " + responseCode);
+            throw new RuntimeException("Data could not be obtained.");
+        } else {
+            try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+                String inputLine;
+                StringBuilder html = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    html.append(inputLine);
+                }
+
+                in.close();
+
+                String htmlString = html.toString();
+
+                Pattern p = Pattern.compile("(?<=<h2 class=\"f4 text-normal mb-2\">)(.*?)(?=</h2>)");
+                Matcher m = p.matcher(htmlString);
+                String target = "";
+
+                while (m.find()) {
+                    target = m.group();
+                }
+
+                return Integer.parseInt(target.strip().split("\\s+")[0]);
+            } catch (IOException e) {
+                logger.severe("Contribution Count Could not be obtained.");
+                return -1;
+            }
+        }
+    }
+
+    /**
+     * Returns the total number of repos a person on GitHub
+     * has made to date.
+     *
+     * @param userName The name of the user.
+     * @return The total number of repos found on GitHub else -1, if any error occurred.
+     * @throws RuntimeException If the server did not respond well.
+     */
+    public static int getRepoCount(String userName) throws RuntimeException{
+        establishConnectionForWebsite(userName);
+
+        if (responseCode != 200) {
+            logger.severe("Server responded with error code " + responseCode);
+            throw new RuntimeException("Data could not be obtained.");
+        } else {
+            try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+
+                String inputLine;
+                StringBuilder html = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    html.append(inputLine);
+                }
+
+                in.close();
+
+                String htmlString = html.toString();
+
+                Pattern p = Pattern.compile("(?<=Repositories)(.*?)(?=</span>)");
+                Matcher m = p.matcher(htmlString);
+                String target = "";
+
+                while (m.find()) {
+                    target = m.group();
+                }
+
+                return Integer.parseInt(target.split("class=\"Counter\">")[1]);
+            } catch (IOException e) {
+                logger.severe("Repo Count Could not be obtained.");
+                return -1;
+            }
+        }
+    }
+
+    //Add Storing capabilities for avatar_url
 }
