@@ -154,6 +154,118 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Lesson feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Enroll feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Delete Lesson feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Unenroll feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Filter feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Enroll feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
+### Delete Lesson feature
+
+Description
+
+#### Implementation
+
+Object diagram
+
+Sequence diagram
+
+Activity diagram
+
+#### Design considerations:
+
+Command syntax
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -232,10 +344,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_  
 
 --------------------------------------------------------------------------------------------------------------------
 
