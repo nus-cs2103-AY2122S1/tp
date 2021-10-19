@@ -42,9 +42,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String userInputNoPrefix = removePrefixFromUserInput(args, argMultimap);
-        String trimmedUserInputNoPrefix = userInputNoPrefix.trim();
-        if (trimmedUserInputNoPrefix.isEmpty()) {
+        String trimmedUserInputNoPrefix = removePrefixFromUserInput(args, argMultimap).trim();
+        if (trimmedUserInputNoPrefix.isBlank()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -85,42 +84,47 @@ public class FindCommandParser implements Parser<FindCommand> {
 
     /**
      * Returns the user input with the prefix removed. If none of the prefix matches,
-     * the same user input will be returned.
+     * an empty string will be returned.
      */
     private String removePrefixFromUserInput(String args, ArgumentMultimap argumentMultimap) {
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_NAME.getPrefix());
             String output = argsSplitByPrefix.length == INPUT_SIZE
                     ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : args;
+                    : "";
+            return output;
         }
 
         if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_PHONE.getPrefix());
             String output = argsSplitByPrefix.length == INPUT_SIZE
                     ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : args;
+                    : "";
+            return output;
         }
 
         if (argumentMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_CASE_NUMBER.getPrefix());
             String output = argsSplitByPrefix.length == INPUT_SIZE
                     ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : args;
+                    : "";
+            return output;
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_START.getPrefix());
             String output = argsSplitByPrefix.length == INPUT_SIZE
                     ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : args;
+                    : "";
+            return output;
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_END.getPrefix());
             String output = argsSplitByPrefix.length == INPUT_SIZE
                     ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : args;
+                    : "";
+            return output;
         }
 
         return "";
