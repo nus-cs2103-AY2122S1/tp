@@ -27,6 +27,7 @@ import seedu.edrecord.model.module.ReadOnlyModuleSystem;
 import seedu.edrecord.model.person.PartOfModulePredicate;
 import seedu.edrecord.model.person.Person;
 import seedu.edrecord.testutil.PersonBuilder;
+import seedu.edrecord.testutil.TypicalModules;
 
 public class AddCommandTest {
 
@@ -253,6 +254,17 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public Module getModule(Module mod) {
+            for (Module m : TypicalModules.getTypicalModules()) {
+                if (m.isSameModule(mod)) {
+                    return m;
+                }
+            }
+            // TODO: Refine this, this should not be returning mod.
+            return mod;
         }
 
         @Override
