@@ -14,7 +14,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import dash.commons.core.index.Index;
-import dash.logic.commands.taskcommand.AddTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.EditTaskCommand.EditTaskDescriptor;
 import dash.logic.parser.ArgumentMultimap;
@@ -32,8 +31,8 @@ import javafx.collections.ObservableList;
 public class EditTaskCommandParser implements ParserRequiringPersonList<EditTaskCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditTaskCommand
+     * and returns an EditTaskCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -60,12 +59,11 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
         }
 
         if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
-            System.out.println("a");
             Set<Index> personIndices = ParserUtil.parsePersonIndex(argMultimap.getAllValues(PREFIX_PERSON));
             Set<Person> people = new HashSet<>();
             for (Index i : personIndices) {
                 if (i.getZeroBased() < 0 || i.getZeroBased() >= filteredPersonList.size()) {
-                    throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + AddTaskCommand.MESSAGE_USAGE);
+                    throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX + EditTaskCommand.MESSAGE_USAGE);
                 }
                 people.add(filteredPersonList.get(i.getZeroBased()));
             }
