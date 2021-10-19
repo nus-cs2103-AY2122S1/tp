@@ -41,10 +41,6 @@ public class PriorityTag extends Tag {
      */
     public class LowPriority {
 
-        //prevent instantiation of this class
-        private LowPriority() {
-        }
-
         public static final String NAME = "LowPriority";
 
         public static final String TERM = "low";
@@ -60,10 +56,6 @@ public class PriorityTag extends Tag {
      */
     public class MediumPriority {
 
-        //prevent instantiation of this class
-        private MediumPriority() {
-        }
-
         public static final String NAME = "MediumPriority";
 
         public static final String TERM = "med";
@@ -77,10 +69,6 @@ public class PriorityTag extends Tag {
      * Class containing relevant fields for a High Priority Tag.
      */
     public class HighPriority {
-
-        //prevent instantiation of this class
-        private HighPriority() {
-        }
 
         public static final String NAME = "HighPriority";
 
