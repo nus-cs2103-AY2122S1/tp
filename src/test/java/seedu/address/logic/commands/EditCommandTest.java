@@ -97,25 +97,25 @@ public class EditCommandTest {
         ClientId clientId3 = CLIENTID_SECOND_PERSON;
         List<ClientId> clientIdList = List.of(clientId1, clientId2, clientId3);
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptorBuilder()
-                .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
+            .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
 
         EditCommand editCommand = new EditCommand(clientIdList, editPersonDescriptor);
-        Person person1 = model.getAddressBook().getPerson(clientId1);
-        Person person2 = model.getAddressBook().getPerson(clientId2);
-        Person person3 = model.getAddressBook().getPerson(clientId3);
+        Person person1 = model.getPerson(clientId1);
+        Person person2 = model.getPerson(clientId2);
+        Person person3 = model.getPerson(clientId3);
 
         Person editedPerson1 = new PersonBuilder(person1).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Person editedPerson2 = new PersonBuilder(person2).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Person editedPerson3 = new PersonBuilder(person3).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
 
         List<ClientId> clientIdlist = List.of(clientId1, clientId2, clientId3);
         List<Person> editPersonList = List.of(editedPerson1, editedPerson2, editedPerson3);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
-                StringUtil.joinListToString(editPersonList, "\n"));
+            StringUtil.joinListToString(editPersonList, "\n"));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPersonByClientIds(clientIdlist, editPersonDescriptor);
