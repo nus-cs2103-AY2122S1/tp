@@ -176,6 +176,24 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add student feature: `add -s`
+
+#### Implementation
+
+This feature adds a student contact to TutorAid, which includes details such as the student's name, contact 
+number, the parent's name and contact number. It is mainly implemented by `AddStudentCommand#execute()` in the 
+`AddStudentCommand` class. Additionally, it also facilitated by the following methods:
+* 
+
+
+It also extends the `AddCommand` class, which acts as the parent class for all command 
+classes that begin with the keyword `add`.
+
+Given below is an example of what happens when the user attempts to add a student to TutorAid:
+
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
