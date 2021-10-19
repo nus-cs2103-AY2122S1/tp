@@ -343,7 +343,6 @@ public class HelpWindow extends UiPart<Stage> {
         userGuide();
         overview();
         quickStart();
-
         featureNotes();
 
         //Setting a section for each of the features that have been implemented thus far
