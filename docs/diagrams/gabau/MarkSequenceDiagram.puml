@@ -17,10 +17,10 @@ participant ":Person" as Person MODEL_COLOR
 participant ":Period" as Period MODEL_COLOR
 end box
 
-[-> LogicManager : execute("mark -i 1 d/2001-01-04")
+[-> LogicManager : execute()
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("mark -i 1 d/2001-01-04")
+LogicManager -> AddressBookParser : parseCommand()
 activate AddressBookParser
 
 create MarkCommandParser
@@ -29,7 +29,7 @@ activate MarkCommandParser
 MarkCommandParser --> AddressBookParser
 deactivate MarkCommandParser
 
-AddressBookParser -> MarkCommandParser : parse(" -i 1 d/2001-01-04")
+AddressBookParser -> MarkCommandParser : parse()
 activate MarkCommandParser
 
 
