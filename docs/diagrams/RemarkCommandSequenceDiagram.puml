@@ -26,7 +26,7 @@ user -[USER_COLOR]>editor : new remark
 editor -[UI_COLOR_T1]-> ui : newRemark
 deactivate editor
 
-ui -[UI_COLOR]-> logic : editedPerson
+ui -[UI_COLOR]-> logic
 deactivate ui
 
 logic -[LOGIC_COLOR]> model : setPerson(editedPerson)
