@@ -162,6 +162,13 @@ public class Student {
     }
 
     /**
+     * Adds the lesson into the current students' lessons set.
+     */
+    public void addLesson(Lesson newLesson) {
+        lessons.add(newLesson);
+    }
+
+    /**
      * Remove lesson from student instance. Student instance uses a weaker linkage to Lessons, using its lesson code.
      */
     public void unenrollFromLesson(Lesson lesson) {

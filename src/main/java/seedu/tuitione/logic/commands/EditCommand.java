@@ -97,7 +97,6 @@ public class EditCommand extends Command {
 
         if (!editStudentDescriptor.gradeIsEdited) {
             Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
-            editedStudent.setLessons(studentLessons);
             editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
 
             for (Lesson lesson : studentLessons) {
@@ -105,6 +104,7 @@ public class EditCommand extends Command {
                 lessonClone.removeStudent(studentToEdit);
                 lessonClone.addStudentNoConstraint(editedStudent); // editedStudent will be able to enroll
                 model.setLesson(lesson, lessonClone);
+                editedStudent.addLesson(lessonClone);
             }
         }
 
