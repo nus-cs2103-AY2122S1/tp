@@ -58,7 +58,7 @@ public class TagTaskCommand extends Command {
         }
 
         Task taskToTag = lastShownList.get(index.getZeroBased());
-        Task tagsAddedTask = AddTags(taskToTag, editTaskDescriptor);
+        Task tagsAddedTask = addTags(taskToTag, editTaskDescriptor);
 
         model.setTask(taskToTag, tagsAddedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
@@ -69,7 +69,7 @@ public class TagTaskCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code editTaskDescriptor}.
      */
-    private static Task AddTags(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+    private static Task addTags(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
         Set<Tag> oldTags = taskToEdit.getTags();
