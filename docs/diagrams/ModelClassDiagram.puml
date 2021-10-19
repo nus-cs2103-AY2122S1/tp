@@ -17,8 +17,8 @@ Class ReadOnlyUserPrefs
 
 Class UniquePersonList
 Class Person
-Class UniqueModuleClassList
-Class ModuleClass
+Class UniqueModuleLessonList
+Class ModuleLesson
 
 Class Name
 Class Email
@@ -52,16 +52,16 @@ Person *---> Phone
 Person *---> TeleHandle
 Person --> "1..*" ModuleCode
 Person *---> Remark
-AddressBook *--> "1" UniqueModuleClassList
-UniqueModuleClassList --> "~* all" ModuleClass
-ModuleClass *--> Remark
-ModuleClass --> "1" ModuleCode
-ModuleClass *---> "1" LessonCode
-ModuleClass *---> "1" LessonDay
-ModuleClass *--> "1" LessonTime
+AddressBook *--> "1" UniqueModuleLessonList
+UniqueModuleLessonList --> "~* all" ModuleLesson
+ModuleLesson *--> Remark
+ModuleLesson --> "1" ModuleCode
+ModuleLesson *---> "1" LessonCode
+ModuleLesson *---> "1" LessonDay
+ModuleLesson *--> "1" LessonTime
 ModuleCode --> LessonCode
 
 
 ModelManager -->"~* filtered" Person
-ModelManager --> "~* filtered" ModuleClass
+ModelManager --> "~* filtered" ModuleLesson
 @enduml
