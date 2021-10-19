@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.commons.core.GuiSettings;
+import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Person;
@@ -22,6 +23,9 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Appointment> PREDICATE_SHOW_ALL_APPOINTMENTS = unused -> true;
 
     /**
      * Changes current state to  {@code state}.
@@ -129,6 +133,33 @@ public interface Model {
      */
     void setDoctor(Doctor target, Doctor editedDoctor);
 
+    //// appointment methods
+
+    /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the PlannerMD.
+     */
+    boolean hasAppointment(Appointment appointment);
+
+    /**
+     * Deletes the given appointment.
+     * The appointment must exist in the PlannerMD.
+     */
+    void deleteAppointment(Appointment target);
+
+    /**
+     * Adds the given appointment.
+     * {@code appointment} must not already exist in the PlannerMD.
+     */
+    void addAppointment(Appointment appointment);
+
+    /**
+     * Replaces the given appointment {@code target} with {@code editedAppointment}.
+     * {@code target} must exist in the PlannerMD.
+     * The appointment identity of {@code editedAppointment} must not be the
+     * same as another existing appointment in the PlannerMD.
+     */
+    void setAppointment(Appointment target, Appointment editedAppointment);
+
     /**
      * Returns an unmodifiable view of the filtered patient list
      */
@@ -150,4 +181,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDoctorList(Predicate<? super Doctor> predicate);
+
+    /**
+     * Returns an unmodifiable view of the filtered appointments list
+     */
+    ObservableList<Appointment> getFilteredAppointmentList();
+
+    /**
+     * Updates the filter of the filtered appointment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredAppointmentList(Predicate<? super Appointment> predicate);
 }

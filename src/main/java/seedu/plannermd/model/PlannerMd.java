@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.UniqueAppointmentList;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.UniquePersonList;
@@ -18,6 +20,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
     private final UniquePersonList<Patient> patients;
     private final UniquePersonList<Doctor> doctors;
+    private final UniqueAppointmentList appointments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     {
         patients = new UniquePersonList<>();
         doctors = new UniquePersonList<>();
+        appointments = new UniqueAppointmentList();
     }
 
     public PlannerMd() {}
@@ -51,6 +55,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
 
         setPatients(newData.getPatientList());
         setDoctors(newData.getDoctorList());
+        setAppointments(newData.getAppointmentList());
     }
 
     /**
@@ -67,6 +72,14 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      */
     public void setDoctors(List<Doctor> doctors) {
         this.doctors.setPersons(doctors);
+    }
+
+    /**
+     * Replaces the contents of the appointments list with {@code appointments}.
+     * {@code appointments} must not contain duplicate appointments.
+     */
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.setAppointments(appointments);
     }
 
     //// person-level operations
@@ -144,6 +157,43 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         doctors.remove(key);
     }
 
+    //Appointments
+
+    /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the PlannerMD.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        return appointments.contains(appointment);
+    }
+
+    /**
+     * Adds an appointment to the PlannerMD.
+     * The appointment must not already exist in the PlannerMD.
+     */
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    /**
+     * Replaces the given doctor {@code target} in the list with {@code editedAppointment}.
+     * {@code target} must exist in the PlannerMD.
+     * The appointment identity of {@code editedAppointment} must not be the
+     * same as another existing appointment in the PlannerMD.
+     */
+    public void setAppointment(Appointment target, Appointment editedAppointment) {
+        requireNonNull(editedAppointment);
+        appointments.setAppointment(target, editedAppointment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code PlannerMd}.
+     * {@code key} must exist in the PlannerMD.
+     */
+    public void removeAppointment(Appointment key) {
+        appointments.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -160,6 +210,11 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     @Override
     public ObservableList<Doctor> getDoctorList() {
         return doctors.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Appointment> getAppointmentList() {
+        return appointments.asUnmodifiableObservableList();
     }
 
     @Override
