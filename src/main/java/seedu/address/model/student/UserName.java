@@ -54,6 +54,6 @@ public class UserName {
 
     @Override
     public int hashCode() {
-        return isNull() ? 0 : hashCode();
+        return isNull() ? 0 : userName.hashCode();
     }
 }

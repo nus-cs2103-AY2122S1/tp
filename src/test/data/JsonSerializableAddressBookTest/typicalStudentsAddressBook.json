@@ -7,7 +7,8 @@
     "username" : "paulice",
     "repo" : "ip",
     "tagged" : [ "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : null
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
@@ -15,7 +16,8 @@
     "username" : "benben",
     "repo" : "ip",
     "tagged" : [ "owesMoney", "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W14-4"
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@example.com",
@@ -23,7 +25,8 @@
     "username" : "cark",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W14-4"
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
@@ -31,7 +34,8 @@
     "username" : "danmei",
     "repo" : "ip",
     "tagged" : [ "friends" ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W14-4"
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@example.com",
@@ -39,7 +43,8 @@
     "username" : "em",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W15-5"
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
@@ -47,7 +52,8 @@
     "username" : "fku",
     "repo" : "ip",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : "W15-5"
   }, {
     "name" : "George Best",
     "email" : "anna@example.com",
@@ -55,7 +61,8 @@
     "username" : "user",
     "repo" : "ipppp",
     "tagged" : [ ],
-    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+    "attendance" : [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+    "groupName" : null
   } ],
   "tasks" : [ ],
   "groups" : [ ]
