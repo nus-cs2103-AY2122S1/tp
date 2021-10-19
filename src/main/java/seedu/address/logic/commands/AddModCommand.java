@@ -23,17 +23,20 @@ public class AddModCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds one or more modules to your module list. "
+            + "You may optionally add your grouping status."
             + "Existing modules will not be overwritten.\n"
             + "Duplicate modules cannot be added.\n"
             + "Parameters: "
             + "[" + PREFIX_MOD + "MOD]...\n"
-            + "Example: " + COMMAND_WORD
-            + " " + PREFIX_MOD + "CS2103T";
+            + "Example: \n" + COMMAND_WORD
+            + " " + PREFIX_MOD + "CS2103T\n"
+            + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group"
+            + " " + PREFIX_MOD + "CS1101S need member\n";
 
     public static final String MESSAGE_ADD_MODULE_SUCCESS = "Added module: %1$s";
     public static final String MESSAGE_NO_CHANGE = "At least one module must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "You have already added this module to your list.\n"
-            + "Please use the \"edit\" keyword to change your grouping status.";
+            + "Please use the \"editGroupStatus\" keyword to change your grouping status.";
 
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -60,7 +63,7 @@ public class AddModCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_MODULE_SUCCESS, editPersonDescriptor.getTags().get()));
     }
 
     /**

@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
  */
 public class AddFavCommand extends Command {
 
-    public static final String COMMAND_WORD = "addfav";
+    public static final String COMMAND_WORD = "addFav";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person as a favourite. \n "
             + "Parameters: Student_ID \n"
