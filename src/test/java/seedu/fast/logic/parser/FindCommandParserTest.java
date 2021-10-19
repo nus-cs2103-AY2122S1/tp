@@ -9,10 +9,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.logic.commands.FindCommand;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.PriorityPredicate;
-import seedu.fast.model.person.RemarkContainsKeyWordsPredicate;
-import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 public class FindCommandParserTest {
@@ -28,7 +28,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new NameContainsQueriesPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -54,7 +54,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindTagCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList("poo",
+                new FindCommand(new TagMatchesKeywordPredicate(Arrays.asList("poo",
                         "pee")));
         assertParseSuccess(parser , FindCommand.TAG_PREFIX
                 + "poo pee", expectedFindCommand);
@@ -67,7 +67,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindRemarkCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new RemarkContainsKeyWordsPredicate(Arrays.asList("poo",
+                new FindCommand(new RemarkContainsKeywordPredicate(Arrays.asList("poo",
                         "pee")));
         assertParseSuccess(parser , FindCommand.REMARK_PREFIX
                 + "poo pee", expectedFindCommand);

@@ -6,10 +6,10 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code Remark} contains any of the queries given.
  */
-public class RemarkContainsKeyWordsPredicate implements Predicate<Person> {
+public class RemarkContainsKeywordPredicate implements Predicate<Person> {
     public final List<String> queries;
 
-    public RemarkContainsKeyWordsPredicate(List<String> queries) {
+    public RemarkContainsKeywordPredicate(List<String> queries) {
         this.queries = queries;
     }
 
@@ -34,7 +34,7 @@ public class RemarkContainsKeyWordsPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RemarkContainsKeyWordsPredicate // instanceof handles nulls
-                && queries.equals(((RemarkContainsKeyWordsPredicate) other).queries)); // state check
+                || (other instanceof RemarkContainsKeywordPredicate // instanceof handles nulls
+                && queries.equals(((RemarkContainsKeywordPredicate) other).queries)); // state check
     }
 }
