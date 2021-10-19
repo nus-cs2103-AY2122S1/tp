@@ -25,9 +25,8 @@ import seedu.notor.testutil.PersonEditDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-    // TODO: Change name to fullname after Yukun fix bug.
-    public static final String VALID_NAME_AMY = "Amy";
-    public static final String VALID_NAME_BOB = "Bob";
+    public static final String VALID_NAME_AMY = "Amy Toh";
+    public static final String VALID_NAME_BOB = "Bob Kebab";
     public static final String INVALID_NAME_JAMES = "James&";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
