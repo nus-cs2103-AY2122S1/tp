@@ -381,13 +381,15 @@ Use case ends.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Implementation
+
 This section describes some noteworthy details on how certain features are implemented.
 
 ### [Developed] Time conflict management
+
 The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
 defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
-- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
-- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+* `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+* `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
 
 Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
 
@@ -400,7 +402,26 @@ time slot exists. If there is a conflict, a `CommandException` will be thrown.
 
 Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
 
+### [Developed] Display of Timetable
 
+The construction of the read-only timetable is mainly facilitated by the `TimetableInfoPage` class.
+It receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable accordingly.
+It generates a timetable with the following operations:
+* `TimetableInfoPage#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`
+* `TimetableInfoPage#setTableTime(start, end)` - Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list
+* `TimetableInfoPage#insertSlot()` - Inserts all tuition classes into the timetable
+
+Given below is an example usage scenario and how the timetable is generated.
+
+Step1: The user enters `timetable` command. The `TimetableInfoPage` will first check whether the tuition class list received is empty.
+If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
+
+Step2: Upon ensuring there are tuition classes, the `TimetableInfoPage` will proceed to parse the `TimeSlot` in each tuition class.
+After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided. 
+
+Step3: Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable.
+
+Step4: The complete timetable is then displayed to user through the `UI` component.
 
 ## **Appendix: Instructions for manual testing**
 

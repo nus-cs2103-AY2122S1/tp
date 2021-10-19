@@ -66,7 +66,7 @@ public class TimetableInfoPage extends InfoPage {
         scrollPane.setStyle(" -fx-background:dark; -fx-border-color:dark;");
         scrollPane.setPadding(new Insets(0, 0, 0, 20));
         this.tuitionClasses = tuitionClasses;
-        setDay();
+        setTableDay();
         if (tuitionClasses.size() == 0) {
             throw new CommandException("No class found.");
         } else {
@@ -234,7 +234,7 @@ public class TimetableInfoPage extends InfoPage {
         return color;
     }
 
-    private void setDay() {
+    private void setTableDay() {
         for (int j = 0; j < numCols; j++) {
             ColumnConstraints colConst = new ColumnConstraints();
             colConst.setPercentWidth(100.0 / numCols);
