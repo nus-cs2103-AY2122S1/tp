@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeysPredicate;
 
 public class FindCommandParserTest {
 
@@ -23,14 +23,16 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() throws ParseException {
+    public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, PREFIX_NAME.toString() + "Alice Bob", expectedFindCommand);
+                new FindCommand(new NameContainsKeysPredicate(Arrays.asList("Alice", "Bob")));
+        String testInput = PREFIX_NAME.getPrefix() + "Alice Bob";
+        assertParseSuccess(parser, testInput, expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        String testInputWithWhiteSpaces = PREFIX_NAME.getPrefix() + " \n Alice \n \t Bob  \t";
+        assertParseSuccess(parser, testInputWithWhiteSpaces, expectedFindCommand);
     }
 
 }

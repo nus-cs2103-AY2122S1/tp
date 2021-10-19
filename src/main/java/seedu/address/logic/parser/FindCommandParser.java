@@ -16,7 +16,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.CaseNumberContainsKeysPredicate;
-import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.NameContainsKeysPredicate;
 import seedu.address.model.person.predicates.PhoneContainsKeysPredicate;
 import seedu.address.model.person.predicates.ShnPeriodEndContainsKeysPredicate;
 import seedu.address.model.person.predicates.ShnPeriodStartContainsKeysPredicate;
@@ -26,6 +26,7 @@ import seedu.address.model.person.predicates.ShnPeriodStartContainsKeysPredicate
  */
 public class FindCommandParser implements Parser<FindCommand> {
     public static int INDEX_ARGUMENT = 1;
+    public static int INPUT_SIZE = 2;
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -59,7 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throws ParseException {
 
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return new NameContainsKeywordsPredicate(keys);
+            return new NameContainsKeysPredicate(keys);
         }
 
         if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
@@ -86,36 +87,43 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Returns the user input with the prefix removed. If none of the prefix matches,
      * the same user input will be returned.
      */
-    private String removePrefixFromUserInput(String args, ArgumentMultimap argumentMultimap)
-            throws ParseException {
-
+    private String removePrefixFromUserInput(String args, ArgumentMultimap argumentMultimap) {
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_NAME.getPrefix());
-            return argsSplitByPrefix[INDEX_ARGUMENT];
+            String output = argsSplitByPrefix.length == INPUT_SIZE
+                    ? argsSplitByPrefix[INDEX_ARGUMENT]
+                    : args;
         }
 
         if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_PHONE.getPrefix());
-            return argsSplitByPrefix[INDEX_ARGUMENT];
+            String output = argsSplitByPrefix.length == INPUT_SIZE
+                    ? argsSplitByPrefix[INDEX_ARGUMENT]
+                    : args;
         }
 
         if (argumentMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_CASE_NUMBER.getPrefix());
-            return argsSplitByPrefix[INDEX_ARGUMENT];
+            String output = argsSplitByPrefix.length == INPUT_SIZE
+                    ? argsSplitByPrefix[INDEX_ARGUMENT]
+                    : args;
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_START.getPrefix());
-            return argsSplitByPrefix[INDEX_ARGUMENT];
+            String output = argsSplitByPrefix.length == INPUT_SIZE
+                    ? argsSplitByPrefix[INDEX_ARGUMENT]
+                    : args;
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
             String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_END.getPrefix());
-            return argsSplitByPrefix[INDEX_ARGUMENT];
+            String output = argsSplitByPrefix.length == INPUT_SIZE
+                    ? argsSplitByPrefix[INDEX_ARGUMENT]
+                    : args;
         }
 
-        throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        return "";
     }
 
     /**
