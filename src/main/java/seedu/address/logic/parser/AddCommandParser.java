@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     @Override
     public AddCommand parse(String args, Model model) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
+                ArgumentTokenizer.tokenize(args, allPrefixLess(PREFIX_CLIENTID));
         if (!allPrefixesPresent(argMultimap, REQUIRED_PREFIXES)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));

@@ -38,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args, Model model) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
+                ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
 
         List<ClientId> clientIds = new ArrayList<>();
         try {
@@ -78,7 +78,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags, Model model) throws ParseException {
+    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
 
         if (tags.isEmpty()) {
