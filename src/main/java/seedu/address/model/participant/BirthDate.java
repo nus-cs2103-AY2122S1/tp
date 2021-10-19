@@ -124,7 +124,7 @@ public class BirthDate {
     @Override
     public String toString() {
         if (this.date == null) {
-            return "N/A";
+            return "NA";
         }
         return date.toString();
     }

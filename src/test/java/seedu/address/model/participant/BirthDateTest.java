@@ -22,7 +22,7 @@ public class BirthDateTest {
     @Test
     public void notSpecifiedBirthDateTest() {
         BirthDate birthDate = BirthDate.notSpecified();
-        assertEquals("N/A", birthDate.toString());
+        assertEquals("NA", birthDate.toString());
     }
 
     @Test

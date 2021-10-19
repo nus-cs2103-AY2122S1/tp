@@ -42,7 +42,7 @@ public class ParticipantTest {
         Participant alexP = new ParticipantBuilder().withBirthDate(2000, 8, 4).build();
         Participant bobP = new ParticipantBuilder().build();
         assertEquals("2000-08-04", alexP.getBirthDateString());
-        assertEquals("N/A", bobP.getBirthDateString());
+        assertEquals("NA", bobP.getBirthDateString());
     }
 
     @Test
