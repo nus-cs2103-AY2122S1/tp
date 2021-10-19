@@ -257,12 +257,12 @@ Use case ends.
      Use case resumes from step 2.
 
 * 1b. TutAssistor does not detect existing Student/Tuition Class with names indicated by the user.
-	   * 1b1. TutAssistor alerts that the Student/Class does not exist.
-  	 * 1b2. Tutor keys in new command.
+  * 1b1. TutAssistor alerts that the Student/Class does not exist.
+  * 1b2. Tutor keys in new command.
 
-    Steps 1b1-1b2 are repeated until the Tutor keys in the existing student/class.
+      Steps 1b1-1b2 are repeated until the Tutor keys in the existing student/class.
 
-    Use case resumes from step 2.
+      Use case resumes from step 2.
 
 **Use Case: UC03 - Add student to a tuition class**
 
@@ -293,12 +293,12 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-	   * 1a1. TutAssitor reminds the tutor the right format.
-	   * 1a2. Tutor enters a new command.
+  * 1a1. TutAssitor reminds the tutor the right format.
+  * 1a2. Tutor enters a new command.
 
-    Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
+      Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
 
-    Use case resumes from step 2.
+      Use case resumes from step 2.
 
 **Use Case: UC05 - Search Student/Tuition class**
 
@@ -381,13 +381,15 @@ Use case ends.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Implementation
+
 This section describes some noteworthy details on how certain features are implemented.
 
 ### [Developed] Time conflict management
+
 The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
 defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
-- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
-- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+* `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+* `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
 
 Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
 
@@ -400,7 +402,28 @@ time slot exists. If there is a conflict, a `CommandException` will be thrown.
 
 Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
 
+### [Developed] Display of Timetable
 
+The construction of the read-only timetable is mainly facilitated by the `Timetable` class which is encapsulated in the `Tuition` package.
+The `Timetable` receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
+It generates a timetable with the help of the `TimetableInfoPage` class using the following operations:
+* `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list 
+* `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time
+* `Timetable#insertSlot()` - Inserts all tuition classes into the timetable
+
+Given below is an example usage scenario and how the timetable is generated.
+
+Step1: The user enters `timetable` command. The `TimetableCommand` class will first check whether the tuition class list received is empty.
+If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
+
+Step2: Upon ensuring there are tuition classes, the list of tuition classes are passed to the `Timetable` class.
+It will proceed to parse the `TimeSlot` in each tuition class. 
+After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided. 
+
+Step3: The intended size of timetable is then passed to the `TimetableInfoPage` class. 
+Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by the `TimetableInfoPage` class.
+
+Step4: The complete timetable is displayed to user through the `UI` component.
 
 ## **Appendix: Instructions for manual testing**
 
