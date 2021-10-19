@@ -8,6 +8,8 @@ import seedu.address.model.Model;
  */
 public class TimetableCommand extends Command {
     public static final String COMMAND_WORD = "timetable";
+    public static final String SHORTCUT = "tt";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": show timetable\n"
             + "Parameters: Null\n"
             + "Example: " + COMMAND_WORD;

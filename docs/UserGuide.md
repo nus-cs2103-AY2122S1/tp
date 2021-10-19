@@ -12,7 +12,8 @@ TutAssistor is a ***desktop app for private tutors to manage tuition class time 
 
 ## Quick start
 
-TBA
+1. Download TutAssitor jar file.
+2. Open by double-clicking.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -20,15 +21,27 @@ TBA
 
 ### Adding students/tuition classes
 #### Adding a student: `add`
+
+Command Shortcut: `a`
+
 Adds a student’s information such as n/NAME, p/PHONE_NUMBER.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
 
 Examples:
-- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks t/paid`
+
+```
+add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+```
+```
+a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks t/paid
+```
 
 #### Adding a tuition class: `addclass`
+
+Command Shortcut: `ac`
+
+
 Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
 
 The students to be added are optional. If the student the user intends to add is not present, or the class limit has
@@ -39,48 +52,116 @@ on time slots. If there is any conflict or overlap, TutAssistor will alert the c
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
 Examples:
-- `addclass n/Chemistry l/16 ts/Thu 15:00-17:00 s/Bernice Yu`
-- `addclass n/Math l/8 ts/Mon 11:00-14:00 s/Richard Ng r/Quiz on final lesson`
+```
+addclass n/Chemistry l/16 ts/Thu 15:00-17:00 s/Bernice Yu,Richard Ng
+```
+```
+ac n/Math l/8 ts/Mon 11:00-14:00 r/Quiz on final lesson
+```
 
 ### Viewing students/tuition classes
 Provides a view of a student or class if an INDEX is provided. Otherwise, a full list is provided.
 
 #### Viewing a student: `student`
+
+Command Shortcut: `vs`
+
 Format: `student INDEX`
 
+Example:
+```
+student 2
+```
+or
+```
+vs 2
+```
+
 #### Viewing a tuition class: `class`
+
+Command Shortcut: `vc`
+
 Format: `class INDEX`
+
+Example:
+```
+class 3
+```
+or
+```
+vc 3
+```
 
 ### Editing students/tuition classes
 Edits a student’s information such as n/NAME, p/PHONE_NUMBER.
 Edits a tuition class at specified t/TIME.
 
-#### Editing a student: `editstudent`
-Format: `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
+#### Editing a student: `edit`
+
+Command Shortcut: `e`
+
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
+
+Examples:
+```
+edit 1 n/Jason Tan a/221b Baker Street
+```
+```
+e 2 p/62353535
+```
 
 #### Editing a class: `editclass`
-Format: `editclass INDEX l/limit t/time n/NAME,NAME,NAME... [t/TAG]…`
 
+Command Shortcut: `ec`
+
+Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
+
+Examples:
+```
+editclass 2 l/10
+```
+```
+ec 3 n/Trigonometry ts/Sun 10:00-11:00
+```
 
 ### Deleting students/tuition classes
-Deletes a student or a tuition class given INDEX.
+Deletes a student or a tuition class of a given INDEX.
 
 #### Deleting students: `delete`
-Format: `delete STUDENT_INDEX STUDENT_INDEX`
+
+Command Shortcut: `del`
+
+Format: `delete STUDENT_INDEX [STUDENT_INDEX]...`
 
 Example:
-- `delete 1 2`
+```
+delete 1 2
+```
+```
+del 1
+```
 
 #### Deleting tuition classes: `deleteclass`
-Format: `deleteclass CLASS_INDEX CLASS_INDEX`
+
+Command Shortcut: `delc`
+
+Format: `deleteclass CLASS_INDEX [CLASS_INDEX]...`
 
 Example:
-- `deletclass 1 2`
+```
+deleteclass 1 2
+```
+```
+delc 4
+```
 
 ### Adding/Removing an existing student from class
 Move a student to/from classes by adding or removing them.
 
 #### Adding existing students to a class: `addtoclass`
+
+Command Shortcut: `atc`
+
 Add one or more existing students to an existing class using student NAME or INDEX.
 When the student to be added is already enrolled in the class or is not found in TutAssistor, TutAssistor will alert the
 names of these students to the tutor.
@@ -88,67 +169,126 @@ names of these students to the tutor.
 When adding student names, using comma to separate names and there is no space around comma.
 When adding student indexes, using space to separate indexes.
 
-Format: `addtoclass si/INDEX_STUDENT INDEX_STUDENT INDEX_STUDENT... tc/INDEX_CLASS`
-or `addtoclass s/NAME,NAME,NAME... tc/INDEX_CLASS`
+Format:
+
+`addtoclass si/STUDENT_INDEX [STUDENT_INDEX]... tc/INDEX_CLASS`
+
+or
+
+`addtoclass s/NAME[,NAME,NAME...] tc/INDEX_CLASS`
 
 Examples:
-- `addtoclass si/1 tc/1`
-- `addtoclass si/1 2 3 4 tc/1`
-- `addtoclass s/James,Felicia tc/2`
-- `addtoclass s/James tc/3`
+```
+addtoclass si/1 tc/1
+```
+```
+atc si/1 2 3 4 tc/1
+```
+```
+addtoclass s/James,Felicia tc/2
+```
+```
+atc s/James tc/3
+```
 
 #### Removing existing students from a class: `remove`
+
+Command Shortcut: `rm`
+
 Removes existing students from a tuition class using student INDEX.
 
 Format: `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
 
 Examples:
-- `remove si/1 tc/1`
-- `remove si/1 2 3 4 tc/2`
+```
+remove si/1 tc/1
+```
+```
+rm si/1 2 3 4 tc/2
+```
 
 ### Adding remarks to a student: `remark`
+
+Command Shortcut: `re`
+
 Adds a remark to the identified student.
 
-Format: `remark INDEX_STUDENT r/REMARK`
+Format: `remark STUDENT_INDEX r/REMARK`
 
 Examples:
-- `remark 1 r/Haven't paid last week's fee`
+```
+remark 1 r/Hasn't paid last week's fee
+```
+```
+re 2 r/Exam on 28 Oct
+```
 
 #### Adding remarks to a tuition class: `remarkclass`
+
+Command Shortcut: `rec`
+
 Format: `remarkclass INDEX_CLASS r/REMARK`
 
 Examples:
-- `remarkclass 2 r/Math homework due Friday`
+```
+remarkclass 2 r/Math homework due Friday
+```
+```
+rec 1 r/No class on week 7
+```
 
 ### Finding students by name: `find`
+
+Command Shortcut: `f`
+
 Filters the list of students to only display all students whose names contain any of the given keywords (case-insensitive).
 
 Format: `find NAME`
 
-Example: `find alice tan`
-
-TutAssitor will display a list of all students with 'alice' or 'tan' in their name.
+Example: 
+```
+find alice tan
+```
+or
+```
+f alice tan
+```
+TutAssitor will display a list of all students with `alice` or `tan` in their name.
 
 #### Listing all students: `list`
+
+Command Shortcut: `l`
+
 Display list of all students after conducting a search with the `find` command.
 
-Format: `list`
-
 ### Finding classes by name: `findclass`
+
+Command Shortcut: `fc`
+
 Filters the list of classes to only display all classes whose names contain any of the given keywords (case-insensitive).
 
 Format: `findclass NAME`
 
-Example: `findclass physics chemistry`
-
-TutAssitor will display a list of all classes with 'physics' or 'chemistry' in their name.
+Example: 
+```
+findclass physics chemistry
+```
+or
+```
+fc physics chemistry
+```
+TutAssitor will display a list of all classes with `physics` or `chemistry` in their name.
 
 #### Listing all classes: `listclass`
-Display list of all classes after conducting a search with the `find` command.
 
-Format: `listclass`
+Command Shortcut: `lc`
+
+Display list of all classes after conducting a search with the `findclass` command.
 
 ### Sorting tuition classes: `sort`
+
+Command Shortcut: `s`
+
 Permanently sorts tuition class list according to time or alphabetical order.
 
 If the tutor does not exit TutAssistor, the list will be auto-sorted
@@ -164,6 +304,8 @@ Examples: (examples below are all possible usages of `sort`)
 
 ### View timetable: `timetable`
 
+Command Shortcut: `tt`
+
 Example:
 - `timetable`
 <br>
@@ -172,6 +314,9 @@ Shows lessons scheduled in this week in a timetable.<br>
 ![Ui](images/time_table.png)
 
 ### Viewing help: `help`
+
+Command Shortcut: `h`
+
 Shows a command summary and a link to the user guide. <br>
 ![Ui](images/helpWindow.png)
 
@@ -181,27 +326,27 @@ Format: `exit`
 
 ## Command Summary
 
-Action | Format
---------|------------------
-***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
-***Add Class*** | `addclass l/limit t/time [s/NAME,NAME,NAME...] [r/REMARK] [t/TAG]…`
-***View Student*** | `student INDEX`
-***View Class*** | `class INDEX`
-***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…`
-***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…`
-***Delete Student*** | `deletestudent INDEX_STUDENT INDEX_STUDENT`
-***Delete Class*** | `deleteclass INDEX_CLASS INDEX_CLASS`
-***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS`
-***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS`
-***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK`
-***Add Remarks to Class*** | `remarkclass INDEX_CLASS r/REMARK`
-***Find Student by Name*** | `find NAME`
-***List all Students*** | `list`
-***Find Class by Name*** | `findclass NAME`
-***List all Classes*** | `listclass`
-***Sort Tuition Class*** | `sort [o/ORDER]`
-***View Timetable*** | `timetable`
-***Help*** | `help`
-***Exit*** | `exit`
+Action | Format | Shortcut
+-------|--------|---------
+***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…` | `a`
+***Add Class*** | `addclass l/limit t/time [s/NAME,NAME,NAME...] [r/REMARK] [t/TAG]…` | `ac`
+***View Student*** | `student INDEX` | `vs`
+***View Class*** | `class INDEX` | `vc`
+***Edit Student*** | `editstudent INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]  [t/TAG]…` | `e`
+***Edit Class*** | `editclass INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `ec`
+***Delete Student*** | `deletestudent INDEX_STUDENT INDEX_STUDENT` | `del`
+***Delete Class*** | `deleteclass INDEX_CLASS INDEX_CLASS` | `delc`
+***Add Student to Class*** | `addtoclass si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` <br /> or `addtoclass s/NAME,NAME... tc/INDEX_CLASS` | `atc`
+***Remove Students from Class*** | `remove si/INDEX_STUDENT INDEX_STUDENT tc/INDEX_CLASS` | `rm`
+***Add Remarks to Student*** | `remark INDEX_STUDENT r/REMARK` | `re`
+***Add Remarks to Class*** | `remarkclass INDEX_CLASS r/REMARK` | `rec`
+***Find Student by Name*** | `find NAME` | `f`
+***List all Students*** | `list` | `l`
+***Find Class by Name*** | `findclass NAME` | `fc`
+***List all Classes*** | `listclass` | `lc`
+***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
+***View Timetable*** | `timetable` | `tt`
+***Help*** | `help` | `h`
+***Exit*** | `exit` | -
 
 

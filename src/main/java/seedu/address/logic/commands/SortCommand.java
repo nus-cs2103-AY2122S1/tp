@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
+    public static final String SHORTCUT = "s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sort the tuition class list.\n"
             + "Parameters: [" + PREFIX_SORT_ORDER + "ORDER_TO_SORT] \n"

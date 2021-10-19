@@ -22,6 +22,8 @@ import seedu.address.ui.UiManager;
 public class RemarkCommand extends Command {
 
     public static final String COMMAND_WORD = "remark";
+    public static final String SHORTCUT = "re";
+
     public static final String MESSAGE_UPDATE_REMARK_SUCCESS = "Remark updated for Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
 

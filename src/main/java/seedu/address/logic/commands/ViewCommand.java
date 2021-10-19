@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "student";
+    public static final String SHORTCUT = "vs";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows full information on a student of "
             + "a specified index number.\n"
