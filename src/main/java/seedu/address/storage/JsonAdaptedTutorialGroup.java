@@ -66,7 +66,7 @@ public class JsonAdaptedTutorialGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
         }
 
-        final GroupType modelGroupType = groupType.equals("OP1") ? GroupType.OP1 : GroupType.OP2;
+        final GroupType modelGroupType = new GroupType(groupType);
 
         return new TutorialGroup(modelGroupName, modelClassCode, modelGroupType);
     }

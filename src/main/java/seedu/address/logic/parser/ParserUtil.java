@@ -143,12 +143,10 @@ public class ParserUtil {
      */
     public static GroupType parseGroupType(String groupType) throws ParseException {
         requireNonNull(groupType);
-        String trimmedGroupType = groupType.trim();
-        if (trimmedGroupType.equals("OP1")) {
-            return GroupType.OP1;
-        } else {
-            return GroupType.OP2;
+        if (!GroupType.isValidGroupType(groupType)) {
+            throw new ParseException(GroupType.MESSAGE_CONSTRAINTS);
         }
+        return new GroupType(groupType);
     }
 
     /**
