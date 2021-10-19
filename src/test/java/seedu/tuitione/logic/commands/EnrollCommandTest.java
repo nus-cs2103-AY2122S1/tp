@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
 import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
@@ -32,13 +34,12 @@ public class EnrollCommandTest {
 
     @Test
     public void execute_validEnrollment_success() {
-        LessonCode code = new LessonCode("Science-P2-Wed-1230");
-        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_STUDENT, code.value);
+        EnrollCommand enrollCommand = new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_LESSON);
 
         Model expectedModel = new ModelManager(getTypicalTuitione(), new UserPrefs());
         Student studentToEnroll = expectedModel.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
-        Lesson testLesson = expectedModel.searchLessons(code).get();
+        Lesson testLesson = expectedModel.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
         testLesson.addStudent(studentToEnroll);
         String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLesson);
 
@@ -47,46 +48,58 @@ public class EnrollCommandTest {
 
     @Test
     public void execute_invalidEnrollmentNotSameGrade_failure() {
-        LessonCode code = new LessonCode("Mathematics-S2-Tue-0930");
+        Lesson testLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
         Student alice = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased()); //ALICE
         Student carl = model.getFilteredStudentList().get(INDEX_THIRD_STUDENT.getZeroBased()); //CARL
 
-        String expectedMessageAlice = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL, alice.getName(), code);
-        String expectedMessageCarl = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL, carl.getName(), code);
+        String expectedMessageAlice = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL,
+                alice.getName(),
+                testLesson.getLessonCode());
+        String expectedMessageCarl = String.format(EnrollCommand.MESSAGE_UNABLE_TO_ENROLL,
+                carl.getName(),
+                testLesson.getLessonCode());
 
-        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, code.value), model, expectedMessageAlice);
-        assertCommandFailure(new EnrollCommand(INDEX_THIRD_STUDENT, code.value), model, expectedMessageCarl);
+        assertCommandFailure(new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_SECOND_LESSON),
+                model,
+                expectedMessageAlice);
+        assertCommandFailure(new EnrollCommand(INDEX_THIRD_STUDENT, INDEX_SECOND_LESSON),
+                model,
+                expectedMessageCarl);
     }
 
     @Test
     public void execute_invalidEnrollmentAlreadyInLesson_failure() {
-        LessonCode code = new LessonCode("Mathematics-S2-Tue-0930");
+        Lesson testLesson = model.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
+        LessonCode code = testLesson.getLessonCode();
         Student benson = model.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased()); //BENSON
 
-        String expectedMessageBenson = String.format(EnrollCommand.MESSAGE_STUDENT_IN_LESSON, benson.getName(), code);
+        String expectedMessageBenson = String.format(EnrollCommand.MESSAGE_STUDENT_IN_LESSON,
+                benson.getName(),
+                code);
 
-        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, code.value), model, expectedMessageBenson);
+        assertCommandFailure(new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_SECOND_LESSON),
+                model,
+                expectedMessageBenson);
     }
 
     @Test
     public void execute_invalidEnrollmentWrongIndex_failure() {
-        LessonCode code = new LessonCode("Mathematics-S2-Tue-0930");
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        EnrollCommand enrollCommand = new EnrollCommand(outOfBoundIndex, code.value);
+        EnrollCommand enrollCommand = new EnrollCommand(outOfBoundIndex, INDEX_SECOND_LESSON);
 
         assertCommandFailure(enrollCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        EnrollCommand enrollFirstCommand = new EnrollCommand(INDEX_FIRST_STUDENT, "l/Science-P5-Wed-1230");
-        EnrollCommand enrollSecondCommand = new EnrollCommand(INDEX_SECOND_STUDENT, "l/Science-P5-Wed-1230");
+        EnrollCommand enrollFirstCommand = new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_LESSON);
+        EnrollCommand enrollSecondCommand = new EnrollCommand(INDEX_SECOND_STUDENT, INDEX_FIRST_LESSON);
 
         // same object -> returns true
         assertEquals(enrollFirstCommand, enrollFirstCommand);
 
         // same values -> returns true
-        EnrollCommand enrollFirstCommandCopy = new EnrollCommand(INDEX_FIRST_STUDENT, "l/Science-P5-Wed-1230");
+        EnrollCommand enrollFirstCommandCopy = new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_LESSON);
         assertEquals(enrollFirstCommand, enrollFirstCommandCopy);
 
         // different types -> returns false
