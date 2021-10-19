@@ -15,7 +15,7 @@ public class JsonAdaptedTaskTest {
     private static final String INVALID_NAME = "@REPORT_1";
     private static final String INVALID_DEADLINE = "2021-13-13";
 
-    private static final String VALID_NAME = REPORT_1.getName().toString();
+    private static final String VALID_NAME = REPORT_1.getDescription().toString();
     private static final String VALID_DEADLINE = REPORT_1.getDeadline().toString();
     private static final String VALID_UNIQUEID = REPORT_1.getId().getUuid().toString();
 

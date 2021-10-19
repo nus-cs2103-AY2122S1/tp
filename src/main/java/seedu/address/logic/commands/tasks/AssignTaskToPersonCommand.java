@@ -81,7 +81,7 @@ public class AssignTaskToPersonCommand extends Command {
         model.setPerson(personToEdit, newPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAssign.getName(), newPerson.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAssign.getDescription(), newPerson.getName()));
     }
 
 }

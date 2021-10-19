@@ -34,13 +34,13 @@ public class TaskTest {
         assertFalse(REPORT_1.isSameTask(editedReport1));
 
         // name differs in case, deadline same -> returns false
-        String nameInLowerCase = REPORT_2.getName().toString().toLowerCase();
-        Task editedReport2 = new TaskBuilder(REPORT_2).withName(nameInLowerCase).build();
+        String nameInLowerCase = REPORT_2.getDescription().toString().toLowerCase();
+        Task editedReport2 = new TaskBuilder(REPORT_2).withDescription(nameInLowerCase).build();
         assertFalse(REPORT_2.isSameTask(editedReport2));
 
         // name has trailing spaces, deadline same -> returns false
-        String nameWithTrailingSpaces = REPORT_2.getName().toString() + " ";
-        editedReport2 = new TaskBuilder(REPORT_2).withName(nameWithTrailingSpaces).build();
+        String nameWithTrailingSpaces = REPORT_2.getDescription().toString() + " ";
+        editedReport2 = new TaskBuilder(REPORT_2).withDescription(nameWithTrailingSpaces).build();
         assertFalse(REPORT_2.isSameTask(editedReport2));
     }
 
@@ -59,7 +59,7 @@ public class TaskTest {
         assertNotEquals(REPORT_1, REPORT_2);
 
         // different name -> returns false
-        Task editedReport1 = new TaskBuilder(REPORT_1).withName("Random name").build();
+        Task editedReport1 = new TaskBuilder(REPORT_1).withDescription("Random name").build();
         assertNotEquals(REPORT_1, editedReport1);
 
         // different deadline -> returns false

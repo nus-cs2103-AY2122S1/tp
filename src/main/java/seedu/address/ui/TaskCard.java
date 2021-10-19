@@ -39,7 +39,7 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        name.setText(task.getName().name);
+        name.setText(task.getDescription().description);
         deadline.setText(task.getDeadline().toString());
     }
 

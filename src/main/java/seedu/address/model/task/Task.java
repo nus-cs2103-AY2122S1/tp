@@ -42,7 +42,7 @@ public class Task implements HasUniqueId {
         id.setOwner(this);
     }
 
-    public Description getName() {
+    public Description getDescription() {
         return description;
     }
 
@@ -64,7 +64,7 @@ public class Task implements HasUniqueId {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName())
+                && otherTask.getDescription().equals(getDescription())
                 && otherTask.getDeadline().equals(getDeadline());
     }
 
@@ -94,7 +94,7 @@ public class Task implements HasUniqueId {
 
     @Override
     public String toString() {
-        return getName()
+        return getDescription()
                 + "; Deadline: "
                 + getDeadline();
     }
