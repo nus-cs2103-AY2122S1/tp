@@ -11,7 +11,7 @@ import tutoraid.model.StudentBook;
 /**
  * Represents a storage for {@link StudentBook}.
  */
-public interface TutorAidStorage {
+public interface TutorAidStudentStorage {
 
     /**
      * Returns the file path of the data file.
