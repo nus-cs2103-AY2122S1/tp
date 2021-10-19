@@ -29,4 +29,8 @@ public class StatusEqualsPredicate implements Predicate<Anime> {
                 || (other instanceof StatusEqualsPredicate // instanceof handles nulls
                 && status.equals(((StatusEqualsPredicate) other).status)); // state check
     }
+
+    public Status getStatus() {
+        return status;
+    }
 }

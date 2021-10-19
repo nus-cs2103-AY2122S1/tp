@@ -9,6 +9,7 @@ import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.ui.TabOption;
 
 /**
  * API of the Logic component
@@ -47,4 +48,14 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Sets the current tab.
+     */
+    void setCurrentTab(TabOption.TabOptions currentTab);
+
+    /**
+     * Returns current tab.
+     */
+    TabOption getCurrentTab();
 }

@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane fx:id="animeListTabPane" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab fx:id="allTab" text="All">
       <content>
@@ -32,7 +32,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab fx:id="watchedTab" text="Finished">
+      <Tab fx:id="finishedTab" text="Finished">
         <content>
           <AnchorPane>
                <children>

@@ -16,6 +16,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.storage.Storage;
+import seedu.anilist.ui.TabOption;
 
 /**
  * The main LogicManager of the app.
@@ -77,5 +78,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void setCurrentTab(TabOption.TabOptions currentTab) {
+        model.setCurrentTab(currentTab);
+    }
+
+    @Override
+    public TabOption getCurrentTab() {
+        return model.getCurrentTab();
     }
 }
