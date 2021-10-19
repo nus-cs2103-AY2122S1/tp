@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Final state
+
+package Tuitione {
+    package Lessons {
+    }
+    package Students {
+        class John as "__John:Student__"
+        class Alice as "__Alice:Student__"
+    }
+}
+
+package ToRemove {
+    class Lesson0 as "__L0:Lesson__"
+    class LessonCode0 as "__LC0:LessonCode__"
+}
+
+Lesson0 --> LessonCode0
+John -[hidden]-> Alice
+
+'John -l-> LessonCode0
+'Alice -l-> LessonCode0
+
+'Lesson0 -r-> John
+'Lesson0 -r-> Alice
+
+@end
