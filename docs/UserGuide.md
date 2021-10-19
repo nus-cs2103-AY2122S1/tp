@@ -17,7 +17,7 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 1. Copy the file to the folder you want to use as the _home folder_ for your Staff’d.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/NewUi.jpg)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -63,8 +63,9 @@ Format: `help`
 ## Basic management of Staff Details
 
 
-### Tag legend - `todo: standardize tags for all commands`
+### Tag legend 
 
+####Tags for Specific Fields
 |Tag|Description|
 |---|-----------|
 |n/|Name|
@@ -76,12 +77,19 @@ Format: `help`
 |e/|Email|
 |t/|Extra tags|
 
+#### Tags for Lookup
+|Tag|Name|
+|---|----|
+|-n|Name|
+|-i|Index|
+|-d|Day Of the Week|
+
+
 ### View a staff - `view`
 
 View the staff details of a single staff.
 
-Examples:
-
+Examples:\
 `view n/Candice`\
 `view i/123`
 
@@ -196,13 +204,8 @@ Examples:
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice r/cook`
 
-|Tag|Name|Description|
-|---|----|-----------|
-|-n|Name|Contact with the name will be edited.|
-|-i|Index|Contact with that index will be edited.|
 
-
-### Locating staff: `find`
+### Finding staff: `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
@@ -229,11 +232,6 @@ Examples:
 * `find -n John` returns `john` and `John Doe`
 * `find -n alex david` returns `Alex Yeoh`, `David Li`
 * `find -i 3` returns the staff at the 3rd position on the list
-
-|Tag|Name|Description|
-|---|----|-----------|
-|-n|Name|Contacts with the name will be found.|
-|-i|Index|Contact corresponding to that index in the displayed staff list will be found.|
 
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -314,6 +312,9 @@ Examples:
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
+
+Demo:\
+![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
 
 ### Saving the data
 
