@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
-import seedu.address.model.module.student.*;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.module.student.Email;
+import seedu.address.model.module.student.Name;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
+import seedu.address.model.module.student.TeleHandle;
+import seedu.address.model.task.Task;
 
 public class StudentBuilder {
 
@@ -76,10 +79,13 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Build a typical student
+     * @return
+     */
     public Student build() {
         Student student = new Student(studentId, name, teleHandle, email);
-        for (Task task:
-             this.taskList) {
+        for (Task task: this.taskList) {
             student.addTask(task);
         }
         return student;

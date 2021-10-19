@@ -1,13 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.TeachingAssistantBuddy;
-import seedu.address.model.module.Module;
-import seedu.address.model.module.student.Student;
-import seedu.address.model.module.student.UniqueStudentList;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.TeachingAssistantBuddy;
+import seedu.address.model.module.Module;
 
 public class TypicalModules {
 
@@ -17,13 +15,13 @@ public class TypicalModules {
     public static final String INVALID_MODULE_NAME = "Invalid module name";
 
     //some samples, can add more/modify for testing
-    public static final Module module1 = new ModuleBuilder()
+    public static final Module MODULE_1 = new ModuleBuilder()
             .withName(MODULE_NAME_0)
             .withStudents(TypicalStudents.getTypicalStudents())
             .withTasks(TypicalTasks.getTypicalTasksForModule(MODULE_NAME_0))
             .build();
 
-    public static final Module module2 = new ModuleBuilder()
+    public static final Module MODULE_2 = new ModuleBuilder()
             .withName(MODULE_NAME_1)
             .withStudents(TypicalStudents.getTypicalStudents())
             .withTasks(TypicalTasks.getTypicalTasksForModule(MODULE_NAME_1))
@@ -32,7 +30,7 @@ public class TypicalModules {
     /**
      * Returns an {@code TAB} with all the typical modules.
      */
-    public static TeachingAssistantBuddy getTypicalTAB() {
+    public static TeachingAssistantBuddy getTypicalBuddy() {
         TeachingAssistantBuddy tab = new TeachingAssistantBuddy();
         for (Module module: getTypicalModules()) {
             tab.addModule(module);
@@ -41,7 +39,7 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(module1, module2));
+        return new ArrayList<>(Arrays.asList(MODULE_1, MODULE_2));
     }
 
 }

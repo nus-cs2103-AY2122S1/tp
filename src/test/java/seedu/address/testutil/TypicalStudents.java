@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.module.student.Student;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.module.student.Student;
 
 public class TypicalStudents {
 

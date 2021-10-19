@@ -1,10 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.task.Task;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.task.Task;
+
 
 public class TypicalTasks {
 
@@ -21,13 +22,13 @@ public class TypicalTasks {
                 .withName("Assignment 1")
                 .withDeadline("2021-12-31").build();
 
-       Task task2 = new TaskBuilder()
+        Task task2 = new TaskBuilder()
                 .withModule(moduleName)
                 .withName("Assignment 2")
                 .withDeadline("2021-12-30")
                 .build();
 
-         Task task3 = new TaskBuilder()
+        Task task3 = new TaskBuilder()
                 .withModule(moduleName)
                 .withName("Assignment 3")
                 .withDeadline("2021-11-31")

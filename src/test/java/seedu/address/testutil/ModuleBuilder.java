@@ -1,23 +1,21 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
-import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ModuleBuilder {
     public static final String DEFAULT_NAME = "CS2103";
     public static final List<Student> DEFAULT_STUDENTS = new ArrayList<>();
-    public static final List<Task>  DEFAULT_TASKS = new ArrayList<>();
+    public static final List<Task> DEFAULT_TASKS = new ArrayList<>();
 
     private ModuleName moduleName;
-    private List<Student>  students;
-    private  List<Task> tasks;
+    private List<Student> students;
+    private List<Task> tasks;
 
     /**
      * Creates a {@code ModuleBuilder} with the default details.
@@ -59,11 +57,14 @@ public class ModuleBuilder {
         return this;
     }
 
+    /**
+     * Build a typical module.
+     * @return
+     */
     public Module build() {
         Module module = new Module(moduleName);
         module.setStudents(students);
-        for (Task task:
-             tasks) {
+        for (Task task : tasks) {
             module.addTask(task);
         }
         return module;
