@@ -28,11 +28,11 @@
         <Label fx:id="studentName" text="\$studentName" styleClass="cell_big_label" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="lessonName" styleClass="cell_small_label" text="\$studentPhone" />
-      <Label fx:id="timing" styleClass="cell_small_label" text="\$parentName" />
-      <Label fx:id="price" styleClass="cell_small_label" text="\$parentPhone" />
-      <Label fx:id="capacity" styleClass="cell_small_label" text="\$progress" />
-      <Label fx:id="students" styleClass="cell_small_label" text="\$paymentStatus" />
+      <Label fx:id="lessonName" styleClass="cell_small_label" text="\$lessonName" />
+      <Label fx:id="timing" styleClass="cell_small_label" text="\$timing" />
+      <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
+      <Label fx:id="capacity" styleClass="cell_small_label" text="\$capacity" />
+      <Label fx:id="students" styleClass="cell_small_label" text="\$students" />
     </VBox>
   </GridPane>
 </HBox>

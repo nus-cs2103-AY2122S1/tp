@@ -137,7 +137,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillLessonCard(boolean viewAll) {
         lessonListPanel = viewAll
-                ? fullLessonPanel : minimalLessonPanel;
+                ? fullLessonPanel
+                : minimalLessonPanel;
         lessonListPanelPlaceholder.getChildren().clear();
         lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
     }
