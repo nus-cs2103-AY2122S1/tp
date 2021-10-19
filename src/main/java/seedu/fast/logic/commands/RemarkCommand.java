@@ -23,7 +23,8 @@ public class RemarkCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing remark will be overwritten by the input.\n\n"
             + "Parameters: \nINDEX (must be a postive integer) "
-            + "r/ [REMARK]\n\n"
+            + "r/ [REMARK]\n"
+            + "[Remark] cannot exceed 100 characters \n\n"
             + "Example: \n" + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 

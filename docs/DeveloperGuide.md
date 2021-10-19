@@ -174,20 +174,57 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort feature
 
-#### Design considerations:
+#### Current Implementation
 
-**Aspect: How undo & redo executes:**
+The sort mechanism is facilitated by the inbuilt Collections::sort method.
+This is done by passing a custom comparator that implements the Comparator interface to the sort method.
+There are currently three custom comparators implemented in FAST:
+- `SortByName` -- Sorts the contacts alphabetically by name.
+- `SortByAppointment` -- Sorts the contacts chronologically by date.
+- `SortByPriority` -- Sorts the contacts by priority tags.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
+`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+the inbuilt `Date::compareTo` method.  <br>
+`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a  sort command and will call `SortCommandParser::parse`. From the given input,
+`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
+Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(modal)` where modal contains methods that mutate 
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
+to sort the list of persons by their name.<br>
+
+#### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: May need additional attributes to compare.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Implement a custom Sort method.
+  * Pros: May not need additional attributes
+  * Cons: Very complicated, may have performance issues if the sort is not efficient.
 
+**Aspect: How SortByDate is implemented:**
+
+* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+    * Pros: Easy to implement.
+    * Cons: Need to account for empty appointment dates.
+
+* **Alternative 2:** Compare dates in String.
+    * Pros: No need to convert the values to another type.
+    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+    
 _{more aspects and alternatives to be added}_
 
 ### \[Proposed\] Data archiving
@@ -216,12 +253,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * No time/busy
 * Might not be tech-savvy
 * Many contacts to manage
-* has a need to manage a significant number of contacts
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-* Need to profile clients
-
+* Has a need to manage a significant number of contacts
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Needs to profile clients
 
 **Value proposition**: Financial Advisors are busy. We will help them save time by optimising our system for them. FAST keeps track of client details and information for them.
 
@@ -498,6 +534,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
+
+**Use case: UC11 - Sort contacts**
+
+**MSS**
+
+1. User requests to sort persons
+2. FAST displays a list of contacts sorted by the given keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given command syntax is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of sort command to user.
+
+* 2b. The list is empty.
+      Use case ends.
 
 *{More to be added}*
 
