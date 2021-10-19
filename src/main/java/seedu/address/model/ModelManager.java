@@ -104,14 +104,11 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== AddressBook ================================================================================
+
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
-    }
-
-    @Override
-    public Path getPositionBookFilePath() {
-        return userPrefs.getPositionBookFilePath();
     }
 
     @Override
@@ -119,8 +116,6 @@ public class ModelManager implements Model {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
-
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -144,33 +139,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteApplicant(Applicant target) {
-        applicantBook.removeApplicant(target);
-    }
-
-    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
-        Position position = positionBook.getPosition(dummyPosition);
-        Application application = new Application(applicant, position);
-
-        // Sets the application of the applicant to the application with original position object
-        applicant.setApplication(application);
-
-        applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(application);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
-    }
-
-    @Override
-    public boolean hasApplicant(Applicant applicant) {
-        requireNonNull(applicant);
-        return applicantBook.hasApplicant(applicant);
     }
 
     @Override
@@ -179,14 +150,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    @Override
-    public void setApplicant(Applicant target, Applicant editedApplicant) {
-        requireAllNonNull(target, editedApplicant);
-        applicantBook.setApplicant(target, editedApplicant);
-    }
-
     //=========== Filtered Person List Accessors =============================================================
-
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
      * {@code versionedAddressBook}
@@ -195,24 +159,11 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
     }
-
-    @Override
-    public ObservableList<Applicant> getFilteredApplicantList() {
-        return filteredApplicants;
-    }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
-    @Override
-    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
-        requireNonNull(predicateShowAllApplicants);
-        filteredApplicants.setPredicate(predicateShowAllApplicants);
-    }
-
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -231,8 +182,12 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+    //=========== Position and PositionBook =========================================================================
 
-    // Position related methods
+    @Override
+    public Path getPositionBookFilePath() {
+        return userPrefs.getPositionBookFilePath();
+    }
     @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
@@ -244,29 +199,72 @@ public class ModelManager implements Model {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
-
     @Override
     public void deletePosition(Position positionToDelete) {
         positionBook.removePosition(positionToDelete);
         applicantBook.removeApplicantsUnderPosition(positionToDelete);
     }
 
-    //=========== Filtered Position List Accessors =============================================================
+    @Override
+    public ReadOnlyPositionBook getPositionBook() {
+        return positionBook;
+    }
+
     @Override
     public ObservableList<Position> getFilteredPositionList() {
         return filteredPositions;
     }
-
     @Override
     public void updateFilteredPositionList(Predicate<Position> predicate) {
         requireNonNull(predicate);
         filteredPositions.setPredicate(predicate);
     }
 
-    //=========== Filtered Applicant List Accessors =============================================================
+
+    //=========== Applicant and ApplicantBook =============================================================
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicantBook.hasApplicant(applicant);
+    }
+
+    @Override
+    public void setApplicant(Applicant target, Applicant editedApplicant) {
+        requireAllNonNull(target, editedApplicant);
+        applicantBook.setApplicant(target, editedApplicant);
+    }
+
+    @Override
+    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
+        Position position = positionBook.getPosition(dummyPosition);
+        Application application = new Application(applicant, position);
+
+        // Sets the application of the applicant to the application with original position object
+        applicant.setApplication(application);
+
+        applicantBook.addApplicant(applicant);
+        applicationBook.addApplication(application);
+        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+    }
+
+    @Override
+    public void deleteApplicant(Applicant target) {
+        applicantBook.removeApplicant(target);
+    }
+
     @Override
     public Path getApplicantBookFilePath() {
         return userPrefs.getApplicantBookFilePath();
     }
 
+    @Override
+    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
+        requireNonNull(predicateShowAllApplicants);
+        filteredApplicants.setPredicate(predicateShowAllApplicants);
+    }
+
+    @Override
+    public ObservableList<Applicant> getFilteredApplicantList() {
+        return filteredApplicants;
+    }
 }

@@ -44,11 +44,6 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the user prefs' position book file path.
-     */
-    Path getPositionBookFilePath();
-
-    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -73,27 +68,10 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the given applicant.
-     * The applicant must exist in the address book.
-     */
-    void deleteApplicant(Applicant target);
-
-    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
-
-    /**
-     * Adds the given applicant to the given position.
-     * {@code applicant} must not already exist in the applicant book.
-     */
-    void addApplicantToPosition(Applicant applicant, Position position);
-
-    /**
-     * Returns true if an applicant with the same identity as {@code applicant} exists MrTechRecruiter.
-     */
-    boolean hasApplicant(Applicant applicant);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -102,6 +80,35 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Position related methods =============================================================
+    boolean hasPosition(Position toAdd);
+
+    void addPosition(Position toAdd);
+
+    void deletePosition(Position positionToDelete);
+
+    /**
+     * Returns the user prefs' position book file path.
+     */
+    Path getPositionBookFilePath();
+
+    /** Returns the AddressBook */
+    ReadOnlyPositionBook getPositionBook();
+
+    ObservableList<Position> getFilteredPositionList();
+
+    void updateFilteredPositionList(Predicate<Position> predicate);
+
+    //=========== Applicant related methods =============================================================
     /**
      * Replaces the given applicant {@code target} with {@code editedApplicant}.
      * {@code target} must exist in MrTechRecruiter.
@@ -110,32 +117,27 @@ public interface Model {
      */
     public void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Returns true if an applicant with the same identity as {@code applicant} exists MrTechRecruiter.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    boolean hasApplicant(Applicant applicant);
+
+    /**
+     * Adds the given applicant to the given position.
+     * {@code applicant} must not already exist in the applicant book.
+     */
+    void addApplicantToPosition(Applicant applicant, Position position);
+
+    /**
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
+     */
+    void deleteApplicant(Applicant target);
+
+    Path getApplicantBookFilePath();
 
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
-
-    // Position related methods
-    boolean hasPosition(Position toAdd);
-
-    void addPosition(Position toAdd);
-
-    void deletePosition(Position positionToDelete);
-
-    //=========== Filtered Position List Accessors =============================================================
-    ObservableList<Position> getFilteredPositionList();
-
-    void updateFilteredPositionList(Predicate<Position> predicate);
-
-    // Applicant related methods ==============================================================================
-    Path getApplicantBookFilePath();
 }

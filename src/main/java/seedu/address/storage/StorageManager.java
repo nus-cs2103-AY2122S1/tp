@@ -8,8 +8,10 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.position.PositionBookStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -19,6 +21,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private PositionBookStorage positionBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -61,7 +64,7 @@ public class StorageManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read address book data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -72,8 +75,36 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to address book data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ PositionBook methods ==============================
+
+    @Override
+    public Path getPositionBookFilePath() {
+        return positionBookStorage.getPositionBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyPositionBook> readPositionBook() throws DataConversionException, IOException {
+        return readPositionBook(positionBookStorage.getPositionBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyPositionBook> readPositionBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read position data from file: " + filePath);
+        return positionBookStorage.readPositionBook(filePath);
+    }
+
+    @Override
+    public void savePositionBook(ReadOnlyPositionBook positionBook) throws IOException {
+        savePositionBook(positionBook, positionBookStorage.getPositionBookFilePath());
+    }
+
+    @Override
+    public void savePositionBook(ReadOnlyPositionBook positionBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to position book data file: " + filePath);
+        positionBookStorage.savePositionBook(positionBook, filePath);
+    }
 }
