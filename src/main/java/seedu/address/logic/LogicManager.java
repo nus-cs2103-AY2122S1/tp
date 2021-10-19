@@ -2,19 +2,27 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.Storage;
 
 /**
@@ -49,6 +57,30 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(model.getAddressBook());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        if (command instanceof SwitchCommand) {
+            SwitchCommand sc = (SwitchCommand) command;
+            Path filePath = sc.getFilePath();
+            AddressBookStorage addressBookStorage = new JsonAddressBookStorage(filePath);
+            ReadOnlyAddressBook addressBook;
+            try {
+                Optional<ReadOnlyAddressBook> addressBookOptional = this.storage.readAddressBook(filePath);
+                if (addressBookOptional.isEmpty()) {
+                    logger.info("Data file not found. Will be starting with a sample AddressBook");
+                }
+
+                addressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            } catch (DataConversionException e) {
+                logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+                addressBook = new AddressBook();
+            } catch (IOException e) {
+                logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+                addressBook = new AddressBook();
+            }
+
+            this.model.setAddressBook(addressBook);
+            this.storage.switchAddressBook(addressBookStorage);
         }
 
         return commandResult;
