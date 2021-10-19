@@ -293,12 +293,12 @@ Use case ends.
 **Extensions**
 
 * 1a. TutAssistor detects the wrong format in the user input.
-	   * 1a1. TutAssitor reminds the tutor the right format.
-	   * 1a2. Tutor enters a new command.
+  * 1a1. TutAssitor reminds the tutor the right format.
+  * 1a2. Tutor enters a new command.
 
-    Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
+      Steps 1a1-1a2 are repeated until the Tutor keys in information in the correct format by TutAssistor.
 
-    Use case resumes from step 2.
+      Use case resumes from step 2.
 
 **Use Case: UC05 - Search Student/Tuition class**
 
