@@ -15,8 +15,10 @@ import java.util.stream.Collectors;
 public class Availability {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Availability should be given as a list of numbers separated by a space each, "
+            "Availability should be given as a list of numbers from 1 to 7, separated by a space each, "
             + "where 1 represents Monday, 2 represents Tuesday... and 7 represents Sunday";
+
+    public static final String VALIDATION_REGEX = "[1-7]"; // numbers from 1 to 7
 
     public final List<DayOfWeek> values;
 
@@ -34,19 +36,13 @@ public class Availability {
      * Returns true if a given availability list is valid.
      */
     public static boolean isValidAvailability(List<String> test) {
-        try {
-            if (test.get(0).isEmpty()) { // empty but valid
-                return true;
+        if (test.get(0).isEmpty()) { // empty but valid
+            return true;
+        }
+        for (String s : test) {
+            if (!s.matches(VALIDATION_REGEX)) {
+                return false;
             }
-            for (String s : test) {
-                int dayNumber = Integer.parseInt(s);
-
-                if (dayNumber < 1 || dayNumber > 7) {
-                    return false;
-                }
-            }
-        } catch (NumberFormatException e) { // if any of the string is not a number, it is invalid
-            return false;
         }
         return true;
     }

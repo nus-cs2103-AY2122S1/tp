@@ -27,7 +27,7 @@ public class SetMemberAvailabilityCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "d/1 2 3 7";
 
-    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Successfully Set availability of member(s)";
+    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Successfully set availability of %s to %s";
 
     private final List<Index> indices;
     private final Availability availability;
@@ -59,7 +59,13 @@ public class SetMemberAvailabilityCommand extends Command {
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(MESSAGE_SET_AVAILABILITY_SUCCESS);
+        StringBuilder names = new StringBuilder();
+        for (Person p : lastShownList) {
+            names.append(p.getName());
+            names.append(", ");
+        }
+
+        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability));
     }
 
     @Override
