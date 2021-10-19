@@ -48,7 +48,8 @@ public class UserName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UserName // instanceof handles nulls
-                && userName.equals(((UserName) other).userName)); // state check
+                && ((isNull() && ((UserName) other).isNull())
+                || userName.equals(((UserName) other).userName))); // state check
     }
 
     @Override

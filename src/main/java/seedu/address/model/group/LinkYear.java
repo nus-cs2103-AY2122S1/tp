@@ -48,7 +48,8 @@ public class LinkYear {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LinkYear // instanceof handles nulls
-                && year.equals(((LinkYear) other).year)); // state check
+                && ((isNull() && ((LinkYear) other).isNull())
+                || year.equals(((LinkYear) other).year))); // state check
     }
 
     @Override
