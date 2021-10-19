@@ -1,8 +1,10 @@
 package seedu.programmer.model.student;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +20,7 @@ public class Student {
     private final StudentId studentId;
     private final ClassId classId;
     private final Grade grade;
-    private List<LabResult> labResultList;
+    private ObservableList<LabResult> labResultList;
 
     /**
      * Every field must be present and not null.
@@ -29,7 +31,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.grade = grade;
-        this.labResultList = new ArrayList<>();
+        this.labResultList = FXCollections.observableArrayList();
     }
 
     public Name getName() {
@@ -48,7 +50,7 @@ public class Student {
         return grade;
     }
 
-    public List<LabResult> getLabResultList() {
+    public ObservableList<LabResult> getLabResultList() {
         return labResultList;
     }
 
@@ -56,14 +58,11 @@ public class Student {
      * Add a lab result into the student's record
      * */
     public void addLabResult(LabResult result) {
-        if (this.labResultList == null) {
-            labResultList = new ArrayList<>();
-        }
         this.labResultList.add(result);
     }
 
     public void setLabResultRecord(List<LabResult> labResultRecord) {
-        this.labResultList = labResultRecord;
+        this.labResultList.addAll(labResultRecord);
     }
     /**
      * Returns true if both students have the same name.

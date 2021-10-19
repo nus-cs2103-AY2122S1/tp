@@ -110,10 +110,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
 
     @Override
     public ObservableList<LabResult> showLabResultList(Student target) {
-        List<LabResult> results = target.getLabResultList();
-        LabResultList labResultList = new LabResultList();
-        labResultList.setLabResults(results);
-        return labResultList.asUnmodifiableObservableList();
+        return target.getLabResultList();
     }
 
     @Override
