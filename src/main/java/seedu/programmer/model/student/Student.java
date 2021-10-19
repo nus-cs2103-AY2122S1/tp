@@ -64,7 +64,7 @@ public class Student {
 
     public void setLabResultRecord(List<LabResult> labResultRecord) {
         if (labResultRecord == null) {
-           labResultRecord = new ArrayList<>();
+            labResultRecord = new ArrayList<>();
         }
         this.labResultList.addAll(labResultRecord);
     }
