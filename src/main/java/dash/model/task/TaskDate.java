@@ -6,14 +6,15 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
- * Represents a Date of a Task, can have Date, Task, both or none.
+ * Represents a Date of a Task, can have Date with optional Time or have neither.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}}
  */
 public class TaskDate {
     public static final String MESSAGE_CONSTRAINTS = "Date/Time should not be blank. "
-        + "They should also follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
+        + "They should also be valid and follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
         + "If both Date and Time are included, Date should come first before Time and they should be separated "
         + "by a comma. A full list of available formats can be seen under the Help tab.";
     private static final String[] DATE_FORMATS = {
@@ -27,13 +28,12 @@ public class TaskDate {
         "HHmm",
         "hh:mm a"
     };
-    private LocalDate date = null;
-    private LocalTime time = null;
+    private Optional<LocalDate> date = Optional.empty();
+    private Optional<LocalTime> time = Optional.empty();
     private String taskDateString;
     private String taskTimeString;
     private String detectedDateFormat = null;
     private String detectedTimeFormat = null;
-
 
     /**
      * Constructs a {@code TaskDate}.
@@ -44,17 +44,22 @@ public class TaskDate {
         requireNonNull(taskDate);
         checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
 
-        if (hasDate()) {
+        if (detectedDateFormat != null) {
             DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
-            this.date = LocalDate.parse(taskDateString, dateFormat);
+            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
+        } else {
+            this.date = Optional.of(LocalDate.now());
         }
 
-        if (hasTime()) {
+        if (detectedTimeFormat != null) {
             DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
-            this.time = LocalTime.parse(taskTimeString, timeFormat);
+            this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
         }
     }
 
+    /**
+     * Constructs a {@code TaskDate} of empty Date and Time.
+     */
     public TaskDate() {
     }
 
@@ -87,22 +92,21 @@ public class TaskDate {
 
         return isDate(maybeDate) && isTime(maybeTime);
     }
-
     /**
-     * Returns the instance's Date.
+     * Returns the instance's Date which can be missing.
      *
-     * @return LocalDate object.
+     * @return Optional LocalDate.
      */
-    public LocalDate getDate() {
+    public Optional<LocalDate> getDate() {
         return this.date;
     }
 
     /**
-     * Returns the instance's Time.
+     * Returns the instance's Time which can be missing.
      *
-     * @return LocalTime object.
+     * @return Optional LocalTime.
      */
-    public LocalTime getTime() {
+    public Optional<LocalTime> getTime() {
         return this.time;
     }
 
@@ -112,7 +116,7 @@ public class TaskDate {
      * @return boolean
      */
     public boolean hasDate() {
-        return detectedDateFormat != null;
+        return date.isPresent();
     }
 
     /**
@@ -121,7 +125,7 @@ public class TaskDate {
      * @return boolean
      */
     public boolean hasTime() {
-        return detectedTimeFormat != null;
+        return time.isPresent();
     }
 
     /**
@@ -196,12 +200,23 @@ public class TaskDate {
         return isTime;
     }
 
+    /**
+     * Returns String of Date in given format, empty string if no date is present.
+     *
+     * @return String representation of Date.
+     */
     public String toDateString() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        return date.map(mapDate -> mapDate.format(DateTimeFormatter.ofPattern("dd MMM yyy")))
+                .orElse("");
     }
 
+    /**
+     *
+     * @return String of Time in given format, empty string if no time is present.
+     */
     public String toTimeString() {
-        return this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+        return time.map(mapTime -> mapTime.format(DateTimeFormatter.ofPattern("hh:mm a")))
+                .orElse("");
     }
 
     @Override
@@ -232,14 +247,11 @@ public class TaskDate {
     @Override
     public String toString() {
 
-        if (hasDate() && hasTime()) {
+        if (hasTime()) {
             return String.format("%s, %s", toDateString(), toTimeString());
         }
         if (hasDate()) {
             return String.format("%s", toDateString());
-        }
-        if (hasTime()) {
-            return String.format("%s", toTimeString());
         }
         return "";
     }
