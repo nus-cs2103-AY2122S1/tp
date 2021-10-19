@@ -50,30 +50,48 @@ public class ShowCommandParser implements Parser<ShowCommand> {
     public static class ShowDescriptor {
         private Prefix prefix;
 
-
         ShowDescriptor(ArgumentMultimap argMultimap) {
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 prefix = PREFIX_NAME;
-            } else if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            }
+
+            if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
                 prefix = PREFIX_PHONE;
-            } else if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            }
+
+            if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
                 prefix = PREFIX_EMAIL;
-            } else if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            }
+
+            if (argMultimap.getValue(PREFIX_ROLE).isPresent()) {
                 prefix = PREFIX_ROLE;
-            } else if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
+            }
+
+            if (argMultimap.getValue(PREFIX_EMPLOYMENT_TYPE).isPresent()) {
                 prefix = PREFIX_EMPLOYMENT_TYPE;
             }
 
+            if (argMultimap.getValue(PREFIX_EXPECTED_SALARY).isPresent()) {
+                prefix = PREFIX_EXPECTED_SALARY;
+            }
+
+            if (argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).isPresent()) {
+                prefix = PREFIX_LEVEL_OF_EDUCATION;
+            }
+
+            if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
+                prefix = PREFIX_EXPERIENCE;
+            }
+
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                prefix = PREFIX_TAG;
+            }
 
         }
 
         public Prefix getPrefix() {
             return prefix;
-        }
-
-        private static String[] splitByWhiteSpace(String arg) {
-            return arg.split("\\s+");
         }
 
     }
