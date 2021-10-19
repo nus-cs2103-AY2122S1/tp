@@ -6,6 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -14,10 +18,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.PersonBuilder;
-
-import java.time.DayOfWeek;
-import java.time.format.TextStyle;
-import java.util.Locale;
 
 public class SplitCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
