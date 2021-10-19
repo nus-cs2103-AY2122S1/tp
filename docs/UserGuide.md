@@ -241,6 +241,7 @@ rec 1
 ```
 <br>
 
+Users can edit the remarks for a particular student or tuition class in the text area.<br>
 ![Ui](images/remarkEditor.png)
 
 ### Finding students/tuition classes by name
