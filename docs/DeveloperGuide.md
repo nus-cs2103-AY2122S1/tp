@@ -172,24 +172,38 @@ Command syntax
 
 #### Implementation
 
-The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before removal.
-
-Given below is an example usage scenario and how the delete lesson operation behaves.  
+The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before removal. Given below is an example usage scenario and how the delete lesson operation behaves.  
 _Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
 
-Step 1:
+<ins>Step 1:</ins>  
 
-Object diagram
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `L0` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
-Step 2:
+Object diagram 0
 
-Object diagram
+<ins>Step 2:</ins>  
 
+Upon running the delete lesson command, the application runs a few internal steps:
+
+1. The tuitione model obtains the lesson to remove.
+2. The command executor then extracts the students that are in the lesson.
+3. If there are students enrolled:
+   1. The lesson then unenrolls the students that are present.
+   2. The update students are updated in the tuitione model.
+4. Finally, the lesson is safe to be removed.
+5. Relevant UI and Storage procedures are run to complete the execution in full.
+
+The final object state diagram is as such:
+
+Object diagram 1
+
+The following sequence diagram shows how the delete lesson operation works:
 
 Sequence diagram
 
 The following activity diagram summarizes what happens when a user executes the delete lesson command:
-TODO: IMAGE HERE
+
+Activity diagram
 
 #### Design considerations:
 
