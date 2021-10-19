@@ -100,6 +100,10 @@ public class EditStudentCommand extends EditCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param studentToEdit The student to be edited.
+     * @param editPersonDescriptor The edited student descriptions.
+     * @return The edited student.
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editPersonDescriptor) {
         assert studentToEdit != null;
