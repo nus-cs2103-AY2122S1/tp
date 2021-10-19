@@ -109,10 +109,16 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
+        boolean sameMods = true;
+        for (Mod mod : otherPerson.getMods()) {
+            sameMods &= getMods().contains(mod);
+        }
+
+
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getMods().equals(getMods())
+                && sameMods
                 && otherPerson.getIsFavourite() == getIsFavourite()
                 && otherPerson.getStudentId().equals(getStudentId());
     }

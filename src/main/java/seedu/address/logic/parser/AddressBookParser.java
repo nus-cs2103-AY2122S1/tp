@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddFavCommand;
+import seedu.address.logic.commands.AddModCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateCommand;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFavCommand;
 import seedu.address.logic.commands.RemFavCommand;
+import seedu.address.logic.commands.RemoveModCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -52,6 +54,9 @@ public class AddressBookParser {
         case AddFavCommand.COMMAND_WORD:
             return new AddFavCommandParser().parse(arguments);
 
+        case AddModCommand.COMMAND_WORD:
+            return new AddModCommandParser().parse(arguments);
+
         case CreateCommand.COMMAND_WORD:
             return new CreateCommandParser().parse(arguments);
 
@@ -78,6 +83,9 @@ public class AddressBookParser {
 
         case RemFavCommand.COMMAND_WORD:
             return new RemFavCommandParser().parse(arguments);
+
+        case RemoveModCommand.COMMAND_WORD:
+            return new RemoveModCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);

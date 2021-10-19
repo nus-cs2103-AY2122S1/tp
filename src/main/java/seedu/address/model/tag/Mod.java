@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Mod {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Module statuses should only contain alphanumeric characters and spaces";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Please enter a valid Module Code (e.g. CS2103T). You may also include your grouping status.";
+    public static final String VALIDATION_REGEX =
+            "([A-Z]|[a-z]){2,3}[0-9]{4}([A-Z]|[a-z])?\\s?[\\p{Alnum}]?[\\p{Alnum} ]*";
 
     public final String oriInput;
     public final String modName;
@@ -48,8 +49,7 @@ public class Mod {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Mod // instanceof handles nulls
-                && modName.equals(((Mod) other).modName) // state check
-                && status.equals(((Mod) other).status)); // state check
+                && modName.equals(((Mod) other).modName)); // state check
     }
 
     @Override
