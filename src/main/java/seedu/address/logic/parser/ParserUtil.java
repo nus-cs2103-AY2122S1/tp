@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -58,8 +57,6 @@ public class ParserUtil {
             indexesList[i] = Index.fromOneBased(Integer.parseInt(trimmedIndex));
         }
 
-        // Sort the array from large to small so that applicants will be deleted from the back
-        Arrays.sort(indexesList, (i1, i2) -> i2.getZeroBased() - i1.getZeroBased());
         return indexesList;
     }
 
