@@ -293,6 +293,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Customer Service Officer                   | update the email of a student’s parent | ensure the details are updated to date                         |
 | `* *`    | Customer Service Officer                   | filter students by their grade       | categorise students by their grades                              |
 | `* *`    | Customer Service Officer                   | filter lessons by their grade        | categorise lessons by their grades                               |
+| `* *`    | Customer Service Officer                   | filter lessons by their subject        | categorise lessons by their subjects                               |
 | `* *`    | Customer Service Officer                   | know how many students are in the lesson | help tutors plan resources accordingly for the lesson        |
 | `* *`    | Customer Service Officer                   | know the command format to enter     | learn to use the application                                     |
 | `* *`    | Customer Service Officer                   | know how much a student has to pay per week | remind the parents to pay punctually                      |
