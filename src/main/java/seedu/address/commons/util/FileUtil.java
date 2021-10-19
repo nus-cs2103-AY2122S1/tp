@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -7,7 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Writes and reads files
+ * Utility class for file operations
  */
 public class FileUtil {
 
@@ -89,6 +90,13 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Deletes the file specified in the filepath, regardless if it exists or not.
+     */
+    public static void deleteFile(Path file) {
+        new File(file.toString()).delete();
     }
 
 }
