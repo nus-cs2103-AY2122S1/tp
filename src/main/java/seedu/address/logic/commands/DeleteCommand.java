@@ -26,11 +26,9 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
 
     private final Index[] targetIndexes;
-    private final String personsDeletedString;
 
-    public DeleteCommand(Index[] targetIndexes, String personsDeletedString) {
+    public DeleteCommand(Index[] targetIndexes) {
         this.targetIndexes = targetIndexes;
-        this.personsDeletedString = personsDeletedString;
     }
 
     @Override
@@ -38,15 +36,18 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
+        String result = "";
+
         for (Index targetIndex : targetIndexes) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            result = "\n" + personToDelete + result;
             model.deletePerson(personToDelete);
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personsDeletedString));
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, result));
     }
 
     @Override
