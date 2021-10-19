@@ -108,6 +108,8 @@ public class ModelManager implements Model {
     @Override
     public void addParticipant(Participant participant) {
         addressBook.addParticipant(participant);
+        logger.info("Participant " + participant.getParticipantIdValue()
+                + " was successfully added to AddressBook");
         updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
@@ -194,6 +196,12 @@ public class ModelManager implements Model {
     public void removeEvent(Event target) {
         requireNonNull(target);
         addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(target);
+        addressBook.setEvent(target, editedEvent);
     }
 
     @Override
