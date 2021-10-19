@@ -23,7 +23,6 @@ import seedu.address.model.tag.Tag;
 public class ApplicantParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String PLACEHOLDER_DESCRIPTION = "This is a placeholder description";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

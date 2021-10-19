@@ -5,16 +5,12 @@ import java.util.Objects;
 import seedu.address.model.position.Position;
 
 /**
- * An association class representing a job application.
- *
- * References both the job applicant and the applied position.
- * Contains relevant information on the application.
- *
- * If either the Applicant or Position is deleted, the Application should also be deleted.
+ * Represents an application to a specific job position.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Application {
     private final Position position;
-    private ApplicationStatus status;
+    private final ApplicationStatus status;
 
     /**
      * Constructor for a job application.
@@ -26,35 +22,26 @@ public class Application {
     }
 
     /**
-     * Marks the application as pending.
+     * Internal constructor for a job application which specifies an application status.
      */
-    public void markAsPending() {
-        this.status = ApplicationStatus.PENDING;
+    private Application(Position position, ApplicationStatus applicationStatus) {
+        this.position = position;
+        this.status = applicationStatus;
     }
 
     /**
-     * Marks the application as accepted.
+     * Returns a new Application with the status updated as specified.
      */
-    public void markAsAccepted() {
-        this.status = ApplicationStatus.ACCEPTED;
-    }
-
-    /**
-     * Marks the application as rejected.
-     */
-    public void markAsRejected() {
-        this.status = ApplicationStatus.REJECTED;
-    }
-
-    /**
-     * Returns the status of the /application.
-     */
-    public ApplicationStatus getStatus() {
-        return status;
+    public Application markAs(ApplicationStatus applicationStatus) {
+        return new Application(position, applicationStatus);
     }
 
     public Position getPosition() {
         return position;
+    }
+
+    public ApplicationStatus getStatus() {
+        return status;
     }
 
     @Override

@@ -90,6 +90,7 @@ public interface Model {
     /**
      * Adds a new applicant to MrTechRecruiter with the given particulars.
      * The intended applicant must not already exist in the applicant book.
+     * @return the newly added applicant.
      */
     Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
 

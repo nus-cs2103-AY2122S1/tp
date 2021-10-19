@@ -6,6 +6,7 @@ import java.util.Objects;
 
 import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 
 /**
@@ -27,12 +28,7 @@ public class Applicant {
      * Every field must be present and not null.
      */
     public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
-        requireAllNonNull(name, phone, email, address);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.application = new Application(position);
+        this(name, phone, email, address, new Application(position));
     }
 
     /**
@@ -44,8 +40,27 @@ public class Applicant {
                 applicantParticulars.getPhone(),
                 applicantParticulars.getEmail(),
                 applicantParticulars.getAddress(),
-                position
+                new Application(position)
         );
+    }
+
+    /**
+     * Internal constructor for a new Applicant object.
+     */
+    private Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+        requireAllNonNull(name, phone, email, address);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.application = application;
+    }
+
+    /**
+     * Marks the application with the specified application status.
+     */
+    public Applicant markAs(ApplicationStatus applicationStatus) {
+        return new Applicant(name, phone, email, address, application.markAs(ApplicationStatus.PENDING));
     }
 
     public Name getName() {
