@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "f:CreateFolderCommand" as CreateFolderCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(mkdir)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(mkdir)
+activate AddressBookParser
+
+create CreateFolderCommand
+AddressBookParser -> CreateFolderCommand
+activate CreateFolderCommand
+
+CreateFolderCommand --> AddressBookParser
+deactivate CreateFolderCommand
+
+AddressBookParser --> LogicManager : f
+deactivate AddressBookParser
+
+LogicManager -> CreateFolderCommand : execute(m)
+activate CreateFolderCommand
+
+CreateFolderCommand -> Model : addFolder(f.folderToAdd)
+activate Model
+
+Model --> CreateFolderCommand
+deactivate Model
+
+CreateFolderCommand --> LogicManager : result
+deactivate CreateFolderCommand
+
+CreateFolderCommand -[hidden]-> LogicManager : result
+destroy CreateFolderCommand
+
+[<--LogicManager
+deactivate LogicManager
+
+@enduml
