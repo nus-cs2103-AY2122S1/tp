@@ -139,13 +139,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the primary help window
+     * Opens the Online User Guide if possible, else open the internal help window
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
             try {
+                helpWindow.openUserGuide();
+            } catch (IOException | SecurityException | IllegalArgumentException ex) {
+                handleBackUpHelp();
+            }
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * Opens the Command Summary if possible, else open the internal help window
+     */
+    public void openCommandSummary() {
+        if (Desktop.isDesktopSupported()) {
+            try {
                 helpWindow.openCommandSummary();
-            } catch (IOException ex) {
+            } catch (IOException | SecurityException | IllegalArgumentException ex) {
                 handleBackUpHelp();
             }
         } else {
