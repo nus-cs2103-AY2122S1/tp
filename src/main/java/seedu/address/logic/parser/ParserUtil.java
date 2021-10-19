@@ -200,7 +200,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dayOfWeek} into an {@code DayOfWeek}.
+     * Parses a dayOfWeek-time.
      * Leading and trailing whitespaces will be trimmed.
      * This parser is not case sensitive.
      *

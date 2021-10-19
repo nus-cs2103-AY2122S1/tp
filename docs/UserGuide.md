@@ -298,10 +298,10 @@ Examples:\
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
 Formats:\
-`viewShift -d DAY-SHIFT NUMBER`
-`viewShift -t DAY-HH:mm` (Note that this is in 24-hour format)
+`viewShift -d day-shift_number`
+`viewShift -t day-HH:mm` (Note that this is in 24-hour format)
 
-Note that `DAY` refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon). 
+Note that `day` refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon). 
 
 Examples:\
 `viewShift -d monday-1` \
@@ -347,7 +347,7 @@ Action | Format, Examples
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
-**View shift** | `viewShift -d DAY-SHIFT NUMBER` <br> `viewShift -t DAY-HH:mm`
+**View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
