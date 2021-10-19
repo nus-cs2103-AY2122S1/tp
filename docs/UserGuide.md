@@ -1,6 +1,5 @@
 ---
-layout: page
-title: User Guide
+layout: page title: User Guide
 ---
 
 Socius is a **desktop app for managing CS2103T tutorial classmates’ contacts for international students, optimized for
@@ -10,16 +9,16 @@ type fast, Socius can get your contact management tasks done faster than traditi
 * Table of Contents
     1. Quick Start
     2. Features
-       1. Viewing help `help`
-       2. Adding a person `add`
-       3. Listing all persons `list`
-       4. Editing a person `edit`
-       5. Locating persons by name `find`
-       6. Deleting a person `delete`
-       7. Clearing all entries `clear`
-       8. Exiting the program `exit`
-       9. Saving the data
-       10. Editing the data file
+        1. Viewing help `help`
+        2. Adding a person `add`
+        3. Listing all persons `list`
+        4. Editing a person `edit`
+        5. Locating persons by name `find`
+        6. Deleting a person `delete`
+        7. Clearing all entries `clear`
+        8. Exiting the program `exit`
+        9. Saving the data
+        10. Editing the data file
     3. FAQ
     4. Command Summary
 
@@ -43,8 +42,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
     * **`list`** : Lists all contacts.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact
-      named `John Doe` to the Address Book.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com nat/Singaporean` : Adds a contact named `John Doe` to Socius.
 
     * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -88,7 +86,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -96,7 +94,11 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE]
+[r/REMARK] [t/TAG]…​`
+
+* Only `Name` must be provided.
+* All other fields are optional.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -104,8 +106,10 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Dwight Halpert`
+* `add n/John Doe p/98765432 e/johnd@example.com g/M`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
+* `add n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
 
 ### Listing all persons : `list`
 
@@ -117,7 +121,8 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE]
+[r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
@@ -140,16 +145,19 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`
+* Socius is capable of searching for keywords of all properties. e.g. `SocialHandle`, `Nationality`, etc.
+* Only full words will be matched e.g. `Han` will not match `Hans`add
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will
+  return `Hans Gruber`
   , `Bo Yang`
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find nat/Singapore` <br>
+  ![result for 'find nat/Singapore'](images/findNatSingapore.png)
 
 ### Deleting a person : `delete`
 
@@ -210,10 +218,12 @@ the data of your previous Socius home folder.
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
-|**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`| e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`|
+|**
+Add** | `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
 |**Clear** | `clear` | |
 |**Delete** | `delete INDEX` | e.g., `delete 3`|
-|**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​` | e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-|**Find** | `find KEYWORD [MORE_KEYWORDS]` | e.g., `find James Jake` |
+|**
+Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+|**Find** | `find KEYWORD [MORE_KEYWORDS]` | e.g., `find g/F tg/07` |
 |**List** | `list` | |
 |**Help** | `help` | |
