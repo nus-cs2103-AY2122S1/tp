@@ -1,15 +1,15 @@
 {
   "persons": [ {
-    "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "name": "Hans",
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street"
   } ],
   "folders" : [ {
-    "folderName" : "CS2103",
+    "folderName" : "Folder with invalid folder name: #friends",
     "contacts" : []
   }, {
-    "folderName" : "Friends",
+    "folderName" : "Work",
     "contacts" : []
   } ]
 }
