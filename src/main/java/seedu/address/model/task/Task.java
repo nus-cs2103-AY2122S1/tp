@@ -25,11 +25,11 @@ public class Task {
      * @param deadline A valid Deadline.
      * @param tags A valid Set of Tags.
      */
-    public Task(TaskName name, Deadline deadline, Set<Tag> tags) {
+    public Task(TaskName name, Deadline deadline, Set<Tag> tags, boolean isDone) {
         this.name = name;
         this.deadline = deadline;
         this.tags.addAll(tags);
-        this.isDone = false;
+        this.isDone = isDone;
     }
 
     public TaskName getName() {
@@ -40,7 +40,7 @@ public class Task {
         return deadline;
     }
 
-    public String getStatus() {
+    public String getStatusString() {
         return this.isDone ? "Completed" : "Pending";
     }
 
@@ -108,7 +108,7 @@ public class Task {
                 .append("; Deadline: ")
                 .append(getDeadline())
                 .append("; Status: ")
-                .append(getStatus());
+                .append(getStatusString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

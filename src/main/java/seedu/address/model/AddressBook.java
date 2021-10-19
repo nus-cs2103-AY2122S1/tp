@@ -64,6 +64,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tasks.setTasks(tasks);
     }
 
+
+
     /**
      * Replaces the contents of the group list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
@@ -122,6 +124,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeTask(Task key) {
         tasks.remove(key);
+    }
+
+    public void clearAllTask() {
+        tasks.removeAllTasks();
     }
 
 
