@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
-import seedu.notor.model.person.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
@@ -16,8 +16,8 @@ import seedu.notor.model.util.SampleDataUtil;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-
-    public static final String DEFAULT_NAME = "Amy Bee";
+    // TODO: Can change it back to full name once Yukun refactors
+    public static final String DEFAULT_NAME = "Amy";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Why is her last name Bee tho?";

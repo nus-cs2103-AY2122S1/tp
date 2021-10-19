@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import seedu.notor.commons.util.DateUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
-import seedu.notor.model.person.Note;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 
 

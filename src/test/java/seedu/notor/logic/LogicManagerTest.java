@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.notor.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.notor.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.notor.testutil.Assert.assertThrows;
 import static seedu.notor.testutil.TypicalPersons.AMY;
 
@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.logic.commands.ListCommand;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -60,15 +60,17 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "person 9 /delete";
         assertExecuteException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    }
+    // TODO: Add this back when list command is supported
+
+    //    @Test
+    //    public void execute_validCommand_success() throws Exception {
+    //        String listCommand = "person /list";
+    //        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+    //    }
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
@@ -81,7 +83,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = PersonCreateCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        String addCommand =
+                PersonCommand.COMMAND_WORD + " " + VALID_NAME_AMY + " /" + PersonCreateCommand.COMMAND_WORD
+                        + PHONE_DESC_AMY + EMAIL_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.createPerson(expectedPerson);

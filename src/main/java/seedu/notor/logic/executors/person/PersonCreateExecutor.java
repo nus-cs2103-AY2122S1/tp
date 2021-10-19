@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
 
 /**
@@ -14,7 +15,7 @@ public class PersonCreateExecutor extends PersonExecutor {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    protected Person person;
+    private final Person person;
 
     /**
      * Constructor for a PersonCreateExecutor instance.
@@ -35,6 +36,17 @@ public class PersonCreateExecutor extends PersonExecutor {
         }
 
         model.createPerson(person);
+
+        if (index != null) {
+            if (model.getFilteredGroupList().size() > index.getOneBased()) {
+                Group group = model.getFilteredGroupList().get(index.getZeroBased());
+                group.addPerson(person);
+                person.addGroup(group);
+            } else {
+                // TODO: stub error message, this is supposed to be for when index is out of bounds.
+                throw new ExecuteException("");
+            }
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));
     }
 

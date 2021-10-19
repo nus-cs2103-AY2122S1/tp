@@ -9,13 +9,13 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.stage.Stage?>
 
-<Stage xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
-        <Scene stylesheets="@ConfirmationWindow.css">
-            <AnchorPane prefHeight="151.0" prefWidth="368.0">
+        <Scene stylesheets="@GeneralWindow.css">
+            <AnchorPane prefHeight="151.0" prefWidth="385.0">
             <children>
-               <TextFlow fx:id="textFlow" layoutX="19.0" layoutY="29.0" prefHeight="71.0" prefWidth="330.0" />
-               <ButtonBar layoutY="112.0" prefHeight="40.0" prefWidth="368.0" style="-fx-background-color: #ECECEC;">
+               <TextFlow fx:id="textFlow" layoutX="14.0" layoutY="27.0" prefHeight="71.0" prefWidth="373.0" />
+               <ButtonBar layoutY="112.0" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #ECECEC;">
                   <buttons>
                      <Button mnemonicParsing="false" onAction="#onClickSave" text="Save" translateX="-10.0">
                         <font>
@@ -33,7 +33,7 @@
                            <Insets />
                         </opaqueInsets>
                      </Button>
-                     <Button mnemonicParsing="false" onAction="#onClickCancel" prefHeight="22.0" text="Cancel" translateX="-10.0">
+                     <Button mnemonicParsing="false" onAction="#onClickCancel" prefHeight="22.0" text="Return to note" translateX="-10.0">
                         <opaqueInsets>
                            <Insets />
                         </opaqueInsets>

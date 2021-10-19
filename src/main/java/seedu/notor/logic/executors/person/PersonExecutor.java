@@ -1,6 +1,7 @@
 package seedu.notor.logic.executors.person;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
@@ -45,5 +46,10 @@ public abstract class PersonExecutor extends Executor {
 
         // state check
         return index.equals(e.index);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 }

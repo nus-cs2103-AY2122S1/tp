@@ -5,6 +5,7 @@ import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
+import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.executors.person.PersonNoteExecutor;
 
 /**
@@ -13,16 +14,19 @@ import seedu.notor.logic.executors.person.PersonNoteExecutor;
 public class PersonNoteCommand extends PersonCommand {
     public static final String COMMAND_WORD = "note";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the notes of the person identified "
-            + "by the index number used in the last person listing. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_WORD + " 1 ";
+    private static final String COMMAND_DESCRIPTION =
+            ": Edits the notes of the person identified by the index number used in the current person listing.\n";
 
-    private final PersonNoteExecutor executor;
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+            + COMMAND_DESCRIPTION
+            + "Parameters: none"
+            + "Example: "
+            + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+
+    private final PersonExecutor executor;
 
     /**
      * @param index Index of the person to edit note for.
-     *
      */
     public PersonNoteCommand(Index index) {
         super(index);

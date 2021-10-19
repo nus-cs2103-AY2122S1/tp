@@ -12,5 +12,5 @@ public abstract class Parser<T extends Command> {
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
-    public abstract T parse(String userInput) throws ParseException;
+    public abstract T parse() throws ParseException;
 }

@@ -150,6 +150,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+
     /**
      * Opens the note window or focuses on it if it's already opened.
      */

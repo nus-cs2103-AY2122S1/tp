@@ -11,7 +11,7 @@
 
 <Stage xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
-        <Scene stylesheets="@ConfirmationWindow.css">
+        <Scene stylesheets="@GeneralWindow.css">
             <AnchorPane prefHeight="151.0" prefWidth="368.0">
             <children>
                <TextFlow fx:id="textFlow" layoutX="19.0" layoutY="29.0" prefHeight="71.0" prefWidth="330.0" />

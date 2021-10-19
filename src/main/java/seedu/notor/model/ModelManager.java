@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
+import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final Notor notor;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<SuperGroup> filteredGroups;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +39,7 @@ public class ModelManager implements Model {
         this.notor = new Notor(notor);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.notor.getPersonList());
+        filteredGroups = new FilteredList<>(this.notor.getSuperGroups());
     }
 
     public ModelManager() {
@@ -131,7 +135,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addSuperGroup(String superGroup) {
+    public void addSuperGroup(String superGroup) throws ParseException {
         notor.addSuperGroup(superGroup);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -143,8 +147,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public SuperGroup findSuperGroup(String name) {
-        return notor.findSuperGroup(name);
+    public Group findGroup(String name) {
+        return notor.findGroup(name);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -162,6 +166,16 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<SuperGroup> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
+    @Override public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     @Override

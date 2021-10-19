@@ -1,18 +1,20 @@
-package seedu.notor.model.person;
+package seedu.notor.model.common;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's note that is opened upon note command.
+ * Represents a note that is opened upon the execution of note command.
  */
 public class Note {
+    public static final Note EMPTY_NOTE = new EmptyNote();
     /** regex to remove newLine **/
-    private static String removeEmptyLines = "(?m)^\\s*$[\n\r]{1,}";
+    private static final String REMOVE_EMPTY_LINES = "(?m)^\\s*$[\n\r]{1,}";
 
-    /** content of note **/
+    /**
+     * content of note
+     **/
     public final String value;
-    public final String savedDate;
-
+    private final String savedDate;
 
     /**
      * Constructor for a Note instance.
@@ -45,6 +47,9 @@ public class Note {
         Note noteOther = (Note) other;
         return value.equals(noteOther.value) && savedDate.equals(noteOther.savedDate); // state check
     }
+    public String getNoEmptyLineNote() {
+        return value.replaceAll(REMOVE_EMPTY_LINES, "");
+    }
 
     @Override
     public int hashCode() {
@@ -55,10 +60,13 @@ public class Note {
     public String toString() {
         return value;
     }
-
-    public String getNoEmptyLineNote() {
-        return value.replaceAll(removeEmptyLines, "");
+    private static final class EmptyNote extends Note {
+        public EmptyNote() {
+            super("", "");
+        }
+        @Override
+        public boolean equals(Object other) {
+            return other == this;
+        }
     }
-
-
 }

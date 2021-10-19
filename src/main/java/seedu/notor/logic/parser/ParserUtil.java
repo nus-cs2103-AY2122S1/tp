@@ -2,17 +2,16 @@ package seedu.notor.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.commons.util.StringUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.common.Name;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
 import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
 
@@ -20,7 +19,6 @@ import seedu.notor.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
@@ -110,18 +108,27 @@ public class ParserUtil {
         if (!SuperGroup.isValidGroupName(trimmedGroup)) {
             throw new ParseException(Group.MESSAGE_CONSTRAINTS);
         }
-        return new SuperGroup(trimmedGroup);
+        Name name = new Name(trimmedGroup);
+        return new SuperGroup(name);
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    public static Set<Tag> parseTags(String tags) throws ParseException {
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        final String trimmedTags = tags.trim();
+        if (trimmedTags.equals("")) {
+            return tagSet;
+        }
+        String[] splitTags = tags.split(",");
+        for (String tagName : splitTags) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Index parseGroupIndex(String index) throws ParseException {
+        return parseIndex(index);
     }
 }

@@ -2,14 +2,17 @@ package seedu.notor.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPINDEX;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Objects;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonCreateExecutor;
+import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.person.Person;
 
@@ -17,22 +20,26 @@ import seedu.notor.model.person.Person;
  * Adds a person to the address book.
  */
 public class PersonCreateCommand extends PersonCommand {
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "create";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    private static final String COMMAND_DESCRIPTION =
+            ": Creates a person in the address book.\n";
+
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " NAME " + COMMAND_WORD
+            + COMMAND_DESCRIPTION
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_TAG + "TAGS... "
+            + PREFIX_GROUPINDEX + "\n"
+            + "Example: " + PersonCommand.COMMAND_WORD
+            + " John Doe " + COMMAND_WORD + " "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "student,year1"
+            + PREFIX_GROUPINDEX + 1;
 
-    private final PersonCreateExecutor executor;
+    private final PersonExecutor executor;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -53,5 +60,10 @@ public class PersonCreateCommand extends PersonCommand {
         return other == this // short circuit if same object
                 || (other instanceof PersonCreateCommand // instanceof handles nulls
                 && executor.equals(((PersonCreateCommand) other).executor));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(executor);
     }
 }
