@@ -112,6 +112,7 @@ public class CommandTestUtil {
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "abc"; //alphabets not allowed
     public static final String INVALID_JOBTITLE_DESC = " " + PREFIX_JOBTITLE + "Account Manager*"; // '*' not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_SHIFT_DESC = " " + PREFIX_SHIFT + "123-123-123-123"; // must be in correct format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

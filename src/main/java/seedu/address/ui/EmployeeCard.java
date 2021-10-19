@@ -63,7 +63,7 @@ public class EmployeeCard extends UiPart<Region> {
         salary.setText(employee.getSalary().currentSalary);
         jobTitle.setText(employee.getJobTitle().jobTitle);
         employee.getShifts().stream()
-                .sorted(Comparator.comparing(shift -> shift.workingShift))
+                .sorted(Comparator.comparing(shift -> shift.shiftString))
                 .forEach(shift -> shifts.getChildren().add(new Label(shift.shiftString)));
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -11,13 +11,11 @@ import java.time.format.DateTimeParseException;
  * Represents an Employee's shift in the address book.
  */
 public class Shift {
-    public static final String MESSAGE_CONSTRAINTS = "Salary should be numerical and should be 3 or more digits long"
+    public static final String MESSAGE_CONSTRAINTS = "Working shifts should be in the format yyyy-mm-dd HHmm"
             + ".";
 
-    /*
-     * Between 1-6 digits, optional 2 digits after the dot
-     */
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX =
+            "^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9]) (2[0-3]|[01]?[0-9])([0-5]?[0-9])$";
 
     public final LocalDateTime workingShift;
     public final String shiftString;
@@ -30,7 +28,7 @@ public class Shift {
     public Shift(String shift) {
         requireNonNull(shift);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-        checkArgument(isValidShift(shift, formatter));
+        checkArgument(isValidShift(shift), MESSAGE_CONSTRAINTS);
         shiftString = shift;
         workingShift = LocalDateTime.parse(shift, formatter);
     }
@@ -38,13 +36,20 @@ public class Shift {
     /**
      * Returns true if a given string is a valid shift.
      */
-    public boolean isValidShift(String test, DateTimeFormatter formatter) {
+    public static boolean isValidShift(String test, DateTimeFormatter formatter) {
         try {
             formatter.parse(test);
             return true;
         } catch (DateTimeParseException dtpe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if a given string is a valid shift.
+     */
+    public static boolean isValidShift(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
