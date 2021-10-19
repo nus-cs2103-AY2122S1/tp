@@ -10,15 +10,15 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeysPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final List<String> keys;
 
-    public NameContainsKeysPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public NameContainsKeysPredicate(List<String> keys) {
+        this.keys = keys;
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
+        return keys.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
@@ -26,7 +26,7 @@ public class NameContainsKeysPredicate implements Predicate<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NameContainsKeysPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeysPredicate) other).keywords)); // state check
+                && keys.equals(((NameContainsKeysPredicate) other).keys)); // state check
     }
 
 }

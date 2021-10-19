@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_END;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_START;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -37,12 +36,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_CASE_NUMBER, PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
 
-        if (!isOnlyOnePrefixEntered(argMultimap)) {
+        if (!isOnlyOnePrefixEntered(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String trimmedUserInputNoPrefix = removePrefixFromUserInput(args, argMultimap).trim();
+        String trimmedArgs = args.trim();
+        String trimmedUserInputNoPrefix = removePrefixFromUserInput(trimmedArgs, argMultimap).trim();
+
         if (trimmedUserInputNoPrefix.isBlank()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -88,43 +89,23 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     private String removePrefixFromUserInput(String args, ArgumentMultimap argumentMultimap) {
         if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
-            String[] argsSplitByPrefix = args.split(PREFIX_NAME.getPrefix());
-            String output = argsSplitByPrefix.length == INPUT_SIZE
-                    ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : "";
-            return output;
+            return args.substring(PREFIX_NAME.getPrefix().length()).trim();
         }
 
         if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            String[] argsSplitByPrefix = args.split(PREFIX_PHONE.getPrefix());
-            String output = argsSplitByPrefix.length == INPUT_SIZE
-                    ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : "";
-            return output;
+            return args.substring(PREFIX_PHONE.getPrefix().length()).trim();
         }
 
         if (argumentMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
-            String[] argsSplitByPrefix = args.split(PREFIX_CASE_NUMBER.getPrefix());
-            String output = argsSplitByPrefix.length == INPUT_SIZE
-                    ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : "";
-            return output;
+            return args.substring(PREFIX_CASE_NUMBER.getPrefix().length()).trim();
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
-            String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_START.getPrefix());
-            String output = argsSplitByPrefix.length == INPUT_SIZE
-                    ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : "";
-            return output;
+            return args.substring(PREFIX_SHN_PERIOD_START.getPrefix().length()).trim();
         }
 
         if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
-            String[] argsSplitByPrefix = args.split(PREFIX_SHN_PERIOD_END.getPrefix());
-            String output = argsSplitByPrefix.length == INPUT_SIZE
-                    ? argsSplitByPrefix[INDEX_ARGUMENT]
-                    : "";
-            return output;
+            return args.substring(PREFIX_SHN_PERIOD_END.getPrefix().length()).trim();
         }
 
         return "";
@@ -134,28 +115,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * Returns true if user enters only one prefix.
      */
     private boolean isOnlyOnePrefixEntered(ArgumentMultimap argumentMultimap) {
-        HashSet<Prefix> prefixes = new HashSet<>();
-
-        if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
-            prefixes.add(PREFIX_NAME);
-        }
-
-        if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            prefixes.add(PREFIX_PHONE);
-        }
-
-        if (argumentMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
-            prefixes.add(PREFIX_CASE_NUMBER);
-        }
-
-        if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
-            prefixes.add(PREFIX_SHN_PERIOD_START);
-        }
-
-        if (argumentMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
-            prefixes.add(PREFIX_SHN_PERIOD_END);
-        }
-
-        return prefixes.size() == FindCommand.LIMIT_PREFIX;
+        return argumentMultimap.numOfPrefix() == FindCommand.REQUIRED_NUMBER_OF_PREFIX;
     }
 }

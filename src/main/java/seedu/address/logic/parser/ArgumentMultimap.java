@@ -15,7 +15,9 @@ import java.util.Optional;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -62,12 +64,10 @@ public class ArgumentMultimap {
      * Returns the number of prefix(es) entered by the user.
      */
     public int numOfPrefix() {
-        int count = 0;
-        for (Prefix p: argMultimap.keySet()) {
-            if (getValue(p).isPresent()) {
-                count++;
-            }
-        }
-        return count;
+        int numOfPrefixEnteredByUser = argMultimap.values().stream()
+                .mapToInt(list -> list.isEmpty() ? 0 : 1).sum();
+        // Subtract by 1 to take into account the preamble prefix.
+        return numOfPrefixEnteredByUser - 1;
     }
 }
+

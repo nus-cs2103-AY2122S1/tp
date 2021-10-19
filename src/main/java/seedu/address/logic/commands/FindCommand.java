@@ -17,7 +17,7 @@ import java.util.function.Predicate;
  */
 public class FindCommand extends Command {
 
-    public static final int LIMIT_PREFIX = 1;
+    public static final int REQUIRED_NUMBER_OF_PREFIX = 1;
 
     public static final String COMMAND_WORD = "find";
 
