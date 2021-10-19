@@ -2,6 +2,7 @@ package seedu.programmer.model.student;
 
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -62,6 +63,9 @@ public class Student {
     }
 
     public void setLabResultRecord(List<LabResult> labResultRecord) {
+        if (labResultRecord == null) {
+           labResultRecord = new ArrayList<>();
+        }
         this.labResultList.addAll(labResultRecord);
     }
     /**
