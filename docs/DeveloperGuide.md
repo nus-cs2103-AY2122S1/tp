@@ -503,7 +503,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1d. CSO decides to filter by grade and subject
     * 1d1. TuitiONE filters the student list based on the given grade, and filters the lesson list based on both the
       given grade and subject.
- 
+
     Use case resumes at step 2.
 
 **UC05: Delete a Student**

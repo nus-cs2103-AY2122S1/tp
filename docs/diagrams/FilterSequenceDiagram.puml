@@ -77,8 +77,6 @@ FilterCommand --> LogicManager : commandResult
 deactivate FilterCommand
 FilterCommand -[hidden]-> LogicManager
 destroy FilterCommand
-
 [<--LogicManager
 deactivate LogicManager
-
 @enduml
