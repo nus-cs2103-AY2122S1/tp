@@ -86,7 +86,7 @@ class JsonSerializableStudent {
         for (JsonAdaptedTutorialGroup jsonAdaptedTutorialGroup : tutorialGroups) {
             TutorialGroup tutorialGroup = jsonAdaptedTutorialGroup.toModelType();
             if (classmate.hasTutorialGroup(tutorialGroup)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_CLASS);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_GROUP);
             }
             classmate.addTutorialGroup(tutorialGroup);
         }
