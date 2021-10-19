@@ -16,11 +16,13 @@ import dash.logic.commands.personcommand.DeletePersonCommand;
 import dash.logic.commands.personcommand.EditPersonCommand;
 import dash.logic.commands.personcommand.FindPersonCommand;
 import dash.logic.commands.personcommand.ListPeopleCommand;
+import dash.logic.commands.personcommand.TagPersonCommand;
 import dash.logic.parser.exceptions.ParseException;
 import dash.logic.parser.personcommand.AddPersonCommandParser;
 import dash.logic.parser.personcommand.DeletePersonCommandParser;
 import dash.logic.parser.personcommand.EditPersonCommandParser;
 import dash.logic.parser.personcommand.FindPersonCommandParser;
+import dash.logic.parser.personcommand.TagPersonCommandParser;
 
 /**
  * Parses user input.
@@ -57,6 +59,9 @@ public class ContactsTabParser {
 
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
+
+        case TagPersonCommand.COMMAND_WORD:
+            return new TagPersonCommandParser().parse(arguments);
 
         case ClearPeopleCommand.COMMAND_WORD:
             return new ClearPeopleCommand();
