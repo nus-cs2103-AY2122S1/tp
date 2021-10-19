@@ -55,6 +55,10 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().name);
         phone.setText(person.getPhone().value);
         info.setText(person.getInfo().value);
+        if (person.getInfo().value.isBlank()) {
+            info.setVisible(false);
+            info.managedProperty().bind(info.visibleProperty());
+        }
         email.setText(person.getEmail().value);
         module.setText(person.getModule().getCode());
         group.setText(person.getGroup().getCode());

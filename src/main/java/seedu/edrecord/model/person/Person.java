@@ -125,10 +125,12 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Info: ")
-                .append(getInfo())
-                .append("; Module: ")
+                .append(getEmail());
+        if (!getInfo().value.isBlank()) {
+            builder.append("; Info: ")
+                .append(getInfo());
+        }
+        builder.append("; Module: ")
                 .append(getModule())
                 .append("; Group: ")
                 .append(getGroup());

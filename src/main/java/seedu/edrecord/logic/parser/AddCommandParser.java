@@ -40,7 +40,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_MODULE, PREFIX_GROUP, PREFIX_TAG);
 
         if (!arePrefixesPresent(
-                argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MODULE, PREFIX_GROUP)
+                argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_MODULE,
+            PREFIX_GROUP, PREFIX_TAG)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -54,7 +55,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, info, module, group, tagList);
-
         return new AddCommand(person);
     }
 
@@ -63,7 +63,12 @@ public class AddCommandParser implements Parser<AddCommand> {
      * {@code ArgumentMultimap}.
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> {
+            boolean multiMapContainsPrefix = argumentMultimap.getValue(prefix).isPresent();
+            if (!multiMapContainsPrefix) {
+                return prefix.getPrefixIsOptional() == PrefixIsOptional.YES;
+            }
+            return multiMapContainsPrefix;
+        });
     }
-
 }

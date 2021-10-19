@@ -6,9 +6,28 @@ package seedu.edrecord.logic.parser;
  */
 public class Prefix {
     private final String prefix;
+    private final PrefixIsOptional isOptional;
 
+    /**
+     * Constructs an {@code Prefix} that is not optional by default.
+     * @param prefix The prefix's value.
+     */
     public Prefix(String prefix) {
         this.prefix = prefix;
+        this.isOptional = PrefixIsOptional.NO;
+    }
+    /**
+     * Constructs an {@code Prefix} that specifies if it's optional.
+     * @param prefix The prefix's value.
+     * @param isOptional An enum to indicate if prefix is optional.
+     */
+    public Prefix(String prefix, PrefixIsOptional isOptional) {
+        this.prefix = prefix;
+        this.isOptional = isOptional;
+    }
+
+    public PrefixIsOptional getPrefixIsOptional() {
+        return this.isOptional;
     }
 
     public String getPrefix() {
