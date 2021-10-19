@@ -72,7 +72,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
   e.g. in `add n/{NAME}`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/{NAME} [t/{TAG}]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/{NAME} [h/{TELE_HANDLE}]` can be used as `n/John Doe h/@johndoe` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/{NAME} p/{PHONE}`, `p/{PHONE} n/{NAME}` is also acceptable.
@@ -93,19 +93,21 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-Command aliases: `man`
+Command aliases: `man` `h`
 
 ***
 
 ### Adding a person: `add` <a name="add"></a>
 
-Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and tags are **optional**. Parameters can be in any order.
+Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and remarks are **optional**. Parameters can be in any order.
 
-Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`
+Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
-* `add n/Ben e/ben123@gmail.com m/CS2103T h/@BenIsHere t/Overseas`
+* `add n/Ben e/ben123@gmail.com m/CS2103T T12 B14 p/91238456 h/@BenIsHere r/Overseas`
 * `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100`
+
+Command aliases: `a`
 
 ***
 
@@ -134,6 +136,8 @@ Examples:
 * `find Ben`
 * `find CS2103T`
 
+Command aliases: `f`
+
 ***
 
 ### Edit contact: `edit` <a name="edit"></a>
@@ -155,7 +159,7 @@ Examples:
 * `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
 * `edit 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
 
-Command aliases: `update`
+Command aliases: `update` `e`
 
 ***
 
@@ -175,7 +179,7 @@ Examples:
 * `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
 * `delete b/CS2103T` deletes all the contacts from CS2103T.
 
-Command aliases: `del` `del` `rm` 
+Command aliases: `del` `rm` `d` 
 
 ***
 
@@ -198,25 +202,13 @@ Examples:
 * `remark 2 currently overseas`
 ***
 
-### Tag a contact: `tag` <a name="tag"></a>
-
-Tags a contact with a category.
-
-Format: `tag {INDEX} {TAG}`
-
-Examples:
-* `tag Ben CS2103T`
-* `tag Mary Overseas`
-
-***
-
 ### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
 
 Format: `exit`
 
-Command aliases: `quit`
+Command aliases: `quit` `q`
 
 ***
 

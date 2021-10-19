@@ -22,13 +22,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *     Why can't enum's constructor access static fields</a>
  */
 public enum CommandWord {
-    ADD("add"),
+    ADD("add", "a"),
     CLEAR("clear", "clr"),
-    DELETE("delete", "del", "rm"),
-    EDIT("edit", "update"),
-    EXIT("exit", "quit"),
-    FIND("find"),
-    HELP("help", "man"),
+    DELETE("delete", "del", "rm", "d"),
+    EDIT("edit", "update", "e"),
+    EXIT("exit", "quit", "q"),
+    FIND("find", "f"),
+    HELP("help", "man", "h"),
     LIST("list", "ls"),
     REMARK("remark");
 
