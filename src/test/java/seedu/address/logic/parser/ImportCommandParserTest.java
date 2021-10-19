@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_FILENAME_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_FRIENDS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -19,7 +21,8 @@ public class ImportCommandParserTest {
         assertParseSuccess(parser, VALID_FILENAME_FRIENDS, new ImportCommand(VALID_FILENAME_FRIENDS));
     }
 
-    @Test void parse_fileNameMissing_failure() {
+    @Test
+    public void parse_fileNameMissing_failure() {
         // file name missing
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
