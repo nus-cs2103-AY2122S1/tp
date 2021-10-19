@@ -66,10 +66,10 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Adds the given person.
+     * Creates a user profile.
      * {@code person} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void createProfile(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

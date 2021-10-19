@@ -48,7 +48,7 @@ deactivate ModuLinkParser
 LogicManager -> CreateCommand : execute()
 activate CreateCommand
 
-CreateCommand -> Model : createProfile(person)
+CreateCommand -> Model : createProfile(myProfile)
 activate Model
 
 Model --> CreateCommand

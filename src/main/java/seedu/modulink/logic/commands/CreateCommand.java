@@ -37,21 +37,21 @@ public class CreateCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     private static final String MESSAGE_DUPLICATE_STUDENT_ID = "There is already a person with this Student ID.";
 
-    private final Person toAdd;
+    private final Person myProfile;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
     public CreateCommand(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        myProfile = person;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(myProfile)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
@@ -59,18 +59,18 @@ public class CreateCommand extends Command {
         // Since the model person already in the system has this student ID,
         // creating another model person fail make the "execute_personAcceptedByModel_addSuccessful" test
         // Don't know what to do about this rn
-        if (model.hasStudentId(toAdd)) {
+        if (model.hasStudentId(myProfile)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_ID);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        model.createProfile(myProfile);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, myProfile));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CreateCommand // instanceof handles nulls
-                && toAdd.equals(((CreateCommand) other).toAdd));
+                && myProfile.equals(((CreateCommand) other).myProfile));
     }
 }

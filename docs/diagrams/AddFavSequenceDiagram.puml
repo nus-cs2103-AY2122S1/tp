@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("addfav A0123456A")
+[-> LogicManager : execute("addFav A0123456A")
 activate LogicManager
 
-LogicManager -> ModuLinkParser : parseCommand("addfav A0123456A")
+LogicManager -> ModuLinkParser : parseCommand("addFav A0123456A")
 activate ModuLinkParser
 
 create AddFavCommandParser
@@ -26,7 +26,7 @@ activate AddFavCommandParser
 AddFavCommandParser --> ModuLinkParser
 deactivate AddFavCommandParser
 
-ModuLinkParser -> AddFavCommandParser : parse("mod/CS2101")
+ModuLinkParser -> AddFavCommandParser : parse("A0123456A")
 activate AddFavCommandParser
 
 create AddFavCommand

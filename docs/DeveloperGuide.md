@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/modulink/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W12-4/tp/blob/master/src/main/java/seedu/modulink/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -52,7 +52,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `ZACHARY`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `addFav A0123456A`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -69,7 +69,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W12-4/tp/tree/master/src/main/java/seedu/modulink/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -86,7 +86,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W12-4/tp/tree/master/src/main/java/seedu/modulink/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -94,27 +94,27 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `ModuLinkParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `CreateCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("ZACHARY")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("addFav")` API call.
 
-![Interactions Inside the Logic Component for the `ZACHARY 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `addFav` Command](images/AddFavSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
-ZACHARY ADD THE DIAGRAM HERE
+
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `ModuLinkParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ModuLinkParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `ModuLinkParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `CreateCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `CreateCommand`) which the `ModuLinkParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `CreateCommandParser`, `EditCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W12-4/tp/tree/master/src/main/java/seedu/modulink/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -135,7 +135,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W12-4/tp/tree/master/src/main/java/seedu/modulink/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -164,12 +164,12 @@ The GUI will then update to include the created profile and the current user's p
 After creating a profile, the user can now use other commands in ModuLink.
 
 #### Usage
-To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
 `create n/NAME id/STUDENT_ID p/PHONE e/EMAIL [mod/TAG]...` <br/>
 Example: `create n/John Doe id/A1234567Z p/98765432 e/johnd@example.com mod/CS2100 mod/CS2101`
 
-The following sequence diagram shows how the `create` mechanism works: ZACHARY
-![ListFavCommand0](images/ListFavSequenceDiagram.png)
+The following sequence diagram shows how the `create` mechanism works:
+![CreateSequenceDiagram](images/CreateSequenceDiagram.png)
 
 
 ### Add A Module Tag
@@ -181,12 +181,12 @@ The implementation required the creation of a parser for `addModCommand` as the 
 The GUI will then update to include the tags for the user profile.
 
 #### Usage
-To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
 `addMod [mod/MOD]...` <br/>
 Example: `addMod mod/CS2103T`
 
-The following sequence diagram shows how the `addMod` mechanism works: ZACHARY
-![ListFavCommand0](images/ListFavSequenceDiagram.png)
+The following sequence diagram shows how the `addMod` mechanism works:
+![AddModSequenceDiagram](images/AddModSequenceDiagram.png)
 
 
 ### Add A Profile As Favourite
@@ -198,12 +198,12 @@ The implementation required the creation of a parser for `addFavCommand` as the 
 The GUI will then update to show the specified profile as a favourite.
 
 #### Usage
-To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
 `addFav Student_ID` <br/>
 Example: `addFav A1234567X`
 
-The following sequence diagram shows how the `addFav` mechanism works: ZACHARY
-![ListFavCommand0](images/ListFavSequenceDiagram.png)
+The following sequence diagram shows how the `addFav` mechanism works:
+![AddFavSequenceDiagram](images/AddFavSequenceDiagram.png)
 
 
 ### List All Favourited Profiles
@@ -218,7 +218,7 @@ The GUI will then change the content to display all favourited profiles.
 To use this function to see all favourited profiles, simply enter `listFav` in the command line. 
 
 The following sequence diagram shows how the `listFav` mechanism works:
-![ListFavCommand0](images/ListFavSequenceDiagram.png)
+![ListFavSequenceDiagram](images/ListFavSequenceDiagram.png)
 
 
 ### Filter Profiles By Name
@@ -230,12 +230,12 @@ The implementation required the creation of a parser for `findCommand` as the co
 The GUI will then update to show the profiles that contain the specified name.
 
 #### Usage
-To use this function and create a profile, simply enter the command and the requried parameters in the command line in the following format.
+To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
 `find NAME` <br/>
 Example: `find Charlotte`
 
-The following sequence diagram shows how the `find` mechanism works: ZACHARY
-![ListFavCommand0](images/ListFavSequenceDiagram.png)
+The following sequence diagram shows how the `find` mechanism works:
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -385,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User boots up ModuLink for the first time.
 2.  User enters their details.
-3.  ModuLink creates a new account
+3.  ModuLink creates a new profile.
 
     Use case ends.
 
@@ -543,8 +543,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  **Quality**: A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  **Performance**: Should be able to respond to a command within a response time of 2 seconds.
 5.  **Quality**: A new user should be able to understand and use ModuLink easily with the help of the [UserGuide](https://ay2122s1-cs2103t-w12-4.github.io/tp/UserGuide.html).
-6.  **Privacy**: Only users that have signed up can see the contact details of other users.
-7.  **Portable**: Registered users can sign in ModuLink on other computers and still see their favourite profiles.
 
 ### Glossary
 
