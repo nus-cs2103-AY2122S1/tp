@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.PersonBuilder;
 
 public class TagsContainKeywordsPredicateTest {
@@ -78,6 +79,7 @@ public class TagsContainKeywordsPredicateTest {
         // Empty keyword
         predicate = new TagsContainKeywordsPredicate(new ArrayList<>());
         assertThrows(IllegalArgumentException.class,
-                () -> predicate.test(new PersonBuilder().withTags("buddy", "cousin").build()));
+            () -> predicate.test(new PersonBuilder().withTags("buddy", "cousin").build())
+        );
     }
 }

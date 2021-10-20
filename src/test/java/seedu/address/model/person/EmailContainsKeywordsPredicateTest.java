@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.PersonBuilder;
 
 public class EmailContainsKeywordsPredicateTest {
@@ -26,7 +27,8 @@ public class EmailContainsKeywordsPredicateTest {
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        EmailContainsKeywordsPredicate firstPredicateCopy = new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
+        EmailContainsKeywordsPredicate firstPredicateCopy =
+                new EmailContainsKeywordsPredicate(firstPredicateKeywordList);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
@@ -66,6 +68,7 @@ public class EmailContainsKeywordsPredicateTest {
         // Empty keyword
         predicate = new EmailContainsKeywordsPredicate(new ArrayList<>());
         assertThrows(IllegalArgumentException.class,
-                () -> predicate.test(new PersonBuilder().withEmail("amazingspiderman@doodle.com").build()));
+            () -> predicate.test(new PersonBuilder().withEmail("amazingspiderman@doodle.com").build())
+        );
     }
 }

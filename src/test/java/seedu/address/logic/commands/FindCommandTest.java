@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -19,13 +21,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.*;
-
-
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.TagsContainKeywordsPredicate;
+import seedu.address.model.person.TasksContainKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -71,7 +77,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByName_oneKeyword_multiplePersonsFound_success() {
+    public void findByNameOneKeyword_multiplePersonsFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("ben");
         FindCommand command = new FindCommand(predicate);
@@ -81,7 +87,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByName_multipleKeywords_singlePersonsFound_success() {
+    public void findByNameMultipleKeywords_singlePersonsFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate predicate = prepareNamePredicate("dan me");
         FindCommand command = new FindCommand(predicate);
@@ -91,7 +97,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByPhone_oneKeyword_multiplePersonsFound_success() {
+    public void findByPhoneOneKeyword_multiplePersonsFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         PhoneContainsKeywordsPredicate predicate = preparePhonePredicate("948");
         FindCommand command = new FindCommand(predicate);
@@ -101,7 +107,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByAddress_oneKeyword_multiplePersonsFound_success() {
+    public void findByAddressOneKeyword_multiplePersonsFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate("street");
         FindCommand command = new FindCommand(predicate);
@@ -111,7 +117,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByAddress_multipleKeywords_singlePersonFound_success() {
+    public void findByAddressMultipleKeywords_singlePersonFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         AddressContainsKeywordsPredicate predicate = prepareAddressPredicate("michegan ave");
         FindCommand command = new FindCommand(predicate);
@@ -121,7 +127,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByEmail_oneKeyword_singlePersonFound_success() {
+    public void findByEmailOneKeyword_singlePersonFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         EmailContainsKeywordsPredicate predicate = prepareEmailPredicate("heinz");
         FindCommand command = new FindCommand(predicate);
@@ -131,7 +137,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByTag_oneKeyword_multiplePersonsFound_success() {
+    public void findByTagOneKeyword_multiplePersonsFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         TagsContainKeywordsPredicate predicate = prepareTagPredicate("friend");
         FindCommand command = new FindCommand(predicate);
@@ -141,7 +147,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findByTask_oneKeyword_singlePersonFound_success() {
+    public void findByTaskOneKeyword_singlePersonFound_success() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         TasksContainKeywordsPredicate predicate = prepareTasksPredicate("sleep");
         FindCommand command = new FindCommand(predicate);

@@ -20,14 +20,17 @@ public class AddressContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = List.of("123, Jurong West Ave 6, #08-111");
         List<String> secondPredicateKeywordList = List.of("124, Jurong East Ave 5, #09-99");
 
-        AddressContainsKeywordsPredicate firstPredicate = new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
-        AddressContainsKeywordsPredicate secondPredicate = new AddressContainsKeywordsPredicate(secondPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicate =
+                new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate secondPredicate =
+                new AddressContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
-        AddressContainsKeywordsPredicate firstPredicateCopy = new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
+        AddressContainsKeywordsPredicate firstPredicateCopy =
+                new AddressContainsKeywordsPredicate(firstPredicateKeywordList);
         assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
@@ -79,6 +82,7 @@ public class AddressContainsKeywordsPredicateTest {
         // Empty keyword
         predicate = new AddressContainsKeywordsPredicate(new ArrayList<>());
         assertThrows(IllegalArgumentException.class,
-                () -> predicate.test(new PersonBuilder().withAddress("10, Clementi Ave 4, #13-55").build()));
+            () -> predicate.test(new PersonBuilder().withAddress("10, Clementi Ave 4, #13-55").build())
+        );
     }
 }
