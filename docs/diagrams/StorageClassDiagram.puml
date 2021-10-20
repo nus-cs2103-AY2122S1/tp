@@ -19,7 +19,7 @@ Interface CsBookStorage <<Interface>>
 Class JsonCsBookStorage
 Class JsonSerializableCsBook
 Class JsonAdaptedStudent
-Class JsonAdaptedTag
+Class JsonAdaptedGroup
 }
 
 }
@@ -38,6 +38,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonCsBookStorage .up.|> CsBookStorage
 JsonCsBookStorage ..> JsonSerializableCsBook
 JsonSerializableCsBook --> "*" JsonAdaptedStudent
-JsonAdaptedStudent --> "*" JsonAdaptedTag
+JsonSerializableCsBook --> "*" JsonAdaptedGroup
+
 
 @enduml

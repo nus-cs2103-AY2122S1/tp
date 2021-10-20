@@ -158,6 +158,61 @@ Classes used by multiple components are in the `seedu.csbook.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Loading data
+
+Implementation
+
+The loading of data into CsBook is facilitated by `JsonCsBookStorage`, `JsonSerializableCsBook`, `JsonAdaptedGroup` and
+`JsonAdaptedStudent`. The relevant operations for loading CSBook data is as follows:
+
+- `JsonCsBookStorage#readCsBook()` — Reads the current CSBook data
+- `JsonSerializableCsBook#toModelType()` - Converts the JsonSerializableCsBook to a CsBook object
+- `JsonSerializableCsBook#addStudentsToCsBook(csBook)` - Adds all students to a given CsBook
+- `JsonSerializableCsBook#addGroupsToCsBook(csBook)` - Adds all groups to a given CsBook
+- `JsonSerializableCsBook#addStudentsToGroups(csBook)` - Adds all students to their corresponding Groups
+- `JsonAdaptedStudent#toModelType(groupList)` - Converts the JsonAdaptedStudent to a Student object
+- `JsonAdaptedGroup#toModelType()` - Converts the JsonAdaptedGroup to a Group object
+
+Given below how loading data behaves at each step.
+
+Step 1. The user starts the app and an encrypted data file containing CsBook's information is present. The data
+is decrypted and a call to `JsonCsBookStorage#readCsBook()` is made. After this, a call to `JsonSerializableCsBook#toModelType()`
+is made to convert the data into a CsBook object.
+
+![LoadSequence0](images/LoadSequence0.png)
+
+Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
+Next, we add the students from the data into Csbook by calling `JsonAdaptedStudent#toModelType(groupList)`. `groupList` is
+required to add students to ensure that each student has a valid group.
+
+![LoadSequence1](images/LoadSequence1.png)
+
+Step 3. Currently, each group does not have its lists of students, we would need to add it in using `JsonSerializableCsBook#addStudentsToGroups(csBook)`.
+The group list is retrieved from `csBook`. For each group in the group list, we will filter the list of students by checking if the student belongs to the group,
+then add the students in by calling `Group#addAll(StudentsInGroup)`. This would return us a new group that contains the students, and we will update `csBook` by calling
+`CsBook#setGroup(group, groupWithStudentList)`.
+
+![LoadSequence2](images/LoadSequence2.png)
+
+The following sequence diagram shows how the overall loading data operation works:
+
+![LoadSequenceAll](images/LoadSequenceAll.png)
+
+#### Design considerations
+
+**Aspect: How we choose to load data:**
+
+- **Alternative 1 (current choice):** Load groups without their student list, load students, then update each group's student list using the loaded students.
+
+    - Pros: Allows us to validate the student's group name field and saves space as we do not need to store the student list for each group in our data file.
+    - Cons: May take more time to load as we need to do more computation.
+
+- **Alternative 2:** Have each group store their student's information in the data file, load students and load groups separately.
+
+    - Pros: Less computation as we can immediately convert the data file to retrieve the students and groups.
+    - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and
+    once in the list of groups.
+
 ### JSON encryption feature
 
 #### Implementation

@@ -95,6 +95,7 @@ Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`
 * Existing values will be updated to the input values.
 
 Examples:
+
 *  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
 *  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
 
@@ -114,6 +115,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
@@ -138,6 +141,8 @@ Format: `viewgroup GROUPNAME`
 
 Examples:
 * `viewgroup CS2103T` displays the group's description and its students.
+
+
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
@@ -149,6 +154,8 @@ Format: `listgroups`
 
 Examples:
 * `listgroups` displays a list of all the groups, including their group description and number of students in them.
+
+
   ![result for `listgroups`](images/listGroups.png)
 
 ### Clearing all entries : `clear`
@@ -192,13 +199,12 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 ### Editing the data file
 
-CSBook data are saved as a JSON file `[JAR file location]/data/CSBook.json`. Advanced users are welcome to update data directly by editing that data file.
+CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
