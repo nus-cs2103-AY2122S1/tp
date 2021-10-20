@@ -280,13 +280,13 @@ This feature is facilitated by the following operations:
 
 To represent a student's payment status, a `PaymentStatus` class is created. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement it as a field in Student.
 
-![StudentWithPaymentStatusClassDiagram](images/StudentWithPaymentStatusClassDiagram.png)
+<img src="images/StudentWithPaymentStatusClassDiagram.png" width="150" />
 
 Given below is an example usage scenario for setting a student's payment status as paid, and how the command is executed.
 
 Step 1. The user executes `paid 2` command to set the payment status of the 2nd student in the address book. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. This in turn calls `PaidCommandParser#parse()`, which then checks for the validity of the provided index. If the index is valid, `PaidCommandParser#parse()` returns a `PaidCommand` instance.
 
-![ParsePaidCommandSequenceDiagram](images/ParsePaidCommandSequenceDiagram.png)
+<img src="images/ParsePaidCommandSequenceDiagram.png" width="800" />
 
 Step 2. `LogicManager#execute()` then calls upon `PaidCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
 
@@ -298,7 +298,7 @@ Step 5. The result of the `PaidCommand` execution is then encapsulated as a `Com
 
 The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components, from Steps 2 to 5.
 
-![ExecutePaidCommandSequenceDiagram](images/ExecutePaidCommandSequenceDiagram.png)
+<img src="images/ExecutePaidCommandSequenceDiagram.png" width="850" />
 
 A similar execution scenario can be expected for setting a student's payment status as unpaid.
 
