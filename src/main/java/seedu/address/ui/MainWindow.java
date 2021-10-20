@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,13 +13,18 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandResultExport;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -29,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    public FileChooser fileChooser;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -59,6 +69,14 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        this.fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("csv","*.csv");
+        fileChooser.getExtensionFilters().addAll(filter);
+        fileChooser.setInitialDirectory(new File("./"));
+        fileChooser.setSelectedExtensionFilter(filter);
+
+
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -163,6 +181,30 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleChooser(CommandResult commandResult) {
+        File file =  fileChooser.showSaveDialog(primaryStage);
+        Path path = Path.of(file.getPath() + ".csv");
+        //TODO: sanitize user provided path
+
+        List<Person> personList =  ((CommandResultExport) commandResult).getPersonList();
+
+        String toWrite = personList.stream().map(x->x.toString() + "\n").collect(Collectors.joining());
+
+        try{
+            FileUtil.writeToFile(path,toWrite);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
+        // folder = fileChooser
+        // but hwhat to save --> need some other info
+        // Command result child class!
+        // child class contains the serialized csv to write
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +226,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isChooseFile()) {
+                handleChooser(commandResult);
             }
 
             return commandResult;
