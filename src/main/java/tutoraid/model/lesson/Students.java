@@ -1,7 +1,6 @@
 package tutoraid.model.lesson;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import tutoraid.model.student.Student;
 
@@ -31,9 +30,15 @@ public class Students {
 
     @Override
     public String toString() {
-        String connector = "\n    ";
-        return connector + students.stream().map(Student::toNameString)
-                .collect(Collectors.joining(connector));
+        String str = "";
+        int counter = 1;
+
+        for (Student student : students) {
+            str += "\n" + counter + ".  " + student.toNameString();
+            counter++;
+        }
+
+        return str;
     }
 
     @Override
