@@ -114,7 +114,6 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
-        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -125,7 +124,6 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         return filteredPersons;
     }
 

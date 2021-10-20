@@ -20,7 +20,7 @@ public class SortCommandParserTest {
         SortCommand sortByNextVisitCommand = new SortCommand(SORT_BY_NEXT_VISIT, true);
 
         assertParseSuccess(parser, String.format(" %s", PREFIX_LAST_VISIT), sortByLastVisitCommand);
-        assertParseSuccess(parser, String.format(" %s", SORT_BY_NEXT_VISIT), sortByNextVisitCommand);
+        assertParseSuccess(parser, String.format(" %s", PREFIX_VISIT), sortByNextVisitCommand);
     }
 
     @Test
