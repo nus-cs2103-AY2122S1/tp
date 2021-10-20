@@ -270,7 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                     | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user                         | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
-
+| `* *`  | user                                     | quickly batch-remove contacts whose SHN has been completed | clear outdated contacts |
 *{More to be added}*
 
 ### Use cases
@@ -383,22 +383,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
     Use case resumes from step 2.
 
-**Use case: UC06 - Clear all contacts**
+**Use case: UC06 - Clear persons with completed SHN periods**
 
 **MSS:**
 
-1. User chooses to clear all contacts.
-2.	Track2Gather warns user that all contacts will be deleted.
-3.	User chooses to proceed.
-4.	Track2Gather clears all contacts.
+1. User requests to list persons.
+2. Track2Gather shows a list of persons.
+3. User chooses to clear persons.
+4. Track2Gather clears all persons with completed SHN periods.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. User chooses not to proceed with clearing all contacts.
+* 2a. The list is empty.
     
     Use case ends.
+* 3a. There are no persons with completed SHN periods.
+
+  Use case ends.
 
 
 *{More to be added}*
@@ -463,7 +466,18 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+### Clearing person(s) with completed SHN periods
+
+1. Clearing person(s) while all persons are being shown
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    1. Test case: `clear`<br>
+       Expected: All persons with completed SHN periods are deleted from the list. Success message is shown. Timestamp in the status bar is updated.
+    
+    1. Test case: `clear x` (where x is any character)<br>
+       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
 
 ### Saving data
 
