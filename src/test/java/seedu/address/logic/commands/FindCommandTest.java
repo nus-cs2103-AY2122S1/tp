@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_CONTACTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -59,7 +59,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 0);
         FindableContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -69,7 +69,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullNameKeyword_singlePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FindableContainsKeywordsPredicate predicate = preparePredicate("Elle");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -79,7 +79,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullAddressKeyword_singlePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FindableContainsKeywordsPredicate predicate = preparePredicate("michegan");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -89,7 +89,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullPhoneKeyword_singlePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FindableContainsKeywordsPredicate predicate = preparePredicate("9482224");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -99,7 +99,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullReviewKeyword_singlePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FindableContainsKeywordsPredicate predicate = preparePredicate("bad");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -109,7 +109,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullEmailKeyword_singlePersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 1);
         FindableContainsKeywordsPredicate predicate = preparePredicate("alice@example.com");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -119,7 +119,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleFullKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 2);
         FindableContainsKeywordsPredicate predicate = preparePredicate("Meier");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -129,7 +129,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleFullKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         FindableContainsKeywordsPredicate predicate = preparePredicate("Kurz Meyer tokyo");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -139,7 +139,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_singleNonFullKeyword_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         FindableContainsKeywordsPredicate predicate = preparePredicate("Me");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
@@ -149,7 +149,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleNonFullKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CONTACTS_LISTED_OVERVIEW, 3);
         FindableContainsKeywordsPredicate predicate = preparePredicate("Paul Ku");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
