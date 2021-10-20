@@ -37,7 +37,7 @@ import seedu.fast.logic.commands.RemarkCommand;
 import seedu.fast.logic.commands.SortCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
 import seedu.fast.model.person.Appointment;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.Remark;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
@@ -88,7 +88,7 @@ public class FastParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new NameContainsQueriesPredicate(keywords)), command);
     }
 
     @Test

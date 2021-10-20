@@ -11,8 +11,8 @@ import seedu.fast.commons.util.TagUtil;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
-            + "and not more than 20 characters long, or follow the specified "
-            + "format for a PriorityTag";
+            + "and not more than 20 characters long, or follow the specified \n"
+            + "format for a PriorityTag (low, med or high)";
 
     public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
         + "Tags can be applied using the Add or Edit command.\n\n"

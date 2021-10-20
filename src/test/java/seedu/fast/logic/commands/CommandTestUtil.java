@@ -18,7 +18,7 @@ import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescripto
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
@@ -140,7 +140,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsQueriesPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
