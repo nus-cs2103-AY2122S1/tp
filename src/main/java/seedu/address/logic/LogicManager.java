@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -82,12 +81,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void updateDisplayTaskList(List<Task> taskList) {
-        model.updateDisplayTaskList(taskList);
+    public ObservableList<Task> getDisplayTaskList() {
+        return model.getDisplayTaskList();
     }
 
     @Override
-    public ObservableList<Task> getDisplayTaskList() {
-        return model.getDisplayTaskList();
+    public void displayPersonTaskList(Person person) {
+        model.displayPersonTaskList(person);
     }
 }

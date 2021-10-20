@@ -20,6 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -100,20 +101,9 @@ public class LogicManagerTest {
     @Test
     public void getDisplayTaskList_success() {
         Task[] taskList = {};
-        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
-        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
-                mockObservableList);
-        assertEquals(logic.getDisplayTaskList(), mockUnmodifiableObservableList);
-    }
-
-    @Test
-    public void updateDisplayTaskList_success() {
-        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
-        logic.updateDisplayTaskList(Arrays.asList(taskList));
-        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
-        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
-                mockObservableList);
-        assertEquals(logic.getDisplayTaskList(), mockUnmodifiableObservableList);
+        ObservableList<Task> observableList = FXCollections.observableList(Arrays.asList(taskList));
+        FilteredList<Task> filteredTasks = new FilteredList<>(observableList);
+        assertEquals(logic.getDisplayTaskList(), (ObservableList<Task>) filteredTasks);
     }
 
     @Test
