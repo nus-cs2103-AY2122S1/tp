@@ -41,6 +41,11 @@ class PriceTest {
     }
 
     @Test
+    void isValidPrice_invalidNegativeAmount() {
+        assertFalse(isValidPrice("-3"));
+    }
+
+    @Test
     void formatPrice_smallNumber() {
         Price p = new Price("1");
         assertEquals("$1", p.formatPrice());
