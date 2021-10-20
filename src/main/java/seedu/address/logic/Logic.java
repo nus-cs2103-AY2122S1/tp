@@ -53,7 +53,13 @@ public interface Logic {
     GuiSettings getGuiSettings();
 
     /**
-     * Set the user prefs' GUI settings.
+     * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Switches the AddressBook to that specified {@code Path filePath}
+     * in {@code addressBookFilePath} of {@code UserPrefs}
+     */
+    void switchAddressBook();
 }

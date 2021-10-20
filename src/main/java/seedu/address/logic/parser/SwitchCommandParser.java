@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SwitchCommand.MESSAGE_ADDRESSBOOK_NOT_FOUND;
 
 import java.nio.file.Path;
 
@@ -23,11 +24,17 @@ public class SwitchCommandParser implements Parser<SwitchCommand> {
         requireNonNull(args);
 
         String trimmedArgs = args.trim();
+        String lowercaseArgs = trimmedArgs.toLowerCase();
+
+        if (lowercaseArgs.isBlank()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwitchCommand.MESSAGE_USAGE));
+        }
+
         Path filePath;
         try {
-            filePath = ParserUtil.parseFilePath(trimmedArgs);
+            filePath = ParserUtil.parseFilePath(lowercaseArgs);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwitchCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_ADDRESSBOOK_NOT_FOUND, trimmedArgs), pe);
         }
 
         return new SwitchCommand(filePath);

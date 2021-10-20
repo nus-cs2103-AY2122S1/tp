@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -60,29 +59,7 @@ public class LogicManager implements Logic {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
 
-        if (command instanceof SwitchCommand) {
-            SwitchCommand sc = (SwitchCommand) command;
-            Path filePath = sc.getFilePath();
-            AddressBookStorage addressBookStorage = new JsonAddressBookStorage(filePath);
-            ReadOnlyAddressBook addressBook;
-            try {
-                Optional<ReadOnlyAddressBook> addressBookOptional = this.storage.readAddressBook(filePath);
-                if (addressBookOptional.isEmpty()) {
-                    logger.info("Data file not found. Will be starting with a sample AddressBook");
-                }
 
-                addressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            } catch (DataConversionException e) {
-                logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-                addressBook = new AddressBook();
-            } catch (IOException e) {
-                logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-                addressBook = new AddressBook();
-            }
-
-            this.model.setAddressBook(addressBook);
-            this.storage.switchAddressBook(addressBookStorage);
-        }
 
         return commandResult;
     }
@@ -120,5 +97,29 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public void switchAddressBook() {
+        Path filePath = getAddressBookFilePath();
+        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(filePath);
+        ReadOnlyAddressBook addressBook;
+        try {
+            Optional<ReadOnlyAddressBook> addressBookOptional = this.storage.readAddressBook(filePath);
+            if (addressBookOptional.isEmpty()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+
+            addressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            addressBook = new AddressBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            addressBook = new AddressBook();
+        }
+
+        this.model.setAddressBook(addressBook);
+        this.storage.switchAddressBook(addressBookStorage);
     }
 }

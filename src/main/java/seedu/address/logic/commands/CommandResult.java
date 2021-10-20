@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NORMAL;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCHING;
 
 import java.util.Objects;
 
@@ -11,19 +15,13 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** The application should exit. */
-    private final boolean exit;
-
+    private final SpecialCommandResult type;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, SpecialCommandResult type) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
+        this.type = type;
     }
 
     /**
@@ -31,7 +29,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, NORMAL);
     }
 
     public String getFeedbackToUser() {
@@ -39,11 +37,15 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return type.equals(SHOW_HELP);
     }
 
     public boolean isExit() {
-        return exit;
+        return type.equals(EXIT);
+    }
+
+    public boolean isSwitching() {
+        return type.equals(SWITCHING);
     }
 
     @Override
@@ -59,13 +61,25 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && type == otherCommandResult.type;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, type);
     }
 
+    /**
+     * Encapsulates the type of CommandResult
+     */
+    public enum SpecialCommandResult {
+        /** Normal command **/
+        NORMAL,
+        /** Help information should be shown to the user. */
+        SHOW_HELP,
+        /** The application should exit. */
+        EXIT,
+        /** The application is switching AddressBook **/
+        SWITCHING
+    }
 }

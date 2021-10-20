@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_SWITCH_SUCCESS;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCHING;
 
 
 import java.nio.file.Path;
@@ -15,6 +16,8 @@ public class SwitchCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switch between different address books\n"
             + "Parameters: switch {name of the addressbook}\n"
             + "Example: " + COMMAND_WORD + " addressbook2";
+
+    public static final String MESSAGE_ADDRESSBOOK_NOT_FOUND = "Address Book with this name not found: %1$s";
 
     private final Path filePath;
 
@@ -30,7 +33,7 @@ public class SwitchCommand extends Command {
         requireNonNull(model);
         model.setAddressBookFilePath(filePath);
 
-        return new CommandResult(String.format(MESSAGE_SWITCH_SUCCESS, filePath));
+        return new CommandResult(String.format(MESSAGE_SWITCH_SUCCESS, filePath), SWITCHING);
     }
 
     public Path getFilePath() {
