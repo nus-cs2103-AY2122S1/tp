@@ -36,9 +36,9 @@ class DeleteTaskCommandTest {
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
         Index targetTasksIndex = Index.fromZeroBased(model.getFilteredPersonList()
-                        .get(1)
-                        .getTasks()
-                        .size());
+                .get(1)
+                .getTasks()
+                .size());
 
         assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(null, null));
         assertThrows(NullPointerException.class, () -> new DeleteTaskCommand(INDEX_FIRST_PERSON, null));
@@ -61,7 +61,7 @@ class DeleteTaskCommandTest {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(targetPersonIndex, Index.fromZeroBased(0));
 
         CommandException commandException = Assertions.assertThrows(
-            CommandException.class, () -> deleteTaskCommand.execute(model));
+                CommandException.class, () -> deleteTaskCommand.execute(model));
 
         assert commandException != null;
 
@@ -76,7 +76,7 @@ class DeleteTaskCommandTest {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST_PERSON, targetTaskIndex);
 
         CommandException commandException = Assertions.assertThrows(
-            CommandException.class, () -> deleteTaskCommand.execute(model));
+                CommandException.class, () -> deleteTaskCommand.execute(model));
 
         assert commandException != null;
 

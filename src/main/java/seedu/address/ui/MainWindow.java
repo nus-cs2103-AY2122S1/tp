@@ -125,10 +125,10 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleMouseClicked(ListView<Person> personListView) {
         int selectedIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
-        String InputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
+        String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
 
         try {
-            executeCommand(InputCommand);
+            executeCommand(inputCommand);
         } catch (ParseException | CommandException e) {
             resultDisplay.setFeedbackToUser(e.getMessage());
         }

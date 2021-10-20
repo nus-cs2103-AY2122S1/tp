@@ -104,7 +104,7 @@ public class TaskListManager {
         nameOfChosenPerson = name;
 
         assert(taskListArchive.containsKey(name.toString())) : "taskListArchive probably"
-            + "not initialised properly.";
+                + "not initialised properly.";
 
         List<Task> taskList = taskListArchive.get(name.toString());
         assert(taskList != null);
