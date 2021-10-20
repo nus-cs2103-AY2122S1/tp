@@ -33,6 +33,22 @@ public class GenderStatistic {
         return (float) amount / total * 100;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GenderStatistic)) { //this handles null as well.
+            return false;
+        }
+
+        GenderStatistic otherGenderStats = (GenderStatistic) other;
+
+        return this.numberOfMales == otherGenderStats.numberOfMales
+                && this.numberOfFemales == otherGenderStats.numberOfFemales
+                && this.numberOfOthers == otherGenderStats.numberOfOthers;
+    }
+
     /**
      * Format state as text for viewing.
      */

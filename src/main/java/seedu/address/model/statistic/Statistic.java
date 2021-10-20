@@ -26,7 +26,7 @@ public class Statistic {
         this.list = list;
     }
 
-    private GenderStatistic computeGenderStatistic() {
+    GenderStatistic computeGenderStatistic() {
         int numberOfMales = 0;
         int numberOfFemales = 0;
         int numberOfOthers = 0;
@@ -46,7 +46,7 @@ public class Statistic {
         return new GenderStatistic(numberOfMales, numberOfFemales, numberOfOthers);
     }
 
-    private NationalityStatistic computeNationalityStatistic() {
+    NationalityStatistic computeNationalityStatistic() {
         HashMap<String, Integer> nationalitiesCount = new HashMap<String, Integer>();
 
         for (Person p: list) {
@@ -62,6 +62,20 @@ public class Statistic {
     @Override
     public int hashCode() {
         return list.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Statistic)) { //this handles null as well.
+            return false;
+        }
+
+        Statistic otherStats = (Statistic) other;
+
+        return this.list.equals(otherStats.list);
     }
 
     /**

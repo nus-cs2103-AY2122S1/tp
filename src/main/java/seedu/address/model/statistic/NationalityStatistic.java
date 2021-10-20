@@ -24,6 +24,20 @@ public class NationalityStatistic {
         this.nationalitiesCount = nationalitiesCount;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof NationalityStatistic)) { //this handles null as well.
+            return false;
+        }
+
+        NationalityStatistic otherNationalityStats = (NationalityStatistic) other;
+
+        return this.nationalitiesCount.equals(otherNationalityStats.nationalitiesCount);
+    }
+
     /**
      * Format state as text for viewing.
      */
