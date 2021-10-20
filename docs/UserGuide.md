@@ -61,7 +61,7 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -209,13 +209,14 @@ If there are changes to the data file that makes its format invalid, CSBook will
 ## Command summary
 
 Action | Format, Examples
+--------|------------------
 **Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] `<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **List** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Group** | `addgroup GROUPNAME`
+**Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
 **Delete Group** | `deletegroup GROUPNAME`
 **View Group** | `viewgroup GROUPNAME`
 **List Groups** | `listgroups`
