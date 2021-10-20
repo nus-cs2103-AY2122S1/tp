@@ -1,15 +1,20 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_CLASHING_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,6 +25,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -180,6 +186,38 @@ class LessonEditCommandTest {
             new EditLessonDescriptorBuilder().withSubject(TESTING_SUBJECT).build());
 
         assertCommandFailure(lessonEditCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidLessonIndex_failure() {
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withSubject(TESTING_SUBJECT).build();
+        LessonEditCommand lessonEditCommand =
+            prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
+
+        assertCommandFailure(lessonEditCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_clashingEditedLesson_failure() {
+        Lesson existingLesson = new LessonBuilder()
+                .withDate(VALID_DATE_PAST)
+                .withTimeRange(VALID_TIME_RANGE)
+                .build();
+        Lesson lessonBeforeEdit = new LessonBuilder().withDate(VALID_DATE_FUTURE).build();
+
+        Person personBeforeLessonEdit = new PersonBuilder(firstPerson)
+            .withLessons(existingLesson, lessonBeforeEdit)
+            .build();
+
+        model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withDate(VALID_DATE_PAST).withTimeRange(VALID_TIME_RANGE).build();
+
+        LessonEditCommand lessonEditCommand =
+            prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);
+
+        assertThrows(CommandException.class, () -> lessonEditCommand.execute(), MESSAGE_CLASHING_LESSON);
     }
 
     @Test
