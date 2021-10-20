@@ -1,5 +1,6 @@
 package seedu.address.encryption;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -25,6 +26,7 @@ public class EncryptionTest {
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String PASSWORD_ONE = "password_one";
     private static final String PASSWORD_TWO = "password_two";
+    private static final String TOO_LONG_PASSWORD = "1111111111111111111111111111111111";
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "EncryptionTest");
     private static final Path DECRYPTED_FILEPATH_JSON = TEST_DATA_FOLDER.resolve("testJson.json");
@@ -132,5 +134,11 @@ public class EncryptionTest {
 
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_ONE); // Cleanup
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON_TWO); // Cleanup
+    }
+
+    @Test
+    public void failure_whenTooLongPasswordIsSupplied() {
+        assertThrows(UnsupportedPasswordException.class, () -> EncryptionKeyGenerator.generateKey(TOO_LONG_PASSWORD));
+        assertDoesNotThrow(() -> EncryptionKeyGenerator.generateKey(PASSWORD_ONE));
     }
 }
