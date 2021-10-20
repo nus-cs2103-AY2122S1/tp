@@ -47,7 +47,7 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
 
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    // TODO: Remove password from production branch
+    // TODO: Remove hardcoded password by end of v1.3b
     private static final String PASSWORD = "password1234";
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
@@ -96,7 +96,9 @@ public class MainApp extends Application {
         try {
             if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
+                storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
                 FileUtil.createFile(userPrefs.getEncryptedFilePath());
+                cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
             } else {
                 cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             }
@@ -109,8 +111,12 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException e) { // will not be thrown
-            logger.warning("Encryption error. Will be starting with an empty AddressBook"); // in case thrown
+        } catch (InvalidAlgorithmParameterException | InvalidKeyException e) {
+            /*
+              These exceptions will never be thrown unless an invalid cipher or bad key (does not comply to the cipher)
+              is supplied, which will not be the user's fault.
+             */
+            logger.warning("Encryption error. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
 
@@ -148,7 +154,7 @@ public class MainApp extends Application {
             initializedConfig = new Config();
         }
 
-        //Update config file in case it was missing to begin with or there are new/unused fields
+        // Update config file in case it was missing to begin with or there are new/unused fields
         try {
             ConfigUtil.saveConfig(initializedConfig, configFilePathUsed);
         } catch (IOException e) {
@@ -180,7 +186,7 @@ public class MainApp extends Application {
             initializedPrefs = new UserPrefs();
         }
 
-        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        // Update prefs file in case it was missing to begin with or there are new/unused fields
         try {
             storage.saveUserPrefs(initializedPrefs);
         } catch (IOException e) {

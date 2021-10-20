@@ -57,10 +57,10 @@ public class LogicManager implements Logic {
             cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());
             cryptor.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
-            FileUtil.deleteFile(storage.getAddressBookFilePath()); // Cleanup
+            FileUtil.deleteFile(storage.getAddressBookFilePath());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        } catch (InvalidKeyException | InvalidAlgorithmParameterException e) { // will not be thrown
+        } catch (InvalidKeyException | InvalidAlgorithmParameterException e) {
             throw new CommandException(e.getMessage());
         }
 

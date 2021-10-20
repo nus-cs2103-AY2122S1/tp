@@ -84,6 +84,7 @@ public class Cryptor implements Cryptable {
     @Override
     public void decrypt(Path encryptedSourceFilePath, Path destinationFilePath)
             throws InvalidAlgorithmParameterException, IOException, InvalidKeyException {
+        logger.fine("Decrypting content from: " + encryptedSourceFilePath);
         FileUtil.writeToFile(destinationFilePath, decrypt(encryptedSourceFilePath));
     }
 
@@ -94,8 +95,6 @@ public class Cryptor implements Cryptable {
         if (isIllegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
-
-        logger.fine("Decrypting content from: " + encryptedSourceFilePath);
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
         byte[] fileIv = new byte[16];
         fileIn.read(fileIv);
