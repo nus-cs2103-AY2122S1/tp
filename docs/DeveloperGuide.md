@@ -192,7 +192,7 @@ between a student and a specific lesson. This student to be enrolled must meet a
 2. The student cannot already be enrolled in the lesson.
 
 When enrolled, the student will have that lesson added to their list
-of existing lessons, while the lesson size would increase by 1.
+of lessons they have currently signed up for, and lesson size would increase by 1.
 
 Given below is an example usage scenario and how the enroll operation behaves.
 _Note: For this usage, we only consider the main success scenario
@@ -202,7 +202,7 @@ and has not been enrolled in the lesson yet)._
 <ins>Step 1:</ins>
 
 User has a list of students and lessons presented in their
-TuitiONE application. The user has one has a `Lesson` with the lessoncode Math-P2-Wed-1800 and `grade`
+TuitiONE application. The user has a `Lesson` with the lessoncode Math-P2-Wed-1800 and `grade`
 P2 that they would like to enroll a `Student` named Alice of `grade` P2 into.
 The object state diagram is as such:
 

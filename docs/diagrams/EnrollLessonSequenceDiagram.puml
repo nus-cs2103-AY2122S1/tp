@@ -14,8 +14,6 @@ participant "l1:Lesson" as Lesson MODEL_COLOR
 participant ":Alice:Student" as Student MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 
-
-
 end box
 
 [-> LogicManager : execute("enroll 1 l/1")
