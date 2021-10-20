@@ -194,7 +194,7 @@ objects into one.
 The following sequence diagram shows how the mark command works.
 
 
-![Seq1](images/MarkSequenceDiagram.png)
+<img src="images/MarkSequenceDiagram.png" width="1224" height="656"/>
 
 The `unmark` command does the opposite — it calls `Person#mark()`, which replaces the
 `Period` that are contained in the `Person` with the `Period` objects representing
