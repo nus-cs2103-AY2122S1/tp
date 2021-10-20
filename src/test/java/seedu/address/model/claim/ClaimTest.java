@@ -17,7 +17,7 @@ import seedu.address.testutil.ClaimBuilder;
 
 public class ClaimTest {
     private final Claim defaultClaim = new ClaimBuilder(VALID_CLAIM_TITLE_AMY,
-            VALID_CLAIM_DESCRIPTION_AMY, VALID_CLAIM_STATUS_AMY).build();
+            VALID_CLAIM_DESCRIPTION_AMY, VALID_CLAIM_STATUS_AMY).buildClaim();
 
     @Test
     public void getTitle() {
@@ -47,14 +47,14 @@ public class ClaimTest {
         // different type -> return false
         assertFalse(defaultClaim.equals(5));
 
-        // different status, same title -> return true
-        assertTrue(defaultClaim.equals(new ClaimBuilder(defaultClaim)
-                .withStatus(VALID_CLAIM_STATUS_BOB).build()));
-        // different description, same title 0
-        assertTrue(defaultClaim.equals(new ClaimBuilder(defaultClaim)
-                .withDescription(VALID_CLAIM_DESCRIPTION_BOB).build()));
-        // Different title
+        // different status, same title -> return false
         assertFalse(defaultClaim.equals(new ClaimBuilder(defaultClaim)
-                .withTitle(VALID_CLAIM_TITLE_BOB).build()));
+                .withStatus(VALID_CLAIM_STATUS_BOB).buildClaim()));
+        // different description, same title -> return false
+        assertFalse(defaultClaim.equals(new ClaimBuilder(defaultClaim)
+                .withDescription(VALID_CLAIM_DESCRIPTION_BOB).buildClaim()));
+        // Different title -> return false
+        assertFalse(defaultClaim.equals(new ClaimBuilder(defaultClaim)
+                .withTitle(VALID_CLAIM_TITLE_BOB).buildClaim()));
     }
 }

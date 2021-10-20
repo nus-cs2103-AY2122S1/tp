@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.logic.commands.ClaimCommand.EditClaimDescriptor;
 import seedu.address.model.claim.Claim;
 import seedu.address.model.claim.Description;
 import seedu.address.model.claim.Status;
@@ -84,9 +85,21 @@ public class ClaimBuilder {
     /**
      * Build the claim and returns it.
      *
-     * @return A valid with the given attributes
+     * @return A valid claim with the given attributes
      */
-    public Claim build() {
+    public Claim buildClaim() {
         return new Claim(title, description, status);
+    }
+
+    /**
+     * Build the {@Code EditClaimDescriptor} and returns it
+     *
+     * @return A valid EditClaimDescriptor with the given attributes
+     */
+    public EditClaimDescriptor buildEditClaimDescriptor() {
+        EditClaimDescriptor editClaimDescriptor = new EditClaimDescriptor(title);
+        editClaimDescriptor.setDescription(description);
+        editClaimDescriptor.setStatus(status);
+        return editClaimDescriptor;
     }
 }

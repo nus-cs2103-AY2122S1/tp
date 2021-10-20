@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_INSURANCE = "Money";
     private static final String INVALID_CLAIM_TITLE = "@Title ";
-    private static final String INVALID_CLAIM_DESCRIPTION = " ";
+    private static final String INVALID_CLAIM_DESCRIPTION = " &*&*&*&*";
     private static final String INVALID_CLAIM_STATUS = "isCompleted";
 
     private static final String VALID_NAME = "Rachel Walker";
