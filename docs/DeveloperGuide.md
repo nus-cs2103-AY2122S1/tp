@@ -15,8 +15,17 @@ title: Developer Guide
     * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
     * [Filter Event feature](#completed-filter-event-feature)
+        + [Implementation details](#implementation-details)
+        + [Implementation rationale](#implementation-rationale)
+        + [Design considerations](#design-considerations)
     * [View Participant Details feature](#completed-view-participants-details-feature)
+        + [Implementation details](#implementation-details)
+        + [Implementation rationale](#implementation-rationale)
+        + [Design considerations](#design-considerations)
     * [View Event Details feature](#completed-view-event-details-feature)
+        + [Implementation details](#implementation-details)
+        + [Implementation rationale](#implementation-rationale)
+        + [Design considerations](#design-considerations)
     * [Undo/redo feature](#proposed-undoredo-feature)
         + [Proposed implementation](#proposed-implementation)
         + [Design considerations](#design-considerations)
@@ -196,7 +205,7 @@ This section describes some noteworthy details on how certain features are imple
 
 This feature allows Managera users to filter the event list by date of event and by time.
 
-#### How the feature is implemented
+#### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
 we can simply add a new `commandType` case for `FilterEventCommand` in `AddressBookParser`. 
@@ -206,21 +215,23 @@ Since this feature requires Managera to take in user input and determine if the 
 1. Date only; or
 2. Date and Time
 
-A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser`
-parses user's input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
-`EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the event list. 
+A `FilterEventCommandParser` is made to be responsible for this purpose. The `FilterEventCommandParser` parses user's 
+input and creates the `EventDateTimePredicate` which the `FilterEventCommand` will use to execute the filtering.
+`EventDateTimePredicate` implements `Predicate<Event>` which can be passed to a `FilteredList<Event>` to filter the 
+event list. 
 
-The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `EventDateTimePredicate` to filter
-the event list. When the command is executed, the `model` will filter the `FilteredList<Event>` using
-the `EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in `FilterEventCommand`.
+The `FilterEventCommand` created by `FilterEventCommandParser` will contain the `EventDateTimePredicate` to filter the 
+event list. When the command is executed, the `model` will filter the `FilteredList<Event>` using the 
+`EventDateTimePredicate` and display only events that fulfils the `EventDateTimePredicate` contained in 
+`FilterEventCommand`.
 
 
-#### Why is this implemented this way
+#### Implementation Rationale
 
 With considerations to how the `Event` class is implemented, some events do not have time associated to them.
-We feel that since all `Event` have a date associated through the `EventDate` class, filtering should
-be done primarily through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is
-included as an optional criteria for filtering.
+We feel that since all `Event` have a date associated through the `EventDate` class, filtering should be done primarily 
+through date i.e. `EventDate`. However, understanding that users might want to filter by time too, it is included as an 
+optional criteria for filtering.
 
 
 #### Design Considerations:
@@ -269,7 +280,7 @@ The following is the sequence diagram for how a `FilterEventCommand` works inter
 This feature allows Managera users to look for a specific participant and view their details. The search is done using
 the participant's ID since each participant has a unique ID.
 
-#### How the feature is implemented
+#### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
 we can simply add a new `commandType` case for `ViewCommand` in `AddressBookParser`.
@@ -284,7 +295,7 @@ the participant list. When the command is executed, the `model` will filter the 
 the `ParticipantIdMatchesGivenIdPredicate` and display the participant that fulfils the 
 `ParticipantIdMatchesGivenIdPredicate` contained in `ViewCommand`.
 
-#### Why is this implemented this way
+#### Implementation Rationale
 
 Since each participant has a unique ID, it provides a convenient way for the user to look for a specific participant if
 matching ID is used as the criterion. The `findParticipant` command provides similar functionality, but returns a list 
@@ -324,7 +335,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
 name since Managera employs a UniqueEventList and will not have more than one Event with a given name.
 
-#### How the feature is implemented
+#### Implementation Details
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we 
 simply added a new `commandType` case for `ShowEventDetailsCommand` in `AddressBookParser`.
@@ -338,7 +349,7 @@ The `ShowEventDetailsCommand` created by `ShowEventDetailsParser` contains the `
 Event list. When the command is executed, the `model` obtains the Event by filtering the `FilteredList<Event>` using 
 the `EventNamePredicate` and displays its details.
 
-#### Why is this implemented this way
+#### Implementation Rationale
 
 Since each Event has a unique name, it provides a convenient way for the user to look for a specific Event if matching 
 name is used as the criterion. 
