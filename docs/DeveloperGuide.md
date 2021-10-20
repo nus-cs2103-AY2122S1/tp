@@ -114,6 +114,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -154,7 +155,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-TBA
+### [Developed] Time conflict management
+
+The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
+defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
+* `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+* `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+
+Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
+
+Step1: The user enters `addclass` command. The `Timeslot` will check whehter the format of the
+time slot entered by user is correct. If it is incorrect, a `CommandException` will be thrown and user will receive
+a guidance to correct the time slot format.
+
+Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
+time slot exists. If there is a conflict, a `CommandException` will be thrown.
+
+Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
+
+### [Developed] Display of Timetable
+
+The construction of the read-only timetable is mainly facilitated by the `Timetable` class which is encapsulated in the `Tuition` package.
+The `Timetable` receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
+It generates a timetable with the help of the `TimetableInfoPage` class using the following operations:
+* `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list
+* `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time
+* `Timetable#insertSlot()` - Inserts all tuition classes into the timetable
+
+Given below is an example usage scenario and how the timetable is generated.
+
+Step1: The user enters `timetable` command. The `TimetableCommand` class will first check whether the tuition class list received is empty.
+If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
+
+Step2: Upon ensuring there are tuition classes, the list of tuition classes are passed to the `Timetable` class.
+It will proceed to parse the `TimeSlot` in each tuition class.
+After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided.
+
+Step3: The intended size of timetable is then passed to the `TimetableInfoPage` class.
+Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by the `TimetableInfoPage` class.
+
+Step4: The complete timetable is displayed to user through the `UI` component.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -379,28 +419,6 @@ Use case ends.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Implementation
-This section describes some noteworthy details on how certain features are implemented.
-
-### [Developed] Time conflict management
-The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
-defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
-- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
-- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
-
-Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
-
-Step1: The user enters `addclass` command. The `Timeslot` will check whehter the format of the
-time slot entered by user is correct. If it is incorrect, a `CommandException` will be thrown and user will receive
-a guidance to correct the time slot format.
-
-Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
-time slot exists. If there is a conflict, a `CommandException` will be thrown.
-
-Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
-
-
 
 ## **Appendix: Instructions for manual testing**
 
