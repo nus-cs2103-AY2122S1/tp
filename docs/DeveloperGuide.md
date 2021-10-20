@@ -234,6 +234,121 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Lesson Management
+
+#### Current Implementation
+
+Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
+in TAB. Added lessons can also be edited and deleted.
+
+#### Coming soon
+Chosen dates of recurring lessons can be mark as cancelled. User will be able to specify an end date to their recurring 
+lessons to be able to add another recurring lessons in the same timeslot without having to delete the previous one. This is
+for the sake of keeping records of past lessons.
+
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, a `TimeRange` for the
+`Lesson`, a `Subject` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
+represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.
+
+![LessonClassDiagram](images/LessonClassDiagram.png)
+
+The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
+objects with overlapping time ranges.
+
+Operations on lessons can be done using the `LessonAddCommand`, `LessonEditCommand` and `LessonDeleteCommand` commands.
+The class diagram given below shows how these commands are part of the `Logic` Component.
+
+![LessonLogicDiagram](images/LessonLogic.png)
+
+These commands are described in greater detail in the sections below.
+
+#### Adding Lessons
+The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
+
+The figure below shows the sequence diagram for adding a lesson to a student.
+
+![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
+
+The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in 
+the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student current has. Note that `toAdd`
+will not be added if there is an existing lesson with a clashing date and timeslot.
+
+```java
+public class LessonAddCommand extends UndoableCommand {
+    @Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        if (model.hasClashingLesson(toAdd)) {
+            throw new CommandException(MESSAGE_CLASHING_LESSON);
+        }
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
+
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
+        
+        // ... display updated TAB and command result message
+    }
+}
+```
+
+The lesson added will be displayed in the `LessonListPanel` in TAB.
+
+#### Editing Lessons
+The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
+with this lesson. The lesson will be edited per the given information input by the user.
+
+The figure below shows the sequence diagram for editing a lesson.
+
+![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
+
+In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
+the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
+object to create the `editedLesson` object.
+
+The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
+The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect 
+the changes made to the specified lesson.
+
+#### Deleting Lessons
+The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the 
+student with this lesson. 
+
+The figure below shows the sequence diagram for deleting a lesson.
+
+![LessonDeleteSequenceDiagram](images/LessonDeleteSequenceDiagram.png)
+
+The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
+
+#### Storing Lessons
+The set of `Lesson` objects are stored with the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
+to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the .json file, where all the 
+`Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
+into `model`-friendly `Lesson` objects.
+
+#### Displaying Lessons in GUI
+A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
+the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
+The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
+list of lessons to view.
+
+#### Design considerations:
+
+**Aspect: Data Structures to support lesson operations**
+
+* **Alternative 1 (current choice):** Store the `Lesson` objects in a set referenced by a `Person` object.
+    * Pros: Easy to implement.
+    * Cons: Operations have to be done with respect to the `Person` with the set containing the target lesson.
+
+* **Alternative 2:** Store a `UniqueLessonList` containing the lessons of all the students in TAB.
+    * Pros: No need to edit `Person` for `Lesson` operations.
+    * Cons: Operations are done with respect to the full list of lessons in the application, which means user cannot
+    isolate the list of lessons of a student of choice to operate on.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_

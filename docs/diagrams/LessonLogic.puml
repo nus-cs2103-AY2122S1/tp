@@ -1,0 +1,20 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Logic" {
+    Class "{abstract}\nCommand" as Command
+    Class "{abstract}\nUndoableCommand" as UndoableCommand
+    Class LessonAddCommand
+    Class LessonEditCommand
+    Class LessonDeleteCommand
+}
+
+Command <|-down- UndoableCommand
+UndoableCommand <|-down- LessonAddCommand
+UndoableCommand <|-down- LessonEditCommand
+UndoableCommand <|-down- LessonDeleteCommand
+
+@enduml
