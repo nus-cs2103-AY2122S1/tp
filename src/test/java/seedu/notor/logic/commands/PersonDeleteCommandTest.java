@@ -1,5 +1,6 @@
 package seedu.notor.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +18,7 @@ import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.executors.Executor;
+import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonDeleteExecutor;
 import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
@@ -39,7 +41,7 @@ public class PersonDeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonDeleteCommand deleteCommand = new PersonDeleteCommand(INDEX_FIRST_PERSON);
+        PersonDeleteCommand deleteCommand = new PersonDeleteCommandStub(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(PersonDeleteExecutor.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -52,7 +54,7 @@ public class PersonDeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        PersonDeleteCommand deleteCommand = new PersonDeleteCommand(outOfBoundIndex);
+        PersonDeleteCommand deleteCommand = new PersonDeleteCommandStub(outOfBoundIndex);
 
         assertExecuteFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -62,7 +64,7 @@ public class PersonDeleteCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonDeleteCommand deleteCommand = new PersonDeleteCommand(INDEX_FIRST_PERSON);
+        PersonDeleteCommand deleteCommand = new PersonDeleteCommandStub(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(PersonDeleteExecutor.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
@@ -116,4 +118,42 @@ public class PersonDeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
+    private static class PersonDeleteExecutorStub extends PersonDeleteExecutor {
+        public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+        public PersonDeleteExecutorStub(Index index) {
+            super(index);
+        }
+
+        @Override
+        public CommandResult execute() throws ExecuteException {
+            Person toBeDeletedPerson = super.getPerson();
+            model.deletePerson(toBeDeletedPerson);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, toBeDeletedPerson));
+        }
+
+    }
+    private static class PersonDeleteCommandStub extends PersonDeleteCommand {
+
+        private final PersonDeleteExecutorStub executor;
+
+        /**
+         * Constructor for a PersonDeleteCommand.
+         *
+         * @param index Index of the person to be deleted.
+         */
+        public PersonDeleteCommandStub(Index index) {
+            super(index);
+            requireNonNull(index);
+            this.executor = new PersonDeleteExecutorStub(index);
+        }
+
+        @Override
+        public CommandResult execute() throws ExecuteException {
+            return executor.execute();
+        }
+
+    }
+
 }

@@ -9,7 +9,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.executors.person.PersonNoteExecutor;
 
 /**
- *
+ * Shows the Note of the person by the given index.
  */
 public class PersonNoteCommand extends PersonCommand {
     public static final String COMMAND_WORD = "note";

@@ -1,5 +1,6 @@
 package seedu.notor.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.notor.testutil.TypicalPersons.getTypicalNotor;
 
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        CommandTestUtil.assertExecuteSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertExecuteSuccess(new ClearCommandStub(), model, ClearCommand.MESSAGE_SUCCESS,
+                expectedModel);
     }
 
     @Test
@@ -25,7 +27,16 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalNotor(), new UserPrefs());
         expectedModel.setNotor(new Notor());
 
-        CommandTestUtil.assertExecuteSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertExecuteSuccess(new ClearCommandStub(), model, ClearCommand.MESSAGE_SUCCESS,
+                expectedModel);
+    }
+    private static class ClearCommandStub extends ClearCommand {
+        @Override
+        public CommandResult execute(Model model) {
+            requireNonNull(model);
+            model.setNotor(new Notor());
+            return new CommandResult(MESSAGE_SUCCESS);
+        }
     }
 
 }
