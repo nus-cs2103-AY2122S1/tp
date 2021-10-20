@@ -23,7 +23,7 @@ public class SupplierBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_SUPPLY_TYPE = "Chicken";
-    public static final String DEFAULT_DELIVERY_DETAIL = "Every 3rd Friday of the Month";
+    public static final String DEFAULT_DELIVERY_DETAIL = "12:00 19-09-2021";
 
     private Name name;
     private Phone phone;

@@ -58,7 +58,7 @@ public class AddressBookParserTest {
         assertEquals(new AddCustomerCommand(customer), command);
     }
     @Test
-    public void parseCommand_addemployee() throws Exception {
+    public void parseCommand_addEmployee() throws Exception {
         Employee employee = new EmployeeBuilder().build();
         AddEmployeeCommand command = (AddEmployeeCommand) parser.parseCommand(EmployeeUtil
                 .getAddEmployeeCommand(employee));
@@ -73,7 +73,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_deleteemployee() throws Exception {
+    public void parseCommand_deleteEmployee() throws Exception {
         DeleteEmployeeCommand command = (DeleteEmployeeCommand) parser.parseCommand(
                 DeleteEmployeeCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteEmployeeCommand(INDEX_FIRST_PERSON), command);
@@ -90,7 +90,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_editemployee() throws Exception {
+    public void parseCommand_editEmployee() throws Exception {
         Employee employee = new EmployeeBuilder().build();
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(employee).build();
         System.out.println(EditEmployeeCommand.COMMAND_WORD
