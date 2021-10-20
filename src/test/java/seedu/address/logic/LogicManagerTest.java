@@ -17,8 +17,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -57,8 +57,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete apple pie";
-        assertCommandException(deleteCommand, String.format(DeleteCommand.MESSAGE_ITEM_NAME_NOT_FOUND, "apple pie"));
+        String removeCommand = "remove apple pie";
+        assertCommandException(removeCommand, String.format(RemoveCommand.MESSAGE_ITEM_NOT_FOUND, "apple pie"));
     }
 
     @Test

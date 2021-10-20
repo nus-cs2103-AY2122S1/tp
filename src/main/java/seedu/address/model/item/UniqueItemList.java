@@ -37,23 +37,7 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public boolean contains(Item toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameItem);
-    }
-
-    /**
-     * Returns true if the list contains an item with the given name
-     */
-    public boolean contains(Name name) {
-        requireNonNull(name);
-        return internalList.stream().anyMatch(item -> name.equals(item.getName()));
-    }
-
-    /**
-     * Returns true if the list contains an item with the given id
-     */
-    public boolean contains(String id) {
-        requireNonNull(id);
-        return internalList.stream().anyMatch(item -> id.equals(item.getId()));
+        return internalList.stream().anyMatch(x -> toCheck.isSameItem(x) && x.getCount() > 0);
     }
 
     /**
@@ -74,26 +58,6 @@ public class UniqueItemList implements Iterable<Item> {
     public Optional<Item> getItem(Item item) {
         requireNonNull(item);
         return internalList.stream().filter(item::equals).findFirst();
-    }
-
-    /**
-     * Returns an optional of the item in the list with the given {@code name}.
-     * If item does not exist, return an empty optional.
-     */
-    public Optional<Item> getItem(Name name) {
-        requireNonNull(name);
-        return internalList.stream()
-                .filter(item -> item.getName().equals(name)).findFirst();
-    }
-
-    /**
-     * Returns an optional of the item in the list with the given {@code id}.
-     * If item does not exist, return an empty optional.
-     */
-    public Optional<Item> getItem(String id) {
-        requireNonNull(id);
-        return internalList.stream()
-                .filter(item -> item.getId().equals(id)).findFirst();
     }
 
     /**

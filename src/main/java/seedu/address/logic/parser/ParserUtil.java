@@ -85,7 +85,7 @@ public class ParserUtil {
             throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
         }
 
-        if (Integer.parseInt(count) >= 0) {
+        if (Integer.parseInt(count) > 0) {
             return Integer.parseInt(count);
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);

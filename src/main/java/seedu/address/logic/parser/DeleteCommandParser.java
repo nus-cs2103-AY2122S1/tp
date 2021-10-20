@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Name;
+import seedu.address.model.item.ItemDescriptor;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -23,25 +23,23 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT);
 
-        // Check that either name (preamble) or id is specified, not both
-        if (!(argMultimap.getPreamble().isEmpty() ^ argMultimap.getValue(PREFIX_ID).isEmpty())) {
+        // Check that either name or id specified
+        if (argMultimap.getPreamble().isEmpty() && argMultimap.getValue(PREFIX_ID).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
+        ItemDescriptor toDeleteDescriptor = new ItemDescriptor();
 
-        int count = -1;
-        if (argMultimap.getValue(PREFIX_COUNT).isPresent()) {
-            count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
-        }
-
+        // Parse name
         if (!argMultimap.getPreamble().isEmpty()) {
-            // name specified
-            Name name = new Name(argMultimap.getPreamble());
-            return new DeleteCommand(name, count);
-        } else {
-            // id specified
-            String id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-            return new DeleteCommand(id, count);
+            toDeleteDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
         }
+
+        // Parse id
+        if (!argMultimap.getValue(PREFIX_ID).isEmpty()) {
+            toDeleteDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
+        }
+
+        return new DeleteCommand(toDeleteDescriptor);
     }
 
 }

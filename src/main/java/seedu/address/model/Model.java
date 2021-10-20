@@ -64,38 +64,15 @@ public interface Model {
     boolean hasItem(Item item);
 
     /**
-     * Returns true if an item with the given {@code name} exists in the inventory.
-     */
-    boolean hasItem(Name name);
-
-    /**
-     * Returns true if an item with the given {@code id} exists in the inventory.
-     * @see ItemDescriptor#isMatch(Item)
-     */
-    boolean hasItem(String id);
-
-    /**
      * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
      */
     List<Item> getItems(ItemDescriptor descriptor);
 
     /**
-     * Deletes item in the inventory with the given name.
+     * Deletes {@code item} from the inventory .
      * The item must exist in the inventory.
-     * @param name name of the item to remove
-     * @param count count of the item to remove, set to -1 to remove all
-     * @returns the deleted item
      */
-    Item deleteItem(Name name, int count);
-
-    /**
-     * Deletes item in the inventory with the given id.
-     * The item must exist in the inventory.
-     * @param id id of the item to remove
-     * @param count count of the item to remove, set to -1 to remove all
-     * @returns the deleted item
-     */
-    Item deleteItem(String id, int count);
+    void deleteItem(Item item);
 
     /**
      * Adds the given item into inventory
@@ -110,10 +87,17 @@ public interface Model {
     void setItem(Item target, Item editedItem);
 
     /**
-     * Increments the count of the given item {@code target} with {@code amount}.
+     * Increments the count of the given {@code target} in the inventory by {@code amount}.
      * {@code target} must exist in the inventory.
      */
     void restockItem(Item target, int amount);
+
+    /**
+     * Decrements the count of the given {@code target} in the inventory by {@code amount}.
+     * {@code target} must exist in the inventory.
+     * {@code amount} must be less than {@code target}'s count.
+     */
+    void removeItem(Item target, int amount);
 
     /**
      * Sorts the item list using the given {@code comparator}.
@@ -155,20 +139,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemList(Predicate<Item> predicate);
-
-    /**
-     * Gets Item with the same name.
-     *
-     * @param name The name of the item that wants to be searched
-     * @return the Item with the same name.
-     */
-    Item getItemWithName(String name);
-
-    /**
-     * Gets Item with the same id.
-     *
-     * @param id The name of the item that wants to be searched
-     * @return the Item with the same name.
-     */
-    Item getItemWithId(String id);
 }

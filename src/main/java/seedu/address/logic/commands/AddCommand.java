@@ -33,7 +33,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "popular";
 
     public static final String MESSAGE_SUCCESS_NEW = "New item added: %1$s";
-    public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %dx %s";
+    public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %d x %s";
     public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before,"
             + " please provide both a name and id";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
@@ -75,7 +75,7 @@ public class AddCommand extends Command {
 
         Item target = matchingItems.get(0);
         int amount = toAddDescriptor.getCount().get();
-        model.restockItem(target, toAddDescriptor.getCount().get());
+        model.restockItem(target, amount);
         return new CommandResult(String.format(MESSAGE_SUCCESS_REPLENISH, amount, target.getName()));
     }
 

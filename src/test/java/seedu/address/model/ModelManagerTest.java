@@ -23,7 +23,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.model.order.Order;
 import seedu.address.testutil.InventoryBuilder;
@@ -89,31 +88,18 @@ public class ModelManagerTest {
     public void hasItem_nullItem_throwsNullPointerException() {
         //Search by item
         assertThrows(NullPointerException.class, () -> modelManager.hasItem((Item) null));
-        //Search by name
-        assertThrows(NullPointerException.class, () -> modelManager.hasItem((Name) null));
-        //Search by id
-        assertThrows(NullPointerException.class, () -> modelManager.hasItem((String) null));
     }
 
     @Test
     public void hasItem_itemNotInInventory_returnsFalse() {
-        // Search by item
         assertFalse(modelManager.hasItem(APPLE_PIE));
-        // Search by name
-        assertFalse(modelManager.hasItem(APPLE_PIE.getName()));
-        // Search by id
-        assertFalse(modelManager.hasItem(APPLE_PIE.getId()));
     }
 
     @Test
     public void hasItem_itemInInventory_returnsTrue() {
         modelManager.addItem(APPLE_PIE);
-        // Search by item
+
         assertTrue(modelManager.hasItem(APPLE_PIE));
-        // Search by name
-        assertTrue(modelManager.hasItem(APPLE_PIE.getName()));
-        // Search by id
-        assertTrue(modelManager.hasItem(APPLE_PIE.getId()));
     }
 
     @Test

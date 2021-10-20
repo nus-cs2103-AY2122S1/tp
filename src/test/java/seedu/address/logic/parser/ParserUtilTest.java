@@ -20,6 +20,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtilTest {
     private static final String INVALID_NAME = "Pudding^";
     private static final String INVALID_TAG = "#nice";
+    private static final String INVALID_COUNT_ZERO = "0";
     private static final String INVALID_COUNT_1 = "sweet";
     private static final String INVALID_COUNT_2 = "-1";
     private static final String INVALID_Id = "abc";
@@ -133,6 +134,11 @@ public class ParserUtilTest {
     @Test
     public void parseCount_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_1));
+    }
+
+    @Test
+    public void parseCount_zeroNumber_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCount(INVALID_COUNT_ZERO));
     }
 
     @Test
