@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -201,12 +202,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code interview} is invalid.
      */
-    public static Interview parseInterview(String interview) throws ParseException {
+    public static Optional<Interview> parseInterview(String interview) throws ParseException {
         requireNonNull(interview);
         String trimmedTime = interview.trim();
+        if (interview.isEmpty()) { // parse empty interview
+            return Optional.of(Interview.EMPTY_INTERVIEW);
+        }
+
         if (!Interview.isValidInterviewTime(trimmedTime)) {
             throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
         }
-        return new Interview(interview);
+        return Optional.of(new Interview(interview));
     }
 }

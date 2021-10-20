@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -56,8 +57,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 argMultimap.getValue(PREFIX_LEVEL_OF_EDUCATION).get());
         Experience experience = ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Interview interview = ParserUtil.parseInterview(
-                argMultimap.getValue(PREFIX_INTERVIEW).get());
+        Optional<Interview> interview = ParserUtil.parseInterview(
+                argMultimap.getValue(PREFIX_INTERVIEW).orElse(""));
 
         Person person = new Person(name, phone, email, role, employmentType,
                 expectedSalary, levelOfEducation, experience, tagList, interview);

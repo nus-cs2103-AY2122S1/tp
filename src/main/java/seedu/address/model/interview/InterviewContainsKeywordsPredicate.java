@@ -22,7 +22,7 @@ public class InterviewContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return keywords.stream()
                 .anyMatch(keyword ->
-                        StringUtil.isIntegerLargerOrEqualToValue(person.getInterview().parseTime, keyword));
+                        StringUtil.containsWordIgnoreCase(person.getInterview().get().parseTime, keyword));
     }
 
     @Override
