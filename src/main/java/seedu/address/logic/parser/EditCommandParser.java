@@ -17,7 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.position.Position;
+import seedu.address.model.module.member.position.Position;
 
 /**
  * Parses input arguments and creates a new EditCommand object

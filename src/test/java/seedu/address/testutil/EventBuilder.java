@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import seedu.address.model.data.Name;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.event.EventDate;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.EventDate;
+import seedu.address.model.module.member.Member;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -16,7 +16,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class EventBuilder {
 
     public static final String DEFAULT_NAME = "CYCLING";
-    public static final String DEFAULT_DATE = "12-12-2022";
+    public static final String DEFAULT_DATE = "12/12/2022";
     public static final Set<Member> DEFAULT_PARTICIPANTS = Set.of(TypicalMembers.ALICE, TypicalMembers.BOB,
             TypicalMembers.BENSON);
 
@@ -37,14 +37,14 @@ public class EventBuilder {
     }
 
     /**
-     * Initializes the EventBuilder with the data of {@code EventToCopy}.
+     * Initializes the EventBuilder with the data of {@code eventToCopy}.
      *
-     * @param EventToCopy is the event to copy
+     * @param eventToCopy is the event to copy
      */
-    public EventBuilder(Event EventToCopy) {
-        name = EventToCopy.getName();
-        date = EventToCopy.getDate();
-        participants = EventToCopy.getMap();
+    public EventBuilder(Event eventToCopy) {
+        name = eventToCopy.getName();
+        date = eventToCopy.getDate();
+        participants = eventToCopy.getMap();
 
     }
 

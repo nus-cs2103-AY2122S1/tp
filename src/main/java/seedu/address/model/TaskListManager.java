@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskList;
 
 /**
  * Handles the operation on the {@code TaskList} of a specified {@code Member}.

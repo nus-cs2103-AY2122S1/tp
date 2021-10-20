@@ -10,13 +10,13 @@ src/main/resources/docs/
 /*.iml
 
 # Storage/log files
-/data/
+/module/
 /config.json
 /preferences.json
 /*.log.*
 
 # Test sandbox files
-src/test/data/sandbox/
+src/test/module/sandbox/
 
 # MacOS custom attributes files created by Finder
 .DS_Store

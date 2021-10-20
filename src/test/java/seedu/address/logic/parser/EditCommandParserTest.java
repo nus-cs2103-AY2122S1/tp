@@ -36,11 +36,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.member.Address;
-import seedu.address.model.data.member.Email;
-import seedu.address.model.data.member.Phone;
-import seedu.address.model.position.Position;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.member.Address;
+import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Phone;
+import seedu.address.model.module.member.position.Position;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditCommandParserTest {

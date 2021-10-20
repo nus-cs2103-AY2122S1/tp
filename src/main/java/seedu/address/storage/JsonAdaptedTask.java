@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.task.Task;
 /**
  * Jackson-friendly version pf {@link Task}
  */

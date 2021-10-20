@@ -8,7 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.member.Member;
 
 /**
  * Panel containing the list of members.

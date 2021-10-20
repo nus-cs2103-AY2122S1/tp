@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.position.Position;
+import seedu.address.model.module.member.position.Position;
 
 /**
  * Jackson-friendly version of {@link Position}.
