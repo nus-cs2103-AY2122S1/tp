@@ -1,7 +1,6 @@
 package tutoraid.model.lesson;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import tutoraid.model.student.Student;
 
