@@ -104,7 +104,7 @@ class JsonAdaptedLesson {
         final Subject modelSubject = new Subject(subject);
 
         if (lessonRates == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonRates.class.getSimpleName()));
         }
         if (!LessonRates.isValidLessonRates(lessonRates)) {
             throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);

@@ -1,7 +1,26 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
+import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LESSON_RATES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_RATES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -10,7 +29,12 @@ import static seedu.address.testutil.TypicalLessons.PAST_MAKEUP_LESSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeRange;
 import seedu.address.testutil.LessonBuilder;
 
 public class LessonAddCommandParserTest {

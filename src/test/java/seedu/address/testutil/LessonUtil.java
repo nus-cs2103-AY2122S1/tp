@@ -1,9 +1,14 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+
 import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.model.lesson.Lesson;
-
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Lesson.
