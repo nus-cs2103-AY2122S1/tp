@@ -44,8 +44,8 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public static boolean isValidAppointmentDate(String test) {
         try {
-            LocalDate date = LocalDate.parse(test, DATE_FORMATTER);
-            return !date.isBefore(LocalDate.now());
+            LocalDate.parse(test, DATE_FORMATTER);
+            return true;
         } catch (DateTimeParseException e) {
             return false;
         }

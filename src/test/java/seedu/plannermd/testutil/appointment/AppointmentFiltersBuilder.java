@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
@@ -17,12 +19,13 @@ import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
  */
 public class AppointmentFiltersBuilder {
 
-    private AppointmentFilters filters = AppointmentFilters.allAppointmentsFilter();
+    private AppointmentFilters filters;
 
     /**
      * Initializes the AppointmentFilterBuilder with the default values.
      */
     public AppointmentFiltersBuilder() {
+        filters = AppointmentFilters.allAppointmentsFilter();
     }
 
     /**
@@ -38,7 +41,7 @@ public class AppointmentFiltersBuilder {
      * Sets the {@code AppointmentFilters} that we are building to filter for upcoming appointments.
      */
     public AppointmentFiltersBuilder withUpcoming() {
-        filters.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
+        filters.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)));
         return this;
     }
 
@@ -75,10 +78,26 @@ public class AppointmentFiltersBuilder {
     }
 
     /**
+     * Sets the {@code hasPatient} of the {@code AppointmentFilters} that we are building.
+     */
+    public AppointmentFiltersBuilder withPatientKeywords(String... keywords) {
+        filters.setHasPatient(new AppointmentContainsPatientPredicate(Arrays.asList(keywords)));
+        return this;
+    }
+
+    /**
      * Sets the {@code hasDoctor} of the {@code AppointmentFilters} that we are building.
      */
     public AppointmentFiltersBuilder withDoctorKeywords(List<String> keywords) {
         filters.setHasDoctor(new AppointmentContainsDoctorPredicate(keywords));
+        return this;
+    }
+
+    /**
+     * Sets the {@code hasDoctor} of the {@code AppointmentFilters} that we are building.
+     */
+    public AppointmentFiltersBuilder withDoctorKeywords(String... keywords) {
+        filters.setHasDoctor(new AppointmentContainsDoctorPredicate(Arrays.asList(keywords)));
         return this;
     }
 

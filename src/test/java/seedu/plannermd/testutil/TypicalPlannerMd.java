@@ -25,7 +25,7 @@ public class TypicalPlannerMd {
         }
 
         for (Appointment appointment: getTypicalAppointments()){
-
+            pm.addAppointment(appointment);
         }
         return pm;
     }

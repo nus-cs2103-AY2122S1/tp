@@ -1,28 +1,39 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
-import java.util.function.Predicate;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
-import seedu.plannermd.logic.commands.CommandResult;
-import seedu.plannermd.logic.commands.exceptions.CommandException;
-import seedu.plannermd.model.Model;
-import seedu.plannermd.model.appointment.Appointment;
+public class FilterAppointmentCommand extends FilterCommand {
 
-public class FilterAppointmentCommand extends AppointmentCommand {
+    public static final String COMMAND_WORD = "appt -f";
 
-    public static final String MESSAGE_USAGE = "Filter all appointments according to the"
-            + "filters parameters given.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all appointments according to the"
+            + "filters parameters given.\n"
+            + "Parameters: [" + PREFIX_PATIENT + "PATIENT NAME] [" + PREFIX_DOCTOR + "DOCTOR_NAME] ["
+            + PREFIX_START + "START DATE] [" + PREFIX_END + "END DATE]\n" + "Example: "
+            + COMMAND_WORD + " " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "Bob "
+            + PREFIX_START + "15/10/2021 " + PREFIX_END + "18/10/2021";
 
-    private AppointmentFilters filters;
-    private String userMessage;
-
-    public FilterAppointmentCommand(AppointmentFilters filters, String userMessage) {
-        this.filters = filters;
-        this.userMessage = userMessage;
+    public FilterAppointmentCommand(AppointmentFilters filters) {
+        super(filters);
     }
+
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        Predicate<Appointment> allFilters = filters.collectAllFilters();
-        model.updateFilteredAppointmentList(allFilters);
-        return null;
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FilterAppointmentCommand)) {
+            return false;
+        }
+
+        // state check
+        FilterAppointmentCommand e = (FilterAppointmentCommand) other;
+        return getFilters().equals(e.getFilters());
     }
 }

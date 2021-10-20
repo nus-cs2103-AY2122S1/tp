@@ -1,27 +1,35 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
-import java.util.function.Predicate;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 
-import seedu.plannermd.logic.commands.CommandResult;
-import seedu.plannermd.logic.commands.exceptions.CommandException;
-import seedu.plannermd.model.Model;
-import seedu.plannermd.model.appointment.Appointment;
+public class FilterUpcomingAppointmentCommand extends FilterCommand {
 
-public class FilterUpcomingAppointmentCommand extends AppointmentCommand {
+    public static final String COMMAND_WORD = "appt -u";
 
-    private AppointmentFilters filters;
-    private String userMessage;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all upcoming appointments according to the"
+            + "filters parameters given.\n"
+            + "Parameters: [" + PREFIX_PATIENT + "PATIENT NAME] [" + PREFIX_DOCTOR + "DOCTOR_NAME\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "Bob";
 
-    public FilterUpcomingAppointmentCommand(AppointmentFilters filters, String userMessage) {
-        this.filters = filters;
-        this.userMessage = userMessage;
+    public FilterUpcomingAppointmentCommand(AppointmentFilters filters) {
+        super(filters);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        Predicate<Appointment> allFilters = filters.collectAllFilters();
-        model.updateFilteredAppointmentList(allFilters);
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
 
-        return null;
+        // instanceof handles nulls
+        if (!(other instanceof FilterUpcomingAppointmentCommand)) {
+            return false;
+        }
+
+        // state check
+        FilterUpcomingAppointmentCommand e = (FilterUpcomingAppointmentCommand) other;
+        return getFilters().equals(e.getFilters());
     }
 }

@@ -3,6 +3,7 @@ package seedu.plannermd.logic.commands.apptcommand;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,7 +31,7 @@ public class AppointmentFilters {
 
     public static AppointmentFilters upcomingAppointmentsFilter() {
         AppointmentFilters filter = new AppointmentFilters();
-        filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
+        filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)));
         return filter;
     }
 
