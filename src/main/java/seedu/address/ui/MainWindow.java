@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -89,6 +91,13 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+
+        // Fix dimension based on screen resolution
+        Dimension dimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        primaryStage.setMaxWidth(dimensions.getWidth() / 1.8);
+        primaryStage.setMaxHeight(dimensions.getHeight() / 1.2);
+        primaryStage.setMinWidth(dimensions.getWidth() / 2);
+        primaryStage.setMinHeight(dimensions.getHeight() / 1.4);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());

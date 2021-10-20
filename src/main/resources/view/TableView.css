@@ -13,14 +13,14 @@
 
 .table-view .column-header-background {
     -fx-background-color: #121212;
-    -fx-background-radius: 0px 0px 0px 0px;
-    -fx-background-insets: 0 0px 0 0;
+    -fx-background-radius: 0em 0em 0em 0em;
+    -fx-background-insets: 0 0em 0 0;
     -fx-padding: 0 0 0 0;
 }
 
 .table-view .column-header {
     -fx-background-color: transparent;
-    -fx-font-size: 11pt;
+    -fx-font-size: 0.95em;
     -fx-font-family: "Open Sans Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -28,9 +28,9 @@
 
 .table-view .table-cell{
     -fx-border-color: transparent;
-    -fx-padding: 3 0 3 10px;
+    -fx-padding: 3 0 3 0.8em;
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 1.05em;
 }
 
 .table-row-cell: hover {
@@ -59,5 +59,5 @@
 }
 
 .table-row-cell:empty .table-cell {
-    -fx-border-width: 0px;
+    -fx-border-width: 0em;
 }

@@ -83,7 +83,7 @@
     &:not(:last-child) {
       margin-right: 0;
     }
-    margin-left: 20px;
+    margin-left: 1.25em;
   }
 
   @media screen and (min-width: $on-medium) {
@@ -109,7 +109,7 @@
       padding: 0;
 
       &:not(:last-child) {
-        margin-right: 20px;
+        margin-right: 1.25em;
       }
       margin-left: auto;
     }
