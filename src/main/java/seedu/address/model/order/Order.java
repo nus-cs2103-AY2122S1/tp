@@ -37,6 +37,14 @@ public class Order {
         this.productId = productId;
         this.quantity = quantity;
     }
+    /**
+     * Constructor of {@code Order}, assume attributes to be valid.
+     */
+    public Order(LocalDate time, int productId, Quantity quantity) {
+        this.time = time;
+        this.productId = productId;
+        this.quantity = quantity;
+    }
 
     private static boolean isValidProductID(int productId, Model model) {
         return model.hasProduct(productId);
