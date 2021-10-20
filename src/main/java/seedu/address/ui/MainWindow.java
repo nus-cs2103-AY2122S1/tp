@@ -32,6 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private SummaryPanel summaryPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane panelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +112,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        panelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +122,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        summaryPanel = new SummaryPanel(logic.getSummary());
     }
 
     /**
@@ -133,6 +136,31 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Shows summary panel.
+     */
+    @FXML
+    private void handleSummary() {
+        if (panelPlaceholder.getChildren().contains(summaryPanel.getRoot())) {
+            return;
+        }
+        summaryPanel = new SummaryPanel(logic.getSummary());
+        panelPlaceholder.getChildren().remove(personListPanel.getRoot());
+        panelPlaceholder.getChildren().add(summaryPanel.getRoot());
+    }
+
+    /**
+     * Shows summary panel.
+     */
+    @FXML
+    private void handlePersonList() {
+        if (!panelPlaceholder.getChildren().contains(summaryPanel.getRoot())) {
+            return;
+        }
+        panelPlaceholder.getChildren().remove(summaryPanel.getRoot());
+        panelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
@@ -177,6 +205,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowSummary()) {
+                handleSummary();
+            } else {
+                handlePersonList();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

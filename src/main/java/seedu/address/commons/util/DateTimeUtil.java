@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Helper functions for handling datetime
@@ -43,6 +44,41 @@ public class DateTimeUtil {
      */
     public static boolean isPast(LocalDateTime test) {
         return test.isBefore(LocalDateTime.now());
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is within the next 7 days.
+     */
+    public static boolean isThisWeek(LocalDateTime test) {
+        return !test.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS))
+                   && !test.isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).plusDays(7));
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is within the period from the present to the end of the month.
+     */
+    public static boolean isThisMonth(LocalDateTime test) {
+        LocalDateTime firstDayOfNextMonth =
+                LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).withDayOfMonth(1).plusMonths(1);
+        return !test.isBefore(LocalDateTime.now())
+                   && test.isBefore(firstDayOfNextMonth);
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is within the past 7 days.
+     */
+    public static boolean isLastWeek(LocalDateTime test) {
+        return !test.isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS))
+                   && !test.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).minusDays(7));
+    }
+
+    /**
+     * Returns true if the datetime {@code test} is within the last month.
+     */
+    public static boolean isLastMonth(LocalDateTime test) {
+        LocalDateTime firstDayOfCurrMonth = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).withDayOfMonth(1);
+        return test.isBefore(firstDayOfCurrMonth)
+                   && !test.isBefore(firstDayOfCurrMonth.minusMonths(1));
     }
 
 }
