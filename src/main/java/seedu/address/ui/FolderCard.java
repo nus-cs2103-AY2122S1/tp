@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.folder.Folder;
@@ -29,6 +30,8 @@ public class FolderCard extends UiPart<Region> {
     private Label folderName;
     @FXML
     private Label id;
+    @FXML
+    private FlowPane contacts;
 
     /**
      * Creates a {@code FolderCode} with the given {@code Folder} and index to display.
@@ -38,6 +41,8 @@ public class FolderCard extends UiPart<Region> {
         this.folder = folder;
         id.setText(displayedIndex + ". ");
         folderName.setText(folder.getFolderName().toString());
+        folder.getContacts()
+                .forEach(person -> contacts.getChildren().add(new Label(person.getName().toString())));
     }
 
     @Override
