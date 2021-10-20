@@ -147,6 +147,7 @@ public interface Model {
 
     /**
      * Updates the filter of the filtered lesson list to filter by the given {@code predicate}.
+     * @param predicate
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredLessonList(Predicate<Lesson> predicate);
