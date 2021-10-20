@@ -30,8 +30,6 @@ public class TypicalGames {
     public static final Game APEX_LEGENDS = new GameBuilder().withGameId(CommandTestUtil.VALID_GAME_ID_APEX_LEGENDS)
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Legends"; // A keyword that matches MEIER
-
     private TypicalGames() {
     } // prevents instantiation
 

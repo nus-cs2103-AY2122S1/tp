@@ -36,7 +36,7 @@ public class GetGameCommand extends Command {
 
         if (!model.hasGameWithId(gameId)) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_GAME_ID, gameId.value));
+                    String.format(Messages.MESSAGE_GAME_ID_NOT_FOUND, gameId.value));
         }
 
         Game game = model.getGame(gameId);

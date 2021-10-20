@@ -41,7 +41,7 @@ public class GetFriendCommand extends Command {
 
         if (!model.hasFriendWithId(friendId)) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_FRIEND_ID, friendId.value));
+                    String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, friendId.value));
         }
 
         Friend friend = model.getFriend(friendId);

@@ -49,7 +49,7 @@ public class GetFriendCommandTest {
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
         // command fails if friend id does not exist in unfiltered list
         GetFriendCommand getFriendCommand = new GetFriendCommand(AMY.getFriendId());
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_FRIEND_ID, AMY.getFriendId());
+        String expectedMessage = String.format(Messages.MESSAGE_FRIEND_ID_NOT_FOUND, AMY.getFriendId());
 
         assertCommandFailure(getFriendCommand, model, expectedMessage);
     }

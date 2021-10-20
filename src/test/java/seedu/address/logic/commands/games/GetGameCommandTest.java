@@ -50,7 +50,7 @@ public class GetGameCommandTest {
     public void execute_nonExistentIdUnfilteredList_throwsCommandException() {
         // command fails if game id does not exist in unfiltered list
         GetGameCommand getGameCommand = new GetGameCommand(CSGO.getGameId());
-        String expectedMessage = String.format(Messages.MESSAGE_INVALID_GAME_ID, CSGO.getGameId());
+        String expectedMessage = String.format(Messages.MESSAGE_GAME_ID_NOT_FOUND, CSGO.getGameId());
 
         assertCommandFailure(getGameCommand, model, expectedMessage);
     }

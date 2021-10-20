@@ -16,6 +16,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.model.FriendsList;
 import seedu.address.model.GamesList;
 import seedu.address.model.Model;
@@ -56,15 +57,14 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditFriendDescriptor DESC_AMY;
-    public static final EditCommand.EditFriendDescriptor DESC_BOB;
+    public static final EditFriendCommand.EditFriendDescriptor DESC_AMY;
+    public static final EditFriendCommand.EditFriendDescriptor DESC_BOB;
 
-    // TODO: check if these are still needed for edit command
     static {
         DESC_AMY = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_AMY)
-                .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_ID_APEX_LEGENDS).build();
+                .withFriendName(VALID_NAME_AMY).build();
         DESC_BOB = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_BOB)
-                .withFriendName(VALID_NAME_BOB).withGames(VALID_GAME_ID_CSGO).build();
+                .withFriendName(VALID_NAME_BOB).build();
     }
 
     /**
