@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -46,6 +47,20 @@ public class Period {
     public Period(LocalDate date) {
         this.startDate = date;
         this.endDate = date;
+    }
+
+    /**
+     * Obtains a {@code Period} representing the period across the month of the input date.
+     * E.g. with input date 2021-10-20, the resulting period will span 2021-10-01 to
+     * 2021-10-31.
+     */
+    public static Period getPeriodFromDateOverMonth(LocalDate date) {
+        Month month = date.getMonth();
+        int year = date.getYear();
+        int lastDate = month.length(year%4 == 0);
+        return new Period(LocalDate.of(year, month, 1),
+                LocalDate.of(year, month, lastDate));
+
     }
 
     /**
@@ -213,6 +228,17 @@ public class Period {
         return true;
     }
 
+    /**
+     * Gets an List representing an iteration over this period.
+     *
+     * @return The List.
+     */
+    public List<LocalDate> toList() {
+        return startDate
+                .datesUntil(endDate.plusDays(1)) //exclusive
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public String toString() {
@@ -227,4 +253,6 @@ public class Period {
                 && ((Period) o).endDate.equals(endDate);
 
     }
+
+
 }

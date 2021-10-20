@@ -1,10 +1,15 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.Shift.isValidShift;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -15,11 +20,12 @@ import seedu.address.model.person.exceptions.NoShiftException;
 public class Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Schedule json string error! Invalid format."; //todo idek if need
+    public static final int HOURS_PER_SLOT = 4;
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
     // Set the number of hours for a slot as 4 hours
-    private static final int HOURS_PER_SLOT = 4;
+
 
 
     private static final String SCHEDULE_DEFAULT = "Schedule:\n"
@@ -181,6 +187,36 @@ public class Schedule {
         }
         return totalHours;
     }
+
+    /**
+     * Calculates the total working hours over {@code Period period}
+     * of this schedule, while removing {@code Collection<Period> absentPeriods} from the count.
+     */
+    public int getTotalWorkingHour(Period period, Collection<Period> absentPeriods) {
+        requireNonNull(period);
+        requireNonNull(absentPeriods);
+        int totalHours = 0;
+        List<LocalDate> datesNotCounted = absentPeriods
+                .stream()
+                .flatMap(p -> p.toList().stream())
+                .collect(Collectors.toList());
+        List<LocalDate> dates = period.toList();
+        for (LocalDate date : dates) {
+            if (datesNotCounted.contains(date)) {
+                continue;
+            }
+            //test both slots in a date
+            if (isWorking(date.getDayOfWeek(), Slot.MORNING)) {
+                totalHours += HOURS_PER_SLOT;
+            }
+
+            if (isWorking(date.getDayOfWeek(), Slot.AFTERNOON)) {
+                totalHours += HOURS_PER_SLOT;
+            }
+        }
+        return totalHours;
+    }
+
 
     /**
      * Returns String representation of the schedule object.

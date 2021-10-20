@@ -190,6 +190,25 @@ public class Person {
 
 
     /**
+     * A method to get the working hours of {@code this} during {@code Period period}.
+     *
+     * @param period The period to get the working hours over.
+     * @return The total working hours over this period.
+     */
+    public int getTotalWorkingHour(Period period) {
+        return this.schedule.getTotalWorkingHour(period, getAbsentDates());
+    }
+
+    /**
+     * Gets the total salary that this staff has earned over {@code Period period}.
+     *
+     * @return The salary to be paid in dollars.
+     */
+    public double getSalaryToBePaid(Period period) {
+        return getTotalWorkingHour(period) * salary.value / 100;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
