@@ -67,21 +67,22 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
 </div>
 
-### Viewing help: `help` [coming soon]
+### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+TuitiONE will display the help panel which shows a summary of the command syntax that is usable to the current version of TuitiONE.
 
 [comment]: <> (![help message]&#40;images/helpMessage.png&#41;)
 
-Format: `help`
+Command Format: `help`
 
 ### Adding a student: `add`
 
 Adds a student to the TuitiONE.
 
-Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/REMARK]…`
+Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
 * A student can have any number of remarks (including 0).
@@ -89,7 +90,7 @@ Format: `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/REMARK]�
 
 Examples:
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
-* `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
+* `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
 ### Adding a lesson: `add-l`
 
