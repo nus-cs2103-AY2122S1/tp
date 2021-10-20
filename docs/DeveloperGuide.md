@@ -150,7 +150,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Implementation
+## **Implementation**
 This section describes some noteworthy details on how certain features are implemented.
 
 ### [Developed] Time Conflict Management
@@ -196,7 +196,7 @@ Step4: The complete timetable is displayed to user through the `UI` component.
 ### [Developed] Adding Remarks With Editor
 Users can add, edit, or remove remarks for students or tuition classes, which is facilitated by `RemarkEditor`. The `UIManager` displays a dialog box with a text area for users to type in the description of the remark. Additionally, the `RemarkEditor` supports the following operations:
 
-- `RemarkEditor#setRemark()` — Sets the name and remarks of the identified student or tuition class.
+- `RemarkEditor#setRemark(name, remark)` — Sets the name and remark of the identified student or tuition class.
 - `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
 
 The interactions between the components during the execution of the `RemarkCommand` is show in the sequence diagram below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
