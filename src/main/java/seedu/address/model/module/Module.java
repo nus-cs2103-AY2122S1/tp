@@ -166,8 +166,16 @@ public class Module {
     }
 
     /**
+     * Returns the UniqueTaskList containing the tasks for this module.
+     * @return UniqueTaskList containing the tasks for this module.
+     */
+    public UniqueTaskList getTaskList() {
+        return this.tasks;
+    }
+
+    /**
      * Replaces the contents of the task list with {@code tasks}.
-     * {@code persons} must not contain duplicate tasks.
+     * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);

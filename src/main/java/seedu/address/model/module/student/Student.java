@@ -22,19 +22,17 @@ public class Student {
     // Data fields
     private final StudentId studentId;
     //private final Set<Tag> tags = new HashSet<>();
-
     private UniqueTaskList taskList;
 
     /**
      * Every field must be present and not null.
      */
     public Student(StudentId studentId, Name name, TeleHandle teleHandle, Email email) {
-        requireAllNonNull(name, teleHandle, email, studentId);
+        requireAllNonNull(studentId, name, teleHandle, email);
+        this.studentId = studentId;
         this.name = name;
         this.teleHandle = teleHandle;
         this.email = email;
-        this.studentId = studentId;
-        this.taskList = new UniqueTaskList();
         //this.tags.addAll(tags);
     }
 
@@ -78,6 +76,10 @@ public class Student {
         return this.taskList;
     }
 
+    /**
+     * Sets the UniqueTaskList of this Student to be the input {@code taskList} taskList.
+     * @param taskList the taskList to set this Student's UniqueTaskList to.
+     */
     public void setTaskList(UniqueTaskList taskList) {
         this.taskList = taskList;
     }

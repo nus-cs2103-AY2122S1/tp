@@ -40,7 +40,7 @@ public class AddStudentCommand extends AddCommand {
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the module";
 
-    private final Student toAdd;
+    private final Student studentToAdd;
     private ModuleName moduleName;
 
     /**
@@ -51,7 +51,7 @@ public class AddStudentCommand extends AddCommand {
      */
     public AddStudentCommand(Student student, ModuleName moduleName) {
         requireNonNull(student);
-        toAdd = student;
+        studentToAdd = student;
         this.moduleName = moduleName;
     }
 
@@ -65,12 +65,14 @@ public class AddStudentCommand extends AddCommand {
             if (mod.getName().equals(moduleName)) {
                 module = mod;
 
-                if (module.hasStudent(toAdd)) {
+                if (module.hasStudent(studentToAdd)) {
                     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
                 }
 
-                module.addStudent(toAdd);
-                return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, toAdd));
+                module.addStudent(studentToAdd);
+                // upon adding student to the module, set student's tasks to be the module's task
+                studentToAdd.setTaskList(module.getTaskList());
+                return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
@@ -80,6 +82,6 @@ public class AddStudentCommand extends AddCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddStudentCommand // instanceof handles nulls
-                && toAdd.equals(((AddStudentCommand) other).toAdd));
+                && studentToAdd.equals(((AddStudentCommand) other).studentToAdd));
     }
 }
