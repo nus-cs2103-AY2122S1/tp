@@ -18,10 +18,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalLessons.PAST_MAKEUP_LESSON;
+import static seedu.address.testutil.TypicalLessons.PAST_RECURRING_LESSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -36,10 +38,11 @@ import seedu.address.testutil.LessonBuilder;
 public class LessonAddCommandParserTest {
 
     private static final int FIRST_PERSON = INDEX_FIRST_PERSON.getOneBased();
+    private static final String RECURRENCE_FLAG = " " + PREFIX_RECURRING;
     private LessonAddCommandParser parser = new LessonAddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresentMakeUpLesson_success() {
         Lesson expectedLesson = new LessonBuilder(PAST_MAKEUP_LESSON)
             .withHomeworkSet(VALID_HOMEWORK_POETRY).build();
 
@@ -71,7 +74,42 @@ public class LessonAddCommandParserTest {
             + TIME_RANGE_DESC + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
             new LessonAddCommand(INDEX_FIRST_PERSON, expectedLessonMultipleHomework));
+    }
 
+    @Test
+    public void parse_allFieldsPresentReccuringLesson_success() {
+        Lesson expectedLesson = new LessonBuilder(PAST_RECURRING_LESSON)
+            .withHomeworkSet(VALID_HOMEWORK_POETRY).buildRecurring();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + FIRST_PERSON
+            + RECURRENCE_FLAG + PAST_DATE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple date - last date accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG
+            + FUTURE_DATE_DESC
+            + PAST_DATE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple subject - last subject accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON +  RECURRENCE_FLAG + PAST_DATE_DESC
+            + TIME_RANGE_DESC + SUBJECT_DESC + SUBJECT_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple time ranges - last time range accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+            + TIME_RANGE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple homework - all accepted
+        Lesson expectedLessonMultipleHomework = new LessonBuilder(PAST_RECURRING_LESSON)
+            .withHomeworkSet(VALID_HOMEWORK_POETRY, VALID_HOMEWORK_TEXTBOOK).buildRecurring();
+
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+                + TIME_RANGE_DESC + SUBJECT_DESC
+                + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
+            new LessonAddCommand(INDEX_FIRST_PERSON, expectedLessonMultipleHomework));
     }
 
     @Test
