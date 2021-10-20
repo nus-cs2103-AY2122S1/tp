@@ -129,7 +129,7 @@ Command Format: `list`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Command Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -147,7 +147,7 @@ Examples:
 
 Deletes a student from the TuitiONE.
 
-Format: `delete INDEX`
+Command Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
@@ -161,14 +161,12 @@ Examples:
 
 Deletes a lesson from the TuitiONE.
 
-
-Format: `delete-l INDEX`
+Command Format: `delete-l INDEX`
 
 * Deletes the lesson of the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** 1, 2, 3, …
 
-    
 Examples:
 * `delete-l 1` deletes the lesson with corresponding index.
 
@@ -176,16 +174,17 @@ Examples:
 
 Enroll a specified student from a given TuitiONE lesson.
 
-Format: `enroll INDEX l/LESSON_CODE`
+Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
-* Enroll the student identified by `INDEX` from the specific `lesson`.
-* Enrolling a student is only possible if  the student (1) has the same `grade` as the lesson, (2) is not enrolled to the lesson and (3) has no other lessons with conflicting timing.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …
-* LESSON_CODE should have the corresponding format as seen in the program.
-    * SUBJECT-GRADE-DAY-TIME
-    * The first letter of SUBJECT, GRADE, and DAY is in caps.
-    * Time is in 2400 hours format.
+* Enroll the student identified by `STUDENT_INDEX` in the displayed student list to the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
+* Enrolling a student is only possible if the student:
+  1. has the same `grade` as the lesson,
+  2. is not enrolled to the lesson and,
+  3. has no other lessons with conflicting timing.
+* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+* Both indexes **must be a positive integer** 1, 2, 3, …
+
 
 Examples:
 * `enroll 1 l/Science-P5-Wed-1230` will enroll the student indexed `1` for a `P5` `Science` lesson on `Wed 1230 pm`.
@@ -194,7 +193,7 @@ Examples:
 
 Unenroll a student from a given TuitiONE lesson.
 
-Format: `unenroll INDEX l/LESSON_CODE`
+Command Format: `unenroll INDEX l/LESSON_CODE`
 
 * Unenroll the student identified by `INDEX` from the specific `lesson` using its `lesson code`.
 * The index refers to the index number shown in the displayed student list.
@@ -209,7 +208,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all student entries from the TuitiONE.
+Clears all student and lesson entries from the TuitiONE.
 
 Format: `clear`
 
