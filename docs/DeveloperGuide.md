@@ -128,7 +128,9 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -148,7 +150,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.tuitione.commons` package.
+Classes used by multiple components are in the [`seedu.tuitione.commons`](https://github.com/AY2122S1-CS2103T-F13-4/tp/tree/master/src/main/java/seedu/tuitione/commons) package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,7 +205,11 @@ The following sequence diagram shows how the delete lesson operation works:
 
 ![DeleteLessonSequenceDiagram](images/DeleteLessonSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">
+
 :information_source: **Note:** The lifelines for `DeleteLessonCommandParser` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 The following activity diagram summarizes what happens when a user executes the delete lesson command:
 
