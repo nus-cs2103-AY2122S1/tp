@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.HashSet;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -89,6 +91,6 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
-        return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress);
+        return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress, new HashSet<>());
     }
 }

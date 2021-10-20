@@ -4,8 +4,10 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.commons.ID;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -99,6 +101,8 @@ public interface Model {
      */
     boolean hasProduct(Product product);
 
+    boolean hasProduct(ID productId);
+
     /**
      * Deletes the given product.
      * The product must exist in the address book.
@@ -118,6 +122,8 @@ public interface Model {
      * book.
      */
     void setProduct(Product target, Product editedProduct);
+
+    Product getProductsById(ID productId);
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();

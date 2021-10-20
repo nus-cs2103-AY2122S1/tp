@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Address;
@@ -12,6 +15,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 public class AddClientCommand extends Command {
     public static final String COMMAND_WORD = "add -c";
@@ -69,7 +73,7 @@ public class AddClientCommand extends Command {
         PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
         Email email = addClientDescriptor.getEmail();
         Address address = addClientDescriptor.getAddress();
-        return new Client(name, phoneNumber, email, address);
+        return new Client(name, phoneNumber, email, address, new HashSet<>());
     }
 
     @Override
@@ -87,6 +91,7 @@ public class AddClientCommand extends Command {
         private PhoneNumber phoneNumber;
         private Email email;
         private Address address;
+        private Set<Order> orders;
 
         /**
          * Constructor of the class `AddClientDescriptor`.
@@ -150,6 +155,10 @@ public class AddClientCommand extends Command {
          */
         public Address getAddress() {
             return this.address;
+        }
+
+        public void setOrders(Set<Order> orders) {
+            this.orders = orders;
         }
     }
 }

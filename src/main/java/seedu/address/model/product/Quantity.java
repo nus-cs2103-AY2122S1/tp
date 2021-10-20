@@ -56,6 +56,9 @@ public class Quantity implements Comparable<Quantity> {
 
     @Override
     public int compareTo(Quantity quantity) {
+        if (quantity == null) {
+            return 0;
+        }
         int thisVal = Integer.parseInt(this.value);
         int otherVal = Integer.parseInt(quantity.value);
         if (thisVal < otherVal) {

@@ -2,10 +2,9 @@ package seedu.address.model.order;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-import javafx.collections.transformation.FilteredList;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
 import seedu.address.model.commons.ID;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
@@ -14,17 +13,22 @@ import seedu.address.model.product.Quantity;
  * Represents an Order in Sellah.
  */
 public class Order {
+    public static final String REGEX =
+            "^[0-9]+ [0-9]+ (((19|2[0-9])[0-9]{2})/)?(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$";
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n" +
+                    "Valid formats of time: MM/DD, YYYY/MM/DD\nExample: -o 10312 20 2021/10/20";
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
 
-    private final LocalDateTime time;
+    private final LocalDate time;
     private final ID productId;
     private final Quantity quantity;
 
-    public Order(LocalDateTime time, ID productId, Quantity quantity, AddressBook addressBook) {
-        FilteredList<Product> products = getProductInList(productId, addressBook);
-        checkArgument(isValidProductID(products), MESSAGE_CONSTRAINTS_ID);
-        Product product = products.get(0);
+    public Order(LocalDate time, ID productId, Quantity quantity, Model model) {
+        checkArgument(isValidProductID(productId, model), MESSAGE_CONSTRAINTS_ID);
+        Product product = model.getProductsById(productId);
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
         this.time = time;
@@ -32,14 +36,8 @@ public class Order {
         this.quantity = quantity;
     }
 
-    private static FilteredList<Product> getProductInList(ID productId, AddressBook addressBook) {
-        FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
-        products.setPredicate(product -> product.getId().equals(productId));
-        return products;
-    }
-
-    private static boolean isValidProductID(FilteredList<Product> products) {
-        return products.size() == 1;
+    private static boolean isValidProductID(ID productId, Model model) {
+        return model.hasProduct(productId);
     }
 
     private static boolean isValidQuantity(Quantity quantity, Product product) {
