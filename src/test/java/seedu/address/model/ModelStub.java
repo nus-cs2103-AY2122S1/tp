@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
+import seedu.address.model.order.Order;
 
 /**
  * A default model stub that have all of its methods failing.

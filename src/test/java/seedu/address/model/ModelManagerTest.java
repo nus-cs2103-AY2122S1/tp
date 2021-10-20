@@ -24,6 +24,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.order.Order;
 import seedu.address.testutil.InventoryBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.TypicalItems;

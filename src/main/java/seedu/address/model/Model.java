@@ -9,12 +9,15 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
+import seedu.address.model.order.Order;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
     /**
@@ -52,11 +55,14 @@ public interface Model {
      */
     void setInventory(ReadOnlyInventory inventory);
 
-    /** Returns the Inventory */
+    /**
+     * Returns the Inventory
+     */
     ReadOnlyInventory getInventory();
 
     /**
      * Returns true if an item with the given {@code id} exists in the inventory.
+     *
      * @see Item#isSameItem
      */
     boolean hasItem(Item item);
@@ -99,6 +105,7 @@ public interface Model {
 
     /**
      * Sorts the item list using the given {@code comparator}.
+     *
      * @throws NullPointerException if {@code comparator} is null.
      */
     void sortItems(Comparator<Item> comparator);
@@ -120,6 +127,7 @@ public interface Model {
 
     /**
      * Removes the item from the current order list.
+     *
      * @param item
      */
     void removeFromOrder(Item item);
@@ -129,11 +137,14 @@ public interface Model {
      */
     void transactAndClearOrder();
 
-    /** Returns an unmodifiable view of the filtered item list */
+    /**
+     * Returns an unmodifiable view of the filtered item list
+     */
     ObservableList<Item> getFilteredItemList();
 
     /**
      * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredItemList(Predicate<Item> predicate);
