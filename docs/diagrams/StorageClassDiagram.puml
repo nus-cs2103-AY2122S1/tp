@@ -14,10 +14,10 @@ Class JsonUserPrefsStorage
 Interface Storage <<Interface>>
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Interface AddressBookStorage <<Interface>>
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
+package "Notor Storage" #F4F6F6{
+Interface NotorStorage <<Interface>>
+Class JsonNotorStorage
+Class JsonSerializableNotor
 }
 
 package "Archive Storage" #F4F6F6{
@@ -28,26 +28,30 @@ Class JsonSerializableArchive
 
 Class JsonAdaptedPerson
 Class JsonAdaptedTag
+Class JsonAdaptedSuperGroup
+Class JsonAdaptedSubGroup
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" NotorStorage
 StorageManager -up-> "1" ArchiveStorage
 StorageManager -up-> "1" UserPrefsStorage
 
-Storage -left-|> AddressBookStorage
+Storage -left-|> NotorStorage
 Storage -left-|> ArchiveStorage
 Storage -right-|> UserPrefsStorage
 
-JsonAddressBookStorage .up.|> AddressBookStorage
+JsonNotorStorage .up.|> NotorStorage
 JsonArchiveStorage .up.|> ArchiveStorage
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonNotorStorage ..> JsonSerializableNotor
 JsonArchiveStorage ..> JsonSerializableArchive
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableNotor --> "*" JsonAdaptedPerson
+JsonSerializableNotor --> "*" JsonAdaptedSuperGroup
+JsonAdaptedSuperGroup --> "*" JsonAdaptedSubGroup
 JsonSerializableArchive --> "*" JsonAdaptedPerson
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 

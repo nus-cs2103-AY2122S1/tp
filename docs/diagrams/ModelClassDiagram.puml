@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyNotor <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class Notor
+Class ReadOnlyNotor
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -17,34 +17,51 @@ Class ReadOnlyUserPrefs
 
 
 Class UniquePersonList
+Class UniqueSuperGroupsList
 Class Person
 Class Email
 Class Name
 Class Phone
 Class Tag
 Class Note
-
+Class UniqueSuperGroupList
+Class DisplaySuperGroup
+Class DisplaySubGroup
+Class Group
+Class SuperGroup
+Class SubGroup
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+Notor .up.|> ReadOnlyNotor
 
 ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
-Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+Model .left.> ReadOnlyNotor
+ModelManager -left-> "1" Notor
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
+Notor *--> "1" UniquePersonList
+Notor *--> "1" UniqueSuperGroupList
+
 UniquePersonList --> "~* all" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Note
 Person *--> "*" Tag
+Person *--> "*" DisplaySuperGroup
+Person *--> "*" DisplaySubGroup
+
+UniqueSuperGroupList *--> "*" SuperGroup
+SuperGroup *--> "*" SubGroup
+Group <|-- SuperGroup
+Group <|-- SubGroup
+Group *--> Note
+Group *--> "*" Person
 
 Name -[hidden]right-> Phone
 

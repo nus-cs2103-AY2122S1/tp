@@ -28,7 +28,7 @@ In particular, we tackle the needs of mentor professors, who tend to be busy and
 
 ### **Acknowledgements**
 
-This project is a further iteration of the [_AddressBook-Level 3 (
+This project is a further iteration of the [_Notor-Level 3 (
 AB-3)_](https://nus-cs2103-ay2122s1.github.io/tp/DeveloperGuide.html) project. All features we have are in addition to
 those already present in AB-3. Removed features may or may not be listed as well.
 
@@ -72,19 +72,22 @@ section for the general Architectural design of the app. Only changes will be li
 *(placeholder API for now, will update to our own link later when implemented.)*
 
 **
-API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 ![ModelClassDiagram](images/ModelClassDiagram.png)
 
 * `Person` does not contain the `Address` field anymore.
-* `Person` contains a new `Note` field.
+* `Person` contains a new `Note` field, `SuperGroup` field and `SubGroup` field.
+* `Person` does not contain direct reference to `SuperGroup` and `SubGroup` but 
+strings of SuperGroup and for display purposes.
+
 * This UML diagram is the current class structure implemented.
 
 Here is the better class structure to be implemented:
 ![ModelClassDiagram2](images/BetterModelClassDiagram.png)
 
 * `Trie` allows tags to be autocompleted as commands are entered.
-* Storing `String` objects in a `Trie` in AddressBook allows all tags to only get created once instead of once per
+* Storing `String` objects in a `Trie` in Notor allows all tags to only get created once instead of once per
   object.
 * Storing tags as `String` objects in a trie is simpler than a dedicated `Tag` class.
 
@@ -93,7 +96,7 @@ Here is the better class structure to be implemented:
 *(placeholder API for now, will update to our own link later when implemented.)*
 
 **
-API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+API** : [`Storage.java`](https://github.com/se-edu/Notor-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 ![StorageClassDiagram](images/StorageClassDiagram.png)
 
@@ -122,47 +125,47 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
+The proposed undo/redo mechanism is facilitated by `VersionedNotor`. It extends `Notor` with an undo/redo
+history, stored internally as an `NotorStateList` and `currentStatePointer`. Additionally, it implements the
 following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedNotor#commit()` — Saves the current address book state in its history.
+* `VersionedNotor#undo()` — Restores the previous address book state from its history.
+* `VersionedNotor#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitNotor()`, `Model#undoNotor()`
+and `Model#redoNotor()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
+Step 1. The user launches the application for the first time. The `VersionedNotor` will be initialized with the
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
+calls `Model#commitNotor()`, causing the modified state of the address book after the `delete 5` command executes
+to be saved in the `NotorStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
 state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`
-, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitNotor()`
+, causing another modified address book state to be saved into the `NotorStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitNotor()`, so the address book state will not be saved into the `NotorStateList`.
 
 </div>
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
+the `undo` command. The `undo` command will call `Model#undoNotor()`, which will shift the `currentStatePointer`
 once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Notor state, then there are no previous Notor states to restore. The `undo` command uses `Model#canUndoNotor()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -175,21 +178,21 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
+The `redo` command does the opposite — it calls `Model#redoNotor()`, which shifts the `currentStatePointer` once
 to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `NotorStateList.size() - 1`, pointing to the latest address book state, then there are no undone Notor states to restore. The `redo` command uses `Model#canRedoNotor()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+as `list`, will usually not call `Model#commitNotor()`, `Model#undoNotor()` or `Model#redoNotor()`.
+Thus, the `NotorStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
+Step 6. The user executes `clear`, which calls `Model#commitNotor()`. Since the `currentStatePointer` is not
+pointing at the end of the `NotorStateList`, all address book states after the `currentStatePointer` will be
 purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
 desktop applications follow.
 
@@ -290,20 +293,20 @@ Priorities:<p>
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified
+(For all use cases below, the **System** is the `Notor` and the **Actor** is the `user`, unless specified
 otherwise)
 
-**Use case: Add a note**
+**Use case: Add a note to a person**
 
 **MSS**
 
 1. User requests to add a note to the person
-2. AddressBook shows a list of persons
+2. Notor shows a list of persons
 3. User requests to add a note to a specific person in the list
-4. AddressBook opens up a pop up dialogue for the user to type the note for the person
+4. Notor opens up a pop up dialogue for the user to type the note for the person
 5. User requests to save the note to the person
-6. AddressBook stores the book to the person
-7. AddressBook saves the note to storage
+6. Notor stores the book to the person
+7. Notor saves the note to storage
 
    Use case ends.
 
@@ -312,24 +315,24 @@ otherwise)
 * 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-    * 3a1. AddressBook shows an error message. Use case resumes at step 2.
+    * 3a1. Notor shows an error message. Use case resumes at step 2.
 
 **Use case: User types a command**
 
 **MSS**
 
-1. User starts typing a command in AddressBook
-2. AddressBook shows possible commands starting with what user has typed
+1. User starts typing a command in Notor
+2. Notor shows possible commands starting with what user has typed
 3. User presses tab to select the right command
 4. User presses enter to execute the selected command
-5. AddressBook <u>runs command (UC1)</u>
+5. Notor <u>runs command (UC1)</u>
 
    Use case ends.
 
 **Extensions**
 
 * 2a. The typed string is not in any command.
-    * 2a1. AddressBook displays no commands. Use case resumes at step 1.
+    * 2a1. Notor displays no commands. Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
