@@ -27,7 +27,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
     public static final String END_DATE_BEFORE_START_DATE_MESSAGE = "End date cannot be before start date.";
     public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
             + FilterAppointmentCommand.MESSAGE_USAGE;
-    private static final String UNUSED_PREAMBLE = "0 ";
+    private static final String UNUSED_PREAMBLE = "0";
 
     private LocalDate startDate;
     private LocalDate endDate;
@@ -40,7 +40,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
      */
     public FilterAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(UNUSED_PREAMBLE + args,
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(UNUSED_PREAMBLE + " " + args,
                 PREFIX_DOCTOR, PREFIX_PATIENT, PREFIX_START, PREFIX_END);
 
         AppointmentFilters filters = AppointmentFilters.allAppointmentsFilter();
@@ -48,7 +48,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
         boolean hasStartFilter = false;
         boolean hasEndFilter = false;
 
-        if (!argumentMultimap.getPreamble().equals("0")) {
+        if (!argumentMultimap.getPreamble().equals(UNUSED_PREAMBLE)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterAppointmentCommand.MESSAGE_USAGE));
         }
