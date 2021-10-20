@@ -2,29 +2,9 @@
 layout: page
 title: User Guide
 ---
+* Table of Contents
+{:toc}
 
- Table of Contents
-- [Introduction](#introduction)
-- [Quick start](#quick-start)
-- [Features](#features)
-    * [Viewing help](#viewing-help-help)
-    * [Adding a person](#adding-a-person-add)
-    * [Listing all persons](#listing-all-persons-list)
-    * [Editing a person](#editing-a-person-edit)
-    * [Locating persons by name](#locating-persons-by-name-find)
-    * [Deleting a person](#deleting-a-person-del)
-    * [Adding a remark](#adding-a-remark-rmk)  
-    * [Adding an appointment](#adding-an-appointment-appt)
-    * [Editing an appointment](#editing-an-appointment-eppt)
-    * [Deleting an appointment](#deleting-an-appointment-dappt)
-    * [Updating completed appointment](#updating-completed-appointment-done)
-    * [Sorting all persons](#sorting-all-persons-sort)
-    * [Clearing all entries](#clearing-all-entries-clear)
-    * [Exiting the program](#exiting-the-program-exit)
-    * [Saving the data](#saving-the-data)
-    * [Archiving data files](#archiving-data-files-coming-in-v20)
-- [FAQ](#faq)
-- [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
@@ -95,11 +75,20 @@ Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
 
 ### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
+Opens a new window that contains command usage, and a quick start guide.
+In the help window, you can access all the command usages using the dropdown menu.
 
-![help message](images/helpMessage.png)
+![help window](images/helpWindow.png)
 
-Format: `help`
+Format: `help [COMMAND]`
+
+Examples:
+* `help` will just open the default help window
+* `help add` will open the help window and directly navigate to the `Add` command help page.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+The help window can also be quickly accessed by entering using the F1 key on your keyboard!
+</div>
 
 
 ### Adding a person: `add`
@@ -139,23 +128,29 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Searching for people: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds people by their name, priority, tags or remarks.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
+OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* You can search by name, priority, tags or remarks using the formats shown above.
+* Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
+* For priority searches, there are 3 priorities, `pr/low`, `pr/med`, or `pr/high`.
+* Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
+* Persons matching at least one search query will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find pr/high med` returns all entries with `HighPriority` and `MediumPriority`.
+* `find t/friends enemies` returns all entries tagged with `friends` or `enemies`.
+* `find r/good` returns all entries with remarks containing `good`.
 
 ### Deleting a person: `del`
 
@@ -268,6 +263,52 @@ Format: `sort KEYWORD`
 Examples:
 * `sort priority` Sorts all existing persons by the priority from highest priority tag to lowest priority tag.
 
+### Editing a tag: `tag`
+
+Adds or removes tags from a specified contact.
+
+Format: `tag INDEX [a/TAG] [d/TAG]`
+* Use `a/` to add a tag, and `d/` to delete a tag.
+* Does not affect any unmentioned tags, unlike `edit`.
+* `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
+* Delete operations are performed first before add operations, regardless of their order in the input.
+* Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
+
+Example: 
+* `tag 1 a/thin d/fat` will add the `thin` tag while deleting the `fat` tag, given the `fat` tag already exists..
+* `tag 1 d/pr/low a/pr/high` will delete the `LowPriority` tag before adding the `HighPriority` tag.
+* `tag 1 a/ip/property` will add a `PropertyInsurance` tag to the contact.
+
+### Using Priority tags: `pr/`
+
+A set of fixed tags to indicate the priority level of contacts.
+
+Usage: replace any fields requiring `[TAG]` with one of the following terms:
+* LowPriority: `pr/low`
+* MediumPriority: `pr/med`
+* HighPriority: `pr/high`
+
+Example:
+* `tag 2 a/pr/low` will add a `LowPriority` tag to the specified contact.
+* `edit 1 t/pr/med` will set the specified contact to have only the `MediumPriority` tag.
+
+### Using Investment Plan tags: `ip/`
+
+A set of fixed tags to indicate the type of investment plans purchased by contacts.
+
+Usage: replace any fields requiring `[TAG]` with one of the following terms:
+* HealthInsurance: `ip/health`
+* Investment: `ip/invest`
+* LifeInsurance: `ip/life`
+* MotorInsurance: `ip/motor`
+* PropertyInsurance: `ip/property`
+* Savings: `ip/save`
+* TravelInsurance: `ip/travel`
+
+Example: 
+* `tag 2 a/ip/life` will add a `LifeInsurance` tag to the specified contact.
+* `edit 1 t/ip/motor` will set the specified contact to have only the `MotorInsurance` tag.
+
 ### Clearing all entries: `clear`
 
 Clears all entries from the address book.
@@ -282,19 +323,26 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+FAST data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+FAST data are saved as a JSON file `[JAR file location]/data/fast.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, FAST will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Viewing statistics
 
-_Details coming soon ..._
+FAST comes with built-in statistics to provide you with an overview of your data. 
+To view the statistics, simply click the "Stats" menu item on the top bar or press `F2`.
+Currently, FAST supports these statistics:
+* Priority Tag Chart
+* Insurance Plan Chart (Coming soon!)
+
+![stats window](images/statsWindow.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -309,16 +357,20 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g., `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
-**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `dappt INDEX`<br> e.g., `dappt 1`
-**Delete Contact** | `del INDEX`<br> e.g., `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `appt 3 v/Clementi Town d/2021-03-27 t/18:00`
-**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete Appointment** | `dappt INDEX`<br> e.g. `dappt 1`
+**Delete Contact** | `del INDEX`<br> e.g. `del 3`
+**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
+**Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
+**Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Help** | `help`
+**Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **List** | `list`
+**Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Update Completed Appointment** | `done INDEX`<br> e.g., `done 5`
+**Update Completed Appointment** | `done INDEX`<br> e.g. `done 5`

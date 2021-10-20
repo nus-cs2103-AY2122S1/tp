@@ -9,8 +9,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.fast.logic.commands.FindCommand;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
 
 public class FindCommandParserTest {
@@ -26,7 +28,7 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new FindCommand(new NameContainsQueriesPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -46,6 +48,32 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, PriorityTag.PRIORITY_TAG_PREFIX
                 + PriorityTag.LowPriority.TERM + " \n \t "
                 + PriorityTag.MediumPriority.TERM , expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindTagCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new TagMatchesKeywordPredicate(Arrays.asList("poo",
+                        "pee")));
+        assertParseSuccess(parser , FindCommand.TAG_PREFIX
+                + "poo pee", expectedFindCommand);
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, FindCommand.TAG_PREFIX
+                + "poo \n \t pee" , expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsFindRemarkCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new RemarkContainsKeywordPredicate(Arrays.asList("poo",
+                        "pee")));
+        assertParseSuccess(parser , FindCommand.REMARK_PREFIX
+                + "poo pee", expectedFindCommand);
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, FindCommand.REMARK_PREFIX
+                + "poo \n \t pee" , expectedFindCommand);
     }
 
 }

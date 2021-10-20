@@ -22,6 +22,7 @@ import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
+import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
@@ -34,6 +35,8 @@ public class ParserUtil {
 
     public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
         "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+
+    public static final int MAX_LENGTH_REMARK = 100;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -164,6 +167,10 @@ public class ParserUtil {
 
     /**
      * Parses {@code String tagName} and returns the corresponding priority tag name.
+     *
+     * Input will always be a valid priority tag command, as validated by Tag::createTag
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
      */
     public static String parsePriorityTag(String tagName) {
         switch (tagName) {
@@ -307,4 +314,30 @@ public class ParserUtil {
         return venue;
     }
 
+    /**
+     * Parses {@code String tagName} and returns the corresponding investment plan tag name.
+     *
+     * Input will always be a valid investment plan tag command, as validated by Tag::createTag
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
+     */
+    public static String parseInvestmentPlanTag(String tagName) {
+        switch (tagName) {
+        case InvestmentPlanTag.LifeInsurance.COMMAND:
+            return InvestmentPlanTag.LifeInsurance.NAME;
+        case InvestmentPlanTag.MotorInsurance.COMMAND:
+            return InvestmentPlanTag.MotorInsurance.NAME;
+        case InvestmentPlanTag.HealthInsurance.COMMAND:
+            return InvestmentPlanTag.HealthInsurance.NAME;
+        case InvestmentPlanTag.TravelInsurance.COMMAND:
+            return InvestmentPlanTag.TravelInsurance.NAME;
+        case InvestmentPlanTag.PropertyInsurance.COMMAND:
+            return InvestmentPlanTag.PropertyInsurance.NAME;
+        case InvestmentPlanTag.Investment.COMMAND:
+            return InvestmentPlanTag.Investment.NAME;
+        default:
+            return InvestmentPlanTag.Savings.NAME;
+            //it is guaranteed that the default case will always be an savings investment plan tag.
+        }
+    }
 }
