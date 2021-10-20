@@ -266,7 +266,7 @@ The predicate is then used to filter the list of person.
 
 **Aspect: Data structure of predicates**
 * **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
-    * Pros: All predicates meant for testing on person fields can be consolidated in one place and reduce code duplication. It can also handle encapsulate the composition of all predicates.
+    * Pros: All predicates meant for testing on person fields can be consolidated in one place and reduce code duplication. It can also encapsulate the composition of all predicates.
     * Cons: If fields have different matching behaviour, it may result in the class having more than one responsibility.
 * **Alternative 2:** Use multiple `{field}MatchesKeywordsPredicate` classes to represent each field's predicate.
     * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
