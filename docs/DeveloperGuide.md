@@ -194,6 +194,43 @@ The following activity diagram shows what happens when a user executes the `edit
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
 
+### Filter feature
+
+#### Proposed Implementation
+
+The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
+
+* `Model#updateFilteredPersonList(Predicate p)` - iterates through the addressBook `PersonList`. If a `Person` returns true, the `Person` is added to the `filteredPersons` list.
+* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a person’s `categoryCode` is in the Set
+
+Given below is an example usage scenario of the filter mechanism.
+
+Step 1. The user launched the application for the first time. The `filteredPerson` List will be initialized with all persons in the addressBook `UniquePersonList`.
+
+Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
+
+Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredPersonList()` with the predicate as an argument, causing the `filteredPerson` List to be modified to contain only attraction contacts in the address book.
+
+The following sequence diagram shows how the filter operation works:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new filter command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Functionality of Filter feature**
+
+* **Alternative 1 (current choice):** Filters one or multiple categories.
+    * Pros: More flexible usage as users can choose to enter one or more category codes.
+    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user. 
+
+* **Alternative 2:** Only handles filter by one category.
+    * Pros: More targeted results.
+    * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

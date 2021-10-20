@@ -142,6 +142,32 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
 }
+.details_rating_label {
+    -fx-font-family: "RNS Sanz Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+
+    -fx-background-color: #4A2512;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+}
+
+.details_contact_name {
+    -fx-font-family: "RNS Sanz Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #010504;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+}
+
+.details_contact_field {
+    -fx-font-family: "RNS Sanz Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #010504;
+    -fx-wrap-text: true;
+}
+
 
 .stack-pane {
      -fx-background-color: derive(#7e6453, 40%);

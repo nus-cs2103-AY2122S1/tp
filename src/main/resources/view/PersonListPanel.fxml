@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
-</VBox>
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" styleClass="pane-with-border" VBox.vgrow="ALWAYS" >
+  <children>
+    <VBox fx:id="personList" minWidth="400" prefWidth="400" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+      <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+    </VBox>
+    <StackPane fx:id="selectedPersonPanelPlaceholder" minWidth="340.0" HBox.hgrow="ALWAYS" />
+  </children>
+</HBox>
