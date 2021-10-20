@@ -1,10 +1,10 @@
 package seedu.programmer.ui;
 
-import seedu.programmer.commons.core.LogsCenter;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+import seedu.programmer.commons.core.LogsCenter;
 
 public class CommandHistory {
     static final String DEFAULT_COMMAND = "";
