@@ -27,7 +27,11 @@ public class FindCommand extends Command {
             + "\n3. Finds all persons whose telegram handles(s) (if present) matches the specified telegram "
             + "handle(s) and displays them as a list with index numbers.\n"
             + "Parameters : te/TELEGRAM_HANDLE [MORE_TELEGRAM_HANDLES]...\n"
-            + "Example: " + COMMAND_WORD + " te/alex_1 yuBernice";
+            + "Example: " + COMMAND_WORD + " te/alex_1 yuBernice"
+            + "\n4. Finds all persons whose github username(s) (if present) matches the specified github "
+            + "username(s) and displays them as a list with index numbers.\n"
+            + "Parameters : g/GITHUB_USERNAME [MORE_GITHUB_USERNAMES]...\n"
+            + "Example: " + COMMAND_WORD + " g/alex-coder bernice";
 
     private final Predicate<Person> predicate;
 
