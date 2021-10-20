@@ -6,8 +6,8 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.plannermd.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.plannermd.logic.commands.CommandTestUtil.REMARK_DESC_AMY;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_DELETE;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -75,6 +75,37 @@ public class PlannerMdParserTest {
         assertEquals(new AddDoctorCommand(doctor), doctorCommand);
     }
 
+    //Appointment command integration tests
+    @Test
+    public void parseCommand_addAppointmentCommand() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void parseCommand_deleteAppointmentCommand() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void parseCommand_editAppointmentCommand() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void parseCommand_filterAppointmentCommand() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void parseCommand_filterUpcomingAppointmentCommand() throws Exception {
+        //TODO
+    }
+
+    @Test
+    public void parseCommand_listAppointmentCommand() throws Exception {
+        //TODO
+    }
+
     @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, patientState) instanceof ClearCommand);
@@ -127,13 +158,13 @@ public class PlannerMdParserTest {
 
         // Adding a tag
         AddPatientTagCommand addCommand = (AddPatientTagCommand) parser.parseCommand(
-                TagCommand.COMMAND_WORD + " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased() + " "
+                TagCommand.COMMAND_WORD + " " + FLAG_ADD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PREFIX_TAG + validTag, State.PATIENT);
         assertEquals(new AddPatientTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), addCommand);
 
         // Deleting a tag
         DeletePatientTagCommand deleteCommand = (DeletePatientTagCommand) parser.parseCommand(
-                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " " + PREFIX_ID
+                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " "
                         + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + validTag, State.PATIENT);
         assertEquals(new DeletePatientTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), deleteCommand);
     }
@@ -144,13 +175,13 @@ public class PlannerMdParserTest {
 
         // Adding a tag
         AddDoctorTagCommand addCommand = (AddDoctorTagCommand) parser.parseCommand(
-                TagCommand.COMMAND_WORD + " " + PREFIX_ID + INDEX_FIRST_PERSON.getOneBased() + " "
+                TagCommand.COMMAND_WORD + " " + FLAG_ADD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
                         + PREFIX_TAG + validTag, State.DOCTOR);
         assertEquals(new AddDoctorTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), addCommand);
 
         // Deleting a tag
         DeleteDoctorTagCommand deleteCommand = (DeleteDoctorTagCommand) parser.parseCommand(
-                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " " + PREFIX_ID
+                TagCommand.COMMAND_WORD + " " + FLAG_DELETE + " "
                         + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TAG + validTag, State.DOCTOR);
         assertEquals(new DeleteDoctorTagCommand(INDEX_FIRST_PERSON, new Tag(validTag)), deleteCommand);
     }
@@ -214,11 +245,15 @@ public class PlannerMdParserTest {
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), (
             ) -> parser.parseCommand("", patientState));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), (
+            ) -> parser.parseCommand("", doctorState));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, (
-        )-> parser.parseCommand("unknownCommand", patientState));
+            )-> parser.parseCommand("unknownCommand", patientState));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, (
+            )-> parser.parseCommand("unknownCommand", doctorState));
     }
 }

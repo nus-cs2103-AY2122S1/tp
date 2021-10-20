@@ -1,5 +1,6 @@
 package seedu.plannermd.model.appointment;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -12,7 +13,7 @@ import seedu.plannermd.model.person.Remark;
  * Represents an Appointment in the plannermd. Guarantees: details are present and
  * not null, field values are validated, immutable.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
 
     private final Patient patient;
     private final Doctor doctor;
@@ -81,6 +82,22 @@ public class Appointment {
                 && otherAppointment.getDoctor().equals(getDoctor())
                 && otherAppointment.getAppointmentDate().equals(getAppointmentDate())
                 && otherAppointment.getSession().equals(getSession());
+    }
+
+    /**
+     * Compares this appointment to another appointment.
+     * The comparison is based on the date and start time of the appointment session.
+     *
+     * @param otherAppointment Given Appointment to compare to, not null.
+     * @return The comparator value, negative if less, positive if greater, and zero if equal.
+     */
+    @Override
+    public int compareTo(Appointment otherAppointment) {
+        requireNonNull(otherAppointment);
+
+        return date.isEqualDate(otherAppointment.date)
+                ? session.compareStartTimeTo(otherAppointment.session)
+                : date.compareTo(otherAppointment.date);
     }
 
     /**

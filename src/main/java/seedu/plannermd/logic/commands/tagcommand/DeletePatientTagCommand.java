@@ -2,7 +2,6 @@ package seedu.plannermd.logic.commands.tagcommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -22,8 +21,8 @@ import seedu.plannermd.model.tag.Tag;
 public class DeletePatientTagCommand extends DeleteTagCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a tag from the patient identified "
-            + "by the index number used in the displayed patient list.\n" + "Parameters: " + PREFIX_ID
-            + "ID (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " " + PREFIX_ID
+            + "by the index number used in the displayed patient list.\n" + "Parameters: "
+            + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " "
             + "1 " + PREFIX_TAG + "healthy";
 
     public static final String MESSAGE_DELETE_TAG_SUCCESS = "Deleted tag from Patient: %1$s";

@@ -13,6 +13,7 @@ import seedu.plannermd.logic.commands.HelpCommand;
 import seedu.plannermd.logic.commands.ToggleCommand;
 import seedu.plannermd.logic.commands.addcommand.AddDoctorCommand;
 import seedu.plannermd.logic.commands.addcommand.AddPatientCommand;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeleteCommand;
 import seedu.plannermd.logic.commands.editcommand.EditCommand;
 import seedu.plannermd.logic.commands.findcommand.FindDoctorCommand;
@@ -62,16 +63,18 @@ public class PlannerMdParser {
         case ToggleCommand.COMMAND_WORD:
             return new ToggleCommand();
 
+        case AppointmentCommand.COMMAND_WORD:
+            return new AppointmentCommandParser().parseAppointmentCommand(userInput);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         default:
-        }
-
-        if (state.equals(State.PATIENT)) {
-            return parsePatientCommand(commandWord, arguments);
-        } else {
-            return parseDoctorCommand(commandWord, arguments);
+            if (state.equals(State.PATIENT)) {
+                return parsePatientCommand(commandWord, arguments);
+            } else {
+                return parseDoctorCommand(commandWord, arguments);
+            }
         }
     }
 

@@ -12,7 +12,7 @@ import java.time.format.ResolverStyle;
  * Represents an Appointment's date in the plannermd.
  * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentDate(String)}
  */
-public class AppointmentDate {
+public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format DD/MM/YYYY "
             + "and adhere to the following constraints:\n"
@@ -51,6 +51,13 @@ public class AppointmentDate {
         }
     }
 
+    /**
+     * Returns true if the given date is equal to date.
+     */
+    public boolean isEqualDate(AppointmentDate otherDate) {
+        return date.isEqual(otherDate.date);
+    }
+
     @Override
     public String toString() {
         return date.format(DISPLAYED_DATE_FORMATTER);
@@ -73,5 +80,18 @@ public class AppointmentDate {
     @Override
     public int hashCode() {
         return date.hashCode();
+    }
+
+    /**
+     * Compares this appointment date to another appointment date.
+     * The comparison is primarily based on the date, from earliest to latest.
+     * It is "consistent with equals", as defined by Comparable.
+     *
+     * @param otherAppointmentDate Given AppointmentDate to compare to, not null.
+     * @return The comparator value, negative if less, positive if greater, and zero if equal.
+     */
+    @Override
+    public int compareTo(AppointmentDate otherAppointmentDate) {
+        return date.compareTo(otherAppointmentDate.date);
     }
 }

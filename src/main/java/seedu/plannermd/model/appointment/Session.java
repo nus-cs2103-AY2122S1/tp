@@ -85,6 +85,18 @@ public class Session {
     }
 
     /**
+     * Compares this session start time to input session start time.
+     * The comparison is based on the time-line position of the local times within a day.
+     * It is "consistent with equals", as defined by Comparable.
+     *
+     * @param otherSession Given Session to compare to, not null.
+     * @return The comparator value, negative if less, positive if greater, and zero if equal.
+     */
+    public int compareStartTimeTo(Session otherSession) {
+        return start.compareTo(otherSession.start);
+    }
+
+    /**
      * Checks if the given time is between the start and the end (inclusive).
      *
      * @param time  Given time to be checked.

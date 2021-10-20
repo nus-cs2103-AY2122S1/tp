@@ -43,6 +43,17 @@ class AppointmentDateTest {
     }
 
     @Test
+    public void isEqualDate_equalDates_returnsTrue() {
+        assertTrue(new AppointmentDate(validDate).isEqualDate(new AppointmentDate(validDate)));
+    }
+
+    @Test
+    public void isEqualDate_notEqualDates_returnsFalse() {
+        String otherDate = "31/11/2030";
+        assertFalse(new AppointmentDate(validDate).isEqualDate(new AppointmentDate(otherDate)));
+    }
+
+    @Test
     public void equals() {
         final AppointmentDate appointmentDate = new AppointmentDate(validDate);
 
@@ -61,5 +72,24 @@ class AppointmentDateTest {
 
         // different date -> returns false
         assertNotEquals(appointmentDate, new AppointmentDate("1/1/2023"));
+    }
+
+    @Test
+    public void compareTo() {
+        String date = "10/10/2040";
+        String dateBefore = "10/10/2030";
+        String dateAfter = "10/10/2050";
+
+        AppointmentDate appointmentDate = new AppointmentDate(date);
+        AppointmentDate otherAppointmentDate;
+
+        otherAppointmentDate = new AppointmentDate(date);
+        assertEquals(appointmentDate.compareTo(otherAppointmentDate), 0);
+
+        otherAppointmentDate = new AppointmentDate(dateAfter);
+        assertTrue(appointmentDate.compareTo(otherAppointmentDate) < 0);
+
+        otherAppointmentDate = new AppointmentDate(dateBefore);
+        assertTrue(appointmentDate.compareTo(otherAppointmentDate) > 0);
     }
 }

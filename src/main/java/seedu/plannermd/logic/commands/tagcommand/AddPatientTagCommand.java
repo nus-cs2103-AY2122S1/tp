@@ -1,7 +1,6 @@
 package seedu.plannermd.logic.commands.tagcommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -22,8 +21,8 @@ import seedu.plannermd.model.tag.Tag;
 public class AddPatientTagCommand extends AddTagCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a tag to the patient identified "
-            + "by the index number used in the displayed patient list.\n" + "Parameters: " + PREFIX_ID
-            + "ID (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " " + PREFIX_ID
+            + "by the index number used in the displayed patient list.\n" + "Parameters: "
+            + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n" + "Example: " + COMMAND_WORD + " "
             + "1 " + PREFIX_TAG + "healthy";
 
     public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Patient: %1$s";
