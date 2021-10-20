@@ -118,7 +118,6 @@ public class AnimeListParserTest {
     @Test
     public void parseConfirmationCommand_confirmClear() throws Exception {
         assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear") instanceof ConfirmClearCommand);
-        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "CLEAR") instanceof ConfirmClearCommand);
         //trailing whitespace
         assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear  ") instanceof ConfirmClearCommand);
     }
