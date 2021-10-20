@@ -121,8 +121,9 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the plannerMd data i.e., all `Patient` and `Doctor` objects (which are contained in `UniquePersonList<Patient>` and `UniquePersonList<Doctor>` respectively).
+* stores the currently active `State` (which determines which list of Person, `Patient` or `Doctor`, to interact with)
+* stores the currently 'selected' `Patient` or `Doctor`  objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as unmodifiable `ObservableList<Patient>` and `ObservableList<Doctor>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -238,6 +239,26 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+---
+### Stateful PlannerMd
+With the introduction of two types of `Person` (`Patient` and `Doctor`), commands needs to be sensitive to be "active"
+list it is interacting with.
+
+### Remark
+
+#### Remark field
+A field added for `Person` and thus applies to both `Patient` and `Doctor`. Remark are miscellaneous information
+stored as a String.
+* No restrictions, `Remark` can be any `String`, including empty.
+* `Remark` is an empty String by default.
+
+#### Remark command
+Command used to edit the `Remark` field of a Person.
+* No input restrictions, input can be any `String`, including empty.
+  * empty input effectively deletes the current `Remark`
+* `Remark` is an empty String by default.
+
+### \[Upcoming\] Propagating Person Changes to Appointment List
 
 --------------------------------------------------------------------------------------------------------------------
 
