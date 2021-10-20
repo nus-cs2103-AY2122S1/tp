@@ -6,11 +6,12 @@ import java.util.Arrays;
 
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.PriorityPredicate;
-import seedu.fast.model.person.RemarkContainsKeyWordsPredicate;
-import seedu.fast.model.person.TagContainsKeyWordsPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -36,7 +37,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             for (String tag : tags) {
                 if (!isPriority(tag)) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
                 }
             }
             return new FindCommand(new PriorityPredicate(Arrays.asList(tags)));
@@ -47,7 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             checkForBlanks(tags);
-            return new FindCommand(new TagContainsKeyWordsPredicate(Arrays.asList(tags)));
+            return new FindCommand(new TagMatchesKeywordPredicate(Arrays.asList(tags)));
 
         } else if (trimmedArgs.startsWith(FindCommand.REMARK_PREFIX)) {
             String tokenizedArgs = trimmedArgs.substring(
@@ -55,12 +56,12 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] queries = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             checkForBlanks(queries);
-            return new FindCommand(new RemarkContainsKeyWordsPredicate(Arrays.asList(queries)));
+            return new FindCommand(new RemarkContainsKeywordPredicate(Arrays.asList(queries)));
 
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindCommand(new NameContainsQueriesPredicate(Arrays.asList(nameKeywords)));
         }
     }
 

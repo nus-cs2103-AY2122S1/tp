@@ -9,10 +9,10 @@ import seedu.fast.model.tag.Tag;
 /**
  * Tests that a {@code Person}'s {@code Tag} matches any of the tag names given.
  */
-public class TagContainsKeyWordsPredicate implements Predicate<Person> {
+public class TagMatchesKeywordPredicate implements Predicate<Person> {
     public final List<String> tags;
 
-    public TagContainsKeyWordsPredicate(List<String> tags) {
+    public TagMatchesKeywordPredicate(List<String> tags) {
         this.tags = tags;
     }
 
@@ -42,7 +42,7 @@ public class TagContainsKeyWordsPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TagContainsKeyWordsPredicate // instanceof handles nulls
-                && tags.equals(((TagContainsKeyWordsPredicate) other).tags)); // state check
+                || (other instanceof TagMatchesKeywordPredicate // instanceof handles nulls
+                && tags.equals(((TagMatchesKeywordPredicate) other).tags)); // state check
     }
 }
