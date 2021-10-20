@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -181,7 +182,7 @@ public class ShowCommand extends Command {
 
     private Set<String> getUniqueInterviewInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getInterview().get().toString()).collect(Collectors.toSet());
+                .map(x -> x.getInterview().orElse(Interview.EMPTY_INTERVIEW).toString()).collect(Collectors.toSet());
     }
 
 }
