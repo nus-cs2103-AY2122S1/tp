@@ -20,11 +20,14 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.persons.EditPersonCommand;
+import seedu.address.logic.commands.tasks.EditTaskCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -48,6 +51,10 @@ public class CommandTestUtil {
     public static final String VALID_TIME_14 = "14:00";
     public static final String VALID_DAY_MON = "Mon";
     public static final String VALID_DAY_TUE = "Tue";
+    public static final String VALID_DESCRIPTION_QUIZ1 = "Maths Quiz 1";
+    public static final String VALID_DESCRIPTION_QUIZ2 = "Maths Quiz 2";
+    public static final String VALID_DEADLINE_QUIZ1 = "2021-11-10";
+    public static final String VALID_DEADLINE_QUIZ2 = "2021-11-20";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -85,6 +92,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_QUIZ1;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_QUIZ2;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -93,6 +102,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_QUIZ1 = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_QUIZ1)
+                .withDeadline(VALID_DEADLINE_QUIZ1).build();
+        DESC_QUIZ2 = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_QUIZ2)
+                .withDeadline(VALID_DEADLINE_QUIZ2).build();
     }
 
     /**
@@ -136,6 +149,23 @@ public class CommandTestUtil {
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered task list and selected task in {@code actualModel} remain unchanged
+     */
+    public static void assertTaskCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Task> expectedFilteredList = new ArrayList<>(actualModel.getFilteredTaskList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredTaskList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

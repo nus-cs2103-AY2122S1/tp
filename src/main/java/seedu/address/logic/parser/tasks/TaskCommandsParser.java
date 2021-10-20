@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.tasks.AddTaskCommand;
 import seedu.address.logic.commands.tasks.AssignTaskToPersonCommand;
+import seedu.address.logic.commands.tasks.EditTaskCommand;
 import seedu.address.logic.commands.tasks.UnassignTaskFromPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -42,6 +43,9 @@ public class TaskCommandsParser {
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
+
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
 
         case AssignTaskToPersonCommand.COMMAND_WORD:
             return new AssignTaskToPersonCommandParser().parse(arguments);

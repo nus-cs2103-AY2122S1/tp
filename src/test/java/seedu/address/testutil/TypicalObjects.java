@@ -69,8 +69,11 @@ public class TypicalObjects {
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    public static final Task REPORT_1 = new TaskBuilder().withName("Report 1")
+    public static final Task REPORT_1 = new TaskBuilder().withDescription("Report 1")
             .withUniqueId("f31648db-5619-4bad-99d2-87367a2b5f28").withDeadline("2021-10-10").build();
+
+    public static final Task REPORT_2 = new TaskBuilder().withDescription("Report 2")
+            .withUniqueId("84213370-69bf-44e4-9d11-229411f3c1c9").withDeadline("2021-10-20").build();
 
     private TypicalObjects() {} // prevents instantiation
 
@@ -93,6 +96,6 @@ public class TypicalObjects {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(List.of(REPORT_1));
+        return new ArrayList<>(List.of(REPORT_1, REPORT_2));
     }
 }

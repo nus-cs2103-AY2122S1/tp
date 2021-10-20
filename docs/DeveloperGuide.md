@@ -238,6 +238,72 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Uniquely identify persons/groups/tasks
+
+#### Implementation
+
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
+is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
+
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId` 
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the 
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without 
+exhausting all classes that have `UniqueId` as instance.
+
+When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
+
+<img src="images/UniqueIdDiagram.png" alt="Unique id diagram" width="254">
+
+#### Design Consideration
+
+**Aspect: How to generate a unique id:**
+
+- Aspect 1 (Current choice): UUID (128-bit label)
+  - Pros: Low possibility of collision
+  - Cons: Require more spaces to store
+- Aspect 2: `java.rmi.server.UID` (unique ID over time with respect to the host that it was generated on)
+  - Pros: Ensure uniqueness within same device
+  - Cons: As users can copy the data file and run the program in other devices, it may corrupt.
+- Aspect 3: UID + IP address:
+  - Pros: Solve the problem introduced in aspect 2.
+  - Cons: Require more spaces to store, IP addresses may confuse collaborator as they are not supposed to be in an id.
+- Aspect 4: Give a serial number for each objects
+  - Pros: Easy to implement / intuitive.
+  - Cons: Numbers (`int`, `long`) may be out-of-bound, need to keep a reference of the total number of id.
+
+### Assign/Unassign task to student
+
+#### Implementation
+
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task` 
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object 
+and the `Task` object.
+
+![TaskAssignment](images/TaskAssignmentDiagram.png)
+
+The implementation currently supports two task commands:
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object, 
+and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
+- `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
+and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
+
+#### Implementation rationale
+
+- `UniqueId` is used to easily identify and retrieve different `Task` and `Person` objects that are assigned to one another.
+- Storing assignments as a set in each `Person` and `Task` makes it easy to display and retrieve all assigned tasks for each `Person`
+and all assigned `Person` for each `Task`. It also makes implementation relatively simple, without having to use external lists.
+
+#### Alternatives considered
+
+Storing assignments as a separate set in the `AddressBook`. This may complicate command execution as the command needs to retrieve the
+entire set from the `AddressBook` and look up the persons and tasks in the set.
+
+#### \[Proposed\] Future implementation
+
+- Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
+- Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -265,7 +331,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app. 
+**Value proposition**: manage students' relevant details and tasks to be assigned faster than a typical mouse/GUI driven app.
 The app is purely offline, and does not include any online feature.
 
 
@@ -368,7 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The tasks list is empty.
 
   Use case ends.
-  
+
 * 4a. The students list is empty.
 
   Use case ends.

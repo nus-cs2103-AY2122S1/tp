@@ -11,7 +11,7 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.persons.PersonAddLessonCommand;
+import seedu.address.logic.commands.persons.EditPersonCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -23,12 +23,22 @@ import seedu.address.model.lesson.Timeslot;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new PersonAddLessonCommand object
+ * Parses input arguments and creates a new EditPersonCommand object
  */
-public class PersonAddLessonParser implements Parser<PersonAddLessonCommand> {
+public class PersonAddLessonParser implements Parser<EditPersonCommand> {
+
+    public static final String COMMAND_WORD = "-al";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
+            + "by the index number used in the displayed person list. "
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_START_TIME + "HH:MM START TIME] "
+            + "[" + PREFIX_END_TIME + "HH:MM END TIME] "
+            + "[" + PREFIX_DAY + "DAY] ";
+    public static final String ADD_LESSON_SUCCESS = "Lesson added: %1$s";
 
     @Override
-    public PersonAddLessonCommand parse(String userInput) throws ParseException {
+    public EditPersonCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY);
@@ -36,7 +46,7 @@ public class PersonAddLessonParser implements Parser<PersonAddLessonCommand> {
         if (!argMultimap.arePrefixesPresent(PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PersonAddLessonCommand.MESSAGE_USAGE));
+                    MESSAGE_USAGE));
         }
 
         Index index;
@@ -45,7 +55,7 @@ public class PersonAddLessonParser implements Parser<PersonAddLessonCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PersonAddLessonCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_USAGE), pe);
         }
 
         Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_START_TIME).get(),
@@ -53,6 +63,8 @@ public class PersonAddLessonParser implements Parser<PersonAddLessonCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
         Lesson lesson = new Lesson(timeslot, subject, dayOfWeek, new ArrayList<Name>());
-        return new PersonAddLessonCommand(index, lesson);
+        EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
+        editPersonDescriptor.addLesson(lesson);
+        return new EditPersonCommand(index, editPersonDescriptor, ADD_LESSON_SUCCESS);
     }
 }

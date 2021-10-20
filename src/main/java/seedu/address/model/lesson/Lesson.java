@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +23,7 @@ public class Lesson implements Comparable<Lesson> {
 
     // Identity fields
     private final Subject subject;
-    private final List<Name> attendees;
+    private final List<Name> attendees = new ArrayList<>();
     /**
      * Every field must be present and not null.
      */
@@ -31,7 +32,7 @@ public class Lesson implements Comparable<Lesson> {
         this.timeslot = timeslot;
         this.subject = subject;
         this.dayOfWeek = dayOfWeek;
-        this.attendees = attendees;
+        this.attendees.addAll(attendees);
     }
 
     public Timeslot getTimeslot() {
@@ -50,8 +51,29 @@ public class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableList(attendees);
     }
 
-    public void addAttendee(Name name) {
-        attendees.add(name);
+    /**
+     * Immutable way of adding an attendee
+     * @param name of attendee
+     * @return Lesson with added attendee
+     */
+    public Lesson withAttendee(Name name) {
+        Lesson newLesson = new Lesson(timeslot, subject, dayOfWeek, attendees);
+        newLesson.attendees.add(name);
+        return newLesson;
+    }
+
+    /**
+     * Immutable way of removing an attendee
+     * @param name of attendee
+     * @return Lesson with removed attendee
+     */
+    public Lesson removeAttendee(Name name) {
+        Lesson newLesson = new Lesson(timeslot, subject, dayOfWeek, attendees);
+        int index = newLesson.attendees.indexOf(name);
+        if (index != -1) {
+            newLesson.attendees.remove(index);
+        } //TODO throw exception when removeAttendee is out of bounds
+        return newLesson;
     }
 
     /**

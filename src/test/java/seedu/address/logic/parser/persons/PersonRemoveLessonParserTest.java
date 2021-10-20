@@ -8,8 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.persons.PersonAddLessonCommand;
-import seedu.address.logic.commands.persons.PersonRemoveLessonCommand;
+import seedu.address.logic.commands.persons.EditPersonCommand;
 
 class PersonRemoveLessonParserTest {
 
@@ -22,17 +21,20 @@ class PersonRemoveLessonParserTest {
 
     @Test
     public void parse_validArgs_returnsCorrectCommand() {
-        assertParseSuccess(parser, "1 1", new PersonRemoveLessonCommand(INDEX_FIRST_PERSON, INDEX_FIRST_PERSON));
+        EditPersonCommand.EditPersonDescriptor editPersonDesc = new EditPersonCommand.EditPersonDescriptor();
+        editPersonDesc.removeLesson(INDEX_FIRST_PERSON);
+        assertParseSuccess(parser, "1 1", new EditPersonCommand(INDEX_FIRST_PERSON, editPersonDesc,
+                PersonRemoveLessonParser.MESSAGE_SUCCESS));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         // all wrong
         assertParseFailure(parser, "abcdefgh", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PersonAddLessonCommand.MESSAGE_USAGE));
+                PersonAddLessonParser.MESSAGE_USAGE));
 
         // half right :)
         assertParseFailure(parser, "1 abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PersonAddLessonCommand.MESSAGE_USAGE));
+                PersonAddLessonParser.MESSAGE_USAGE));
     }
 }

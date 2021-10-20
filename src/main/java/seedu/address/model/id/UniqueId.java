@@ -4,11 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.UUID;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * A class that represents unique ids for tasks/students using UUID.
+ * A class that represents unique ids for tasks/students/groups using UUID.
  */
 public class UniqueId {
     public static final UniqueId DEFAULT_ID = UniqueId.generateId("00000000-0000-0000-0000-000000000000");
@@ -86,6 +87,9 @@ public class UniqueId {
         }
         if (owner instanceof Person) {
             return "S-" + this.id.toString();
+        }
+        if (owner instanceof Group) {
+            return "G-" + this.id.toString();
         }
 
         return "#INVALID";
