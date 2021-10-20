@@ -2,9 +2,12 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import com.sun.javafx.scene.control.behavior.TabPaneBehavior;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -16,6 +19,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Category;
+import seedu.address.model.client.Client;
+import seedu.address.model.product.Product;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,6 +41,10 @@ public class MainWindow extends UiPart<Stage> {
     private ProductListPanel productListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PieChartView pieChartView;
+    private HelpMessage helpMessage;
+    private ViewMoreClient viewMoreClient;
+    private ViewMoreProduct viewMoreProduct;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -53,6 +63,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane secondPanelPlaceholder;
+
+    @FXML
+    private TabPane tabPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -128,6 +144,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        helpMessage = new HelpMessage();
+        secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
+
     }
 
     /**
@@ -170,6 +190,63 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleStat() {
+        pieChartView = new PieChartView();
+        secondPanelPlaceholder.getChildren().clear();
+        secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
+
+    }
+
+    private void handleList(TabPaneBehavior tpb, int selectedTab, Category category) {
+        if (category instanceof Client) {
+            logger.info("List all clients");
+            if (selectedTab == 1) {
+                tabPane.setDisable(true);
+                tpb.selectNextTab();
+                tabPane.setDisable(false);
+            }
+        }
+        if (category instanceof Product) {
+            logger.info("List all products");
+            if (selectedTab == 0) {
+                tabPane.setDisable(true);
+                tpb.selectNextTab();
+                tabPane.setDisable(false);
+            }
+        }
+    }
+
+    private void handleView(TabPaneBehavior tpb, int selectedTab, Category category) {
+        if (category instanceof Client) {
+            logger.info("View client's details: " + category.toString());
+            viewMoreClient = new ViewMoreClient();
+            viewMoreClient.setClientDetails((Client) category);
+            secondPanelPlaceholder.getChildren().clear();
+            secondPanelPlaceholder.getChildren().add(viewMoreClient.getRoot());
+
+            if (selectedTab == 1) {
+                tabPane.setDisable(true);
+                tpb.selectNextTab();
+                tabPane.setDisable(false);
+            }
+        }
+
+        if (category instanceof Product) {
+            logger.info("View product's details: " + category.toString());
+            viewMoreProduct = new ViewMoreProduct();
+            viewMoreProduct.setProductDetails((Product) category);
+            secondPanelPlaceholder.getChildren().clear();
+            secondPanelPlaceholder.getChildren().add(viewMoreProduct.getRoot());
+
+            if (selectedTab == 0) {
+                tabPane.setDisable(true);
+                tpb.selectNextTab();
+                tabPane.setDisable(false);
+            }
+        }
+    }
+
     public ClientListPanel getClientListPanel() {
         return clientListPanel;
     }
@@ -188,6 +265,17 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            int selectedTab = tabPane.getSelectionModel().getSelectedIndex();
+            TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
+            Category category = commandResult.getInfo();
+
+            if (commandResult.isList()) {
+                handleList(tpb, selectedTab, category);
+            }
+
+            if (commandResult.isViewMore()) {
+                handleView(tpb, selectedTab, category);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -195,6 +283,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isStat()) {
+                handleStat();
             }
 
             return commandResult;
