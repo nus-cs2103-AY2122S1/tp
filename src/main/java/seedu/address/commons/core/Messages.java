@@ -12,6 +12,4 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_VIEW_SUCCESS = "Viewing person: %1$s";
     public static final String MESSAGE_SORT_SUCCESS = "List sorted by %s";
-
-    public static final String MESSAGE_SWITCH_SUCCESS = "Address Book switch to %1$s";
 }

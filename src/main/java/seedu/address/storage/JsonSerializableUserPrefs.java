@@ -20,7 +20,7 @@ import seedu.address.model.UserPrefs;
 @JsonRootName(value = "userprefs")
 class JsonSerializableUserPrefs {
     private final Path filepath;
-    private GuiSettings guiSettings;
+    private final GuiSettings guiSettings;
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.

@@ -170,8 +170,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleSwitch() {
+    /**
+     * Switches the Address Book.
+     */
+    private void handleSwitchAddressBook() {
         this.logic.switchAddressBook();
+    }
+
+    /**
+     * Create a new Address Book.
+     */
+    private void handleCreateAddressBook() {
+        this.logic.createAddressBook();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -197,8 +207,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isSwitching()) {
-                handleSwitch();
+            if (commandResult.isSwitchAddressBook()) {
+                handleSwitchAddressBook();
+            }
+
+            if (commandResult.isCreateAddressBook()) {
+                handleCreateAddressBook();
             }
 
             return commandResult;

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NORMAL;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCHING;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCH_ADDRESSBOOK;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +39,7 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("feedback", EXIT)));
 
         // different switch value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", SWITCHING)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", SWITCH_ADDRESSBOOK)));
     }
 
     @Test

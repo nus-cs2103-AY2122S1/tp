@@ -19,7 +19,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.Storage;
@@ -57,8 +56,6 @@ public class LogicManager implements Logic {
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
-
-
 
         return commandResult;
     }
@@ -105,11 +102,7 @@ public class LogicManager implements Logic {
         ReadOnlyAddressBook addressBook;
         try {
             Optional<ReadOnlyAddressBook> addressBookOptional = this.storage.readAddressBook(filePath);
-            if (addressBookOptional.isEmpty()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-
-            addressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            addressBook = addressBookOptional.orElseGet(AddressBook::new);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             addressBook = new AddressBook();
@@ -120,5 +113,14 @@ public class LogicManager implements Logic {
 
         this.model.setAddressBook(addressBook);
         this.storage.switchAddressBook(addressBookStorage);
+    }
+
+    @Override
+    public void createAddressBook() {
+        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(getAddressBookFilePath());
+        ReadOnlyAddressBook addressBook = new AddressBook();
+
+        this.storage.switchAddressBook(addressBookStorage);
+        this.model.setAddressBook(addressBook);
     }
 }

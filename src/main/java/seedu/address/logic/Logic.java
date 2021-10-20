@@ -62,4 +62,6 @@ public interface Logic {
      * in {@code addressBookFilePath} of {@code UserPrefs}
      */
     void switchAddressBook();
+
+    void createAddressBook();
 }

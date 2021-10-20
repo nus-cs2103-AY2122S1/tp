@@ -13,6 +13,15 @@ public class FileUtil {
 
     private static final String CHARSET = "UTF-8";
 
+    /**
+     * Converts {@code String addressBookName} into a {@code Path}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String convertToAddressBookPathString(String addressBookName) {
+        String trimmedLowerCase = addressBookName.trim().toLowerCase();
+        return String.format("data/%s.json", trimmedLowerCase);
+    }
+
     public static boolean isFileExists(Path file) {
         return Files.exists(file) && Files.isRegularFile(file);
     }
