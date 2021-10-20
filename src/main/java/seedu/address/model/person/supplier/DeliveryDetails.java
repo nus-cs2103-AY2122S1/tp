@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class DeliveryDetails {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Delivery details is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy"
-                    + "format and a time in 12hr/24hr clock format (eg: 6:00 PM or 18:00)."
+            "Delivery details is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
+                    + "format and a time in 12hr/24hr clock format (eg: 6:00 PM or 18:00). "
                     + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     private static final DateTimeFormatter[] dateTimeFormatters = {
@@ -54,6 +54,12 @@ public class DeliveryDetails {
         return temp != null;
     }
 
+    /**
+     * Returns the original date time string entered into the app by the user.
+     */
+    public String getUnformattedDeliveryDetailsString() {
+        return this.deliveryDetails.format(chosenFormat);
+    }
 
     @Override
     public String toString() {

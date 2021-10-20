@@ -66,7 +66,7 @@ class JsonAdaptedSupplier {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         supplyType = source.getSupplyType().supplyType;
-        deliveryDetails = source.getDeliveryDetails().toString();
+        deliveryDetails = source.getDeliveryDetails().getUnformattedDeliveryDetailsString();
     }
 
     /**
