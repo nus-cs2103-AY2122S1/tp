@@ -224,22 +224,22 @@ The implementation of `adding`, `editing` and `deleting` an appointment is fairl
 `Adding appointment`: `date` field is compulsory. Parses the `date` string and `time` string by using the built-in 
 `LocalDate` parser. The `date` string and `time` string will then be formatted by built-in `DateTimeFormatter` to the 
 required format. Make use of `String::length` method to check for the character limit imposed on the `venue` field.
-Make use of `String::equalsIgnoreCase` method to prevent user from adding appointment if it already exists.
+Makes use of `String::equalsIgnoreCase` method to prevent user from adding appointment if it already exists.
 If all input data fields fulfill the requirements, a new `Appointment` object will be created to store the data, 
 which will be added to the `model`.
 
 `Edit appointment`: Similar to `Adding appointment`, except that `date` field is no longer compulsory. 
 Included a `EditAppointmentDescriptor` class to duplicate data fields that are not modified. 
 `EditAppointmentDescriptor::isAnyFieldEmpty` is implemented to ensure that at least 1 data field is being edited.
-Make use of `String::equalsIgnoreCase` to prevent editing a non-existent appointment.
+Makes use of `String::equalsIgnoreCase` to prevent editing a non-existent appointment.
 If all input data fields fulfills the requirements, a new `EditAppointmentDescriptor` object will be created to store 
 the data, which will be used to update the `model`.
 
-`Delete appointment`: Make use of `String::equalsIgnoreCase` to prevent deleting a non-existent appointment.
-`deletes` an appointing by creating a new `Appointment` object with empty `date`, `time` and `venue` field for the 
+`Delete appointment`: Makes use of `String::equalsIgnoreCase` to prevent deleting a non-existent appointment.
+`deletes` an appointment by creating a new `Appointment` object with empty `date`, `time` and `venue` field for the 
 specified contact in the `model`.
 
-`Track Completed Status`: Make use of the `AppointmentCount` class to keep track of the number of completed appointment 
+`Track Completed Status`: Makes use of the `AppointmentCount` class to keep track of the number of completed appointment 
 with the specified contact. `AppointmentCount` will be increased by 1 each time the user enters the command.
 
 Below is an example usage scenario (`adding` / `editing`):
