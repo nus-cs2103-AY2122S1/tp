@@ -38,4 +38,28 @@ public class ProgressTest {
         assertTrue(Progress.isValidProgress("Capital Tan")); // with capital letters
         assertTrue(Progress.isValidProgress("Still required to study 2103T")); // long progress
     }
+
+    @Test
+    public void equal() {
+        String progressOne = "Did Homework";
+        String progressTwo = "Finished Exam";
+        Progress amyProgress = new Progress(progressOne);
+        Progress bobProgress = new Progress(progressOne); // same as amy
+        Progress charlesProgress = new Progress(progressTwo); // different from amy
+
+        // same object -> returns true
+        assertTrue(amyProgress.equals(amyProgress));
+
+        // same values -> returns true
+        assertTrue(amyProgress.equals(bobProgress));
+
+        // different types -> returns false
+        assertFalse(amyProgress.equals(true));
+
+        // null -> returns false
+        assertFalse(amyProgress.equals(null));
+
+        // different progress -> returns false
+        assertFalse(amyProgress.equals(charlesProgress));
+    }
 }
