@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.done.Done;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +31,9 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
+    // Status fields
+    private final Done done;
+
     /**
      * Every field must be present and not null.
      */
@@ -46,6 +50,7 @@ public class Person {
         this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         this.tags.addAll(tags);
+        this.done = new Done();
     }
 
     public Name getName() {
@@ -88,6 +93,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Done getDone() {
+        return done;
+    }
+
     /**
      * Returns true if both persons have the same email and contact number.
      * This defines a weaker notion of equality between two persons.
@@ -125,14 +134,15 @@ public class Person {
                 && otherPerson.getExpectedSalary().equals(getExpectedSalary())
                 && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getDone().equals(getDone());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags);
+                expectedSalary, levelOfEducation, experience, tags, done);
     }
 
     @Override
@@ -159,6 +169,9 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        builder.append("; ").append(getDone());
+
         return builder.toString();
     }
 }
