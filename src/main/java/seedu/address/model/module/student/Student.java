@@ -34,6 +34,7 @@ public class Student {
         this.teleHandle = teleHandle;
         this.email = email;
         //this.tags.addAll(tags);
+        this.taskList = new UniqueTaskList();
     }
 
     public Name getName() {
