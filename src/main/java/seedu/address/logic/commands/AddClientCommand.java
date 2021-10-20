@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -77,7 +76,8 @@ public class AddClientCommand extends Command {
         PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
         Email email = addClientDescriptor.getEmail();
         Address address = addClientDescriptor.getAddress();
-        return new Client(name, phoneNumber, email, address, new HashSet<>());
+        Set<Order> orders = addClientDescriptor.getOrders();
+        return new Client(name, phoneNumber, email, address, orders);
     }
 
     @Override
@@ -168,6 +168,15 @@ public class AddClientCommand extends Command {
          */
         public void setOrders(Set<Order> orders) {
             this.orders = orders;
+        }
+
+        /**
+         * Gets the orders from a client.
+         *
+         * @return The orders from a client.
+         */
+        public Set<Order> getOrders() {
+            return this.orders;
         }
     }
 }
