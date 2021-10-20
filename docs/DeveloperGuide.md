@@ -136,10 +136,15 @@ The `Model` component,
 
 #### Current Implementations
 
-The 
+The model that we implemented currently has `Event`, `Task` and `Member`. `Member` has a field with `TaskList` which contains
+`Task` belonging to the `Member`. `Event` has a `Name` field, `EventDate` field, and a field of a HashMap<Member, Boolean>
+to serve as a participant list with attendance. Event and Member both extend from the abstract class `Module` to reduce class duplication.
+
 
 #### Future Plans
 
+The future plan for the model is to have `Task` extend from module. The search functions in regard to name will be greatly helped ny the `Module` class.
+We also plan to make the `Position` objects unique to reduce space cost, Each member would contain a reference to the `Position` object instead.
 
 ### Storage component
 
@@ -151,6 +156,15 @@ The `Storage` component,
 * can save both address book module and user preference module in json format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+#### Current Implementation
+
+`JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
+loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
+
+#### Future Plans
+
+Storing `Position` in a unique list would reduce the amount of `Position` objects needed.
 
 ### Common classes
 
