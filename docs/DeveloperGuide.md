@@ -199,7 +199,7 @@ With `UndoableCommand`, the commands that are undoable are implemented similarly
 Step 1. Suppose that a user has just launched our application. The `undoRedoStack` will be empty at the beginning.
 
 Step 2. The user then executes an `UndoableCommand` which modifies the existing `Model` as per the definition of an `UndoableCommand`. 
-The specific called `UndoableCommand` will process the command during the method call `UndoableCommand#executeUndoableCommand` so that it can undo itself.
+The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand` so that it can undo itself.
 
 For instance, the executed command is `delete 5`, to delete the 5th person in the `AddressBook` that resides in the `Model`. 
 The deleted Person, referred to in the Figure 1 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
