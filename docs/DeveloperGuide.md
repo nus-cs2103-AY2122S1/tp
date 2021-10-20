@@ -93,7 +93,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `TuitoneParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -234,15 +234,77 @@ Additionally, there is not much significance in having an especially pretty comm
 
 #### Implementation
 
-Object diagram
+The Enroll feature establishes a bi-directional relationship
+between a student and a specific lesson. This student to be enrolled must meet a set of conditions.
+1. The student has to have the same `Grade` as specified in the lesson.
+2. The student cannot already be enrolled in the lesson.
 
-Sequence diagram
+When enrolled, the student will have that lesson added to their list
+of lessons they have currently signed up for, and lesson size would increase by 1.
 
-Activity diagram
+Given below is an example usage scenario and how the enroll operation behaves.
+_Note: For this usage, we only consider the main success scenario
+(i.e. the student exists, has the same `grade` as the specific lesson,
+and has not been enrolled in the lesson yet)._
+
+<ins>Step 1:</ins>
+
+User has a list of students and lessons presented in their
+TuitiONE application. The user has a `Lesson` with the lessoncode Math-P2-Wed-1800 and `grade`
+P2 that they would like to enroll a `Student` named Alice of `grade` P2 into.
+The object state diagram is as such:
+
+![EnrollLessonState0](images/EnrollLessonState0.png)
+
+The initial size of the lesson is 0, and the student has yet to enroll
+into the lesson.
+
+<ins>Step 2:</ins>
+
+Upon running the Enroll command, the application runs a few internal steps:
+
+1. The tuitione model obtains the student to enroll into lesson.
+2. The command executor checks if the student is eligible to be enrolled into lesson.
+3. The command executor checks if the student is currently enrolled in the lesson
+4. Finally, the student is ready to be enrolled into the lesson.
+5. Relevant UI and Storage procedures runs to complete the execution in full.
+
+The final object state diagram is as such:
+
+![EnrollLessonState0](images/EnrollLessonState1.png)
+
+The following sequence diagram shows how the enroll lesson operation works:
+
+![EnrollLessonSequenceDiagram](images/EnrollLessonSequenceDiagram.png)
+
+The following activity diagram summarizes what
+happens when a user executes the enroll lesson command:
+
+![EnrollLessonActivityDiagram](images/EnrollLessonActivityDiagram.png)
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>
+* Option 1: `enroll STUDENT_INDEX l/LESSON_CODE`
+    * Pros:
+        * More intuitive for user to type out lesson code as it contains critical information
+          about the lesson itself (i.e grade, starting time, subject)
+        * Unique command word allows command keys to be easily distinguished
+    * Cons:
+        * Long command might be inconvenient for users when typing multiple enroll commands
+* Option 2: `enroll STUDENT_INDEX l/LESSON_INDEX`
+    * Pros:
+        * Much shorter to type lesson index when looking at GUI, instead of entire lesson code
+        * Can refer easily to GUI lesson index
+    * Cons:
+        * Less intuitive for the user as they have to refer to the GUI to ensure they have the correct lesson before enrolling
+        * Might require user to filter lesson first before referring to GUI, incurring an extra step
+
+<ins>Decision</ins>
+Ultimately, Option 2 (`enroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as our team felt that a user would value efficiency when typing multiple enroll commands rather than typing out an entire lesson code.
+The user is still able to refer to the GUI in this instance, with the help with filter commands, making it rather easy for the user to achieve the same result as using a lesson code.
+
+Our team's main goal is to ensure that whatever the user does and types is done in an efficient and easy method. Ultimately, Option 2 achieves this goal better than option 1.
 
 ### Unenroll feature
 
@@ -797,7 +859,8 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
 2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
     * Performance requirements: the system should respond within 2 seconds.
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands)
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
 5. Quality requirements:
     * User interface not produce excessive colour changes/flashing on command execution.
