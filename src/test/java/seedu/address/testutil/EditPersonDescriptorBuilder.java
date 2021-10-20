@@ -40,8 +40,9 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
-        descriptor.setTasks(person.getTasks());
         descriptor.setDescription(person.getDescription());
+        descriptor.setTasks(person.getTasks());
+
     }
 
     /**
@@ -87,6 +88,14 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Descripton} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
+        return this;
+    }
+
+    /**
      * Parse the {@code tags} into a {@code List<Task>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
@@ -96,13 +105,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Descripton} of the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withDescription(String description) {
-        descriptor.setDescription(new Description(description));
-        return this;
-    }
+
     public EditPersonDescriptor build() {
         return descriptor;
     }

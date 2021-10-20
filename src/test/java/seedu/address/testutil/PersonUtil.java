@@ -41,9 +41,9 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
+        sb.append(PREFIX_DESCRIPTION + person.getDescription().value + " ");
         person.getTasks().stream().forEach(
             s -> sb.append(PREFIX_TASK + s.taskName + " "));
-        sb.append(PREFIX_DESCRIPTION + person.getDescription().value + " ");
         return sb.toString();
     }
 

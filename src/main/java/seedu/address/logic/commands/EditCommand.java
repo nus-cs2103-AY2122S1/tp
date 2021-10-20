@@ -106,8 +106,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
+        List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
                 updatedDescription);
@@ -165,7 +165,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setDescription(toCopy.description);
-	    setTasks(toCopy.tasks);
+            setTasks(toCopy.tasks);
         }
 
         /**
@@ -221,6 +221,7 @@ public class EditCommand extends Command {
 
         public Optional<List<Task>> getTasks() {
             return Optional.ofNullable(tasks);
+
         }
 
         /**
