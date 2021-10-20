@@ -125,7 +125,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
-    public static final String INVALID_LESSON_RATES_DESC = " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
+    public static final String INVALID_LESSON_RATES_DESC =
+            " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "-An+"; // Not alphanumeric
     public static final String INVALID_HOMEWORK_DESC =
             " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"

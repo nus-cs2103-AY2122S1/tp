@@ -1,8 +1,13 @@
 package seedu.address.testutil;
 
-import seedu.address.model.lesson.Lesson;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import seedu.address.model.lesson.Lesson;
 
 public class TypicalLessons {
     // all fields present

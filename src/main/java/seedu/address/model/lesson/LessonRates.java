@@ -12,11 +12,17 @@ public class LessonRates {
             "Lesson Rates should be formatted with a decimal point '.' as a separator between the dollars and cents, "
                     + "and adhere to the following constraints:\n"
                     + "1. Lesson Rates should only contain numbers and at most one decimal point.\n"
-                    + "2. Lesson Rates should not start or end with a decimal point and should have at most two decimal places.";
+                    + "2. Lesson Rates should not start or end with a decimal point"
+                    + " and should have at most two decimal places.";
 
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
     public final String value;
 
+    /**
+     * Constructs a {@code LessonRates}.
+     *
+     * @param lessonRates A valid description.
+     */
     public LessonRates(String lessonRates) {
         requireNonNull(lessonRates);
         checkArgument(isValidLessonRates(lessonRates));

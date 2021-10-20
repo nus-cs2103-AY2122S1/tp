@@ -10,7 +10,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.RecurringLesson;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeRange;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
