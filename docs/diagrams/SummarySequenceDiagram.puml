@@ -46,23 +46,26 @@ deactivate Summary
 Summary -> Summary : setPercentageReviews()
 activate Summary
 
+loop addressBookSize
 Summary -> Person : getReview()
 activate Person
 
 Person --> Summary
 deactivate Person
-
+end
 Summary --> Summary
 deactivate Summary
 
 Summary -> Summary : setNumberCategory()
 activate Summary
 
+loop addressBookSize
 Summary -> Person : getCategoryCode()
 activate Person
 
 Person --> Summary
 deactivate Person
+end
 
 Summary --> Summary
 deactivate Summary
