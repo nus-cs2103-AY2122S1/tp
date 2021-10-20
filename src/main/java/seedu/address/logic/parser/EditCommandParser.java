@@ -2,15 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,7 +30,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPECTED_SALARY,
-                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG);
+                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
 
         Index index;
 
@@ -81,6 +73,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EXPERIENCE).isPresent()) {
             editPersonDescriptor.setExperience(
                     ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+            editPersonDescriptor.setInterview(
+                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

@@ -111,7 +111,7 @@ public class EditCommand extends Command {
                 .getLevelOfEducation().orElse(personToEdit.getLevelOfEducation());
         Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Interview updatedInterview = editPersonDescriptor.getInterview().orElse(personToEdit.getInterview());
+        Optional<Interview> updatedInterview = editPersonDescriptor.getInterview().orElse(personToEdit.getInterview());
 
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
         private LevelOfEducation levelOfEducation;
         private Experience experience;
         private Set<Tag> tags;
-        private Interview interview;
+        private Optional<Interview> interview;
 
 
         public EditPersonDescriptor() {}
@@ -262,11 +262,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setInterview(Interview interview) {
+        public void setInterview(Optional<Interview> interview) {
             this.interview = interview;
         }
 
-        public Optional<Interview> getInterview() {
+        public Optional<Optional<Interview>> getInterview() {
             return Optional.ofNullable(interview);
         }
 
@@ -293,6 +293,7 @@ public class EditCommand extends Command {
                     && getExpectedSalary().equals(e.getExpectedSalary())
                     && getLevelOfEducation().equals(e.getLevelOfEducation())
                     && getExperience().equals(e.getExperience())
+                    && getInterview().equals(e.getInterview())
                     && getTags().equals(e.getTags());
         }
     }

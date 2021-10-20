@@ -9,17 +9,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an interview in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidInterviewTime(String)}
+ * Guarantees: immutable; time input is valid as declared in {@link #isValidInterviewTime(String)}
  */
 public class Interview {
-
-    public static final String MESSAGE_CONSTRAINTS = "Interview time should follow the format: yyyy-MM-dd, HH:mm";
-
-    public static final String parseFormat = "yyyy-MM-dd, HH:mm";
+    public static final Interview EMPTY_INTERVIEW = new Interview();
+    public static final String parseFormat = "yyyy-MM-dd, H:mm";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Interview time should follow the exact format: [" + parseFormat + "]. E.g. i/2021-10-22, 8:00";
 
     public final String parseTime;
-
-    //public final LocalDate ld;
 
     /**
      * Constructs an {@code Interview}.
@@ -33,7 +31,14 @@ public class Interview {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Constructs an empty {@code Interview}.
+     */
+    public Interview() {
+        this.parseTime = "-";
+    }
+
+    /**
+     * Returns true if a given string is a valid interview time which follows the timing format.
      */
     public static boolean isValidInterviewTime(String test) {
         try {

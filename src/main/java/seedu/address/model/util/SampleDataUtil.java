@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
+import javax.swing.text.html.Option;
+
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
@@ -30,7 +33,9 @@ public class SampleDataUtil {
                 new EmploymentType("Full time"),
                 new ExpectedSalary("3500"),
                 new LevelOfEducation("PhD"),
-                new Experience("0"), getTagSet("friends")),
+                new Experience("0"),
+                    getTagSet("friends"),
+                    Optional.of(new Interview("2021-10-20, 9:30"))),
             new Person(new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"),
                 new Role("Software Tester"),
@@ -39,7 +44,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("Masters"),
                 new Experience("1"),
                 getTagSet("colleagues", "friends"),
-                    new Interview("2021-10-20, 10:00")),
+                    Optional.empty()),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Role("Software Developer"),
@@ -48,7 +53,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("Elementary"),
                 new Experience("2"),
                 getTagSet("neighbours"),
-                    new Interview("2021-10-20, 11:00")),
+                    Optional.of(new Interview("2021-10-20, 11:00"))),
             new Person(new Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Role("Software Developer"),
@@ -57,7 +62,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("Bachelors"),
                 new Experience("3"),
                 getTagSet("family"),
-                    new Interview("2021-10-20, 12:00")),
+                    Optional.of(new Interview("2021-10-20, 15:00"))),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Role("Software Tester"),
@@ -66,7 +71,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("Middle School"),
                 new Experience("4"),
                 getTagSet("classmates"),
-                    new Interview("2021-10-20, 05:00")),
+                    Optional.empty()),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Role("Software Engineer"),
@@ -75,7 +80,7 @@ public class SampleDataUtil {
                 new LevelOfEducation("High School"),
                 new Experience("5"),
                 getTagSet("colleagues"),
-                    new Interview("2021-10-20, 13:00"))
+                   Optional.empty())
         };
     }
 

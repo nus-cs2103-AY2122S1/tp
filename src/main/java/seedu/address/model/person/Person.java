@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
@@ -27,7 +24,7 @@ public class Person {
     private final ExpectedSalary expectedSalary;
     private final LevelOfEducation levelOfEducation;
     private final Experience experience;
-    private Interview interview;
+    private Optional<Interview> interview;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -37,7 +34,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email,
                   Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
-                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags, Interview interview) {
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags,
+                  Optional<Interview> interview) {
         requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags, interview);
         this.name = name;
         this.phone = phone;
@@ -49,24 +47,6 @@ public class Person {
         this.experience = experience;
         this.tags.addAll(tags);
         this.interview = interview;
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
-    public Person(Name name, Phone phone, Email email,
-                  Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
-                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.role = role;
-        this.employmentType = employmentType;
-        this.expectedSalary = expectedSalary;
-        this.levelOfEducation = levelOfEducation;
-        this.experience = experience;
-        this.tags.addAll(tags);
     }
 
 
@@ -102,7 +82,12 @@ public class Person {
         return experience;
     }
 
-    public Interview getInterview() {
+    /**
+     * If interview is present, return interview; Else, return an instance of empty interview.
+     *
+     * @return Person's interview timing or an empty interview.
+     */
+    public Optional<Interview> getInterview() {
         return interview;
     }
 
