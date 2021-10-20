@@ -3,6 +3,7 @@ package tutoraid.model.student;
 import java.util.Objects;
 
 import tutoraid.commons.util.CollectionUtil;
+import tutoraid.model.lesson.Lesson;
 
 /**
  * Represents a Student in the TutorAid.
@@ -69,6 +70,13 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getStudentName().equals(getStudentName());
+    }
+
+    /**
+     * Returns true if student has the lesson.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        return this.lesson.equals(lesson);
     }
 
     /**

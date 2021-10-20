@@ -23,15 +23,10 @@ public class Students {
     }
 
     /**
-     * Returns true if both sets of students have the same names.
-     * This defines a weaker notion of equality between two sets of students.
+     * Returns true if student is in the set of students.
      */
-    public boolean areSameStudents(Students otherStudents) {
-        if (otherStudents == this) {
-            return true;
-        }
-
-        return otherStudents.equals(this);
+    public boolean hasStudent(Student otherStudent) {
+        return students.contains(otherStudent);
     }
 
     @Override
