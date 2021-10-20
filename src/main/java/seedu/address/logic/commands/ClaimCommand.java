@@ -27,15 +27,15 @@ public class ClaimCommand extends Command {
     public static final String COMMAND_WORD = "claim";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a claim to the person identified by the index number used in the displayed person list."
+            + ": Adds a claim to the person identified by the index number used in the displayed person list. "
             + "Claims with the same name will be overwritten. Statuses can only be 'pending' or 'completed' \n"
-            + "Parameters: INDEX (must be a positive integer)"
-            + "[" + PREFIX_NAME + "TITLE]"
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "TITLE] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
             + "[" + PREFIX_STATUS + "STATUS]\n"
-            + "Example: " + COMMAND_WORD + "1"
-            + PREFIX_NAME + "Heart surgery"
-            + PREFIX_DESCRIPTION + "Pre-existing condition"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NAME + "Heart surgery "
+            + PREFIX_DESCRIPTION + "Pre-existing condition "
             + PREFIX_STATUS + "Pending";
 
     public static final String MESSAGE_CLAIM_ADDED_SUCCESS = "Claim added: %1$s";
