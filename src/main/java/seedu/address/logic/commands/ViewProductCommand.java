@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -28,43 +26,38 @@ public class ViewProductCommand extends Command {
                     + COMMAND_WORD
                     + " 20 ";
 
-    private final ProductContainsIdPredicate predicate;
     private Index index;
 
     /**
      * Constructor for the view product command.
      */
     public ViewProductCommand(ProductContainsIdPredicate predicate) {
-        this.predicate = predicate;
         try {
             this.index = Index.fromOneBased(predicate.getId());
         } catch (IndexOutOfBoundsException ioobe) {
             this.index = Index.fromOneBased(Integer.MAX_VALUE);
         }
-
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
+
         List<Product> lastShownList = model.getFilteredProductList();
-        if (index.getZeroBased() < 0 || index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PRODUCT_DISPLAYED_INDEX);
         }
 
-        Product productToEdit = lastShownList.get(index.getZeroBased());
-        Predicate<Product> productPredicate = (product -> product.equals(productToEdit));
-        model.updateFilteredProductList(productPredicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size())
-        );
+        Product product = lastShownList.get(index.getZeroBased());
+
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_PRODUCT, product.getId()),
+                false, false, true, product, false, false);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewProductCommand // instanceof handles nulls
-                && predicate.equals(((ViewProductCommand) other).predicate)); // state check
+                && index.equals(((ViewProductCommand) other).index)); // state check
     }
 }

@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -12,8 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsIdPredicate;
-
-
 
 /**
  * Views a client based on the id specified.
@@ -30,14 +26,12 @@ public class ViewClientCommand extends Command {
                     + COMMAND_WORD
                     + " 20 ";
 
-    private final ClientContainsIdPredicate predicate;
     private Index index;
 
     /**
      * Constructor for the view client command.
      */
     public ViewClientCommand(ClientContainsIdPredicate predicate) {
-        this.predicate = predicate;
         try {
             this.index = Index.fromOneBased(predicate.getId());
         } catch (IndexOutOfBoundsException ioobe) {
@@ -48,25 +42,22 @@ public class ViewClientCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+
         List<Client> lastShownList = model.getFilteredClientList();
-        System.out.println(this.index.getZeroBased());
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
-        Predicate<Client> clientPredicate = (client -> client.equals(clientToEdit));
-        model.updateFilteredClientList(clientPredicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW, model.getFilteredClientList().size())
-        );
+        Client client = lastShownList.get(index.getZeroBased());
+
+        return new CommandResult(String.format(Messages.MESSAGE_VIEW_CLIENT, client.getId()),
+                false, false, true, client, false, false);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewClientCommand // instanceof handles nulls
-                && predicate.equals(((ViewClientCommand) other).predicate)); // state check
+                && index.equals(((ViewClientCommand) other).index)); // state check
     }
 }

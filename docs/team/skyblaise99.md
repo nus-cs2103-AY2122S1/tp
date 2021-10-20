@@ -11,7 +11,9 @@ CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added a history command.
+* **New Feature**: Added a history command. (Pull request
+  [\#139](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/139),
+  [\#141](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/141))
     * What it does: allows the user to navigate to previous commands using up/down keys.
     * Justification: This feature allows user to reuse previous input commands quickly without the need to retype again.
       This is especially helpful if the previous command is very long (e.g.
@@ -36,17 +38,18 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `edit` and `Table of Content`
+        * Added documentation for the features `edit` and `Table of Content` (Pull requests
           [\#35](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/35),
-          [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40)
-        * Added `Command Summary Table` [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
+          [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40))
+        * Added `Command Summary Table` (Pull requests [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
           [\#46](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/46),
-          [\#47](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/47)
+          [\#47](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/47))
     * Developer Guide:
-        * Added use cases of the `edit` feature. [\#48](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/48),
-          [\#50](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/50)
-        * Added implementation details of the `edit` feature.
-          [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132)
+        * Added use cases of the `edit` feature. (Pull requests
+          [\#48](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/48),
+          [\#50](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/50))
+        * Added implementation details of the `edit` feature. (Pull request
+          [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#91](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/91)

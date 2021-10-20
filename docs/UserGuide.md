@@ -3,17 +3,18 @@ layout: page
 title: User Guide
 ---
 
-Sellah is a desktop application optimized for online sellers who prefer CLI over GUI. It is an address book that
-contains the contact information and order details related to clients and partners.
+Sellah is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address book 
+that contains the contact information and order details related to clients and partners.
 
 * Table of Contents
     * [Quick Start](#quick-start)
     * [Features](#features)
-        * [Add (Coming Soon)](#adding-add-coming-soon)
+        * [Add](#adding-add-coming-soon)
         * [Edit](#editing-edit)
-        * [View (Coming Soon)](#viewing-view-coming-soon)
-        * [Delete (Coming Soon)](#deleting-delete-coming-soon)
-        * [List (Coming Soon)](#listing-list-coming-soon)
+        * [View](#viewing-view-coming-soon)
+        * [Delete](#deleting-delete-coming-soon)
+        * [Find](#finding-find)  
+        * [List](#listing-list)
         * [Exit](#exiting-exit)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
@@ -41,7 +42,7 @@ contains the contact information and order details related to clients and partne
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add NAME`, `NAME` is a parameter which can be used as `add Ben`.
@@ -61,7 +62,7 @@ contains the contact information and order details related to clients and partne
 
 </div>
 
-### Adding: `add` [coming soon]
+### Adding: `add`
 
 Adds a new client or product to the application with an automatically generated ID.
 
@@ -107,14 +108,14 @@ Examples:
 * `edit -c 1 -n Ben` Edits the name of the client with `INDEX` of `1` to `Ben`.
 * `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `INDEX` of `3` to `Ben10` and the quantity to `20`.
 
-### Viewing: `view` [coming soon]
+### Viewing: `view`
 
 Views a current client/product from the application.
 
 Format:
 
-* View a client: `view -c ID`
-* View a product: `view -p ID`
+* View a client: `view -c INDEX`
+* View a product: `view -p INDEX`
 
 Notes:
 
@@ -122,30 +123,51 @@ Notes:
 
 Examples:
 
-* `view -c 20` Views all the details of the client with `ID` of `20` including name, address, etc.
-* `view -p 5` Views all the details of the product with `ID` of `5` including name, price, etc.
+* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, 
+  email and address.
+* `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
 
-### Deleting: `delete` [coming soon]
+### Deleting: `delete`
 
 Deletes the specified client/product from the tracker.
 
 Format:
 
-* Delete a client: `delete -c ID`
-* Delete a product: `delete -p ID`
+* Delete a client: `delete -c INDEX`
+* Delete a product: `delete -p INDEX`
 
 Notes:
 
-* Deletes the client/product based on the client/product’s ID.
-* The ID refers to the id shown in the displayed client/product list.
+* Deletes the client/product based on the client/product’s INDEX.
+* The INDEX refers to the index shown in the displayed client/product list.
 * If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
 
 Examples:
 
-* `delete -c 135` deletes the client with id 135 in the tracker.
-* `delete -p 197` deletes the product with id 197 in the tracker.
+* `delete -c 1` deletes the client with index 1 in the tracker.
+* `delete -p 2` deletes the product with index 2 in the tracker.
 
-### Listing: `list` [coming soon]
+### Finding: `find`
+
+Finds a client/product that is in the application
+
+Format:
+
+* Find clients: `find -c NAME`
+* Find products: `find -p NAME`
+
+Notes:
+
+* Finds the client/product based on the `NAME` provided.
+* `NAME` provided must fully match the `NAME` in the application and can be case-insensitive.
+* User will be informed if there are no matching `NAME` in the application.
+
+Examples:
+
+* `find -c john` Shows a list of all clients with the `NAME` `john` in the application.
+* `find -c phone` Shows a list of all products with the `NAME` `phone` in the application.
+
+### Listing: `list`
 
 Shows a list of all clients/products in the application
 
@@ -156,12 +178,12 @@ Format:
 
 Notes:
 
-* Shows a list of clients and products if -c/-p is not specified.
+* User will be informed if there are no clients/products in the application.
 
 Examples:
 
-* `list -c` Shows a list of all clients in the application
-* `list -p` Shows a list of all products in the application
+* `list -c` Shows a list of all clients in the application.
+* `list -p` Shows a list of all products in the application.
 
 ### Exiting: `exit`
 
@@ -209,12 +231,12 @@ _Details coming soon ..._
             <a href="#editing-edit">Edit</a>
         </td>
         <td>
-            Edit a client: <code>edit -c ID [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]</code><br>
-            e.g., <code>edit -c 1 -n Ben</code> Edits the name of the client with <code>ID</code> of <code>1</code> to
+            Edit a client: <code>edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]</code><br>
+            e.g., <code>edit -c 1 -n Ben</code> Edits the name of the client with <code>INDEX</code> of <code>1</code> to
             <code>Ben</code>.<br>
             <br>
-            Edit a product: <code>edit -p ID [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]</code><br>
-            e.g., <code>edit -p 3 -n Ben10 -q 20</code> Edits the name of the product with <code>ID</code> of
+            Edit a product: <code>edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]</code><br>
+            e.g., <code>edit -p 3 -n Ben10 -q 20</code> Edits the name of the product with <code>INDEX</code> of
             <code>3</code> to <code>Ben10</code> and the quantity to <code>20</code>.
         </td>
     </tr>
@@ -223,13 +245,13 @@ _Details coming soon ..._
             <a href="#viewing-view-coming-soon">View</a>
         </td>
         <td>
-            View a client: <code>view -c ID</code><br>
-            e.g., <code>view -c 20</code> Views all the details of the client with <code>ID</code> of <code>20</code>
-            including name, address, etc.<br>
+            View a client: <code>view -c INDEX</code><br>
+            e.g., <code>view -c 20</code> Views all the details of the client with <code>INDEX</code> of <code>20</code>
+            including id, name, phone number, email and address.<br>
             <br>
-            View a product: <code>view -p ID</code><br>
-            e.g., <code>view -p 5</code> Views all the details of the product with <code>ID</code> of
-            <code>5</code> including name, price, etc.
+            View a product: <code>view -p INDEX</code><br>
+            e.g., <code>view -p 5</code> Views all the details of the product with <code>INDEX</code> of
+            <code>5</code> including id, name, unit price and quantity.
         </td>
     </tr>
     <tr>
@@ -249,13 +271,13 @@ _Details coming soon ..._
             <a href="#deleting-delete-coming-soon">Delete</a>
         </td>
         <td>
-            Delete a client: <code>delete -c ID </code><br> 
-            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>ID</code> of 
-            <code>20</code> including name, address, etc.<br>
+            Delete a client: <code>delete -c INDEX</code><br> 
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of 
+            <code>20</code> including id, name, phone number, email and address.<br>
             <br>
-            Delete a product: <code>delete -p ID </code><br> 
-            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>ID</code> of 
-            <code>5</code> including name, price, etc.
+            Delete a product: <code>delete -p INDEX</code><br> 
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of 
+            <code>5</code> including id, name, unit price and quantity.
             <br>
         </td>
     </tr>
