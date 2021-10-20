@@ -13,9 +13,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
-    public static final String MESSAGE_NOT_CSV = "Failed! "
-            + "Entries at following rows are wrongly formatted:";
-
     private static final String exportsDirectoryPath = System.getProperty("user.dir")
             + File.separator
             + "exports";
