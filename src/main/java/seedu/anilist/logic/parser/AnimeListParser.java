@@ -92,6 +92,7 @@ public class AnimeListParser {
     /**
      * Parses user confirmation input into command for execution.
      *
+     * @param cmdInProgress the command currently in progress
      * @param userInput full user input string
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format

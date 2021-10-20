@@ -47,10 +47,12 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         if (this.lastCmd == null || !this.lastCmd.requiresConfirmation()) {
             Command command = animeListParser.parseCommand(commandText);
+            assert command != null;
             commandResult = command.execute(model);
             this.lastCmd = command;
         } else {
             Command command = animeListParser.parseConfirmationCommand(this.lastCmd, commandText);
+            assert command != null;
             commandResult = command.execute(model);
             this.lastCmd = command;
         }
