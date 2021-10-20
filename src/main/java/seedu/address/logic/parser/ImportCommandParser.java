@@ -94,7 +94,7 @@ public class ImportCommandParser {
                     if (x.get(finalI).equals("")) {
                         return new ArrayList<>();
                     } else {
-                        return Arrays.asList(x.get(finalI).split(" "));
+                        return Arrays.asList(x.get(finalI).split(";"));
                     }
                 });
 
