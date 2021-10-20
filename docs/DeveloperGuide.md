@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-list of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
+List of sources of all reused/adapted ideas, code, documentation, and third-party libraries:
 
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 * Libraries used: [CalendarFX](https://dlsc.com/products/calendarfx/), [Jackson](https://github.com/FasterXML/jackson), [JavaFX](https://openjfx.io/), [JUnit5](https://github.com/junit-team/junit5)
