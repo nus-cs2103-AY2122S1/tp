@@ -13,7 +13,8 @@ that contains the contact information and order details related to clients and p
         * [Edit](#editing-edit)
         * [View](#viewing-view-coming-soon)
         * [Delete](#deleting-delete-coming-soon)
-        * [List](#listing-list-coming-soon)
+        * [Find](#finding-find)  
+        * [List](#listing-list)
         * [Exit](#exiting-exit)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
@@ -146,6 +147,26 @@ Examples:
 * `delete -c 1` deletes the client with index 1 in the tracker.
 * `delete -p 2` deletes the product with index 2 in the tracker.
 
+### Finding: `find`
+
+Finds a client/product that is in the application
+
+Format:
+
+* Find clients: `find -c NAME`
+* Find products: `find -p NAME`
+
+Notes:
+
+* Finds the client/product based on the `NAME` provided.
+* `NAME` provided must fully match the `NAME` in the application and can be case-insensitive.
+* User will be informed if there are no matching `NAME` in the application.
+
+Examples:
+
+* `find -c john` Shows a list of all clients with the `NAME` `john` in the application.
+* `find -c phone` Shows a list of all products with the `NAME` `phone` in the application.
+
 ### Listing: `list`
 
 Shows a list of all clients/products in the application
@@ -157,12 +178,12 @@ Format:
 
 Notes:
 
-* Shows a list of clients and products if -c/-p is not specified.
+* User will be informed if there are no clients/products in the application.
 
 Examples:
 
-* `list -c` Shows a list of all clients in the application
-* `list -p` Shows a list of all products in the application
+* `list -c` Shows a list of all clients in the application.
+* `list -p` Shows a list of all products in the application.
 
 ### Exiting: `exit`
 
