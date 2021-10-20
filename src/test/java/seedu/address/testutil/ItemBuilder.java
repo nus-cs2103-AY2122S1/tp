@@ -16,11 +16,15 @@ public class ItemBuilder {
     public static final String DEFAULT_NAME = "Cream Puff";
     public static final String DEFAULT_ID = "654321";
     public static final String DEFAULT_COUNT = "5";
+    public static final String DEFAULT_COSTPRICE = "5.0";
+    public static final String DEFAULT_SALESPRICE = "7.0";
 
     private Name name;
     private String id;
     private String count;
     private Set<Tag> tags;
+    private String costPrice;
+    private String salesPrice;
 
     /**
      * Creates a {@code ItemBuilder} with the default details.
@@ -29,6 +33,8 @@ public class ItemBuilder {
         name = new Name(DEFAULT_NAME);
         id = DEFAULT_ID;
         count = DEFAULT_COUNT;
+        costPrice = DEFAULT_COSTPRICE;
+        salesPrice = DEFAULT_SALESPRICE;
         tags = new HashSet<>();
     }
 
@@ -39,6 +45,8 @@ public class ItemBuilder {
         name = itemToCopy.getName();
         id = itemToCopy.getId();
         count = Integer.toString(itemToCopy.getCount());
+        costPrice = Double.toString(itemToCopy.getCostPrice());
+        salesPrice = Double.toString(itemToCopy.getSalesPrice());
         tags = new HashSet<>(itemToCopy.getTags());
     }
 
@@ -74,8 +82,28 @@ public class ItemBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code costPrice} of the {@code Item} that we are building.
+     */
+    public ItemBuilder withCostPrice(String costPrice) {
+        this.costPrice = costPrice;
+        return this;
+    }
+
+    /**
+     * Sets the {@code salesPrice} of the {@code Item} that we are building.
+     */
+    public ItemBuilder withSalesPrice(String salesPrice) {
+        this.salesPrice = salesPrice;
+        return this;
+    }
+
+    /**
+     * Build the {@code Item}
+     */
     public Item build() {
-        return new Item(name, id, Integer.parseInt(count), tags);
+        return new Item(name, id, Integer.parseInt(count), tags, Double.parseDouble(costPrice),
+                Double.parseDouble(salesPrice));
     }
 
 }

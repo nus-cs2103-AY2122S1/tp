@@ -38,6 +38,10 @@ public class ItemCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label count;
+    @FXML
+    private Label costPrice;
+    @FXML
+    private Label salesPrice;
 
     /**
      * Creates a {@code ItemCard} with the given {@code Item} and index to display.
@@ -49,6 +53,8 @@ public class ItemCard extends UiPart<Region> {
         name.setText(item.getName().fullName);
         id.setText(String.format("#%s", item.getId()));
         count.setText(String.format("Quantity: %d", item.getCount()));
+        costPrice.setText(String.format("Cost Price: $ %s", item.getCostPrice()));
+        salesPrice.setText(String.format("Sales Price: $ %s", item.getSalesPrice()));
         item.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

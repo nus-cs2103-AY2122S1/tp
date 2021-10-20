@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -34,6 +36,10 @@ public class CommandTestUtil {
     public static final String VALID_ID_DONUT = "789012";
     public static final String VALID_COUNT_BAGEL = "5";
     public static final String VALID_COUNT_DONUT = "6";
+    public static final String VALID_COSTPRICE_BAGEL = "5.0";
+    public static final String VALID_COSTPRICE_DONUT = "6.0";
+    public static final String VALID_SALESPRICE_BAGEL = "6.0";
+    public static final String VALID_SALESPRICE_DONUT = "7.0";
     public static final String VALID_TAG_BAKED = "baked";
     public static final String VALID_TAG_POPULAR = "popular";
 
@@ -44,6 +50,10 @@ public class CommandTestUtil {
     public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
     public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
     public static final String COUNT_DESC_ZERO = " " + PREFIX_COUNT + "0";
+    public static final String SALESPRICE_DESC_BAGEL = " " + PREFIX_SALESPRICE + VALID_SALESPRICE_BAGEL;
+    public static final String SALESPRICE_DESC_DONUT = " " + PREFIX_SALESPRICE + VALID_SALESPRICE_DONUT;
+    public static final String COSTPRICE_DESC_BAGEL = " " + PREFIX_COSTPRICE + VALID_COSTPRICE_BAGEL;
+    public static final String COSTPRICE_DESC_DONUT = " " + PREFIX_COSTPRICE + VALID_COSTPRICE_DONUT;
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
@@ -54,6 +64,8 @@ public class CommandTestUtil {
     public static final String INVALID_ID_BAGEL_2 = " " + PREFIX_ID + "-123232";
     public static final String INVALID_COUNT_FORMAT = " " + PREFIX_COUNT + "abc";
     public static final String INVALID_COUNT_VALUE = " " + PREFIX_COUNT + "-14";
+    public static final String INVALID_SALESPRICE_BAGEL = " " + PREFIX_SALESPRICE + "asdf";
+    public static final String INVALID_COSTPRICE_BAGEL = " " + PREFIX_COSTPRICE + "asdf";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -63,9 +75,12 @@ public class CommandTestUtil {
 
     static {
         DESC_BAGEL = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL)
-                .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL).withTags(VALID_TAG_BAKED).build();
+                .withId(VALID_ID_BAGEL).withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL).withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .withTags(VALID_TAG_BAKED).build();
         DESC_DONUT = new ItemDescriptorBuilder().withName(VALID_NAME_DONUT)
                 .withId(VALID_ID_DONUT).withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_DONUT).withSalesPrice(VALID_SALESPRICE_DONUT)
                 .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR).build();
     }
 

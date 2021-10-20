@@ -32,6 +32,8 @@ public class ItemDescriptorBuilder {
         descriptor.setName(item.getName());
         descriptor.setId(item.getId());
         descriptor.setCount(item.getCount());
+        descriptor.setCostPrice(item.getCostPrice());
+        descriptor.setSalesPrice(item.getSalesPrice());
         descriptor.setTags(item.getTags());
     }
 
@@ -65,6 +67,22 @@ public class ItemDescriptorBuilder {
      */
     public ItemDescriptorBuilder withId(String id) {
         descriptor.setId(id);
+        return this;
+    }
+
+    /**
+     * Sets the {@code costPrice} of the {@code ItemDescriptor} that we are building.
+     */
+    public ItemDescriptorBuilder withCostPrice(String costPrice) {
+        descriptor.setCostPrice(Double.parseDouble(costPrice));
+        return this;
+    }
+
+    /**
+     * Sets the {@code salesPrice} of the {@code ItemDescriptor} that we are building.
+     */
+    public ItemDescriptorBuilder withSalesPrice(String salesPrice) {
+        descriptor.setSalesPrice(Double.parseDouble(salesPrice));
         return this;
     }
 

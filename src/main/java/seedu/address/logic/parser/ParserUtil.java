@@ -93,6 +93,40 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String costPrice} into a {@code Double}.
+     */
+    public static Double parseCostPrice(String costPrice) throws ParseException {
+        try {
+            Double.parseDouble(costPrice);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COSTPRICE_FORMAT);
+        }
+
+        if (Double.parseDouble(costPrice) > 0) {
+            return Double.parseDouble(costPrice);
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_COSTPRICE_FORMAT);
+        }
+    }
+
+    /**
+     * Parses {@code String salesPrice} into a {@code Double}.
+     */
+    public static Double parseSalesPrice(String salesPrice) throws ParseException {
+        try {
+            Double.parseDouble(salesPrice);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_SALESPRICE_FORMAT);
+        }
+
+        if (Double.parseDouble(salesPrice) > 0) {
+            return Double.parseDouble(salesPrice);
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_SALESPRICE_FORMAT);
+        }
+    }
+
+    /**
      * Parses {@code String count} into a {@code id}.
      */
     public static String parseId(String id) throws ParseException {

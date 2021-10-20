@@ -18,6 +18,7 @@ import seedu.address.model.tag.Tag;
 
 public class RemoveFromOrderCommandParser implements Parser<RemoveFromOrderCommand> {
     private static final int DUMMY_COUNT = -1;
+    private static final double DUMMY_PRICE = 1.0;
 
     /**
      * Parses {@code userInput} into a {@code AddToOrderCommand} and returns it.
@@ -46,9 +47,11 @@ public class RemoveFromOrderCommandParser implements Parser<RemoveFromOrderComma
         }
 
         Integer count = DUMMY_COUNT;
+        Double costPrice = DUMMY_PRICE;
+        Double salesPrice = DUMMY_PRICE;
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Item item = new Item(name, id, count, tagList);
+        Item item = new Item(name, id, count, tagList, costPrice, salesPrice);
 
         return new RemoveFromOrderCommand(item);
     }

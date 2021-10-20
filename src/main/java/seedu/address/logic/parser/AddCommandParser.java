@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddCommand;
@@ -21,7 +23,8 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG,
+                        PREFIX_COSTPRICE, PREFIX_SALESPRICE);
 
         if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -42,6 +45,14 @@ public class AddCommandParser implements Parser<AddCommand> {
             toAddDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
         } else {
             toAddDescriptor.setCount(1);
+        }
+        // Parse salesPrice
+        if (argMultimap.getValue(PREFIX_SALESPRICE).isPresent()) {
+            toAddDescriptor.setSalesPrice(ParserUtil.parseSalesPrice(argMultimap.getValue(PREFIX_SALESPRICE).get()));
+        }
+        // Parse costPrice
+        if (argMultimap.getValue(PREFIX_COSTPRICE).isPresent()) {
+            toAddDescriptor.setCostPrice(ParserUtil.parseCostPrice(argMultimap.getValue(PREFIX_COSTPRICE).get()));
         }
         // Parse tags
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {

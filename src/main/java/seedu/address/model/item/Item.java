@@ -18,6 +18,8 @@ public class Item {
     // Identity fields
     private final Name name;
     private final String id;
+    private final Double costPrice;
+    private final Double salesPrice;
 
     // Data fields
     private Integer count;
@@ -26,12 +28,27 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
+    public Item(Name name, String id, Integer count, Set<Tag> tags, Double costPrice, Double salesPrice) {
+        requireAllNonNull(name, id, count, tags, costPrice, salesPrice);
+        this.count = count;
+        this.name = name;
+        this.id = id;
+        this.tags.addAll(tags);
+        this.costPrice = costPrice;
+        this.salesPrice = salesPrice;
+    }
+
+    /**
+     * Old constructor
+     */
     public Item(Name name, String id, Integer count, Set<Tag> tags) {
         requireAllNonNull(name, id, count, tags);
         this.count = count;
         this.name = name;
         this.id = id;
         this.tags.addAll(tags);
+        this.costPrice = 1.0;
+        this.salesPrice = 1.0;
     }
 
     /**
@@ -42,6 +59,8 @@ public class Item {
         this.count = count;
         this.name = other.name;
         this.id = other.id;
+        this.salesPrice = other.salesPrice;
+        this.costPrice = other.costPrice;
         this.tags.addAll(other.tags);
     }
 
@@ -55,6 +74,14 @@ public class Item {
 
     public Integer getCount() {
         return count;
+    }
+
+    public Double getSalesPrice() {
+        return salesPrice;
+    }
+
+    public Double getCostPrice() {
+        return costPrice;
     }
 
     public void replenishItem(int n) {
@@ -78,7 +105,7 @@ public class Item {
     public Item updateCount(int newCount) {
         assert(newCount >= 0);
 
-        return new Item(name, id, newCount, tags);
+        return new Item(name, id, newCount, tags, costPrice, salesPrice);
     }
 
     /**
@@ -139,7 +166,11 @@ public class Item {
                 .append("; id: ")
                 .append(getId())
                 .append("; count: ")
-                .append(getCount());
+                .append(getCount())
+                .append("; costPrice: ")
+                .append(getCostPrice())
+                .append("; salesPrice: ")
+                .append(getSalesPrice());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

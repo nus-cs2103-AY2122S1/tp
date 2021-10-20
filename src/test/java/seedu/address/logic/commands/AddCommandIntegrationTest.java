@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -38,6 +40,8 @@ public class AddCommandIntegrationTest {
                 .withId(VALID_ID_BAGEL)
                 .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
                 .withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
                 .build();
 
         Item validItem = new ItemBuilder(BAGEL)
@@ -46,6 +50,7 @@ public class AddCommandIntegrationTest {
 
         AddCommand addCommand = new AddCommand(validDescriptor);
         String expectedMessage = String.format(AddCommand.MESSAGE_SUCCESS_NEW, validItem);
+        System.out.println(expectedMessage);
         Model expectedModel = new ModelManager();
         expectedModel.addItem(validItem);
 
@@ -57,6 +62,8 @@ public class AddCommandIntegrationTest {
         ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_BAGEL)
                 .withCount(VALID_COUNT_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
                 .build();
 
         AddCommand addCommand = new AddCommand(validDescriptor);

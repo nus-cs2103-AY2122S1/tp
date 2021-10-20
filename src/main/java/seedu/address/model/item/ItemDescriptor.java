@@ -18,6 +18,8 @@ public class ItemDescriptor {
     private String id;
     private Set<Tag> tags;
     private Integer count;
+    private Double costPrice;
+    private Double salesPrice;
 
     public ItemDescriptor() {
     }
@@ -30,6 +32,8 @@ public class ItemDescriptor {
         setName(toCopy.name);
         setId(toCopy.id);
         setCount(toCopy.count);
+        setCostPrice(toCopy.costPrice);
+        setSalesPrice(toCopy.salesPrice);
         setTags(toCopy.tags);
     }
 
@@ -37,7 +41,7 @@ public class ItemDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, id, tags);
+        return CollectionUtil.isAnyNonNull(name, id, tags, costPrice, salesPrice);
     }
 
     public void setName(Name name) {
@@ -62,6 +66,22 @@ public class ItemDescriptor {
 
     public Optional<Integer> getCount() {
         return Optional.ofNullable(count);
+    }
+
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public Optional<Double> getCostPrice() {
+        return Optional.ofNullable(costPrice);
+    }
+
+    public void setSalesPrice(Double salesPrice) {
+        this.salesPrice = salesPrice;
+    }
+
+    public Optional<Double> getSalesPrice() {
+        return Optional.ofNullable(salesPrice);
     }
 
     /**
@@ -104,14 +124,14 @@ public class ItemDescriptor {
      *
      */
     public Item buildItem() {
-        if (name == null || id == null) {
-            throw new NullPointerException("Item descriptor requires both name and id to build");
+        if (name == null || id == null || costPrice == null || salesPrice == null) {
+            throw new NullPointerException("Item descriptor requires name, id, cost price, and sales price to build");
         }
 
         int itemCount = (count == null) ? 1 : count;
         Set<Tag> itemTags = (tags == null) ? new HashSet<>() : tags;
 
-        return new Item(name, id, itemCount, itemTags);
+        return new Item(name, id, itemCount, itemTags, costPrice, salesPrice);
     }
 
     @Override
@@ -132,6 +152,8 @@ public class ItemDescriptor {
         return getName().equals(e.getName())
                 && getId().equals(e.getId())
                 && getCount().equals(e.getCount())
-                && getTags().equals(e.getTags());
+                && getTags().equals(e.getTags())
+                && getCostPrice().equals(e.getCostPrice())
+                && getSalesPrice().equals(e.getSalesPrice());
     }
 }
