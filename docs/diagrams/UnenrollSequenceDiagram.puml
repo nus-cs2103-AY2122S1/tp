@@ -12,6 +12,7 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant "l:Lesson" as Lesson MODEL_COLOR
+participant "Alice:Student" as Student MODEL_COLOR
 end box
 
 [-> LogicManager : execute("unenroll 2 l/1")
@@ -51,6 +52,12 @@ activate UnenrollCommand
 
 UnenrollCommand -> Lesson : removeStudent(2)
 activate Lesson
+
+Lesson -> Student : unenrollFromLesson(Alice)
+activate Student
+
+Student -> Lesson
+deactivate Student
 
 Lesson --> UnenrollCommand
 deactivate Lesson
