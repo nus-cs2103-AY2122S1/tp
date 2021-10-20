@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Date;
+import seedu.address.model.order.Amount;
+import seedu.address.model.order.Customer;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -46,6 +48,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+
     private static final String INVALID_LABEL = "";
     private static final String INVALID_DATE = "";
     private static final String INVALID_TASK_TAG = "SG100";
@@ -53,6 +56,13 @@ public class ParserUtilTest {
     private static final String VALID_LABEL = "Order cloth";
     private static final String VALID_DATE = "19 September 2021";
     private static final String VALID_TASK_TAG = "SO100";
+
+    private static final String INVALID_CUSTOMER = "";
+    private static final String INVALID_AMOUNT = ".99";
+
+    private static final String VALID_CUSTOMER = "Richard Li";
+    private static final String VALID_AMOUNT = "99.99";
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -352,5 +362,51 @@ public class ParserUtilTest {
         String taskTagWithWhitespace = WHITESPACE + VALID_TASK_TAG + WHITESPACE;
         TaskTag expectedTaskTag = new TaskTag(VALID_TASK_TAG);
         assertEquals(expectedTaskTag, ParserUtil.parseTaskTag(taskTagWithWhitespace));
+    }
+
+    @Test
+    public void parseCustomer_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCustomer((String) null));
+    }
+
+    @Test
+    public void parseCustomer_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCustomer(INVALID_CUSTOMER));
+    }
+
+    @Test
+    public void parseCustomer_validValueWithoutWhitespace_returnsCustomer() throws Exception {
+        Customer expectedCustomer = new Customer(VALID_CUSTOMER);
+        assertEquals(expectedCustomer, ParserUtil.parseCustomer(VALID_CUSTOMER));
+    }
+
+    @Test
+    public void parseCustomer_validValueWithWhitespace_returnsTrimmedCustomer() throws Exception {
+        String customerWithWhitespace = WHITESPACE + VALID_CUSTOMER + WHITESPACE;
+        Customer expectedCustomer = new Customer(VALID_CUSTOMER);
+        assertEquals(expectedCustomer, ParserUtil.parseCustomer(customerWithWhitespace));
+    }
+
+    @Test
+    public void parseAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount((String) null));
+    }
+
+    @Test
+    public void parseAmount_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount(INVALID_AMOUNT));
+    }
+
+    @Test
+    public void parseAmount_validValueWithoutWhitespace_returnsAmount() throws Exception {
+        Amount expectedAmount = new Amount(VALID_AMOUNT);
+        assertEquals(expectedAmount, ParserUtil.parseAmount(VALID_AMOUNT));
+    }
+
+    @Test
+    public void parseAmount_validValueWithWhitespace_returnsTrimmedAmount() throws Exception {
+        String amountWithWhitespace = WHITESPACE + VALID_AMOUNT + WHITESPACE;
+        Amount expectedAmount = new Amount(VALID_AMOUNT);
+        assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace));
     }
 }

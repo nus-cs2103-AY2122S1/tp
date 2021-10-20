@@ -1,10 +1,10 @@
-package seedu.address.model.salesorder;
+package seedu.address.model.order;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Customer related to a SalesOrder.
+ * Represents a Customer related to a Order.
  */
 public class Customer {
     public static final String MESSAGE_CONSTRAINTS =

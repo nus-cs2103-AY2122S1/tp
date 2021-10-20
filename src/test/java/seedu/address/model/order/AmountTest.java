@@ -1,4 +1,4 @@
-package seedu.address.model.salesorder;
+package seedu.address.model.order;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

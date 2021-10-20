@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -57,6 +59,11 @@ public class CommandTestUtil {
     public static final String VALID_TASKTAG_ORDER = "SO1000";
     public static final String VALID_TASKTAG_SEW = "SO1";
 
+    public static final String VALID_CUSTOMER_SALE1 = "Muthu";
+    public static final String VALID_CUSTOMER_SALE2 = "Danish";
+    public static final String VALID_AMOUNT_SALE1 = "50";
+    public static final String VALID_AMOUNT_SALE2 = "30.90";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_AMY;
@@ -81,6 +88,11 @@ public class CommandTestUtil {
     public static final String TASKTAG_DESC_ORDER = " " + PREFIX_TASK_TAG + VALID_TASKTAG_ORDER;
     public static final String TASKTAG_DESC_SEW = " " + PREFIX_TASK_TAG + VALID_TASKTAG_SEW;
 
+    public static final String CUSTOMER_DESC_SALE1 = " " + PREFIX_CUSTOMER + VALID_CUSTOMER_SALE1;
+    public static final String CUSTOMER_DESC_SALE2 = " " + PREFIX_CUSTOMER + VALID_CUSTOMER_SALE2;
+    public static final String AMOUNT_DESC_SALE1 = " " + PREFIX_AMOUNT + VALID_AMOUNT_SALE1;
+    public static final String AMOUNT_DESC_SALE2 = " " + PREFIX_AMOUNT + VALID_AMOUNT_SALE2;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "mimi"; // mimi is not a gender
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -93,6 +105,9 @@ public class CommandTestUtil {
     public static final String INVALID_LABEL_DESC = " " + PREFIX_LABEL; // empty string not allowed for labels
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE; // empty string not allowed for date
     public static final String INVALID_TASKTAG_DESC = " " + PREFIX_TASK_TAG + "SOSO"; // wrong prefix and missing id
+
+    public static final String INVALID_CUSTOMER_DESC = " " + PREFIX_CUSTOMER; // empty string not allowed for customers
+    public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "20."; // no digit after dot
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
