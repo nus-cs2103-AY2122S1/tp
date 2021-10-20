@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 
 /**
@@ -28,7 +29,7 @@ public class AppointmentIsAfterPredicate implements Predicate<Appointment> {
      */
     public AppointmentIsAfterPredicate(LocalDateTime filterStartDateTime) {
         requireNonNull(filterStartDateTime);
-        this.filterStartDateTime = filterStartDateTime;
+        this.filterStartDateTime = filterStartDateTime.truncatedTo(ChronoUnit.MINUTES);
     }
 
     @Override

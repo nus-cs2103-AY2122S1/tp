@@ -12,7 +12,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.plannermd.logic.parser.FilterAppointmentCommandParser.END_DATE_BEFORE_START_DATE_MESSAGE;
-import static seedu.plannermd.logic.parser.FilterAppointmentCommandParser.INVALID_DATE_MESSAGE;
 import static seedu.plannermd.logic.parser.FilterAppointmentCommandParser.NO_ARGUMENTS_MESSAGE;
 
 import java.time.LocalDate;
@@ -21,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.logic.commands.apptcommand.FilterAppointmentCommand;
+import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
 
 public class FilterAppointmentCommandParserTest {
@@ -166,18 +166,17 @@ public class FilterAppointmentCommandParserTest {
 
     @Test
     public void parse_invalidDates_failure() {
-
         // Invalid start date format
-        assertParseFailure(parser, PREFIX_START + "31/06/2021", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_START + "6/20/2021", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_START + "16/02", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_START + "06/20/21", INVALID_DATE_MESSAGE); //2 digit year
+        assertParseFailure(parser, PREFIX_START + "31/06/2021", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_START + "6/20/2021", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_START + "16/02", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_START + "06/20/21", AppointmentDate.MESSAGE_CONSTRAINTS); //2 digit year
 
         // Invalid end date format
-        assertParseFailure(parser, PREFIX_END + "31/06/2021", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_END + "6/20/2021", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_END + "16/02", INVALID_DATE_MESSAGE);
-        assertParseFailure(parser, PREFIX_END + "06/20/21", INVALID_DATE_MESSAGE); //2 digit year
+        assertParseFailure(parser, PREFIX_END + "31/06/2021", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_END + "6/20/2021", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_END + "16/02", AppointmentDate.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, PREFIX_END + "06/20/21", AppointmentDate.MESSAGE_CONSTRAINTS); //2 digit year
 
         // End date before start date
         assertParseFailure(parser, PREFIX_START + "12/12/2021 " + PREFIX_END + "01/02/2021",

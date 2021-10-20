@@ -41,7 +41,7 @@ public class AppointmentFiltersBuilder {
      * Sets the {@code AppointmentFilters} that we are building to filter for upcoming appointments.
      */
     public AppointmentFiltersBuilder withUpcoming() {
-        filters.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)));
+        filters.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
         return this;
     }
 

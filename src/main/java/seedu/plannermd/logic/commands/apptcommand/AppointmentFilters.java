@@ -54,7 +54,7 @@ public class AppointmentFilters {
      */
     public static AppointmentFilters upcomingAppointmentsFilter() {
         AppointmentFilters filter = new AppointmentFilters();
-        filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)));
+        filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
         return filter;
     }
 
