@@ -32,6 +32,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
+import seedu.address.model.ModelManager;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
@@ -42,7 +43,7 @@ public class EditClientCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditClientCommand.MESSAGE_USAGE);
 
-    private EditClientCommandParser parser = new EditClientCommandParser();
+    private EditClientCommandParser parser = new EditClientCommandParser(new ModelStub());
 
     @Test
     public void parse_missingParts_failure() {
@@ -194,5 +195,8 @@ public class EditClientCommandParserTest {
                 .build();
         expectedCommand = new EditClientCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    public static class ModelStub extends ModelManager {
     }
 }

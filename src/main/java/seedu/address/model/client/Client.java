@@ -39,7 +39,9 @@ public class Client implements Category {
         this.email = email;
         this.address = address;
         this.orders = new HashSet<>();
-        this.orders.addAll(orders);
+        if (orders != null) {
+            this.orders.addAll(orders);
+        }
     }
 
     public ID getId() {
