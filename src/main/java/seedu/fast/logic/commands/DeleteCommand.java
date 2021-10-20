@@ -52,22 +52,34 @@ public class DeleteCommand extends Command {
             throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED);
         }
 
+        Index targetIndex;
         if (isSingleDelete()) {
-            int singleDeleteIndexPosition = 0;
-            Index targetIndex = indexArray[singleDeleteIndexPosition];
-            executeSingleDelete(lastShownList, model, targetIndex);
+            targetIndex = indexArray[0];
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
 
-            return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS,
-                    lastShownList.get(targetIndex.getZeroBased())));
-        }
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePerson(personToDelete);
 
-        if (isMultipleDelete()) {
-            executeMultipleDelete(lastShownList, model);
+            return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, personToDelete));
+        } else if (isMultipleDelete()){
+            for (int i = 0; i < indexArray.length; i++) {
+                targetIndex = Index.indexModifier(indexArray[i], i);
+                if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                    throw new CommandException(String.format("%1$s contact(s) has been deleted "
+                                    + "before the invalid index at 'index %2$s' is detected.",
+                            i, indexArray[i].getOneBased()));
+                }
+
+                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+                model.deletePerson(personToDelete);
+            }
+
             return new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
+        } else {
+            throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
-
-        // should never reach here
-        throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
     private boolean isSingleDelete() {
@@ -76,41 +88,6 @@ public class DeleteCommand extends Command {
 
     private boolean isMultipleDelete() {
         return indexArray.length > 1;
-    }
-
-    private boolean isIndexLongerThanEqualToList(int index, int sizeOfList) {
-        return index >= sizeOfList;
-    }
-
-    private void deletePersonFromModel(List<Person> lastShownList, Model model, int position) {
-        Person personToDelete = lastShownList.get(position);
-        model.deletePerson(personToDelete);
-    }
-
-    private void executeSingleDelete(List<Person> lastShownList, Model model, Index targetIndex)
-            throws CommandException {
-
-        if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(), lastShownList.size())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        deletePersonFromModel(lastShownList, model, targetIndex.getZeroBased());
-
-    }
-
-    private void executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
-        Index targetIndex;
-        for (int i = 0; i < indexArray.length; i++) {
-            targetIndex = Index.indexModifier(indexArray[i], i);
-
-            if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(), lastShownList.size())) {
-                throw new CommandException(String.format("%1$s contact(s) has been deleted "
-                                + "before the invalid index at 'index %2$s' is detected.",
-                        i, indexArray[i].getOneBased()));
-            }
-
-            deletePersonFromModel(lastShownList, model, targetIndex.getZeroBased());
-        }
     }
 
     @Override
