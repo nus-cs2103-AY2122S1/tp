@@ -28,7 +28,6 @@ public class ShowCommandParser implements Parser<ShowCommand> {
 
         // One whitespace required before first prefix.
         String trimmedArgs = " " + args;
-        System.out.println(trimmedArgs);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
@@ -51,6 +50,8 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         private Prefix prefix;
 
         ShowDescriptor(ArgumentMultimap argMultimap) {
+
+            assert !argMultimap.isEmpty() : "ShowDescriptor should not be created with empty ArgumentMultimap";
 
             if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
                 prefix = PREFIX_NAME;

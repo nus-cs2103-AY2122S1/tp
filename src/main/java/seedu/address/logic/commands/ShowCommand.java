@@ -2,18 +2,19 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPERIENCE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_LEVEL_OF_EDUCATION_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_NAME_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_ROLE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_TAG_SYNTAX;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -39,7 +40,16 @@ public class ShowCommand extends Command {
 
     private final Prefix prefix;
 
+    /**
+     * Constructor for ShowCommand.
+     * Prefix object passed as parameter cannot be null.
+     *
+     * @param prefix Category to get unique terms from.
+     */
     public ShowCommand(Prefix prefix) {
+
+        requireNonNull(prefix);
+
         this.prefix = prefix;
     }
 
@@ -55,6 +65,8 @@ public class ShowCommand extends Command {
 
     private String getUniqueCategoryInputs(Model model) {
 
+        assert prefix != null : "Prefix should not be null";
+
         // obtains an unmodifiable list of all applicants
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         ObservableList<Person> ol = addressBook.getPersonList();
@@ -62,52 +74,48 @@ public class ShowCommand extends Command {
         String prefixString = prefix.getPrefix();
 
         // temporary variables to hold unique search terms and part of UI message to user
-        Set<String> uniqueInputs = new HashSet<>();
+        List<String> uniqueInputs = new ArrayList<>();
         String userText = "";
 
-        if (prefixString.equals(PREFIX_NAME.getPrefix())) {
+        switch (prefixString) {
+        case PREFIX_NAME_SYNTAX:
             userText = "names";
             uniqueInputs = getUniqueNameInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_PHONE.getPrefix())) {
+            break;
+        case PREFIX_PHONE_SYNTAX:
             userText = "contact numbers";
             uniqueInputs = getUniquePhoneInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EMAIL.getPrefix())) {
+            break;
+        case PREFIX_EMAIL_SYNTAX:
             userText = "emails";
             uniqueInputs = getUniqueEmailInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_ROLE.getPrefix())) {
+            break;
+        case PREFIX_ROLE_SYNTAX:
             userText = "roles";
             uniqueInputs = getUniqueRoleInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EMPLOYMENT_TYPE.getPrefix())) {
+            break;
+        case PREFIX_EMPLOYMENT_TYPE_SYNTAX:
             userText = "employment types";
             uniqueInputs = getUniqueEmploymentTypeInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EXPECTED_SALARY.getPrefix())) {
+            break;
+        case PREFIX_EXPECTED_SALARY_SYNTAX:
             userText = "expected salaries";
             uniqueInputs = getUniqueExpectedSalaryInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_LEVEL_OF_EDUCATION.getPrefix())) {
+            break;
+        case PREFIX_LEVEL_OF_EDUCATION_SYNTAX:
             userText = "levels of education";
             uniqueInputs = getUniqueLevelOfEducationInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EXPERIENCE.getPrefix())) {
+            break;
+        case PREFIX_EXPERIENCE_SYNTAX:
             userText = "years of experience";
             uniqueInputs = getUniqueExperienceInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_TAG.getPrefix())) {
+            break;
+        case PREFIX_TAG_SYNTAX:
             userText = "tags";
             uniqueInputs = getUniqueTagInputs(ol);
+            break;
+        default:
+            return "No search terms exist for unknown prefix " + prefixString;
         }
 
         if (!uniqueInputs.isEmpty()) {
@@ -122,49 +130,61 @@ public class ShowCommand extends Command {
         }
     }
 
-    private Set<String> getUniqueNameInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueNameInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getName().toString()).collect(Collectors.toSet());
+                .map(x -> x.getName().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniquePhoneInputs(ObservableList<Person> ol) {
+    private List<String> getUniquePhoneInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getPhone().toString()).collect(Collectors.toSet());
+                .map(x -> x.getPhone().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueEmailInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueEmailInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getEmail().toString()).collect(Collectors.toSet());
+                .map(x -> x.getEmail().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueRoleInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueRoleInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getRole().toString()).collect(Collectors.toSet());
+                .map(x -> x.getRole().toString()).distinct().sorted().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getEmploymentType().toString()).collect(Collectors.toSet());
+                .map(x -> x.getEmploymentType().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueExpectedSalaryInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueExpectedSalaryInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getExpectedSalary().toString()).collect(Collectors.toSet());
+                .map(x -> x.getExpectedSalary().toString()).distinct()
+                .sorted(Comparator.comparing(String::length).thenComparing(String::compareTo))
+                .collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueLevelOfEducationInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueLevelOfEducationInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getLevelOfEducation().toString()).collect(Collectors.toSet());
+                .map(x -> x.getLevelOfEducation().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueExperienceInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueExperienceInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getExperience().toString()).collect(Collectors.toSet());
+                .map(x -> x.getExperience().toString()).distinct()
+                .sorted(Comparator.comparing(String::length).thenComparing(String::compareTo))
+                .collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueTagInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueTagInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .flatMap(person -> person.getTags().stream().map(Tag::toString)).collect(Collectors.toSet());
+                .flatMap(person -> person.getTags().stream().map(Tag::toString))
+                .distinct().sorted().collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ShowCommand // instanceof handles nulls
+                && prefix.equals(((ShowCommand) other).prefix)); // state check
     }
 
 }
