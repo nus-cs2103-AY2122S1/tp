@@ -172,9 +172,9 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static List<Index> parseTaskIndexes(Collection<String> taskIndexes) throws ParseException {
+    public static Set<Index> parseTaskIndexes(Collection<String> taskIndexes) throws ParseException {
         requireNonNull(taskIndexes);
-        final List<Index> taskIndexList = new ArrayList<>();
+        final Set<Index> taskIndexList = new HashSet<>();
         for (String taskName : taskIndexes) {
             taskIndexList.add(parseIndex(taskName));
         }

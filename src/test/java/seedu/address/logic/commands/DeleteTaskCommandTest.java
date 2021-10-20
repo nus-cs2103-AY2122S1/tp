@@ -104,12 +104,43 @@ class DeleteTaskCommandTest {
             Index targetTaskIndex = Index.fromOneBased(taskListCopy.size());
             List<Index> targetTaskIndexList = new ArrayList<>();
             targetTaskIndexList.add(targetTaskIndex);
-            String taskName = taskListCopy.get(targetTaskIndex.getZeroBased()).getTaskName();
+
             taskListCopy.remove(targetTaskIndex.getZeroBased());
 
             DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personIndex, targetTaskIndexList);
 
-            String feedback = String.format(DeleteTaskCommand.MESSAGE_SUCCESS, taskName, person.getName());
+            String feedback = String.format(DeleteTaskCommand.MESSAGE_SUCCESS, 1, "task", person.getName());
+            CommandResult resultCopy = new CommandResult(feedback);
+            CommandResult result = deleteTaskCommand.execute(model);
+
+            person = model.getFilteredPersonList().get(personIndex.getZeroBased());
+
+            assertEquals(person.getTasks(), taskListCopy);
+            assertEquals(result, resultCopy);
+        } catch (CommandException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void execute_success_multiple() {
+        try {
+            Index personIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+            Person person = model.getFilteredPersonList().get(personIndex.getZeroBased());
+
+            List<Task> taskListCopy = new ArrayList<>(person.getTasks());
+            Index targetTaskIndex = Index.fromOneBased(taskListCopy.size());
+            Index targetTaskIndex2 = Index.fromOneBased(taskListCopy.size() - 1);
+            List<Index> targetTaskIndexList = new ArrayList<>();
+            targetTaskIndexList.add(targetTaskIndex);
+            targetTaskIndexList.add(targetTaskIndex2);
+
+            taskListCopy.remove(targetTaskIndex.getZeroBased());
+            taskListCopy.remove(targetTaskIndex.getZeroBased() - 1);
+
+            DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(personIndex, targetTaskIndexList);
+
+            String feedback = String.format(DeleteTaskCommand.MESSAGE_SUCCESS, 2, "tasks", person.getName());
             CommandResult resultCopy = new CommandResult(feedback);
             CommandResult result = deleteTaskCommand.execute(model);
 
@@ -126,11 +157,22 @@ class DeleteTaskCommandTest {
     void getCommand_success() {
         String commandWord = DeleteTaskCommand.COMMAND_WORD;
         Index targetTaskIndex = Index.fromOneBased(1);
+        Index targetTaskIndex2 = Index.fromOneBased(2);
+        Index targetTaskIndex3 = Index.fromOneBased(3);
+
         List<Index> targetTaskIndexList = new ArrayList<>();
         targetTaskIndexList.add(targetTaskIndex);
+
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 targetTaskIndexList);
         assertEquals(deleteTaskCommand.getCommand(), commandWord);
+
+        targetTaskIndexList.add(targetTaskIndex2);
+        targetTaskIndexList.add(targetTaskIndex3);
+
+        DeleteTaskCommand deleteTaskCommand2 = new DeleteTaskCommand(INDEX_FIRST_PERSON,
+                targetTaskIndexList);
+        assertEquals(deleteTaskCommand2.getCommand(), commandWord);
     }
 
     @Test
