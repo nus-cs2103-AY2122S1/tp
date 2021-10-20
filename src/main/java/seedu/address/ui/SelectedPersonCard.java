@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-
 import java.util.Comparator;
 import java.util.logging.Logger;
 
@@ -9,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -27,6 +27,7 @@ public class SelectedPersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
+
 
     private Person person;
 
@@ -74,7 +75,6 @@ public class SelectedPersonCard extends UiPart<Region> {
         if (person == null) {
             setEmptyPersonDetails();
         } else {
-
             category.setText("Category: " + person.getCategoryCode().getFullCode());
             name.setText(person.getName().fullName);
             phone.setText("Phone: " + person.getPhone().value);
