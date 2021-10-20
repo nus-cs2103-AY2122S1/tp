@@ -161,4 +161,9 @@ public class ModelStub implements Model {
     public void sortOrderList(Comparator<Order> comparator) {
         throw new AssertionError("This method should not be called.");
     }
+
+    @Override
+    public void resetOrderView() {
+        throw new AssertionError("This method should not be called.");
+    }
 }

@@ -186,7 +186,7 @@ public class ModelManager implements Model {
      */
     public void addOrder(Order toAdd) {
         addressBook.addOrder(toAdd);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        resetOrderView();
     }
 
     /**
@@ -251,6 +251,13 @@ public class ModelManager implements Model {
     public void sortOrderList(Comparator<Order> comparator) {
         addressBook.sortOrders(comparator);
         filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    @Override
+    public void resetOrderView() {
+        Comparator<Order> defaultComparator = Order::compareTo;
+        addressBook.sortOrders(defaultComparator);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
 }

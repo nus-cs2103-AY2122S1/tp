@@ -146,4 +146,7 @@ public interface Model {
 
     void sortOrderList(Comparator<Order> comparator);
 
+    /** Resets the order list to its regular ordering based on id */
+    void resetOrderView();
+
 }
