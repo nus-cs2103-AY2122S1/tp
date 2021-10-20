@@ -128,7 +128,7 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* has a `Tag` list in `AddressBook` , which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag.
+* has a `UniqueTagList` in `AddressBook` , which contains `Tag`(s) that a `Person` can reference. This allows `AddressBook` to only require one `Tag` object per unique tag.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
@@ -158,7 +158,7 @@ Option | Description
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | If set to `true`, the field is allowed to be blank (for string fields such as phone, name, etc)
 IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for int/Date fields such as LastMet, etc)
-DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Person` creation.
+DEFAULT_VALUE | The default value for the field. Set when user does not pass in any values for the respective prefix on `Person` creation.
 IS_EDITABLE | If set to `true`, the field is editable by the user through edit command.
 
 ### Field interfaces
@@ -191,7 +191,7 @@ Option | Default
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | `false`
 IS_NULL_VALUE_ALLOWED | `false`
-DEFAULT_VALUE | `""`
+DEFAULT_VALUE | `""`(But not applicable here)
 IS_EDITABLE | `true`
 
 --------------------------------------------------------------------------------------------------------------------
