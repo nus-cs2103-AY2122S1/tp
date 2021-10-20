@@ -156,16 +156,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 #### Import feature
 
-The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import 
-file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file 
-from the file path stored.
+The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
 
-This operation is exposed in the `Model` interface as `Model#importFile(Path filePath)`. This is further facilitated 
-by an additional function in `AddressBook`, `AddressBook#mergeFile`
+This operation is exposed in the `Model` interface as `Model#importFile(Path filePath)`. This is further facilitated by an additional function in `AddressBook`, `AddressBook#mergeFile`.
 
 The following sequence diagram shows how the import operation works:
 ![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
-
 
 #### !TODO Export feature
 
