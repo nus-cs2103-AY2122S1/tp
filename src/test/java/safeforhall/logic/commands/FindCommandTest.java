@@ -120,6 +120,46 @@ public class FindCommandTest {
         }
     }
 
+    @Test
+    public void execute_invalidRoom_fail() {
+        try {
+            String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+            FindCompositePredicate predicate = preparePredicate(null, "A12", null, null, null, null);
+            FindCommand command = new FindCommand(predicate);
+            expectedModel.updateFilteredPersonList(predicate);
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void execute_invalidRoom2_fail() {
+        try {
+            String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+            FindCompositePredicate predicate = preparePredicate(null, "1A", null, null, null, null);
+            FindCommand command = new FindCommand(predicate);
+            expectedModel.updateFilteredPersonList(predicate);
+            assertCommandSuccess(command, model, expectedMessage, expectedModel);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void execute_validRoom_fail() {
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        FindCompositePredicate predicate = preparePredicate(null, "a1", null, null, null, null);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(TypicalPersons.ALICE, TypicalPersons.BENSON, TypicalPersons.CARL,
+                TypicalPersons.DANIEL, TypicalPersons.ELLE, TypicalPersons.FIONA, TypicalPersons.GEORGE),
+                model.getFilteredPersonList());
+    }
+
     /**
      * Parses {@code userInput} into a {@code FindCompositePredicate}.
      */

@@ -12,6 +12,7 @@ import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.CollectionUtil;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.CliSyntax;
+//import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;

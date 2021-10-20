@@ -118,7 +118,7 @@ public class ParserUtil {
         requireNonNull(room);
         String trimmedRoom = room.trim();
         if (!Room.isValidRoomForFind(trimmedRoom)) {
-            throw new ParseException(Room.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Room.MESSAGE_CONSTRAINTS_FOR_FIND);
         }
         return trimmedRoom;
     }

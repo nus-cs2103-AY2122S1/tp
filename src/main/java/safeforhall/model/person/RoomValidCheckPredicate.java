@@ -1,5 +1,7 @@
 package safeforhall.model.person;
 
+import static safeforhall.commons.util.AppUtil.checkArgument;
+
 import java.util.function.Predicate;
 
 /**
@@ -9,7 +11,13 @@ public class RoomValidCheckPredicate implements Predicate<Person> {
 
     private final String input;
 
+    /**
+     * Validates the string input for room and returns the RoomValidCheckPredicate instance
+     * or throws an exception
+     * @param input the user input
+     */
     public RoomValidCheckPredicate(String input) {
+        checkArgument(Room.isValidRoomForFind(input), Room.MESSAGE_CONSTRAINTS_FOR_FIND);
         this.input = input;
     }
 

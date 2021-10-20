@@ -32,6 +32,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all residents whose parameters match any of "
             + "the provided keywords for different options (case-insensitive) and displays them as a "
             + "list with index numbers.\n"
+            + "Note that room can searched for by block (A), level (1), and block-level (A1) as well. "
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_ROOM + "ROOM] "

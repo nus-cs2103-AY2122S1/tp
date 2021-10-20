@@ -3,6 +3,8 @@ package safeforhall.model.person;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
+import safeforhall.logic.parser.CliSyntax;
+
 /**
  * Represents a Person's room in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoom(String)}
@@ -14,6 +16,12 @@ public class Room {
             + "Character 2: The level, 1-4\n"
             + "Character 3: The room, 0-2\n"
             + "Character 4: The room, 0-9\n";
+
+    public static final String MESSAGE_CONSTRAINTS_FOR_FIND = "Rooms can be searched by block, level, block-level: \n"
+            + "Example: " + CliSyntax.PREFIX_ROOM + "A , "
+            + CliSyntax.PREFIX_ROOM + "1 , "
+            + CliSyntax.PREFIX_ROOM + "A1 , "
+            + CliSyntax.PREFIX_ROOM + "A100 ";
 
     /*
      * The room must be 4 characters

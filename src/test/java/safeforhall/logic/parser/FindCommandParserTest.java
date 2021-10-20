@@ -1,5 +1,6 @@
 package safeforhall.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static safeforhall.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.FACULTY_DESC_AMY;
@@ -19,22 +20,41 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_AMY;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_ROOM_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VACCSTATUS_AMY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import safeforhall.logic.commands.FindCommand;
+import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Phone;
+import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
 public class FindCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+
+    private static final String INVALID_ROOM_FOR_FIND1 = "AA";
+    private static final String INVALID_ROOM_FOR_FIND2 = "A12";
+    private static final String INVALID_ROOM_FOR_FIND3 = "12";
+
+    private static final String VALID_ROOM_FOR_FIND1 = "A";
+    private static final String VALID_ROOM_FOR_FIND2 = "A1";
+    private static final String VALID_ROOM_FOR_FIND3 = "E200";
+
+    private static final String INVALID_ROOM_DESC1 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND1;
+    private static final String INVALID_ROOM_DESC2 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND2;
+    private static final String INVALID_ROOM_DESC3 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND3;
+
+    private static final String VALID_ROOM_DESC1 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND1;
+    private static final String VALID_ROOM_DESC2 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND2;
+    private static final String VALID_ROOM_DESC3 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND3;
 
     private FindCommandParser parser = new FindCommandParser();
 
@@ -170,6 +190,72 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidRoom1_fail() {
+        try {
+            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            predicate.setRoom(INVALID_ROOM_FOR_FIND1);
+
+            assertParseFailure(parser, INVALID_ROOM_DESC1, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidRoom2_fail() {
+        try {
+            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            predicate.setRoom(INVALID_ROOM_FOR_FIND2);
+
+            assertParseFailure(parser, INVALID_ROOM_DESC2, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_invalidRoom3_fail() {
+        try {
+            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            predicate.setRoom(INVALID_ROOM_FOR_FIND3);
+
+            assertParseFailure(parser, INVALID_ROOM_DESC3, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
+        } catch (IllegalArgumentException e) {
+            assertEquals(1, 1);
+        }
+    }
+
+    @Test
+    public void parse_validRoomBlock_success() {
+        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        predicate.setRoom(VALID_ROOM_FOR_FIND1);
+
+        FindCommand expectedCommand = new FindCommand(predicate);
+
+        assertParseSuccess(parser, VALID_ROOM_DESC1, expectedCommand);
+    }
+
+    @Test
+    public void parse_validRoomBlockLevel_success() {
+        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        predicate.setRoom(VALID_ROOM_FOR_FIND2);
+
+        FindCommand expectedCommand = new FindCommand(predicate);
+
+        assertParseSuccess(parser, VALID_ROOM_DESC2, expectedCommand);
+    }
+
+    @Test
+    public void parse_validRoom_success() {
+        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        predicate.setRoom(VALID_ROOM_FOR_FIND3);
+
+        FindCommand expectedCommand = new FindCommand(predicate);
+
+        assertParseSuccess(parser, VALID_ROOM_DESC3, expectedCommand);
+    }
+
+    @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         String userInput = INVALID_PHONE_DESC + PHONE_DESC_BOB;
@@ -184,7 +270,7 @@ public class FindCommandParserTest {
     /**
      * Parses {@code userInput} into a {@code FindCompositePredicate}.
      */
-    private FindCommand.FindCompositePredicate preparePredicate(String name, String room , String phone, String email,
+    private FindCompositePredicate preparePredicate(String name, String room , String phone, String email,
                                                                 String vaccStatus, String faculty) {
         FindCommand.FindCompositePredicate f = new FindCommand.FindCompositePredicate();
 
