@@ -52,7 +52,7 @@ public class SupplierCard extends UiPart<Region> {
         super(FXML);
         this.supplier = supplier;
         id.setText(displayedIndex + ". ");
-        name.setText("Name: " + supplier.getName().fullName);
+        name.setText(supplier.getName().fullName);
         phone.setText("Phone: " + supplier.getPhone().value);
         address.setText("Address: " + supplier.getAddress().value);
         email.setText("Email: " + supplier.getEmail().value);
