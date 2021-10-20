@@ -144,7 +144,6 @@ class JsonAdaptedPerson {
         for (JsonAdaptedLesson l : lessonsList) {
             modelLessonsList.add(l.toModelType());
         }
-
         if (NoOverlapLessonList.doAnyLessonsOverlap(modelLessonsList)) {
             throw new IllegalValueException(NoOverlapLessonList.LESSON_OVERLAP);
         }

@@ -25,13 +25,13 @@ import seedu.address.model.Model;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NoOverlapLessonList;
+import seedu.address.model.lesson.exceptions.CannotAssignException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Exam;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.exceptions.CannotAttendException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -270,10 +270,12 @@ public class EditPersonCommand extends Command {
          * @throws CommandException if any specified index or lesson is invalid
          */
         public Person updateLessons(Person personToEdit) throws CommandException {
+            // removes lesson first before adding lessons
             try {
-                // removes lesson first before adding lessons
+                // sort because removing from the back will not hurt the earlier indexes!
+                lessonsToRemove.sort(new Index.SortDescending());
                 for (Index i : lessonsToRemove) {
-                    personToEdit = personToEdit.unAttendLesson(i.getZeroBased());
+                    personToEdit = personToEdit.unassignLesson(i.getZeroBased());
                 }
             } catch (IndexOutOfBoundsException index) {
                 throw new CommandException(INVALID_LESSON_INDEX);
@@ -281,10 +283,9 @@ public class EditPersonCommand extends Command {
 
             try {
                 for (Lesson l : lessonsToAdd) {
-                    l = l.withAttendee(personToEdit.getName());
-                    personToEdit = personToEdit.attendLesson(l);
+                    personToEdit = personToEdit.assignLesson(l);
                 }
-            } catch (CannotAttendException e) {
+            } catch (CannotAssignException e) {
                 throw new CommandException(e.getMessage());
             }
             return personToEdit;
@@ -297,8 +298,10 @@ public class EditPersonCommand extends Command {
          * @throws CommandException if any specified index is invalid
          */
         public Person updateExams(Person personToEdit) throws CommandException {
+            // removes lesson first before adding lessons
             try {
-                // removes lesson first before adding lessons
+                // sort because removing from the back will not hurt the earlier indexes!
+                lessonsToRemove.sort(new Index.SortDescending());
                 for (Index i : examsToRemove) {
                     personToEdit = personToEdit.removeExam(i.getZeroBased());
                 }

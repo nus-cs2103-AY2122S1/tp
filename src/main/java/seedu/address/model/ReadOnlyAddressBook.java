@@ -4,7 +4,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -33,6 +33,7 @@ public interface ReadOnlyAddressBook {
 
     /**
      * Returns a list of all lessons in a sorted manner
+     * The attendee details are attached
      */
-    List<Lesson> getSortedLessons();
+    List<LessonWithAttendees> getSortedLessonsWithAttendees();
 }

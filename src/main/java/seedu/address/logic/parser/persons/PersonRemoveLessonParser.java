@@ -37,7 +37,6 @@ public class PersonRemoveLessonParser implements Parser<EditPersonCommand> {
         }
         EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
         editPersonDescriptor.removeLesson(indexes.get(1));
-
         return new EditPersonCommand(indexes.get(0), editPersonDescriptor, MESSAGE_SUCCESS);
     }
 }
