@@ -24,7 +24,7 @@ public class AddGameCommandParser implements Parser<AddGameCommand> {
         // assign gameId
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, FLAG_ADD);
 
-        if (!ParserUtil.areFlagsPresent(argumentMultimap, FLAG_ADD)) {
+        if (!ParserUtil.areFlagsPresent(argumentMultimap, FLAG_ADD) || argumentMultimap.getValue(FLAG_ADD).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGameCommand.MESSAGE_USAGE));
         }
 
