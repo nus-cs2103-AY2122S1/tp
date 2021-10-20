@@ -616,6 +616,35 @@ User story ends.
 
       Use case resumes at step 3.
 
+**Use case: UC06 - Find a client/product**
+
+**MSS**
+
+1. User requests to find a client/product.
+2. Sellah finds a list of clients/products.
+3. Sellah displays success message and shows the updated list of clients/products.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The input parameter is invalid.
+
+    * 1a1. Sellah shows an error message.
+    
+      Use case resumes at step 1.
+
+* 1b. The command format is incorrect.
+
+    * 1b1. Sellah shows an error message.
+      Use case resumes at step 1.
+
+* 2a. The list is empty.
+
+    * 2a1. Sellah shows an error message.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
