@@ -53,6 +53,22 @@ public class Person {
         this.done = new Done();
     }
 
+    public Person(Name name, Phone phone, Email email,
+                  Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags, Done done) {
+        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags, done);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.employmentType = employmentType;
+        this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
+        this.experience = experience;
+        this.tags.addAll(tags);
+        this.done = done;
+    }
+
     public Name getName() {
         return name;
     }

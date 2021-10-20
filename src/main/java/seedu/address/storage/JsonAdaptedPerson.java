@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final String levelOfEducation;
     private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final String done;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -51,7 +53,8 @@ class JsonAdaptedPerson {
             @JsonProperty("expectedSalary") String expectedSalary,
             @JsonProperty("levelOfEducation") String levelOfEducation,
             @JsonProperty("experience") String experience,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("done") String done) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,6 +66,7 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.done = done;
     }
 
     /**
@@ -80,6 +84,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        done = source.getDone().getDoneStatus();
     }
 
     /**
@@ -163,8 +168,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final Done modelDone = new Done(done);
+
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
-                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags);
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, modelDone);
     }
 
 }

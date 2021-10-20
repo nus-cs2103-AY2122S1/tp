@@ -18,6 +18,11 @@ public class Done {
         this.doneStatus = STATUS_UNDONE;
     }
 
+    public Done(String doneStatus) {
+        assert (doneStatus.equals(STATUS_DONE) || doneStatus.equals(STATUS_UNDONE));
+        this.doneStatus = doneStatus;
+    }
+
     public String getDoneStatus() {
         return doneStatus;
     }

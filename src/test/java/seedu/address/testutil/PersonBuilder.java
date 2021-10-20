@@ -146,11 +146,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Done} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDone(String done) {
+        this.done = new Done(done);
+        return this;
+    }
+
+    /**
      * Builds a {@code Person} with the given information.
      */
     public Person build() {
         return new Person(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags);
+                expectedSalary, levelOfEducation, experience, tags, done);
     }
 
 }
