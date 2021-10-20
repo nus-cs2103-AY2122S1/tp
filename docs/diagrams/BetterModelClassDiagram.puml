@@ -5,17 +5,17 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 CsBook *-right-> "1" UniqueStudentList
-CsBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueStudentList
-UniqueTagList -[hidden]down- UniqueStudentList
+CsBook *-right-> "1" UniqueGroupList
+UniqueGroupList -[hidden]down- UniqueStudentList
+UniqueGroupList -[hidden]down- UniqueStudentList
 
-UniqueTagList *-right-> "*" Tag
-UniqueStudentList -right-> Student
+UniqueGroupList *-right-> "*" Group
+UniqueStudentList -right-> "*" Student
 
-Student -up-> "*" Tag
+Student -up-> "1" Group
 
-Person *--> Name
-Person *--> TelegramHandle
-Person *--> Email
+Student *--> "1" Name
+Student *--> "1" TelegramHandle
+Student *--> "1" Email
 
 @enduml
