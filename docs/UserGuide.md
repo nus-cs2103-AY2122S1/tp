@@ -12,14 +12,16 @@ type fast, Socius can get your contact management tasks done faster than traditi
     2. Features
        1. Viewing help `help`
        2. Adding a person `add`
-       3. Listing all persons `list`
-       4. Editing a person `edit`
-       5. Locating persons by name `find`
-       6. Deleting a person `delete`
-       7. Clearing all entries `clear`
-       8. Exiting the program `exit`
-       9. Saving the data
-       10. Editing the data file
+       3. Importing contacts from a file `import`
+       4. Listing all persons `list`
+       5. Editing a person `edit`
+       6. Locating persons by name `find`
+       7. Deleting a person `delete`
+       8. Computing statistics of a tutorial group : `stats`
+       9. Clearing all entries `clear`
+       10. Exiting the program `exit`
+       11. Saving the data
+       12. Editing the data file
     3. FAQ
     4. Command Summary
 
@@ -106,6 +108,15 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+### Importing contacts from a file `import`
+
+Imports and adds every person that is listed in the specified file.
+
+Format: `import FILE_NAME.json`
+
+* File must be in JSON format.
+* File must be located within the `data` directory in the same directory as `socius.jar`.
 
 ### Listing all persons : `list`
 
