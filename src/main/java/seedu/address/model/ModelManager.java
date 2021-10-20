@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.parser.SortComparator;
 import seedu.address.model.person.Person;
 
 /**
@@ -112,8 +113,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -124,21 +125,24 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         return filteredPersons;
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        Comparator<Person> personComparatorByName = Comparator.comparing(i -> i.getName().toString());
-        sortedPersons.setComparator(personComparatorByName);
+        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         filteredPersons.setPredicate(predicate);
     }
 
     @Override
-    public void sortByNextVisitList() {
-        Comparator<Person> personComparatorByNextVisit = Comparator.comparing(i -> i.getVisit().get());
-        sortedPersons.setComparator(personComparatorByNextVisit);
+    public void sortFilteredPersonList(Comparator<Person> personComparator, boolean isAscending) {
+        if (isAscending) {
+            sortedPersons.setComparator(personComparator);
+        } else {
+            sortedPersons.setComparator(personComparator.reversed());
+        }
     }
 
     @Override

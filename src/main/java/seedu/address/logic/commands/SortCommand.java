@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
+import java.util.Comparator;
+
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 /*
  * Sorts all persons in the address book to the user.
@@ -19,26 +22,25 @@ public class SortCommand extends Command {
             + "Parameters: [" + PREFIX_VISIT + "] or [" + PREFIX_LAST_VISIT + "]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VISIT + " or " + COMMAND_WORD + " " + PREFIX_LAST_VISIT;
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons";
+    public static final String MESSAGE_SUCCESS = "Sorted listed persons successfully";
     public static final String MESSAGE_INVALID_FLAG = "Flags are missing or invalid.";
 
-    private final boolean isLastVisit;
+    private final Comparator<Person> comparator;
+    private final boolean isAscending;
 
     /**
-     * @param isLastVisit whether it is to sort by last visit.
+     * @param comparator which is used for sorting
+     * @param isAscending true if the sort is of ascending order
      */
-    public SortCommand(boolean isLastVisit) {
-        this.isLastVisit = isLastVisit;
+    public SortCommand(Comparator<Person> comparator, boolean isAscending) {
+        this.comparator = comparator;
+        this.isAscending = isAscending;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (isLastVisit) {
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
-            model.sortByNextVisitList();
-            return new CommandResult(MESSAGE_SUCCESS);
-        }
+        model.sortFilteredPersonList(comparator, isAscending);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

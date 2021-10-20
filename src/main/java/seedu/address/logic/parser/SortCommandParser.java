@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
+import static seedu.address.logic.parser.SortComparator.SORT_BY_LAST_VISIT;
+import static seedu.address.logic.parser.SortComparator.SORT_BY_NEXT_VISIT;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,18 +24,15 @@ public class SortCommandParser implements Parser<SortCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_VISIT, PREFIX_LAST_VISIT);
-        boolean isLastVisit;
 
         try {
-            if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
-                isLastVisit = false;
-            } else if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
-                isLastVisit = true;
+            if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+                return new SortCommand(SORT_BY_LAST_VISIT, false);
+            } else if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
+                return new SortCommand(SORT_BY_NEXT_VISIT, true);
             } else {
                 throw new ParseException(SortCommand.MESSAGE_INVALID_FLAG);
             }
-            return new SortCommand(isLastVisit);
-
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), pe);

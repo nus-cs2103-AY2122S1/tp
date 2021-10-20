@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -85,6 +86,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Sorts person list based on next visit */
-    void sortByNextVisitList();
+    /**
+     * Sorts the person list.
+     * @param comparator which is used to sort the person list.
+     * @param isAscending the direction of sorting (ascending or descending).
+     */
+    void sortFilteredPersonList(Comparator<Person> comparator, boolean isAscending);
 }
