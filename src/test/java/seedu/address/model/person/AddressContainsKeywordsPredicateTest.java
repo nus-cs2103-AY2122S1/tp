@@ -82,8 +82,9 @@ public class AddressContainsKeywordsPredicateTest {
         AddressContainsKeywordsPredicate predicate;
         // Empty keyword
         predicate = new AddressContainsKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class,
-            () -> predicate.test(new PersonBuilder().withAddress("10, Clementi Ave 4, #13-55").build())
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withAddress("10, Clementi Ave 4, #13-55").build())
         );
     }
 }

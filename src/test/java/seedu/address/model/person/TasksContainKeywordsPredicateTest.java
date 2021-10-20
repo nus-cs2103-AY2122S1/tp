@@ -78,8 +78,9 @@ public class TasksContainKeywordsPredicateTest {
         TasksContainKeywordsPredicate predicate;
         // Empty keyword
         predicate = new TasksContainKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class,
-            () -> predicate.test(new PersonBuilder().withTags("work", "study", "run").build())
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withTags("work", "study", "run").build())
         );
     }
 }

@@ -78,8 +78,9 @@ public class TagsContainKeywordsPredicateTest {
         TagsContainKeywordsPredicate predicate;
         // Empty keyword
         predicate = new TagsContainKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class,
-            () -> predicate.test(new PersonBuilder().withTags("buddy", "cousin").build())
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withTags("buddy", "cousin").build())
         );
     }
 }

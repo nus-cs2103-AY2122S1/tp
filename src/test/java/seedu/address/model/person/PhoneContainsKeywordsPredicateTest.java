@@ -67,8 +67,9 @@ public class PhoneContainsKeywordsPredicateTest {
         PhoneContainsKeywordsPredicate predicate;
         // Empty keyword
         predicate = new PhoneContainsKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class,
-            () -> predicate.test(new PersonBuilder().withPhone("85757857").build())
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withPhone("85757857").build())
         );
     }
 }

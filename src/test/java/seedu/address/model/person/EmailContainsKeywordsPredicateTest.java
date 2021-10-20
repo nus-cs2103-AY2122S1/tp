@@ -67,7 +67,8 @@ public class EmailContainsKeywordsPredicateTest {
         EmailContainsKeywordsPredicate predicate;
         // Empty keyword
         predicate = new EmailContainsKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class, (
+        assertThrows(
+                IllegalArgumentException.class, (
                 ) -> predicate.test(new PersonBuilder().withEmail("amazingspiderman@doodle.com").build())
         );
     }

@@ -78,8 +78,9 @@ public class NameContainsKeywordsPredicateTest {
         NameContainsKeywordsPredicate predicate;
         // Empty keyword
         predicate = new NameContainsKeywordsPredicate(new ArrayList<>());
-        assertThrows(IllegalArgumentException.class,
-            () -> predicate.test(new PersonBuilder().withName("Alice Bob").build())
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withName("Alice Bob").build())
         );
     }
 }
