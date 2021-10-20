@@ -6,6 +6,6 @@ public class DuplicateModuleLessonException extends RuntimeException {
      * have the same identity).
      */
     public DuplicateModuleLessonException() {
-        super("Operation would result in duplicate module class");
+        super("Operation would result in duplicate lessons");
     }
 }

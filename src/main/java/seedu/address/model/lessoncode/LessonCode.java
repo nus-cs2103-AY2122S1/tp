@@ -48,7 +48,7 @@ public class LessonCode {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + lessonCode + ']';
+        return lessonCode;
     }
 
 }

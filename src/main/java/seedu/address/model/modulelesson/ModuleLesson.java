@@ -28,7 +28,7 @@ public class ModuleLesson {
      */
     public ModuleLesson(Set<ModuleCode> moduleCode, LessonDay lessonDay, LessonTime lessonTime, Remark remark) {
         requireAllNonNull(moduleCode, lessonDay, lessonTime, remark);
-        assert(moduleCode.size() == 1) : "Class should only contain 1 module code!";
+        assert(moduleCode.size() == 1) : "Lesson should only contain 1 module code!";
         this.moduleCodes.addAll(moduleCode);
         this.lessonDay = lessonDay;
         this.lessonTime = lessonTime;
@@ -100,18 +100,17 @@ public class ModuleLesson {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Module: ")
-                .append(getModuleCodes())
-                .append("; Day: ")
+        builder.append("Module: ");
+        Set<ModuleCode> moduleCodes = getModuleCodes();
+        moduleCodes.forEach(builder::append);
+        builder.append("; Day: ")
                 .append(getDay().toString())
                 .append("; Time: ")
                 .append(getTime().toString());
-
         if (!remark.toString().trim().isEmpty()) {
             builder.append("; Remark: ");
             builder.append(getRemark());
         }
-
         return builder.toString();
     }
 
