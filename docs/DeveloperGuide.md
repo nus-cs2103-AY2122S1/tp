@@ -239,6 +239,40 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### Finding students
+
+The `FindCommand` allows users to find students based on person fields.
+
+**Current Implementation**
+
+The figure below shows the sequence diagram for finding students.
+
+![Find Command](images/FindSequenceDiagram.png)
+
+
+The user can specify multiple fields to search for and each field takes in multiple keywords.
+An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
+
+The `PersonMatchesKeywordsPredicate` is used to test whether a person matches the specified keywords.
+For each searchable field, a predicate is created which tests if a given person's field contains all specified keywords.
+
+Additionally, a `FindCondition` can be specified by the user which determines whether `all`, `any` or `none` of the fields specified are required to match with a given person, for the person to be returned. The default is `all`.
+
+The `PersonMatchesKeywordsPredicate#test()` method will compose all searched field predicates into a single predicate, depending on the find condition.
+The predicate is then used to filter the list of person.
+
+
+**Design considerations:**
+
+**Aspect: Data structure of predicates**
+* **Alternative 1 (current choice):** Use a single `PersonMatchesKeywordsPredicate` class to represent all fields' predicates.
+    * Pros: All predicates meant for testing on person fields can be consolidated in one place and reduce code duplication. It can also handle encapsulate the composition of all predicates.
+    * Cons: If fields have different matching behaviour, it may result in the class having more than one responsibility.
+* **Alternative 2:** Use multiple `{field}MatchesKeywordsPredicate` classes to represent each field's predicate.
+    * Pros: It offers greater flexibility for each field predicate to have its own matching behavior.
+    * Cons: There is greater probability of bugs introduced if a new field to search is to be added, or if the matching behaviour of all predicates are required to be changed.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -573,6 +607,25 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
     * 2b1. TAB displays an error message
 
       Use case resumes at step 1.
+
+<br/>
+
+**Use case: UC8 – Find student by student fields**
+
+**MSS:**
+
+1.  User requests to list students.
+2.  TAB shows a list of students.
+3.  User requests to find student with a specified name and address.
+4.  TAB shows a list of students with matching name and address.
+
+    Use case ends.
+
+**Extensions:**
+
+* 2a. The list is empty.
+
+  Use case ends.
 
 <br/>
 
