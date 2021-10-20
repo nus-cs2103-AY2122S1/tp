@@ -59,8 +59,12 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.addPerson(toAdd);
+        if (model.getPersonListControl() != null) {
+            model.setTabIndex(0);
+            model.getPersonListControl().setSelectedIndex(model.getFilteredPersonList().indexOf(toAdd));
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonDetails personDetails;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private TabPaneFooter tabPaneFooter;
+    private TabPaneHeader tabPaneHeader;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -98,7 +98,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         eventsIcon.setOnMouseClicked(event -> {
-            tabPaneFooter.getTabPane().getSelectionModel().select(2);
+            tabPaneHeader.getTabPane().getSelectionModel().select(2);
         });
     }
 
@@ -155,9 +155,10 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneFooter = new TabPaneFooter(logic);
+        tabPaneHeader = new TabPaneHeader(logic);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-        tabPanePlaceholder.getChildren().add(tabPaneFooter.getRoot());
+        tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
+        personListPanel.setTabPaneHeader(tabPaneHeader);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
