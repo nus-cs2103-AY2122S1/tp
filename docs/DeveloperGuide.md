@@ -238,25 +238,30 @@ _{more aspects and alternatives to be added}_
 
 ## **Glossary, Naming Conventions**
 
-### Anime
-Represents a single season of an anime series.
-
-### Animes
-We chose this to denote multiple anime even though the plural for anime is anime.
-This is to distinct between a single anime and multiple animes.
+### Action
+Used to provide more information to some commands, like `genre`.
 
 ### AniList
 The name of our app. Only used for package name.
+
+### Anime
+Represents a single season of an anime series.
 
 ### AnimeList
 A list of Anime, also the overall structure of the data.
 I.e. the user data is stored as an instance of AnimeList in json format.
 
-### Genre
-Represents a genre of anime.
+### Animes
+We chose this to denote multiple anime even though the plural for anime is anime.
+This is to distinct between a single anime and multiple animes.
 
-### Action
-Used to provide more information to some commands, like `genre`.
+### Genre
+Represents a genre of an anime.
+
+### Status
+Represents the watch status of an anime
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -296,6 +301,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete an anime                         | remove anime that I no longer need                                     |
 | `* * *`  | user                                       | list all anime                          | see all anime I have added                                             |
 | `* * *`  | user                                       | update anime episode                    | ensure I am on the right episode of the anime                          |
+| `* * *`  | user                                       | update anime status                     | know if I have watched or am watching the anime                        |
+
 
 *{More to be added}*
 
@@ -360,6 +367,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  AniList shows a list of anime
 3.  User requests to update the episode number of a specific anime
 4.  AniList updates the episode number of the anime
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given index is invalid.
+
+    * 3a1. AniList shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: UC05 - Update the status of an anime**
+
+**MSS**
+
+1.  User requests to list anime
+2.  AniList shows a list of anime
+3.  User requests to update the status of a specific anime
+4.  AniList updates the status of the anime
 
     Use case ends.
 
