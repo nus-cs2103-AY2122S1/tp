@@ -34,7 +34,6 @@ public class SplitCommand extends Command {
         this.dayNumber = dayNumber;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
