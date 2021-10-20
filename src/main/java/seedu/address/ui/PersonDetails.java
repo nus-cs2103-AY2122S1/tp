@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.GitHubUtil;
 import seedu.address.model.person.Person;
 
 
@@ -107,8 +106,7 @@ public class PersonDetails extends UiPart<Region> {
         profileView.setClip(clip);
 
         // To Obtain the user GitHub username and to fetch and display it.
-        String userName = person.getGithub().toString();
-        Image userGitHubProfilePicture = GitHubUtil.getProfilePicture(userName);
+        Image userGitHubProfilePicture = person.getProfilePicture();
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(userGitHubProfilePicture);
     }
