@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.Model;
+import seedu.address.model.TaskAssignable;
 import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.Lesson;
@@ -22,7 +24,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person implements HasUniqueId {
+public class Person implements HasUniqueId, TaskAssignable {
 
     // Identity fields
     private final Name name;
@@ -193,6 +195,7 @@ public class Person implements HasUniqueId {
 
     /**
      * Immutable way of updating the assigned task id list
+     *
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
@@ -200,6 +203,17 @@ public class Person implements HasUniqueId {
         requireNonNull(newAssignedTaskIds);
         return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList, exams);
     }
+
+    /**
+     * Gets the filter list from the given model.
+     *
+     * @param model The model that stores the filter list.
+     * @return The filter list from the given model.
+     */
+    @Override
+    public List<Person> getFilteredListFromModel(Model model) {
+        return model.getFilteredPersonList();
+    };
 
     /**
      * Returns true if both persons have the same name.
