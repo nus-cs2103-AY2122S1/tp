@@ -8,11 +8,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
+    enum Type {
+        GENERAL,
+        EVENT,
+        MODULE
+    }
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String VALIDATION_REGEX =
+            "\\p{Alnum}+|event-\\s*\\p{Alnum}+|mod-\\s*\\p{Alnum}+";
 
     public final String tagName;
+    public final Type type;
 
     /**
      * Constructs a {@code Tag}.
@@ -21,15 +28,17 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        checkArgument(isValidTagName(tagName));
+        this.type = parseTagType(tagName);
+        this.tagName = parseTagName(type, tagName);
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean isValidTagName = test.matches(VALIDATION_REGEX);
+        return isValidTagName;
     }
 
     @Override
@@ -51,4 +60,34 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     *
+     * @param tagName
+     * @return
+     */
+    public Type parseTagType(String tagName) {
+        if (tagName.indexOf("event-") == 0) {
+            return Type.EVENT;
+        } else if (tagName.indexOf("mod-") == 0) {
+            return Type.MODULE;
+        } else {
+            return Type.GENERAL;
+        }
+    }
+
+    /**
+     *
+     * @param tagName
+     * @param tagType
+     * @return
+     */
+    public String parseTagName(Type tagType, String tagName) {
+        if (tagType == Type.GENERAL) {
+            return tagName;
+        } else if (tagType == Type.EVENT) {
+            return tagName.substring(6).trim();
+        } else {
+            return tagName.substring(4).trim();
+        }
+    }
 }
