@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
