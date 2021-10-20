@@ -16,13 +16,6 @@ public class Toggle extends UiPart<Region> {
     private final Runnable tasksToggler;
     private final Runnable ordersToggler;
 
-    @FXML
-    private ToggleButton clients;
-    @FXML
-    private ToggleButton tasks;
-    @FXML
-    private ToggleButton orders;
-
     /**
      * Creates a {@code Toggle} with the given {@code Runnable}s.
      *
