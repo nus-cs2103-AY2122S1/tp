@@ -256,6 +256,9 @@ The following activity diagram summarizes what happens when a user executes the 
 * **Alternative 2**: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
+    
+Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
+handle multiple scenarios would be less daunting to use.
 
 Command syntax: `filter [g/GRADE] [s/SUBJECT]`
 
