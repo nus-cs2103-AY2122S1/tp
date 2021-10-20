@@ -207,13 +207,13 @@ Examples:
 
 Clears all student and lesson entries from the TuitiONE.
 
-Format: `clear`
+Command Format: `clear`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Command Format: `exit`
 
 ### Saving the data
 
@@ -221,10 +221,14 @@ TuitiONE data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-TuitiONE data is saved as a JSON file `[JAR file location]/data/TuitiONE.json`. Advanced users are welcome to update data directly by editing that data file.
+TuitiONE data is saved as a `.json` file `[JAR file location]/data/TuitiONE.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TuitiONE will discard all data and start with an empty data file at the next run.
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**
+
+If the changes you made to the data file render its format invalid, TuitiONE will discard all data and start with an empty data file at the next run.
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -233,13 +237,13 @@ If your changes to the data file makes its format invalid, TuitiONE will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [t/REMARK]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 t/foreign student`
+**Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Delete lesson** | `delete-l INDEX`<br> e.g. `delete-l 1`
-**Enroll** | `enroll INDEX l/LESSON_CODE`<br> e.g. `enroll 1 l/Science-P5-Wed-1230`
-**Unenroll** | `unenroll INDEX l/LESSON_CODE`<br> e.g. `unenroll 1 l/Science-P5-Wed-1230`
+**Enroll** | `enroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `enroll 1 l/1`
+**Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `unenroll 1 l/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
 **Help** | `help`
