@@ -28,7 +28,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
-import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -200,5 +199,4 @@ class LessonEditCommandParserTest {
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
 }

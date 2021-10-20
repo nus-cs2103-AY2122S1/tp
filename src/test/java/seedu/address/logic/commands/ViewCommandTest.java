@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
@@ -36,7 +37,7 @@ class ViewCommandTest {
     }
 
     @Test
-    public void execute_InvalidIndexFilteredList_failure() {
+    public void execute_invalidIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandFailure(
             prepareViewCommand(INDEX_SECOND_PERSON), model,

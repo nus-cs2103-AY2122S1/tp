@@ -93,7 +93,7 @@ public class LessonAddCommandParserTest {
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple subject - last subject accepted
-        assertParseSuccess(parser, " " + FIRST_PERSON +  RECURRENCE_FLAG + PAST_DATE_DESC
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
             + TIME_RANGE_DESC + SUBJECT_DESC + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 

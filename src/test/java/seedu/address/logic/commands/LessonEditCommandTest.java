@@ -21,6 +21,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
@@ -38,7 +39,7 @@ import seedu.address.testutil.PersonBuilder;
 
 class LessonEditCommandTest {
 
-    private final String TESTING_SUBJECT = "TESTING";
+    private static final String TESTING_SUBJECT = "TESTING";
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
@@ -57,8 +58,8 @@ class LessonEditCommandTest {
         Person personAfterLessonEdit = new PersonBuilder(firstPerson).withLessons(editedLesson).build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        LessonEditCommand lessonEditCommand
-                = prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
+        LessonEditCommand lessonEditCommand =
+                prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
 
         String expectedMessage =
                 String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
@@ -89,12 +90,12 @@ class LessonEditCommandTest {
         Person personAfterLessonEdit = new PersonBuilder(firstPerson).withLessons(editedLesson).build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
-        LessonEditCommand lessonEditCommand
-            = prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
+        LessonEditCommand lessonEditCommand =
+                prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
 
         String expectedMessage =
-            String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                formerLesson, editedLesson, personAfterLessonEdit);
+                String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
+                    formerLesson, editedLesson, personAfterLessonEdit);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
@@ -206,8 +207,8 @@ class LessonEditCommandTest {
         Lesson lessonBeforeEdit = new LessonBuilder().withDate(VALID_DATE_FUTURE).build();
 
         Person personBeforeLessonEdit = new PersonBuilder(firstPerson)
-            .withLessons(existingLesson, lessonBeforeEdit)
-            .build();
+                .withLessons(existingLesson, lessonBeforeEdit)
+                .build();
 
         model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
 
@@ -233,8 +234,8 @@ class LessonEditCommandTest {
         assertTrue(lessonEditCommand.equals(lessonEditCommand));
 
         // same values -> returns true
-        LessonEditCommand lessonEditCommandCopy
-                = prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, copyDescriptor);
+        LessonEditCommand lessonEditCommandCopy =
+                prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, copyDescriptor);
         assertTrue(lessonEditCommand.equals(lessonEditCommandCopy));
 
         // different types -> returns false
@@ -251,7 +252,8 @@ class LessonEditCommandTest {
      * Generates a {@code LessonEditCommand} with parameters {@code index}, {@code indexToEdit}
      * and {@code editLessonDescriptor}.
      */
-    private LessonEditCommand prepareLessonEditCommand(Index index, Index indexToEdit, EditLessonDescriptor editLessonDescriptor) {
+    private LessonEditCommand prepareLessonEditCommand(Index index, Index indexToEdit,
+                                                       EditLessonDescriptor editLessonDescriptor) {
         LessonEditCommand lessonEditCommand = new LessonEditCommand(index, indexToEdit, editLessonDescriptor);
         lessonEditCommand.setDependencies(model, new UndoRedoStack());
         return lessonEditCommand;
