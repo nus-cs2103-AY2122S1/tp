@@ -23,14 +23,15 @@ public class ViewShiftCommand extends Command {
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
-            + PREFIX_DASH_DAY_SHIFT + " [DAY]-[SLOT NUMBER]\n"
-            + PREFIX_DASH_TIME + " [DAY]-[TIME]" + " (TIME is in format HH:mm)\n\n"
+            + PREFIX_DASH_DAY_SHIFT + " day-slot_number\n"
+            + PREFIX_DASH_TIME + " day-time" + " (time is in format HH:mm)\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " monday-0\n"
             + COMMAND_WORD + " " + PREFIX_DASH_DAY_SHIFT + " TUESDAY-1\n"
-            + COMMAND_WORD + " " + PREFIX_DASH_TIME + " wednesday-11:00";
+            + COMMAND_WORD + " " + PREFIX_DASH_TIME + " wednesday-11:00\n\n";
 
     public static final int INVALID_SLOT_NUMBER = -1;
+    public static final int INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES = -2;
     private static final String NO_STAFF_WORKING = "There is currently no staff working at the specified shift.";
     private static final String STAFF_LIST_EMPTY = "There are no staffs in the staff list, please add some first!";
 
@@ -113,12 +114,26 @@ public class ViewShiftCommand extends Command {
                 counter++;
             }
         }
-
-        if (result.toString().equals("")) {
+        if (result.equals("")) {
             return new CommandResult(NO_STAFF_WORKING);
+        } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
+            return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
             return new CommandResult(DEFAULT_MESSAGE + result.toString());
         }
+    }
+
+    public String getWorkingStaffByTime(ObservableList<Person> staffs) {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        for (Person p : staffs) {
+            boolean hasShift = p.isWorking(dayOfWeek, time);
+            if (hasShift) {
+                result.append(counter).append(". ").append(p.getName()).append("\n");
+                counter++;
+            }
+        }
+        return "Currently working:\n" + result;
     }
 
     @Override

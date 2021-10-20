@@ -26,15 +26,18 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_NAME.getPrefix())) {
             String[] nameKeywords = trimmedArgs.replace(CliSyntax.PREFIX_DASH_NAME.getPrefix(), "")
                     .trim().split("\\s+");
+            if (nameKeywords[0].equals("")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
             return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
 
         } else if (trimmedArgs.contains(CliSyntax.PREFIX_DASH_INDEX.getPrefix())) {
             String indexString = trimmedArgs.replace("-i", "").trim();
 
             try {
-                // TODO can consider creating an exception when the index is not in range
                 int index = Integer.parseInt(indexString);
-                return new FindCommand(index - 1); // +1 so that it starts from 1 instead of 0
+                return new FindCommand(index - 1); // -1 to account for zero indexing
 
             } catch (NumberFormatException e) {
                 throw new ParseException(

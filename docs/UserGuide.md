@@ -102,8 +102,6 @@ Shows a list of all staffs in the staff list.
 
 Format: `list`
 
-
-
 ### Marking a staff as absent : `mark`
 
 Marks a specified staff(s) as not working for a specified date.
@@ -111,17 +109,14 @@ The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
 
-The format of the input date is in:
-
-`YYYY-MM-DD`
+The format of the input date is in:`YYYY-MM-DD`
 
 Format:\
 `mark i/index d/startDate d/endDate`  
 `mark n/name d/startDate d/endDate`  
 `mark t/tag d/startDate d/endDate`
 
-Possible to mark a single date  
-`mark t/tag d/date`
+Possible to mark a single date `mark t/tag d/date`
 
 Examples:\
 `mark i/1 d/2020-01-03 d/2021-01-03`  
@@ -282,7 +277,6 @@ Examples:\
 `deleteSchedule i/1278 d/friday-1`
 
 ### Editing a staff schedule: `editSchedule`
-
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
 Formats:\
