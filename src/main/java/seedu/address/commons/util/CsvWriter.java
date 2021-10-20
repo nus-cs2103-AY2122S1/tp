@@ -7,18 +7,33 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Writes data to Csv files.
+ */
 public class CsvWriter {
 
-    private String filePath;
-    private String[] headers;
-    private Map<String, List<String>> data;
+    private final String filePath;
+    private final String[] headers;
+    private final Map<String, List<String>> data;
 
+    /**
+     * Default constructor.
+     *
+     * @param filePath path of file to be written to.
+     * @param headers array of headers for the csv file.
+     * @param data data to be written to the csv file.
+     */
     public CsvWriter(String filePath, String[] headers, Map<String, List<String>> data) {
         this.filePath = filePath;
         this.headers = headers;
         this.data = data;
     }
 
+    /**
+     * Writes data to Csv files.
+     *
+     * @throws IOException when file cannot be created or written to.
+     */
     public void write() throws IOException {
         FileUtil.createFile(Paths.get(filePath));
         BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
@@ -43,8 +58,8 @@ public class CsvWriter {
         for (int j = 0; j < headers.length; j++) {
             row[j] = get(headers[j], i);
         }
-        String result = String.join(",", row);
-        return result;
+
+        return String.join(",", row);
     }
 
 }

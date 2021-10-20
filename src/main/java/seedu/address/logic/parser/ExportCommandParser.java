@@ -1,19 +1,17 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.io.File;
+
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class ExportCommandParser implements Parser<ExportCommand>{
+public class ExportCommandParser implements Parser<ExportCommand> {
 
     public static final String MESSAGE_NOT_CSV = "Failed! "
             + "Entries at following rows are wrongly formatted:";

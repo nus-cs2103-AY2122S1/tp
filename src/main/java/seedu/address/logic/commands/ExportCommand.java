@@ -1,21 +1,24 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import seedu.address.commons.util.CsvWriter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
-
-import java.io.IOException;
-import java.util.*;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Exports contacts to a csv file.
  */
-public class ExportCommand extends Command{
+public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -59,7 +62,7 @@ public class ExportCommand extends Command{
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
-    public void convertFieldsToString(List<Person> personList) {
+    private void convertFieldsToString(List<Person> personList) {
         for (Person p: personList) {
             names.add(p.getName().toString());
             phones.add(p.getPhone().toString());
@@ -82,7 +85,7 @@ public class ExportCommand extends Command{
         }
     }
 
-    public void populateDataToExport() {
+    private void populateDataToExport() {
         data.put(fieldHeaders[0], names);
         data.put(fieldHeaders[1], phones);
         data.put(fieldHeaders[2], emails);
