@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagramUpdated.png" width="450" />
 
 
 The `Model` component,
@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 
 </div>
 
@@ -213,6 +213,27 @@ The following activity diagram summarizes what happens when a user enters and ex
   * Cons: Difficult to parse user input as would need to scan exhaustively for aliases.
 
 In modern CLI applications, an alias is mainly used for abbreviating system commands or adding default arguments to regularly used commands. Considering the target use of SportsPA and time constraints, since command arguments are not likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
+
+### Split feature
+
+#### Implementation
+
+The split mechanism is facilitated by `AddressBookParser`. More details to be added.
+
+#### Design considerations:
+
+**Aspect: Format of values in `Availability`**
+
+* **Alternative 1 (current choice):** Stores values as a `List<DayOfWeek>`.
+    * Pros: Easy to implement in parser, increases user-friendliness by allowing users to just type in numbers to 
+      represent days of a week instead of the names. Numbers can then be easily converted into DayOfWeek, 
+      and sorted, ensuring uniformity.
+    * Cons: May not be intuitive to some users that 1 represents Monday and 7 represents Sunday. 
+
+* **Alternative 2:** Stores values as a `String`
+    * Pros: Intuitive for users to type in the names of the days
+    * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are 
+      in the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
 
 ### \[Proposed\] Undo/redo feature
 
