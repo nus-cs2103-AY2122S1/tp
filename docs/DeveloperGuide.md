@@ -251,7 +251,7 @@ the first listed contact.
 5. `FastParser::parseCommand` will call `AppointmentCommandParser::parse`.
    1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
    2. `ParserUtil::parseIndex`, `ParserUtil::parseDateString`, `ParserUtil::parseTimeString` and 
-   `ParserUtil::parseVenueString` will be called to check and parsed the input if it passes the check (for requirement).
+   `ParserUtil::parseVenueString` will be called to check and parse the input if it passes the check (for requirement).
    3. A new `Appointment` object with the input `date`, `time` and `venue` will be created.
 6. `AppointmentCommandParser::parse` will return a new `AppointmentCommand` object that contains the position of the 
 specified contact and the `Appointment` object. 
@@ -269,7 +269,7 @@ Below is an example usage scenario (`deleting`):
 3.`FastParser::parseCommand` will determine that it is a delete appointment command.
 4.`FastParser::parseCommand` will call `DeleteAppointmentCommandParser::parse`.
     1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-    2. `ParserUtil::parseIndex`, will be called to check and parsed the input if it passes the check (for requirement).
+    2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
     3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
 5.`DeleteAppointmentCommandParser::parse` will return a new `DeleteAppointmentCommand` object that contains the position of the
    specified contact and the `Appointment` object.
@@ -284,7 +284,7 @@ Below is an example usage scenario (`tracking completed appointment`):
 3. `FastParser::parseCommand` will determine that it is a mark appointment command.
 4. `FastParser::parseCommand` will call `MarkAppointmentCommandParser::parse`. 
    1. `ArgumentTokenizer::tokenize` will be called to recognise the required prefixes for appointment feature.
-   2. `ParserUtil::parseIndex`, will be called to check and parsed the input if it passes the check (for requirement).
+   2. `ParserUtil::parseIndex`, will be called to check and parse the input if it passes the check (for requirement).
    3. A new `Appointment` object with the input empty `date`, `time` and `venue` will be created.
 5. `MarkAppointmentCommandParser::parse` will return a new `MarkAppointmentCommand` object that contains the position of the
 specified contact and the `Appointment` object. 
@@ -301,7 +301,7 @@ after verifying that an appointment exists (previously) for the specified contac
     * Pros:
         1. Isolation of a single sub-feature to a specific command: more intuitive to use.
         2. Improvement for the command syntax. Less prefix required.
-        3. Improvement over `edit` command: retains data fields not directly affected by the command.
+        3. Improvement over `edit appointment` command: retains data fields not directly affected by the command.
     * Cons:
         1. More classes added, resulting in more lines of codes in the program.
         2. More checks and testcases needed.
