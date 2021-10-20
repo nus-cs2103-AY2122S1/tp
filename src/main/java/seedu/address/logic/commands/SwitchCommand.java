@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_SWITCH_SUCCESS;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCHING;
 
-
 import java.nio.file.Path;
 
 import seedu.address.logic.commands.exceptions.CommandException;

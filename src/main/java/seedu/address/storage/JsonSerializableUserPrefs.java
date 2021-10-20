@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.UserPrefs.DEFAULT_ADDRESSBOOK_FILE;
+
 import java.nio.file.Path;
 import java.util.Optional;
 
@@ -47,7 +49,7 @@ class JsonSerializableUserPrefs {
      */
     public UserPrefs toModelType() throws IllegalValueException {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(this.filepath);
+        userPrefs.setAddressBookFilePath(Optional.ofNullable(this.filepath).orElse(DEFAULT_ADDRESSBOOK_FILE));
         userPrefs.setGuiSettings(Optional.ofNullable(this.guiSettings).orElseGet(GuiSettings::new));
         return userPrefs;
     }

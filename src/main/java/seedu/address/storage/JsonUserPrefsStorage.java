@@ -43,7 +43,8 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
      */
     public Optional<UserPrefs> readUserPrefs(Path prefsFilePath) throws DataConversionException {
         requireNonNull(prefsFilePath);
-        Optional<JsonSerializableUserPrefs> jsonUserPrefs = JsonUtil.readJsonFile(prefsFilePath, JsonSerializableUserPrefs.class);
+        Optional<JsonSerializableUserPrefs> jsonUserPrefs =
+                JsonUtil.readJsonFile(prefsFilePath, JsonSerializableUserPrefs.class);
         if (jsonUserPrefs.isEmpty()) {
             return Optional.empty();
         }
