@@ -8,7 +8,7 @@ public class CommandFormat {
     public static final String ADD_CLASS_DESC = "Creates a tuition class.";
     public static final String DELETE_COMMAND = "delete | del";
     public static final String DELETE_DESC = "Deletes a student.";
-    public static final String DELETE_ClASS_COMMAND = "deleteclass | delc";
+    public static final String DELETE_CLASS_COMMAND = "deleteclass | delc";
     public static final String DELETE_CLASS_DESC = "Deletes a tuition class.";
     public static final String ADD_TO_CLASS_COMMAND = "addtoclass | atc";
     public static final String ADD_TO_CLASS_DESC = "Adds a student to a class.";

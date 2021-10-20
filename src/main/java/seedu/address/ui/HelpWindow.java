@@ -1,6 +1,47 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.CommandFormat.*;
+import static seedu.address.ui.CommandFormat.ADD_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.ADD_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.ADD_COMMAND;
+import static seedu.address.ui.CommandFormat.ADD_DESC;
+import static seedu.address.ui.CommandFormat.ADD_TO_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.ADD_TO_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.CLEAR_COMMAND;
+import static seedu.address.ui.CommandFormat.CLEAR_DESC;
+import static seedu.address.ui.CommandFormat.DELETE_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.DELETE_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.DELETE_COMMAND;
+import static seedu.address.ui.CommandFormat.DELETE_DESC;
+import static seedu.address.ui.CommandFormat.EDIT_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.EDIT_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.EDIT_COMMAND;
+import static seedu.address.ui.CommandFormat.EDIT_DESC;
+import static seedu.address.ui.CommandFormat.EXIT_COMMAND;
+import static seedu.address.ui.CommandFormat.EXIT_DESC;
+import static seedu.address.ui.CommandFormat.FIND_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.FIND_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.FIND_COMMAND;
+import static seedu.address.ui.CommandFormat.FIND_DESC;
+import static seedu.address.ui.CommandFormat.LIST_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.LIST_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.LIST_COMMAND;
+import static seedu.address.ui.CommandFormat.LIST_DESC;
+import static seedu.address.ui.CommandFormat.REMARK_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.REMARK_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.REMARK_COMMAND;
+import static seedu.address.ui.CommandFormat.REMARK_DESC;
+import static seedu.address.ui.CommandFormat.REMOVE_FROM_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.REMOVE_FROM_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.SORT_COMMAND;
+import static seedu.address.ui.CommandFormat.SORT_DESC;
+import static seedu.address.ui.CommandFormat.TIMETABLE_COMMAND;
+import static seedu.address.ui.CommandFormat.TIMETABLE_DESC;
+import static seedu.address.ui.CommandFormat.TODAY_COMMAND;
+import static seedu.address.ui.CommandFormat.TODAY_DESC;
+import static seedu.address.ui.CommandFormat.VIEW_CLASS_COMMAND;
+import static seedu.address.ui.CommandFormat.VIEW_CLASS_DESC;
+import static seedu.address.ui.CommandFormat.VIEW_COMMAND;
+import static seedu.address.ui.CommandFormat.VIEW_DESC;
 
 import java.util.logging.Logger;
 
@@ -126,7 +167,7 @@ public class HelpWindow extends UiPart<Stage> {
         addToClassDesc.setText(ADD_CLASS_DESC);
         del.setText(DELETE_COMMAND);
         delDesc.setText(DELETE_DESC);
-        delc.setText(DELETE_ClASS_COMMAND);
+        delc.setText(DELETE_CLASS_COMMAND);
         delcDesc.setText(DELETE_CLASS_DESC);
         atc.setText(ADD_TO_CLASS_COMMAND);
         atcDesc.setText(ADD_TO_CLASS_DESC);
