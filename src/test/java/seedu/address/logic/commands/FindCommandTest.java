@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.GithubContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
@@ -57,6 +59,46 @@ public class FindCommandTest {
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+    }
+
+    @Test
+    public void execute_zeroGithubUsernameKeywords_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        GithubContainsKeywordsPredicate predicate = prepareGithubUsernamePredicate("g/ ");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_oneGithubUsername_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        GithubContainsKeywordsPredicate predicate = prepareGithubUsernamePredicate("g/ku");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleGithubUsernames_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        GithubContainsKeywordsPredicate predicate = prepareGithubUsernamePredicate("g/Be me");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL, ELLE, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleGithubUsernames_noPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        GithubContainsKeywordsPredicate predicate = prepareGithubUsernamePredicate("g/az te re");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
@@ -164,6 +206,13 @@ public class FindCommandTest {
     }
 
     /**
+     * Parses {@code userInput} into a {@code GithubContainsKeywordsPredicate}.
+     */
+    private GithubContainsKeywordsPredicate prepareGithubUsernamePredicate(String userInput) {
+        String githubUsernames = userInput.substring(2);
+        return new GithubContainsKeywordsPredicate(Arrays.asList(githubUsernames.split("\\s+")));
+    }
+    /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
     private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
@@ -179,7 +228,7 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code TelegramHandleContainsKeywordsPredicate}.
      */
     private TelegramHandleContainsKeywordsPredicate prepareTelegramHandlePredicate(String userInput) {
         String telegramHandles = userInput.substring(3);

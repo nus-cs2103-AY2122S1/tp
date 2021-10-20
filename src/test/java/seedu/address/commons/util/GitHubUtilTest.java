@@ -1,5 +1,4 @@
 package seedu.address.commons.util;
-
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -7,7 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.scene.image.Image;
 
+
 public class GitHubUtilTest {
+
     @Test
     public void getProfile_invalidUserName_runtimeException() {
         boolean runtimeExceptionThrown = false;

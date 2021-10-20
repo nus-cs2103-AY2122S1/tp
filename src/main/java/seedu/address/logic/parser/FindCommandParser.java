@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
@@ -8,6 +9,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.GithubContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
@@ -19,9 +21,26 @@ import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
     private static String tagIdentifier = PREFIX_TAG.getPrefix();
     private static String telegramHandleIdentifier = PREFIX_TELEGRAM.getPrefix();
+    private static String githubUsernameIdentifier = PREFIX_GITHUB.getPrefix();
 
     /**
-     * Parses the list of names to be searched for in the context of the FindCommand
+     * Parses the list of Github username(s) to be searched for in the context of the FindCommand
+     * and returns a FindCommand object for execution.
+     *
+     * @return FindCommand object for execution.
+     * @throws ParseException if user has not entered at least 1 tag to search for
+     */
+    public FindCommand parseFindGithubUsername(String trimmedArgs) throws ParseException {
+        String githubUsernames = trimmedArgs.substring(2).trim();
+        if (githubUsernames.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        String[] githubUsernameKeywords = githubUsernames.split("\\s+");
+        return new FindCommand(new GithubContainsKeywordsPredicate(Arrays.asList(githubUsernameKeywords)));
+    }
+    /**
+     * Parses the list of name(s) to be searched for in the context of the FindCommand
      * and returns a FindCommand object for execution.
      *
      * @return FindCommand object for execution.
@@ -33,7 +52,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Parses the list of tags to be searched for in the context of the FindCommand
+     * Parses the list of tag(s) to be searched for in the context of the FindCommand
      * and returns a FindCommand object for execution.
      *
      * @return FindCommand object for execution.
@@ -50,7 +69,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Parses the list of telegram handles to be searched for in the context of the FindCommand
+     * Parses the list of Telegram handle(s) to be searched for in the context of the FindCommand
      * and returns a FindCommand object for execution.
      *
      * @return FindCommand object for execution.
@@ -69,8 +88,9 @@ public class FindCommandParser implements Parser<FindCommand> {
     private boolean isValidFormat(String trimmedArgs) {
         boolean isTag = trimmedArgs.indexOf(tagIdentifier) == 0;
         boolean isTelegram = trimmedArgs.indexOf(telegramHandleIdentifier) == 0;
+        boolean isGithub = trimmedArgs.indexOf(githubUsernameIdentifier) == 0;
         boolean isName = !trimmedArgs.contains("/") && Character.isLetter(trimmedArgs.charAt(0));
-        return isTag || isTelegram || isName;
+        return isTag || isTelegram || isGithub || isName;
     }
 
     /**
@@ -90,6 +110,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return parseFindTag(trimmedArgs);
         } else if (trimmedArgs.indexOf(telegramHandleIdentifier) == 0) {
             return parseFindTelegramHandle(trimmedArgs);
+        } else if (trimmedArgs.indexOf(githubUsernameIdentifier) == 0) {
+            return parseFindGithubUsername(trimmedArgs);
         } else {
             return parseFindName(trimmedArgs);
         }
