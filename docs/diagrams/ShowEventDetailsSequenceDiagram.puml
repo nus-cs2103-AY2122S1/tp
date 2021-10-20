@@ -1,18 +1,18 @@
 @startuml
+'https://plantuml.com/sequence-diagram
 !include Style.puml
-hide footbox
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ShowEventDetailsCommandParser" as ShowEventDetailsCommandParser LOGIC_COLOR
-participant "command:ShowEventDetailsCommand" as ShowEventDetailsCommand LOGIC_COLOR
+participant "s:ShowEventDetailsCommand" as ShowEventDetailsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":EventNamePredicate" as EventNamePredicate MODEL_COLOR
-participant "model:Model" as Model MODEL_COLOR
+participant "e:EventNamePredicate" as EventNamePredicate MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
 end box
 
 [-> LogicManager : execute("showDetails Dinner")
@@ -28,27 +28,30 @@ activate ShowEventDetailsCommandParser
 ShowEventDetailsCommandParser --> AddressBookParser
 deactivate ShowEventDetailsCommandParser
 
-AddressBookParser -> ShowEventDetailsCommandParser : parse("Dinner")
+AddressBookParser -> ShowEventDetailsCommandParser : parse(" Dinner")
 activate ShowEventDetailsCommandParser
-
-create EventNamePredicate
-ShowEventDetailsCommandParser -> EventNamePredicate
-activate EventNamePredicate
-
-EventNamePredicate --> ShowEventDetailsCommandParser
-deactivate EventNamePredicate
 
 create ShowEventDetailsCommand
 ShowEventDetailsCommandParser -> ShowEventDetailsCommand
 activate ShowEventDetailsCommand
 
-ShowEventDetailsCommand --> ShowEventDetailsCommandParser
+create EventNamePredicate
+ShowEventDetailsCommand -> EventNamePredicate
+activate EventNamePredicate
+
+EventNamePredicate --> ShowEventDetailsCommand : e
+deactivate EventNamePredicate
+
+ShowEventDetailsCommand --> ShowEventDetailsCommandParser : s
 deactivate ShowEventDetailsCommand
 
-ShowEventDetailsCommandParser --> AddressBookParser
+ShowEventDetailsCommandParser --> AddressBookParser : s
 deactivate ShowEventDetailsCommandParser
 
-AddressBookParser --> LogicManager : command
+ShowEventDetailsCommandParser -[hidden]> AddressBookParser : s
+destroy ShowEventDetailsCommandParser
+
+AddressBookParser --> LogicManager : s
 deactivate AddressBookParser
 
 LogicManager -> ShowEventDetailsCommand : execute()
@@ -67,9 +70,13 @@ activate CommandResult
 CommandResult --> ShowEventDetailsCommand
 deactivate CommandResult
 
-ShowEventDetailsCommand --> LogicManager : commandResult
+ShowEventDetailsCommand --> LogicManager : result
 deactivate ShowEventDetailsCommand
 
-[<- LogicManager : commandResult
+ShowEventDetailsCommand -[hidden]> LogicManager : result
+destroy ShowEventDetailsCommand
+destroy EventNamePredicate
 
+[<- LogicManager
+deactivate LogicManager
 @enduml
