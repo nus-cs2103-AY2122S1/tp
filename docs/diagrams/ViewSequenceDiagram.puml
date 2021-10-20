@@ -1,0 +1,82 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
+participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
+participant "p:ParticipantIdMatchesGivenIdPredicate" as ParticipantIdMatchesGivenIdPredicate LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("view aleyeo1"))
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("view aleyeo1")
+activate AddressBookParser
+
+create ViewCommandParser
+AddressBookParser -> ViewCommandParser
+
+activate ViewCommandParser
+ViewCommandParser --> AddressBookParser
+deactivate ViewCommandParser
+
+AddressBookParser -> ViewCommandParser : parse(" aleyeo1")
+activate ViewCommandParser
+
+create ViewCommand
+ViewCommandParser -> ViewCommand
+activate ViewCommand
+
+create ParticipantIdMatchesGivenIdPredicate
+ViewCommand --> ParticipantIdMatchesGivenIdPredicate
+activate ParticipantIdMatchesGivenIdPredicate
+
+ParticipantIdMatchesGivenIdPredicate --> ViewCommand : p
+deactivate ParticipantIdMatchesGivenIdPredicate
+
+ViewCommand --> ViewCommandParser : v
+deactivate ViewCommand
+
+ViewCommandParser --> AddressBookParser : v
+deactivate ViewCommandParser
+
+ViewCommandParser -[hidden]-> AddressBookParser
+destroy ViewCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewCommand : execute()
+activate ViewCommand
+
+ViewCommand -> Model : findParticipant(p)
+activate Model
+
+Model --> ViewCommand
+deactivate Model
+
+create CommandResult
+ViewCommand -> CommandResult
+
+activate CommandResult
+CommandResult --> ViewCommand
+
+deactivate CommandResult
+
+ViewCommand --> LogicManager : result
+deactivate
+ViewCommand -[hidden]-> LogicManager : result
+destroy ViewCommand
+destroy ParticipantIdMatchesGivenIdPredicate
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -7,6 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":FilterEventCommandParser" as FilterEventCommandParser LOGIC_COLOR
 participant "f:FilterEventCommand" as FilterEventCommand LOGIC_COLOR
+participant "e:EventDateTimePredicate" as EventDateTimePredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -34,6 +35,13 @@ create FilterEventCommand
 FilterEventCommandParser -> FilterEventCommand
 activate FilterEventCommand
 
+create EventDateTimePredicate
+FilterEventCommand --> EventDateTimePredicate
+activate EventDateTimePredicate
+
+EventDateTimePredicate --> FilterEventCommand : e
+deactivate EventDateTimePredicate
+
 FilterEventCommand --> FilterEventCommandParser : f
 deactivate FilterEventCommand
 
@@ -49,7 +57,7 @@ deactivate AddressBookParser
 LogicManager -> FilterEventCommand : execute()
 activate FilterEventCommand
 
-FilterEventCommand -> Model : updateFilteredParticipantList(predicate)
+FilterEventCommand -> Model : updateFilteredEventList(e)
 activate Model
 
 Model --> FilterEventCommand
@@ -67,6 +75,7 @@ FilterEventCommand --> LogicManager : result
 deactivate
 FilterEventCommand -[hidden]-> LogicManager : result
 destroy FilterEventCommand
+destroy EventDateTimePredicate
 
 [<--LogicManager
 deactivate LogicManager
