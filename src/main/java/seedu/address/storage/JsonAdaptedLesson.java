@@ -10,13 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Date;
-import seedu.address.model.lesson.Homework;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.MakeUpLesson;
-import seedu.address.model.lesson.RecurringLesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.lesson.*;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -28,6 +22,7 @@ class JsonAdaptedLesson {
     private final String date;
     private final String timeRange;
     private final String subject;
+    private final String lessonRates;
     private final boolean isRecurring;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
 
@@ -38,10 +33,12 @@ class JsonAdaptedLesson {
     public JsonAdaptedLesson(@JsonProperty("date") String date,
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
-                             @JsonProperty("homework") List<JsonAdaptedHomework> homework) {
+                             @JsonProperty("homework") List<JsonAdaptedHomework> homework,
+                             @JsonProperty("lessonRates") String lessonRates) {
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
+        this.lessonRates = lessonRates;
         if (homework != null) {
             this.homework.addAll(homework);
         }
@@ -55,6 +52,7 @@ class JsonAdaptedLesson {
         date = source.getDate().value;
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
+        lessonRates = source.getLessonRates().value;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
@@ -98,9 +96,17 @@ class JsonAdaptedLesson {
         }
         final Subject modelSubject = new Subject(subject);
 
+        if (lessonRates == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
+        }
+        if (!LessonRates.isValidLessonRates(lessonRates)) {
+            throw new IllegalValueException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        final LessonRates modelLessonRates = new LessonRates(lessonRates);
+
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework);
+                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates);
     }
 }

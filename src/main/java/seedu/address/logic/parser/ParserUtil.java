@@ -16,6 +16,7 @@ import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.AcadLevel;
@@ -361,5 +362,20 @@ public class ParserUtil {
         }
 
         return findCondition;
+    }
+
+    /**
+     * Parses a {@code String lessonRates} into an {@code lessonRates}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code lessonRates} is invalid.
+     */
+    public static LessonRates parseLessonRates(String lessonRates) throws ParseException {
+        requireNonNull(lessonRates);
+        String strippedRates = lessonRates.strip();
+        if (!LessonRates.isValidLessonRates(strippedRates)) {
+            throw new ParseException(LessonRates.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonRates(lessonRates);
     }
 }
