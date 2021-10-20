@@ -70,5 +70,4 @@ public class StaffStatisticsCommand extends Command {
         return getPeriodFromDateOverMonth(LocalDate.now());
     }
 
-
 }
