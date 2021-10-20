@@ -3,29 +3,8 @@ layout: page
 title: User Guide
 ---
 
- Table of Contents
-- [Introduction](#introduction)
-- [Quick start](#quick-start)
-- [Features](#features)
-    * [Viewing help](#viewing-help-help)
-    * [Adding a person](#adding-a-person-add)
-    * [Listing all persons](#listing-all-persons-list)
-    * [Editing a person](#editing-a-person-edit)
-    * [Locating persons by name](#locating-persons-by-name-find)
-    * [Deleting a person](#deleting-a-person-del)
-    * [Adding a remark](#adding-a-remark-rmk)  
-    * [Adding an appointment](#adding-an-appointment-appt)
-    * [Editing an appointment](#editing-an-appointment-eppt)
-    * [Deleting an appointment](#deleting-an-appointment-dappt)
-    * [Updating completed appointment](#updating-completed-appointment-done)
-    * [Sorting all persons](#sorting-all-persons-sort)
-    * [Clearing all entries](#clearing-all-entries-clear)
-    * [Exiting the program](#exiting-the-program-exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-    * [Viewing statistics](#viewing-statistics)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
+* Table of Contents
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
@@ -305,7 +284,7 @@ If your changes to the data file makes its format invalid, FAST will discard all
 ### Viewing statistics
 
 FAST comes with built-in statistics to provide you with an overview of your data. 
-To view the statistics, simply click the "Stats" menu item on the top bar or press F2.
+To view the statistics, simply click the "Stats" menu item on the top bar or press `F2`.
 Currently, FAST supports these statistics:
 * Priority Tag Chart
 * Insurance Plan Chart (Coming soon!)
