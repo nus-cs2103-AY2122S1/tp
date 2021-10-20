@@ -50,8 +50,8 @@ class JsonAdaptedPerson {
             @JsonProperty("expectedSalary") String expectedSalary,
             @JsonProperty("levelOfEducation") String levelOfEducation,
             @JsonProperty("experience") String experience,
-            @JsonProperty("interview") String interview,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("interview") String interview) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,10 +60,11 @@ class JsonAdaptedPerson {
         this.expectedSalary = expectedSalary;
         this.levelOfEducation = levelOfEducation;
         this.experience = experience;
-        this.interview = interview;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.interview = interview;
+
     }
 
     /**
@@ -78,10 +79,11 @@ class JsonAdaptedPerson {
         expectedSalary = source.getExpectedSalary().value;
         levelOfEducation = source.getLevelOfEducation().levelOfEducation;
         experience = source.getExperience().value;
-        interview = source.getInterview().get().parseTime;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        interview = source.getInterview().get().parseTime;
+
     }
 
     /**
