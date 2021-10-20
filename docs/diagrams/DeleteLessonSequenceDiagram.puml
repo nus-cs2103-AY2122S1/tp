@@ -56,28 +56,34 @@ activate Model
 Model --> DeleteLessonCommand : l1
 deactivate Model
 
-DeleteLessonCommand -> Lesson : removeAllStudents()
+DeleteLessonCommand -> Lesson : getStudents()
 activate Lesson
 
-loop all student s in l1
-    Lesson -> Student
+Lesson --> DeleteLessonCommand : studentList
+deactivate Lesson
+
+loop student s in studentList
+    DeleteLessonCommand -> Student : unenrollFromLesson(l1)
     activate Student
 
-    Student -> Student: removeLesson(1)
-    activate Student
+    Student -> Lesson : getLessonCode()
+    activate Lesson
 
-    Student --> Student
+    Lesson --> Student
+    deactivate Lesson
+    
+    Student --> DeleteLessonCommand
     deactivate Student
 
-    Student -> Model : setStudent(s)
+    DeleteLessonCommand -> Model : setStudent(s)
     activate Model
 
-    Model --> Student
+    Model --> DeleteLessonCommand
     deactivate Model
-
-    Student -> Lesson
-    deactivate Student
 end
+
+DeleteLessonCommand -> Lesson : removeAllStudents()
+activate Lesson
 
 Lesson --> DeleteLessonCommand
 deactivate Lesson
