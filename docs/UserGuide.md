@@ -115,6 +115,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
@@ -139,6 +141,8 @@ Format: `viewgroup GROUPNAME`
 
 Examples:
 * `viewgroup CS2103T` displays the group's description and its students.
+  
+
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
@@ -150,6 +154,8 @@ Format: `listgroups`
 
 Examples:
 * `listgroups` displays a list of all the groups, including their group description and number of students in them.
+  
+
   ![result for `listgroups`](images/listGroups.png)
 
 ### Clearing all entries : `clear`
