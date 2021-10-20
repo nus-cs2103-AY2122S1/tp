@@ -3,22 +3,47 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [**Acknowledgements**](#acknowledgements)
 - [**Introduction**](#introduction)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
-    * [Architecture](#architecture)
-    * [UI component](#ui-component)
-    * [Logic component](#logic-component)
-    * [Model component](#model-component)
-    * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    * [Filter Event feature](#completed-filter-event-feature)
-    * [Undo/redo feature](#proposed-undoredo-feature)
-        + [Proposed implementation](#proposed-implementation)
-        + [Design considerations](#design-considerations)
-    * [Data archiving](#proposed-data-archiving)
+  - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [How the feature is implemented](#how-the-feature-is-implemented)
+    - [Why is this implemented this way](#why-is-this-implemented-this-way)
+    - [Design Considerations:](#design-considerations)
+      - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
+      - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
+  - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
+    - [How the feature is implemented](#how-the-feature-is-implemented-1)
+    - [Why is this implemented this way](#why-is-this-implemented-this-way-1)
+    - [Design Considerations:](#design-considerations-1)
+      - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+  - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
+    - [Implementation Details](#implementation-details)
+    - [Implementation Rationale](#implementation-rationale)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+    - [Proposed Implementation](#proposed-implementation)
+    - [Design considerations:](#design-considerations-2)
+  - [\[Proposed\] Data archiving](#proposed-data-archiving)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a participant](#deleting-a-participant)
+  - [Saving data](#saving-data)
 
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
@@ -316,6 +341,36 @@ The following is the sequence diagram for how a `ViewCommand` works internally.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
+### \[Completed\] Add/Remove Participant to/from event by index
+
+This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered list of events and participant visible to user.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
+
+A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. If the indexes that the user input are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
+
+The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains  2 zero-based indexes. The fist one is used to identify the `Participant` while the second one is used to identify the `Event`. When the command is executed, the `model` first trieds to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). After all of that, if the Event already have that `Participant` object a `CommandException` will be thrown as well but if not the `Participant` object will be added to the `Event` as one of its participants
+
+A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. If the indexes that the user input are not zero-based indexes, a `ParseException` will be thrown before `RemoveParticipantByIndexParser` creates the command itself to prevent any further error. If all indexes are valid, a `RemoveParticipantByIndexCommand` will be created by the parser.
+
+The `RemoveParticipantByIndexCommand` created by `RemoveParticipantFromEventByIndexParser` contains  2 zero-based indexes. The fist one is used to identify the `Participant` while the second one is used to identify the `Event`. When the command is executed, the `model` first trieds to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). After all of that, if the Event doesn't that `Participant` object a `CommandException` will be thrown as well but if the Event does have the `Participant` object, that object will be removed from the `Event`.
+
+#### Implementation Rationale
+
+Since the command implies that the index of participant should come before event there is no need for tags to be used as that would only require extra typing on the user side and slow down the process.
+
+The following activity diagrams summarise what happens when a user executes a new command in each case:
+
+`AddParticipantToEventByIndex`
+
+![AddParticipantToEventActivityDiagram](images/AddParticipantToEventByIndexActivityDiagram.png)
+
+`RemoveParticipantFromEventByIndex`
+
+![RemoveParticipantFromEventActivityDiagram](images/RemoveParticipantByIndexActivityDiagram.png)
+
 
 ### \[Proposed\] Undo/redo feature
 
