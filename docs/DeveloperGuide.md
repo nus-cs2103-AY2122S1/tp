@@ -241,8 +241,7 @@ _{more aspects and alternatives to be added}_
 Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
 in TAB. Added lessons can also be edited and deleted.
 
-#### Coming soon
-Chosen dates of recurring lessons can be mark as cancelled. User will be able to specify an end date to their recurring
+**_[Coming soon]_** Chosen dates of recurring lessons can be marked as cancelled. User will be able to specify an end date to their recurring
 lessons to be able to add another recurring lessons in the same timeslot without having to delete the previous one. This is
 for the sake of keeping records of past lessons.
 
