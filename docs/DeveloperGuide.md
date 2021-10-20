@@ -234,6 +234,12 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Viewing Tags
+Viewing tag is facilitated by `UniqueTagList`. 
+- `UniqueTagList` stores a list of unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of students labelled under each tag. 
+- `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
