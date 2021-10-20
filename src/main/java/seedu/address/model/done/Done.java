@@ -18,6 +18,9 @@ public class Done {
         this.doneStatus = STATUS_UNDONE;
     }
 
+    /**
+     * Secondary constructor for Done.
+     */
     public Done(String doneStatus) {
         assert (doneStatus.equals(STATUS_DONE) || doneStatus.equals(STATUS_UNDONE));
         this.doneStatus = doneStatus;

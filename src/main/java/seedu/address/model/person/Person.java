@@ -53,6 +53,9 @@ public class Person {
         this.done = new Done();
     }
 
+    /**
+     * Secondary constructor for Person.
+     */
     public Person(Name name, Phone phone, Email email,
                   Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
                   LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags, Done done) {
