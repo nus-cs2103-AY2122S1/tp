@@ -354,11 +354,11 @@ the `EventNamePredicate` and displays its details.
 Since each Event has a unique name, it provides a convenient way for the user to look for a specific Event if matching 
 name is used as the criterion. 
 
-Another command similar in function is `findParticipant`, where the model will filter the existing Participant list and 
-display the Participants with names that contain a given keyword. However, this implementation is meant for returning a 
-list of possibly multiple Participants. Since we are only looking for one particular Event, we decided that instead of 
-filtering the Event list to display just the one Event, we leave the Event list untouched and simply return the Event 
-details to the results display.
+Another command similar in function is `findEvent`, where the model will filter the existing Event list and display the 
+Event with names that contain a given keyword. However, this implementation is meant for returning a list of possibly 
+multiple Events. Since we are only looking for one particular Event, we decided that instead of filtering the Event list 
+to display just the one Event, we leave the Event list untouched and simply return the Event details to the results 
+display.
 
 #### Design Considerations:
 ##### Aspect: Similar Event names:
