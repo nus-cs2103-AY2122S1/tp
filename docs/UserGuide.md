@@ -43,39 +43,28 @@ Refer to the [Features](#Features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
-
 <div markdown="block" class="alert alert-info">
-
 **Information_source: Notes about the command format:**<br>
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n:NAME`, `NAME` is a parameter which can be used as `add n:John Doe`.
-
+  e.g. in `person /create n:NAME`, `NAME` is a parameter which can be used as `/create n:John Doe`.
 * Round brackets `()` refer to COMPULSORY arguments.<br>
-  e.g `(GROUP_NAME)` means that the group name must be entered a that position.
-
+  e.g `g:(GROUP_NAME)` means that the group name must be entered a that position.
+  
 * Items in square brackets are optional.<br>
   e.g `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
-
+[comment]: <> (MAY DELETE TAGS)
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
 [comment]: <> (Check if this is actually the correct format!!)
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
-
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-
-[comment]: <> (  Change this example e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.)
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+  e.g. if you specify `p:12341234 p:56785678`, only `p:56785678` will be taken.)
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
 </div>
-
 ## General Commands
-
 #### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -86,87 +75,17 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from Notor.
+Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this 
+command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 
 Format: `clear`
+* Take care not to confuse this command with the more specific`/clearnote` command.
 
 #### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and saves your data.
 
 Format: `exit`
-
-## Filtering with Notor
-
-Sometimes, you will want to view all people, groups, subgroups, or tags to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters.
-### List all ___: `list`
-List can show all persons, groups, subgroups, or tags which you have added to Notor. Ensure you have one and only one parameter which determines what is to be shown.
-
-**_Show all people_**
-
-Format: `list /people`<br>
-Advanced user Format: `list /p`
-
-**_Show all groups_**
-
-Format:  `list /group`<br>
-Advanced user Format: `list /g`
-
-**_Show all subgroups_**
-
-Format: `list /subgroup g:GROUP_NAME`<br>
-Advanced user Format: `list /sg g:GROUP_NAME`
-Examples:
-
-* `list /subgroup g:Orbital`
-* `list /sg g:Orbital`
-
-### Find a person : `find`
-
-Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
-
-**_Finding people_**
-Format: `list /person n:KEYWORD [g:GROUP_NAME]`<br>
-Advanced user Format:  `find /p n:KEYWORD [g:GROUP_NAME]`
-
-* Find all people whose metadata matches the `KEYWORD` in that particular field.
-* Filter based on the group if `GROUP_NAME` is specified. For example, if you specify `g:Final Year Project`, you will only find people who belong to the group `Final Year Project`.
-* The keyword must not include backslash (`/`) or underscore (`_`).
-
-Examples:
-
-* `find /person n:Elton g:Orbital Team 1`
-* `find /p n:John`
-
-### Find a group : `find`
-
-Find all the groups with the keyword specified.
-
-Format:  `find /group g:KEYWORD`
-Advanced user Format: `find /g g:KEYWORD`
-
-* Find all the group that matches the `KEYWORD`.
-* The keyword must not include backslash (`/`) or underscore (`_`).
-
-Examples:
-
-* `find /group g:Orbital_Team_1`
-* `find /g g:W08`
-
-### Find a subgroup: `find`
-
-Find all the subgroups with the group and subgroup name specified.
-
-Format: `find /subgroup sg:KEYWORD g:GROUP_NAME`<br>
-Advanced user Format: `find /sg sg:KEYWORD g:GROUP_NAME`
-
-* Find all the subgroups that matches the `KEYWORD` in `GROUP_NAME`
-* The keyword must not include backslash (`/`) or underscore (`_`).
-
-Examples:
-
-* `find /subgroup sg:W08 g:CS2103T`
-* `find /subgroup sg:Artemis g:Orbital`
 
 ## Working with people
 The base functionality of Notor is to allow you to mantain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
@@ -279,46 +198,6 @@ Examples:
 * `person 1 /clearnote`
 * `p 2 /cn`
 
-### Listing all persons : `person /list`
-
-Lists all persons.
-
-Format: `person /list`<br>
-Advanced user Format:`p /l`
-
-Examples:
-
-* `person /list`
-* `p /l`
-
-### Listing all persons in a group : `person (INDEX) /list`
-
-Lists all persons in a group.
-
-Format: `person (INDEX)/list`<br>
-Advanced user Format:`p (INDEX) /l`
-
-* Lists all persons of a group that is at the given `INDEX` .
-
-Examples:
-
-* `person 1 /list`
-* `p 2 /l`
-
-
-### Finding persons : `person /find (n:QUERY)`
-
-Finds all persons that match your search term.
-
-Format: `person  /find (n:QUERY)`<br>
-Advanced user Format:`p /f (n:QUERY)`
-
-* Finds all persons that match with given `QUERY`.
-
-Examples:
-
-* `person /find n:John`
-* `p 2 /f n:Mary`
 
 ## Working with groups/subgroups
 :warning: **These commands will work only will only work when groups or subgroups are listed.** :warning:
@@ -441,6 +320,94 @@ Examples :
 
 * `group 1 /cleartags` clears all tags from group 1.
 * `g 1 /ct`
+
+## Filtering with Notor
+
+Sometimes, you will want to view all people, groups, subgroups, or tags to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters. Here are the ways to view a subset of your data.
+
+### List
+
+List can show all persons, groups, subgroups, or tags which you have added to Notor.
+
+#### _Listing all persons_ : `person /list`
+
+Lists all persons.
+
+Format: `person /list`<br>
+Advanced user Format:`p /l`
+
+#### **_List all groups_**
+
+Format:  `list /group`<br>
+Advanced user Format: `list /g`
+
+#### _Listing all persons in a group_ : `group (INDEX) /list`
+
+Use after you have listed out all groups (so you can select the index). Lists all persons in that group.
+
+Format: `group (INDEX)/list`<br>
+Advanced user Format:`p (INDEX) /l`
+
+* Lists all persons of a group that is at the given `INDEX` .
+
+Examples:
+
+* `person 1 /list`
+* `p 2 /l`
+
+#### _List all subgroups in a group_ : `group (INDEX) /listsubgroup`
+
+List all the subgroups within a group. Use after you have listed out all groups (so you can select the index)
+
+Format: `group (INDEX) /listsubgroup`<br>
+Advanced user Format: `g (INDEX) /lsg`
+
+Examples:
+
+* `group 3 /listsubgroup`
+* `g 2 /lsg`
+
+#### _List all tags_ : `tag /list`
+
+Lists out all tags which you have used so far, so that you can understand what metadata you are tracking.
+
+Format: `tag /list` <br>
+Advanced Format: `t /l`
+
+### Find
+
+Find allows you to obtain the results that match with the keyword specified. You can filter in this way on people, groups, and subgroups. In addition, you may add additional parameters to your search, in order to narrow the search further.
+
+### _Finding persons_ : `person /find (n:QUERY)`
+
+Finds all persons that match your search term.
+
+Format: `person  /find (n:QUERY)`<br>
+Advanced user Format:`p /f (n:QUERY)`
+
+* Finds all persons that match with given `QUERY`.
+
+Examples:
+
+* `person /find n:John`
+* `p 2 /f n:Mary`
+
+### _Find a group or subgroup_ : `find`
+
+Find all the groups with the keyword specified. This can also be used to find all the subgroups with the group and subgroup name specified.
+
+Format:  `find /group g:KEYWORD`
+Advanced user Format: `find /g g:KEYWORD`
+
+* Find all the group that matches the `KEYWORD`.
+* The keyword must not include backslash (`/`) or underscore (`_`).
+
+Examples of finding group:
+
+* `group /find g:Orbital_Team_1`
+* `g /f g:W08`
+* `group /f sg:W08 g:CS2103T`
+* `g /f sg:Artemis g:Orbital`
 
 ## Miscellaneous information
 
