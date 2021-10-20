@@ -1,0 +1,46 @@
+@startuml
+participant MainWindow
+
+activate MainWindow
+MainWindow -> LogicManager: execute("task")
+activate LogicManager
+
+alt User is on Contacts Tab
+	LogicManager -> ContactsTabParser: parseCommand("task")
+	activate ContactsTabParser
+	ContactsTabParser -> SwitchTabContactsCommand
+	activate SwitchTabContactsCommand
+	SwitchTabContactsCommand --> ContactsTabParser: c
+	destroy SwitchTabContactsCommand
+	ContactsTabParser --> LogicManager: c
+	destroy ContactsTabParser
+else User is on Tasks Tab
+	ref over LogicManager : Implementation hidden
+
+else User is on Help Tab
+	ref over LogicManager : Implementation hidden
+end
+LogicManager --> MainWindow
+
+alt User switches to Contacts Tab
+	ref over MainWindow : Implementation hidden
+else User switches to Tasks tab
+	MainWindow -> MainWindow: handleSwitchTasksTab()
+	activate MainWindow
+	MainWindow -> TabMenu: switchTab(1)
+	activate TabMenu
+	TabMenu -> TabPane: getSelectionModel().select(1)
+	activate TabPane
+	TabPane --> TabMenu
+	destroy TabPane
+	TabMenu --> MainWindow
+	destroy TabMenu
+	MainWindow -> LogicManager: setTabNumber(1)
+	LogicManager --> MainWindow
+else User switches to Help Tab
+	ref over MainWindow : Implementation hidden
+else User chooses to exit
+	ref over MainWindow : Implementation hidden
+end
+	destroy LogicManager
+@enduml
