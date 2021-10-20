@@ -131,6 +131,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasProduct(int productId) {
+        requireAllNonNull(productId);
+        FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
+        return products.stream().anyMatch(product -> product.getId().getId() == productId);
+    }
+
+    @Override
     public void deleteProduct(Product target) {
         addressBook.removeProduct(target);
     }
@@ -146,6 +153,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedProduct);
 
         addressBook.setProduct(target, editedProduct);
+    }
+
+    @Override
+    public Product getProductById(int productId) {
+        FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
+        products.setPredicate(product -> product.getId().getId() == productId);
+        return products.get(0);
     }
 
     //========================================================================================================

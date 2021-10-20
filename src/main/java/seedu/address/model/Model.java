@@ -100,6 +100,11 @@ public interface Model {
     boolean hasProduct(Product product);
 
     /**
+     * Returns true if a product has the identity {@code productId} exists in the address book.
+     */
+    boolean hasProduct(int productId);
+
+    /**
      * Deletes the given product.
      * The product must exist in the address book.
      */
@@ -118,6 +123,11 @@ public interface Model {
      * book.
      */
     void setProduct(Product target, Product editedProduct);
+
+    /**
+     * Given {@code productId} of a product, returns the product.
+     */
+    Product getProductById(int productId);
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();

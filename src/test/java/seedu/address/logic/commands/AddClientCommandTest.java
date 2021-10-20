@@ -39,7 +39,7 @@ public class AddClientCommandTest {
 
     @Test
     public void execute_newClient_returnsCommandResult() {
-        Client clientToAdd = new Client(name, phoneNumber, null, null);
+        Client clientToAdd = new Client(name, phoneNumber, null, null, null);
         CommandResult expectedResult = new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd));
         try {
             CommandResult actualResult = addClientCommand.execute(new ModelStub());

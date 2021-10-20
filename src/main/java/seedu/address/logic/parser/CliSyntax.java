@@ -18,7 +18,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_UNIT_PRICE = new Prefix("-$ ");
     public static final Prefix PREFIX_QUANTITY = new Prefix("-q ");
 
+    // Order
+    public static final Prefix PREFIX_ORDER = new Prefix("-o ");
+
     // todo remove later
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
 }
