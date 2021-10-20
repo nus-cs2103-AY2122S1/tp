@@ -285,7 +285,8 @@ Step 3: The user executes `list` to get back the initial lists before the filter
 
 The following sequence diagram shows how the filter operation works:
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 The following activity diagram summarizes what happens when a user executes the filter command:
 ![FilterActivityDiagram](images/FilterActivityDiagram.png)
