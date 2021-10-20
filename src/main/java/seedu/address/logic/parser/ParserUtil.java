@@ -18,7 +18,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
 /**
@@ -152,13 +152,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code deadline} is invalid.
      */
-    public static Deadline parseDeadline(String deadline) throws ParseException {
+    public static TaskDate parseDeadline(String deadline) throws ParseException {
         requireNonNull(deadline);
         String trimmedDeadline = deadline.trim();
-        if (!Deadline.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(Deadline.MESSAGE_CONSTRAINTS + " HUH:" + trimmedDeadline);
+        if (!TaskDate.isValidDeadline(trimmedDeadline)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedDeadline);
         }
-        return new Deadline(trimmedDeadline);
+        return new TaskDate(trimmedDeadline);
     }
 
     /**

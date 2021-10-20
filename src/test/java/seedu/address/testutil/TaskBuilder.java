@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -18,7 +18,7 @@ public class TaskBuilder {
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
 
     private TaskName taskName;
-    private Deadline taskDeadline;
+    private TaskDate taskTaskDate;
     private Set<Tag> tags;
     private boolean isDone;
 
@@ -27,7 +27,7 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
-        this.taskDeadline = new Deadline(DEFAULT_TASK_DATE);
+        this.taskTaskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
         this.isDone = false;
     }
@@ -37,7 +37,6 @@ public class TaskBuilder {
      */
     public TaskBuilder(Task taskToCopy) {
         this.taskName = taskToCopy.getName();
-        this.taskDeadline = taskToCopy.getDeadline();
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
     }
@@ -54,7 +53,7 @@ public class TaskBuilder {
      * Sets the {@code Deadline} of the {@code Task} that we are building.
      */
     public TaskBuilder withDeadline(String date) {
-        this.taskDeadline = new Deadline(date);
+        this.taskTaskDate = new TaskDate(date);
         return this;
     }
 
@@ -67,7 +66,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(taskName, taskDeadline, tags);
+        return new Task(taskName, tags, false);
     }
 
 }

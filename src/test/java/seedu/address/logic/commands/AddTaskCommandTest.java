@@ -124,6 +124,11 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void clearTasks() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -164,12 +169,47 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void addStudentGroup(Student target, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteGroup(Group target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setGroup(Group target, Group editedGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -214,42 +254,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public boolean hasGroup(Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteGroup(Group target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addGroup(Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setGroup(Group target, Group editedGroup) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Group> getFilteredGroupList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addStudentGroup(Student target, Group group) {
             throw new AssertionError("This method should not be called.");
         }
     }

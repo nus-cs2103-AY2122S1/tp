@@ -23,7 +23,12 @@ public class MarkTaskDoneCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Marks a task as completed
+     * @param targetIndex the index of the Task as displayed to the user
+     */
     public MarkTaskDoneCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -36,9 +41,9 @@ public class MarkTaskDoneCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToMarkCompeleted = lastShownList.get(targetIndex.getZeroBased());
-        model.completeTask(taskToMarkCompeleted);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompeleted));
+        Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
+        model.completeTask(taskToMarkCompleted);
+        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
     }
 
     @Override

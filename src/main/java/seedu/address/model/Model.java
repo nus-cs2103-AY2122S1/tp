@@ -63,6 +63,8 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    public void clearTasks();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

@@ -6,12 +6,16 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddDeadlineTaskCommand;
+import seedu.address.logic.commands.AddEventTaskCommand;
 import seedu.address.logic.commands.AddGithubGroupCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddStudentGroupCommand;
-import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.logic.commands.BackCommand;
+import seedu.address.logic.commands.ClearAllCommand;
+import seedu.address.logic.commands.ClearAllTasksCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteGroupCommand;
@@ -72,6 +76,12 @@ public class AddressBookParser {
         case MarkStudentAttCommand.COMMAND_WORD:
             return new MarkStudentAttCommandParser().parse(arguments);
 
+        case ClearAllCommand.COMMAND_WORD:
+            return new ClearAllCommand();
+
+        case ClearAllTasksCommand.COMMAND_WORD:
+            return new ClearAllTasksCommand();
+
         case MarkStudentPartCommand.COMMAND_WORD:
             return new MarkStudentPartCommandParser().parse(arguments);
 
@@ -93,8 +103,14 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case AddTaskCommand.COMMAND_WORD:
-            return new AddTaskCommandParser().parse(arguments);
+        case AddTodoTaskCommand.COMMAND_WORD:
+            return new AddTodoTaskCommandParser().parse(arguments);
+
+        case AddDeadlineTaskCommand.COMMAND_WORD:
+            return new AddDeadlineTaskCommandParser().parse(arguments);
+
+        case AddEventTaskCommand.COMMAND_WORD:
+            return new AddEventTaskCommandParser().parse(arguments);
 
         case MarkTaskDoneCommand.COMMAND_WORD:
             return new MarkTaskDoneCommandParser().parse(arguments);

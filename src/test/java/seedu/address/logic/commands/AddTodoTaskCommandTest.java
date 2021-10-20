@@ -25,58 +25,59 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.TaskBuilder;
 
-public class AddGroupCommandTest {
+public class AddTodoTaskCommandTest {
 
     @Test
-    public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null));
+    public void constructor_nullTask_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddTodoTaskCommand(null));
     }
 
     @Test
-    public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
-        Group validGroup = new GroupBuilder().build();
+    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+        AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
+                new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
+        Task validTask = new TaskBuilder().build();
 
-        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
+        CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);
 
-        assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
+        assertEquals(String.format(AddTodoTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
 
     @Test
-    public void execute_duplicateGroup_throwsCommandException() {
-        Group validGroup = new GroupBuilder().build();
-        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
-        AddGroupCommandTest.ModelStub modelStub = new ModelStubWithGroup(validGroup);
+    public void execute_duplicateTask_throwsCommandException() {
+        Task validTask = new TaskBuilder().build();
+        AddTodoTaskCommand addTodoTaskCommand = new AddTodoTaskCommand(validTask);
+        AddTodoTaskCommandTest.ModelStub modelStub = new AddTodoTaskCommandTest.ModelStubWithTask(validTask);
 
         assertThrows(CommandException.class,
-                AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () -> addGroupCommand.execute(modelStub));
+                AddTodoTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTodoTaskCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Group g1 = new GroupBuilder().withName("w14-4").build();
-        Group g2 = new GroupBuilder().withName("w11-1").build();
-        AddGroupCommand addG1Command = new AddGroupCommand(g1);
-        AddGroupCommand addG2Command = new AddGroupCommand(g2);
+        Task alice = new TaskBuilder().withName("Alice").build();
+        Task bob = new TaskBuilder().withName("Bob").build();
+        AddTodoTaskCommand addAliceCommand = new AddTodoTaskCommand(alice);
+        AddTodoTaskCommand addBobCommand = new AddTodoTaskCommand(bob);
 
         // same object -> returns true
-        assertTrue(addG1Command.equals(addG1Command));
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddGroupCommand addG1CommandCopy = new AddGroupCommand(g1);
-        assertTrue(addG1Command.equals(addG1CommandCopy));
+        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addG1Command.equals(1));
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addG1Command.equals(null));
+        assertFalse(addAliceCommand.equals(null));
 
         // different task -> returns false
-        assertFalse(addG1Command.equals(addG2Command));
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
@@ -262,37 +263,37 @@ public class AddGroupCommandTest {
     /**
      * A Model stub that contains a single task.
      */
-    private class ModelStubWithGroup extends AddGroupCommandTest.ModelStub {
-        private final Group group;
+    private class ModelStubWithTask extends AddTodoTaskCommandTest.ModelStub {
+        private final Task task;
 
-        ModelStubWithGroup(Group group) {
-            requireNonNull(group);
-            this.group = group;
+        ModelStubWithTask(Task task) {
+            requireNonNull(task);
+            this.task = task;
         }
 
         @Override
-        public boolean hasGroup(Group group) {
-            requireNonNull(group);
-            return this.group.isSameGroup(group);
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return this.task.isSameTask(task);
         }
     }
 
     /**
-     * A Model stub that always accept the group being added.
+     * A Model stub that always accept the task being added.
      */
-    private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
-        final ArrayList<Group> groupsAdded = new ArrayList<>();
+    private class ModelStubAcceptingTaskAdded extends AddTodoTaskCommandTest.ModelStub {
+        final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
-        public boolean hasGroup(Group group) {
-            requireNonNull(group);
-            return groupsAdded.stream().anyMatch(group::isSameGroup);
+        public boolean hasTask(Task task) {
+            requireNonNull(task);
+            return tasksAdded.stream().anyMatch(task::isSameTask);
         }
 
         @Override
-        public void addGroup(Group group) {
-            requireNonNull(group);
-            groupsAdded.add(group);
+        public void addTask(Task task) {
+            requireNonNull(task);
+            tasksAdded.add(task);
         }
 
         @Override

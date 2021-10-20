@@ -8,7 +8,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TodoTask;
 
 /**
  * Panel containing the list of tasks.
@@ -37,11 +40,21 @@ public class TaskListPanel extends UiPart<Region> {
         protected void updateItem(Task task, boolean empty) {
             super.updateItem(task, empty);
 
+            if (!(task instanceof TodoTask) && !(task instanceof EventTask) && !(task instanceof DeadlineTask)) {
+                setGraphic(null);
+                setText(null);
+            }
             if (empty || task == null) {
                 setGraphic(null);
                 setText(null);
+            } else if (task instanceof TodoTask) {
+                setGraphic(new ToDoTaskCard(task, getIndex() + 1).getRoot());
+            } else if (task instanceof DeadlineTask) {
+                setGraphic(new DeadlineTaskCard(task, getIndex() + 1).getRoot());
+            } else if (task instanceof EventTask) {
+                setGraphic(new EventTaskCard(task, getIndex() + 1).getRoot());
             } else {
-                setGraphic(new TaskCard(task, getIndex() + 1).getRoot());
+                setGraphic(new ToDoTaskCard(task, getIndex() + 1).getRoot());
             }
         }
     }

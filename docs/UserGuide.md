@@ -168,14 +168,14 @@ Format: `tasks`
 
 ### Adding a task with a date: `addTask n/TASK_NAME by/DATE`
 
-Adds a task with the given name and a specified deadline.
+Adds a task with the given name and a specified taskDate.
 
 Format: `addTask n/TASK_NAME by/DATE`
 Format: `addTask n/TASK_NAME by/DATE`
 
 * Adds a task with the specified `TASK_NAME`
-* The task has the deadline `DATE`
-* The deadline must be in the format `YYYY-MM-dd`
+* The task has the taskDate `DATE`
+* The taskDate must be in the format `YYYY-MM-dd`
 
 Examples:
 * `add n/grade scripts by/2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
@@ -353,6 +353,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 
 ### Editing the data file `[coming in v1.3]`
 

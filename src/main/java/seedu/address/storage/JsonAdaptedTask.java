@@ -11,31 +11,35 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Deadline;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TodoTask;
 
 public class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
+    private int i;
     private final String name;
-    private final String deadline;
+    private String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final String status;
+    private boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                           @JsonProperty("status") String status) {
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                                       @JsonProperty("status") String status) {
         this.name = name;
         this.deadline = deadline;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        this.status = status;
+        i = 0;
     }
 
     /**
@@ -43,11 +47,22 @@ public class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getName().toString();
-        deadline = source.getDeadline().toString();
+        if (source instanceof DeadlineTask) {
+            this.i = 1;
+            DeadlineTask task = (DeadlineTask) source;
+            deadline = task.getDeadline().toString();
+        }
+        if (source instanceof EventTask) {
+            this.i = 2;
+            EventTask task = (EventTask) source;
+            deadline = task.getDeadline().toString();
+        } else {
+            i = 0;
+        }
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        status = source.getStatus();
+        this.isComplete = source.checkIsDone();
     }
 
     /**
@@ -65,22 +80,41 @@ public class JsonAdaptedTask {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskName.class.getSimpleName()));
         }
+
         if (!TaskName.isValidName(name)) {
             throw new IllegalValueException(TaskName.MESSAGE_CONSTRAINTS);
         }
         final TaskName modelName = new TaskName(name);
 
-        if (deadline == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
-        }
-        if (!Deadline.isValidDeadline(deadline)) {
-            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
-        }
-        final Deadline modelDeadline = new Deadline(deadline);
-
-
         final Set<Tag> modelTags = new HashSet<>(taskTags);
-        return new Task(modelName, modelDeadline, modelTags);
+
+        //if (task instanceof DeadlineTask) {
+        if (i == 1) {
+            if (deadline == null) {
+                throw new IllegalValueException(
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
+            }
+
+            if (!TaskDate.isValidDeadline(deadline)) {
+                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
+            }
+            final TaskDate modelTaskDate = new TaskDate(deadline);
+            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate);
+        }
+        //if (task instanceof EventTask) {
+        if (i == 2) {
+            if (deadline == null) {
+                throw new IllegalValueException(
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
+            }
+
+            if (!TaskDate.isValidDeadline(deadline)) {
+                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
+            }
+            final TaskDate modelTaskDate = new TaskDate(deadline);
+            return new EventTask(modelName, modelTags, isComplete, modelTaskDate);
+        }
+
+        return new TodoTask(modelName, modelTags, isComplete);
     }
 }
