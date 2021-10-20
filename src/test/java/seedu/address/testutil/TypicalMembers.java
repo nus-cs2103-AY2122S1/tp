@@ -49,6 +49,11 @@ public class TypicalMembers {
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Member IDA = new MemberBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
+
+    // No email and no address
+    public static final Member JERRY = new MemberBuilder().withName("Jerry Smith").withPhone("123456789")
+            .withEmail(null).withAddress(null).build();
+
     // Manually added - Member's details found in {@code CommandTestUtil}
     public static final Member AMY = new MemberBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -74,6 +79,6 @@ public class TypicalMembers {
     }
 
     public static List<Member> getTypicalMembers() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, JERRY, GEORGE));
     }
 }

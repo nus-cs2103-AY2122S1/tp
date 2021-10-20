@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedMember.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.BENSON;
+import static seedu.address.testutil.TypicalMembers.JERRY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,8 @@ public class JsonAdaptedMemberTest {
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
-    private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_EMAIL = BENSON.getEmail().get().toString();
+    private static final String VALID_ADDRESS = BENSON.getAddress().get().toString();
     private static final List<JsonAdaptedPosition> VALID_POSITIONS = BENSON.getPositions().stream()
             .map(JsonAdaptedPosition::new)
             .collect(Collectors.toList());
@@ -44,6 +45,12 @@ public class JsonAdaptedMemberTest {
     public void toModelType_validMemberDetails_returnsMember() throws Exception {
         JsonAdaptedMember member = new JsonAdaptedMember(BENSON);
         assertEquals(BENSON, member.toModelType());
+    }
+
+    @Test
+    public void toModelType_validMemberDetailsWithNoOptionalFields_returnsMember() throws Exception {
+        JsonAdaptedMember member = new JsonAdaptedMember(JERRY);
+        assertEquals(JERRY, member.toModelType());
     }
 
     @Test
@@ -91,27 +98,11 @@ public class JsonAdaptedMemberTest {
     }
 
     @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, null,
-                VALID_ADDRESS, VALID_POSITIONS, VALID_TASK_LIST);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
-    }
-
-    @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedMember member =
                 new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         INVALID_ADDRESS, VALID_POSITIONS, VALID_TASK_LIST);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
-    }
-
-    @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                null, VALID_POSITIONS, VALID_TASK_LIST);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, member::toModelType);
     }
 

@@ -73,6 +73,13 @@
     "attachedPosition" : [ ],
     "attachedTasks": [ ]
   }, {
+    "name" : "Jerry Smith",
+    "phone" : "123456789",
+    "email" : null,
+    "address" : null,
+    "attachedPosition" : [ ],
+    "attachedTasks": [ ]
+  }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
