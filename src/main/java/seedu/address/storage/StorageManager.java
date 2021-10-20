@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -28,6 +30,11 @@ public class StorageManager implements Storage {
     public StorageManager(FriendsListStorage friendsListStorage, GamesListStorage gamesListStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
+
+        requireNonNull(friendsListStorage);
+        requireNonNull(gamesListStorage);
+        requireNonNull(userPrefsStorage);
+
         this.friendsListStorage = friendsListStorage;
         this.gamesListStorage = gamesListStorage;
         this.userPrefsStorage = userPrefsStorage;
