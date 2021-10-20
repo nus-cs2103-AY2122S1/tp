@@ -263,6 +263,7 @@ Action | Format, Examples
 **Enroll** | `enroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `enroll 1 l/1`
 **Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `unenroll 1 l/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**Filter** | `filter [g/GRADE] s[SUBJECT]`<br> e.g. `filter g/P2`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
