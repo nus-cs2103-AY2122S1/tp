@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.StudentBuilder;
 
 public class ClassmateTest {
@@ -52,7 +53,7 @@ public class ClassmateTest {
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>());
+        ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>(), new ArrayList<>());
 
         assertThrows(DuplicateStudentException.class, () -> classmate.resetData(newData));
     }
@@ -92,10 +93,13 @@ public class ClassmateTest {
     private static class ClassmateStub implements ReadOnlyClassmate {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<TutorialClass> tutorialClasses = FXCollections.observableArrayList();
+        private final ObservableList<TutorialGroup> tutorialGroups = FXCollections.observableArrayList();
 
-        ClassmateStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses) {
+        ClassmateStub(Collection<Student> students, Collection<TutorialClass> tutorialClasses,
+                      Collection<TutorialGroup> tutorialGroups) {
             this.students.setAll(students);
             this.tutorialClasses.setAll(tutorialClasses);
+            this.tutorialGroups.setAll(tutorialGroups);
         }
 
         @Override
@@ -106,6 +110,11 @@ public class ClassmateTest {
         @Override
         public ObservableList<TutorialClass> getTutorialClassList() {
             return tutorialClasses;
+        }
+
+        @Override
+        public ObservableList<TutorialGroup> getTutorialGroupList() {
+            return tutorialGroups;
         }
     }
 

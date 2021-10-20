@@ -16,4 +16,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_CLASSCODE = new Prefix("c/");
     public static final Prefix PREFIX_SCHEDULE = new Prefix("s/");
 
+    // TutorialGroup Prefix definitions
+    public static final Prefix PREFIX_GROUPNAME = new Prefix("gn/");
+    public static final Prefix PREFIX_TYPE = new Prefix("type/");
 }
