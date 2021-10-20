@@ -65,9 +65,15 @@ public class UnenrollCommandTest {
                 carl.getName(),
                 testLesson.getLessonCode());
 
-        assertCommandFailure(new UnenrollCommand(INDEX_FIRST_STUDENT, INDEX_THIRD_LESSON), model, expectedMessageAlice);
-        assertCommandFailure(new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_LESSON), model, expectedMessageBenson);
-        assertCommandFailure(new UnenrollCommand(INDEX_THIRD_STUDENT, INDEX_THIRD_LESSON), model, expectedMessageCarl);
+        assertCommandFailure(new UnenrollCommand(INDEX_FIRST_STUDENT, INDEX_THIRD_LESSON),
+                model,
+                expectedMessageAlice);
+        assertCommandFailure(new UnenrollCommand(INDEX_SECOND_STUDENT, INDEX_THIRD_LESSON),
+                model,
+                expectedMessageBenson);
+        assertCommandFailure(new UnenrollCommand(INDEX_THIRD_STUDENT, INDEX_THIRD_LESSON),
+                model,
+                expectedMessageCarl);
     }
 
     @Test
