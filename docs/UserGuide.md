@@ -52,9 +52,8 @@ Refer to the [Features](#Features) below for details of each command.
   
 * Items in square brackets are optional.<br>
   e.g `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
-[comment]: <> (MAY DELETE TAGS)
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be used multiple times including zero times, with a comma separating terms.<br>
+  e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t:tag1, tag2, tag3` etc.
 [comment]: <> (Check if this is actually the correct format!!)
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
