@@ -107,6 +107,27 @@ Examples:
 * `delete student m/CS2103 i/A1234567A`: Removes student with id A1234567A from module CS2103’s list of students
 * `delete student m/CS2100 i/A7654321A`: Removes student with id A7654321A from module CS2100’s list of students
 
+### Edit a student's information: `edit student`
+
+Edits a student's information (at least one field (name/tele handle/email) should be provided)
+
+Format: `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
+
+Examples:
+* `edit student m/CS2103 i/A0123456A n/John Doe`: Edits the name of the student with id
+  A0123456A in module CS2103 to John Doe
+* `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`: Edits the tele handle and email of the student with id
+  A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
+
+### Find a student: `find`
+
+Find the student in the module specified along with the student's information
+
+Format: `find m/<module name> i/<student id>`
+
+Examples:
+* `find m/CS2103 i/A0123456A`: Finds and shows student with ID A0123456A from module CS2103
+
 ### Delete module from TAB: `delete module`
 
 Deletes the specified module from TAB
@@ -117,23 +138,11 @@ Examples:
 * `delete module m/CS2103`: Deletes module CS2103 from TAB
 * `delete module m/CS2100`: Deletes module CS2100 from TAB
 
-### Create a new student: `student add`
+### Go to homepage: `home`
 
-Create a new student
+Returns to homepage which shows the complete list of modules and students along with their tasks
 
-Format: `student add <student id>, <student name>, <student teleHandle>, <student email>`
-
-Examples:
-* `student add A0123456A, John Doe, @johndoe, john.doe@u.nus.edu`: add student John Doe
-
-### Get student information: `student get`
-
-Get the student’s information (name, id, telehandle, email)
-
-Format: `student get <student id>`
-
-Examples:
-* `student get A0123456A`: get information of the student with student id A0123456A
+Format: `home`
 
 ## FAQ
 

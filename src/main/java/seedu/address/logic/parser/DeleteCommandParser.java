@@ -26,11 +26,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns a DeleteCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param userInput The user input for deleting a type.
+     * @return DeleteCommand object created from user input.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public DeleteCommand parse(String userInput) throws ParseException {
-        String command = userInput.split(" ")[0];
-
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
@@ -59,5 +60,4 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

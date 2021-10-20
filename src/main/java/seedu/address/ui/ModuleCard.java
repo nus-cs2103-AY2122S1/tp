@@ -53,8 +53,8 @@ public class ModuleCard extends UiPart<Region> {
      * Fills up all the placeholders of this ModuleCard.
      */
     void fillInnerParts() {
-        ObservableList<Student> studentList = module.getStudentList();
-        studentListPanel = new StudentListPanel(module.getStudentList());
+        ObservableList<Student> studentList = module.getFilteredStudentList();
+        studentListPanel = new StudentListPanel(module.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
     }
 

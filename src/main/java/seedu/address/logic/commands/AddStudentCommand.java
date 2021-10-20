@@ -44,7 +44,10 @@ public class AddStudentCommand extends AddCommand {
     private ModuleName moduleName;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Student}
+     *
+     * @param student The student to be added to a module.
+     * @param moduleName The name of the module the student will be added to.
      */
     public AddStudentCommand(Student student, ModuleName moduleName) {
         requireNonNull(student);
