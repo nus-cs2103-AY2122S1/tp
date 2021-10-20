@@ -10,7 +10,6 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.UniqueEventList;
-import safeforhall.model.event.exceptions.EventNotFoundException;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Room;
@@ -143,17 +142,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new CommandException("Information is not room or name");
         }
         return Optional.empty();
-    }
-
-    /**
-     * Replaces the given event {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedPerson} must not be the same as another existing event in the address book.
-     */
-    public void setEvent(Event target, Event editedEvent) throws EventNotFoundException {
-        requireNonNull(editedEvent);
-
-        events.setEvent(target, editedEvent);
     }
 
     /**

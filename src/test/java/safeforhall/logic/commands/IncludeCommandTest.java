@@ -88,17 +88,17 @@ public class IncludeCommandTest {
 
     @Test
     public void addExistingRoomTest() {
-        model.addEvent(TypicalEvents.BASKETBALL);
+        model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("A102"));
+                new ResidentList("A103"));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void addExistingNameTest() {
-        model.addEvent(TypicalEvents.BASKETBALL);
+        model.addEvent(TypicalEvents.VOLLEYBALL);
         IncludeCommand command = new IncludeCommand(Index.fromOneBased(1),
-                new ResidentList("Carl Kurz"));
+                new ResidentList("Daniel Meier"));
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 

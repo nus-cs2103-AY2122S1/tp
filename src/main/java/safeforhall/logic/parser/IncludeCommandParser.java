@@ -6,7 +6,6 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_RESIDENTS;
 import java.util.stream.Stream;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.ResidentList;
@@ -34,7 +33,7 @@ public class IncludeCommandParser implements Parser<IncludeCommand> {
             String preamble = argMultimap.getPreamble();
             index = ParserUtil.parseIndex(preamble);
         } catch (ParseException pe) {
-            String message = pe.getMessage() + "\n" + EditCommand.MESSAGE_USAGE;
+            String message = pe.getMessage() + "\n" + IncludeCommand.MESSAGE_USAGE;
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message), pe);
         }
 

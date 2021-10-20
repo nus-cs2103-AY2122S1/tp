@@ -11,12 +11,11 @@ import safeforhall.model.event.Event;
  * A utility class containing a list of {@code Event} objects to be used in tests.
  */
 public class TypicalEvents {
-<<<<<<< HEAD
     public static final Event BASKETBALL = new EventBuilder().withEventName("basketball")
             .withEventDate("10-10-2021")
             .withVenue("basketball court")
             .withCapacity("5")
-            .withResidentList("Carl Kurz, Benson Meier")
+            .withResidentList("")
             .build();
     public static final Event VOLLEYBALL = new EventBuilder().withEventName("volleyball")
             .withEventDate("12-10-2021")
@@ -56,32 +55,11 @@ public class TypicalEvents {
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
-=======
-    public static final Event FOOTBALL_TRAINING = new EventBuilder().withName("Football Training")
-            .withDate("20-10-2021")
-            .withVenue("Field")
-            .withCapacity("20")
-            .build();
-    public static final Event SWIM_TRAINING = new EventBuilder().withName("Swim Training")
-            .withDate("19-10-2021")
-            .withVenue("Pool")
-            .withCapacity("15")
-            .build();
-    public static final Event BASKETBALL_TRAINING = new EventBuilder().withName("Basketball Training")
-            .withDate("21-10-2021")
-            .withVenue("Basketball Court")
-            .withCapacity("10")
-            .build();
->>>>>>> 41e174c566bec184c75e1c819c7655acd34d11ea
 
     private TypicalEvents() {} // prevents instantiation
 
     /**
-<<<<<<< HEAD
      * Returns an {@code AddressBook} with all the typical persons.
-=======
-     * Returns an {@code AddressBook} with all the typical events.
->>>>>>> 41e174c566bec184c75e1c819c7655acd34d11ea
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -92,13 +70,6 @@ public class TypicalEvents {
     }
 
     public static List<Event> getTypicalEvents() {
-<<<<<<< HEAD
         return new ArrayList<>(Arrays.asList(BASKETBALL, VOLLEYBALL, POWERLIFTING, SWIM, BAND, ROAD_RELAY, DANCE));
     }
 }
-
-=======
-        return new ArrayList<>(Arrays.asList(FOOTBALL_TRAINING, SWIM_TRAINING, BASKETBALL_TRAINING));
-    }
-}
->>>>>>> 41e174c566bec184c75e1c819c7655acd34d11ea

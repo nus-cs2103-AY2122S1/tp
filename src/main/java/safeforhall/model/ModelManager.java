@@ -185,13 +185,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setEvent(Event target, Event editedEvent) {
-        requireAllNonNull(target, editedEvent);
-
-        addressBook.setEvent(target, editedEvent);
-    }
-
-    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
