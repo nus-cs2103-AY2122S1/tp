@@ -1,8 +1,10 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -69,6 +71,8 @@ public class ItemUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getId().ifPresent(id -> sb.append(PREFIX_ID).append(id).append(" "));
         descriptor.getCount().ifPresent(count -> sb.append(PREFIX_COUNT).append(count).append(" "));
+        descriptor.getCostPrice().ifPresent(costPrice -> sb.append(PREFIX_COSTPRICE).append(costPrice).append(" "));
+        descriptor.getSalesPrice().ifPresent(salesPrice -> sb.append(PREFIX_SALESPRICE).append(salesPrice).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

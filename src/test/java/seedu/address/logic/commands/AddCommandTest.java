@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -46,6 +48,8 @@ public class AddCommandTest {
                 .withId(VALID_ID_BAGEL)
                 .withTags(VALID_TAG_BAKED, VALID_TAG_POPULAR)
                 .withCount(VALID_COUNT_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
                 .build();
 
         Item validItem = new ItemBuilder(BAGEL)

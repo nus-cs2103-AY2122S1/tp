@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
@@ -33,6 +35,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ID + "ID] "
             + "[" + PREFIX_COUNT + "COUNT] "
+            + "[" + PREFIX_COSTPRICE + "COSTPRICE] "
+            + "[" + PREFIX_SALESPRICE + "SALESPRICE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ID + "192028 ";
@@ -87,9 +91,11 @@ public class EditCommand extends Command {
         Name updatedName = itemDescriptor.getName().orElse(itemToEdit.getName());
         String updatedId = itemDescriptor.getId().orElse(itemToEdit.getId());
         Integer updatedCount = itemDescriptor.getCount().orElse(itemToEdit.getCount());
+        Double updatedCostPrice = itemDescriptor.getCostPrice().orElse(itemToEdit.getCostPrice());
+        Double updatedSalesPrice = itemDescriptor.getSalesPrice().orElse(itemToEdit.getSalesPrice());
         Set<Tag> updatedTags = itemDescriptor.getTags().orElse(itemToEdit.getTags());
 
-        return new Item(updatedName, updatedId, updatedCount, updatedTags);
+        return new Item(updatedName, updatedId, updatedCount, updatedTags, updatedCostPrice, updatedSalesPrice);
     }
 
     @Override

@@ -18,6 +18,7 @@ import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
+    private static final Double DUMMY_PRICE = 1.0;
     /**
      * Parses {@code userInput} into a {@code AddToOrderCommand} and returns it.
      */
@@ -45,8 +46,11 @@ public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
 
         Integer count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // TODO STILL IMPLEMENTED USING DUMMY_PRICE
+        Double costPrice = DUMMY_PRICE;
+        Double salesPrice = DUMMY_PRICE;
 
-        Item item = new Item(name, id, count, tagList);
+        Item item = new Item(name, id, count, tagList, costPrice, salesPrice);
 
         return new AddToOrderCommand(item);
     }

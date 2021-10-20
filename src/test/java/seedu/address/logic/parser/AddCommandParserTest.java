@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.COSTPRICE_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_ZERO;
@@ -12,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.SALESPRICE_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_BAKED;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_POPULAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
@@ -40,22 +42,23 @@ public class AddCommandParserTest {
         ItemDescriptor expectedDescriptor = new ItemDescriptorBuilder(BAGEL).withTags(VALID_TAG_BAKED).build();
 
         // All fields
-        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
-                + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
+        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL + COSTPRICE_DESC_BAGEL
+                + SALESPRICE_DESC_BAGEL + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
 
         // multiple id - last id accepted
         assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL
-                + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
+                + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
 
         // multiple count - last count accepted
         assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_DONUT + COUNT_DESC_BAGEL
-                + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
+                + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL + TAG_DESC_BAKED, new AddCommand(expectedDescriptor));
 
         // multiple tags - all accepted
         ItemDescriptor multipleTagsDescriptor =
                 new ItemDescriptorBuilder(BAGEL).withTags(VALID_TAG_POPULAR, VALID_TAG_BAKED).build();
         assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_BAGEL
-                + TAG_DESC_POPULAR + TAG_DESC_BAKED, new AddCommand(multipleTagsDescriptor));
+                + COSTPRICE_DESC_BAGEL + SALESPRICE_DESC_BAGEL + TAG_DESC_POPULAR + TAG_DESC_BAKED,
+                new AddCommand(multipleTagsDescriptor));
     }
 
     @Test

@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COSTPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -24,18 +26,22 @@ public class AddCommand extends Command {
             + "NAME "
             + PREFIX_ID + "ID "
             + PREFIX_COUNT + "COUNT "
+            + PREFIX_COSTPRICE + "COSTPRICE "
+            + PREFIX_SALESPRICE + "SALESPRICE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "Banana Bread "
             + PREFIX_ID + "019381 "
             + PREFIX_COUNT + "10 "
+            + PREFIX_COSTPRICE + "3.2 "
+            + PREFIX_SALESPRICE + "6.4 "
             + PREFIX_TAG + "baked "
             + PREFIX_TAG + "popular";
 
     public static final String MESSAGE_SUCCESS_NEW = "New item added: %1$s";
     public static final String MESSAGE_SUCCESS_REPLENISH = "Item replenished: %d x %s";
     public static final String MESSAGE_INCOMPLETE_INFO = "Item has not been added before,"
-            + " please provide both a name and id";
+            + " please provide name, id, cost price, and sales price";
     public static final String MESSAGE_MULTIPLE_MATCHES = "Multiple candidates found, which one did you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;
@@ -57,7 +63,8 @@ public class AddCommand extends Command {
         // Check if item exists in inventory
         if (matchingItems.size() == 0) {
             // Check name and id are specified
-            if (toAddDescriptor.getName().isEmpty() || toAddDescriptor.getId().isEmpty()) {
+            if (toAddDescriptor.getName().isEmpty() || toAddDescriptor.getId().isEmpty()
+                || toAddDescriptor.getSalesPrice().isEmpty() || toAddDescriptor.getCostPrice().isEmpty()) {
                 throw new CommandException(MESSAGE_INCOMPLETE_INFO);
             }
 
