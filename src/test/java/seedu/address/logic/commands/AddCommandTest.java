@@ -204,8 +204,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasPositionWithTitle(Title toCheck) {
             throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setPositionBook(ReadOnlyPositionBook positionBook) {

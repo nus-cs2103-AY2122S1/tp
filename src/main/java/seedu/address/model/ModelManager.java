@@ -87,7 +87,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook();
         this.positionBook = new PositionBook(positionBook);
         this.applicantBook = new ApplicantBook();
-        this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
