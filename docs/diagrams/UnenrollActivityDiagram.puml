@@ -1,0 +1,58 @@
+@startuml
+start
+:User executes
+unenroll
+command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+:Search for the specified student in Tuitione;
+
+if () then ([student exists in Tuitione])
+
+    :Search for lesson
+    specified in Tuitione;
+
+    if () then ([lesson exists in Tuitione])
+
+        :Check if the student
+        is enrolled in the lesson;
+
+        if () then ([student is enrolled in the lesson]))
+
+            :unenroll student
+            from lesson;
+
+            :Save new Tuitione
+            to Storage;
+
+            :Update UI with
+            new Tuitione;
+
+        else ([else])
+
+            :Tuitione informs that
+            the student is not
+            enrolled in the lesson;
+
+        endif
+
+    else ([else])
+
+        :Tuitione informs
+        that lesson
+        does not exist;
+
+    endif
+
+else ([else])
+
+    :Tuitione informs
+    that student
+    does not exist;
+
+endif
+
+stop
+@enduml
