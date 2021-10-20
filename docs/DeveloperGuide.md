@@ -283,24 +283,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | user | be able to see their contact details | I can copy the contact details to contact them |
 | `* * *` | new user | be able to find out what kind of commands are available | I can use the app as intended |
 | `* * *` | user | be able to close the app | I can stop using it |
-| `* *` | user | be able to see the group this contact belongs to | I recognise where I know this person from |
 | `* *` | user | be able to purge all current data | I can get rid of sample/experimental data i used for exploring the app |
-| `* *` | user | be able to search for contacts | I don’t have to scroll the entire contact list |
-| `* *` | organised user | be able to sort by modules | I can see the modules in order |
+| `* *` | user | be able to view my contacts in alphabetical order | I can see the contacts in more intuitive order |
+| `* *` | user | be able to delete by module | I can delete all contacts linked to that module |
+| `* *` | user | be able to delete contacts by groups | I do not have to delete one by one |
+| `* *` | user | be able to see the group this contact belongs to | I recognise where I know this person from |
+| `* *` | user | be able to search for contacts | I do not have to scroll the entire contact list |
 | `* *` | user | be able to retrieve data fast | I can get the contact in the fastest time possible |
-| `* *` | user | be able to view by categories | I can ignore unrelated contact |
-| `* *` | user | be able to delete contacts by groups | I don’t have to delete one by one |
+| `* *` | user | be able to search by categories | I can ignore unrelated contact |
 | `* *` | user | be able to add a description about a contact | I can add more details about the contact |
-| `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
 | `* *` | user | have access to a help page | I can know how to navigate the app |
+| `*` | user | be able to create a class card | I can see my classes |
+| `*` | user | be able to read a class card | I can view the details of my classes |
+| `*` | user | be able to update a class card | I can update the details of my classes |
+| `*` | user | be able to delete a class card | I can delete the classes are are irrelevant |
 | `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
-| `*` | user | be able to know which contact I retrieve frequently | I can know which contact is frequently contacted |
-| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
-| `*` | user | be able to set up profile picture for the contact | I can recognise the person |
 | `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
 | `*` | Expert user | be able to set up shortcuts | I can do things faster |
-| `*` | user | be able to create favorite contact list | I can find my favourite student/prof/TA |
-| `*` | user | be able to set up profile picture for myself | I can add a personal touch to the application |
+
 
 ### Use cases
 
