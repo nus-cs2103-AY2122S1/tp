@@ -35,7 +35,7 @@ You can refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The *Architecture Diagram* given above explains the high-level design of the App.
+*Figure A.0.1: Architecture Diagram that explains high-level design of the App.*
 
 Given below is a quick overview of the components and how they interact with each other.
 
@@ -61,6 +61,8 @@ The *Sequence Diagram* below is an example of how the components interact with e
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
+*Figure A.0.2: Sequence Diagram of main components when executing Delete Command*
+
 Each of the four main components (also shown in the diagram above)
 
 * defines its *API* in an `interface` with the same name as the Component.
@@ -70,6 +72,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 <img src="images/ComponentManagers.png" width="300" />
 
+*Figure A.0.3: Interaction of the Main Components*
+
 The sections below give more details of each component.
 
 ### UI component
@@ -77,6 +81,8 @@ The sections below give more details of each component.
 The *API* of this component is specified in the [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java) interface.
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
+
+*Figure A.1.1: Class Diagram of GUI using JavaFX framework*
 
 The `Ui` component uses the JavaFX framework and consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `CenterPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible _GUI_.
 
@@ -98,6 +104,8 @@ Here's a (partial) *class diagram* of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
+*Figure A.1.2: Class Diagram of Logic Component* 
+
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses, e.g., `AddCommand`) which is then executed by the `LogicManager`.
@@ -108,12 +116,16 @@ The _Sequence Diagram_ below illustrates the interactions within the `Logic` com
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
+*Figure A.1.3: Sequence Diagram of execution Delete Command*
+
 <div markdown="span" class="alert alert-info">:information_source: Note: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <img src="images/ParserClasses.png" width="600"/>
+
+*Figure A.1.4: Class Diagram of Parser Component*
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -124,6 +136,8 @@ How the parsing works:
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="800" />
+
+*Figure A.2.1: Class Diagram of Model Component*
 
 
 The `Model` component
@@ -145,6 +159,8 @@ The `Model` component
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
+
+*Figure A.3.1: Class Diagram of Storage Component*
 
 The `Storage` component
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -221,6 +237,8 @@ The *Sequence Diagram* below shows how the `Ui` components interact with each ot
 
 ![Interactions Inside the Ui Component for the `schedule` Command](images/ScheduleSequenceDiagram.png)
 
+*Figure I.1.1: Sequence Diagram of Schedule Command*
+
 When the user requests to view the schedule,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
 Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
 
@@ -245,6 +263,8 @@ The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `
 `UndoRedoStack` only deals with `UndoableCommand`. Commands that cannot be undone will inherit from `Command` instead.
 
 ![UndoableCommandInheritance](images/UndoableCommandInheritance.png)
+
+*Figure I.2.1: Class Diagram of Undoable Command*
 
 `UndoableCommand` adds an extra layer between the abstract `Command` class and the concrete commands that can be undone such as `AddCommand`, `DeleteCommand`.
 `UndoableCommand` makes the `Command#execute()` method concrete, while the child classes implement an `executeUndoableCommand()` method that preprocesses the Command before execution. 
@@ -288,26 +308,27 @@ Step 2. The user then executes an `UndoableCommand` which modifies the existing 
 The specific `UndoableCommand` called will process the command during the method call `UndoableCommand#executeUndoableCommand` so that it can undo itself.
 
 For instance, the executed command is `delete 5`, to delete the 5th person in the `AddressBook` that resides in the `Model`. 
-The deleted Person, referred to in the Figure 1 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
-The Figure 1 below shows the state of `UndoRedoStack` before and after the execution of `delete 5`.
+The deleted Person, referred to in the Figure I3 as `p5` is stored in the `deletedPerson` field in `DeleteCommand`. 
+The Figure I.2.2 below shows the state of `UndoRedoStack` before and after the execution of `delete 5`.
 
 ![UndoRedoStackStart](images/UndoRedoStackStartDiagram.png)
 
-*Figure 1. UndoRedoStack before and after executing 1 Delete Command*
+*Figure I.2.2: UndoRedoStack before and after executing 1 Delete Command*
 
-In Figure 1, when `delete 5` command finishes, the command will be pushed onto the `undoStack`.
+In Figure I.2.2, when `delete 5` command finishes, the command will be pushed onto the `undoStack`.
 
 Step 3. As the user continues to use the program, more commands are added into the `undoStack`. For example, the user may execute `add n/John Doe ...` to add a new person. 
-Figure 2 below shows the change in `undoStack` when `add` command is executed right after `delete 5` command.
+Figure I.2.3 below shows the change in `undoStack` when `add` command is executed right after `delete 5` command.
 
 ![UndoRedoStackAfterAdd](images/UndoRedoStack1CommandDiagram.png) 
 
-*Figure 2. UndoRedoStack before and after executing 1 `AddCommand`.*
+*Figure I.2.3: UndoRedoStack before and after executing 1 `AddCommand`.*
 
-In Figure 2, `undoStack` initially contains `delete 5` command alongside the specific changed portion of the `Model`, namely `deletedPerson`. 
+In Figure I.2.3, `undoStack` initially contains `delete 5` command alongside the specific changed portion of the `Model`, namely `deletedPerson`. 
 Upon executing `add` command, `add` command that has been processed such that it can undo itself is added to the `undoStack`.
 
-> :label: If a command fails its execution, it will not be pushed to the `UndoRedoStack` at all.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not be pushed to the `UndoRedoStack` at all.<br></div>
+
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action using `undo`.
 
@@ -316,26 +337,27 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 
 ![UndoRedoStackAfterUndo](images/UndoRedoStack1UndoDiagram.png) 
 
-*Figure 3. UndoRedoStack before and after executing Undo Command*
+*Figure I.2.4: UndoRedoStack before and after executing Undo Command*
 
-In Figure 3, `undo` results in `add` command in the `undoStack` being popped out and pushed into `redoStack`. 
+In Figure I.2.4, `undo` results in `add` command in the `undoStack` being popped out and pushed into `redoStack`. 
 At the same time, the `add` command would undo itself, restoring the `AddressBook` to the previous state.
 
-> :label: If the `undoStack` is empty, then there are no other commands left to be undone, and an `Exception` will be thrown when popping the `undoStack`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `undoStack` is empty, then there are no other commands left to be undone, and an `Exception` will be thrown when popping the `undoStack`.<br></div>
 
-The sequence diagram in Figure 4 shows how the undo operation works:
+The sequence diagram in Figure I6 shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png) 
 
-*Figure 4. Sequence diagram of executing Undo Command*
+*Figure I.2.5: Sequence diagram of executing Undo Command*
 
-In Figure 4, when the user enters the command to `undo`, `AddressBookParser` will parse the given command and create an `UndoCommand` to be returned to `LogicManager`.
+In Figure I.2.5, when the user enters the command to `undo`, `AddressBookParser` will parse the given command and create an `UndoCommand` to be returned to `LogicManager`.
 `LogicManager` will call `execute()` method in `UndoCommand`, which in turn calls `popUndo()` method in `UndoRedoStack`. `UndoRedoStack` will return the most recently executed `UndoableCommand`popped from
 the `UndoRedoStack`. `UndoCommand` will call `undo()` on the `XYZCommand` so that `XYZCommand` can undo itself, restoring the `AddressBook`.
 
 The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, and calls the `XYZCommand` to redo itself).
 
-> :label: If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `redoStack` is empty, then there are no other commands left to be redone, and an `Exception` will be thrown when popping the `redoStack`.<br></div>
+
 
 #### Design considerations:
 
@@ -368,6 +390,8 @@ represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off le
 
 ![LessonClassDiagram](images/LessonClassDiagram.png)
 
+*Figure I.3.1: Class Diagram of Lessons*
+
 The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
 objects with overlapping time ranges.
 
@@ -375,6 +399,8 @@ Operations on lessons can be done using the `LessonAddCommand`, `LessonEditComma
 The class diagram given below shows how these commands are part of the `Logic` Component.
 
 ![LessonLogicDiagram](images/LessonLogic.png)
+
+*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*
 
 These commands are described in greater detail in the sections below.
 
@@ -384,6 +410,8 @@ The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
 The figure below shows the sequence diagram for adding a lesson to a student.
 
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
+
+*Figure I.3.3: Sequence Diagram of Lesson Add Command*
 
 The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in 
 the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
@@ -422,6 +450,8 @@ The figure below shows the sequence diagram for editing a lesson.
 
 ![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
 
+*Figure I.3.4: Sequence Diagram of Lesson Edit Command*
+
 In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
 the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
 object to create the `editedLesson` object.
@@ -437,6 +467,8 @@ student with this lesson.
 The figure below shows the sequence diagram for deleting a lesson.
 
 ![LessonDeleteSequenceDiagram](images/LessonDeleteSequenceDiagram.png)
+
+*Figure I.3.5: Sequence Diagram of Lesson Delete Command*
 
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
 
@@ -487,10 +519,10 @@ Given below is an example usage scenario and how viewing tag is executed:
   - During execution, `TagCommand#execute()` calls `Model#getObservableList()` to get the tag list with the tags created in TAB with their corresponding number of students labelled under them to be displayed to the user.
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Tags with duplicate case-insensitive tag names for a person is not allowed. If the user tries to adds a tag with the same tag name to the person already with that tag, the new tag will not be added and `tagCounter` will not increment the count for this tag.<br></div>
 
-Figure T1 shows a sequence diagram of how viewing tags works.<br>
+Figure I.4.1 shows a sequence diagram of how viewing tags works.<br>
 <img src="images/ViewTagSequenceDiagram.png" width="800" />
 
-*Figure T1: View tag sequence diagram*
+*Figure I.4.1: View tag sequence diagram*
 
 #### Design considerations:
 **Alternative 1 (current implementation):** Use a `UniqueTagList` to store the tags created and a class field `tagCounter` to map each unique `Tag` to the number of persons labelled under it.
@@ -513,10 +545,9 @@ The `FindCommand` allows users to find students based on person fields.
 
 **Current Implementation**
 
-The figure below shows the sequence diagram for finding students.
-
 ![Find Command](images/FindSequenceDiagram.png)
 
+**Figure I.5.1: Sequence Diagram of Find Command*
 
 The user can specify multiple fields to search for and each field takes in multiple keywords.
 An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
