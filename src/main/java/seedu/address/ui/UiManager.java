@@ -121,12 +121,15 @@ public class UiManager implements Ui {
 
             Optional<ButtonType> clickedButton = dialog.showAndWait();
             if (clickedButton.get() == ButtonType.OK) {
+                logger.info("Ok button clicked. Remark Editor closing now.");
                 return remarkController.getNewRemark();
             }
         } catch (IOException e) {
             logger.severe(StringUtil.getDetails(e));
             throw new CommandException(REMARK_EDITOR_ERROR_MESSAGE, e);
         }
+
+        logger.info("Cancel remark updates. Remark Editor closing now.");
         return new Remark(remarkToEdit);
     }
 
