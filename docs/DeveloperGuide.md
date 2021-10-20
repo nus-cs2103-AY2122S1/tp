@@ -114,9 +114,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](images/ModelClassDiagram.png)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Structure of the Model Component](images/ModelClassDiagram.png)
 
 
 The `Model` component,
