@@ -220,14 +220,24 @@ Command syntax
 
 The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user
 input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
-the `LogicManager` class to filter the `uniqueStudentList` and/or the `uniqueLessonList` of the `model` based on the given user inputs.
+the `LogicManager` class to filter the `filteredStudents` and/or the `filteredLessons` list(s) in the `model` based on the given user inputs.
 The filter performs differently based on the inputs given (grade, subject, or both):
-* If only grade is given as input, TuitiONE filters both the students list and the lesson list based on the given grade.
+* If only grade is given as input, TuitiONE filters both the student list and the lesson list based on the given grade.
 * If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
 * If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based
 on both the given grade and subject.
 
-#### Object diagram
+Given below is an example usage scenario and how the filter operation works.
+
+Step 1: The user launches the app with the stored student list holding the initial student data and the lesson list holding the
+initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
+![FilterState0](images/FilterState0.png)
+
+Step 2: The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
+the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
+![FilterState1](images/FilterState1.png)
+
+Step 3: The user executes `list` to get back the initial lists before the filter. 
 
 The following sequence diagram shows how the filter operation works:
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)

@@ -1,19 +1,27 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-title After command "filter g/S2 s/English"
+title Initial state
 
 package Tuitione {
     package lessonList {
         object "<u>l1:Lesson" as Lesson1 {
-        subject = "English"
+        subject = English
         grade = "S2"
         }
 
+        object "<u>l2:Lesson" as Lesson2 {
+        subject = Math
+        grade = "S2"
+        }
     }
     package studentList {
         object "<u>s1:Student" as Student1 {
         grade = "S2"
+        }
+
+        object "<u>s2:Student" as Student2 {
+        grade = "P6"
         }
     }
 }
