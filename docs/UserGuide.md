@@ -49,11 +49,7 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Parameters can be in any order.<br>
-<<<<<<< HEAD
-  e.g. if the command specifies `n/NAME p/TELEGRAM_HANDLE`, `p/TELEGRAM_HANDLE n/NAME` is also acceptable.
-=======
   e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/albino_monkii t/albino_api`, only `t/albino_api` will be taken.
@@ -76,15 +72,7 @@ Format: `help`
 
 Adds a student to the CSBook.
 
-<<<<<<< HEAD
-Format: `add n/NAME p/TELEGRAM_HANDLE e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-=======
 Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
@@ -100,24 +88,16 @@ Format: `list`
 
 Edits an existing student in the CSBook.
 
-<<<<<<< HEAD
-Format: `edit INDEX [n/NAME] [p/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-=======
 Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-<<<<<<< HEAD
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the telegramHandle number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-=======
+
 *  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
 *  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 ### Locating students by name: `find`
 
@@ -135,6 +115,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
@@ -159,6 +141,8 @@ Format: `viewgroup GROUPNAME`
 
 Examples:
 * `viewgroup CS2103T` displays the group's description and its students.
+
+
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
@@ -170,6 +154,8 @@ Format: `listgroups`
 
 Examples:
 * `listgroups` displays a list of all the groups, including their group description and number of students in them.
+
+
   ![result for `listgroups`](images/listGroups.png)
 
 ### Clearing all entries : `clear`
@@ -219,12 +205,10 @@ CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action | Format, Examples
---------|------------------
 **Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`

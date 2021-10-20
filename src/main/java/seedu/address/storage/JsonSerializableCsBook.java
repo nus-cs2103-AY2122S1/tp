@@ -56,7 +56,14 @@ class JsonSerializableCsBook {
      */
     public CsBook toModelType() throws IllegalValueException {
         CsBook csBook = new CsBook();
+        addGroupsToCsBook(csBook);
+        addStudentsToCsBook(csBook);
+        addStudentsToGroups(csBook);
 
+        return csBook;
+    }
+
+    public void addGroupsToCsBook(CsBook csBook) throws IllegalValueException {
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
             if (csBook.hasGroup(group)) {
@@ -64,9 +71,10 @@ class JsonSerializableCsBook {
             }
             csBook.addGroup(group);
         }
+    };
 
+    public void addStudentsToCsBook(CsBook csBook) throws IllegalValueException {
         ObservableList<Group> groupList = csBook.getGroupList();
-
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType(groupList);
             if (csBook.hasStudent(student)) {
@@ -74,7 +82,10 @@ class JsonSerializableCsBook {
             }
             csBook.addStudent(student);
         }
+    }
 
+    public void addStudentsToGroups(CsBook csBook) {
+        ObservableList<Group> groupList = csBook.getGroupList();
         for (Group groupWithoutStudentList : groupList) {
             List<Student> studentsInGroup = csBook.getStudentList().stream()
                     .filter(student -> student.getGroup().equals(groupWithoutStudentList)).collect(Collectors.toList());
@@ -83,8 +94,6 @@ class JsonSerializableCsBook {
             groupWithStudentList.addAllStudents(studentsInGroup);
             csBook.setGroup(groupWithoutStudentList, groupWithStudentList);
         }
-
-        return csBook;
     }
 
 }
