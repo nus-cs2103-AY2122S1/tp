@@ -1,0 +1,18 @@
+@startuml
+!include ../../../style.puml
+Participant ":RetrieveCommand" as rc LOGIC_COLOR
+Participant ":Model" as mm LOGIC_COLOR
+Participant ":FilteredList" as fl LOGIC_COLOR
+Participant ":CommandResult" as result LOGIC_COLOR
+
+-> rc ++ :execute
+loop for all InformationWantedFilter
+    rc -> rc ++ :executeFilter
+    rc -> mm ++  :getFilteredStudentListView(InformationWantedFilter)
+    return FilteredList
+    deactivate
+end
+rc -> result ++ :CommandResult
+return
+return CommandResult
+@enduml
