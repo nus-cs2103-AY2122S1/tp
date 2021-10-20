@@ -5,6 +5,8 @@ import java.util.Comparator;
 import dash.model.person.Person;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -26,6 +28,9 @@ public class PersonCard extends UiPart<Region> {
 
     public final Person person;
 
+    private Image tag = new Image("/images/tag.png", 20, 20, false, true);
+    private Image tagGrey = new Image("/images/tag_greyed.png", 20, 20, false, true);
+
     @FXML
     private HBox cardPane;
     @FXML
@@ -38,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label address;
     @FXML
     private Label email;
+    @FXML
+    private Label tagImage;
     @FXML
     private FlowPane tags;
 
@@ -52,6 +59,9 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        ImageView tagIcon = new ImageView(tag);
+        tagImage.setText(" ");
+        tagImage.setGraphic(tagIcon);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
