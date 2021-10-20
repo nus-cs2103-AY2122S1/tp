@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new ClearStudentsCommand();
 
         case FindStudentCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new FindStudentCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

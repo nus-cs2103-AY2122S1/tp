@@ -129,8 +129,6 @@ public class ModelManager implements Model {
             updatedGroup.getMembers().removeMember(target);
             addressBook.setGroup(group, updatedGroup);
         }
-
-
     }
 
     @Override
@@ -291,7 +289,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
     }
-
 
     //=========== Filtered Task List Accessors =============================================================
 
