@@ -174,19 +174,63 @@ Command syntax
 
 #### Implementation
 
-Object diagram
+The delete lesson operation is facilitated by `DeleteLessonCommand` and `DeleteLessonCommandParser`. `DeleteLessonCommandParser` first parses the user input to extract out the command and the arguments, after which the `DeleteLessonCommand#execute(model)` method is invoked in the `LogicManager` class to delete the lesson.  
 
-Sequence diagram
+The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before deletion. Given below is an example usage scenario and how the delete lesson operation behaves.  
+_Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
 
-Activity diagram
+Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
+
+![DeleteLessonState0](images/DeleteLessonState0.png)
+
+Step 2: Upon running the delete lesson command, the application runs a few internal steps:
+
+1. The tuitione model obtains the lesson to remove.
+2. The command executor then extracts the students that are in the lesson.
+3. If there are students enrolled:
+   1. The lesson unenrolls the students.
+   2. The mentioned student details are updated subsequently.
+4. Finally, the lesson is safe to be removed.
+5. Relevant UI and Storage procedures are run to complete the execution in full.
+
+The final object state diagram is as such:
+
+![DeleteLessonState1](images/DeleteLessonState1.png)
+
+Notice how there are no more associations between the Lesson and the Students.
+
+The following sequence diagram shows how the delete lesson operation works:
+
+![DeleteLessonSequenceDiagram](images/DeleteLessonSequenceDiagram.png)
+
+:information_source: **Note:** The lifelines for `DeleteLessonCommandParser` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes the delete lesson command:
+
+![DeleteLessonActivityDiagram](images/DeleteLessonActivityDiagram.png)
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>  
+* Option 1: `delete-l LESSON_INDEX`
+  * Pros:
+    * Non-space-separated word allows easier parsing of command word
+    * Unique command word allows command keys to be easily distinguished
+  * Cons: 
+    * Redundant creation of a new command word, when there is an existing `delete STUDENT_INDEX` command.
+    * Might not be as intuitive as there are now 2 delete commands with different keywords.
+* Option 2: `delete -l LESSON_INDEX`
+  * Pros: 
+    * More intuitive, `-l` flag can be used to determine that a lesson is to be deleted, while omitting it means a student is to be deleted.
+  * Cons: 
+    * Harder to parse, as the `-l` flag is space separated from the command keyword.
+    * User might forget to include the `-l` flag, accidentally deleting a student instead.
+
+<ins>Decision</ins>  
+Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.  
+Additionally, there is not much significance in having an especially pretty command syntax as efficiency (i.e. entering commands fast and correctly) is desired. At the same time, the accidental deletion of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`delete -l LESSON_INDEX`) should only be implemented once an undo/redo feature is implemented.
 
 ### Enroll feature
-
-Description
 
 #### Implementation
 
@@ -328,7 +372,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+<ins> Aspect: How undo & redo executes:</ins>
 
 * **Alternative 1 (current choice):** Saves the entire tuitione.
     * Pros: Easy to implement.
@@ -418,7 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 For all use cases below, the **System** is the `TuitiONE` and the **Actor** is the `Customer Service Officer (CSO)`, unless specified otherwise.
 
-**UC01: View all Students and Lessons**
+#### UC01: View all Students and Lessons
 
 **MSS**
 
@@ -427,7 +471,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC02: Add a Student**
+#### UC02: Add a Student
 
 **MSS**
 
@@ -457,7 +501,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC03: Look up Student(s)**
+#### UC03: Look up Student(s)
 
 **MSS**
 
@@ -486,7 +530,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC04: Filter Students by grade and Lessons by grade and/or subject**
+#### UC04: Filter Students by grade and Lessons by grade and/or subject
 
 **MSS**
 1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
@@ -526,7 +570,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-**UC05: Delete a Student**
+#### UC05: Delete a Student
 
 **MSS**
 
@@ -554,7 +598,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC06: Add a Lesson**
+#### UC06: Add a Lesson
 
 **MSS**
 
@@ -577,7 +621,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC07: View details of a Lesson**
+#### UC07: View details of a Lesson
 
 **MSS**
 
@@ -591,7 +635,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC08: Filter Lesson(s) by their Grade and/or Subject**
+#### UC08: Filter Lesson(s) by their Grade and/or Subject
 
 **MSS**
 1. CSO enters grade and/or subject to filter lessons by.
@@ -608,7 +652,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 2.
 
-**UC09: Delete a Lesson**
+#### UC09: Delete a Lesson
 
 **MSS**
 
@@ -636,7 +680,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC10 - Update a specific Student’s Details**
+#### UC10 - Update a specific Student’s Details
 
 **MSS**
 
@@ -649,18 +693,18 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
   **Extension**
 
 * 2a. TuitiONE detects an error in entered command.
-      * 2a1. TuitiONE requests CSO to input a valid command.
-      * 2a2. CSO enters new command.
-        Steps 2a1-2a2 are repeated until the data entered are correct.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command. 
+      Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
 
 * 2b. The student requested to edit is not present in the list.
-      * 2b1. TuitiONE informs that there is no such student.
+    * 2b1. TuitiONE informs that there is no such student.
 
     Use case ends.
 
-**UC11: Enroll a Student to a Lesson**
+#### UC11: Enroll a Student to a Lesson
 
 **MSS**
 
@@ -699,7 +743,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC12: Unenroll a Student from a Lesson**
+#### UC12: Unenroll a Student from a Lesson
 
 **MSS**
 
@@ -738,7 +782,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC13: Review Commands**
+#### UC13: Review Commands
 
 **MSS**
 

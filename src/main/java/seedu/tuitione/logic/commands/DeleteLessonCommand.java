@@ -11,6 +11,7 @@ import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
+import seedu.tuitione.model.student.Student;
 
 /**
  * Deletes a lesson identified using it's displayed index from the lesson panel in tuitione book.
@@ -40,9 +41,15 @@ public class DeleteLessonCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        List<Student> students = lessonToDelete.getStudents();
+        students.forEach(s -> {
+            s.unenrollFromLesson(lessonToDelete);
+            model.setStudent(s, s);
+        }); // remove student -> lesson code linkages
         lessonToDelete.removeAll();
+
         model.deleteLesson(lessonToDelete);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
