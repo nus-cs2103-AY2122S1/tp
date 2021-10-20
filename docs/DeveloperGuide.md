@@ -149,8 +149,10 @@ The `Storage` component,
 
 **API** : [`Cryptable.java`]()
 
+<img src="images/CryptableClassDiagram.png" width="200" />
+
 The `Cryptable` component,
-* encrypts data files to `.enc` format.
+* encrypts data files and writes to `.enc` format.
   * accepts file in any format for encryption, per the supplied `Path`.
 * decrypts data files from `.enc` format.
   * writes to file in any format after decryption, per the supplied `Path`.
