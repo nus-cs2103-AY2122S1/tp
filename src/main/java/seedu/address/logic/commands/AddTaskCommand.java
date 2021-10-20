@@ -31,7 +31,10 @@ public class AddTaskCommand extends AddCommand {
     private final ModuleName moduleName;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Task}
+     *
+     * @param moduleName The name of the module the task will be associated to.
+     * @param task The task to be added.
      */
     public AddTaskCommand(ModuleName moduleName, Task task) {
         requireNonNull(task);

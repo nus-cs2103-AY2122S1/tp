@@ -23,7 +23,7 @@ public class Student {
     private final StudentId studentId;
     //private final Set<Tag> tags = new HashSet<>();
 
-    private final UniqueTaskList taskList;
+    private UniqueTaskList taskList;
 
     /**
      * Every field must be present and not null.
@@ -76,6 +76,10 @@ public class Student {
      */
     public UniqueTaskList getTaskList() {
         return this.taskList;
+    }
+
+    public void setTaskList(UniqueTaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**

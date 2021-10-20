@@ -19,7 +19,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
      *
      * @param args User input.
      * @return The AddTaskCommand created from user input.
-     * @throws ParseException
+     * @throws ParseException if the user input does not conform the expected format.
      */
     @Override
     public AddTaskCommand parse(String args) throws ParseException {

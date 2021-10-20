@@ -30,7 +30,7 @@ public class DeleteStudentCommand extends DeleteCommand {
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_STUDENT_ID + "A1234567A ";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";
 
     private StudentId studentId;
     private ModuleName moduleName;

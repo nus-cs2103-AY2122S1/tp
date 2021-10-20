@@ -30,6 +30,9 @@ public class DeleteModuleCommand extends DeleteCommand {
 
     private final ModuleName moduleName;
 
+    /**
+     * Deletes a module from TAB.
+     */
     public DeleteModuleCommand(ModuleName moduleName) {
         this.moduleName = moduleName;
     }
