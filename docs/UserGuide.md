@@ -27,7 +27,7 @@ Command Shortcut: `a`
 
 Adds a student’s information such as n/NAME, p/PHONE_NUMBER.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]…`
 
 Examples:
 
@@ -35,7 +35,7 @@ Examples:
 add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 ```
-a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks t/paid
+a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks
 ```
 
 #### Adding a tuition class: `addclass`
@@ -45,10 +45,8 @@ Command Shortcut: `ac`
 
 Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
 
-The students to be added are optional. If the student the user intends to add is not present, or the class limit has
-been exceeded, TutAssistor will alert names of these students. The time slot should follow the
-format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap
-on time slots. If there is any conflict or overlap, TutAssistor will alert the conflict.
+The students to be added are optional. The time slot should follow the format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap on time slots. 
+If there is any conflict or overlap, TutAssistor will alert the conflict.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
@@ -161,18 +159,16 @@ delc 4
 
 ### Adding/Removing an existing student from class
 
-Move a student to/from classes by adding or removing them.
+Moves a student to/from classes by adding or removing them.
 
 #### Adding existing students to a class: `addtoclass`
 
 Command Shortcut: `atc`
 
-Add one or more existing students to an existing class using student NAME or INDEX.
-When the student to be added is already enrolled in the class or is not found in TutAssistor, TutAssistor will alert the
-names of these students to the tutor.
+Adds one or more existing students to an existing class using student NAME or INDEX.
 
-When adding student names, using comma to separate names and there is no space around comma.
-When adding student indexes, using space to separate indexes.
+When adding student names, use comma to separate names without space around comma.
+When adding student indexes, use space to separate indexes.
 
 Format:
 
@@ -298,21 +294,21 @@ Display list of all students after conducting a search with the `find` command.
 
 Command Shortcut: `lc`
 
-Display list of all classes after conducting a search with the `findclass` command.
+Displays list of all classes after conducting a search with the `findclass` command.
 
 ### Sorting tuition classes: `sort`
 
 Command Shortcut: `s`
 
-Permanently sorts tuition class list according to time or alphabetical order.
+Sorts tuition class list according to time or alphabetical order.
 
-If the tutor does not exit TutAssistor, the list will be auto-sorted
+Without exiting TutAssistor, the list will be auto-sorted
 when adding and editing classes after the tutor sorted the list.
 
 Format: `sort [o/ORDER]`
 
 Examples: (examples below are all possible usages of `sort`)
-* `sort` (without order being specified, TutAssistor will sort the list by time)
+* `sort` (sort by time)
 * `sort o/asc` (sort by ascending alphabetical order)
 * `sort o/desc` (sort by descending alphabetical order)
 * `sort o/time` (sort by time)
@@ -351,7 +347,7 @@ Format: `exit`
 
 Action | Format | Shortcut
 -------|--------|---------
-***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…` | `a`
+***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]…` | `a`
 ***Add Class*** | `addclass l/limit t/time [s/NAME,NAME,NAME...] [r/REMARK] [t/TAG]…` | `ac`
 ***View Student*** | `student INDEX` | `vs`
 ***View Class*** | `class INDEX` | `vc`
