@@ -135,7 +135,7 @@ Finds students whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The order of the keywords does not matter. e.g `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
@@ -145,6 +145,23 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+### Sorting the list : `sort` 
+
+Sorts the list of students in the academy directory.
+
+Format: `sort attr/ATTRIBUTE ord/ORDER`
+
+* The sort can be done on some `Attribute`  in either ascending order or descending order.
+* `Attribute` can only be `name`, `participation`, `RA1`, `Midterm`, `RA2`, `Final` and `Average`.
+* `Attribute` is case-insensitve. e.g `name` and `NAME` will both sort the list by `Name`.
+* `Order` can only be `asc` and `desc` which indicate either ascending or descending sort.
+* `Order` is case-insensitive. e.g `ASC` and `Asc` will both sort the list in ascending order
+* Both `Attribute` and `Order` are required for the sorting to work.
+
+Examples:
+* `sort attr/RA1 ord/desc` sorts the list in descending order based on their `RA1` grades.
+* `sort attr/participation ord/asc` sorts the list in ascending order based on their participation score.
 
 ### Deleting a student: `delete`
 
@@ -285,6 +302,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Sort** | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`
 **List** | `list`
 **Attendance** | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
 **Studio Participation** | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
