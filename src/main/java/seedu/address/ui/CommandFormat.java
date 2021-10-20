@@ -3,7 +3,7 @@ package seedu.address.ui;
 public class CommandFormat {
 
     public static final String ADD_FORMAT = "Add student/class\n"
-            + "\tadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…\n"
+            + "\tadd n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]\n"
             + "\taddclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]\n\n";
 
     public static final String DELETE_FORMAT = "Delete student/class\n"
