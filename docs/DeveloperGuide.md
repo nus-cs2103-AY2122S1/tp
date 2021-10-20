@@ -259,9 +259,9 @@ This feature allows the users to delete a `Client` or `Product` of their choice.
 
 The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
-`DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be 
-executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state 
-of address book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display 
+`DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be
+executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of
+address book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display
 feedback of the `CommandResult` to the user.
 
 The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
@@ -279,7 +279,6 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Saves time if the user wish to delete multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
-
 ### Find Client/Product Feature
 
 This feature allows the users to find a `Client` or `Product` based on their `name`.
@@ -287,8 +286,8 @@ This feature allows the users to find a `Client` or `Product` based on their `na
 The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
 `FindClientCommandParser`, parsing the inputs and returning a `FindClientCommand`. The command will then be executed in
-`LogicManager`, returning a `CommandResult`.The `CommandResult` will finally be returned to `MainWindow`, 
-which will display feedback of the `CommandResult` to the user.
+`LogicManager`, returning a `CommandResult`.The `CommandResult` will finally be returned to `MainWindow`, which will
+display feedback of the `CommandResult` to the user.
 
 The flow of the sequence diagram would be the same for finding `Products`, but the UI displayed will be different.
 
@@ -302,11 +301,10 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
     * Pros : Allows the user to focus on finding a particular client or product
     * Cons : Unable to find clients or products without name
 * **Alternative 2** : User can find clients by their details such as name, address, email, etc.. and products by their
-                      name, price, etc..
+  name, price, etc..
     * Pros : Saves time if the user is unable to remember the exact name of a client/product.
     * Cons : More complex code which would lead to higher amount of error
 
-    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -631,13 +629,12 @@ User story ends.
 * 1a. The input parameter is invalid.
 
     * 1a1. Sellah shows an error message.
-    
+
       Use case resumes at step 1.
 
 * 1b. The command format is incorrect.
 
-    * 1b1. Sellah shows an error message.
-      Use case resumes at step 1.
+    * 1b1. Sellah shows an error message. Use case resumes at step 1.
 
 * 2a. The list is empty.
 
@@ -719,7 +716,7 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
+
 1. _{ more test cases …​ }_
 
 ### Saving data
