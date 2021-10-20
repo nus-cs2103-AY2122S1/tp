@@ -77,7 +77,7 @@ class TaddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private static class ModelStub implements Model {
+    private class ModelStub implements Model {
         @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
