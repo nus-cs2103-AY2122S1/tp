@@ -10,15 +10,13 @@ title: User Guide
 
 ## Introduction
 
-Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
-
-**Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
+**Tuition Address Book (TAB)** is an all-in-one desktop application that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
 
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
+With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
-Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
@@ -171,9 +169,17 @@ Deletes the specified student from TAB.
 
 Format: `delete INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `delete` command:**<br>
+
 * Deletes the student at the specified `INDEX`.
+  
 * The index refers to the index number shown in the displayed student list.
+  
 * The index **must be a positive integer** 1, 2, 3, …
+
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
@@ -326,11 +332,21 @@ Examples:
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing schedule: `schedule` [coming soon]
+#### Viewing schedule: `schedule`
 
-Displays a read-only weekly schedule.
+Displays a read-only schedule of your upcoming week.
+
+![view schedule](images/ViewSchedule.png)
 
 Format: `schedule`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `schedule` command:**<br>
+
+* Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+
+</div>
 
 ### Managing Data
 
@@ -391,7 +407,7 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
