@@ -89,6 +89,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the list.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
+     */
+    void setEvent(Event target, Event editedEvent);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
