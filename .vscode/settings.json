@@ -1,0 +1,6 @@
+{
+    "editor.defaultFormatter": "shengchen.vscode-checkstyle",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java"
+    }
+}

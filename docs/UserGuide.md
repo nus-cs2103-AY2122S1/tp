@@ -58,17 +58,23 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@nus.edu.sg r/staff f/computing m/computer science mod/CS2040S`
 * `add n/Seth r/student f/computing m/computer science mod/CS2103T`
 
-List of personal detail tags:
+List of personal detail fields:
 * n/: name
-* p/: phone number
 * e/: email
 
-List of school-related tags:
-* r/: role - staff/student/admin
+List of school-related fields:
 * f/: faculty
 * m/: major
-* cca/: cca
-* mod/: module
+* s/: skill
+* l/: language
+* fr/: framework
+* t/: tags
+
+List of entrepreneurship-related fields:
+* r/: remarks (To be implemented)
+* i/: interest (To be implemented)
+* int/: interactions
+* p/: projects (To be implemented)
 
 ### Search Contacts : `search`
 Search for contacts with specified keyword.
