@@ -18,12 +18,12 @@ import seedu.address.model.person.Person;
  */
 public class StaffStatisticsCommand extends Command {
 
-    public final static String COMMAND_WORD = "stats";
-    public final static String MESSAGE_SUCCESS = "Stats:\n"
+    public static final String COMMAND_WORD = "stats";
+    public static final String MESSAGE_SUCCESS = "Stats:\n"
             + "Total salary: %1$s\n"
             + "Total work time: %2$s\n"
             + "Average work time: %3$s\n";
-    public final static String EMPTY_MODEL = "There is no one to get the statistics of.";
+    public static final String EMPTY_MODEL = "There is no one to get the statistics of.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

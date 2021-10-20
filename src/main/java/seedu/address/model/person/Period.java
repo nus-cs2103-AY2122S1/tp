@@ -57,7 +57,7 @@ public class Period {
     public static Period getPeriodFromDateOverMonth(LocalDate date) {
         Month month = date.getMonth();
         int year = date.getYear();
-        int lastDate = month.length(year%4 == 0);
+        int lastDate = month.length(year % 4 == 0);
         return new Period(LocalDate.of(year, month, 1),
                 LocalDate.of(year, month, lastDate));
 
