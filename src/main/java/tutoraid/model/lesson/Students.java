@@ -1,7 +1,6 @@
 package tutoraid.model.lesson;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import tutoraid.model.student.Student;
 
@@ -22,23 +21,17 @@ public class Students {
         this.students = students;
     }
 
-    /**
-     * Returns true if both sets of students have the same names.
-     * This defines a weaker notion of equality between two sets of students.
-     */
-    public boolean areSameStudents(Students otherStudents) {
-        if (otherStudents == this) {
-            return true;
-        }
-
-        return otherStudents.equals(this);
-    }
-
     @Override
     public String toString() {
-        String connector = "\n    ";
-        return connector + students.stream().map(Student::toNameString)
-                .collect(Collectors.joining(connector));
+        String str = "";
+        int counter = 1;
+
+        for (Student student : students) {
+            str += "\n" + counter + ".  " + student.toNameString();
+            counter++;
+        }
+
+        return str;
     }
 
     @Override
