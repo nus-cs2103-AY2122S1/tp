@@ -172,24 +172,22 @@ Command syntax
 
 #### Implementation
 
-The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before removal. Given below is an example usage scenario and how the delete lesson operation behaves.  
+The delete lesson operation is facilitated by `DeleteLessonCommand` and `DeleteLessonCommandParser`. `DeleteLessonCommandParser` first parses the user input to extract out the command and the arguments, after which the `DeleteLessonCommand#execute(model)` method is invoked in the `LogicManager` class to delete the lesson.  
+
+The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before deletion. Given below is an example usage scenario and how the delete lesson operation behaves.  
 _Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
 
-<ins>Step 1:</ins>  
-
-User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
+Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
 ![DeleteLessonState0](images/DeleteLessonState0.png)
 
-<ins>Step 2:</ins>  
-
-Upon running the delete lesson command, the application runs a few internal steps:
+Step 2: Upon running the delete lesson command, the application runs a few internal steps:
 
 1. The tuitione model obtains the lesson to remove.
 2. The command executor then extracts the students that are in the lesson.
 3. If there are students enrolled:
-   1. The lesson then unenrolls the students that are present.
-   2. The update students are updated in the tuitione model.
+   1. The lesson unenrolls the students.
+   2. The mentioned student details are updated subsequently.
 4. Finally, the lesson is safe to be removed.
 5. Relevant UI and Storage procedures are run to complete the execution in full.
 
