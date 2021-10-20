@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,17 +19,22 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
+import seedu.address.model.order.TransactionTimeComparator;
 
 /**
  * Represents the in-memory model of BogoBogo data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private final String TRANSACTION_LOGGING_MSG = "Transacted successfully: ";
 
     private final Inventory inventory;
     private final UserPrefs userPrefs;
     private final FilteredList<Item> filteredItems;
     private Optional<Order> optionalOrder;
+    private Set<TransactionRecord> transactions;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -251,7 +258,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Destroys the current order when ordering finish.
+     * Updates the inventory according to current order and exit ordering mode, the transaction is recorded as well.
      */
     @Override
     public void transactAndClearOrder() {
@@ -260,5 +267,26 @@ public class ModelManager implements Model {
         TransactionRecord transaction = inventory.transactOrder(optionalOrder.get());
         // Reset to no order status
         optionalOrder = Optional.empty();
+        transactions.add(transaction);
+        logger.fine(TRANSACTION_LOGGING_MSG + transaction.toString());
+    }
+
+    /**
+     * Return a list of {@code TransactionRecord} sorted according to given comparator.
+     */
+    public List<TransactionRecord> getTransactions(Comparator<TransactionRecord> comparator) {
+        requireNonNull(comparator);
+
+        List<TransactionRecord> resultList = new ArrayList<>(transactions);
+        resultList.sort(comparator);
+
+        return resultList;
+    }
+
+    /**
+     * Return a list of {@code TransactionRecord} sorted according to timestamp.
+     */
+    public List<TransactionRecord> getTransactions() {
+        return getTransactions(new TransactionTimeComparator());
     }
 }
