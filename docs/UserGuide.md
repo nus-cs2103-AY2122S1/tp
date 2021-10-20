@@ -70,10 +70,9 @@ Views a info page for a list of commands and examples
 
 Format: `help`
 
-
 ### Adding a student: `student -a`
-
-Adds a student to the students list.
+<details>
+<summary>Adds a student to the students list.</summary>
 
 Format: `student -a -n NAME [-c CONTACT] [-em EMAIL] [-s DAY/STARTTIME/ENDTIME]​`
 
@@ -88,11 +87,12 @@ Examples:
   adds a student with the name John, contact number 12345678, email john@mail.com and a lesson every tuesday from 4pm to 6pm
 * `student -a -n Barbara -c 12344321`<br>
   adds a student with the name Barbara and contact number 12344321
+</details>
 
 ### Viewing a student: `student -v` `[coming in v1.2]`
-
-Views a particular student's details given by the specified index from the
-persons list.
+<details>
+<summary>Views a particular student's details given by the specified index from the
+persons list.</summary>
 
 Format: `student -v INDEX`
 
@@ -101,10 +101,13 @@ Format: `student -v INDEX`
 
 Examples:
 * `student -v 3` view the student detail at index 3.
+</details>
 
 ### Editing a student: `student -e` `[coming in v1.2]`
-
+<details>
+<summary>
 Edits the detail of a specific student.
+</summary>
 
 Format: `student -e INDEX [n/NAME] [c/CONTACT] [e/EMAIL]`
 
@@ -118,38 +121,13 @@ Example:
 * `student -e 3 c/88888888 e/johnny@mail.com` Edits the contact number and email
   address of the third student in the student list to 88888888 and johnny@mail.com
   respectively.
-
-### Adding a lesson to a student: `student -al` `[coming in v1.2]`
-
-Adds a lesson to the specific student
-
-Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
-
-* Adds a lesson to the student specified by the `INDEX`.
-* `SUBJECT` takes in any input with at least one alphanumeric character.
-* `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
-* `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
-  for 8am.
-* Overlapping tasks cannot be added.
-
-* `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
-  starting at 8am and ending at 9am on Mondays.
-
-### Deleting a lesson from a student: `student -dl` `[coming in v1.2]`
-
-Deletes a lesson from the specific student
-
-Format: `student -dl PERSON_INDEX LESSON_INDEX`
-
-* Specifies the student at `PERSON_INDEX`.
-* Deletes the specified lesson at `LESSON_INDEX` of the student specified.
-* Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
-
-* `student -dl 1 1` deletes the first lesson from the first student.
+</details>
 
 ### Deleting a student: `student -d` `[coming in v1.2]`
-
+<details>
+<summary>
 Deletes the specific student given by the specified index from the persons list.
+</summary>
 
 Format: `student -d INDEX`
 
@@ -160,6 +138,7 @@ Format: `student -d INDEX`
 Examples:
 
 * `student -d 3` deleted the third student in the persons list
+</details>
 
 ### Listing all students : `list`
 
@@ -168,8 +147,10 @@ Shows a list of all students in the students list.
 Format: `list`
 
 ### Locating students by name: `student -f`
-
+<details>
+<summary>
 Finds students whose names contain any of the given keywords.
+</summary>
 
 Format: `student -f KEYWORD…​`
 
@@ -183,7 +164,76 @@ Format: `student -f KEYWORD…​`
 Examples:
 * `student -f John` returns `john` and `John Doe`
 * `student -f alex david` returns `Alex Yeoh`, `David Li`<br>
+</details>
 
+### Adding a lesson to a student: `student -al`
+
+<details>
+<summary>
+Adds a lesson to the specific student
+</summary>
+
+Format: `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY`
+
+* Adds a lesson to the student specified by the `INDEX`.
+* `SUBJECT` takes in any input with at least one alphanumeric character.
+* `DAY` takes in the following inputs: `Mon Tue Wed Thu Fri Sat Sun`.
+* `START_TIME` and `END_TIME` takes in the time in 24-hour, HH:MM, format. For example `08:00`
+  for 8am.
+* Overlapping tasks cannot be added.
+
+Example:
+* `student -al 1 s/Biology st/08:00 et/09:00 d/Mon` Adds a lesson with the subject name biology
+  starting at 8am and ending at 9am on Mondays.
+</details>
+
+### Deleting a lesson from a student: `student -dl`
+<details>
+<summary>
+Deletes a lesson from the specific student
+</summary>
+
+Format: `student -dl PERSON_INDEX LESSON_INDEX`
+
+* Specifies the student at `PERSON_INDEX`.
+* Deletes the specified lesson at `LESSON_INDEX` of the student specified.
+* Both `PERSON_INDEX` and `LESSON_INDEX` must be a positive number.
+
+Example:
+* `student -dl 1 1` deletes the first lesson from the first student.
+</details>
+
+### Adding an exam to a student: `student -ae`
+<details>
+<summary>
+Adds an exam to the specific student
+</summary>
+
+Format: `student -ae INDEX s/SUBJECT d/DATE_TIME`
+
+* Adds a lesson to the student specified by the `INDEX`.
+* `SUBJECT` takes in any input with at least one alphanumeric character.
+* `DATE_TIME` takes in a date and time in the following format: `yyyy-MM-dd HH:mm`.
+
+Example:
+* `student -ae 1 s/Math d/2021-12-20 14:00` Adds an exam with the subject name Math
+  on 20th December 2021, 2pm.
+</details>
+
+### Deleting an exam from a student: `student -de`
+<details>
+<summary>
+Deletes a lesson from the specific student
+</summary>
+
+Format: `student -de PERSON_INDEX EXAM_INDEX`
+
+* Specifies the student at `PERSON_INDEX`.
+* Deletes the specified lesson at `EXAM_INDEX` of the student specified.
+* Both `PERSON_INDEX` and `EXAM_INDEX` must be a positive number.
+
+* `student -de 1 1` deletes the first exam from the first student.
+</details>
 
 ### Grouping students  `[coming in v1.2]`
 
@@ -313,6 +363,10 @@ Action | Format, Examples
 **Delete a student** | `student -d INDEX​` <br> e.g., `student -d 3`
 **Find a student** | `find KEYWORD [MORE_KEYWORDS]​` <br> e.g., `find alex david`
 **List all students** | `list`
+**Add a lesson to a student** | `student -al INDEX s/SUBJECT st/START_TIME et/END_TIME d/DAY` <br> e.g. `student -al 1 s/Biology st/08:00 et/09:00 d/Mon`
+**Remove a lesson from a student** | `student -dl PERSON_INDEX LESSON_INDEX` <br> e.g. `student -dl 1 1`
+**Add an exam to a student** | `student -ae INDEX s/SUBJECT d/DATE_TIME` <br> e.g. `student -ae 1 s/Math d/2021-12-20 14:00`
+**Remove an exam from a student** | `student -de PERSON_INDEX EXAM_INDEX` <br> e.g. `student -de 1 1`
 **Group students** | `student -g GROUPNAME INDEX1 INDEX2 INDEX3 ...​` <br> e.g., `student -g Team2 1 3 5`
 **Add a task** | `task -a n/NAME​` <br> e.g., `task -a n/CS2100 Lab 1`
 **Edit a task** | `task -e INDEX [n/NAME] [d/DEADLINE] [c/COMPLETED]​` <br> e.g., `task -e 4 d/20211231 c/true`

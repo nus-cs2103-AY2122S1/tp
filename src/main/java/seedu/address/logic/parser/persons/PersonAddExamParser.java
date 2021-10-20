@@ -3,12 +3,9 @@ package seedu.address.logic.parser.persons;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.persons.EditPersonCommand;
@@ -17,33 +14,29 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.Timeslot;
-import seedu.address.model.person.Name;
+import seedu.address.model.person.Exam;
 
 /**
  * Parses input arguments and creates a new EditPersonCommand object
  */
-public class PersonAddLessonParser implements Parser<EditPersonCommand> {
+public class PersonAddExamParser implements Parser<EditPersonCommand> {
 
-    public static final String COMMAND_WORD = "-al";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the person identified "
+    public static final String COMMAND_WORD = "-ae";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exam to the person identified "
             + "by the index number used in the displayed person list. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "[" + PREFIX_START_TIME + "HH:MM START TIME] "
-            + "[" + PREFIX_END_TIME + "HH:MM END TIME] "
-            + "[" + PREFIX_DAY + "DAY] ";
-    public static final String ADD_LESSON_SUCCESS = "Lesson added: %1$s";
+            + "[" + PREFIX_DAY + ParserUtil.DATE_TIME_FORMAT + "] ";
+    public static final String ADD_EXAM_SUCCESS = "Exam added: %1$s";
 
     @Override
     public EditPersonCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY);
+                ArgumentTokenizer.tokenize(userInput, PREFIX_SUBJECT, PREFIX_DAY);
 
-        if (!argMultimap.arePrefixesPresent(PREFIX_SUBJECT, PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_DAY)
+        if (!argMultimap.arePrefixesPresent(PREFIX_SUBJECT, PREFIX_DAY)
                 || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MESSAGE_USAGE));
@@ -58,13 +51,11 @@ public class PersonAddLessonParser implements Parser<EditPersonCommand> {
                     MESSAGE_USAGE), pe);
         }
 
-        Timeslot timeslot = ParserUtil.parseTimeslot(argMultimap.getValue(PREFIX_START_TIME).get(),
-                argMultimap.getValue(PREFIX_END_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
-        DayOfWeek dayOfWeek = ParserUtil.parseDayOfWeek(argMultimap.getValue(PREFIX_DAY).get());
-        Lesson lesson = new Lesson(timeslot, subject, dayOfWeek, new ArrayList<Name>());
+        LocalDateTime dateTime = ParserUtil.parseLocalDateTime(argMultimap.getValue(PREFIX_DAY).get());
+        Exam exam = new Exam(subject, dateTime);
         EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
-        editPersonDescriptor.addLesson(lesson);
-        return new EditPersonCommand(index, editPersonDescriptor, ADD_LESSON_SUCCESS);
+        editPersonDescriptor.addExam(exam);
+        return new EditPersonCommand(index, editPersonDescriptor, ADD_EXAM_SUCCESS);
     }
 }
