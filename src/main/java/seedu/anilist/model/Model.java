@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.ui.TabOption;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimeList(Predicate<Anime> predicate);
+
+    /**
+     * Sets the current tab.
+     */
+    void setCurrentTab(TabOption.TabOptions currentTab);
+
+    /**
+     * Returns current tab.
+     */
+    TabOption getCurrentTab();
 }

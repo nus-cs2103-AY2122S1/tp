@@ -67,7 +67,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList());
+        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
         animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -76,7 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimeListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 

@@ -67,10 +67,19 @@ Examples:
 Lists all currently supports commands, and provides a link to this user guide.<br>
 Format: `help`
 
-### Listing all anime: `list`
+### Listing anime: `list`
 
 Shows a list of all anime names the user has added.<br>
-Format: `list`
+An additional status parameter can be specified to switch tabs, showing only anime with that status.<br>
+Format: `list [s/STATUS]`
+
+- `STATUS` refers to the updated status of the anime.
+- Available statuses: `towatch`, `watching`, `finished`
+- Shortforms: `t`, `w`, `f`
+
+Examples:
+*  `list`
+*  `list s/towatch`
 
 ### Updating an anime's episode: `update`
 
@@ -101,16 +110,16 @@ Examples:
 ### Add/Delete a genre from an anime: `genre`
 
 Adds or deletes a genre from a specified anime.<br>
-All genres will be automatically changed to lowercase, and duplicate genres are not allowed.
+All genres will be automatically changed to lowercase, and duplicate genres are not allowed.<br>
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 
 - `ACTION` specifies whether you are adding or deleting genres.
 - Current list of available actions: `add`, `delete`.
-- Updates the anime at the specified `INDEX`.  
+- Updates the anime at the specified `INDEX`.
 - The index must be a positive integer 1, 2, 3, ...
 - `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
 - You need to provide at least 1 `GENRE`.
-
-Examples:
+  
+  Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
