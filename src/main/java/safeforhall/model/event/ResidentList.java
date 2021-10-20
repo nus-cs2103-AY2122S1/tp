@@ -20,6 +20,7 @@ public class ResidentList {
 
     public final String residents;
     public final ArrayList<String> residentInformation;
+    public final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
 
     /**
@@ -29,6 +30,7 @@ public class ResidentList {
      */
     public ResidentList(String residents) {
         requireNonNull(residents);
+        this.isEmpty = residents.equals(DEFAULT_LIST);
         this.residents = residents;
         residentInformation = new ArrayList<>(Arrays.asList(this.residents.split("\\s*,\\s*")));
     }
@@ -39,6 +41,9 @@ public class ResidentList {
      * @param residents A string of residents.
      */
     public static boolean isValidResidentList(String residents) throws ParseException {
+        if (residents.equals(DEFAULT_LIST)) {
+            return true;
+        }
         String[] informationList = residents.split("\\s*,\\s*");
         boolean isRoom = false;
         boolean isName = false;
@@ -74,12 +79,22 @@ public class ResidentList {
             }
         }
         for (Person person : toAdd) {
-            if (!residentList.contains(person)) {
+            if (!residentList.contains(person) && !newResidentList.toString().equals("")) {
                 newResidentList.append(", ").append(person.getName());
+                residentList.add(person);
+            } else if (!residentList.contains(person) && newResidentList.toString().equals("")) {
+                newResidentList.append(person.getName());
                 residentList.add(person);
             }
         }
         return newResidentList.toString();
+    }
+
+    /**
+     * Returns true if the ResidentList is empty.
+     */
+    public boolean isEmpty() {
+        return this.isEmpty;
     }
 
     @Override

@@ -36,7 +36,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE,
-                        PREFIX_VENUE, PREFIX_CAPACITY);
+                        PREFIX_VENUE, PREFIX_CAPACITY, PREFIX_RESIDENTS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE,
                 PREFIX_VENUE, PREFIX_CAPACITY)

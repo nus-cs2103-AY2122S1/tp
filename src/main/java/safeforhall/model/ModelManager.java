@@ -135,9 +135,12 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);
+        ArrayList<Person> personList = new ArrayList<>();
+        if (residentList.isEmpty) {
+            return personList;
+        }
         String[] residentInformation = residentList.residents.split("\\s*,\\s*");
 
-        ArrayList<Person> personList = new ArrayList<>();
         for (String information : residentInformation) {
             Optional<Person> personFound;
             if (Name.isValidName(information)) {
@@ -148,7 +151,7 @@ public class ModelManager implements Model {
             }
 
             if (personFound.isEmpty()) {
-                throw new CommandException(information.toString() + " event not found");
+                throw new CommandException(information + " event not found");
             } else {
                 personList.add(personFound.get());
             }
