@@ -138,38 +138,52 @@ Examples:
 * `search n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
 * `search v/false f/soc` returns un-vaccinated residents from SoC <br>
 
-### Editing a person : `edit`
+### Editing a resident : `edit`
 
-Edits an existing resident in the address book.
+Edits the details of existing residents in the address book.
 
-Format: `edit INDEX [MORE_INDICES] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM] [v/VACCINATION_STATUS] [f/FACULTY] [c/CCA]…​`
+Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] [f/FACULTY] [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-* Edits the resident at the specified `INDEX`. The index refers to the index number shown in the displayed resident list. The index **must be a positive integer** 1, 2, 3, …​
+* Edit the residents at the specified `INDEXES`. 
+* Each index refers to the index number shown in the displayed resident list. 
+* The indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing CCAs, the existing CCAs of the resident will be removed i.e adding of CCAs is not cumulative.
-* You can remove all the resident’s CCAs by typing `c/` without specifying any CCAs after it.
-* Able to edit multiple residents at once by inputting multiple indexes, each separated by a space.
+* Edit multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
 Examples:
-*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st person to be `johndoe@example.com` and `A101` respectively.
-*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing CCAs.
-*  `edit 1 2 3 v/true` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated.
+*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
+*  `edit 1 2 3 v/true fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 ### Deleting a resident : `delete`
 
-Deletes the specified resident from the address book.
+Deletes specified residents from the address book.
 
-Format: `delete INDEX [MORE_INDICES]`
+Format: `delete INDEX…`
 
-* Deletes the resident at the specified `INDEX`.
-* The index refers to the index number shown in the displayed resident list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Able to delete multiple residents at once by inputting multiple indexes, each separated by a space.
+* Delete the residents at the specified `INDEXES`.
+* Each index refers to the index number shown in the displayed resident list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* Delete multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
 Examples:
-* `view` followed by `delete 1 2 3` deletes the first 3 people in the address book.
-* `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
+* `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
+* `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
+
+### Editing an event : `edit`
+
+Edits an existing event in the address book.
+
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+
+* Edits the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
 ### Clearing all entries : `clear`
 
@@ -192,8 +206,8 @@ Action | Format, Examples
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **List** | `list [FLAG] [d/DATE]` <br> e.g. `list -f 15-8-2021`
-**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
-**Edit** | `edit INDEX [MORE_INDICES] [FLAG/UPDATED_PARTICULARS]...`<br> e.g., `edit 1 2 3 v/true`
-**Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
+**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]…` <br> e.g. `search n/john alex v/false f/fass` 
+**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
+**Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
 **Help** | `help`
 **Exit** | `exit`
