@@ -129,7 +129,7 @@ public class TypicalPersons {
 
     public static List<String> getTypicalTagsStringForm() {
         return new ArrayList<>(Arrays.asList("friends",
-                "owesMoney friends",
+                "owesMoney;friends",
                 "",
                 "friends",
                 "",
