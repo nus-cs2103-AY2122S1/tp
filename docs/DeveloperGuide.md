@@ -310,15 +310,68 @@ Our team's main goal is to ensure that whatever the user does and types is done 
 
 #### Implementation
 
-Object diagram
+The unenroll operation is facilitated by the `UnenrollCommand` and `UnenrollcommandParser`. `UnenrollCommandParser` 
+first parses the user input to extract out the command and the arguments, after which the 
+`UnenrollCommand#execute(model)` method is invoked in the `LogicManager` class to unenroll the specified student from 
+the specified lesson.
 
-Sequence diagram
+The unenroll feature removes the student from the list of students in the specified lesson object. Subsequently, the
+lesson is removed from the set of lessons in the specified student object. The student must be enrolled in the lesson 
+in order for the unenroll operation to be successful.
 
-Activity diagram
+Given below is an example usage scenario and how the unenroll operation works.
+
+Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
+lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
+
+![UnenrollState0](images/UnenrollState0.png)
+
+Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1. 
+
+Step 2: The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
+internal steps.
+
+1. The tuitione model obtains the student specified. In this case, the student is `Alice`.
+2. The tuitione model obtains the lesson specified. In this case, the lesson is `l`.
+3. The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
+4. If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
+5. Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
+6. Relevant UI and Storage procedures are run to complete the execution in full.
+
+The final object state diagram is as such:
+
+![UnenrollState1](images/UnenrollState1.png)
+
+Notice how there is no longer any association between the student `Alice` and lesson `l`.
+
+The following sequence diagram shows how the unenroll operation works:
+
+![UnenrollSequenceDiagram](images/UnenrollSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes the unenroll lesson command:
+
+![UnenrollActivityDiagram](images/UnenrollActivityDiagram.png)
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>
+* Option 1: `unenroll STUDENT_INDEX l/LESSON_CODE`
+    * Pros:
+        * Unique lesson code clearly specifies the lesson that the student is to be unenrolled from.
+    * Cons:
+        * More difficult to type as the lesson code is quite long.
+* Option 2: `delete STUDENT_INDEX l/LESSON_INDEX`
+    * Pros:
+        * Much faster to type and execute.
+    * Cons:
+        * User may specify the wrong index and unenroll student from the wrong lesson.
+
+<ins>Decision</ins>  
+Ultimately, Option 2 (`unenroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as it is faster and easier to type. 
+This makes our app faster and easier to use. Additionally, there is not much significance in specifying the lesson 
+through a lesson code as although it cleary specifies the lesson, the chances of the user keying in the wrong index and 
+subsequently unenrolling the student from the wrong lesson is not high. Even if it does happen, the short command 
+syntax should make it easy to fix the mistake.
 
 ### Filter feature
 
