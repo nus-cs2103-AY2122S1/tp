@@ -155,10 +155,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String desc} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code desc} is invalid.
      */
     public static Description parseDescription(String desc) throws ParseException {
         requireNonNull(desc);
