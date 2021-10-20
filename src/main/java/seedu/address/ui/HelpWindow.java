@@ -87,6 +87,7 @@ public class HelpWindow extends AnchorPane {
      */
     private HelpWindow() {
         stage = new Stage();
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/HelpWindow.fxml"));
             fxmlLoader.setController(this);
@@ -104,11 +105,12 @@ public class HelpWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fillCommandTable();
+
         helpMessage.setText(HELP_MESSAGE);
         additionalInfo.setText("");
         userGuideMessage.setText(USER_GUIDE_MESSAGE);
         copyButton.setText("Copy URL");
+        fillCommandTable();
     }
 
     public static HelpWindow getWindow() {
@@ -250,7 +252,6 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
-        commandTable.put("viewtask", this::handleViewTask); // placeholder
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -332,13 +333,8 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleDelTask() {
-        additionalInfo.setText("Format: deltask INDEX ti/TASK_INDEX\n"
+        additionalInfo.setText("Format: deletetask INDEX ti/TASK_INDEX\n"
                 + "Deletes a task attached to the person at the specified INDEX");
-    }
-
-    private void handleViewTask() {
-        additionalInfo.setText("Format: viewtask INDEX\n"
-                + "Displays the list of tasks attached to the person at the specifiedINDEX");
     }
 
     private void handleEditTask() {

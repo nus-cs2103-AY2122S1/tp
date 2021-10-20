@@ -9,4 +9,9 @@ public abstract class AttributeContainsKeywordsPredicate implements Predicate<Pe
     protected AttributeContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
+
+    public boolean isEmpty() {
+        return keywords.stream().allMatch(String::isEmpty);
+    }
+
 }

@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -27,6 +27,13 @@ public class NameContainsKeywordsPredicate extends AttributeContainsKeywordsPred
                 && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
+    /**
+     * Checks if a person's name contains the specified keywords.
+     *
+     * @param person A {@code Person} whose name might match the keywords.
+     * @param keywords A {@code List<String>} that might contain words that match the name of the person.
+     * @throws java.lang.NullPointerException if person or keywords is null
+     */
     public boolean nameContainsWords(Person person, List<String> keywords) {
         requireNonNull(keywords);
         requireNonNull(person);

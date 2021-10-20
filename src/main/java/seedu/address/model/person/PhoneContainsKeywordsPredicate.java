@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.util.StringUtil;
 
 public class PhoneContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate {
     public PhoneContainsKeywordsPredicate(List<String> keywords) {
@@ -23,6 +23,13 @@ public class PhoneContainsKeywordsPredicate extends AttributeContainsKeywordsPre
                 && keywords.equals(((PhoneContainsKeywordsPredicate) other).keywords)); // state check
     }
 
+    /**
+     * Checks if a person's phone contains the specified keywords.
+     *
+     * @param person A {@code Person} whose phone might match the keywords.
+     * @param keywords A {@code List<String>} that might contain words that match the phone of the person.
+     * @throws java.lang.NullPointerException if person or keywords is null
+     */
     public boolean phoneContainsWords(Person person, List<String> keywords) {
         requireNonNull(keywords);
         requireNonNull(person);
