@@ -28,7 +28,7 @@ public class AddModCommand extends Command {
             + "Duplicate modules cannot be added.\n"
             + "Parameters: "
             + "[" + PREFIX_MOD + "MOD]...\n"
-            + "Example: \n" + COMMAND_WORD
+            + "Example: \n- " + COMMAND_WORD
             + " " + PREFIX_MOD + "CS2103T\n"
             + COMMAND_WORD + " " + PREFIX_MOD + "CS2100 need group"
             + " " + PREFIX_MOD + "CS1101S need member\n";
