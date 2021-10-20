@@ -53,7 +53,7 @@ public class SampleDataUtil {
                     getGenreSet("drama", "slice of life")),
             new Anime(new Name("Fullmetal Alchemist: Brotherhood"),
                     new Episode("64"),
-                    new Status("fi"),
+                    new Status("f"),
                     getGenreSet("action", "adventure", "comedy", "drama", "fantasy")),
             new Anime(new Name("Blue Period"),
                     new Episode("0"),
@@ -62,7 +62,7 @@ public class SampleDataUtil {
             new Anime(new Name("Komi-san wa, Comyushou desu."),
                     new Episode("0"),
                     new Status("t"),
-                    getGenreSet( "comedy", "slice of life"))
+                    getGenreSet("comedy", "slice of life"))
         };
     }
 
