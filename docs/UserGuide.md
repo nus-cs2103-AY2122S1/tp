@@ -391,12 +391,12 @@ Examples:
 * `person /find n:John`
 * `p 2 /f n:Mary`
 
-### _Find a group or subgroup_ : `find`
+### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
 Find all the groups with the keyword specified. This can also be used to find all the subgroups with the group and subgroup name specified.
 
-Format:  `find /group g:KEYWORD`
-Advanced user Format: `find /g g:KEYWORD`
+Format:  `group /find g:KEYWORD`
+Advanced user Format: `g /find g:KEYWORD`
 
 * Find all the group that matches the `KEYWORD`.
 * The keyword must not include backslash (`/`) or underscore (`_`).
