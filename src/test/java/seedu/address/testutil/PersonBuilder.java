@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.done.Done;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -38,6 +39,7 @@ public class PersonBuilder {
     private LevelOfEducation levelOfEducation;
     private Experience experience;
     private Set<Tag> tags;
+    private Done done;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -52,6 +54,7 @@ public class PersonBuilder {
         levelOfEducation = new LevelOfEducation(DEFAULT_LEVEL_OF_EDUCATION);
         experience = new Experience(DEFAULT_EXPERIENCE);
         tags = new HashSet<>();
+        done = new Done();
     }
 
     /**
@@ -67,6 +70,7 @@ public class PersonBuilder {
         levelOfEducation = personToCopy.getLevelOfEducation();
         experience = personToCopy.getExperience();
         tags = new HashSet<>(personToCopy.getTags());
+        done = personToCopy.getDone();
     }
 
     /**
