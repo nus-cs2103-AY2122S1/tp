@@ -1,23 +1,33 @@
 package seedu.programmer.ui;
 
+import seedu.programmer.logic.commands.AddCommand;
+import seedu.programmer.logic.commands.EditCommand;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandHistory {
-    private static final List<String> commandHistory = new ArrayList<>();
     private static final String DEFAULT_COMMAND = "";
-    private static int size = 0;
-    private static int counter = -1;
+    private static final int INITIAL_LIST_SIZE = 0;
+    private static final int INITIAL_COUNTER_VALUE = -1;
+
+    private List<String> commandHistory;
+    private int size;
+    private int counter;
+
+    public CommandHistory() {
+        commandHistory = new ArrayList<>();
+        size = INITIAL_LIST_SIZE;
+        counter = INITIAL_COUNTER_VALUE;
+    }
 
     /**
      * Adds the {@code command} to the {@code commandHistory}.
      * {@code counter} resets itself to point to the most recently added command to {@code commandHistory}.
      * @param command The string to be added to the history of commands.
      */
-    public static void add(String command) {
-        commandHistory.add(command);
-        size++;
-        counter = size - 1;
+    public void add(String command) {
+        addCommandToHistory(command);
     }
 
     /**
@@ -26,11 +36,11 @@ public class CommandHistory {
      * Returns the least recent command if the {@code counter} is already pointer at the oldest command.
      * @return The string of the next most recent entered command.
      */
-    public static String getPrevCommand() {
-        if (counter == -1) {
+    public String getPrevCommand() {
+        if (isCommandHistoryEmpty()) {
             return DEFAULT_COMMAND;
         }
-        if (counter == 0) {
+        if (isCounterAtFirst()) {
             return commandHistory.get(counter);
         }
         return commandHistory.get(counter--);
@@ -42,14 +52,58 @@ public class CommandHistory {
      * Returns the most recent command if the {@code counter} is already pointer at the latest command.
      * @return The string of the next least recent entered command.
      */
-    public static String getNextCommand() {
-        if (counter == -1) {
+    public String getNextCommand() {
+        if (isCommandHistoryEmpty()) {
             return DEFAULT_COMMAND;
-            
         }
-        if (counter == size - 1) {
+        if (isCounterAtLast()) {
             return commandHistory.get(counter);
         }
         return commandHistory.get(counter++);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditCommand)) {
+            return false;
+        }
+
+        // state check
+        CommandHistory e = (CommandHistory) other;
+        return commandHistory.equals(e.commandHistory)
+                && size == e.size
+                && counter == e.counter;
+    }
+
+    private boolean isCommandHistoryEmpty() {
+        return size == INITIAL_LIST_SIZE;
+    }
+
+    private void increaseSizeByOne() {
+        size++;
+    }
+
+    private void resetCounterToLast() {
+        counter = size - 1;
+    }
+
+    private void addCommandToHistory(String command) {
+        commandHistory.add(command);
+        increaseSizeByOne();
+        resetCounterToLast();
+    }
+
+    private boolean isCounterAtLast() {
+        return counter == size - 1;
+    }
+
+    private boolean isCounterAtFirst() {
+        return counter == 0;
     }
 }

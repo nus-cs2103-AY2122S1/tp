@@ -19,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final CommandHistory commandHistory = new CommandHistory();
 
     @FXML
     private TextField commandTextField;
@@ -44,7 +45,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            CommandHistory.add(commandText);
+            commandHistory.add(commandText);
             commandExecutor.execute(commandText);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
@@ -59,12 +60,12 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.UP) {
-            commandTextField.setText(CommandHistory.getPrevCommand());
+            commandTextField.setText(commandHistory.getPrevCommand());
             commandTextField.end();
             event.consume(); // Consume Event
         }
         if (event.getCode() == KeyCode.DOWN) {
-            commandTextField.setText(CommandHistory.getNextCommand());
+            commandTextField.setText(commandHistory.getNextCommand());
             commandTextField.end();
             event.consume(); // Consume Event
         }
