@@ -1,11 +1,12 @@
-
 .error {
-    -fx-text-fill: #d06651 !important; /* The error class should always override the default text-fill style */
+    /* The error class should always override the default text-fill style */
+    -fx-text-fill: #dc143c !important;
+    -fx-font-style: italic !important;
 }
 
 .list-cell:empty {
     /* Empty cells will not have alternating colours */
-    -fx-background: #383838;
+    -fx-background: #ff7bad;
 }
 
 .tag-selector {
@@ -17,4 +18,28 @@
 
 .tooltip-text {
     -fx-text-fill: white;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #ff7bad;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 10;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #ff7bad;
+    -fx-background-radius: 20.0 0.0 20.0 0.0;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #ffcfe5;
+}
+
+.tab-pane .tab-label {
+    -fx-font-family: "Open Sans Bold Italic";
+    -fx-font-size: 14px;
 }

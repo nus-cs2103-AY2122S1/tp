@@ -20,6 +20,7 @@ import seedu.address.logic.commands.FindProductCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClientCommand;
 import seedu.address.logic.commands.ListProductCommand;
+import seedu.address.logic.commands.StatCommand;
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -110,6 +111,9 @@ public class AddressBookParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case StatCommand.COMMAND_WORD:
+            return new StatCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
