@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.interview.Interview;
 import seedu.address.model.interview.InterviewContainsKeywordsPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;

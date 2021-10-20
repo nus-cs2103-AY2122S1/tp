@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -82,7 +86,7 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        interview = source.getInterview().get().parseTime;
+        interview = source.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime;
 
     }
 
@@ -168,7 +172,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Interview modelInterview;
-        if (interview.equals("-")) {  // check for empty interview
+        if (interview.isEmpty()) { // check for empty interview
             modelInterview = Interview.EMPTY_INTERVIEW;
         } else if (!Interview.isValidInterviewTime(interview)) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -178,7 +182,7 @@ class JsonAdaptedPerson {
         }
 
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
-                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, Optional.of(modelInterview));
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, Optional.ofNullable(modelInterview));
     }
 
 }

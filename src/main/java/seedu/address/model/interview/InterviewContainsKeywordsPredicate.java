@@ -3,7 +3,6 @@ package seedu.address.model.interview;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.model.person.Person;
 
 
@@ -12,14 +11,15 @@ import seedu.address.model.person.Person;
  */
 public class InterviewContainsKeywordsPredicate implements Predicate<Person> {
 
-    private final List<String> keywords;
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview can only be searched through numbers and relevant characters such as '-' or ':', " +
-                    "and it should not contain alphabets ";
+            "Interview can only be searched through numbers and relevant characters such as '-' or ':', "
+                    + "and it should not contain alphabets ";
     /**
      * Keyword does not contain alphabets.
      */
     public static final String VALIDATION_REGEX = "\\P{IsAlphabetic}+";
+    private final List<String> keywords;
+
     public InterviewContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

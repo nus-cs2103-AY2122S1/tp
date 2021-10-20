@@ -19,7 +19,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.tag.Tag;
 
-import javax.swing.text.html.Option;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.

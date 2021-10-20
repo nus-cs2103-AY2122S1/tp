@@ -1,11 +1,11 @@
 package seedu.address.model.interview;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents an interview in the address book.
@@ -13,9 +13,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Interview {
     public static final Interview EMPTY_INTERVIEW = new Interview();
-    public static final String parseFormat = "yyyy-MM-dd, H:mm";
+    public static final String PARSE_FORMAT = "yyyy-MM-dd, H:mm";
     public static final String MESSAGE_CONSTRAINTS =
-            "Interview time should follow the exact format: [" + parseFormat + "]. E.g. i/2021-10-22, 8:00";
+            "Interview time should follow the exact format: [" + PARSE_FORMAT + "]. E.g. i/2021-10-22, 8:00";
 
     public final String parseTime;
 
@@ -42,7 +42,7 @@ public class Interview {
      */
     public static boolean isValidInterviewTime(String test) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(parseFormat);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(PARSE_FORMAT);
             LocalDate.parse(test, formatter);
         } catch (DateTimeParseException e) {
             return false;
