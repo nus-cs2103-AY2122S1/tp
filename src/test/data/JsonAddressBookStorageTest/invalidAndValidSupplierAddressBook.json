@@ -14,7 +14,7 @@
     "supplyType": "Chicken",
     "deliveryDetails": "Tomorrow"
   }, {
-    "name": "Supplier With Invalid Phone Field",
+    "name": "Supplier With Invalid Phone and Delivery Details Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
     "address": "4th street",

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_MONTHLY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_PHONE_BOB;
@@ -63,7 +63,7 @@ public class EditSupplierDescriptorTest {
 
         // different delivery details -> returns false
         editedAmy = new EditSupplierDescriptorBuilder(DESC_AMY)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY)
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_BOB)
                 .build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }

@@ -60,7 +60,7 @@ public class SupplierCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         supplyType.setText("Supply Type: " + supplier.getSupplyType().supplyType);
-        deliveryDetails.setText("Delivery Details: " + supplier.getDeliveryDetails().deliveryDetails);
+        deliveryDetails.setText("Delivery Details: " + supplier.getDeliveryDetails().toString());
     }
 
     @Override
