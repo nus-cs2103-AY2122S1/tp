@@ -167,7 +167,7 @@ The loading of data into CsBook is facilitated by `JsonCsBookStorage`, `JsonSeri
 
 - `JsonCsBookStorage#readCsBook()` — Reads the current CSBook data
 - `JsonSerializableCsBook#toModelType()` - Converts the JsonSerializableCsBook to a CsBook object
-- `JsonSerializableCsBook#addStudentsToCsBook(csBook)` - Adds all students to a given CsBook 
+- `JsonSerializableCsBook#addStudentsToCsBook(csBook)` - Adds all students to a given CsBook
 - `JsonSerializableCsBook#addGroupsToCsBook(csBook)` - Adds all groups to a given CsBook
 - `JsonSerializableCsBook#addStudentsToGroups(csBook)` - Adds all students to their corresponding Groups
 - `JsonAdaptedStudent#toModelType(groupList)` - Converts the JsonAdaptedStudent to a Student object
@@ -175,13 +175,13 @@ The loading of data into CsBook is facilitated by `JsonCsBookStorage`, `JsonSeri
 
 Given below how loading data behaves at each step.
 
-Step 1. The user starts the app and an encrypted data file containing CsBook's information is present. The data 
+Step 1. The user starts the app and an encrypted data file containing CsBook's information is present. The data
 is decrypted and a call to `JsonCsBookStorage#readCsBook()` is made. After this, a call to `JsonSerializableCsBook#toModelType()`
 is made to convert the data into a CsBook object.
 
 ![LoadSequence0](images/LoadSequence0.puml)
 
-Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`. 
+Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
 Next, we add the students from the data into Csbook by calling `JsonAdaptedStudent#toModelType(groupList)`. `groupList` is
 required to add students to ensure that each student has a valid group.
 
@@ -210,7 +210,7 @@ The following sequence diagram shows how the overall loading data operation work
 - **Alternative 2:** Have each group store their student's information in the data file, load students and load groups separately.
 
     - Pros: Less computation as we can immediately convert the data file to retrieve the students and groups.
-    - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and 
+    - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and
     once in the list of groups.
 
 ### JSON encryption feature

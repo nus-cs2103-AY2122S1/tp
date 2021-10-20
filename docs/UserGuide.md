@@ -141,7 +141,7 @@ Format: `viewgroup GROUPNAME`
 
 Examples:
 * `viewgroup CS2103T` displays the group's description and its students.
-  
+
 
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
@@ -154,7 +154,7 @@ Format: `listgroups`
 
 Examples:
 * `listgroups` displays a list of all the groups, including their group description and number of students in them.
-  
+
 
   ![result for `listgroups`](images/listGroups.png)
 
