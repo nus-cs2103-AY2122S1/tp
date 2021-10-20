@@ -160,6 +160,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
+
         assertFalse(standardCommand.equals(new ClearStudentsCommand()));
 
         // different index -> returns false

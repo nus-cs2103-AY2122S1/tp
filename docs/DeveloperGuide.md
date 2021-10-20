@@ -258,14 +258,14 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 This product is for CS2103/T TAs who are:
-* Familiar with command line and code 
-* Worried about using too many applications to manage his students' projects and grades. 
-* Able to tolerate a steep learning curve 
-* Disorganized, forgetful 
+* Familiar with command line and code
+* Worried about using too many applications to manage his students' projects and grades.
+* Able to tolerate a steep learning curve
+* Disorganized, forgetful
 * Busy with other school projects and modules
 
 
-**Value proposition**: 
+**Value proposition**:
 
 TAs are required to access different platforms (LumiNUS, GitHub & CS2103/T website) and manage multiple groups and students.
 
@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user            | search for a student                                 | quickly access all information related to the student                  |
 | `* *`    | user                | purge all current data                               | get rid of sample data I used for exploring the app                    |
 | `* *`    | user                | sort groups & students by their tP / iP progress     | see who needs help                                                     |
-| `* *`    | expert user         | sort tasks by earliest deadline                      | know what tasks need to be completed urgently                          |
+| `* *`    | expert user         | sort tasks by earliest taskDate                      | know what tasks need to be completed urgently                          |
 | `* *`    | user                | specify default tasks to add when adding students    | I do not need to manually add the same tasks                           |
 | `* *`    | user                | create tags to be added to tasks                     | easily access the links related to the task                            |
 | `* *`    | user                | tag students to specific tasks                       | keep track of students related to a task                               |
@@ -326,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to go back to the welcome page to choose either students or tasks directory again. 
+1.  User requests to go back to the welcome page to choose either students or tasks directory again.
 2.  tApp navigates into the welcome page and displays the exit confirm message.
 
     Use case ends.
@@ -389,12 +389,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The student list is empty. 
-    
+* 2a. The student list is empty.
+
   Use case ends.
 
 * 2b. User requests to mark a specific person as absent in the list.
-  
+
     * 2b1. tApp marks the person as absent.
 
       Use case ends.
@@ -450,7 +450,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to create a task with the specified deadline
+1.  User requests to create a task with the specified taskDate
 2.  tApp creates the task and stores it in the task list
 3.  tApp displays the task that was just created
 
@@ -484,7 +484,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. The list is empty.
-  
+
   Use case ends.
 
 * 3a. The given index is invalid.
@@ -510,7 +510,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 * 3a. The given index is invalid.
-  
+
     * 3a1.  tApp shows an error message.
 
       Use case ends.
@@ -561,12 +561,144 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC12 - View group list**
+
+**MSS**
+
+1.  User requests to view the list of groups
+2.  tApp displays all the groups currently in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The group list is empty.
+
+    * 2a1. tApp displays an empty list
+
+      Use case ends.
+
+**Use case: UC13 - Add a group**
+
+**MSS**
+
+1.  User requests to create a group with the specified name
+2.  tApp creates the group and stores it in the group list
+3.  tApp displays the group that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The group name is empty.
+
+    * 1a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+* 1b. The group name is invalid.
+
+    * 1b1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+**Use case: UC14 - Delete a group**
+
+**MSS**
+
+1.  User requests to view their list of groups
+2.  tApp displays all the groups currently in the list
+3.  User requests to delete a specific group from the list of groups
+4.  tApp deletes the group
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. tApp shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC15 - Add a student to a group**
+
+**MSS**
+
+1.  User requests to view their list of students
+2.  tApp displays all the students currently in the list
+3.  User requests to add a specific student from the list of students to a specific group from the list of groups
+4.  tApp adds the student to the group
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The group name is empty or invalid.
+
+    * 3a1. tApp displays an error message stating that the group name is invalid and to follow the correct format
+
+      Use case ends.
+
+* 3b. The student index is empty or invalid.
+
+    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+
+      Use case ends.
+    
+* 3c. The group name is valid but the group does not exist.
+
+    * 3c1. tApp displays an error message stating that the group does not exist
+
+    Use case ends.
+  
+* 3d. The student index is valid but the student does not exist.
+
+    * 3d1. tApp displays an error message stating that the student already has a group
+
+    Use case ends.
+
+**Use case: UC16 - Add a Github link to a group**
+
+**MSS**
+
+1.  User requests to view their list of groups
+2.  tApp displays all the groups currently in the list
+3.  User requests to add a Github link to a specific group from the list of groups
+4.  tApp adds the link to the group
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The link fields are invalid.
+
+    * 3a1. tApp displays an error message stating that the link fields are invalid and to follow the correct format.
+
+      Use case ends.
+
+* 3b. The group index is invalid or missing.
+
+    * 3b1. tApp displays an error message stating that the command format is invalid and to follow the correct format
+
+      Use case ends.
+
+* 3c. The group specified already has an existing Github link.
+
+    * 3c1. tApp overwrites the link in the group with the one provided
+
+  Use case ends.
+
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 * A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-* Commands used should be intuitive, and should not exceed 80 characters. 
-* System should respond almost immediately upon entering a command. 
+* Commands used should be intuitive, and should not exceed 80 characters.
+* System should respond almost immediately upon entering a command.
 * Error messages shown should inform the user of what is wrong and what the correct command syntax should be.
 
 
@@ -574,7 +706,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Student contact**: A student entry with the corresponding student’s name, tutorial attendance, and tutorial participation.
-* **Task**: An entry with a textual description of a piece of work to do, and a time that specifies the date that piece of work should be completed by 
+* **Task**: An entry with a textual description of a piece of work to do, and a time that specifies the date that piece of work should be completed by
 * **Directory**: The list commands entered will be applied to (either student or task)
 
 --------------------------------------------------------------------------------------------------------------------

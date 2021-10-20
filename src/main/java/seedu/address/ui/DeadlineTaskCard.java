@@ -7,14 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 
-/**
- * An UI component that displays information of a {@code Student}.
- */
-public class TaskCard extends UiPart<Region> {
+public class DeadlineTaskCard extends UiPart<Region> {
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "DeadlineTaskListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -33,22 +31,24 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label deadline;
+    private Label taskDate;
     @FXML
     private Label status;
     @FXML
     private FlowPane tags;
 
     /**
-     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
+     * Creates a {@code TaskCode} with the given {@code Student} and index to display.
      */
-    public TaskCard(Task task, int displayedIndex) {
+    public DeadlineTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". ");
+        id.setText(displayedIndex + ". [D]");
         name.setText(task.getName().toString());
-        deadline.setText(task.getDeadline().toString());
-        status.setText(task.getStatus());
+        DeadlineTask deadlineTask = (DeadlineTask) task;
+        status.setText(task.getStatusString());
+
+        taskDate.setText(deadlineTask.getDeadline().toString());
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -63,12 +63,12 @@ public class TaskCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TaskCard)) {
+        if (!(other instanceof DeadlineTaskCard)) {
             return false;
         }
 
         // state check
-        TaskCard card = (TaskCard) other;
+        DeadlineTaskCard card = (DeadlineTaskCard) other;
         return id.getText().equals(card.id.getText())
                 && task.equals(card.task);
     }
