@@ -28,7 +28,7 @@ public class Order {
 
     public Order(LocalDate time, ID productId, Quantity quantity, Model model) {
         checkArgument(isValidProductID(productId, model), MESSAGE_CONSTRAINTS_ID);
-        Product product = model.getProductsById(productId);
+        Product product = model.getProductById(productId);
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
         this.time = time;

@@ -157,7 +157,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Product getProductsById(ID productId) {
+    public Product getProductById(ID productId) {
         FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
         products.setPredicate(product -> product.getId().equals(productId));
         return products.get(0);
