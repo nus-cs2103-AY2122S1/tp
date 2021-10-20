@@ -3,29 +3,8 @@ layout: page
 title: User Guide
 ---
 
- Table of Contents
-- [Introduction](#introduction)
-- [Quick start](#quick-start)
-- [Features](#features)
-    * [Viewing help](#viewing-help-help)
-    * [Adding a person](#adding-a-person-add)
-    * [Listing all persons](#listing-all-persons-list)
-    * [Editing a person](#editing-a-person-edit)
-    * [Searching for people](#searching-for-people-find)
-    * [Deleting a person](#deleting-a-person-del)
-    * [Adding a remark](#adding-a-remark-rmk)  
-    * [Adding an appointment](#adding-an-appointment-appt)
-    * [Editing an appointment](#editing-an-appointment-eppt)
-    * [Deleting an appointment](#deleting-an-appointment-dappt)
-    * [Updating completed appointment](#updating-completed-appointment-done)
-    * [Sorting all persons](#sorting-all-persons-sort)
-    * [Clearing all entries](#clearing-all-entries-clear)
-    * [Exiting the program](#exiting-the-program-exit)
-    * [Saving the data](#saving-the-data)
-    * [Editing the data file](#editing-the-data-file)
-    * [Viewing statistics](#viewing-statistics)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
+* Table of Contents
+  {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Introduction
@@ -311,7 +290,7 @@ If your changes to the data file makes its format invalid, FAST will discard all
 ### Viewing statistics
 
 FAST comes with built-in statistics to provide you with an overview of your data. 
-To view the statistics, simply click the "Stats" menu item on the top bar or press F2.
+To view the statistics, simply click the "Stats" menu item on the top bar or press `F2`.
 Currently, FAST supports these statistics:
 * Priority Tag Chart
 * Insurance Plan Chart (Coming soon!)
@@ -335,12 +314,12 @@ Action | Format, Examples
 **Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `dappt INDEX`<br> e.g., `dappt 1`
-**Delete Contact** | `del INDEX`<br> e.g., `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g., `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
-**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g., `rmk 1 r/likes dogs`
-**Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g., `find James Jake`
+**Delete Appointment** | `dappt INDEX`<br> e.g. `dappt 1`
+**Delete Contact** | `del INDEX`<br> e.g. `del 3`
+**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
+**Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Help** | `help [COMMAND]` <br> e.g. `help add`
 **List** | `list`
 **Remark** | `rmk INDEX [r/REMARK]`
