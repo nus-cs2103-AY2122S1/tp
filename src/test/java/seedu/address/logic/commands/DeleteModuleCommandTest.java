@@ -19,7 +19,6 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.testutil.TypicalModules;
 
 
-
 class DeleteModuleCommandTest {
     private Model model = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
 
