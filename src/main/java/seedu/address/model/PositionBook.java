@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.model.position.UniquePositionList;
 
 /**
@@ -55,6 +56,14 @@ public class PositionBook implements ReadOnlyPositionBook {
     public boolean hasPosition(Position position) {
         requireNonNull(position);
         return positions.contains(position);
+    }
+
+    /**
+     * Returns true if a position titled {@code title} exists in the position book.
+     */
+    public boolean hasPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return positions.containsPositionWithTitle(title);
     }
 
     /**

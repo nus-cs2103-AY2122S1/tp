@@ -15,6 +15,7 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.application.Application;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -237,6 +238,12 @@ public class ModelManager implements Model {
     public boolean hasPosition(Position position) {
         requireNonNull(position);
         return positionBook.hasPosition(position);
+    }
+
+    @Override
+    public boolean hasPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return positionBook.hasPositionWithTitle(title);
     }
 
     @Override

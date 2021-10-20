@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * The API of the Model component.
@@ -125,7 +126,9 @@ public interface Model {
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     // Position related methods
-    boolean hasPosition(Position toAdd);
+    boolean hasPosition(Position position);
+
+    boolean hasPositionWithTitle(Title title);
 
     void addPosition(Position toAdd);
 

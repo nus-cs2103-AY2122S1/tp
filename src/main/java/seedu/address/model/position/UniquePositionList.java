@@ -39,6 +39,14 @@ public class UniquePositionList implements Iterable<Position> {
     }
 
     /**
+     * Returns true if the list contains a position with the specified title.
+     */
+    public boolean containsPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return internalList.stream().anyMatch(position -> position.getTitle().equals(title));
+    }
+
+    /**
      * Adds a position to the list.
      * The position must not already exist in the list.
      */
