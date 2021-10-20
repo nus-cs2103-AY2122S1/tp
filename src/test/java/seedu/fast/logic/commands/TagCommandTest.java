@@ -44,5 +44,6 @@ public class TagCommandTest {
     }
 
     //TODO: Add more testcases
+    // for case when no parameters specified e.g. 'tag 1', should throw error or simply return the success message?
 
 }
