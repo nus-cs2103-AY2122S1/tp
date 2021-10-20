@@ -1,0 +1,16 @@
+@startuml
+start
+:user inputs find command;
+:Logic executes find command;
+:FindCommandParser parses the command;
+
+    if () then ([keywords to search are present])
+        :executes FindCommand;
+
+    else ([else])
+    :throw ParseException;
+    endif
+
+stop
+
+@enduml

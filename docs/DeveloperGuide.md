@@ -215,7 +215,7 @@ Given below is an example usage scenario:
 
 #### Implementation details
 
-Delete command is sued to delete an existing person or the next visit of a person in SeniorLove. It makes use of polymorphism and is similar to the other commands in SerniorLove:
+Delete command is used to delete an existing person or the next visit of a person in SeniorLove. It makes use of polymorphism and is similar to the other commands in SeniorLove:
 
 * `DeleteCommand` extends `Command`
 * `DeleteCommandParser` implements `Parser<DeleteCommand>`
@@ -275,6 +275,41 @@ The datetime is stored and displayed differently in the system for both efficien
 
 For example, time at two o'clock in the afternoon of 1st November 2021 will be stored or parsed as `2021-11-01 14:00` and displayed as `01 Nov 2021 14:00`
 
+### Find command
+
+#### Implementation details
+
+The find command carries out a AND search on the attributes of all elderly in SeniorLove, and shows a list of elderly who match the find parameters. The find parameters are strings that are non-empty.
+
+It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
+- `FindCommand` extends `Command`
+- `FindCommandParser` implements `Parser<FindCommand>`
+
+The following activity diagram illustrates the activity flow of the visit command:
+![FindCommandActivityDiagram](images/FindCommandActivityDiagram.png)
+
+The following sequence diagram shows how different components of SeniorLove interact with each other when executing a find command with a non-empty keyword:
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+Given below is an example usage scenario:
+1. User inputs the find command, specifying the keyword(s) to find.
+2. After successfully parsing the user input, the `FindCommand#execute(Model model)` method is called.
+3. Attributes of all elderly in the list are searched, and all elderly who satisfy the AND search will be returned.
+4. `CommandResult` object is instantiated and returned to `LogicManager`.
+
+#### Design choices
+
+- Searching by specified attributes:
+
+    This is a possible solution, but we chose to do a search across all attributes because we have many different flags and formatting, and it makes `find` harder to use if each attribute has to be specified.
+
+- AND search:
+
+    We chose to implement this over OR search because we want each new keyword to narrow the search space, so that it is easy to find elderly that match all the given attributes.
+
+- Substring match:
+
+    Matching by substring was implemented because it makes it easier to search for an elderly without having to remember their full attributes.
 
 ### \[Proposed\] Undo/redo feature
 
