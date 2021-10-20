@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.testutil.PositionBuilder;
 
 
@@ -210,8 +211,14 @@ public class AddPositionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
         public boolean hasPosition(Position toAdd) {
-            return false;
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPositionWithTitle(Title title) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
