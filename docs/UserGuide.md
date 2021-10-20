@@ -82,7 +82,8 @@ Adds a student to the TuitiONE.
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**<br>
+
+:bulb: **Tip:**
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
 
@@ -98,9 +99,11 @@ Examples:
 
 Adds a lesson to the TuitiONE.
 
-Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
+Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 
 * Adds the lesson with the specified prefixes.
 * GRADE here follows the similar requirements when adding a student.
@@ -109,6 +112,7 @@ Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST`
 * START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
 * Lessons are fixed at two hour periods.
 * The cost must be a non-negative number 0.0, 2.0, 3.3, …
+
 </div>
 
 Examples:
