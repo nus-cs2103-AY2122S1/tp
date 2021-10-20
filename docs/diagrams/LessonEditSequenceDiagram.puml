@@ -5,6 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":LessonEditCommandParser" as LessonEditCommandParser LOGIC_COLOR
+participant "eld:EditLessonDescriptor" as EditLessonDescriptor LOGIC_COLOR
 participant "le:LessonEditCommand" as LessonEditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant "editedPerson:Person" as Person LOGIC_COLOR
@@ -32,8 +33,15 @@ deactivate LessonEditCommandParser
 AddressBookParser -> LessonEditCommandParser : parse("1 2 time/1300-1500 subject/Science")
 activate LessonEditCommandParser
 
+create EditLessonDescriptor
+LessonEditCommandParser -> EditLessonDescriptor
+activate EditLessonDescriptor
+
+EditLessonDescriptor --> LessonEditCommandParser
+deactivate
+
 create LessonEditCommand
-LessonEditCommandParser -> LessonEditCommand
+LessonEditCommandParser -> LessonEditCommand : eld
 activate LessonEditCommand
 
 LessonEditCommand --> LessonEditCommandParser : le
@@ -52,7 +60,7 @@ LogicManager -> LessonEditCommand : executeUndoableCommand()
 activate LessonEditCommand
 
 create Lesson
-LessonEditCommand -> Lesson
+LessonEditCommand -> Lesson : createEditedLesson(eld)
 activate Lesson
 
 Lesson --> LessonEditCommand : editedLesson
@@ -65,7 +73,7 @@ Model --> LessonEditCommand
 deactivate Model
 
 create Person
-LessonEditCommand -> Person : lesson
+LessonEditCommand -> Person : PersonUtil.createEditedPerson(personToEdit, updatedLessons)
 activate Person
 
 Person --> LessonEditCommand : person

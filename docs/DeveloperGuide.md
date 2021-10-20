@@ -324,8 +324,8 @@ The figure below shows the sequence diagram for deleting a lesson.
 The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
 
 #### Storing Lessons
-The set of `Lesson` objects are stored with the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
-to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the .json file, where all the 
+The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
+to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the 
 `Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
 into `model`-friendly `Lesson` objects.
 
