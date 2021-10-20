@@ -97,8 +97,7 @@ The index of the resident is the corresponding number in the list
 shown when `view` (without the [INDEX] parameter) is called.
 
 Format: `view [INDEX]`
-* For an index i, 1 &leq; i &leq; n, where n is the number of
-  residents in the address book
+* For an index i, 1 &leq; i &leq; n, where n is the number of residents in the address book
 
 Examples:
 
