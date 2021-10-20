@@ -73,6 +73,13 @@ public class Person {
     }
 
     /**
+     * Returns true if person is vaccinated.
+     */
+    public boolean isVaccinated() {
+        return vaccStatus.vaccinated;
+    }
+
+    /**
      * Returns true if both persons have the same name and room.
      * This defines a weaker notion of equality between two persons.
      */

@@ -73,6 +73,22 @@ public class Event {
     }
 
     /**
+     * Checks if residents attending the event are vaccinated
+     * @return Returns true if any {@code resident} in the {@code Event} is not vaccinated
+     */
+    public boolean hasUnvaccinatedResident() {
+        return residents.hasUnvaccinatedResident();
+    }
+
+    /**
+     * Counts the number of unvaccinated residents in the {@code Event}
+     * @return Returns the number of unvaccinated residents in the {@code Event}
+     */
+    public int numOfUnvaccinatedResidents() {
+        return residents.numOfUnvaccinatedResidents();
+    }
+
+    /**
      * Returns true if the given eventName is same as the eventName of the current instance of Event
      */
     public boolean hasSameEventName(EventName eventName) {

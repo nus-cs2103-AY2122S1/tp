@@ -39,4 +39,10 @@ public class ResidentListTest {
         assertTrue(ResidentList.isValidResidentList("A213")); // rooms capital
         assertTrue(ResidentList.isValidResidentList("A213, b423")); // more than one room
     }
+
+    @Test
+    public void hasUnvaccinatedResident() {
+        ResidentList emptyResidentList = new ResidentList("");
+        assertFalse(emptyResidentList.hasUnvaccinatedResident());
+    }
 }

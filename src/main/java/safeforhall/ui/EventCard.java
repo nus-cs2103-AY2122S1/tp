@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
@@ -34,6 +35,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private HBox informationContainer;
+    @FXML
     private Label date;
     @FXML
     private Label venue;
@@ -41,6 +44,8 @@ public class EventCard extends UiPart<Region> {
     private Label capacity;
     @FXML
     private Label residents;
+    @FXML
+    private VBox vaccinatedContainer;
 
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
@@ -54,6 +59,19 @@ public class EventCard extends UiPart<Region> {
         venue.setText(Venue.DESC + event.getVenue().venue);
         capacity.setText(Capacity.DESC + event.getCapacity().capacity);
         residents.setText(ResidentList.DESC + event.getResidents().getResidents());
+
+        if (event.hasUnvaccinatedResident()) {
+            handleUnvaccinated();
+        }
+    }
+
+    /**
+     * Handles case where {@code event} contains any unvaccinated resident
+     */
+    public void handleUnvaccinated () {
+        this.getRoot().setStyle("-fx-background-color: #8B0000;");
+        Label textBox = new Label("Non-Vaccinated:" + event.numOfUnvaccinatedResidents());
+        vaccinatedContainer.getChildren().add(textBox);
     }
 
     @Override

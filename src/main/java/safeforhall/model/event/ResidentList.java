@@ -36,7 +36,7 @@ public class ResidentList {
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid list of residents.
      *
      * @param residents A string of residents.
      */
@@ -88,6 +88,33 @@ public class ResidentList {
             }
         }
         return newResidentList.toString();
+    }
+
+    /**
+     * Checks if any {@code resident} is not vaccinated
+     * @return Returns true if any {@code resident} in the {@code ResidentList} is not vaccinated
+     */
+    public boolean hasUnvaccinatedResident() {
+        for (Person person : residentList) {
+            if (!person.isVaccinated()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Counts the number of unvaccinated residents in the {@code ResidentList}
+     * @return Returns the number of unvaccinated residents in the {@code ResidentList}
+     */
+    public int numOfUnvaccinatedResidents() {
+        int total = 0;
+        for (Person person : residentList) {
+            if (!person.isVaccinated()) {
+                total++;
+            }
+        }
+        return total;
     }
 
     /**
