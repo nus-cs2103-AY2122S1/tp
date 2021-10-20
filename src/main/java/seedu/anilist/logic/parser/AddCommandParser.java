@@ -42,12 +42,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (argMultimap.getValue(PREFIX_EPISODE).isPresent()) {
             episode = ParserUtil.parseEpisode(argMultimap.getValue(PREFIX_EPISODE).get());
         } else {
-            episode = new Episode("0");
+            episode = new Episode(Episode.DEFAULT_EPISODE);
         }
         if (argMultimap.getValue(PREFIX_STATUS).isPresent()) {
             status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         } else {
-            status = new Status("w");
+            status = new Status(Status.DEFAULT_STATUS);
         }
         Set<Genre> genreList = ParserUtil.parseGenres(argMultimap.getAllValues(PREFIX_GENRE));
         Anime anime = new Anime(name, episode, status, genreList);
