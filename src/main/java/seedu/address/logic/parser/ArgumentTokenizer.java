@@ -45,6 +45,20 @@ public class ArgumentTokenizer {
     }
 
     /**
+     * Finds and returns all prefixes existing in the given arguments string as a list sorted by
+     * the order in which the user input the prefix.
+     *
+     * @param argString Arguments string of the form: {@code <prefix> value <prefix>value ...}
+     * @param prefixes  Prefixes to find in the arguments string
+     * @return          List of prefixes in the given arguments string sorted by order of user input
+     */
+    public static List<Prefix> findAllPrefixSorted(String argString, Prefix... prefixes) {
+        List<PrefixPosition> prefixPositions = findAllPrefixPositions(argString, prefixes);
+        prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
+        return prefixPositions.stream().map(PrefixPosition::getPrefix).collect(Collectors.toList());
+    }
+
+    /**
      * Finds all zero-based prefix positions in the given arguments string.
      *
      * @param argsString Arguments string of the form: {@code preamble <prefix>value <prefix>value ...}
