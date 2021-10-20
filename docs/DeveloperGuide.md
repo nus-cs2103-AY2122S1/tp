@@ -151,8 +151,8 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
-
 This section describes some noteworthy details on how certain features are implemented.
+
 
 ### [Developed] Time conflict management
 
@@ -160,6 +160,8 @@ The time conflict management mechanism is facilitated by `TimeSlot`. It is encap
 defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
 * `Timeslot#compareTime()` - Compares two time slots to detect time conflict
 * `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+
+
 
 Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
 
@@ -170,6 +172,7 @@ a guidance to correct the time slot format.
 Step2: After confirmed the time slot format is correct, `TuitionClass` will check whether there is a conflict in
 time slot exists. If there is a conflict, a `CommandException` will be thrown.
 
+
 Step3: If time slot follows the format and no conflict exist, a new `TuitionClass` will be created
 
 ### [Developed] Display of Timetable
@@ -177,6 +180,7 @@ Step3: If time slot follows the format and no conflict exist, a new `TuitionClas
 The construction of the read-only timetable is mainly facilitated by the `Timetable` class which is encapsulated in the `Tuition` package.
 The `Timetable` receives a complete tuition class list from the `UniqueTuitionList` class, and then processes the `TimeSlot` occupied by each `TuitionClass` to construct a timetable.
 It generates a timetable with the help of the `TimetableInfoPage` class using the following operations:
+
 * `Timetable#parseTime()` - Extracts `TimeSlot` occupied by each `TuitionClass`. Determines the size of the timetable using the earliest starting time and latest ending time of the tuition class list
 * `TimetableInfoPage#setTableTime(start, end)` - Constructs a timetable given the starting and ending time
 * `Timetable#insertSlot()` - Inserts all tuition classes into the timetable
@@ -187,15 +191,33 @@ Step1: The user enters `timetable` command. The `TimetableCommand` class will fi
 If there is not any tuition class, a `CommandException` will be thrown to alert the user that no class has been found.
 
 Step2: Upon ensuring there are tuition classes, the list of tuition classes are passed to the `Timetable` class.
+
 It will proceed to parse the `TimeSlot` in each tuition class.
 After comparing the time when each `TuitionClass` takes place, the time range and thus the size of the timetable to be produced can be decided.
 
 Step3: The intended size of timetable is then passed to the `TimetableInfoPage` class.
+
 Following the construction of the timetable, each `TuitionClass` is then inserted into the timetable by the `TimetableInfoPage` class.
 
 Step4: The complete timetable is displayed to user through the `UI` component.
 
 
+### [Developed] Adding Remarks With Editor
+Users can add, edit, or remove remarks for students or tuition classes, which is facilitated by `RemarkEditor`. The `UIManager` displays a dialog box with a text area for users to type in the description of the remark. Additionally, the `RemarkEditor` supports the following operations:
+
+- `RemarkEditor#setRemark(name, remark)` — Sets the name and remark of the identified student or tuition class.
+- `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
+
+The interactions between the components during the execution of the `RemarkCommand` is show in the sequence diagram below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
+![Ui](images/RemarkCommandSequenceDiagram.png)
+
+Given below is an example usage scenario of how a user can interact with the `RemarkEditor` dialog.
+
+Step 1. The user executes `remark 1` to edit the remark of the 1st student. A dialog box pops up for the user to edit the remark description.
+
+Step 2.1. The user clicks `Ok`  and the remark for the student is automatically updated to the new description.
+
+Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the remark will remain unchanged.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
