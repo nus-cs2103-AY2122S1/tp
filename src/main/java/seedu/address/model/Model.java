@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,6 +85,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered Participant list */
     ObservableList<Participant> getFilteredParticipantList();
 
+    /** Returns the Participant that satisfies the given predicate, if the Participant exists. */
+    Optional<Participant> findParticipant(Predicate<Participant> predicate);
+
     /**
      * Updates the filter of the filtered Participant list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -105,6 +109,14 @@ public interface Model {
      * {@code target} must exist in Managera.
      */
     void removeEvent(Event target);
+
+    /**
+     * Replaces the given Event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in Managera.
+     * This Event identity of {@code editedEvent} must not be the same
+     * as another existing Event in Managera.
+     */
+    void setEvent(Event target, Event editedEvent);
 
     /**
      * Marks the given Event {@code target} as done.

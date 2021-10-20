@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -73,6 +74,11 @@ public class DefaultModelStub implements Model {
     }
 
     @Override
+    public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Participant> getFilteredParticipantList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -94,6 +100,11 @@ public class DefaultModelStub implements Model {
 
     @Override
     public void removeEvent(Event target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
         throw new AssertionError("This method should not be called.");
     }
 

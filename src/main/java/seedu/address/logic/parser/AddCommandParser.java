@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // NOT REQUIRED
-        BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_DATE).orElse("NA"));
+        BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_DATE).orElse("N/A"));
         // TODO: If separating adding of notes and NOK, change to simply an Empty Set and Empty Arraylist.
         Set<Note> noteList = ParserUtil.parseNotes(argMultimap.getAllValues(PREFIX_NOTE));
         ArrayList<NextOfKin> nextOfKins = ParserUtil.parseNextOfKins(argMultimap.getAllValues(PREFIX_NEXT_OF_KIN));

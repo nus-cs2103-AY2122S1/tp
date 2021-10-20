@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -107,6 +108,8 @@ public class ModelManager implements Model {
     @Override
     public void addParticipant(Participant participant) {
         addressBook.addParticipant(participant);
+        logger.info("Participant " + participant.getParticipantIdValue()
+                + " was successfully added to AddressBook");
         updateFilteredParticipantList(PREDICATE_SHOW_ALL_PARTICIPANTS);
     }
 
@@ -126,6 +129,12 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Participant> getFilteredParticipantList() {
         return filteredParticipants;
+    }
+
+    @Override
+    public Optional<Participant> findParticipant(Predicate<Participant> predicate) {
+        requireNonNull(predicate);
+        return filteredParticipants.stream().filter(predicate).findFirst();
     }
 
     @Override
@@ -187,6 +196,12 @@ public class ModelManager implements Model {
     public void removeEvent(Event target) {
         requireNonNull(target);
         addressBook.removeEvent(target);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(target);
+        addressBook.setEvent(target, editedEvent);
     }
 
     @Override
