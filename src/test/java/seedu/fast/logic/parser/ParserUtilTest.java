@@ -19,6 +19,8 @@ import seedu.fast.model.person.Address;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
+import seedu.fast.model.tag.InvestmentPlanTag;
+import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -48,6 +50,10 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_PRIORITY_TAG_1 = "pr/low";
+    private static final String VALID_PRIORITY_TAG_2 = "pr/high";
+    private static final String VALID_INVESTMENT_PLAN_TAG_1 = "ip/save";
+    private static final String VALID_INVESTMENT_PLAN_TAG_2 = "ip/life";
     private static final String VALID_HELP_ARG_1 = "Add";
     private static final String VALID_HELP_ARG_2 = "";
     private static final String VALID_HELP_COMMAND_1 = "help help";
@@ -349,4 +355,29 @@ public class ParserUtilTest {
     public void parse_invalidVenueInput_failure() {
         assertThrows(ParseException.class, ()-> ParserUtil.parseVenueString(INVALID_VENUE_INPUT));
     }
+
+    @Test
+    public void parsePriorityTag_validInput1_success() {
+        String expectedString = PriorityTag.LowPriority.NAME;
+        assertEquals(expectedString, ParserUtil.parsePriorityTag(VALID_PRIORITY_TAG_1));
+    }
+
+    @Test
+    public void parsePriorityTag_validInput2_success() {
+        String expectedString = PriorityTag.HighPriority.NAME;
+        assertEquals(expectedString, ParserUtil.parsePriorityTag(VALID_PRIORITY_TAG_2));
+    }
+
+    @Test
+    public void parseInvestmentPlanTag_validInput1_success() {
+        String expectedString = InvestmentPlanTag.Savings.NAME;
+        assertEquals(expectedString, ParserUtil.parseInvestmentPlanTag(VALID_INVESTMENT_PLAN_TAG_1));
+    }
+
+    @Test
+    public void parseInvestmentPlanTag_validInput2_success() {
+        String expectedString = InvestmentPlanTag.LifeInsurance.NAME;
+        assertEquals(expectedString, ParserUtil.parseInvestmentPlanTag(VALID_INVESTMENT_PLAN_TAG_2));
+    }
+
 }

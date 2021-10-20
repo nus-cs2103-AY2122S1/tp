@@ -12,14 +12,19 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
             + "and not more than 20 characters long, or follow the specified \n"
-            + "format for a PriorityTag (low, med or high)";
+            + "format for a PriorityTag (low, med or high) or InvestmentPlanTag ()";
+
 
     public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
-        + "Tags can be applied using the Add or Edit command.\n\n"
+        + "Tags can be applied using the Add,Edit or Tag command.\n\n"
         + "Parameters (using Edit): \n"
         + "edit INDEX t/TAG\n\n"
         + "Example: \n"
-        + "edit 1 t/High Value Client";
+        + "edit 1 t/High Value Client\n\n"
+        + "Parameters (using Tag): \n"
+        + "tag INDEX a/ADD_TAG d/DELETE_TAG\n\n"
+        + "Example: \n"
+        + "tag 1 a/Low Value Client d/Medium Value Client";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -64,8 +69,13 @@ public class Tag {
      * Create either an instance of a Tag or a PriorityTag depending on the input term.
      */
     public static Tag createTag(String term) {
-        if (term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX)) {
+        boolean hasPriorityTagTerm = term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        if (hasPriorityTagTerm) {
             return new PriorityTag(term);
+        }
+        boolean hasInvestmentPlanTerm = term.matches(InvestmentPlanTag.INVESTMENT_PLAN_VALIDATION_REGEX);
+        if (hasInvestmentPlanTerm) {
+            return new InvestmentPlanTag(term);
         }
         return new Tag(term);
     }
