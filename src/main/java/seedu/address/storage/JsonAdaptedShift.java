@@ -39,6 +39,9 @@ class JsonAdaptedShift {
      * @throws IllegalValueException if there were any data constraints violated in the adapted shift.
      */
     public Shift toModelType() throws IllegalValueException {
+        if (!Shift.isValidShift(shift)) {
+            throw new IllegalValueException(Shift.MESSAGE_CONSTRAINTS);
+        }
         return new Shift(shift);
     }
 

@@ -26,7 +26,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditCustomerDescriptorBuilder;
 
 
@@ -149,7 +149,7 @@ public class ReservationCommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new CustomerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new CustomerClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }

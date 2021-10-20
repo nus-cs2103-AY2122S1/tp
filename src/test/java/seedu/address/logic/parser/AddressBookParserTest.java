@@ -29,12 +29,11 @@ import seedu.address.logic.commands.EditEmployeeCommand.EditEmployeeDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCustomerCommand;
 import seedu.address.logic.commands.ReserveCommand;
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.testutil.CustomerBuilder;
@@ -62,7 +61,6 @@ public class AddressBookParserTest {
         Employee employee = new EmployeeBuilder().build();
         AddEmployeeCommand command = (AddEmployeeCommand) parser.parseCommand(EmployeeUtil
                 .getAddEmployeeCommand(employee));
-        System.out.println(employee.getShifts());
         assertEquals(new AddEmployeeCommand(employee), command);
     }
 
@@ -93,12 +91,8 @@ public class AddressBookParserTest {
     public void parseCommand_editEmployee() throws Exception {
         Employee employee = new EmployeeBuilder().build();
         EditEmployeeDescriptor descriptor = new EditEmployeeDescriptorBuilder(employee).build();
-        System.out.println(EditEmployeeCommand.COMMAND_WORD
-                + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
         EditEmployeeCommand command = (EditEmployeeCommand) parser.parseCommand(EditEmployeeCommand.COMMAND_WORD
             + " " + INDEX_FIRST_PERSON.getOneBased() + " " + EmployeeUtil.getEditEmployeeDescriptorDetails(descriptor));
-        System.out.println(new EditEmployeeCommand(INDEX_FIRST_PERSON, descriptor));
         assertEquals(new EditEmployeeCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
@@ -113,7 +107,7 @@ public class AddressBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCustomerCommand command = (FindCustomerCommand) parser.parseCommand(
                 FindCustomerCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCustomerCommand(new CustomerNameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCustomerCommand(new CustomerClassContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -133,12 +127,6 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
-    }
-
-    @Test
-    public void parseCommand_listCustomer() throws Exception {
-        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_WORD) instanceof ListCustomerCommand);
-        assertTrue(parser.parseCommand(ListCustomerCommand.COMMAND_WORD + " 3") instanceof ListCustomerCommand);
     }
 
     @Test

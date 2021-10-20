@@ -25,9 +25,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.Employee;
-import seedu.address.model.person.employee.EmployeeNameContainsKeywordsPredicate;
+import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditCustomerDescriptorBuilder;
 import seedu.address.testutil.EditEmployeeDescriptorBuilder;
 
@@ -112,6 +112,7 @@ public class CommandTestUtil {
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "abc"; //alphabets not allowed
     public static final String INVALID_JOBTITLE_DESC = " " + PREFIX_JOBTITLE + "Account Manager*"; // '*' not allowed
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_SHIFT_DESC = " " + PREFIX_SHIFT + "123-123-123-123"; // must be in correct format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -197,7 +198,7 @@ public class CommandTestUtil {
 
         Customer customer = model.getFilteredCustomerList().get(targetIndex.getZeroBased());
         final String[] splitName = customer.getName().fullName.split("\\s+");
-        model.updateFilteredCustomerList(new CustomerNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCustomerList(new CustomerClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCustomerList().size());
     }
@@ -211,7 +212,7 @@ public class CommandTestUtil {
 
         Employee employee = model.getFilteredEmployeeList().get(targetIndex.getZeroBased());
         final String[] splitName = employee.getName().fullName.split("\\s+");
-        model.updateFilteredEmployeeList(new EmployeeNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEmployeeList(new EmployeeClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEmployeeList().size());
     }

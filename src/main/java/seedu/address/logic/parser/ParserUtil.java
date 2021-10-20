@@ -286,6 +286,9 @@ public class ParserUtil {
     public static Shift parseShift(String shift) throws ParseException {
         requireNonNull(shift);
         String trimmedShift = shift.trim();
+        if (!Shift.isValidShift(trimmedShift)) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
         return new Shift(trimmedShift);
     }
 
