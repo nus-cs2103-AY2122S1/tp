@@ -95,7 +95,7 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
-   /**
+    /**
      * Parse the {@code tags} into a {@code List<Task>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */

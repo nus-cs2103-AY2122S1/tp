@@ -213,6 +213,7 @@ public class EditCommand extends Command {
 
         public Optional<Description> getDescription() {
             return Optional.ofNullable(description);
+        }
 
         public void setTasks(List<Task> tasks) {
             this.tasks = tasks;
