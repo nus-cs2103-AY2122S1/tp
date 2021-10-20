@@ -12,8 +12,8 @@ package Tuitione <<rectangle>> {
     }
     package Students <<rectangle>> {
         object "<u>s1:Student" as Student {
-        Name = Alice
-        Grade = P2
+        name = Alice
+        grade = P2
         }
     }
 
