@@ -8,7 +8,7 @@ package seedu.address.commons.core.index;
  * base the other component is using for its index. However, after receiving the {@code Index}, that component can
  * convert it back to an int if the index will not be passed to a different component again.
  */
-public class Index implements Comparable {
+public class Index implements Comparable<Index> {
     private int zeroBasedIndex;
 
     /**
@@ -52,19 +52,19 @@ public class Index implements Comparable {
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
     }
 
+    @Override
+    public int hashCode() {
+        Integer i = zeroBasedIndex;
+        return i.hashCode();
+    }
+
     /**
      * Compare two Index by their value
      */
-
     @Override
-    public int compareTo(Object o) {
-        if (!(o instanceof Index)) {
-            return 0;
-        } else {
-            Index other = (Index) o;
-            Integer thisInt = this.getZeroBased();
-            Integer otherInt = other.getZeroBased();
-            return thisInt.compareTo(otherInt);
-        }
+    public int compareTo(Index other) {
+        Integer thisInt = this.getZeroBased();
+        Integer otherInt = other.getZeroBased();
+        return thisInt.compareTo(otherInt);
     }
 }
