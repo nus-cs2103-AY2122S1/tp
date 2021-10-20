@@ -5,14 +5,16 @@ import java.util.function.Predicate;
 
 public class TaskDateAfterCurrentDatePredicate implements Predicate<Task> {
     private final LocalDate currentDate = LocalDate.now();
-    private final TaskList taskList;
 
-    public TaskDateAfterCurrentDatePredicate(TaskList taskList) {
-        this.taskList = taskList;
+    public TaskDateAfterCurrentDatePredicate() {
     }
 
     @Override
     public boolean test(Task task) {
-        return false;
+        if (!task.getTaskDate().hasDate()) {
+            return false;
+        }
+        LocalDate taskDateToCheck = task.getTaskDate().getDate().get();
+        return taskDateToCheck.isAfter(currentDate) || taskDateToCheck.isEqual(currentDate);
     }
 }

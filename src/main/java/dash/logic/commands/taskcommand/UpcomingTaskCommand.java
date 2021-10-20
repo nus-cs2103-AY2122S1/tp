@@ -13,13 +13,7 @@ public class UpcomingTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all upcoming tasks";
 
-    private final TaskDateAfterCurrentDatePredicate predicate;
-
-    public UpcomingTaskCommand(TaskDateAfterCurrentDatePredicate predicate) {
-        this.predicate = predicate;
-    }
-
-
+    private final TaskDateAfterCurrentDatePredicate predicate = new TaskDateAfterCurrentDatePredicate();
 
     @Override
     public CommandResult execute(Model model) {
