@@ -111,16 +111,16 @@ public class AnimeListParserTest {
 
         //If the previous command requires confirmation (i.e. ClearCommand), these become invalid inputs which
         //would abort the clear operation
-        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear") instanceof AbortClearCommand);
         assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "list") instanceof AbortClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "help") instanceof AbortClearCommand);
     }
 
     @Test
     public void parseConfirmationCommand_confirmClear() throws Exception {
-        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "y") instanceof ConfirmClearCommand);
-        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "Y") instanceof ConfirmClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear") instanceof ConfirmClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "CLEAR") instanceof ConfirmClearCommand);
         //trailing whitespace
-        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "Y  ") instanceof ConfirmClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear  ") instanceof ConfirmClearCommand);
     }
 
     @Test

@@ -8,7 +8,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
 public class ConfirmClearCommand extends Command {
-    public static final String COMMAND_WORD = "y";
+    public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Anime(s) have been cleared!";
 
 

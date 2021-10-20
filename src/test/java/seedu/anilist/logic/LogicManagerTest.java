@@ -77,10 +77,9 @@ public class LogicManagerTest {
         Model modelWithAnime = new ModelManager(getTypicalAnimeList(), new UserPrefs());
         logic = new LogicManager(modelWithAnime, storage);
 
-        String clearCmd = "clear";
-        String confirmClearCmd = "y";
-        logic.execute(clearCmd);
-        CommandResult finalResult = logic.execute(confirmClearCmd);
+        String cmd = "clear";
+        logic.execute(cmd);
+        CommandResult finalResult = logic.execute(cmd);
 
         assertEquals(ConfirmClearCommand.MESSAGE_SUCCESS, finalResult.getFeedbackToUser());
     }

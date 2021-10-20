@@ -98,7 +98,7 @@ public class AnimeListParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseConfirmationCommand(Command cmdInProgress, String userInput) throws ParseException {
-        String cmdWord = userInput.trim().toLowerCase(Locale.ROOT);
+        String cmdWord = userInput.trim();
         //Extendable to future commands that require confirmation
         switch (cmdWord) {
         case ConfirmClearCommand.COMMAND_WORD:
