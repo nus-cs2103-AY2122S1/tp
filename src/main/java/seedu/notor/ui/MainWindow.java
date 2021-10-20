@@ -156,7 +156,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleNote(Person person, Logic logic) {
-        NoteWindow noteWindow = new NoteWindow(person, logic);
+        NoteWindow noteWindow = new NoteWindow(person, logic, resultDisplay);
         if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
             NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
             noteWindow.show();

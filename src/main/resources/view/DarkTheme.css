@@ -51,7 +51,7 @@
 .table-view .column-header-background {
     -fx-background-color: transparent;
 }
-
+.
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
@@ -127,6 +127,17 @@
     -fx-font-size: 13px;
     -fx-text-fill: #010504;
 }
+.text_area {
+    -fx-control-inner-background: '#808080';
+    -fx-font-family: "Open Sans Regular";
+    -fx-opacity: 1;
+    -fx-text-fill: white;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+    -fx-text-box-border: -fx-control-inner-background;
+    -fx-border-width: 5px;
+}
+
 
 .stack-pane {
     -fx-background-color: derive(#1d1d1d, 20%);

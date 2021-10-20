@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class Note {
     public static final Note EMPTY_NOTE = new EmptyNote();
+    /** regex to remove newLine **/
+    private static final String REMOVE_EMPTY_LINES = "(?m)^\\s*$[\n\r]{1,}";
 
     /**
      * content of note
@@ -45,6 +47,9 @@ public class Note {
         Note noteOther = (Note) other;
         return value.equals(noteOther.value) && savedDate.equals(noteOther.savedDate); // state check
     }
+    public String getNoEmptyLineNote() {
+        return value.replaceAll(REMOVE_EMPTY_LINES, "");
+    }
 
     @Override
     public int hashCode() {
@@ -55,12 +60,10 @@ public class Note {
     public String toString() {
         return value;
     }
-
     private static final class EmptyNote extends Note {
         public EmptyNote() {
             super("", "");
         }
-
         @Override
         public boolean equals(Object other) {
             return other == this;

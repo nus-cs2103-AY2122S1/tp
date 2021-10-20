@@ -1,7 +1,6 @@
 package seedu.notor.logic.executors.person;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
@@ -32,9 +31,6 @@ public class PersonNoteExecutor extends PersonExecutor {
         Person editedPerson = new Person(
                 storedPerson.getName(), storedPerson.getPhone(), storedPerson.getEmail(),
                 storedPerson.getNote(), storedPerson.getTags());
-
-        model.setPerson(storedPerson, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(generateSuccessMessage(editedPerson), false, true, editedPerson, false);
     }
