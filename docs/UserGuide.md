@@ -6,7 +6,7 @@ title: User Guide
 Notor is a desktop application for mentors to keep tabs on their mentees, **optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type faster than the average typing speed, Notor allows you to take notes quickly and efficiently, while keeping them in an easy to reference format, which is vital if you are taking notes during meetings with mentees.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -49,14 +49,15 @@ Refer to the [Features](#Features) below for details of each command.
 **Information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n:NAME`, `NAME` is a parameter which can be used as `add n:John Doe`.
+  e.g. in `person /create n:NAME`, `NAME` is a parameter which can be used as `/create n:John Doe`.
 
 * Round brackets `()` refer to COMPULSORY arguments.<br>
-  e.g `(GROUP_NAME)` means that the group name must be entered a that position.
+  e.g `g:(GROUP_NAME)` means that the group name must be entered a that position.
   
 * Items in square brackets are optional.<br>
   e.g `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
 
+[comment]: <> (MAY DELETE TAGS)
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -65,10 +66,9 @@ Refer to the [Features](#Features) below for details of each command.
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p:12341234 p:56785678`, only `p:56785678` will be taken.)
 
-[comment]: <> (  Change this example e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.)
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be
   ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -86,19 +86,22 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from Notor.
+Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this 
+command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 
 Format: `clear`
+* Take care not to confuse this command with the more specific`/clearnote` command.
 
 #### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and saves your data.
 
 Format: `exit`
 
 ## Filtering with Notor
 
 Sometimes, you will want to view all people, groups, subgroups, or tags to understand what you have saved in your Notor. At other times, you will want to find those which fit into certain parameters.
+
 ### List all ___: `list`
 List can show all persons, groups, subgroups, or tags which you have added to Notor. Ensure you have one and only one parameter which determines what is to be shown.
 
