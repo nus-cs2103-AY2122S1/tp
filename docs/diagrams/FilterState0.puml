@@ -3,8 +3,8 @@
 
 title Initial state
 
-package Tuitione {
-    package lessonList {
+package Tuitione <<rectangle>> {
+    package lessonList <<rectangle>> {
         object "<u>l1:Lesson" as Lesson1 {
         subject = "English"
         grade = "S2"
@@ -15,7 +15,7 @@ package Tuitione {
         grade = "S2"
         }
     }
-    package studentList {
+    package studentList <<rectangle>> {
         object "<u>s1:Student" as Student1 {
         grade = "S2"
         }
