@@ -35,7 +35,7 @@ public class SampleDataUtil {
                     new Nationality("Malaysia"), new TutorialGroup("W28"), new SocialHandle("@charlotte"),
                     new Gender("F"), new Remark("likes to eat"), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Nationality("Singapore"), new TutorialGroup("E02"), new SocialHandle("@davidl"),
+                    new Nationality("Singapore"), new TutorialGroup("T02"), new SocialHandle("@davidl"),
                     new Gender("M"), new Remark("likes to cook"), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Nationality("Singapore"), new TutorialGroup("W01"), new SocialHandle("@irfan"),

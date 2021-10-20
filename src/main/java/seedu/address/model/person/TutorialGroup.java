@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TutorialGroup {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial Groups should only contain one uppercase letter followed by two digits, "
+            "Tutorial Groups should only contain one letter that is either M/T/W/F followed by two digits, "
                     + "and it should not be blank";
-    public static final String VALIDATION_REGEX = "[A-Z]\\d{2}";
+    public static final String VALIDATION_REGEX = "[mtwfMTWF]\\d{2}";
 
     public final String value;
 
