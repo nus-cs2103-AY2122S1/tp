@@ -90,7 +90,7 @@ public class DeleteCommand extends Command {
     private void executeSingleDelete(List<Person> lastShownList, Model model, Index targetIndex)
             throws CommandException {
 
-        if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(),lastShownList.size())) {
+        if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(), lastShownList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -103,7 +103,7 @@ public class DeleteCommand extends Command {
         for (int i = 0; i < indexArray.length; i++) {
             targetIndex = Index.indexModifier(indexArray[i], i);
 
-            if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(),lastShownList.size())) {
+            if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(), lastShownList.size())) {
                 throw new CommandException(String.format("%1$s contact(s) has been deleted "
                                 + "before the invalid index at 'index %2$s' is detected.",
                         i, indexArray[i].getOneBased()));
