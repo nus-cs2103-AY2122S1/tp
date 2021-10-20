@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.COUNT_DESC_ZERO;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_FORMAT;
@@ -104,11 +105,17 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_noNameNorId_failure() {
+    public void parse_noNameOrId_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // both name and id prefix missing
         assertParseFailure(parser, COUNT_DESC_BAGEL, expectedMessage);
+    }
+
+    @Test
+    public void parse_countZero_failure() {
+        assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + COUNT_DESC_ZERO,
+                Messages.MESSAGE_INVALID_COUNT_INTEGER);
     }
 
     @Test

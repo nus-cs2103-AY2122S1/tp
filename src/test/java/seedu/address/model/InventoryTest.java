@@ -24,7 +24,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.testutil.ItemBuilder;
@@ -66,8 +65,6 @@ public class InventoryTest {
     @Test
     public void hasItem_nullItem_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> inventory.hasItem((Item) null));
-        assertThrows(NullPointerException.class, () -> inventory.hasItem((Name) null));
-        assertThrows(NullPointerException.class, () -> inventory.hasItem((String) null));
     }
 
     @Test
@@ -85,15 +82,8 @@ public class InventoryTest {
     public void hasItem_itemWithSameIdentityFieldsInInventory_returnsTrue() {
         inventory.addItem(APPLE_PIE);
 
-        // Search by item
         Item editedPie = new ItemBuilder(APPLE_PIE).withTags(VALID_TAG_POPULAR).build();
         assertTrue(inventory.hasItem(editedPie));
-
-        // Search by name
-        assertTrue(inventory.hasItem(APPLE_PIE.getName()));
-
-        // Search by id
-        assertTrue(inventory.hasItem(APPLE_PIE.getId()));
     }
 
     @Test
@@ -166,64 +156,32 @@ public class InventoryTest {
     }
 
     @Test
-    public void removeItemByName_removeAll_success() {
+    public void removeItem_removeAll_success() {
         inventory.addItem(APPLE_PIE);
+        inventory.removeItem(APPLE_PIE, APPLE_PIE.getCount());
 
-        assertEquals(APPLE_PIE, inventory.removeItem(APPLE_PIE.getName(), -1));
         assertFalse(inventory.hasItem(APPLE_PIE));
     }
 
     @Test
-    public void removeItemById_removeAll_success() {
-        inventory.addItem(APPLE_PIE);
-
-        assertEquals(APPLE_PIE, inventory.removeItem(APPLE_PIE.getId(), -1));
-        assertFalse(inventory.hasItem(APPLE_PIE));
-    }
-
-    @Test
-    public void removeItemByName_someOfItem_success() {
+    public void removeItem_removeSome_success() {
         inventory.addItem(APPLE_PIE);
 
         int expectedCount = APPLE_PIE.getCount() - 1;
         Inventory expectedInventory = new Inventory();
         expectedInventory.addItem(APPLE_PIE.updateCount(expectedCount));
 
-        assertEquals(APPLE_PIE.updateCount(1), inventory.removeItem(APPLE_PIE.getName(), 1));
-        assertEquals(inventory, expectedInventory);
-    }
-
-
-    @Test
-    public void removeItemById_someOfItem_success() {
-        inventory.addItem(APPLE_PIE);
-
-        int expectedCount = APPLE_PIE.getCount() - 1;
-        Inventory expectedInventory = new Inventory();
-        expectedInventory.addItem(APPLE_PIE.updateCount(expectedCount));
-
-        assertEquals(APPLE_PIE.updateCount(1), inventory.removeItem(APPLE_PIE.getId(), 1));
+        inventory.removeItem(APPLE_PIE, 1);
         assertEquals(inventory, expectedInventory);
     }
 
     @Test
-    public void removeItemByName_removeTooMuch_success() {
+    public void removeItemByName_removeTooMuch_failure() {
         inventory.addItem(APPLE_PIE);
 
         int amount = APPLE_PIE.getCount() + 1;
-
-        assertEquals(APPLE_PIE, inventory.removeItem(APPLE_PIE.getName(), amount));
-        assertFalse(inventory.hasItem(APPLE_PIE));
-    }
-
-    @Test
-    public void removeItemById_removeTooMuch_success() {
-        inventory.addItem(APPLE_PIE);
-
-        int amount = APPLE_PIE.getCount() + 1;
-
-        assertEquals(APPLE_PIE, inventory.removeItem(APPLE_PIE.getId(), amount));
-        assertFalse(inventory.hasItem(APPLE_PIE));
+        assertThrows(IllegalArgumentException.class, () -> inventory.removeItem(APPLE_PIE, amount));
+        assertTrue(inventory.hasItem(APPLE_PIE));
     }
 
     @Test
@@ -254,9 +212,9 @@ public class InventoryTest {
         typicalInventory.transactOrder(abnormalOrder);
 
         Inventory expectedInventory = TypicalItems.getTypicalInventory();
-        expectedInventory.removeItem(APPLE_PIE);
+        expectedInventory.deleteItem(APPLE_PIE);
 
-        assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
+        // assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
     }
 
     @Test

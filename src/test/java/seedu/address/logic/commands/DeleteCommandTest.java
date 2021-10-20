@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 import static seedu.address.testutil.TypicalItems.BAGEL;
+import static seedu.address.testutil.TypicalItems.DONUT;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.item.ItemDescriptor;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,56 +29,92 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_deleteExistingItemByName_success() {
-        DeleteCommand deleteCommand = new DeleteCommand(APPLE_PIE.getName(), 1);
+        model.addItem(BAGEL);
+
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
 
         Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
-        expectedModel.deleteItem(APPLE_PIE.getName(), 1);
+        expectedModel.deleteItem(BAGEL);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, APPLE_PIE.updateCount(1));
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_SUCCESS, BAGEL);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteExistingItemById_success() {
-        DeleteCommand deleteCommand = new DeleteCommand(APPLE_PIE.getId(), 1);
+        model.addItem(BAGEL);
+
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
 
         Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
-        expectedModel.deleteItem(APPLE_PIE.getId(), 1);
+        expectedModel.deleteItem(BAGEL);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_ITEM_SUCCESS, APPLE_PIE.updateCount(1));
+        String expectedMessage = String.format(
+                seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
+
+        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteExistingItemByNameAndId_success() {
+        model.addItem(BAGEL);
+
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
+
+        Model expectedModel = new ModelManager(model.getInventory(), new UserPrefs());
+        expectedModel.deleteItem(BAGEL);
+
+        String expectedMessage = String.format(seedu.address.logic.commands.DeleteCommand.MESSAGE_SUCCESS, BAGEL);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_nonexistentName_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(BAGEL.getName(), -1);
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_ITEM_NAME_NOT_FOUND, BAGEL.getName());
+    public void execute_nonexistentItem_throwsCommandException() {
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+
+        DeleteCommand deleteCommand = new DeleteCommand(bagelDescriptor);
+        String expectedMessage = DeleteCommand.MESSAGE_ITEM_NOT_FOUND;
 
         assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
-    public void execute_nonexistentId_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(BAGEL.getId(), -1);
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_ITEM_ID_NOT_FOUND, BAGEL.getId());
+    public void execute_multipleMatches_throwsCommandException() {
+        model.addItem(BAGEL);
+        model.addItem(DONUT);
 
-        assertCommandFailure(deleteCommand, model, expectedMessage);
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_DONUT).build();
+
+        DeleteCommand deleteCommand = new DeleteCommand(descriptor);
+        String expectedMessage = DeleteCommand.MESSAGE_MULTIPLE_MATCHES;
+
+        Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
+        expectedModel.updateFilteredItemList(x-> x.equals(BAGEL) || x.equals(DONUT));
+
+        assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(VALID_NAME_BAGEL, -1);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(VALID_NAME_DONUT, -1);
-        DeleteCommand deleteThirdCommand = new DeleteCommand(VALID_ID_BAGEL, -1);
-        DeleteCommand deleteFourthCommand = new DeleteCommand(VALID_NAME_DONUT, 2);
+        ItemDescriptor bagelDescriptor = new ItemDescriptorBuilder(BAGEL).build();
+        ItemDescriptor donutDescriptor = new ItemDescriptorBuilder(DONUT).build();
+
+        DeleteCommand deleteFirstCommand = new DeleteCommand(bagelDescriptor);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(donutDescriptor);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(VALID_NAME_BAGEL, -1);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(bagelDescriptor);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -87,9 +125,5 @@ public class DeleteCommandTest {
 
         // different values -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-        // different id -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteThirdCommand));
-        // different count -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteFourthCommand));
     }
 }

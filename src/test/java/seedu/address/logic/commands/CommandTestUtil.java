@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String ID_DESC_DONUT = " " + PREFIX_ID + VALID_ID_DONUT;
     public static final String COUNT_DESC_BAGEL = " " + PREFIX_COUNT + VALID_COUNT_BAGEL;
     public static final String COUNT_DESC_DONUT = " " + PREFIX_COUNT + VALID_COUNT_DONUT;
+    public static final String COUNT_DESC_ZERO = " " + PREFIX_COUNT + "0";
     public static final String TAG_DESC_BAKED = " " + PREFIX_TAG + VALID_TAG_BAKED;
     public static final String TAG_DESC_POPULAR = " " + PREFIX_TAG + VALID_TAG_POPULAR;
 
@@ -110,6 +111,20 @@ public class CommandTestUtil {
         assertEquals(expectedInventory, actualModel.getInventory());
         assertEquals(expectedFilteredList, actualModel.getFilteredItemList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the inventory, filtered item list and selected item in {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertCommandFailure(Command command, Model actualModel,
+                                            Model expectedModel, String expectedMessage) {
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(actualModel.getInventory(), expectedModel.getInventory());
+        assertEquals(expectedModel.getFilteredItemList(), actualModel.getFilteredItemList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the item at the given {@code targetIndex} in the
      * {@code model}'s inventory.

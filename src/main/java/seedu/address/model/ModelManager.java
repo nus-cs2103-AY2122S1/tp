@@ -16,7 +16,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 
 /**
  * Represents the in-memory model of BogoBogo data.
@@ -102,31 +101,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasItem(Name name) {
-        requireNonNull(name);
-        return inventory.hasItem(name);
-    }
-
-    @Override
-    public boolean hasItem(String id) {
-        requireNonNull(id);
-        return inventory.hasItem(id);
-    }
-
-    @Override
     public List<Item> getItems(ItemDescriptor descriptor) {
         requireNonNull(descriptor);
         return inventory.getItems(descriptor);
     }
 
     @Override
-    public Item deleteItem(Name name, int count) {
-        return inventory.removeItem(name, count);
-    }
-
-    @Override
-    public Item deleteItem(String id, int count) {
-        return inventory.removeItem(id, count);
+    public void deleteItem(Item item) {
+        inventory.deleteItem(item);
     }
 
     @Override
@@ -146,6 +128,12 @@ public class ModelManager implements Model {
     public void restockItem(Item target, int amount) {
         requireNonNull(target);
         inventory.restockItem(target, amount);
+    }
+
+    @Override
+    public void removeItem(Item target, int amount) {
+        requireNonNull(target);
+        inventory.removeItem(target, amount);
     }
 
     @Override
@@ -188,18 +176,6 @@ public class ModelManager implements Model {
         return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
                 && filteredItems.equals(other.filteredItems);
-    }
-
-    @Override
-    public Item getItemWithName(String name) {
-        requireNonNull(name);
-        return inventory.getItemWithName(name);
-    }
-
-    @Override
-    public Item getItemWithId(String id) {
-        requireNonNull(id);
-        return inventory.getItemWithId(id);
     }
 
     // ============== Order related methods ========================

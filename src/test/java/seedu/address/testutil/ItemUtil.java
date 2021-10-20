@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.tag.Tag;
@@ -28,11 +29,21 @@ public class ItemUtil {
     }
 
     /**
-     * Returns a delete command string for adding the {@code item}.
+     * Returns a delete command string for deleting the {@code item}.
      */
     public static String getDeleteCommand(Item item) {
         return DeleteCommand.COMMAND_WORD
                 + " " + item.getName()
+                + " " + PREFIX_ID + item.getId();
+    }
+
+    /**
+     * Returns a remove command string for removing the {@code item}.
+     */
+    public static String getRemoveCommand(Item item) {
+        return RemoveCommand.COMMAND_WORD
+                + " " + item.getName()
+                + " " + PREFIX_ID + item.getId()
                 + " " + PREFIX_COUNT + item.getCount();
     }
 

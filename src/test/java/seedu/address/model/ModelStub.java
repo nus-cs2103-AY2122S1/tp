@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 
 /**
  * A default model stub that have all of its methods failing.
@@ -67,27 +66,7 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public boolean hasItem(Name name) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public boolean hasItem(String id) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public List<Item> getItems(ItemDescriptor descriptor) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Item deleteItem(Name name, int count) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Item deleteItem(String id, int count) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -97,7 +76,17 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteItem(Item target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void restockItem(Item target, int amount) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void removeItem(Item target, int amount) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -113,16 +102,6 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredItemList(Predicate<Item> predicate) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Item getItemWithName(String name) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
-    public Item getItemWithId(String id) {
         throw new AssertionError("This method should not be called.");
     }
 
