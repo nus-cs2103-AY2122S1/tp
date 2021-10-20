@@ -164,13 +164,22 @@ It makes use of polymorphism and interfaces, and is similar in implementation to
 - `AddCommandParser` implements `Parser<AddCommand>`
 
 The following activity diagram illustrates the activity flow of the add command:
-(activity diagram here)
+![AddCommandActivityDiagram](images/AddCommandActivityDiagram.png)
 
 
 The following sequence diagram illustrates how different components of SeniorLove interact with each other:
 ![VisitSequenceDiagram](images/AddSequenceDiagram.png)
 
+Given below is an example usage scenario:
+1. User inputs the add command, specifying the name, phone number, address and preferred language of the elderly to be added. They may also optionally include their health conditions, last visit, and the next scheduled visit.
+2. After successfully parsing the user input, the `AddCommand#execute(Model model)` method is called.
+3. The elderly that the user wants to add will be stored.
+4. Upon successfully adding the elderly to address book, a `CommandResult` object is instantiated and returned to `LogicManager`.
 
+#### Design choices
+- Optional last visit and visit attributes
+
+  Both attributes are implemented as optional to allow users the flexibility to either add them on-the-go or omit them.
 
 ### Visit command
 
@@ -201,7 +210,7 @@ Given below is an example usage scenario:
   However, we chose to implement the `visit` command since a visit can be added without having any visit previously, and overloading the `edit` command can make it confusing to use.
 
 
-- Replace the existing person with a new instance with the visit changed:
+- Replacing the existing person with a new instance with the visit changed:
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with modified visit to replace the previous Person object.
 
@@ -238,9 +247,9 @@ Given below is an example usage scenario:
 
   Deleting person and deleting visits are overlapping functionalities dealing with removing information. It is possible to overload the `delete` command to achieve both functionalities without creating new command.
 
-- Replace the exiting person with a new instance (if deleting a visit):
+- Replace the existing person with a new instance (if deleting a visit):
 
-  We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with removed visit to replace the previous Person object.
+  We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with visit removed to replace the previous Person object.
 
 
 ### Done Command
