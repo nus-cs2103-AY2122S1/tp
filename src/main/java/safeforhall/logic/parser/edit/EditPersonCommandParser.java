@@ -1,4 +1,4 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.edit;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -6,21 +6,28 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import java.util.ArrayList;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.EditCommand;
-import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
+import safeforhall.logic.parser.ArgumentMultimap;
+import safeforhall.logic.parser.ArgumentTokenizer;
+import safeforhall.logic.parser.CliSyntax;
+import safeforhall.logic.parser.Parser;
+import safeforhall.logic.parser.ParserUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditPersonCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditPersonCommandParser implements Parser<EditPersonCommand> {
+
+    public static final String MESSAGE_DUPLICATE_NAME = "Name should not be changed for more than one person.";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditPersonCommand
+     * and returns an EditPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditPersonCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE,
@@ -30,8 +37,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         try {
             indexArray = ParserUtil.parseIndexes(argMultimap.getPreamble().split(" "));
+            boolean isNameChanged = argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent();
+            boolean isMoreThanOnePerson = indexArray.size() > 1;
+            if (isMoreThanOnePerson && isNameChanged) {
+                throw new ParseException(MESSAGE_DUPLICATE_NAME);
+            }
         } catch (ParseException pe) {
-            String message = pe.getMessage() + "\n" + EditCommand.MESSAGE_USAGE;
+            String message = pe.getMessage() + "\n" + EditPersonCommand.MESSAGE_USAGE;
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, message), pe);
         }
 
@@ -70,10 +82,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(indexArray, editPersonDescriptor);
+        return new EditPersonCommand(indexArray, editPersonDescriptor);
     }
 
 }

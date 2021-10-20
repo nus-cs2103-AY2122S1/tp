@@ -74,7 +74,7 @@ public class Room {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Room // instanceof handles nulls
-                && room.equals(((Room) other).room)); // state check
+                && room.equalsIgnoreCase(((Room) other).room)); // state check
     }
 
     @Override

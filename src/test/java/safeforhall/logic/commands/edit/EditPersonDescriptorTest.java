@@ -1,4 +1,4 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.edit;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -8,11 +8,10 @@ import static safeforhall.logic.commands.CommandTestUtil.DESC_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-//import static safeforhall.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
-import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {
@@ -20,7 +19,8 @@ public class EditPersonDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditCommand.EditPersonDescriptor descriptorWithSameValues = new EditCommand.EditPersonDescriptor(DESC_AMY);
+        EditPersonCommand.EditPersonDescriptor descriptorWithSameValues =
+                new EditPersonCommand.EditPersonDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true

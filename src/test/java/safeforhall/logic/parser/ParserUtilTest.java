@@ -1,14 +1,15 @@
 package safeforhall.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static safeforhall.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import safeforhall.commons.core.Messages;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -28,6 +29,8 @@ public class ParserUtilTest {
     private static final String INVALID_ROOM_FOR_FIND1 = "AA";
     private static final String INVALID_ROOM_FOR_FIND2 = "A12";
     private static final String INVALID_ROOM_FOR_FIND3 = "12";
+    private static final String INVALID_RESIDENTS = "Alex Yeoh, C11";
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ROOM = "A100";
@@ -38,6 +41,7 @@ public class ParserUtilTest {
     private static final String VALID_ROOM_FOR_FIND1 = "A";
     private static final String VALID_ROOM_FOR_FIND2 = "A1";
     private static final String VALID_ROOM_FOR_FIND3 = "E200";
+    private static final String VALID_RESIDENTS = "Alex Yeoh, Bernice Yu";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -48,7 +52,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
@@ -253,5 +257,28 @@ public class ParserUtilTest {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         LastDate expectedDate = new LastDate(VALID_DATE);
         Assertions.assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseResidents_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseResidents((String) null));
+    }
+
+    @Test
+    public void parseResidents_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseResidents(INVALID_RESIDENTS));
+    }
+
+    @Test
+    public void parseResidents_validValueWithoutWhitespace_returnsLastDate() throws Exception {
+        ResidentList expectedList = new ResidentList(VALID_RESIDENTS);
+        Assertions.assertEquals(expectedList, ParserUtil.parseResidents(VALID_RESIDENTS));
+    }
+
+    @Test
+    public void parseResidents_validValueWithWhitespace_returnsTrimmedLastDate() throws Exception {
+        String listWithWhitespace = WHITESPACE + VALID_RESIDENTS + WHITESPACE;
+        ResidentList expectedList = new ResidentList(VALID_RESIDENTS);
+        Assertions.assertEquals(expectedList, ParserUtil.parseResidents(listWithWhitespace));
     }
 }

@@ -39,7 +39,7 @@ public class Capacity {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Capacity // instanceof handles nulls
-                && (capacity == ((Capacity) other).capacity)); // state check
+                && capacity.equals(((Capacity) other).capacity)); // state check
     }
 
     @Override

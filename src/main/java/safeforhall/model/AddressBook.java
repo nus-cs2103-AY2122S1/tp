@@ -3,11 +3,16 @@ package safeforhall.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.UniqueEventList;
+import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
 import safeforhall.model.person.UniquePersonList;
 
 /**
@@ -104,6 +109,42 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Finds the event list for an event from the given Event Name.
+     */
+    public Optional<Event> findEvent(EventName eventName) {
+        for (Event event : events) {
+            if (event.hasSameEventName(eventName)) {
+                return Optional.of(event);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Finds the person list for an event from the given String.
+     */
+    public Optional<Person> findPerson(String information) throws CommandException {
+        if (Room.isValidRoom(information)) {
+            Room room = new Room(information);
+            for (Person person : persons) {
+                if (person.getRoom().equals(room)) {
+                    return Optional.of(person);
+                }
+            }
+        } else if (Name.isValidName(information)) {
+            Name name = new Name(information);
+            for (Person person : persons) {
+                if (person.getName().equals(name)) {
+                    return Optional.of(person);
+                }
+            }
+        } else {
+            throw new CommandException("Information is not room or name");
+        }
+        return Optional.empty();
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -115,11 +156,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the list.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
+     */
+    public void setEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
+
+        events.setEvent(target, editedEvent);
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeEvent(Event key) {
+        events.remove(key);
     }
 
     //// util methods
