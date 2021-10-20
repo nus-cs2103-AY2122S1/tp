@@ -17,6 +17,7 @@ public class Status {
 
     public static final String[] VALID_STATUS_STRING = {"towatch", "t", "watching", "w", "finished", "f"};
     public static final String MESSAGE_CONSTRAINTS = "Status should only be one of 'towatch', 'watching' or 'finished'";
+    public static final String DEFAULT_STATUS = "watching";
 
     public final WatchStatus status;
 

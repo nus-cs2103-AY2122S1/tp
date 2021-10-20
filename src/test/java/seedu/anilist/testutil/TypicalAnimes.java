@@ -19,7 +19,7 @@ public class TypicalAnimes {
     public static final String FIRST_ANIME_GENRE = "action";
     public static final Anime AOT = new AnimeBuilder()
             .withName("Attack on Titan: The Final Season")
-            .withEpisode("0")
+            .withEpisode("2")
             .withGenres(FIRST_ANIME_GENRE)
             .build();
     public static final Anime BRS = new AnimeBuilder()

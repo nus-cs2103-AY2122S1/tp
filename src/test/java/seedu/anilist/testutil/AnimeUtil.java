@@ -1,7 +1,9 @@
 package seedu.anilist.testutil;
 
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import java.util.Set;
 
@@ -28,6 +30,8 @@ public class AnimeUtil {
     public static String getAnimeDetails(Anime anime) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + anime.getName().fullName + " ");
+        sb.append(PREFIX_EPISODE + anime.getEpisode().toString() + " ");
+        sb.append(PREFIX_STATUS + anime.getStatus().toString() + " ");
         anime.getGenres().stream().forEach(
             s -> sb.append(PREFIX_GENRE + s.genreName + " ")
         );

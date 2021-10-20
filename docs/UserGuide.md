@@ -39,13 +39,17 @@ faster than traditional GUI apps.
 ### Adding anime: `add`
 
 Adds an anime into the list.<br>
-Format: `add n/NAME [e/EPISODE]`
+Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE]...`
 - `EPISODE` refers to the latest episode watched for the anime `NAME`
 - `EPISODE` must be a non-negative integer 0, 1, 2...
-- `EPISODE` must be a non-negative integer 0, 1, 2...
+- `STATUS` refers to the watch status for the anime `NAME`
+- Available statuses: `towatch`, `watching`, `finished`
+- Short-forms: `t`, `w`, `f`
+- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
+- You can provide any number of `GENRE`.
 
 Examples:
-* `add n/Shingeki no Kyojin e/2`
+* `add n/Shingeki no Kyojin e/2 s/w g/fantasy`
 
 ### Deleting an anime : `delete`
 
@@ -75,7 +79,7 @@ Format: `update INDEX e/NEWEPISODE`
 
 - `NEWEPISODE` refers to the latest episode watched.
 - Updates the anime at the specified `INDEX`.
-- The index must be a positive integer 1, 2, 3, ...
+- `EPISODE` must be a non-negative integer 0, 1, 2...
 
 Examples:
 *  `update 1 e/3`
@@ -86,8 +90,8 @@ Updates the status of a specified anime.<br>
 Format: `status INDEX s/UPDATEDSTATUS`
 
 - `UPDATEDSTATUS` refers to the updated status of the anime.
-- Available statuses: "towatch", "watching", "finished"
-- Shortforms: "t", "w", "f"
+- Available statuses: `towatch`, `watching`, `finished`
+- Short-forms: `t`, `w`, `f`
 - Updates the anime at the specified `INDEX`.
 - The index must be a positive integer 1, 2, 3, ...
 
