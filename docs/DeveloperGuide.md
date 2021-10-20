@@ -238,11 +238,11 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Uniquely identify students/groups/tasks
+### Uniquely identify persons/groups/tasks
 
 #### Implementation
 
-We identify different students/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
 the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
 is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
 
@@ -253,7 +253,7 @@ exhausting all classes that have `UniqueId` as instance.
 
 When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
 
-
+<img src="images/UniqueIdDiagram.png" alt="Unique id diagram" width="254">
 
 #### Design Consideration
 
