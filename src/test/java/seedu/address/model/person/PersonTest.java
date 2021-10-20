@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -58,6 +59,16 @@ public class PersonTest {
         assertTrue(person.isAvailableOnDay("Mon"));
         assertTrue(person.isAvailableOnDay("Tue"));
         assertFalse(person.isAvailableOnDay("Fri"));
+    }
+
+    @Test
+    public void clearTodayAttendance_success() {
+        Person person = new PersonBuilder().build();
+        person.setPresent();
+        person.clearTodayAttendance();
+        Person expectedPerson = new PersonBuilder().build();
+        expectedPerson.getTotalAttendance().incrementAttendance();
+        assertEquals(person, expectedPerson);
     }
 
     @Test

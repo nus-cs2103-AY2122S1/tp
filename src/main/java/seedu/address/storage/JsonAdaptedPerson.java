@@ -8,6 +8,8 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -19,16 +21,21 @@ class JsonAdaptedPerson {
     private final String name;
     private final String phone;
     private final String availability;
+    private final Boolean todayAttendance;
+    private final Integer totalAttendance;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("availability") String availability) {
+            @JsonProperty("availability") String availability, @JsonProperty("todayAttendance") Boolean todayAttendance,
+                             @JsonProperty("totalAttendance") Integer totalAttendance) {
         this.name = name;
         this.phone = phone;
         this.availability = availability;
+        this.todayAttendance = todayAttendance;
+        this.totalAttendance = totalAttendance;
     }
 
     /**
@@ -38,6 +45,8 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         availability = source.getAvailability().values;
+        todayAttendance = source.getTodayAttendance().getAttendance();
+        totalAttendance = source.getTotalAttendance().getAttendance();
     }
 
     /**
@@ -68,6 +77,19 @@ class JsonAdaptedPerson {
         }
         final Availability modelAvailability = new Availability(availability);
 
-        return new Person(modelName, modelPhone, modelAvailability);
+        if (todayAttendance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TodayAttendance.class.getSimpleName()));
+        }
+        final TodayAttendance modelTodayAttendance = new TodayAttendance(todayAttendance);
+
+        if (totalAttendance == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    TotalAttendance.class.getSimpleName()));
+        }
+
+        final TotalAttendance modelTotalAttendance = new TotalAttendance(totalAttendance);
+
+        return new Person(modelName, modelPhone, modelAvailability, modelTodayAttendance, modelTotalAttendance);
     }
 }

@@ -98,12 +98,6 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
-    /**
-     * Replaces the contents of this list with empty list.
-     */
-    public void resetPersons() {
-        internalList.setAll();
-    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -141,6 +135,17 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    /**
+     * Resets today's attendance of all members in list.
+     */
+    public void resetAttendance() {
+        for (Person person : internalList) {
+            Person toEdit = person;
+            toEdit.clearTodayAttendance();
+            setPerson(person, toEdit);
+        }
     }
 
     /**

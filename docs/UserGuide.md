@@ -218,6 +218,34 @@ Format: `split DAY`
 Examples:
 * `split Mon` splits members into groups for training on Monday of that week and displays the list of allocations to the user
 
+### Marking attendance of members : `mark`
+
+Marks attendance of members listed as present.
+
+Format: `mark INDEX/INDICES`
+
+* Marks the members at the specified `INDEX/INDICES` in the members list as present.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+### Unmarking attendance of members: `unmark`
+
+Unmarks attendance of members marked as present.
+
+Format `unmark INDEX/INDICES`
+
+*Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+###Clearing all attendance for today: `cleara`
+
+Clears all member's attendance for today.
+
+Format: `cleara`
+
 ### Clearing all entries in facility list: `clearf`
 
 Clears all entries from the facility list.
@@ -260,6 +288,7 @@ Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
 **Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAYS]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/Mon`
+**Clear attendance**|`cleara`
 **Clear facilities**|`clearf`
 **Clear member**| `clearm`
 **Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
@@ -270,5 +299,7 @@ Action | Format, Examples
 **Help**| `help`
 **List members**| `listm`
 **List facilities**| `listf`
+**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
-**Split members**| `split d/DAY` <br> eg. `split d/Mon`
+**Split members**| `split DAY` <br> eg. `split Mon`
+**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`

@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -66,6 +68,36 @@ public interface Model {
      * Returns true if a facility with the same parameters as {@code facility} exists in SportsPA.
      */
     boolean hasFacility(Facility facility);
+
+    /**
+     * Returns true if all {@code indices} is within the member list.
+     */
+    boolean isWithinListIndex(List<Index> indices);
+
+    /**
+     * Marks attendance of members at specified {@code indices} as present.
+     */
+    void markMembersAttendance(List<Index> indices);
+
+    /**
+     * Marks attendance of specified {@code member} as present.
+     */
+    void markOneMemberAttendance(Person member);
+
+    /**
+     * Unmarks attendance of members at specified {@code indices} as absent.
+     */
+    void unmarkMembersAttendance(List<Index> indices);
+
+    /**
+     * Unmarks attendance of specified {@code member} as absent.
+     */
+    void unmarkOneMemberAttendance(Person member);
+
+    /**
+     * Resets today's attendance for all members.
+     */
+    void resetTodayAttendance();
 
     /**
      * Deletes the given person.

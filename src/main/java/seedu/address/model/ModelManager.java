@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -102,6 +104,52 @@ public class ModelManager implements Model {
     public boolean hasFacility(Facility facility) {
         requireNonNull(facility);
         return addressBook.hasFacility(facility);
+    }
+
+    @Override
+    public boolean isWithinListIndex(List<Index> indices) {
+        for (Index i : indices) {
+            if (i.getZeroBased() >= getFilteredPersonList().size()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public void markMembersAttendance(List<Index> indices) {
+        for (Index i : indices) {
+            Person person = filteredPersons.get(i.getZeroBased());
+            markOneMemberAttendance(person);
+        }
+    }
+
+    @Override
+    public void markOneMemberAttendance(Person person) {
+        Person toEdit = person;
+        toEdit.setPresent();
+        setPerson(person, toEdit);
+    }
+
+    @Override
+    public void unmarkMembersAttendance(List<Index> indices) {
+        for (Index i : indices) {
+            Person person = filteredPersons.get(i.getZeroBased());
+            unmarkOneMemberAttendance(person);
+        }
+    }
+
+    @Override
+    public void unmarkOneMemberAttendance(Person person) {
+        Person toEdit = person;
+        toEdit.setNotPresent();
+        setPerson(person, toEdit);
+    }
+
+    @Override
+    public void resetTodayAttendance() {
+        addressBook.resetTodayAttendance();
     }
 
     @Override

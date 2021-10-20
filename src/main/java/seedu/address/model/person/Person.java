@@ -19,6 +19,8 @@ public class Person {
 
     // Data fields
     private final Availability availability;
+    private final TodayAttendance todayAttendance;
+    private final TotalAttendance totalAttendance;
 
     /**
      * Every field must be present and not null.
@@ -28,6 +30,27 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.availability = availability;
+        this.todayAttendance = new TodayAttendance(false);
+        this.totalAttendance = new TotalAttendance(0);
+    }
+
+    /**
+     * Constructor that creates person object with attendance.
+     *
+     * @param name Name of member
+     * @param phone Phone number of member
+     * @param availability availability of member
+     * @param todayAttendance Today's attendance of member.
+     * @param totalAttendance Total attendance of member.
+     */
+    public Person(Name name, Phone phone, Availability availability,
+                  TodayAttendance todayAttendance, TotalAttendance totalAttendance) {
+        requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance);
+        this.name = name;
+        this.phone = phone;
+        this.availability = availability;
+        this.totalAttendance = totalAttendance;
+        this.todayAttendance = todayAttendance;
     }
 
     public Name getName() {
@@ -40,6 +63,14 @@ public class Person {
 
     public Availability getAvailability() {
         return availability;
+    }
+
+    public TotalAttendance getTotalAttendance() {
+        return totalAttendance;
+    }
+
+    public TodayAttendance getTodayAttendance() {
+        return todayAttendance;
     }
 
     /**
@@ -55,12 +86,58 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Returns true if person is available on specified day. Otherwise,
+     * false is returned.
+     *
+     * @param day Day to be checked if person is available.
+     * @return Boolean value if person is available on day.
+     */
     public boolean isAvailableOnDay(String day) {
         return availability.contains(day);
     }
 
     public void setDays(List<String> days) {
         this.days = days;
+    }
+
+    /**
+     * Sets the member as present today.
+     */
+    public void setPresent() {
+        if (!isMarkedPresent()) {
+            todayAttendance.setPresent();
+            totalAttendance.incrementAttendance();
+        }
+    }
+
+    /**
+     * Sets member as not present today.
+     */
+    public void setNotPresent() {
+        if (isMarkedPresent()) {
+            todayAttendance.setNotPresent();
+            totalAttendance.decrementAttendance();
+        }
+    }
+
+    /**
+     * Clears today's attendance.
+     */
+    public void clearTodayAttendance() {
+        if (isMarkedPresent()) {
+            todayAttendance.setNotPresent();
+        }
+    }
+
+    /**
+     * Returns true if person has been marked present. Otherwise,
+     * false is returned.
+     *
+     * @return Boolean value if person is marked present.
+     */
+    public boolean isMarkedPresent() {
+        return todayAttendance.isPresentToday();
     }
 
     /**
@@ -80,7 +157,9 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getAvailability().equals(getAvailability());
+                && otherPerson.getAvailability().equals(getAvailability())
+                && otherPerson.getTodayAttendance().equals(getTodayAttendance())
+                && otherPerson.getTotalAttendance().equals(getTotalAttendance());
     }
 
     @Override

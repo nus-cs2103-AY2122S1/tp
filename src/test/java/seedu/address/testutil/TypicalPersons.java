@@ -21,19 +21,19 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").build();
+            .withPhone("94351253").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withPhone("98765432").build();
+            .withPhone("98765432").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withPhone("95352563").build();
+            .withPhone("95352563").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withPhone("87652533").build();
+            .withPhone("87652533").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withPhone("9482224").build();
+            .withPhone("9482224").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("9482427").build();
+            .withPhone("9482427").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("9482442").build();
+            .withPhone("9482442").withTodayAttendance(false).withTotalAttendance(0).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
