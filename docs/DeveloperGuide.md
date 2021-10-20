@@ -290,6 +290,27 @@ Diagram:
 
 ![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
 
+### Viewing list of folders: `ls -folders`
+
+#### Implementation
+
+In our GUI, we would like to display the list of folders that users can create to organize
+their contacts into different classes. The implementation is very similar to `PersonListCard` and
+`PersonListPanel` for viewing list of contacts.
+
+#### Design considerations
+
+* Alternative 1: 2-row layout
+    * Pros: Ability to see additional details of folders and contacts with a small-sized GUI.
+    * Cons: Extra effort to scroll down the GUI to look into the details of contacts.
+* Alternative 2: 2-column layout
+    * Pros: Ability to see both folders and contacts data at a glance without initial scrolling needed
+    * Cons: Truncated details of folders and contacts will be displayed due to the small-sized GUI.
+
+Alternative 1 is selected, implemented using additional`StackPane` on top of the existing `StackPane`
+for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
+component in `MainWindow`.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
