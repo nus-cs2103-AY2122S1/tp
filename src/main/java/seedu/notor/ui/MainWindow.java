@@ -19,6 +19,9 @@ import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.note.NoteGroupWindow;
+import seedu.notor.ui.note.NotePersonWindow;
+import seedu.notor.ui.note.NoteWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing
