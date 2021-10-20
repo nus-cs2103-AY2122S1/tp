@@ -35,8 +35,8 @@ public class SortCommand extends Command {
             + "The input `ORDER` must be a valid order: asc, desc"
             + "\n"
             + "Example:\n"
-            + "* `sort attr/name /asc`"
-            + "* `sort attr/RA1 /desc`";
+            + "* `sort attr/name ord/asc`"
+            + "* `sort attr/RA1 ord/desc`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts student by the specified attribute. "
             + "\nParameters: "
