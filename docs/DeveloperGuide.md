@@ -206,6 +206,34 @@ Note:
         - More difficult to parse the user input to extract the needed data.
         - Is inconsistent with the format of other commands.
 
+### Find modules feature
+
+#### Implementation
+
+The `find` command is implemented via the `FindCommand`, `FindCommandParser` and `NameContainsKeywordsPredicate` classes.
+
+The `FindCommandParser` class implements the `Parser` interface and the `FindCommandParser#parse()` method is responsible for parsing the user input to retrieve the `args` String which represents the keywords to search the modules by. <br>
+When the `FindCommandParser#parse()` method is called,
+
+- The `args` String is converted into an array of String(s) called `nameKeywords`.
+- A new `NameContainsKeywordsPredicate` object is created by passing in the array `nameKeywords` as its argument.
+- A `FindCommand` object is returned with the `NameContainsKeywordsPredicate` object as its argument
+
+The `NameContainsKeywordsPredicate` class implements the `Predicate` interface and the `NameContainsKeywordsPredicate#test()` method is responsible for checking if the given module contains any of the valid keywords. <br>
+It contains the non-null `keywords` field, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
+When the `NameContainsKeywordsPredicate#test()` method is called,
+
+- 
+
+The `FindCommand` class extends the `Command` class and implements the `FindCommand#execute()` method which handles the main logic of the class. <br>
+It contains the non-null `predicate` field. <br>
+When the `FindCommand#execute()` method is called,
+
+- 
+
+#### Design considerations:
+
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

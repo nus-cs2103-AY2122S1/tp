@@ -87,16 +87,16 @@ Examples:
 
 Shows a list of all the modules that contains the given keyword.
 
-Format: `FORMAT: find [code] [title] [description] [mc] [tag] KEYWORD`
-* **KEYWORD** refers to the word that the application will search the modules by.
+Format: `FORMAT: find [code] [title] [description] [mc] [tag] KEYWORDS`
+* **KEYWORDS** refers to the words that the application will search the modules by.
 * If no optional parameters are entered, the application will search within all the modules'
-  components for a matching **KEYWORD**
+  components for matching **KEYWORDS**
 * If optional parameters are entered, the application will search within the modules'
-  specified components for a matching **KEYWORD**
+  specified components for matching **KEYWORDS**
 
 Examples:
 * `find CS` displays any modules that contain the word "CS" in the code, title, description, mc or tag.
-* `find code title CS` displays any modules that contain the word "CS" in the code or title.
+* `find code title CS GE` displays any modules that contain the words "CS" or "GE" in the code or title.
 * `find code CS2040S` displays any modules that contain the word "CS2040S" in the code.
 * `find tag UE` displays any modules that contain the word "UE" in the tag.
 
@@ -169,7 +169,7 @@ Action | Format, Examples
 **Add** | `add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference n/4`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** [Coming soon] | `edit`
-**Find** | `find [code] [title] [description] [mc] [tag] KEYWORD` <br> e.g. `find code CS2040S`
+**Find** | `find [code] [title] [description] [mc] [tag] KEYWORDS` <br> e.g. `find code CS2040S`
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
