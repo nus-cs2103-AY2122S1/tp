@@ -52,15 +52,15 @@ public class SupplierCard extends UiPart<Region> {
         super(FXML);
         this.supplier = supplier;
         id.setText(displayedIndex + ". ");
-        name.setText(supplier.getName().fullName);
-        phone.setText(supplier.getPhone().value);
-        address.setText(supplier.getAddress().value);
-        email.setText(supplier.getEmail().value);
+        name.setText("Name: " + supplier.getName().fullName);
+        phone.setText("Phone: " + supplier.getPhone().value);
+        address.setText("Address: " + supplier.getAddress().value);
+        email.setText("Email: " + supplier.getEmail().value);
         supplier.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        supplyType.setText(supplier.getSupplyType().supplyType);
-        deliveryDetails.setText(supplier.getDeliveryDetails().deliveryDetails);
+        supplyType.setText("Supply Type: " + supplier.getSupplyType().supplyType);
+        deliveryDetails.setText("Delivery Details: " + supplier.getDeliveryDetails().toString());
     }
 
     @Override
