@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -59,6 +60,16 @@ public class ImportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        if (StringUtil.isJson(fileName)) {
+            return executeJson(model);
+        } else if (StringUtil.isCsv(fileName)) {
+            return executeCsv(model);
+        } else {
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+        }
+    }
+
+    private CommandResult executeJson(Model model) throws CommandException {
         Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -81,6 +92,10 @@ public class ImportCommand extends Command {
             }
         }
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
+    }
+
+    private CommandResult executeCsv(Model model) {
+        return new CommandResult("import csv");
     }
 
     @Override
