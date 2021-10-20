@@ -43,11 +43,13 @@ public class TimetableInfoPage extends InfoPage {
      */
     public TimetableInfoPage(ObservableList<TuitionClass> tuitionClasses, ResultDisplay resultDisplay) {
         super(FXML);
+        logger.info("Starting construction of timetable.");
         scrollPane.setStyle(" -fx-background:dark; -fx-border-color:dark;");
         scrollPane.setPadding(new Insets(0, 0, 0, 20));
         this.timetable = new Timetable(tuitionClasses, resultDisplay, this);
         setTableDay();
         timetable.showTimetable();
+        logger.info("Timetable shown.");
     }
 
     /**

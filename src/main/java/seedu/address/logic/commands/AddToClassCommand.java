@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUITION_CLASS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,6 +20,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.TuitionClass;
 
+/**
+ * Adds students to existing tuition class.
+ */
 public class AddToClassCommand extends Command {
     public static final String COMMAND_WORD = "addtoclass";
     public static final String SHORTCUT = "atc";
@@ -38,6 +43,7 @@ public class AddToClassCommand extends Command {
     private static final String MESSAGE_STUDENT_NOT_FOUND = "The following students are not "
             + "found in the address book: ";
     private static final String MESSAGE_NO_STUDENT_ADDED = "No student has been added.";
+    private static final Logger logger = LogsCenter.getLogger(AddToClassCommand.class);
     private List<Index> studentIndex;
     private Index classIndex;
     private StudentList studentList;
@@ -97,6 +103,14 @@ public class AddToClassCommand extends Command {
         model.setTuition(tuitionClass, modifiedClass);
     }
 
+    /**
+     * Categorizes students into not found, already enrolled, added, and not added due to class size limit.
+     * @param studentList students to be added
+     * @param model model containing all students and tuition classes
+     * @param tuitionClass the tuition class students are added to
+     * @return an array of arraylists containing students being divided to not found, already enrolled, added,
+     * and not added due to class size limit.
+     */
     private ArrayList[] getStudent(StudentList studentList, Model model, TuitionClass tuitionClass) {
         ArrayList<String> invalidStudentNames = new ArrayList<>();
         ArrayList<Person> newStudents = new ArrayList<>();
@@ -135,9 +149,16 @@ public class AddToClassCommand extends Command {
         return returnValue;
     }
 
+    /**
+     * Executes the command if students are added using their names.
+     * @param model model containing all students and tuition classes
+     * @param tuitionClass the tuition class students are added to
+     * @return a CommandResult of the AddToClass command
+     */
     private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) {
         ArrayList[] students = this.getStudent(studentList, model, tuitionClass);
         ArrayList<Person> newStudents = students[0];
+        String logStudentName = "";
         if (newStudents.size() == 0) {
             return new CommandResult(getMessage(students));
         }
@@ -151,15 +172,25 @@ public class AddToClassCommand extends Command {
         for (Person person: newStudents) {
             Person studentToAdd = person;
             Person studentToChange = person;
+            logStudentName += person.getNameString();
+            if (!person.equals(newStudents.get(newStudents.size() - 1))) {
+                logStudentName += ", ";
+            }
             studentToAdd.addClass(modifiedClass);
             studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " | "
                     + modifiedClass.getTimeslot().time));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
-
+        logger.info("Add students [" + logStudentName + "] to class [" + tuitionClass.getName() + "]");
         return new CommandResult(getMessage(students));
     }
 
+    /**
+     * Executes the command if students are added using their indexes.
+     * @param model model containing all students and tuition classes
+     * @param tuitionClass the tuition class students are added to
+     * @return a CommandResult of the AddToClass command
+     */
     private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) throws CommandException {
         ArrayList<String> studentNames = new ArrayList<>();
         for (Index index: studentIndex) {
@@ -174,6 +205,12 @@ public class AddToClassCommand extends Command {
         return executeStudentName(model, tuitionClass);
     }
 
+    /**
+     * Produces the message to show to user.
+     * @param students an array of arraylists containing students being divided to not found, already enrolled, added,
+     * and not added due to class size limit
+     * @return the message as a String
+     */
     private String getMessage(ArrayList[] students) {
         ArrayList<String> invalidStudentNames = students[1];
         ArrayList<Person> newStudents = students[0];
