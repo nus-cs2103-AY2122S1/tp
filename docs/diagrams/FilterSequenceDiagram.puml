@@ -19,7 +19,6 @@ activate LogicManager
 LogicManager -> TuitioneParser : parseCommand("filter [g/GRADE] [s/SUBJECT]")
 activate TuitioneParser
 
-
 create FilterCommandParser
 TuitioneParser -> FilterCommandParser
 activate FilterCommandParser
