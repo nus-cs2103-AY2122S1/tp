@@ -1,13 +1,10 @@
 package seedu.programmer.ui;
 
-import seedu.programmer.logic.commands.AddCommand;
-import seedu.programmer.logic.commands.EditCommand;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CommandHistory {
-    private static final String DEFAULT_COMMAND = "";
+    static final String DEFAULT_COMMAND = "";
     private static final int INITIAL_LIST_SIZE = 0;
     private static final int INITIAL_COUNTER_VALUE = -1;
 
@@ -15,6 +12,9 @@ public class CommandHistory {
     private int size;
     private int counter;
 
+    /**
+     * Constructor to initialize a new {@code CommandHistory} object.
+     */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
         size = INITIAL_LIST_SIZE;
@@ -70,7 +70,7 @@ public class CommandHistory {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof CommandHistory)) {
             return false;
         }
 
