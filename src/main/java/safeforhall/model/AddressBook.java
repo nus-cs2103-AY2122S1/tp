@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.UniqueEventList;
@@ -14,7 +15,6 @@ import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.UniquePersonList;
-import safeforhall.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Wraps all data at the address-book level
@@ -122,25 +122,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Finds the person list for an event from the given Room.
+     * Finds the person list for an event from the given String.
      */
-    public Optional<Person> findPerson(Room room) {
-        for (Person person : persons) {
-            if (person.isStayingInRoom(room)) {
-                return Optional.of(person);
+    public Optional<Person> findPerson(String information) throws CommandException {
+        if (Room.isValidRoom(information)) {
+            Room room = new Room(information);
+            for (Person person : persons) {
+                if (person.getRoom().equals(room)) {
+                    return Optional.of(person);
+                }
             }
-        }
-        return Optional.empty();
-    }
-
-    /**
-     * Finds the person list for an event from the given Room.
-     */
-    public Optional<Person> findPerson(Name name) {
-        for (Person person : persons) {
-            if (person.hasTheName(name)) {
-                return Optional.of(person);
+        } else if (Name.isValidName(information)) {
+            Name name = new Name(information);
+            for (Person person : persons) {
+                if (person.getName().equals(name)) {
+                    return Optional.of(person);
+                }
             }
+        } else {
+            throw new CommandException("Information is not room or name");
         }
         return Optional.empty();
     }
@@ -161,7 +161,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void setPerson(Person target, Person editedPerson) throws PersonNotFoundException {
+    public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);

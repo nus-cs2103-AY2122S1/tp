@@ -20,16 +20,16 @@ public class IncludeCommand extends Command {
 
     public static final String COMMAND_WORD = "include";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds resident to the given event. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds residents to the given event. "
             + "Parameters: "
             + "INDEX "
-            + CliSyntax.PREFIX_RESIDENTS + "INFORMATION \n"
+            + CliSyntax.PREFIX_RESIDENTS + "ROOM/NAME \n"
 
             + "Example: " + COMMAND_WORD + " "
             + "1 "
             + CliSyntax.PREFIX_RESIDENTS + "A101, A102, A103";
 
-    public static final String MESSAGE_SUCCESS = "Residents ( %s ) added to event %s";
+    public static final String MESSAGE_SUCCESS = "Residents (%s) added to event %s";
     private final Index index;
     private final ResidentList residentList;
 

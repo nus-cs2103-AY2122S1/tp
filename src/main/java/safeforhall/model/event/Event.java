@@ -12,8 +12,6 @@ import safeforhall.model.person.Person;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-    public static final String RESIDENTS_DESC = "Residents: ";
-
     // Identity fields
     private final EventName eventName;
     private final EventDate eventDate;
@@ -97,7 +95,9 @@ public class Event {
                 .append("; Venue: ")
                 .append(getVenue())
                 .append("; Capacity: ")
-                .append(getCapacity());
+                .append(getCapacity())
+                .append("; Residents: ")
+                .append(getResidents());
 
         return builder.toString();
     }

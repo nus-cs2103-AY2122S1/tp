@@ -48,24 +48,6 @@ public class PersonTest {
     }
 
     @Test
-    public void isStayingInRoom() {
-        // same object -> returns true
-        assertTrue(ALICE.isStayingInRoom(new Room("A100")));
-
-        // null -> returns false
-        assertFalse(ALICE.isStayingInRoom(null));
-    }
-
-    @Test
-    public void hasTheName() {
-        // same object -> returns true
-        assertTrue(ALICE.hasTheName(new Name("Alice Pauline")));
-
-        // null -> returns false
-        assertFalse(ALICE.hasTheName(null));
-    }
-
-    @Test
     public void equals() {
         // same values -> returns true
         Person aliceCopy = new PersonBuilder(ALICE).build();

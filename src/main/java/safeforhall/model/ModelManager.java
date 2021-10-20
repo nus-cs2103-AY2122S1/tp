@@ -17,9 +17,7 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventName;
 import safeforhall.model.event.ResidentList;
-import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
-import safeforhall.model.person.Room;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -105,23 +103,15 @@ public class ModelManager implements Model {
     @Override
     public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);
-        ArrayList<String> residentInformation = residentList.residentInformation;
+        ArrayList<String> residentInformation = residentList.getResidentInformation();
         ArrayList<Person> personList = new ArrayList<>();
 
         for (String information : residentInformation) {
             Optional<Person> personFound;
-            if (Room.isValidRoom(information)) {
-                Room room = new Room(information);
-                personFound = addressBook.findPerson(room);
-            } else if (Name.isValidName(information)) {
-                Name name = new Name(information);
-                personFound = addressBook.findPerson(name);
-            } else {
-                throw new IllegalArgumentException();
-            }
+            personFound = addressBook.findPerson(information);
 
             if (personFound.isEmpty()) {
-                throw new CommandException(information + " person not found");
+                throw new CommandException("No person with this " + information + " could be found");
             } else {
                 personList.add(personFound.get());
             }
@@ -136,22 +126,17 @@ public class ModelManager implements Model {
     public ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException {
         requireNonNull(residentList);
         ArrayList<Person> personList = new ArrayList<>();
-        if (residentList.isEmpty) {
+        if (residentList.isEmpty()) {
             return personList;
         }
-        String[] residentInformation = residentList.residents.split("\\s*,\\s*");
+        String[] residentInformation = residentList.getResidents().split("\\s*,\\s*");
 
         for (String information : residentInformation) {
             Optional<Person> personFound;
-            if (Name.isValidName(information)) {
-                Name name = new Name(information);
-                personFound = addressBook.findPerson(name);
-            } else {
-                throw new IllegalArgumentException();
-            }
+            personFound = addressBook.findPerson(information);
 
             if (personFound.isEmpty()) {
-                throw new CommandException(information + " event not found");
+                throw new CommandException("No event with this " + information + " could be found");
             } else {
                 personList.add(personFound.get());
             }

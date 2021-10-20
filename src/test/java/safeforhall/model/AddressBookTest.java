@@ -20,11 +20,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventName;
-import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.exceptions.DuplicatePersonException;
 import safeforhall.testutil.PersonBuilder;
 
@@ -105,33 +104,20 @@ public class AddressBookTest {
     }
 
     @Test
-    public void findPersonByRoomSuccess() {
+    public void findPersonSuccess() throws CommandException {
         addressBook.addPerson(ALICE);
         addressBook.addPerson(BENSON);
-        assertEquals(addressBook.findPerson(new Room("A100")).get(), ALICE);
-        assertEquals(addressBook.findPerson(new Room("A101")).get(), BENSON);
+        assertEquals(addressBook.findPerson("A100").get(), ALICE);
+        assertEquals(addressBook.findPerson("A101").get(), BENSON);
+        assertEquals(addressBook.findPerson("Alice Pauline").get(), ALICE);
+        assertEquals(addressBook.findPerson("Benson Meier").get(), BENSON);
     }
 
     @Test
-    public void findPersonByRoomFailure() {
-        Room room = new Room("A401");
-        assertEquals(Optional.empty(), addressBook.findPerson(room));
+    public void findPersonFailure() throws CommandException {
+        assertEquals(Optional.empty(), addressBook.findPerson("A401"));
+        assertEquals(Optional.empty(), addressBook.findPerson("Johnny Lim"));
     }
-
-    @Test
-    public void findPersonByNameSuccess() {
-        addressBook.addPerson(ALICE);
-        addressBook.addPerson(BENSON);
-        assertEquals(addressBook.findPerson(new Name("Alice Pauline")).get(), ALICE);
-        assertEquals(addressBook.findPerson(new Name("Benson Meier")).get(), BENSON);
-    }
-
-    @Test
-    public void findPersonByNameFailure() {
-        Name name = new Name("Johnny Lim");
-        assertEquals(Optional.empty(), addressBook.findPerson(name));
-    }
-
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.

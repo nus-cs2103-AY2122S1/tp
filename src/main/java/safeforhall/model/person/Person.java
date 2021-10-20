@@ -85,14 +85,6 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public boolean isStayingInRoom(Room room) {
-        return this.room.equals(room);
-    }
-
-    public boolean hasTheName(Name name) {
-        return this.name.equals(name);
-    }
-
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

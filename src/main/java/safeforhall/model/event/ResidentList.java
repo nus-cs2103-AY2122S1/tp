@@ -18,9 +18,9 @@ public class ResidentList {
     public static final String DESC = "Residents: ";
     public static final String DEFAULT_LIST = "";
 
-    public final String residents;
-    public final ArrayList<String> residentInformation;
-    public final boolean isEmpty;
+    private final String residents;
+    private final ArrayList<String> residentInformation;
+    private final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
 
     /**
@@ -107,5 +107,13 @@ public class ResidentList {
     @Override
     public String toString() {
         return residents;
+    }
+
+    public ArrayList<String> getResidentInformation() {
+        return this.residentInformation;
+    }
+
+    public String getResidents() {
+        return this.residents;
     }
 }
