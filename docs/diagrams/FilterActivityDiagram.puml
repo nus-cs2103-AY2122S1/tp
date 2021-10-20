@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+if () then ([filter grade & subject])
+    if () then ([valid grade])
+        : lesson & student list filtered by grade & subject;
+    else ([invalid grade])
+        : throw error;
+    endif
+else ([filter by single variable])
+    if () then ([filter by grade])
+        if () then ([valid grade])
+            : lesson & student list filtered by grade;
+        else ([invalid grade])
+            : throw error;
+        endif
+    else ([filter by subject])
+        : lesson list filtered by subject;
+
+    endif
+endif
+stop
+
+@enduml
