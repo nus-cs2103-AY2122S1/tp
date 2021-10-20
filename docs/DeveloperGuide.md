@@ -345,9 +345,9 @@ This feature allows Managera users to quickly add/remove participant to/from eve
 
 The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
 
-A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. If the indexes that the user input are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
+A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
 
-The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains  2 zero-based indexes. The fist one is used to identify the `Participant` while the second one is used to identify the `Event`. When the command is executed, the `model` first trieds to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). After all of that, if the Event already have that `Participant` object a `CommandException` will be thrown as well but if not the `Participant` object will be added to the `Event` as one of its participants
+The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. The first one is used to identify the `Participant` while the second is used to identify the `Event`. When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner. (if unsuccessful, a `CommmandException` will be thrown accordingly) If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly. Otherwise, a `CommandException` will be thrown.
 
 A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. If the indexes that the user input are not zero-based indexes, a `ParseException` will be thrown before `RemoveParticipantByIndexParser` creates the command itself to prevent any further error. If all indexes are valid, a `RemoveParticipantByIndexCommand` will be created by the parser.
 
@@ -355,7 +355,7 @@ The `RemoveParticipantByIndexCommand` created by `RemoveParticipantFromEventByIn
 
 #### Implementation Rationale
 
-Since the command implies that the index of participant should come before event there is no need for tags to be used as that would only require extra typing on the user side and slow down the process.
+Since the command implies that the index of participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
 
 The following activity diagrams summarise what happens when a user executes a new command in each case:
 
