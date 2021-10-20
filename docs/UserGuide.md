@@ -82,10 +82,12 @@ Adds a student to the TuitiONE.
 Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…`
 
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
+
 * A student can have any number of remarks (including 0).
+
 </div>
 
 Examples:
