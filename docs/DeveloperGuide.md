@@ -236,9 +236,20 @@ _{more aspects and alternatives to be added}_
 
 ### Viewing Tags
 Viewing tag is facilitated by `UniqueTagList`. 
-- `UniqueTagList` stores a list of unique unmodifiable tags with case-insensitive tag names.
-- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of students labelled under each tag. 
+- `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
+- `UniqueTagList` holds a class field `tagCounter` that maps `Tag` to `Integer`, where `Integer` is the number of persons labelled under each tag. 
 - `Tag` objects are not referenced by `Person`, i.e. each `Person` has a set of `Tag` objects.
+
+Operations include:
+- `UniqueTagList#asUnmodifiableTagList` - Returns an unmodifiable view of the tag list.
+- `UniqueTagList#addTagFromPersonList(List<Person>)` - Adds tags from the specified list of persons to the tag list.
+- `UniqueTagList#addTagFromPerson(Person)` - Adds tags from the specified person to the tag list if the tags do not exist in the tag list. If there is already a tag with same case-insensitive name, it increments the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#removeTagFromPerson(Person)` - Removes tags belonging to the specified person from the tag list if there is no person labelled under this tag after removal, else, decrements the `Integer` that this tag is mapped to in `tagCounter`.
+- `UniqueTagList#editTagFromPerson(Person)` - Removes the original tags belonging to the specified person to the tag list and adds the new tags labelled for the specified person.
+These operations are called when a person is added, deleted, or edited.
+
+Given below is an example usage scenario and how viewing tag is executed:
+- Step 1: The user 
 
 ### \[Proposed\] Data archiving
 
