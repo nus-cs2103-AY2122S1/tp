@@ -63,7 +63,7 @@ public class DeleteCommand extends Command {
             model.deletePerson(personToDelete);
 
             return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, personToDelete));
-        } else if (isMultipleDelete()){
+        } else if (isMultipleDelete()) {
             for (int i = 0; i < indexArray.length; i++) {
                 targetIndex = Index.indexModifier(indexArray[i], i);
                 if (targetIndex.getZeroBased() >= lastShownList.size()) {
