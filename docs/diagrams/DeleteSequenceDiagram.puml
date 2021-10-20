@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":ClassmateParser" as ClassmateParser LOGIC_COLOR
-participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
-participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":DeleteStudentCommandParser" as DeleteStudentCommandParser LOGIC_COLOR
+participant "d:DeleteStudentCommand" as DeleteStudentCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+[-> LogicManager : execute("deletestu 1")
 activate LogicManager
 
-LogicManager -> ClassmateParser : parseCommand("delete 1")
+LogicManager -> ClassmateParser : parseCommand("deletestu 1")
 activate ClassmateParser
 
 create DeleteCommandParser
@@ -36,8 +36,8 @@ activate DeleteCommand
 DeleteCommand --> DeleteCommandParser : d
 deactivate DeleteCommand
 
-DeleteCommandParser --> ClassmateParser : d
-deactivate DeleteCommandParser
+DeleteStudentCommandParser --> ClassmateParser : d
+deactivate DeleteStudentCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommandParser -[hidden]-> ClassmateParser
 destroy DeleteCommandParser
@@ -45,8 +45,8 @@ destroy DeleteCommandParser
 ClassmateParser --> LogicManager : d
 deactivate ClassmateParser
 
-LogicManager -> DeleteCommand : execute()
-activate DeleteCommand
+LogicManager -> DeleteStudentCommand : execute()
+activate DeleteStudentCommand
 
 DeleteCommand -> Model : deleteStudent(1)
 activate Model

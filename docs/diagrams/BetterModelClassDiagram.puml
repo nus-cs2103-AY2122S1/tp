@@ -4,18 +4,26 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+Classmate *-right-> "1" UniqueTutorialClassList
 Classmate *-right-> "1" UniqueStudentList
 Classmate *-right-> "1" UniqueTagList
+UniqueTutorialClassList -[hidden]down- UniqueTagList
 UniqueTagList -[hidden]down- UniqueStudentList
 UniqueTagList -[hidden]down- UniqueStudentList
 
+UniqueTutorialClassList -right-> TutorialClass
 UniqueTagList *-right-> "*" Tag
 UniqueStudentList -right-> Student
 
-Student -up-> "*" Tag
+TutorialClass *-down-> ClassCode
+TutorialClass *-down-> "*" Tag
+Student *-up-> ClassCode
+Student *-up-> "*" Tag
+Tag -[hidden]right- ClassCode
 
 Student *--> Name
 Student *--> Phone
 Student *--> Email
 Student *--> Address
+TutorialClass *--> Schedule
 @enduml
