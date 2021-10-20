@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.GenderContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -121,6 +122,34 @@ public class DeleteMultipleCommandTest {
     }
 
     @Test
+    public void execute_oneGenderKeyword_multiplePersonsDeleted() {
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 3);
+        GenderContainsKeywordsPredicate predicate = prepareGenderPredicate("F");
+        DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
+        expectedModel.deletePerson(ALICE);
+        expectedModel.deletePerson(ELLE);
+        expectedModel.deletePerson(FIONA);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(BENSON, CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleGenderKeyword_multiplePersonsDeleted() {
+        String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 7);
+        GenderContainsKeywordsPredicate predicate = prepareGenderPredicate("F M");
+        DeleteMultipleCommand command = new DeleteMultipleCommand(predicate);
+        expectedModel.deletePerson(ALICE);
+        expectedModel.deletePerson(BENSON);
+        expectedModel.deletePerson(CARL);
+        expectedModel.deletePerson(DANIEL);
+        expectedModel.deletePerson(ELLE);
+        expectedModel.deletePerson(FIONA);
+        expectedModel.deletePerson(GEORGE);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_oneTagKeyword_multiplePersonsDeleted() {
         String expectedMessage = String.format(MESSAGE_MULTIPLE_PERSONS_DELETED_OVERVIEW, 3);
         TagContainsKeywordsPredicate predicate = prepareTagPredicate("friends");
@@ -163,5 +192,12 @@ public class DeleteMultipleCommandTest {
      */
     private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
         return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code GenderContainsKeywordsPredicate}.
+     */
+    private GenderContainsKeywordsPredicate prepareGenderPredicate(String userInput) {
+        return new GenderContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
