@@ -45,7 +45,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
+                  <Label fx:id="telegram" style="-fx-text-fill: #84ddf3; -fx-font-size: 15px;" text="Label" textFill="#84ddf3" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -60,7 +60,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="github" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="github" style="-fx-text-fill: #84ddf3; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
