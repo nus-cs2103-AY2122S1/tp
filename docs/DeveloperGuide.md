@@ -313,17 +313,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to create a contact with the inputted details
 2. contHACKS creates the contact and displays the newly added contact
 
-Use case ends.
+Use case ends
 
 **Extensions**
 * 1a. User gives insufficient details for contact creation
     * 1a1. contHACKS shows an error message<br />
-    Use case ends.
+    Use case ends
 
 
 * 1b. User input details in a wrong format
     * 1b1. contHACKS shows an error message<br />
-    Use case ends.
+    Use case ends
 
 
 **Use case: Finding a contact**
@@ -333,27 +333,27 @@ Use case ends.
 1. User requests to find a contact based on input details
 2. contHACKS shows a list of contacts that match input details
 
-Use case ends.
+Use case ends
 
 **Extensions**
 * 1a. There are no contacts that matches the input details
     * 1a1. contHACKS displays an empty list<br />
-    Use case ends.
+    Use case ends
 
 
 * 1b. User finds by name
     * 1b1. contHACKS displays a list of contacts with names that match the input<br />
-    Use case ends.
+    Use case ends
 
 
 * 1c. User finds by module code
     * 1c1. contHACKS displays a list of contacts that are tagged with the module code<br />
-    Use case ends.
+    Use case ends
 
 
 * 1d. User input details in a wrong format
     * 1d1. contHACKS shows an error message<br />
-    Use case ends.
+    Use case ends
 
 
 **Use case: Updating a contact**
@@ -363,17 +363,17 @@ Use case ends.
 1. User requests to update a specific contact with the inputted details
 2. contHACKS updates the contact with the inputted details and displays the updated contact
 
-Use case ends.
+Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message.<br />
-    Use case ends.
+    * 1a1. contHACKS shows an error message<br />
+    Use case ends
 
 
 * 1b. User input details in a wrong format
-    * 1b1. contHACKS shows an error message.<br />
-    Use case ends.
+    * 1b1. contHACKS shows an error message<br />
+    Use case ends
     
 
 **Use case: Adding remark to a contact**
@@ -383,17 +383,17 @@ Use case ends.
 1. User requests to add a remark to a specific contact
 2. contHACKS updates the contact with the inputted remark and displays the updated contact
 
-Use case ends.
+Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
-    * 1a1. contHACKS shows an error message.<br />
-      Use case ends.
+    * 1a1. contHACKS shows an error message<br />
+      Use case ends
 
 
 * 1b. User input the remark in a wrong format
-    * 1b1. contHACKS shows an error message.<br />
-      Use case ends.
+    * 1b1. contHACKS shows an error message<br />
+      Use case ends
 
 
 **Use case: Deleting a contact**
@@ -403,12 +403,12 @@ Use case ends.
 1. User requests to delete a specific contact
 2. contHACKS deletes the contact and displays the updated contact list
 
-Use case ends.
+Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
     * 1a1. contHACKS shows an error message.<br />
-      Use case ends.
+      Use case ends
 
 
 **Use case: Listing the contact list**
@@ -418,7 +418,7 @@ Use case ends.
 1. User requests to for the whole contact list
 2. contHACKS displays the whole contact list
 
-Use case ends.
+Use case ends
 
 
 **Use case: Clear all contacts**
@@ -428,7 +428,7 @@ Use case ends.
 1. User requests to clear all contacts
 2. contHACKS delete all the contacts and displays an empty contact list
 
-Use case ends.
+Use case ends
 
 
 **Use case: Getting help manual**
@@ -438,7 +438,7 @@ Use case ends.
 1. User requests to for a help manual
 2. contHACKS displays the help manual
 
-Use case ends.
+Use case ends
 
 
 **Use case: Exiting the application**
@@ -446,9 +446,9 @@ Use case ends.
 **MSS**
 
 1. User requests to exit the application
-2. contHACKS closed.
+2. contHACKS closes
 
-Use case ends.
+Use case ends
 
 
 ### Non-Functional Requirements
