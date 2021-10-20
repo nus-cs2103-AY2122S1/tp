@@ -224,12 +224,13 @@ public class Student {
                 .append("; Address: ").append(address)
                 .append("; Grade: ").append(grade)
                 .append("; ");
+
         if (!remarks.isEmpty()) {
             builder.append("Remark(s): ");
             remarks.forEach(t -> builder.append(t).append(" "));
-            builder.append(" ");
+            builder.insert(builder.length() - 1, ';');
         }
-        builder.setLength(builder.length() - 1);
+
         if (!lessonCodesAndPrices.isEmpty()) {
             builder.append("Lesson(s): ");
             lessonCodesAndPrices.keySet().forEach(l -> builder.append(l).append(" "));
