@@ -13,6 +13,7 @@ import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -26,6 +27,13 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<SuperGroup> filteredGroups;
+    private boolean isPersonView = true;
+    private boolean isGroupView = false;
+    private boolean isSubGroupView = false;
+    /**
+     * Represents the current subGroups shown in the UI. It is null when not shown.
+     */
+    private final FilteredList<SubGroup> filteredSubGroups = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -151,6 +159,13 @@ public class ModelManager implements Model {
         return notor.findGroup(name);
     }
 
+    @Override
+    public void deleteSubGroup(SubGroup subGroup) {
+        SuperGroup parent = (SuperGroup) notor.findGroup(subGroup.getParent());
+        parent.deleteSubGroup(subGroup);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -173,9 +188,37 @@ public class ModelManager implements Model {
         return filteredGroups;
     }
 
-    @Override public void updateFilteredGroupList(Predicate<Group> predicate) {
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<SubGroup> getFilteredSubGroupList() {
+        return filteredSubGroups;
+    }
+
+    @Override
+    public void updateFilteredSubGroupList(Predicate<SubGroup> predicate) {
+        requireNonNull(predicate);
+        filteredSubGroups.setPredicate(predicate);
+    }
+
+    //=========== View Check =============================================================
+    @Override
+    public boolean isPersonView() {
+        return isPersonView;
+    }
+
+    @Override
+    public boolean isGroupView() {
+        return isGroupView;
+    }
+
+    @Override
+    public boolean isSubGroupView() {
+        return isSubGroupView;
     }
 
     @Override

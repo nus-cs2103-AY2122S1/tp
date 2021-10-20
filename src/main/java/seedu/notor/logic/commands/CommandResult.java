@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
 
 
@@ -30,6 +31,8 @@ public class CommandResult {
 
     private final Person person;
 
+    private final Group group;
+
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -40,14 +43,33 @@ public class CommandResult {
         this.showNote = showNote;
         this.exit = exit;
         this.person = person;
+        this.group = null;
     }
+    // TODO: Abstract to more classes.
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showNote, boolean exit, Group group) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.showNote = showNote;
+        this.exit = exit;
+        this.group = group;
+        this.person = null;
+    }
+
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null, false);
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = false;
+        this.showNote = false;
+        this.person = null;
+        this.exit = false;
+        this.group = null;
     }
 
     public String getFeedbackToUser() {
@@ -68,6 +90,10 @@ public class CommandResult {
 
     public Person person() {
         return person;
+    }
+
+    public Group group() {
+        return group;
     }
 
     @Override

@@ -17,6 +17,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
 
 /**
@@ -156,7 +157,22 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleNote(Person person, Logic logic) {
-        NoteWindow noteWindow = new NoteWindow(person, logic, resultDisplay);
+        NoteWindow noteWindow = new NotePersonWindow(person, logic, resultDisplay);
+        if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
+            NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
+            noteWindow.show();
+        } else {
+            int indexOfNoteWindow = NoteWindow.OPENED_NOTE_WINDOWS.indexOf(noteWindow);
+            NoteWindow.OPENED_NOTE_WINDOWS.get(indexOfNoteWindow).focus();
+        }
+    }
+
+    /**
+     * Opens the note window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleNote(Group group, Logic logic) {
+        NoteWindow noteWindow = new NoteGroupWindow(group, logic, resultDisplay);
         if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
             NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
             noteWindow.show();
@@ -201,7 +217,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
             if (commandResult.isShowNote()) {
-                handleNote(commandResult.person(), logic);
+                // TODO: potentially refactor this
+                if (commandResult.person() != null) {
+                    handleNote(commandResult.person(), logic);
+                } else {
+                    handleNote(commandResult.group(), logic);
+                }
             }
             if (commandResult.isExit()) {
                 handleExit();

@@ -141,7 +141,14 @@ public class Notor implements ReadOnlyNotor {
         superGroups.add(ParserUtil.parseSuperGroup(sg));
     }
 
+    /**
+     * Removes superGroup from Notor.
+     * @param sg the SuperGroup to removed.
+     */
     public void deleteSuperGroup(SuperGroup sg) {
+        for (Person person : sg.getPeople().values()) {
+            person.removeSuperGroup(sg.toString());
+        }
         superGroups.remove(sg);
     }
 
@@ -152,8 +159,8 @@ public class Notor implements ReadOnlyNotor {
      * @return Group with the specified display name.
      */
     public Group findGroup(String name) {
-        if (name.contains(":")) {
-            String[] splitName = name.split(":");
+        if (name.contains("_")) {
+            String[] splitName = name.split("_");
             return findSuperGroup(splitName[0]).findSubGroup(splitName[1]);
         }
         return findSuperGroup(name);

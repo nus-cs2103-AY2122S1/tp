@@ -14,16 +14,14 @@ import javafx.stage.Stage;
 import seedu.notor.commons.util.DateUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
-import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 
 
 
-public class NoteWindow extends UiPart<Stage> {
+public abstract class NoteWindow extends UiPart<Stage> {
 
     protected static final ArrayList<NoteWindow> OPENED_NOTE_WINDOWS = new ArrayList<>();
-    private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Person: %1$s";
-    private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Person: %1$s";
+
     private static final int WIDTH = 616;
     private static final int HEIGHT = 390;
     private static final int OFFSET = 10;
@@ -39,28 +37,19 @@ public class NoteWindow extends UiPart<Stage> {
     private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, CTRL);
 
     @FXML
-    private TextArea noteTextArea;
-
-    private Person person;
-
-    private final Logic logic;
-
-    private final seedu.notor.ui.ConfirmationWindow confirmationWindow;
-
-    private final ResultDisplay resultDisplay;
+    protected TextArea noteTextArea;
 
 
-    /**
-     * Creates a new NoteWindow.
-     */
-    public NoteWindow(Person person, Logic logic, ResultDisplay resultDisplay) {
+    protected ConfirmationWindow confirmationWindow;
+
+    protected final Logic logic;
+
+    protected final ResultDisplay resultDisplay;
+
+    protected NoteWindow(Logic logic, ResultDisplay resultDisplay) {
         super(FXML);
-        noteTextArea.setText(person.getNote().value);
         this.resultDisplay = resultDisplay;
-        this.person = person;
         this.logic = logic;
-        confirmationWindow = new ConfirmationWindow(person.getName().toString(), this);
-        getRoot().setTitle(person.getName().toString());
         noteTextArea.setWrapText(true);
         getRoot().setOnCloseRequest(e -> {
             e.consume();
@@ -113,30 +102,19 @@ public class NoteWindow extends UiPart<Stage> {
      * the note is added.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(String message, Person personToEdit) {
-        return String.format(message, personToEdit);
-    }
+    public abstract String generateSuccessMessage(String message);
+
 
     /**
      * Saves the file
      */
     @FXML
-    public void handleSave() throws CommandException {
-        String paragraph = noteTextArea.getText();
-        Note editedNote = new Note(paragraph, noteLastModified());
-        Person editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                editedNote, person.getTags());
-        person = editedPerson;
-        logic.executeSaveNote(person, editedPerson);
-        resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS, person));
-    }
+    public abstract void handleSave() throws CommandException;
 
     /**
      * Checks if current Note is saved.
      */
-    private boolean isSave() {
-        return person.getNote().value.equals(noteTextArea.getText());
-    }
+    public abstract boolean isSave();
 
     /**
      * Exits the note window if note is saved or user wants to exit without saving. Shows confirmation window if
@@ -154,11 +132,8 @@ public class NoteWindow extends UiPart<Stage> {
     /**
      * Exits the note Window.
      */
-    public void exit() {
-        getRoot().close();
-        OPENED_NOTE_WINDOWS.remove(this);
-        resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_EXIT_NOTE_SUCCESS, person));
-    }
+    public abstract void exit();
+
     /**
      * Exits and saves the note window.
      */
@@ -207,19 +182,6 @@ public class NoteWindow extends UiPart<Stage> {
     }
 
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
 
-        if (!(other instanceof NoteWindow)) {
-            return false;
-        }
-
-        NoteWindow otherPerson = (NoteWindow) other;
-        return otherPerson.person.equals(this.person);
-
-    }
 
 }

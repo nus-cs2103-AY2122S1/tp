@@ -11,8 +11,10 @@ import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
+import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
+import seedu.notor.logic.commands.person.GroupDeleteCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
@@ -22,6 +24,8 @@ import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.tag.TagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
@@ -124,10 +128,16 @@ public class NotorParser {
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             case GroupCommand.COMMAND_WORD:
-                if (subCommandWord.equals(SubGroupCreateCommand.COMMAND_WORD)) {
+                switch (subCommandWord) {
+                case SubGroupCreateCommand.COMMAND_WORD:
                     return new SubGroupCreateCommandParser(index, arguments).parse();
+                case GroupDeleteCommand.COMMAND_WORD:
+                    return new GroupDeleteCommandParser(index).parse();
+                case GroupNoteCommand.COMMAND_WORD:
+                    return new GroupNoteCommandParser(index).parse();
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             case TagCommand.COMMAND_WORD:
                 // TODO: Implement tag command.
             default:

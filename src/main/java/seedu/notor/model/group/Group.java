@@ -20,7 +20,6 @@ public abstract class Group {
     protected Name name;
     protected Set<Tag> tags;
     protected Note note = Note.EMPTY_NOTE;
-
     protected HashMap<String, Person> people;
 
     // TODO: RequireAllNonNull assertions/checks
@@ -45,6 +44,18 @@ public abstract class Group {
         this.tags = tags;
         this.note = note;
         people = new HashMap<>();
+    }
+
+    public Note getNote() {
+        return note;
+    }
+
+    public String getNoteSavedDate() {
+        return note.getSavedDate();
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
     }
 
     @Override

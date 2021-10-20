@@ -11,4 +11,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t:");
     public static final Prefix PREFIX_GROUPINDEX = new Prefix("g:");
     public static final Prefix PREFIX_GROUPNAME = new Prefix("g:");
+    public static final Prefix PREFIX_SUBGROUP = new Prefix("sg:");
 }

@@ -166,7 +166,7 @@ public class Person implements Unique<Person> {
      * @param subGroup the subgroup to be removed.
      * @throws ItemNotFoundException if SubGroup is not found.
      */
-    public void removeSuperGroup(SubGroup subGroup) throws ItemNotFoundException {
+    public void removeSubGroup(SubGroup subGroup) throws ItemNotFoundException {
         if (!subGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
