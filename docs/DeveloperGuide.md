@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagramUpdated.png" width="450" />
 
 
 The `Model` component,
@@ -128,7 +128,7 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/BetterModelClassDiagramUpdated.png" width="450" />
 
 </div>
 
@@ -187,9 +187,88 @@ Step 2. The user executes `mark 1` command to mark the 1st person as present.
   * Pros: Requires one less step of finding members.
   * Cons: There may be two members with same name, so when marking using
     names, it might result in ambiguity of whose attendance to mark.
+    
+### Alias feature
 
+#### Implementation
 
+The aliases mechanism is facilitated by `AddressBookParser`. Aliases are stored in `AliasMap`, which keeps the mappings between `Shortcut` and `CommandWord`, and is stored in `UserPrefs`. The association between `Shortcut` and `CommandWord` is represented as `Alias`. `AliasMap` implements the following operations:
 
+* `AliasMap#add(Alias)` — Adds an alias to the mapping.
+* `AliasMap#remove(Shortcut)` — Removes an alias from the mapping.
+* `AliasMap#convertAliasIfPresent(String)` — Replaces the input string with the command if it is an alias.
+
+The first two operations are exposed in the `Model` interface as `Model#addAlias(Alias)` and `Model#removeAlias(Shortcut)` respectively. 
+
+Given below is an example usage scenario and how the aliases mechanism behaves. 
+
+Step 1. The user launches the application for the first time. `UserPrefs` is initialised and `AliasMap` is created with empty mappings. 
+
+![AliasState0](images/AliasState0.png)
+
+Step 2. The user executes the `alias s/l cw/listf` command to create a shortcut `l` for the `listf` command. The `alias` command calls `Model#addAlias(Alias)`, causing a mapping between `l` and `listf` to be stored in `AliasMap`. 
+
+![AliasState1](images/AliasState1.png)
+
+Step 3. The user now wants to use the shortcut `l` for a different command, `listm`, instead. The user executes `alias s/l cw/listm`. `Model#addAlias(Alias)` is called again and the mapping from `l` to `listf` is replaced with `l` to `listm` in `AliasMap`.
+
+![AliasState2](images/AliasState2.png)
+
+Step 4. The user enters `l`, which the system understands as `listm` and executes the `listm` command, displaying all members in the member list.
+
+The following sequence diagram shows how the system understands aliases:  
+
+![AliasSequenceDiagram](images/AliasSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `ListMembersCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 5. The user then realises that the shortcut `l` was not to their liking and deletes the alias by executing `unalias l`. The `unalias` command calls `Model#removeAlias(Shortcut)` and removes the mapping from `AliasMap`.     
+
+![AliasState3](images/AliasState3.png)
+
+Step 6. The user finally decides to use the shortcut `lm` for `listm` and executes `alias s/lm cw/lsitm`. The user closes the application and the alias defined are saved into `UserPrefStorage`, available for use at the next launch.
+
+The following activity diagram summarizes what happens when a user enters and executes a command: 
+
+<img src="images/AliasActivityDiagram.png" width="250" />
+
+#### Design considerations:
+
+**Aspect: What the user can create shortcuts for**
+
+* **Alternative 1 (current choice):** Valid commands only.
+  * Pros: Easy to implement in parser.
+  * Cons: Less flexibility for user.
+
+* **Alternative 2:** Any defined text.
+  * Pros: Very flexible, no validation required.
+  * Cons: Difficult to parse user input as would need to scan exhaustively for aliases.
+
+In modern CLI applications, an alias is mainly used for abbreviating system commands or adding default arguments to regularly used commands. Considering the target use of SportsPA and time constraints, since command arguments are not likely to be repeated, we decided that it was sufficient to allow users to create shortcuts for commands only.
+
+### Split feature
+
+#### Implementation
+
+The split mechanism is facilitated by `AddressBookParser`. More details to be added.
+
+#### Design considerations:
+
+**Aspect: Format of values in `Availability`**
+
+* **Alternative 1 (current choice):** Stores values as a `List<DayOfWeek>`.
+    * Pros: Easy to implement in parser, increases user-friendliness by allowing users to just type in numbers to 
+      represent days of a week instead of the names. Numbers can then be easily converted into DayOfWeek, 
+      and sorted, ensuring uniformity.
+    * Cons: May not be intuitive to some users that 1 represents Monday and 7 represents Sunday. 
+
+* **Alternative 2:** Stores values as a `String`
+    * Pros: Intuitive for users to type in the names of the days
+    * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are 
+      in the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
+>>>>>>> master
 
 ### \[Proposed\] Undo/redo feature
 

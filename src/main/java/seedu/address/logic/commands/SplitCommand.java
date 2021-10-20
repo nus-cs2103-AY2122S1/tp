@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,40 +17,36 @@ public class SplitCommand extends Command {
     public static final String COMMAND_WORD = "split";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": splits members into locations based on availability.\n"
             + "Parameters: " + "DAY\n"
-            + "DAY must be one of Mon, Tue, Wed, Thu, Fri, Sat or Sun\n"
-            + "Example: " + COMMAND_WORD + " Mon";
+            + "DAY must be an integer from 1 to 7\n"
+            + "where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
+            + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Members have been split for %1$s";
 
-    private static final List<String> VALID_DAYS = Arrays.asList("Mon", "Tue", "Wed",
-            "Thu", "Fri", "Sat", "Sun");
-    private final String day;
+    private final int dayNumber;
 
     /**
      * Creates a SplitCommand object to split the members.
      *
-     * @param day Day to split members for.
+     * @param dayNumber Day to split members for.
      */
-    public SplitCommand(String day) {
-        requireNonNull(day);
-        this.day = day;
+    public SplitCommand(int dayNumber) {
+        assert dayNumber >= 1 && dayNumber <= 7 : "dayNumber should be between 1 and 7";
+        this.dayNumber = dayNumber;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!VALID_DAYS.contains(day)) {
-            throw new CommandException(String.format(MESSAGE_INVALID_DAY, MESSAGE_USAGE));
-        }
-        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(day);
+        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(dayNumber);
         model.split(predicate);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, day));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())));
     }
 
     @Override
     public boolean equals(Object obj) {
         return (obj == this)
                 || (obj instanceof SplitCommand
-                && day.equals(((SplitCommand) obj).day));
+                && dayNumber == ((SplitCommand) obj).dayNumber);
     }
 }
