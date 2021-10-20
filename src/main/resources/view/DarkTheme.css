@@ -137,7 +137,7 @@
     -fx-text-fill: #010504;
 }
 
-/* module, tags, email, remarks... */
+/* module, lesson codes, email, remarks... */
 .cell_small_label {
     -fx-font-family: "Lato";
     -fx-font-size: 14px;
@@ -350,14 +350,14 @@
     -fx-background-radius: 0;
 }
 
-/* spacing between tags */
-#tags {
+/* spacing between lesson codes */
+#lessonCodes {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-/* tag labels */
-#tags .label {
+/* lesson code labels */
+#lessonCodes .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
@@ -384,7 +384,7 @@
     -fx-font-size: 12;
 }
 
-#contactHeader, #moduleClass {
+#contactHeader, #moduleLesson {
     -fx-padding: 5 5 5 5;
     -fx-text-fill: white;
     -fx-background-color: #424242;

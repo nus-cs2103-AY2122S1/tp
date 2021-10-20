@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.person.ModuleCode;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link ModuleCode}.
@@ -19,7 +19,7 @@ import seedu.address.model.tag.Tag;
 public class JsonAdaptedModuleCode {
 
     private final String moduleCodeName;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedLessonCode> lessonCodes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedModuleCode} with the given {@code moduleCodeName}.
@@ -28,10 +28,10 @@ public class JsonAdaptedModuleCode {
      */
     @JsonCreator
     public JsonAdaptedModuleCode(@JsonProperty("moduleCode") String moduleCodeName,
-                                 @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                                 @JsonProperty("lessonCodes") List<JsonAdaptedLessonCode> lessonCodes) {
         this.moduleCodeName = moduleCodeName;
-        if (tags != null) {
-            this.tags.addAll(tags);
+        if (lessonCodes != null) {
+            this.lessonCodes.addAll(lessonCodes);
         }
     }
 
@@ -42,8 +42,8 @@ public class JsonAdaptedModuleCode {
      */
     public JsonAdaptedModuleCode(ModuleCode source) {
         moduleCodeName = source.value;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
+        lessonCodes.addAll(source.getLessonCodes().stream()
+                .map(JsonAdaptedLessonCode::new)
                 .collect(Collectors.toList()));
     }
 
@@ -63,11 +63,11 @@ public class JsonAdaptedModuleCode {
             throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
 
-        final List<Tag> moduleCodeTags = new ArrayList<>();
-        for (JsonAdaptedTag tag: tags) {
-            moduleCodeTags.add(tag.toModelType());
+        final List<LessonCode> moduleCodeLessonCodes = new ArrayList<>();
+        for (JsonAdaptedLessonCode lessonCode: lessonCodes) {
+            moduleCodeLessonCodes.add(lessonCode.toModelType());
         }
-        final Set<Tag> modelTags = new HashSet<>(moduleCodeTags);
-        return new ModuleCode(moduleCodeName, modelTags);
+        final Set<LessonCode> modelLessonCodes = new HashSet<>(moduleCodeLessonCodes);
+        return new ModuleCode(moduleCodeName, modelLessonCodes);
     }
 }

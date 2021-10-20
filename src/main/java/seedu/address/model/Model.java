@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<ModuleClass> PREDICATE_SHOW_ALL_CLASSES = unused -> true;
+    Predicate<ModuleLesson> PREDICATE_SHOW_ALL_LESSONS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -71,10 +71,10 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the given class.
-     * The class must exist in the address book.
+     * Deletes the given lesson.
+     * The lesson must exist in the address book.
      */
-    void deleteClass(ModuleClass target);
+    void deleteLesson(ModuleLesson target);
 
     /**
      * Adds the given person.
@@ -83,10 +83,10 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given class.
-     * {@code moduleClass} must not already exist in the address book.
+     * Adds the given lesson.
+     * {@code moduleLesson} must not already exist in the address book.
      */
-    void addClass(ModuleClass moduleClass);
+    void addLesson(ModuleLesson moduleLesson);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -96,18 +96,18 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Replaces the given class {@code target} with {@code editedClass}.
+     * Replaces the given lesson {@code target} with {@code editedLesson}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedClass} must not be the same as another existing class in the address book.
+     * The person identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
      */
-    void setModuleClass(ModuleClass target, ModuleClass editedClass);
+    void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson);
 
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered moduleClass list */
-    ObservableList<ModuleClass> getFilteredModuleClassList();
+    /** Returns an unmodifiable view of the filtered moduleLesson list */
+    ObservableList<ModuleLesson> getFilteredModuleLessonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -116,8 +116,8 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Updates the filter of the filtered moduleClass list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered moduleLesson list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredModuleClassList(Predicate<ModuleClass> predicate);
+    void updateFilteredModuleLessonList(Predicate<ModuleLesson> predicate);
 }

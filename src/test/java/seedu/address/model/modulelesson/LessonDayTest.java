@@ -1,4 +1,4 @@
-package seedu.address.model.moduleclass;
+package seedu.address.model.modulelesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,40 +8,40 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class DayTest {
+public class LessonDayTest {
 
-    private final Day tuesday = new Day("2");
-    private final Day wednesday = new Day ("3");
-    private final Day thursday = new Day("4");
-    private final Day sunday = new Day("7");
+    private final LessonDay tuesday = new LessonDay("2");
+    private final LessonDay wednesday = new LessonDay("3");
+    private final LessonDay thursday = new LessonDay("4");
+    private final LessonDay sunday = new LessonDay("7");
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Day(null));
+        assertThrows(NullPointerException.class, () -> new LessonDay(null));
     }
 
     @Test
     public void constructor_emptyString() {
-        assertThrows(IllegalArgumentException.class, () -> new Day(""));
+        assertThrows(IllegalArgumentException.class, () -> new LessonDay(""));
     }
 
     @Test
     public void illegalDay_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Day("8"));
+        assertThrows(IllegalArgumentException.class, () -> new LessonDay("8"));
     }
 
     @Test
     public void isValidDay() {
-        assertThrows(NullPointerException.class, () -> Day.isValidDay(null));
+        assertThrows(NullPointerException.class, () -> LessonDay.isValidDay(null));
 
-        assertFalse(Day.isValidDay("8")); //out of range
-        assertFalse(Day.isValidDay("0")); //out of range
-        assertFalse(Day.isValidDay("-1"));
-        assertFalse(Day.isValidDay("1.0"));
+        assertFalse(LessonDay.isValidDay("8")); //out of range
+        assertFalse(LessonDay.isValidDay("0")); //out of range
+        assertFalse(LessonDay.isValidDay("-1"));
+        assertFalse(LessonDay.isValidDay("1.0"));
 
-        assertTrue(Day.isValidDay("1"));
-        assertTrue(Day.isValidDay("5"));
-        assertTrue(Day.isValidDay("7"));
+        assertTrue(LessonDay.isValidDay("1"));
+        assertTrue(LessonDay.isValidDay("5"));
+        assertTrue(LessonDay.isValidDay("7"));
     }
 
     @Test
