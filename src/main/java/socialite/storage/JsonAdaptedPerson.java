@@ -15,6 +15,7 @@ import socialite.model.handle.Instagram;
 import socialite.model.handle.Telegram;
 import socialite.model.handle.TikTok;
 import socialite.model.handle.Twitter;
+import socialite.model.person.Dates;
 import socialite.model.person.Name;
 import socialite.model.person.Person;
 import socialite.model.person.Phone;
@@ -37,6 +38,7 @@ class JsonAdaptedPerson {
     private final String telegram;
     private final String tiktok;
     private final String twitter;
+    private final Dates dates;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +48,7 @@ class JsonAdaptedPerson {
             @JsonProperty("remark") String remark, @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("facebook") String facebook, @JsonProperty("instagram") String instagram,
             @JsonProperty("telegram") String telegram, @JsonProperty("tiktok") String tiktok,
-            @JsonProperty("twitter") String twitter) {
+            @JsonProperty("twitter") String twitter, @JsonProperty("dates") Dates dates) {
         this.name = name;
         this.phone = phone;
         this.remark = remark;
@@ -58,6 +60,7 @@ class JsonAdaptedPerson {
         this.telegram = telegram;
         this.tiktok = tiktok;
         this.twitter = twitter;
+        this.dates = dates;
     }
 
     /**
@@ -75,6 +78,7 @@ class JsonAdaptedPerson {
         telegram = source.getTelegram().get();
         tiktok = source.getTiktok().get();
         twitter = source.getTwitter().get();
+        dates = source.getDates();
     }
 
     /**
@@ -136,7 +140,9 @@ class JsonAdaptedPerson {
         }
         final TikTok modelTikTok = new TikTok(tiktok);
 
+        final Dates modelDates = new Dates(dates);
+
         return new Person(modelName, modelPhone, modelRemark, modelTags, modelFacebook,
-                modelInstagram, modelTelegram, modelTikTok, modeTwitter);
+                modelInstagram, modelTelegram, modelTikTok, modeTwitter, modelDates);
     }
 }

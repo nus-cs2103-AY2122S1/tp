@@ -21,6 +21,7 @@ import socialite.model.handle.Instagram;
 import socialite.model.handle.Telegram;
 import socialite.model.handle.TikTok;
 import socialite.model.handle.Twitter;
+import socialite.model.person.Dates;
 import socialite.model.person.Name;
 import socialite.model.person.Person;
 import socialite.model.person.Phone;
@@ -59,8 +60,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         TikTok tiktok = ParserUtil.parseTikTok(argMultimap.getValue(PREFIX_TIKTOK).orElse(null));
         Twitter twitter = ParserUtil.parseTwitter(argMultimap.getValue(PREFIX_TWITTER).orElse(null));
 
+        // TODO(@bnjmnt4n)
+        Dates dates = new Dates();
+
         Person person = new Person(name, phone, remark, tagList, facebook,
-                instagram, telegram, tiktok, twitter);
+                instagram, telegram, tiktok, twitter, dates);
 
         return new AddCommand(person);
     }

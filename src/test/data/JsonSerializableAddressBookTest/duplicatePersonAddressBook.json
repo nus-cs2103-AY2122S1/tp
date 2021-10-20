@@ -7,7 +7,8 @@
     "remark" : "",
     "tagged": [ "friends" ],
     "tiktok": "alice.pauline",
-    "twitter": "alice_pauline"
+    "twitter": "alice_pauline",
+    "dates": {}
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -15,6 +16,7 @@
     "address": "4th street",
     "remark" : "",
     "tiktok": "alice.pauline",
-    "twitter": "alice_pauline"
+    "twitter": "alice_pauline",
+    "dates": {}
   } ]
 }

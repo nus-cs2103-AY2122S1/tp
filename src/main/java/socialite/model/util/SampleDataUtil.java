@@ -25,29 +25,32 @@ public class SampleDataUtil {
     public static final Remark EMPTY_REMARK = new Remark("");
 
     public static Person[] getSamplePersons() {
+        // TODO(@bnjmnt4n)
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), EMPTY_REMARK,
                 getTagSet("friends"), new Facebook("alex.yeoh"), new Instagram("alex.yeoh"),
-                new Telegram("alyeoh"), new TikTok("alex.yeoh"), new Twitter("alexy")),
+                new Telegram("alyeoh"), new TikTok("alex.yeoh"), new Twitter("alexy"),
+                null),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), EMPTY_REMARK,
                 getTagSet("colleagues", "friends"), new Facebook("bern.yu"),
                 new Instagram("bern.yu"), new Telegram("bern_yu"),
-                new TikTok("bernice.yu"), new Twitter("berniceyu")),
+                new TikTok("bernice.yu"), new Twitter("berniceyu"), null),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), EMPTY_REMARK,
                 getTagSet("neighbours"), new Facebook("charlotte.oli"),
                 new Instagram("charlotte.oli"), new Telegram("olichar"),
-                new TikTok("charlotte.olive"), new Twitter("charolive")),
+                new TikTok("charlotte.olive"), new Twitter("charolive"), null),
             new Person(new Name("David Li"), new Phone("91031282"), EMPTY_REMARK,
                 getTagSet("family"), new Facebook("davey"),
-                new Instagram("davey"), new Telegram("david_li"), new TikTok("david"), new Twitter("david")),
+                new Instagram("davey"), new Telegram("david_li"), new TikTok("david"),
+                new Twitter("david"), null),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), EMPTY_REMARK,
                 getTagSet("classmates"), new Facebook("irfan.him"),
                 new Instagram("irfan.him"), new Telegram("irfan_ibrahim"),
-                new TikTok("irfan"), new Twitter("irfanibrahim")),
+                new TikTok("irfan"), new Twitter("irfanibrahim"), null),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), EMPTY_REMARK,
                 getTagSet("colleagues"), new Facebook("balaroy"),
                 new Instagram("balaroy"), new Telegram("roybala"),
-                new TikTok("roy.balakrishnan"), new Twitter("royB"))
+                new TikTok("roy.balakrishnan"), new Twitter("royB"), null)
         };
     }
 

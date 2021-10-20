@@ -9,7 +9,8 @@
     "instagram" : "alice.p",
     "telegram": "alice_pauline",
     "tiktok": "alice.pauline",
-    "twitter": null
+    "twitter": null,
+    "dates": {}
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -19,7 +20,8 @@
     "instagram" : "benson.m",
     "telegram": "benson_meier",
     "tiktok": null,
-    "twitter": "bensonMeier"
+    "twitter": "bensonMeier",
+    "dates": {}
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -29,7 +31,8 @@
     "instagram" : "carl.k",
     "telegram": null,
     "tiktok": "carl.kurz",
-    "twitter": "carl"
+    "twitter": "carl",
+    "dates": {}
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -39,7 +42,8 @@
     "instagram" : null,
     "telegram": "daniel_meier",
     "tiktok": "daniel.meier",
-    "twitter": "DanielMeier"
+    "twitter": "DanielMeier",
+    "dates": {}
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -49,7 +53,8 @@
     "instagram" : "elle.m",
     "telegram": "elle_meyer",
     "tiktok": "elle.meyer",
-    "twitter": "elle_meyer01"
+    "twitter": "elle_meyer01",
+    "dates": {}
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -59,7 +64,8 @@
     "instagram" : "fiona.k",
     "telegram": "fiona_kunz",
     "tiktok": "fiona.kunz",
-    "twitter": "fiona_kunz"
+    "twitter": "fiona_kunz",
+    "dates": {}
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -69,6 +75,7 @@
     "instagram" : "george.b",
     "telegram": "george_best",
     "tiktok": "george.best",
-    "twitter": "georgeBest"
+    "twitter": "georgeBest",
+    "dates": {}
   } ]
 }

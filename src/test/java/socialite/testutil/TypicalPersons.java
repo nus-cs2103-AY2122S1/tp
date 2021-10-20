@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import socialite.model.AddressBook;
+import socialite.model.person.Dates;
 import socialite.model.person.Person;
 
 /**
@@ -65,11 +66,13 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withRemark(VALID_REMARK_AMY).withTags(VALID_TAG_FRIEND)
             .withFacebook(VALID_FACEBOOK_AMY).withInstagram(VALID_INSTAGRAM_AMY)
-            .withTelegram(VALID_TELEGRAM_AMY).withTikTok(VALID_TIKTOK_AMY).withTwitter(VALID_TWITTER_AMY).build();
+            .withTelegram(VALID_TELEGRAM_AMY).withTikTok(VALID_TIKTOK_AMY).withTwitter(VALID_TWITTER_AMY)
+            .withDates(new Dates()).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withRemark(VALID_REMARK_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withFacebook(VALID_FACEBOOK_BOB).withInstagram(VALID_INSTAGRAM_BOB)
-            .withTelegram(VALID_TELEGRAM_BOB).withTikTok(VALID_TIKTOK_BOB).withTwitter(VALID_TWITTER_BOB).build();
+            .withTelegram(VALID_TELEGRAM_BOB).withTikTok(VALID_TIKTOK_BOB).withTwitter(VALID_TWITTER_BOB)
+            .withDates(new Dates()).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
