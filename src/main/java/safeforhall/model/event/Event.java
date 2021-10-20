@@ -68,6 +68,7 @@ public class Event {
                 && otherEvent.getCapacity().equals(getCapacity());
     }
 
+<<<<<<< HEAD
 
     public String addResidentsToEvent(ArrayList<Person> current, ArrayList<Person> toAdd) {
         return residents.addResidentList(current, toAdd);
@@ -80,6 +81,30 @@ public class Event {
         return getEventName().equals(eventName);
     }
 
+=======
+    /**
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getCapacity().equals(getCapacity());
+    }
+
+
+>>>>>>> 41e174c566bec184c75e1c819c7655acd34d11ea
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -95,10 +120,14 @@ public class Event {
                 .append("; Venue: ")
                 .append(getVenue())
                 .append("; Capacity: ")
+<<<<<<< HEAD
                 .append(getCapacity())
                 .append("; Residents: ")
                 .append(getResidents());
 
+=======
+                .append(getCapacity());
+>>>>>>> 41e174c566bec184c75e1c819c7655acd34d11ea
         return builder.toString();
     }
 }

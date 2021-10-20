@@ -1,13 +1,13 @@
 package safeforhall.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static safeforhall.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static safeforhall.testutil.Assert.assertThrows;
 import static safeforhall.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import safeforhall.commons.core.Messages;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Email;
@@ -45,7 +45,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+        assertThrows(ParseException.class, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 

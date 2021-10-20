@@ -45,7 +45,7 @@ public class Venue {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Venue // instanceof handles nulls
-                && venue.equals(((Venue) other).venue)); // state check
+                && venue.equalsIgnoreCase(((Venue) other).venue)); // state check
     }
 
     @Override

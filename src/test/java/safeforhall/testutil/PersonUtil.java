@@ -9,8 +9,8 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
 
-import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.person.Person;
 
 /**
@@ -47,19 +47,16 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getRoom().ifPresent(room -> sb.append(PREFIX_ROOM).append(room.room).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
-        //descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        /*if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
-        return sb.toString();*/
-        //TODO
-        return "";
+        descriptor.getVaccStatus().ifPresent(vaccStatus -> sb.append(PREFIX_VACCSTATUS)
+                .append(vaccStatus.vaccStatus).append(" "));
+        descriptor.getFaculty().ifPresent(faculty -> sb.append(PREFIX_FACULTY).append(faculty.faculty).append(" "));
+        descriptor.getLastFetDate().ifPresent(lastFetDate -> sb.append(PREFIX_FETDATE)
+                .append(lastFetDate.date).append(" "));
+        descriptor.getLastCollectionDate().ifPresent(lastCollectionDate -> sb.append(PREFIX_COLLECTIONDATE)
+                .append(lastCollectionDate.date).append(" "));
+        return sb.toString();
     }
 }
