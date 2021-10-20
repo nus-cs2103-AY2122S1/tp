@@ -2,28 +2,9 @@
 layout: page
 title: Developer Guide
 ---
-Table of Contents
-- [**Acknowledgements**](#acknowledgements)
-- [**Setting up, getting started**](#setting-up-getting-started)
-- [**Design**](#design)
-    * [Architecture](#architecture)
-    * [UI component](#ui-component)
-    * [Logic component](#logic-component)
-    * [Model component](#model-component)
-    * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
-- [**Implementation**](#implementation)
-- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Appendix: Requirements**](#appendix-requirements)
-    * [Product scope](#product-scope)
-    * [User stories](#user-stories)
-    * [Use cases](#use-cases)
-    * [Non-Functional Requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
-- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Deleting a person](#deleting-a-person)
-    * [Saving data](#saving-data)
+* Table of Contents
+  
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -174,21 +155,224 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort feature
 
-#### Design considerations:
+#### Current Implementation
 
-**Aspect: How undo & redo executes:**
+The sort mechanism is facilitated by the inbuilt Collections::sort method.
+This is done by passing a custom comparator that implements the Comparator interface to the sort method.
+There are currently three custom comparators implemented in FAST:
+- `SortByName` -- Sorts the contacts alphabetically by name.
+- `SortByAppointment` -- Sorts the contacts chronologically by date.
+- `SortByPriority` -- Sorts the contacts by priority tags.
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+`SortByName`: Implemented by using the inbuilt `String::compareTo`.  <br>
+`SortByAppointment`: Implemented by first converting the appointment date from `String` to a `Date` object before using
+the inbuilt `Date::compareTo` method.  <br>
+`SortByPriority`: Implemented by first assigning int values to tags, tags with highest priority will have the smallest int value.
+Using those priority values, the inbuilt `Integer::compareTo` is used. <br>
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `sort name` in the CLI to sort all contacts by name. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a sort command and will call `SortCommandParser::parse`. From the given input,
+`SortCommandParser` will create the corresponding `SortByName` Comparator and return a `SortCommand` with that comparator. <br>
+Step 4. After execution of the user input, `LogicManager` calls `SortCommand::execute(model)` where model contains methods that mutate 
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `UniquePersonList::sortPersons(SortByName)`, which executes the sort method
+to sort the list of persons by their name.<br>
+
+#### Design Considerations
+
+**Aspect: How sort executes:**
+
+* **Alternative 1 (current choice):** Use the inbuilt `Collections::sort`.
   * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+  * Cons: May need additional attributes to compare.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Implement a custom Sort method.
+  * Pros: May not need additional attributes
+  * Cons: Very complicated, may have performance issues if the sort is not efficient.
 
+**Aspect: How SortByDate is implemented:**
+
+* **Alternative 1 (current choice):** Convert the String value to Date object before using inbuilt `compareTo`.
+    * Pros: Easy to implement.
+    * Cons: Need to account for empty appointment dates.
+
+* **Alternative 2:** Compare dates in String.
+    * Pros: No need to convert the values to another type.
+    * Cons: Complicated since there is a need for 3 different comparisons namely, year, month, date.
+    
+### Find feature
+
+#### Current implementation
+
+The find mechanism uses a few implementations of Predicate<Person> using the inbuilt `Predicate` class.
+It uses these predicates to determine which persons to display in the search results.
+There are currently 4 custom predicates implemented in FAST:
+- `NameContainsQueriesPredicate` -- checks if the person's name contains the query.
+- `PriorityPredicate` -- checks if the person has the given priority tag.
+- `TagMatchesKeywordPredicate` -- checks if any of the person's tags match the keyword.
+- `RemarkContainsKeywordPredicate` -- checks if the person's remark contains the keyword.
+
+`NameContainsQueriesPredicate` implemented by running the name through a for-loop to see if any word starts with the query.
+`PriorityPredicate` implemented by running the tags through a for-loop and checking if any of them match the given priority.
+`TagMatchesKeywordPredicate` implemented by running the tags through a for-loop and checking if any of them match the given keyword.
+`RemarkContainsKeywordPredicate` implemented by using the inbuilt `String::contains`.
+
+Given below is an example usage scenario and how the find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. <br>
+Step 2. The user inputs `find john` in the CLI to find all contacts whose names contain `john`. This calls `LogicManager::execute` which in turn
+calls `FastParser::parseCommand` to parse the given input. <br>
+Step 3. `FastParser` will determine that it is a find command and will call `FindCommandParser::parse`. From the given input,
+`FindCommandParser` will determine that the user is searching for a name and return a `FindCommand` with a `NameContainsQueriesPredicate`. <br>
+Step 4. After execution of the user input, `LogicManager` calls `FindCommand::execute(model)` where model contains methods that mutate 
+the state of our contacts. <br>
+Step 5. Through a series of method chains, it calls `ModelManager::getFilteredPersonList()`, which will display the results
+of the search.<br>
+
+#### Design Considerations
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Use many `Predicate<Person` implementations.
+  * Pros: Easy to implement.
+  * Cons: For every type of find added, a new class must be made.
+
+* **Alternative 2:** Implement a custom Find method.
+  * Pros: May be able to condense into 1 class
+  * Cons: Very complicated and difficult to implement.
+
+### Help Window
+
+#### Current Implementation
+The help windows is a separate window and displays the command usage for each of the command. To access the help
+window, users have 3 ways to get to the help page:
+* Using the menu bar. Click on `Help` > `Help`.
+* Pressing `F1` while using FAST.
+* Typing the command `help [COMMAND]`.
+
+To access the different commands' help page, there is a dropdown selector which will navigate to 
+the different help pages. By default, the help window opens to our "Quick Start" page which contains basic 
+information for first time users.
+
+#### Design Considerations
+
+**Aspect: How to access various commands' help page**
+* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
+    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate 
+            between the pages.
+    * Cons: To new users, might not be immediately obvious that the `ComboBox` can be interacted with. Users
+            might also miss the scroll bar and miss out some commands available.
+      
+* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
+    * Pros: Easier to be understood by new users.
+    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command. 
+    
+* **Alternative 3:** Using a Table of Contents (ToC) landing page.
+    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
+    * Cons: Users have to navigate back to the ToC to navigate between each command.
+    
+We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of 
+navigating between help pages. While we understand that most experienced users might not need to access the help menu, 
+by providing them a quick and easy way to access the commands' help page when they do need it is very important.
+    
+**Aspect: How to access the help window**
+
+Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an 
+additional `[COMMAND]` paremater for the help command, which nagivates to the selected command's help page.
+  * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
+    first and selecting the command help page from there.
+  * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
+
+To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
+valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
+window to the default page.
+
+### Statistics window
+
+#### Current Implementation
+
+The statis window displays statistics and insights into the user's client base. To access the stats window, users have 
+2 ways of getting to the stats page:
+* Using the menu bar. Click on `Stats` > `Stats`.
+* Pressing `F2` while using FAST.
+
+Currently, the stats window provides infomation for the client's Priority Tags and their Insurance Plans. We used 
+`JavaFX::PieChart` to visualise the client's data and display them to the user. We also provided a few template insights
+for the user to make sense of the data provided.
+
+#### Design Considerations
+
+**Aspect: How to visualise the data**
+* **Alternative 1 (Current choice):** Using `JavaFX::PieChart`.
+    * Pros: Can be easily understood by the user. Provides a good overview of the proportion at a glance.
+    * Cons: Gets messy if there are a lot of variables. Data elements with a small count will be hidden to the
+            user.
+
+* **Alternative 2:** Using `JavaFX::BarChart`.
+    * Pros: Easier to be understood by new users. 
+    * Cons: The information might be overbearing. Does not provide an immediate overview of the client base. New
+            users might also be confused by the large amount of information displayed at once.
+
+Ultimately, as our main focus was speed and ease of use, we decided on the piechart implementation as it is both 
+easily understood, yet is able to convey the essence of the data to the user. Other chart types are less common and 
+thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
+piechart to help users better understand the data and provide a more complete statistic.
+    
 _{more aspects and alternatives to be added}_
+
+### Tagging feature
+
+#### Current Implementation
+
+Other than the edit command. a tag command has also been added to make adding and deleting tags easier.
+This command has a relatively straightforward implementation:
+1. A `Set` of currently assigned tags is retrieved from the specified `Person`.
+2. A new `Set` is created using the retrieved `Set`, then tags are deleted and added as necessary.
+3. If there are no issues with adding and deleting, and certain conditions are satisfied, the `Person` 
+   will be updated with the new `Set` of tags. Any violations of the conditions will result in an error being 
+   shown to the user. The conditions are as follows:
+    1. All tag names have a maximum character length of 20 alphanumeric characters
+    2. A maximum of 1 Priority tag exists in the `Set` of tags
+    3. A maximum of 1 of each Investment Plan tag exists in the `Set` of tags
+    4. No duplicate tag is added to the `Set`
+    5. No non-existent tag is attempted to be deleted from the 'Set'
+    
+Below is an example usage scenario: 
+
+1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
+   from the first listed contact.
+2. This calls `LogicManager::execute` which further calls `FastParser::parseCommand` to parse the given input.
+3. `FastParser` determines that it is a tag command, and further calls `TagCommandParser::parse`.
+4. `TagCommandParser` will then identify the tags to add and delete, and return a `TagCommand` that contains a Set
+   of tags to delete and another Set of tags to add.
+5. `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
+   tags, while ensuring that certain conditions are met.
+6. If there are no issues, the command will finish executing, and a message indicating success will appear.
+   Any changes to the tags will be reflected immediately: In this case, the tag `fat` will be added while the
+   tag `thin` will be deleted.
+   
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Implement a dedicated Tag command.
+    * Pros: 
+      1. Isolation of a single feature to a specific command: more intuitive to use.
+      2. Improvement over `edit` command: retains tags not directly affected by the command
+    * Cons:
+      1. Repeated functionality that already exists in `edit` command
+    
+* **Alternative 2:** Augment the `edit` command.
+    * Pros:
+      1. Reduce the number of commands in the application: less to manage, easier to remember.
+    * Cons:
+      1. Overloading the `edit` command, which already accepts many parameters and modifiers in its
+         command format, could make it much more confusing to use, especially for newer users.
+      2. Harder to implement, as many existing dependencies could be affected.   
 
 ### \[Proposed\] Data archiving
 
@@ -216,12 +400,11 @@ _{Explain here how the data archiving feature will be implemented}_
 * No time/busy
 * Might not be tech-savvy
 * Many contacts to manage
-* has a need to manage a significant number of contacts
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-* Need to profile clients
-
+* Has a need to manage a significant number of contacts
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
+* Needs to profile clients
 
 **Value proposition**: Financial Advisors are busy. We will help them save time by optimising our system for them. FAST keeps track of client details and information for them.
 
@@ -360,12 +543,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC05 - Find Contact**
+**Use case: UC05 - Find Contact by name**
 
 **MSS**
 
 1. User searches for a name.
-2. FAST shows a list of persons with the specified name or people whose name contains the search query.
+2. FAST shows a list of persons with the specified name or people whose name starts with the search query.
 
    Use case ends.
 
@@ -382,7 +565,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1b1. FAST displays a message to inform user no contacts that matches the query was found.
 
       Use case ends.
-
 
 **Use case: UC06 - List Contacts**
 
@@ -498,6 +680,155 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. FAST shows an error message.
 
       Use case ends.
+      
+
+**Use case: UC11 - Sort contacts**
+
+**MSS**
+
+1. User requests to sort persons
+2. FAST displays a list of contacts sorted by the given keyword.
+   Use case ends.
+
+**Extensions**
+
+* 2a. The given command syntax is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of sort command to user.
+
+* 2b. The list is empty.
+      Use case ends.
+      
+**Use case: UC12 - Find Contact by priority**
+
+**MSS**
+
+1. User searches for a priority.
+2. FAST shows a list of persons with the specified priority.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given priority is invalid and does not follow the format of a priority tag.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command and correct format for priority to user.
+
+      Use case ends.
+
+
+* 1b FAST cannot find any contacts with the given priority.
+    * 1b1. FAST displays a message to inform user no contacts with the given priority were found.
+
+      Use case ends.
+      
+**Use case: UC13 - Find Contact by tag**
+
+**MSS**
+
+1. User searches for some tags.
+2. FAST shows a list of persons with the specified tags.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given tags are invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command.
+
+      Use case ends.
+      
+**Use case: UC14 - Find Contact by remark**
+
+**MSS**
+
+1. User searches for a remark.
+2. FAST shows a list of persons whose remarks contain the searched remark.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The given remark is invalid.
+    * 1a1. FAST shows an error message.
+    * 1a2. FAST shows an example of find command.
+
+      Use case ends.
+
+
+* 1b FAST cannot find any contacts with the given remark.
+    * 1b1. FAST displays a message to inform user no contacts with the given remark were found.
+
+      Use case ends.
+
+**Use case: UC15 - Help command**
+
+**MSS**
+
+1. User requests to open the help window.
+2. FAST opens a new help window. Use case ends.
+
+**Extension**
+* 1a. There is already a help window opened.
+    * 1a1. FAST focuses on the existing help window. Use case ends.
+    
+
+**Use case: U16 - Statistics window**
+
+**MSS**
+
+1. User requests to open the stats window.
+2. FAST opens a new stats window. Use case ends.
+
+**Extension**
+* 1a. There is already a stats window opened.
+    * 1a1. FAST updates and focuses on the existing help window. Use case ends.
+    
+
+**Use case: UC17 - Edit tags of a contact**
+
+**MSS**
+
+1. User requests to list contacts (UC06)
+2. User requests to edit tags of a contact
+3. FAST displays a message indicating success.
+4. FAST displays the updated contact below.
+
+  Use case ends.
+  
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of the tag command to the user.
+    
+      Use case ends.
+    
+* 2b. A tag to be added to the specified contact already exists.
+    * 2b1. FAST shows an error message to the user that the tag already exists.
+    
+      Use case ends.
+    
+* 2c. A tag to be deleted from the specified contact does not exist.
+    * 2c1. FAST shows an error message to the user that the tag does not exist.
+    
+      Use case ends.
+
+* 2d. More than one Priority tag is added to a contact.
+    * 2d1. FAST shows an error message to the user that each contact may only have one Priority tag.
+
+      Use case ends.
+    
+* 2e. More than one of each Insurance Plan tag is added to a contact.
+    * 2e1. FAST shows an error message to the user that each contact may only have one of each Investment Plan tag.    
+
+      Use case ends.
+    
+* 2f. Tag name exceeds maximum length of 20 characters.
+    * 2f1. FAST shows an error message to the user that the maximum tag length is 20 characters.
+    
+      Use case ends.
 
 *{More to be added}*
 
@@ -519,6 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Remark**: A comment/note about a specific contact
+  **Tag** A short note about a specific contact, used for sorting and grouping contacts
 * **URL**: Uniform Resource Locator, known more commonly as a link to a website.
 * **XML**: Extensible MarkUp Language, used to format the layout of this software
 

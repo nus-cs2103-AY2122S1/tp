@@ -10,8 +10,10 @@ import seedu.fast.commons.util.TagUtil;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, or follow the specified "
-            + "format for a PriorityTag or InvestmentPlanTag";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
+            + "and not more than 20 characters long, or follow the specified \n"
+            + "format for a PriorityTag (low, med or high) or InvestmentPlanTag ()";
+
 
     public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
         + "Tags can be applied using the Add,Edit or Tag command.\n\n"
@@ -45,14 +47,22 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidTagLength(test);
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagTerm(String test) {
-        return test.matches(VALIDATION_REGEX) || test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        return (test.matches(VALIDATION_REGEX) || test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX))
+                && isValidTagLength(test);
+    }
+
+    /**
+     * Returns true if a given string has a valid length.
+     */
+    public static boolean isValidTagLength(String test) {
+        return test.length() < TagUtil.MAX_LENGTH_TAG;
     }
 
     /**

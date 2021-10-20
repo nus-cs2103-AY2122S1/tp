@@ -12,8 +12,8 @@ public class InvestmentPlanTag extends Tag {
 
     public static final String MESSAGE_USAGE = "Investment Plan tag: label a person with a investment plan. "
             + "The investment plans available are: \n"
-            + "Life Insurance, Motor insurance, Health insurance, Travel insurance, \n"
-            + "Property insurance, Investment and Savings.\n"
+            + "Health insurance, Investment, Life Insurance, Motor insurance, Property insurance,\n"
+            + "Savings, and Travel insurance.\n"
             + "Similar to tag, to apply an Investment Plan Tag, you have to use Add, Edit, or Tag command.\n\n"
             + "Parameters (using Edit): \n"
             + "edit INDEX t/ ip/INVESTMENT_PLAN\n\n"

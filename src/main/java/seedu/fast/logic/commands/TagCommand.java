@@ -29,7 +29,7 @@ public class TagCommand extends Command {
             + "d/[TAGNAME]\n\n"
             + "Example: \n" + COMMAND_WORD + " 1 "
             + "a/Friend d/Family";
-    public static final String MESSAGE_ADD_TAG_SUCCESS = "Added tag to Person: %1$s";
+    public static final String MESSAGE_ADD_TAG_SUCCESS = "Edited tags of Person: %1$s";
     public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";
     public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each person can only have one Priority tag!";

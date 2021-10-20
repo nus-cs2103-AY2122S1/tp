@@ -2,20 +2,26 @@ package seedu.fast.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.fast.model.person.Person;
+import seedu.fast.model.person.PriorityPredicate;
 import seedu.fast.model.person.UniquePersonList;
+import seedu.fast.model.tag.PriorityTag;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the FAST level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class Fast implements ReadOnlyFast {
 
     private final UniquePersonList persons;
+    private final FilteredList<Person> filteredPersons;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +32,7 @@ public class Fast implements ReadOnlyFast {
      */
     {
         persons = new UniquePersonList();
+        filteredPersons = new FilteredList<>(this.getPersonList());
     }
 
     public Fast() {}
@@ -100,6 +107,28 @@ public class Fast implements ReadOnlyFast {
     public void sortPersons(Comparator<Person> comparator) {
         requireNonNull(comparator);
         persons.sortPersons(comparator);
+    }
+
+    /**
+     * Returns the number of persons tagged with the respective PriorityTag.
+     */
+    public int getPriorityCount(String term) {
+        String[] priority = {term};
+        PriorityPredicate predicate = new PriorityPredicate(Arrays.asList(priority));
+        filteredPersons.setPredicate(predicate);
+        return filteredPersons.size();
+    }
+
+    public int getHighPriorityCount() {
+        return getPriorityCount(PriorityTag.HighPriority.TERM);
+    }
+
+    public int getMediumPriorityCount() {
+        return getPriorityCount(PriorityTag.MediumPriority.TERM);
+    }
+
+    public int getLowPriorityCount() {
+        return getPriorityCount(PriorityTag.LowPriority.TERM);
     }
 
     //// util methods
