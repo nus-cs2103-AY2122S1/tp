@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,9 +20,13 @@ public class ViewShiftCommandParserTest {
     private static final ViewShiftCommandParser parser = new ViewShiftCommandParser();
 
     @Test
-    public void parse_emptyArg_throwsParseException() {
-        String userInput = COMMAND_WORD;
-        assertParseFailure(parser, userInput, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+    public void parse_emptyArg() {
+        // an empty ViewShiftCommand outputs the help message with the staff currently working
+        String userInput = "  ";
+        ViewShiftCommand expectedOutput = new ViewShiftCommand(DayOfWeek.from(LocalDate.now()),
+                ViewShiftCommand.INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES,
+                LocalTime.now().truncatedTo(ChronoUnit.MINUTES));
+        assertParseSuccess(parser, userInput, expectedOutput);
     }
 
     @Test
@@ -50,18 +56,15 @@ public class ViewShiftCommandParserTest {
     @Test
     public void test_failures() {
         String userInput1 = " saturday-12:00";
-        assertParseFailure(parser, userInput1, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput1, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput2 = " " + PREFIX_DASH_TIME + " " + PREFIX_DASH_DAY_SHIFT + " saturday-12:00";
-        assertParseFailure(parser, userInput2, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
-
-        String userInput3 = " ";
-        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput2, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput4 = " -d monday-12:00";
-        assertParseFailure(parser, userInput4, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput4, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
 
         String userInput5 = " -t WEDNESDAY-0";
-        assertParseFailure(parser, userInput3, ViewShiftCommandParser.INVALID_FIND_SCHEDULE_COMMAND);
+        assertParseFailure(parser, userInput5, ViewShiftCommandParser.INVALID_VIEW_SHIFT_COMMAND);
     }
 }

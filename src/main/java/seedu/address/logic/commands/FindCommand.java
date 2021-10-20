@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.StaffHasCorrectIndexPredicate;
 
@@ -30,6 +32,7 @@ public class FindCommand extends Command {
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " alice bob charlie\n";
 
+    private StringBuilder successMessage = new StringBuilder(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW).append("\n");
     private final NameContainsKeywordsPredicate namePredicate;
     private final int index;
     private StaffHasCorrectIndexPredicate indexPredicate = null;
@@ -80,8 +83,14 @@ public class FindCommand extends Command {
      */
     public CommandResult executeNameSearch(Model model) {
         model.updateFilteredPersonList(namePredicate);
+        ObservableList<Person> staffs = model.getFilteredPersonList();
+        int counter = 1;
+        for (Person p : staffs) {
+            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            counter++;
+        }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
     /**
@@ -92,8 +101,14 @@ public class FindCommand extends Command {
      */
     public CommandResult executeIndexSearch(Model model) {
         model.updateFilteredPersonList(indexPredicate);
+        ObservableList<Person> staffs = model.getFilteredPersonList();
+        int counter = 1;
+        for (Person p : staffs) {
+            successMessage.append(counter).append(". ").append(p.getName()).append("\n");
+            counter++;
+        }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(successMessage.toString(), model.getFilteredPersonList().size()));
     }
 
     /**
