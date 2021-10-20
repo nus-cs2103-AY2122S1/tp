@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,8 @@ public class EditFriendDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditFriendCommand.EditFriendDescriptor descriptorWithSameValues = new EditFriendCommand.EditFriendDescriptor(DESC_AMY);
+        EditFriendCommand.EditFriendDescriptor descriptorWithSameValues =
+                new EditFriendCommand.EditFriendDescriptor(DESC_AMY);
         assertTrue(DESC_AMY.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -33,7 +33,8 @@ public class EditFriendDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditFriendCommand.EditFriendDescriptor editedAmy = new EditFriendDescriptorBuilder(DESC_AMY).withFriendName(VALID_NAME_BOB).build();
+        EditFriendCommand.EditFriendDescriptor editedAmy =
+                new EditFriendDescriptorBuilder(DESC_AMY).withFriendName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

@@ -1,14 +1,9 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.logic.commands.friends.EditFriendCommand.EditFriendDescriptor;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.

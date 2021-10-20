@@ -1,15 +1,11 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_ID;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
 
-import java.util.Set;
-
-import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
  * A utility class for Friend.

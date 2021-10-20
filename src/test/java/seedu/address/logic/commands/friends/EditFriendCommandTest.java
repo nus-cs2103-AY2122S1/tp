@@ -1,10 +1,8 @@
 package seedu.address.logic.commands.friends;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -43,7 +41,8 @@ public class EditFriendCommandTest {
 
         Friend editedFriend = new FriendBuilder(friendToEdit).withFriendName("1234 5678 9101112 13141516").build();
 
-        EditFriendCommand.EditFriendDescriptor editFriendDescriptor = new EditFriendDescriptorBuilder(editedFriend).build();
+        EditFriendCommand.EditFriendDescriptor editFriendDescriptor =
+                new EditFriendDescriptorBuilder(editedFriend).build();
 
         EditFriendCommand editFriendCommand = new EditFriendCommand(friendToEdit.getFriendId(), editFriendDescriptor);
 
@@ -88,8 +87,8 @@ public class EditFriendCommandTest {
         assertNotEquals(new ClearCommand(), standardCommand);
 
         // different index -> returns false
-        assertNotEquals(new EditFriendCommand(new FriendId(friendToEdit.getFriendId().value + "diff")
-                , DESC_AMY), standardCommand);
+        assertNotEquals(new EditFriendCommand(new FriendId(friendToEdit.getFriendId().value + "diff"), DESC_AMY),
+                standardCommand);
 
         // different descriptor -> returns false
         assertNotEquals(new EditFriendCommand(friendToEdit.getFriendId(), DESC_BOB), standardCommand);
