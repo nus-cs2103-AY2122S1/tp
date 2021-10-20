@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a client**
+#### Use case: Add a client
 
 **MSS**
 
@@ -349,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a client**
+#### Use case: Delete a client
 
 **MSS**
 
@@ -373,7 +373,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: Add a task**
+#### Use case: Add a task
 
 **MSS**
 
@@ -391,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a task**
+#### Use case: Delete a task
 
 **MSS**
 
