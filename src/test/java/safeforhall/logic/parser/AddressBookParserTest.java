@@ -115,8 +115,8 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD, true) instanceof ViewPersonCommand);
         assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD + " 3", true) instanceof ViewPersonCommand);
 
-        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD, true) instanceof ViewEventCommand);
-        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " 3", true) instanceof ViewEventCommand);
+        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD, false) instanceof ViewEventCommand);
+        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " 3", false) instanceof ViewEventCommand);
     }
 
     @Test
