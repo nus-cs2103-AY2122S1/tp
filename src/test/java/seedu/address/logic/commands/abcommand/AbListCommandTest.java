@@ -11,31 +11,12 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
 
 public class AbListCommandTest {
-    private final String filePathPrefix = "src\\test\\data";
-    private final Path userPrefsFilePath = Path.of(filePathPrefix, "JsonUserPrefsStorageTest", "TypicalUserPref.json");
-
-    private final String addressBookFilePathName = "typicalPersonsAddressBook";
-    private final Path addressBookFilePath = Path.of(filePathPrefix, "JsonSerializableAddressBookTest",
-            addressBookFilePathName + ".json");
-
-    private final UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
-    private final AddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
-    private final Storage storage = new StorageManager(addressBookStorage, userPrefsStorage);
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final Logic logic = new LogicManager(model, storage);
 
     @Test
     public void equals() {

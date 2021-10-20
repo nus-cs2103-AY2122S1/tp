@@ -30,18 +30,20 @@ import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 
 public class AbCreateCommandTest {
+    private static final Path TEST_DATA_FOLDER = Path.of("src", "test", "data");
+
+    private static final String addressBookFilePathName = "typicalPersonsAddressBook";
+    private static final Path userPrefsFilePath = TEST_DATA_FOLDER.resolve(
+            Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
+    private static final Path addressBookFilePath = TEST_DATA_FOLDER.resolve(
+            Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
+
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final String filePathPrefix = "src\\test\\data";
-    private final Path userPrefsFilePath = Path.of(filePathPrefix, "JsonUserPrefsStorageTest", "TypicalUserPref.json");
-
-    private final String addressBookFilePathName = "typicalPersonsAddressBook";
-
-    private final Path addressBookFilePath = Path.of(filePathPrefix, "JsonSerializableAddressBookTest",
-            addressBookFilePathName + ".json");
 
     private final UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private final AddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
+
     private final Storage storage = new StorageManager(addressBookStorage, userPrefsStorage);
     private final Logic logic = new LogicManager(model, storage);
 
@@ -77,7 +79,7 @@ public class AbCreateCommandTest {
     @Test
     public void execute_success() {
         String newFilePathName = "testingfile";
-        Path newFilePath = Path.of(filePathPrefix, newFilePathName + ".json");
+        Path newFilePath = TEST_DATA_FOLDER.resolve(newFilePathName + ".json");
         AbCreateCommand abCreateCommand1 = new AbCreateCommand(newFilePathName, newFilePath);
         expectedModel.setAddressBookFilePath(newFilePath);
         CommandResult result = new CommandResult(

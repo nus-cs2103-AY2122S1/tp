@@ -32,16 +32,18 @@ import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 
 public class AbSwitchCommandTest {
-    private final String filePathPrefix = "src\\test\\data";
-    private final Path userPrefsFilePath = Path.of(filePathPrefix, "JsonUserPrefsStorageTest", "TypicalUserPref.json");
+    private static final Path TEST_DATA_FOLDER = Path.of("src", "test", "data");
 
-    private final String addressBookFilePathName = "typicalPersonsAddressBook";
-    private final String anotherAddressBookFilePathName = "anotherTypicalPersonsAddressBook";
+    private static final Path userPrefsFilePath = TEST_DATA_FOLDER.resolve(
+            Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
 
-    private final Path addressBookFilePath = Path.of(filePathPrefix, "JsonSerializableAddressBookTest",
-            addressBookFilePathName + ".json");
-    private final Path anotherAddressBookFilePath = Path.of(filePathPrefix, "JsonSerializableAddressBookTest",
-            anotherAddressBookFilePathName + ".json");
+    private static final String addressBookFilePathName = "typicalPersonsAddressBook";
+    private static final String anotherAddressBookFilePathName = "anotherTypicalPersonsAddressBook";
+
+    private static final Path addressBookFilePath = TEST_DATA_FOLDER.resolve(
+            Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
+    private static final Path anotherAddressBookFilePath = TEST_DATA_FOLDER.resolve(
+            Path.of("JsonSerializableAddressBookTest", anotherAddressBookFilePathName + ".json"));
 
     private final UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private final AddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
@@ -104,7 +106,7 @@ public class AbSwitchCommandTest {
     @Test
     public void execute_failure() {
         String invalidFilePathName = "jjjjj";
-        Path invalidFilePath = Path.of(filePathPrefix, invalidFilePathName + ".json");
+        Path invalidFilePath = TEST_DATA_FOLDER.resolve(invalidFilePathName + ".json");
         AbSwitchCommand abSwitchCommand1 = new AbSwitchCommand(invalidFilePathName, invalidFilePath);
         model.setAddressBookFilePath(addressBookFilePath);
         String result = String.format(MESSAGE_ADDRESSBOOK_NOT_FOUND, invalidFilePathName);
