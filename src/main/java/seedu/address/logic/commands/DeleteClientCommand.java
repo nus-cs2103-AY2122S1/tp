@@ -17,8 +17,6 @@ import seedu.address.model.client.Client;
  * Deletes a client identified using it's displayed index from the address book.
  */
 public class DeleteClientCommand extends Command {
-    private final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
-
     public static final String COMMAND_WORD = "delete -c";
 
     public static final String MESSAGE_USAGE =
@@ -28,6 +26,8 @@ public class DeleteClientCommand extends Command {
                     + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_CLIENT_SUCCESS = "Deleted Client: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
 
     private final Index targetIndex;
 

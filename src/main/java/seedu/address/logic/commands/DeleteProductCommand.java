@@ -17,8 +17,6 @@ import seedu.address.model.product.Product;
  * Deletes a product identified using it's displayed index from the address book.
  */
 public class DeleteProductCommand extends Command {
-    private final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
-
     public static final String COMMAND_WORD = "delete -p";
 
     public static final String MESSAGE_USAGE =
@@ -28,6 +26,8 @@ public class DeleteProductCommand extends Command {
                     + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
+
+    private static final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
 
     private final Index targetIndex;
 
