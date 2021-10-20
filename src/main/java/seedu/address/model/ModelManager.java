@@ -19,7 +19,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-import seedu.address.model.item.Name;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.order.TransactionTimeComparator;
