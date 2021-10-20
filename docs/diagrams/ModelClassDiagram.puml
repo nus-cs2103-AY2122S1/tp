@@ -22,6 +22,9 @@ Class Nationality
 Class Email
 Class Name
 Class Phone
+Class TutorialGroup
+Class SocialHandle
+Class Remark
 Class Tag
 
 }
@@ -41,9 +44,12 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Nationality
+Person *--> "0..1" Phone
+Person *--> "0..1" Email
+Person *---> "0..1" Nationality
+Person *---> "0..1" TutorialGroup
+Person *---> "0..1" SocialHandle
+Person *--> "0..1" Remark
 Person *--> "*" Tag
 
 Name -[hidden]right-> Phone
