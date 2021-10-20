@@ -3,27 +3,67 @@ layout: page
 title: User Guide
 ---
 
-TutorAid is a **desktop app for private tutors to match their students' contacts, optimized for use via a Command Line
-Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TutorAid
-can get your student management tasks done faster than traditional GUI apps.
-
 * Table of Contents
-{:toc}
+  {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+# 1. Introduction
+Thank you for downloading **TutorAid**! TutorAid is a desktop app **for private tutors to track their students' contacts**.
 
-## Quick start
+The main features of TutorAid include:
+1. Storing contacts of students and their parents
+2. Storing and managing lesson details
+3. Tracking students' progress
+4. Tracking students' payment status
 
+With TutorAid, you have a one-stop solution for keeping track of your students' contacts and staying up-to-date on their progress. TutorAid is optimised for use via a **Command Line Interface** (CLI) while retaining the benefits of a visually-appealing Graphical User Interface (GUI). If you can type fast, TutorAid can help you to manage your tutoring tasks more efficiently than traditional GUI apps.
+
+We hope that TutorAid will be helpful in adding more organisation to your tutoring career. To get TutorAid up and running, check out the [Quick Start](#quick-start) section.
+
+<hr>
+
+# 2. About
+This section contains information and terms that may help you to understand the user guide.
+
+## 2.1 User Guide formatting
+
+Formats discussed in this section may be used in relevant areas of this user guide.
+
+**Tips**
+
+Tips are helpful suggestions that may improve your experience using TutorAid.
+
+:bulb: | This is helpful :smiley:
+:---: | :---
+
+**Warnings**
+
+Warnings can inform you of things that should be followed carefully to prevent unwanted behaviour.
+
+:exclamation: | This is important!
+:---: | :---
+
+**Commands**
+
+Commands in these highlighted boxes are typically used to show what you should enter into TutorAid.
+
+`command`
+
+## 2.2 TutorAid visual components
+This section details the various components in TutorAid and how they will be referred to throughout the guide.
+
+
+
+## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `tutoraid.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-3/tp/releases).
+2. Download the latest `tutoraid.jar` from [here](https://github.com/AY2122S1-CS2103T-W16-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your TutorAid.
+3. Copy the file to the folder you want to use as the _home folder_ for your TutorAid.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -37,7 +77,7 @@ can get your student management tasks done faster than traditional GUI apps.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -47,19 +87,19 @@ can get your student management tasks done faster than traditional GUI apps.
 
 **:information_source: Notes about the command format:**<br>
 * Words in `UPPER_CASE` are the parameters to be supplied by the user and can contain spaces.
-e.g. in `add sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as add n/John Doe.
+  e.g. in `add sn/STUDENT_NAME`, `STUDENT_NAME` is a parameter which can be used as add n/John Doe.
 
 * Items in square brackets are optional.
-e.g `sn/STUDENT_NAME [sp/STUDENT_PHONE]` can be used as `sn/John Doe sp/91234567` or as `sn/John Doe`.
+  e.g `sn/STUDENT_NAME [sp/STUDENT_PHONE]` can be used as `sn/John Doe sp/91234567` or as `sn/John Doe`.
 
 * Parameters can be in any order.
-e.g. if the command specifies `sn/STUDENT_NAME sp/STUDENT_PHONE`, `sp/STUDENT_PHONE sn/STUDENT_NAME` is also acceptable.
+  e.g. if the command specifies `sn/STUDENT_NAME sp/STUDENT_PHONE`, `sp/STUDENT_PHONE sn/STUDENT_NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but if you specify it multiple times, only the last occurrence of the parameter will be taken.
-e.g. if you specify `p/92341234 p/86785678`, only `p/86785678` will be taken.
+  e.g. if you specify `p/92341234 p/86785678`, only `p/86785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
-e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
@@ -92,7 +132,7 @@ Format: `list [-a]`
 Examples:
 
 - `list` displays all students in TutorAid while showing only their name and list index
-- `list -a` displays all students in TutorAid while showing all of their data such as their contact number, payment status and so on. 
+- `list -a` displays all students in TutorAid while showing all of their data such as their contact number, payment status and so on.
 
 ### Deleting a student : `delete`
 Deletes the specified student with the given student index from TutorAid.
@@ -233,8 +273,8 @@ Action | Format, Examples
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222` 
-**List** | `list [-a]`<br>e.g., `list`, `list -a` 
+**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222`
+**List** | `list [-a]`<br>e.g., `list`, `list -a`
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
 **Unset payment made** | `unpaid STUDENT_INDEX`<br>e.g., `unpaid 3`
