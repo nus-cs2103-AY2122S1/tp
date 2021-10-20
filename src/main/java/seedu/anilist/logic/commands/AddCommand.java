@@ -1,8 +1,10 @@
 package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.model.Model;
@@ -18,9 +20,13 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an anime to the anime list. "
             + "Parameters: "
             + PREFIX_NAME + "ANIME "
+            + "[" + PREFIX_EPISODE + "EPISODE] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_GENRE + "GENRE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Naruto "
+            + PREFIX_EPISODE + "24 "
+            + PREFIX_STATUS + "FINISHED "
             + PREFIX_GENRE + "Action "
             + PREFIX_GENRE + "Fantasy";
 

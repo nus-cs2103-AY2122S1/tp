@@ -27,10 +27,10 @@ public class UpdateStatusCommand extends Command {
             + "by the index number used in the displayed anime list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_STATUS + "\n "
+            + PREFIX_STATUS + "STATUS\n "
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_STATUS + "finished";
 
-    public static final String MESSAGE_UPDATE_ANIME_STATUS_SUCCESS = "Updated Anime: %1$s";
+    public static final String MESSAGE_UPDATE_ANIME_STATUS_SUCCESS = "Updated Anime status: %1$s";
     public static final String MESSAGE_NOT_EDITED = "An updated status should be provided.";
 
     private final Index index;

@@ -11,6 +11,7 @@ public class Episode {
 
     public static final String MESSAGE_CONSTRAINTS = "Episodes should only contain numbers";
     public static final String VALIDATION_REGEX = "\\d+";
+    public static final String DEFAULT_EPISODE = "0";
     public final int episodeNumber;
 
     /**
