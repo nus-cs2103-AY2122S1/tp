@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDateTime;
+
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.ParserUtil;
 
@@ -29,6 +31,26 @@ public class LastVisit {
      */
     public static boolean isValidLastVisit(String test) {
         return DateTimeUtil.matchDateTimeRegex(test);
+    }
+
+    /**
+     * Returns true if the last visit date is within the last 7 days.
+     */
+    public boolean isLastWeek() {
+        if (value.isEmpty()) {
+            return false;
+        }
+        return DateTimeUtil.isLastWeek(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+    }
+
+    /**
+     * Returns true if the last visit date is within the last month.
+     */
+    public boolean isLastMonth() {
+        if (value.isEmpty()) {
+            return false;
+        }
+        return DateTimeUtil.isLastMonth(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
     }
 
     /**

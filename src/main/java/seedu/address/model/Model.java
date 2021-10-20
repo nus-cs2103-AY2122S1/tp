@@ -84,4 +84,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns a summary of the persons and visits statistics */
+    Summary getSummary();
+
 }

@@ -20,6 +20,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Summary summary;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -34,6 +35,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.summary = new Summary(addressBook);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
@@ -127,6 +129,13 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=================================== Summary =============================================================
+
+    @Override
+    public Summary getSummary() {
+        return summary;
     }
 
     @Override
