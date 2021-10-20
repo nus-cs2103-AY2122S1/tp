@@ -81,7 +81,7 @@ public class StudentBuilder {
 
     /**
      * Build a typical student
-     * @return
+     * @return A {@code Student} Object
      */
     public Student build() {
         Student student = new Student(studentId, name, teleHandle, email);

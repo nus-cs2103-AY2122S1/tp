@@ -59,7 +59,7 @@ public class ModuleBuilder {
 
     /**
      * Build a typical module.
-     * @return
+     * @return A {@code Module} Object.
      */
     public Module build() {
         Module module = new Module(moduleName);

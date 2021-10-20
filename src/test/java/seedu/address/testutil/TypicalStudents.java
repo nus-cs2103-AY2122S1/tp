@@ -52,6 +52,10 @@ public class TypicalStudents {
             .withTeleHandle("@George")
             .build();
 
+    /**
+     * Returns a list of students.
+     * @return A list of students
+     */
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }

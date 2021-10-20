@@ -38,6 +38,11 @@ public class TypicalModules {
         return tab;
     }
 
+    /**
+     * Returns a list of typical modules.
+     *
+     * @return A list of modules.
+     */
     public static List<Module> getTypicalModules() {
         return new ArrayList<>(Arrays.asList(MODULE_1, MODULE_2));
     }
