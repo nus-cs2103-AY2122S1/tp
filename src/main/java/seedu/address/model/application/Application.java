@@ -17,8 +17,7 @@ public class Application {
      * Invoked whenever the add-applicant command is called.
       */
     public Application(Position position) {
-        this.position = position;
-        this.status = ApplicationStatus.PENDING;
+        this(position, ApplicationStatus.PENDING);
     }
 
     /**
