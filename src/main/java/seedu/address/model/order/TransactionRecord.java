@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.order;
 
 import java.time.Instant;
 import java.time.ZoneId;

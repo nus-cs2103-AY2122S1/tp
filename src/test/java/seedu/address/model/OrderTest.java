@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.item.Item;
+import seedu.address.model.order.Order;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;

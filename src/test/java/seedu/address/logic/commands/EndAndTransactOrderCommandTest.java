@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Inventory;
 import seedu.address.model.ModelStub;
-import seedu.address.model.Order;
+import seedu.address.model.order.Order;
 import seedu.address.model.ReadOnlyInventory;
-import seedu.address.model.TransactionRecord;
+import seedu.address.model.order.TransactionRecord;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 

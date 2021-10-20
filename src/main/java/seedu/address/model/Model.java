@@ -10,6 +10,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.Name;
+import seedu.address.model.order.Order;
 
 /**
  * The API of the Model component.
