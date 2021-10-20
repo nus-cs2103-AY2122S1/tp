@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
@@ -18,11 +19,21 @@ public class StatsWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
+    private static final String PRIORITY_CHART_MESSAGE_INTRO = "You currently have a total of: ";
+    private static final String HIGH_PRIORITY_MESSAGE = "Good job! You have a large proportion of high value clients!\n"
+        + "However, this means that you need to be sure to put in extra effort to maintain it!";
+    private static final String MEDIUM_PRIORITY_MESSAGE = "Nice! You have a sizeable portion of medium value clients!\n"
+        + "This is a great base for your portfolio!";
+    private static final String LOW_PRIORITY_MESSAGE = "Keep it up! Focus on developing your client base to boost \n"
+        + "your client portfolio!";
 
     private Fast fast;
 
     @FXML
     private PieChart priorityPieChart;
+
+    @FXML
+    private Label priorityPieChartDesc;
 
     /**
      * Creates a new StatsWindow.
@@ -95,6 +106,8 @@ public class StatsWindow extends UiPart<Stage> {
         int mediumPriorityCount = this.fast.getMediumPriorityCount();
         int lowPriorityCount = this.fast.getLowPriorityCount();
 
+        addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
+
         addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
         addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
         addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
@@ -123,6 +136,39 @@ public class StatsWindow extends UiPart<Stage> {
             PieChart.Data data = new PieChart.Data(name, count);
             pc.getData().add(data);
         }
+    }
+
+    /**
+     * Adds a brief analysis of the client base to the PieChart.
+     */
+    public void addPriorityPieChartDesc(int highCount, int medCount, int lowCount) {
+        int totalCount = highCount + medCount + lowCount;
+        String totalClientCount = totalCount + " Clients!";
+
+        // Gets the max out of 3 values
+        int maxCount = Math.max(highCount, Math.max(medCount, lowCount));
+
+        // Prioritise higher Priorities first,
+        // e.g. if the counts are equal for all, HIGH_PRIORITY_MESSAGE will be used
+        if (highCount == maxCount) {
+            setPriorityPieChartLabel(totalClientCount, HIGH_PRIORITY_MESSAGE);
+            return; //return to prevent fallthrough
+        }
+        if (medCount == maxCount) {
+            setPriorityPieChartLabel(totalClientCount, MEDIUM_PRIORITY_MESSAGE);
+            return; //return to prevent fallthrough
+        }
+        if (lowCount == maxCount) {
+            setPriorityPieChartLabel(totalClientCount, LOW_PRIORITY_MESSAGE);
+            return;
+        }
+    }
+
+    /**
+     * Sets the text of the label.
+     */
+    private void setPriorityPieChartLabel(String totalClientCount, String text) {
+        priorityPieChartDesc.setText(PRIORITY_CHART_MESSAGE_INTRO + totalClientCount + "\n\n" + text);
     }
 
     /**
