@@ -37,8 +37,12 @@ public class ViewMoreClient extends UiPart<Region> implements SecondPanel {
         id.setText("ID: " + client.getId().toString());
         name.setText("Name: " + client.getName().toString());
         phoneNumber.setText("Phone Number: " + client.getPhoneNumber().toString());
-        email.setText("Email: " + client.getEmail().toString());
-        address.setText("Address: " + client.getAddress().toString());
+        if (client.getEmail() != null) {
+            email.setText("Email: " + client.getEmail().toString());
+        }
+        if (client.getAddress() != null) {
+            address.setText("Address: " + client.getAddress().toString());
+        }
     }
 
 
