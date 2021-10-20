@@ -3,45 +3,53 @@ layout: page
 title: Developer Guide
 ---
 ## Table of Contents
+- [Table of Contents](#table-of-contents)
 - [**Acknowledgements**](#acknowledgements)
 - [**Introduction**](#introduction)
 - [**Setting up, getting started**](#setting-up-getting-started)
 - [**Design**](#design)
-    * [Architecture](#architecture)
-    * [UI component](#ui-component)
-    * [Logic component](#logic-component)
-    * [Model component](#model-component)
-    * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-    * [Filter Event feature](#completed-filter-event-feature)
-        + [Implementation details](#implementation-details)
-        + [Implementation rationale](#implementation-rationale)
-        + [Design considerations](#design-considerations)
-    * [View Participant Details feature](#completed-view-participants-details-feature)
-        + [Implementation details](#implementation-details)
-        + [Implementation rationale](#implementation-rationale)
-        + [Design considerations](#design-considerations)
-    * [View Event Details feature](#completed-view-event-details-feature)
-        + [Implementation details](#implementation-details)
-        + [Implementation rationale](#implementation-rationale)
-        + [Design considerations](#design-considerations)
-    * [Undo/redo feature](#proposed-undoredo-feature)
-        + [Proposed implementation](#proposed-implementation)
-        + [Design considerations](#design-considerations)
-    * [Data archiving](#proposed-data-archiving)
-
+  - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+    - [Implementation Details](#implementation-details)
+    - [Implementation Rationale](#implementation-rationale)
+    - [Design Considerations:](#design-considerations)
+      - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
+      - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
+  - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
+    - [Implementation Details](#implementation-details-1)
+    - [Implementation Rationale](#implementation-rationale-1)
+    - [Design Considerations:](#design-considerations-1)
+      - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+  - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
+    - [Implementation Details](#implementation-details-2)
+    - [Implementation Rationale](#implementation-rationale-2)
+  - [\[Completed\] View Event Details feature](#completed-view-event-details-feature)
+    - [Implementation Details](#implementation-details-3)
+    - [Implementation Rationale](#implementation-rationale-3)
+    - [Design Considerations:](#design-considerations-2)
+      - [Aspect: Similar Event names:](#aspect-similar-event-names)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+    - [Proposed Implementation](#proposed-implementation)
+    - [Design considerations:](#design-considerations-3)
+  - [\[Proposed\] Data archiving](#proposed-data-archiving)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
-    * [Product scope](#product-scope)
-    * [User stories](#user-stories)
-    * [Use cases](#use-cases)
-    * [Non-Functional Requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
 - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Deleting a person](#deleting-a-person)
-    * [Saving data](#saving-data)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a participant](#deleting-a-participant)
+  - [Saving data](#saving-data)
+  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -329,6 +337,44 @@ The following is the sequence diagram for how a `ViewCommand` works internally.
 The following activity diagram summarizes what happens when a user executes a new command:
 
 ![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
+### \[Completed\] Add/Remove Participant to/from event by index
+
+This feature allows Managera users to quickly add/remove participant to/from event according to the current filtered
+ list of events and participant visible to user.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, 
+hence we add new `commandType` cases for `AddParticipantToEventByIndexCommand` and `RemoveParticipantFromEventByIndexCommand` in `AddressBookParser`
+
+A `AddParticipantToEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+If the indexes given by the user are not zero-based indexes, a `ParseException` will be thrown before `AddParticipantByIndexParser` creates the command itself to prevent any further error. 
+If all indexes are valid, a `AddParticipantByIndexCommand` will be created by the parser.
+
+The `AddParticipantByIndexCommand` created by `AddParticipantToEventByIndexParser` contains 2 zero-based indexes. 
+The first one is used to identify the `Participant` while the second is used to identify the `Event`. 
+When the command is executed, the `model` first tries to obtain Participant at specified index (if unsuccessful, a `CommandException` will be thrown accordingly) and then event will be retrieved in the same manner (if unsuccessful, a `CommmandException` will be thrown accordingly). If the Event does not already contain the `Participant` object, the participant will be added to the event accordingly.
+ Otherwise, a `CommandException` will be thrown.
+
+A `RemoveParticipantFromEventByIndexParser` parses the user's input and obtain indexes for Participant and Event respectively. 
+The workflow is nearly identical to `AddParticipantToEventByIndex`. It is only that instead of throwing `CommandException` if `Participant` object already exists in the event,
+the `CommandException` will be thrown when `Participant` *doesn't* exist in the event. After all of that, the `Participant` object will be removed from the `Event`. 
+
+
+#### Implementation Rationale
+
+Since the command implies that the index of participant should come before event, there is no need for prefixes to be used as that would incur extra typing for the user and slow down the process.
+
+The following activity diagrams summarise what happens when a user executes a new command in each case:
+
+`AddParticipantToEventByIndex`
+
+![AddParticipantToEventActivityDiagram](images/AddParticipantToEventByIndexActivityDiagram.png)
+
+`RemoveParticipantFromEventByIndex`
+
+![RemoveParticipantFromEventActivityDiagram](images/RemoveParticipantByIndexActivityDiagram.png)
+
 
 ### \[Completed\] View Event Details feature
 

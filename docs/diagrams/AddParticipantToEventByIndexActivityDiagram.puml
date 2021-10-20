@@ -1,0 +1,28 @@
+@startuml
+start
+:User executes command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid zero-based indexes])
+    :Fetch Participant in Participant List;
+    if () then ([Participant Found])
+        :Fetch event in Event List;
+        if () then ([Event Found])
+                if () then ([Participant already exists in event])
+                        : Display error message;
+                    else ([else])
+                        : Add participant to Event;
+                    endif
+            else ([else])
+                : Display error message;
+            endif
+    else ([else])
+        : Display error message;
+    endif
+else ([else])
+    : Display error message;
+endif
+stop
+@enduml
