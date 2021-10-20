@@ -40,9 +40,12 @@ public class AbListCommandTest {
     public void execute_success() {
         AbListCommand command = new AbListCommand();
         File fileDir = new File(Path.of("data").toString());
+        String[] list = fileDir.list();
         StringBuilder result = new StringBuilder();
-        for (String s: fileDir.list()) {
-            result.append("\n- ").append(StringUtil.getStringWithoutSuffix(s, StringUtil.JSON_FILE_PREFIX));
+        if (list != null) {
+            for (String s: list) {
+                result.append("\n- ").append(StringUtil.getStringWithoutSuffix(s, StringUtil.JSON_FILE_PREFIX));
+            }
         }
 
         assertCommandSuccess(command, model, String.format(AbListCommand.MESSAGE_SUCCESS, result), model);
