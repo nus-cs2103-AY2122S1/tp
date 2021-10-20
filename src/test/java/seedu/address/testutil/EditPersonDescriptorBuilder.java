@@ -122,6 +122,9 @@ public class EditPersonDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Done} of the {@code EditPersonDescriptor} that we are building.
+     */
     public EditPersonDescriptorBuilder withDone(String done) {
         descriptor.setDone(new Done(done));
         return this;
