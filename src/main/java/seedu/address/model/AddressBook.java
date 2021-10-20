@@ -105,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Index index, Person p) {
         persons.add(p, index);
+        entries.addLessons(p);
     }
 
     /**
