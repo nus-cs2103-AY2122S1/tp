@@ -171,18 +171,23 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Interview modelInterview;
-        if (interview.isEmpty()) { // check for empty interview
-            modelInterview = Interview.EMPTY_INTERVIEW;
-        } else if (!Interview.isValidInterviewTime(interview)) {
+        final Optional<Interview> modelInterview;
+        if (interview == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Interview.class.getSimpleName()));
+        }
+        if (interview.isEmpty() || interview.equals("-")) {
+            modelInterview = Optional.ofNullable(Interview.EMPTY_INTERVIEW);
         } else {
-            modelInterview = new Interview(interview);
+            if (!Interview.isValidInterviewTime(interview)) {
+                throw new IllegalValueException(Interview.MESSAGE_CONSTRAINTS);
+            }
+            modelInterview = Optional.ofNullable(new Interview(interview));
         }
 
+
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
-                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, Optional.ofNullable(modelInterview));
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, modelInterview);
     }
 
 }

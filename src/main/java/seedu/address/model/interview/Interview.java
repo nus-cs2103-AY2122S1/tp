@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
  * Guarantees: immutable; time input is valid as declared in {@link #isValidInterviewTime(String)}
  */
 public class Interview {
-    public static final Interview EMPTY_INTERVIEW = new Interview();
+    public static final Interview EMPTY_INTERVIEW = new Interview("");
     public static final String PARSE_FORMAT = "yyyy-MM-dd, H:mm";
     public static final String MESSAGE_CONSTRAINTS =
             "Interview time should follow the exact format: [" + PARSE_FORMAT + "]. E.g. i/2021-10-22, 8:00";
@@ -25,16 +25,14 @@ public class Interview {
      * @param time A valid interview time.
      */
     public Interview(String time) {
-        requireNonNull(time);
-        checkArgument(isValidInterviewTime(time), MESSAGE_CONSTRAINTS);
-        this.parseTime = time;
-    }
+        if (time.isEmpty()) {
+            this.parseTime = "-";
+        } else {
+            requireNonNull(time);
+            checkArgument(isValidInterviewTime(time), MESSAGE_CONSTRAINTS);
+            this.parseTime = time;
+        }
 
-    /**
-     * Constructs an empty {@code Interview}.
-     */
-    public Interview() {
-        this.parseTime = "-";
     }
 
     /**

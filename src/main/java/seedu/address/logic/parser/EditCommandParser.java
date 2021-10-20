@@ -84,14 +84,15 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
         }
 
-        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
-            editPersonDescriptor.setInterview(
-                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
-        }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+            editPersonDescriptor.setInterview(
+                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
         }
 
         return new EditCommand(index, editPersonDescriptor);

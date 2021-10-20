@@ -30,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EXPECTED_SALARY = "3200";
     public static final String DEFAULT_LEVEL_OF_EDUCATION = "PhD";
     public static final String DEFAULT_EXPERIENCE = "0";
-    public static final String DEFAULT_INTERVIEW = "2021-10-21 19:00";
+    public static final String DEFAULT_INTERVIEW = "2021-10-21, 19:00";
 
 
     private Name name;
@@ -57,7 +57,7 @@ public class PersonBuilder {
         levelOfEducation = new LevelOfEducation(DEFAULT_LEVEL_OF_EDUCATION);
         experience = new Experience(DEFAULT_EXPERIENCE);
         tags = new HashSet<>();
-        interview = Optional.of(new Interview(DEFAULT_INTERVIEW));
+        interview = Optional.ofNullable(new Interview(DEFAULT_INTERVIEW));
     }
 
     /**
@@ -152,7 +152,7 @@ public class PersonBuilder {
      * Sets the {@code Interview} of the {@code Person} that we are building.
      */
     public PersonBuilder withInterview(String interview) {
-        this.interview = Optional.of(new Interview(interview));
+        this.interview = Optional.ofNullable(new Interview(interview));
         return this;
     }
 
