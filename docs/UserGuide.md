@@ -117,5 +117,4 @@ Displays a confirmation prompt to user asking whether they wish to proceed with 
 User can choose to proceed by entering 'clear' again,
 in which case all animes currently displayed on screen would be cleared from the anime list.<br>
 Otherwise, the clear command is cancelled. <br>
-
 Format: `clear`
