@@ -8,8 +8,8 @@
     <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
     </padding>
-    <Label fx:id="id" styleClass="cell_small_label" text="\$unitPrice" />
-    <Label fx:id="name" styleClass="cell_small_label" text="\$unitPrice" />
-    <Label fx:id="unitPrice" styleClass="cell_small_label" text="\$unitPrice" />
-    <Label fx:id="quantity" styleClass="cell_small_label" text="\$unitPrice" />
+    <Label fx:id="id" styleClass="cell_small_label" text="No ID provided" />
+    <Label fx:id="name" styleClass="cell_small_label" text="No name provided" />
+    <Label fx:id="unitPrice" styleClass="cell_small_label" text="No unit price provided!" />
+    <Label fx:id="quantity" styleClass="cell_small_label" text="No quantity provided!" />
 </VBox>
