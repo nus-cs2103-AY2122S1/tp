@@ -2,28 +2,8 @@
 layout: page
 title: Developer Guide
 ---
-Table of Contents
-- [**Acknowledgements**](#acknowledgements)
-- [**Setting up, getting started**](#setting-up-getting-started)
-- [**Design**](#design)
-    * [Architecture](#architecture)
-    * [UI component](#ui-component)
-    * [Logic component](#logic-component)
-    * [Model component](#model-component)
-    * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
-- [**Implementation**](#implementation)
-- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-- [**Appendix: Requirements**](#appendix-requirements)
-    * [Product scope](#product-scope)
-    * [User stories](#user-stories)
-    * [Use cases](#use-cases)
-    * [Non-Functional Requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
-- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    * [Launch and shutdown](#launch-and-shutdown)
-    * [Deleting a person](#deleting-a-person)
-    * [Saving data](#saving-data)
+* Table of Contents
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,6 +207,85 @@ to sort the list of persons by their name.<br>
     
 _{more aspects and alternatives to be added}_
 
+### Help Window
+
+#### Current Implementation
+The help windows is a separate window and displays the command usage for each of the command. To access the help
+window, users have 3 ways to get to the help page:
+* Using the menu bar. Click on `Help` > `Help`.
+* Pressing `F1` while using FAST.
+* Typing the command `help [COMMAND]`.
+
+To access the different commands' help page, there is a dropdown selector which will navigate to 
+the different help pages. By default, the help window opens to our "Quick Start" page which contains basic 
+information for first time users.
+
+#### Design Considerations
+
+**Aspect: How to access various commands' help page**
+* **Alternative 1 (Current choice):** Using `JavaFX::ComboBox`which provides a dropdown selector.
+    * Pros: Compact and easy to hide the selector in plain sight without distracting the user. Quick to navigate 
+            between the pages.
+    * Cons: To new users, might not be immediately obvious that the `ComboBox` can be interacted with. Users
+            might also miss the scroll bar and miss out some commands available.
+      
+* **Alternative 2:** Using a single-page design where all commands' help messages are viewable at once
+    * Pros: Easier to be understood by new users.
+    * Cons: Cumbersome to users as they would have to scroll down a lot to find their desired command. 
+    
+* **Alternative 3:** Using a Table of Contents (ToC) landing page.
+    * Pros: Users can see all the available commands at a glance and can select their desired commands easily.
+    * Cons: Users have to navigate back to the ToC to navigate between each command.
+    
+We decided on the first choice as it provided users with the greatest ease of use. It is also the fastest way of 
+navigating between help pages. While we understand that most experienced users might not need to access the help menu, 
+by providing them a quick and easy way to access the commands' help page when they do need it is very important.
+    
+**Aspect: How to access the help window**
+
+Initially, the help command only involved inputting `help` into FAST. However, we chose to revamp it to allow an 
+additional `[COMMAND]` paremater for the help command, which nagivates to the selected command's help page.
+  * Pros: Allows experienced users to quickly navigate to their desired help page, without having to open the help menu
+    first and selecting the command help page from there.
+  * Cons: Users might not know the exact `[COMMAND]` parameter to enter, which is counter-intuitive for a help command
+
+To address to cons of our implementation, we decided to compromise by still opening the help menu regardless of a
+valid input. If an incorrect `[COMMAND]` was entered, FAST will provide feedback to the user and still open the help
+window to the default page.
+
+
+### Statistics window
+
+#### Current Implementation
+
+The statis window displays statistics and insights into the user's client base. To access the stats window, users have 
+2 ways of getting to the stats page:
+* Using the menu bar. Click on `Stats` > `Stats`.
+* Pressing `F2` while using FAST.
+
+Currently, the stats window provides infomation for the client's Priority Tags and their Insurance Plans. We used 
+`JavaFX::PieChart` to visualise the client's data and display them to the user. We also provided a few template insights
+for the user to make sense of the data provided.
+
+
+#### Design Considerations
+
+**Aspect: How to visualise the data**
+* **Alternative 1 (Current choice):** Using `JavaFX::PieChart`.
+    * Pros: Can be easily understood by the user. Provides a good overview of the proportion at a glance.
+    * Cons: Gets messy if there are a lot of variables. Data elements with a small count will be hidden to the
+            user.
+
+* **Alternative 2:** Using `JavaFX::BarChart`.
+    * Pros: Easier to be understood by new users. 
+    * Cons: The information might be overbearing. Does not provide an immediate overview of the client base. New
+            users might also be confused by the large amount of information displayed at once.
+
+Ultimately, as our main focus was speed and ease of use, we decided on the piechart implementation as it is both 
+easily understood, yet is able to convey the essence of the data to the user. Other chart types are less common and 
+thus might be confusing the the user. To address the cons of the piechart, we also included some analysis of the 
+piechart to help users better understand the data and provide a more complete statistic.
+    
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -551,7 +610,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The list is empty.
       Use case ends.
+  
 
+**Use case: UC13 - Help command**
+
+**MSS**
+
+1. User requests to open the help window.
+2. FAST opens a new help window. Use case ends.
+
+**Extension**
+* 1a. There is already a help window opened.
+    * 1a1. FAST focuses on the existing help window. Use case ends.
+    
+
+**Use case: U14 - Statistics window**
+
+**MSS**
+
+1. User requests to open the stats window.
+2. FAST opens a new stats window. Use case ends.
+
+**Extension**
+* 1a. There is already a stats window opened.
+    * 1a1. FAST updates and focuses on the existing help window. Use case ends.
+    
+    
 *{More to be added}*
 
 ### Non-Functional Requirements
