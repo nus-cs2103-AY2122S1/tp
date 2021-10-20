@@ -45,6 +45,10 @@ public class Index {
         return new Index(oneBasedIndex - 1);
     }
 
+    public static Index indexModifier(Index index, int shiftAmount) {
+        return new Index(index.zeroBasedIndex - shiftAmount);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
