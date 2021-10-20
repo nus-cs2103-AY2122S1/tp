@@ -240,6 +240,19 @@ _{more aspects and alternatives to be added}_
 _{Explain here how the data archiving feature will be implemented}_
 
 
+### \[Proposed\] Add a task feature for a member or several members
+
+#### Proposed Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to add the task with given task name to each of the members.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tadd /n take attendance /m 1 /m 2`. This command will add the task "take attendance" 
+to the first and second member of the member list.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
