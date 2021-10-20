@@ -23,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -155,6 +156,7 @@ public class EditCommand extends Command {
         private LevelOfEducation levelOfEducation;
         private Experience experience;
         private Set<Tag> tags;
+        private Done done;
 
         public EditPersonDescriptor() {}
 
@@ -172,6 +174,7 @@ public class EditCommand extends Command {
             setLevelOfEducation(toCopy.levelOfEducation);
             setExperience(toCopy.experience);
             setTags(toCopy.tags);
+            setDone(toCopy.done);
         }
 
         /**
@@ -263,6 +266,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setDone(Done done) {
+            this.done = done;
+        }
+
+        public Optional<Done> getDone() {
+            return Optional.ofNullable(done);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -286,7 +297,8 @@ public class EditCommand extends Command {
                     && getExpectedSalary().equals(e.getExpectedSalary())
                     && getLevelOfEducation().equals(e.getLevelOfEducation())
                     && getExperience().equals(e.getExperience())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getDone().equals(e.getDone());
         }
     }
 }
