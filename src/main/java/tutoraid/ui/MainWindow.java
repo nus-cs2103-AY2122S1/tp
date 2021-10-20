@@ -148,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         fillStudentCard(false);
-        fillLessonCard(false);
+        fillLessonCard(true);
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 

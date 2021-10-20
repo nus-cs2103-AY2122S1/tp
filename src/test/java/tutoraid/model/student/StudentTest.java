@@ -1,5 +1,6 @@
 package tutoraid.model.student;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_NAME_BOB;
@@ -74,5 +75,11 @@ public class StudentTest {
         // different parent phone -> returns false
         editedAlice = new StudentBuilder(TypicalStudents.ALICE).withParentPhone(VALID_PARENT_PHONE_BOB).build();
         assertFalse(TypicalStudents.ALICE.equals(editedAlice));
+    }
+
+    @Test
+    public void toNameString() {
+        assertEquals(TypicalStudents.ALICE.getStudentName().toString(), TypicalStudents.ALICE.toNameString());
+        assertEquals(TypicalStudents.BOB.getStudentName().toString(), TypicalStudents.BOB.toNameString());
     }
 }
