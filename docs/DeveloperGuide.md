@@ -104,7 +104,7 @@ Here's a (partial) *class diagram* of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-*Figure A.1.2: Class Diagram of Logic Component* 
+*Figure A.2.1: Class Diagram of Logic Component* 
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -116,7 +116,7 @@ The _Sequence Diagram_ below illustrates the interactions within the `Logic` com
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-*Figure A.1.3: Sequence Diagram of execution Delete Command*
+*Figure A.2.2: Sequence Diagram of execution Delete Command*
 
 <div markdown="span" class="alert alert-info">:information_source: Note: The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -125,7 +125,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 <img src="images/ParserClasses.png" width="600"/>
 
-*Figure A.1.4: Class Diagram of Parser Component*
+*Figure A.2.3: Class Diagram of Parser Component*
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -137,7 +137,7 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
-*Figure A.2.1: Class Diagram of Model Component*
+*Figure A.3.1: Class Diagram of Model Component*
 
 
 The `Model` component
@@ -160,7 +160,7 @@ The `Model` component
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-*Figure A.3.1: Class Diagram of Storage Component*
+*Figure A.4.1: Class Diagram of Storage Component*
 
 The `Storage` component
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -547,7 +547,7 @@ The `FindCommand` allows users to find students based on person fields.
 
 ![Find Command](images/FindSequenceDiagram.png)
 
-**Figure I.5.1: Sequence Diagram of Find Command*
+*Figure I.5.1: Sequence Diagram of Find Command*
 
 The user can specify multiple fields to search for and each field takes in multiple keywords.
 An exception is the tag field which only accepts a single keyword. Instead, users can specify multiple tag fields.
