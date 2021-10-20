@@ -335,8 +335,14 @@ This command has a relatively straightforward implementation:
 1. A `Set` of currently assigned tags is retrieved from the specified `Person`.
 2. A new `Set` is created using the retrieved `Set`, then tags are deleted and added as necessary.
 3. If there are no issues with adding and deleting, and certain conditions are satisfied, the `Person` 
-   will be updated with the new `Set` of tags.
-   
+   will be updated with the new `Set` of tags. Any violations of the conditions will result in an error being 
+   shown to the user. The conditions are as follows:
+    1. All tag names have a maximum character length of 20 alphanumeric characters
+    2. A maximum of 1 Priority tag exists in the `Set` of tags
+    3. A maximum of 1 of each Investment Plan tag exists in the `Set` of tags
+    4. No duplicate tag is added to the `Set`
+    5. No non-existent tag is attempted to be deleted from the 'Set'
+    
 Below is an example usage scenario: 
 
 1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
@@ -818,6 +824,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2e1. FAST shows an error message to the user that each contact may only have one of each Investment Plan tag.    
 
       Use case ends.
+    
+* 2f. Tag name exceeds maximum length of 20 characters.
+    * 2f1. FAST shows an error message to the user that the maximum tag length is 20 characters.
+    
+      Use case ends.
 
 *{More to be added}*
 
@@ -839,6 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Remark**: A comment/note about a specific contact
+  **Tag** A short note about a specific contact, used for sorting and grouping contacts
 * **URL**: Uniform Resource Locator, known more commonly as a link to a website.
 * **XML**: Extensible MarkUp Language, used to format the layout of this software
 

@@ -268,11 +268,12 @@ Examples:
 
 Adds or removes tags from a specified contact.
 
-Format: `tag INDEX a/[TAG] d/[TAG]`
+Format: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
 * Does not affect any unmentioned tags, unlike `edit`.
 * `INDEX`: refers to the index shown in the displayed person list. **Must be a positive integer**.
 * Delete operations are performed first before add operations, regardless of their order in the input.
+* Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
 
 Example: 
 * `tag 1 a/thin d/fat` will add the `thin` tag while deleting the `fat` tag, given the `fat` tag already exists..
@@ -366,11 +367,11 @@ Action | Format, Examples
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 **Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
-**Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
-**Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Help** | `help`
+**Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **List** | `list`
+**Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
 **Update Completed Appointment** | `done INDEX`<br> e.g. `done 5`
