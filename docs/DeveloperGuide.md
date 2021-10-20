@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) from Baeldung
-  * Adapted and modified.
+  * Adapted and modified. See section on _[Encryption](#encryption)_.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ The `Cryptable` component,
   * accepts file in any format for encryption, per the supplied `Path`.
 * decrypts data files from `.enc` format.
   * writes to file in any format after decryption, per the supplied `Path`.
-* performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` component and the cipher algorithm.
+* performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` utility class and the cipher algorithm.
 
 ### Common classes
 
@@ -167,6 +167,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Encryption
+
+**Specifications:**
+* Encryption standard: [AES](https://searchsecurity.techtarget.com/definition/Advanced-Encryption-Standard)
+* Block cipher: AES-128
+* Key generation method: user-supplied password (up to 32 characters long)
+* File extension: [`.enc`](https://fileinfo.com/extension/enc)
+
+#### Implementation
+
+The encryption feature is implemented with the following classes:
+* `Cryptor` — Implements the `Cryptable` API and handles the encryption and decryption of data files. 
+  * Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
+  * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
+* `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-128 compliant keys.
+  * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex and safe (small probability of collision) hash function.
+* `MainApp` — `Cryptor` is initiated here and passed as parameter to the constructor of `LogicManager`. 
+  * There should be one and only one `Cryptor` instance at any time. 
+  * This acts as a single source of truth, which avoids clashing keys.
+* `LogicManager` — The `execute()` method uses `Cryptor` to decrypt the program data before consuming the data. 
+  * The entirety of the [**data file lifecycle**](#data-file-lifecycle) happens within the `execute()` method.
+
+An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
+
+The supplied password string must be 32 characters long (32 characters = 128 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
+
+#### Data file lifecycle
+
+The program's data undergoes a lifecycle per operation:
+1. The contents of the encrypted data file is decrypted, and is written to a temporary `.json` file.
+2. Other components of the program consumes the `.json` file and modifies its contents.
+3. The modified `.json` file is encrypted and overwrites the contents of the encrypted data file.
+4. The temporary `.json` file is deleted.
+
+The lifecycle ensures the program's data stays encrypted at any point in time. In the event of a program crash, the decrypted file will be impossible to recover, but the encrypted file will stay intact.
+
+The lifecycle can be described by the following sequence diagram:
+
+<img src="images/EncryptionSequenceDiagram.png" width="800">
 
 ### \[Proposed\] Undo/redo feature
 
