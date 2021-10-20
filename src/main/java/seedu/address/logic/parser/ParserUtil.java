@@ -160,8 +160,11 @@ public class ParserUtil {
     public static Insurance parseInsurance(String insurance) throws ParseException {
         requireNonNull(insurance);
         String trimmedInsurance = insurance.trim();
+        String[] insuranceTokens = trimmedInsurance.split(" ", 2);
+        String insuranceType = insuranceTokens.length > 0 ? insuranceTokens[0] : "";
+        String insuranceName = insuranceTokens.length > 1 ? insuranceTokens[1] : "";
         try {
-            return Insurance.of(trimmedInsurance);
+            return Insurance.of(insuranceType, insuranceName);
         } catch (IllegalValueException exception) {
             throw new ParseException(Insurance.MESSAGE_CONSTRAINTS);
         }
