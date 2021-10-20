@@ -61,17 +61,10 @@ public class EventCard extends UiPart<Region> {
         residents.setText(ResidentList.DESC + event.getResidents().getResidents());
 
         if (event.hasUnvaccinatedResident()) {
-            handleUnvaccinated();
+            this.getRoot().setStyle("-fx-background-color: #8B0000;");
+            Label textBox = new Label("Non-Vaccinated:" + event.numOfUnvaccinatedResidents());
+            vaccinatedContainer.getChildren().add(textBox);
         }
-    }
-
-    /**
-     * Handles case where {@code event} contains any unvaccinated resident
-     */
-    public void handleUnvaccinated () {
-        this.getRoot().setStyle("-fx-background-color: #8B0000;");
-        Label textBox = new Label("Non-Vaccinated:" + event.numOfUnvaccinatedResidents());
-        vaccinatedContainer.getChildren().add(textBox);
     }
 
     @Override
