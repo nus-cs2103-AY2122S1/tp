@@ -58,6 +58,16 @@ public class Fee {
     }
 
     /**
+     * Returns true if fee value is empty.
+     *
+     * @return True if fee value is empty.
+     */
+    public boolean isEmpty() {
+        return value.isEmpty();
+    }
+
+
+    /**
      * Returns true if a given string is a valid fee.
      */
     public static boolean isValidFee(String test) {

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -26,6 +28,7 @@ public class LogicManager implements Logic {
 
     private final Model model;
     private final Storage storage;
+    private final UndoRedoStack undoRedoStack;
     private final AddressBookParser addressBookParser;
 
     /**
@@ -34,6 +37,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
+        undoRedoStack = new UndoRedoStack();
         addressBookParser = new AddressBookParser();
     }
 
@@ -43,7 +47,9 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        command.setDependencies(model, undoRedoStack); //equivalent to setting parameters for command.execute()
+        commandResult = command.execute();
+        undoRedoStack.pushUndoableCommand(command);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -62,6 +68,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return model.getCalendar();
     }
 
     @Override

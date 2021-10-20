@@ -9,41 +9,49 @@ import org.junit.jupiter.api.Test;
 public class TimeRangeTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TimeRange(null, null));
+        assertThrows(NullPointerException.class, () -> new TimeRange(null));
     }
 
     @Test
     public void constructor_invalidTimeRange_throwsIllegalArgumentException() {
-        Time validStartTime = new Time("12:00");
-        Time validEndTime = new Time("10:00");
+        String invalidTimeRange = " ";
         assertThrows(IllegalArgumentException.class, () ->
-            new TimeRange(validStartTime, validEndTime));
+            new TimeRange(invalidTimeRange));
     }
 
     @Test
     public void isValidTimeRange() {
         // null date
-        assertThrows(NullPointerException.class, () -> TimeRange.isValidTimeRange(null, null));
+        assertThrows(NullPointerException.class, () -> TimeRange.isValidTimeRange(null));
 
         // invalid time range
-        assertFalse(TimeRange.isValidTimeRange(new Time("23:00"),
-            new Time("19:00"))); // end time earlier than start
+        assertFalse(TimeRange.isValidTimeRange("1200-1000")); // end time earlier than start time
+        assertFalse(TimeRange.isValidTimeRange("1099-1200")); // not a time value
+        assertFalse(TimeRange.isValidTimeRange("0000-1200")); // before 8am
+        assertFalse(TimeRange.isValidTimeRange("2000-2359")); // after 10pm
 
         // valid time
-        assertTrue(TimeRange.isValidTimeRange(new Time("13:00"),
-            new Time("14:30")));
+        assertTrue(TimeRange.isValidTimeRange("1300-1400"));
     }
 
     @Test
     public void isClashing_timeRange() {
-        TimeRange timeRange = new TimeRange(new Time("09:00"), new Time("12:00"));
-        TimeRange clashingTimeRange = new TimeRange(new Time("09:00"), new Time("10:00"));
-        TimeRange nonClashingTimeRange = new TimeRange(new Time("13:00"), new Time("15:00"));
+        TimeRange timeRange = new TimeRange("0900-1200");
+        TimeRange nonClashingTimeRange = new TimeRange("1300-1500");
+        TimeRange startDuringEndAfter = new TimeRange("1030-1300");
+        TimeRange startBeforeEndDuring = new TimeRange("0900-1000");
+        TimeRange startBeforeEndAfter = new TimeRange("0800-1300");
+        TimeRange startDuringEndDuring = new TimeRange("1000-1100");
+        TimeRange duplicateTimeRange = new TimeRange("0900-1200");
 
         // time ranges not clashing
         assertFalse(timeRange.isClashing(nonClashingTimeRange));
 
         // time ranges clashing
-        assertTrue(timeRange.isClashing(clashingTimeRange));
+        assertTrue(timeRange.isClashing(startDuringEndAfter));
+        assertTrue(timeRange.isClashing(startBeforeEndDuring));
+        assertTrue(timeRange.isClashing(startBeforeEndAfter));
+        assertTrue(timeRange.isClashing(startDuringEndDuring));
+        assertTrue(timeRange.isClashing(duplicateTimeRange));
     }
 }

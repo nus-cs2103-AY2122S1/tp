@@ -2,20 +2,23 @@ package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 
 /**
  * Represents a Lesson in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Lesson implements Comparable<Lesson> {
+
     // Types of lesson
-    private static final String RECURRING = "Recurring Lesson";
-    private static final String MAKEUP = "Makeup Lesson";
+    private static final String RECURRING = "Recurring";
+    private static final String MAKEUP = "Makeup";
 
     // Time fields
     private final Date date;
@@ -45,12 +48,32 @@ public abstract class Lesson implements Comparable<Lesson> {
         return date;
     }
 
+    public LocalDate getLocalDate() {
+        return date.getLocalDate();
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return date.getDayOfWeek();
+    }
+
     public Subject getSubject() {
         return subject;
     }
 
     public TimeRange getTimeRange() {
         return timeRange;
+    }
+
+    public LocalDateTime getStartDateTime() {
+        return timeRange.getStart().atDate(date.getLocalDate());
+    }
+
+    public LocalDateTime getEndDateTime() {
+        return timeRange.getEnd().atDate(date.getLocalDate());
+    }
+
+    public String getTypeOfLesson() {
+        return isRecurring() ? RECURRING : MAKEUP;
     }
 
     /**
@@ -69,26 +92,12 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
-     * Update the lesson date to the same day on the following week.
+     * Returns true both lessons clash.
      *
-     * @return newDate The date of the same day on the following week.
+     * @param otherLesson The other lesson to be compared with.
+     * @return True if and only if lessons clash.
      */
-    public Date updateDateWithWeek() {
-        Date newDate = new Date(getDate().getLocalDate().plusDays(7).format(Date.FORMATTER));
-        return newDate;
-    }
-
-    public boolean isOver() {
-        return getDate().isOver();
-    }
-
-    /**
-     * Edit the date of the particular type of lesson.
-     *
-     * @param newDateString The date to be updated with.
-     * @return {@code Lesson} with the updated date.
-     */
-    public abstract Lesson updateDate(String newDateString);
+    public abstract boolean isClashing(Lesson otherLesson);
 
     /**
      * Check if both lessons have the same data fields.
@@ -117,7 +126,6 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(date, timeRange, subject, homework);
     }
 
@@ -156,4 +164,3 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
 }
-

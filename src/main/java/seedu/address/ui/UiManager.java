@@ -39,6 +39,7 @@ public class UiManager implements Ui {
 
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
+        primaryStage.setMaximized(true);
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
@@ -54,6 +55,7 @@ public class UiManager implements Ui {
     private Image getImage(String imagePath) {
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
+
 
     void showAlertDialogAndWait(Alert.AlertType type, String title, String headerText, String contentText) {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
