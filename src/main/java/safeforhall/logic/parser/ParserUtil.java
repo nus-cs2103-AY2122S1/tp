@@ -104,6 +104,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String room} into a {@code Room}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code room} is invalid.
+     */
+    public static String parseRoomForFind(String room) throws ParseException {
+        requireNonNull(room);
+        String trimmedRoom = room.trim();
+        if (!Room.isValidRoomForFind(trimmedRoom)) {
+            throw new ParseException(Room.MESSAGE_CONSTRAINTS_FOR_FIND);
+        }
+        return trimmedRoom;
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
