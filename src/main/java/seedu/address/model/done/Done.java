@@ -1,7 +1,5 @@
 package seedu.address.model.done;
 
-import java.util.Stack;
-
 /**
  * Represents an Applicant's status in RecruitIn; if an Applicant is considered Done, it means that
  * the recruiter has finished helping an Applicant out and will no longer need to contact the Applicant.
