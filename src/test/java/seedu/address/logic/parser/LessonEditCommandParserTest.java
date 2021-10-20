@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
@@ -88,17 +87,6 @@ class LessonEditCommandParserTest {
         assertParseFailure(parser, "1 1" + INVALID_TIME_RANGE_DESC + SUBJECT_DESC,
                 TimeRange.MESSAGE_CONSTRAINTS);
 
-        /*
-        // while parsing {@code PREFIX_HOMEWORK} alone will reset the Homework of the {@code Lesson} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1 1" + HOMEWORK_DESC_TEXTBOOK + HOMEWORK_DESC_POETRY + HOMEWORK_EMPTY,
-                Homework.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 1" + HOMEWORK_DESC_TEXTBOOK + HOMEWORK_EMPTY + HOMEWORK_DESC_POETRY,
-                Homework.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1 1" + HOMEWORK_EMPTY + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
-                Homework.MESSAGE_CONSTRAINTS);
-
-         */
         // multiple invalid values, but only the first invalid value checked is captured
         // order goes in time range, subject, homework
         assertParseFailure(parser, "1 1" + INVALID_HOMEWORK_DESC + INVALID_TIME_RANGE_DESC + VALID_SUBJECT,
@@ -161,11 +149,6 @@ class LessonEditCommandParserTest {
         expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // recurring flag
-        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + " " + PREFIX_RECURRING;
-        descriptor = new EditLessonDescriptorBuilder().withRecurrence().build();
-        expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test

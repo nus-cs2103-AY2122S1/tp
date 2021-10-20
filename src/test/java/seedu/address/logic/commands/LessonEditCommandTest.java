@@ -134,7 +134,7 @@ class LessonEditCommandTest {
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personBeforeLessonEdit = new PersonBuilder(personInFilteredList)
-            .withLessons(new LessonBuilder().build())
+            .withLessons(new LessonBuilder().buildRecurring())
             .build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
