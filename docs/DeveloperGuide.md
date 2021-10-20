@@ -161,7 +161,9 @@ IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for i
 DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Person` creation.
 IS_EDITABLE | If set to `true`, the field is editable by the user through edit command.
 
-### Common Field types
+### Field interfaces
+
+<img src="images/FieldClassDiagram.png" width="550" />
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
