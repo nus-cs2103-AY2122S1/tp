@@ -16,6 +16,7 @@ Class UserPrefs
 Class ReadOnlyUserPrefs
 
 Class UniqueGroupList
+Class Group
 Class UniqueStudentList
 Class Student
 Class Email
@@ -38,7 +39,9 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 CsBook *--> "1" UniqueStudentList
 CsBook *--> "1" UniqueGroupList
 UniqueStudentList --> "~* all" Student
-UniqueGroupList --> "~* filtered" Student
+UniqueGroupList --> "~* all" Group
+Group --> "~* filtered" Student
+Student -up-> "1" Group
 Student *--> Name
 Student *--> TelegramHandle
 Student *--> Email
