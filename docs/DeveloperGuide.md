@@ -49,6 +49,7 @@ The rest of the App consists of four components.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Encryption`**](#encryption-component): Encrypts and decrypts data
 
 
 **How the architecture components interact with each other**
@@ -133,7 +134,6 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -141,9 +141,20 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both address book data and user preference data in `.json` format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Encryption component
+
+**API** : [`Cryptable.java`]()
+
+The `Cryptable` component,
+* encrypts data files to `.enc` format.
+  * accepts file in any format for encryption, per the supplied `Path`.
+* decrypts data files from `.enc` format.
+  * writes to file in any format after decryption, per the supplied `Path`.
+* performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` component and the cipher algorithm.
 
 ### Common classes
 
