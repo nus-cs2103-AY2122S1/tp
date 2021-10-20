@@ -1,11 +1,15 @@
 package safeforhall.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import safeforhall.commons.core.GuiSettings;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 
 /**
@@ -60,15 +64,35 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Searches and converts the names in the {@code residentList} to a list of person and return the list of person
+     * if it exists in the address book.
+     */
+    ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException;
+
+
+    ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException;
+
+    /**
      * Returns true if an event with the same details as {@code event} exists in the address book.
      */
     boolean hasEvent(Event event);
+
+    /**
+     * Searches the eventList and return the {@code event} if it exists in the address book.
+     */
+    Event getEvent(EventName eventName) throws CommandException;
 
     /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
     void deletePerson(Person target);
+
+    /**
+     * Deletes the given event.
+     * The event must exist in the address book.
+     */
+    void deleteEvent(Event target);
 
     /**
      * Adds the given person.

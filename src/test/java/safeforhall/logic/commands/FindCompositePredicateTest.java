@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
 public class FindCompositePredicateTest {
@@ -16,7 +15,7 @@ public class FindCompositePredicateTest {
     public void equals() {
         FindCommand.FindCompositePredicate firstPredicate = new FindCommand.FindCompositePredicate();
         firstPredicate.setName(new Name("Alice"));
-        firstPredicate.setRoom(new Room("A100"));
+        firstPredicate.setRoom("A100");
         firstPredicate.setFaculty(new Faculty("SoC"));
         firstPredicate.setVaccStatus(new VaccStatus("T"));
 
@@ -28,7 +27,7 @@ public class FindCompositePredicateTest {
         // same values -> returns true
         FindCommand.FindCompositePredicate firstPredicateCopy = new FindCommand.FindCompositePredicate();
         firstPredicateCopy.setName(new Name("Alice"));
-        firstPredicateCopy.setRoom(new Room("A100"));
+        firstPredicateCopy.setRoom("A100");
         firstPredicateCopy.setFaculty(new Faculty("SoC"));
         firstPredicateCopy.setVaccStatus(new VaccStatus("T"));
 

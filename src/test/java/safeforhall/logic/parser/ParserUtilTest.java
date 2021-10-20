@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -25,6 +26,11 @@ public class ParserUtilTest {
     private static final String INVALID_FACULTY = " ";
     private static final String INVALID_VACCSTATUS = " ";
     private static final String INVALID_DATE = "21.10.2021";
+    private static final String INVALID_ROOM_FOR_FIND1 = "AA";
+    private static final String INVALID_ROOM_FOR_FIND2 = "A12";
+    private static final String INVALID_ROOM_FOR_FIND3 = "12";
+    private static final String INVALID_RESIDENTS = "Alex Yeoh, C11";
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ROOM = "A100";
@@ -32,6 +38,10 @@ public class ParserUtilTest {
     private static final String VALID_DATE = "21-10-2021";
     private static final String VALID_FACULTY = "SoC";
     private static final String VALID_VACCSTATUS = "T";
+    private static final String VALID_ROOM_FOR_FIND1 = "A";
+    private static final String VALID_ROOM_FOR_FIND2 = "A1";
+    private static final String VALID_ROOM_FOR_FIND3 = "E200";
+    private static final String VALID_RESIDENTS = "Alex Yeoh, Bernice Yu";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -125,6 +135,39 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseRoomForFind_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoomForFind(INVALID_ROOM_FOR_FIND1));
+    }
+
+    @Test
+    public void parseRoomForFind_invalidValue2_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoomForFind(INVALID_ROOM_FOR_FIND2));
+    }
+
+    @Test
+    public void parseRoomForFind_invalidValue3_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRoomForFind(INVALID_ROOM_FOR_FIND3));
+    }
+
+    @Test
+    public void parseRoomForFind_validValue1_returnsTrimmedRoom() throws Exception {
+        String roomWithWhitespace = WHITESPACE + VALID_ROOM_FOR_FIND1 + WHITESPACE;
+        assertEquals(VALID_ROOM_FOR_FIND1, ParserUtil.parseRoomForFind(roomWithWhitespace));
+    }
+
+    @Test
+    public void parseRoomForFind_validValue2_returnsTrimmedRoom() throws Exception {
+        String roomWithWhitespace = WHITESPACE + VALID_ROOM_FOR_FIND2 + WHITESPACE;
+        assertEquals(VALID_ROOM_FOR_FIND2, ParserUtil.parseRoomForFind(roomWithWhitespace));
+    }
+
+    @Test
+    public void parseRoomForFind_validValue3_returnsTrimmedRoom() throws Exception {
+        String roomWithWhitespace = WHITESPACE + VALID_ROOM_FOR_FIND3 + WHITESPACE;
+        assertEquals(VALID_ROOM_FOR_FIND3, ParserUtil.parseRoomForFind(roomWithWhitespace));
+    }
+
+    @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -214,5 +257,28 @@ public class ParserUtilTest {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         LastDate expectedDate = new LastDate(VALID_DATE);
         Assertions.assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
+
+    @Test
+    public void parseResidents_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseResidents((String) null));
+    }
+
+    @Test
+    public void parseResidents_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseResidents(INVALID_RESIDENTS));
+    }
+
+    @Test
+    public void parseResidents_validValueWithoutWhitespace_returnsLastDate() throws Exception {
+        ResidentList expectedList = new ResidentList(VALID_RESIDENTS);
+        Assertions.assertEquals(expectedList, ParserUtil.parseResidents(VALID_RESIDENTS));
+    }
+
+    @Test
+    public void parseResidents_validValueWithWhitespace_returnsTrimmedLastDate() throws Exception {
+        String listWithWhitespace = WHITESPACE + VALID_RESIDENTS + WHITESPACE;
+        ResidentList expectedList = new ResidentList(VALID_RESIDENTS);
+        Assertions.assertEquals(expectedList, ParserUtil.parseResidents(listWithWhitespace));
     }
 }
