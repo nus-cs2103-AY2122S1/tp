@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 
 import seedu.address.model.Model;
-import seedu.address.model.commons.ID;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 
@@ -23,13 +22,13 @@ public class Order {
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
 
     public final LocalDate time;
-    public final ID productId;
+    public final int productId;
     public final Quantity quantity;
 
     /**
      * Constructor of {@code Order}
      */
-    public Order(LocalDate time, ID productId, Quantity quantity, Model model) {
+    public Order(LocalDate time, int productId, Quantity quantity, Model model) {
         checkArgument(isValidProductID(productId, model), MESSAGE_CONSTRAINTS_ID);
         Product product = model.getProductById(productId);
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
@@ -39,7 +38,7 @@ public class Order {
         this.quantity = quantity;
     }
 
-    private static boolean isValidProductID(ID productId, Model model) {
+    private static boolean isValidProductID(int productId, Model model) {
         return model.hasProduct(productId);
     }
 
@@ -52,7 +51,7 @@ public class Order {
         return other == this // short circuit if same object
                 || (other instanceof Order // instanceof handles nulls
                 && time.equals(((Order) other).time)
-                && productId.equals(((Order) other).productId)
+                && productId == (((Order) other).productId)
                 && quantity.equals(((Order) other).quantity)); // state check
     }
 

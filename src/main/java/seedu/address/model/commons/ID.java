@@ -1,28 +1,31 @@
 package seedu.address.model.commons;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 /**
  * Represents a Client's or Product's ID in the address book.
  * Guarantees: immutable; is unique.
  */
 public class ID {
-    private static int idCounter = 0;
+    private static int clientIDCounter = 0;
+    private static int productIDCounter = 0;
+
     private final int id;
 
-    /** Constructs a {@code ID}. */
-    public ID() {
-        id = idCounter;
-        idCounter++;
+    private ID(int id) {
+        this.id = id;
     }
+
     /**
-     * Constructs a {@code ID}.
-     *
-     * @param idString A valid id.
+     * Constructs a {@code ID} for {@code Client}.
      */
-    public ID(String idString) {
-        requireAllNonNull(idString);
-        id = Integer.parseInt(idString);
+    public static ID getNewClientID() {
+        return new ID(clientIDCounter++);
+    }
+
+    /**
+     * Constructs a {@code ID} for {@code Product}.
+     */
+    public static ID getNewProductID() {
+        return new ID(productIDCounter++);
     }
 
     public int getId() {
@@ -37,8 +40,8 @@ public class ID {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                       || (other instanceof ID // instanceof handles nulls
-                                   && this.getId() == ((ID) other).getId()); // state check
+                || (other instanceof ID // instanceof handles nulls
+                && this.getId() == ((ID) other).getId()); // state check
     }
 
     @Override

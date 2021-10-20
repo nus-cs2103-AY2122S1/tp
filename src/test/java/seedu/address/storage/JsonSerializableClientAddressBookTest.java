@@ -63,7 +63,7 @@ public class JsonSerializableClientAddressBookTest {
                     typicalClientsAddressBook.getClientList().get(0).getPhoneNumber(),
                     typicalClientsAddressBook.getClientList().get(0).getEmail(),
                     typicalClientsAddressBook.getClientList().get(0).getAddress(),
-                    typicalClientsAddressBook.getClientList().get(i).getOrders()
+                    typicalClientsAddressBook.getClientList().get(0).getOrders()
             ));
         }
         assertEquals(addressBookFromFile, typicalClientsAddressBookUpdated);

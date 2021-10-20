@@ -16,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
-import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Quantity;
@@ -190,7 +189,7 @@ public class ParserUtil {
             throw new ParseException(Order.MESSAGE_CONSTRAINTS);
         }
         String[] args = trimmedOrder.split(" ");
-        ID productId = new ID(args[0]);
+        int productId = Integer.parseInt(args[0]);
         Quantity quantity = new Quantity(args[1]);
         String timeStr = args[2];
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");

@@ -27,7 +27,7 @@ public class Client implements Category {
     private final Set<Order> orders;
 
     public Client(Name name, PhoneNumber phoneNumber, Email email, Address address, Set<Order> orders) {
-        this(new ID(), name, phoneNumber, email, address, orders);
+        this(ID.getNewClientID(), name, phoneNumber, email, address, orders);
     }
 
     private Client(ID id, Name name, PhoneNumber phoneNumber, Email email, Address address, Set<Order> orders) {
@@ -145,7 +145,8 @@ public class Client implements Category {
                 && phoneNumber.equals(otherClient.phoneNumber)
                 && email.equals(otherClient.email)
                 && address.equals(otherClient.address)
-                && orders.equals(otherClient.orders);
+                && orders.containsAll(otherClient.orders)
+                && otherClient.orders.containsAll(orders);
     }
 
     @Override
@@ -157,12 +158,9 @@ public class Client implements Category {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("ID: ")
-                .append(id)
-                .append("; Name: ")
-                .append(name)
-                .append("; Phone Number: ")
-                .append(phoneNumber);
+        builder.append("ID: ").append(id)
+                .append("; Name: ").append(name)
+                .append("; Phone Number: ").append(phoneNumber);
 
         if (email != null) {
             builder.append("; Email: ").append(email);
