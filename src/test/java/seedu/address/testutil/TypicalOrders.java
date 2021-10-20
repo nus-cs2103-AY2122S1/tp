@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.Order;
+import seedu.address.model.order.Order;
 
 public class TypicalOrders {
 

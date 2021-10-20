@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 
 /**
  * Wraps all data at the inventory level
