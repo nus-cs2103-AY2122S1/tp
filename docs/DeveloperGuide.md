@@ -305,7 +305,17 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
     * Pros : Saves time if the user is unable to remember the exact name of a client/product.
     * Cons : More complex code which would lead to higher amount of error
 
-### \[Proposed\] Undo/redo feature
+### Command History Feature
+
+This feature allows the user to navigate to previous commands using `↑` and `↓` keys.
+
+The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. Each time the user
+inputs a command, it is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. As user inputs `↑`,
+previous command will be shown till no more available. `↓` is used to go back to the next command. As user reaches the
+last and latest command stored in `ArrayList`, the next `↓` will clear the command input field. At any time, user can
+choose to just stop and proceed on to edit or input the current history command.
+
+### \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
