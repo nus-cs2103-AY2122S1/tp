@@ -70,6 +70,27 @@ public class CategoryCode {
         }
     }
 
+    /**
+     * Returns the category code in non-abbreviated format
+     * @return non-abbreviated category
+     */
+    public String getFullCode() {
+        switch (category) {
+        case ATT:
+            return "Attractions";
+        case ACC:
+            return "Accomodation";
+        case FNB:
+            return "Food & Beverages";
+        case TPT:
+            return "Transport";
+        case COM:
+            return "Commerce";
+        default:
+            return "Others";
+        }
+    }
+
     @Override
     public String toString() {
         return category.toString();

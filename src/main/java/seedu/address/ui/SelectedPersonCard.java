@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class SelectedPersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "SelectedPersonCard.fxml";
     private final Logger logger = LogsCenter.getLogger(SelectedPersonCard.class);
 
     /**
@@ -74,12 +74,13 @@ public class SelectedPersonCard extends UiPart<Region> {
         if (person == null) {
             setEmptyPersonDetails();
         } else {
-            category.setText(person.getCategoryCode().toString());
+
+            category.setText("Category: " + person.getCategoryCode().getFullCode());
             name.setText(person.getName().fullName);
-            phone.setText(person.getPhone().value);
-            address.setText(person.getAddress().value);
-            review.setText(person.getReview().value);
-            email.setText(person.getEmail().value);
+            phone.setText("Phone: " + person.getPhone().value);
+            address.setText("Address: " + person.getAddress().value);
+            review.setText("Reviews: " + person.getReview().value);
+            email.setText("Email: " + person.getEmail().value);
             tags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
@@ -93,12 +94,12 @@ public class SelectedPersonCard extends UiPart<Region> {
      * Sets the empty Selected Person details.
      */
     public void setEmptyPersonDetails() {
-        category.setText("NIL");
-        name.setText("NIL");
-        phone.setText("NIL");
-        address.setText("NIL");
-        review.setText("NIL");
-        email.setText("NIL");
+        category.setText("Category: NIL");
+        name.setText("No contact selected.");
+        phone.setText("Phone: NIL");
+        address.setText("Address: NIL");
+        review.setText("Reviews: NIL");
+        email.setText("Email: NIL");
         tags.getChildren().clear();
         rating.setText("NIL" + "\u2B50");
         logger.info("Empty person set");
