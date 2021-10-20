@@ -330,6 +330,8 @@ Examples:
 
 Displays a read-only schedule of your upcoming week.
 
+![view schedule](ViewSchedule.png)
+
 Format: `schedule`
 
 <div markdown="block" class="alert alert-info">

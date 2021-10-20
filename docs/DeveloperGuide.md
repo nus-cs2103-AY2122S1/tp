@@ -104,7 +104,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The _Sequence Diagram_ below illustrates the interactions within the `Logic` component for the `execute("delete 1")` _API_ call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
@@ -176,15 +176,12 @@ The following code snippet shows how `SchedulePanel` is initialised from the `Mo
 ```java
 public class SchedulePanel extends UiPart<Region> {
 
-    private static final String FXML = "SchedulePanel.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(this.getClass());
+    private static final String FXML = "SchedulePanel.fxml"; // The corresponding .fxml file for this UiPart
 
     private final DetailedWeekView calendarView;
 
-    @FXML
-    private StackPane scheduleView;
-
+    // other fields...
+    
     /**
      * Creates a {@code SchedulePanel} with the given {@code Calendar}.
      */
@@ -192,13 +189,11 @@ public class SchedulePanel extends UiPart<Region> {
         super(FXML);
         calendarView = new DetailedWeekView();
         initialiseCalendar(calendar);
-        createTimeThread();
+        createTimeThread(); // Starts a thread to keep track of the current time
     }
 
     /**
      * Sets up CalendarFX.
-     * Adapted from CalendarFX developer manual.
-     * http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start
      */
     public void initialiseCalendar(Calendar calendar) {
         CalendarSource calendarSource = new CalendarSource();
@@ -211,13 +206,25 @@ public class SchedulePanel extends UiPart<Region> {
         
     }
     
-    // other SchedulePanel methods...
+    // other methods...
 }
 ```
-When `SchedulePanel` is initialised, it sets up a `CalendarSource` and `DetailedWeekView` with our custom display settings.
+When `SchedulePanel` is initialised, it sets up a `DetailedWeekView` with our custom display settings, and a thread that allows us to display the current time on the calendar interface. The way we initialise the calendar is adapted from CalendarFX's [Quick Start Guide](https://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
+
 Any changes made to the `Calendar` in `Model` will automatically update the `DetailedWeekView` in the `SchedulePanel` through CalendarFX's internal implementation (see how in the [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
 
-####Design considerations:
+#### CenterPanel
+
+We allow the user to toggle between viewing the schedule and viewing the list of students with the `CenterPanel` class in the `Ui` component.
+
+The *Sequence Diagram* below shows how the `Ui` components interact with each other when user inputs the `schedule` command.
+
+![Interactions Inside the Ui Component for the `schedule` Command](images/ScheduleSequenceDiagram.png)
+
+When the user requests to view the schedule,the `displaySchedulePanel()` method of `CenterPanel` is called, which sets the current display to show the `SchedulePanel`.
+Switching back is similarly achieved by calling the `displayPersonListPanel()` method of `CenterPanel`.
+
+#### Design considerations
 
 **Aspect: How schedule is implemented:**
 
@@ -225,7 +232,7 @@ Any changes made to the `Calendar` in `Model` will automatically update the `Det
     * Pros: More customisable as we are not limited by CalendarFX's API.
     * Cons: Much more difficult to implement.
 
-* **Alternative 2 (current choice):** Use CalendarFX to display entries while storing entry data locally.
+* **Alternative 2 (current implementation):** Use CalendarFX to display entries while storing entry data locally.
     * Pros: Less code is written to implement it and the difficulty of implementing a calendar is completely abstracted away.
     * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
 
