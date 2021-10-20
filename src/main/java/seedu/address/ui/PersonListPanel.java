@@ -33,7 +33,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
-        setSelectedPersonPanel(personList);
+        setSelectedPersonPanel();
         selectedPersonPanelPlaceholder.getChildren().add(selected.getRoot());
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
@@ -41,18 +41,15 @@ public class PersonListPanel extends UiPart<Region> {
             @Override
             public void handle(Event event) {
                 Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-                selected.setPersonDetails(selectedPerson);
+                logger.info("selected " + selectedPerson);
+                selected.updatePerson(selectedPerson);
+                selected.setPersonDetails();
             }
         });
     }
 
-
-    public void setSelectedPersonPanel(ObservableList<Person> personList) {
-        if (!personList.isEmpty()) {
-            selected.setPersonDetails(personList.get(0));
-        } else {
-            selected.setEmptyPersonDetails();
-        }
+    public void setSelectedPersonPanel() {
+        selected.setPersonDetails();
     }
 
     /**

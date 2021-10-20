@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <Label fx:id="name" styleClass="details_contact_name" text="\$first">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="rating" styleClass="details_rating_label" text="\$rating">
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin></Label>
+            <FlowPane fx:id="tags">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" top="10.0" />
+            </VBox.margin></FlowPane>
+            <Label fx:id="category" styleClass="details_contact_field" text="\$category">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="phone" styleClass="details_contact_field" text="\$phone">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="address" styleClass="details_contact_field" text="\$address">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="email" styleClass="details_contact_field" text="\$email">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+            <Label fx:id="review" styleClass="details_contact_field" text="\$review">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" top="10.0" />
+                </padding>
+            </Label>
+        </VBox>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+</HBox>
