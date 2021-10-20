@@ -68,9 +68,7 @@ The app helps the tour guides easily collate and access contacts of a variety of
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a command summary of all available commands
 
 Format: `help`
 

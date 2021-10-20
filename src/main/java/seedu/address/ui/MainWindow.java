@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -33,7 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private Help helpWindow;
+    private HelpWindow backUpHelpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -64,8 +67,8 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
+        helpWindow = new Help();
+        backUpHelpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -136,14 +139,44 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the Online User Guide if possible, else open the internal help window
+     */
+    public void handleHelp() {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                helpWindow.openUserGuide();
+            } catch (IOException | SecurityException | IllegalArgumentException ex) {
+                handleBackUpHelp();
+            }
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * Opens the Command Summary if possible, else open the internal help window
+     */
+    public void openCommandSummary() {
+        if (Desktop.isDesktopSupported()) {
+            try {
+                helpWindow.openCommandSummary();
+            } catch (IOException | SecurityException | IllegalArgumentException ex) {
+                handleBackUpHelp();
+            }
+        } else {
+            handleBackUpHelp();
+        }
+    }
+
+    /**
+     * Opens the secondary help window in that case that user's computer does not support Desktop operations
      */
     @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+    public void handleBackUpHelp() {
+        if (!backUpHelpWindow.isShowing()) {
+            backUpHelpWindow.show();
         } else {
-            helpWindow.focus();
+            backUpHelpWindow.focus();
         }
     }
 
@@ -159,7 +192,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
