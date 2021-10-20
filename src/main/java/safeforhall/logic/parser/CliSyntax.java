@@ -20,4 +20,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_VENUE = new Prefix("l/");
     public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
+    public static final Prefix PREFIX_RESIDENTS = new Prefix("r/");
+
 }

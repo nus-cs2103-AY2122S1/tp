@@ -54,7 +54,8 @@ public class EditEventCommandTest {
         Event lastEvent = model.getFilteredEventList().get(indexLastEvent.getZeroBased());
 
         EventBuilder eventInList = new EventBuilder(lastEvent);
-        Event editedEvent = eventInList.withName(VALID_NAME_SWIM_TRAINING).withDate(VALID_DATE_SWIM_TRAINING).build();
+        Event editedEvent = eventInList.withEventName(VALID_NAME_SWIM_TRAINING)
+                .withEventDate(VALID_DATE_SWIM_TRAINING).build();
 
         EditEventDescriptor descriptor = new EditEventDescriptorBuilder().withName(VALID_NAME_SWIM_TRAINING)
                 .withDate(VALID_DATE_SWIM_TRAINING).build();
@@ -85,7 +86,8 @@ public class EditEventCommandTest {
         showEventAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventInFilteredList = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
-        Event editedEvent = new EventBuilder(eventInFilteredList).withName(VALID_NAME_FOOTBALL_TRAINING).build();
+        Event editedEvent = new EventBuilder(eventInFilteredList)
+                .withEventName(VALID_NAME_FOOTBALL_TRAINING).build();
         EditEventCommand editEventCommand = new EditEventCommand(INDEX_FIRST_EVENT,
                 new EditEventDescriptorBuilder().withName(VALID_NAME_FOOTBALL_TRAINING).build());
 
