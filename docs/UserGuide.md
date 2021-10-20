@@ -337,6 +337,8 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWOR
 
 * You can edit all fields of a lesson except the start date.
 
+* You cannot change the lesson type (i.e. recurring and makeup).
+  
 * The lesson index refers to the index number shown in the lesson list of the student.
 
 * The index and lesson index **must be a positive integer** 1, 2, 3, …
