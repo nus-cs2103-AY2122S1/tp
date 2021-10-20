@@ -371,8 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SalesNote shows an error message.
 
       Use case resumes at step 2.
-
-
+    
 #### Use case: Add a task
 
 **MSS**
@@ -413,6 +412,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SalesNote shows an error message.
 
       Use case resumes at step 2.
+
+#### Use case: Add an order
+
+**MSS**
+
+1. User requests to add a specific order to the list
+2. SalesNote adds the order
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the request is invalid.
+
+    * 1a1. SalesNote shows an error message.
+
+      Use case ends.
+
+#### Use case: Delete an order
+
+**MSS**
+
+1.  User requests to list orders
+2.  SalesNote shows a list of orders
+3.  User requests to delete a specific order in the list
+4.  SalesNote deletes the order
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
