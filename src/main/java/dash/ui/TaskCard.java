@@ -4,7 +4,6 @@ import java.util.Comparator;
 
 import dash.model.task.Task;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +32,10 @@ public class TaskCard extends UiPart<Region> {
     private int cardIndex = 0;
     private Image checkmarkOrange = new Image("/images/checkmark.png", 20, 20, false, true);
     private Image checkmarkGrey = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
+    private Image tag = new Image("/images/tag.png", 20, 20, false, true);
+    private Image tagGrey = new Image("/images/tag_greyed.png", 20, 20, false, true);
+    private Image contact = new Image("/images/contact.png", 20, 20, false, true);
+    private Image contactGrey = new Image("/images/contact_greyed.png", 20, 20, false, true);
 
     @FXML
     private HBox cardPane;
@@ -47,7 +50,13 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label tagImage;
+    @FXML
     private FlowPane tags;
+    @FXML
+    private Label assigneeImage;
+    @FXML
+    private FlowPane assignees;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -62,9 +71,14 @@ public class TaskCard extends UiPart<Region> {
         ImageView checkmark = new ImageView(checkmarkGrey);
         completionStatus.setText(" ");
         completionStatus.setGraphic(checkmark);
-        if (this.task.getCompletionStatus().get()) {
-            setAsComplete();
-        }
+
+        ImageView tagIcon = new ImageView(tag);
+        tagImage.setText(" ");
+        tagImage.setGraphic(tagIcon);
+
+        ImageView assigneeIcon = new ImageView(contact);
+        assigneeImage.setText(" ");
+        assigneeImage.setGraphic(assigneeIcon);
 
         if (task.getTaskDate().hasDate()) {
             date.setText(task.getTaskDate().toDateString());
@@ -76,6 +90,14 @@ public class TaskCard extends UiPart<Region> {
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        task.getPeople().stream()
+                .sorted(Comparator.comparing(person -> person.getName().fullName))
+                .forEach(person -> assignees.getChildren().add(new Label(person.getName().fullName)));
+
+        if (this.task.getCompletionStatus().get()) {
+            setAsComplete();
+        }
     }
 
     public void setAsComplete() {
@@ -84,18 +106,25 @@ public class TaskCard extends UiPart<Region> {
         } else {
             this.cardPane.setStyle("-fx-background-color: #ffe6cf;");
         }
-        this.desc.setStyle("-fx-text-fill: #878787");
-        this.id.setStyle("-fx-text-fill: #878787");
+
+        this.desc.setStyle("-fx-text-fill: #878787;");
+        this.id.setStyle("-fx-text-fill: #878787;");
         ImageView checkmark = new ImageView(checkmarkOrange);
         completionStatus.setText(" ");
         completionStatus.setGraphic(checkmark);
-        this.date.setStyle("-fx-text-fill: #878787");
-        this.time.setStyle("-fx-text-fill: #878787");
-        for (Node n: tags.getChildren()) {
-            Label l = (Label) n;
-            l.setStyle("-fx-background-color: #bf9284");
-        }
 
+        this.date.setStyle("-fx-text-fill: #878787;");
+        this.time.setStyle("-fx-text-fill: #878787;");
+
+        this.tags.setStyle("-fx-opacity:0.5;");
+        ImageView tagIconGrey = new ImageView(tagGrey);
+        tagImage.setText(" ");
+        tagImage.setGraphic(tagIconGrey);
+
+        this.assignees.setStyle("-fx-opacity:0.5;");
+        ImageView assigneeIconGrey = new ImageView(contactGrey);
+        assigneeImage.setText(" ");
+        assigneeImage.setGraphic(assigneeIconGrey);
     }
 
     @Override
