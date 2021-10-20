@@ -158,12 +158,14 @@
     -fx-font-size: 20px;
     -fx-text-fill: #010504;
     -fx-font-weight: bold;
+    -fx-wrap-text: true;
 }
 
 .details_contact_field {
     -fx-font-family: "RNS Sanz Bold";
     -fx-font-size: 16px;
     -fx-text-fill: #010504;
+    -fx-wrap-text: true;
 }
 
 
