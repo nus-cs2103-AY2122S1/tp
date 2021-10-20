@@ -129,7 +129,7 @@ How the parsing works:
 The `Model` component
 
 * stores the tuition address book data, i.e., all `Person` and calendar `Entry` objects (which are contained in a `UniquePersonList` object and `CalendarEntryList` object respectively).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate filtered list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed', e.g., the `Ui` component can be bound to this list so that it automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
@@ -739,17 +739,20 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 * **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **Class Diagram**: UML class diagrams describe the structure (but not the behavior) of an _OOP_ solution. These are possibly the most often used diagrams in the industry and are an indispensable tool for an OO programmer (as defined in the Software Engineering for Self-Directed Learners CS2103/T edition [textbook](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/index.html)).
 * **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
-* **Outstanding fees**: Tuition fees that have yet to be collected.
+* **OOP**: Object-Oriented Programming - a programming paradigm that organizes software design around data, or objects, rather than functions and logic
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
+* **Sequence Diagram**: A UML sequence diagram models the interactions between various entities in a system, in a specific scenario. Modelling such scenarios is useful, for example, to verify the design of the internal interactions is able to provide the expected outcomes (as defined in the Software Engineering for Self-Directed Learners CS2103/T edition [textbook](https://nus-cs2103-ay2122s1.github.io/website/se-book-adapted/index.html)).
 * **Session**: A session begins when the app is started and ends when the app is exited.
 * **UI**: User Interface - the means by which the user and the app interact.
-* **UX**: User Experience - The experience a user has when using the app.
+* **UML**: Unified Modeling Language - a modeling language that software engineers use to provide a standard way to visualize the design of a system.
 * **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
   UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+* **UX**: User Experience - The experience a user has when using the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
