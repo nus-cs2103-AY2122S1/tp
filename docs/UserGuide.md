@@ -213,10 +213,10 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 ### Editing the data file
 
-CSBook data are saved as a JSON file `[JAR file location]/data/CSBook.json`. Advanced users are welcome to update data directly by editing that data file.
+CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -225,18 +225,11 @@ If your changes to the data file makes its format invalid, CSBook will discard a
 
 Action | Format, Examples
 --------|------------------
-<<<<<<< HEAD
-**Add** | `add n/NAME p/TELEGRAM_HANDLE e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-=======
 **Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] `<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **List** | `list`
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add Group** | `addgroup GROUPNAME`
 **Delete Group** | `deletegroup GROUPNAME`
