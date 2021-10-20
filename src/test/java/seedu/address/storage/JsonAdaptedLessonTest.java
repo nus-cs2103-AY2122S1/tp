@@ -13,10 +13,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Date;
-import seedu.address.model.lesson.LessonRates;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.lesson.*;
 
 class JsonAdaptedLessonTest {
 
@@ -111,7 +108,7 @@ class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
                         VALID_HOMEWORK_PIECES, INVALID_LESSON_RATES);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonRates.class.getSimpleName());
+        String expectedMessage = LessonRates.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
@@ -120,7 +117,7 @@ class JsonAdaptedLessonTest {
         JsonAdaptedLesson lesson =
                 new JsonAdaptedLesson(VALID_DATE, VALID_TIME_RANGE, VALID_SUBJECT,
                         VALID_HOMEWORK_PIECES, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonRates.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 }

@@ -18,7 +18,7 @@ public class LessonBuilder {
     public static final String DEFAULT_DATE = "20 Mar 2000";
     public static final String DEFAULT_TIME_RANGE = "1400-1500";
     public static final String DEFAULT_SUBJECT = "Mathematics";
-    public static final String DEFAULT_LESSON_RATES = "$50";
+    public static final String DEFAULT_LESSON_RATES = "50";
     public static final String DEFAULT_HOMEWORK = "Textbook Page 5";
 
     private Date date;
