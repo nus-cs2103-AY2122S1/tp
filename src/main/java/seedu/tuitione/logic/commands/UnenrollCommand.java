@@ -1,19 +1,19 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
-import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
-import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.student.Student;
 
 /**
@@ -25,62 +25,68 @@ public class UnenrollCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unenroll a specified student "
             + "from a given TuitiONE lesson\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "l/LESSON_CODE\n"
-            + "Example: " + "unenroll 1 " + PREFIX_LESSON + "Science-P5-Wed-1230";
+            + "Parameters: STUDENT_INDEX (must be a positive integer) "
+            + "l/LESSON_INDEX\n"
+            + "Example: " + "unenroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from Lesson: %2$s";
-    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "%1$s is not currently enrolled in the Lesson: %2$s";
+    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from lesson: %2$s";
+    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "%1$s is not currently enrolled in the lesson: %2$s";
 
-    private final Index targetIndex;
+    private final Index indexStudent;
 
-    private final String lessonCode;
+    private final Index indexLesson;
 
     /**
      * Creates an UnenrollCommand for a Student with a given index and a specified {@code Lesson}.
      */
-    public UnenrollCommand(Index targetIndex, String lessonCode) {
-        requireNonNull(targetIndex, lessonCode);
+    public UnenrollCommand(Index indexStudent, Index indexLesson) {
+        requireAllNonNull(indexStudent, indexLesson);
 
-        this.targetIndex = targetIndex;
-        this.lessonCode = lessonCode;
+        this.indexStudent = indexStudent;
+        this.indexLesson = indexLesson;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        LessonCode code = new LessonCode(lessonCode);
-        Optional<Lesson> lessonOptional = model.searchLessons(code);
-        Lesson lesson = lessonOptional.orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_LESSON_CODE));
-
-        List<Student> lastShownList = model.getFilteredStudentList();
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        ObservableList<Lesson> lastShownLessonList = model.getFilteredLessonList();
+        if (indexStudent.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-        Student studentToUnenroll = lastShownList.get(targetIndex.getZeroBased());
+        Student studentToUnenroll = lastShownStudentList.get(indexStudent.getZeroBased());
 
-        if (!lesson.containsStudent(studentToUnenroll)) {
+        if (indexLesson.getZeroBased() >= lastShownLessonList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        }
+        Lesson lesson = lastShownLessonList.get(indexLesson.getZeroBased());
+        Lesson newLesson = lesson.createClone();
+
+        if (!newLesson.containsStudent(studentToUnenroll)) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
                     studentToUnenroll.getName(),
-                    lesson));
+                    newLesson));
         }
 
         Student newStudent = studentToUnenroll.createClone();
-        lesson.removeStudent(newStudent);
+
+        newLesson.removeStudent(newStudent);
         model.setStudent(studentToUnenroll, newStudent);
+        model.setLesson(lesson, newLesson);
+
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
 
-        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, studentToUnenroll.getName(), lesson));
+        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, newStudent.getName(), newLesson));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UnenrollCommand // instanceof handles nulls
-                && targetIndex.equals(((UnenrollCommand) other).targetIndex))
-                && lessonCode.equals(((UnenrollCommand) other).lessonCode); // state check
+                && indexStudent.equals(((UnenrollCommand) other).indexStudent))
+                && indexLesson.equals(((UnenrollCommand) other).indexLesson); // state check
     }
 
 }

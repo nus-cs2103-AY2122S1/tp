@@ -5,8 +5,8 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the team lead (Justin)'s email `e0564825@u.nus.edu`.  
-Here is our module coordinator's 
+You can reach us at the team lead (Justin)'s email `e0564825@u.nus.edu`.
+Here is our module coordinator's
 [[homepage](http://www.comp.nus.edu.sg/~damithch)].
 
 ## Project Team

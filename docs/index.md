@@ -8,7 +8,7 @@ title: TuitiONE
 
 ![Ui](images/Ui.png)
 
-**TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+**TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
 * If you are interested in using TuitiONE, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).

@@ -185,20 +185,24 @@ public class ParserUtil {
      */
     public static UnenrollCommand parseUnenrollArgs(String args) throws ParseException {
         requireNonNull(args);
-        Index index;
-        String lessonCode = null;
+        Index indexStudent;
+        Index indexLesson;
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_LESSON);
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            indexStudent = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), pe);
         }
 
-        if (argMultimap.getValue(PREFIX_LESSON).isPresent()) {
-            lessonCode = argMultimap.getValue(PREFIX_LESSON).get().trim();
+        try {
+            indexLesson = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get().trim());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), pe);
         }
-        return new UnenrollCommand(index, lessonCode);
+
+        return new UnenrollCommand(indexStudent, indexLesson);
     }
 
     /**
