@@ -329,6 +329,7 @@ Shows a command summary and a link to the user guide. <br>
 ![Ui](images/helpWindow.png)
 
 ### Exiting the app: `exit`
+
 Exits the program.<br>
 Format: `exit`
 
