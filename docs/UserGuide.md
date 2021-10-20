@@ -13,7 +13,7 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your work station.
 
 1. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
@@ -29,7 +29,7 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
    * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2` : Adds a student named `John Doe` to the TuitiONE app.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
@@ -51,13 +51,13 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/REMARK]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [r/REMARK]` can be used as `n/John Doe r/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
-  e.g. `[t/REMARK]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[r/REMARK]…` can be used as ` ` (i.e. 0 times), `r/sick`, `r/absent r/graduated` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME p/PARENT_CONTACT`, `p/PARENT_CONTACT n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
