@@ -6,6 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableObjectValue;
+import javafx.beans.value.ObservableValue;
 import seedu.address.commons.core.GuiSettings;
 
 /**
@@ -14,7 +18,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private final SimpleObjectProperty<Path> addressBookFilePath =
+            new SimpleObjectProperty<>(Paths.get("data" , "addressbook.json"));
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -47,13 +52,17 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getAddressBookFilePath() {
+    public ObservableValue<Path> getAddressBookFilePathObject() {
         return addressBookFilePath;
+    }
+
+    public Path getAddressBookFilePath() {
+        return addressBookFilePath.get();
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
+        this.addressBookFilePath.set(addressBookFilePath);
     }
 
     @Override

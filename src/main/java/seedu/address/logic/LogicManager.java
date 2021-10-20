@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -104,6 +105,11 @@ public class LogicManager implements Logic {
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    @Override
+    public ObservableValue<Path> getAddressBookFilePathObject() {
+        return model.getAddressBookFilePathObject();
     }
 
     @Override
