@@ -44,7 +44,7 @@ public class Done {
         return other == this // short circuit if same object
                 || (other instanceof Done // instanceof handles nulls
                 && (doneStatus.equals(((Done) other).doneStatus))
-                && (isDone && ((Done) other).isDone)); // state check
+                && (isDone == ((Done) other).isDone)); // state check
     }
 
     @Override
