@@ -64,7 +64,7 @@ Lesson *--> Price
 Lesson *--> Subject
 Lesson *--> Grade
 
-Student <-> Lesson
+Student - Lesson
 
 
 Name -[hidden]right-> ParentContact
