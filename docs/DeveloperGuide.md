@@ -257,42 +257,70 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* administrator of on-campus halls and residences
+* has a need to manage a large amount of resident information
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions 
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                 | I want to …​                                                                                       | So that I can…​                                                                                                                    |
+| -------- | ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `* * *`  | admin in a hall/ residence                 | add a resident’s information into the database                                                        | keep track of the residents' data                                                                                                     |
+| `* * *`  | admin in a hall/ residence                 | delete a resident’s information from the database                                                     | remove the data of a resident who has moved out                                                                                       |
+| `* * *`  | admin in a hall/ residence                 | delete many residents in a single command                                                             | save a lot of time when deleting multiple residents                                                                                   |
+| `* * *`  | admin in a hall/ residence                 | edit each resident’s details                                                                          | update and reflect any changes in the residents’ details                                                                              |
+| `* * *`  | admin in a hall/ residence                 | edit the particulars of many residents in a single command                                            | save a lot of time when editing the details of multiple residents                                                                     |
+| `* * *`  | admin in a hall/ residence                 | view the residents’ information                                                                       | see all the information of the current residents                                                                                      |
+| `* * *`  | admin in a hall/ residence                 | search for the residents by their name, room, email, phone number                                     | find a resident based on the information given                                                                                        |
+| `* * *`  | admin in a hall/ residence                 | retrieve a list of residents in a certain faculty                                                     | easily disseminate faculty-specific information to the residents                                                                      |
+| `* * *`  | admin in a hall/ residence                 | filter the residents by their vaccination status                                                      | use the information to disseminate information or guidelines that may be different for vaccinated and unvaccinated individuals        |
+| `* * *`  | admin in a hall/ residence                 | retrieve all residents whose FETs that are due within a given date                                    | ensure residents do not miss their FET deadlines by reminding them to do their FETs                                                   |
+| `* * *`  | admin in a hall/ residence                 | retrieve a resident's test kit collection deadlines                                                   | ensure residents do not miss their test kit collections by reminding them to collect their kits on time                               |
+| `* * *`  | admin in a hall/ residence                 | add a resident's last FET date                                                                        | track and be aware of the new residents’ FET progress                                                                                 |
+| `* * *`  | admin in a hall/ residence                 | edit a resident's last FET date                                                                       | update the current residents’ last FET dates when they take a new FET                                                                 |
+| `* * *`  | admin in a hall/ residence                 | add a new event                                                                                       | keep track of current and upcoming events happening in the hall/ residence                                                            |
+| `* * *`  | admin in a hall/ residence                 | add residents to an event                                                                             | keep track of the residents attending an event and their information                                                                  |
+| `* * *`  | admin in a hall/ residence                 | view a list of residents who were present at an event                                                 | identify who is at risk if someone in the group catches COVID                                                                         |
+| `* * *`  | admin in a hall/ residence                 | check the date of the events                                                                          | identify who was in contact with the infected person on the day of the event                                                          |
+| `* * *`  | admin in a hall/ residence                 | view the help guide whenever I need to                                                                | refresh my memory on how to use the app                                                                                               |
+| `* *`    | admin in a hall/ residence                 | immediately see residents who have missed their FET deadlines                                         | disseminate a reminder to these residents to take a new FET test                                                                      |
+| `* *`    | admin in a hall/ residence                 | retrieve the event venues and its maximum capacity and the number of residents attending an event     | ensure that the number of residents attending the event will not exceed the capacity of the event venue                               |
+| `* *`    | admin in a hall/ residence                 | retrieve the vaccination statuses of the residents attending an event                                 | ensure that COVID restrictions are adhered to and everyone attending the event is vaccinated                                          |
+| `* *`    | admin in a hall/ residence                 | delete an event                                                                                       | remove an event that has been cancelled                                                                                               |
+| `* *`    | admin in a hall/ residence                 | filter the residents by block and level                                                               | easily contact a group of students in order to disseminate group-specific information                                                 |
+| `* *`    | admin in a hall/ residence                 | import user data from a CSV file                                                                      | input multiple residents' information into the system at once without having to add each resident's information line-by-line          |
+| `*`      | admin in a hall/ residence                 | output the emails of the residents whose FET/collection are due soon into a file                      | disseminate information to the residents more easily                                                                                  |
+| `*`      | admin in a hall/ residence                 | edit an event                                                                                         | edit an event’s details if there are any changes                                                                                      |
+| `*`      | admin in a hall/ residence                 | check which CCA booked a certain facility                                                             | find out which CCA is responsible in case trouble arises                                                                              |
+| `*`      | admin in a hall/ residence                 | check a resident’s prior activities (events/ CCAs)                                                    | find out which group has come into contact with the infected person                                                                   |
+| `*`      | new user of the app                        | view a detailed guide on how to use basic functions                                                   | learn how to navigate within the app and use the commands                                                                             |
+| `*`      | admin in a hall/ residence                 | ensure there is no duplication among the residents’ names and rooms                                   | avoid having multiple entries of the same resident                                                                                    |
+| `*`      | admin in a hall/ residence                 | retrieve a list of residents in a certain CCA                                                         | easily disseminate CCA-specific information to the residents                                                                          |
+| `*`      | admin in a hall/ residence                 | easily carry out contact tracing                                                                      | quarantine can be done quickly in the case where one person in the group catches COVID                                                |
+| `*`      | admin in a hall/ residence                 | see a pop-up of the format of the command once I type it                                              | input the data in the correct format correctly on my first try                                                                        |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `SafeFor(H)All app` and the **Actor** is the `Hall admin`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Delete a resident**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Actor requests to list residents
+2.  System shows a list of residents
+3.  Actor requests to delete a specific resident in the list
+4.  System deletes the resident
 
     Use case ends.
 
@@ -304,9 +332,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. System shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC02 - Remind residents to take FET**
+
+**MSS**
+
+1. Actor filters residents, specifying desired FET due date.
+2. System shows the list of residents filtered.
+3. Actor requests for a list of the email addresses of the residents shown. 
+4. System outputs the list email addresses. 
+5. Actor sends an email to these residents to remind them to take their FET soon.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC03 - View residents involved in an event**
+
+**MSS**
+
+1. Actor navigates to the `events` tab of the application.
+2. Actor requests to view an event.
+3. System shows the list of residents involved in the event and their relevant personal information.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The list is empty.
+
+  Use case ends.
+
+**Use case: UC04 - View any unvaccinated residents involved in an event**
+
+**MSS**
+
+1. Actor <u>views residents involved in an event (UC03)</u>
+2. Actor filters for unvaccinated residents.
+3. System shows the list of unvaccinated residents.
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. The list is empty.
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -315,8 +393,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should be targeted towards a single user and not multi-users.
+5.  Data stored locally should be in a human editable text file.
+6.  Do not make use of a DBMS to manage data.
+7.  Final software should be platform-independent.
+8.  The software shouldn't depend on our own remote server.
+9.  Application is to be packaged into a single JAR file.
+10. JAR file size to be limited to 100MB and documents to 15MB/file.
+11. UG and DG are to be pdf-friendly.
 
 ### Glossary
 
