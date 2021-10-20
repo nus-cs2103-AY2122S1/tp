@@ -3,7 +3,8 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+  
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,6 +325,54 @@ thus might be confusing the the user. To address the cons of the piechart, we al
 piechart to help users better understand the data and provide a more complete statistic.
     
 _{more aspects and alternatives to be added}_
+
+### Tagging feature
+
+#### Current Implementation
+
+Other than the edit command. a tag command has also been added to make adding and deleting tags easier.
+This command has a relatively straightforward implementation:
+1. A `Set` of currently assigned tags is retrieved from the specified `Person`.
+2. A new `Set` is created using the retrieved `Set`, then tags are deleted and added as necessary.
+3. If there are no issues with adding and deleting, and certain conditions are satisfied, the `Person` 
+   will be updated with the new `Set` of tags. Any violations of the conditions will result in an error being 
+   shown to the user. The conditions are as follows:
+    1. All tag names have a maximum character length of 20 alphanumeric characters
+    2. A maximum of 1 Priority tag exists in the `Set` of tags
+    3. A maximum of 1 of each Investment Plan tag exists in the `Set` of tags
+    4. No duplicate tag is added to the `Set`
+    5. No non-existent tag is attempted to be deleted from the 'Set'
+    
+Below is an example usage scenario: 
+
+1. The user launches the application and inputs "tag 1 a/fat d/thin", to add a tag `fat` and delete a tag `thin`
+   from the first listed contact.
+2. This calls `LogicManager::execute` which further calls `FastParser::parseCommand` to parse the given input.
+3. `FastParser` determines that it is a tag command, and further calls `TagCommandParser::parse`.
+4. `TagCommandParser` will then identify the tags to add and delete, and return a `TagCommand` that contains a Set
+   of tags to delete and another Set of tags to add.
+5. `LogicManager` then calls the method `TagCommand::execute`, which will attempt to add and delete the specified 
+   tags, while ensuring that certain conditions are met.
+6. If there are no issues, the command will finish executing, and a message indicating success will appear.
+   Any changes to the tags will be reflected immediately: In this case, the tag `fat` will be added while the
+   tag `thin` will be deleted.
+   
+#### Design Considerations
+
+* **Alternative 1 (current choice):** Implement a dedicated Tag command.
+    * Pros: 
+      1. Isolation of a single feature to a specific command: more intuitive to use.
+      2. Improvement over `edit` command: retains tags not directly affected by the command
+    * Cons:
+      1. Repeated functionality that already exists in `edit` command
+    
+* **Alternative 2:** Augment the `edit` command.
+    * Pros:
+      1. Reduce the number of commands in the application: less to manage, easier to remember.
+    * Cons:
+      1. Overloading the `edit` command, which already accepts many parameters and modifiers in its
+         command format, could make it much more confusing to use, especially for newer users.
+      2. Harder to implement, as many existing dependencies could be affected.   
 
 ### \[Proposed\] Data archiving
 
@@ -736,7 +785,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. There is already a stats window opened.
     * 1a1. FAST updates and focuses on the existing help window. Use case ends.
     
+
+**Use case: UC17 - Edit tags of a contact**
+
+**MSS**
+
+1. User requests to list contacts (UC06)
+2. User requests to edit tags of a contact
+3. FAST displays a message indicating success.
+4. FAST displays the updated contact below.
+
+  Use case ends.
+  
+**Extensions**
+
+* 2a. The given index is invalid.
+    * 2a1. FAST shows an error message.
+    * 2a2. FAST shows an example of the tag command to the user.
     
+      Use case ends.
+    
+* 2b. A tag to be added to the specified contact already exists.
+    * 2b1. FAST shows an error message to the user that the tag already exists.
+    
+      Use case ends.
+    
+* 2c. A tag to be deleted from the specified contact does not exist.
+    * 2c1. FAST shows an error message to the user that the tag does not exist.
+    
+      Use case ends.
+
+* 2d. More than one Priority tag is added to a contact.
+    * 2d1. FAST shows an error message to the user that each contact may only have one Priority tag.
+
+      Use case ends.
+    
+* 2e. More than one of each Insurance Plan tag is added to a contact.
+    * 2e1. FAST shows an error message to the user that each contact may only have one of each Investment Plan tag.    
+
+      Use case ends.
+    
+* 2f. Tag name exceeds maximum length of 20 characters.
+    * 2f1. FAST shows an error message to the user that the maximum tag length is 20 characters.
+    
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -757,6 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Remark**: A comment/note about a specific contact
+  **Tag** A short note about a specific contact, used for sorting and grouping contacts
 * **URL**: Uniform Resource Locator, known more commonly as a link to a website.
 * **XML**: Extensible MarkUp Language, used to format the layout of this software
 
