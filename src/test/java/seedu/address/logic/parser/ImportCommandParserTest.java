@@ -48,8 +48,6 @@ public class ImportCommandParserTest {
     public void execute_parseMissingOptionalColumns_success() throws Exception {
         CsvParser csvParser = new CsvParserStubMissingOptionalColumns();
         csvParser.parse(new CsvFileSelectorDummy());
-        System.out.println(csvParser.get("name"));
-        System.out.println(csvParser.get("phone") == null);
         ImportCommand producedCommand = new ImportCommandParser().parse(csvParser);
         assertEquals(producedCommand, new ImportCommand(TypicalPersons.getTypicalPersonsNameOnly()));
     }
