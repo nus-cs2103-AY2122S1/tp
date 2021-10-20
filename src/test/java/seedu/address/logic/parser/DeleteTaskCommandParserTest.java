@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -16,8 +19,11 @@ class DeleteTaskCommandParserTest {
 
     @Test
     void parse_validArgs_returnsDeleteTaskCommand() {
+        List<Index> indexList = new ArrayList<>();
+        Index taskIndex = Index.fromOneBased(2);
+        indexList.add(taskIndex);
         assertParseSuccess(parser, "1 ti/2", new DeleteTaskCommand(INDEX_FIRST_PERSON,
-                Index.fromOneBased(2)));
+                indexList));
     }
 
     @Test
