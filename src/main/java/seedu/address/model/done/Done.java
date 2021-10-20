@@ -10,14 +10,12 @@ public class Done {
     public static final String STATUS_UNDONE = "Not Done";
 
     private String doneStatus;
-    private boolean isDone;
 
     /**
      * Constructor for Done; every Applicant will initially be marked as Not Done.
      */
     public Done() {
         this.doneStatus = STATUS_UNDONE;
-        this.isDone = false;
     }
 
     public String getDoneStatus() {
@@ -26,12 +24,10 @@ public class Done {
 
     public void setAsDone() {
         this.doneStatus = STATUS_DONE;
-        this.isDone = true;
     }
 
     public void setAsUndone() {
         this.doneStatus = STATUS_UNDONE;
-        this.isDone = false;
     }
 
     @Override
@@ -43,8 +39,7 @@ public class Done {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Done // instanceof handles nulls
-                && (doneStatus.equals(((Done) other).doneStatus))
-                && (isDone == ((Done) other).isDone)); // state check
+                && (doneStatus.equals(((Done) other).doneStatus))); // state check
     }
 
     @Override
