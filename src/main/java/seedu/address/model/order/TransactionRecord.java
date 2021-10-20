@@ -13,7 +13,7 @@ import seedu.address.model.item.UniqueItemList;
  * Records a list of items transacted items in an order. Immutable.
  */
 public class TransactionRecord {
-    private final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
             .ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault());
 

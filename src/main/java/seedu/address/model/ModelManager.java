@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,7 +29,7 @@ import seedu.address.model.order.TransactionTimeComparator;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private final String TRANSACTION_LOGGING_MSG = "Transacted successfully: ";
+    private static final String TRANSACTION_LOGGING_MSG = "Transacted successfully: ";
 
     private final Inventory inventory;
     private final UserPrefs userPrefs;
@@ -49,6 +50,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredItems = new FilteredList<>(this.inventory.getItemList());
         optionalOrder = Optional.empty();
+        transactions = new HashSet<>();
     }
 
     public ModelManager() {
