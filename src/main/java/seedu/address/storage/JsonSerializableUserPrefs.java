@@ -47,7 +47,7 @@ class JsonSerializableUserPrefs {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public UserPrefs toModelType() throws IllegalValueException {
+    public UserPrefs toModelType() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Optional.ofNullable(this.filepath).orElse(DEFAULT_ADDRESSBOOK_FILE));
         userPrefs.setGuiSettings(Optional.ofNullable(this.guiSettings).orElseGet(GuiSettings::new));

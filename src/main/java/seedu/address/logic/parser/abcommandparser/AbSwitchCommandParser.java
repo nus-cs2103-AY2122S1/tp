@@ -3,10 +3,8 @@ package seedu.address.logic.parser.abcommandparser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.FileUtil.convertToAddressBookPathString;
-import static seedu.address.commons.util.FileUtil.isFileExists;
 import static seedu.address.commons.util.FileUtil.isValidPath;
 import static seedu.address.logic.commands.abcommand.AbCreateCommand.MESSAGE_ADDRESSBOOK_NOT_VALID;
-import static seedu.address.logic.commands.abcommand.AbSwitchCommand.MESSAGE_ADDRESSBOOK_NOT_FOUND;
 
 import java.nio.file.Path;
 

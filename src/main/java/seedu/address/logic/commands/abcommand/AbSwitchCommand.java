@@ -41,7 +41,8 @@ public class AbSwitchCommand extends AbCommand {
 
         model.setAddressBookFilePath(filePath);
 
-        return new CommandResult(String.format(MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS, filePath), SWITCH_ADDRESSBOOK);
+        return new CommandResult(
+                String.format(MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS, addressBookName), SWITCH_ADDRESSBOOK);
     }
 
     @Override
