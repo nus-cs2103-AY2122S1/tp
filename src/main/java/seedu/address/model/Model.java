@@ -104,5 +104,5 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /** Returns an unmodifiable view of the filtered tag list */
-    ObservableList<Tag> getFilteredTagList();
+    ObservableList<Tag> getObservableTagList();
 }

@@ -27,7 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Tag> filteredTags;
+    private final ObservableList<Tag> tagObservableList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,7 +41,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTags = new FilteredList<>(this.addressBook.getTagList());
+        tagObservableList = this.addressBook.getTagList();
     }
 
     public ModelManager() {
@@ -157,8 +157,8 @@ public class ModelManager implements Model {
      * Returns an unmodifiable view of the filtered tag list
      */
     @Override
-    public ObservableList<Tag> getFilteredTagList() {
-        return filteredTags;
+    public ObservableList<Tag> getObservableTagList() {
+        return tagObservableList;
     }
 
     @Override

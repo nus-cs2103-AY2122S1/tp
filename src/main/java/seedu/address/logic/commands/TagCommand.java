@@ -15,7 +15,7 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute() throws CommandException {
         requireNonNull(model);
-        model.getFilteredTagList();
+        model.getObservableTagList();
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }

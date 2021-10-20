@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Tag> getFilteredTagList() {
+        public ObservableList<Tag> getObservableTagList() {
             throw new AssertionError("This method should not be called.");
         }
     }
