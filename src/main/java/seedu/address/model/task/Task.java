@@ -13,27 +13,31 @@ import seedu.address.model.module.ModuleName;
  */
 public class Task {
 
-    private final ModuleName module;
+    private final ModuleName moduleName;
     private final String name;
     private final String deadline;
     private boolean isComplete;
 
     /**
      * Constructs a Task.
-     * @param module The TeachingAssistantBuddy this Task is under.
+     * @param moduleName The TeachingAssistantBuddy this Task is under.
      * @param name The Name of this Task.
      * @param deadline The Deadline of this Task.
      */
-    public Task(ModuleName module, String name, String deadline) {
-        requireAllNonNull(module, name, deadline);
-        this.module = module;
+    public Task(ModuleName moduleName, String name, String deadline) {
+        requireAllNonNull(moduleName, name, deadline);
+        this.moduleName = moduleName;
         this.name = name;
         this.deadline = deadline;
         this.isComplete = false;
     }
 
-    public String getModule() {
-        return this.module.toString();
+    public String getModuleNameString() {
+        return this.moduleName.toString();
+    }
+
+    public ModuleName getModuleName() {
+        return this.moduleName;
     }
 
     public String getName() {
@@ -60,7 +64,7 @@ public class Task {
 
         return otherTask != null
                 && otherTask.getName().equals(this.getName())
-                && otherTask.getModule().equals(this.getModule());
+                && otherTask.getModuleNameString().equals(this.getModuleNameString());
     }
 
     /**
@@ -82,7 +86,7 @@ public class Task {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; TeachingAssistantBuddy: ")
-                .append(getModule())
+                .append(getModuleNameString())
                 .append("; Deadline: ")
                 .append(getDeadline())
                 .append("; Is completed: ")
@@ -101,13 +105,13 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getModule().equals(getModule())
+        return otherTask.getModuleNameString().equals(getModuleNameString())
                 && otherTask.getName().equals(getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, module, deadline);
+        return Objects.hash(name, moduleName, deadline);
     }
 
 }
