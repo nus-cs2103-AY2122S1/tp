@@ -6,8 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TaskTag {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Task tags names should have prefix 'SO' followed by at least 1 digit.";
-    public static final String VALIDATION_REGEX = "SO[\\d]+";
+            "Task tags names should have prefix 'SO' followed by at least 1 digit,"
+                    + "or have prefix 'G: ' followed by an alphanumeric name.";
+    public static final String VALIDATION_REGEX = "SO[\\d]+|G: [\\p{Alnum}]*";
 
     public final String tagName;
 
