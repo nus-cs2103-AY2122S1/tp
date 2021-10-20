@@ -154,6 +154,40 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Mark/unmark attendance feature
+
+### Implementation
+
+The proposed mark/unmark attendance mechanism is facilitated by `ModelManager`. ModelManager contains the
+`filteredPersons` and attendance will be updated based on members index in this list. Additionally, it implements
+the following operations:
+
+* details to be added later
+
+Given below is an example usage scenario and how the mark/unmark attendance feature behaves at each step.
+
+Step 1. The user launches the application and adds members to the list. The `totalAttendance` and `todayAttendance`
+of the members added will be initialised to `0` and `false` respectively.
+
+Step 2. The user executes `mark 1` command to mark the 1st person as present.
+
+(more details to be added later)
+
+#### Design considerations:
+
+**Aspect: How mark & unmark executes:**
+
+* **Alternative 1 (current choice):** Uses index to mark attendance.
+  * Pros: Easy to implement (e.g there will be no two members with the same
+    index in list, so there will be no ambiguity)
+  * Cons: May require additional step of finding members' index using findm 
+    command then marking attendance.
+    
+* **Alternative 2:** Uses names of members to mark attendance.
+  * Pros: Requires one less step of finding members.
+  * Cons: There may be two members with same name, so when marking using
+    names, it might result in ambiguity of whose attendance to mark.
+    
 ### Alias feature
 
 #### Implementation
@@ -234,6 +268,7 @@ The split mechanism is facilitated by `AddressBookParser`. More details to be ad
     * Pros: Intuitive for users to type in the names of the days
     * Cons: Difficult to parse user input as a complicated regular expression is needed to ensure names of days are 
       in the correct format. Less user-friendly due to need to type out the names of the days. More difficult to sort.
+>>>>>>> master
 
 ### \[Proposed\] Undo/redo feature
 
