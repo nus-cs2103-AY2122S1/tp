@@ -15,7 +15,7 @@ title: Developer Guide
 5. [Implementation](#implementation)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-   - [Set payment status feature](#setunset-payment-status-feature)
+   - [Set/Unset payment made feature](#setunset-payment-made-feature)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
