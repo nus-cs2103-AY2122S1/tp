@@ -70,7 +70,7 @@
          <RowConstraints />
       </rowConstraints>
   </GridPane>
-   <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: grey;" HBox.hgrow="NEVER">
+   <AnchorPane styleClass="card_side_pane" prefHeight="200.0" prefWidth="200.0">
       <children>
          <Label layoutX="5.0" layoutY="11.0" text="Next Meeting:" />
          <Label fx:id="nextMeeting" layoutX="5.0" layoutY="60.0" prefWidth="200.0" styleClass="cell_small_label" wrapText="true" />
