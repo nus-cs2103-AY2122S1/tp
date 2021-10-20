@@ -1,13 +1,17 @@
 package seedu.programmer.ui;
 
+import seedu.programmer.commons.core.LogsCenter;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CommandHistory {
     static final String DEFAULT_COMMAND = "";
     private static final int INITIAL_LIST_SIZE = 0;
     private static final int INITIAL_COUNTER_VALUE = -1;
 
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
     private int size;
     private int counter;
@@ -38,12 +42,15 @@ public class CommandHistory {
      */
     public String getPrevCommand() {
         if (isCommandHistoryEmpty()) {
+            logger.info("There is no command history.");
             return DEFAULT_COMMAND;
         }
-        if (isCounterAtFirst()) {
-            return commandHistory.get(counter);
+        String result = commandHistory.get(counter);
+        if (!isCounterAtFirst()) {
+            counter--;
         }
-        return commandHistory.get(counter--);
+        logger.info("Previous Command retrieved: " + result);
+        return result;
     }
 
     /**
@@ -54,12 +61,15 @@ public class CommandHistory {
      */
     public String getNextCommand() {
         if (isCommandHistoryEmpty()) {
+            logger.info("There is no command history.");
             return DEFAULT_COMMAND;
         }
-        if (isCounterAtLast()) {
-            return commandHistory.get(counter);
+        String result = commandHistory.get(counter);
+        if (!isCounterAtLast()) {
+            counter++;
         }
-        return commandHistory.get(counter++);
+        logger.info("Next Command retrieved: " + result);
+        return result;
     }
 
     @Override
