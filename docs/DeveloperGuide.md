@@ -483,7 +483,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC04: Filter Students and/or Lessons by grade and/or subject**
+**UC04: Filter Students by grade and Lessons by grade and/or subject**
 
 **MSS**
 1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
@@ -496,7 +496,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1a. TuitiONE detects an error in entered command.
     * 1a1. TuitiONE requests CSO to input a valid command.
     * 1a2. CSO enters new command.
-      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Steps 1a1-1a2 are repeated until the input entered is correct.
 
     Use case resumes at step 2.
 
@@ -513,6 +513,13 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1d. CSO decides to filter by grade and subject
     * 1d1. TuitiONE filters the student list based on the given grade, and filters the lesson list based on both the
       given grade and subject.
+
+    Use case resumes at step 2.
+
+* 1e. TuitiONE detects an error in the input fields for grade and/or subject.
+    * 1e1. TuitiONE requests CSO to input command with valid fields.
+    * 1e2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the input entered is correct.
 
     Use case resumes at step 2.
 
