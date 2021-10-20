@@ -352,6 +352,48 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Add contacts with optional arguments
+
+#### Implementation
+
+The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
+without the need to include contact details.
+
+#### Usage
+
+Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
+
+1. The user first launches Socius and adds a new contact by name, without any contact details.
+
+2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+
+3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+   instantiating a new `Person` object.
+
+4. The command communicates with the `Model` to add the person to the existing AddressBook.
+
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the AddCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
+
+#### Design considerations:
+
+**Aspect: How contacts are saved with optional arguments:**
+
+* **Alternative 1 (current choice):** Save a contact, with empty strings as arguments if argument is not included in
+  input.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Save all optional attributes of a contact as Optional type.
+    * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
+    * Cons: Harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -505,7 +547,7 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -522,7 +564,7 @@ Use case ends.
 3. User requests to tag a specific person in the list
 4. Socius tags the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -531,16 +573,14 @@ Use case ends.
   Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Remove existing tag of a person**
 
@@ -551,20 +591,16 @@ Use case ends.
 3. User requests to remove existing tag of a specific person in the list
 4. Socius removes the existing tag of the person
 
-    Use case ends.
-
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Filter persons by tag**
 
@@ -573,19 +609,14 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to filter the list of persons by tag
-4. Socius shows a filtered list of persons by tag
-    Use case ends.
-
+4. Socius shows a filtered list of persons by tag Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-  * 3a1. Socius shows an empty list.
-    Use case ends.
-
+    * 3a1. Socius shows an empty list. Use case ends.
 
 **Use case: Add remarks for a person**
 
@@ -594,27 +625,21 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person
-    Use case ends.
-
+4. Socius adds remarks for the person Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 *{More to be added}*
 
