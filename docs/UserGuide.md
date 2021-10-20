@@ -36,7 +36,7 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
    
     * **`list`** : Shows a list of all persons.
 
-    * **`clear`** : Deletes all persons.
+    * **`clear`** : Deletes all persons with SHN periods that are completed at time of command call.
     
     * **`help`** : Shows a message explaining how to access the help page.
 
@@ -134,7 +134,7 @@ Format: `list`
 
 ### Clearing all persons : `clear`
 
-Deletes all the persons in the persons list.
+Deletes all persons with SHN periods that are completed at time of command call from the app.
 
 Format: `clear`
 
