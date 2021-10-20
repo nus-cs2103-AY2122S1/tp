@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -18,7 +17,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return
      */
     @Override
-    public FilterCommand parse(String args,Model model) throws ParseException {
+    public FilterCommand parse(String args, Model model) throws ParseException {
         String trimmedArgs = args.trim().replaceAll("\\s+", " ");
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -14,7 +13,6 @@ public interface Parser<T extends Command> {
      * Parses {@code userInput} into a command and returns it.
      *
      * @throws ParseException if {@code userInput} does not conform the expected format
-     * @return
      */
     Command parse(String userInput, Model model) throws ParseException;
 }

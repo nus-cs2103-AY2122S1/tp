@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -28,7 +27,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @return
      */
     @Override
-    public SortCommand parse(String args,Model model) throws ParseException {
+    public SortCommand parse(String args, Model model) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

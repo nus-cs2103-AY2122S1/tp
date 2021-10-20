@@ -27,7 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @return
      */
     @Override
-    public DeleteCommand parse(String args,Model model) throws ParseException {
+    public DeleteCommand parse(String args, Model model) throws ParseException {
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
