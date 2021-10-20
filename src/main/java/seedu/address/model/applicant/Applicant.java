@@ -60,7 +60,7 @@ public class Applicant {
      * Marks the application with the specified application status.
      */
     public Applicant markAs(ApplicationStatus applicationStatus) {
-        return new Applicant(name, phone, email, address, application.markAs(ApplicationStatus.PENDING));
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus));
     }
 
     public Name getName() {
@@ -147,5 +147,4 @@ public class Applicant {
     public String getApplicationSummary() {
         return "Applied for: " + application.getPosition().getTitle() + "; Status: " + application.getStatus();
     }
-
 }
