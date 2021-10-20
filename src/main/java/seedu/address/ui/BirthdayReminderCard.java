@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 
+
 public class BirthdayReminderCard extends UiPart<Region> {
     private static final String FXML = "BirthdayReminderListCard.fxml";
 
@@ -41,7 +42,7 @@ public class BirthdayReminderCard extends UiPart<Region> {
         phone.setText(person.getPhoneNumber());
         Optional<Birthday> possibleBirthday = person.getBirthday();
         assert possibleBirthday.isPresent();
-        birthday.setText(possibleBirthday.map(Birthday::display).get());
+        birthday.setText(possibleBirthday.map(Birthday::display).orElse(""));
     }
 
     @Override

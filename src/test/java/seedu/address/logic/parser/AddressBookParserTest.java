@@ -1,23 +1,6 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -32,7 +15,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.FindPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
@@ -40,6 +24,24 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class AddressBookParserTest {
 
@@ -108,10 +110,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameStringList = List.of("Alan", "Bob", "Chris");
+        List<String> tagStringList = List.of("football", "friends");
+        List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
+        List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
+        FindPredicate findPredicate = new FindPredicate(nameList, tagList);
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(findPredicate), command);
     }
 
     @Test

@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.model.person.FindPredicate;
+import seedu.address.logic.commands.FindOrCommand;
+import seedu.address.model.person.FindOrPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
@@ -12,9 +13,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-public class FindCommandParserTest {
+public class FindOrCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindOrCommandParser parser = new FindOrCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -26,12 +27,12 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
-        FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
-        assertParseSuccess(parser, " n/Alice n/Bob t/friends t/colleagues", expectedFindCommand);
+        FindOrCommand expectedFindOrCommand =
+                new FindOrCommand(new FindOrPredicate(nameList, tagList));
+        assertParseSuccess(parser, " n/Alice n/Bob t/friends t/colleagues", expectedFindOrCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t t/friends t/colleagues", expectedFindCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t t/friends t/colleagues", expectedFindOrCommand);
     }
 
 }
