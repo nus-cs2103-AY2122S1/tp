@@ -3,18 +3,19 @@ layout: page
 title: User Guide
 ---
 
-Sellah is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address book 
+Sellah is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address book
 that contains the contact information and order details related to clients and partners.
 
 * Table of Contents
     * [Quick Start](#quick-start)
     * [Features](#features)
-        * [Add](#adding-add-coming-soon)
+        * [Add](#adding-add)
         * [Edit](#editing-edit)
-        * [View](#viewing-view-coming-soon)
-        * [Delete](#deleting-delete-coming-soon)
-        * [Find](#finding-find)  
+        * [View](#viewing-view)
+        * [Delete](#deleting-delete)
+        * [Find](#finding-find)
         * [List](#listing-list)
+        * [Command History](#command-history)
         * [Exit](#exiting-exit)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
@@ -97,7 +98,7 @@ Notes:
 
 * Edits the client/product at the specified `INDEX`.
     * The index refers to the index number shown in the displayed client/product list by
-      [`list`](#listing-list-coming-soon) or [`view`](#viewing-view-coming-soon) commands.
+      [`list`](#listing-list) or [`view`](#viewing-view) commands.
     * The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -123,8 +124,8 @@ Notes:
 
 Examples:
 
-* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, 
-  email and address.
+* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email and
+  address.
 * `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
 
 ### Deleting: `delete`
@@ -185,6 +186,21 @@ Examples:
 * `list -c` Shows a list of all clients in the application.
 * `list -p` Shows a list of all products in the application.
 
+### Command History:
+
+Allows the user to navigate to previous commands using `↑` and `↓` keys.
+
+Format:
+
+* Previous command: `↑`
+* Next command: `↓`
+
+Notes:
+
+* Pressing `↑` when the first command is currently displayed will do nothing.
+* Pressing `↓` when the last command is currently displayed will clear the command input field.
+    * Subsequent `↓` will do nothing.
+
 ### Exiting: `exit`
 
 Exits the program.
@@ -216,7 +232,7 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
-            <a href="#adding-add-coming-soon">Add</a>
+            <a href="#adding-add">Add</a>
         </td>
         <td>
             Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]</code><br> 
@@ -242,7 +258,7 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
-            <a href="#viewing-view-coming-soon">View</a>
+            <a href="#viewing-view">View</a>
         </td>
         <td>
             View a client: <code>view -c INDEX</code><br>
@@ -256,7 +272,34 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
-            <a href="#listing-list-coming-soon">List</a>
+            <a href="#deleting-delete">Delete</a>
+        </td>
+        <td>
+            Delete a client: <code>delete -c INDEX</code><br> 
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of 
+            <code>20</code> including id, name, phone number, email and address.<br>
+            <br>
+            Delete a product: <code>delete -p INDEX</code><br> 
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of 
+            <code>5</code> including id, name, unit price and quantity.
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#finding-find">Find</a>
+        </td>
+        <td>
+            Find clients: <code>find -c NAME</code><br>
+            e.g., <code>find -c john</code> Shows a list of all clients with the <code>NAME</code> <code>john</code> in the application.<br>
+            <br>
+            Find products: <code>find -p NAME</code> <br>
+            e.g. <code>find -c phone</code> Shows a list of all products with the <code>NAME</code> <code>phone</code> in the application.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#listing-list">List</a>
         </td>
         <td>
             List all client: <code>list -c</code><br>
@@ -268,17 +311,20 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
-            <a href="#deleting-delete-coming-soon">Delete</a>
+            <a href="#command-history">Command History</a>
         </td>
         <td>
-            Delete a client: <code>delete -c INDEX</code><br> 
-            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of 
-            <code>20</code> including id, name, phone number, email and address.<br>
-            <br>
-            Delete a product: <code>delete -p INDEX</code><br> 
-            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of 
-            <code>5</code> including id, name, unit price and quantity.
-            <br>
+            Allows the user to navigate to previous commands using <code>↑</code> and <code>↓</code> keys.<br>
+            Previous command: <code>↑</code><br>
+            Next command: <code>↓</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#exiting-exit">Exit</a>
+        </td>
+        <td>
+            Exit the program: <code>exit</code>
         </td>
     </tr>
 </table>
