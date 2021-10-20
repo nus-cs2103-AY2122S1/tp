@@ -23,8 +23,6 @@ public class DeleteStudentCommand extends DeleteCommand {
 
     public static final String COMMAND_WORD = "delete student";
 
-    private static Logger logger = Logger.getLogger("Delete Student Logger");
-
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student id from the module specified.\n"
             + "Parameters: "
@@ -35,6 +33,8 @@ public class DeleteStudentCommand extends DeleteCommand {
             + PREFIX_STUDENT_ID + "A1234567A ";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";
+
+    private static Logger logger = Logger.getLogger("Delete Student Logger");
 
     private StudentId studentId;
     private ModuleName moduleName;
