@@ -74,6 +74,9 @@ Adds a student to the CSBook.
 
 Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 
+* Adds the student into CSBook as well as the group it is assigned
+* The group must exist before the student is created. Each student must never not belong to a group
+
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 * `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`
@@ -125,7 +128,7 @@ Deletes the specified student from CSBook.
 
 Format: `delete INDEX`
 
-* Deletes the student at the specified `INDEX`.
+* Deletes the student at the specified `INDEX` and removes the student from their assigned group.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -178,11 +181,12 @@ where students can be added into.
 
 ### Delete Group: deletegroup
 
-Deletes the group with the specified group name.
+Deletes the group with the specified group name as well as all students associated with the group.
 
 Format: `deletegroup GROUPNAME`
 
-* Deletes the group with the specified `GROUPNAME`.
+* Deletes the group with the specified `GROUPNAME` as well as all students associated with the group.
+* Use the `edit` command to change the group of a student if deleting the student is undesirable.
 
 Examples:
 * `deletegroup CS2103T` deletes the group CS2103T.
@@ -213,7 +217,7 @@ Action | Format, Examples
 **Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] `<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
+**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **List** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
