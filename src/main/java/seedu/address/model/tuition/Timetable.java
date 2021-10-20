@@ -4,14 +4,12 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.ui.ResultDisplay;
 import seedu.address.ui.infopage.TimetableInfoPage;
 
@@ -22,7 +20,6 @@ public class Timetable {
     private static final String COLOR_EVEN = "-fx-background-color: #515658; -fx-text-fill:WHITE;"
             + " -fx-font-size:%1$spt;";
     private static final String NOT_SHOWN = "The following class details are not shown due to space limit: ";
-    private static final Logger logger = LogsCenter.getLogger(TimetableInfoPage.class);
     private static final HashMap<String, Integer> dates = Timeslot.getDays();
     private final ObservableList<TuitionClass> tuitionClasses;
     private int start;

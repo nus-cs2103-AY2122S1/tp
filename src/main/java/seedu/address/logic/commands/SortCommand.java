@@ -7,6 +7,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortCommandParser;
 import seedu.address.model.Model;
 
+/**
+ * Sorts the tuition class list.
+ */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String SHORTCUT = "s";
@@ -21,6 +24,14 @@ public class SortCommand extends Command {
     public SortCommand(SortCommandParser.Order order) {
         this.order = order;
     }
+
+    /**
+     * Sorts the tuition class list by time or alphabetical order.
+     * @param model {@code Model} which the command should operate on.
+     * @return a CommandResult of the sort command.
+     * @throws CommandException default path throws a CommandException if
+     * the sorting order is not defined by the software
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         SortCommandParser.Order resultOrder;
