@@ -335,17 +335,17 @@ Lists all persons.
 Format: `person /list`<br>
 Advanced user Format:`p /l`
 
-#### **_List all groups_**
+#### _List all groups_ : `group /list`
 
-Format:  `list /group`<br>
-Advanced user Format: `list /g`
+Format:  `group /list`<br>
+Advanced user Format: `g /l`
 
 #### _Listing all persons in a group_ : `group (INDEX) /list`
 
 Use after you have listed out all groups (so you can select the index). Lists all persons in that group.
 
 Format: `group (INDEX)/list`<br>
-Advanced user Format:`p (INDEX) /l`
+Advanced user Format:`g (INDEX) /l`
 
 * Lists all persons of a group that is at the given `INDEX` .
 
