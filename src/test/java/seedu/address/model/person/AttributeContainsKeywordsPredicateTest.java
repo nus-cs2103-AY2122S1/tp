@@ -103,7 +103,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_StudentIdContainsKeywords_returnsTrue() {
+    public void test_studentIdContainsKeywords_returnsTrue() {
         // Full Student ID
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("A0226588N"), STUDENT_ID_TYPE);
@@ -119,7 +119,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_StudentIdDoesNotContainKeywords_returnsTrue() {
+    public void test_studentIdDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), STUDENT_ID_TYPE);
@@ -142,7 +142,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_NusNetIdContainsKeywords_returnsTrue() {
+    public void test_nusNetIdContainsKeywords_returnsTrue() {
         // Full NUSNet ID
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("E0638874"), NUSNET_ID_TYPE);
@@ -158,7 +158,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_NusNetIdDoesNotContainKeywords_returnsTrue() {
+    public void test_nusNetIdDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), NUSNET_ID_TYPE);
@@ -181,7 +181,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_EmailContainsKeywords_returnsTrue() {
+    public void test_emailContainsKeywords_returnsTrue() {
         // Full Email
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("e1234567@u.nus.edu"), EMAIL_TYPE);
@@ -197,7 +197,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_EmailDoesNotContainKeywords_returnsTrue() {
+    public void test_emailDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), EMAIL_TYPE);
@@ -216,7 +216,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_GithubIdContainsKeywords_returnsTrue() {
+    public void test_githubIdContainsKeywords_returnsTrue() {
         // Full Github ID
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("RachelCheah"), GITHUB_ID_TYPE);
@@ -232,7 +232,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_GithubIdDoesNotContainKeywords_returnsTrue() {
+    public void test_githubIdDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), GITHUB_ID_TYPE);
@@ -251,7 +251,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_TutorialIdContainsKeywords_returnsTrue() {
+    public void test_tutorialIdContainsKeywords_returnsTrue() {
         // Full Tutorial ID
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("10"), TUTORIAL_ID_TYPE);
@@ -259,7 +259,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_TutorialIdDoesNotContainKeywords_returnsTrue() {
+    public void test_tutorialIdDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), TUTORIAL_ID_TYPE);
@@ -278,7 +278,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_RoleContainsKeywords_returnsTrue() {
+    public void test_roleContainsKeywords_returnsTrue() {
         // Full Role name
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("student"), ROLE_TYPE);
@@ -286,7 +286,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_RoleDoesNotContainKeywords_returnsTrue() {
+    public void test_roleDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), ROLE_TYPE);
@@ -305,7 +305,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_PhoneContainsKeywords_returnsTrue() {
+    public void test_phoneContainsKeywords_returnsTrue() {
         // Full Phone number
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("98765432"), PHONE_TYPE);
@@ -317,7 +317,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_PhoneDoesNotContainKeywords_returnsTrue() {
+    public void test_phoneDoesNotContainKeywords_returnsTrue() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), PHONE_TYPE);
@@ -335,7 +335,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_AddressContainsKeywords_returnsTrue() {
+    public void test_addressContainsKeywords_returnsTrue() {
         // One keyword
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.singletonList("John"), ADDRESS_TYPE);
@@ -363,7 +363,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_AddressDoesNotContainKeywords_returnsFalse() {
+    public void test_addressDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Collections.emptyList(), ADDRESS_TYPE);
@@ -385,7 +385,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_TagContainsKeywords_returnsTrue() {
+    public void test_tagContainsKeywords_returnsTrue() {
         // Full Tag
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("t/", "friends"), TAG_TYPE);
@@ -393,7 +393,7 @@ public class AttributeContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_TagDoesNotContainKeywords_returnsTrue() {
+    public void test_tagDoesNotContainKeywords_returnsTrue() {
         // Full Tag with mixed-case
         AttributeContainsKeywordsPredicate predicate =
                 new AttributeContainsKeywordsPredicate(Arrays.asList("t/", "frIends"), TAG_TYPE);
