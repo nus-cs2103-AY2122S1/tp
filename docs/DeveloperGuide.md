@@ -622,7 +622,12 @@ Priorities: High - must have; Medium - nice to have;  Low - unlikely to have.
     Use case ends.
 
 **Extensions:**
+* 1a. The user specifies an invalid keyword
+    
+    * 1a1. TAB displays an error message
 
+      Use case resumes at step 1.
+    
 * 2a. The list is empty.
 
   Use case ends.
