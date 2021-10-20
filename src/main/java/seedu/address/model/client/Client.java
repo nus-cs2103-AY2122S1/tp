@@ -102,7 +102,7 @@ public class Client implements Category {
     }
 
     /**
-     * @see #updateClient(Client, Name, PhoneNumber, Email, Address, Set<Order>)
+     * @see #updateClient(Client, Client)
      */
     public static Client updateClient(Client copyTo, Client copyFrom) {
         return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email,

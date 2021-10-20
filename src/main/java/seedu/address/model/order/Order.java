@@ -17,15 +17,18 @@ public class Order {
             "^[0-9]+ [0-9]+ (((19|2[0-9])[0-9]{2})/)?(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])$";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n" +
-                    "Valid formats of time: MM/DD, YYYY/MM/DD\nExample: -o 10312 20 2021/10/20";
+            "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n"
+                    + "Valid formats of time: MM/DD, YYYY/MM/DD\nExample: -o 10312 20 2021/10/20";
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
 
-    private final LocalDate time;
-    private final ID productId;
-    private final Quantity quantity;
+    public final LocalDate time;
+    public final ID productId;
+    public final Quantity quantity;
 
+    /**
+     * Constructor of {@code Order}
+     */
     public Order(LocalDate time, ID productId, Quantity quantity, Model model) {
         checkArgument(isValidProductID(productId, model), MESSAGE_CONSTRAINTS_ID);
         Product product = model.getProductById(productId);
