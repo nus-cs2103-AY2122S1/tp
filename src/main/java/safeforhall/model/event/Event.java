@@ -59,6 +59,28 @@ public class Event {
                 && otherEvent.getCapacity().equals(getCapacity());
     }
 
+    /**
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getCapacity().equals(getCapacity());
+    }
+
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -75,7 +97,6 @@ public class Event {
                 .append(getVenue())
                 .append("; Capacity: ")
                 .append(getCapacity());
-
         return builder.toString();
     }
 }

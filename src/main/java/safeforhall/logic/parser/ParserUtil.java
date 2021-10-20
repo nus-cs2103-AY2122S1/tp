@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -24,9 +25,6 @@ import safeforhall.model.person.VaccStatus;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_NO_INDEX_INPUT = "Missing residents' index(es).";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -35,9 +33,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        } else {
+            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -49,13 +48,8 @@ public class ParserUtil {
     public static ArrayList<Index> parseIndexes(String... indexes) throws ParseException {
         ArrayList<Index> indexArray = new ArrayList<>();
         for (String i : indexes) {
-            try {
-                Integer.parseInt(i);
-            } catch (NumberFormatException e) {
-                throw new ParseException(MESSAGE_NO_INDEX_INPUT);
-            }
             if (!StringUtil.isNonZeroUnsignedInteger(i)) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             indexArray.add(Index.fromOneBased(Integer.parseInt(i)));
         }
