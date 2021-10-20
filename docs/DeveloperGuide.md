@@ -13,16 +13,17 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
+   - [[Proposed] View student/lesson feature](#proposed-view-studentlesson-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
+7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+8. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    - [Launch and shutdown](#launch-and-shutdown)
    - [Deleting a person](#deleting-a-person)
    - [Saving data](#saving-data)
@@ -176,7 +177,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] View Student/Lesson feature
+### \[Proposed\] View student/lesson feature
 
 #### Proposed Implementation
 
