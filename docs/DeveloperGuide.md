@@ -82,6 +82,22 @@ system to handle them.
   parser
 * `Executor` instances are created by each `Command` class, which then handle the actual execution of commands and
   returning of `CommandResult`
+* Commands now come in 3 general types, `PersonCommand`, `GroupCommand` and `Command`
+    * `PersonCommand` operates on `Person` objects
+    * `GroupCommand` operates on `Group` objects
+    * `Command` operates without either a `Person` or `Group` object
+* `Parser` and `Executor` classes come in the same 3 categories as `Command` classes
+* `NotorParser` now parses both the `commandWord` and `subCommandWord` for user commands
+    * `commandWord` refers to either `Person`, `Group` or one of the object agnostic commands
+    * `subCommandWord` refers to an operation that can be carried out on a `Person` or `Group`
+
+New Workflow for Adding Commands:
+
+1. Create a `XYZCommand` class that extends either `PersonCommand`, `GroupCommand` or simply `implements Command`.
+2. Create a `XYZCommandParser` class that extends the same type of `Parser` as the `Command` above is.
+3. Add the new `XYZCommandParser` to the `parse()` method in `NotorParser`.
+4. Create a `XYZCommandExecutor` class that extends the same type of `Executor` as the `Command` from step 1.
+5. Implement all required methods and ensure all fields used by the methods are present.
 
 ### Model Changes
 
