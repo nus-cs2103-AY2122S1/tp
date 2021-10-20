@@ -172,6 +172,6 @@ public class Person {
 
         builder.append("; ").append(getDone());
 
-        return builder.toString();
+        return builder.append("\n").toString();
     }
 }

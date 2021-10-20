@@ -55,7 +55,7 @@ public class EmploymentType {
     public EmploymentType(String employmentType) {
         requireNonNull(employmentType);
         checkArgument(isValidEmploymentType(employmentType), MESSAGE_CONSTRAINTS);
-        this.employmentType = employmentType;
+        this.employmentType = getCorrectCapitalization(employmentType);
     }
 
     /**
@@ -65,8 +65,8 @@ public class EmploymentType {
      * @return Boolean indicating if given string is a valid employment type.
      */
     public static boolean isValidEmploymentType(String test) {
-        return test.equals(Type.FULL_TIME.term) || test.equals(Type.PART_TIME.term)
-                || test.equals(Type.TEMPORARY.term) || test.equals(Type.INTERNSHIP.term);
+        return test.equalsIgnoreCase(Type.FULL_TIME.term) || test.equalsIgnoreCase(Type.PART_TIME.term)
+                || test.equalsIgnoreCase(Type.TEMPORARY.term) || test.equalsIgnoreCase(Type.INTERNSHIP.term);
     }
 
     @Override
@@ -84,6 +84,16 @@ public class EmploymentType {
     @Override
     public int hashCode() {
         return employmentType.hashCode();
+    }
+
+    private String getCorrectCapitalization(String employmentType) {
+        ArrayList<String> employmentTypes = EmploymentType.Type.getTerms();
+        for (String et: employmentTypes) {
+            if (et.equalsIgnoreCase(employmentType)) {
+                return et;
+            }
+        }
+        return null;
     }
 
 }
