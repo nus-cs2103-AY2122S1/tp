@@ -154,6 +154,19 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Delete Module
+
+1. When the `Logic` is called upon to execute `delete module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
+3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
+4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
+5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
+6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteModuleSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
