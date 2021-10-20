@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalCsBook;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.model.AddressBook;
+import seedu.address.model.CsBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -36,11 +36,11 @@ public class ViewGroupCommandTest {
         Student validStudent3 = new StudentBuilder().withName("Pei Xian")
                 .withGroup("CS2101", "SWE Module").build();
         List<Student> testStudents = Arrays.asList(validStudent1, validStudent2, validStudent3);
-        AddressBook addressBook = getTypicalAddressBook();
-        addressBook.setGroups(testGroups);
-        addressBook.setStudents(testStudents);
-        model = new ModelManager(addressBook, new UserPrefs());
-        expectedModel = new ModelManager(addressBook, new UserPrefs());
+        CsBook csBook = getTypicalCsBook();
+        csBook.setGroups(testGroups);
+        csBook.setStudents(testStudents);
+        model = new ModelManager(csBook, new UserPrefs());
+        expectedModel = new ModelManager(csBook, new UserPrefs());
     }
 
     @Test

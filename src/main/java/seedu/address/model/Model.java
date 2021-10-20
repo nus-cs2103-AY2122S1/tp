@@ -37,25 +37,25 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' CS book file path.
      */
-    Path getAddressBookFilePath();
+    Path getCsBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' CS book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setCsBookFilePath(Path csBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces address book data with the data in {@code csBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setCsBook(ReadOnlyCsBook csBook);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CsBook */
+    ReadOnlyCsBook getCsBook();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the CS book.
      */
     boolean hasStudent(Student student);
 

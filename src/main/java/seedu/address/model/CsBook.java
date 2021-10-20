@@ -14,7 +14,7 @@ import seedu.address.model.student.UniqueStudentList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CsBook implements ReadOnlyCsBook {
 
     private final UniqueStudentList students;
     private final UniqueGroupList groups;
@@ -31,12 +31,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups = new UniqueGroupList();
     }
 
-    public AddressBook() {}
+    public CsBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an CsBook using the Students in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CsBook(ReadOnlyCsBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -61,9 +61,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CsBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCsBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// student-level operations
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the CS book.
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
@@ -90,8 +90,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the address
+     * {@code target} must exist in the CS book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the CS
      * book.
      */
     public void setStudent(Student target, Student editedStudent) {
@@ -101,7 +101,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code CsBook}.
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
@@ -127,7 +127,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code CsBook}.
      * {@code key} must exist in the address book.
      */
     public void removeGroup(Group key) {
@@ -168,8 +168,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && students.equals(((AddressBook) other).students));
+                || (other instanceof CsBook // instanceof handles nulls
+                && students.equals(((CsBook) other).students));
     }
 
     @Override

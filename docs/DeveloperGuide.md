@@ -96,7 +96,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `CsBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -114,7 +114,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- When called upon to parse a user command, the `CsBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `CsBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -125,12 +125,12 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+- stores the CS book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
 - stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `CsBook`, which `Student` references. This allows `CsBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -144,13 +144,13 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in json format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save both CS book data and user preference data in json format, and read them back into corresponding objects.
+- inherits from both `CsBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.csbook.commons` package.
 
 ---
 
@@ -158,41 +158,124 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### JSON encryption feature
+
+#### Implementation
+
+The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
+Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the
+CSBook data to an encrypted JSON file are as follows:
+
+- `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)` — Saves the current CSBook data
+- `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` — Saves the given data to a encrypted JSON file
+- `EncryptionUtil.encryptSerializableObject(Serializable)` — Encrypts a `Serializable` object
+- `FileUtil#writeToEncryptedFile(Path, SealedObject)` — Writes the encrypted object to a file
+
+Decrypting an encrypted JSON file goes through a similar process. The relevant operations for decrypting the
+encrypted JSON file to the CSBook are as follows:
+
+- `JsonCsBookStorage#readCsBook()` — Reads the CSBook data from the encrypted JSON file
+- `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` — Reads the data from a encrypted JSON file
+- `EncryptionUtil#decryptSealedObject(SealedObject)` — Decrypts a `SealedObject`
+- `FileUtil#readFromEncryptedFile(Path)` — Reads the encrypted object from a file
+
+Given below is an example usage scenario and how encryption/decryption behaves at each step.
+
+Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to
+`JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
+now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
+
+![EncryptSequence0](images/EncryptSequence0.png)
+
+Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a `Serializable`,
+and encrypts it using `EncryptionUtil.encryptSerializableObject(Serializable)`. The method returns a `SealedObject` object,
+which contains the encrypted JSON data.
+
+![EncryptSequence1](images/EncryptSequence1.png)
+
+Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file.
+`EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
+
+![EncryptSequence2](images/EncryptSequence2.png)
+
+The following sequence diagram shows how the overall encryption operation works:
+
+![EncryptSequenceAll](images/EncryptSequenceAll.png)
+
+The decryption operation accomplishes the opposite of the encryption operation.
+
+Step 4. When a user launches the application for the first time, a call it made to `JsonCsBookStorage#readCsBook()`
+to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` to
+read the encrypted JSON file.
+
+![DecryptSequence0](images/DecryptSequence0.png)
+
+Step 5. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
+read the encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the
+encrypted CSBook data.
+
+![DecryptSequence1](images/DecryptSequence1.png)
+
+Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
+object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then
+transformed by `JsonCsBookStorage#readCsBook()` into a `ReadOnlyCsBook` that is used to populate the model.
+
+![DecryptSequence2](images/DecryptSequence2.png)
+
+The following sequence diagram shows how the overall decryption operation works:
+
+![DecryptSequenceAll](images/DecryptSequenceAll.png)
+
+#### Design considerations
+
+**Aspect: How JSON encryption and decryption executes:**
+
+- **Alternative 1 (current choice):** Encrypts the entire CSBook data.
+
+    - Pros: More secure.
+    - Cons: May take up more storage due to excessive encryption.
+
+- **Alternative 2:** Encrypts individual fields.
+
+    - Pros: Uses less storage by encrypting data and not fields.
+      (e.g. `name: Jun Wei` is encrypted to become `name: ????????????????????`)
+    - Cons: Less secure compared to encrypting the entire JSON file.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedCsBook`. It extends `CsBook` with an undo/redo history, stored internally as an `csBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+- `VersionedCsBook#commit()` — Saves the current CS book state in its history.
+- `VersionedCsBook#undo()` — Restores the previous CS book state from its history.
+- `VersionedCsBook#redo()` — Restores a previously undone CS book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitCsBook()`, `Model#undoCsBook()` and `Model#redoCsBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCsBook` will be initialized with the initial CS book state, and the `currentStatePointer` pointing to that single CS book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the CS book. The `delete` command calls `Model#commitCsBook()`, causing the modified state of the CS book after the `delete 5` command executes to be saved in the `csBookStateList`, and the `currentStatePointer` is shifted to the newly inserted CS book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCsBook()`, causing another modified CS book state to be saved into the `csBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCsBook()`, so the CS book state will not be saved into the `csBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCsBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CS book state, and restores the CS book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CsBook state, then there are no previous CsBook states to restore. The `undo` command uses `Model#canUndoCsBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -205,17 +288,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCsBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the CS book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `csBookStateList.size() - 1`, pointing to the latest CS book state, then there are no undone CsBook states to restore. The `redo` command uses `Model#canRedoCsBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CS book, such as `list`, will usually not call `Model#commitCsBook()`, `Model#undoCsBook()` or `Model#redoCsBook()`. Thus, the `csBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCsBook()`. Since the `currentStatePointer` is not pointing at the end of the `csBookStateList`, all CS book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -227,7 +310,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-- **Alternative 1 (current choice):** Saves the entire address book.
+- **Alternative 1 (current choice):** Saves the entire CS book.
 
   - Pros: Easy to implement.
   - Cons: May have performance issues in terms of memory usage.

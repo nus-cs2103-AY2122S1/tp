@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
+  "_comment": "CsBook save file which contains the same Student values as in TypicalStudents#getTypicalCsBook()",
   "students" : [ {
     "name" : "Alice Pauline",
     "telegramHandle" : "@alice_pauline",

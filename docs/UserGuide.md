@@ -152,7 +152,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### View details of a group
-Finds and displays details about a group, including the group description, 
+Finds and displays details about a group, including the group description,
 number of students and some details about each student in the group .
 
 Format: `viewgroup GROUPNAME`
@@ -180,14 +180,14 @@ Format: `clear`
 
 ### Creating a group: `addgroup`
 
-Creates a group with the given group name and given description so that students can be added into it. 
+Creates a group with the given group name and given description so that students can be added into it.
 
 Format: `addgroup n/GROUPNAME d/DESCRIPTION`
 
 * Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
-* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod` 
+* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod`
 where students can be added into.
 
 ### Delete Group: deletegroup
@@ -235,7 +235,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] `<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
-**List** | `list` 
+**List** | `list`
 >>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add Group** | `addgroup GROUPNAME`
