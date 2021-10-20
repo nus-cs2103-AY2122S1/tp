@@ -112,14 +112,18 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the person identified by the specified index number used in the displayed persons list.
+Deletes the person(s) identified by the specified index number(s) used in the displayed persons list.
 
-Format: `delete INDEX`
-* Deletes the persons at the specified `INDEX`
-* The index **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index **must not exceed the total number of persons** in the persons list
+Format: `delete INDEX [MORE_INDICES]`
+
+* Deletes the contact(s) at the specified `INDEX`(s).
+* The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
+* The index(s) **must be given in ascending order** (e.g. `delete 1 4 5`)
+* The index(s) **must not exceed the total number of contacts** in the address book
 
 Examples:
+* `sort` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
+* `sort` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the contacts list when sorted by name.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if any.
 
 ### Listing all persons : `list`
@@ -174,7 +178,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g., `add n/Jane p/12345678 e/jane@email.com cn/600204 ha/123 Changi Road #01-100 700123 wa/50 Jurong Road 120050 qa/12 Harbourfront Ring 123012 sh/2021-01-01 2021-01-14 kn/Peter kp/90011234 ka/73 Yishun Drive #10-301 310073`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS]`<br> e.g., `edit 1 n/Henry Hugh`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
 **Clear** | `clear`
 **Help** | `help`
