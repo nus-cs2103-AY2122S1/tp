@@ -9,7 +9,7 @@ if () then ([valid argument])
     :Search for participant in participant list;
     if () then ([participant found])
         : Display participant's details;
-    else ([participant not found])
+    else ([else])
         : Display error message;
     endif
 else ([else])

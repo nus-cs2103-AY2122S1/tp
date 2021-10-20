@@ -309,7 +309,7 @@ implemented to allow users the ability to sieve out a single participant for a m
     * Cons:
         1. Significantly harder implementation.
 
-The following is the sequence diagram for how a `FilterEventCommand` works internally.
+The following is the sequence diagram for how a `ViewCommand` works internally.
 
 ![ViewSequenceDiagram](images/ViewSequenceDiagram.png)
 
