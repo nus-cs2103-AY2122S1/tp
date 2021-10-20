@@ -158,7 +158,7 @@ Option | Description
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | If set to `true`, the field is allowed to be blank (for string fields such as phone, name, etc)
 IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for int/Date fields such as LastMet, etc)
-DEFAULT_VALUE | The default value for the field. Set when user does not pass in any values for the respective prefix on `Person` creation.
+DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Person` creation.
 IS_EDITABLE | If set to `true`, the field is editable by the user through edit command.
 
 ### Field interfaces
