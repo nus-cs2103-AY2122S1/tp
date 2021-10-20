@@ -9,7 +9,8 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_SUCCESS = "Displayed all tags! \n"
-            + "You can go back to list view by typing \"list\" or any other valid command.";
+            + "To view student list, type: \"list\".\n"
+            + "To view schedule, type: \"schedule\".";
 
     @Override
     public CommandResult execute() throws CommandException {

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,8 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * A list of tags that enforces uniqueness between its elements in terms of tag names, and does not allow nulls.
  */
 public class UniqueTagList {
+    private static final HashMap<Tag, Integer> tagCounter = new HashMap<>();
+
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -34,26 +37,25 @@ public class UniqueTagList {
 
     /**
      * Adds a tag to the list.
-     * If the tag already exists in the list, replaces the tag with a new tag with
-     * the increased number of students labelled under that tag.
+     * If the tag already exists in the list, update number of students labelled under the specified tag in tag
+     * counter.
      *
      * @param toAdd Tag to be added to the list.
      */
     public void addTag(Tag toAdd) {
         requireNonNull(toAdd);
         if (containsTag(toAdd)) {
-            int index = internalList.indexOf(toAdd);
-            Tag tag = internalList.get(index);
-            int newNumStudents = tag.getNumStudents() + 1;
-            internalList.set(index, toAdd.createTagWithNum(newNumStudents));
+            int newNumStudents = tagCounter.get(toAdd) + 1;
+            tagCounter.put(toAdd, newNumStudents);
         } else {
+            tagCounter.put(toAdd, 1);
             internalList.add(toAdd);
         }
     }
 
     /**
      * Adds tags from the specified person to the internal tag list.
-     * Tag list will be sorted alphabetically after the addition of the tags.
+     * Tags will be sorted alphabetically.
      *
      * @param person Person whose tags are to be added to the tag list.
      */
@@ -65,7 +67,6 @@ public class UniqueTagList {
 
     /**
      * Adds tags from the specified list of persons to the internal tag list.
-     * Tag list will be sorted alphabetically.
      *
      * @param persons List of persons whose tags are to be added to the tag list.
      */
@@ -82,33 +83,38 @@ public class UniqueTagList {
      * @param toRemove Tag to be removed from the list.
      */
     public void removeTag(Tag toRemove) {
-        assert toRemove.getNumStudents() > 0 : Tag.ASSERTION_ERROR_NON_POSITIVE_DUPLICATES;
         requireNonNull(toRemove);
-        int index = internalList.indexOf(toRemove);
 
-        if (index < 0) {
+        if (!containsTag(toRemove)) {
             throw new TagNotFoundException();
-        } else if (internalList.get(index).getNumStudents() == 1) {
+        }
+
+        Integer numStudents = tagCounter.get(toRemove);
+        assert numStudents != null && numStudents > 0;
+
+        if (numStudents == 1) {
+            tagCounter.remove(toRemove);
             internalList.remove(toRemove);
         } else {
-            int newNumStudents = internalList.get(index).getNumStudents() - 1;
-            internalList.set(index, toRemove.createTagWithNum(newNumStudents));
+            int newNumStudents = numStudents - 1;
+            tagCounter.put(toRemove, newNumStudents);
         }
     }
 
     /**
      * Removes the tags belonging to the specified person.
      *
-     * @param person Person whose tags has to be removed.
+     * @param person Person whose tags have to be removed.
      */
     public void removeTagFromPerson(Person person) {
         person.removeTagsFromTagList(this);
+        sortTags();
     }
 
     /**
      * Replaces the contents of this list with {@code tags}.
      * {@code tags} must not contain duplicate tags.
-     * Tag list will be sorted alphabetically.
+     * Tags will be sorted alphabetically.
      *
      * @param tags The Tags to be set.
      */
@@ -117,15 +123,17 @@ public class UniqueTagList {
         if (!tagsAreUnique(tags)) {
             throw new DuplicateTagException();
         }
-
-        internalList.setAll(tags.stream()
-                .sorted(Comparator.comparing(Tag::getTagName))
-                .collect(Collectors.toList()));
+        tagCounter.clear();
+        internalList.clear();
+        for (Tag tag : tags) {
+            addTag(tag);
+        }
+        sortTags();
     }
 
     /**
      * Removes the tags from {@code target} and adds the tags from {@code editedPerson} to the tag list.
-     * Tag list will be sorted alphabetically.
+     * Tags will be sorted alphabetically.
      *
      * @param target Person whose tags are to be removed.
      * @param editedPerson Person whose tags are to be added.
@@ -135,13 +143,6 @@ public class UniqueTagList {
         target.removeTagsFromTagList(this);
         editedPerson.addTagsToTagList(this);
         sortTags();
-    }
-
-    /**
-     * Sorts the tag list alphabetically.
-     */
-    private void sortTags() {
-        setTags(internalList.stream().sorted(Comparator.comparing(Tag::getTagName)).collect(Collectors.toList()));
     }
 
     /**
@@ -162,6 +163,26 @@ public class UniqueTagList {
     }
 
     /**
+     * Returns the number of students labelled under the specified tag.
+     *
+     * @param tag Tag to check for number of students labelled under it.
+     * @return Number of students labelled under the specified tag.
+     */
+    public static int getNumStudentsForTag(Tag tag) {
+        return tagCounter.get(tag);
+    }
+
+    /**
+     * Sorts the tag list alphabetically.
+     */
+    private void sortTags() {
+        List<Tag> sortedList = internalList.stream()
+                .sorted(Comparator.comparing(Tag::getTagName))
+                .collect(Collectors.toList());
+        internalList.setAll(sortedList);
+    }
+
+    /**
      * Returns an unmodifiable distinct tag list.
      *
      * @return An unmodifiable distinct tag observable list.
@@ -179,6 +200,6 @@ public class UniqueTagList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTagList // instanceof handles nulls
-                && internalList.equals(((UniqueTagList) other).internalList));
+                        && internalList.equals(((UniqueTagList) other).internalList));
     }
 }

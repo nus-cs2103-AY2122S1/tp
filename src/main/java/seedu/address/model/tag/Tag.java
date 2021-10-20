@@ -11,11 +11,8 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String ASSERTION_ERROR_NON_POSITIVE_DUPLICATES =
-            "Number of students labelled under this tag should be positive.";
 
     private final String tagName;
-    private final int numStudents;
 
     /**
      * Constructs a {@code Tag}.
@@ -26,21 +23,6 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName.toUpperCase();
-        this.numStudents = 1;
-    }
-
-    /**
-     * Constructs a {@code Tag} with specified number of students labelled under this tag.
-     *
-     * @param tagName A valid tag name.
-     * @param numStudents Number of students labelled under this tag.
-     */
-    private Tag(String tagName, int numStudents) {
-        assert numStudents > 0 : ASSERTION_ERROR_NON_POSITIVE_DUPLICATES;
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
-        this.numStudents = numStudents;
     }
 
     /**
@@ -54,17 +36,6 @@ public class Tag {
     }
 
     /**
-     * Creates a tag with its original tag name and the given number of students labelled under this tag.
-     *
-     * @param num Number of students labelled under this tag.
-     * @return Tag containing the original tag name and number of students under this tag.
-     */
-    public Tag createTagWithNum(int num) {
-        assert num > 0 : ASSERTION_ERROR_NON_POSITIVE_DUPLICATES;
-        return new Tag(tagName, num);
-    }
-
-    /**
      * Returns the tag name of this tag.
      *
      * @return Tag name of this tag.
@@ -74,21 +45,12 @@ public class Tag {
     }
 
     /**
-     * Returns the number of students labelled under this tag.
-     *
-     * @return Number of students labelled under this tag.
-     */
-    public int getNumStudents() {
-        return numStudents;
-    }
-
-    /**
      * Stringifies the number of students under this tag.
      *
      * @return String representation of the number of students under this tag.
      */
     public String getNumStudentsString() {
-        return Integer.toString(numStudents);
+        return Integer.toString(UniqueTagList.getNumStudentsForTag(this));
     }
 
     /**

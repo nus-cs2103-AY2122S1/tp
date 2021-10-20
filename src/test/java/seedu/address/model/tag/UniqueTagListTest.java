@@ -22,6 +22,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
@@ -60,17 +62,19 @@ class UniqueTagListTest {
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         expectedUniqueTagList.setTags(expectedList);
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(sample));
     }
 
     @Test
     public void addTag_duplicateTag_success() {
-        Tag sample = TAG_UNPAID;
-        List<Tag> expectedList = new ArrayList<>(List.of(sample.createTagWithNum(2)));
+        Tag tagWithTwoStudents = TAG_UNPAID;
+        List<Tag> expectedList = new ArrayList<>(List.of(tagWithTwoStudents));
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         expectedUniqueTagList.setTags(expectedList);
-        uniqueTagList.addTag(sample);
-        uniqueTagList.addTag(sample);
+        uniqueTagList.addTag(tagWithTwoStudents);
+        uniqueTagList.addTag(tagWithTwoStudents);
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertEquals(2, UniqueTagList.getNumStudentsForTag(tagWithTwoStudents));
     }
 
     @Test
@@ -80,20 +84,17 @@ class UniqueTagListTest {
 
     @Test
     public void addTagFromPerson_sorted_success() {
-        List<Tag> expectedList = new ArrayList<>(Arrays.asList(TAG_FORGETFUL, TAG_UNPAID));
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(expectedList);
         uniqueTagList.addTagFromPerson(BENSON);
-        assertEquals(expectedUniqueTagList, uniqueTagList);
-    }
 
-    @Test
-    public void addTagFromPerson_unequalsUnsorted_success() {
-        UniqueTagList unsortedTagList = new UniqueTagList();
-        unsortedTagList.addTag(TAG_UNPAID);
-        unsortedTagList.addTag(TAG_FORGETFUL);
-        uniqueTagList.addTagFromPerson(BENSON);
-        assertNotEquals(unsortedTagList, uniqueTagList);
+        UniqueTagList unsortedList = new UniqueTagList();
+        unsortedList.addTag(TAG_UNPAID);
+        unsortedList.addTag(TAG_FORGETFUL);
+
+        UniqueTagList sortedList = new UniqueTagList();
+        sortedList.addTag(TAG_FORGETFUL);
+        sortedList.addTag(TAG_UNPAID);
+        assertNotEquals(unsortedList, uniqueTagList);
+        assertEquals(sortedList, uniqueTagList);
     }
 
     @Test
@@ -104,12 +105,14 @@ class UniqueTagListTest {
     @Test
     public void addTagFromPersonList_success() {
         List<Person> samplePersonList = new ArrayList<>(Arrays.asList(AMY, BOB));
-        Tag sample1 = TAG_FORGETFUL.createTagWithNum(2);
-        Tag sample2 = TAG_ZOOM;
+        Tag tagWithTwoStudents = TAG_FORGETFUL;
+        Tag tagWithOneStudents = TAG_ZOOM;
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(Arrays.asList(sample1, sample2));
+        expectedUniqueTagList.setTags(Arrays.asList(tagWithTwoStudents, tagWithOneStudents));
         uniqueTagList.addTagFromPersonList(samplePersonList);
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertEquals(2, UniqueTagList.getNumStudentsForTag(tagWithTwoStudents));
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(tagWithOneStudents));
     }
 
     @Test
@@ -130,6 +133,7 @@ class UniqueTagListTest {
 
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(sample));
     }
 
     @Test
@@ -143,6 +147,7 @@ class UniqueTagListTest {
         uniqueTagList.addTag(sample);
         uniqueTagList.removeTag(sample);
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(sample));
     }
 
     @Test
@@ -155,15 +160,21 @@ class UniqueTagListTest {
         uniqueTagList.setTags(Arrays.asList(TAG_FORGETFUL, TAG_UNPAID));
         uniqueTagList.removeTagFromPerson(BENSON);
         assertEquals(new UniqueTagList(), uniqueTagList);
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_UNPAID));
     }
 
     @Test
     public void removeTagFromPerson_nonEmptyResultList_success() {
-        uniqueTagList.setTags(Arrays.asList(TAG_FORGETFUL, TAG_UNPAID));
+        Tag tagToRemove = TAG_FORGETFUL;
+        Tag tagRemained = TAG_UNPAID;
+        uniqueTagList.setTags(Arrays.asList(tagToRemove, tagRemained));
         uniqueTagList.removeTagFromPerson(ALICE);
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(List.of(TAG_UNPAID));
+        expectedUniqueTagList.setTags(List.of(tagRemained));
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(tagRemained));
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(tagToRemove));
     }
 
     @Test
@@ -173,22 +184,16 @@ class UniqueTagListTest {
 
     @Test
     public void setTags_replacesOwnListWithProvidedList_success() {
-        uniqueTagList.addTag(TAG_UNPAID);
-        List<Tag> tagList = Collections.singletonList(TAG_FORGETFUL);
+        Tag tagToReplace = TAG_UNPAID;
+        uniqueTagList.addTag(tagToReplace);
+        Tag replacedTag = TAG_FORGETFUL;
+        List<Tag> tagList = Collections.singletonList(replacedTag);
         uniqueTagList.setTags(tagList);
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.addTag(TAG_FORGETFUL);
+        expectedUniqueTagList.addTag(replacedTag);
         assertEquals(expectedUniqueTagList, uniqueTagList);
-    }
-
-    @Test
-    public void setTags_unequalsUnsortedList_success() {
-        List<Tag> tagList = Arrays.asList(TAG_ZOOM, TAG_FORGETFUL);
-        uniqueTagList.setTags(tagList);
-        UniqueTagList unsortedTagList = new UniqueTagList();
-        unsortedTagList.addTag(TAG_ZOOM);
-        unsortedTagList.addTag(TAG_FORGETFUL);
-        assertNotEquals(unsortedTagList, uniqueTagList);
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(tagToReplace));
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(replacedTag));
     }
 
     @Test
@@ -221,11 +226,27 @@ class UniqueTagListTest {
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withTags(VALID_TAG_ZOOM).build();
         uniqueTagList.editTagFromPerson(AMY, editedPerson);
         assertEquals(expectedUniqueTagList, uniqueTagList);
+        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
+        assertEquals(1, UniqueTagList.getNumStudentsForTag(TAG_ZOOM));
     }
 
     @Test
     public void asUnmodifiableTagList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> uniqueTagList.asUnmodifiableTagList().remove(0));
+    }
+
+    @Test
+    public void asUnmodifiableTagList_sortedList_success() {
+        uniqueTagList.setTags(Arrays.asList(TAG_ZOOM, TAG_FORGETFUL));
+
+        ObservableList<Tag> sortedList =
+                FXCollections.unmodifiableObservableList(
+                        FXCollections.observableList(Arrays.asList(TAG_FORGETFUL, TAG_ZOOM)));
+        ObservableList<Tag> unsortedList =
+                FXCollections.unmodifiableObservableList(
+                        FXCollections.observableArrayList(Arrays.asList(TAG_ZOOM, TAG_FORGETFUL)));
+        assertEquals(sortedList, uniqueTagList.asUnmodifiableTagList());
+        assertNotEquals(unsortedList, uniqueTagList.asUnmodifiableTagList());
     }
 
     @Test
@@ -256,7 +277,7 @@ class UniqueTagListTest {
     }
 
     @Test
-    public void equals_differentInternalListUnequals_success() {
+    public void equals_unequalsDifferentInternalList_success() {
         UniqueTagList resultList = new UniqueTagList();
         resultList.addTag(TAG_FORGETFUL);
 
