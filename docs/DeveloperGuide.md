@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+This project is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
