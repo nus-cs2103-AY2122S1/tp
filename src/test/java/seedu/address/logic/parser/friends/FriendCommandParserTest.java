@@ -57,9 +57,4 @@ class FriendCommandParserTest {
         String listInput = " --list";
         assertEquals(parser.parse(listInput), new ListFriendCommandParser().parse(listInput));
     }
-
-    @Test
-    public void parseNoMatch_invalidCommandFlag_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(""));
-    }
 }
