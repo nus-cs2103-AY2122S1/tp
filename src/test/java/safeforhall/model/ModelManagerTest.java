@@ -5,17 +5,27 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static safeforhall.testutil.Assert.assertThrows;
+import static safeforhall.testutil.TypicalEvents.BASKETBALL;
+import static safeforhall.testutil.TypicalEvents.VOLLEYBALL;
 import static safeforhall.testutil.TypicalPersons.ALICE;
 import static safeforhall.testutil.TypicalPersons.BENSON;
+import static safeforhall.testutil.TypicalPersons.CARL;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.GuiSettings;
+import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
+import safeforhall.model.person.Person;
 import safeforhall.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -128,5 +138,61 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void toPersonListTest() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(ALICE);
+        expected.add(BENSON);
+
+        ResidentList listWithName = new ResidentList("Alice Pauline, Benson Meier");
+        ArrayList<Person> personListWithName = modelManager.toPersonList(listWithName);
+        assertEquals(personListWithName, expected);
+
+        ResidentList listWithRoom = new ResidentList("A100, A101");
+        ArrayList<Person> personListWithRoom = modelManager.toPersonList(listWithRoom);
+        assertEquals(personListWithRoom, expected);
+    }
+
+    @Test
+    public void getCurrentResidentsTest() throws CommandException {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withPerson(CARL).build();
+        UserPrefs userPrefs = new UserPrefs();
+        modelManager = new ModelManager(addressBook, userPrefs);
+
+        ArrayList<Person> expected = new ArrayList<>();
+        expected.add(ALICE);
+        expected.add(BENSON);
+
+        ResidentList list = new ResidentList("Alice Pauline, Benson Meier");
+        ArrayList<Person> personList = modelManager.getCurrentEventResidents(list);
+        assertEquals(personList, expected);
+    }
+
+    @Test
+    public void getEventSuccess() {
+        AddressBook addressBook = new AddressBookBuilder().withEvent(BASKETBALL).withEvent(VOLLEYBALL).build();
+        EventName basketballEvent = new EventName("basketball");
+        Optional<Event> foundBasketball = addressBook.findEvent(basketballEvent);
+        assertEquals(foundBasketball.get(), BASKETBALL);
+
+        EventName volleyballEvent = new EventName("volleyball");
+        Optional<Event> foundVolleyball = addressBook.findEvent(volleyballEvent);
+        assertEquals(foundVolleyball.get(), VOLLEYBALL);
+    }
+
+    @Test
+    public void getEventFailure() {
+        AddressBook addressBook = new AddressBookBuilder().withEvent(BASKETBALL).build();
+        EventName volleyballEvent = new EventName("volleyball");
+        Optional<Event> foundVolleyball = addressBook.findEvent(volleyballEvent);
+        assertEquals(foundVolleyball, Optional.empty());
     }
 }

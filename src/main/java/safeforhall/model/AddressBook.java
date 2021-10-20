@@ -3,11 +3,16 @@ package safeforhall.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
 import safeforhall.model.event.UniqueEventList;
+import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
+import safeforhall.model.person.Room;
 import safeforhall.model.person.UniquePersonList;
 
 /**
@@ -101,6 +106,42 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addEvent(Event e) {
         events.add(e);
+    }
+
+    /**
+     * Finds the event list for an event from the given Event Name.
+     */
+    public Optional<Event> findEvent(EventName eventName) {
+        for (Event event : events) {
+            if (event.hasSameEventName(eventName)) {
+                return Optional.of(event);
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
+     * Finds the person list for an event from the given String.
+     */
+    public Optional<Person> findPerson(String information) throws CommandException {
+        if (Room.isValidRoom(information)) {
+            Room room = new Room(information);
+            for (Person person : persons) {
+                if (person.getRoom().equals(room)) {
+                    return Optional.of(person);
+                }
+            }
+        } else if (Name.isValidName(information)) {
+            Name name = new Name(information);
+            for (Person person : persons) {
+                if (person.getName().equals(name)) {
+                    return Optional.of(person);
+                }
+            }
+        } else {
+            throw new CommandException("Information is not room or name");
+        }
+        return Optional.empty();
     }
 
     /**
