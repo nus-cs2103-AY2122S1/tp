@@ -21,7 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 import safeforhall.commons.core.Messages;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ListCommand;
-import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -80,8 +80,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ViewCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ViewCommand.MESSAGE_SUCCESS, model, true);
+        String viewCommand = ViewPersonCommand.COMMAND_WORD;
+        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_SUCCESS, model, true);
     }
 
     @Test

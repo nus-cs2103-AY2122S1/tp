@@ -1,4 +1,4 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.view;
 
 import static safeforhall.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static safeforhall.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -15,7 +15,7 @@ import safeforhall.testutil.TypicalPersons;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
  */
-public class ViewCommandTest {
+public class ViewPersonCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,12 +28,12 @@ public class ViewCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewCommand(), model, ViewCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewPersonCommand(), model, ViewPersonCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ViewCommand(), model, ViewCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewPersonCommand(), model, ViewPersonCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
