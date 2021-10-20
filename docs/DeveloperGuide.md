@@ -464,7 +464,7 @@ _{more aspects and alternatives to be added}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile (Customer Service Officer at tuition center)**:
 
 * has a need to manage a significant number of student details in a tuition centre
 * prefer desktop apps over other types
