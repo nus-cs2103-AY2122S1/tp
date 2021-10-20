@@ -183,7 +183,7 @@ The encryption feature is implemented with the following classes:
   * Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
   * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
 * `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-128 compliant keys.
-  * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex and safe (small probability of collision) hash function.
+  * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex hash function.
 * `MainApp` — `Cryptor` is initiated here and passed as parameter to the constructor of `LogicManager`. 
   * There should be one and only one `Cryptor` instance at any time. 
   * This acts as a single source of truth, which avoids clashing keys.
