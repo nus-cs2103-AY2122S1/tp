@@ -151,6 +151,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Event> getFilteredEventList() {
+        logger.info("AddressBook's FilteredList of Participants accessed.");
         return filteredEvents;
     }
 
