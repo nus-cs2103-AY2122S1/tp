@@ -24,7 +24,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports the contacts in the current displayed list to the exports folder in project directory."
             + System.lineSeparator()
-            + "Parameters: FILENAME (Must be a valid filename in the csv format)"
+            + "Parameters: FILENAME (Must be a valid filename and be in the csv format)"
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " myContacts.csv";
     public static final String MESSAGE_SUCCESS = "Contacts exported successfully";
@@ -91,6 +91,13 @@ public class ExportCommand extends Command {
         data.put(fieldHeaders[2], emails);
         data.put(fieldHeaders[3], addresses);
         data.put(fieldHeaders[4], tags);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ExportCommand // instanceof handles nulls
+                && filePath.equals(((ExportCommand) other).filePath));
     }
 
 }

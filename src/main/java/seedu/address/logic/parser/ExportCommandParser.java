@@ -13,9 +13,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ExportCommandParser implements Parser<ExportCommand> {
 
-    private static final String exportsDirectoryPath = System.getProperty("user.dir")
+    private static final String EXPORTS_DIRECTORY_PATH = System.getProperty("user.dir")
             + File.separator
             + "exports";
+
+    private static final String REGEX = "^[a-zA-Z0-9._ -]+\\.(csv)$";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -23,10 +25,10 @@ public class ExportCommandParser implements Parser<ExportCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ExportCommand parse(String args) throws ParseException {
-        String filePath = exportsDirectoryPath + File.separator + args;
-        if (!args.endsWith(".csv") || !FileUtil.isValidPath(filePath)) {
+        if (!args.matches(REGEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
+        String filePath = EXPORTS_DIRECTORY_PATH + File.separator + args;
         return new ExportCommand(filePath);
     }
 }
