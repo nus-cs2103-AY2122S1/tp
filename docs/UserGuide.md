@@ -64,10 +64,8 @@ Command Shortcut: `ac`
 
 Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
 
-The students to be added are optional. If the student the user intends to add is not present, or the class limit has
-been exceeded, TutAssistor will alert names of these students. The time slot should follow the
-format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap
-on time slots. If there is any conflict or overlap, TutAssistor will alert the conflict.
+The students to be added are optional. The time slot should follow the format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap on time slots. 
+If there is any conflict or overlap, TutAssistor will alert the conflict.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
@@ -327,21 +325,21 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 Command Shortcut: `lc`
 
-Display list of all classes after conducting a search with the `findclass` command.
+Displays list of all classes after conducting a search with the `findclass` command.
 
 ### Sorting tuition classes: `sort`
 
 Command Shortcut: `s`
 
-Permanently sorts tuition class list according to time or alphabetical order.
+Sorts tuition class list according to time or alphabetical order.
 
-If the tutor does not exit TutAssistor, the list will be auto-sorted
+Without exiting TutAssistor, the list will be auto-sorted
 when adding and editing classes after the tutor sorted the list.
 
 Format: `sort [o/ORDER]`
 
 Examples: (examples below are all possible usages of `sort`)
-* `sort` (without order being specified, TutAssistor will sort the list by time)
+* `sort` (sort by time)
 * `sort o/asc` (sort by ascending alphabetical order)
 * `sort o/desc` (sort by descending alphabetical order)
 * `sort o/time` (sort by time)

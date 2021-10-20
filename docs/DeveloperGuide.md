@@ -23,7 +23,20 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -114,6 +127,7 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -156,8 +170,8 @@ This section describes some noteworthy details on how certain features are imple
 ### [Developed] Time Conflict Management
 The time conflict management mechanism is facilitated by `TimeSlot`. It is encapsulated in `Tuition` package which
 defines time slot format, checks time slot format and manage time conflict. It implements the following operations:
-- `Timeslot#compareTime()` - Compares two time slots to detect time conflict
-- `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
+* `Timeslot#compareTime()` - Compares two time slots to detect time conflict
+* `Timeslot#isFormatCorrect()` - Checks whether the time slot entered by user follows the format
 
 Given below is an example usage scenario and how the time conflict management mechanism behaves at each step.
 
@@ -196,8 +210,8 @@ Step4: The complete timetable is displayed to user through the `UI` component.
 ### [Developed] Adding Remarks With Editor
 Users can add, edit, or remove remarks for students or tuition classes, which is facilitated by `RemarkEditor`. The `UIManager` displays a dialog box with a text area for users to type in the description of the remark. Additionally, the `RemarkEditor` supports the following operations:
 
-- `RemarkEditor#setRemark(name, remark)` — Sets the name and remark of the identified student or tuition class.
-- `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
+* `RemarkEditor#setRemark(name, remark)` — Sets the name and remark of the identified student or tuition class.
+* `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
 
 The interactions between the components during the execution of the `RemarkCommand` is show in the sequence diagram below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
 ![Ui](images/RemarkCommandSequenceDiagram.png)
