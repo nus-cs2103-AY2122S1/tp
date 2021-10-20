@@ -8,9 +8,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +16,6 @@ import seedu.plannermd.logic.commands.apptcommand.FilterAppointmentCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
 import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
-import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
 

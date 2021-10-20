@@ -3,7 +3,6 @@ package seedu.plannermd.logic.commands.apptcommand;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

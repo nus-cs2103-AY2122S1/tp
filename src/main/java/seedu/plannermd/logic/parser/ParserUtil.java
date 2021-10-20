@@ -6,10 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.plannermd.commons.core.index.Index;
@@ -167,6 +165,12 @@ public class ParserUtil {
         return new Risk(trimmedAndUpperCaseRisk);
     }
 
+    /**
+     * Parses a {@code String string} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException If the given {@code risk} is invalid or empty.
+     */
     public static LocalDate stringToDate(String string) throws ParseException {
         requireNonNull(string);
         if (string.trim().isEmpty()) {
