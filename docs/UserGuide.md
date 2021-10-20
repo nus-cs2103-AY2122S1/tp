@@ -87,7 +87,7 @@ Examples:
 
 Shows a list of all the modules that contains the given keyword.
 
-Format: `FORMAT: find [code] [title] [description] [mc] [tag] KEYWORDS`
+Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] KEYWORDS`
 * **KEYWORDS** refers to the words that the application will search the modules by.
 * If no optional parameters are entered, the application will search within all the modules'
   components for matching **KEYWORDS**
@@ -96,9 +96,9 @@ Format: `FORMAT: find [code] [title] [description] [mc] [tag] KEYWORDS`
 
 Examples:
 * `find CS` displays any modules that contain the word "CS" in the code, title, description, mc or tag.
-* `find code title CS GE` displays any modules that contain the words "CS" or "GE" in the code or title.
-* `find code CS2040S` displays any modules that contain the word "CS2040S" in the code.
-* `find tag UE` displays any modules that contain the word "UE" in the tag.
+* `find c/ t/ CS GE` displays any modules that contain the words "CS" or "GE" in the code or title.
+* `find c/ CS2040S` displays any modules that contain the word "CS2040S" in the code.
+* `find tag/ UE` displays any modules that contain the word "UE" in the tag.
 
 
 ### Editing a module : `edit` [Coming soon]

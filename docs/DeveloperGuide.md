@@ -215,24 +215,56 @@ The `find` command is implemented via the `FindCommand`, `FindCommandParser` and
 The `FindCommandParser` class implements the `Parser` interface and the `FindCommandParser#parse()` method is responsible for parsing the user input to retrieve the `args` String which represents the keywords to search the modules by. <br>
 When the `FindCommandParser#parse()` method is called,
 
-- The `args` String is converted into an array of String(s) called `nameKeywords`.
-- A new `NameContainsKeywordsPredicate` object is created by passing in the array `nameKeywords` as its argument.
-- A `FindCommand` object is returned with the `NameContainsKeywordsPredicate` object as its argument
+- The `args` String is converted into two arrays of String(s) called `nameKeywords` and `optionalFilter`.
+- The `nameKeywords` array consists of the keywords to search the modules with and the `optionalFilter` array consists of specific components of the module to search for the keywords.
+- A new `NameContainsKeywordsPredicate` object is created by passing in the arrays `nameKeywords` and `optionalFilter` as arguments.
+- A `FindCommand` object is returned with the `NameContainsKeywordsPredicate` object as its argument.
 
 The `NameContainsKeywordsPredicate` class implements the `Predicate` interface and the `NameContainsKeywordsPredicate#test()` method is responsible for checking if the given module contains any of the valid keywords. <br>
-It contains the non-null `keywords` field, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
-When the `NameContainsKeywordsPredicate#test()` method is called,
+It contains the non-null `keywords` and `optionalFilter` fields, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
+When the `NameContainsKeywordsPredicate#test()` method is called, it takes in a `Module` and returns a boolean depending on whether the keyword is found inside the `module`.
 
-- 
 
 The `FindCommand` class extends the `Command` class and implements the `FindCommand#execute()` method which handles the main logic of the class. <br>
 It contains the non-null `predicate` field. <br>
 When the `FindCommand#execute()` method is called,
 
-- 
+- The `Model` object is updated with a new `predicate`.
+- The `Model` filters the module list based on the given `predicate`.
+- A `CommandResult` is returned with the updated `Model`.
 
 #### Design considerations:
 
+**Aspect: How the user can find a module**
+
+- **Alternative 1 (current choice):** User uses a separate command (`find`) to take a module, along with additional optional parameters as filters.
+    - Pros:
+        - Gives the user more control when finding a specific module.
+        - Allows the user to view a more curated/specific set of results.
+    - Cons:
+        - User might want to view a general set of modules.
+        - Might be troublesome for the user to memorise all the optional parameters.
+- **Alternative 2:** User uses a separate command (`find`) to take a module, without the use of additional optional parameters.
+    - Pros:
+        - Easier for the user to use as there is no need to memorise all the optional parameters.
+    - Cons:
+        - More error prone (such as users typing `find c` and the application returns all the modules, which has the same effect as using the list command.
+
+**Aspect: Format of user input**
+
+- **Alternative 1 (current choice):** Users use `c/`, `t/` prefixes to specify which components of the module to search in.
+    - Pros:
+        - Easier to parse user inputs to get the needed data.
+    - Cons:
+        - Less flexible for the user.
+        - Might be troublesome for the user to memorise all the optional parameters.
+- **Alternative 2:** Users are allowed to use generic prefixes to specify which components of the module to search in.
+    - Pros:
+        - Greater flexibility for the user and more intuitive for the user.
+    - Cons:
+        - Difficult for the application to differentiate between keywords and words for specifying a certain component.  
+        - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).  
+        - Is inconsistent with the format of other commands.
     
 ### \[Proposed\] Undo/redo feature
 
