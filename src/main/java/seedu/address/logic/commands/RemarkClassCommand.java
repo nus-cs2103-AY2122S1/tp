@@ -25,8 +25,7 @@ public class RemarkClassCommand extends Command {
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Tuition Class: %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the remark of the tuition class identified "
-            + "by the index number used in the last tuition classes listing. "
-            + "Existing remark will be overwritten by the input.\n"
+            + "by the index number used in the last tuition classes listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_REMARK + "[REMARK]\n"
             + "Example: " + COMMAND_WORD + " 1 "
