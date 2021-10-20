@@ -22,6 +22,8 @@ package Tuitione <<rectangle>> {
 package ToDelete <<rectangle>> {
     object "<u>l:Lesson" as Lesson {
         lessonCode = Math-P2-Wed-1800
+        grade = P2
+        size = 0
     }
 }
 
