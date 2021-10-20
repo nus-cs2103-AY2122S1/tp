@@ -317,6 +317,65 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![ViewCommandActivityDiagram](images/ViewCommandActivityDiagram.png)
 
+### \[Completed\] View Event Details feature
+
+This feature allows Managera users to find an Event by name and view its details. The search is done using the Event's 
+name since Managera employs a UniqueEventList and will not have more than one Event with a given name.
+
+#### How the feature is implemented
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input, hence we 
+simply added a new `commandType` case for `ShowEventDetailsCommand` in `AddressBookParser`.
+
+A `ShowEventDetailsCommandParser` parses the user's input and creates an `EventNamePredicate` which the
+`ShowEventDetailsCommand` uses to search for the Event. `EventNamePredicate` implements `Predicate<Event>` which 
+can be passed to a `FilteredList<Event>` to filter out the Event. Since the predicate searches for the Event with a name
+that matches the predicate exactly, it returns only one result in the filtered list.
+
+The `ShowEventDetailsCommand` created by `ShowEventDetailsParser` contains the `EventNamePredicate` used to filter the 
+Event list. When the command is executed, the `model` obtains the Event by filtering the `FilteredList<Event>` using 
+the `EventNamePredicate` and displays its details.
+
+#### Why is this implemented this way
+
+Since each Event has a unique name, it provides a convenient way for the user to look for a specific Event if matching 
+name is used as the criterion. 
+
+Another command similar in function is `findParticipant`, where the model will filter the existing Participant list and 
+display the Participants with names that contain a given keyword. However, this implementation is meant for returning a 
+list of possibly multiple Participants. Since we are only looking for one particular Event, we decided that instead of 
+filtering the Event list to display just the one Event, we leave the Event list untouched and simply return the Event 
+details to the results display.
+
+#### Design Considerations:
+##### Aspect: Similar Event names:
+
+* **Alternative 1 (Current Choice)**: Exact name match:
+    * Pros:
+        1. The details of the specific Event are returned immediately, provided that the user's input is an exact
+           match of the Event's name.
+        2. Simpler to implement.
+    * Cons:
+        1. The user has to know the exact name of the Event, otherwise no Event, or the wrong Event, may be found.
+        2. If the Event name is long, typographical errors are likely, resulting in the desired Event not being found.
+
+
+* **Alternative 2**: Find similar names, or by a given keyword:
+    * Pros:
+        1. A list of Events with names that contain the user's input are returned, offering greater flexibility
+           if the user does not fully recall the entire name of the Event they are looking for. The search can be
+           further refined by subsequent user input to narrow it down to the specific Event.
+    * Cons:
+        1. Significantly harder implementation.
+
+The following is the sequence diagram for how a `ShowEventDetailsCommand` works internally.
+
+![ShowEventDetailsSequenceDiagram](images/ShowEventDetailsSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes a new command:
+
+![ShowEventDetailsActivityDiagram](images/ShowEventDetailsActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
