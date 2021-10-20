@@ -15,6 +15,8 @@ title: Developer Guide
     * [Common classes](#common-classes)
 - [**Implementation**](#implementation)
     * [Filter Event feature](#completed-filter-event-feature)
+    * [View Participant Details feature](#completed-view-participants-details-feature)
+    * [View Event Details feature](#completed-view-event-details-feature)
     * [Undo/redo feature](#proposed-undoredo-feature)
         + [Proposed implementation](#proposed-implementation)
         + [Design considerations](#design-considerations)
