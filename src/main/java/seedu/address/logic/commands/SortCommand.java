@@ -29,8 +29,8 @@ public class SortCommand extends Command {
     private final boolean isAscending;
 
     /**
-     * @param comparator which is used for sorting
-     * @param isAscending true if the sort is of ascending order
+     * @param comparator Comparator used for sorting
+     * @param isAscending True if the sort is of ascending order, false if descending order
      */
     public SortCommand(Comparator<Person> comparator, boolean isAscending) {
         this.comparator = comparator;
@@ -42,5 +42,23 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.sortFilteredPersonList(comparator, isAscending);
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCommand e = (SortCommand) other;
+        return comparator.equals(e.comparator)
+                && isAscending == e.isAscending;
     }
 }

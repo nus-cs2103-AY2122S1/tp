@@ -16,8 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class SortCommandParser implements Parser<SortCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
@@ -26,7 +26,9 @@ public class SortCommandParser implements Parser<SortCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_VISIT, PREFIX_LAST_VISIT);
 
         try {
-            if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+            if (argMultimap.isAllPresent(PREFIX_LAST_VISIT, PREFIX_VISIT)) {
+                throw new ParseException(SortCommand.MESSAGE_INVALID_FLAG);
+            } else if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
                 return new SortCommand(SORT_BY_LAST_VISIT, false);
             } else if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
                 return new SortCommand(SORT_BY_NEXT_VISIT, true);

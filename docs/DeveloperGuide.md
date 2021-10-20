@@ -230,7 +230,7 @@ Given below is an example usage scenario:
 1. User inputs the delete command, specifying the visit flag and the index of the elderly to be removed visit from. (If user wants to remove the entry of the elderly entirely instead of only removing the visit, she/he only needs to specify the index without the visit flag.)
 2. After successfully parsing the user input, the `DeleteCommand#execute(Model model)` method is called.
 3. The person which the user wants to delete visit from will be replaced by a new entry of a copy of person without the existing next visit.
-4Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
+4. Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
 
 #### Design choices
 
@@ -238,7 +238,7 @@ Given below is an example usage scenario:
 
   Deleting person and deleting visits are overlapping functionalities dealing with removing information. It is possible to overload the `delete` command to achieve both functionalities without creating new command.
 
-- Replace the exiting person with a new instance (if deleting a visit):
+- Replace the existing person with a new instance (if deleting a visit):
 
   We want to keep the data safe by ensuring immutability of Person objects. Therefore, we create an instance of Person with removed visit to replace the previous Person object.
 
