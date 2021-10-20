@@ -7,11 +7,11 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":ViewCommandParser" as ViewCommandParser LOGIC_COLOR
 participant "v:ViewCommand" as ViewCommand LOGIC_COLOR
-participant "p:ParticipantIdMatchesGivenIdPredicate" as ParticipantIdMatchesGivenIdPredicate LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant "p:ParticipantIdMatchesGivenIdPredicate" as ParticipantIdMatchesGivenIdPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 

@@ -57,7 +57,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
 
    * **`delete`**`3` : Deletes the 3rd Participant shown in the current list.
 
-   * **`clear`** : Deletes all Participants.
+   * **`clear`** : Deletes all Participants and Events.
 
    * **`exit`** : Exits the app.
      
@@ -81,7 +81,7 @@ Managera is a **desktop app that provides event organisers with a convenient met
 * Items in square brackets are optional.<br>
   e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as `addEvent n/CS2103T Final d/2021-11-23`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…`​ after them (e.g. `[tag/TAG]…`​) can be used multiple times including zero times.<br>
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
@@ -107,7 +107,7 @@ Format: `help`
 
 Adds a Participant to Managera.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE] [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A Participant can have any number of tags (including 0)
@@ -127,7 +127,7 @@ Format: `list`
 
 Edits an existing Participant in Managera.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [tag/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE] [tag/TAG]…​`
 
 * Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
