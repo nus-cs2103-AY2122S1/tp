@@ -2,15 +2,15 @@ package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPERIENCE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_LEVEL_OF_EDUCATION_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_NAME_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_ROLE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_TAG_SYNTAX;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -39,7 +39,16 @@ public class ShowCommand extends Command {
 
     private final Prefix prefix;
 
+    /**
+     * Constructor for ShowCommand.
+     * Prefix object passed as parameter cannot be null.
+     *
+     * @param prefix Category to get unique terms from.
+     */
     public ShowCommand(Prefix prefix) {
+
+        requireNonNull(prefix);
+
         this.prefix = prefix;
     }
 
@@ -55,6 +64,8 @@ public class ShowCommand extends Command {
 
     private String getUniqueCategoryInputs(Model model) {
 
+        assert prefix != null : "Prefix should not be null";
+
         // obtains an unmodifiable list of all applicants
         ReadOnlyAddressBook addressBook = model.getAddressBook();
         ObservableList<Person> ol = addressBook.getPersonList();
@@ -65,49 +76,45 @@ public class ShowCommand extends Command {
         Set<String> uniqueInputs = new HashSet<>();
         String userText = "";
 
-        if (prefixString.equals(PREFIX_NAME.getPrefix())) {
+        switch (prefixString) {
+        case PREFIX_NAME_SYNTAX:
             userText = "names";
             uniqueInputs = getUniqueNameInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_PHONE.getPrefix())) {
+            break;
+        case PREFIX_PHONE_SYNTAX:
             userText = "contact numbers";
             uniqueInputs = getUniquePhoneInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EMAIL.getPrefix())) {
+            break;
+        case PREFIX_EMAIL_SYNTAX:
             userText = "emails";
             uniqueInputs = getUniqueEmailInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_ROLE.getPrefix())) {
+            break;
+        case PREFIX_ROLE_SYNTAX:
             userText = "roles";
             uniqueInputs = getUniqueRoleInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EMPLOYMENT_TYPE.getPrefix())) {
+            break;
+        case PREFIX_EMPLOYMENT_TYPE_SYNTAX:
             userText = "employment types";
             uniqueInputs = getUniqueEmploymentTypeInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EXPECTED_SALARY.getPrefix())) {
+            break;
+        case PREFIX_EXPECTED_SALARY_SYNTAX:
             userText = "expected salaries";
             uniqueInputs = getUniqueExpectedSalaryInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_LEVEL_OF_EDUCATION.getPrefix())) {
+            break;
+        case PREFIX_LEVEL_OF_EDUCATION_SYNTAX:
             userText = "levels of education";
             uniqueInputs = getUniqueLevelOfEducationInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_EXPERIENCE.getPrefix())) {
+            break;
+        case PREFIX_EXPERIENCE_SYNTAX:
             userText = "years of experience";
             uniqueInputs = getUniqueExperienceInputs(ol);
-        }
-
-        if (prefixString.equals(PREFIX_TAG.getPrefix())) {
+            break;
+        case PREFIX_TAG_SYNTAX:
             userText = "tags";
             uniqueInputs = getUniqueTagInputs(ol);
+            break;
+        default:
+            return "No search terms exist for unknown prefix " + prefixString;
         }
 
         if (!uniqueInputs.isEmpty()) {
