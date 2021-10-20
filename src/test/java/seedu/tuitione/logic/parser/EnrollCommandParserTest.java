@@ -3,6 +3,7 @@ package seedu.tuitione.logic.parser;
 import static seedu.tuitione.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.tuitione.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,8 @@ public class EnrollCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsEnrollCommand() {
-        assertParseSuccess(parser, "1 l/Science-P2-Wed-1230",
-                new EnrollCommand(INDEX_FIRST_STUDENT, "Science-P2-Wed-1230"));
+        assertParseSuccess(parser, "1 l/1",
+                new EnrollCommand(INDEX_FIRST_STUDENT, INDEX_FIRST_LESSON));
     }
 
     @Test
