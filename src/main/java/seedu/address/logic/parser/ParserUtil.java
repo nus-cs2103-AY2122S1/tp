@@ -139,7 +139,7 @@ public class ParserUtil {
     public static BirthDate parseBirthDate(String birthDate) throws ParseException {
         requireNonNull(birthDate);
         String trimmedBirthDate = birthDate.trim();
-        if (trimmedBirthDate.equals("NA")) {
+        if (trimmedBirthDate.equals("N/A")) {
             return BirthDate.notSpecified();
         } else if (!BirthDate.isValidBirthDate(trimmedBirthDate)) {
             throw new ParseException(BirthDate.MESSAGE_DATE_CONSTRAINTS);
