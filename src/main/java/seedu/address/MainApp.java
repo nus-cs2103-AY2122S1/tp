@@ -171,11 +171,15 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
+    /**
+     * Creates a imports directory within the project's home directory
+     * and populates it with and importTemplate.csv file.
+     */
     protected void initImportsDirectory() {
         String home = System.getProperty("user.dir");
         Path path = Paths.get(home, "imports");
         try {
-            FileUtil.createDirectory(path);
+            FileUtil.createDirectoryIfEmpty(path);
         } catch (IOException e) {
             logger.warning("Failed to create imports directory : " + StringUtil.getDetails(e));
         }
@@ -188,7 +192,6 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Failed to retrieve importTemplate.csv : " + StringUtil.getDetails(e));
         }
-
     }
 
     @Override

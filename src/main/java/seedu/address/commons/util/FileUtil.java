@@ -57,7 +57,7 @@ public class FileUtil {
     /**
      * Creates a directory if it does not exist.
      */
-    public static void createDirectory(Path directory) throws IOException {
+    public static void createDirectoryIfEmpty(Path directory) throws IOException {
         if (Files.exists(directory)) {
             return;
         }
