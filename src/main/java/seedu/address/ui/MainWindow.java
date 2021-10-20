@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -20,7 +19,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -119,14 +117,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Event handler when user clicks on a particular ListCell in the {@code tmp}.
-     * Updates the task list panel to show the task list of the Person represented by
-     * the selected ListCell.
+     * Event handler when user clicks on a particular {@code ListCell} in the {@code personListView}.
+     * Updates the {@code taskListPanel} to show the task list of the {@code Person} represented
+     * by the selected {@code ListCell}.
      */
     @FXML
     public void handleMouseClicked(ListView<Person> personListView) {
-        List<Task> selectedTaskList = personListView.getSelectionModel().getSelectedItem().getTasks();
-        logic.updateDisplayTaskList(selectedTaskList);
+        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
+        logic.displayPersonTaskList(selectedPerson);
     }
 
     /** Makes child node of anchor resize together with its parent. */

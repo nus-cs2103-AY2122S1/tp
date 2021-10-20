@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -12,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -39,6 +41,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddress(person.getAddress());
         descriptor.setTags(person.getTags());
         descriptor.setDescription(person.getDescription());
+        descriptor.setTasks(person.getTasks());
+
     }
 
     /**
@@ -90,6 +94,18 @@ public class EditPersonDescriptorBuilder {
         descriptor.setDescription(new Description(description));
         return this;
     }
+
+   /**
+     * Parse the {@code tags} into a {@code List<Task>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withTasks(String... tasks) {
+        List<Task> taskList = Stream.of(tasks).map(Task::new).collect(Collectors.toList());
+        descriptor.setTasks(taskList);
+        return this;
+    }
+
+
     public EditPersonDescriptor build() {
         return descriptor;
     }
