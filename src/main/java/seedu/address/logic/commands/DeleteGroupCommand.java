@@ -37,11 +37,13 @@ public class DeleteGroupCommand extends Command {
         requireNonNull(model);
         List<TutorialGroup> lastShownList = model.getFilteredTutorialGroupList();
 
+        assert targetIndex.getZeroBased() >= 0;
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         TutorialGroup groupToDelete = lastShownList.get(targetIndex.getZeroBased());
+        assert groupToDelete != null;
         model.deleteTutorialGroup(groupToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
