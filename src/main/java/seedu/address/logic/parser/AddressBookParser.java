@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new ViewProductCommandParser().parse(arguments);
 
         case EditClientCommand.COMMAND_WORD:
-            return new EditClientCommandParser().parse(arguments);
+            return new EditClientCommandParser(model).parse(arguments);
 
         case EditProductCommand.COMMAND_WORD:
             return new EditProductCommandParser().parse(arguments);
