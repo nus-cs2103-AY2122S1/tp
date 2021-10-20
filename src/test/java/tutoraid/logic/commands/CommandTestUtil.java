@@ -15,6 +15,7 @@ import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.StudentBook;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.lesson.LessonNameContainsKeywordsPredicate;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
@@ -154,6 +155,20 @@ public class CommandTestUtil {
         model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s lesson book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
+
+        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
+        final String[] splitName = lesson.getLessonName().lessonName.split("\\s+");
+        model.updateFilteredLessonList(new LessonNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredLessonList().size());
     }
 
 }

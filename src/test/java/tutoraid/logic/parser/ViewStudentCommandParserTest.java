@@ -5,26 +5,26 @@ import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import tutoraid.logic.commands.ViewCommand;
+import tutoraid.logic.commands.ViewStudentCommand;
 
-public class ViewCommandParserTest {
+public class ViewStudentCommandParserTest {
 
-    private ViewCommandParser parser = new ViewCommandParser();
+    private ViewStudentCommandParser parser = new ViewStudentCommandParser();
 
     @Test
     public void parse_validArgs_returnsViewCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1", new ViewCommand(INDEX_FIRST_STUDENT));
+        CommandParserTestUtil.assertParseSuccess(parser, "1", new ViewStudentCommand(INDEX_FIRST_STUDENT));
     }
 
     @Test
     public void parse_invalidArg_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewCommand.MESSAGE_USAGE));
+                ViewStudentCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ViewCommand.MESSAGE_USAGE));
+                ViewStudentCommand.MESSAGE_USAGE));
     }
 }
