@@ -3,7 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,6 +17,8 @@ import seedu.address.model.product.Product;
  * Deletes a product identified using it's displayed index from the address book.
  */
 public class DeleteProductCommand extends Command {
+    private final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
+
     public static final String COMMAND_WORD = "delete -p";
 
     public static final String MESSAGE_USAGE =
@@ -40,6 +45,7 @@ public class DeleteProductCommand extends Command {
         }
 
         Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
+        logger.log(Level.INFO, "deleting product now");
         model.deleteProduct(productToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
     }
