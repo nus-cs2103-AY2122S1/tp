@@ -108,7 +108,7 @@ public interface Model {
      * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
      * MrTechRecruiter.
      */
-    public void setApplicant(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -122,7 +122,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+    void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     // Position related methods
     boolean hasPosition(Position toAdd);

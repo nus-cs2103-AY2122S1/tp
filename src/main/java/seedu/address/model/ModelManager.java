@@ -208,9 +208,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants) {
-        requireNonNull(predicateShowAllApplicants);
-        filteredApplicants.setPredicate(predicateShowAllApplicants);
+    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+        requireNonNull(predicate);
+        filteredApplicants.setPredicate(predicate);
     }
 
     @Override
