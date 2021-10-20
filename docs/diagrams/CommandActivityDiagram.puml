@@ -1,0 +1,22 @@
+@startuml
+start
+repeat
+:User chooses to look into one of the modules;
+switch (module?)
+case (Event)
+    :list all events;
+    :User chooses what to do with events;
+    :User executes event command;
+case (Member)
+    if (members of event?) then (true)
+        :list members of specific event;
+    else (false)
+        :list all members;
+    endif
+case (Task)
+    :tlist /m INDEX;
+endswitch
+    :AddressBook saves changes to Storage;
+repeat while (Program exited?) is (false)
+stop
+@enduml
