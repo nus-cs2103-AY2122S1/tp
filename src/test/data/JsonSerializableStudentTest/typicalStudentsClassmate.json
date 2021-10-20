@@ -65,5 +65,10 @@
       "schedule": "Wed 10:00 to 12:00, Fri 10:00 to 12:00",
       "tagged": [ ]
     }
-  ]
+  ],
+  "tutorialGroups": [ {
+    "groupName" : "1",
+    "classCode" : "G06",
+    "groupType" : "OP1"
+  } ]
 }
