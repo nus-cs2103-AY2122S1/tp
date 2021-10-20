@@ -192,14 +192,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 The features mentioned are:
-- [Adding contacts with optional details](#add-contacts)
-- [Finding multiple contacts by keywords](#find-by-keywords)
+- [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
 - [Deleting multiple contacts by keywords](#delete-by-keywords)
+- [Undoing / redoing command](#proposed-undoredo-feature)
 - {and so on...}
 
-### Add contacts
+### Add contacts with optional arguments
 
-### Find by keywords
+#### Implementation
+
+The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
+without the need to include contact details.
+
+#### Usage
+
+Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
+
+1. The user first launches Socius and adds a new contact by name, without any contact details.
+
+2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+
+3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+   instantiating a new `Person` object.
+
+4. The command communicates with the `Model` to add the person to the existing AddressBook.
+
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the AddCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
+
+#### Design considerations:
+
+**Aspect: How contacts are saved with optional arguments:**
+
+* **Alternative 1 (current choice):** Save a contact, with empty strings as arguments if argument is not included in
+  input.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Save all optional attributes of a contact as Optional type.
+    * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
+    * Cons: Harder to implement.
 
 ### Delete by keywords
 
@@ -224,7 +263,7 @@ Step 2. The user executes `deletem t/friends g/m` command to delete all contacts
 Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse the arguments provided.
 Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
 
-Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step. 
+Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
 The following sequence diagram briefly shows how the parser operation works:
 
 [insert diagram]
@@ -250,7 +289,7 @@ The following sequence diagram shows how the Delete By Keywords mechanism works:
 * **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
-    
+
 
 
 ### \[Proposed\] Undo/redo feature
@@ -351,49 +390,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
-### Add contacts with optional arguments
-
-#### Implementation
-
-The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
-without the need to include contact details.
-
-#### Usage
-
-Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
-
-1. The user first launches Socius and adds a new contact by name, without any contact details.
-
-2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
-
-3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
-   instantiating a new `Person` object.
-
-4. The command communicates with the `Model` to add the person to the existing AddressBook.
-
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-
-The following sequence diagram shows how the AddCommand function works:
-
-![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![UpdatedAddCommand](images/UpdatedAddCommand.png)
-
-#### Design considerations:
-
-**Aspect: How contacts are saved with optional arguments:**
-
-* **Alternative 1 (current choice):** Save a contact, with empty strings as arguments if argument is not included in
-  input.
-    * Pros: Easy to implement.
-    * Cons: May result in unexpected bugs.
-
-* **Alternative 2:** Save all optional attributes of a contact as Optional type.
-    * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
-    * Cons: Harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
