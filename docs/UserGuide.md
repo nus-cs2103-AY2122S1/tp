@@ -27,7 +27,7 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
    Some example commands you can try:
 
-   * **`list`** : Lists all students.
+   * **`list`** : Lists all students and lessons.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
 
@@ -99,7 +99,7 @@ Examples:
 
 Adds a lesson to the TuitiONE.
 
-Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
+Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 <div markdown="span" class="alert alert-primary">
 
@@ -121,9 +121,9 @@ Examples:
 
 ### Listing all students: `list`
 
-Shows a list of all students in the TuitiONE.
+Shows a list of all students and lessons in the TuitiONE.
 
-Format: `list`
+Command Format: `list`
 
 ### Locating students by name: `find`
 
