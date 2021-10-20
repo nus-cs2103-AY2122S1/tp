@@ -4,20 +4,20 @@ title Final state
 
 package Tuitione {
     package Lessons {
-        object __Lesson__ {
+        object "<u>L1:Lesson" as Lesson{
         lessonCode = Math-P2-Wed-1800
         grade = P2
         size = 1
         }
     }
     package Students {
-        object __Student__ {
+        object "<u>S1:Student" as Student {
         Name = Alice
         Grade = P2
         }
     }
 
-    __Lesson__ <-R-> __Student__
+    Lesson <-R-> Student
 
 }
 
