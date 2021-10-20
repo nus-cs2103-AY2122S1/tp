@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Returns an unmodifiable view of the filtered tag list
+     * Returns an unmodifiable view of the observable tag list.
      */
     @Override
     public ObservableList<Tag> getObservableTagList() {
