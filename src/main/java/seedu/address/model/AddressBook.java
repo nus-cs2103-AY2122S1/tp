@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.calendarfx.model.Calendar;
 
@@ -175,11 +176,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                        && persons.equals(((AddressBook) other).persons))
+                        && entries.equals(((AddressBook) other).entries)
+                        && tags.equals(((AddressBook) other).tags);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, entries, tags);
     }
 }
