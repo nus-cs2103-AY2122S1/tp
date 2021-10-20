@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 import seedu.plannermd.testutil.patient.PatientBuilder;

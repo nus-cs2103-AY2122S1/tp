@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
 

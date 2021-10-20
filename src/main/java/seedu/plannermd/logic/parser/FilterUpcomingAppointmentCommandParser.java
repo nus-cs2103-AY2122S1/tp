@@ -15,6 +15,9 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
 import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
 
+/**
+ * Parses input arguments and creates a new FilterUpcomingAppointmentCommand object.
+ */
 public class FilterUpcomingAppointmentCommandParser implements
         Parser<FilterUpcomingAppointmentCommand> {
 
@@ -25,7 +28,8 @@ public class FilterUpcomingAppointmentCommandParser implements
     /**
      * Parses the given {@code String} of arguments in the context of the FilterUpcomingAppointmentCommand
      * and returns a FilterUpcomingAppointmentCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException If the user input does not conform the expected format
      */
     public FilterUpcomingAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);

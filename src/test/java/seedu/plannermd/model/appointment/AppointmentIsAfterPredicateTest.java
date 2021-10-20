@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 
 public class AppointmentIsAfterPredicateTest {
@@ -45,11 +46,9 @@ public class AppointmentIsAfterPredicateTest {
 
     @Test
     public void test_nullKeywords_throwsException() {
-        assertThrows(NullPointerException.class,
-                () -> new AppointmentIsAfterPredicate((LocalDate) null));
+        assertThrows(NullPointerException.class, () -> new AppointmentIsAfterPredicate((LocalDate) null));
 
-        assertThrows(NullPointerException.class,
-                () -> new AppointmentIsAfterPredicate((LocalDateTime) null));
+        assertThrows(NullPointerException.class, () -> new AppointmentIsAfterPredicate((LocalDateTime) null));
     }
 
     @Test

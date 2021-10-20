@@ -3,8 +3,8 @@ package seedu.plannermd.logic.parser;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.commands.CommandTestUtil.FILTER_VALID_END_DATE;
 import static seedu.plannermd.logic.commands.CommandTestUtil.FILTER_VALID_START_DATE;
-import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_STRING_START_DATE;
 import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_STRING_END_DATE;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_STRING_START_DATE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
@@ -18,6 +18,7 @@ import static seedu.plannermd.logic.parser.FilterAppointmentCommandParser.NO_ARG
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.logic.commands.apptcommand.FilterAppointmentCommand;
 import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
@@ -133,7 +134,7 @@ public class FilterAppointmentCommandParserTest {
         filters = new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
         assertParseSuccess(parser, userInput, expectedCommand);
-        userInput = PREFIX_START + " " + VALID_STRING_START_DATE;  // Whitespace before startDate
+        userInput = PREFIX_START + " " + VALID_STRING_START_DATE; // Whitespace before startDate
         assertParseSuccess(parser, userInput, expectedCommand);
         userInput = PREFIX_START + "2/8/2021"; // Single digit date and month
         filters = new AppointmentFiltersBuilder()
@@ -146,7 +147,7 @@ public class FilterAppointmentCommandParserTest {
         filters = new AppointmentFiltersBuilder().withEndDate(FILTER_VALID_END_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
         assertParseSuccess(parser, userInput, expectedCommand);
-        userInput = PREFIX_END + " " + VALID_STRING_END_DATE + "  ";  // Whitespace before endDate
+        userInput = PREFIX_END + " " + VALID_STRING_END_DATE + "  "; // Whitespace before endDate
         assertParseSuccess(parser, userInput, expectedCommand);
         userInput = PREFIX_END + "2/8/2021"; // Single digit date and month
         filters = new AppointmentFiltersBuilder()
@@ -156,7 +157,7 @@ public class FilterAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_NoFieldSpecified_success() {
+    public void parse_noFieldSpecified_success() {
         // Should show all appointments
         AppointmentFilters filters = new AppointmentFiltersBuilder().build();
         FilterAppointmentCommand expectedCommand = new FilterAppointmentCommand(filters);

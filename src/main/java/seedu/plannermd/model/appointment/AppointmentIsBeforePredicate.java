@@ -6,10 +6,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
+/**
+ * Tests that a {@code Appointment}'s has a starting time that is before the endDate given.
+ */
 public class AppointmentIsBeforePredicate implements Predicate<Appointment> {
 
     private final LocalDateTime filerEndDateTime;
 
+    /**
+     * Creates an AppointmentIsAfterPredicate with a LocalDate object.
+     */
     public AppointmentIsBeforePredicate(LocalDate filterEndDateTime) {
         requireNonNull(filterEndDateTime);
         // The filter end date should be the last moment of the day since the filter is inclusive

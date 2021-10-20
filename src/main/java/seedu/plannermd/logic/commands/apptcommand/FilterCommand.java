@@ -8,6 +8,9 @@ import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.appointment.Appointment;
 
+/**
+ * Represents an Filter command with hidden internal logic and the ability to be executed.
+ */
 public abstract class FilterCommand extends AppointmentCommand {
 
     private AppointmentFilters filters;

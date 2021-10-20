@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         logger.fine("Initializing with plannermd: " + plannerMd + " and user prefs " + userPrefs);
 
         this.state = State.PATIENT;
-        this.plannerMd = new PlannerMd();
+        this.plannerMd = new PlannerMd(plannerMd);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPatients = new FilteredList<>(this.plannerMd.getPatientList());
         filteredDoctors = new FilteredList<>(this.plannerMd.getDoctorList());

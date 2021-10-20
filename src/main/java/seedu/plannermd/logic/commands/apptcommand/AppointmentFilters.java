@@ -16,25 +16,51 @@ import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
 
+/**
+ * Stores the details of all the filters to filter the appointment list in plannermd with.
+ */
 public class AppointmentFilters {
 
+    /**
+     * Appointment starts after a certain point in time.
+     */
     private Predicate<Appointment> startAfter = x -> true;
+    /**
+     * Appointment starts before a certain point in time.
+     */
     private Predicate<Appointment> startBefore = x -> true;
+    /**
+     * Appointment contains a patient whose names matches a given set of keywords.
+     */
     private Predicate<Appointment> hasPatient = x -> true;
+    /**
+     * Appointment contains a doctor whose names matches a given set of keywords.
+     */
     private Predicate<Appointment> hasDoctor = x -> true;
 
     private AppointmentFilters() {}
 
+    /**
+     * Initialises a {@code AppointmentFilters} that filters through all appointments in the
+     * plannermd.
+     */
     public static AppointmentFilters allAppointmentsFilter() {
         return new AppointmentFilters();
     }
 
+    /**
+     * Initialises a {@code AppointmentFilters} that filters through all upcoming appointments in
+     * the plannermd.
+     */
     public static AppointmentFilters upcomingAppointmentsFilter() {
         AppointmentFilters filter = new AppointmentFilters();
         filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES)));
         return filter;
     }
 
+    /**
+     * Copy constructor.
+     */
     public static AppointmentFilters copyAppointmentFilters(AppointmentFilters filterToCopy) {
         AppointmentFilters filters = new AppointmentFilters();
         filters.startAfter = filterToCopy.startAfter;
@@ -77,8 +103,12 @@ public class AppointmentFilters {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         AppointmentFilters that = (AppointmentFilters) o;
         return startAfter.equals(that.startAfter) && startBefore.equals(that.startBefore)
                 && hasPatient.equals(that.hasPatient) && hasDoctor.equals(that.hasDoctor);
@@ -89,19 +119,4 @@ public class AppointmentFilters {
         return Objects.hash(startAfter, startBefore, hasPatient, hasDoctor);
     }
 
-    public Predicate<Appointment> getStartAfter() {
-        return startAfter;
-    }
-
-    public Predicate<Appointment> getStartBefore() {
-        return startBefore;
-    }
-
-    public Predicate<Appointment> getHasPatient() {
-        return hasPatient;
-    }
-
-    public Predicate<Appointment> getHasDoctor() {
-        return hasDoctor;
-    }
 }

@@ -7,10 +7,16 @@ import java.util.function.Predicate;
 
 import seedu.plannermd.commons.util.StringUtil;
 
+/**
+ * Tests that a {@code Appointment}'s has a patient whose name matches any of the keywords given.
+ */
 public class AppointmentContainsPatientPredicate implements Predicate<Appointment> {
 
     private final List<String> keywords;
 
+    /**
+     * Creates an AppointmentContainsPredicate based on a given list of keywords.
+     */
     public AppointmentContainsPatientPredicate(List<String> keywords) {
         requireNonNull(keywords);
         this.keywords = keywords;

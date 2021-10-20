@@ -5,6 +5,9 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
+/**
+ * Filters the appointment records in the plannermd.
+ */
 public class FilterAppointmentCommand extends FilterCommand {
 
     public static final String COMMAND_WORD = "appt -f";
@@ -16,6 +19,11 @@ public class FilterAppointmentCommand extends FilterCommand {
             + COMMAND_WORD + " " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "Bob "
             + PREFIX_START + "15/10/2021 " + PREFIX_END + "18/10/2021";
 
+    /**
+     * Creates a new FilterAppointmentCommand object.
+     *
+     * @param filters The filter to be applied tp the appointment list in the plannermd.
+     */
     public FilterAppointmentCommand(AppointmentFilters filters) {
         super(filters);
     }

@@ -19,21 +19,15 @@ import seedu.plannermd.logic.commands.apptcommand.FilterAppointmentCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
 import seedu.plannermd.model.appointment.AppointmentContainsPatientPredicate;
+import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
 import seedu.plannermd.model.appointment.AppointmentIsBeforePredicate;
 
+/**
+ * Parses input arguments and creates a new FilterAppointmentCommand object.
+ */
 public class FilterAppointmentCommandParser implements Parser<FilterAppointmentCommand> {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
-            .withResolverStyle(ResolverStyle.STRICT);
-
-    private static final String DATE_CONSTRAINTS = "Dates should be of the format DD/MM/YYYY "
-            + "and adhere to the following constraints:\n"
-            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "3. Year must be 4 characters.";
-
-    public static final String INVALID_DATE_MESSAGE = "Invalid date provided.\n" + DATE_CONSTRAINTS;
     public static final String END_DATE_BEFORE_START_DATE_MESSAGE = "End date cannot be before start date.";
     public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
             + FilterAppointmentCommand.MESSAGE_USAGE;
@@ -43,9 +37,10 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
     private LocalDate endDate;
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FilterAllAppointmentCommand
-     * and returns a FilterAllAppointmentCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the FilterAppointmentCommand
+     * and returns a FilterAppointmentCommand object for execution.
+     *
+     * @throws ParseException If the user input does not conform the expected format
      */
     public FilterAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -70,12 +65,12 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
             filters.setHasPatient(new AppointmentContainsPatientPredicate(stringToList(patientKeywords)));
         }
         if (argumentMultimap.getValue(PREFIX_START).isPresent()) {
-            startDate = stringToDate(argumentMultimap.getValue(PREFIX_START).get());
+            startDate = ParserUtil.stringToDate(argumentMultimap.getValue(PREFIX_START).get());
             filters.setStartAfter(new AppointmentIsAfterPredicate(startDate));
             hasStartFilter = true;
         }
         if (argumentMultimap.getValue(PREFIX_END).isPresent()) {
-            endDate = stringToDate(argumentMultimap.getValue(PREFIX_END).get());
+            endDate = ParserUtil.stringToDate(argumentMultimap.getValue(PREFIX_END).get());
             filters.setStartBefore(new AppointmentIsBeforePredicate(endDate));
             hasEndFilter = true;
         }
@@ -92,20 +87,6 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
         }
         String[] nameKeywords = string.trim().split("\\s+");
         return Arrays.asList(nameKeywords);
-    }
-
-    private LocalDate stringToDate(String string) throws ParseException {
-        requireNonNull(string);
-        if (string.trim().isEmpty()) {
-            throw new ParseException(NO_ARGUMENTS_MESSAGE);
-        }
-
-        try {
-            return LocalDate.parse(string.trim(), DATE_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(INVALID_DATE_MESSAGE);
-
-        }
     }
 
     private boolean verifyStartDateBeforeEndDate() {

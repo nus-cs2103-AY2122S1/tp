@@ -8,6 +8,7 @@ import static seedu.plannermd.logic.parser.CommandParserTestUtil.assertParseSucc
 import static seedu.plannermd.logic.parser.FilterUpcomingAppointmentCommandParser.NO_ARGUMENTS_MESSAGE;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.logic.commands.apptcommand.FilterUpcomingAppointmentCommand;
 import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
@@ -85,7 +86,7 @@ public class FilterUpcomingAppointmentCommandParserTest {
     }
 
     @Test
-    public void parse_NoFieldSpecified_success() {
+    public void parse_noFieldSpecified_success() {
         // Should show all appointments
         AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming().build();
         FilterUpcomingAppointmentCommand expectedCommand = new FilterUpcomingAppointmentCommand(filters);
