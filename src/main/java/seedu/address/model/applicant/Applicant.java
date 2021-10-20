@@ -145,6 +145,6 @@ public class Applicant {
     }
 
     public String getApplicationSummary() {
-        return "Applied for: " + application.getPosition().getTitle() + "; Status: " + application.getStatus();
+        return "Applied for: " + application.getDescription();
     }
 }

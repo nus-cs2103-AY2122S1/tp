@@ -35,6 +35,13 @@ public class Application {
         return new Application(position, applicationStatus);
     }
 
+    /**
+     * Returns a description of the application and its status.
+     */
+    public String getDescription() {
+        return position.getTitle() + "; Status: " + status;
+    }
+
     public Position getPosition() {
         return position;
     }
