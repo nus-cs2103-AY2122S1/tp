@@ -128,16 +128,10 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* has a `UniqueTagList` in `AddressBook` , which contains `Tag`(s) that a `Person` can reference. This allows `AddressBook` to only require one `Tag` object per unique tag.
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -153,6 +147,52 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
+
+### Field options
+
+We provide options for developers to easily customise the constraints on the user input such as whether the input is required or whether it is editable. These field options are encapsulated within the `Field` interface, which further branches into more concrete interfaces which can be implemented by `Person` attributes.
+
+Field options largely dictate how the parsers respond to user's inputs.
+
+Option | Description
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | If set to `true`, the field is allowed to be blank (for string fields such as phone, name, etc)
+IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for int/Date fields such as LastMet, etc)
+DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Person` creation.
+IS_EDITABLE | If set to `true`, the field is editable by the user through edit command.
+
+### Field interfaces
+
+<img src="images/FieldClassDiagram.png" width="700" />
+
+The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
+
+#### OptionalStringBasedField
+
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `true`
+IS_NULL_VALUE_ALLOWED | `false`
+DEFAULT_VALUE | `""`
+IS_EDITABLE | `true`
+
+#### OptionalNonStringBasedField
+
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `true`
+IS_NULL_VALUE_ALLOWED | `true`
+DEFAULT_VALUE | `""`
+IS_EDITABLE | `true`
+
+#### RequiredField
+
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `false`
+IS_NULL_VALUE_ALLOWED | `false`
+DEFAULT_VALUE | `""`(But not applicable here)
+IS_EDITABLE | `true`
 
 --------------------------------------------------------------------------------------------------------------------
 
