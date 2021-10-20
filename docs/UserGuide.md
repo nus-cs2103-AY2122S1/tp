@@ -351,8 +351,8 @@ Advanced user Format:`g (INDEX) /l`
 
 Examples:
 
-* `person 1 /list`
-* `p 2 /l`
+* `group 1 /list`
+* `g 2 /l`
 
 #### _List all subgroups in a group_ : `group (INDEX) /listsubgroup`
 
