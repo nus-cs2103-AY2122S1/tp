@@ -304,7 +304,7 @@ Examples:
 
 #### Deleting a lesson : `ldelete`
 
-Deletes the specified lesson from the specified student in TAB.
+Deletes the specified lesson of the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
@@ -327,6 +327,34 @@ Examples:
   
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
+
+
+#### Editing a lesson : `ledit`
+
+Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
+
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ledit` command:**<br>
+
+* Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson type (i.e. recurring and makeup).
+  
+* The lesson index refers to the index number shown in the lesson list of the student.
+
+* The index and lesson index **must be a positive integer** 1, 2, 3, …
+
+</div>
+
+Examples:
+* `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
+* `ledit 2 3 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
+* `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
 ### Viewing the Schedule
 
