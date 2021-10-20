@@ -2,11 +2,15 @@
 layout: page title: User Guide
 ---
 
+# Socius User Guide
+
 Socius is a **desktop app for managing CS2103T tutorial classmates’ contacts for international students, optimized for
 use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can
 type fast, Socius can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
     1. Quick Start
     2. Features
         1. Viewing help `help`
@@ -26,31 +30,31 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Before you can use the application, you need to have ***Java 11*** installed in your Computer.
 
-1. Download the latest `socius.jar`.
+1. Download the latest `Socius.jar` on our [Releases](https://github.com/AY2122S1-CS2103T-W08-4/tp/releases) page.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Socius Application.
+1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
-   contains some sample data.<br>
+1. *Double-click* the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
+   
    ![Ui](images/Ui.png)
+   
+1. Note that the app comes with some sample data by default. Type `clear` in the command box to remove those sample data.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
-   Some example commands you can try:
+1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [command summary](#command-summary) for an overview of all commands.
 
-    * **`list`** : Lists all contacts.
+1. The following are some example of commands you can try. Type the command in the command box and press `Enter` to execute it.
+    
+    * `list` : Lists all contacts.
 
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com nat/Singaporean` : Adds a contact named `John Doe` to Socius.
+    * `add n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
 
-    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-    * **`clear`** : Deletes all contacts.
+    * `clear` : Deletes all contacts.
 
-    * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+    * `exit` : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -94,11 +98,11 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
 [r/REMARK] [t/TAG]…​`
 
-* Only `Name` must be provided.
-* All other fields are optional.
+* Only `n/NAME` field is *compulsory*, while other fields are *optional*.
+* The order of the fields does not matter
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -121,7 +125,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: `edit INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
 [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
@@ -218,12 +222,10 @@ the data of your previous Socius home folder.
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
-|**
-Add** | `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| e.g., `add n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
-|**Clear** | `clear` | |
-|**Delete** | `delete INDEX` | e.g., `delete 3`|
-|**
-Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/[TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
-|**Find** | `find KEYWORD [MORE_KEYWORDS]` | e.g., `find g/F tg/07` |
-|**List** | `list` | |
-|**Help** | `help` | |
+|**Add** | `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| `add n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
+|**Clear** | `clear` | `clear` |
+|**Delete** | `delete INDEX` | `delete 3`|
+|**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com` |
+|**Find** | `find KEYWORD [MORE_KEYWORDS]` | `find g/F tg/07` |
+|**List** | `list` | `list` |
+|**Help** | `help` | `help` |
