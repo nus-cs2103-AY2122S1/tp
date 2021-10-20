@@ -33,7 +33,6 @@ import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 //import safeforhall.testutil.EditPersonDescriptorBuilder;
 import safeforhall.testutil.PersonBuilder;
@@ -93,7 +92,7 @@ public class AddressBookParserTest {
 
         FindCompositePredicate predicate = new FindCompositePredicate();
         predicate.setName(new Name(joint));
-        predicate.setRoom(new Room("A100"));
+        predicate.setRoom("A100");
         predicate.setVaccStatus(new VaccStatus("T"));
 
         assertEquals(new FindCommand(predicate), command);
