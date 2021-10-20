@@ -7,10 +7,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.fast.commons.util.Colors;
 import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
+import javafx.scene.image.Image;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -36,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private VBox phone;
     @FXML
     private Label address;
     @FXML
@@ -56,6 +59,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label appointmentCount;
 
+    private Image phoneImage = new Image(this.getClass().getResourceAsStream("/images/phone.png"));
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -64,7 +69,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
+//        phone.setText(person.getPhone().value);
+        phone.getChildren().add(new Phone(person.getPhone().value, phoneImage));
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
