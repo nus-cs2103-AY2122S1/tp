@@ -191,6 +191,68 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+The features mentioned are:
+- [Adding contacts with optional details](#add-contacts)
+- [Finding multiple contacts by keywords](#find-by-keywords)
+- [Deleting multiple contacts by keywords](#delete-by-keywords)
+- {and so on...}
+
+### Add contacts
+
+### Find by keywords
+
+### Delete by keywords
+
+#### Implementation
+
+The Delete By Keyword mechanism will delete contacts specified by a given set of keywords. Any contacts containing any of the specified keywords will be deleted.
+
+It works by filtering for the contacts in the `model` and deleting them one by one.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
+
+[insert diagram]
+
+Given below is an exmaple usage scenario and how the Delete By Keyword mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
+
+Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse the arguments provided.
+Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
+
+Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step. 
+The following sequence diagram briefly shows how the parser operation works:
+
+[insert diagram]
+
+Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
+
+Step 6. It will then iterate through the list and call `deletePerson` to remove contact with matching keywords one by one.
+
+Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
+
+The following sequence diagram shows how the Delete By Keywords mechanism works:
+
+[insert diagram]
+
+#### Design considerations:
+
+**Aspect: How delete multiple executes:**
+
+* **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
+    * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
+    * Cons: Challenging to implement as it requires parsing and checking multiple dynamic parameters. It also may have performance issues in terms of memory usage.
+
+* **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
+    * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
+    * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
+    
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
