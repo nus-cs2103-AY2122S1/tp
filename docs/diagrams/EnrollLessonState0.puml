@@ -4,14 +4,14 @@ title Initial state
 
 package Tuitione {
     package Lessons {
-        object Lesson {
+        object __Lesson__ {
         lessonCode = Math-P2-Wed-1800
         grade = P2
         size = 0
         }
     }
     package Students {
-        object Student {
+        object __Student__ {
         Name = Alice
         Grade = P2
         }
