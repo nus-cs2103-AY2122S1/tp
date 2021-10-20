@@ -14,7 +14,7 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 /**
  * A ui for the status bar that is displayed at the footer of the application.
  */
-public class TabPaneFooter extends UiPart<Region> {
+public class TabPaneHeader extends UiPart<Region> {
 
     private static final String FXML = "TabPane.fxml";
 
@@ -36,7 +36,7 @@ public class TabPaneFooter extends UiPart<Region> {
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public TabPaneFooter(Logic logic) {
+    public TabPaneHeader(Logic logic) {
         super(FXML);
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.equals(contacts)) {

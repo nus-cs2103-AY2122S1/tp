@@ -71,7 +71,10 @@ public class ShowCommand extends Command {
             if (filteredList.isEmpty()) {
                 throw new CommandException(MESSAGE_NO_NAME);
             } else {
-                model.updateFilteredPersonList(model.PREDICATE_SHOW_ALL_PERSONS);
+                if (model.getPersonListControl() != null) {
+                    model.setTabIndex(0);
+                }
+                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
                 this.executeWithName(model);
             }
         }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root maxHeight="1000.0" maxWidth="1200.0" minHeight="910.0" minWidth="950.0" onCloseRequest="#handleExit" title="CohortConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="910.0" minWidth="950.0" onCloseRequest="#handleExit" title="CohortConnect" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/logo.png" />
   </icons>
@@ -47,18 +47,18 @@
                </children>
             </HBox>
 
-        <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                                <StackPane fx:id="commandBoxPlaceholder" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
-            <HBox fx:id="mainHBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="940.0" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <HBox fx:id="mainHBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                <children>
                   <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0" HBox.hgrow="ALWAYS">
                     <columnConstraints>
@@ -74,7 +74,7 @@
                               <Insets />
                            </GridPane.margin>
                         </StackPane>
-                   <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="500.0" style="-fx-background-color: #121212#121212;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                   <StackPane fx:id="personListPanelPlaceholder" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: #121212#121212;" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                      </children>
                   </GridPane>
                   <StackPane id="personCardPlaceholder" fx:id="personCardPlaceholder" minWidth="400.0" style="-fx-background-color: #121212;">
@@ -87,12 +87,13 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </HBox>
-            <HBox fx:id="footerHBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 25%);">
+            <HBox fx:id="footerHBar" maxHeight="1.7976931348623157E308" style="-fx-background-color: derive(#1d1d1d, 25%)derive(#1d1d1d, 25%);">
                <children>
               <StackPane fx:id="statusbarPlaceholder" alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                      <HBox.margin>
                         <Insets left="10.0" />
-                     </HBox.margin></StackPane>
+                     </HBox.margin>
+                  </StackPane>
                </children>
                <padding>
                   <Insets bottom="2.0" top="2.0" />
