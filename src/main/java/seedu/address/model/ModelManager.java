@@ -107,6 +107,7 @@ public class ModelManager implements Model {
         GroupName groupName = target.getGroupName();
         updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
         Group retrievedGroup = getFilteredGroupList().get(0);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
 
         // Remove reference to student from the group that the student belonged to
         retrievedGroup.removeStudent(target);
@@ -126,7 +127,6 @@ public class ModelManager implements Model {
         retrievedGroup.addStudent(student);
 
         csBook.addStudent(student);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override

@@ -323,10 +323,14 @@ Step 1. Starting with an empty model, the user will first have to create an empt
 objects to. The user executes a command that will create a new `Group` and add it to the model by calling
 `ModelManager#addGroup(Group)`.
 
+![GroupManagementSequence0](images/GroupManagementSequence0.png)
+
 Step 2. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
 be a part of an existing group. This command will then call `ModelManager#addStudent(Student)` with the created
 `Student` which adds the student to the model, and then finds the corresponding `Group` that the `Student` will be
 added to, and add a reference to the `Student` in the `Group`.
+
+![GroupManagementSequence1](images/GroupManagementSequence1.png)
 
 (Optional steps) The user may manipulate the groups or individual students using any of the available commands, but
 these will not be discussed here as the focus is on how the grouping of students is done.
@@ -336,10 +340,14 @@ then invokes `ModelManager#deleteStudent(Student)`, which will find the respecti
 using the stored `Group` reference in the `Student` and remove the `Group`'s reference to the `Student`. Then, the
 `Student` itself is deleted from the model.
 
+![GroupManagementSequence2](images/GroupManagementSequence2.png)
+
 Step 4. The user executes a command to delete a `Group` in order to, for example, remove an entire group and its
 students after the user has finished teaching a module. The command invokes `ModelManager#deleteGroup(Group)`, which
 finds the `Group` in the model, and for each `Student` reference found, removes them from `csbook`. After all `Student`
 objects associated with the `Group` has been removed, the `Group` itself is then deleted.
+
+![GroupManagementSequence3](images/GroupManagementSequence3.png)
 
 #### Design considerations
 
