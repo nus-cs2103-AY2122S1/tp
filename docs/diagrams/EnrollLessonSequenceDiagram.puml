@@ -10,9 +10,8 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "l1:Lesson" as LessonL1 MODEL_COLOR
-participant "newL1:Lesson" as NewLesson MODEL_COLOR
-participant "s1:Student" as StudentS1 MODEL_COLOR
+participant "l1:Lesson" as Lesson MODEL_COLOR
+participant ":Alice:Student" as Student MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 
 
@@ -54,34 +53,21 @@ deactivate TuitioneParser
 LogicManager -> EnrollLessonCommand : execute()
 activate EnrollLessonCommand
 
-EnrollLessonCommand -> Model : getStudent(1)
+EnrollLessonCommand -> Lesson : removeStudent(2)
+activate Lesson
+
+Lesson -> Student : EnrollFromLesson(Alice)
+activate Student
+
+Student -> Lesson
+deactivate Student
+
+Lesson --> EnrollLessonCommand
+deactivate Lesson
+
+EnrollLessonCommand --> Model : setNewLesson(l1)
 activate Model
 
-Model --> EnrollLessonCommand : s1
-
-EnrollLessonCommand -> Model : getLesson(1)
-Model --> EnrollLessonCommand : l1
-
-
-EnrollLessonCommand --> StudentS1 : createClone()
-activate "StudentS1"
-StudentS1 --> EnrollLessonCommand : newS1
-deactivate "StudentS1"
-
-EnrollLessonCommand --> LessonL1 : createClone()
-activate "LessonL1"
-LessonL1 --> EnrollLessonCommand : newL1
-deactivate "LessonL1"
-
-EnrollLessonCommand --> NewLesson :addStudent(newS1)
-activate "NewLesson"
-NewLesson --> EnrollLessonCommand
-deactivate "NewLesson"
-
-EnrollLessonCommand -> Model : setStudent(s1, newS1)
-Model --> EnrollLessonCommand
-
-EnrollLessonCommand -> Model : setLesson(l1, newL1)
 Model --> EnrollLessonCommand
 deactivate Model
 
@@ -97,4 +83,5 @@ deactivate EnrollLessonCommand
 
 [<--LogicManager
 deactivate LogicManager
+
 @enduml
