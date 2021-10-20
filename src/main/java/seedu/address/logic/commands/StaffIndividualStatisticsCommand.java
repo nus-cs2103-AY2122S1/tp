@@ -53,11 +53,25 @@ public class StaffIndividualStatisticsCommand extends Command {
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
+
+    /**
+     * Constructor for the lookup command to display staff statistics.
+     * Staff statistics displayed are total work hours for the month.
+     *
+     * @param predicate The {@code PersonContainsFieldsPredicate} that decides
+     *                  which staff to display the statistics of.
+     */
     public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate) {
         this.predicate = predicate;
         this.index = -1;
     }
 
+    /**
+     * Constructor for the lookup command to display staff statistics by index.
+     *
+     * @param predicate The predicate to test the staff with.
+     * @param index The index of the staff to get.
+     */
     public StaffIndividualStatisticsCommand(PersonContainsFieldsPredicate predicate, Index index) {
         this.predicate = predicate;
         this.index = index.getZeroBased();
