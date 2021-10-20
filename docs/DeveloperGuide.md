@@ -10,7 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) from Baeldung
-  * Adapted and modified. See section on _[Encryption]()_.
+  * Adapted and modified.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -147,7 +147,7 @@ The `Storage` component,
 
 ### Encryption component
 
-**API** : [`Cryptable.java`]()
+**API** : `Cryptable.java`
 
 <img src="images/CryptableClassDiagram.png" width="200" />
 
