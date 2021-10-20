@@ -78,6 +78,7 @@ public class ProgressList {
      * @param progressToAdd the progress to be added
      */
     public void addProgress(Progress progressToAdd) {
+        requireNonNull(progressToAdd);
         while (progressList.size() > 10) {
             progressList.remove(0);
         }
