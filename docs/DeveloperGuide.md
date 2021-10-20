@@ -353,7 +353,7 @@ The figure below shows the sequence diagram for adding a lesson to a student.
 ![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
 
 The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in 
-the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student current has. Note that `toAdd`
+the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
 will not be added if there is an existing lesson with a clashing date and timeslot.
 
 ```java
