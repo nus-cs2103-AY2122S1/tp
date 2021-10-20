@@ -156,13 +156,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Undo/redo feature
 
-The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `Logic Manager`. It supports the undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
+The undo/redo mechanism is facilitated by an `UndoRedoStack`, which resides in `LogicManager`. It supports the undoing and redoing of commands that modifies the state of the address book (e.g. `add`, `edit`). Such commands will inherit from `UndoableCommand`.
 
 `UndoRedoStack` only deals with `UndoableCommand`. Commands that cannot be undone will inherit from `Command` instead.
 
 ![UndoableCommandInheritance](images/UndoableCommandInheritance.png)
 
-`UndoableCommand` adds an extra layer between the abstract `Command` class and the concrete commands that can be undone such as `AddCommand`, `DeleteCommand`. `UndoableCommand` makes the `Command#execute()` method concrete, while the child classes implements an `executeUndoableCommand()` method that preprocesses the Command before execution. Each child class knows how to undo/redo by itself.
+`UndoableCommand` adds an extra layer between the abstract `Command` class and the concrete commands that can be undone such as `AddCommand`, `DeleteCommand`.
+`UndoableCommand` makes the `Command#execute()` method concrete, while the child classes implement an `executeUndoableCommand()` method that preprocesses the Command before execution. Each child class of `UndoableCommand` knows how to undo/redo by itself.
 
 Commands that are not undoable have similar implementations as the code snippet below:
 
