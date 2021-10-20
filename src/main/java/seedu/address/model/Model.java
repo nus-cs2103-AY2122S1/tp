@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -87,14 +86,11 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /**
-     * Updates the currently displayed person's taskList to the given {@code taskList}.
-     * @throws NullPointerException if {@code taskList} is null.
-     */
-    void updateDisplayTaskList(List<Task> taskList);
-
-    /** Returns an unmodifiable view of the display task list. */
+    /** Returns an unmodifiable view of the task list to be displayed on the GUI. */
     ObservableList<Task> getDisplayTaskList();
+
+    /** Displays {@code person}'s task list on the GUI. */
+    void displayPersonTaskList(Person person);
 
     void updateSortedPersonList(boolean isReverseOrder);
 }

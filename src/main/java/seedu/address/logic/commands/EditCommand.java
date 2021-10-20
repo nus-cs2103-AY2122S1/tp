@@ -106,8 +106,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
-        List<Task> tasks = personToEdit.getTasks();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
                 updatedDescription);
@@ -150,6 +150,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Description description;
+        private List<Task> tasks;
 
         public EditPersonDescriptor() {}
 
@@ -164,13 +165,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setDescription(toCopy.description);
+	    setTasks(toCopy.tasks);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks);
         }
 
         public void setName(Name name) {
@@ -213,6 +215,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(description);
         }
 
+        public void setTasks(List<Task> tasks) {
+            this.tasks = tasks;
+        }
+
+        public Optional<List<Task>> getTasks() {
+            return Optional.ofNullable(tasks);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -249,7 +259,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTasks().equals(e.getTasks());
         }
     }
 }
