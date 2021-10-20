@@ -119,14 +119,14 @@ Example:
 - Click open to import contacts.
 
 Note:  
-- `.csv` file must have corresponding **headers**:
+- `.csv` file should have corresponding **headers**:
   - name
-  - phone
-  - email
-  - address
+  - phone(optional)
+  - email(optional)
+  - address(optional)
   - tags(optional)
 - Addresses containing **commas (,)** should be wrapped in **"double quotes"**.
-- Multiple tags should be seperated via **single whitespace**.
+- Multiple tags should be seperated via **semicolons (;)**.
 - Make sure to save the spreadsheet data as **`.csv`** and not **`.csv UTF-8`**.
 - A template `importTemplate.csv` can be found in the default directory of the file browser.
 
