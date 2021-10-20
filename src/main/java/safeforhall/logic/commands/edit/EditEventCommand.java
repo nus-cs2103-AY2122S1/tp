@@ -26,8 +26,8 @@ import safeforhall.model.event.Venue;
 public class EditEventCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the events identified "
-            + "by the index numbers used in the displayed events list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
+            + "by the index number used in the displayed events list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (positive integers only) "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
@@ -126,7 +126,6 @@ public class EditEventCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);

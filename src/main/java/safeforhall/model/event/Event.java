@@ -46,7 +46,22 @@ public class Event {
     /**
      * Returns true if both events have the same name, date, venue and capacity.
      * This defines a weaker notion of equality between two events.
-     * @param other
+     */
+    public boolean isSameEvent(Event otherEvent) {
+        if (otherEvent == this) {
+            return true;
+        }
+
+        return otherEvent != null
+                && otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getCapacity().equals(getCapacity());
+    }
+
+    /**
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {
