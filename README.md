@@ -13,6 +13,9 @@ Socius is an application which serves as a platform for CS2103T students to bett
     * Tag classmates based on assigned project groups
     * Filter classmates based on different project groups
 
+* See [User Guide](https://ay2122s1-cs2103t-w08-4.github.io/tp/UserGuide.html)
+
+* See [Developer Guide](https://ay2122s1-cs2103t-w08-4.github.io/tp/DeveloperGuide.html)
 
 * For the detailed documentation of this project, see
   the **[Socius Product Website](https://ay2122s1-cs2103t-w08-4.github.io/tp/)**.
