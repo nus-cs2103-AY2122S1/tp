@@ -1,0 +1,100 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":LessonEditCommandParser" as LessonEditCommandParser LOGIC_COLOR
+participant "eld:EditLessonDescriptor" as EditLessonDescriptor LOGIC_COLOR
+participant "le:LessonEditCommand" as LessonEditCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "editedPerson:Person" as Person LOGIC_COLOR
+participant "editedLesson:Lesson" as Lesson LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("ledit 1 2 time/1300-1500 subject/Science")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("ledit 1 2 time/1300-1500 subject/Science")
+activate AddressBookParser
+
+create LessonEditCommandParser
+AddressBookParser -> LessonEditCommandParser
+activate LessonEditCommandParser
+
+LessonEditCommand --> AddressBookParser
+deactivate LessonEditCommandParser
+
+AddressBookParser -> LessonEditCommandParser : parse("1 2 time/1300-1500 subject/Science")
+activate LessonEditCommandParser
+
+create EditLessonDescriptor
+LessonEditCommandParser -> EditLessonDescriptor
+activate EditLessonDescriptor
+
+EditLessonDescriptor --> LessonEditCommandParser
+deactivate
+
+create LessonEditCommand
+LessonEditCommandParser -> LessonEditCommand : eld
+activate LessonEditCommand
+
+LessonEditCommand --> LessonEditCommandParser : le
+deactivate LessonEditCommand
+
+LessonEditCommandParser --> AddressBookParser : le
+deactivate LessonEditCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+LessonEditCommandParser -[hidden]-> AddressBookParser
+destroy LessonEditCommandParser
+
+AddressBookParser --> LogicManager : le
+deactivate AddressBookParser
+
+LogicManager -> LessonEditCommand : executeUndoableCommand()
+activate LessonEditCommand
+
+create Lesson
+LessonEditCommand -> Lesson : createEditedLesson(eld)
+activate Lesson
+
+Lesson --> LessonEditCommand : editedLesson
+deactivate Lesson
+
+LessonEditCommand -> Model : hasClashingLesson(editedLesson, lessonToEdit)
+activate Model
+
+Model --> LessonEditCommand
+deactivate Model
+
+create Person
+LessonEditCommand -> Person : PersonUtil.createEditedPerson(personToEdit, updatedLessons)
+activate Person
+
+Person --> LessonEditCommand : person
+deactivate Person
+
+LessonEditCommand -> Model : setPerson(person, editedPerson)
+activate Model
+
+Model --> LessonEditCommand
+deactivate Model
+
+create CommandResult
+LessonEditCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> LessonEditCommand
+deactivate CommandResult
+
+LessonEditCommand --> LogicManager : result
+deactivate LessonEditCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
