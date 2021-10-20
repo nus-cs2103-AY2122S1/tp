@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 public class ArgumentTokenizerTest {
@@ -242,6 +244,47 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, pSlash);
         assertArgumentPresent(argMultimap, dashT, "dashT^qhatQ");
         assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
+    public void findAllPrefixSorted_singlePrefix() {
+        String argsString = " p/";
+        List<Prefix> prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), pSlash);
+
+        // prefix value given -> prefix value ignored
+        argsString = " p/some random string";
+        prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), pSlash);
+
+        // preamble given -> preamble ignored
+        argsString = "some random string p/";
+        prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), pSlash);
+    }
+
+    @Test
+    public void findAllPrefixSorted_noPrecedingWhitespaceBeforePrefix() {
+        String argsString = "p/";
+        List<Prefix> prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertTrue(prefixList.isEmpty());
+    }
+
+    @Test
+    public void findAllPrefixSorted_multiplePrefixes_firstElementIsFirstPrefix() {
+        String argsString = " -t ^Q p/";
+        List<Prefix> prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), dashT);
+
+        // No preceding whitespace -> first prefix ignored
+        argsString = "-t ^Q p/";
+        prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), hatQ);
+
+        // preamble and prefix input given -> preamble and prefix input ignored
+        argsString = "preamble -tsome random string ^Qsome random string p/some random string";
+        prefixList = ArgumentTokenizer.findAllPrefixSorted(argsString, pSlash, dashT, hatQ);
+        assertEquals(prefixList.get(0), dashT);
     }
 
     @Test
