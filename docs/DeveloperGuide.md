@@ -270,6 +270,27 @@ entire set from the `AddressBook` and look up the persons and tasks in the set.
 - Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
 - Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
 
+### View a student
+
+#### Implementation
+
+The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
+checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
+object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be 
+executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
+target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
+
+#### Implementation rationale
+* `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands 
+  related to student.
+
+#### Alternatives considered
+View the student from the persons list itself as it also displays the students' details. This may not include other details
+relating to the student, such as the different `Task` object they have, and the `Group` they are in.
+
+The following sequence diagram shows how the view operation works.
+
+![ViewDiagram](images/ViewStudentDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
