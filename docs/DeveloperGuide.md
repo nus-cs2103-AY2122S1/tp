@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -114,15 +114,17 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+![Structure of the Model Component](images/ModelClassDiagram.png)
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the tuitione data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the tuitione data i.e., all `Lesson` objects (which are contained in a `UniqueLessonList` object).
 * stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Lesson` objects (e.g., results of a filter) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Lesson>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -216,15 +218,49 @@ Command syntax
 
 #### Implementation
 
-Object diagram
+The filter operation is facilitated by `FilterCommand` and `FilterCommandParser`. `FilterCommandParser` first parses the user
+input to extract out the command and the arguments, after which the `FilterCommand#execute(model)` method is invoked in
+the `LogicManager` class to filter the `filteredStudents` and/or the `filteredLessons` list(s) in the `model` based on the given user inputs.
+The filter performs differently based on the inputs given (grade, subject, or both):
+* If only grade is given as input, TuitiONE filters both the student list and the lesson list based on the given grade.
+* If only subject is given as input, TuitiONE filters only the lesson list based on the given subject.
+* If both are given as input, TuitiONE filters the student list by the given grade, but filters the lesson list based
+on both the given grade and subject.
 
-Sequence diagram
+Given below is an example usage scenario and how the filter operation works.
 
-Activity diagram
+Step 1: The user launches the app with the stored student list holding the initial student data and the lesson list holding the
+initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
+![FilterState0](images/FilterState0.png)
+
+Step 2: The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
+the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
+![FilterState1](images/FilterState1.png)
+
+Step 3: The user executes `list` to get back the initial lists before the filter. 
+
+The following sequence diagram shows how the filter operation works:
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes the filter command:
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
 
 #### Design considerations:
 
-Command syntax
+**Aspect: How to implement filter**
+* **Alternative 1 (current choice)**: one filter command that handles both grade and subject filtering
+    * Pros: Less commands to remember, user will not feel overwhelmed.
+    * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
+* **Alternative 2**: 3 separate filter commands, one for each scenario stated above
+    * Pros: Slightly more straightforward to implement.
+    * Cons: Too many existing commands in the application, and may not be as intuitive to use.
+    
+Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
+handle multiple scenarios would be less daunting to use.
+
+Command syntax: `filter [g/GRADE] [s/SUBJECT]`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -342,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Customer Service Officer                   | delete a student                     | keep track of student count and details                          |
 | `* * *`  | Customer Service Officer                   | know a student's grade               | schedule them into the right lessons (eg. P5 student to P5 lessons) |
 | `* * *`  | Customer Service Officer                   | look up a student by their name      | find out the student’s details                                   |
-| `* * *`  | Customer Service Officer                   | know the lessons a student is enrolled in  | -obvious benefit-                                          |
+| `* * *`  | Customer Service Officer                   | know the lessons a student is enrolled in  | so that I can keep track of what lessons they need to pay for                                          |
 | `* * *`  | Customer Service Officer                   | enroll a students into a lesson      | keep track of student count and details in lessons               |
 | `* * *`  | Customer Service Officer                   | unenroll a student from a lesson     | keep track of student count and details in lessons               |
 | `* * *`  | Customer Service Officer                   | know the contact of a student’s parent | call the parent if he is late or did not attend                |
@@ -450,11 +486,11 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-**UC04: Filter Student(s) by their Grade**
+**UC04: Filter Students by grade and Lessons by grade and/or subject**
 
 **MSS**
-1. CSO enters a grade to filter for students by.
-2. TuitiONE lists the students that matches the grade.
+1. CSO wants to filter the student and/or lesson list by their grade and/or subject.
+2. TuitiONE lists the students and/or lessons that matches the filter criteria.
 
     Use case ends.
 
@@ -463,7 +499,30 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1a. TuitiONE detects an error in entered command.
     * 1a1. TuitiONE requests CSO to input a valid command.
     * 1a2. CSO enters new command.
-      Steps 1a1-1a2 are repeated until the data entered are correct.
+      Steps 1a1-1a2 are repeated until the input entered is correct.
+
+    Use case resumes at step 2.
+
+* 1b. CSO decides to filter by grade only
+    * 1b1. TuitiONE filters the student and lesson list based on the given grade.
+
+    Use case resumes at step 2.
+
+* 1c. CSO decides to filter by subject only
+    * 1c1. TuitiONE filters the lesson list based on the given subject.
+
+    Use case resumes at step 2.
+
+* 1d. CSO decides to filter by grade and subject
+    * 1d1. TuitiONE filters the student list based on the given grade, and filters the lesson list based on both the
+      given grade and subject.
+
+    Use case resumes at step 2.
+
+* 1e. TuitiONE detects an error in the input fields for grade and/or subject.
+    * 1e1. TuitiONE requests CSO to input command with valid fields.
+    * 1e2. CSO enters new command.
+      Steps 1a1-1a2 are repeated until the input entered is correct.
 
     Use case resumes at step 2.
 
@@ -480,7 +539,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **Extensions**
 
 * 1a. The list is empty.
-  
+
     Use case ends.
 
 * 2a. TuitiONE detects an error in entered command.
@@ -500,7 +559,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO requests to add a lesson with relevant details.
-2. TuitiONE adds the lesson.  
+2. TuitiONE adds the lesson.
 
     Use case ends.
 
@@ -516,7 +575,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 1b. Lesson already exists in TuitiONE.
     * 1b1. TuitiONE informs that there already exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC07: View details of a Lesson**
 
@@ -575,7 +634,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 * 2b. Lesson does not exists in TuitiONE.
     * 2b1. TuitiONE informs that there does not exist such a Lesson.
 
-    Use case ends.  
+    Use case ends.
 
 **UC10 - Update a specific Student’s Details**
 
@@ -591,7 +650,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
 * 2a. TuitiONE detects an error in entered command.
       * 2a1. TuitiONE requests CSO to input a valid command.
-      * 2a2. CSO enters new command. 
+      * 2a2. CSO enters new command.
         Steps 2a1-2a2 are repeated until the data entered are correct.
 
     Use case resumes at step 3.
@@ -684,28 +743,28 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 **MSS**
 
 1. CSO enters help.
-2. TuitiONE provides the basic commands, as well as the user guide link.  
+2. TuitiONE provides the basic commands, as well as the user guide link.
 
     Use case ends.
 
 ### Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java 11 or above installed.  
-2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.  
-    * Performance requirements: the system should respond within 2 seconds.  
-3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.  
-4. Technical requirements: The system should work in both 32-bit and 64-bit environments.  
-5. Quality requirements:  
-    * User interface not produce excessive colour changes/flashing on command execution.  
-    * The user interface should use readable text styling, i.e. appropriate size and font.  
-    * All string output must be in UTF-8 encoding.  
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
+    * Performance requirements: the system should respond within 2 seconds.
+3. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. Technical requirements: The system should work in both 32-bit and 64-bit environments.
+5. Quality requirements:
+    * User interface not produce excessive colour changes/flashing on command execution.
+    * The user interface should use readable text styling, i.e. appropriate size and font.
+    * All string output must be in UTF-8 encoding.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X  
-* **Private contact detail**: A contact detail that is not meant to be shared with others  
-* **CSO**: Customer Service Officer  
-* **GUI**: Graphical User Interface  
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **CSO**: Customer Service Officer
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
