@@ -25,7 +25,7 @@ public class EditFriendCommand extends Command {
     public static final String COMMAND_WORD = "--edit";
     public static final String USAGE_EXAMPLE = "Example: friend " + COMMAND_WORD + " Draco "
             + FLAG_FRIEND_NAME + "Marcus Tang";
-    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited: %1$s";
+    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the friend identified "
             + "by friend's FRIEND_ID. "
