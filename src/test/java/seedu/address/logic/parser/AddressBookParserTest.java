@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.MEMBER_ID_DESC_ONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 
@@ -25,6 +26,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaddCommand;
 import seedu.address.logic.commands.TaddCommand;
 import seedu.address.logic.commands.TdelCommand;
+import seedu.address.logic.commands.TlistCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.data.NameContainsKeywordsPredicate;
 import seedu.address.model.data.member.Member;
@@ -107,6 +109,11 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_tlist() throws Exception {
+        assertTrue(parser.parseCommand(TlistCommand.COMMAND_WORD + MEMBER_ID_DESC_ONE) instanceof TlistCommand);
     }
 
     @Test
