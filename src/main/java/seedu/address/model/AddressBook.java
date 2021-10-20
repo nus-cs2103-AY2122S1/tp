@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.UniqueModuleClassList;
+import seedu.address.model.modulelesson.ModuleLesson;
+import seedu.address.model.modulelesson.UniqueModuleLessonList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueModuleClassList moduleClasses;
+    private final UniqueModuleLessonList moduleLessons;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,7 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        moduleClasses = new UniqueModuleClassList();
+        moduleLessons = new UniqueModuleLessonList();
     }
 
     public AddressBook() {}
@@ -53,11 +53,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the class list with {@code classes}.
-     * {@code classes} must not contain duplicate class;
+     * Replaces the contents of the lesson list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lesson;
      */
-    public void setModuleClasses(List<ModuleClass> classes) {
-        moduleClasses.setModuleClasses(classes);
+    public void setModuleLessons(List<ModuleLesson> lessons) {
+        moduleLessons.setModuleLessons(lessons);
     }
 
     /**
@@ -67,7 +67,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setModuleClasses(newData.getModuleClassList());
+        setModuleLessons(newData.getModuleLessonList());
     }
 
     /**
@@ -88,11 +88,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a class with the same identity as {@code ModuleClass} exists in the address book.
+     * Returns true if a lesson with the same identity as {@code ModuleLesson} exists in the address book.
      */
-    public boolean hasClass(ModuleClass moduleClass) {
-        requireNonNull(moduleClass);
-        return moduleClasses.contains(moduleClass);
+    public boolean hasLesson(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return moduleLessons.contains(moduleLesson);
     }
 
     /**
@@ -104,11 +104,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a class to the address book.
-     * The class must not already exist in the address book.
+     * Adds a lesson to the address book.
+     * The lesson must not already exist in the address book.
      */
-    public void addClass(ModuleClass m) {
-        moduleClasses.add(m);
+    public void addLesson(ModuleLesson m) {
+        moduleLessons.add(m);
     }
 
     /**
@@ -123,14 +123,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given class {@code target} in the list with {@code editedClass}.
+     * Replaces the given lesson {@code target} in the list with {@code editedLesson}.
      * {@code target} must exist in the address book.
-     * The class information of {@code editedClass} must not be the same as another existing class in the address book.
+     * The lesson information of {@code editedLesson} must not be the same as another
+     * existing lesson in the address book.
      */
-    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
-        requireNonNull(editedClass);
+    public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+        requireNonNull(editedLesson);
 
-        moduleClasses.setModuleClass(target, editedClass);
+        moduleLessons.setModuleLesson(target, editedLesson);
     }
 
     /**
@@ -145,8 +146,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeClass(ModuleClass key) {
-        moduleClasses.remove(key);
+    public void removeLesson(ModuleLesson key) {
+        moduleLessons.remove(key);
     }
 
     //// util methods
@@ -163,8 +164,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ModuleClass> getModuleClassList() {
-        return moduleClasses.asUnmodifiableObservableList();
+    public ObservableList<ModuleLesson> getModuleLessonList() {
+        return moduleLessons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -172,11 +173,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
-                && moduleClasses.equals(((AddressBook) other).moduleClasses);
+                && moduleLessons.equals(((AddressBook) other).moduleLessons);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, moduleClasses);
+        return Objects.hash(persons, moduleLessons);
     }
 }

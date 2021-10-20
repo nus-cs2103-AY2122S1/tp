@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<ModuleClass> filteredModuleClasses;
+    private final FilteredList<ModuleLesson> filteredModuleLessons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredModuleClasses = new FilteredList<>(this.addressBook.getModuleClassList());
+        filteredModuleLessons = new FilteredList<>(this.addressBook.getModuleLessonList());
     }
 
     public ModelManager() {
@@ -111,8 +111,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteClass(ModuleClass moduleClass) {
-        addressBook.removeClass(moduleClass);
+    public void deleteLesson(ModuleLesson moduleLesson) {
+        addressBook.removeLesson(moduleLesson);
     }
 
     @Override
@@ -122,9 +122,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addClass(ModuleClass moduleClass) {
-        addressBook.addClass(moduleClass);
-        updateFilteredModuleClassList(PREDICATE_SHOW_ALL_CLASSES);
+    public void addLesson(ModuleLesson moduleLesson) {
+        addressBook.addLesson(moduleLesson);
+        updateFilteredModuleLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     @Override
@@ -135,10 +135,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
-        requireAllNonNull(target, editedClass);
+    public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+        requireAllNonNull(target, editedLesson);
 
-        addressBook.setModuleClass(target, editedClass);
+        addressBook.setModuleLesson(target, editedLesson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -159,14 +159,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<ModuleClass> getFilteredModuleClassList() {
-        return filteredModuleClasses;
+    public ObservableList<ModuleLesson> getFilteredModuleLessonList() {
+        return filteredModuleLessons;
     }
 
     @Override
-    public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
+    public void updateFilteredModuleLessonList(Predicate<ModuleLesson> predicate) {
         requireNonNull(predicate);
-        filteredModuleClasses.setPredicate(predicate);
+        filteredModuleLessons.setPredicate(predicate);
     }
 
 
@@ -187,7 +187,7 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredModuleClasses.equals(other.filteredModuleClasses);
+                && filteredModuleLessons.equals(other.filteredModuleLessons);
     }
 
 }

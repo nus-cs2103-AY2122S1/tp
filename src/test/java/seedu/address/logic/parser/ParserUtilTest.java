@@ -14,11 +14,11 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
-import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -126,49 +126,51 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+    public void parseLessonCode_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonCode(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseLessonCode_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonCode(INVALID_TAG));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    public void parseLessonCode_validValueWithoutWhitespace_returnsTag() throws Exception {
+        LessonCode expectedLessonCode = new LessonCode(VALID_TAG_1);
+        assertEquals(expectedLessonCode, ParserUtil.parseLessonCode(VALID_TAG_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+    public void parseLessonCode_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        LessonCode expectedLessonCode = new LessonCode(VALID_TAG_1);
+        assertEquals(expectedLessonCode, ParserUtil.parseLessonCode(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+    public void parseLessonCodes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonCodes(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseLessonCodes_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonCodes(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    public void parseLessonCodes_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseLessonCodes(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+    public void parseLessonCodes_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<LessonCode> actualLessonCodeSet = ParserUtil.parseLessonCodes(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        Set<LessonCode> expectedLessonCodeSet = new HashSet<LessonCode>(
+                Arrays.asList(new LessonCode(VALID_TAG_1), new LessonCode(VALID_TAG_2))
+        );
 
-        assertEquals(expectedTagSet, actualTagSet);
+        assertEquals(expectedLessonCodeSet, actualLessonCodeSet);
     }
 
     @Test
