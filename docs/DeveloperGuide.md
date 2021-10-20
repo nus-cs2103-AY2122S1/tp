@@ -310,13 +310,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a contact with the inputted details
+1. User requests to create a contact and inputs contact details
 2. contHACKS creates the contact and displays the newly added contact
 
 Use case ends
 
 **Extensions**
-* 1a. User gives insufficient details for contact creation
+* 1a. User fails to provide compulsory field
     * 1a1. contHACKS shows an error message<br />
     Use case ends
 
@@ -360,7 +360,7 @@ Use case ends
 
 **MSS**
 
-1. User requests to update a specific contact with the inputted details
+1. User requests to update a specific contact and inputs the new contact details
 2. contHACKS updates the contact with the inputted details and displays the updated contact
 
 Use case ends
