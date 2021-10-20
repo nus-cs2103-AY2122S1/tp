@@ -1,9 +1,13 @@
----
-layout: page
-title: Developer Guide
----
-* Table of Contents
-{:toc}
+# Modulink: Developer Guide
+**Table of Contents**
+1. [Acknowledgements](#acknowledgements)
+2. [Setting up, getting started](#setting-up-getting-started)
+3. [Design](#design)
+4. [Implementation](#implementation)
+5. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+6. [Appendix](#appendix-requirements)
+   1. [Requirements](#appendix-requirements)
+   2. [Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -601,3 +605,5 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+[Back to top](#modulink-developer-guide)
