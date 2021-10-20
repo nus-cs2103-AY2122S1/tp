@@ -98,7 +98,7 @@ public class StaffIndividualStatisticsCommand extends Command {
         int workHours = staff
                 .getTotalWorkingHour(period);
         double totalSalary = staff.getSalaryToBePaid(period);
-        return String.format(INDIVIDUAL_STAFF_PRINT, workHours, totalSalary);
+        return String.format(INDIVIDUAL_STAFF_PRINT, staff.getName(), workHours, totalSalary);
     }
 
 }
