@@ -16,10 +16,10 @@ public class LastMetTest {
 
     @Test
     public void isValidLastMet() {
-        // null email
+        // null
         assertThrows(NullPointerException.class, () -> LastMet.isValidLastMet(null));
 
-        // blank email
+        // blank string
         assertFalse(LastMet.isValidLastMet(" ")); // empty string
 
         // missing parts
@@ -30,7 +30,7 @@ public class LastMetTest {
         assertFalse(LastMet.isValidLastMet("60-08-2010"));
         assertFalse(LastMet.isValidLastMet("5654-08-12"));
 
-        // valid email
+        // valid date
         assertTrue(LastMet.isValidLastMet("20-12-2021"));
         assertTrue(LastMet.isValidLastMet("20-09-2021"));
         assertTrue(LastMet.isValidLastMet("30-12-2021"));

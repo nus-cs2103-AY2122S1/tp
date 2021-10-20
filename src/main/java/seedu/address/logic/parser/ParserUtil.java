@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -15,6 +16,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.person.SortDirection;
@@ -125,13 +127,40 @@ public class ParserUtil {
     public static LastMet parseLastMet(String lastMet) throws ParseException {
         requireNonNull(lastMet);
         String trimmedLastMet = lastMet.trim();
-        if (!LastMet.isValidLastMet(trimmedLastMet)) {
+        if (!StringUtil.isValidDate(trimmedLastMet)) {
             throw new ParseException(LastMet.MESSAGE_CONSTRAINTS);
         }
         return new LastMet(trimmedLastMet);
     }
 
-    /** Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+    /**
+     * Parses a given String {@code String nextMeeting} to return a {@code NextMeeting}
+     * Parses a {@code String RiskAppetite} into an {@code RiskAppetite}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nextMeeting} is invalid.
+     */
+    public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
+        requireNonNull(nextMeeting);
+        String trimmedNextMeeting = nextMeeting.trim();
+        if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING)) {
+            return NextMeeting.NULL_MEETING;
+        }
+
+        if (!NextMeeting.isValidNextMeeting(trimmedNextMeeting)) {
+            throw new ParseException(NextMeeting.MESSAGE_INVALID_MEETING_STRING);
+        }
+
+        String date = trimmedNextMeeting.split(" ", 2)[0];
+        String startTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("(") + 1,
+            trimmedNextMeeting.indexOf("~"));
+        String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
+            trimmedNextMeeting.indexOf(")"));
+        String location = trimmedNextMeeting.split(",", 2)[1].trim();
+        return new NextMeeting(date, startTime, endTime, location);
+    }
+
+    /**
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code RiskAppetite} is invalid.
@@ -181,24 +210,34 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag, Model model) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+
+        if (model.hasTagName(tag)) {
+            return model.getTag(tag);
+        } else {
+            Tag newTag = new Tag(trimmedTag);
+            model.addTag(newTag);
+            return newTag;
+        }
     }
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<String> tags, Model model) throws ParseException {
         requireNonNull(tags);
+
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(tagName, model));
         }
+
         return tagSet;
     }
 }

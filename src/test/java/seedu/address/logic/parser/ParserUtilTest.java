@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_CLIENT_ID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommandTest;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CurrentPlan;
@@ -20,6 +23,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
 import seedu.address.model.person.SortDirection;
@@ -34,6 +38,7 @@ public class ParserUtilTest {
     private static final String INVALID_RISKAPPETITE = "10";
     private static final String INVALID_DISPOSABLEINCOME = "-2313213";
     private static final String INVALID_LASTMET = "20-30-2021";
+    private static final String INVALID_NEXTMEETING = "18 Oct, 2pm-3pm";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE_FROM_PARSER = "123456";
@@ -48,6 +53,7 @@ public class ParserUtilTest {
     private static final String VALID_DISPOSABLEINCOME = "5000";
     private static final String VALID_CURRENTPLAN = "Prudential Prolife";
     private static final String VALID_LASTMET = "05-10-2021";
+    private static final String VALID_NEXTMEETING = "24-09-2021 (10:00~12:00), Starbucks @ UTown";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -73,7 +79,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -137,7 +143,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -173,7 +179,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDirection_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortDirection((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortDirection(null));
     }
 
     @Test
@@ -196,7 +202,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseRiskAppetite_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskAppetite((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRiskAppetite(null));
     }
 
     @Test
@@ -242,7 +248,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseLastMet_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastMet((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLastMet(null));
     }
 
     @Test
@@ -264,53 +270,112 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseNextMeeting_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNextMeeting((String) null));
+    }
+
+    @Test
+    public void parseNextMeeting_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNextMeeting(INVALID_NEXTMEETING));
+    }
+
+    @Test
+    public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
+        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+            "Starbucks @ UTown");
+        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(VALID_NEXTMEETING));
+    }
+
+    @Test
+    public void parseNextMeeting_validValueWithWhitespace_returnsTrimmedNextMeeting() throws Exception {
+        String nextMeetingWithWhitespace = WHITESPACE + VALID_NEXTMEETING + WHITESPACE;
+        NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
+            "Starbucks @ UTown");
+        assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(nextMeetingWithWhitespace));
+    }
+
+    @Test
     public void parseDisposableIncome_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisposableIncome((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDisposableIncome(null));
     }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null, modelStub));
     }
 
     @Test
     public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG, modelStub));
     }
 
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1, modelStub));
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertEquals(expectedTag, ParserUtil.parseTag(tagWithWhitespace, modelStub));
     }
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        AddCommandTest.ModelStub modelStub = new AddCommandTest.ModelStub();
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null, modelStub));
     }
 
     @Test
     public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertThrows(ParseException.class, () ->
+            ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG), modelStub));
     }
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        assertTrue(ParserUtil.parseTags(Collections.emptyList(), modelStub).isEmpty());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
-        Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+        AddCommandTest.ModelStub modelStub = new ModelStubAcceptingTags();
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2), modelStub);
+        Set<Tag> expectedTagSet = new HashSet<>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    /**
+     * A Model stub that always accept the tag being added.
+     */
+    private class ModelStubAcceptingTags extends AddCommandTest.ModelStub {
+
+        final ArrayList<Tag> tagsAdded = new ArrayList<>();
+
+        @Override
+        public boolean hasTagName(String tagName) {
+            requireNonNull(tagName);
+            return tagsAdded.stream().anyMatch(t -> t.getName().equals(tagName));
+        }
+
+        @Override
+        public Tag getTag(String tagName) {
+            return new Tag(tagName);
+        }
+
+        @Override
+        public void addTag(Tag tag) {
+            requireNonNull(tag);
+            tagsAdded.add(tag);
+        }
     }
 }

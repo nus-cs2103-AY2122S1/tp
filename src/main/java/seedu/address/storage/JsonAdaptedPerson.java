@@ -10,6 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.CurrentPlan;
@@ -17,6 +19,7 @@ import seedu.address.model.person.DisposableIncome;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.LastMet;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RiskAppetite;
@@ -37,6 +40,7 @@ class JsonAdaptedPerson {
     private final String riskAppetite;
     private final String disposableIncome;
     private final String lastMet;
+    private final String nextMeeting;
     private final String currentPlan;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -51,6 +55,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("disposableIncome") String disposableIncome,
                              @JsonProperty("current-plan") String currentPlan,
                              @JsonProperty("last-met") String lastMet,
+                             @JsonProperty("next-meeting") String nextMeeting,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
 
         this.clientId = clientId;
@@ -61,6 +66,7 @@ class JsonAdaptedPerson {
         this.riskAppetite = riskAppetite;
         this.disposableIncome = disposableIncome;
         this.lastMet = lastMet;
+        this.nextMeeting = nextMeeting;
         this.currentPlan = currentPlan;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -80,6 +86,7 @@ class JsonAdaptedPerson {
         riskAppetite = source.getRiskAppetite().value;
         currentPlan = source.getCurrentPlan().value;
         lastMet = source.getLastMet().dateInString;
+        nextMeeting = source.getNextMeeting().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -118,14 +125,19 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-
         if (lastMet == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, LastMet.class.getSimpleName()));
         }
-        if (!LastMet.isValidLastMet(lastMet)) {
+        if (!StringUtil.isValidDate(lastMet)) {
             throw new IllegalValueException(LastMet.MESSAGE_CONSTRAINTS);
         }
         final LastMet modelLastMet = new LastMet(lastMet);
+
+        if (nextMeeting == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                NextMeeting.class.getSimpleName()));
+        }
+        final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
 
         if (currentPlan == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -153,8 +165,6 @@ class JsonAdaptedPerson {
 
         final Address modelAddress = new Address(address);
 
-
-
         if (riskAppetite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     RiskAppetite.class.getSimpleName()));
@@ -179,7 +189,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,
-                modelDisposableIncome, modelCurrentPlan, modelLastMet, modelTags);
+                modelDisposableIncome, modelCurrentPlan, modelLastMet, modelNextMeeting, modelTags);
     }
 
 }

@@ -57,25 +57,25 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments, model);
 
         case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments, model);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments, model);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case SearchCommand.COMMAND_WORD:
-            return new SearchCommandParser().parse(arguments);
+            return new SearchCommandParser().parse(arguments, model);
 
         case SortCommand.COMMAND_WORD:
-            return new SortCommandParser().parse(arguments);
+            return new SortCommandParser().parse(arguments, model);
 
         case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
+            return new FilterCommandParser().parse(arguments, model);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -87,7 +87,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+            return new ViewCommandParser().parse(arguments, model);
 
         case AbCommand.COMMAND_WORD:
             return new AbCommandParser().parse(arguments);

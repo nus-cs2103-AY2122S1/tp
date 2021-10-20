@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.person.ClientId;
 import seedu.address.model.person.PersonHasId;
 
@@ -20,7 +21,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public ViewCommand parse(String args) throws ParseException {
+    public ViewCommand parse(String args, Model model) throws ParseException {
         requireNonNull(args);
 
         ClientId clientId;

@@ -22,7 +22,6 @@ public class ClientId {
 
     /**
      * Returns if a given string is a valid email.
-     * @param test
      */
     public static boolean isValidClientId(String test) {
         return test.matches(VALIDATION_REGEX);
@@ -36,8 +35,8 @@ public class ClientId {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClientId // instanceof handles nulls
-                && value.equals(((ClientId) other).value)); // state check
+            || (other instanceof ClientId // instanceof handles nulls
+            && value.equals(((ClientId) other).value)); // state check
     }
 
     @Override

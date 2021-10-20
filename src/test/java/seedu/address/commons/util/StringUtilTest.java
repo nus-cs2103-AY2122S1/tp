@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -168,7 +170,7 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
-    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+    //---------------- Tests for containsStringIgnoreCase --------------------------------------
 
     /*
      * Invalid equivalence partitions for word: null, empty, multiple words
@@ -177,17 +179,17 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containIgnoreCase_nullSentence_throwsNullPointerException() {
+    public void containsStringIgnoreCase_nullSentence_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase(null, "a"));
     }
 
     @Test
-    public void containIgnoreCase_nullWord_throwsNullPointerException() {
+    public void containsStringIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsStringIgnoreCase("a", null));
     }
 
     @Test
-    public void containIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+    public void containsStringIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> StringUtil.containsStringIgnoreCase("a", ""));
     }
 
@@ -209,6 +211,133 @@ public class StringUtilTest {
 
         // match multiple
         assertTrue(StringUtil.containsStringIgnoreCase("acadffac", "ac"));
+    }
+
+    //---------------- Tests for isValidDate --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid date, invalid date in correct format, valid date in incorrect format,
+     * random string, empty string
+     */
+
+    @Test
+    public void isValidDate_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isValidDate(null));
+    }
+
+    @Test
+    public void isValidDate_validDate_returnsTrue() {
+        assertTrue(StringUtil.isValidDate("18-10-2021"));
+    }
+
+    @Test
+    public void isValidDate_validDateIncorrectFormat_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("2021-10-18"));
+    }
+
+    @Test
+    public void isValidDate_invalidDate_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("18-13-2021"));
+    }
+
+    @Test
+    public void isValidDate_randomString_returnsFalse() {
+        assertFalse(StringUtil.isValidDate(" "));
+    }
+
+    @Test
+    public void isValidDate_emptyString_returnsTrue() {
+        assertTrue(StringUtil.isValidDate(""));
+    }
+
+    //---------------- Tests for isValidTime --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, valid time, invalid time in correct format, valid time in incorrect format,
+     * random string, empty string
+     */
+
+    @Test
+    public void isValidTime_nullValue_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.isValidTime(null));
+    }
+
+    @Test
+    public void isValidTime_validTime_returnsTrue() {
+        assertTrue(StringUtil.isValidTime("23:59"));
+    }
+
+    @Test
+    public void isValidTime_validTimeIncorrectFormat_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("2359"));
+    }
+
+    @Test
+    public void isValidTime_invalidTime_returnsFalse() {
+        assertFalse(StringUtil.isValidDate("24:00"));
+    }
+
+    @Test
+    public void isValidTime_randomString_returnsFalse() {
+        assertFalse(StringUtil.isValidDate(" "));
+    }
+
+    @Test
+    public void isValidTime_emptyString_returnsTrue() {
+        assertTrue(StringUtil.isValidDate(""));
+    }
+
+    //---------------- Tests for parseToLocalDate --------------------------------------
+
+    /*
+     * Equivalence Partitions: empty string, valid date
+     */
+
+    @Test
+    public void parseToLocalDate_emptyString_returnsNull() {
+        assertEquals(StringUtil.parseToLocalDate(""), null);
+    }
+
+    @Test
+    public void parseToLocalDate_validString_returnsCorrectLocalDate() {
+        assertTrue(LocalDate.of(2021, 10, 18).equals(StringUtil.parseToLocalDate("18-10-2021")));
+    }
+
+    //---------------- Tests for parseToLocalTime --------------------------------------
+
+    /*
+     * Equivalence Partitions: empty string, valid date
+     */
+
+    @Test
+    public void parseToLocalTime_emptyString_returnsNull() {
+        assertEquals(StringUtil.parseToLocalTime(""), null);
+    }
+
+    @Test
+    public void parseToLocalTime_validString_returnsCorrectLocalDate() {
+        assertTrue(LocalTime.of(20, 20).equals(StringUtil.parseToLocalTime("20:20")));
+    }
+
+    //---------------- Tests for convertEmptyStringIfNull --------------------------------------
+
+    /*
+     * Equivalence Partitions: null, empty string, non-empty string
+     */
+
+    @Test
+    public void convertEmptyStringIfNull_null_returnsEmptyString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull(null), "");
+    }
+
+    @Test
+    public void convertEmptyStringIfNull_emptyString_returnsUnchangedString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull(""), "");
+    }
+
+    @Test
+    public void convertEmptyStringIfNull_nonEmptyString_returnsUnchangedString() {
+        assertEquals(StringUtil.convertEmptyStringIfNull("test 123"), "test 123");
     }
 
     //---------------- Tests for getDetails --------------------------------------

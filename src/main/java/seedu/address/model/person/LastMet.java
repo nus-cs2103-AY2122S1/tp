@@ -2,15 +2,16 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isValidDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.commons.util.StringUtil;
+
 public class LastMet implements OptionalPersonNonStringField {
     public static final String MESSAGE_CONSTRAINTS = "LastMet should be in the form of Day-Month-Year, "
         + "where Day, month and year should be numerical values.";
-    public static final String VALIDATION_REGEX =
-        "^([1-2][0-9]|3[0-1]|0?[1-9])[-]([1][0-2]|0?[1-9])[-](\\d{4})";
 
     public final LocalDate value;
     public final String dateInString;
@@ -28,7 +29,7 @@ public class LastMet implements OptionalPersonNonStringField {
             lastMetDate = "";
         }
 
-        checkArgument(isValidLastMet(lastMetDate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDate(lastMetDate), MESSAGE_CONSTRAINTS);
         dateInString = lastMetDate;
 
         if (lastMetDate.isEmpty()) {
@@ -40,22 +41,19 @@ public class LastMet implements OptionalPersonNonStringField {
     }
 
     /**
-     * Returns if a given string is a valid LastMet.
+     * Returns if a given string is a valid lastMet.
      */
     public static boolean isValidLastMet(String test) {
-        return (IS_NULL_VALUE_ALLOWED && test.isEmpty())
-            || test.matches(VALIDATION_REGEX);
+        return StringUtil.isValidDate(test);
     }
 
     @Override
     public String toString() {
-
         if (value == null) {
             return DEFAULT_VALUE;
         } else {
             return this.dateInString;
         }
-
     }
 
     @Override
@@ -67,6 +65,9 @@ public class LastMet implements OptionalPersonNonStringField {
 
     @Override
     public int hashCode() {
+        if (value == null) {
+            return 0;
+        }
         return value.hashCode();
     }
 }
