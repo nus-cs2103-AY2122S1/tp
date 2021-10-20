@@ -113,6 +113,33 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
+
+![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
+
+#### Current Implementation
+
+New feature: Events
+* Events can be added and deleted from event list via `eadd` and `edelete` commands
+* The participating members can be listed using the command `mlist /v EVENT_ID`
+* New events created can have many participants selected from member list.
+* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
+for adding participants separately, eadd command allows creation of complete event to
+minimise commands required to add them individually. The format is similar to `delete` and `list` commands
+for familiarity with similar commands for other modules.
+
+
+#### Future Plans
+
+Future plans for Events
+* Include adding and deleting of participants, as well as marking whether a participant has attended the event.
+* Include updating of event with participants and different name
+* Include searching for the list of events for a participant
+* Include filtering of events by month or events that are happening today.
+* Include sorting of events by date, name or number of participants.
+  * Dates should be in reverse chronological order so that upcoming events are shown first
+* Include additional remarks or description for an event
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -177,7 +204,7 @@ Step 2. The user executes `delete 5` command to delete the 5th member in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `padd /n David …​` to add a new member. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `madd /n David …​` to add a new member. The `madd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
