@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,9 +27,29 @@ public class Person {
     private final ExpectedSalary expectedSalary;
     private final LevelOfEducation levelOfEducation;
     private final Experience experience;
+    private Interview interview;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email,
+                  Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags, Interview interview) {
+        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags, interview);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.employmentType = employmentType;
+        this.expectedSalary = expectedSalary;
+        this.levelOfEducation = levelOfEducation;
+        this.experience = experience;
+        this.tags.addAll(tags);
+        this.interview = interview;
+    }
 
     /**
      * Every field must be present and not null.
@@ -47,6 +68,7 @@ public class Person {
         this.experience = experience;
         this.tags.addAll(tags);
     }
+
 
     public Name getName() {
         return name;
@@ -79,6 +101,11 @@ public class Person {
     public Experience getExperience() {
         return experience;
     }
+
+    public Interview getInterview() {
+        return interview;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -125,14 +152,15 @@ public class Person {
                 && otherPerson.getExpectedSalary().equals(getExpectedSalary())
                 && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getInterview().equals(getInterview());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags);
+                expectedSalary, levelOfEducation, experience, tags, interview);
     }
 
     @Override
@@ -159,6 +187,10 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        builder.append("; Interview: ")
+                .append(getInterview());
+
         return builder.toString();
     }
 }

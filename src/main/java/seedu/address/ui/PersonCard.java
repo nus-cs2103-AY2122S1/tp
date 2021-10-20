@@ -47,7 +47,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label experience;
     @FXML
+    private Label interview;
+    @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,6 +67,11 @@ public class PersonCard extends UiPart<Region> {
         expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
         levelOfEducation.setText("Level of Education: " + person.getLevelOfEducation().levelOfEducation);
         experience.setText("Years of Experience: " + person.getExperience().value);
+        if (person.getInterview() != null) {
+            interview.setText("Interview Time: " + person.getInterview().parseTime);
+        } else {
+            interview.setText(" ");
+        }
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
