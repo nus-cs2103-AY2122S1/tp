@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import seedu.address.logic.commands.abcommand.AbCreateCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses input arguments and create a new AbCreateCommand object.
@@ -23,7 +24,7 @@ public class AbCreateCommandParser implements Parser<AbCreateCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AbCreateCommand parse(String args) throws ParseException {
+    public AbCreateCommand parse(String args, Model model) throws ParseException {
         requireNonNull(args);
         String trimmedArgs = args.trim();
         String lowercaseArgs = trimmedArgs.toLowerCase();
@@ -39,7 +40,6 @@ public class AbCreateCommandParser implements Parser<AbCreateCommand> {
         }
 
         Path filePath = Path.of(filePathName);
-
 
         return new AbCreateCommand(trimmedArgs, filePath);
     }

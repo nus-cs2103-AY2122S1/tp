@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.abcommand;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.FileUtil.isFileExists;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCH_ADDRESSBOOK;
 
 import java.nio.file.Path;
@@ -18,20 +19,43 @@ public class AbSwitchCommand extends AbCommand {
 
     public static final String MESSAGE_ADDRESSBOOK_NOT_FOUND = "Address Book with this name not found: %1$s";
 
+    private final String addressBookName;
     private final Path filePath;
 
     /**
+     * @param addressBookName name of the addressbook to switch to.
      * @param filePath the filepath to the address book to switch to
      */
-    public AbSwitchCommand(Path filePath) {
+    public AbSwitchCommand(String addressBookName, Path filePath) {
+        this.addressBookName = addressBookName;
         this.filePath = filePath;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!isFileExists(filePath)) {
+            throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_NOT_FOUND, addressBookName));
+        }
+
         model.setAddressBookFilePath(filePath);
 
         return new CommandResult(String.format(MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS, filePath), SWITCH_ADDRESSBOOK);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AbSwitchCommand)) {
+            return false;
+        }
+
+        AbSwitchCommand otherCommand = (AbSwitchCommand) other;
+        return this.addressBookName.equals(otherCommand.addressBookName)
+                && this.filePath.equals(otherCommand.filePath);
     }
 }

@@ -19,13 +19,11 @@ public class AbCreateCommand extends AbCommand {
 
     public static final String MESSAGE_ADDRESSBOOK_EXISTS = "Address Book with this name already exists: %1$s";
 
-    public static final String MESSAGE_ADDRESSBOOK_NOT_VALID = "This is not a valid Address Book name: %1$s";
-
     private final String addressBookName;
-
     private final Path filePath;
 
     /**
+     * @param addressBookName name of the addressbook to create.
      * @param filePath the filepath to the address book to create
      */
     public AbCreateCommand(String addressBookName, Path filePath) {
@@ -43,5 +41,20 @@ public class AbCreateCommand extends AbCommand {
         model.setAddressBookFilePath(filePath);
 
         return new CommandResult(String.format(MESSAGE_CREATE_ADDRESSBOOK_SUCCESS, filePath), CREATE_ADDRESSBOOK);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof AbCreateCommand)) {
+            return false;
+        }
+
+        AbCreateCommand otherCommand = (AbCreateCommand) other;
+        return this.addressBookName.equals(otherCommand.addressBookName)
+                && this.filePath.equals(otherCommand.filePath);
     }
 }

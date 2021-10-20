@@ -90,7 +90,7 @@ public class AddressBookParser {
             return new ViewCommandParser().parse(arguments, model);
 
         case AbCommand.COMMAND_WORD:
-            return new AbCommandParser().parse(arguments);
+            return new AbCommandParser().parse(arguments, model);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

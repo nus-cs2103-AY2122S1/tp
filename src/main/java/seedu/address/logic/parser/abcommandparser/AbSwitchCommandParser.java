@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.FileUtil.convertToAddressBookPathString;
 import static seedu.address.commons.util.FileUtil.isFileExists;
+import static seedu.address.commons.util.FileUtil.isValidPath;
+import static seedu.address.logic.commands.abcommand.AbCreateCommand.MESSAGE_ADDRESSBOOK_NOT_VALID;
 import static seedu.address.logic.commands.abcommand.AbSwitchCommand.MESSAGE_ADDRESSBOOK_NOT_FOUND;
 
 import java.nio.file.Path;
@@ -11,6 +13,7 @@ import java.nio.file.Path;
 import seedu.address.logic.commands.abcommand.AbSwitchCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses input arguments and create a new AbSwitchCommand object.
@@ -23,7 +26,7 @@ public class AbSwitchCommandParser implements Parser<AbSwitchCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AbSwitchCommand parse(String args) throws ParseException {
+    public AbSwitchCommand parse(String args, Model model) throws ParseException {
         requireNonNull(args);
 
         String trimmedArgs = args.trim();
@@ -34,12 +37,12 @@ public class AbSwitchCommandParser implements Parser<AbSwitchCommand> {
         }
 
         String filePathName = convertToAddressBookPathString(lowercaseArgs);
-        Path filePath = Path.of(filePathName);
 
-        if (!isFileExists(filePath)) {
-            throw new ParseException(String.format(MESSAGE_ADDRESSBOOK_NOT_FOUND, trimmedArgs));
+        if (!isValidPath(filePathName)) {
+            throw new ParseException(String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, trimmedArgs));
         }
 
-        return new AbSwitchCommand(filePath);
+        Path filePath = Path.of(filePathName);
+        return new AbSwitchCommand(trimmedArgs, filePath);
     }
 }

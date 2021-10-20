@@ -11,6 +11,7 @@ import seedu.address.logic.commands.abcommand.AbListCommand;
 import seedu.address.logic.commands.abcommand.AbSwitchCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 public class AbCommandParser implements Parser<AbCommand> {
     /**
@@ -26,7 +27,7 @@ public class AbCommandParser implements Parser<AbCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     @Override
-    public AbCommand parse(String args) throws ParseException {
+    public AbCommand parse(String args, Model model) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbCommand.MESSAGE_USAGE));
@@ -37,10 +38,10 @@ public class AbCommandParser implements Parser<AbCommand> {
         switch (commandWord) {
 
         case AbSwitchCommand.COMMAND_WORD:
-            return new AbSwitchCommandParser().parse(arguments);
+            return new AbSwitchCommandParser().parse(arguments, model);
 
         case AbCreateCommand.COMMAND_WORD:
-            return new AbCreateCommandParser().parse(arguments);
+            return new AbCreateCommandParser().parse(arguments, model);
 
         case AbListCommand.COMMAND_WORD:
             return new AbListCommand();
