@@ -148,6 +148,47 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+### Field options
+
+We provide options for developers to easily customise the constraints on the user input such as whether the input is required or whether it is editable. These field options are encapsulated within the `Field` interface, which further branches into more concrete interfaces which can be implemented by `Person` attributes.
+
+Field options largely dictate how the parsers respond to user's inputs.
+
+Option | Description
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | If set to `true`, the field is allowed to be blank (for string fields such as phone, name, etc)
+IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for int/Date fields such as LastMet, etc)
+DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Person` creation.
+IS_EDITABLE | If set to `true`, the field is editable by the user through edit command.
+
+### Common Field types
+
+The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
+
+#### OptionalStringBasedField
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `true`
+IS_NULL_VALUE_ALLOWED | `false`
+DEFAULT_VALUE | `""`
+IS_EDITABLE | `true`
+
+#### OptionalNonStringBasedField
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `true`
+IS_NULL_VALUE_ALLOWED | `true`
+DEFAULT_VALUE | `""`
+IS_EDITABLE | `true`
+
+#### RequiredField
+Option | Default
+--- | --- 
+IS_BLANK_VALUE_ALLOWED | `false`
+IS_NULL_VALUE_ALLOWED | `false`
+DEFAULT_VALUE | `""`
+IS_EDITABLE | `true`
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
