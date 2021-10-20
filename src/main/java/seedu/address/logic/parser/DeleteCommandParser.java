@@ -29,7 +29,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String userInput) throws ParseException {
-        String command = userInput.split(" ")[0];
 
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
