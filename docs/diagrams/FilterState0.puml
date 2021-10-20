@@ -6,12 +6,12 @@ title Initial state
 package Tuitione {
     package lessonList {
         object "<u>l1:Lesson" as Lesson1 {
-        subject = English
+        subject = "English"
         grade = "S2"
         }
 
         object "<u>l2:Lesson" as Lesson2 {
-        subject = Math
+        subject = "Math"
         grade = "S2"
         }
     }

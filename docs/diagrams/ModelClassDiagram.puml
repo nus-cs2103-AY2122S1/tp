@@ -64,6 +64,9 @@ Lesson *--> Price
 Lesson *--> Subject
 Lesson *--> Grade
 
+Student <-> Lesson
+
+
 Name -[hidden]right-> ParentContact
 ParentContact -[hidden]right-> Address
 Address -[hidden]right-> Email

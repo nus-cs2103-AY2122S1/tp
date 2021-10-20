@@ -51,14 +51,12 @@ activate FilterCommand
 FilterCommand -> Model
 activate Model
 alt "grade != null"
-    Model -> Model : updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade))
-    Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade))
+    Model -> Model : filter student and lesson list by grade
 else "subject != null"
-    Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject))
+    Model -> Model : filter lesson list by subject
 
 else "grade != null && subject != null"
-    Model -> Model : updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade))
-    Model -> Model : updateFilteredLessonList(new LessonIsOfSpecifiedGradeAndSubject(grade, subject))
+    Model -> Model : filter student list by subject, filter lesson list by subject and grade
 end
 
 Model --> FilterCommand
