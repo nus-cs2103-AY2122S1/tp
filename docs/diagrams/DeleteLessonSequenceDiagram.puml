@@ -11,8 +11,7 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "s:Student" as Student MODEL_COLOR
-participant "l1:Lesson" as Lesson MODEL_COLOR
+participant "l:Lesson" as Lesson MODEL_COLOR
 end box
 
 [-> LogicManager : execute("delete-l 1")
@@ -50,48 +49,16 @@ deactivate TuitioneParser
 LogicManager -> DeleteLessonCommand : execute()
 activate DeleteLessonCommand
 
-DeleteLessonCommand -> Model : getLesson(1)
-activate Model
-
-Model --> DeleteLessonCommand : l1
-deactivate Model
-
-DeleteLessonCommand -> Lesson : getStudents()
-activate Lesson
-
-Lesson --> DeleteLessonCommand : studentList
-deactivate Lesson
-
-loop student s in studentList
-    DeleteLessonCommand -> Student : unenrollFromLesson(l1)
-    activate Student
-
-    Student -> Lesson : getLessonCode()
-    activate Lesson
-
-    Lesson --> Student
-    deactivate Lesson
-    
-    Student --> DeleteLessonCommand
-    deactivate Student
-
-    DeleteLessonCommand -> Model : setStudent(s)
-    activate Model
-
-    Model --> DeleteLessonCommand
-    deactivate Model
-end
-
 DeleteLessonCommand -> Lesson : removeAllStudents()
 activate Lesson
 
 Lesson --> DeleteLessonCommand
 deactivate Lesson
 
-DeleteLessonCommand -> Model : deleteLesson(l1)
+DeleteLessonCommand -> Model : deleteLesson(l)
 activate Model
 
-Model -> Lesson : removeLesson(l1)
+Model -> Lesson : deleteLesson(l)
 destroy Lesson
 
 Model --> DeleteLessonCommand

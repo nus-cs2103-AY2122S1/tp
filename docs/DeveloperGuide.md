@@ -177,11 +177,9 @@ _Note: For this usage, we only consider the main success scenario (i.e. the less
 
 <ins>Step 1:</ins>  
 
-User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `L0` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
 ![DeleteLessonState0](images/DeleteLessonState0.png)
-
-Lessons are directly linked with the Students enrolled (`L0 -> John & Alice`), while the Students are linked to the Lesson through the LessonCode (in this case `Alice -> LC0 <- L0, John -> LC0 <- L0`).
 
 <ins>Step 2:</ins>  
 
@@ -199,7 +197,7 @@ The final object state diagram is as such:
 
 ![DeleteLessonState1](images/DeleteLessonState1.png)
 
-Notice how there are no more associations between the Lesson/LessonCode and the Students.
+Notice how there are no more associations between the Lesson and the Students.
 
 The following sequence diagram shows how the delete lesson operation works:
 
