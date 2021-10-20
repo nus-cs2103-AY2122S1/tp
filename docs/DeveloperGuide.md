@@ -28,7 +28,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/DeveloperGuideImage/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -54,7 +54,7 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<img src="images/DeveloperGuideImage/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -63,7 +63,7 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<img src="images/DeveloperGuideImage/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
@@ -71,7 +71,7 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI Component](images/DeveloperGuideImage/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
@@ -90,7 +90,7 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `TuitoneParser` class to parse the user command.
@@ -100,14 +100,14 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeveloperGuideImage/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/DeveloperGuideImage/ParserClasses.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `TuitoneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitoneParser` returns back as a `Command` object.
@@ -116,7 +116,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/model/Model.java)
 
-![Structure of the Model Component](images/ModelClassDiagram.png)
+![Structure of the Model Component](images/DeveloperGuideImage/ModelClassDiagram.png)
 
 
 The `Model` component,
@@ -132,7 +132,7 @@ The `Model` component,
 
 :information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Remark` list in the `TuitiONE`, which `Student` references. This allows `TuitiONE` to only require one `Remark` object per unique remark, instead of each `Student` needing their own `Remark` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
+<img src="images/DeveloperGuideImage/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
@@ -141,7 +141,7 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-F13-4/tp/blob/master/src/main/java/seedu/tuitione/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<img src="images/DeveloperGuideImage/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
 * can save both tuitione data and user preference data in json format, and read them back into corresponding objects.
@@ -183,7 +183,7 @@ _Note: For this usage, we only consider the main success scenario (i.e. the less
 
 Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
-![DeleteLessonState0](images/DeleteLessonState0.png)
+![DeleteLessonState0](images/DeveloperGuideImage/DeleteLessonState0.png)
 
 Step 2: Upon running the delete lesson command, the application runs a few internal steps:
 
@@ -197,13 +197,13 @@ Step 2: Upon running the delete lesson command, the application runs a few inter
 
 The final object state diagram is as such:
 
-![DeleteLessonState1](images/DeleteLessonState1.png)
+![DeleteLessonState1](images/DeveloperGuideImage/DeleteLessonState1.png)
 
 Notice how there are no more associations between the Lesson and the Students.
 
 The following sequence diagram shows how the delete lesson operation works:
 
-![DeleteLessonSequenceDiagram](images/DeleteLessonSequenceDiagram.png)
+![DeleteLessonSequenceDiagram](images/DeveloperGuideImage/DeleteLessonSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">
 
@@ -213,7 +213,7 @@ The following sequence diagram shows how the delete lesson operation works:
 
 The following activity diagram summarizes what happens when a user executes the delete lesson command:
 
-![DeleteLessonActivityDiagram](images/DeleteLessonActivityDiagram.png)
+![DeleteLessonActivityDiagram](images/DeveloperGuideImage/DeleteLessonActivityDiagram.png)
 
 #### Design considerations:
 
@@ -260,7 +260,7 @@ TuitiONE application. The user has a `Lesson` with the lessoncode Math-P2-Wed-18
 P2 that they would like to enroll a `Student` named Alice of `grade` P2 into.
 The object state diagram is as such:
 
-![EnrollLessonState0](images/EnrollLessonState0.png)
+![EnrollLessonState0](images/DeveloperGuideImage/EnrollLessonState0.png)
 
 The initial size of the lesson is 0, and the student has yet to enroll
 into the lesson.
@@ -277,16 +277,16 @@ Upon running the Enroll command, the application runs a few internal steps:
 
 The final object state diagram is as such:
 
-![EnrollLessonState0](images/EnrollLessonState1.png)
+![EnrollLessonState0](images/DeveloperGuideImage/EnrollLessonState1.png)
 
 The following sequence diagram shows how the enroll lesson operation works:
 
-![EnrollLessonSequenceDiagram](images/EnrollLessonSequenceDiagram.png)
+![EnrollLessonSequenceDiagram](images/DeveloperGuideImage/EnrollLessonSequenceDiagram.png)
 
 The following activity diagram summarizes what
 happens when a user executes the enroll lesson command:
 
-![EnrollLessonActivityDiagram](images/EnrollLessonActivityDiagram.png)
+![EnrollLessonActivityDiagram](images/DeveloperGuideImage/EnrollLessonActivityDiagram.png)
 
 #### Design considerations:
 
@@ -330,7 +330,7 @@ Given below is an example usage scenario and how the unenroll operation works.
 Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
 lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
 
-![UnenrollState0](images/UnenrollState0.png)
+![UnenrollState0](images/DeveloperGuideImage/UnenrollState0.png)
 
 Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1. 
 
@@ -346,17 +346,17 @@ internal steps.
 
 The final object state diagram is as such:
 
-![UnenrollState1](images/UnenrollState1.png)
+![UnenrollState1](images/DeveloperGuideImage/UnenrollState1.png)
 
 Notice how there is no longer any association between the student `Alice` and lesson `l`.
 
 The following sequence diagram shows how the unenroll operation works:
 
-![UnenrollSequenceDiagram](images/UnenrollSequenceDiagram.png)
+![UnenrollSequenceDiagram](images/DeveloperGuideImage/UnenrollSequenceDiagram.png)
 
 The following activity diagram summarizes what happens when a user executes the unenroll lesson command:
 
-![UnenrollActivityDiagram](images/UnenrollActivityDiagram.png)
+![UnenrollActivityDiagram](images/DeveloperGuideImage/UnenrollActivityDiagram.png)
 
 #### Design considerations:
 
@@ -397,25 +397,25 @@ Given below is an example usage scenario and how the filter operation works.
 Step 1: The user launches the app with the stored student list holding the initial student data and the lesson list holding the
 initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
 
-![FilterState0](images/FilterState0.png)
+![FilterState0](images/DeveloperGuideImage/FilterState0.png)
 
 Step 2: The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
 the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
 
-![FilterState1](images/FilterState1.png)
+![FilterState1](images/DeveloperGuideImage/FilterState1.png)
 
 Step 3: The user executes `list` to get back the initial lists before the filter. 
 
 The following sequence diagram shows how the filter operation works:
 
-![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+![FilterSequenceDiagram](images/DeveloperGuideImage/FilterSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FilterCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 The following activity diagram summarizes what happens when a user executes the filter command:
 
-![FilterActivityDiagram](images/FilterActivityDiagram.png)
+![FilterActivityDiagram](images/DeveloperGuideImage/FilterActivityDiagram.png)
 
 
 #### Design considerations:
@@ -449,15 +449,15 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedTuitione` will be initialized with the initial tuitione state, and the `currentStatePointer` pointing to that single tuitione state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![UndoRedoState0](images/DeveloperGuideImage/UndoRedoState0.png)
 
 Step 2. The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commit**Tuitione**()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![UndoRedoState1](images/DeveloperGuideImage/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitTuitione()`, causing another modified tuitione state to be saved into the `tuitioneStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+![UndoRedoState2](images/DeveloperGuideImage/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitTuitione()`, so the tuitione state will not be saved into the `tuitioneStateList`.
 
@@ -465,7 +465,7 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 
 Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTuitione()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tuitione state, and restores the tuitione to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+![UndoRedoState3](images/DeveloperGuideImage/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial Tuitione state, then there are no previous Tuitione states to restore. The `undo` command uses `Model#canUndoTuitione()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
@@ -473,7 +473,7 @@ Step 4. The user now decides that adding the student was a mistake, and decides 
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![UndoSequenceDiagram](images/DeveloperGuideImage/UndoSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -487,15 +487,15 @@ The `redo` command does the opposite — it calls `Model#redoTuitione()`, wh
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the tuitione, such as `list`, will usually not call `Model#commitTuitione()`, `Model#undoTuitione()` or `Model#redoTuitione()`. Thus, the `tuitioneStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+![UndoRedoState4](images/DeveloperGuideImage/UndoRedoState4.png)
 
 Step 6. The user executes `clear`, which calls `Model#commitTuitione()`. Since the `currentStatePointer` is not pointing at the end of the `tuitioneStateList`, all tuitione states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+![UndoRedoState5](images/DeveloperGuideImage/UndoRedoState5.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<img src="images/DeveloperGuideImage/CommitActivityDiagram.png" width="250" />
 
 #### Design considerations:
 
