@@ -5,7 +5,7 @@ import seedu.address.logic.commands.Command;
 public abstract class AbCommand extends Command {
     public static final String COMMAND_WORD = "ab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Commands related to usage Address Book\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Commands related to usage of Address Book\n"
             + "- " + COMMAND_WORD + " create\n"
             + "- " + COMMAND_WORD + " switch\n"
             + "- " + COMMAND_WORD + " list\n";
