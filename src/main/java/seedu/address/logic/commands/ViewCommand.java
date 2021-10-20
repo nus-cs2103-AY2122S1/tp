@@ -18,7 +18,7 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Displayed list of lessons!";
+    public static final String MESSAGE_SUCCESS = "Displayed list of lessons for %1$s!";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the list of lessons "
         + " of the student identified by the index number used in the displayed student list.\n"
@@ -48,7 +48,8 @@ public class ViewCommand extends Command {
 
         Person studentToView = lastShownList.get(index.getZeroBased());
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, model.getFilteredPersonList().size()),
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                model.getFilteredPersonList().get(index.getZeroBased())),
                 studentToView);
     }
 }
