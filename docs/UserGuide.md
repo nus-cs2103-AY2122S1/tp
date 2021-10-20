@@ -159,7 +159,6 @@ Format: `delete INDEX [MORE_INDICES]`
 * Able to delete multiple residents at once by inputting multiple indexes, each separated by a space.
 
 Examples:
-* `view` followed by `delete 2` deletes the 2nd person in the address book.
 * `view` followed by `delete 1 2 3` deletes the first 3 people in the address book.
 * `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
 
