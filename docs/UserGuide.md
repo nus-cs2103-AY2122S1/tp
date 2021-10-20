@@ -66,12 +66,12 @@ Format: `help`
 ### Listing anime: `list`
 
 Shows a list of all anime names the user has added.<br>
-An additional status parameter can be specified to show only anime with that status.<br>
+An additional status parameter can be specified to switch tabs, showing only anime with that status.<br>
 Format: `list [s/STATUS]`
 
 - `STATUS` refers to the updated status of the anime.
-- Available statuses: "towatch", "watching", "finished"
-- Shortforms: "t", "w", "f"
+- Available statuses: `towatch`, `watching`, `finished`
+- Shortforms: `t`, `w`, `f`
 
 Examples:
 *  `list`
