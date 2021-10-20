@@ -203,6 +203,24 @@ Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 Examples:
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
+### Filtering of list: `filter`
+
+Filter the respective list to display entries that correspond to the conditions as specified.
+
+Command Format: `filter [g/GRADE] [s/Subject]`
+
+* When filtering, filtering conditions `GRADE` and `SUBJECT` can be coexistent. The order of the 2 conditions can be interchanged.
+* When filtering, there must be at least 1 filtering condition.
+* Filter and display the corresponding the respective list by:
+    * `GRADE`: If only filtering by `GRADE`, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` as specified.
+    * `SUBJECT`: If only filtering by `SUBJECT`, only the lesson list will be filtered to display the respective lessons that correspond to the `SUBJECT` as specified.
+    * Both `GRADE` and `SUBJECT`: If filtering by both conditions, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
+
+
+Examples:
+* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective list.
+* `filter l/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+
 ### Clearing all entries : `clear`
 
 Clears all student and lesson entries from the TuitiONE.
