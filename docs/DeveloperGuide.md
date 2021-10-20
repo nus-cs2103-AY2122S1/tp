@@ -247,13 +247,15 @@ A sequence diagram is provided below:
 
 ![TabSystemSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
 
-####Challenges
+#### Challenges  
+
 This was the first set of commands that required access to the address book, so implementing the parser for the 
 commands simply by implementing the `Parser` interface was not sufficient. An extension to the `Parser`
 interface, `ParserRequiringPersonList` was created for these commands specifically, and an alternative parse function
 was created which took in the person list from the command parser `TaskTabParser`.
 
-####Alternatives Considered
+#### Alternatives Considered  
+
 - Assigning people using their names instead of index
 
 Pros: No need to remember indices  
