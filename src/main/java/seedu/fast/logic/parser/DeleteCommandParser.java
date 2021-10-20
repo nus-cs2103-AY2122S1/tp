@@ -22,7 +22,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         Index[] result = new Index[multipleIndexes.length];
         int count = 0;
         for (String indexString : multipleIndexes) {
-
             try {
                 Index index = ParserUtil.parseIndex(indexString);
                 result[count++] = index;

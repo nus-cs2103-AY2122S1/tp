@@ -46,40 +46,71 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (indexArray.length > lastShownList.size()) {
-            if (indexArray.length == 1) {
+            if (isSingleDelete()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED);
         }
 
-        Index targetIndex;
-        String additionMessage = "";
-        if (indexArray.length == 1) {
-            targetIndex = indexArray[0];
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
+        if (isSingleDelete()) {
+            int singleDeleteIndexPosition = 0;
+            Index targetIndex = indexArray[singleDeleteIndexPosition];
+            executeSingleDelete(lastShownList, model, targetIndex);
 
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(personToDelete);
-            additionMessage = personToDelete.toString();
-        } else {
-            for (int i = 0; i < indexArray.length; i++) {
-                targetIndex = Index.indexModifier(indexArray[i], i);
-                if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(String.format("%1$s contact(s) has been deleted "
-                                    + "before the invalid index at 'index %2$s' is detected.",
-                            i, indexArray[i].getOneBased()));
-                }
-
-                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-                model.deletePerson(personToDelete);
-            }
+            return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS,
+                    lastShownList.get(targetIndex.getZeroBased())));
         }
 
-        return indexArray.length == 1
-                ? new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, additionMessage))
-                : new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
+        if (isMultipleDelete()) {
+            executeMultipleDelete(lastShownList, model);
+            return new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
+        }
+
+        // should never reach here
+        throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
+    }
+
+    private boolean isSingleDelete() {
+        return indexArray.length == 1;
+    }
+
+    private boolean isMultipleDelete() {
+        return indexArray.length > 1;
+    }
+
+    private boolean isIndexLongerThanEqualToList(int index, int sizeOfList) {
+        return index >= sizeOfList;
+    }
+
+    private void deletePersonFromModel(List<Person> lastShownList, Model model, int position) {
+        Person personToDelete = lastShownList.get(position);
+        model.deletePerson(personToDelete);
+    }
+
+    private void executeSingleDelete(List<Person> lastShownList, Model model, Index targetIndex)
+            throws CommandException {
+
+        if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(),lastShownList.size())) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        deletePersonFromModel(lastShownList, model, targetIndex.getZeroBased());
+
+    }
+
+    private void executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
+        Index targetIndex;
+        for (int i = 0; i < indexArray.length; i++) {
+            targetIndex = Index.indexModifier(indexArray[i], i);
+
+            if (isIndexLongerThanEqualToList(targetIndex.getZeroBased(),lastShownList.size())) {
+                throw new CommandException(String.format("%1$s contact(s) has been deleted "
+                                + "before the invalid index at 'index %2$s' is detected.",
+                        i, indexArray[i].getOneBased()));
+            }
+
+            deletePersonFromModel(lastShownList, model, targetIndex.getZeroBased());
+        }
     }
 
     @Override
