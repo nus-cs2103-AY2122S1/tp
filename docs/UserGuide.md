@@ -330,7 +330,7 @@ Examples:
 
 Displays a read-only schedule of your upcoming week.
 
-![view schedule](ViewSchedule.png)
+![view schedule](images/ViewSchedule.png)
 
 Format: `schedule`
 
