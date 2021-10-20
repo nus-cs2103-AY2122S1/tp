@@ -203,6 +203,8 @@ The following sequence diagram shows how the delete lesson operation works:
 
 ![DeleteLessonSequenceDiagram](images/DeleteLessonSequenceDiagram.png)
 
+:information_source: **Note:** The lifelines for `DeleteLessonCommandParser` and `Lesson l` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 The following activity diagram summarizes what happens when a user executes the delete lesson command:
 
 ![DeleteLessonActivityDiagram](images/DeleteLessonActivityDiagram.png)
