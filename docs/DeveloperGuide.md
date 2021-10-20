@@ -252,7 +252,7 @@ The Find functionality is facilitated by  `ModelManager`. It uses the following 
 
 - `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
 - `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
-- 
+
 Also, `FindCommandParser` was created to achieve this functionality.
 
 ![FindCommand](images/findCommand/FindClassDiagram.png)
@@ -270,7 +270,7 @@ with `find`, a new `FindCommandParser` is created to parse the command further.
 Step 3. `FindCommandParser` determines that the search is by name, due to the `-n` tag. Hence, `FindCommand` is created with the information. In this case, the name of staff to search is "John".
 
 Step 4. `FindCommand` creates a NameContainsKeywordsPredicates object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
-for staff whose names match the keywords. 
+for staff whose names match the keywords.
 
 Step 5. Following this, the displayed staff list will display the updated filtered list. 
 
@@ -444,9 +444,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a2. Steps 3a1-3a2 are repeated until the data entered are correct.
 
       Use case resumes at step 4.
-      
+
 *{More to be added}*
-      
+
 
 ### Non-Functional Requirements
 

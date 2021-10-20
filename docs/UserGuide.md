@@ -40,7 +40,7 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-  
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -63,7 +63,7 @@ Format: `help`
 ## Basic management of Staff Details
 
 
-### Tag legend 
+### Tag legend
 
 ####Tags for Specific Fields
 |Tag|Description|
@@ -117,23 +117,23 @@ Format: `list`
 ### Marking a staff as absent : `mark`
 
 Marks a specified staff(s) as not working for a specified date.
-The salary for that date will be not included in calculation, 
+The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
 
 The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`mark i/index d/startDate d/endDate`  
-`mark n/name d/startDate d/endDate`  
+`mark i/index d/startDate d/endDate`\
+`mark n/name d/startDate d/endDate`\
 `mark t/tag d/startDate d/endDate`
 
-Possible to mark a single date  
+Possible to mark a single date
 `mark t/tag d/date`
 
 Examples:\
-`mark i/1 d/2020-01-03 d/2021-01-03`  
-`mark d/Alex Yeoh d/2020-01-03`  
+`mark i/1 d/2020-01-03 d/2021-01-03`\
+`mark d/Alex Yeoh d/2020-01-03`
 
 
 ### Removing the absent mark `unmark`
@@ -143,12 +143,12 @@ Removes the period that was marked by the `mark` command.
 The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`unmark n/name d/startDate d/endDate`  
+`unmark n/name d/startDate d/endDate`\
 `unmark i/index d/startDate d/endDate`  
 
 Examples:\
-`unmark i/1 d/2020-01-03 d/2021-01-03`  
-`unmark t/friends d/2020-01-03`  
+`unmark i/1 d/2020-01-03 d/2021-01-03`\
+`unmark t/friends d/2020-01-03`
 
 ### Deleting a Staff : `delete`
 
@@ -208,9 +208,9 @@ Name Search:
   e.g. `John Nathan` will return `John Wick`, `Nathan Tan`
 
 Index Search:
-* If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will 
+* If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
-* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0 
+* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0
   if the Staff List is empty)
 * Only single search is supported, and this search will return only the specific Staff at that index
 
@@ -222,7 +222,7 @@ Examples:
 List before using Find command:
   ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
 
-List after using Find coma  
+List after using Find coma
 ![List after find command is called](images/findCommand/AfterFindCommand.jpg)
 
 
