@@ -238,13 +238,47 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Uniquely identify persons/groups/tasks
+
+#### Implementation
+
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
+is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
+
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId` 
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the 
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without 
+exhausting all classes that have `UniqueId` as instance.
+
+When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
+
+<img src="images/UniqueIdDiagram.png" alt="Unique id diagram" width="254">
+
+#### Design Consideration
+
+**Aspect: How to generate a unique id:**
+
+- Aspect 1 (Current choice): UUID (128-bit label)
+  - Pros: Low possibility of collision
+  - Cons: Require more spaces to store
+- Aspect 2: `java.rmi.server.UID` (unique ID over time with respect to the host that it was generated on)
+  - Pros: Ensure uniqueness within same device
+  - Cons: As users can copy the data file and run the program in other devices, it may corrupt.
+- Aspect 3: UID + IP address:
+  - Pros: Solve the problem introduced in aspect 2.
+  - Cons: Require more spaces to store, IP addresses may confuse collaborator as they are not supposed to be in an id.
+- Aspect 4: Give a serial number for each objects
+  - Pros: Easy to implement / intuitive.
+  - Cons: Numbers (`int`, `long`) may be out-of-bound, need to keep a reference of the total number of id.
+
 ### Assign/Unassign task to student
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class, which stores a randomly-generated UUID and the owner of the id. 
-Each `Person` object and each `Task` object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s
-in both the `Person` object and the `Task` object.
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task` 
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object 
+and the `Task` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
