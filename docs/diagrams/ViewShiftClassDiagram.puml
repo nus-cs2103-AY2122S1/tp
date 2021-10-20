@@ -4,16 +4,18 @@ skinparam arrowThickness 1.1
 skinparam arrowColor LOGIC_COLOR_T4
 skinparam classBackgroundColor LOGIC_COLOR
 
-
 Interface Parser <<Interface>>
 abstract class Command
-
-Class ViewShiftCommandParser {
-    String data
-}
-
 Parser <|.. ViewShiftCommandParser
 Command <|-- ViewShiftCommand
-Command <|-- ViewShiftCommand
 
-@end
+class ViewShiftCommand {
+    dayOfWeek : DayOfWeek
+    slotNum : Integer
+    time : LocalTime
+    execute()
+    executeViewShiftBySlot()
+    executeViewShiftByTime()
+}
+
+@enduml
