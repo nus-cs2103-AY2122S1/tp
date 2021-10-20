@@ -78,7 +78,7 @@ public class MrTechRecruiterParser {
             return new AddApplicantCommandParser().parse(arguments);
 
         case DeleteApplicantCommand.COMMAND_WORD:
-            return new DeleteApplicantParser().parse(arguments);
+            return new DeleteApplicantCommandParser().parse(arguments);
 
         case ListApplicantCommand.COMMAND_WORD:
             return new ListApplicantCommand();
