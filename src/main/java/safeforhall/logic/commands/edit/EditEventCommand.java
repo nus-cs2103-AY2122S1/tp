@@ -18,6 +18,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
 /**
@@ -89,8 +90,10 @@ public class EditEventCommand extends Command {
         EventDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getEventDate());
         Venue updatedVenue = editEventDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Capacity updatedCapacity = editEventDescriptor.getCapacity().orElse(eventToEdit.getCapacity());
+        ResidentList updatedResidentList = editEventDescriptor.getResidentList()
+                .orElse(eventToEdit.getResidents());
 
-        return new Event(updatedName, updatedDate, updatedVenue, updatedCapacity);
+        return new Event(updatedName, updatedDate, updatedVenue, updatedCapacity, updatedResidentList);
     }
 
 
@@ -121,6 +124,7 @@ public class EditEventCommand extends Command {
         private EventDate date;
         private Venue venue;
         private Capacity capacity;
+        private ResidentList residentList;
 
         public EditEventDescriptor() {}
 
@@ -132,6 +136,7 @@ public class EditEventCommand extends Command {
             setDate(toCopy.date);
             setVenue(toCopy.venue);
             setCapacity(toCopy.capacity);
+            setResidentList(toCopy.residentList);
         }
 
         /**
@@ -173,6 +178,14 @@ public class EditEventCommand extends Command {
             return Optional.ofNullable(capacity);
         }
 
+        public void setResidentList(ResidentList residentList) {
+            this.residentList = residentList;
+        }
+
+        public Optional<ResidentList> getResidentList() {
+            return Optional.ofNullable(residentList);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -187,7 +200,6 @@ public class EditEventCommand extends Command {
 
             // state check
             EditEventDescriptor e = (EditEventDescriptor) other;
-
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
                     && getVenue().equals(e.getVenue())

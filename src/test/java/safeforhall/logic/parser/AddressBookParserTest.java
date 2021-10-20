@@ -17,17 +17,19 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
-import safeforhall.logic.commands.DeleteCommand;
 //import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
@@ -56,11 +58,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), true);
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
+                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), true);
         ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
-        assertEquals(new DeleteCommand(indexArray), command);
+        assertEquals(new DeletePersonCommand(indexArray), command);
     }
 
     @Test
@@ -117,6 +119,14 @@ public class AddressBookParserTest {
 
         assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD, false) instanceof ViewEventCommand);
         assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " 3", false) instanceof ViewEventCommand);
+    }
+
+    @Test
+    public void parseCommand_include() throws Exception {
+        IncludeCommand command = (IncludeCommand) parser.parseCommand(
+                IncludeCommand.COMMAND_WORD + " "
+                        + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
+        assertEquals(command, new IncludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
     }
 
     @Test

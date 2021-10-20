@@ -8,6 +8,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
 /**
@@ -21,6 +22,7 @@ class JsonAdaptedEvent {
     private final String eventDate;
     private final String venue;
     private final String capacity;
+    private final String residents;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
@@ -29,11 +31,13 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
                              @JsonProperty("eventDate") String eventDate,
                              @JsonProperty("venue") String venue,
-                             @JsonProperty("capacity") String capacity) {
+                             @JsonProperty("capacity") String capacity,
+                            @JsonProperty("residents") String residents) {
         this.eventName = eventName;
         this.eventDate = eventDate;
         this.venue = venue;
         this.capacity = capacity;
+        this.residents = residents;
     }
 
     /**
@@ -44,6 +48,7 @@ class JsonAdaptedEvent {
         eventDate = source.getEventDate().eventDate;
         venue = source.getVenue().venue;
         capacity = source.getCapacity().capacity;
+        residents = source.getResidents().getResidents();
     }
 
     /**
@@ -94,7 +99,18 @@ class JsonAdaptedEvent {
         }
         final Capacity modelCapacity = new Capacity(capacity);
 
-        return new Event(modelEventName, modelEventDate, modelVenue, modelCapacity);
+        // Residents
+
+        if (residents == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ResidentList.class.getSimpleName()));
+        }
+        if (!ResidentList.isValidResidentList(residents)) {
+            throw new IllegalValueException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        final ResidentList modelResidentList = new ResidentList(residents);
+
+        return new Event(modelEventName, modelEventDate, modelVenue, modelCapacity, modelResidentList);
     }
 
 }
