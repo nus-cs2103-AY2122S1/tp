@@ -71,7 +71,7 @@ public class UnenrollCommand extends Command {
 
         Student newStudent = studentToUnenroll.createClone();
 
-        newLesson.removeStudent(newStudent);
+        newLesson.removeStudent(studentToUnenroll);
         model.setStudent(studentToUnenroll, newStudent);
         model.setLesson(lesson, newLesson);
 
