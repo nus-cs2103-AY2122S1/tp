@@ -179,24 +179,24 @@ Step 1. The user starts the app and an encrypted data file containing CsBook's i
 is decrypted and a call to `JsonCsBookStorage#readCsBook()` is made. After this, a call to `JsonSerializableCsBook#toModelType()`
 is made to convert the data into a CsBook object.
 
-![LoadSequence0](images/LoadSequence0.puml)
+![LoadSequence0](images/LoadSequence0.png)
 
 Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
 Next, we add the students from the data into Csbook by calling `JsonAdaptedStudent#toModelType(groupList)`. `groupList` is
 required to add students to ensure that each student has a valid group.
 
-![LoadSequence1](images/LoadSequence1.puml)
+![LoadSequence1](images/LoadSequence1.png)
 
 Step 3. Currently, each group does not have its lists of students, we would need to add it in using `JsonSerializableCsBook#addStudentsToGroups(csBook)`.
 The group list is retrieved from `csBook`. For each group in the group list, we will filter the list of students by checking if the student belongs to the group,
 then add the students in by calling `Group#addAll(StudentsInGroup)`. This would return us a new group that contains the students, and we will update `csBook` by calling
 `CsBook#setGroup(group, groupWithStudentList)`.
 
-![LoadSequence2](images/LoadSequence2.puml)
+![LoadSequence2](images/LoadSequence2.png)
 
 The following sequence diagram shows how the overall loading data operation works:
 
-![LoadSequenceAll](images/LoadSequenceAll.puml)
+![LoadSequenceAll](images/LoadSequenceAll.png)
 
 #### Design considerations
 
