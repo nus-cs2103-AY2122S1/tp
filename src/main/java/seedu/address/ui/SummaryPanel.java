@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.Summary;
+import seedu.address.model.ReadOnlySummary;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -19,7 +19,7 @@ public class SummaryPanel extends UiPart<Region> {
     private static final String DISPLAY_VISITS_LAST_WEEK = "Number of last visits in the last week: ";
     private static final String DISPLAY_VISITS_LAST_MONTH = "Number of last visits in last month: ";
 
-    public final Summary summary;
+    public final ReadOnlySummary summary;
 
     @FXML
     private HBox summaryPanelPane;
@@ -39,7 +39,7 @@ public class SummaryPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public SummaryPanel(Summary summary) {
+    public SummaryPanel(ReadOnlySummary summary) {
         super(FXML);
         this.summary = summary;
         totalElderly.setText(DISPLAY_TOTAL_ELDERLY + summary.getTotalElderly());

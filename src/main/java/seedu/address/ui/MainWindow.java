@@ -146,6 +146,7 @@ public class MainWindow extends UiPart<Stage> {
         if (panelPlaceholder.getChildren().contains(summaryPanel.getRoot())) {
             return;
         }
+        summaryPanel = new SummaryPanel(logic.getSummary());
         panelPlaceholder.getChildren().remove(personListPanel.getRoot());
         panelPlaceholder.getChildren().add(summaryPanel.getRoot());
     }

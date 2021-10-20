@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import javafx.collections.ObservableList;
@@ -10,7 +11,7 @@ import seedu.address.model.person.Visit;
 /**
  * Represents the summary statistics of the Address Book.
  */
-public class Summary {
+public class Summary implements ReadOnlySummary {
 
     private int totalElderly;
     private int overdueVisits;
@@ -24,10 +25,11 @@ public class Summary {
      */
     public Summary(ReadOnlyAddressBook addressBook) {
         requireAllNonNull(addressBook);
-        computeStatistics(addressBook);
+        setStatistics(addressBook);
     }
 
-    private void computeStatistics(ReadOnlyAddressBook addressBook) {
+    public void setStatistics(ReadOnlyAddressBook addressBook) {
+        requireNonNull(addressBook);
         ObservableList<Person> listOfPersons = addressBook.getPersonList();
 
         int overdueVisits = 0;

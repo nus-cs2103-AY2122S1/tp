@@ -134,8 +134,13 @@ public class ModelManager implements Model {
     //=================================== Summary =============================================================
 
     @Override
-    public Summary getSummary() {
+    public ReadOnlySummary getSummary() {
         return summary;
+    }
+
+    @Override
+    public void updateStatistics() {
+        summary.setStatistics(addressBook);
     }
 
     @Override

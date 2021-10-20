@@ -86,6 +86,9 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /** Returns a summary of the persons and visits statistics */
-    Summary getSummary();
+    ReadOnlySummary getSummary();
+
+    /** Updates the statistics of the summary */
+    void updateStatistics();
 
 }

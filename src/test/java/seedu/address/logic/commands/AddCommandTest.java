@@ -153,6 +153,11 @@ public class AddCommandTest {
         public Summary getSummary() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateStatistics() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
