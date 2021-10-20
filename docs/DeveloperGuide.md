@@ -163,11 +163,12 @@ IS_EDITABLE | If set to `true`, the field is editable by the user through edit c
 
 ### Field interfaces
 
-<img src="images/FieldClassDiagram.png" width="550" />
+<img src="images/FieldClassDiagram.png" width="700" />
 
 The following concrete interfaces inherit the `Field` interface. You can alternatively define your own interface or provide a concrete implementation of the field options within the `attribute` classes if they don't suit your needs.
 
 #### OptionalStringBasedField
+
 Option | Default
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | `true`
@@ -176,6 +177,7 @@ DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
 #### OptionalNonStringBasedField
+
 Option | Default
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | `true`
@@ -184,6 +186,7 @@ DEFAULT_VALUE | `""`
 IS_EDITABLE | `true`
 
 #### RequiredField
+
 Option | Default
 --- | --- 
 IS_BLANK_VALUE_ALLOWED | `false`
