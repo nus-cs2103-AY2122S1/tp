@@ -48,6 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
+     * @return
      */
     @Override
     public AddCommand parse(String args, Model model) throws ParseException {

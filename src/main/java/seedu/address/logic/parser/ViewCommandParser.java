@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -19,6 +20,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
      * and returns an ViewCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
+     * @return
      */
     @Override
     public ViewCommand parse(String args, Model model) throws ParseException {

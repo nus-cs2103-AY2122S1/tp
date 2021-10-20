@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,6 +14,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -145,6 +147,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(clientIds);
         requireNonNull(editedPersonDescriptor);
         return persons.setPersonByClientIds(clientIds, editedPersonDescriptor);
+    }
+
+    /**
+     * Retrieve the NextMeeting from the given LocalDate by the user {@code date}.
+     *
+     * @return a list of NextMeetings that's on the same date as {@code date}
+     */
+    public List<Person> retrieveLastMeetings (LocalDate date) {
+        requireNonNull(date);
+        return persons.retrieveNextMeetings(date);
     }
 
     /**

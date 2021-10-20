@@ -66,7 +66,9 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public static NextMeeting getNullMeeting() {
         return NULL_MEETING;
     }
-
+    public LocalDate getDate() {
+        return date;
+    }
     public static boolean isValidNextMeeting(String test) {
         return test.matches(VALID_MEETING_STRING);
     }

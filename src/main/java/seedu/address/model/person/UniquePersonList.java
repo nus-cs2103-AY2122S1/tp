@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.EditCommand.createEditedPerson;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -164,6 +166,25 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         internalList.setAll(persons);
+    }
+
+    /**
+     * Finds Persons with meetings on the given {@code date}.
+     *
+     * @param date inputted by user for the "schedule" command.
+     * @return list of persons with meetings on the given {@code date}.
+     */
+
+    public List<Person> retrieveNextMeetings(LocalDate date) {
+        Predicate<Person> personsWithSameDateNextMeeting = (person) -> {
+            LocalDate meetingDate = person.getNextMeetingDate();
+            if (meetingDate != null) {
+                return meetingDate.equals(date);
+            } else {
+                return false;
+            }
+        };
+        return internalList.filtered(personsWithSameDateNextMeeting);
     }
 
     /**
