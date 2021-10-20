@@ -3,6 +3,8 @@ package safeforhall.model.person;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.AppUtil.checkArgument;
 
+import safeforhall.logic.parser.CliSyntax;
+
 /**
  * Represents a Person's room in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRoom(String)}
@@ -15,6 +17,12 @@ public class Room {
             + "Character 3: The room, 0-2\n"
             + "Character 4: The room, 0-9\n";
 
+    public static final String MESSAGE_CONSTRAINTS_FOR_FIND = "Rooms can be searched by block, level, block-level: \n"
+            + "Example: " + CliSyntax.PREFIX_ROOM + "A , "
+            + CliSyntax.PREFIX_ROOM + "1 , "
+            + CliSyntax.PREFIX_ROOM + "A1 , "
+            + CliSyntax.PREFIX_ROOM + "A100 ";
+
     /*
      * The room must be 4 characters
      * The first character of the room must be A-E to represent the block
@@ -24,6 +32,8 @@ public class Room {
      * This check assumes 5 blocks, 4 levels and 30 rooms a level
      */
     public static final String VALIDATION_REGEX = "^[a-eA-E][1-4][0-2][0-9]$";
+
+    public static final String VALIDATION_FOR_FIND_REGEX = "[a-eA-E]|[1-4]|[a-eA-E][1-4]";
 
     public static final String DESC = "Room: ";
 
@@ -46,6 +56,13 @@ public class Room {
      */
     public static boolean isValidRoom(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid block, level, level-block or room.
+     */
+    public static boolean isValidRoomForFind(String test) {
+        return test.matches(VALIDATION_FOR_FIND_REGEX) || isValidRoom(test);
     }
 
     @Override
