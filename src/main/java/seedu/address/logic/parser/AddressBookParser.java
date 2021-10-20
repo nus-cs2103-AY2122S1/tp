@@ -21,6 +21,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.PaddCommand;
 import seedu.address.logic.commands.TaddCommand;
 import seedu.address.logic.commands.TdelCommand;
+import seedu.address.logic.commands.TlistCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,6 +92,9 @@ public class AddressBookParser {
 
         case TdelCommand.COMMAND_WORD:
             return new TdelCommandParser().parse(arguments);
+
+        case TlistCommand.COMMAND_WORD:
+            return new TlistCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -20,7 +20,7 @@ import seedu.address.model.task.Task;
 public class TaddCommand extends Command {
     public static final String COMMAND_WORD = "tadd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
             + "Parameters: "
             + PREFIX_NAME + " TASKNAME "
             + PREFIX_MEMBER_ID + " MEMBER_ID\n"
