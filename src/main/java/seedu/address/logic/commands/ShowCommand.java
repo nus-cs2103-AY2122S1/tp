@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPERIENCE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_INTERVIEW_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_LEVEL_OF_EDUCATION_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_NAME_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
@@ -113,6 +114,10 @@ public class ShowCommand extends Command {
             userText = "tags";
             uniqueInputs = getUniqueTagInputs(ol);
             break;
+        case PREFIX_INTERVIEW_SYNTAX:
+            userText = "interview";
+            uniqueInputs = getUniqueInterviewInputs(ol);
+            break;
         default:
             return "No search terms exist for unknown prefix " + prefixString;
         }
@@ -172,6 +177,11 @@ public class ShowCommand extends Command {
     private Set<String> getUniqueTagInputs(ObservableList<Person> ol) {
         return ol.stream()
                 .flatMap(person -> person.getTags().stream().map(Tag::toString)).collect(Collectors.toSet());
+    }
+
+    private Set<String> getUniqueInterviewInputs(ObservableList<Person> ol) {
+        return ol.stream()
+                .map(x -> x.getInterview().get().toString()).collect(Collectors.toSet());
     }
 
 }
