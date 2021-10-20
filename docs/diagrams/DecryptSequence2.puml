@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonCsBookStorage" as JsonCsBookStorage STORAGE_COLOR
+end box
+
+box Commons COMMONS_COLOR_T1
+participant "<<class>>\nEncryptedJsonUtil" as EncryptedJsonUtil COMMONS_COLOR
+participant "<<class>>\nEncryptionUtil" as EncryptionUtil COMMONS_COLOR
+end box
+
+activate EncryptedJsonUtil
+EncryptedJsonUtil -> EncryptionUtil : decryptSealedObject(sealedObject)
+activate EncryptionUtil
+
+EncryptionUtil --> EncryptedJsonUtil : serializable
+deactivate EncryptionUtil
+
+EncryptedJsonUtil -> EncryptedJsonUtil : fromJsonString(serializable, JsonSerializableCsBook.class)
+
+activate JsonCsBookStorage
+EncryptedJsonUtil --> JsonCsBookStorage : jsonCsBook
+deactivate EncryptedJsonUtil
+
+[<-- JsonCsBookStorage : csbook
+deactivate JsonCsBookStorage
+
+@enduml
