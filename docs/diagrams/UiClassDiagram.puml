@@ -40,7 +40,7 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 PersonListPanel -down-> "*" PersonCard
-LessonListPanel -down-> "*" LessonCard
+LessonListPanel -down--> "*" LessonCard
 
 MainWindow -left-|> UiPart
 
@@ -54,7 +54,7 @@ StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
 
 PersonCard -down..> Model
-LessonCard -down..> Model
+LessonCard -right..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
@@ -63,8 +63,6 @@ PersonListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
-
-PersonCard -[hidden]right- LessonCard
 
 MainWindow -[hidden]-|> UiPart
 @enduml
