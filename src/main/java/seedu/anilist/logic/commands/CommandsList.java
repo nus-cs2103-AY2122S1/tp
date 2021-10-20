@@ -4,7 +4,8 @@ package seedu.anilist.logic.commands;
  * List of all commands currently supported.
  */
 public class CommandsList {
-    private static final String[] LIST_OF_COMMANDS = {"add", "delete", "help", "list", "update"};
+    private static final String[] LIST_OF_COMMANDS =
+        {"add", "delete", "help", "list", "update", "status", "rename", "genre", "find", "clear"};
 
     /**
      * Creates a copy of the LIST_OF_COMMANDS array and return it.
