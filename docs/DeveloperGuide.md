@@ -189,7 +189,7 @@ The following activity diagram shows what happens when a user executes the `edit
 * **Alternative 1 (current choice):** Category field is added through `add` or `edit` commands.
   * Pros: Easy to implement
   * Cons: May cause `add` command to be too long
-  
+
 * **Alternative 2:** Exclusive command to add Category field
   * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
   * Cons: Reduces usability due to the need to remember another command
