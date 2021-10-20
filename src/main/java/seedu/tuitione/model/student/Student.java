@@ -222,14 +222,17 @@ public class Student {
                 .append("; Phone: ").append(parentContact)
                 .append("; Email: ").append(email)
                 .append("; Address: ").append(address)
-                .append("; Grade: ").append(grade);
+                .append("; Grade: ").append(grade)
+                .append("; ");
+
         if (!remarks.isEmpty()) {
-            builder.append("; Remark(s): ");
+            builder.append("Remark(s): ");
             remarks.forEach(t -> builder.append(t).append(" "));
+            builder.insert(builder.length() - 1, ';');
         }
-        builder.setLength(builder.length() - 1);
+
         if (!lessonCodesAndPrices.isEmpty()) {
-            builder.append("; Lesson(s): ");
+            builder.append("Lesson(s): ");
             lessonCodesAndPrices.keySet().forEach(l -> builder.append(l).append(" "));
         }
         return builder.toString();
