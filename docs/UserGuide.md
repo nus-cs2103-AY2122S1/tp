@@ -185,26 +185,23 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
 * Both indexes **must be a positive integer** 1, 2, 3, …
 
-
 Examples:
-* `enroll 1 l/Science-P5-Wed-1230` will enroll the student indexed `1` for a `P5` `Science` lesson on `Wed 1230 pm`.
+
+* `enroll 1 l/1` will enroll the student indexed at `1` in the displayed student list to the lesson indexed at `1` in the displayed lesson list.
 
 ### Unenrolling a student from lesson: `unenroll`
 
 Unenroll a student from a given TuitiONE lesson.
 
-Command Format: `unenroll INDEX l/LESSON_CODE`
+Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 
-* Unenroll the student identified by `INDEX` from the specific `lesson` using its `lesson code`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …
-* LESSON_CODE should have the corresponding format as seen in the program.
-    * SUBJECT-GRADE-DAY-TIME
-    * The first letter of SUBJECT, GRADE, and DAY is in caps.
-    * Time is in 2400 hours format.
+* Unenroll the student identified by `STUDENT_INDEX` in the displayed student list from the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
+* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+* Both indexes **must be a positive integer** 1, 2, 3, …
 
 Examples:
-* `unenroll 1 l/Science-P5-Wed-1230` will unenroll the student indexed `1` from a `P5` `Science` lesson on `Wed 1230 pm`.
+* `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
 ### Clearing all entries : `clear`
 
