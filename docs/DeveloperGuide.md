@@ -174,6 +174,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Batch Import
+
+#### Implementation
+
+The chosen implementation of the `ImportCommand` pulls up a `CsvFileSelector` window that only allows csv files to be selected.
+
+Once a file is selected, the command is supported by two parsers.
+
+- `CsvParser` — Deals with parsing a csv file and assigning its body to its headers via key-value pairs.
+
+- `ImportCommandParser` — Retrieves the relevant entries from `CsvParser` then checks if the necessary fields are present and correctly formatted before creating the `Person` objects that will be added to the `Model` in `ImportCommand`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("import")` API call.
+
+![Interactions Inside the Logic Component for the `import` Command](images/ImportSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `ImportCommandParser` finds any wrongly formatted fields in any of the entries, the `ImportCommand` is not created and executed. Instead a CommandException is thrown describing the entries that are wrongly formatted and the field in the entry that is responsible for it.
+
+</div>
+
+#### Design considerations:
+
+**Aspect: How csv file is chosen:**
+
+- **Alternative 1 (current choice):** `FileSelector` window.
+  - Pros:
+  	- Ensures users select files that exist and are in the csv format.
+  	- Allows for easy navigability between directories for quick retrieval of the wanted file.
+  - Cons:
+  	- Diverts from target user profile by utilising GUI for commands.
+
+- **Alternative 2:** Csv file path to be inputted after `import` in command call.
+  - Pros:
+  	- Meets target user profile by utilising CLI rather than GUI.
+  - Cons:
+  	- More troublesome for the user as user has to search for the csv file's absolute path.
+  	- File could also not exist or be in the wrong format. Would require additional exception handling.
+    
 ### Encryption
 
 **Specifications:**
