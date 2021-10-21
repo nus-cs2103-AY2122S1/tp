@@ -66,8 +66,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingList() {
-        return model.getSortedNextMeetingList();
+    public ObservableList<NextMeeting> getFilteredNextMeetingList() {
+        return model.getFilteredNextMeetingList();
     }
 
     @Override

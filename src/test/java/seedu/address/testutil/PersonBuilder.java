@@ -62,10 +62,9 @@ public class PersonBuilder {
         lastMet = new LastMet(DEFAULT_LASTMET);
         try {
             nextMeeting = ParserUtil.parseNextMeeting(DEFAULT_NEXTMEETING);
-            nextMeeting.setWithWho(name);
         } catch (ParseException pe) {
             nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-                "Starbucks @ UTown", name.fullName);
+                "Starbucks @ UTown");
         }
 
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
@@ -167,10 +166,9 @@ public class PersonBuilder {
     public PersonBuilder withNextMeeting(String nextMeeting) {
         try {
             this.nextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
-            this.nextMeeting.setWithWho(name);
         } catch (ParseException pe) {
             this.nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-                "Starbucks @ UTown", name.fullName);
+                "Starbucks @ UTown");
         }
         return this;
     }
