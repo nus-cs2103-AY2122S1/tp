@@ -88,6 +88,34 @@ public class AddCommandTest {
     }
 
     @Test
+    public void execute_newItemNoCostPrice_incompleteInfofailure() {
+        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .build();
+
+        AddCommand addCommand = new AddCommand(validDescriptor);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INCOMPLETE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_newItemNoSalesPrice_incompleteInfofailure() {
+        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
+                .build();
+
+        AddCommand addCommand = new AddCommand(validDescriptor);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INCOMPLETE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
     public void execute_existingItemNameDescription_restockSuccessful() {
         modelStub.addItem(BAGEL.updateCount(5));
 
