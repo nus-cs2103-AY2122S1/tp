@@ -1,11 +1,10 @@
 * {
-    -fx-primary-color: #383838;
-    -fx-secondary-color: #515658;
-    -fx-selected-color: #424d5f;
-    -fx-font-color: #FFFFFF;
-    -fx-genre-color: #333333;
-    -fx-tab-color: #b091bd;
-    -fx-prompt-text-color: #bfbfbf;
+    -fx-primary-color: #953139;
+    -fx-secondary-color: #732D33;
+    -fx-selected-color: #572334;
+    -fx-font-color: #FAF2EC;
+    -fx-genre-color: #4F1E2C;
+    -fx-tab-color: #96B946;
 }
 
 
@@ -38,7 +37,6 @@
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-prompt-text-fill: -fx-prompt-text-color;
 }
 
 .tab-pane {
@@ -345,6 +343,7 @@
 }
 
 #resultDisplay .content {
+    -fx-background-image: url("../images/anime_girl.png");
     -fx-background-repeat: no-repeat;
     -fx-background-size: 336px 210px;
     -fx-background-position: bottom right;

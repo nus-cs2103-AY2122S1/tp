@@ -95,4 +95,14 @@ public interface Model {
      * Returns current tab.
      */
     TabOption getCurrentTab();
+
+    /**
+     * Returns theme css file name as a string.
+     */
+    String getThemeCss();
+
+    /**
+     * Sets the theme css file.
+     */
+    void setThemeCss(String themeCss);
 }
