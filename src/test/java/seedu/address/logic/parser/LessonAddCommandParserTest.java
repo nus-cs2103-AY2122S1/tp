@@ -56,13 +56,15 @@ public class LessonAddCommandParserTest {
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple subject - last subject accepted
+        String testSubject = " " + PREFIX_SUBJECT + "Testing";
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-            + TIME_RANGE_DESC + " " + PREFIX_SUBJECT + "Testing" + SUBJECT_DESC
+            + TIME_RANGE_DESC + testSubject + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple time ranges - last time range accepted
+        String testTimeRange = " " + PREFIX_TIME + "1234-1400";
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-            + " " + PREFIX_TIME + "1234-1400" + TIME_RANGE_DESC + SUBJECT_DESC
+            + testTimeRange + TIME_RANGE_DESC + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple homework - all accepted
