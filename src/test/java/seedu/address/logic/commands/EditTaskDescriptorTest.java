@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
-public class EditStudentDescriptorTest {
+public class EditTaskDescriptorTest {
 
     @Test
     public void equals() {

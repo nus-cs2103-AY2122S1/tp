@@ -166,20 +166,46 @@ Displays all the tasks currently in the list.
 
 Format: `tasks`
 
-### Adding a task with a date: `addTask n/TASK_NAME by/DATE`
+### Adding a todo task: `todo n/TASK_NAME`
 
-Adds a task with the given name and a specified taskDate.
+Adds a TODO task with the given name.
 
-Format: `addTask n/TASK_NAME by/DATE`
-Format: `addTask n/TASK_NAME by/DATE`
+Format: `todo n/TASK_NAME`
 
-* Adds a task with the specified `TASK_NAME`
-* The task has the taskDate `DATE`
+* Adds a todo task with the specified `TASK_NAME`
+
+Examples:
+* `todo n/study` creates the todo task "study".
+* `todo n/play` creates the todo task "play".
+
+### Adding an event task: `event n/TASK_NAME on/DATE`
+
+Adds an event task with the given name and a specified taskDate.
+
+Format: `event n/TASK_NAME on/DATE`
+
+* Adds an event task with the specified `TASK_NAME`
+* The event task has the taskDate `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
 
 Examples:
-* `add n/grade scripts by/2021-09-23` creates the task "grade scripts", which is to be completed by the given date.
-* `add n/tutorial preparation by/2021-10-04` creates the task "tutorial preparation", which is to be completed by the given date.
+* `event n/party on/2021-09-23` creates the event task "party", which is to be held on the given date.
+* `event n/exam on/2021-10-04` creates the event task "exam", which is to be held on the given date.
+
+### Adding an deadline task: `deadline n/TASK_NAME by/DATE`
+
+Adds an deadline task with the given name and a specified taskDate.
+
+Format: `event n/TASK_NAME by/DATE`
+
+* Adds an deadline task with the specified `TASK_NAME`
+* The deadline task has the taskDate `DATE`
+* The taskDate must be in the format `YYYY-MM-dd`
+
+Examples:
+* `deadline n/tutorial participation on/2021-09-23` creates the deadline task "tutorial participation", which is to be completed by the given date.
+* `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", which is to be completed by the given date.
+
 
 ### Marking a student as present: `marka`
 
@@ -384,12 +410,14 @@ Action | Format, Examples
 **List Students** | `students`
 **List Tasks** | `tasks`
 **Add Student** | `add n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​` <br> e.g., `add n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
-**Add Task** | `addTask n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `addTask n/study by/2021-10-31 t/W14-4`
+**Add Todo Task** | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/study t/W14-4`
+**Add Event Task** | `event n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `event n/study on/2021-10-31 t/W14-4`
+**Add Deadline Task** | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` <br> e.g., `deadline n/study by/2021-10-31 t/W14-4`
 **DoneTask** | `doneTask INDEX` <br> e.g., `doneTask 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Task** | `deleteTask INDEX`<br> e.g., `deleteTask 3`
 **Edit** | `edit INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Edit Task** | `edit INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`edit 2 n/study by/2012-10-31 t/W14-4`
+**Edit Task** | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Help** | `help`

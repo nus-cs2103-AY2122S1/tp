@@ -43,7 +43,7 @@ public class StudentUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditTaskDescriptor}'s details.
      */
     public static String getEditStudentDescriptorDetails(EditStudentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();

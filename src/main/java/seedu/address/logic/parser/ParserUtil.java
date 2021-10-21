@@ -147,19 +147,20 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code deadline} is invalid.
+     * @throws ParseException if the given {@code taskDate} is invalid.
      */
-    public static TaskDate parseDeadline(String deadline) throws ParseException {
-        requireNonNull(deadline);
-        String trimmedDeadline = deadline.trim();
-        if (!TaskDate.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedDeadline);
+    public static TaskDate parseTaskDate(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedTaskDate = taskDate.trim();
+        if (!TaskDate.isValidDeadline(trimmedTaskDate)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedTaskDate);
         }
-        return new TaskDate(trimmedDeadline);
+        return new TaskDate(trimmedTaskDate);
     }
+
 
     /**
      * Parses a {@code String email} into an {@code Email}.

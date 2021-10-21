@@ -55,7 +55,7 @@ public class JsonAdaptedTask {
         if (source instanceof EventTask) {
             this.i = 2;
             EventTask task = (EventTask) source;
-            deadline = task.getDeadline().toString();
+            deadline = task.getTaskDate().toString();
         } else {
             i = 0;
         }
