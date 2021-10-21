@@ -261,7 +261,7 @@ The mechanism is as described below:
 
 
 * `ShowCommandParser` parses the index and creates a `ShowCommand`, which finds the student to be shown according to the index and creates a `ShowCommandResult` with the student identified.
-  
+
 
 * `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
 
@@ -285,15 +285,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Each student object keeps track of its own lab results by an ObservableList.
     * Pros: Easy to implement; Lower chance of having mismatched student and lab records.
-    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student` 
+    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student`
 
 * **Alternative 2:** An ObservableList of lab results of every student in ProgrammerError
   itself.
     * Pros: Potential improvement in performance by passing an index, instead of a `Student` instance, across different classes.
-    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index 
+    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index
       (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list),
       given that other operations such as add and delete can change the indexes easily.
-    
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,8 +323,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
-
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
 
 ### User stories
 
@@ -333,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
+| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
 | `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.      
 | `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
@@ -576,5 +574,6 @@ testers are expected to do more *exploratory* testing.
     2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
 ### [Proposed] Dashboard
+
 
 1. A dashboard to view the TA's classes lab results.  
