@@ -16,8 +16,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
