@@ -32,7 +32,7 @@ public class ItemTest {
         assertFalse(APPLE_PIE.isSameItem(null));
 
         // same name, different id, all other attributes different -> returns true
-        Item editedPie = new ItemBuilder(APPLE_PIE).withId("#123456").build();
+        Item editedPie = new ItemBuilder(APPLE_PIE).withId("123456").build();
         assertTrue(APPLE_PIE.isSameItem(editedPie));
 
         // different name, same id, all other attributes different -> returns true

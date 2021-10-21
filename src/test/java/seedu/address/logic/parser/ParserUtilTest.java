@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_COUNT_1 = "2";
     private static final String VALID_COUNT_2 = "12";
     private static final String VALID_Id_1 = "223131";
-    private static final String VALID_Id_2 = "002489";
+    private static final String VALID_Id_2 = "122489";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -182,15 +182,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseId_validId_returnsId() throws Exception {
-        String expectedId = VALID_Id_1;
-        String actualId = ParserUtil.parseId(VALID_Id_1);
+        Integer expectedId = Integer.parseInt(VALID_Id_1);
+        Integer actualId = ParserUtil.parseId(VALID_Id_1);
         assertEquals(expectedId, actualId);
     }
 
     @Test
     public void parseId_validId2_returnsId() throws Exception {
-        String expectedId = VALID_Id_2;
-        String actualId = ParserUtil.parseId(VALID_Id_2);
+        Integer expectedId = Integer.parseInt(VALID_Id_2);
+        Integer actualId = ParserUtil.parseId(VALID_Id_2);
         assertEquals(expectedId, actualId);
     }
 }
