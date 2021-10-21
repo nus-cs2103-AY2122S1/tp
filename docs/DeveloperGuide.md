@@ -152,7 +152,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### Data Archiving Features
+
+#### Import feature
+
+The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
+
+This operation is exposed in the `Model` interface as `Model#importFile(Path filePath)`. This is further facilitated by an additional function in `AddressBook`, `AddressBook#mergeFile`.
+
+The following sequence diagram shows how the import operation works:
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+#### !TODO Export feature
 
 ### \[Proposed\] Undo/redo feature
 
@@ -234,9 +245,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
