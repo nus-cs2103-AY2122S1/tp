@@ -297,6 +297,13 @@ The essential fields for a lesson are:
 * `date`
 * `time range`
 * `subject`
+* `rate`
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about `rate`**<br>
+The lesson's rate refers to the fee of the lesson per hour.
+This rate will be used in the calculation of fees due after each lesson.
+</div>
 
 An optional field for a lesson is:
 * `homework`
@@ -325,6 +332,7 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 * Time range `HHmm-HHmm`
 * Subject
 * Homework
+* Rate
 
 Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
 
