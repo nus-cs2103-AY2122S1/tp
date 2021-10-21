@@ -74,7 +74,7 @@ Spam is a desktop app for managing contacts **targeted at marketers who require 
 > > Note:
 > >
 > > All flags will have a long version and a short version that can be used. The long version will be prefixed with
-> > `--` while the short versions will be prefixed with `-`. (Eg. `--phone` and `-p`)
+> > `--` while the short versions will be prefixed with `-`. (E.g. `--phone` and `-p`)
 
 </div>
 
@@ -150,7 +150,7 @@ Format: `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email)
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed ie. adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `-t` without specifying any tags after it.
 
 Examples:
@@ -160,22 +160,24 @@ Examples:
 
 ### Locating persons: `find`
 
-Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
+Finds persons whose respective fields contain any of the respective keywords.
 
 Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
 
 - At least one of the optional fields must be provided.
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- The order of the optional fields does not matter. e.g. `-n Hans Bo -p 12345678` and `-p 12345678 -n Hans Bo` will return the same result
+- Optional fields can be repeated. e.g. `-t friend -t colleagues` returns only persons with tags containing both `friends` and `colleagues`
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword in **an** option will be returned (i.e. `OR` search for individual fields).
+- Persons matching at least one keyword in **EACH** option will be returned (i.e. `OR` search within individual fields).
 
   e.g. `Hans Bo` will return:
 
   - `Hans Gruber`
   - `Bo Yang`
 
-- Persons matching **all** given options will be returned (i.e. `AND` search for multiple fields).
+- Persons matching **all** given options will be returned (i.e. `AND` search across multiple fields).
 
   e.g. `-n Hans Bo -p 12345678` will return:
 
