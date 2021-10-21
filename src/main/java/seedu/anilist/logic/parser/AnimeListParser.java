@@ -6,9 +6,11 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.anilist.logic.commands.AbortClearCommand;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.ClearCommand;
 import seedu.anilist.logic.commands.Command;
+import seedu.anilist.logic.commands.ConfirmClearCommand;
 import seedu.anilist.logic.commands.DeleteCommand;
 import seedu.anilist.logic.commands.ExitCommand;
 import seedu.anilist.logic.commands.FindCommand;
@@ -85,4 +87,23 @@ public class AnimeListParser {
         }
     }
 
+
+    /**
+     * Parses user confirmation input into command for execution.
+     *
+     * @param cmdInProgress the command currently in progress
+     * @param userInput full user input string
+     * @return the command based on the user input
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public Command parseConfirmationCommand(Command cmdInProgress, String userInput) throws ParseException {
+        String cmdWord = userInput.trim();
+        //Extendable to future commands that require confirmation
+        switch (cmdWord) {
+        case ConfirmClearCommand.COMMAND_WORD:
+            return new ConfirmClearCommand();
+        default:
+            return new AbortClearCommand();
+        }
+    }
 }

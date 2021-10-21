@@ -7,6 +7,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.anilist.logic.commands.CommandTestUtil.NAME_DESC_AKIRA;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AKIRA;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.CommandResult;
+import seedu.anilist.logic.commands.ConfirmClearCommand;
 import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
@@ -68,6 +70,23 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand,
                 String.format(Messages.MESSAGE_ANIME_LISTED_OVERVIEW, model.getFilteredAnimeList().size()),
                 model);
+    }
+
+    @Test
+    public void execute_validConfirmationCommand_success() throws Exception {
+        // Setup LogicManager with modelWithAnime
+        JsonAnimeListStorage animeListStorage =
+                new JsonAnimeListStorage(temporaryFolder.resolve("animeList.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(animeListStorage, userPrefsStorage);
+        Model modelWithAnime = new ModelManager(getTypicalAnimeList(), new UserPrefs());
+        logic = new LogicManager(modelWithAnime, storage);
+
+        String cmd = "clear";
+        logic.execute(cmd);
+        CommandResult finalResult = logic.execute(cmd);
+
+        assertEquals(ConfirmClearCommand.MESSAGE_SUCCESS, finalResult.getFeedbackToUser());
     }
 
     @Test
