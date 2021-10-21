@@ -389,6 +389,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC06 - Showing search terms**
+
+**MSS**
+
+1. User requests to show search terms for a specific category.
+2. RecruitIn displays a list of search terms for the requested category.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input format is invalid.
+    * 1a1. RecruitIn shows an error message.
+  
+      Use case resumes at step 1.
+
+* 2a. The list of applicants is empty.
+
+    * 2a1. RecruitIn displays a message indicating that no search terms are available.
+
+      Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
