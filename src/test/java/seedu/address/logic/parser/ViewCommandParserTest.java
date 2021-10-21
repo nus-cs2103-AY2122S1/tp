@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -38,19 +38,19 @@ public class ViewCommandParserTest {
     @Test
     public void test_single_input() {
 
-        String nameInput = inputFormat(PREFIX_NAME, DEFAULT_TEST_NAME);
+        String nameInput = inputFormat(PREFIX_DASH_NAME, DEFAULT_TEST_NAME);
         ViewCommand nameExpectedCommand = commandFromString(DEFAULT_TEST_NAME, Name::new);
         assertParseSuccess(parser, nameInput, nameExpectedCommand);
 
-        String phoneInput = inputFormat(PREFIX_PHONE, DEFAULT_TEST_PHONE);
+        String phoneInput = inputFormat(PREFIX_DASH_PHONE, DEFAULT_TEST_PHONE);
         ViewCommand phoneExpectedCommand = commandFromString(DEFAULT_TEST_PHONE, Phone::new);
         assertParseSuccess(parser, phoneInput, phoneExpectedCommand);
 
-        String emailInput = inputFormat(PREFIX_EMAIL, DEFAULT_TEST_EMAIL);
+        String emailInput = inputFormat(PREFIX_DASH_EMAIL, DEFAULT_TEST_EMAIL);
         ViewCommand emailExpectedCommand = commandFromString(DEFAULT_TEST_EMAIL, Email::new);
         assertParseSuccess(parser, emailInput, emailExpectedCommand);
 
-        String addressInput = inputFormat(PREFIX_ADDRESS, DEFAULT_TEST_ADDRESS);
+        String addressInput = inputFormat(PREFIX_DASH_ADDRESS, DEFAULT_TEST_ADDRESS);
         ViewCommand addressExpectedCommand = commandFromString(DEFAULT_TEST_ADDRESS, Address::new);
         assertParseSuccess(parser, addressInput, addressExpectedCommand);
 
@@ -62,9 +62,9 @@ public class ViewCommandParserTest {
 
     @Test
     public void test_multiple_input() {
-        String userInput = COMMAND_WORD + " " + PREFIX_EMAIL + DEFAULT_TEST_EMAIL + " "
-                + PREFIX_ADDRESS + DEFAULT_TEST_ADDRESS + " "
-                + PREFIX_PHONE + DEFAULT_TEST_PHONE;
+        String userInput = COMMAND_WORD + " " + PREFIX_DASH_EMAIL + DEFAULT_TEST_EMAIL + " "
+                + PREFIX_DASH_ADDRESS + DEFAULT_TEST_ADDRESS + " "
+                + PREFIX_DASH_PHONE + DEFAULT_TEST_PHONE;
         PersonContainsFieldsPredicate predicate = new PersonContainsFieldsPredicate(new Email(DEFAULT_TEST_EMAIL),
                 new Address(DEFAULT_TEST_ADDRESS), new Phone(DEFAULT_TEST_PHONE));
         ViewCommand result = new ViewCommand(predicate);

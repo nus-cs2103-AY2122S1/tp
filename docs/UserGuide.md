@@ -112,8 +112,6 @@ Shows a list of all staffs in the staff list.
 
 Format: `list`
 
-
-
 ### Marking a staff as absent : `mark`
 
 Marks a specified staff(s) as not working for a specified date.
@@ -128,8 +126,7 @@ Format:\
 `mark n/name d/startDate d/endDate`\
 `mark t/tag d/startDate d/endDate`
 
-Possible to mark a single date
-`mark t/tag d/date`
+Possible to mark a single date `mark t/tag d/date`
 
 Examples:\
 `mark i/1 d/2020-01-03 d/2021-01-03`\
@@ -282,7 +279,6 @@ Examples:\
 `deleteSchedule i/1278 d/friday-1`
 
 ### Editing a staff schedule: `editSchedule`
-
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
 Formats:\
