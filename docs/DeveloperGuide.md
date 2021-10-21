@@ -173,20 +173,24 @@ The `execute` method in `DeleteCommand` overrides that in `Command`. In this imp
 The `DeleteCommandParser` class implements the `Parser<DeleteCommand` interface. It manages the parsing of the arguments (index(es) in the case of a delete command) in the user input.
 The `parse` method in `DeleteCommandParser` first converts the argument provided into a `List<Index>`. It then returns a `DeleteCommand` back to `UniFyParser`, initialized with the `List<Index>`.
 
+##### Usage Scenario
+TODO
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
 #### 3.2.2 Design Consideration
 
-##### Aspect: What to use as reference to find the task?
+##### Aspect: Reference to use to delete tasks
 
-* **Alternative 1 (current choice):** Allow users to enter task name with date.
-    * Pros: Easier for users to find the task if they know the task name and what date the task in on.
-    * Cons: Harder to implement because multiple predicates have to be used.
+* **Alternative 1 (current choice):** Allow users to delete tasks using task id.
+    * Pros: Short and really quick for users to type
+    * Cons: If list is long, users might have to spend time scrolling to find task id before deletion
 
-* **Alternative 2:** Users can only enter name
-    * Pros: Easy to implement, and only one predicate is required.
-    * Cons: Inconvenient for users if they have recurring task on different dates.
-
-_{more aspects and alternatives to be added}_
-
+* **Alternative 2:** Allows users to delete tasks by task name
+    * Pros: Tasks sharing task name can be easily deleted together (e.g. user can delete every assignment in Uni-Fy by typing `delete assignment`)
+    * Cons: Might result in collateral deletion accidentally; Takes much longer to input
+    
+Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, we have decided to adopt Alternative 1 as our current implementation.
 
 ### 3.3 Show feature
 
