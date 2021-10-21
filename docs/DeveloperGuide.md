@@ -270,6 +270,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                     | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user                         | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
+| `* *`  | user                                     | delete multiple contacts at once | more easily clean my contacts |
 
 *{More to be added}*
 
@@ -361,15 +362,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case resumes from step 2.
 
-**Use case: UC05 - Delete a contact**
+**Use case: UC05 - Delete person(s)**
 
 **MSS:**
 
-1. User chooses to delete a contact.
-2.	Track2Gather shows a list of persons.
-3.	Track2Gather requests the user to specify the person to be deleted.
-4.	User chooses a specific person in the list.
-5.	Track2Gather deletes the person.
+1. User requests to list persons.
+2. Track2Gather shows a list of persons.
+3. User identifies specific person(s) to delete from the list.
+4. Track2Gather deletes the person(s).
 
     Use case ends.
 
@@ -378,8 +378,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
     
     Use case ends.
-* 4a. The given index is invalid.
-  * 4a1. Track2Gather shows an error message.
+* 3a. The given index(s) is invalid or is in the wrong format.
+  * 3a1. Track2Gather shows the correct format for deleting.
         
     Use case resumes from step 2.
 
@@ -454,16 +454,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First person is deleted from the list. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 1 2`<br>
+      Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+
+   4. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a b` (where a and b are in descending order), `...` <br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a person while search results are being shown
+   1. Prerequisites: Find specific person(s) using the `find` command.
+
+   2. Test case: `delete 1`<br>
+      Expected: First person displayed in the search results is deleted from the application. Details of the deleted person shown in the status message. Timestamp in the status bar is updated.
+
+   3. Test case: `delete 1 2`<br>
+      Expected: First and second persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+
+   4. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a b` (where a and b are in descending order), `...` <br>
+      Expected: Similar to previous.
+
 
 ### Saving data
 
