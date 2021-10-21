@@ -15,6 +15,12 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
+    - [\[Completed\] Add Event feature](#completed-add-event-feature)
+        - [Implementation Details](#implementation-details)
+        - [Implementation Rationale](#implementation-rationale)
+  - [\[Completed\] Remove Event feature](#completed-remove-event-feature)
+      - [Implementation Details](#implementation-details)
+      - [Implementation Rationale](#implementation-rationale)
   - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
     - [Implementation Details](#implementation-details)
     - [Implementation Rationale](#implementation-rationale)
@@ -208,6 +214,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Completed\] Add Event feature
+
+This feature allows Managera users to create an event at the specified date and time.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `AddEventCommand` in `AddressBookParser`. 
+
+The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil` to ensure that the event's name, 
+date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
+This event will be supplied to the `addEventCommand` to be executed.
+
+Since Managera employs a UniqueEventList, it should not have more than one Event with the same name. The `addressBook` 
+is responsible for this, with the function `hasEvent` that returns if the given event already exists. If the event does 
+not already exist, it will be successfully added to the `addressBook` through the model.
+
+#### Implementation Rationale
+
+As events may span a full day, we decided to implement time as an optional attribute of the Event. However, to accommodate
+this, Event is implemented with abstractions EventName, EventDate and EventTime. These abstractions are helpful in 
+
+
+### \[Completed\] Remove Event feature
+
+This feature allows Managera users to remove an existing event at a particular index of the displayed list.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `RemoveEventCommand` in `AddressBookParser`.
+
+The `RemoveEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. This 
+`Index` will be supplied to the `removeEventCommand` to be executed. 
+
+When the command is executed, there is a check to ensure the index is within the range of the displayed list. 
+
+#### Implementation Rationale
+
+We decided that the fastest way to remove an Event would be by its index, based on the list last displayed on the screen.
+This should be much more convenient than entering the exact name of the event to be deleted.
+
 
 ### \[Completed\] Filter Event feature
 
