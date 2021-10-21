@@ -17,6 +17,8 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.Notable;
+import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
 
@@ -27,7 +29,8 @@ import seedu.notor.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String UNSAVED_NOTE_MESSAGE = "You have unsaved Notes, do you want to exit notor without saving?";
+    private static final String UNSAVED_NOTE_MESSAGE = "You have unsaved notes, "
+            + "do you want to exit Notor without saving?";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -156,12 +159,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the note window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleNote(Person person, Logic logic) {
-        NoteWindow noteWindow = new NotePersonWindow(person, logic, resultDisplay);
+    private void manageNoteWindow(NoteWindow noteWindow) {
         if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
             NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
             noteWindow.show();
@@ -171,18 +169,36 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the note window or focuses on it if it's already opened.
-     */
     @FXML
-    public void handleNote(Group group, Logic logic) {
-        NoteWindow noteWindow = new NoteGroupWindow(group, logic, resultDisplay);
-        if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
-            NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
-            noteWindow.show();
+    private void handleNote(Person person, Logic logic) {
+        NoteWindow noteWindow = new PersonNoteWindow(person, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    @FXML
+    private void handleNote(Group group, Logic logic) {
+        NoteWindow noteWindow = new GroupNoteWindow(group, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    @FXML
+    private void handleNote(Notor notor, Logic logic) {
+        NoteWindow noteWindow = new GeneralNoteWindow(notor, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    /**
+     * Handles opening of Person Note or Group Note.
+     * @param notable The object that is notable.
+     * @param logic The Logic of Notor.
+     */
+    public void handleNote(Notable notable, Logic logic) throws CommandException {
+        if (notable instanceof Person) {
+            handleNote((Person) notable, logic);
+        } else if (notable instanceof Group) {
+            handleNote((Group) notable, logic);
         } else {
-            int indexOfNoteWindow = NoteWindow.OPENED_NOTE_WINDOWS.indexOf(noteWindow);
-            NoteWindow.OPENED_NOTE_WINDOWS.get(indexOfNoteWindow).focus();
+            handleNote((Notor) notable, logic);
         }
     }
 
@@ -204,13 +220,13 @@ public class MainWindow extends UiPart<Stage> {
         if (!isAllNotesSaved) {
             WarningWindow warningWindow = new WarningWindow(UNSAVED_NOTE_MESSAGE);
             warningWindow.show();
-
-            if (warningWindow.canContinue()) {
-                NoteWindow.OPENED_NOTE_WINDOWS.forEach(NoteWindow::hide);
-                helpWindow.hide();
-                primaryStage.hide();
+            if (!warningWindow.canContinue()) {
+                return;
             }
         }
+        NoteWindow.OPENED_NOTE_WINDOWS.forEach(NoteWindow::hide);
+        helpWindow.hide();
+        primaryStage.hide();
     }
 
     private boolean checkIfAllNotesSaved() {
@@ -240,11 +256,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
             if (commandResult.isShowNote()) {
-                // TODO: potentially refactor this
-                if (commandResult.person() != null) {
-                    handleNote(commandResult.person(), logic);
-                } else {
-                    handleNote(commandResult.group(), logic);
+                if (commandResult.getNotable() != null) {
+                    handleNote(commandResult.getNotable(), logic);
                 }
             }
             if (commandResult.isExit()) {

@@ -62,6 +62,8 @@ public interface Model {
      */
     void setNotor(ReadOnlyNotor notor);
 
+    void clearNotorNote();
+
     /**
      * Returns the Notor data (lists and the like)
      */

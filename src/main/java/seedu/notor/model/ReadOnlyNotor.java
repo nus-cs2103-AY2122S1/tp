@@ -7,7 +7,7 @@ import seedu.notor.model.person.Person;
 /**
  * Unmodifiable view of Notor
  */
-public interface ReadOnlyNotor {
+public interface ReadOnlyNotor extends Notable {
 
     /**
      * Returns an unmodifiable view of the persons list.

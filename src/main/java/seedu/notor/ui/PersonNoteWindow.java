@@ -6,7 +6,7 @@ import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 
-public class NotePersonWindow extends NoteWindow {
+public class PersonNoteWindow extends NoteWindow {
 
     private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Person: %1$s";
     private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Person: %1$s";
@@ -16,7 +16,7 @@ public class NotePersonWindow extends NoteWindow {
     /**
      * Creates a new NoteWindow.
      */
-    public NotePersonWindow(Person person, Logic logic, ResultDisplay resultDisplay) {
+    public PersonNoteWindow(Person person, Logic logic, ResultDisplay resultDisplay) {
         super(logic, resultDisplay);
         noteTextArea.setText(person.getNote().value);
         this.person = person;
@@ -75,11 +75,11 @@ public class NotePersonWindow extends NoteWindow {
             return true;
         }
 
-        if (!(other instanceof NotePersonWindow)) {
+        if (!(other instanceof PersonNoteWindow)) {
             return false;
         }
 
-        NotePersonWindow otherPerson = (NotePersonWindow) other;
+        PersonNoteWindow otherPerson = (PersonNoteWindow) other;
         return otherPerson.person.equals(this.person);
 
     }

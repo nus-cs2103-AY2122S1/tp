@@ -39,9 +39,8 @@ public class PersonClearNoteExecutor extends PersonExecutor {
             Person editedPerson = new Person(
                     storedPerson.getName(), storedPerson.getPhone(), storedPerson.getEmail(),
                     Note.EMPTY_NOTE, storedPerson.getTags());
-            System.out.println("hello");
             model.setPerson(editedPerson, editedPerson);
-            return new CommandResult(generateSuccessMessage(editedPerson), false, false, null, false);
+            return new CommandResult(generateSuccessMessage(editedPerson), false, false, false);
         }
         return new CommandResult(String.format(MESSAGE_CLEAR_NOTE_CANCEL, storedPerson));
     }

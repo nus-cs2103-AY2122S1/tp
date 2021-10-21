@@ -14,6 +14,7 @@ import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.NotorParser;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.Model;
+import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.person.Person;
 import seedu.notor.storage.Storage;
@@ -77,6 +78,20 @@ public class LogicManager implements Logic {
         // TODO: Update Group Display
         try {
             storage.saveNotor(model.getNotor());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+    }
+
+    /**
+     * Executes command to save general Note to Notor.
+     * @param notor Notor with newly saved note.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    public void executeSaveNote(Notor notor) throws CommandException {
+        // TODO: Update Group Display
+        try {
+            storage.saveNotor(notor);
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }

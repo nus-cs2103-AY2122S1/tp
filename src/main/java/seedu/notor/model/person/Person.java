@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.exceptions.DuplicateItemException;
@@ -21,7 +22,7 @@ import seedu.notor.model.util.Unique;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person implements Unique<Person> {
+public class Person implements Unique<Person>, Notable {
 
     // Identity fields
     private final Name name;
@@ -84,6 +85,7 @@ public class Person implements Unique<Person> {
         return email;
     }
 
+    @Override
     public Note getNote() {
         return note;
     }

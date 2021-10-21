@@ -127,7 +127,6 @@ public abstract class NoteWindow extends UiPart<Stage> {
         } else {
             confirmationWindow.show();
         }
-
     }
     /**
      * Exits the note Window.

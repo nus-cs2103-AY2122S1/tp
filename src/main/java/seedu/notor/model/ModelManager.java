@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.notor.commons.core.GuiSettings;
 import seedu.notor.commons.core.LogsCenter;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
@@ -94,6 +95,11 @@ public class ModelManager implements Model {
     @Override
     public void setNotor(ReadOnlyNotor notor) {
         this.notor.resetData(notor);
+    }
+
+    @Override
+    public void clearNotorNote() {
+        this.notor.setNote(Note.EMPTY_NOTE);
     }
 
     @Override

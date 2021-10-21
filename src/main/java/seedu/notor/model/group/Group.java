@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.exceptions.ItemNotFoundException;
@@ -13,7 +14,7 @@ import seedu.notor.model.tag.Tag;
 /**
  * Represents a group which a person can belong to.
  */
-public abstract class Group {
+public abstract class Group implements Notable {
 
     public static final String MESSAGE_CONSTRAINTS = "Group should not contain colon or slash";
 
@@ -46,6 +47,7 @@ public abstract class Group {
         people = new HashMap<>();
     }
 
+    @Override
     public Note getNote() {
         return note;
     }

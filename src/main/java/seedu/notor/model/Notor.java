@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
@@ -18,9 +19,12 @@ import seedu.notor.model.util.UniqueList;
  */
 public class Notor implements ReadOnlyNotor {
 
+
     private final UniqueList<Person> persons;
 
     private final UniqueList<SuperGroup> superGroups;
+
+    private Note note;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,13 +38,19 @@ public class Notor implements ReadOnlyNotor {
         superGroups = new UniqueList<>();
     }
 
-    public Notor() {}
+    public Notor() {
+        this.note = Note.EMPTY_NOTE;
+    }
+
+    public Notor(Note note) {
+        this.note = note;
+    }
 
     /**
      * Creates an Notor using the Persons in the {@code toBeCopied}
      */
     public Notor(ReadOnlyNotor toBeCopied) {
-        this();
+        this(toBeCopied.getNote());
         resetData(toBeCopied);
     }
 
@@ -218,5 +228,14 @@ public class Notor implements ReadOnlyNotor {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    @Override
+    public Note getNote() {
+        return note;
+    }
+
+    public void setNote(Note note) {
+        this.note = note;
     }
 }

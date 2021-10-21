@@ -6,7 +6,7 @@ import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 
-public class NoteGroupWindow extends NoteWindow {
+public class GroupNoteWindow extends NoteWindow {
 
     private static final String MESSAGE_SAVE_NOTE_SUCCESS = "Saved Note to Group: %1$s";
     private static final String MESSAGE_EXIT_NOTE_SUCCESS = "Exited Note of Group: %1$s";
@@ -16,7 +16,7 @@ public class NoteGroupWindow extends NoteWindow {
     /**
      * Creates a new NoteWindow.
      */
-    public NoteGroupWindow(Group group, Logic logic, ResultDisplay resultDisplay) {
+    public GroupNoteWindow(Group group, Logic logic, ResultDisplay resultDisplay) {
         super(logic, resultDisplay);
         noteTextArea.setText(group.getNote().value);
         this.group = group;
@@ -71,11 +71,11 @@ public class NoteGroupWindow extends NoteWindow {
             return true;
         }
 
-        if (!(other instanceof NoteGroupWindow)) {
+        if (!(other instanceof GroupNoteWindow)) {
             return false;
         }
 
-        NoteGroupWindow otherGroup = (NoteGroupWindow) other;
+        GroupNoteWindow otherGroup = (GroupNoteWindow) other;
         return otherGroup.group.equals(this.group);
 
     }
