@@ -219,17 +219,10 @@ The following sequence diagram describes what happens when `AttendanceCommand` i
 
 As seen from the diagram, the `AttendanceCommand` involves two for loops. In each of the loops there is a reference frame.
 
-For `IndexWithinRange` and `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams are as follows:private Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
-
-![IndexWithinRangeSequenceDiagram](images/logic/commands/attendancecommand/IndexWithinRangeSequenceDiagram.png)
-
-If the condition is met, a `CommandException` is thrown to let the user know that the `Index` input is invalid.
+For `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams can be found below:
 
 ![UpdateModelAttendanceSequenceDiagram](images/logic/commands/attendancecommand/UpdateModelAttendanceSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of `Student` as we are creating a new `Student` instance. 
-
- </div>
 
 ### ParticipationCommand
 
@@ -239,7 +232,7 @@ This command serves to update the `Participation` score of students. Following t
 
 `ParticipationCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring is done. `ParticipationCommand` has an additional section in the sequence diagram and it is located between the two loops in `AttendanceCommand`:
+The implementation is similar to `AttendanceCommand`, with the same sequence diagram being applicable for Participation given that the proper refactoring is done. `ParticipationCommand` has an additional section in the sequence diagram located above the loop in `AttendanceCommand`.
 
 ![ParticipationCommandMarkAttendanceSequenceDiagram](images/logic/commands/participationcommand/ParticipationCommandMarkAttendanceSequenceDiagram.png)
 
