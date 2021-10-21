@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.LessonDeleteCommand;
+import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -19,6 +21,21 @@ public class LessonUtil {
     public static String getLessonAddCommand(int index, Lesson lesson) {
         return LessonAddCommand.COMMAND_WORD + " " + index + " "
             + getLessonDetails(lesson);
+    }
+
+    /**
+     * Returns a delete command string for deleting the {@code lesson}.
+     */
+    public static String getLessonDeleteCommand(int index, int indexToDelete) {
+        return LessonDeleteCommand.COMMAND_WORD + " " + index + " " + indexToDelete;
+    }
+
+    /**
+     * Returns an edit command string for editing the {@code lesson}.
+     */
+    public static String getLessonEditCommand(int index, int indexToEdit, Lesson lesson) {
+        return LessonEditCommand.COMMAND_WORD + " " + index + " " + indexToEdit + " "
+            + getLessonDetailsWithoutDateAndRecurrence(lesson);
     }
 
     /**
@@ -37,4 +54,20 @@ public class LessonUtil {
         );
         return sb.toString();
     }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details.
+     */
+    public static String getLessonDetailsWithoutDateAndRecurrence(Lesson lesson) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(PREFIX_TIME + lesson.getTimeRange().value + " ");
+        sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
+        lesson.getHomework().stream().forEach(
+            s -> sb.append(PREFIX_HOMEWORK + s.description + " ")
+        );
+        return sb.toString();
+    }
+
+
 }

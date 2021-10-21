@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -44,7 +43,7 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 1 "
             + PREFIX_HOMEWORK + "Textbook Pg2 "
-            + PREFIX_DATE + "20 may 2022";
+            + PREFIX_SUBJECT + "Biology";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
             + " of the student identified by the index number used in the displayed student list.\n"
@@ -56,6 +55,10 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!.";
+    public static final String MESSAGE_ATTEMPT_TO_EDIT_DATE = "You cannot edit the start date of a lesson. Please add "
+            + " another lesson if you wish to do so.";
+    public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
+            + " lesson if you wish to do so.";
 
     private final Index index;
     private final Index indexToEdit;
@@ -132,8 +135,7 @@ public class LessonEditCommand extends UndoableCommand {
     private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
 
-        Date updatedDate = editLessonDescriptor.getDate()
-                .orElse(lessonToEdit.getStartDate());
+        Date updatedDate = lessonToEdit.getStartDate(); // Do not allow changes to date
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange()
                 .orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject()
@@ -184,25 +186,25 @@ public class LessonEditCommand extends UndoableCommand {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the lesson with. Each non-empty field value will replace the
+     * corresponding field value of the lesson.
      */
     public static class EditLessonDescriptor {
 
-        private Date date;
+        // Absence of Date field as changes to date is disallowed.
         private TimeRange timeRange;
         private Subject subject;
         private Set<Homework> homeworkSet;
-        private boolean isRecurring;
+
+        // Absence of isRecurring boolean field as changes to type of lesson is disallowed.
 
         public EditLessonDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code homeworkSet} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
-            setDate(toCopy.date);
             setTimeRange(toCopy.timeRange);
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);
@@ -212,15 +214,7 @@ public class LessonEditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet);
-        }
-
-        public Optional<Date> getDate() {
-            return Optional.ofNullable(date);
-        }
-
-        public void setDate(Date date) {
-            this.date = date;
+            return CollectionUtil.isAnyNonNull(timeRange, subject, homeworkSet);
         }
 
         public Optional<TimeRange> getTimeRange() {
@@ -258,14 +252,6 @@ public class LessonEditCommand extends UndoableCommand {
             this.homeworkSet = (homeworkSet != null) ? new HashSet<>(homeworkSet) : null;
         }
 
-        public boolean isRecurring() {
-            return isRecurring;
-        }
-
-        public void setRecurring(boolean isRecurring) {
-            this.isRecurring = isRecurring;
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -281,8 +267,7 @@ public class LessonEditCommand extends UndoableCommand {
             // state check
             EditLessonDescriptor e = (EditLessonDescriptor) other;
 
-            return getDate().equals(e.getDate())
-                && getTimeRange().equals(e.getTimeRange())
+            return getTimeRange().equals(e.getTimeRange())
                 && getSubject().equals(e.getSubject())
                 && getHomeworkSet().equals(e.getHomeworkSet());
         }

@@ -1,18 +1,23 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_DATE;
+import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
@@ -168,6 +173,31 @@ class LessonEditCommandParserTest {
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_unacceptableFields_failure() {
+        Index targetIndex = INDEX_FIRST_PERSON;
+        Index lessonTargetIndex = INDEX_THIRD_LESSON;
+
+        String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
+            + FUTURE_DATE_DESC + HOMEWORK_DESC_TEXTBOOK;
+
+        // disallow edits to date
+        assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_DATE);
+
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
+            + " " + PREFIX_RECURRING + HOMEWORK_DESC_TEXTBOOK;
+
+        // disallow edits to type of lesson
+        assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_TYPE);
+
+        // attempt to edit date and type, only show first (date) message
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
+            + " " + PREFIX_RECURRING + PAST_DATE_DESC;
+
+        // disallow edits to date
+        assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_DATE);
     }
 
     @Test

@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASHING_TIME_RANGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NON_CLASHING_TIME_RANGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -130,17 +130,14 @@ class LessonEditCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Lesson editedLesson = new LessonBuilder().withDate(VALID_DATE_FUTURE).buildRecurring();
+        Lesson editedLesson = new LessonBuilder().withHomeworkSet("Test 4").buildRecurring();
 
         Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personBeforeLessonEdit = new PersonBuilder(personInFilteredList)
             .withLessons(new LessonBuilder().buildRecurring())
             .build();
 
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-            .withDate(VALID_DATE_FUTURE)
-            .withRecurrence()
-            .build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
 
         Lesson formerLesson = personBeforeLessonEdit
             .getLessons().stream().collect(Collectors.toList())
@@ -201,10 +198,9 @@ class LessonEditCommandTest {
     @Test
     public void execute_clashingEditedLesson_failure() {
         Lesson existingLesson = new LessonBuilder()
-                .withDate(VALID_DATE_PAST)
                 .withTimeRange(VALID_TIME_RANGE)
                 .build();
-        Lesson lessonBeforeEdit = new LessonBuilder().withDate(VALID_DATE_FUTURE).build();
+        Lesson lessonBeforeEdit = new LessonBuilder().withTimeRange(VALID_NON_CLASHING_TIME_RANGE).build();
 
         Person personBeforeLessonEdit = new PersonBuilder(firstPerson)
                 .withLessons(existingLesson, lessonBeforeEdit)
@@ -212,8 +208,8 @@ class LessonEditCommandTest {
 
         model.setPerson(firstPerson, personBeforeLessonEdit); // Ensure at least one lesson to edit
 
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withDate(VALID_DATE_PAST).withTimeRange(VALID_TIME_RANGE).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(existingLesson)
+                .withTimeRange(VALID_CLASHING_TIME_RANGE).build();
 
         LessonEditCommand lessonEditCommand =
             prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_SECOND_LESSON, descriptor);

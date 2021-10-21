@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
 import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalLessons.MAKEUP_LESSON;
 import static seedu.address.testutil.TypicalLessons.RECURRING_LESSON;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ class JsonAdaptedLessonTest {
     public void toModelType_validLessonDetails_returnsLesson() throws IllegalValueException {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(RECURRING_LESSON);
         assertEquals(RECURRING_LESSON, lesson.toModelType());
+
+        lesson = new JsonAdaptedLesson(MAKEUP_LESSON);
+        assertEquals(MAKEUP_LESSON, lesson.toModelType());
     }
 
     @Test

@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
-import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Subject;
@@ -28,27 +27,9 @@ public class EditLessonDescriptorBuilder {
      */
     public EditLessonDescriptorBuilder(Lesson lesson) {
         descriptor = new EditLessonDescriptor();
-        descriptor.setRecurring(lesson.isRecurring());
-        descriptor.setDate(lesson.getStartDate());
         descriptor.setTimeRange(lesson.getTimeRange());
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
-    }
-
-    /**
-     * Sets the {@code EditLessonDescriptor} that we are building as recurring.
-     */
-    public EditLessonDescriptorBuilder withRecurrence() {
-        descriptor.setRecurring(true);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Date} of the {@code EditLessonDescriptor} that we are building.
-     */
-    public EditLessonDescriptorBuilder withDate(String date) {
-        descriptor.setDate(new Date(date));
-        return this;
     }
 
     /**

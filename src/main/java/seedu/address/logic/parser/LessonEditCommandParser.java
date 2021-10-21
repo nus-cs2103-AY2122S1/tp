@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -30,8 +32,20 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_TIME,
-                PREFIX_SUBJECT, PREFIX_HOMEWORK); // don't allow changes to date and type
+            ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                PREFIX_SUBJECT, PREFIX_HOMEWORK);
+
+        // don't allow changes to date
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_DATE);
+
+        }
+
+        // don't allow changes to type of lesson
+        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
+            throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE);
+
+        }
 
         Index[] indices;
 

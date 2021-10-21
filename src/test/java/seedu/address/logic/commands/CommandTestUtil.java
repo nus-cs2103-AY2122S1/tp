@@ -109,6 +109,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_PAST = "15 May 1988";
     public static final String VALID_DATE_FUTURE = "07 Apr 2103";
     public static final String VALID_TIME_RANGE = "1234-1345";
+    public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
+    public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
     public static final String VALID_SUBJECT = "Language Arts";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
@@ -116,6 +118,8 @@ public class CommandTestUtil {
     public static final String PAST_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_PAST;
     public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
+    public static final String CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_CLASHING_TIME_RANGE;
+    public static final String NON_CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_NON_CLASHING_TIME_RANGE;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
