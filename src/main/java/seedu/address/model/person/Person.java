@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.tag.SpecialTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +28,7 @@ public class Person {
     private final Gender gender;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<SpecialTag> specialTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -44,6 +46,22 @@ public class Person {
         this.gender = gender;
         this.remark = remark;
         this.tags.addAll(tags);
+    }
+
+    public Person(Name name, Phone phone, Email email, Nationality nationality,
+                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Gender gender,
+                  Remark remark, Set<Tag> tags, Set<SpecialTag> specialTags) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, gender, remark, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.nationality = nationality;
+        this.tutorialGroup = tutorialGroup;
+        this.socialHandle = socialHandle;
+        this.gender = gender;
+        this.remark = remark;
+        this.tags.addAll(tags);
+        this.specialTags.addAll(specialTags);
     }
 
     public Name getName() {
@@ -86,6 +104,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Set<SpecialTag> getSpecialTags() {
+        return Collections.unmodifiableSet(specialTags);
+    }
+
 
     /**
      * Returns true if both persons have the same name.
@@ -123,14 +145,15 @@ public class Person {
                 && otherPerson.getSocialHandle().equals(getSocialHandle())
                 && otherPerson.getGender().equals(getGender())
                 && otherPerson.getRemark().equals(getRemark())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSpecialTags().equals(getSpecialTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle,
-                gender, remark, tags);
+                gender, remark, tags, specialTags);
     }
 
     @Override
