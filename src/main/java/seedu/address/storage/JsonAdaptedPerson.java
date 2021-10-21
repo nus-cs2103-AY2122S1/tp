@@ -138,7 +138,6 @@ class JsonAdaptedPerson {
                 NextMeeting.class.getSimpleName()));
         }
         final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
-        modelNextMeeting.setWithWho(modelName);
 
         if (currentPlan == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

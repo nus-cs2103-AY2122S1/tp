@@ -157,7 +157,7 @@ public class ParserUtil {
         String endTime = trimmedNextMeeting.substring(trimmedNextMeeting.indexOf("~") + 1,
             trimmedNextMeeting.indexOf(")"));
         String location = trimmedNextMeeting.split(",", 2)[1].trim();
-        return new NextMeeting(date, startTime, endTime, location, "");
+        return new NextMeeting(date, startTime, endTime, location);
     }
 
     /**

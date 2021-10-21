@@ -16,7 +16,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -30,7 +29,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<NextMeeting> sortedNextMeetings;
     private final FilteredList<Person> personToView;
     private final FilteredList<Tag> filteredTags;
 
@@ -47,7 +45,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
@@ -116,11 +113,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteMeetingsByPersons(List<Person> toDelete) {
-        addressBook.deleteMeetingsByPersons(toDelete);
-    }
-
-    @Override
     public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
         return addressBook.deletePersonByClientIds(clientIds);
     }
@@ -129,11 +121,6 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-    }
-
-    @Override
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        addressBook.addNextMeeting(nextMeeting);
     }
 
     @Override
@@ -183,11 +170,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
-    }
-
-    @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingList() {
-        return sortedNextMeetings;
     }
 
     @Override
