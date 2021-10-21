@@ -52,6 +52,10 @@ public class Student {
         return group.getGroupName();
     }
 
+    public boolean isWeak() {
+        return true;
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

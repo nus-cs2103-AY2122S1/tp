@@ -47,10 +47,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
+    private StackPane leftPanelPlaceholder;
 
     @FXML
-    private StackPane groupListPanelPlaceholder;
+    private StackPane rightPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,16 +114,15 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    private void showStudents() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-    }
-
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showStudents();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        leftPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        rightPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -175,11 +174,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleShowGroups() {
-        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
-    }
-
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
@@ -213,12 +207,6 @@ public class MainWindow extends UiPart<Stage> {
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
             delay.setOnFinished( event -> popup.hide());
             delay.play();
-
-            if (commandResult.isShowGroups()) {
-                handleShowGroups();
-            } else {
-                showStudents();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
