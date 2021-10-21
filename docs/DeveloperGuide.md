@@ -13,7 +13,7 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
-   - [[Proposed] View student/lesson feature](#proposed-view-studentlesson-feature)
+   - [[Proposed] View student/lesson feature](#view-studentlesson-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -177,9 +177,9 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] View student/lesson feature
+### View student/lesson feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -194,7 +194,7 @@ Step 1. The user launches the application for the first time. The `ModelManager`
 
 ![ViewStudentState0](images/ViewStudentState0.png)
 
-Step 2. The user executes `view -s 1` command to view the 1st student in TutorAid. The `view` command calls `Model#viewStudent()`, causing the modified state of model manager after the `view -s 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that model manager state.
+Step 2. The user executes `view -s 1` command to view the 1st student in TutorAid. The `view -s` command calls `Model#viewStudent()`, causing the modified state of model manager after the `view -s 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that model manager state.
 
 The following sequence diagram shows how the view student operation works:
 

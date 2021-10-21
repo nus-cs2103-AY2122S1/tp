@@ -16,10 +16,10 @@ box Ui UI_COLOR_T1
 participant "ui:UIManager" as UIManager UI_COLOR
 end box
 
-[-> LogicManager: execute(view -s 1)
+[-> LogicManager: execute("view -s 1")
 activate LogicManager
 
-LogicManager -> TutorAidParser: parseCommand(view -s 1)
+LogicManager -> TutorAidParser: parseCommand("view -s 1")
 activate TutorAidParser
 
 create ViewStudentCommand
