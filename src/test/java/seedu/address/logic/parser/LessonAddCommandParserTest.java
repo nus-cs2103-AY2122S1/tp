@@ -67,6 +67,11 @@ public class LessonAddCommandParserTest {
                 + TIME_RANGE_DESC + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
                 + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
+        //multiple lesson rates - last lesson rate accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
         // multiple homework - all accepted
         Lesson expectedLessonMultipleHomework = new LessonBuilder(PAST_MAKEUP_LESSON)
                 .withHomeworkSet(VALID_HOMEWORK_POETRY, VALID_HOMEWORK_TEXTBOOK).build();

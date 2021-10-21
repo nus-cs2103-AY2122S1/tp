@@ -21,7 +21,7 @@ public class LessonRates {
     /**
      * Constructs a {@code LessonRates}.
      *
-     * @param lessonRates A valid description.
+     * @param lessonRates A valid lesson rate.
      */
     public LessonRates(String lessonRates) {
         requireNonNull(lessonRates);
