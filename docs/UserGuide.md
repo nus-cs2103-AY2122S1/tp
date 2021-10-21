@@ -297,6 +297,22 @@ Examples:
 * `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as 'Done'.
 * `find John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
 
+### Unmarking an applicant : `unmark`
+
+Unmarks a specific applicant by index from the list in RecruitIn to 'Not Done' (have not been attended to).
+
+Format: `unmark INDEX`
+
+* Unmarks an applicant at the specified `INDEX` to 'Not Done'.
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+
+Examples:
+* `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to 'Not Done'.
+* `find John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+
 ### Exiting the program : `exit`
 
 Exits the program.
