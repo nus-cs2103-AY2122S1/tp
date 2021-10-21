@@ -20,7 +20,8 @@ public class DeleteMarkedCommandTest {
     @Test
     public void execute_listIsNotFilteredAndNoDone_success() {
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
-        String expectedMessage = DeleteMarkedCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS,
+                DeleteMarkedCommand.MESSAGE_NONE_DELETED);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         assertCommandSuccess(deleteMarkedCommand, model, expectedMessage, expectedModel);
@@ -30,7 +31,8 @@ public class DeleteMarkedCommandTest {
     public void execute_listIsFilteredAndNoDone_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
-        String expectedMessage = DeleteMarkedCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS,
+                DeleteMarkedCommand.MESSAGE_NONE_DELETED);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         assertCommandSuccess(deleteMarkedCommand, model, expectedMessage, expectedModel);
@@ -41,7 +43,7 @@ public class DeleteMarkedCommandTest {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         personToDone.getDone().setAsDone();
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
-        String expectedMessage = DeleteMarkedCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS, personToDone);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));
@@ -55,7 +57,7 @@ public class DeleteMarkedCommandTest {
         Person personToDone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         personToDone.getDone().setAsDone();
         DeleteMarkedCommand deleteMarkedCommand = new DeleteMarkedCommand();
-        String expectedMessage = DeleteMarkedCommand.MESSAGE_SUCCESS;
+        String expectedMessage = String.format(DeleteMarkedCommand.MESSAGE_SUCCESS, personToDone);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()));

@@ -17,20 +17,26 @@ public class DeleteMarkedCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_done";
 
-    public static final String MESSAGE_SUCCESS = "Deleted all applicants that were marked as done";
+    public static final String MESSAGE_SUCCESS = "Deleted all applicants that were marked as done: \n%1$s";
+
+    public static final String MESSAGE_NONE_DELETED = "\nNO APPLICANTS WERE MARKED AS DONE; NONE DELETED";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        //TODO: MIGHT NEED CHANGE IF IMPLEMENT ISDONE METHOD IN PERSON CLASS
         model.updateFilteredPersonList((person) -> person.getDone().getDoneStatus().equals(Done.STATUS_DONE));
         List<Person> doneList = model.getFilteredPersonList();
 
+        StringBuilder result = new StringBuilder();
+
         while (!doneList.isEmpty()) {
-            model.deletePerson(doneList.get(0));
+            Person personToDelete = doneList.get(0);
+            result.append(personToDelete);
+            model.deletePerson(personToDelete);
         }
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                result.toString().isEmpty() ? MESSAGE_NONE_DELETED : result));
     }
 }
