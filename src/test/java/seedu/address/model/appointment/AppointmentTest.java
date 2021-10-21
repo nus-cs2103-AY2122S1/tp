@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -67,15 +66,23 @@ public class AppointmentTest {
     public void isExpired() {
         Appointment expiredAppointment = new Appointment("05-Jan-1999 05:40");
 
-        DateTimeFormatter formatter = DateTimeFormatter
-                .ofPattern("dd-MMM-yyyy HH:mm");
         LocalDateTime upcomingDate = LocalDateTime.now().plusDays(2);
-        Appointment upcomingAppointment = new Appointment(upcomingDate.format(formatter));
+        Appointment upcomingAppointment = new Appointment(upcomingDate.format(Appointment.FORMATTER));
 
         // date has passed
         assertTrue(expiredAppointment.isExpired());
 
         // date has yet to pass
         assertFalse(upcomingAppointment.isExpired());
+    }
+
+    @Test
+    public void compareTo() {
+        Appointment earlierAppointment = new Appointment("05-Jan-1999 05:40");
+        Appointment laterAppointment = new Appointment("05-Jan-2000 05:40");
+
+        assertTrue(earlierAppointment.compareTo(earlierAppointment) == 0);
+        assertTrue(earlierAppointment.compareTo(laterAppointment) < 0);
+        assertTrue(laterAppointment.compareTo(earlierAppointment) > 0);
     }
 }

@@ -15,7 +15,7 @@ public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should be in the following format: dd-MMM-yyyy HH:mm "
                     + "where only first alphabet of the month is capitalised.";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
 
     private final LocalDateTime appointmentTime;

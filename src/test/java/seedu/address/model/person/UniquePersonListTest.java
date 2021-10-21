@@ -9,12 +9,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -166,5 +168,31 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void asSortedByAppointment_sortList_returnSuccess() {
+        LocalDateTime earlierDate = LocalDateTime.now().plusDays(2);
+        LocalDateTime laterDate = LocalDateTime.now().plusDays(3);
+        Appointment earlierAppointment = new Appointment(earlierDate.format(Appointment.FORMATTER));
+        Appointment laterAppointment = new Appointment(laterDate.format(Appointment.FORMATTER));
+
+        Person person1 = new PersonBuilder(ALICE).withAppointment(laterAppointment).build();
+        Person person2 = new PersonBuilder(BOB).withAppointment(earlierAppointment).build();
+
+        uniquePersonList.add(person1);
+        uniquePersonList.add(person2);
+
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        // BOB's appointment is before ALICE's, hence should be before ALICE
+        expectedUniquePersonList.add(person2);
+        expectedUniquePersonList.add(person1);
+
+        // should return false as ALICE is before BOB in uniquePersonList but other way around in the sorted list.
+        assertFalse(uniquePersonList.asUnmodifiableObservableList()
+                .equals(expectedUniquePersonList.asUnmodifiableObservableList()));
+
+        // should be equal as they should now be of the same sequence
+        assertEquals(expectedUniquePersonList.asUnmodifiableObservableList(), uniquePersonList.asSortedByAppointment());
     }
 }
