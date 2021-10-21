@@ -89,6 +89,6 @@ public class DeleteTaskCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit, Task taskRemoved) {
-        return String.format(MESSAGE_SUCCESS, taskRemoved.getTaskName(), personToEdit.getName());
+        return String.format(MESSAGE_SUCCESS, taskRemoved.getDescription(), personToEdit.getName());
     }
 }

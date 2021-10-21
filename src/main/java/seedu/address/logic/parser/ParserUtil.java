@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 
 /**
@@ -127,7 +128,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String task} into a {@code Task}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code tag} is invalid.
@@ -135,14 +136,14 @@ public class ParserUtil {
     public static Task parseTask(String task) throws ParseException {
         requireNonNull(task);
         String trimmedTask = task.trim();
-        if (!Task.isValidTaskName(trimmedTask)) {
-            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(trimmedTask)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Task(trimmedTask);
+        return new Task(new Description(task));
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> tasks} into a {@code Set<Task>}.
      */
     public static List<Task> parseTasks(Collection<String> tasks) throws ParseException {
         requireNonNull(tasks);

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 
 public class JsonAdaptedTask {
@@ -22,7 +23,7 @@ public class JsonAdaptedTask {
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
-        taskName = source.getTaskName();
+        taskName = source.getDescription().description;
     }
 
     @JsonValue
@@ -36,9 +37,10 @@ public class JsonAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Task toModelType() throws IllegalValueException {
-        if (!Task.isValidTaskName(taskName)) {
-            throw new IllegalValueException(Task.MESSAGE_CONSTRAINTS);
+        if (!Description.isValidDescription(taskName)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
-        return new Task(taskName);
+        Description taskDescription = new Description(taskName);
+        return new Task(taskDescription);
     };
 }

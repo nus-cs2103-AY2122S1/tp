@@ -1,41 +1,80 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Task {
-    public static final String MESSAGE_CONSTRAINTS = "Task names should contain at least 1 non-whitespace character";
-    public static final String VALIDATION_REGEX = "\\S+.*"; // At least 1 non-whitespace
-    public final String taskName;
+    public final Description description;
+    public final LocalDate date;
+    public final LocalTime time;
+    public final Venue venue;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
      */
-    public Task (String taskName) {
-        requireNonNull(taskName);
-        checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
-        this.taskName = taskName;
+    public Task (Description description, LocalDate date, LocalTime time, Venue venue) {
+        requireNonNull(description);
+        this.description = description;
+        this.date = date;
+        this.time = time;
+        this.venue = venue;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public Description getDescription() {
+        return description;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public Venue getVenue() {
+        return venue;
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof Task && taskName.equals(((Task) other).getTaskName()));
-    }
+        if (other == this) {
+            return true;
+        }
 
-    /**
-     * Returns true if a given string is a valid tag name.
-     */
-    public static boolean isValidTaskName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!(other instanceof Task)) {
+            return false;
+        }
+
+        Task otherTask = (Task) other;
+        boolean sameDate = otherTask.getDate() == null
+                ? date == null
+                : otherTask.getDate().equals(date);
+        boolean sameTime = otherTask.getTime() == null
+                ? time == null
+                : otherTask.getTime().equals(time);
+        boolean sameVenue = otherTask.getVenue() == null
+                ? venue == null
+                : otherTask.getVenue().equals(venue);
+        return otherTask.getDescription().equals(description)
+                && sameDate
+                && sameTime
+                && sameVenue;
     }
 
     @Override
     public String toString() {
-        return taskName;
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getDescription())
+                .append("; Date: ")
+                .append(date == null ? "" : date)
+                .append("; Time: ")
+                .append(time == null ? "" : time)
+                .append("; Venue: ")
+                .append(venue == null ? "" : venue);
+
+        return builder.toString();
     }
 }

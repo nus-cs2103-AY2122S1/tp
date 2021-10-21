@@ -44,6 +44,6 @@ public class TaskCard extends UiPart<Region> {
             lc.widthProperty(), lc.paddingProperty()));
 
         id.setText(displayedIndex + ". ");
-        taskName.setText(task.getTaskName());
+        taskName.setText(task.getDescription().description);
     }
 }

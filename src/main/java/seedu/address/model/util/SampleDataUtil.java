@@ -13,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 
 /**
@@ -64,6 +65,7 @@ public class SampleDataUtil {
      */
     public static List<Task> getTaskList(String... strings) {
         return Arrays.stream(strings)
+                .map(Description::new)
                 .map(Task::new)
                 .collect(Collectors.toList());
     }
