@@ -58,8 +58,8 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items with `…`​ after them can be repeated multiple times, including zero times.<br>
+  e.g. `delete INDEX...` can be used as `delete 1` (i.e. `INDEX` repeated 0 times), `delete 1 2`, `delete 2 4 3` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -125,8 +125,11 @@ Prefix Input Specifications:
   * An EMPLOYMENT_TYPE should
   * For example:
 * ####EXPECTED_SALARY `s/`
-  * An EXPECTED_SALARY should
+  * An EXPECTED_SALARY should only represent non-negative integers.
+    * Non-negative integers range from 0 to 2^(31) - 1 inclusive.
   * For example:
+    * EXPECTED_SALARY inputs such as `0` and `3500` are acceptable.
+    * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
 * ####LEVEL_OF_EDUCATION `l/`
   * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
   * A LEVEL_OF_EDUCATION is case-insensitive.
@@ -268,19 +271,21 @@ Examples:
 
 ### Deleting an applicant : `delete`
 
-Deletes a specific applicant by index from the list in RecruitIn.
+Deletes applicants by their index from the list in RecruitIn.
 
-Format: `delete INDEX`
+Format: `delete INDEX...`
 
-* Deletes an applicant at the specified `INDEX`.
+* Deletes the applicant at the specified `INDEX`.
 * The `INDEX` refers to the index number shown in the displayed applicants list.
+* At least one `INDEX` must be given. (i.e. `delete ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd applicant listed in RecruitIn.
-* `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+* `list` followed by `delete 1` deletes the 1st applicant listed in RecruitIn.
+* `find n/John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+* `list` followed by `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
 ### Showing search terms : `show`
 
@@ -333,6 +338,12 @@ Examples:
 * `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
 * `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
 * `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+
+### Deleting marked applicants: `delete_marked`
+
+Deletes all applicants that are marked as done.
+
+Format: `delete_marked`
 
 ### Exiting the program : `exit`
 
@@ -390,9 +401,10 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
 **List** | `list`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
+**Delete Marked** | `delete_marked`
 **Help** | `help`
