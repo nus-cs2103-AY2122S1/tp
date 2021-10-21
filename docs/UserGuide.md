@@ -83,10 +83,14 @@ to help you with the installation. Follow the guide for your operating system fo
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* There are constraints in place to determine whether the value you provide for a field is valid. 
+  TAB will inform you if you gave an invalid input for a field.
 
 </div>
 
 ### Getting Help 
+This section tells you what to do if you require help while using TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +103,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### Managing Students
-The following section will guide you on how to use the commands relating to the operations for managing students in TAB.
+This section guides you on how to use the commands for managing students in TAB.
 
 A student must have the following essential fields:
 * Name
@@ -124,9 +128,6 @@ Other available optional fields for a student are:
 You can add multiple tags and lessons to a student in TAB.
 </div>
 <br>
-
-There are constraints in place to determine whether the value you provide for a field is valid.
-TAB will inform you if you gave an invalid input for a field.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -224,7 +225,7 @@ Shows a list of all students in TAB.
 Format: `list`
 
 ### Finding Students
-The following section will guide you on how to use the `find` command in TAB to filter or search for students of choice.
+This section guides you on how to find students of your choice in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -285,7 +286,7 @@ Examples:
 
 ### Managing Lessons
 
-The following section will guide you on how to use the commands relating to the operations for managing lessons of students in TAB.
+This section guides you on how to use the commands for managing the lessons of your students in TAB.
 A `Lesson` **must** have the following fields: a start date, a time range and a subject.
 
 A `Lesson` can be categorised into 2 types: 
@@ -311,9 +312,6 @@ An optional field for a lesson is:
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 <br>
-
-There are constraints in place to determine whether the value you provide for a field is valid.
-TAB will inform you if you gave an invalid input for a field.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -412,7 +410,7 @@ Examples:
 
 ### Viewing the Schedule
 
-The following section will guide you on how to use TAB's scheduling feature.
+This section guides you on how to use TAB's scheduling feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -423,6 +421,8 @@ Displays a read-only weekly schedule.
 Format: `schedule`
 
 ### Managing Data
+
+This section informs you on how data is handled in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -439,6 +439,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 </div>
 
 ### Miscellaneous Commands
+This section describes the other miscellaneous commands available in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -475,6 +476,7 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+This section records frequently asked questions from users of TAB.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -482,6 +484,7 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+This section lists all available commands in TAB, along with examples on how you can use them. 
 
 Action | Format, Examples
 --------|------------------
