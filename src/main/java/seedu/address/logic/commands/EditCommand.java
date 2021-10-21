@@ -55,8 +55,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
             + "[" + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION] "
             + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
-            + "[" + PREFIX_TAG + "TAG]"
-            + "[" + PREFIX_INTERVIEW + "INTERVIEW]..\n "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW]\n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";

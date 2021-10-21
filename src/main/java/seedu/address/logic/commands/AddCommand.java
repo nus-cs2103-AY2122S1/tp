@@ -33,9 +33,8 @@ public class AddCommand extends Command {
             + PREFIX_EXPECTED_SALARY + "EXPECTED SALARY "
             + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION "
             + PREFIX_EXPERIENCE + "YEARS OF EXPERIENCE "
-            + "[" + PREFIX_TAG + "TAG]"
-            + PREFIX_INTERVIEW + "INTERVIEW TIME...\n"
-
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW TIME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -46,7 +45,7 @@ public class AddCommand extends Command {
             + PREFIX_LEVEL_OF_EDUCATION + "PhD "
             + PREFIX_EXPERIENCE + "3 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney"
+            + PREFIX_TAG + "owesMoney "
             + PREFIX_INTERVIEW + "2021-10-21, 12:00";
 
 
