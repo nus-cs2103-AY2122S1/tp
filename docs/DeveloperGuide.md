@@ -222,7 +222,7 @@ If the student object created appears to be a duplicate of an existing contact (
 new student object will not be stored in TutorAid and user will be alerted of the duplicate instead. 
 </div>
 
-Below is the sequence diagram that depicts points 1-4 of process described above:
+Below is the sequence diagram that depicts the `Logic` components involved in process:
 ![AddStudent](images/AddStudentSequenceDiagram.png)
 
 ### Design considerations:
