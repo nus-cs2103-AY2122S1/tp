@@ -69,7 +69,7 @@ public class AddressBookParser {
             return new ListCommand();
 
         case MarkCommand.COMMAND_WORD:
-
+            // Fallthrough
         case UnmarkCommand.COMMAND_WORD:
             return new MarkingCommandParser(commandWord).parse(arguments);
 
