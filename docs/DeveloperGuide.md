@@ -3,11 +3,24 @@ layout: page
 title: Developer Guide
 ---
 
+## **About this document**
+
 This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application.
 
-To learn more about the design, you can explore the 'Design' section for the implementations and schematics. The 'Requirements' section in the Appendix explains on the relevant user stories, use cases and non-functional requirements taken into consideration. The 'Instructions for manual testing' section at the end of the Appendix shows the relevant manual tests one can perform as a sanity check.
+To learn more about the design, you can explore the [Design](https://ay2122s1-cs2103t-f13-4.github.io/tp/DeveloperGuide.html#design) section for the implementations and schematics.
+The [Requirements](https://ay2122s1-cs2103t-f13-4.github.io/tp/DeveloperGuide.html#appendix-requirements) section in the Appendix explains on the relevant user stories, use cases and non-functional requirements taken into consideration. The [Instructions for manual testing](https://ay2122s1-cs2103t-f13-4.github.io/tp/DeveloperGuide.html#appendix-instructions-for-manual-testing) section at the end of the Appendix shows the relevant manual tests one can perform as a sanity check.
 
-Relevant non-trivial terminologies used are explained in the 'Glossary' Section.
+Relevant non-trivial terminologies used are explained in the [Glossary](#glossary) Section.
+
+Here are the interpretations of symbols and formatting used in this document: 
+
+* `highlights` represents code.
+* :information_source: indicates additional information.
+* :bulb: indicates tips.
+* `Tuitione` is used in referencing code due to code syntax.
+* **TuitiONE** is used when referencing the application.
+
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
@@ -17,21 +30,6 @@ Relevant non-trivial terminologies used are explained in the 'Glossary' Section.
 ## **Acknowledgements**
 
 This project is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
-
---------------------------------------------------------------------------------------------------------------------
-
-## **About this document**
-
-This document serves to explain the structure and implementation of TuitiONE and details how to set up the programming
-environment locally to support further developing of the app.
-
-Here are the interpretations of symbols and formatting used in this document: 
-
-* `highlights` represents code
-* :information_source: indicates additional information
-* :bulb: indicates tips
-* `Tuitione` is used in referencing code due to java naming syntax
-* **TuitiONE** is used when referencing the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -115,7 +113,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/DeveloperGuideImage/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `TuitoneParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `TuitioneParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -132,7 +130,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/DeveloperGuideImage/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `TuitoneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitoneParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `TuitioneParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `TuitioneParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -224,11 +222,15 @@ _Note: For this usage, we only consider the main successful scenarios (i.e. The 
 
 Example: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`
 
-Step 1: When the CSO has entered the command, <u>`:AddLessonCommandParser`</u> object will proceed on to parse and check the validity of each property entered. Assuming successful, <u>`:AddLessonCommandParser`</u> object will proceed on to produce a <u>`l:Lesson`</u> with the relevant details filled. The object state diagram is as such:
+<u>Step 1:</u>
+
+When the user has entered the command, `AddLessonCommandParser` object will proceed on to parse and check the validity of each property entered. Assuming successful, `AddLessonCommandParser` object will proceed on to produce a `Lesson` with the relevant details filled. The object state diagram is as such:
 
 ![AddLessonState0](images/DeveloperGuideImage/AddLessonState0-Initial_state.png)
 
-Step 2: With all checks done, <u>`l:Lesson`</u> object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
+<u>Step 2:</u>
+
+With all checks done, `Lesson` object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
 
 ![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
 
@@ -244,7 +246,7 @@ The following sequence diagram shows how add lesson operation works:
 
 <ins>Aspect: How to design the syntax</ins>
 * Command Word Style
-  * (**Current Choice**) Option 1: `add-l`
+  * Option 1: `add-l`
     * Pros:
       * Non-space-separated word allows easier parsing of command word
       * Unique command word allows command keys to be easily distinguished
@@ -256,7 +258,7 @@ The following sequence diagram shows how add lesson operation works:
       * More intuitive, `-l` flag can be used to determine that a lesson is to be added, while omitting it means a student is to be added.
     * Cons:
       * Harder to parse, as the `-l` flag is space separated from the command keyword.
-      * CSO might forget to include the `-l` flag, accidentally adding a student instead.
+      * User might forget to include the `-l` flag, accidentally adding a student instead.
     
 * Command Informational Field Style
   * Option 1: `LESSON_CODE`
@@ -264,18 +266,19 @@ The following sequence diagram shows how add lesson operation works:
       * Only one continuous line of code is required to be entered.
     * Cons:
       * One long string will be to be entered, which the team would then be required to come up with another implementation of parser to parse this piece of information. This would be redundant since we can make use of the existing parser using the CliSyntax.
-      * CSO would have to key in the string in a predetermined order, which the CSO could get easily confused.
-  * (**Current Choice**) Command Information Field Option 2: `s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`
+      * User would have to key in the string in a predetermined order, which the user could get easily confused.
+  * Option 2: `s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`
     * Pros:
-      * Different fields can be placed in any order. Hence, making it easier for CSO to enter the relevant fields.
-      * Informational fields are now more distinct. Hence, it is easier for the CSO to follow through.
+      * Different fields can be placed in any order. Hence, making it easier for user to enter the relevant fields.
+      * Informational fields are now more distinct. Hence, it is easier for the user to follow through.
     * Cons:
       * More `spacebar` and CliSyntax would have to be pressed to cater for each individual fields.
 
 <ins>Decision</ins>
 
 Command Word Style: Option 1 (`add-l`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, there is not much significance in having an especially pretty command syntax as efficiency(i.e. entering commands fast and correctly) is desired. At the same time, the accidental addition of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`add -l`) should only be implemented once an undo/redo feature is implemented.
-Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the CSO to pick up the command syntax easier since there are lesser things to remember. 
+
+Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the user to pick up the command syntax easier since there are lesser things to remember. 
 
 ### Delete Lesson feature
 
@@ -286,19 +289,23 @@ The delete lesson operation is facilitated by `DeleteLessonCommand` and `DeleteL
 The delete lesson feature is very similar to that of the original delete student feature. There are however some differences due to the linkages of lessons to multiple students, of which we have to unenroll the students before deletion. Given below is an example usage scenario and how the delete lesson operation behaves.  
 _Note: For this usage, we only consider the main success scenario (i.e. the lesson specified exists as well as the students enrolled to the lesson)._
 
-Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
+<u>Step 1:</u>
+
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has one lesson `l` that is enrolled by 2 students `John` and `Alice`. The object state diagram is as such:
 
 ![DeleteLessonState0](images/DeveloperGuideImage/DeleteLessonState0.png)
 
-Step 2: Upon running the delete lesson command, the application runs a few internal steps:
+<u>Step 2:</u>
 
-1. The `Tuitione` model obtains the lesson to remove.
-2. The command executor then extracts the students that are in the lesson.
-3. If there are students enrolled:
-   1. The lesson unenrolls the students.
-   2. The mentioned student details are updated subsequently.
-4. Finally, the lesson is safe to be removed.
-5. Relevant UI and Storage procedures are run to complete the execution in full.
+Upon running the delete lesson command, the application runs a few internal steps:
+
+* The `Tuitione` model obtains the lesson to remove.
+* The command executor then extracts the students that are in the lesson.
+* If there are students enrolled:
+   * The lesson unenrolls the students.
+   * The mentioned student details are updated subsequently.
+* Finally, the lesson is safe to be removed.
+* Relevant UI and Storage procedures are run to complete the execution in full.
 
 The final object state diagram is as such:
 
@@ -375,11 +382,11 @@ into the lesson.
 
 Upon running the Enroll command, the application runs a few internal steps:
 
-1. The `Tuitione` model obtains the student to enroll into lesson.
-2. The command executor checks if the student is eligible to be enrolled into lesson.
-3. The command executor checks if the student is currently enrolled in the lesson
-4. Finally, the student is ready to be enrolled into the lesson.
-5. Relevant UI and Storage procedures runs to complete the execution in full.
+* The `Tuitione` model obtains the student to enroll into lesson.
+* The command executor checks if the student is eligible to be enrolled into lesson.
+* The command executor checks if the student is currently enrolled in the lesson
+* Finally, the student is ready to be enrolled into the lesson.
+* Relevant UI and Storage procedures runs to complete the execution in full.
 
 The final object state diagram is as such:
 
@@ -448,12 +455,12 @@ Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the
 The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
 internal steps.
 
-1. The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
-2. The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
-3. The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
-4. If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
-5. Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
-6. Relevant UI and Storage procedures are run to complete the execution in full.
+* The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
+* The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
+* The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
+* If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
+* Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
+* Relevant UI and Storage procedures are run to complete the execution in full.
 
 The final object state diagram is as such:
 
@@ -506,17 +513,23 @@ on both the given grade and subject.
 
 Given below is an example usage scenario and how the filter operation works.
 
-Step 1: The user launches the app with the stored student list holding the initial student data and the lesson list holding the
+<u>Step 1:</u>
+
+The user launches the app with the stored student list holding the initial student data and the lesson list holding the
 initial lesson data in TuitiONE (only the fields of each object relevant to filter are shown in the diagrams below).
 
 ![FilterState0](images/DeveloperGuideImage/FilterState0.png)
 
-Step 2: The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
+<u>Step 2:</u>
+
+The user executes `filter g/S2 s/English`  to filter out S2 English lessons and S2 students. The `filter` command causes
 the `FilterCommand#execute(model)` method to be called which then filters the respective lists to only show the relevant objects.
 
 ![FilterState1](images/DeveloperGuideImage/FilterState1.png)
 
-Step 3: The user executes `list` to get back the initial lists before the filter. 
+<u>Step 3:</u>
+
+The user executes `list` to get back the initial lists before the filter. 
 
 The following sequence diagram shows how the filter operation works:
 
@@ -532,18 +545,18 @@ The following activity diagram summarizes what happens when a user executes the 
 
 #### Design considerations:
 
-**Aspect: How to implement filter**
-* **Option 1 (current choice)**: one filter command that handles both grade and subject filtering
+<u>Aspect: How to implement filter</u>
+* Option 1: one filter command that handles both grade and subject filtering
     * Pros: Less commands to remember, user will not feel overwhelmed.
     * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
-* **Option 2**: 3 separate filter commands, one for each scenario stated above
+* Option 2: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
     
+<u>Design</u>
 Ultimately we chose option 1 as we felt that there are already many existing commands, and just having one filter command
 handle multiple scenarios would be less daunting to use.
 
-Command syntax: `filter [g/GRADE] [s/SUBJECT]`
 
 ### \[Proposed\] Undo/redo feature
 
@@ -559,15 +572,21 @@ These operations are exposed in the `Model` interface as `Model#commitTuitione()
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedTuitione` will be initialized with the initial tuitione state, and the `currentStatePointer` pointing to that single tuitione state.
+<u>Step 1.</u>
+
+The user launches the application for the first time. The `VersionedTuitione` will be initialized with the initial tuitione state, and the `currentStatePointer` pointing to that single tuitione state.
 
 ![UndoRedoState0](images/DeveloperGuideImage/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commitTuitione()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
+<u>Step 2.</u>
+
+The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commitTuitione()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
 
 ![UndoRedoState1](images/DeveloperGuideImage/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitTuitione()`, causing another modified tuitione state to be saved into the `tuitioneStateList`.
+<u>Step 3.</u>
+
+The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitTuitione()`, causing another modified tuitione state to be saved into the `tuitioneStateList`.
 
 ![UndoRedoState2](images/DeveloperGuideImage/UndoRedoState2.png)
 
@@ -575,7 +594,9 @@ Step 3. The user executes `add n/David …​` to add a new student. The `add` c
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTuitione()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tuitione state, and restores the tuitione to that state.
+<u>Step 4.</u>
+
+The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoTuitione()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous tuitione state, and restores the tuitione to that state.
 
 ![UndoRedoState3](images/DeveloperGuideImage/UndoRedoState3.png)
 
@@ -597,11 +618,15 @@ The `redo` command does the opposite — it calls `Model#redoTuitione()`, wh
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the tuitione, such as `list`, will usually not call `Model#commitTuitione()`, `Model#undoTuitione()` or `Model#redoTuitione()`. Thus, the `tuitioneStateList` remains unchanged.
+<u>Step 5.</u>
+
+The user then decides to execute the command `list`. Commands that do not modify the tuitione, such as `list`, will usually not call `Model#commitTuitione()`, `Model#undoTuitione()` or `Model#redoTuitione()`. Thus, the `tuitioneStateList` remains unchanged.
 
 ![UndoRedoState4](images/DeveloperGuideImage/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitTuitione()`. Since the `currentStatePointer` is not pointing at the end of the `tuitioneStateList`, all tuitione states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+<u>Step 6.</u>
+
+The user executes `clear`, which calls `Model#commitTuitione()`. Since the `currentStatePointer` is not pointing at the end of the `tuitioneStateList`, all tuitione states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/DeveloperGuideImage/UndoRedoState5.png)
 
@@ -613,16 +638,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <ins> Aspect: How undo & redo executes:</ins>
 
-* **Option 1 (current choice):** Saves the entire tuitione.
+* Option 1: Saves the entire tuitione.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* **Option 2:** Individual command knows how to undo/redo by
+* Option 2: Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -903,7 +927,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC09 - Update a specific Student’s Details
+#### UC09: Update a specific Student’s Details
 
 **MSS**
 
