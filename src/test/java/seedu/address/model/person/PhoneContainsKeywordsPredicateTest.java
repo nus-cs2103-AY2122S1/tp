@@ -64,7 +64,7 @@ public class PhoneContainsKeywordsPredicateTest {
         // Keywords does not match name
         predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345", "123452354", "12345235", "12345253"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").withPhone("94354")
-                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("19")
+                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("W19")
                 .withTags("Meh").build()));
     }
 }

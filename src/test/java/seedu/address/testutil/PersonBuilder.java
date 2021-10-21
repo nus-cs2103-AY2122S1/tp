@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NATIONALITY = "Singapore";
-    public static final String DEFAULT_TUTORIAL_GROUP = "01";
+    public static final String DEFAULT_TUTORIAL_GROUP = "T01";
     public static final String DEFAULT_SOCIAL_HANDLE = "@amybee";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
 

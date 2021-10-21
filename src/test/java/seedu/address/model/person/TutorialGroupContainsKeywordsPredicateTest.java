@@ -45,16 +45,12 @@ public class TutorialGroupContainsKeywordsPredicateTest {
     public void test_tutorialGroupContainsKeywords_returnsTrue() {
         // One keyword
         TutorialGroupContainsKeywordsPredicate predicate =
-                new TutorialGroupContainsKeywordsPredicate(Collections.singletonList("912345"));
-        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("912345").build()));
+                new TutorialGroupContainsKeywordsPredicate(Collections.singletonList("T19"));
+        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
 
         // Only one matching keyword
-        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("9123456", "908976"));
-        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("908976").build()));
-
-        // Non-matching keyword
-        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("908976", "9123456"));
-        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("9123456908976").build()));
+        predicate = new TutorialGroupContainsKeywordsPredicate(Arrays.asList("T19", "T32"));
+        assertTrue(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
     }
 
     @Test
@@ -62,13 +58,13 @@ public class TutorialGroupContainsKeywordsPredicateTest {
         // Zero keywords
         TutorialGroupContainsKeywordsPredicate predicate =
                 new TutorialGroupContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withTutorialGroup("908976").build()));
+        assertFalse(predicate.test(new PersonBuilder().withTutorialGroup("T19").build()));
 
-        // Keywords does not match name
+        // Keywords does not match tutorial group
         predicate = new TutorialGroupContainsKeywordsPredicate(
-                Arrays.asList("99999", "123452354", "12345235", "12345253"));
+                Arrays.asList("T20", "T21", "T22", "T23"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("19")
+                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("T19")
                 .withTags("Meh").build()));
     }
 }

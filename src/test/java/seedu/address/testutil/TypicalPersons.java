@@ -34,34 +34,34 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withGender("F")
             .withNationality("Singapore ").withEmail("alice@example.com")
-            .withPhone("94351253").withTutorialGroup("09").withSocialHandle("@alicep")
+            .withPhone("94351253").withTutorialGroup("T09").withSocialHandle("@alicep")
             .withRemark("She likes aardvarks.").withTags("friends")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withGender("M")
             .withNationality("China ").withEmail("johnd@example.com")
-            .withPhone("98765432").withTutorialGroup("08").withSocialHandle("@bensonm")
+            .withPhone("98765432").withTutorialGroup("W08").withSocialHandle("@bensonm")
             .withRemark("He can't take beer!").withTags("owesMoney", "friends")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withGender("M")
             .withPhone("95352563").withEmail("heinz@example.com").withNationality("Malaysia ")
-            .withTutorialGroup("05").withSocialHandle("@carlk").withRemark("She likes aardvarks.")
+            .withTutorialGroup("T05").withSocialHandle("@carlk").withRemark("She likes aardvarks.")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withGender("M")
             .withPhone("87652533").withEmail("cornelia@example.com").withNationality("Thailand ")
-            .withTutorialGroup("09").withSocialHandle("@danielm").withRemark("She likes aardvarks.")
+            .withTutorialGroup("T09").withSocialHandle("@danielm").withRemark("She likes aardvarks.")
             .withTags("friends")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withGender("F")
             .withPhone("9482224").withEmail("werner@example.com").withNationality("USA ")
-            .withTutorialGroup("29").withSocialHandle("@ellem").withRemark("She likes aardvarks.")
+            .withTutorialGroup("T29").withSocialHandle("@ellem").withRemark("She likes aardvarks.")
             .build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withGender("F")
             .withPhone("9482427").withEmail("lydia@example.com").withNationality("Australia ")
-            .withTutorialGroup("19").withSocialHandle("@fionak").withRemark("She likes aardvarks.")
+            .withTutorialGroup("T19").withSocialHandle("@fionak").withRemark("She likes aardvarks.")
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withGender("M")
             .withPhone("9482442").withEmail("anna@example.com").withNationality("Vietnam ")
-            .withTutorialGroup("28").withSocialHandle("@georgeb").withRemark("She likes aardvarks.")
+            .withTutorialGroup("T28").withSocialHandle("@georgeb").withRemark("She likes aardvarks.")
             .build();
 
     // Manually added

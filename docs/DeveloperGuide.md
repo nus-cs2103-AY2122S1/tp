@@ -1,15 +1,30 @@
 ---
-layout: page title: Developer Guide
+layout: page 
+title: Developer Guide
 ---
 
-* Table of Contents {:toc}
+## Table of Contents
+<!--- * Table of Contents {:toc} --->
+* Acknowledgements
+* Setting up, getting started
+* Design
+  * Architecture
+  * UI component
+  * Logic component
+  * Model component
+  * Storage component
+  * Common classes
+* Implementation
+* Documentation, logging, testing, configuration, dev-ops
+* Appendix: Requirements
+* Appendix: Instructions for manual testing
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-  original source as well}
+<!--- * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+  original source as well} --->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -191,6 +206,107 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+The features mentioned are:
+- [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
+- [Deleting multiple contacts by keywords](#delete-by-keywords)
+- [Undoing / redoing command](#proposed-undoredo-feature)
+- {and so on...}
+
+### Add contacts with optional arguments
+
+#### Implementation
+
+The add mechanism is facilitated by AddCommand and AddCommandParser. It allows users to add contacts by name alone,
+without the need to include contact details.
+
+#### Usage
+
+Given below is an example usage scenario of how the addCommand mechanism behaves at each step.
+
+1. The user first launches Socius and adds a new contact by name, without any contact details.
+
+2. The user executes the command "add n/[NAME]" to add a new person with no contact details.
+
+3. The `parse` function of AddCommandParser will parse the input and set the optional arguments as empty strings, before
+   instantiating a new `Person` object.
+
+4. The command communicates with the `Model` to add the person to the existing AddressBook.
+
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+The following sequence diagram shows how the AddCommand function works:
+
+![UpdatedAddCommandSeqDiagram](images/AddCommandDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![UpdatedAddCommand](images/UpdatedAddCommand.png)
+
+#### Design considerations:
+
+**Aspect: How contacts are saved with optional arguments:**
+
+* **Alternative 1 (current choice):** Save a contact, with empty strings as arguments if argument is not included in
+  input.
+    * Pros: Easy to implement.
+    * Cons: May result in unexpected bugs.
+
+* **Alternative 2:** Save all optional attributes of a contact as Optional type.
+    * Pros: Will result in fewer unexpected bugs since input is expected to be optional.
+    * Cons: Harder to implement.
+
+### Delete by keywords
+
+#### Implementation
+
+The Delete By Keyword mechanism will delete contacts specified by a given set of keywords. Any contacts containing any of the specified keywords will be deleted.
+
+It works by filtering for the contacts in the `model` and deleting them one by one.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `DeleteMultipleCommand` to delete contacts by keywords:
+
+[insert diagram]
+
+Given below is an exmaple usage scenario and how the Delete By Keyword mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `deletem t/friends g/m` command to delete all contacts with the tag `friends` and gender `M`.
+
+Step 3. This will call `DeleteMultipleCommandParsr#parse` which will then parse the arguments provided.
+Within `DeleteMultipleCommandParser#parse`, `TagContainsKeywordsPredicate` and `GenderContainsKeywordsPredicate` will be created using the tags and gender. These will then be added into the list of predicates.
+
+Step 4. A new `DeleteMultipleCommand` object will be created with its `predicate` set to the one defined in the previous step.
+The following sequence diagram briefly shows how the parser operation works:
+
+[insert diagram]
+
+Step 5. `DeleteMultipleCommand#execute` will filter the model with the provided list of predicates and get back the filtered list.
+
+Step 6. It will then iterate through the list and call `deletePerson` to remove contact with matching keywords one by one.
+
+Step 7. After deleting contacts, it will call `updateFilteredPersonList` on model to list all the remaining contacts.
+
+The following sequence diagram shows how the Delete By Keywords mechanism works:
+
+[insert diagram]
+
+#### Design considerations:
+
+**Aspect: How delete multiple executes:**
+
+* **Alternative 1 (current choice):** Deletes multiple contacts from the list given multiple keywords.
+    * Pros: Convenient for user to mass delete contacts with one command instead of removing one by one.
+    * Cons: Challenging to implement as it requires parsing and checking multiple dynamic parameters. It also may have performance issues in terms of memory usage.
+
+* **Alternative 2:** Deletes multiple contacts from the list given a single keyword.
+    * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
+    * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -289,7 +405,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -443,7 +558,7 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -460,7 +575,7 @@ Use case ends.
 3. User requests to tag a specific person in the list
 4. Socius tags the person
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -469,16 +584,14 @@ Use case ends.
   Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Remove existing tag of a person**
 
@@ -489,20 +602,16 @@ Use case ends.
 3. User requests to remove existing tag of a specific person in the list
 4. Socius removes the existing tag of the person
 
-    Use case ends.
-
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 **Use case: Filter persons by tag**
 
@@ -511,19 +620,14 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to filter the list of persons by tag
-4. Socius shows a filtered list of persons by tag
-    Use case ends.
-
+4. Socius shows a filtered list of persons by tag Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given tag is invalid.
-  * 3a1. Socius shows an empty list.
-    Use case ends.
-
+    * 3a1. Socius shows an empty list. Use case ends.
 
 **Use case: Add remarks for a person**
 
@@ -532,27 +636,21 @@ Use case ends.
 1. User requests to list persons
 2. Socius shows a list of persons
 3. User requests to add remarks for a specific person in the list
-4. Socius adds remarks for the person
-    Use case ends.
-
+4. Socius adds remarks for the person Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
-    Use case ends.
+* 2a. The list is empty. Use case ends.
 
 * 3a. The given index is invalid.
-  * 3a1. Socius shows an error message.
-  * 3a2. User enters a new request.
-  * Steps 3a1-3a2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
+    * 3a1. Socius shows an error message.
+    * 3a2. User enters a new request.
+    * Steps 3a1-3a2 are repeated until the data entered are correct. Use case resumes from step 4.
 
-* 3b.  The format of the request is invalid.
-  * 3b1. Socius shows an error message.
-  * 3b2. User enters a new request.
-  * Steps 3b1-3b2 are repeated until the data entered are correct.
-    Use case resumes from step 4.
-
+* 3b. The format of the request is invalid.
+    * 3b1. Socius shows an error message.
+    * 3b2. User enters a new request.
+    * Steps 3b1-3b2 are repeated until the data entered are correct. Use case resumes from step 4.
 
 *{More to be added}*
 
