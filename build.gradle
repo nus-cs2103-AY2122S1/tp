@@ -6,6 +6,10 @@ plugins {
     id 'jacoco'
 }
 
+run {
+    enableAssertions = true
+}
+
 mainClassName = 'seedu.address.Main'
 
 sourceCompatibility = JavaVersion.VERSION_11
@@ -71,6 +75,10 @@ dependencies {
 
 shadowJar {
     archiveName = 'classmate.jar'
+}
+
+run {
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'

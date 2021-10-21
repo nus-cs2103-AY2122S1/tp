@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * The API of the Model component.
@@ -73,6 +74,11 @@ public interface Model {
     boolean hasTutorialClass(TutorialClass tutorialClass);
 
     /**
+     * Returns true if a tutorial group with the same identity as {@code tutorialGroup} exists in Classmate.
+     */
+    boolean hasTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
      * Deletes the given student.
      * The student must exist in Classmate.
      */
@@ -83,6 +89,12 @@ public interface Model {
      * The student must exist in Classmate.
      */
     void deleteTutorialClass(TutorialClass target);
+
+    /**
+     * Deletes the given group.
+     * The group must exist in Classmate.
+     */
+    void deleteTutorialGroup(TutorialGroup target);
 
     /**
      * Adds the given student.
@@ -97,6 +109,12 @@ public interface Model {
     void addTutorialClass(TutorialClass tutorialClass);
 
     /**
+     * Adds the given group.
+     * {@code tutorialGroup} must not already exist in Classmate.
+     */
+    void addTutorialGroup(TutorialGroup tutorialGroup);
+
+    /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
@@ -109,6 +127,9 @@ public interface Model {
     /** Returns unmodifiable view of filtered Tutorial ClassList */
     ObservableList<TutorialClass> getFilteredTutorialClassList();
 
+    /** Returns unmodifiable view of filtered Tutorial GroupList */
+    ObservableList<TutorialGroup> getFilteredTutorialGroupList();
+
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -116,4 +137,6 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate);
+
+    void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate);
 }

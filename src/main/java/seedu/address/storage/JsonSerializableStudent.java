@@ -13,6 +13,7 @@ import seedu.address.model.Classmate;
 import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 /**
  * An Immutable Classmate that is serializable to JSON format.
@@ -23,18 +24,23 @@ class JsonSerializableStudent {
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_TUTORIAL_CLASS =
             "Tutorial Classes list contains duplicate tutorial class(es).";
+    public static final String MESSAGE_DUPLICATE_TUTORIAL_GROUP =
+            "Tutorial Groups list contains duplicate tutorial group(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedTutorialClass> tutorialClasses = new ArrayList<>();
+    private final List<JsonAdaptedTutorialGroup> tutorialGroups = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableStudent} with the given students.
      */
     @JsonCreator
     public JsonSerializableStudent(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                   @JsonProperty("tutorialClasses") List<JsonAdaptedTutorialClass> tutorialClasses) {
+                                   @JsonProperty("tutorialClasses") List<JsonAdaptedTutorialClass> tutorialClasses,
+                                   @JsonProperty("tutorialGroups") List<JsonAdaptedTutorialGroup> tutorialGroups) {
         this.students.addAll(students);
         this.tutorialClasses.addAll(tutorialClasses);
+        this.tutorialGroups.addAll(tutorialGroups);
     }
 
     /**
@@ -48,6 +54,11 @@ class JsonSerializableStudent {
                 .getTutorialClassList()
                 .stream()
                 .map(JsonAdaptedTutorialClass::new)
+                .collect(Collectors.toList()));
+        tutorialGroups.addAll(source
+                .getTutorialGroupList()
+                .stream()
+                .map(JsonAdaptedTutorialGroup::new)
                 .collect(Collectors.toList()));
     }
 
@@ -71,6 +82,13 @@ class JsonSerializableStudent {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_CLASS);
             }
             classmate.addTutorialClass(tutorialClass);
+        }
+        for (JsonAdaptedTutorialGroup jsonAdaptedTutorialGroup : tutorialGroups) {
+            TutorialGroup tutorialGroup = jsonAdaptedTutorialGroup.toModelType();
+            if (classmate.hasTutorialGroup(tutorialGroup)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TUTORIAL_GROUP);
+            }
+            classmate.addTutorialGroup(tutorialGroup);
         }
         return classmate;
     }

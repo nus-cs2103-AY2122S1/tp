@@ -16,6 +16,8 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
+import seedu.address.model.tutorialgroup.GroupName;
+import seedu.address.model.tutorialgroup.GroupType;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -124,6 +126,30 @@ public class ParserUtil {
             throw new ParseException(Schedule.MESSAGE_CONSTRAINTS);
         }
         return new Schedule(trimmedSchedule);
+    }
+
+    /**
+     * Parses a {@code String GroupName} into an {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code schedule} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroupName = groupName.trim();
+        return new GroupName(trimmedGroupName);
+    }
+
+    /**
+     * Parses a {@code String GroupName} into an {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code schedule} is invalid.
+     */
+    public static GroupType parseGroupType(String groupType) throws ParseException {
+        requireNonNull(groupType);
+        if (!GroupType.isValidGroupType(groupType)) {
+            throw new ParseException(GroupType.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupType(groupType);
     }
 
     /**

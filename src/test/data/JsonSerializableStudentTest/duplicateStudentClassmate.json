@@ -18,5 +18,10 @@
       "schedule": "mon 16:00 to 18:00, tues 17:00 to 19:00",
       "tagged": ["evening"]
     }
-  ]
+  ],
+  "tutorialGroups": [ {
+    "groupName" : "1",
+    "classCode" : "G06",
+    "groupType" : "OP1"
+  } ]
 }

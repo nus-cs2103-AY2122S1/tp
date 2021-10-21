@@ -9,6 +9,8 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialclass.UniqueTutorialClassList;
+import seedu.address.model.tutorialgroup.TutorialGroup;
+import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
 
 /**
  * Wraps all data at the address-book level
@@ -18,6 +20,7 @@ public class Classmate implements ReadOnlyClassmate {
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
+    private final UniqueTutorialGroupList tutorialGroups;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -29,6 +32,7 @@ public class Classmate implements ReadOnlyClassmate {
     {
         students = new UniqueStudentList();
         tutorialClasses = new UniqueTutorialClassList();
+        tutorialGroups = new UniqueTutorialGroupList();
     }
 
     public Classmate() {}
@@ -108,7 +112,11 @@ public class Classmate implements ReadOnlyClassmate {
     //// tutorialclass-level operations
 
     /**
+<<<<<<< HEAD
      * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
+=======
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the ClassMATE.
+>>>>>>> deefb051573a6565de028a4fe2bbb6e7bc6cb9d5
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -116,8 +124,13 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
+<<<<<<< HEAD
      * Adds a tutorialClass to the address book.
      * The tutorialClass must not already exist in the address book.
+=======
+     * Adds a tutorialClass to the ClassMATE.
+     * The tutorialClass must not already exist in the ClassMATE.
+>>>>>>> deefb051573a6565de028a4fe2bbb6e7bc6cb9d5
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
@@ -125,7 +138,7 @@ public class Classmate implements ReadOnlyClassmate {
 
     /**
      * Replaces the given tutorialClass {@code target} in the list with {@code editedTutorialClass}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ClassMATE.
      * The tutorialClass identity of {@code editedTutorialClass} must not be the same
      * as another existing tutorialClass in ClassMATE.
      */
@@ -141,6 +154,41 @@ public class Classmate implements ReadOnlyClassmate {
      */
     public void removeTutorialClass(TutorialClass key) {
         tutorialClasses.remove(key);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
+     */
+    public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
+        requireNonNull(tutorialGroup);
+        return tutorialGroups.contains(tutorialGroup);
+    }
+
+    /**
+     * Adds a student to the ClassMATE.
+     * The student must not already exist in the ClassMATE.
+     */
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        tutorialGroups.add(tutorialGroup);
+    }
+
+    /**
+     * Replaces the given student {@code target} in the list with {@code editedStudent}.
+     * {@code target} must exist in the ClassMATE.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
+     */
+    public void setTutorialGroup(TutorialGroup target, TutorialGroup editedTutorialGroup) {
+        requireNonNull(editedTutorialGroup);
+
+        tutorialGroups.setTutorialGroup(target, editedTutorialGroup);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Classmate}.
+     * {@code key} must exist in the ClassMATE.
+     */
+    public void removeTutorialGroup(TutorialGroup key) {
+        tutorialGroups.remove(key);
     }
 
     //// util methods
@@ -160,6 +208,12 @@ public class Classmate implements ReadOnlyClassmate {
     public ObservableList<TutorialClass> getTutorialClassList() {
         return tutorialClasses.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<TutorialGroup> getTutorialGroupList() {
+        return tutorialGroups.asUnmodifiableObservableList();
+    }
+
 
     @Override
     public boolean equals(Object other) {

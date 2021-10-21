@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyClassmate;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
-
+import seedu.address.model.tutorialgroup.TutorialGroup;
 
 
 /**
@@ -54,7 +54,12 @@ public class ModelStub implements Model {
 
     @Override
     public void addTutorialClass(TutorialClass tutorialClass) {
+        throw new AssertionError("This method should not be called.");
+    }
 
+    @Override
+    public void addTutorialGroup(TutorialGroup tutorialGroup) {
+        throw new AssertionError("This method should not be called.");
     }
 
     @Override
@@ -78,12 +83,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasTutorialGroup(TutorialGroup tutorialGroup) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void deleteTutorialClass(TutorialClass target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteTutorialGroup(TutorialGroup target) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -103,12 +118,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<TutorialGroup> getFilteredTutorialGroupList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void updateFilteredTutorialClassList(Predicate<TutorialClass> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateFilteredTutorialGroupList(Predicate<TutorialGroup> predicate) {
         throw new AssertionError("This method should not be called.");
     }
 }
