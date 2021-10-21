@@ -114,6 +114,8 @@ public interface Model {
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
+    void markTask(Task toMark);
+
     //======================================== ORDER FUNCTIONALITIES =================================================
     /**
      * Adds the given task.

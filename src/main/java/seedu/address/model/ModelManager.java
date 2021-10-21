@@ -26,8 +26,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
-    private final FilteredList<Order> filteredOrders;
-
     //pending re-wrapping by yuichiro
     private final OrderList orderList;
     private final FilteredList<Order> filteredOrders;
@@ -205,19 +203,20 @@ public class ModelManager implements Model {
         addressBook.deleteOrder(toDelete);
     }
 
-  
     @Override
     public ObservableList<Order> getFilteredOrderList() {
         return filteredOrders;
     }
 
     @Override
-
     public void updateFilteredOrderList(Predicate<Order> predicate) {
         requireNonNull(predicate);
         filteredOrders.setPredicate(predicate);
     }
 
+    /**
+     * Marks an order as completed
+     */
     public void markOrder(Order order) {
         addressBook.markOrder(order);
 
