@@ -13,10 +13,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueNextMeetingList;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagIsUnreferenced;
@@ -32,7 +29,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     private final UniquePersonList persons;
-    private final UniqueNextMeetingList meetings;
     private final UniqueTagList tags;
 
     private String clientCounter;
@@ -46,7 +42,6 @@ public class AddressBook implements ReadOnlyAddressBook {
          *   among constructors.
          */
         persons = new UniquePersonList();
-        meetings = new UniqueNextMeetingList();
         tags = new UniqueTagList();
     }
 
@@ -69,15 +64,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPersons(List<Person> persons) {
         this.persons.setPersons(persons);
-        removeUnreferencedTags();
-    }
-
-    /**
-     * Replaces the contents of the meetings list with {@code meetings}.
-     * {@code meetings} must not contain duplicate NextMeetings.
-     */
-    public void setMeetings(List<NextMeeting> meetings) {
-        this.meetings.setNextMeetings(meetings);
         removeUnreferencedTags();
     }
 
@@ -117,46 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setMeetings(newData.getNextMeetingsList());
         setClientCounter(newData.getClientCounter());
-    }
-
-    //// meeting-level operations
-
-    /**
-     * Returns true if a nextMeeting with the same identity as {@code nextMeeting} exists in the address book.
-     */
-    public boolean hasNextMeeting(NextMeeting nextMeeting) {
-        requireNonNull(nextMeeting);
-        return meetings.contains(nextMeeting);
-    }
-
-    /**
-     * Adds a NextMeeting to the address book.
-     * The meeting must not already exist in the address book.
-     */
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        meetings.add(nextMeeting);
-    }
-
-    /**
-     * Returns NextMeeting with corresponding withWho.
-     *
-     * @param withWho name of client
-     * @return meeting with matching client
-     */
-    public NextMeeting getNextMeeting(Name withWho) {
-        requireNonNull(withWho);
-        return meetings.getNextMeeting(withWho);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeNextMeeting(NextMeeting key) {
-        meetings.remove(key);
-        removeUnreferencedTags();
     }
 
     //// person-level operations
@@ -273,10 +220,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.deletePersonByClientIds(clientIds);
     }
 
-    public void deleteMeetingsByPersons(List<Person> toDelete) {
-        meetings.deleteByPersons(toDelete);
-    }
-
     /**
      * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
      * Person with {@code clientId} and {@code email} must exist in the address book.
@@ -290,26 +233,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    @Override
-    public ObservableList<NextMeeting> getNextMeetingsList() {
-        return meetings.asUnmodifiableObservableList();
-    };
-
-    @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingsList() {
-        return meetings.asSortedObservableList();
-    };
-
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
-    }
-
-    /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
-     */
-    public void addMeeting(NextMeeting nextMeeting) {
-        meetings.add(nextMeeting);
     }
 
     @Override

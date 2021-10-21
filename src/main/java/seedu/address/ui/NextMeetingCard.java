@@ -34,8 +34,6 @@ public class NextMeetingCard extends UiPart<Region> {
     @FXML
     private Label meetingLocation;
     @FXML
-    private Label withWho;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -48,7 +46,6 @@ public class NextMeetingCard extends UiPart<Region> {
         startTime.setText(nextMeeting.startTimeInString);
         endTime.setText(nextMeeting.endTimeInString);
         meetingLocation.setText(nextMeeting.location);
-        withWho.setText(nextMeeting.getClientName());
     }
 
     @Override
