@@ -73,16 +73,43 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, 
+`EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
+class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.
+com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Member` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
+
+#### Current Implementations 
+
+The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
+that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
+or `Member` would update the `EventListPanel` and `MemberListPanel` to show their respective `EventCard` 
+and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
+corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
+
+However, there are problems faced when the fields inside `Event` and `Member` are being changed. There seems to be 
+some difficulty in updating the `MemberCard` when a `Task` object is being created under the `Member` object, or is 
+removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
+the `Event` object is being removed.
+
+#### Future Plans
+
+To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
+to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
+from `EventCard` and `MemberCard` respectively. 
+
+We plan to support this implementation by using the `elist`, `mlist` and `tlist` commands to determine what is being 
+displayed in the `MainWindow`.
 
 ### Logic component
 
@@ -94,7 +121,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -113,6 +140,29 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+
+#### Current Implementation
+
+New feature: Events
+* Events can be added and deleted from event list via `eadd` and `edelete` commands
+* The participating members can be listed using the command `mlist /v EVENT_ID`
+* New events created can have many participants selected from member list.
+* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
+  for adding participants separately, eadd command allows creation of complete event to
+  minimise commands required to add them individually. The format is similar to `delete` and `list` commands
+  for familiarity with similar commands for other modules.
+
+
+#### Future Plans
+
+Future plans for Events
+* Include adding and deleting of participants, as well as marking whether a participant has attended the event.
+* Include updating of event with participants and different name
+* Include searching for the list of events for a participant
+* Include filtering of events by month or events that are happening today.
+* Include sorting of events by date, name or number of participants.
+    * Dates should be in reverse chronological order so that upcoming events are shown first
+* Include additional remarks or description for an event
 
 ### Add a task feature for a member or several members
 
@@ -158,6 +208,10 @@ Given below is an example usage scenario:
 The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
 The parser will then parse the input to create a TlistCommand with member id as 1.
 This command will display all the tasks of the first member of the member list.
+=======
+Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
+
+![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -223,7 +277,7 @@ Step 2. The user executes `delete 5` command to delete the 5th member in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `padd /n David …​` to add a new member. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `madd /n David …​` to add a new member. The `madd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
