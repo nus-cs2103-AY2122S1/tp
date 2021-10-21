@@ -209,12 +209,12 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Description
 
-The addressbook allows the user to `search` for clients using keywords. The keywords can be used to match generically
+LeadsForce allows the user to `search` for clients using keywords. The keywords can be used to match generically
 with any client's attribute or specifically with the specified attributes
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddresBookParsers`.
+1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
 2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `SearchCommandParser` to parse.
 4. The `SearchCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
@@ -222,11 +222,11 @@ with any client's attribute or specifically with the specified attributes
 6. The `SearchCommandParser` will then create a `SearchCommand` with the `PersonContainsKeywordPredicate`.
 7. The `LogicManger` will call the `execute` method of `SearchCommand`.
 8. The `SearchCommand` wil then call the `updateFilteredPersonList` method of the provided `Model` with it's `PersonContainsKeywordPredicate`.
-9. The `SearchCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
+9. The `SearchCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`.
 
 Below is sequence diagram for search clients.
-   
-<img src="diagrams/tracing/SearchCommandSequenceDiagram.puml"/>
+
+<img src="images/SearchCommandSequenceDiagram.png" />
 
 #### Implementation of PersonContainsKeywordPredicate
 
@@ -244,12 +244,12 @@ is any.
 
 #### Description
 
-The addressbook allows the user to `filter` for clients using keywords. This works similar to the `search` but it allows
+LeadsForce allows the user to `filter` for clients using keywords. This works similar to the `search` but it allows
 for multiple `filter` to be stacked, which allows for user to look for clients incrementally.
 
 #### Implementation
 
-1. The `LogicManager` starts to parses the given input text using `AddresBookParsers`
+1. The `LogicManager` starts to parses the given input text using `AddressBookParser`
 2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
 3. The remaining input text will be passed to the `FilterCommandParser` to parse.
 4. The `FilterCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
@@ -257,25 +257,51 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 6. The `FilterCommandParser` will then create a `FilterCommand` with the `PersonContainsKeywordPredicate`
 7. The `LogicManger` will call the `execute` method of `FilterCommand`.
 8. The `FilterCommand` wil then call the `filterFilteredPersonList` method of the provided `Model` with it's `PersonContainsKeywordPredicate`.
-9. The `FilterCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
+9. The `FilterCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`.
 
 Below is sequence diagram for filter clients.
 
-<img src="diagrams/tracing/FilterCommandSequenceDiagram.puml"/>
+<img src="images/FilterCommandSequenceDiagram.png" />
 
 #### Implementation of PersonContainsKeywordPredicate
 
 See the above description in `Search Clients`.
 
-### 4.3 \[Proposed\] Multiple Address Book
+### 4.3 View Client Info
 
-#### 4.3.1 Proposed Implementation
+#### Description
+
+LeadsForce allows users to view client info in the `PersonViewPanel` in the `SideBar` of the GUI using the `View` command. 
+
+#### Implementation
+
+1. The `LogicManager` starts to parses the given input text using `AddressBookParser`.
+2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `ViewCommandParser` to parse.
+4. The `ViewCommandParser` will parse the `ClientId` from the remaining input text. In our implementation, a valid `ClientId` is any non-negative integer.
+5. The `ViewCommandParser` will then create a new `PersonHasId` using the `ClientId` parsed.
+6. The `ViewCommandParser` will then create a `ViewCommand` with the `ClientId` and `PersonHasId`.
+7. The `LogicManger` will call the `execute` method of `ViewCommand`.
+8. The `ViewCommand` wil then call the `updatePersonToView` method of the provided `Model` with it's `PersonHasId`.
+9. The `ViewCommand` will finally create a new `CommandResult` which will be returned to `LogicManager` and the client's information with the given `ClientId` in the `PersonViewPanel`.
+
+Below is the sequence diagram for view clients.
+
+<img src="images/ViewCommandSequenceDiagram.png" />
+
+#### Implementation of PersonHasId
+
+`PersonHasId` implements `Predicate<Client>` and allow filtering of a list of `Client` based on `ClientId` objects. `PersonHasId` contains a list which holds these 'ClientId'. This allows the `Model` to use this list of `ClientId` objects to filter for `Client`(s) that contain the given `ClientId`(s).
+
+### 4.4 \[Proposed\] Multiple Address Book
+
+#### 4.4.1 Proposed Implementation
 
 To be included
 
-### 4.4 \[Proposed\] Undo/redo feature
+### 4.5 \[Proposed\] Undo/redo feature
 
-#### 4.4.1 Proposed Implementation
+#### 4.5.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -338,7 +364,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### 4.1.2 Design considerations:
+#### 4.5.2 Design considerations:
 
 **Aspect: How undo & redo executes:**
 
@@ -353,7 +379,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### 4.6 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
