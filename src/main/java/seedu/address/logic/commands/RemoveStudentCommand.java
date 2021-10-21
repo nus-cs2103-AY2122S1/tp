@@ -11,7 +11,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 public class RemoveStudentCommand extends Command {
@@ -50,7 +50,7 @@ public class RemoveStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person personToRemove = null;
+        Student studentToRemove = null;
         TuitionClass tuitionClass = null;
         List<String> studentsNotInClass = new ArrayList<>();
         List<String> studentsRemoved = new ArrayList<>();
@@ -63,21 +63,21 @@ public class RemoveStudentCommand extends Command {
         }
         for (int i = 0; i < studentIndex.size(); i++) {
             Index currIndex = studentIndex.get(i);
-            if (currIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            if (currIndex.getZeroBased() >= model.getFilteredStudentList().size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
             }
-            personToRemove = model.getFilteredPersonList().get(currIndex.getZeroBased());
-            if (personToRemove == null) {
+            studentToRemove = model.getFilteredStudentList().get(currIndex.getZeroBased());
+            if (studentToRemove == null) {
                 throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND));
             }
-            if (tuitionClass.containsStudent(personToRemove)) {
-                TuitionClass updatedClass = tuitionClass.removeStudent(personToRemove);
-                Person updatedPerson = personToRemove.removeClass(tuitionClass);
+            if (tuitionClass.containsStudent(studentToRemove)) {
+                TuitionClass updatedClass = tuitionClass.removeStudent(studentToRemove);
+                Student updatedStudent = studentToRemove.removeClass(tuitionClass);
                 model.setTuition(tuitionClass, updatedClass);
-                model.setPerson(personToRemove, updatedPerson);
-                studentsRemoved.add(personToRemove.getName().fullName);
+                model.setStudent(studentToRemove, updatedStudent);
+                studentsRemoved.add(studentToRemove.getName().fullName);
             } else {
-                studentsNotInClass.add(personToRemove.getName().fullName);
+                studentsNotInClass.add(studentToRemove.getName().fullName);
             }
         }
         String feedback = (!studentsRemoved.isEmpty()

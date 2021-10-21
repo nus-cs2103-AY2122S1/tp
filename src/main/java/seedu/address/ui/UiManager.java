@@ -18,7 +18,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.Remark;
+import seedu.address.model.student.Remark;
 
 /**
  * The manager of the UI component.

@@ -8,11 +8,11 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a student identified using it's displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
         List<String> removed = new ArrayList<>();
         List<Integer> invalidStudents = new ArrayList<>();
 
@@ -46,24 +46,24 @@ public class DeleteCommand extends Command {
                 invalidStudents.add(currIndex.getOneBased());
                 continue;
             }
-            Person personToDelete = lastShownList.get(currIndex.getZeroBased());
-            if (personToDelete == null) {
+            Student studentToDelete = lastShownList.get(currIndex.getZeroBased());
+            if (studentToDelete == null) {
                 invalidStudents.add(currIndex.getOneBased());
                 continue;
             }
-            if (personToDelete != null) {
-                for (Integer tuitionClassId : personToDelete.getClasses().getClasses()) {
+            if (studentToDelete != null) {
+                for (Integer tuitionClassId : studentToDelete.getClasses().getClasses()) {
                     TuitionClass tuitionClass = model.getClassById(tuitionClassId);
                     if (tuitionClass != null) {
-                        TuitionClass updatedClass = tuitionClass.removeStudent(personToDelete);
+                        TuitionClass updatedClass = tuitionClass.removeStudent(studentToDelete);
                         model.setTuition(tuitionClass, updatedClass);
                     }
                 }
-                removed.add(personToDelete.getName().fullName);
-                model.deletePerson(personToDelete);
+                removed.add(studentToDelete.getName().fullName);
+                model.deleteStudent(studentToDelete);
             }
             model.updateFilteredTuitionList(Model.PREDICATE_SHOW_ALL_TUITIONS);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         }
         if (!invalidStudents.isEmpty() && removed.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_DELETE_STUDENTS_FAILURE, invalidStudents));

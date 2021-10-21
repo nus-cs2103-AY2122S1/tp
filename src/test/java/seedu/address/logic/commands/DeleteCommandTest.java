@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_STUDENTS_FAILURE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
-import static seedu.address.testutil.TypicalPersons.getAddressBookWithTypicalPersons;
+import static seedu.address.testutil.TypicalStudents.getAddressBookWithTypicalStudents;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,25 +28,25 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getAddressBookWithTypicalPersons(), new UserPrefs());
+    private Model model = new ModelManager(getAddressBookWithTypicalStudents(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(List.of(INDEX_FIRST));
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENTS_SUCCESS,
-                List.of(personToDelete.getName().fullName));
+                List.of(studentToDelete.getName().fullName));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(List.of(outOfBoundIndex));
 
         String expectedMessage = String.format(MESSAGE_DELETE_STUDENTS_FAILURE,
@@ -57,7 +57,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showStudentAtIndex(model, INDEX_FIRST);
         List<Index> outOfBoundIndex = List.<Index>of(INDEX_SECOND, INDEX_THIRD);
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
@@ -95,8 +95,8 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-        assertTrue(model.getFilteredPersonList().isEmpty());
+    private void showNoStudent(Model model) {
+        model.updateFilteredStudentList(p -> false);
+        assertTrue(model.getFilteredStudentList().isEmpty());
     }
 }

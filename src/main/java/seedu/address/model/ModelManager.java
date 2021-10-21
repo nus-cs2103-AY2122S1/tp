@@ -13,7 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.SortCommandParser;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
@@ -24,7 +24,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons;
+    private FilteredList<Student> filteredStudents;
     private FilteredList<TuitionClass> filteredTuition;
 
     /**
@@ -38,7 +38,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredTuition = new FilteredList<>(this.addressBook.getTuitionList());
 
     }
@@ -95,38 +95,38 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasStudent(Student student) {
+        requireNonNull(student);
+        return addressBook.hasStudent(student);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteStudent(Student target) {
+        addressBook.removeStudent(target);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addStudent(Student student) {
+        addressBook.addStudent(student);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
+    public void setStudent(Student target, Student editedStudent) {
+        requireAllNonNull(target, editedStudent);
+        addressBook.setStudent(target, editedStudent);
     }
 
     @Override
-    public Person getStudent(Index index) {
+    public Student getStudent(Index index) {
         requireNonNull(index);
-        return addressBook.getPerson(index);
+        return addressBook.getStudent(index);
     }
 
     @Override
-    public Person getSameNamePerson(Person otherPerson) {
-        return this.addressBook.getSameNamePerson(otherPerson);
+    public Student getSameNameStudent(Student otherStudent) {
+        return this.addressBook.getSameNameStudent(otherStudent);
     }
 
 
@@ -136,22 +136,22 @@ public class ModelManager implements Model {
         addressBook.sort(order);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Student List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Student> getFilteredStudentList() {
+        return filteredStudents;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-        logger.info("filter" + filteredPersons.toString());
+        filteredStudents.setPredicate(predicate);
+        logger.info("filter" + filteredStudents.toString());
     }
 
     @Override
@@ -170,14 +170,14 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredStudents.equals(other.filteredStudents);
     }
 
 
     //=========== Filtered Tuition List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -189,7 +189,7 @@ public class ModelManager implements Model {
     public void updateFilteredTuitionList(Predicate<TuitionClass> predicate) {
         requireNonNull(predicate);
         filteredTuition.setPredicate(predicate);
-        logger.info(filteredPersons.toString());
+        logger.info(filteredStudents.toString());
     }
 
     @Override
@@ -222,10 +222,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public TuitionClass addToClass(TuitionClass tuitionClass, Person person) {
+    public TuitionClass addToClass(TuitionClass tuitionClass, Student student) {
         requireNonNull(tuitionClass);
-        requireNonNull(person);
-        TuitionClass c = addressBook.addToClass(tuitionClass, person);
+        requireNonNull(student);
+        TuitionClass c = addressBook.addToClass(tuitionClass, student);
         updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
         return c;
     }
@@ -240,6 +240,6 @@ public class ModelManager implements Model {
     public void deleteTuition(TuitionClass target) {
         addressBook.removeTuition(target);
         this.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
-        this.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        this.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 }
