@@ -63,6 +63,7 @@ public class CalendarEntryList {
                 .filter(entry -> entry.getUserObject().equals(toFind))
                 .findFirst()
                 .orElseThrow(LessonNotFoundException::new);
+        // findFirst() assumes that there is only one lesson we need to delete
     }
 
     /**
@@ -99,7 +100,7 @@ public class CalendarEntryList {
      * @param editedPerson the person we added the lesson to.
      * @param toAdd The lesson to add
      */
-    public void addLesson(Person editedPerson, Lesson toAdd) {
+    private void addLesson(Person editedPerson, Lesson toAdd) {
         requireAllNonNull(editedPerson, toAdd);
         if (hasClashes(toAdd)) {
             throw new ClashingLessonException();
@@ -114,7 +115,7 @@ public class CalendarEntryList {
      *
      * @param toRemove The lesson to remove.
      */
-    public void removeLesson(Lesson toRemove) {
+    private void removeLesson(Lesson toRemove) {
         requireNonNull(toRemove);
         Entry<Lesson> entryToRemove = getEntry(toRemove);
         remove(entryToRemove);
