@@ -96,12 +96,14 @@ public class CommandTestUtil {
                 .withPhoneNumber(VALID_PHONE_NUMBER_AMY)
                 .withEmail(VALID_EMAIL_AMY)
                 .withAddress(VALID_ADDRESS_AMY)
+                .withOrders(VALID_ORDER_ONE)
                 .build();
         DESC_BOB = new EditClientDescriptorBuilder()
                 .withName(VALID_NAME_BOB)
                 .withPhoneNumber(VALID_PHONE_NUMBER_BOB)
                 .withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB)
+                .withOrders(VALID_ORDER_TWO)
                 .build();
 
         DESC_CANNON = new EditProductDescriptorBuilder()
