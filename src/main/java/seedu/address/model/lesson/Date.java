@@ -80,7 +80,6 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-<<<<<<< HEAD
      * Update the lesson date to the same day on the most recent week
      * that has yet to be pass.
      *
@@ -104,8 +103,6 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-=======
->>>>>>> 5cc08fce492ac99d01795d6cbec8a990ace3f6cc
      * Check if the date has passed.
      *
      * @return true if date is earlier than now.
