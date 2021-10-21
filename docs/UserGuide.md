@@ -72,7 +72,7 @@ Format: `help`
 
 ### Adding a resident’s information : `add`
 
-Adds a resident and their information to the application. 
+Adds a resident and their information to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
