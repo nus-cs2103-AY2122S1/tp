@@ -62,10 +62,10 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
             try {
                 String currString = allValues.get(i);
                 int intValue = Integer.parseInt(currString);
-               Index contactIndex = ParserUtil.parseIndex(Integer.toString(intValue));
-               contactsToAdd.add(contactIndex);
-               i--;
-               allValues.remove(currString);
+                Index contactIndex = ParserUtil.parseIndex(Integer.toString(intValue));
+                contactsToAdd.add(contactIndex);
+                i--;
+                allValues.remove(currString);
             } catch (NumberFormatException e) {
                 continue;
             }

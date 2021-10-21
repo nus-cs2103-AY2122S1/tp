@@ -24,6 +24,7 @@ public class AddToFolderCommand extends Command {
             + "3 >> CS2103";
 
     public static final String MESSAGE_DUPLICATE_CONTACT = "Contact has already been added to this folder";
+    public static final String MESSAGE_DUPLICATE_INDEX_PASSED = "Repeated Indexes passed";
     public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
     public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
 
@@ -44,7 +45,7 @@ public class AddToFolderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        for (Index index : this.indexList){
+        for (Index index : this.indexList) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
@@ -52,8 +53,7 @@ public class AddToFolderCommand extends Command {
             Person personToAdd = lastShownList.get(index.getZeroBased());
 
             if (duplicateIndexPassed()) {
-                System.out.println("GOES HERE");
-                throw new CommandException("Same input twice");
+                throw new CommandException(MESSAGE_DUPLICATE_INDEX_PASSED);
             }
             if (!model.hasFolderName(folderName)) {
                 throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
@@ -63,7 +63,7 @@ public class AddToFolderCommand extends Command {
             }
 
         }
-        for (Index index : this.indexList){
+        for (Index index : this.indexList) {
             Person personToAdd = lastShownList.get(index.getZeroBased());
             model.addContactToFolder(personToAdd, folderName);
         }
@@ -74,10 +74,10 @@ public class AddToFolderCommand extends Command {
      * Checks if user input contains repeated indexes
      * @return true if there are duplicate indexes
      */
-    public boolean duplicateIndexPassed(){
+    public boolean duplicateIndexPassed() {
         List<Index> uniqueIndexes = new ArrayList<>();
-        for(Index index:this.indexList){
-            if(uniqueIndexes.contains(index)){
+        for (Index index:this.indexList) {
+            if (uniqueIndexes.contains(index)) {
                 return true;
             }
             uniqueIndexes.add(index);
