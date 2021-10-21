@@ -54,7 +54,7 @@ public class PersonBuilder {
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
         superGroups = new HashSet<>(personToCopy.getSuperGroups());
-        subGroups = new HashSet<>(personToCopy.getSubGroups());
+        subGroups = new HashSet<>(personToCopy.getDisplaySubGroups());
     }
 
     /**
