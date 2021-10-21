@@ -21,8 +21,9 @@ public class Order {
                     + "Example: -o 10312 20 2021/10/20";
 
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
-    public static final String MESSAGE_CONSTRAINTS_POS_QUANTITY = "Quantity must be a positive integer.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
+
+    private static final Quantity QUANTITY_ZERO = new Quantity("0");
 
     public final ID id;
     public final Quantity quantity;
@@ -36,7 +37,6 @@ public class Order {
 
         Product product = model.getProductById(id);
 
-        checkArgument(isPositiveQuantity(quantity), MESSAGE_CONSTRAINTS_POS_QUANTITY);
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
         this.id = id;
@@ -49,11 +49,11 @@ public class Order {
     }
 
     private static boolean isValidQuantity(Quantity quantity, Product product) {
-        return quantity.compareTo(product.getQuantity()) <= 0;
+        return product.hasEnoughStock(quantity);
     }
 
-    private static boolean isPositiveQuantity(Quantity quantity) {
-        return quantity.compareTo(new Quantity("0")) > 0;
+    public static boolean isPositiveQuantity(Quantity quantity) {
+        return quantity.moreThan(QUANTITY_ZERO);
     }
 
     @Override

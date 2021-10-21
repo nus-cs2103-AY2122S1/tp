@@ -37,6 +37,14 @@ public class Quantity implements Comparable<Quantity> {
         return quantity.matches(VALIDATION_REGEX);
     }
 
+    public boolean lessThan(Quantity quantity) {
+        return this.compareTo(quantity) < 0;
+    }
+
+    public boolean moreThan(Quantity quantity) {
+        return this.compareTo(quantity) > 0;
+    }
+
     @Override
     public String toString() {
         return value;
