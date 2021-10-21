@@ -9,8 +9,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 
 /**
  * Adds a task to the task list of a person.

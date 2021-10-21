@@ -21,8 +21,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.data.NameContainsKeywordsPredicate;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.NameContainsKeywordsPredicate;
+import seedu.address.model.module.member.Member;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 /**
@@ -41,6 +41,11 @@ public class CommandTestUtil {
     public static final String VALID_POSITION_HUSBAND = "husband";
     public static final String VALID_POSITION_FRIEND = "friend";
     public static final String VALID_TASK_NAME = "write a poem";
+    public static final String VALID_EVENT_NAME_CHESS = "Chess Competition";
+    public static final String VALID_EVENT_NAME_BADMINTON = "Recreational badminton";
+    public static final String VALID_EVENT_DATE_CHESS = "10/10/2030";
+    public static final String VALID_EVENT_DATE_BADMINTON = "20/09/2020";
+    public static final int VALID_EVENT_ID = 1;
     public static final int VALID_TASK_ID = 1;
     public static final int VALID_MEMBER_ID = 1;
     public static final int VALID_MEMBER_ID_DEL = 1;
@@ -140,7 +145,7 @@ public class CommandTestUtil {
 
         Member member = model.getFilteredMemberList().get(targetIndex.getZeroBased());
         final String[] splitName = member.getName().fullName.split("\\s+");
-        model.updateFilteredMemberList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredMemberList(new NameContainsKeywordsPredicate<Member>(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredMemberList().size());
     }

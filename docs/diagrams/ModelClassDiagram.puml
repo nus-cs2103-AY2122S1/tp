@@ -14,7 +14,7 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
+Class Module
 
 Class UniqueMemberList
 Class Member
@@ -49,7 +49,7 @@ ModelManager -> "1\n manager" TaskList
 
 AddressBook *--> "1" UniqueMemberList
 UniqueMemberList --> "~* all" Member
-Member *--> Name
+Member .up.|> Module
 Member *--> Phone
 Member *--> Email
 Member *--> Address
@@ -58,12 +58,11 @@ Member *--> "1" TaskList
 
 AddressBook *--> "1" UniqueEventList
 UniqueEventList --> "~*" Event
-Event *--> EventName
+Event .up.|> Module
+Module *--> Name
 Event *--> EventDate
 Event --> "~*" Member
 
-TaskList -[hidden]right->Name
-Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
