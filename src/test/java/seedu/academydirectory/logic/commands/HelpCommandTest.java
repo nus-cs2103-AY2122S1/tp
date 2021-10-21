@@ -2,12 +2,10 @@ package seedu.academydirectory.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 
@@ -44,8 +42,5 @@ public class HelpCommandTest {
         CommandResult commandResult3 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
                 "exit"), ExitCommand.HELP_MESSAGE);
         assertCommandSuccess(helpCommand3, model, commandResult3, model);
-
-        HelpCommand helpCommand4 = new HelpCommand(null, DeleteCommand.HELP_MESSAGE);
-        assertThrows(CommandException.class, () -> helpCommand4.execute(model));
     }
 }

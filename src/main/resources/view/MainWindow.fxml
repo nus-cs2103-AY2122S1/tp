@@ -13,7 +13,7 @@
 
 <?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Academy Directory" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Academy Directory" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/academy_directory_32.png" />
   </icons>
@@ -35,12 +35,12 @@
           </Menu>
         </MenuBar>
 
-        <HBox fx:id="container" styleClass="pane-with-border" minWidth="340" prefWidth="340">
+        <HBox fx:id="container" styleClass="pane-with-border" minWidth="800" prefWidth="340" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" minWidth="360"/>
-          <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border">
+          <StackPane fx:id="studentListPanelPlaceholder" HBox.hgrow="ALWAYS" minWidth="360"/>
+          <StackPane HBox.hgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border">
             <padding>
               <Insets top="5" right="10" bottom="5" left="10" />
             </padding>
