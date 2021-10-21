@@ -30,7 +30,6 @@ public class JsonAdaptedEventTest {
 
     @Test
     public void toModelType_validEventDetails_returnsEvent() throws Exception {
-        System.out.println(RUMBLING.getName().fullName);
         JsonAdaptedEvent event = new JsonAdaptedEvent(RUMBLING);
         assertEquals(RUMBLING, event.toModelType());
     }

@@ -63,7 +63,7 @@ After you are done, verify that the application still works by compiling and run
 
 Unfortunately, there are usages of `Address` that IntelliJ IDEA cannot identify. You can find them by searching for instances of the word `address` in your code (`Edit` \> `Find` \> `Find in path`).
 
-Places of interest to look out for would be resources used by the application. `main/resources` contains images and `fxml` files used by the application and `test/resources` contains test module. For example, there is a `$address` in each `MemberCard` that has not been removed nor identified.
+Places of interest to look out for would be resources used by the application. `main/resources` contains images and `fxml` files used by the application and `test/resources` contains test data. For example, there is a `$address` in each `MemberCard` that has not been removed nor identified.
 
 ![$address](../images/remove/$address.png)
 
@@ -92,9 +92,9 @@ After removing the `Label`, we can proceed to formally test our code. If everyth
 
 ## Tidying up
 
-At this point, your application is working as intended and all your tests are passing. What’s left to do is to clean up references to `Address` in test module and documentation.
+At this point, your application is working as intended and all your tests are passing. What’s left to do is to clean up references to `Address` in test data and documentation.
 
-In `src/test/module/`, module meant for testing purposes are stored. While keeping the `address` field in the json files does not cause the tests to fail, it is not good practice to let cruft from old features accumulate.
+In `src/test/data/`, data meant for testing purposes are stored. While keeping the `address` field in the json files does not cause the tests to fail, it is not good practice to let cruft from old features accumulate.
 
 **`invalidMemberAddressBook.json`:**
 

@@ -30,9 +30,9 @@ It is optimized for use via a Command Line Interface (CLI) while still having th
   - [Mark a task as done : `tdone`](#mark-a-task-as-done--tdone)
   - [Clearing all entries : `clear`](#clearing-all-entries--clear)
   - [Exiting the program : `exit`](#exiting-the-program--exit)
-  - [Saving the module](#saving-the-module)
-  - [Editing the module file](#editing-the-module-file)
-  - [Archiving module files `[coming in v2.0]`](#archiving-module-files-coming-in-v20)
+  - [Saving the data](#saving-the-data)
+  - [Editing the data file](#editing-the-data-file)
+  - [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
   - [Opening up the Menu page `[coming in v2.0]`](#opening-up-the-menu-page-coming-in-v20)
 - [FAQ](#faq)
 - [Command summary](#command-summary)
@@ -47,7 +47,7 @@ It is optimized for use via a Command Line Interface (CLI) while still having th
 
 3. Copy the file to the folder you want to use as the _home folder_ for Ailurus.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample module.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png) 
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -285,19 +285,19 @@ Exits the program.
 
 Format: `exit`
 
-### Saving the module
+### Saving the data
 
-Ailurus module are saved in the hard disk automatically after any command that changes the module. There is no need to save manually.
+Ailurus data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the module file
+### Editing the data file
 
-Ailurus module are saved as a JSON file `[JAR file location]/module/addressbook.json`. Advanced users are welcome to update module directly by editing that module file.
+Ailurus data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the module file makes its format invalid, Ailurus will discard all module and start with an empty module file at the next run.
+If your changes to the data file makes its format invalid, Ailurus will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving module files `[coming in v2.0]`
+### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -309,8 +309,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my module to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty module file it creates with the file that contains the module of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

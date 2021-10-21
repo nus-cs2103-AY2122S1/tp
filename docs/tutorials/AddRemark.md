@@ -190,7 +190,7 @@ return new DeleteCommand(index);
 
 There appears to be another utility class that obtains an `Index` from the input provided by the user.
 
-Now that we have the know-how to extract the module that we need from the user’s input, we can parse the user command and create a new instance of `RemarkCommand`, as given below.
+Now that we have the know-how to extract the data that we need from the user’s input, we can parse the user command and create a new instance of `RemarkCommand`, as given below.
 
 **`RemarkCommandParser.java`:**
 
@@ -225,11 +225,11 @@ If you are stuck, check out the sample
 
 ## Add `Remark` to the model
 
-Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of person module. We achieve that by working with the `Member` model. Each field in a Member is implemented as a separate class (e.g. a `Name` object represents the person’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to a person.
+Now that we have all the information that we need, let’s lay the groundwork for propagating the remarks added into the in-memory storage of person data. We achieve that by working with the `Member` model. Each field in a Member is implemented as a separate class (e.g. a `Name` object represents the person’s name). That means we should add a `Remark` class so that we can use a `Remark` object to represent a remark given to a person.
 
 ### Add a new `Remark` class
 
-Create a new `Remark` in `seedu.address.model.module.event.member`. Since a `Remark` is a field that is similar to `Address`, we can reuse a significant bit of code.
+Create a new `Remark` in `seedu.address.model.data.event.member`. Since a `Remark` is a field that is similar to `Address`, we can reuse a significant bit of code.
 
 A copy-paste and search-replace later, you should have something like [this](https://github.com/se-edu/addressbook-level3/commit/4516e099699baa9e2d51801bd26f016d812dedcc#diff-af2f075d24dfcd333876f0fbce321f25). Note how `Remark` has no constrains and thus does not require input
 validation.
@@ -268,7 +268,7 @@ That’s it! Fire up the application again and you should see something like thi
 
 ## Modify `Member` to support a `Remark` field
 
-Since `MemberCard` displays module from a `Member`, we need to update `Member` to get our `Remark` displayed!
+Since `MemberCard` displays data from a `Member`, we need to update `Member` to get our `Remark` displayed!
 
 ### Modify `Member`
 
@@ -289,13 +289,13 @@ Refer to [this commit](https://github.com/se-edu/addressbook-level3/commit/ce998
 
 ## Updating Storage
 
-AddressBook stores module by serializing `JsonAdaptedMember` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedMember` to work with our new `Member`!
+AddressBook stores data by serializing `JsonAdaptedMember` into `json` with the help of an external library — Jackson. Let’s update `JsonAdaptedMember` to work with our new `Member`!
 
-While the changes to code may be minimal, the test module will have to be updated as well.
+While the changes to code may be minimal, the test data will have to be updated as well.
 
 <div markdown="span" class="alert alert-warning">
 
-:exclamation: You must delete AddressBook’s storage file located at `/module/addressbook.json` before running it! Not doing so will cause AddressBook to default to an empty address book!
+:exclamation: You must delete AddressBook’s storage file located at `/data/addressbook.json` before running it! Not doing so will cause AddressBook to default to an empty address book!
 
 </div>
 
