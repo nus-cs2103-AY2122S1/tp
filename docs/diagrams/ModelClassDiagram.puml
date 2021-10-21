@@ -5,7 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyProgrammerError<<Interface>>
+Interface ReadOnlyProgrammerError <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
 Class ProgrammerError
@@ -35,6 +35,7 @@ Model .left.> ReadOnlyProgrammerError
 ModelManager -left-> "1" ProgrammerError
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
+
 
 ProgrammerError *--> "1" UniqueStudentList
 UniqueStudentList --> "~* all" Student
