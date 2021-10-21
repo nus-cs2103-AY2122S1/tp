@@ -8,8 +8,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientId;
 import seedu.address.model.tag.Tag;
 
 /**

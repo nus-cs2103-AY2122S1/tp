@@ -16,10 +16,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
-import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class UniqueClientListTest {
 
@@ -45,7 +45,7 @@ public class UniqueClientListTest {
     public void contains_clientWithSameIdentityFieldsInList_returnsTrue() {
         uniqueClientList.add(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+            .build();
         assertTrue(uniqueClientList.contains(editedAlice));
     }
 
@@ -63,26 +63,26 @@ public class UniqueClientListTest {
     @Test
     public void setClient_nullTargetClient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueClientList
-                .setClientByClientIds(null, new EditClientDescriptorBuilder(AMY).build()));
+            .setClientByClientIds(null, new EditClientDescriptorBuilder(AMY).build()));
     }
 
     @Test
     public void setClient_nullEditedClient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueClientList
-                .setClientByClientIds(List.of(ALICE.getClientId()), null));
+            .setClientByClientIds(List.of(ALICE.getClientId()), null));
     }
 
     @Test
     public void setClient_targetClientNotInList_throwsClientNotFoundException() {
         assertThrows(ClientNotFoundException.class, () -> uniqueClientList
-                .setClientByClientIds(List.of(ALICE.getClientId()), new EditClientDescriptorBuilder(AMY).build()));
+            .setClientByClientIds(List.of(ALICE.getClientId()), new EditClientDescriptorBuilder(AMY).build()));
     }
 
     @Test
     public void setClient_editedClientIsSameClient_success() {
         uniqueClientList.add(ALICE);
         uniqueClientList.setClientByClientIds(List.of(ALICE.getClientId()),
-                new EditClientDescriptorBuilder(ALICE).build());
+            new EditClientDescriptorBuilder(ALICE).build());
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(ALICE);
         assertEquals(expectedUniqueClientList, uniqueClientList);
@@ -92,9 +92,9 @@ public class UniqueClientListTest {
     public void setClient_editedClientHasSameIdentity_success() {
         uniqueClientList.add(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+            .build();
         uniqueClientList.setClientByClientIds(List.of(ALICE.getClientId()),
-                new EditClientDescriptorBuilder(editedAlice).build());
+            new EditClientDescriptorBuilder(editedAlice).build());
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(editedAlice);
         assertEquals(expectedUniqueClientList, uniqueClientList);
@@ -104,9 +104,9 @@ public class UniqueClientListTest {
     public void setClient_editedClientHasDifferentIdentity_success() {
         uniqueClientList.add(BOB);
         uniqueClientList.setClientByClientIds(List.of(BOB.getClientId()),
-                new EditClientDescriptorBuilder(ALICE).build());
+            new EditClientDescriptorBuilder(ALICE).build());
         uniqueClientList.setClientByClientIds(List.of(BOB.getClientId()),
-                new EditClientDescriptorBuilder(BOB).build());
+            new EditClientDescriptorBuilder(BOB).build());
         UniqueClientList expectedUniqueClientList = new UniqueClientList();
         expectedUniqueClientList.add(BOB);
         assertEquals(expectedUniqueClientList, uniqueClientList);
@@ -117,7 +117,7 @@ public class UniqueClientListTest {
         uniqueClientList.add(ALICE);
         uniqueClientList.add(BOB);
         assertThrows(DuplicateClientException.class, () -> uniqueClientList
-                .setClientByClientIds(List.of(ALICE.getClientId()), new EditClientDescriptorBuilder(BOB).build()));
+            .setClientByClientIds(List.of(ALICE.getClientId()), new EditClientDescriptorBuilder(BOB).build()));
     }
 
     @Test
@@ -176,6 +176,6 @@ public class UniqueClientListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueClientList.asUnmodifiableObservableList().remove(0));
+            -> uniqueClientList.asUnmodifiableObservableList().remove(0));
     }
 }

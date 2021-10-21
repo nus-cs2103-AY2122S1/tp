@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.CurrentPlan;
 import seedu.address.model.client.DisposableIncome;
@@ -29,7 +30,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.NextMeeting;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.tag.Tag;
@@ -63,7 +63,7 @@ public class PrefixMapper {
     private static final BiConsumer<EditClientDescriptor, LastMet> EDIT_SET_LASTMET =
             EditClientDescriptor::setLastMet;
     private static final BiConsumer<EditClientDescriptor, NextMeeting> EDIT_SET_NEXTMEETING =
-        EditClientDescriptor::setNextMeeting;
+            EditClientDescriptor::setNextMeeting;
     private static final BiConsumer<EditClientDescriptor, CurrentPlan> EDIT_SET_CURRENTPLAN =
             EditClientDescriptor::setCurrentPlan;
     private static final BiConsumer<EditClientDescriptor, Set<Tag>> EDIT_SET_TAGS = EditClientDescriptor::setTags;
@@ -84,7 +84,7 @@ public class PrefixMapper {
     private static final Function<EditClientDescriptor, Optional<LastMet>> EDIT_GET_LASTMET =
             EditClientDescriptor::getLastMet;
     private static final Function<EditClientDescriptor, Optional<NextMeeting>> EDIT_GET_NEXTMEETING =
-        EditClientDescriptor::getNextMeeting;
+            EditClientDescriptor::getNextMeeting;
     private static final Function<EditClientDescriptor, Optional<CurrentPlan>> EDIT_GET_CURRENTPLAN =
             EditClientDescriptor::getCurrentPlan;
     private static final Function<EditClientDescriptor, Optional<Set<Tag>>> EDIT_GET_TAGS =
@@ -108,7 +108,7 @@ public class PrefixMapper {
     private static final Function<String, LastMet> PARSE_LASTMET =
             throwableFunctionWrapper(ParserUtil::parseLastMet);
     private static final Function<String, NextMeeting> PARSE_NEXTMEETING =
-        throwableFunctionWrapper(ParserUtil::parseNextMeeting);
+            throwableFunctionWrapper(ParserUtil::parseNextMeeting);
     private static final Function<String, CurrentPlan> PARSE_CURRENTPLAN =
             throwableFunctionWrapper(ParserUtil::parseCurrentPlan);
 
@@ -186,8 +186,9 @@ public class PrefixMapper {
         private final Function<EditClientDescriptor, Optional<T>> editGetFunction;
         private final Function<String, T> parseFunction;
         private final String name;
+
         private PrefixMapperElement(Function<Client, T> getAttributeFunction,
-            BiConsumer<EditClientDescriptor, T> editSetFunction, Function<EditClientDescriptor,
+                                    BiConsumer<EditClientDescriptor, T> editSetFunction, Function<EditClientDescriptor,
                 Optional<T>> editGetFunction, Function<String, T> parseFunction, String name) {
             this.getAttributeFunction = getAttributeFunction;
             this.editSetFunction = editSetFunction;

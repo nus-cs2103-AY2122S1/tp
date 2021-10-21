@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.ClientHasId;
+import seedu.address.model.client.ClientId;
 
 class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

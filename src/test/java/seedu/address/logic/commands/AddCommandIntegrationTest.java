@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientId;
 import seedu.address.testutil.ClientBuilder;
 
 /**
@@ -37,7 +37,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addClient(new ClientBuilder().build());
 
         assertCommandSuccess(new AddCommand(validClientFunction), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
+            String.format(AddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
     }
 
     @Test

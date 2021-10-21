@@ -7,6 +7,7 @@ import java.util.function.Function;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.CurrentPlan;
 import seedu.address.model.client.DisposableIncome;
@@ -14,7 +15,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.NextMeeting;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.tag.Tag;
@@ -64,7 +64,7 @@ public class ClientBuilder {
             nextMeeting = ParserUtil.parseNextMeeting(DEFAULT_NEXTMEETING);
         } catch (ParseException pe) {
             nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-                    "Starbucks @ UTown");
+                "Starbucks @ UTown");
         }
 
         currentPlan = new CurrentPlan(DEFAULT_CURRENTPLAN);
@@ -168,7 +168,7 @@ public class ClientBuilder {
             this.nextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
         } catch (ParseException pe) {
             this.nextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-                    "Starbucks @ UTown");
+                "Starbucks @ UTown");
         }
         return this;
     }
@@ -186,7 +186,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(clientId, name, phone, email, address, riskAppetite,
-                disposableIncome, currentPlan, lastMet, nextMeeting, tags);
+            disposableIncome, currentPlan, lastMet, nextMeeting, tags);
     }
 
     /**
@@ -194,6 +194,6 @@ public class ClientBuilder {
      */
     public Function<ClientId, Client> buildFunction() {
         return clientId -> new Client(clientId, name, phone, email, address, riskAppetite,
-                disposableIncome, currentPlan, lastMet, nextMeeting, tags);
+            disposableIncome, currentPlan, lastMet, nextMeeting, tags);
     }
 }

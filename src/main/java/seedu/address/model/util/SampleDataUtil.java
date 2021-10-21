@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.CurrentPlan;
 import seedu.address.model.client.DisposableIncome;
@@ -14,7 +15,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.LastMet;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.NextMeeting;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.tag.Tag;
@@ -28,8 +28,9 @@ public class SampleDataUtil {
             new Client(new ClientId("0"), new Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
                 new RiskAppetite("1"), new DisposableIncome("500"),
-                new CurrentPlan("Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......."
-                    + ", Even more plans................................."),
+                new CurrentPlan(
+                    "Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......."
+                        + ", Even more plans................................."),
                 new LastMet("24-01-2021"),
                 new NextMeeting("25-12-2021", "08:00", "09:00", "Starbucks @ UTown"),
                 getTagSet("friends")),
@@ -58,7 +59,8 @@ public class SampleDataUtil {
                 new NextMeeting("25-12-2021", "08:00", "09:00", "Starbucks @ UTown"),
                 getTagSet("classmates")),
             new Client(new ClientId("5"), new Name("Roy Balakrishnan"), new Phone("92624417"),
-                new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"), new RiskAppetite("1"),
+                new Email("royb@example.com"), new Address("Blk 45 Aljunied Street 85, #11-31"),
+                new RiskAppetite("1"),
                 new DisposableIncome("500"), new CurrentPlan("Prudential PRUwealth"),
                 new LastMet("24-01-2021"),
                 new NextMeeting("25-12-2021", "08:00", "09:00", "Starbucks @ UTown"),
@@ -80,8 +82,8 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
+            .map(Tag::new)
+            .collect(Collectors.toSet());
     }
 
 }

@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientId;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
 
 /**

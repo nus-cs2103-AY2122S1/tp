@@ -28,10 +28,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Client;
-import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.model.client.ClientId;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -63,10 +63,10 @@ public class EditCommandTest {
 
         ClientBuilder clientInList = new ClientBuilder(thirdClient);
         Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+            .withTags(VALID_TAG_HUSBAND).build();
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+            .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditCommand editCommand = new EditCommand(List.of(clientId), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
@@ -97,7 +97,7 @@ public class EditCommandTest {
         ClientId clientId3 = CLIENTID_SECOND_CLIENT;
         List<ClientId> clientIdList = List.of(clientId1, clientId2, clientId3);
         EditClientDescriptor editClientDescriptor = new EditClientDescriptorBuilder()
-                .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
+            .withAddress(VALID_ADDRESS_AMY).withPhone(VALID_PHONE_BOB).build();
 
         EditCommand editCommand = new EditCommand(clientIdList, editClientDescriptor);
         Client client1 = model.getClient(clientId1);
@@ -105,17 +105,17 @@ public class EditCommandTest {
         Client client3 = model.getClient(clientId3);
 
         Client editedClient1 = new ClientBuilder(client1).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Client editedClient2 = new ClientBuilder(client2).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
         Client editedClient3 = new ClientBuilder(client3).withAddress(VALID_ADDRESS_AMY)
-                .withPhone(VALID_PHONE_BOB).build();
+            .withPhone(VALID_PHONE_BOB).build();
 
         List<ClientId> clientIdlist = List.of(clientId1, clientId2, clientId3);
         List<Client> editClientList = List.of(editedClient1, editedClient2, editedClient3);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CLIENT_SUCCESS,
-                StringUtil.joinListToString(editClientList, "\n"));
+            StringUtil.joinListToString(editClientList, "\n"));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setClientByClientIds(clientIdlist, editClientDescriptor);
@@ -142,7 +142,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(List.of(outOfBound), descriptor);
 
         assertCommandFailure(editCommand, model,
-                String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, CLIENTID_OUTOFBOUND)
+            String.format(Messages.MESSAGE_NONEXISTENT_CLIENT_ID, CLIENTID_OUTOFBOUND)
         );
     }
 

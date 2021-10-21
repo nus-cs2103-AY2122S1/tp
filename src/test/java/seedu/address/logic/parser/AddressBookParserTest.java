@@ -33,13 +33,13 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.client.ClientId;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
 import seedu.address.model.client.ClientHasId;
-import seedu.address.testutil.EditClientDescriptorBuilder;
+import seedu.address.model.client.ClientId;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
+import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -68,7 +68,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " 1");
+            DeleteCommand.COMMAND_WORD + " 1");
         ClientId clientId = new ClientId("1");
         assertEquals(new DeleteCommand(List.of(clientId)), command);
     }
@@ -79,7 +79,7 @@ public class AddressBookParserTest {
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
 
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + CLIENTID_ZERO_CLIENT.value + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
+            + CLIENTID_ZERO_CLIENT.value + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
         List<ClientId> clientIds = List.of(new ClientId(CLIENTID_ZERO_CLIENT.value));
         assertEquals(new EditCommand(clientIds, descriptor), command);
     }
@@ -94,9 +94,9 @@ public class AddressBookParserTest {
     public void parseCommand_search() throws Exception {
         String keywords = "do t/friends e/example.com";
         ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
         SearchCommand command = (SearchCommand) parser.parseCommand(
-                SearchCommand.COMMAND_WORD + " " + keywords);
+            SearchCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new SearchCommand(new ClientContainsKeywordsPredicate(aMM)), command);
     }
 
@@ -104,9 +104,9 @@ public class AddressBookParserTest {
     public void parseCommand_filter() throws Exception {
         String keywords = "do t/friends e/example.com";
         ArgumentMultimap aMM = ArgumentTokenizer.tokenize(keywords,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+            PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords);
+            FilterCommand.COMMAND_WORD + " " + keywords);
         assertEquals(new FilterCommand(new ClientContainsKeywordsPredicate(aMM)), command);
     }
 
@@ -115,7 +115,7 @@ public class AddressBookParserTest {
         String input = "1";
         ClientId clientId = new ClientId(input);
         ViewCommand command = (ViewCommand) parser.parseCommand(
-                ViewCommand.COMMAND_WORD + " " + input);
+            ViewCommand.COMMAND_WORD + " " + input);
         assertEquals(new ViewCommand(clientId, new ClientHasId(clientId)), command);
     }
 
@@ -134,7 +134,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand(""));
+            -> parser.parseCommand(""));
     }
 
     @Test
