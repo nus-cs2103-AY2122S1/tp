@@ -263,10 +263,9 @@ These operations are exposed in the `Model` interface as `Model#hasTutorialClass
 `Model#addTutorialClass(TutorialClass tutorialClass)`, `Model#deleteTutorialClass(TutorialClass tutorialClass)` and
 `Model#getTutorialClass()`respectively.
 
-
 Given below is an example of how the tutorial class features can be used:
 
-Step 1. The user launches the application for the first time. The `UniqueTUtorialClassList` would be derived from the 
+Step 1. The user launches the application for the first time. The `UniqueTutorialClassList` would be derived from the 
 initial ClassMATE state, and all tutorial classes stored will be displayed.
 
 Step 2. The user executes an `addc c/G00 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
@@ -299,7 +298,8 @@ Execution of the `AddClassCommand`
 
 #### Design Considerations
 
-#####Aspect: Finding Tutorial Classes
+#### Aspect: Finding Tutorial Classes
+
 * Alternative 1 (current choice): Find Tutorial Classes by selecting all classes with classcodes matching the search keyword
     * Pros: Shorter keyword to type, therefore increasing user typing speed. User is also able to 
     find multiple classes
@@ -310,7 +310,7 @@ Execution of the `AddClassCommand`
     * Cons: Takes longer for user to type commands, less user friendly
     
 #### Aspect: Student and Tutorial Class lists
-* Alternatice 1 (current choice): Use two seperate lists to store students and tutorial classes
+* Alternative 1 (current choice): Use two separate lists to store students and tutorial classes
     * Pros: Faster, simpler command executions for student and tutorial class commands. 
     Easier to maintain overall. Therefore, all students and all tutorial classes can be accessed independent of each other.
     * Cons: Class specific student commands are slower. For example a user is required to 'viewc' in order to filter just the students in the class,
@@ -319,9 +319,77 @@ Execution of the `AddClassCommand`
     * Pros: Faster in class specific student commands and students are better organised.
     * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
 
+### [Proposed] Student Participation Mark Features
 
+(Contributed by Vishnu Sundaresan)
 
+ClassMATE allows the user to manage information about Class Participation grading relevant to each Student. A User is able to:
 
+1. Add a weekly participation mark
+2. Delete a weekly participation mark
+3. Edit a weekly participation mark
+
+#### Proposed Implementation
+
+Each Student will contain a `List` known as `marks` that will store all participation mark values for the Student. This list is internally stored as an `ArrayList`. Using an `Enumeration` of Student Marks, which contains the following Marks:
+
+* `POOR` (0 marks) 
+* `LOW` (1 mark)
+* `AVG` (2 marks)
+* `GOOD` (3 marks)
+* `HIGH` (4 marks)
+* `EXCELLENT` (5 marks)
+
+ClassMATE will then support the following command classes:
+
+* `AddLastMarkCommand(Index index, StudentMark mark)`
+* `DeleteLastMarkCommand(Index index)`
+* `DeleteAllMarksCommand(Index index)`
+* `EditMarkCommand(Index index, int week)`
+
+These commands inherit from the `Command` class, and are named accordingly.
+
+Given below is an example of how the student marks features can be used:
+
+Step 1. The user launches the application for the first time. The existing `marks` list would be derived from the 
+initial ClassMATE state, and all students stored will be displayed along with their currently stored marks below their name
+
+Step 2. The user executes an `addm 1 m/low` command. The `addm` command calls `Model#setStudent()`, adding the mark provided (`LOW` in this case) to Classmate. This modifies and saves the state of ClassMATE. The updated `UniqueStudentList` will be displayed in the `ClassListPanel` to the user.
+
+Step 3. The user executes a `deletelm 1` command. The `deletelm` command calls the `Model#setStudent()` and the `Model#updateFilteredStudentList()`, modifying the state of the filtered list of students. The updated filtered list consists the students with the latest mark removed from the 1st student.
+
+​																						**Before `deletelm` command**
+
+![StudentMarkState1](images/StudentMarksState1.png)
+
+​																						**After `deletelm` command**
+
+![StudentMarkState2](images/StudentMarksState2.png)
+
+Step 4. The user executes a `deleteam 1` command. The `deleteam` command calls `Model#setStudent()`, modifying and saving the state of ClassMATE by deleting all marks for the 1st student at the given index in the `UniqueStudentList`. This updated list will be displayed to the user.
+
+Step 5. The user executes a `editm` command. The `editm` command calls `Model#setStudent()` modifying and saving the state of the `FilteredList` to contain all students in ClassMATE. This updated list will be displayed to the user.
+
+Using the example of the `AddMarkCommand`,
+when the user enters the `addm` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+During the parsing, a new `Student` instance is created. This `Student` instance will be received by the `AddMarkCommand` when it is created.
+
+The *Sequence Diagram* below summarizes the aforementioned steps.
+
+//TODO: Add sequence diagram for AddMark. 
+
+Execution of the `AddMarkCommand`
+
+#### Design Considerations
+
+#### Aspect: Rationale for studentMarks size
+
+* Alternative 1 (current choice): Keep a list of variable length
+  * Pros: Flexible, allows instructors not to worry about the number of tutorials taken.
+  * Cons: Prone to human error of counting, not tallying within strict 26 tutorial-limit.
+* Alternative 2: Keep a fixed-size list of 26
+  * Pros: Since there are 13 weeks and two tutorials a week, there will be a projected 26 tutorials held. Thus, a fixed size of 26 elements will allow the list to reflect this requirement.
+  * Cons: Instructors are limited to this 26-class limit, and cannot store marks for extra tutorials/make-up sessions.
 
 
 
