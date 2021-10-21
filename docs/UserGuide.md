@@ -247,7 +247,7 @@ First-time avengers can seek in-depth assistance using AD with a `help` command,
 generally or specifically.
 
 #### Viewing general help
-Format: `help` or `help --all`
+Format: `help`
 
 * The singular command `help` displays a menu of all commands available to use, as a list, and how
   to navigate each command, alongside the syntax for each command.
