@@ -2,13 +2,10 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.descriptors.EditPositionDescriptor;
 import seedu.address.model.Model;
-import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.Title;
-
 
 import java.util.*;
 
@@ -54,29 +51,19 @@ public class EditPositionCommand extends Command {
         }
 
         Position positionToEdit = lastShownList.get(index.getZeroBased());
-        Position editedPosition = createEditedPosition(positionToEdit, editPositionDescriptor);
+        Position editedPosition = editPositionDescriptor.createEditedPosition(positionToEdit);
 
         if (!positionToEdit.isSamePosition(editedPosition) && model.hasPosition(editedPosition)) {
             throw new CommandException(MESSAGE_DUPLICATE_POSITION);
         }
 
         model.setPosition(positionToEdit, editedPosition);
+        // when a position is edited, the position information in applicants should also be modified
         model.updateApplicantsWithPosition(positionToEdit, editedPosition);
         model.updateFilteredPositionList(PREDICATE_SHOW_ALL_POSITIONS);
         return new CommandResult(String.format(MESSAGE_EDIT_POSITION_SUCCESS, editedPosition));
     }
 
-    /**
-     * Creates and returns a {@code Position} with the details of {@code positionToEdit}
-     * edited with {@code editPositionDescriptor}.
-     */
-    private static Position createEditedPosition(Position positionToEdit, EditPositionDescriptor editPositionDescriptor) {
-        assert positionToEdit != null;
-
-        Title updatedTitle = editPositionDescriptor.getTitle().orElse(positionToEdit.getTitle());
-        Description updatedDescription = editPositionDescriptor.getDescription().orElse(positionToEdit.getDescription());
-        return new Position(updatedTitle, updatedDescription);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -94,71 +81,6 @@ public class EditPositionCommand extends Command {
         EditPositionCommand e = (EditPositionCommand) other;
         return index.equals(e.index)
                 && editPositionDescriptor.equals(e.editPositionDescriptor);
-    }
-
-
-
-    /**
-     * Stores the details to edit the position with. Each non-empty field value will replace the
-     * corresponding field value of the position.
-     */
-    public static class EditPositionDescriptor {
-        private Title title;
-        private Description description;
-
-        public EditPositionDescriptor() {}
-
-        /**
-         * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public EditPositionDescriptor(EditPositionDescriptor toCopy) {
-            setTitle(toCopy.title);
-            setDescription(toCopy.description);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(title, description);
-        }
-
-        public void setTitle(Title title) {
-            this.title = title;
-        }
-
-        public Optional<Title> getTitle() {
-            return Optional.ofNullable(title);
-        }
-
-        public void setDescription(Description description) {
-            this.description = description;
-        }
-
-        public Optional<Description> getDescription() {
-            return Optional.ofNullable(description);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            // short circuit if same object
-            if (other == this) {
-                return true;
-            }
-
-            // instanceof handles nulls
-            if (!(other instanceof EditPositionDescriptor)) {
-                return false;
-            }
-
-            // state check
-            EditPositionDescriptor e = (EditPositionDescriptor) other;
-
-            return getTitle().equals(e.getTitle())
-                    && getDescription().equals(e.getDescription());
-        }
-
     }
 
 
