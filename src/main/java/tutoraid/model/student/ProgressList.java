@@ -79,16 +79,13 @@ public class ProgressList {
      */
     public void addProgress(Progress progressToAdd) {
         requireNonNull(progressToAdd);
-        while (progressList.size() > 10) {
-            progressList.remove(0);
-        }
 
         if (progressList.size() == 10) {
             progressList.remove(0);
-            progressList.add(progressToAdd);
-        } else {
-            progressList.add(progressToAdd);
         }
+
+        progressList.add(progressToAdd);
+
     }
 
     /**

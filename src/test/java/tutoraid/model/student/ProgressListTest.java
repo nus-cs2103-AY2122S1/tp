@@ -81,12 +81,12 @@ public class ProgressListTest {
             updatedProgressListDescriptions.add(String.valueOf(i + 1));
         }
 
-        ProgressList amyOldProgressList = new ProgressList(oldProgressListDescriptions);
-        ProgressList amyUpdatedProgressList = new ProgressList(updatedProgressListDescriptions);
+        ProgressList oldProgressList = new ProgressList(oldProgressListDescriptions);
+        ProgressList updatedProgressList = new ProgressList(updatedProgressListDescriptions);
 
-        amyOldProgressList.addProgress(new Progress(String.valueOf(10)));
+        oldProgressList.addProgress(new Progress(String.valueOf(10)));
 
-        assertTrue(amyOldProgressList.equals(amyUpdatedProgressList));
+        assertTrue(oldProgressList.equals(updatedProgressList));
     }
 
     @Test
