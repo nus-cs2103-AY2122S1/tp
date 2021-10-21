@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalClientId.CLIENTID_FIRST_PERSON;
-import static seedu.address.testutil.TypicalClientId.CLIENTID_SECOND_PERSON;
-import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_PERSON;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_FIRST_CLIENT;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_SECOND_CLIENT;
+import static seedu.address.testutil.TypicalClientId.CLIENTID_ZERO_CLIENT;
+import static seedu.address.testutil.TypicalClients.ALICE;
+import static seedu.address.testutil.TypicalClients.BENSON;
+import static seedu.address.testutil.TypicalClients.ELLE;
 
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -18,8 +18,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.Client;
 
 public class StringUtilTest {
 
@@ -109,13 +109,13 @@ public class StringUtilTest {
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
+                -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
+                -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test
@@ -349,7 +349,7 @@ public class StringUtilTest {
     @Test
     public void getDetails_exceptionGiven() {
         assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
-            .contains("java.io.FileNotFoundException: file not found"));
+                .contains("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
@@ -375,15 +375,15 @@ public class StringUtilTest {
 
     @Test
     public void joinListToString_validInputs_correctResult() {
-        List<Person> personList = List.of(ALICE, BENSON, ELLE);
-        String personDelimiter = "\n";
-        String personResult = ALICE + personDelimiter + BENSON + personDelimiter + ELLE;
-        assertEquals(StringUtil.joinListToString(personList, personDelimiter), personResult);
+        List<Client> clientList = List.of(ALICE, BENSON, ELLE);
+        String clientDelimiter = "\n";
+        String clientResult = ALICE + clientDelimiter + BENSON + clientDelimiter + ELLE;
+        assertEquals(StringUtil.joinListToString(clientList, clientDelimiter), clientResult);
 
-        List<ClientId> clientIdList = List.of(CLIENTID_ZERO_PERSON, CLIENTID_FIRST_PERSON, CLIENTID_SECOND_PERSON);
+        List<ClientId> clientIdList = List.of(CLIENTID_ZERO_CLIENT, CLIENTID_FIRST_CLIENT, CLIENTID_SECOND_CLIENT);
         String clientIdDelimiter = ", ";
-        String clientIdResult = CLIENTID_ZERO_PERSON + clientIdDelimiter + CLIENTID_FIRST_PERSON
-                + clientIdDelimiter + CLIENTID_SECOND_PERSON;
+        String clientIdResult = CLIENTID_ZERO_CLIENT + clientIdDelimiter + CLIENTID_FIRST_CLIENT
+                + clientIdDelimiter + CLIENTID_SECOND_CLIENT;
         assertEquals(StringUtil.joinListToString(clientIdList, clientIdDelimiter), clientIdResult);
 
     }

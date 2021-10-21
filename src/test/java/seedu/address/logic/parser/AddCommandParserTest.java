@@ -37,9 +37,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.AMY;
+import static seedu.address.testutil.TypicalClients.BOB;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.function.Function;
 
@@ -49,15 +49,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.DisposableIncome;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.DisposableIncome;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class AddCommandParserTest {
 
@@ -71,83 +71,83 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Function<ClientId, Person> expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).buildFunction();
+        Function<ClientId, Client> expectedClient = new ClientBuilder(BOB).withTags(VALID_TAG_FRIEND).buildFunction();
 
         model.getAddressBook().setClientCounter("10");
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB
                         + LASTMET_DESC_BOB + TAG_DESC_FRIEND,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB
                         + LASTMET_DESC_BOB + TAG_DESC_FRIEND ,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB
-                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB
-                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB
-                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple risk appetite - last risk appetite accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_AMY + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB
-                + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple disposable income - last disposable income accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_AMY + DISPOSABLEINCOME_DESC_BOB
-                + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple current plans - last current plan accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_AMY + DISPOSABLEINCOME_DESC_BOB
                 + CURRENTPLAN_DESC_AMY + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple Last Met- last date accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_AMY + DISPOSABLEINCOME_DESC_BOB
                 + CURRENTPLAN_DESC_AMY + CURRENTPLAN_DESC_BOB + LASTMET_DESC_AMY + LASTMET_DESC_BOB
-                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + TAG_DESC_FRIEND, new AddCommand(expectedClient));
 
         model.getAddressBook().setClientCounter("10");
         // multiple tags - all accepted
-        Function<ClientId, Person> expectedPersonMultipleTags = new PersonBuilder(BOB)
+        Function<ClientId, Client> expectedClientMultipleTags = new ClientBuilder(BOB)
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).buildFunction();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + RISKAPPETITE_DESC_BOB + DISPOSABLEINCOME_DESC_BOB + CURRENTPLAN_DESC_BOB + LASTMET_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedClientMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         model.getAddressBook().setClientCounter("9");
-        Function<ClientId, Person> expectedPerson = new PersonBuilder(AMY).withTags().buildFunction();
+        Function<ClientId, Client> expectedClient = new ClientBuilder(AMY).withTags().buildFunction();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + RISKAPPETITE_DESC_AMY + DISPOSABLEINCOME_DESC_AMY + CURRENTPLAN_DESC_AMY + LASTMET_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedClient));
     }
 
     @Test

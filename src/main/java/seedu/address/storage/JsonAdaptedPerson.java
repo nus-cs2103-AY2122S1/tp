@@ -12,25 +12,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.CurrentPlan;
-import seedu.address.model.person.DisposableIncome;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.LastMet;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.NextMeeting;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.RiskAppetite;
+import seedu.address.model.client.Address;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.CurrentPlan;
+import seedu.address.model.client.DisposableIncome;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.LastMet;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.RiskAppetite;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Person}.
+ * Jackson-friendly version of {@link Client}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedClient {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Client's %s field is missing!";
 
     private final String clientId;
     private final String name;
@@ -45,10 +45,10 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name,
+    public JsonAdaptedClient(@JsonProperty("clientId") String clientId, @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone, @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("riskAppetite") String riskAppetite,
@@ -74,9 +74,9 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Client} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
+    public JsonAdaptedClient(Client source) {
         clientId = source.getClientId().value;
         name = source.getName().fullName;
         email = source.getEmail().value;
@@ -93,14 +93,14 @@ class JsonAdaptedPerson {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted client object into the model's {@code Client} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
-    public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+    public Client toModelType() throws IllegalValueException {
+        final List<Tag> clientTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            clientTags.add(tag.toModelType());
         }
 
         if (clientId == null) {
@@ -135,7 +135,7 @@ class JsonAdaptedPerson {
 
         if (nextMeeting == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                NextMeeting.class.getSimpleName()));
+                    NextMeeting.class.getSimpleName()));
         }
         final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
 
@@ -187,8 +187,8 @@ class JsonAdaptedPerson {
 
         final DisposableIncome modelDisposableIncome = new DisposableIncome(disposableIncome);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,
+        final Set<Tag> modelTags = new HashSet<>(clientTags);
+        return new Client(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,
                 modelDisposableIncome, modelCurrentPlan, modelLastMet, modelNextMeeting, modelTags);
     }
 

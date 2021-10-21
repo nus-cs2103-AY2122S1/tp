@@ -190,7 +190,7 @@ Finds clients whose contacts match with the given keywords.
 
 Format: `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
-* `KEYWORD` will be used to match with all attribute of the person.
+* `KEYWORD` will be used to match with all attribute of the client.
 * `<attribute>/` refers to the argument tag for the client's attribute.
 * `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
 * If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only.
@@ -212,7 +212,7 @@ Filter the current list by the given keywords.
 Format: `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
 * Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
-* `KEYWORD` will be used to match with all attribute of the person.
+* `KEYWORD` will be used to match with all attribute of the client.
 * If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}`
 * `<attribute>/` refers to the argument tag for the client's attribute.
 * `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.

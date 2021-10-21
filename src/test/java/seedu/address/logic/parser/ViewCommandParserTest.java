@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.PersonHasId;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.ClientHasId;
 
 public class ViewCommandParserTest {
 
@@ -25,7 +25,7 @@ public class ViewCommandParserTest {
         // no leading and trailing whitespaces
         ClientId expectedClientId = new ClientId("0");
         ViewCommand expectedViewCommand =
-                new ViewCommand(expectedClientId, new PersonHasId(expectedClientId));
+                new ViewCommand(expectedClientId, new ClientHasId(expectedClientId));
         assertParseSuccess(parser, "0", expectedViewCommand);
 
         // multiple whitespaces between keywords

@@ -16,9 +16,9 @@ Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
+Class UniqueClientList
 Class UniqueTagList
-Class Person
+Class Client
 Class Address
 Class Email
 Class Name
@@ -39,20 +39,20 @@ ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *-right-> "1" UniquePersonList
+AddressBook *-right-> "1" UniqueClientList
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquePersonList
-UniqueTagList -[hidden]down- UniquePersonList
+UniqueTagList -[hidden]down- UniqueClientList
+UniqueTagList -[hidden]down- UniqueClientList
 
 UniqueTagList *-right-> "*" Tag
-UniquePersonList -down-> Person
+UniqueClientList -down-> Client
 
-Person -up-> "*" Tag
+Client -up-> "*" Tag
 
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
+Client *--> Name
+Client *--> Phone
+Client *--> Email
+Client *--> Address
 
-ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Client
 @enduml
