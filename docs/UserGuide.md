@@ -335,15 +335,16 @@ Example of format of data for one applicant in applicants:
 {
   "persons": [
     {
-      "name": "Alice Yeoh",
-      "phone": "87438807",
-      "email": "alexyeoh@example.com",
-      "role": "Software Engineering",
-      "employmentType": "Full time",
-      "expectedSalary": "3600",
-      "levelOfEducation": "High School",
-      "experience": "2",
-      "tagged": []
+      "name" : "Alice Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "role" : "Software Engineering",
+      "employmentType" : "Full time",
+      "expectedSalary" : "3600",
+      "levelOfEducation" : "High School",
+      "experience" : "2",
+      "tagged" : [],
+      "done": "Not Done"
     }
   ]
 }
