@@ -2,7 +2,7 @@ package seedu.academydirectory.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academydirectory.logic.parser.CliSyntax.*;
+import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
