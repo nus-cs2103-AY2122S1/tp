@@ -45,12 +45,6 @@ public class NextMeetingTest {
     }
 
     @Test
-    public void getNullMeeting_returnsNextMeetingWithNullFields() {
-        NextMeeting expectedNextMeeting = new NextMeeting(null, null, null, null, null);
-        assertEquals(NextMeeting.getNullMeeting(), expectedNextMeeting);
-    }
-
-    @Test
     public void toString_returnsCorrectRepresentation() {
         // null meeting
         NextMeeting nullMeeting = new NextMeeting(null, null, null, null, null);
