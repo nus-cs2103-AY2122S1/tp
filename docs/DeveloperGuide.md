@@ -563,7 +563,7 @@ Step 1. The user launches the application for the first time. The `VersionedTuit
 
 ![UndoRedoState0](images/DeveloperGuideImage/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commit**Tuitione**()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the tuitione. The `delete` command calls `Model#commitTuitione()`, causing the modified state of the tuitione after the `delete 5` command executes to be saved in the `tuitioneStateList`, and the `currentStatePointer` is shifted to the newly inserted tuitione state.
 
 ![UndoRedoState1](images/DeveloperGuideImage/UndoRedoState1.png)
 
