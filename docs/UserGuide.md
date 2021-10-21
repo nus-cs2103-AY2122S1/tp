@@ -93,13 +93,14 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 </div>
 
-Examples:
+Example(s):
+
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
 ### Adding a lesson: `add-l`
 
-Adds a lesson to the TuitiONE.
+Adds a lesson to the TuitiONE with the specified prefixes.
 
 Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
@@ -107,23 +108,22 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :bulb: **Tip:**<br>
 
-* Adds the lesson with the specified prefixes.<br>
-
 * `GRADE` here follows the similar requirements when adding a student.<br>
 
 * `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.<br>
 
 * `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.<br>
 
-* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm).<br>
+* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.<br>
 
-* Lessons are fixed at two hour periods.<br>
+* Lessons are fixed at **two** hour periods.<br>
 
 * The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …<br>
 
 </div>
 
-Examples:
+Example(s):
+
 * `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
@@ -139,16 +139,18 @@ Finds students whose names contain any of the given keywords.
 
 Command Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only keywords based on name will be searched.
-* Partially matched words will be supported e.g. `Han` will match `Hans`
+* Prefixed matching words will be supported e.g. `Han` will match `Hans`.
 * Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-Examples:
+Example(s):
+
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
   ![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
@@ -161,7 +163,8 @@ Command Format: `delete INDEX`
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
-Examples:
+Example(s):
+
 * `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
@@ -175,7 +178,8 @@ Command Format: `delete-l INDEX`
 * The index refers to the index number shown in the displayed lesson list.
 * The index **must be a positive integer** `1`, `2`, `3`, …
 
-Examples:
+Example(s):
+
 * `delete-l 1` deletes the lesson with corresponding index `1`.
 
 ### Enrolling a student from lesson: `enroll`
@@ -193,7 +197,7 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
-Examples:
+Example(s):
 
 * `enroll 1 l/1` will enroll the student indexed at `1` in the displayed student list to the lesson indexed at `1` in the displayed lesson list.
 
@@ -208,7 +212,8 @@ Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
 * Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
-Examples:
+Example(s):
+
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
 ### Filtering of list: `filter`
@@ -225,7 +230,8 @@ Command Format: `filter [g/GRADE] [s/Subject]`
     * Both `GRADE` and `SUBJECT`: If filtering by both conditions, both of the student list and lesson list will be filtered to display the respective entries that correspond to the `GRADE` and `SUBJECT` as specified.
 
 
-Examples:
+Example(s):
+
 * `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective list.
 * `filter l/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
 
