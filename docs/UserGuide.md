@@ -31,7 +31,7 @@ In the [Table of Contents](), each item listed is a link and you can click to go
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your computer.
+1. Ensure you have **Java 11** or above installed in your computer.
 
 <div markdown="block" class="alert alert-info">
 
@@ -44,7 +44,7 @@ Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-j
 to help you with the installation. Follow the guide for your operation system for detailed instructions.
 </div>
 
-2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
+2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAB.
 
