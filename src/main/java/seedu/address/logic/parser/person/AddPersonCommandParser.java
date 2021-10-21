@@ -29,7 +29,7 @@ import seedu.address.model.person.TeleHandle;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class AddCommandParser implements Parser<AddPersonCommand> {
+public class AddPersonCommandParser implements Parser<AddPersonCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

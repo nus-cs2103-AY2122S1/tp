@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.person;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
@@ -10,13 +10,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.person.FindPersonCommand;
-import seedu.address.logic.parser.person.FindCommandParser;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindPersonCommandParserTest {
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindPersonCommandParser parser = new FindPersonCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

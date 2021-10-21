@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.person;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -36,7 +36,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.person.AddPersonCommand;
-import seedu.address.logic.parser.person.AddCommandParser;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -47,7 +46,7 @@ import seedu.address.model.person.TeleHandle;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddPersonCommandParserTest {
-    private AddCommandParser parser = new AddCommandParser();
+    private AddPersonCommandParser parser = new AddPersonCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

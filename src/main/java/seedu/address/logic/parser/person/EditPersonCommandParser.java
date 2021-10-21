@@ -26,7 +26,7 @@ import seedu.address.model.person.ModuleCode;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditPersonCommand> {
+public class EditPersonCommandParser implements Parser<EditPersonCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand

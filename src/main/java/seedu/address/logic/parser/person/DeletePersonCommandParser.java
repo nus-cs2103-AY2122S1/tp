@@ -19,7 +19,7 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteCommandParser implements Parser<DeletePersonCommand> {
+public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
 
 
     /**

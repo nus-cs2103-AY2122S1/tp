@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.person;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
@@ -13,7 +13,6 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.person.DeletePersonCommand;
-import seedu.address.logic.parser.person.DeleteCommandParser;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 
@@ -26,7 +25,7 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
  */
 public class DeletePersonCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeletePersonCommandParser parser = new DeletePersonCommandParser();
 
     @Test
     public void parse_validIndex_returnsDeleteCommand() {

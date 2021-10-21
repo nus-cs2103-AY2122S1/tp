@@ -17,7 +17,7 @@ import seedu.address.model.person.Remark;
 /**
  * Parses input arguments and creates a new {@code RemarkCommand} object
  */
-public class RemarkCommandParser implements Parser<RemarkPersonCommand> {
+public class RemarkPersonCommandParser implements Parser<RemarkPersonCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code RemarkCommand}
      * and returns a {@code RemarkCommand} object for execution.
