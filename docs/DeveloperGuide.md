@@ -207,7 +207,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ## AddressBook feature
 
-### Search Clients
+### 4.1 Search Clients
 
 #### Description
 
@@ -242,7 +242,7 @@ then `@gmail.com` will be used to matched with the `Email` attribute of the `Cli
 the given `Client` must match with any of the generic keywords if there is any and all the attribute keywords if there
 is any.
 
-### Filter Clients
+### 4.2 Filter Clients
 
 #### Description
 
@@ -269,15 +269,15 @@ Below is sequence diagram for filter clients.
 
 See the above description in `Search Clients`.
 
-### \[Proposed\] Multiple Address Book
+### 4.3 \[Proposed\] Multiple Address Book
 
-#### Proposed Implementation
+#### 4.3.1 Proposed Implementation
 
 To be included
 
-### 4.1 \[Proposed\] Undo/redo feature
+### 4.4 \[Proposed\] Undo/redo feature
 
-#### 4.1.1 Proposed Implementation
+#### 4.4.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
