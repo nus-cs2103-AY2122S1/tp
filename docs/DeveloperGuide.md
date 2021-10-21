@@ -224,8 +224,8 @@ calls `ParserUtil#parsePeriod()`, to obtain the period to mark, and `Person#mark
 ![state1](images/MarkState1.png)
 
 Step 3. The user executes the command `mark -i 1 d/2001-01-03`. The `mark` command
-calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001, 2/1/2001, 4/1/2001
-become contiguous, `Period#union()` that is called, merges the three `Period`
+calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
+become a single range, `Period#union()` that is called, merges the three `Period`
 objects into one.
 
 
