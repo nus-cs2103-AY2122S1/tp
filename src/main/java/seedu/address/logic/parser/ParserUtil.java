@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -37,6 +39,27 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses multiple {@code oneBasedIndex} into {@code Index} and returns them in an array.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integer).
+     */
+    public static Index[] parseMultipleIndex(String oneBasedIndexes) throws ParseException {
+        String trimmedIndexes = oneBasedIndexes.trim();
+        String[] trimmedIndexesList = trimmedIndexes.split("\\s+");
+
+        Index[] indexesList = new Index[trimmedIndexesList.length];
+        for (int i = 0; i < trimmedIndexesList.length; i++) {
+            String trimmedIndex = trimmedIndexesList[i];
+            if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            indexesList[i] = Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        }
+
+        return indexesList;
     }
 
     /**
@@ -192,5 +215,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String interview} into a {@code Interview}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interview} is invalid.
+     */
+    public static Optional<Interview> parseInterview(String interview) throws ParseException {
+        requireNonNull(interview);
+        String trimmedTime = interview.trim();
+        if (interview.isEmpty()) { // parse empty interview
+            return Optional.of(Interview.EMPTY_INTERVIEW);
+        }
+
+        if (!Interview.isValidInterviewTime(trimmedTime)) {
+            throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Interview(interview));
     }
 }

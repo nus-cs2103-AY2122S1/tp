@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -23,6 +24,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.done.Done;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -53,7 +56,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EXPECTED_SALARY + "EXPECTED_SALARY]"
             + "[" + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION] "
             + "[" + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW]\n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -117,10 +121,12 @@ public class EditCommand extends Command {
                 .getLevelOfEducation().orElse(personToEdit.getLevelOfEducation());
         Experience updatedExperience = editPersonDescriptor.getExperience().orElse(personToEdit.getExperience());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Optional<Interview> updatedInterview = editPersonDescriptor.getInterview().orElse(personToEdit.getInterview());
+
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRole,
                 updatedEmploymentType, updatedExpectedSalary, updatedLevelOfEducation,
-                updatedExperience, updatedTags);
+                updatedExperience, updatedTags, updatedInterview);
     }
 
     @Override
@@ -155,6 +161,8 @@ public class EditCommand extends Command {
         private LevelOfEducation levelOfEducation;
         private Experience experience;
         private Set<Tag> tags;
+        private Optional<Interview> interview;
+        private Done done;
 
         public EditPersonDescriptor() {}
 
@@ -172,6 +180,8 @@ public class EditCommand extends Command {
             setLevelOfEducation(toCopy.levelOfEducation);
             setExperience(toCopy.experience);
             setTags(toCopy.tags);
+            setInterview(toCopy.interview);
+            setDone(toCopy.done);
         }
 
         /**
@@ -179,7 +189,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, role,
-                    employmentType, expectedSalary, levelOfEducation, experience, tags);
+                    employmentType, expectedSalary, levelOfEducation, experience, tags, interview);
         }
 
         public void setName(Name name) {
@@ -263,6 +273,22 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setInterview(Optional<Interview> interview) {
+            this.interview = interview;
+        }
+
+        public Optional<Optional<Interview>> getInterview() {
+            return Optional.ofNullable(interview);
+        }
+
+        public void setDone(Done done) {
+            this.done = done;
+        }
+
+        public Optional<Done> getDone() {
+            return Optional.ofNullable(done);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -286,7 +312,10 @@ public class EditCommand extends Command {
                     && getExpectedSalary().equals(e.getExpectedSalary())
                     && getLevelOfEducation().equals(e.getLevelOfEducation())
                     && getExperience().equals(e.getExperience())
-                    && getTags().equals(e.getTags());
+                    && getInterview().equals(e.getInterview())
+                    && getTags().equals(e.getTags())
+
+                    && getDone().equals(e.getDone());
         }
     }
 }

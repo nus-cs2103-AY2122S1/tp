@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -31,8 +32,9 @@ public class AddCommand extends Command {
             + PREFIX_EMPLOYMENT_TYPE + "EMPLOYMENT TYPE "
             + PREFIX_EXPECTED_SALARY + "EXPECTED SALARY "
             + PREFIX_LEVEL_OF_EDUCATION + "LEVEL OF EDUCATION "
-            + PREFIX_EXPERIENCE + "YEARS_OF_EXPERIENCE "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + PREFIX_EXPERIENCE + "YEARS OF EXPERIENCE "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_INTERVIEW + "INTERVIEW TIME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -43,7 +45,9 @@ public class AddCommand extends Command {
             + PREFIX_LEVEL_OF_EDUCATION + "PhD "
             + PREFIX_EXPERIENCE + "3 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_INTERVIEW + "2021-10-21, 12:00";
+
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -34,7 +35,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         List<Prefix> prefixList = ArgumentTokenizer.findAllPrefixSorted(trimmedArgs, PREFIX_NAME,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
                 PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
-                PREFIX_EXPERIENCE, PREFIX_TAG);
+                PREFIX_EXPERIENCE, PREFIX_INTERVIEW, PREFIX_TAG);
 
         // If show command has no prefix, it is invalid
         if (prefixList.isEmpty()) {
