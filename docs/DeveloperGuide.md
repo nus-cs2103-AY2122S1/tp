@@ -156,32 +156,23 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Import feature
 
-The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
-The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file.
+The following activity diagram summarizes what happens when the user inputs an import command:
 
-The import feature overwrites all existing data in the `AddressBook` by calling `Model#setAddressBook()`. This ensures that no conflicts emerge between the old data and newly imported data.
+![ImportCommandActivityDiagram](images/ImportCommandActivityDiagram.png)
 
-How the `ImportCommand` works:
-1. From the 1st row of the csv file, the assessment names are retrieved, and `Assessment` objects are created. 
-    1. A `Command Exception` will be thrown if there are duplicate assessments, or if the assessment name is in the wrong format, as specified in the `Assessment` class.   
-1. For every other row, the student's particulars are retrieved as follows:
-1. The first column is the student's name. 
-    1. A `Command Exception` will be thrown if the name is in the wrong format, as specified in the `Name` class.
-1. The second column is the student's ID. 
-    1. A `Command Exception` will be thrown if there are duplicate IDs, or if the ID is in the wrong format, as specified in the `ID` class.
-1. The next few columns are the student's groups. A `Group` will be added to the student for each non-empty column. There are a few important points to consider here:
-    1. The command will read as many columns as specified by the user in the number of groups input.
-    1. The command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group.
-    1. A new `Group` will only be created in the case where the group hasn't already been created.
-    1. A `Command Exception` will be thrown if the name of the group is in the wrong format, as specified by the `Group` class.
-1. The next few columns are the student's scores. A `Score` will be added into both the `Assessment`, as well as the `Student` if the column is not empty. There are a few important points to consider here:
-    1. The command will read as many columns as specified by the user in the number of assessments input.
-    1. The command will use existing `Assessments` created in step 1. This ensures that the `Assessment` holds a reference to all `Students` who have attempted it, so that the `Score` analysis can be done more smoothly.
-    1. A `Command Exception` will be thrown if the score is in the wrong format, as specified by the `Score` class.
-1. The next few columns are the student's tags. A `Tag` will be added into the `Student` if the column is not empty.
-    1. A `Command Exception` will be thrown if the tag is in the wrong format, as specified by the `Tag` class.
-1. Steps 3 - 7 are repeated for every row in the file other than the first row. 
-1. The model data is then overwritten with the newly created `AddressBook`.
+There are several important details left out of the activity diagram for the sake of clarity:
+
+1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
+The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
+   
+1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
+
+1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
+
+1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
+
+1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
+
 
 
 ### \[Proposed\] Undo/redo feature
