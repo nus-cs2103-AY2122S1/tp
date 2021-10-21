@@ -6,12 +6,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.commons.core.Messages;
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
+import seedu.fast.storage.JsonFastStorage;
 
 /**
  * Deletes a person identified using it's displayed index from FAST.
@@ -32,15 +35,16 @@ public class DeleteCommand extends Command {
             + "your contact list.";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES = "Cannot delete the same contact twice! "
             + "(Cannot have duplicated index!)";
-    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT = "The number of contacts you want to delete "
-            + "cannot be more than the number of contacts you currently have!";
+    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT = "The position/number of contacts "
+            + "you want to delete cannot be more than the number of contacts you currently have!";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT = "You cannot delete more than " +
             + MULTIPLE_DELETE_LIMIT + " contacts at one time!";
     public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "%1$s contact(s) has been deleted"
             + " before the invalid index at 'index %2$s' is detected.";
 
-    private final Index[] indexArray;
+    private static final Logger logger = LogsCenter.getLogger(JsonFastStorage.class);
 
+    private final Index[] indexArray;
     /**
      * Constructor for {@code DeleteCommand}
      *
@@ -56,48 +60,22 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (indexArray.length > MULTIPLE_DELETE_LIMIT) {
+            logger.info("Input contains more than 10 indexes.");
             throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT);
         }
 
         if (indexArray.length > lastShownList.size()) {
-            if (isSingleDelete()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT);
+            executeInvalidIndexScenario();
         }
 
-        Index targetIndex;
         if (isSingleDelete()) {
-            targetIndex = indexArray[0];
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(personToDelete);
-
-            return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, personToDelete));
+            return executeSingleDelete(lastShownList, model);
         }
 
         if (isMultipleDelete()) {
-            if (hasDuplicates(indexArray)) {
-                throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
-            }
-
-            for (int i = 0; i < indexArray.length; i++) {
-                targetIndex = Index.indexModifier(indexArray[i], i);
-                if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
-                            i, indexArray[i].getOneBased()));
-                }
-
-                Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-                model.deletePerson(personToDelete);
-            }
-
-            return new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
+            return executeMultipleDelete(lastShownList, model);
         }
-        
+
         // should never reach here
         throw new CommandException(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
@@ -118,6 +96,46 @@ public class DeleteCommand extends Command {
             }
         }
         return false;
+    }
+
+    private void executeInvalidIndexScenario() throws CommandException {
+        if (isSingleDelete()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } else {
+            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT);
+        }
+    }
+
+    private CommandResult executeSingleDelete(List<Person> lastShownList, Model model) throws CommandException {
+        Index targetIndex = indexArray[0];
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+
+        return new CommandResult(String.format(MESSAGE_SINGLE_DELETE_SUCCESS, personToDelete));
+    }
+
+    private CommandResult executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
+        if (hasDuplicates(indexArray)) {
+            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
+        }
+
+        Index targetIndex;
+        for (int i = 0; i < indexArray.length; i++) {
+            targetIndex = Index.indexModifier(indexArray[i], i);
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
+                        i, indexArray[i].getOneBased()));
+            }
+
+            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePerson(personToDelete);
+        }
+
+        return new CommandResult(String.format(MESSAGE_MULTIPLE_DELETE_SUCCESS, indexArray.length));
     }
 
     @Override
