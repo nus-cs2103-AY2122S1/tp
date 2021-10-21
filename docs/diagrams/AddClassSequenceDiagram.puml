@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":**AddClassCommand**" as AddClassCommand LOGIC_COLOR
+participant "**r:CommandResult**" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "**m:ModelManager**" as ModelManager MODEL_COLOR
+participant "**c:Classmate**" as Classmate MODEL_COLOR
+end box
+
+[-> AddClassCommand : ""execute(m)""
+activate AddClassCommand
+
+AddClassCommand -> ModelManager : ""addTutorialClass(tc)""
+activate ModelManager
+
+ModelManager -> Classmate : ""addTutorialClass(tc)""
+activate Classmate
+
+
+note right
+""tc"" is the TutorialClass
+that is to be added
+to ClassMate
+end note
+
+Classmate --> ModelManager
+deactivate Classmate
+
+ModelManager --> AddClassCommand
+deactivate
+
+create CommandResult
+AddClassCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddClassCommand : ""r""
+deactivate CommandResult
+
+[<-- AddClassCommand : ""r""
+deactivate AddClassCommand
+
+AddClassCommand -[hidden]> CommandResult
+destroy AddClassCommand
+
+@enduml

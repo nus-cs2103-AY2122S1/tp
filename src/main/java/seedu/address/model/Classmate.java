@@ -113,11 +113,7 @@ public class Classmate implements ReadOnlyClassmate {
     //// tutorialclass-level operations
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Classmate.java
-     * Returns true if a student with the same identity as {@code student} exists in the ClassMATE.
-=======
-     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
->>>>>>> branch-ClassCode-Yirui:src/main/java/seedu/address/model/AddressBook.java
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the ClassMATE.
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -125,29 +121,18 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Classmate.java
-     * Adds a student to the ClassMATE.
-     * The student must not already exist in the ClassMATE.
-=======
-     * Adds a tutorialClass to the address book.
-     * The tutorialClass must not already exist in the address book.
->>>>>>> branch-ClassCode-Yirui:src/main/java/seedu/address/model/AddressBook.java
+     * Adds a tutorialClass to the ClassMATE.
+     * The tutorialClass must not already exist in the ClassMATE.
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/model/Classmate.java
-     * Replaces the given student {@code target} in the list with {@code editedStudent}.
-     * {@code target} must exist in the ClassMATE.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.
-=======
      * Replaces the given tutorialClass {@code target} in the list with {@code editedTutorialClass}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the ClassMATE.
      * The tutorialClass identity of {@code editedTutorialClass} must not be the same
      * as another existing tutorialClass in ClassMATE.
->>>>>>> branch-ClassCode-Yirui:src/main/java/seedu/address/model/AddressBook.java
      */
     public void setTutorialClass(TutorialClass target, TutorialClass editedTutorialClass) {
         requireNonNull(editedTutorialClass);

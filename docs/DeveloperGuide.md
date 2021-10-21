@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `ClassListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` and `TutorialClass` objects residing in the `Model`.
 
 ### Logic component
 
@@ -100,9 +100,9 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `deletec 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteStudentCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -110,8 +110,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `ClassmateParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `ClassmateParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `ClassmateParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddStudentCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddStudentCommand`) which the `ClassmateParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddStudentCommandParser`, `DeleteStudentCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the ClassMATE data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
-* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the ClassMATE data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object), and all `TutorialClass` objects (which are contained in a `UniqueTutorialClassList` object).
+* stores the currently 'selected' `Student` and `TutorialClass` objects (e.g., results of a search query) as a separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Student>` and `ObservableList<TutorialClass>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -207,7 +207,7 @@ The `redo` command does the opposite — it calls `Model#redoClassmate()`, w
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify ClassMATE, such as `list`, will usually not call `Model#commitClassmate()`, `Model#undoClassmate()` or `Model#redoClassmate()`. Thus, the `classmateStateList` remains unchanged.
+Step 5. The user then decides to execute the command `liststu`. Commands that do not modify ClassMATE, such as `liststu`, will usually not call `Model#commitClassmate()`, `Model#undoClassmate()` or `Model#redoClassmate()`. Thus, the `classmateStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
@@ -234,9 +234,95 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Tutorial Class Management Features
+(Contributed by Rushil Ramesh and Vishnu Sundaresan)
 
-_{Explain here how the data archiving feature will be implemented}_
+ClassMATE allows the user to manage information relevant to the TutorialClass. A User is able to:
+
+1. Add a new tutorial class
+2. Delete an existing tutorial class
+3. List all existing tutorial class
+4. Find all tutorial classes containing a keyword in their classcodes (Coming Soon)
+5. View Class Details (Coming Soon)
+
+#### Current Implementation
+
+The class `Classmate` facilitates all operations related to tutorial classes. It maintains a
+`UniqueTutorialClassList` of containing all tutorial classes, as well as a `FliteredList` of `TutorialClass` instances reflecting the current state of the 
+tutorial class list to be displayed to the user. The `Classmate` conatins a summary
+of all the logic of the tutorial class commands (e.g. `AddClassCommand`)  executed on the `UniqueTutorialCLassList`.
+
+The following operations are implemented:
+* `Classmate#hasTutorialClass(TutorialClass tutorialClass)` - Checks if tutorial class is in ClassMATE
+* `Classmate#addTutorialClass(TutorialClass tutorialClass)` - Adds tutorial Class to ClassMATE
+* `Classmate#removeTutorialClass(TutorialClass tutorialClass)` - Deletes existing tutorial class from ClassMATE
+* `Classmate#getTutorialClassList()` - Displays entire list of tutorial classes.
+* `Model#updateFilteredTutorialClassList(Predicate<TutorialClass> predicate)` - Searches for tutorial class by keyword and displays filtered list.
+
+These operations are exposed in the `Model` interface as `Model#hasTutorialClass(TutorialClass tutorialClass)`,
+`Model#addTutorialClass(TutorialClass tutorialClass)`, `Model#deleteTutorialClass(TutorialClass tutorialClass)` and
+`Model#getTutorialClass()`respectively.
+
+
+Given below is an example of how the tutorial class features can be used:
+
+Step 1. The user launches the application for the first time. The `UniqueTUtorialClassList` would be derived from the 
+initial ClassMATE state, and all tutorial classes stored will be displayed.
+
+Step 2. The user executes an `addc c/G00 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
+state of ClassMATE. The updated `UniqueTutorialClassList` will be displayed in the `ClassListPanel`
+to the user.
+
+Step 3. The user executes a `findc G00` command. The `findc` command calls the `Model#updateFilteredTutorialClassList()`, modifying the state of the filtered list
+of tutorial classes. The updated filtered list consisting of te results of the search query will be displayed to the user.
+
+Step 4. The user executes a  `viewc 1` command. The `viewc` command updates the `FilteredList` of `TutorialCLass`es to only display the class at the
+given index, and updates the `FilteredList` of `Students` to contain only the students who are in the selected class. The updated filtered list of
+students and tutorial classes will be displayed to the user.
+
+Step 5. The user executes a `deletec 2` command. The `deletec` command calls `Model#deleteTutorialCLass()`, modifying and saving the
+state of ClassMATE by deleting the class stored at the given index in the `UniqueTutorialClassList`. This updated list will be displayed to the user.
+
+Step 6. The user executes a `listc` command. The `listc` command calls `Model#getTutorialClassList()` modifying and saving the state of the `FilteredList`
+to contain all tutorial classes in ClassMATE. This updated list will be displayed to the user.
+
+
+
+Using the example of the `AddClassCommand`,
+when the user enters the `addc` command to add a tutorial class, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+During the parsing, a new TutorialClass instance is created. This `TutorialClass` instance will be received by the `AddClassCommand` when it is created.
+
+The *Sequence Diagram* below summarises the aforementioned steps.
+
+![AddClassSequenceDiagram](images/AddClassSequenceDiagram.png)<br>
+Execution of the `AddClassCommand`
+
+#### Design Considerations
+
+#####Aspect: Finding Tutorial Classes
+* Alternative 1 (current choice): Find Tutorial Classes by selecting all classes with classcodes matching the search keyword
+    * Pros: Shorter keyword to type, therefore increasing user typing speed. User is also able to 
+    find multiple classes
+    * Cons: Lower Accuracy in searching for a specific class, having to search through multiple classes
+    
+* Alternative 2: Find tutorial class by exact classcode
+    * Pros: Higher Accuracy in search
+    * Cons: Takes longer for user to type commands, less user friendly
+    
+#### Aspect: Student and Tutorial Class lists
+* Alternatice 1 (current choice): Use two seperate lists to store students and tutorial classes
+    * Pros: Faster, simpler command executions for student and tutorial class commands. 
+    Easier to maintain overall. Therefore, all students and all tutorial classes can be accessed independent of each other.
+    * Cons: Class specific student commands are slower. For example a user is required to 'viewc' in order to filter just the students in the class,
+    increasing the overall time
+* Alternative 2: Nesting for students within Tutorial Class
+    * Pros: Faster in class specific student commands and students are better organised.
+    * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
+
+
+
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
