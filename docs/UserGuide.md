@@ -119,7 +119,7 @@ Command aliases: `ls`
 
 ***
 
-### Find contacts by name / tag: `find` <a name="find"></a>
+### Find contacts by name / module code: `find` <a name="find"></a>
 
 Finds a name / module code.
 * The search is case-insensitive. eg hans will match Hans
