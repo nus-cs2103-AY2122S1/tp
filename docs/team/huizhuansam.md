@@ -3,6 +3,6 @@ layout: page
 title: Siew Hui Zhuan's Project Portfolio Page
 ---
 
-### Project: NUSpam
+### Project: Spam
 
 _Coming Soon_

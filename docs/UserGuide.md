@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUSpam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
+Spam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
 
 - [Quick start](#quick-start)
 - [Features](#features)
@@ -31,7 +31,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 
 1. Download the latest `Spam.jar` (Coming Soon).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your NUSpam.
+1. Copy the file to the folder you want to use as the _home folder_ for your Spam.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
