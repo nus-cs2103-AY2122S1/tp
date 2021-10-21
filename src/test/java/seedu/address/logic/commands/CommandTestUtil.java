@@ -26,6 +26,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.task.NameContainsTestKeywordsPredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -34,6 +35,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_TASK_NAME_STUDY = "Study";
+    public static final String VALID_TASK_NAME_PLAY = "Play";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_STUDENTNUMBER_AMY = "A1112223B";
@@ -47,6 +50,8 @@ public class CommandTestUtil {
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_PLAY = " " + PREFIX_NAME + VALID_TASK_NAME_PLAY;
+    public static final String NAME_DESC_STUDY = " " + PREFIX_NAME + VALID_TASK_NAME_STUDY;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String STUDENTNUMBER_DESC_AMY = " " + PREFIX_STUDENTNUMBER + VALID_STUDENTNUMBER_AMY;
@@ -73,6 +78,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
+    public static final EditTaskCommand.EditTaskDescriptor DESC_STUDY;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_PLAY;
+
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY)
                 .withStudentNumber(VALID_STUDENTNUMBER_AMY).withUserName(VALID_USERNAME_AMY)
@@ -80,6 +88,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withStudentNumber(VALID_STUDENTNUMBER_BOB).withUserName(VALID_USERNAME_BOB)
                 .withRepoName(VALID_REPONAME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_STUDY = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_STUDY).withTags(VALID_TAG_FRIEND).build();
+        DESC_PLAY = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).withTags(VALID_TAG_HUSBAND).build();
     }
 
     /**

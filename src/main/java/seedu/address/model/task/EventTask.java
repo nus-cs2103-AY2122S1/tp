@@ -19,7 +19,7 @@ public class EventTask extends Task {
     }
 
     //    @Override
-    public TaskDate getDeadline() {
+    public TaskDate getTaskDate() {
         return dueDate;
     }
 
@@ -52,7 +52,7 @@ public class EventTask extends Task {
 
         EventTask otherTask = (EventTask) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline())
+                && otherTask.getTaskDate().equals(getTaskDate())
                 && otherTask.getTags().equals(getTags());
     }
 
@@ -62,7 +62,7 @@ public class EventTask extends Task {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("\nEvent on: ")
-                .append(getDeadline().toString())
+                .append(getTaskDate().toString())
                 .append("\nStatus: ")
                 .append(getStatusString());
 

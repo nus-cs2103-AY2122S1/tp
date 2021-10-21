@@ -34,7 +34,7 @@ public class AddDeadlineTaskCommandParser {
         }
 
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
-        TaskDate taskDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+        TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DEADLINE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Task task = new DeadlineTask(name, tagList, false, taskDate);
 

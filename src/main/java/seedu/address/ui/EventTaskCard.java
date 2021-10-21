@@ -48,7 +48,7 @@ public class EventTaskCard extends UiPart<Region> {
         EventTask deadlineTask = (EventTask) task;
         status.setText(task.getStatusString());
 
-        taskDate.setText(deadlineTask.getDeadline().toString());
+        taskDate.setText(deadlineTask.getTaskDate().toString());
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -18,7 +18,7 @@ public class TaskBuilder {
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
 
     private TaskName taskName;
-    private TaskDate taskTaskDate;
+    private TaskDate taskDate;
     private Set<Tag> tags;
     private boolean isDone;
 
@@ -27,7 +27,7 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
-        this.taskTaskDate = new TaskDate(DEFAULT_TASK_DATE);
+        this.taskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
         this.isDone = false;
     }
@@ -50,10 +50,10 @@ public class TaskBuilder {
     }
 
     /**
-     * Sets the {@code Deadline} of the {@code Task} that we are building.
+     * Sets the {@code TaskDate} of the {@code Task} that we are building.
      */
     public TaskBuilder withDeadline(String date) {
-        this.taskTaskDate = new TaskDate(date);
+        this.taskDate = new TaskDate(date);
         return this;
     }
 
