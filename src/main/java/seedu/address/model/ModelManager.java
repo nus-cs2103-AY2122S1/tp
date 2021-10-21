@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 
@@ -324,7 +325,7 @@ public class ModelManager implements Model {
             Position currentPosition = a.getPositionApplyingTo();
             if (currentPosition.isSamePosition(p)) {
                 total++;
-                if (a.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
+                if (a.getApplicationStatus() == ApplicationStatus.REJECTED) {
                     count++;
                 }
             }
