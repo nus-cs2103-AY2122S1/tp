@@ -190,7 +190,7 @@ The following sequence diagram describes what happens when `AttendanceCommand` i
 
 As seen from the diagram, the `AttendanceCommand` involves two for loops. In each of the loops there is a reference frame.
 
-For `IndexWithinRange` and `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams are as follows:
+For `IndexWithinRange` and `UpdateModelAttendanceSequenceDiagram`, the sequential diagrams are as follows:private Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
 
 ![IndexWithinRangeSequenceDiagram](images/logic/commands/attendancecommand/IndexWithinRangeSequenceDiagram.png)
 
@@ -201,7 +201,21 @@ If the condition is met, a `CommandException` is thrown to let the user know tha
 <div markdown="span" class="alert alert-info">:information_source: **Note:** There are 2 separate instances of `Student` as we are creating a new `Student` instance. 
 
  </div>
- 
+
+### GradeCommand
+
+This command serves to update the `Grade` of various `Assessment` that the students will undergo in CS1101S. The assessments include RA1, Midterm, RA2, Practical Exam (PE), and Final.
+
+#### Implementation
+
+`GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`. The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
+
+The following sequence diagram describes what happens when `GradeCommand` is executed:
+
+![GradeCommandSequenceDiagram](images/logic/commands/gradecommand/GradeCommandSequenceDiagram.png)
+
 ### ParticipationCommand
 
 This command serves to update the `Participation` score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
@@ -217,7 +231,21 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The logic above is to update the `Attendance` and is only executed in the event that `participationUpdate` is more than 0. Otherwise, it will not run.
 
  </div>
- 
+
+### ShowCommand
+
+This command serves to display the collated score of all students in the Academy Directory for a specific `Assessment`. The assessments that can be queried are: RA1, Midterm, RA2, Practical Exam (PE), and Final.
+
+#### Implementation
+
+`ShowCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The grades are collated by iterating through all the students and extracting the score from the `Assessment` HashMap using the input `Assessment` as the key. The information is formatted into a String and parsed into `CommandResult` to be returned by `ShowCommand`.
+
+The following sequence diagram describes what happens when `ShowCommand` is executed:
+
+![ShowCommandSequenceDiagram](images/logic/commands/showcommand/ShowCommandSequenceDiagram.png)
+
 ### SortCommand
 
 This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
@@ -233,6 +261,23 @@ The sorting mechanism is based on the `List` interface as it sorts the various `
 The reference frame for GetComparator can be found below. It details the selection process based on the `attribute` of the `SortCommand`.
 
 ![GetComparatorSequenceDiagram](images/logic/commands/sortcommand/GetComparatorSequenceDiagram.png)
+### RetrieveCommand
+This command serves to retrieve a specific `Information` of students. 
+
+#### Implementation
+`RetrieveCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+All fields of `Student` class which implements the `Information` interface and whose prefix is present in the `InformationWantedFunction` class
+can be queried by `RetrieveCommand`. Hence, for an `Information` to be query-able, it _must_ implement the `Information` interface and its prefix needs
+to be added to the list of supported prefix under `InformationWantedFunction`. If at least one of the two conditions are not fulfilled, compile errors
+will be thrown. The following is the class diagram for `RetrieveCommand`
+![RetrieveCommandClassDiagram](images/logic/commands/retrievecommand/RetrieveCommandClassDiagram.png)
+
+A `RetrieveCommand` is initialized with a list of `InformationWantedFunction` objects to retrieve the necessary information. Obtaining the queried information 
+is done by using the `InformationWantedFunction` objects on all `Student` objects in the model. The specific is shown in the sequence diagram below:
+
+![RetrieveCommandSequenceDiagram](images/logic/commands/retrievecommand/RetrieveCommandSequenceDiagram.png)
+Exactly which field of `Student` should be retrieved is determined by the `Prefix` passed into `InformationWantedFunction` during its creation.
 
 ### \[Proposed\] Undo/redo feature
 
