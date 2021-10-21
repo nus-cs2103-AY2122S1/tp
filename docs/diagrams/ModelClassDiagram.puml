@@ -8,7 +8,7 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyPlannerMd <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Enum State <<Enum>>
+Enum State <<enumeration>>
 Class PlannerMd
 Class ReadOnlyPlannerMd
 Class Model
