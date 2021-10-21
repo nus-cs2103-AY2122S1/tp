@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMAIL_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EMPLOYMENT_TYPE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPECTED_SALARY_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_EXPERIENCE_SYNTAX;
+import static seedu.address.logic.parser.PrefixSyntax.PREFIX_INTERVIEW_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_LEVEL_OF_EDUCATION_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_NAME_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
@@ -25,4 +26,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXPECTED_SALARY = new Prefix(PREFIX_EXPECTED_SALARY_SYNTAX);
     public static final Prefix PREFIX_LEVEL_OF_EDUCATION = new Prefix(PREFIX_LEVEL_OF_EDUCATION_SYNTAX);
     public static final Prefix PREFIX_EXPERIENCE = new Prefix(PREFIX_EXPERIENCE_SYNTAX);
+    public static final Prefix PREFIX_INTERVIEW = new Prefix(PREFIX_INTERVIEW_SYNTAX);
+
+
 }
