@@ -231,7 +231,7 @@ The `filter` mechanism will allow the user to filter profiles by module and opti
 
 The implementation required the creation of a parser for `filterCommand` as the command does takes in parameters.
 `filterCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
-The GUI will then update to show the profiles that contain the specified name.
+The GUI will then update to show the profiles that contain the specified modules and/or group status.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
@@ -247,7 +247,7 @@ The `editGroupStatus` mechanism will allow the user to edit the group status of 
 
 The implementation required the creation of a parser for `editGroupStatusCommand` as the command does takes in parameters.
 `editGroupStatusCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
-The GUI will then update to show the profiles that contain the specified name.
+The GUI will then update to show the updated group status for the specified module.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
