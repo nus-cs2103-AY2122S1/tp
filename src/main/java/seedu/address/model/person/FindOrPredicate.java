@@ -8,7 +8,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s {@code Name} OR {@code Tag} matches ANY of the tags given.
+ * Tests that a {@code Person}'s {@code Name} OR {@code Tag} matches ANY of the keywords given.
  */
 public class FindOrPredicate implements Predicate<Person> {
 

@@ -9,7 +9,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Person;
 
-
 public class BirthdayReminderCard extends UiPart<Region> {
     private static final String FXML = "BirthdayReminderListCard.fxml";
 
