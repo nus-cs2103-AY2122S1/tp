@@ -27,7 +27,7 @@ public class DeleteProductCommand extends Command {
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
 
-    private static final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
+    private static final Logger logger = LogsCenter.getLogger("DeleteProductLogger");
 
     private final Index targetIndex;
 
@@ -45,8 +45,10 @@ public class DeleteProductCommand extends Command {
         }
 
         Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
-        logger.log(Level.INFO, "deleting product now");
         model.deleteProduct(productToDelete);
+
+        logger.log(Level.INFO, String.format("Deleted product %1$s", productToDelete.getId()));
+
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
     }
 
