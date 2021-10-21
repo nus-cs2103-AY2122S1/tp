@@ -183,17 +183,18 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `ModelManager#viewStudent()` — Updates student panel with the student of interest
+* `ModelManager#viewStudent()` — Updates student panel with the student of interest and lesson panel with the lessons the student of interest is in.
+* `ModelManager#viewLesson()` — Updates lesson panel with the lesson of interest and student panel with the students that have this lesson of interest.
 
-This operation is exposed in the `Model` interface as `Model#viewStudent()`.
+This operation is exposed in the `Model` interface as `Model#viewStudent()` and `Model#viewLesson()`.
 
 Given below is an example usage scenario and how the view student mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `ModelManager` will be initialized with the initial model manager state, and the `currentStatePointer` pointing to that single model manager state.
 
-![ViewStudentViewClassState0](images/ViewStudentViewClassState0.png)
+![ViewStudentState0](images/ViewStudentState0.png)
 
-Step 2. The user executes `view -s 1`/`view -l 1` command to view the 1st student/lesson in TutorAid. The `view` command calls `Model#viewStudent()`/`Model#viewLesson()`, causing the modified state of model manager after the `view -s 1`/`view -l 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that single model manager state.
+Step 2. The user executes `view -s 1` command to view the 1st student in TutorAid. The `view` command calls `Model#viewStudent()`, causing the modified state of model manager after the `view -s 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that model manager state.
 
 The following sequence diagram shows how the view student operation works:
 
