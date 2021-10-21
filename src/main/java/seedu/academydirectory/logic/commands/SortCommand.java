@@ -18,7 +18,7 @@ import seedu.academydirectory.model.student.Participation;
 import seedu.academydirectory.model.student.Student;
 
 /**
- * A class that implements the command to show all the students' grades for an assessment.
+ * A class that implements the command to sort the student list.
  */
 public class SortCommand extends Command {
 
@@ -50,7 +50,7 @@ public class SortCommand extends Command {
     private final boolean isAscendingOrder;
 
     /**
-     * Constructor for ShowCommand.
+     * Constructor for SortCommand.
      * @param attribute The attribute to be sorted by.
      * @param isAscendingOrder The order in which to sort.
      */
