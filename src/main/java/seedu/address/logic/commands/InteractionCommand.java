@@ -13,8 +13,8 @@ import seedu.address.model.Model;
 import seedu.address.model.interaction.Interaction;
 import seedu.address.model.person.Person;
 
-public class AppendInteractionCommand extends Command {
-    public static final String COMMAND_WORD = "appendInteraction";
+public class InteractionCommand extends Command {
+    public static final String COMMAND_WORD = "interaction";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a interaction to the person identified "
             + "by the index number used in the displayed person list. \n"
@@ -30,7 +30,7 @@ public class AppendInteractionCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AppendInteractionCommand(Index index, Interaction interaction) {
+    public InteractionCommand(Index index, Interaction interaction) {
         requireNonNull(interaction);
         this.index = index;
         toAdd = interaction;
@@ -56,7 +56,7 @@ public class AppendInteractionCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AppendInteractionCommand // instanceof handles nulls
-                        && toAdd.equals(((AppendInteractionCommand) other).toAdd));
+                || (other instanceof InteractionCommand // instanceof handles nulls
+                        && toAdd.equals(((InteractionCommand) other).toAdd));
     }
 }

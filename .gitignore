@@ -11,6 +11,8 @@ src/main/resources/docs/
 
 # VScode files
 /.vscode/
+./classpath
+.project
 
 # Storage/log files
 /data/

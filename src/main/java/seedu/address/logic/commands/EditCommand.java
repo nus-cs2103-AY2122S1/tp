@@ -42,10 +42,17 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_EMAIL
-            + "EMAIL] " + "[" + PREFIX_FACULTY + "FACULTY] " + "[" + PREFIX_MAJOR + "MAJOR] " + "[" + PREFIX_SKILL
-            + "SKILL] " + "[" + PREFIX_LANGUAGE + "LANGUAGE] " + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] " + "["
-            + PREFIX_TAG + "TAG]...\n" + "Example: " + COMMAND_WORD + " 1 " + PREFIX_EMAIL + "johndoe@example.com";
+            + "Parameters: INDEX (must be a positive integer) " 
+            + "[" + PREFIX_NAME + "NAME] " 
+            + "[" + PREFIX_EMAIL + "EMAIL] " 
+            + "[" + PREFIX_FACULTY + "FACULTY] " 
+            + "[" + PREFIX_MAJOR + "MAJOR] " 
+            + "[" + PREFIX_SKILL + "SKILL] " 
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] " 
+            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] " 
+            + "[" + PREFIX_TAG + "TAG]...\n" 
+            + "Example: " + COMMAND_WORD + " 1 " 
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -55,7 +62,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index                of the person in the filtered person list to edit
+     * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -195,68 +202,68 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code skill} to this object's {@code skills}. A defensive copy of
-         * {@code skills} is used internally.
+         * Sets {@code skill} to this object's {@code skills}. 
+         * A defensive copy of {@code skills} is used internally.
          */
         public void setSkills(Set<Skill> skills) {
             this.skills = (skills != null) ? new HashSet<>(skills) : null;
         }
 
         /**
-         * Returns an unmodifiable skill set, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code skills} is null.
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException} 
+         * if modification is attempted. 
+         * Returns {@code Optional#empty()} if {@code skills} is null.
          */
         public Optional<Set<Skill>> getSkills() {
             return (skills != null) ? Optional.of(Collections.unmodifiableSet(skills)) : Optional.empty();
         }
 
         /**
-         * Sets {@code language} to this object's {@code languages}. A defensive copy of
-         * {@code languages} is used internally.
+         * Sets {@code language} to this object's {@code languages}. 
+         * A defensive copy of {@code languages} is used internally.
          */
         public void setLanguages(Set<Language> languages) {
             this.languages = (languages != null) ? new HashSet<>(languages) : null;
         }
 
         /**
-         * Returns an unmodifiable language set, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code languages} is null.
+         * Returns an unmodifiable language set, which throws {@code UnsupportedOperationException} 
+         * if modification is attempted. 
+         * Returns {@code Optional#empty()} if {@code languages} is null.
          */
         public Optional<Set<Language>> getLanguages() {
             return (languages != null) ? Optional.of(Collections.unmodifiableSet(languages)) : Optional.empty();
         }
 
         /**
-         * Sets {@code framework} to this object's {@code frameworks}. A defensive copy
-         * of {@code frameworks} is used internally.
+         * Sets {@code framework} to this object's {@code frameworks}. 
+         * A defensive copy of {@code frameworks} is used internally.
          */
         public void setFrameworks(Set<Framework> frameworks) {
             this.frameworks = (frameworks != null) ? new HashSet<>(frameworks) : null;
         }
 
         /**
-         * Returns an unmodifiable framework set, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code frameworks} is null.
+         * Returns an unmodifiable framework set, which throws {@code UnsupportedOperationException} 
+         * if modification is attempted. 
+         * Returns {@code Optional#empty()} if {@code frameworks} is null.
          */
         public Optional<Set<Framework>> getFrameworks() {
             return (frameworks != null) ? Optional.of(Collections.unmodifiableSet(frameworks)) : Optional.empty();
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}. A defensive copy of
-         * {@code tags} is used internally.
+         * Sets {@code tags} to this object's {@code tags}. 
+         * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws
-         * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code tags} is null.
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} 
+         * if modification is attempted. 
+         * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();

@@ -9,21 +9,21 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AppendInteractionCommand;
+import seedu.address.logic.commands.InteractionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.interaction.Interaction;
 
 /**
- * Parses input arguments and creates a new AppendInteractionCommand object
+ * Parses input arguments and creates a new InteractionCommand object
  */
-public class AppendInteractionCommandParser implements Parser<AppendInteractionCommand> {
+public class InteractionCommandParser implements Parser<InteractionCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the InteractionCommand
+     * and returns an InteractionCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AppendInteractionCommand parse(String args) throws ParseException {
+    public InteractionCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_INTERACTION, PREFIX_DATE);
 
@@ -32,17 +32,17 @@ public class AppendInteractionCommandParser implements Parser<AppendInteractionC
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendInteractionCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE), pe);
         }
         if (!arePrefixesPresent(argMultimap, PREFIX_INTERACTION, PREFIX_DATE)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendInteractionCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, InteractionCommand.MESSAGE_USAGE));
         }
 
         Optional<String> description = argMultimap.getValue(PREFIX_INTERACTION);
         Optional<String> date = argMultimap.getValue(PREFIX_DATE);
         Interaction interaction = new Interaction(description.get(), date.get());
-        return new AppendInteractionCommand(index, interaction);
+        return new InteractionCommand(index, interaction);
     }
 
     /**

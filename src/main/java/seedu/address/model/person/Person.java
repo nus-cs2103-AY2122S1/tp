@@ -14,8 +14,8 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in ComputingConnection. Guarantees: details are present
- * and not null, field values are validated, immutable.
+ * Represents a Person in ComputingConnection. 
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
 
@@ -95,48 +95,48 @@ public class Person {
     }
 
     /**
-     * Returns an immutable skills set, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable skills set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
     public Set<Skill> getSkills() {
         return Collections.unmodifiableSet(skills);
     }
 
     /**
-     * Returns an immutable languages set, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable languages set, which throws {@code UnsupportedOperationException} 
+     * if modification is attempted.
      */
     public Set<Language> getLanguages() {
         return Collections.unmodifiableSet(languages);
     }
 
     /**
-     * Returns an immutable frameworks set, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable frameworks set, which throws {@code UnsupportedOperationException} 
+     * if modification is attempted.
      */
     public Set<Framework> getFrameworks() {
         return Collections.unmodifiableSet(frameworks);
     }
 
     /**
-     * Returns an immutable tag set, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} 
+     * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns an immutable interaction set, which throws
-     * {@code UnsupportedOperationException} if modification is attempted.
+     * Returns an immutable interaction set, which throws {@code UnsupportedOperationException} 
+     * if modification is attempted.
      */
     public Set<Interaction> getInteractions() {
         return Collections.unmodifiableSet(interactions);
     }
 
     /**
-     * Returns true if both persons have the same name. This defines a weaker notion
-     * of equality between two persons.
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -147,8 +147,8 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields. This
-     * defines a stronger notion of equality between two persons.
+     * Returns true if both persons have the same identity and data fields. 
+     * This defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -177,8 +177,13 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append("; Email: ").append(getEmail()).append("; Faculty: ").append(getFaculty())
-                .append("; Major: ").append(getMajor());
+        builder.append(getName())
+                    .append("; Email: ")
+                    .append(getEmail())
+                    .append("; Faculty: ")
+                    .append(getFaculty())
+                    .append("; Major: ")
+                    .append(getMajor());
 
         Set<Skill> skills = getSkills();
         if (!skills.isEmpty()) {
