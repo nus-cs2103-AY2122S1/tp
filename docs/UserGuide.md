@@ -1,16 +1,25 @@
 ---
 layout: page
-title: User Guide
+title: Uni-Fy User Guide
 ---
 
-Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
-
 * Table of Contents
-{:toc}
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## 1. Introduction
+Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
+
+Interested to know more? Take a look at our Quick Start guide. Enjoy!
+
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 2. Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -22,13 +31,15 @@ Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Li
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [Features](#features) below for details of each command.
+   * Refer to the [**Features**](#3-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. Features
 
 <div markdown="block" class="alert alert-info">
+
+This section highlights all the commands that Uni-Fy supports. These include details about the format of the command and example scenarios of each command. 
 
 **:information_source: Notes about the command format:**<br>
 
@@ -47,7 +58,7 @@ Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Li
     * Time is represented in HH:MM format
 </div>
 
-### Viewing help : `help`
+### 3.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -56,7 +67,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a task: `add` 
+### 3.2 Adding a task: `add` 
 
 Add a task to the task list.
 
@@ -77,7 +88,7 @@ Interpretation
 Examples:
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
 
-### Locating a task by name: `find` (coming soon)
+### 3.3 Locating a task by name: `find` (coming soon)
 
 Find tasks with matching keywords and show them in the task list.
 
@@ -98,7 +109,7 @@ Examples:
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 
 
-### Showing Tasks: `show` (coming soon)
+### 3.4 Showing Tasks: `show` (coming soon)
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -118,13 +129,13 @@ Examples:
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 
 
-### Setting Priority Level for Tasks: `tag` (coming soon)
+### 3.5 Setting Priority Level for Tasks: `tag` (coming soon)
 
 Set a task's priority.
 
 Format:
-- <code> tag n/task_name (d/date) tg/level </i> </code>
-- <code> tag task_id (d/date) tg/level </i> </code>
+- <code> <i> tag n/task_name (d/date) tg/level </i> </code>
+- <code> <i> tag task_id (d/date) tg/level </i> </code>
 
 Interpretation
 * If <code><i>n/task_name</i></code> field is provided:
@@ -146,7 +157,7 @@ Examples:
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
 
 
-### Deleting tasks : `delete` (coming soon)
+### 3.6 Deleting tasks : `delete` (coming soon)
 
 Delete a specific task that has been added to your app.
 
@@ -168,23 +179,23 @@ Examples:
 * `delete n/quiz` removes every `quiz` task in the app
 * `delete n/quiz d/2021-10-10` deletes only the `quiz` task on `2021-10-10`
 
-### Clearing all entries : `clear`
+### 3.7 Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### 3.8 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+### 3.9 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### 3.10 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -192,20 +203,20 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### 3.11 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 4. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tasks home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 5. Command summary
 
 Action | Format, Examples
 --------|------------------
