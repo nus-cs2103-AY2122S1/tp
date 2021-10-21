@@ -116,7 +116,7 @@ public class TypicalItems {
     public static Item getRandomItem() {
         return new ItemBuilder()
                 .withName(StringUtil.generateRandomString())
-                .withId(UUID.randomUUID().toString())
+                .withId("157325")
                 .withCount("999")
                 .build();
     }

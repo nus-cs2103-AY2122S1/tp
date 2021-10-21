@@ -25,7 +25,7 @@ public class ParserUtilTest {
     private static final String INVALID_COUNT_2 = "-1";
     private static final String INVALID_Id = "abc";
     private static final String INVALID_Id_2 = "-1";
-    private static final String INVALID_Id_3 = "000123";
+    private static final String INVALID_Id_3 = "123";
 
     private static final String VALID_NAME = "Pudding";
     private static final String VALID_TAG_1 = "nice";

@@ -38,12 +38,12 @@ public class TypicalOrders {
     }
 
     /**
-     * Returns an {@code order} with one item which has random name and random count.
+     * Returns an {@code order} with one item which has random name.
      */
     public static Order getOrderWithUnexistingItem() {
         return new Order(List.of(
                 new ItemBuilder().withName(StringUtil.generateRandomString())
-                        .withId(UUID.randomUUID().toString())
+                        .withId(String.valueOf(164582))
                         .withCount(String.valueOf(10))
                         .withTags("baked").build()));
     }

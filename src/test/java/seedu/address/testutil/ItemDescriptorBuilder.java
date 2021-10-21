@@ -65,7 +65,7 @@ public class ItemDescriptorBuilder {
      * Sets the {@code Count} of the {@code ItemDescriptor} that we are building.
      */
     public ItemDescriptorBuilder withId(String id) {
-        descriptor.setCount(Integer.parseInt(id));
+        descriptor.setId(Integer.parseInt(id));
         return this;
     }
 

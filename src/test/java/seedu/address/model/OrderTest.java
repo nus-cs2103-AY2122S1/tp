@@ -77,7 +77,7 @@ class OrderTest {
 
         Item applePieWithOnlyName = new ItemBuilder()
                 .withName("Apple Pie")
-                .withId(UUID.randomUUID().toString())
+                .withId("416386")
                 .withCount("5")
                 .withTags("baked").build();
 

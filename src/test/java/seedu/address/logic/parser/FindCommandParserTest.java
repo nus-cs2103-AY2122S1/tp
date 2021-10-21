@@ -31,18 +31,18 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new IdContainsNumberPredicate(Arrays.asList("140262")));
-        assertParseSuccess(parser, "140262", expectedFindCommand);
+        assertParseSuccess(parser, " id/140262", expectedFindCommand);
     }
 
     @Test
     public void parse_negativeIdArgs_throwsParseException() {
-        assertParseFailure(parser, "-123123", String.format(
+        assertParseFailure(parser, " id/-123123", String.format(
                 MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_notSixDigitsIdArgs_throwsParseException() {
-        assertParseFailure(parser, "123", String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " id/123", String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -50,10 +50,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_BAGEL, VALID_NAME_DONUT)));
-        assertParseSuccess(parser, "Bagel Donut", expectedFindCommand);
+        assertParseSuccess(parser, " n/Bagel n/Donut", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "Bagel   Donut", expectedFindCommand);
+        assertParseSuccess(parser, " n/Bagel   n/Donut", expectedFindCommand);
     }
 
     @Test
@@ -61,10 +61,10 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(VALID_NAME_100PLUS, VALID_NAME_H20)));
-        assertParseSuccess(parser, "100Plus H20", expectedFindCommand);
+        assertParseSuccess(parser, " n/100Plus n/H20", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, "100Plus     H20", expectedFindCommand);
+        assertParseSuccess(parser, " n/100Plus     n/H20", expectedFindCommand);
     }
 
 }
