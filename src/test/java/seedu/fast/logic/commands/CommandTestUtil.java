@@ -133,15 +133,6 @@ public class CommandTestUtil {
     }
 
     /**
-     * Executes the given {@code command}, confirms that <br>
-     * - a {@code CommandException} is thrown <br>
-     * - the CommandException message matches {@code expectedMessage} <br>
-     * - model is modified until the first detect invalid input
-     * - the address book, filtered person list and selected person in {@code actualModel} is changed
-     * until the first detect invalid input.
-     */
-
-    /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
