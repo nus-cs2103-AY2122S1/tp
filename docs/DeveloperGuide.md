@@ -200,11 +200,15 @@ Given below is an example usage scenario and how the add lesson operation behave
 
 _Note: For this usage, we only consider the main successful scenarios (i.e. The lesson we're adding does not exist in TuitiONE and all properties entered are within the constraints)_
 
-Example: `add-l s/Science g/P5 d/Wed t/1200 c/10.50`
+Example: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`
 
-Step 1: When the CSO has entered the command, <u>`:AddLessonCommandParser`</u> object will proceed on to parse and check the validity of each property entered. Assuming successful, <u>`:AddLessonCommandParser`</u> object will proceed on to produce a <u>`Lesson`</u> with the relevant details filled.
+Step 1: When the CSO has entered the command, <u>`:AddLessonCommandParser`</u> object will proceed on to parse and check the validity of each property entered. Assuming successful, <u>`:AddLessonCommandParser`</u> object will proceed on to produce a <u>`l:Lesson`</u> with the relevant details filled. The object state diagram is as such:
 
+![AddLessonState0](images/DeveloperGuideImage/AddLessonState0-Initial_state.png)
 
+Step 2: With all checks done, <u>`l:Lesson`</u> object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
+
+![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
 
 Sequence diagram
 
