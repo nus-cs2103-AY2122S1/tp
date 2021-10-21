@@ -27,7 +27,7 @@ public class AddEventTaskCommandParser {
      */
     public AddEventTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT, PREFIX_TAG, 
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT, PREFIX_TAG,
                         PREFIX_DESCRIPTION, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EVENT)

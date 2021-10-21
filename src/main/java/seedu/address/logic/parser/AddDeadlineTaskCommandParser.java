@@ -28,7 +28,7 @@ public class AddDeadlineTaskCommandParser {
      */
     public AddDeadlineTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG, 
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG,
                         PREFIX_DESCRIPTION, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DEADLINE)

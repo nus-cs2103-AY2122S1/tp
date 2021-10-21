@@ -23,8 +23,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.EditTaskDescriptorBuilder;
 import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

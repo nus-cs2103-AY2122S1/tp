@@ -13,7 +13,7 @@ public class DeadlineTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone, 
+    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone,
                         TaskDate dueDate, Description description, Priority priority) {
         super(name, tags, isDone, description, priority);
         this.dueDate = dueDate;

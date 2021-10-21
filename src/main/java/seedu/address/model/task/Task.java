@@ -30,6 +30,8 @@ public class Task implements Comparable<Task>, Cloneable {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      * @param description A valid Description of Tags.
+     * @param isDone A boolean indicating the status of the Task.
+     * @param priority A valid priority for the Task.
      */
     public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
         this.name = name;
@@ -39,6 +41,14 @@ public class Task implements Comparable<Task>, Cloneable {
         this.priority = priority;
     }
 
+    /**
+     * Constructs a {@code Task}.
+     *
+     * @param name A valid TaskName.
+     * @param tags A valid Set of Tags.
+     * @param description A valid Description of Tags.
+     * @param isDone A boolean indicating the status of the Task.
+     */
     public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
         this.name = name;
         this.tags.addAll(tags);

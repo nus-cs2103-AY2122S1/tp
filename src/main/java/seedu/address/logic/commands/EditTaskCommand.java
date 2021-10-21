@@ -168,7 +168,7 @@ public class EditTaskCommand extends Command {
         public void setTaskName(TaskName taskName) {
             this.taskName = taskName;
         }
-        
+
         public void setTaskPriority(Task.Priority priority) {
             this.priority = priority;
         }
@@ -188,7 +188,7 @@ public class EditTaskCommand extends Command {
         public Optional<Description> getDescription() {
             return Optional.ofNullable(description);
         }
-        
+
         public Optional<TaskDate> getDeadline() {
             return Optional.ofNullable(taskDate);
         }
