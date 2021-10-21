@@ -71,6 +71,12 @@ Format: `help`
 
 Add a task to the task list.
 
+![add_command](images/addCommand.jpeg)
+
+After running the add command the task gets added to the task list as shown below:
+
+![add_command](images/addCommandAfter.jpeg)
+
 Format:
 - <code> add <i>n/task_name t/time d/date tg/level </i> </code>
 
