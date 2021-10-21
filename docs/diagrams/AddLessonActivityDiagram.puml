@@ -1,0 +1,111 @@
+@startuml
+start
+:User executes
+add lesson command
+with the relevant properties;
+
+:TuitiONE starts to parse
+and check the validity
+of each field entered ;
+
+if () then ([All required fields can be detected])
+
+    if() then (
+    [Subject field entered
+    is within the constraint]
+    )
+
+
+    if() then (
+    [Grade field entered
+    is within the constraint]
+    )
+
+    if() then (
+    [Price field entered
+    is within the constraint]
+    )
+
+    if() then (
+    [Day Of Week field entered
+    is within the constraint]
+    )
+
+    if() then (
+    [Start time field entered
+    is within the constraint]
+    )
+
+    :Create a new lesson with
+    the respective field and
+    add into TuitiONE;
+
+    else ([else])
+
+    :Tuitione informs that
+    the Start time field entered
+    is invalid and shows the
+    constraint of the Start time field;
+    stop
+    endif
+
+    else ([else])
+
+    :Tuitione informs that
+    the Day Of Week field entered
+    is invalid and shows the
+    constraint of the Day Of Week field;
+    stop
+    endif
+
+    else ([else])
+
+    :Tuitione informs that
+    the Price field entered
+    is invalid and shows the
+    constraint of the Price
+    field;
+    stop
+    endif
+
+    else ([else])
+
+    :Tuitione informs that
+    the Grade field entered
+    is invalid and shows the
+    constraint of the Grade
+    field;
+    stop
+    endif
+
+
+    else ([else])
+
+    :Tuitione informs that
+    the Subject field entered
+    is invalid and shows the
+    constraint of the Subject
+    field;
+    stop
+    endif
+
+    :Save new Tuitione
+    with the new lesson
+    into Storage;
+
+    :Update UI with
+    new Tuitione with
+    the new lesson added;
+
+else ([else])
+
+    :Tuitione informs
+    that the command entered
+    is invalid and shows an
+    example of the proper
+    command syntax;
+
+endif
+
+stop
+@enduml
