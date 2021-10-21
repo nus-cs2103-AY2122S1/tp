@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -17,7 +16,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -31,7 +29,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<NextMeeting> filteredNextMeetings;
     private final FilteredList<Person> personToView;
     private final FilteredList<Tag> filteredTags;
 
@@ -48,7 +45,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-        filteredNextMeetings = new SortedList<>(checkAllNextMeetings(filteredPersons));
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
@@ -174,33 +170,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
-    }
-
-    public ObservableList<NextMeeting> getFilteredNextMeetingList() {
-        return filteredNextMeetings;
-    }
-
-    private SortedList<NextMeeting> checkAllNextMeetings(FilteredList<Person> filteredPersons) {
-
-        ObservableList<NextMeeting> nextMeetings = FXCollections.observableArrayList();
-
-        filteredPersons.stream().forEach((person) -> {
-            if (!person.getNextMeeting().equals(NextMeeting.NULL_MEETING)) {
-                nextMeetings.add(person.getNextMeeting());
-            }
-        });
-
-        SortedList<NextMeeting> sortedMeetings = new SortedList<>(nextMeetings);
-        //Create comparator for next meeting
-
-        sortedMeetings.setComparator((currentMeeting, nextMeeting) -> {
-            return currentMeeting.date.compareTo(nextMeeting.date) != 0
-                ? currentMeeting.date.compareTo(nextMeeting.date)
-                    : (currentMeeting.startTime.compareTo(nextMeeting.startTime) != 0
-                        ? currentMeeting.startTime.compareTo(nextMeeting.startTime)
-                            : (currentMeeting.endTime.compareTo(nextMeeting.endTime)));
-        });
-        return sortedMeetings;
     }
 
     @Override
