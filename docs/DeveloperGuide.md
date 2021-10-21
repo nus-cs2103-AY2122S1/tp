@@ -286,7 +286,7 @@ Given below is an example usage scenario for setting a student's payment status 
 
 1. The user executes `paid 2` command to set the payment status of the 2nd student in the address book. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. This in turn calls `PaidCommandParser#parse()`, which returns a `PaidCommand` instance if the index is valid.
 
-<img src="images/ParsePaidCommandSequenceDiagram.png" width="800" />
+<img src="images/ParsePaidCommandSequenceDiagram.png" width="650" />
 
 2. `LogicManager#execute()` then calls upon `PaidCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
 
@@ -294,7 +294,7 @@ Given below is an example usage scenario for setting a student's payment status 
 
 The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 2 and 3.
 
-<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" />
+<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" height="275" />
 
 4. `Model#setStudent()` is then called upon to replace the existing `Student` instance in the `StudentBook` with the newly created instance. 
 
@@ -302,7 +302,7 @@ The sequence diagram below illustrates the interactions happening within the `Lo
 
 The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
 
-<img src="images/SetEditedStudentSequenceDiagram.png" width="800" />
+<img src="images/SetEditedStudentSequenceDiagram.png" width="500" />
 
 A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
 
