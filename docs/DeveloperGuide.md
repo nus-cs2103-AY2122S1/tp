@@ -568,6 +568,27 @@ Future versions user stories
     * 3b1. Connections display an error message
 
       Use case resumes at step 2.
+
+**Use case: Getting help**
+
+**MSS**
+
+1.  User requests to show help for a command
+2.  Connections show the guide on how to use the command
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Help command was not specified with a valid command
+  * 2a1. Connections show all available commands
+
+      Use case ends.
+
+* 2b. Help command was supplied with an invalid command
+  * 2a1. Connections display an error message followed by a list of valid commands
+
+  Use case ends.
     
 *{More to be added}*
 
