@@ -16,6 +16,9 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.ui.UiManager;
 
+/**
+ * Changes the remark of an existing tuition class in the TutAssistor.
+ */
 public class RemarkClassCommand extends Command {
 
     public static final String COMMAND_WORD = "remarkclass";
@@ -61,7 +64,7 @@ public class RemarkClassCommand extends Command {
         TuitionClass editedClass = new TuitionClass(classToEdit.getName(), classToEdit.getLimit(),
                 classToEdit.getTimeslot(), classToEdit.getStudentList(), newRemark);
 
-        logger.info("Remark Editor closed.");
+        logger.info("Remarks updated from: [" + remarkToEdit + "] to [" + newRemark.toString() + "]");
 
         model.setTuition(classToEdit, editedClass);
         model.updateFilteredTuitionList(PREDICATE_SHOW_ALL_TUITIONS);
@@ -69,6 +72,11 @@ public class RemarkClassCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedClass));
     }
 
+    /**
+     * Generates the message for the command execution outcome.
+     * @param classToEdit The tuition class with the new remark.
+     * @return A message that informs the user whether the remark is updated successfully or deleted.
+     */
     private String generateSuccessMessage(TuitionClass classToEdit) {
         String remark = String.valueOf(classToEdit.getRemark());
         String message = !remark.isEmpty() ? MESSAGE_UPDATE_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;

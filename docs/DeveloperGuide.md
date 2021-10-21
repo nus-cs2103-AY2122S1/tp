@@ -220,7 +220,7 @@ Users can add, edit, or remove remarks for students or tuition classes, which is
 * `RemarkEditor#setRemark(name, remark)` — Sets the name and remark of the identified student or tuition class.
 * `RemarkEditor#getRemark()`— Retrieves the description input by the user as a `Remark`.
 
-The interactions between the components during the execution of the `RemarkCommand` is show in the sequence diagram below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
+The interactions between the components during the execution of the `RemarkCommand` is show in the *Sequence Diagram* below. The interactions and execution paths for `RemarkClassCommand` are the same. <br>
 ![Ui](images/RemarkCommandSequenceDiagram.png)
 
 Given below is an example usage scenario of how a user can interact with the `RemarkEditor` dialog.
@@ -230,6 +230,7 @@ Step 1. The user executes `remark 1` to edit the remark of the 1st student. A di
 Step 2.1. The user clicks `Ok`  and the remark for the student is automatically updated to the new description.
 
 Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the remark will remain unchanged.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

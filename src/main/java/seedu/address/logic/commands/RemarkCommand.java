@@ -17,7 +17,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.ui.UiManager;
 
 /**
- * Changes the remark of an existing person in the address book.
+ * Changes the remark of an existing person in the TutAssistor.
  */
 public class RemarkCommand extends Command {
 
@@ -75,6 +75,11 @@ public class RemarkCommand extends Command {
         return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
+    /**
+     * Generates the message for the command execution outcome.
+     * @param personToEdit The person with the new remark.
+     * @return A message that informs the user whether the remark is updated successfully or deleted.
+     */
     private String generateSuccessMessage(Person personToEdit) {
         String remark = String.valueOf(personToEdit.getRemark());
         String message = !remark.isEmpty() ? MESSAGE_UPDATE_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
