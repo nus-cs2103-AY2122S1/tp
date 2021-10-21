@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -22,8 +23,8 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class SplitCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void constructor_null_exceptionThrown() {

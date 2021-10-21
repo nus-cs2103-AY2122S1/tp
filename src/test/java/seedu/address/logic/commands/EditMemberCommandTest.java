@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -88,7 +87,6 @@ public class EditMemberCommandTest {
     }
 
     @Test
-    @Disabled
     public void execute_noFieldSpecifiedUnfilteredList_success() {
 
         EditMemberCommand editCommand = new EditMemberCommand(INDEX_FIRST, new EditPersonDescriptor());
@@ -102,7 +100,6 @@ public class EditMemberCommandTest {
     }
 
     @Test
-    @Disabled
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST);
 

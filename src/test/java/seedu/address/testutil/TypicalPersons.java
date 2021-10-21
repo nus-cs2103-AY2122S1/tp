@@ -37,15 +37,17 @@ public class TypicalPersons {
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withPhone("8482424").build();
+            .withPhone("8482424").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withPhone("8482131").build();
+            .withPhone("8482131").withTodayAttendance(false).withTotalAttendance(0).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY).build();
+            .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY)
+            .withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
-            .withPhone(VALID_PHONE_BOB).withAvailability(VALID_AVAILABILITY_BOB).build();
+            .withPhone(VALID_PHONE_BOB).withAvailability(VALID_AVAILABILITY_BOB)
+            .withTodayAttendance(false).withTotalAttendance(0).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

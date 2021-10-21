@@ -175,7 +175,11 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append(": Availability: ")
-                .append(getAvailability());
+                .append(getAvailability())
+                .append("Today: ")
+                .append(getTodayAttendance())
+                .append("Total: ")
+                .append(getTotalAttendance());
         return builder.toString();
     }
 }
