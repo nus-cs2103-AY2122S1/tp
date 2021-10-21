@@ -8,6 +8,7 @@ import java.io.File;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.CsvWriter;
 import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -36,6 +37,8 @@ public class ExportCommandParserTest {
     public void parse_valid_success() throws Exception {
         ExportCommandParser parser = new ExportCommandParser();
         ExportCommand producedCommand = parser.parse("test.csv");
-        assertEquals(producedCommand, new ExportCommand(EXPORTS_DIRECTORY_PATH+ File.separator + "test.csv"));
+        assertEquals(producedCommand,
+                new ExportCommand(EXPORTS_DIRECTORY_PATH+ File.separator + "test.csv",
+                new CsvWriter()));
     }
 }

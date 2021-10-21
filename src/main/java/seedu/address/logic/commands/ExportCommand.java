@@ -39,13 +39,15 @@ public class ExportCommand extends Command {
     private final List<String> tags = new ArrayList<>();
 
     private final String filePath;
+    private final CsvWriter csvWriter;
 
     /**
      * Creates an ExportCommand to add the specified list of {@code Person}.
      */
-    public ExportCommand(String filePath) {
+    public ExportCommand(String filePath, CsvWriter csvWriter) {
         requireNonNull(filePath);
         this.filePath = filePath;
+        this.csvWriter = csvWriter;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class ExportCommand extends Command {
         populateDataToExport();
 
         try {
-            new CsvWriter(filePath, fieldHeaders, data).write();
+            csvWriter.write(filePath, fieldHeaders, data);
         } catch (IOException e) {
             throw new CommandException("File cannot be written to");
         }

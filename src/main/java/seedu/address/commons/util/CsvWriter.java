@@ -12,39 +12,27 @@ import java.util.Map;
  */
 public class CsvWriter {
 
-    private final String filePath;
-    private final String[] headers;
-    private final Map<String, List<String>> data;
-
-    /**
-     * Default constructor.
-     *
-     * @param filePath path of file to be written to.
-     * @param headers array of headers for the csv file.
-     * @param data data to be written to the csv file.
-     */
-    public CsvWriter(String filePath, String[] headers, Map<String, List<String>> data) {
-        this.filePath = filePath;
-        this.headers = headers;
-        this.data = data;
-    }
+    private String[] headers;
+    private Map<String, List<String>> data;
 
     /**
      * Writes data to Csv files.
      *
+     * @param filePath path of file to be written to.
+     * @param headers array of headers for the csv file.
+     * @param data data to be written to the csv file.
      * @throws IOException when file cannot be created or written to.
      */
-    public void write() throws IOException {
+    public void write(String filePath, String[] headers, Map<String, List<String>> data) throws IOException {
+        this.headers = headers;
+        this.data = data;
+
         FileUtil.createFile(Paths.get(filePath));
         BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-        bw.write(String.join(",", headers));
-        bw.newLine();
-        bw.flush();
+        writeNewLine(bw, String.join(",", headers));
 
         for (int i = 0; i < data.get("name").size(); i++) {
-            bw.write(getRow(i));
-            bw.newLine();
-            bw.flush();
+            writeNewLine(bw, getRow(i));
         }
         bw.close();
     }
@@ -60,6 +48,12 @@ public class CsvWriter {
         }
 
         return String.join(",", row);
+    }
+
+    private void writeNewLine(BufferedWriter bw, String line) throws IOException {
+        bw.write(line);
+        bw.newLine();
+        bw.flush();
     }
 
 }
