@@ -97,29 +97,33 @@ The index of the resident is the corresponding number in the list
 shown when `view` (without the [INDEX] parameter) is called.
 
 Format: `view [INDEX]`
-* For an index i, 1 &leq; i &leq; n, where n is the number of
-residents in the address book
+* For an index i, 1 &leq; i &leq; n, where n is the number of residents in the address book
 
 Examples:
 
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-### Retrieve a list of residents with their fet due : `list`
+### List of residents whose fet or test kit collection deadline is over or due soon: `list`
 
-Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
+Lists residents whose ART collection or FET tests are due within the range of the given date or the range of the 2 dates given.
 
-Format: `list [FLAG] [d/DATE]`
+Format: `list k/KEYWORD d1/DATE1 d2/DATE2` or `list k/LATE_KEYWORD d1/DATE1`
 
-* The flag can be either -f for fet or -c collection
-* The date inputted has to be in `dd-mm-yyyy` format
-* The given Date must be a date later than the current date
+* Normal keywords are `f` for fet and `c` for collection
+* Late keywords are `lf` for late fet and `lc` for late collection
+* The date inputted has to be in `dd-mm-yyyy` format  
+* When a normal keyword is given, both date1 and date2 have to be inputted
+* The given Date2 must be a date later than the given Date1
+* `date1` is the start date and `date2` is the last date inclusive  
+* When a late keyword is given, only date1 should be given
+* Anyone whose fet and collection is due before but not on `date1` is outputted  
 
 Examples:
-* `list -f` retrieves a list of residents whose FET is due today
-* `list -f 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
-* `list -c` retrieves a list of residents whose FET is due today
-* `list -c 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
+* `list k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
+* `list k/f d1/15-10-2021 d2/20-10-2021` retrieves a list of residents whose `Test Kit Collection` is due some day between `15 Oct 2021` and `20 Oct 2021`, inclusive
+* `list k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
+* `list k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
 
 ### Searching by resident information: `search`
 
@@ -171,6 +175,23 @@ Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 people in the address book.
 * `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
 
+### Add residents to an Event: `include`
+
+Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
+
+Format: `include INDEX r/INFORMATION [, MORE INFORMATION]`
+
+* Resident information can be given in the form of name or room, but all has to be all rooms or all names
+* When adding multiple residents, each piece of information is separated by a comma
+* The information inputted is case-insensitive
+* If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
+
+Examples:
+* `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
+* `include 2 r/A101, A102, A103` adds the residents who stay in rooms A101, A102 and A103 to the second event in the address book
+* `include 3 r/John Doe` adds John Doe to the third event in the address book
+* `include 4 r/John Doe, Jane Doe` adds John Doe and Jane Doe to the fourth event in the address book
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -191,9 +212,10 @@ Action | Format, Examples
 --------|------------------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
 **View** | `view [INDEX]` <br> e.g. `view 30`
-**List** | `list [FLAG] [d/DATE]` <br> e.g. `list -f 15-8-2021`
+**List** | `list k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `list k/f 15-8-2021 20-08-2021`
 **Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
 **Edit** | `edit INDEX [MORE_INDICES] [FLAG/UPDATED_PARTICULARS]...`<br> e.g., `edit 1 2 3 v/true`
 **Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
+**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
 **Help** | `help`
 **Exit** | `exit`
