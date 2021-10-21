@@ -20,7 +20,7 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
     public static final String NO_NEXT_MEETING = "No meeting planned.";
     public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
-        null);
+        null, null);
 
     public static final String VALID_MEETING_STRING =
         "([0-9]{2})-([0-9]{2})-([0-9]{4}) \\(([0-9]{2}):([0-9]{2})~([0-9]{2}):([0-9]{2})\\),(.|\\s)*\\S(.|\\s)*";
@@ -33,21 +33,23 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public final String startTimeInString;
     public final String endTimeInString;
     public final String location;
+    public Name withWho;
 
     /**
      * Constructs a {@code NextMeeting}.
      *
      * @param date date agent next meets a client
      */
-    public NextMeeting(String date, String startTime, String endTime, String location) {
+    public NextMeeting(String date, String startTime, String endTime, String location, String withWho) {
         if (!IS_NULL_VALUE_ALLOWED) {
-            requireAllNonNull(date, startTime, endTime, location);
+            requireAllNonNull(date, startTime, endTime, location, withWho);
         }
 
         date = convertEmptyStringIfNull(date);
         startTime = convertEmptyStringIfNull(startTime);
         endTime = convertEmptyStringIfNull(endTime);
         this.location = convertEmptyStringIfNull(location);
+        withWho = convertEmptyStringIfNull(withWho);
 
         checkArgument(isValidDate(date), DATE_MESSAGE_CONSTRAINTS);
         dateInString = date;
@@ -58,9 +60,19 @@ public class NextMeeting implements OptionalPersonNonStringField {
         checkArgument(isValidTime(endTime), TIME_MESSAGE_CONSTRAINTS);
         endTimeInString = endTime;
 
+        this.withWho = withWho.isEmpty() ? null : new Name(withWho);
+
         this.date = parseToLocalDate(date);
         this.startTime = parseToLocalTime(startTime);
         this.endTime = parseToLocalTime(endTime);
+    }
+
+    public void setWithWho(Name withWho) {
+        this.withWho = withWho;
+    }
+
+    public String getClientName() {
+        return this.withWho.fullName;
     }
 
     public static NextMeeting getNullMeeting() {
@@ -87,6 +99,7 @@ public class NextMeeting implements OptionalPersonNonStringField {
             && dateInString.equals(((NextMeeting) other).dateInString)
             && startTimeInString.equals(((NextMeeting) other).startTimeInString)
             && endTimeInString.equals(((NextMeeting) other).endTimeInString)
-            && location.equals(((NextMeeting) other).location)); // state check
+            && location.equals(((NextMeeting) other).location)
+            && withWho.equals(((NextMeeting) other).withWho)); // state check
     }
 }

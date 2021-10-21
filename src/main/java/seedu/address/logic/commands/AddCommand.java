@@ -17,6 +17,7 @@ import java.util.function.Function;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClientId;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,9 +80,15 @@ public class AddCommand extends Command {
         model.addPerson(person);
         // TODO: model.incrementClientCounter should not be exposed, instead increment directly within addPerson
         model.getAddressBook().incrementClientCounter();
+
+        if (person.getNextMeeting() != NextMeeting.NULL_MEETING) {
+            model.addNextMeeting(person.getNextMeeting());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));
     }
-
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

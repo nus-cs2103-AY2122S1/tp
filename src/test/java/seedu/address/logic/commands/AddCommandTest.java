@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<NextMeeting> getFilteredNextMeetingList() {
+        public ObservableList<NextMeeting> getSortedNextMeetingList() {
             throw new AssertionError("This method should not be called.");
         }
 

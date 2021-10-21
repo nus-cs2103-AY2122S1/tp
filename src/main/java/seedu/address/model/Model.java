@@ -25,6 +25,11 @@ public interface Model {
     /**
      * {@code Predicate} that always evaluate to true
      */
+    Predicate<Person> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
 
@@ -84,6 +89,11 @@ public interface Model {
     List<Person> deletePersonByClientIds(List<ClientId> clientIds);
 
     /**
+     * Deletes the meetings from the belonging to the deleted persons
+     */
+    void deleteMeetingsByPersons(List<Person> toDelete);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -137,9 +147,14 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Adds a meeting to the current meeting list
+     */
+    void addNextMeeting(NextMeeting nextMeeting);
+
+    /**
      * Returns an unmodifiable view of the meetings for current user.
      */
-    ObservableList<NextMeeting> getFilteredNextMeetingList();
+    ObservableList<NextMeeting> getSortedNextMeetingList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
