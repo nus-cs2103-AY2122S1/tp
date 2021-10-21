@@ -117,6 +117,7 @@ A student can have any number of tags (including 0).
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
   included in the add command.
+* To ensure conciseness of data storage, `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
 </div>
 
