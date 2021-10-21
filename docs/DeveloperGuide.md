@@ -441,6 +441,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC08 - Unmarking an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to unmark a specific applicant in the displayed list.
+4.  RecruitIn unmarks the applicant to "Not Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The unmark command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
