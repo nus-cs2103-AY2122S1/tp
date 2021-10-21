@@ -58,6 +58,7 @@ to help you with the installation. Follow the guide for your operating system fo
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+This section highlights the things to note about the command format TAB uses.
 
 <div markdown="block" class="alert alert-info">
 
