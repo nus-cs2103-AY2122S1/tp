@@ -2,62 +2,52 @@ package seedu.address.model.application;
 
 import java.util.Objects;
 
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.position.Position;
 
 /**
- * An association class representing a job application.
- *
- * References both the job applicant and the applied position.
- * Contains relevant information on the application.
- *
- * If either the Applicant or Position is deleted, the Application should also be deleted.
+ * Represents an application to a specific job position.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Application {
-    private final Applicant applicant;
     private final Position position;
-    private ApplicationStatus status;
+    private final ApplicationStatus status;
 
     /**
      * Constructor for a job application.
      * Invoked whenever the add-applicant command is called.
+      */
+    public Application(Position position) {
+        this(position, ApplicationStatus.PENDING);
+    }
+
+    /**
+     * Internal constructor for a job application which specifies an application status.
      */
-    public Application(Applicant applicant, Position position) {
-        this.applicant = applicant;
+    private Application(Position position, ApplicationStatus applicationStatus) {
         this.position = position;
-        this.status = ApplicationStatus.PENDING;
+        this.status = applicationStatus;
     }
 
     /**
-     * Marks the application as pending.
+     * Returns a new Application with the status updated as specified.
      */
-    public void markAsPending() {
-        this.status = ApplicationStatus.PENDING;
+    public Application markAs(ApplicationStatus applicationStatus) {
+        return new Application(position, applicationStatus);
     }
 
     /**
-     * Marks the application as accepted.
+     * Returns a description of the application and its status.
      */
-    public void markAsAccepted() {
-        this.status = ApplicationStatus.ACCEPTED;
-    }
-
-    /**
-     * Marks the application as rejected.
-     */
-    public void markAsRejected() {
-        this.status = ApplicationStatus.REJECTED;
-    }
-
-    /**
-     * Returns the status of the /application.
-     */
-    public ApplicationStatus getStatus() {
-        return status;
+    public String getDescription() {
+        return position.getTitle() + "; Status: " + status;
     }
 
     public Position getPosition() {
         return position;
+    }
+
+    public ApplicationStatus getStatus() {
+        return status;
     }
 
     @Override
@@ -71,20 +61,18 @@ public class Application {
         }
 
         Application otherApplication = (Application) other;
-        return applicant.equals(otherApplication.applicant)
-                && position.equals(otherApplication.position)
+        return position.equals(otherApplication.position)
                 && status.equals(otherApplication.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(applicant, position, status);
+        return Objects.hash(position, status);
     }
 
     @Override
     public String toString() {
         return "Application: {"
-                + "Applicant: " + applicant.getName()
                 + ", Position: " + position.getTitle()
                 + ", Status: " + status
                 + "}";

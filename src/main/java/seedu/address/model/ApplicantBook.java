@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.UniqueApplicantList;
 import seedu.address.model.position.Position;
 
@@ -55,12 +56,13 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     //// position-level operations
+
     /**
-     * Returns true if an applicant with the same identity as {@code applicant} exists in the applicant book.
+     * Returns true if an applicant with the name {@code applicantName} exists in the applicant book.
      */
-    public boolean hasApplicant(Applicant applicant) {
-        requireNonNull(applicant);
-        return applicants.contains(applicant);
+    public boolean hasApplicantWithName(Name applicantName) {
+        requireNonNull(applicantName);
+        return applicants.containsApplicantWithName(applicantName);
     }
 
     /**

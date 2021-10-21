@@ -4,7 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.application.Application;
+import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 
 /**
@@ -20,18 +22,45 @@ public class Applicant {
 
     // Data fields
     private final Address address;
-    private Application application;
+    private final Application application;
 
     /**
-     * Every field must be present and not null
+     * Every field must be present and not null.
      */
-    public Applicant(Name name, Phone phone, Email email, Address address, Position dummyPosition) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Position position) {
+        this(name, phone, email, address, new Application(position));
+    }
+
+    /**
+     * Constructor for an applicant given the applicant's particulars.
+     */
+    public Applicant(ApplicantParticulars applicantParticulars, Position position) {
+        this(
+                applicantParticulars.getName(),
+                applicantParticulars.getPhone(),
+                applicantParticulars.getEmail(),
+                applicantParticulars.getAddress(),
+                new Application(position)
+        );
+    }
+
+    /**
+     * Internal constructor for a new Applicant object.
+     */
+    private Applicant(Name name, Phone phone, Email email, Address address, Application application) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.application = new Application(this, dummyPosition);
+        this.application = application;
+    }
+
+    /**
+     * Marks the application with the specified application status.
+     */
+    public Applicant markAs(ApplicationStatus applicationStatus) {
+        return new Applicant(name, phone, email, address, application.markAs(applicationStatus));
     }
 
     public Name getName() {
@@ -50,16 +79,8 @@ public class Applicant {
         return address;
     }
 
-    public Application.ApplicationStatus getApplicationStatus() {
-        return application.getStatus();
-    }
-
-    public void setApplication(Application application) {
-        this.application = application;
-    }
-
-    public Position getPosition() {
-        return application.getPosition();
+    public Application getApplication() {
+        return application;
     }
 
     /**
@@ -100,13 +121,14 @@ public class Applicant {
         return name.equals(otherApplicant.name)
                 && phone.equals(otherApplicant.phone)
                 && email.equals(otherApplicant.email)
-                && address.equals(otherApplicant.address);
+                && address.equals(otherApplicant.address)
+                && application.equals(otherApplicant.application);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(name, phone, email, address, application);
     }
 
     @Override
@@ -123,7 +145,6 @@ public class Applicant {
     }
 
     public String getApplicationSummary() {
-        return "Applied for: " + application.getPosition().getTitle() + "; Status: " + application.getStatus();
+        return "Applied for: " + application.getDescription();
     }
-
 }
