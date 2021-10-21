@@ -10,7 +10,7 @@
     "levelOfEducation" : "PhD",
     "experience" : "0",
     "tagged" : [ "friends" ],
-    "interview" : ""
+    "interview" : "-"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -33,7 +33,7 @@
     "levelOfEducation" : "Elementary",
     "experience" : "2",
     "tagged" : [ ],
-    "interview" : ""
+    "interview" : "-"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -44,7 +44,7 @@
     "levelOfEducation" : "Middle School",
     "experience" : "3",
     "tagged" : [ "friends" ],
-    "interview" : ""
+    "interview" : "-"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -55,7 +55,7 @@
     "levelOfEducation" : "Bachelors",
     "experience" : "4",
     "tagged" : [ "old" ],
-    "interview" : ""
+    "interview" : "-"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -66,7 +66,7 @@
     "levelOfEducation" : "High School",
     "experience" : "5",
     "tagged" : [ ],
-    "interview" : ""
+    "interview" : "-"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -77,6 +77,6 @@
     "levelOfEducation" : "University",
     "experience" : "6",
     "tagged" : [ ],
-    "interview" : ""
+    "interview" : "-"
   } ]
 }

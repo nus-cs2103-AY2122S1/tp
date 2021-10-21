@@ -176,7 +176,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Interview.class.getSimpleName()));
         }
-        if (interview.isEmpty() || interview.equals("-")) {
+        if (interview.equals("-")) {
             modelInterview = Optional.ofNullable(Interview.EMPTY_INTERVIEW);
         } else {
             if (!Interview.isValidInterviewTime(interview)) {
