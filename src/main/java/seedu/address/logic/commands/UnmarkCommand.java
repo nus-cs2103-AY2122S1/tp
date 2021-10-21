@@ -43,7 +43,7 @@ public class UnmarkCommand extends MarkingCommand {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             Person personToMark = lastShownList.get(targetIndex.getZeroBased());
-            result.insert(0, personToMark);
+            result.append(personToMark);
             personToMark.getDone().setAsUndone();
         }
 
