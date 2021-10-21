@@ -77,6 +77,9 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
+    /**
+     * Old constructor - left temporarily to pass unit tests.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
                         ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -116,6 +119,9 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
+    /**
+     * Old constructor - left temporarily to pass unit tests.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
                         ReadOnlyUserPrefs userPrefs) {
         super();
@@ -133,6 +139,9 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
+    /**
+     * Old constructor - left temporarily to pass unit tests.
+     */
     public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyApplicantBook applicantBook,
                         ReadOnlyUserPrefs userPrefs) {
         super();
