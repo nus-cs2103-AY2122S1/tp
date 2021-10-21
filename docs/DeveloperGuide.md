@@ -3,6 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
+  
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -127,7 +129,6 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
@@ -153,6 +154,63 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### View Task list feature
+
+Displays the task list associated to the specified person onto the `taskListPanel` of the GUI.
+
+The view task list feature is facilitated by :
+
+`TaskListManager` :
+
+- It serves as a archive to track the task lists reference of every `Person`.
+- It maintains an `ObservableList` which encapsulates a `Person`'s task list, and is referenced by the `UI ` for display on the GUI.
+
+- It implements the following operation that support the view task list feature:
+  - `TaskListManager#setToDisplayTaskList` — set the currently displayed task list to the task list of the specified person.
+
+This operation is exposed in the `Model` interface as `Model#displayPersonTaskList`.
+
+Given below is the example usage scenario:
+
+Step 1. The user launches the ContactSh application. Data will be loaded from the storage to the application memory. The `TaskListManager` will populate itself with the references of every `Person`'s task list.
+
+Step 2. The user executes `cat 2` command to view the task list of the 2nd `Person` that is shown on the currently displayed person list.
+
+step 3. If the parameters entered by the user is valid, the application will retrieve the task list reference of the specified `Person` from the archive. The task list reference currently encapsulated by the `ObservableList` is cleared and is then replaced by the specified `Person`'s task list reference. Else, ContactSh will display an error message indicating that the user did not type in the parameters correctly.
+
+The following sequence diagram show how the view task list operation works:
+
+<img src=![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the parameters provided by the user is of non-integer form, ParseException will be thrown and an error message providing the correct format will be shown. Also, if the provided INDEX does not exists within the indices of the displayed person list, CommandException is thrown and an error message that warns of invalid INDEX will be shown.
+
+The following activity diagram summarises what happens when a user executes a `cat` command:
+
+<img src=![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+
+#### Design consideration:
+
+##### Aspect: How to display the task list on the GUI
+
+- **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
+
+  - Pros: User is able to concurrently view more information.
+  - Cons:
+    - More work to create and optimize the split panel.
+    - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
+
+- **Alternative 2:** Have only one panel. The person list gets replaced by task list when cat is executed.
+
+  - Pros: More convenient to implement.
+
+  - Cons:
+
+    - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
+
+      which reduces efficiency).
+
+    - Lesser view of information.
 
 ### \[Proposed\] Undo/redo feature
 
