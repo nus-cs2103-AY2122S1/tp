@@ -35,7 +35,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                     .get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_ROOM).isPresent()) {
-            findCompositePredicate.setRoom(ParserUtil.parseRoom(argMultimap.getValue(CliSyntax.PREFIX_ROOM)
+            findCompositePredicate.setRoom(ParserUtil.parseRoomForFind(argMultimap.getValue(CliSyntax.PREFIX_ROOM)
                     .get()));
         }
         if (argMultimap.getValue(CliSyntax.PREFIX_PHONE).isPresent()) {

@@ -2,7 +2,9 @@ package safeforhall.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_COLLECTIONDATE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE1;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE2;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -13,6 +15,7 @@ import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_PHONE;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_ROOM;
 import static safeforhall.logic.parser.CliSyntax.PREFIX_VACCSTATUS;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 import static safeforhall.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -20,11 +23,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import safeforhall.commons.core.index.Index;
+import safeforhall.logic.commands.edit.EditEventCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.NameContainsEventKeywordsPredicate;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
+import safeforhall.testutil.EditEventDescriptorBuilder;
 import safeforhall.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -53,6 +61,15 @@ public class CommandTestUtil {
     public static final String VALID_KEYWORD_F = "f";
     public static final String VALID_KEYWORD_C = "c";
 
+    public static final String VALID_NAME_FOOTBALL_TRAINING = "Football Training";
+    public static final String VALID_NAME_SWIM_TRAINING = "Swim Training";
+    public static final String VALID_DATE_FOOTBALL_TRAINING = "20-10-2021";
+    public static final String VALID_DATE_SWIM_TRAINING = "19-10-2021";
+    public static final String VALID_VENUE_FOOTBALL_TRAINING = "Field";
+    public static final String VALID_VENUE_SWIM_TRAINING = "Pool";
+    public static final String VALID_CAPACITY_FOOTBALL_TRAINING = "20";
+    public static final String VALID_CAPACITY_SWIM_TRAINING = "15";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -74,6 +91,15 @@ public class CommandTestUtil {
     public static final String KEYWORD_DESC_F = " " + PREFIX_KEYWORD + VALID_KEYWORD_F;
     public static final String KEYWORD_DESC_C = " " + PREFIX_KEYWORD + VALID_KEYWORD_C;
 
+    public static final String NAME_DESC_FOOTBALL_TRAINING = " " + PREFIX_NAME + VALID_NAME_FOOTBALL_TRAINING;
+    public static final String NAME_DESC_SWIM_TRAINING = " " + PREFIX_NAME + VALID_NAME_SWIM_TRAINING;
+    public static final String DATE_DESC_FOOTBALL_TRAINING = " " + PREFIX_DATE + VALID_DATE_FOOTBALL_TRAINING;
+    public static final String DATE_DESC_SWIM_TRAINING = " " + PREFIX_DATE + VALID_DATE_SWIM_TRAINING;
+    public static final String VENUE_DESC_FOOTBALL_TRAINING = " " + PREFIX_VENUE + VALID_VENUE_FOOTBALL_TRAINING;
+    public static final String VENUE_DESC_SWIM_TRAINING = " " + PREFIX_VENUE + VALID_VENUE_SWIM_TRAINING;
+    public static final String CAPACITY_DESC_FOOTBALL_TRAINING =
+            " " + PREFIX_CAPACITY + VALID_CAPACITY_FOOTBALL_TRAINING;
+    public static final String CAPACITY_DESC_SWIM_TRAINING = " " + PREFIX_CAPACITY + VALID_CAPACITY_SWIM_TRAINING;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -83,12 +109,21 @@ public class CommandTestUtil {
     public static final String INVALID_VACCSTATUS_DESC = " " + PREFIX_VACCSTATUS + "fake"; // only T or F allowed
     public static final String INVALID_FETDATE_DESC = " " + PREFIX_FETDATE + "41-20-20"; // not valid date
     public static final String INVALID_COLLECTIONDATE_DESC = " " + PREFIX_FETDATE + "41/20/20"; // not valid date
+    public static final String INVALID_EVENT_NAME_DESC =
+            " " + PREFIX_NAME + "Football & Basketball"; // '&' not allowed in names
+    public static final String INVALID_EVENT_DATE_DESC = " " + PREFIX_DATE + "41/20/20"; // not valid date
+    public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + "$bank"; // '$' not allowed in venues
+    public static final String INVALID_CAPACITY_DESC = " " + PREFIX_CAPACITY + "ten"; // accepts numbers only
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditEventCommand.EditEventDescriptor DESC_FOOTBALL_TRAINING;
+    public static final EditEventCommand.EditEventDescriptor DESC_SWIM_TRAINING;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -96,6 +131,14 @@ public class CommandTestUtil {
                 .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                .build();
+        DESC_FOOTBALL_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_FOOTBALL_TRAINING)
+                .withDate(VALID_DATE_FOOTBALL_TRAINING).withVenue(VALID_VENUE_FOOTBALL_TRAINING)
+                .withCapacity(VALID_CAPACITY_FOOTBALL_TRAINING)
+                .build();
+        DESC_SWIM_TRAINING = new EditEventDescriptorBuilder().withName(VALID_VENUE_SWIM_TRAINING)
+                .withDate(VALID_DATE_SWIM_TRAINING).withVenue(VALID_VENUE_SWIM_TRAINING)
+                .withCapacity(VALID_CAPACITY_SWIM_TRAINING)
                 .build();
     }
 
@@ -134,12 +177,22 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        if (actualModel instanceof Person) {
+            AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+            List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        } else {
+            AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+            List<Event> expectedFilteredList = new ArrayList<>(actualModel.getFilteredEventList());
+
+            assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedFilteredList, actualModel.getFilteredEventList());
+        }
+
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
@@ -153,6 +206,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getEventName().eventName.split("\\s+");
+        model.updateFilteredEventList(new NameContainsEventKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
     }
 
 }
