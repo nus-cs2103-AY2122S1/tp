@@ -60,14 +60,17 @@ public class ModelManager implements Model {
      * Old constructor - left temporarily to pass unit tests
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, positionBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook
+                + " , position book: " + positionBook
+                + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.positionBook = new PositionBook();
+        this.positionBook = new PositionBook(positionBook);
         this.applicantBook = new ApplicantBook();
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
