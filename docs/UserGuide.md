@@ -105,7 +105,7 @@ Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...].. [p/{PHONE}]
 
 Examples:
 * `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`
-* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100 m/CS2030S B09`
+* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100 m/CS2030S T11 B09`
 
 Command aliases: `a`
 
@@ -149,13 +149,13 @@ Edits the person at the specified index.
 * The index number must be a positive integer 1,2,3…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing remark, the existing remark of the person will be overwritten.
+* When editing module/remark, the existing module/remark of the person will be overwritten.
 
 Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE} {LESSON_CODE}..].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
 * `edit 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
-* `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe`.
+* `edit 2 n/John Doe m/CS2100 T09 B09` Edits the name module of the 2nd person to be `John Doe` and `CS2100 T09 B09` respectively.
 * `edit 3 h/@BenWasHere r/Overseas` Edits the telegram handle and remark of the 3rd person to be `@BenWasHere` and `Overseas` respectively.
 
 Command aliases: `update` `e`
