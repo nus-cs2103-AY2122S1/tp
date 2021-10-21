@@ -92,8 +92,7 @@ public class EncryptionManager implements Encryption {
 
     private String decrypt(Path encryptedSourceFilePath)
             throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
-        assert encryptedSourceFilePath != null;
-
+        requireNonNull(encryptedSourceFilePath);
         if (isIllegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
