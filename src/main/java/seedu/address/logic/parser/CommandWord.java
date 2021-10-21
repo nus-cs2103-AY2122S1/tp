@@ -44,7 +44,6 @@ public enum CommandWord {
             aliasMap.put(cw, cw.aliasList);
         }
         ALIAS_MAP = Collections.unmodifiableMap(aliasMap);
-
     }
 
     private ArrayList<String> aliasList;
