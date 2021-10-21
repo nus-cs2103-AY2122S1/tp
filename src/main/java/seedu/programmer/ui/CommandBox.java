@@ -61,14 +61,13 @@ public class CommandBox extends UiPart<Region> {
     private void handleKeyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.UP) {
             commandTextField.setText(commandHistory.getPrevCommand());
-            commandTextField.end();
-            event.consume(); // Consume Event
-        }
-        if (event.getCode() == KeyCode.DOWN) {
+        } else if (event.getCode() == KeyCode.DOWN) {
             commandTextField.setText(commandHistory.getNextCommand());
-            commandTextField.end();
-            event.consume(); // Consume Event
+        } else {
+            return;
         }
+        commandTextField.end();
+        event.consume(); // Consume Event`
     }
 
     /**
