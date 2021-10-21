@@ -52,7 +52,7 @@ public class RejectionRateCommand extends Command {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);
         }
 
-        Title positionName = toAdd.getTitle();
+        Title positionTitle = toAdd.getTitle();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, positionName, rejectionRate));
     }
