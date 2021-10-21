@@ -119,7 +119,7 @@ public class ParserUtil {
         final Set<Tag> tagSet = new HashSet<>();
         final String trimmedTags = tags.trim();
         if (trimmedTags.equals("")) {
-            return tagSet;
+            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         String[] splitTags = tags.split(",");
         for (String tagName : splitTags) {

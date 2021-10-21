@@ -4,6 +4,7 @@ import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.person.PersonCommand;
+import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.Parser;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;

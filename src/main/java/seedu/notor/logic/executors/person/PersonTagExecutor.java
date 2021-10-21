@@ -24,8 +24,8 @@ import seedu.notor.model.tag.Tag;
  * Executor for a PersonTagCommand.
  */
 public class PersonTagExecutor extends PersonExecutor {
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Added Tags to %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "The person already has these tags";
 
     private final Set<Tag> tags;
 
@@ -44,29 +44,29 @@ public class PersonTagExecutor extends PersonExecutor {
     @Override
     public CommandResult execute() throws ExecuteException {
         Person person = super.getPerson();
-        Person editedPerson = createEditedPerson(person, tags);
+        Person taggedPerson = createTaggedPerson(person, tags);
 
-        if (!person.isSame(editedPerson) && model.hasPerson(editedPerson)) {
+        if (!person.isSame(taggedPerson) && model.hasPerson(taggedPerson)) {
             throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.setPerson(person, editedPerson);
+        model.setPerson(person, taggedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        return new CommandResult(String.format(MESSAGE_TAG_PERSON_SUCCESS, taggedPerson));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit} with tags added
+     * Creates and returns a {@code Person} with the details of {@code personToTag} with tags added
      */
-    private static Person createEditedPerson(Person personToEdit, Set<Tag> tags) {
-        assert personToEdit != null;
+    private static Person createTaggedPerson(Person personToTag, Set<Tag> tags) {
+        assert personToTag != null;
 
         // todo: abstract + add errors that are appropriate
-        Set<Tag> updatedTags = new HashSet<>(personToEdit.getTags());
+        Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
         updatedTags.addAll(tags);
 
-        return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getNote(), updatedTags);
+        return new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
+                personToTag.getNote(), updatedTags);
     }
 
     @Override

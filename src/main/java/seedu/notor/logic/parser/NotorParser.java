@@ -40,6 +40,7 @@ import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
+import seedu.notor.logic.parser.person.PersonTagCommandParser;
 
 /**
  * Parses user input.
@@ -136,6 +137,9 @@ public class NotorParser {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 case PersonRemoveGroupCommand.COMMAND_WORD:
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                case TagCommand.COMMAND_WORD:
+                    return new PersonTagCommandParser(index, arguments).parse();
+                // TODO: Implement tag command.
                 default:
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
@@ -152,8 +156,6 @@ public class NotorParser {
                 default:
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
-            case TagCommand.COMMAND_WORD:
-                // TODO: Implement tag command.
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }

@@ -28,13 +28,16 @@ public class PersonTagCommand extends PersonCommand {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TAG + "important";
 
-    public static final String MESSAGE_NOT_EDITED = "At least one tag must be provided.";
+    public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
+    
+    public static final String MESSAGE_TAG_REQUIREMENTS = "Tags are required to be alphanumeric";
 
     private final PersonExecutor executor;
 
     /**
-     * @param index Index of the person in the filtered person list to edit.
-     * @param personTagDescriptor Details to edit the person with.
+     * 
+     * @param index
+     * @param tags
      */
     public PersonTagCommand(Index index, Set<Tag> tags) {
         super(index);
