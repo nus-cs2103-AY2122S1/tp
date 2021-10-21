@@ -37,7 +37,7 @@ public class AppendCommand extends Command {
 
     public static final String COMMAND_WORD = "append";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends a new data fields to "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Appends a new data field to "
             + "existing data fields of a person. "
             + "Only applicable to data fields which can have more than 1 value.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -48,12 +48,17 @@ public class AppendCommand extends Command {
             + "Example: " + COMMAND_WORD  + " 1 "
             + PREFIX_LANGUAGE + "python";
 
-    public static final String MESSAGE_APPEND_PERSON_SUCCESS = "Appended data field";
+    public static final String MESSAGE_APPEND_PERSON_SUCCESS = "Appended data field: %1$s";
+    public static final String MESSAGE_NOT_APPENDED = "At least one field to append must be provided";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
     private final AppendPersonDescriptor appendPersonDescriptor;
 
+    /**
+     * @param index of the person in the filtered person list to append to
+     * @param appendPersonDescriptor detail to append to the person
+     */
     public AppendCommand(Index index, AppendPersonDescriptor appendPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(appendPersonDescriptor);

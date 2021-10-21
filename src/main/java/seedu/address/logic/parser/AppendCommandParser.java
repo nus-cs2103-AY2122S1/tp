@@ -44,10 +44,18 @@ public class AppendCommandParser implements Parser<AppendCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppendCommand.MESSAGE_USAGE), pe);
         }
         AppendPersonDescriptor appendPersonDescriptor = new AppendPersonDescriptor();
-        parseSkillsForAppend(argMultimap.getAllValues(PREFIX_SKILL)).ifPresent(appendPersonDescriptor::setSkills);
-        parseLanguagesForAppend(argMultimap.getAllValues(PREFIX_LANGUAGE)).ifPresent(appendPersonDescriptor::setLanguages);
-        parseFrameworksForAppend(argMultimap.getAllValues(PREFIX_FRAMEWORK)).ifPresent(appendPersonDescriptor::setFrameworks);
-        parseTagsForAppend(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(appendPersonDescriptor::setTags);
+        parseSkillsForAppend(argMultimap.getAllValues(PREFIX_SKILL))
+                .ifPresent(appendPersonDescriptor::setSkills);
+        parseLanguagesForAppend(argMultimap.getAllValues(PREFIX_LANGUAGE))
+                .ifPresent(appendPersonDescriptor::setLanguages);
+        parseFrameworksForAppend(argMultimap.getAllValues(PREFIX_FRAMEWORK))
+                .ifPresent(appendPersonDescriptor::setFrameworks);
+        parseTagsForAppend(argMultimap.getAllValues(PREFIX_TAG))
+                .ifPresent(appendPersonDescriptor::setTags);
+
+        if (!appendPersonDescriptor.isAnyFieldAppended()) {
+            throw new ParseException(AppendCommand.MESSAGE_NOT_APPENDED);
+        }
 
         return new AppendCommand(index, appendPersonDescriptor);
     }
@@ -63,7 +71,9 @@ public class AppendCommandParser implements Parser<AppendCommand> {
         if (skills.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> skillSet = skills.size() == 1 && skills.contains("") ? Collections.emptySet() : skills;
+        Collection<String> skillSet = skills.size() == 1 && skills.contains("")
+                ? Collections.emptySet()
+                : skills;
         return Optional.of(ParserUtil.parseSkills(skillSet));
     }
 
@@ -78,7 +88,9 @@ public class AppendCommandParser implements Parser<AppendCommand> {
         if (languages.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> languageSet = languages.size() == 1 && languages.contains("") ? Collections.emptySet() : languages;
+        Collection<String> languageSet = languages.size() == 1 && languages.contains("")
+                ? Collections.emptySet()
+                : languages;
         return Optional.of(ParserUtil.parseLanguages(languageSet));
     }
 
@@ -93,7 +105,9 @@ public class AppendCommandParser implements Parser<AppendCommand> {
         if (frameworks.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> frameworkSet = frameworks.size() == 1 && frameworks.contains("") ? Collections.emptySet() : frameworks;
+        Collection<String> frameworkSet = frameworks.size() == 1 && frameworks.contains("")
+                ? Collections.emptySet()
+                : frameworks;
         return Optional.of(ParserUtil.parseFrameworks(frameworkSet));
     }
 
@@ -108,7 +122,9 @@ public class AppendCommandParser implements Parser<AppendCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("")
+                ? Collections.emptySet()
+                : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 }
