@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -141,7 +141,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ProgrammerErrorStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -238,7 +238,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Show Lab Results Feature 
+### Show Lab Results Feature
 
 ####  Implementation
 
@@ -261,7 +261,7 @@ The mechanism is as described below:
 
 
 * `ShowCommandParser` parses the index and creates a `ShowCommand`, which finds the student to be shown according to the index and creates a `ShowCommandResult` with the student identified.
-  
+
 
 * `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
 
@@ -285,15 +285,14 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Each student object keeps track of its own lab results by an ObservableList.
     * Pros: Easy to implement; Lower chance of having mismatched student and lab records.
-    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student` 
+    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student`
 
 * **Alternative 2:** An ObservableList of lab results of every student in ProgrammerError
   itself.
     * Pros: Potential improvement in performance by passing an index, instead of a `Student` instance, across different classes.
-    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index 
+    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index
       (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list),
       given that other operations such as add and delete can change the indexes easily.
-    
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -324,8 +323,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
-
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
 
 ### User stories
 
@@ -333,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
+| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
 | `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.      
 | `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
@@ -574,3 +572,8 @@ testers are expected to do more *exploratory* testing.
 
     1. To cancel, click 'cancel' to return to the main window.
     2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
+
+### [Proposed] Dashboard
+
+
+1. A dashboard to view the TA's classes lab results.  
