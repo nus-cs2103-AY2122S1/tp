@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.model.position.UniquePositionList;
 
 /**
@@ -56,12 +57,21 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     //// position-level operations
+
     /**
      * Returns true if a position with the same identity as {@code position} exists in the position book.
      */
     public boolean hasPosition(Position position) {
         requireNonNull(position);
         return positions.contains(position);
+    }
+
+    /**
+     * Returns true if a position titled {@code title} exists in the position book.
+     */
+    public boolean hasPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return positions.containsPositionWithTitle(title);
     }
 
     /**
@@ -73,11 +83,11 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
-     * Searches for a position with the same identity as {@code dummyPosition}.
+     * Searches for a position by its {@code title}.
      */
-    public Position getPosition(Position dummyPosition) {
-        requireNonNull(dummyPosition);
-        return positions.getPosition(dummyPosition);
+    public Position getPositionByTitle(Title title) {
+        requireNonNull(title);
+        return positions.getPositionByTitle(title);
     }
 
     /**

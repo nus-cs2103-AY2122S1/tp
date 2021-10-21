@@ -12,10 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.application.Application;
-import seedu.address.model.application.Application.ApplicationStatus;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,7 +27,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final PositionBook positionBook;
     private final ApplicantBook applicantBook;
-    private final ApplicationBook applicationBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Applicant> filteredApplicants;
@@ -36,21 +36,19 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given positionBook, applicantBook, applicationBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
-                        ReadOnlyPositionBook positionBook, ApplicationBook applicationBook,
+                        ReadOnlyPositionBook positionBook,
                         ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, applicantBook, positionBook, applicationBook, userPrefs);
+        requireAllNonNull(addressBook, applicantBook, positionBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook
                 + ", applicant book: " + applicantBook
                 + ", position book: " + positionBook
-                + ", application book: " + applicationBook
                 + ", userPrefs: " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.positionBook = new PositionBook(positionBook);
         this.applicantBook = new ApplicantBook(applicantBook);
-        this.applicationBook = new ApplicationBook(applicationBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
@@ -70,7 +68,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.positionBook = new PositionBook();
         this.applicantBook = new ApplicantBook();
-        this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
@@ -90,7 +87,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook();
         this.positionBook = new PositionBook(positionBook);
         this.applicantBook = new ApplicantBook();
-        this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
@@ -99,7 +95,7 @@ public class ModelManager implements Model {
 
 
     public ModelManager() {
-        this(new AddressBook(), new ApplicantBook(), new PositionBook(), new ApplicationBook(), new UserPrefs());
+        this(new AddressBook(), new ApplicantBook(), new PositionBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -177,22 +173,20 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
-        Position position = positionBook.getPosition(dummyPosition);
-        Application application = new Application(applicant, position);
-
-        // Sets the application of the applicant to the application with original position object
-        applicant.setApplication(application);
+    public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
+        Title positionTitle = applicantParticulars.getPositionTitle();
+        Position position = positionBook.getPositionByTitle(positionTitle);
+        Applicant applicant = new Applicant(applicantParticulars, position);
 
         applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(application);
         updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        return applicant;
     }
 
     @Override
-    public boolean hasApplicant(Applicant applicant) {
-        requireNonNull(applicant);
-        return applicantBook.hasApplicant(applicant);
+    public boolean hasApplicantWithName(Name applicantName) {
+        requireNonNull(applicantName);
+        return applicantBook.hasApplicantWithName(applicantName);
     }
 
     @Override
@@ -275,10 +269,16 @@ public class ModelManager implements Model {
 
 
     // Position related methods
+
     @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
         return positionBook.hasPosition(position);
+    }
+    @Override
+    public boolean hasPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return positionBook.hasPositionWithTitle(title);
     }
 
     @Override
@@ -318,18 +318,18 @@ public class ModelManager implements Model {
      * @param p The position to be initialised.
      */
     @Override
-    public float calculateRejectionRate(Position p) {
+    public int initialiseRejectionRate(Position p) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getPositionApplyingTo();
-            if (currentPosition.isSamePosition(p)) {
+            Position currentPosition = a.getPosition();
+            if (currentPosition == p) {
                 total++;
-                if (a.getApplicationStatus() == ApplicationStatus.REJECTED) {
+                if (a.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
                     count++;
                 }
             }
         }
-        return Calculator.calculateRejectionRate(total, count);
+        return Calculator.calculateRejRate(total, count);
     }
 }

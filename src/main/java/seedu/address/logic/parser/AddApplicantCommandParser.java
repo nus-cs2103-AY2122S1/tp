@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddApplicantCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
-import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Position;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.position.Title;
 
 /**
  * Parses input arguments and creates a new AddApplicantCommand object
@@ -42,11 +42,12 @@ public class AddApplicantCommandParser implements Parser<AddApplicantCommand> {
         Phone phone = ApplicantParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ApplicantParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ApplicantParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Position dummyPosition = ApplicantParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
+        Title positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
 
-        Applicant applicant = new Applicant(name, phone, email, address, dummyPosition);
+        ApplicantParticulars applicantParticulars =
+                new ApplicantParticulars(name, phone, email, address, positionTitle);
 
-        return new AddApplicantCommand(applicant, dummyPosition);
+        return new AddApplicantCommand(applicantParticulars);
     }
 
     /**
