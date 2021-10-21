@@ -221,7 +221,7 @@ Step 5. The user executes `list` command to view the full list of tasks.
 
 The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
 
-![FindSequenceDiagram](images/UML_Diagrams/FindSequenceDiagram.png)
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -241,7 +241,7 @@ In the **Model** Component, This is the key method invoked:
 * `Model#updateFilteredTaskList(predicate)`: `Model` uses this method to update the displayed patients list.
 
 The following activity diagram summarizes what happens when the user inputs a find command.
-![FindActivityDiagram](images/UML_Diagrams/findActivityDiagram.png)
+![FindActivityDiagram](images/FindActivityDiagram.png)
 
 #### 3.4.2 Design Consideration
 
