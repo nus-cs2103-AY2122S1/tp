@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
+    private final FilteredList<Order> filteredOrders;
 
     //pending re-wrapping by yuichiro
     private final OrderList orderList;
@@ -164,7 +165,6 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        System.out.println(filteredTasks);
         filteredTasks.setPredicate(predicate);
     }
 
@@ -174,14 +174,53 @@ public class ModelManager implements Model {
 
 
     //=========== Order Management ==================================================================================
+
+    /**
+     * check if orderlist has this order.
+     */
+    @Override
+    public boolean hasOrder(Order order) {
+        requireNonNull(order);
+        return addressBook.hasOrder(order);
+    }
+
+    @Override
+    public void setOrder(Order target, Order editedOrder) {
+        requireAllNonNull(target, editedOrder);
+        addressBook.setOrder(target, editedOrder);
+    }
+
+    /**
+     * adding an order to tasklist.
+     */
+    public void addOrder(Order toAdd) {
+        addressBook.addOrder(toAdd);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    /**
+     * deleting an order from orderlist.
+     */
+    public void deleteOrder(Order toDelete) {
+        addressBook.deleteOrder(toDelete);
+    }
+
+  
     @Override
     public ObservableList<Order> getFilteredOrderList() {
         return filteredOrders;
     }
 
     @Override
+
+    public void updateFilteredOrderList(Predicate<Order> predicate) {
+        requireNonNull(predicate);
+        filteredOrders.setPredicate(predicate);
+    }
+
     public void markOrder(Order order) {
-        this.orderList.markComplete(order);
+        addressBook.markOrder(order);
+
     }
 
     //=========== Filtered Person List Accessors =============================================================

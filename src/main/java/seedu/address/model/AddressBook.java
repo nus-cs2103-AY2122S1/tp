@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
@@ -19,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final TaskList tasks;
+    private final OrderList orders;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         tasks = new TaskList();
+        orders = new OrderList();
     }
 
     public AddressBook() {}
@@ -131,6 +135,28 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tasks.hasTask(task);
     }
 
+    /// order-level operations
+
+    public void addOrder(Order toAdd) {
+        orders.add(toAdd);
+    }
+
+    public void deleteOrder(Order toDelete) {
+        orders.remove(toDelete);
+    }
+
+    public void markOrder(Order order) {
+        orders.markComplete(order);
+    }
+
+    public void setOrder(Order target, Order editedOrder) {
+        orders.setOrder(target, editedOrder);
+    }
+
+    public boolean hasOrder(Order order) {
+        return orders.hasOrder(order);
+    }
+
 
     //// util methods
 
@@ -148,6 +174,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Task> getTaskList() {
         return tasks.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Order> getOrderList() {
+        return orders.asUnmodifiableObservableList();
     }
 
     @Override

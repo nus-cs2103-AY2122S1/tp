@@ -5,8 +5,8 @@ import seedu.address.model.Date;
 public class Order {
     private static int count = 1;
 
-    private final Customer customer;
-    private final long id;
+    private Customer customer;
+    private long id;
     private Amount amount;
     private Date date;
     private boolean isComplete;
@@ -53,14 +53,33 @@ public class Order {
         return this.customer;
     }
 
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     //Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
+        final StringBuilder builder = new StringBuilder();
         if (isComplete) {
-            return "[X] " + "SO" + id;
+            builder.append("[X] ");
         } else {
-            return "[ ]" + "SO" + id + ", due: " + date;
+            builder.append("[ ] ");
         }
+        builder.append("ID: SO")
+                .append(getId())
+                .append("; Customer: ")
+                .append(getCustomer())
+                .append("; Amount: ")
+                .append(getAmount())
+                .append("; Date: ")
+                .append(getDate());
+
+        return builder.toString();
     }
 
     //required for OrderList to check if a Order exists, before marking it.
