@@ -76,21 +76,7 @@ Examples:
 * `add n/John Doe e/johnd@nus.edu.sg f/computing m/computer science`
 * `add n/Seth e/seth@nus.edu.sg f/computing m/computer science s/frontend l/javascript t/friend`
 
-### List view of contacts : `list`
-
-Shows a list of all contacts in the address book.
-
-Format: `list`
-
-### Sort contacts : `sort`
-
-Sorts contacts and shows the list of contacts in alphabetical order.
-
-Format: `sort`
-![result for 'sort'](images/sortscreenshot.png)
-
 ### Editing a contact : `edit`
-
 Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [a/ADDRESS] [t/TAG]…​`
@@ -100,8 +86,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] 
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
-  
+  specifying any tags after it.
+
 ### Appending multiple data fields: `append`
 Appends a new element to data fields that support multiple elements.
 
@@ -111,9 +97,28 @@ Format: `append 1 [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `append 3 s/webdev l/python t/classmate` Appends 'webdev' to the skill data field, 'python' to the language data field, and 'classmate' to the tag data field of the Person at index 3 in the list. 
+* `append 3 s/webdev l/python t/classmate` Appends 'webdev' to the skill data field, 'python' to the language data field, and 'classmate' to the tag data field of the Person at index 3 in the list.
 
-### Detailed View of Contacts : view
+### Removing data fields: `remove`
+Removes an element from a data field at a specified index.
+
+Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
+
+* The index refers to the index of the specific element in the non-single data field. 
+* Applicable to skill and miscellaneous data fields.
+
+### Listing all contacts : `list`
+Shows a list of all contacts in the address book.
+
+Format: `list`
+
+### Sorting contacts : `sort`
+Sorts contacts and shows the list of contacts in alphabetical order.
+
+Format: `sort`
+![result for 'sort'](images/sortscreenshot.png)
+
+### Viewing a specific contact in detail : `view`
 Get a detailed view of specific contact(s).
 Format: `view n/NAME`
 Examples:
@@ -122,7 +127,6 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name: `find`
-
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -139,8 +143,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filter a contact : `filter`
-
+### Filtering contacts : `filter`
 Filters the contacts by tags.
 
 Format: `filter f/FACULTY [t/TAG]`
@@ -150,20 +153,6 @@ Examples:
 * `filter f/computing` returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
   ![result for 'filter f/computing'](images/filterscreenshot.png)
-
-### Deleting a contact : `delete`
-
-Deletes the specified contact from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the contact at the specified `INDEX`.
-* The index refers to the index number shown in the displayed contact list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd contact in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 ### Adding an organisation: `add org`
 Adds an organisation to the address book.
@@ -187,6 +176,18 @@ List of personal detail tags:
 List of members:
 * p/: persons in the organisation
 
+### Deleting a contact : `delete`
+Deletes the specified contact from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the contact at the specified `INDEX`.
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd contact in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -214,11 +215,12 @@ Action | Format, Examples
 **Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com s/marketing t/colleague`
 **Edit** | `edit INDEX n/NAME e/EMAIL f/FACULTY [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Append** | `append INDEX [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
-**Remove** | details coming soon
+**Remove** | `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
 **List** | `list`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Sort** | details coming soon
-**Filter** | details coming soon
 **View** | details coming soon
-**Clear** | `clear`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | details coming soon
+**Add Org** | `add org n/NAME e/EMAIL p/PERSON`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
