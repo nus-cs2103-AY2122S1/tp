@@ -1,96 +1,37 @@
 @startuml
 start
-:User executes
+:CSO executes
 add lesson command
-with the relevant properties;
+with the relevant fields;
 
 :TuitiONE starts to parse
 and check the validity
 of each field entered ;
 
-if () then ([All required fields can be detected])
+if () then ([All required fields are entered])
 
     if() then (
-    [Subject field entered
-    is within the constraint]
-    )
-
-    if() then (
-    [Grade field entered
-    is within the constraint]
-    )
-
-    if() then (
-    [Price field entered
-    is within the constraint]
-    )
-
-    if() then (
-    [Day Of Week field entered
-    is within the constraint]
-    )
-
-    if() then (
-    [Start time field entered
-    is within the constraint]
+    [All required fields entered
+    are within the respective constraints]
     )
 
     :Create a new lesson with
-    the respective field and
+    the respective fields and
     add into TuitiONE;
 
-    :Save new TuitiONE
-    with the new lesson
-    into Storage;
+    :Save the TuitiONE
+    to Storage;
 
-    :Update UI with
-    new TuitiONE with
-    the new lesson added;
+    :Update TuitiONE's UI with
+    the new lesson;
 
 
     else ([else])
 
     :TuitiONE informs that
-    the Start time field entered
+    the respective field entered
     is invalid and shows the
-    constraint of the Start time field;
-    endif
-
-    else ([else])
-
-    :TuitiONE informs that
-    the Day Of Week field entered
-    is invalid and shows the
-    constraint of the Day Of Week field;
-    endif
-
-    else ([else])
-
-    :TuitiONE informs that
-    the Price field entered
-    is invalid and shows the
-    constraint of the Price
-    field;
-
-    endif
-
-    else ([else])
-
-    :TuitiONE informs that
-    the Grade field entered
-    is invalid and shows the
-    constraint of the Grade
-    field;
-
-    endif
-
-
-    else ([else])
-
-    :TuitiONE informs that
-    the Subject field entered
-    is invalid and shows the
-    constraint of the Subject
+    constraint of the respective
     field;
 
     endif
