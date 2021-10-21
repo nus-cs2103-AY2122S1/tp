@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_MODULE_NAME;
 
 import java.util.stream.Stream;
 
@@ -17,8 +17,8 @@ public class EditModuleCommandParser implements Parser<EditModuleCommand> {
     @Override
     public EditModuleCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_NAME)
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_NEW_MODULE_NAME);
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_NEW_MODULE_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleCommand.MESSAGE_USAGE));
         }
@@ -26,8 +26,9 @@ public class EditModuleCommandParser implements Parser<EditModuleCommand> {
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_NEW_MODULE_NAME).isPresent()) {
+            editModuleDescriptor.setModuleName(ParserUtil.parseModuleName(
+                    argMultimap.getValue(PREFIX_NEW_MODULE_NAME).get()));
         }
         if (!editModuleDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditModuleCommand.MESSAGE_NOT_EDITED);

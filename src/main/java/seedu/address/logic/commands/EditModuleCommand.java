@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_MODULE_NAME;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,10 +30,10 @@ public class EditModuleCommand extends EditCommand {
             + "old module name and the new module name "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "OLD MODULE NAME "
-            + PREFIX_NAME + "NEW MODULE NAME "
+            + PREFIX_NEW_MODULE_NAME + "NEW MODULE NAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
-            + PREFIX_NAME + "CS2105 ";
+            + PREFIX_NEW_MODULE_NAME + "CS2105 ";
 
     private EditModuleCommand.EditModuleDescriptor editModuleDescriptor;
     private ModuleName moduleName;
