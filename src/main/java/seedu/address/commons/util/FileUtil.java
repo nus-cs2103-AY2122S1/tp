@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -78,6 +79,31 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Checks if two files have the same content.
+     */
+    public static boolean areFilesEqual(Path testedFile, Path expectedFile) throws IOException {
+        BufferedReader bf1 = Files.newBufferedReader(testedFile);
+        BufferedReader bf2 = Files.newBufferedReader(expectedFile);
+
+        String line1;
+        String line2;
+
+        while ((line1 = bf1.readLine()) != null) {
+            line2 = bf2.readLine();
+            if (line2 == null || !line1.equals(line2)) {
+                return false;
+            }
+        }
+
+        if (bf2.readLine() == null) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

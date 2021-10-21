@@ -38,7 +38,7 @@ public class ExportCommandParserTest {
         ExportCommandParser parser = new ExportCommandParser();
         ExportCommand producedCommand = parser.parse("test.csv");
         assertEquals(producedCommand,
-                new ExportCommand(EXPORTS_DIRECTORY_PATH+ File.separator + "test.csv",
+                new ExportCommand(EXPORTS_DIRECTORY_PATH + File.separator + "test.csv",
                 new CsvWriter()));
     }
 }

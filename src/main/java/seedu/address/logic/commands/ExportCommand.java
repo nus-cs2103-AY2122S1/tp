@@ -28,6 +28,7 @@ public class ExportCommand extends Command {
             + System.lineSeparator()
             + "Example: " + COMMAND_WORD + " myContacts.csv";
     public static final String MESSAGE_SUCCESS = "Contacts exported successfully";
+    public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to";
 
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
     private final Map<String, List<String>> data = new HashMap<>();
@@ -46,6 +47,7 @@ public class ExportCommand extends Command {
      */
     public ExportCommand(String filePath, CsvWriter csvWriter) {
         requireNonNull(filePath);
+        requireNonNull(csvWriter);
         this.filePath = filePath;
         this.csvWriter = csvWriter;
     }
@@ -59,7 +61,7 @@ public class ExportCommand extends Command {
         try {
             csvWriter.write(filePath, fieldHeaders, data);
         } catch (IOException e) {
-            throw new CommandException("File cannot be written to");
+            throw new CommandException(MSG_FILE_WRITE_ERROR);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }
