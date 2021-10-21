@@ -18,6 +18,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -55,12 +57,12 @@ public class LessonAddCommandParserTest {
 
         // multiple subject - last subject accepted
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-            + TIME_RANGE_DESC + SUBJECT_DESC + SUBJECT_DESC
+            + TIME_RANGE_DESC + " " + PREFIX_SUBJECT + "Testing" + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple time ranges - last time range accepted
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-            + TIME_RANGE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+            + " " + PREFIX_TIME + "1234-1400" + TIME_RANGE_DESC + SUBJECT_DESC
             + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple homework - all accepted
