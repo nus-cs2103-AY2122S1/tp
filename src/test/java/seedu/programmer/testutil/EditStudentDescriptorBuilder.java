@@ -2,7 +2,7 @@ package seedu.programmer.testutil;
 
 import seedu.programmer.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -30,7 +30,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setStudentId(student.getStudentId());
         descriptor.setClassId(student.getClassId());
-        descriptor.setGrade(student.getGrade());
+        descriptor.setemail(student.getEmail());
     }
 
     /**
@@ -58,10 +58,10 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code grade} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code email} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditStudentDescriptorBuilder withGrade(String grade) {
-        descriptor.setGrade(new Grade(grade));
+    public EditStudentDescriptorBuilder withemail(String email) {
+        descriptor.setemail(new Email(email));
         return this;
     }
 

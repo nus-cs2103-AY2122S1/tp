@@ -2,7 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -15,10 +15,15 @@ import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
+
+
+
+
+
 /**
  * Edits the details of an existing student in ProgrammerError.
  */
@@ -33,7 +38,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STUDENT_ID + "STUDENT_ID] "
             + "[" + PREFIX_CLASS_ID + "CLASS_ID] "
-            + "[" + PREFIX_GRADE + "GRADE] "
+            + "[" + PREFIX_EMAIL + "email] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENT_ID + "A0121234H "
             + PREFIX_CLASS_ID + "B01";
@@ -87,9 +92,9 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updateStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         ClassId updatedClassId = editStudentDescriptor.getClassId().orElse(studentToEdit.getClassId());
-        Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
+        Email updatedEmail = editStudentDescriptor.getemail().orElse(studentToEdit.getEmail());
 
-        return new Student(updatedName, updateStudentId, updatedClassId, updatedGrade);
+        return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail);
     }
 
     @Override
@@ -118,7 +123,7 @@ public class EditCommand extends Command {
         private Name name;
         private StudentId studentId;
         private ClassId classId;
-        private Grade grade;
+        private Email email;
 
         public EditStudentDescriptor() {}
 
@@ -130,14 +135,14 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setStudentId(toCopy.studentId);
             setClassId(toCopy.classId);
-            setGrade(toCopy.grade);
+            setemail(toCopy.email);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, classId, grade);
+            return CollectionUtil.isAnyNonNull(name, studentId, classId, email);
         }
 
         public void setName(Name name) {
@@ -164,12 +169,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(classId);
         }
 
-        public void setGrade(Grade grade) {
-            this.grade = grade;
+        public void setemail(Email email) {
+            this.email = email;
         }
 
-        public Optional<Grade> getGrade() {
-            return Optional.ofNullable(grade);
+        public Optional<Email> getemail() {
+            return Optional.ofNullable(email);
         }
 
         @Override
@@ -190,7 +195,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getStudentId().equals(e.getStudentId())
                     && getClassId().equals(e.getClassId())
-                    && getGrade().equals(e.getGrade());
+                    && getemail().equals(e.getemail());
         }
 
     }

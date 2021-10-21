@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.LabResult;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
@@ -24,7 +24,7 @@ class JsonAdaptedStudent {
     private final String name;
     private final String studentId;
     private final String classId;
-    private final String grade;
+    private final String email;
     private List<LabResult> labResultList;
 
     /**
@@ -32,11 +32,11 @@ class JsonAdaptedStudent {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
-            @JsonProperty("classId") String classId, @JsonProperty("grade") String grade) {
+            @JsonProperty("classId") String classId, @JsonProperty("email") String email) {
         this.name = name;
         this.studentId = studentId;
         this.classId = classId;
-        this.grade = grade;
+        this.email = email;
     }
 
     /**
@@ -46,7 +46,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         studentId = source.getStudentId().studentId;
         classId = source.getClassId().classId;
-        grade = source.getGrade().grade;
+        email = source.getEmail().email;
         //todo: for test of show feature only
         if (source.getLabResultList() != null) {
             labResultList = new ArrayList<>();
@@ -86,14 +86,14 @@ class JsonAdaptedStudent {
         }
         final ClassId modelClassId = new ClassId(classId);
 
-        if (grade == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
+        if (email == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Grade.isValidGrade(grade)) {
-            throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
+        if (!Email.isValidEmail(email)) {
+            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Grade modelGrade = new Grade(grade);
-        Student student = new Student(modelName, modelStudentId, modelClassId, modelGrade);
+        final Email modelEmail = new Email(email);
+        Student student = new Student(modelName, modelStudentId, modelClassId, modelEmail);
         //todo: for test of show feature only
         student.setLabResultRecord(labResultList);
         return student;

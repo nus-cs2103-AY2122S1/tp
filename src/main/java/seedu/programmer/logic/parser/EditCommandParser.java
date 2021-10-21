@@ -3,7 +3,7 @@ package seedu.programmer.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -25,7 +25,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_GRADE);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
 
         Index index;
 
@@ -46,8 +46,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
             editstudentDescriptor.setClassId(ParserUtil.parseClassId(argMultimap.getValue(PREFIX_CLASS_ID).get()));
         }
-        if (argMultimap.getValue(PREFIX_GRADE).isPresent()) {
-            editstudentDescriptor.setGrade(ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get()));
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            editstudentDescriptor.setemail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
 
         if (!editstudentDescriptor.isAnyFieldEdited()) {

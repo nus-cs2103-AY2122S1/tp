@@ -3,15 +3,15 @@ package seedu.programmer.logic.parser;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.GRADE_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.GRADE_DESC_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -35,11 +35,11 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB
-                + GRADE_DESC_BOB, new AddCommand(expectedStudent));
+                + EMAIL_DESC_BOB, new AddCommand(expectedStudent));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB
-                + GRADE_DESC_BOB , new AddCommand(expectedStudent));
+                + EMAIL_DESC_BOB, new AddCommand(expectedStudent));
     }
 
     //TODO
@@ -47,7 +47,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Student expectedStudent = new StudentBuilder(AMY).build();
-        assertParseSuccess(parser, NAME_DESC_AMY + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY + GRADE_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY + EMAIL_DESC_AMY,
                 new AddCommand(expectedStudent));
     }
 
@@ -56,23 +56,23 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + GRADE_DESC_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + EMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_STUDENT_ID_BOB + CLASS_ID_DESC_BOB + GRADE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_STUDENT_ID_BOB + CLASS_ID_DESC_BOB + EMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + VALID_CLASS_ID_BOB + GRADE_DESC_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + VALID_CLASS_ID_BOB + EMAIL_DESC_BOB,
                 expectedMessage);
 
         // missing programmer prefix
-        assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + VALID_GRADE_BOB,
+        assertParseFailure(parser, NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB + VALID_EMAIL_BOB,
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_STUDENT_ID_BOB + VALID_CLASS_ID_BOB + VALID_GRADE_BOB,
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_STUDENT_ID_BOB + VALID_CLASS_ID_BOB + VALID_EMAIL_BOB,
                 expectedMessage);
     }
 }

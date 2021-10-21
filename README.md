@@ -3,7 +3,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-* ProgrammerError (P|E in short) is an application developed based on the `AddressBook Level 3` application.
+* ErwinError (P|E in short) is an application developed based on the `AddressBook Level 3` application.
 * This is an application made for CS2100 Teaching Assistants (TAs) to track their students' task progress and performance
 
 ## Feature List
