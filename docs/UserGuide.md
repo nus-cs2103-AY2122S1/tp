@@ -304,6 +304,7 @@ An optional field for a lesson is:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple homework pieces to a lesson in TAB.
 </div>
+<br>
 
 There are constraints in place to determine whether the value you provide for a field is valid.
 TAB will inform you if you gave an invalid input for a field.
@@ -404,7 +405,7 @@ Examples:
 
 ### Viewing the Schedule
 
-TAB provides a feature for you to view a calendar with your lessons within the application itself.
+The following section will guide you on how to use TAB's scheduling feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
