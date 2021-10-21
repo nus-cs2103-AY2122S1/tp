@@ -1,9 +1,9 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
 import java.time.DayOfWeek;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +34,8 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("availability") List<DayOfWeek> availability, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("availability") List<DayOfWeek> availability,
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.availability = availability;
