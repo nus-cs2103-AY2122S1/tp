@@ -40,6 +40,11 @@ public class Student {
         return name;
     }
 
+    public String getFullName() {
+        return name.fullName;
+    }
+
+
     public StudentId getStudentId() {
         return studentId;
     }
