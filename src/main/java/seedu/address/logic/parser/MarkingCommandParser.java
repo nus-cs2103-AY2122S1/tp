@@ -26,19 +26,23 @@ public class MarkingCommandParser implements Parser<MarkingCommand> {
      */
     public MarkingCommand parse(String args) throws ParseException {
         try {
+            MarkingCommand markingCommand;
             Index[] indexes = ParserUtil.parseMultipleIndex(args);
             if (typeOfMarking.equals(MarkCommand.COMMAND_WORD)) {
-                return new MarkCommand(indexes);
+                markingCommand = new MarkCommand(indexes);
+            } else if (typeOfMarking.equals(UnmarkCommand.COMMAND_WORD)) {
+                markingCommand = new UnmarkCommand(indexes);
             } else {
-                return new UnmarkCommand(indexes);
+                markingCommand = null;
             }
+
+            assert markingCommand != null;
+            return markingCommand;
+
         } catch (ParseException pe) {
-            String errorMessage;
-            if (typeOfMarking.equals(MarkCommand.COMMAND_WORD)) {
-                errorMessage = MarkCommand.MESSAGE_USAGE;
-            } else {
-                errorMessage = UnmarkCommand.MESSAGE_USAGE;
-            }
+            String errorMessage = typeOfMarking.equals(MarkCommand.COMMAND_WORD)
+                    ? MarkCommand.MESSAGE_USAGE : UnmarkCommand.MESSAGE_USAGE;
+            
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage), pe);
         }
