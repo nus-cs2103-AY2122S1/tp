@@ -3,30 +3,50 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+    - [Acknowledgements](#acknowledgements) 
+    - [Setting up, getting started](#setting-up)
+    - [Design](#design)
+        - [Architecture](#architecture)
+        - [UI Component](#ui)
+        - [Logic Component](#logic)
+        - [Model Component](#model)
+        - [Storage Component](#storage) 
+        - [Common classes](#common-classes)
+    - [Implementation](#implementation)
+    - [Documentation, logging, testing, configuration, dev-ops](#documentation)
+    - [Appendix: Requirements](#appendix-requirements)
+        - [Product scope](#product-scope)
+        - [User stories](#user-stories)
+        - [Use cases](#use-cases)
+        - [Non-functional Requirements](#nfr)
+        - [Glossary](#glossary)
+    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+        - [Launch and shutdown](#launch-and-shutdown)
+        - [Deleting a person](#delete-person)
+        - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Acknowledgements**
+## **Acknowledgements** <a name="acknowledgements"/> 
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up, getting started** <a name="setting-up"/>
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## **Design** <a name="design"/>
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### Architecture <a name="architecture"/>
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -36,7 +56,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -67,7 +87,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component <a name="ui"/>
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +104,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic component <a name="logic"/>
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,7 +133,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -133,7 +153,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### Storage component <a name="storage"/>
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,13 +164,13 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### Common classes  <a name="common-classes"/>
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## **Implementation** <a name="implementation"/>
 
 This section describes some noteworthy details on how certain features are implemented.
 
@@ -241,7 +261,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, logging, testing, configuration, dev-ops**  <a name="documentation"/>
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -251,9 +271,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix: Requirements**  <a name="appendix-requirements"/>
 
-### Product scope
+### Product scope  <a name="product-scope"/>
 
 **Target user profile**:
 
@@ -269,7 +289,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: easily manage patients' information and doctors' appointments faster than a typical mouse/GUI driven app
 
 
-### User stories
+### User stories  <a name="user-stores"/>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -300,8 +320,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | clinic receptionist                        | hide private contact details   | minimize chance of someone else seeing them by accident                |
 
 *{More to be added}*
-
-### Use cases
+ 
+### Use cases  <a name="use-cases"/>
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
@@ -484,7 +504,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
     
-### Non-Functional Requirements
+### Non-Functional Requirements  <a name="nfr"/>
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should work independent of network connection.
@@ -498,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+### Glossary <a name="glossary"/>
 
 * **Appointment**: Arrangement to meet between a doctor and a patient
 * **CLI**: Command Line Interface
@@ -512,7 +532,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for manual testing** <a name="appendix-instructions-for-manual-testing"/>
 
 Given below are instructions to test the app manually.
 
@@ -521,7 +541,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and shutdown  <a name="launch-and-shutdown"/>
 
 1. Initial launch
 
@@ -538,7 +558,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a person  <a name="delete-person"/>
 
 1. Deleting a person while all persons are being shown
 
@@ -555,7 +575,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Saving data  <a name="saving-data"/>
 
 1. Dealing with missing/corrupted data files
 

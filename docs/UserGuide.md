@@ -1,6 +1,6 @@
 # PlannerMD User Guide
 
-PlannerMD is a command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
+PlannerMD is an easy-to-use command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -90,7 +90,7 @@ Format: `toggle`
 
 ### Adding a patient: `add`
 
-Adds a patient to the patient records. (Note: for date of birth, PlannerMD will convert any value beyond the last valid day-of-month to be the last valid day-of-month.)
+Adds a patient to the patient records. 
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]`
 
@@ -213,7 +213,7 @@ Examples:
 
 ### Adding a doctor: `add`
 
-Adds a doctor to the doctor records. (Note: for date of birth, PlannerMD will convert any value beyond the last valid day-of-month to be the last valid day-of-month.)
+Adds a doctor to the doctor records.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
 
