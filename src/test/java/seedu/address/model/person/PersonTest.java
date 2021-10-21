@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
+import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.model.util.SampleDataUtil.getTagSet;
 
 import java.time.DayOfWeek;
 import java.util.Arrays;
@@ -30,9 +30,11 @@ public class PersonTest {
     public void constructor_null_throwsException() {
         List<DayOfWeek> validAvailability = Arrays.asList(DayOfWeek.MONDAY);
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name(null), new Phone("92929292"), new Availability(validAvailability), getTagSet("y1")));
+                new Person(new Name(null), new Phone("92929292"), new Availability(validAvailability),
+                        getTagSet("y1")));
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name("Alice"), new Phone(null), new Availability(validAvailability), getTagSet("exco")));
+                new Person(new Name("Alice"), new Phone(null), new Availability(validAvailability),
+                        getTagSet("exco")));
         assertThrows(NullPointerException.class, () ->
                 new Person(new Name("Alice"), new Phone("92929292"), new Availability(null), null));
     }
