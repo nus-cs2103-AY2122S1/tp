@@ -15,7 +15,6 @@ if () then ([All required fields can be detected])
     is within the constraint]
     )
 
-
     if() then (
     [Grade field entered
     is within the constraint]
@@ -40,70 +39,70 @@ if () then ([All required fields can be detected])
     the respective field and
     add into TuitiONE;
 
-    else ([else])
-
-    :Tuitione informs that
-    the Start time field entered
-    is invalid and shows the
-    constraint of the Start time field;
-    stop
-    endif
-
-    else ([else])
-
-    :Tuitione informs that
-    the Day Of Week field entered
-    is invalid and shows the
-    constraint of the Day Of Week field;
-    stop
-    endif
-
-    else ([else])
-
-    :Tuitione informs that
-    the Price field entered
-    is invalid and shows the
-    constraint of the Price
-    field;
-    stop
-    endif
-
-    else ([else])
-
-    :Tuitione informs that
-    the Grade field entered
-    is invalid and shows the
-    constraint of the Grade
-    field;
-    stop
-    endif
-
-
-    else ([else])
-
-    :Tuitione informs that
-    the Subject field entered
-    is invalid and shows the
-    constraint of the Subject
-    field;
-    stop
-    endif
-
-    :Save new Tuitione
+    :Save new TuitiONE
     with the new lesson
     into Storage;
 
     :Update UI with
-    new Tuitione with
+    new TuitiONE with
     the new lesson added;
 
-else ([else])
 
-    :Tuitione informs
+    else ([else])
+
+    :TuitiONE informs that
+    the Start time field entered
+    is invalid and shows the
+    constraint of the Start time field;
+    endif
+
+    else ([else])
+
+    :TuitiONE informs that
+    the Day Of Week field entered
+    is invalid and shows the
+    constraint of the Day Of Week field;
+    endif
+
+    else ([else])
+
+    :TuitiONE informs that
+    the Price field entered
+    is invalid and shows the
+    constraint of the Price
+    field;
+
+    endif
+
+    else ([else])
+
+    :TuitiONE informs that
+    the Grade field entered
+    is invalid and shows the
+    constraint of the Grade
+    field;
+
+    endif
+
+
+    else ([else])
+
+    :TuitiONE informs that
+    the Subject field entered
+    is invalid and shows the
+    constraint of the Subject
+    field;
+
+    endif
+
+    else ([else])
+
+    :TuitiONE informs
     that the command entered
     is invalid and shows an
     example of the proper
     command syntax;
+
 
 endif
 
