@@ -693,6 +693,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC17 - Find student contact by name**
+
+**MSS**
+
+1.  User requests to find student whose name is John
+2.  tApp displays all names containing 'john'
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+    * 2a1. tApp displays an empty list
+
+      Use case ends.
+
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.

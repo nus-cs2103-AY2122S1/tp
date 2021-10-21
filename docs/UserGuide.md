@@ -279,6 +279,24 @@ Sample Usage:
 
     > Kho Tze Jit is removed from the student list!
 
+### Locating student by name: `findStudent`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `findStudent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Partial names will be matched e.g. `Han` will match `Hans`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find Joh` returns `john` and `John Doe`
+* `find alex davi` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
 ### Deleting a task: `deleteTask INDEX`
 
 Deletes the specified task from the task list.
@@ -361,26 +379,6 @@ Examples:
 *  `edit 1 s/A0221111L e/johndoe@example.com` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-[comment]: <> (TODO)
-### Locating persons by name: `find` `[coming in v1.3]`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-
 ### Editing the data file `[coming in v1.3]`
 
 tApp data are saved as a JSON file `[JAR file location]/data/tApp.json`. Advanced users are welcome to update data directly by editing that data file.
@@ -409,15 +407,25 @@ Action | Format, Examples
 --------|------------------
 **List Students** | `students`
 **List Tasks** | `tasks`
-**Add Student** | `add n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​` <br> e.g., `add n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
+**List Groups** | `groups`
+**Add Student** | `addStudent n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​` <br> e.g., `addStudent n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
+**Edit Student** | `editStudent INDEX n/NAME s/STUDENT_NUMBER e/EMAIL g/GITHUB_LINK [t/TAG]…​`<br> e.g., `editStudent 1 n/James Ho s/A0221111L e/jamesho@example.com g/https://github.com/james t/W14-4`
+**Delete Student** | `deleteStudent INDEX`<br> e.g., `deleteStudent 3`
+**Mark Student Attendance** | `marka INDEX w/WEEK` <br> e.g., `marka 1 w/1`
+**Mark Student Participation** | `markp INDEX w/WEEK` <br> e.g., `marka 1 w/1`
+**Find Student** | `findStudent KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James`
+**Clear Students** | `clearStudents`
+**Add (Student) Group** | `addGroup g/NAME` <br> e.g., `addGroup g/W14-4 t/tApp`
+**Delete (Student) Group** | `deleteGroup INDEX`<br> e.g., `deleteGroup 1`
+**Add Student to Group** | `addSG INDEX g/GROUP`<br> e.g., `addSG 1 g/W14-4`
+**Add Github Link to Group** | `addGG INDEX y/YEAR r/REPO NAME`<br> e.g., `addGG 1 y/AY20212022 r/tp`
 **Add Todo Task** | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/study t/W14-4`
 **Add Event Task** | `event n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `event n/study on/2021-10-31 t/W14-4`
 **Add Deadline Task** | `deadline n/TASK_NAME by/DEADLINE [t/TAG]…​` <br> e.g., `deadline n/study by/2021-10-31 t/W14-4`
-**DoneTask** | `doneTask INDEX` <br> e.g., `doneTask 1`
-**Clear** | `clear`
+**Mark Done Task** | `doneTask INDEX` <br> e.g., `doneTask 1`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Delete Task** | `deleteTask INDEX`<br> e.g., `deleteTask 3`
-**Edit** | `edit INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Task** | `editTask INDEX [n/TASK_NAME] [by/DATE] [t/TAG]…​`<br> e.g.,`editTask 2 n/study by/2012-10-31 t/W14-4`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Clear Tasks** | `clearTasks`
+**Clear Address Book** | `clearAll`
 **Help** | `help`
