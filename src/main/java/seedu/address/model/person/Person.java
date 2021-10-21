@@ -171,12 +171,13 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getClaims().equals(getClaims())
                 && otherPerson.getInsurances().equals(getInsurances())
-                && otherPerson.getNote().equals(getNote());
+                && otherPerson.getNote().equals(getNote())
+                && otherPerson.getAppointment().equals(getAppointment());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims);
+        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims, appointment);
     }
 
     @Override

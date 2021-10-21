@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -102,6 +104,16 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Retrieves sorted list of people whose appointment are still upcoming.
+     *
+     * @return the aforementioned sorted list of people.
+     */
+    public ObservableList<Person> asSortedByAppointment() {
+        return internalList.sorted(Comparator.comparing(Person::getAppointment))
+                .filtered(person -> !person.getAppointment().isExpired());
     }
 
     @Override

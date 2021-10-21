@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
  * Represents a scheduled appointment with an individual.
  * If appointment does not exist, appointment field is null.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should be in the following format: dd-MMM-yyyy HH:mm "
                     + "where only first alphabet of the month is capitalised.";
@@ -53,6 +53,17 @@ public class Appointment {
     }
 
     /**
+     * Compares this appointment to another appointment based on the time
+     *
+     * @param other the other appointment to compare to
+     * @return negative is this appointment is earlier, positive if it is later and 0 if they are at the same time.
+     */
+    @Override
+    public int compareTo(Appointment other) {
+        return this.appointmentTime.compareTo(other.appointmentTime);
+    }
+
+    /**
      * Checks whether the string that is supposed to represent a meeting timing is valid.
      *
      * @param meetingDateTime the string to check.
@@ -88,4 +99,7 @@ public class Appointment {
         return this.appointmentTime.format(FORMATTER);
     }
 
+    public boolean isExpired() {
+        return this.appointmentTime.compareTo(LocalDateTime.now()) < 0;
+    }
 }
