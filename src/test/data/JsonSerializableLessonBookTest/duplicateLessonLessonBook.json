@@ -8,7 +8,7 @@
       "studentPhone" : "94351234",
       "parentName" : "Mrs Tan",
       "parentPhone" : "94351253",
-      "progress" : "No Progress",
+      "progressList" : [],
       "hasPaid" : false
     } ],
     "timing" : "1000-1200"
@@ -21,7 +21,7 @@
       "studentPhone" : "94351234",
       "parentName" : "Mrs Tan",
       "parentPhone" : "94351253",
-      "progress" : "No Progress",
+      "progressList" : [],
       "hasPaid" : false
     } ],
     "timing" : "1000-1200"
