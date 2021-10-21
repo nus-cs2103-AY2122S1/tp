@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -128,6 +129,10 @@ public class Person {
 
         return otherPerson.getName().equals(getName())
             || otherPerson.getEmail().equals(getEmail());
+    }
+
+    public LocalDate getNextMeetingDate() {
+        return nextMeeting.getDate();
     }
 
     /**
