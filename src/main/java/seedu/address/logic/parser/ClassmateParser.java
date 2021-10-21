@@ -16,6 +16,7 @@ import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindClassCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClassCommand;
@@ -76,6 +77,9 @@ public class ClassmateParser {
 
         case FindStudentCommand.COMMAND_WORD:
             return new FindStudentCommandParser().parse(arguments);
+
+        case FindClassCommand.COMMAND_WORD:
+            return new FindClassCommandParser().parse(arguments);
 
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommand();
