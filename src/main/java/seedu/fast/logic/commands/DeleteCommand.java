@@ -28,6 +28,8 @@ public class DeleteCommand extends Command {
             + "your contact list.";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED = "The number of contacts you want to delete "
             + "cannot be more than the number of contacts you currently have!";
+    public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "%1$s contact(s) has been deleted"
+            + " before the invalid index at 'index %2$s' is detected.";
 
     private final Index[] indexArray;
 
@@ -67,8 +69,7 @@ public class DeleteCommand extends Command {
             for (int i = 0; i < indexArray.length; i++) {
                 targetIndex = Index.indexModifier(indexArray[i], i);
                 if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                    throw new CommandException(String.format("%1$s contact(s) has been deleted "
-                                    + "before the invalid index at 'index %2$s' is detected.",
+                    throw new CommandException(String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
                             i, indexArray[i].getOneBased()));
                 }
 

@@ -4,6 +4,8 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,12 +24,25 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgsSingle_returnsDeleteCommand() {
         assertParseSuccess(parser, "1", new DeleteCommand(new Index[] {INDEX_FIRST_PERSON}));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_invalidArgsSingle_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgsMultiple_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1 2 3",
+                new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
+    }
+
+    @Test
+    public void parse_invalidArgsMultiple_returnsDeleteCommand() {
+        assertParseFailure(parser, "2 a 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 }

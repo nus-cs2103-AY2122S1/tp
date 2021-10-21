@@ -27,7 +27,7 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalFast(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validSingleIndexUnfilteredList_success() {
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
 
@@ -78,24 +78,33 @@ public class DeleteCommandTest {
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
-        DeleteCommand deleteSecondCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON});
+        DeleteCommand singleDeleteFirstCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
+        DeleteCommand singleDeleteSecondCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON});
+        DeleteCommand multipleDeleteFirstCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON,
+            INDEX_SECOND_PERSON});
+        DeleteCommand multipleDeleteSecondCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON,
+            INDEX_FIRST_PERSON});
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(singleDeleteFirstCommand.equals(singleDeleteFirstCommand));
+        assertTrue(multipleDeleteFirstCommand.equals(multipleDeleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        DeleteCommand singleDeleteFirstCommandCopy = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
+        assertTrue(singleDeleteFirstCommand.equals(singleDeleteFirstCommandCopy));
+        DeleteCommand multipleDeleteSecondCommandCopy = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON,
+            INDEX_FIRST_PERSON});
+        assertTrue(multipleDeleteSecondCommandCopy.equals(multipleDeleteSecondCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(singleDeleteFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(singleDeleteFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(singleDeleteFirstCommand.equals(singleDeleteSecondCommand));
+        assertFalse(multipleDeleteFirstCommand.equals(multipleDeleteSecondCommand));
     }
 
     /**
@@ -105,5 +114,44 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+    // Multiple Delete Tests
+    @Test
+    public void execute_validMultipleIndexUnfilteredList_success() {
+        Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON});
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_SUCCESS, 2);
+
+        ModelManager expectedModel = new ModelManager(model.getFast(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete1);
+        expectedModel.deletePerson(personToDelete2);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidMultipleIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, outOfBoundIndex});
+
+        ModelManager expectedModel = new ModelManager(model.getFast(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
+                1, outOfBoundIndex.getOneBased());
+
+        assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_invalidMultipleIndexFilteredList_throwsCommandException() {
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON, INDEX_FIRST_PERSON});
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 }
