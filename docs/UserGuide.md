@@ -87,6 +87,7 @@ Format: `list`
 Sorts contacts and shows the list of contacts in alphabetical order.
 
 Format: `sort`
+![result for 'sort'](images/sortscreenshot.png)
 
 ### Editing a contact : `edit`
 
@@ -148,6 +149,7 @@ Format: `filter f/FACULTY [t/TAG]`
 Examples:
 * `filter f/computing` returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
+  ![result for 'filter f/computing'](images/filterscreenshot.png)
 
 ### Deleting a contact : `delete`
 
@@ -162,6 +164,29 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd contact in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st contact in the results of the `find` command.
+
+### Adding an organisation: `add org`
+Adds an organisation to the address book.
+
+Format: `add org n/NAME e/EMAIL p/PERSON`
+
+AAn organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
+These are organisations whose contact the user wished to remember. 
+
+
+Examples:
+
+* `add org n/Shopee e/EMAIL p/[n/John doe]`
+* `add org n/SoC e/EMAIL p/[n/Seth e/EMAIL f/computing m/computer science]`
+* `add org n/NUS e/EMAIL p/[n/Damith e/EMAIL f/computing m/computer science] p/[n/Danny e/EMAIL f/computing m/computer science]`
+
+List of personal detail tags:
+* n/: name
+* e/: email
+
+List of members:
+* p/: persons in the organisation
+
 
 ### Clearing all entries : `clear`
 
