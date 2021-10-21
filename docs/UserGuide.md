@@ -238,10 +238,10 @@ _Details coming soon ..._
             <a href="#adding-add">Add</a>
         </td>
         <td>
-            Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...</code><br> 
+            Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...</code><br>
             e.g., <code>add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd</code><br>
-            <br> 
-            Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br> 
+            <br>
+            Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br>
             e.g., <code>add -p pen -$ 10.0 -q 120</code>
         </td>
     </tr>
@@ -278,12 +278,12 @@ _Details coming soon ..._
             <a href="#deleting-delete">Delete</a>
         </td>
         <td>
-            Delete a client: <code>delete -c INDEX</code><br> 
-            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of 
+            Delete a client: <code>delete -c INDEX</code><br>
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of
             <code>20</code> including id, name, phone number, email and address.<br>
             <br>
-            Delete a product: <code>delete -p INDEX</code><br> 
-            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of 
+            Delete a product: <code>delete -p INDEX</code><br>
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of
             <code>5</code> including id, name, unit price and quantity.
             <br>
         </td>

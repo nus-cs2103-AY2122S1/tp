@@ -206,13 +206,13 @@ This section describes some noteworthy details on how certain features are imple
 The add feature allows the users to add a new `Client` or `Product` with details into the application. The commands are
 composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
 
-The user inputs the command through `MainWindow` of the UI component, which will pass the input string to 
-`LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the 
+The user inputs the command through `MainWindow` of the UI component, which will pass the input string to
+`LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
 command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
-The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the 
+The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
 execution, data added will be saved to storage.
 
-For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is 
+For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is
 valid.
 
 The flow of the sequence diagram would be the same for adding `Products`, but the UI displayed will be different.
@@ -228,7 +228,7 @@ The flow of the sequence diagram would be the same for adding `Products`, but th
     * Cons : Might be slow if there are a lot of clients/products to add
 * **Alternative 2** : User can add multiple clients or products
     * Pros : Allows the user to add multiple clients or products in one command
-    * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to 
+    * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
       be done through the`edit` command (requires the user to memorise the IDs)
 
 ### Edit Client/Product Feature
