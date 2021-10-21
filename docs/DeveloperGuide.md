@@ -390,29 +390,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**UC03 - Getting details of an item**
+**UC03 - Finding items through matching keywords**
 
 **MSS**
 
-1. User searches for the details of an item in the inventory.
-2. BogoBogo deletes item from inventory.
+1. User searches for the details of an item in the inventory by stating id, name or tag.
+2. BogoBogo find item from inventory that matches the keywords.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. User did not specify the name or serial number of the item.
-    * 1a1. BogoBogo notifies user of missing details.
+* 1a. User specified an id which is not a positive integer or is not of 6 digits.
+    * 1a1. BogoBogo notifies user of invalid id input.
 
       Use case ends.
 
 * 1b. The specified item is not in the inventory.
-    * 1b1. BogoBogo notifies user that item is not found.
-
-      Use case ends.
-
-* 1c. The given id does not match with the given name.
-    * 1c1. BogoBogo notifies user of the mismatch.
+    * 1b1. BogoBogo outputs an empty list.
 
       Use case ends.
 
