@@ -140,6 +140,9 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
+
+![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
 
 #### Current Implementation
 
@@ -148,9 +151,9 @@ New feature: Events
 * The participating members can be listed using the command `mlist /v EVENT_ID`
 * New events created can have many participants selected from member list.
 * <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
-  for adding participants separately, eadd command allows creation of complete event to
-  minimise commands required to add them individually. The format is similar to `delete` and `list` commands
-  for familiarity with similar commands for other modules.
+for adding participants separately, eadd command allows creation of complete event to
+minimise commands required to add them individually. The format is similar to `delete` and `list` commands
+for familiarity with similar commands for other modules.
 
 
 #### Future Plans
@@ -209,9 +212,6 @@ The user executes `tlist /m 1`. The parser will be called upon to create a Tlist
 The parser will then parse the input to create a TlistCommand with member id as 1.
 This command will display all the tasks of the first member of the member list.
 =======
-Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
-
-![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
