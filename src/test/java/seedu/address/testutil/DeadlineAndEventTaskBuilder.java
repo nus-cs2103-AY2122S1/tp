@@ -13,7 +13,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Task objects.
  */
-public class TaskBuilder {
+public class DeadlineAndEventTaskBuilder {
 
     public static final String DEFAULT_TASK_NAME = "Do CS2103 tP";
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
@@ -28,7 +28,7 @@ public class TaskBuilder {
     /**
      * Creates a {@code TaskBuilder} with the default details.
      */
-    public TaskBuilder() {
+    public DeadlineAndEventTaskBuilder() {
         this.taskName = new TaskName(DEFAULT_TASK_NAME);
         this.taskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
@@ -40,7 +40,7 @@ public class TaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public TaskBuilder(Task taskToCopy) {
+    public DeadlineAndEventTaskBuilder(Task taskToCopy) {
         this.taskName = taskToCopy.getName();
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
@@ -50,7 +50,7 @@ public class TaskBuilder {
     /**
      * Sets the {@code Name} of the {@code Task} that we are building.
      */
-    public TaskBuilder withName(String name) {
+    public DeadlineAndEventTaskBuilder withName(String name) {
         this.taskName = new TaskName(name);
         return this;
     }
@@ -58,7 +58,7 @@ public class TaskBuilder {
     /**
      * Sets the {@code TaskDate} of the {@code Task} that we are building.
      */
-    public TaskBuilder withDeadline(String date) {
+    public DeadlineAndEventTaskBuilder withDate(String date) {
         this.taskDate = new TaskDate(date);
         return this;
     }
@@ -66,7 +66,7 @@ public class TaskBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Task} that we are building.
      */
-    public TaskBuilder withTags(String ... tags) {
+    public DeadlineAndEventTaskBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -74,7 +74,7 @@ public class TaskBuilder {
     /**
      * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
      */
-    public TaskBuilder withDescription(String description) {
+    public DeadlineAndEventTaskBuilder withDescription(String description) {
         this.description = new Description(description);
         return this;
     }
@@ -82,7 +82,7 @@ public class TaskBuilder {
     /**
      * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
      */
-    public TaskBuilder withPriority(String description) {
+    public DeadlineAndEventTaskBuilder withPriority(String description) {
         this.priority = Task.Priority.LOW;
         return this;
     }

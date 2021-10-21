@@ -24,7 +24,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
-import seedu.address.testutil.TaskBuilder;
+import seedu.address.testutil.DeadlineAndEventTaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -35,7 +35,7 @@ public class EditTaskCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Task editedTask = new TaskBuilder().build();
+        Task editedTask = new DeadlineAndEventTaskBuilder().build();
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK, descriptor);
 
@@ -52,7 +52,7 @@ public class EditTaskCommandTest {
         Index indexLastTask = Index.fromOneBased(model.getFilteredTaskList().size());
         Task lastTask = model.getFilteredTaskList().get(indexLastTask.getZeroBased());
 
-        TaskBuilder taskInList = new TaskBuilder(lastTask);
+        DeadlineAndEventTaskBuilder taskInList = new DeadlineAndEventTaskBuilder(lastTask);
         Task editedTask = taskInList.withName(VALID_TASK_NAME_STUDY)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -86,7 +86,7 @@ public class EditTaskCommandTest {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         Task taskInFilteredList = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        Task editedTask = new TaskBuilder(taskInFilteredList).withName(VALID_TASK_NAME_PLAY).build();
+        Task editedTask = new DeadlineAndEventTaskBuilder(taskInFilteredList).withName(VALID_TASK_NAME_PLAY).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK,
                 new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).build());
 
