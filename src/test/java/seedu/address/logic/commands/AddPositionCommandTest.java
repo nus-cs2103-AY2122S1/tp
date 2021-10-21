@@ -24,58 +24,62 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.PositionBuilder;
 
-public class AddCommandTest {
 
+
+public class AddPositionCommandTest {
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullPosition_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddPositionCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_positionAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPositionAdded modelStub = new ModelStubAcceptingPositionAdded();
+        Position validPosition = new PositionBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPositionCommand(validPosition).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddPositionCommand.MESSAGE_SUCCESS, validPosition),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validPosition), modelStub.positionsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicatePosition_throwsCommandException() {
+        Position validPosition = new PositionBuilder().build();
+        AddPositionCommand addPositionCommand = new AddPositionCommand(validPosition);
+        ModelStub modelStub = new ModelStubWithPosition(validPosition);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddPositionCommand.MESSAGE_DUPLICATE_POSITION, ()
+            -> addPositionCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Position dataEngineer = new PositionBuilder().withTitle("Data Engineer").build();
+        Position dataScientist = new PositionBuilder().withTitle("Data Scientist").build();
+        AddPositionCommand addDataEngineerCommand = new AddPositionCommand(dataEngineer);
+        AddPositionCommand addDataScientistCommand = new AddPositionCommand(dataScientist);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addDataEngineerCommand.equals(addDataEngineerCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddPositionCommand addDataEngineerCommandCopy = new AddPositionCommand(dataEngineer);
+        assertTrue(addDataEngineerCommand.equals(addDataEngineerCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addDataEngineerCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addDataEngineerCommand.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different position -> returns false
+        assertFalse(addDataEngineerCommand.equals(addDataScientistCommand));
     }
+
 
     /**
      * A default model stub that have all of the methods failing.
@@ -107,16 +111,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getPositionBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Path getApplicantBookFilePath() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -143,6 +137,16 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getApplicantBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getPositionBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,47 +233,42 @@ public class AddCommandTest {
         public void updateFilteredPositionList(Predicate<Position> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public float calculateRejectionRate(Position p) {
-            throw new AssertionError("This method should not be called.");
-        };
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single position.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithPosition extends ModelStub {
+        private final Position position;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPosition(Position position) {
+            requireNonNull(position);
+            this.position = position;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasPosition(Position position) {
+            requireNonNull(position);
+            return this.position.isSamePosition(position);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the position being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingPositionAdded extends ModelStub {
+        final ArrayList<Position> positionsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasPosition(Position position) {
+            requireNonNull(position);
+            return positionsAdded.stream().anyMatch(position::isSamePosition);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addPosition(Position position) {
+            requireNonNull(position);
+            positionsAdded.add(position);
         }
 
         @Override
@@ -277,5 +276,7 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
+
+
 
 }
