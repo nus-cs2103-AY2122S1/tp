@@ -4,25 +4,33 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.Model;
+import seedu.address.model.TaskAssignable;
 import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.lesson.Attendee;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAssignable;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.lesson.NoOverlapLessonList;
+import seedu.address.model.lesson.exceptions.CannotAssignException;
 import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
-import seedu.address.model.person.exceptions.CannotAttendException;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person implements HasUniqueId {
+
+public class Person implements HasUniqueId, Attendee,
+        TaskAssignable, LessonAssignable {
 
     // Identity fields
     private final Name name;
@@ -127,32 +135,37 @@ public class Person implements HasUniqueId {
         return !lessonsList.doesLessonOverlap(lesson);
     }
 
-    /**
-     * Immutable way of adding a lesson
-     * @param lesson to add
-     * @return Person with added lesson
-     * @throws CannotAttendException if person is unable to attend lesson
-     */
-    public Person attendLesson(Lesson lesson) throws CannotAttendException {
+    @Override
+    public String getAttendeeDetails() {
+        return name.toString();
+    }
+
+    @Override
+    public Person assignLesson(Lesson lesson) throws CannotAssignException {
         NoOverlapLessonList newList;
         try {
             newList = lessonsList.addLesson(lesson);
         } catch (OverlappingLessonsException e) {
-            throw new CannotAttendException(e.getMessage());
+            throw new CannotAssignException(e.getMessage());
         }
 
         return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
     }
 
-    /**
-     * Immutable way of removing a lesson
-     * @param index of lesson to remove
-     * @return Person with removed lesson
-     * @throws IndexOutOfBoundsException if index specified is out of bounds
-     */
-    public Person unAttendLesson(int index) throws IndexOutOfBoundsException {
+    @Override
+    public Person unassignLesson(int index) throws IndexOutOfBoundsException {
         NoOverlapLessonList newList = lessonsList.removeLesson(index);
         return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
+    }
+
+    @Override
+    public List<LessonWithAttendees> getLessonsWithAttendees() {
+        List<LessonWithAttendees> toReturn = new ArrayList<>();
+        List<Attendee> attendees = new ArrayList<>(Arrays.asList(this));
+        for (Lesson lesson : lessonsList.getLessons()) {
+            toReturn.add(new LessonWithAttendees(lesson, attendees));
+        }
+        return toReturn;
     }
 
     /**
@@ -193,6 +206,7 @@ public class Person implements HasUniqueId {
 
     /**
      * Immutable way of updating the assigned task id list
+     *
      * @param newAssignedTaskIds the new assigned task id list
      * @return new Person instance with the updated assigned task id list
      */
@@ -200,6 +214,17 @@ public class Person implements HasUniqueId {
         requireNonNull(newAssignedTaskIds);
         return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList, exams);
     }
+
+    /**
+     * Gets the filter list from the given model.
+     *
+     * @param model The model that stores the filter list.
+     * @return The filter list from the given model.
+     */
+    @Override
+    public List<Person> getFilteredListFromModel(Model model) {
+        return model.getFilteredPersonList();
+    };
 
     /**
      * Returns true if both persons have the same name.
