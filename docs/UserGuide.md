@@ -16,14 +16,14 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `RecruitIn.jar` from here.
+2. Download the latest `RecruitIn.jar` from here.
 
-1. Copy the file to the folder you want to use as the _home folder_.
+3. Copy the file to the folder you want to use as the _home folder_.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
     
     * **`list`** : Lists all applicants.
@@ -36,9 +36,13 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
     * **`show`**`n/` : Displays a list of all unique applicant names.
 
+    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants.
+
+    * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
+
     * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,8 +131,12 @@ Prefix Input Specifications:
     * EXPECTED_SALARY inputs such as `0` and `3500` are acceptable.
     * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
 * ####LEVEL_OF_EDUCATION `l/`
-  * A LEVEL_OF_EDUCATION should
+  * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
+  * A LEVEL_OF_EDUCATION is case-insensitive.
   * For example:
+    * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
+    * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
+    * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ####YEARS_OF_EXPERIENCE `y/`
   * A YEARS_OF_EXPERIENCE should
   * For example:
@@ -301,6 +309,42 @@ Examples:
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
+### Marking an applicant : `mark`
+
+Marks the specified applicant by index from the list in RecruitIn as "Done" (have been attended to).
+
+Format: `mark INDEX…​`
+
+* Marks the applicant at the specified `INDEX` as "Done".
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+
+Examples:
+* `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
+* `find n/John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
+* `list` followed by `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
+
+### Unmarking an applicant : `unmark`
+
+Unmarks the specified applicant by index from the list in RecruitIn to "Not Done" (have not been attended to).
+
+Format: `unmark INDEX…​`
+
+* Unmarks the applicant at the specified `INDEX` to "Not Done".
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+
+Examples:
+* `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
+* `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -323,16 +367,17 @@ Example of format of data for one applicant in applicants:
 {
   "persons": [
     {
-      "name": "Alice Yeoh",
-      "phone": "87438807",
-      "email": "alexyeoh@example.com",
-      "role": "Software Engineering",
-      "employmentType": "Full time",
-      "expectedSalary": "3600",
-      "levelOfEducation": "High School",
-      "experience": "2",
-      "tagged": [],
-      "interview": "-"
+      "name" : "Alice Yeoh",
+      "phone" : "87438807",
+      "email" : "alexyeoh@example.com",
+      "role" : "Software Engineering",
+      "employmentType" : "Full time",
+      "expectedSalary" : "3600",
+      "levelOfEducation" : "High School",
+      "experience" : "2",
+      "tagged" : [],
+      "interview" : "-",
+      "done": "Not Done"
     }
   ]
 }
@@ -360,4 +405,6 @@ Action | Format, Examples
 **Delete Marked** | `delete_marked`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
+**Mark** | `mark INDEX…​`<br> e.g., `mark 3`
+**Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Help** | `help`

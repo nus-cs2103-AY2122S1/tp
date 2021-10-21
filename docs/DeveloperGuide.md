@@ -294,6 +294,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
 | `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
 | `* * *`  | user                                       | find applicants by their interview time       | know how many applicants will have interview on a specific time           |
+| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
+| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
 | `* *`    | regular user                               | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
 | `* *`    | regular user                               | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
@@ -445,6 +447,58 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 *{More to be added}*
+
+**Use case: UC07 - Marking an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to mark applicant(s) in the displayed list.
+4.  RecruitIn marks the requested applicant(s) to "Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The mark command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Unmarking an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to unmark applicant(s) in the displayed list.
+4.  RecruitIn unmarks the requested applicant(s) to "Not Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The unmark command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
