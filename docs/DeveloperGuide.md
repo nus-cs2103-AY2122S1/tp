@@ -176,6 +176,64 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add progress feature: `add -p`
+
+#### Implementation
+
+The add progress feature adds a progress to an existing student's progress list in TutorAid. Each student can have up
+to 10 progress. Adding a new progress to a student with 10 progress will result in the deletion of the oldest progress
+of the student.
+
+This feature implements the following operations:
+* `AddProgressCommand#execute()` —Creates a Progress object and adds it to a ProgressList object of a Student object
+in TutorAid.
+
+It is also additionally facilitated by the methods below:
+* `TutorAidParser#parseCommand()` —Checks for the command word that is required for the addition of a progress.
+* `AddCommandParser#parse()` —Checks for the command flag that specifies the addition of a progress.
+* `AddProgressCommandParser#parse()` —Parses the individual arguments to create a Progress object.
+
+When a Student object is created, a ProgressList object is created for this Student object. This ProgressList object
+stores an ArrayList of type Progress that keeps track of a maximum of 10 Progress objects. We implement `ProgressList`
+as a field in `Student`.
+
+![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
+
+Given below is an example of what happens when the user attempts to add a progress to a student in TutorAid by entering
+a command `add -p 2 Did Homework …​`:
+
+1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command.
+   Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework …​`)
+   are then passed into `AddCommandParser#parse`.
+
+2. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
+   of a progress. Thus, the remaining (`2 Did Homework …​`) is then passed into `AddProgressCommandParser#parse`.
+
+3. The remaining (`2 Did Homework …​`) is then parsed into index `2` and progress description `Did Homework`
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if `AddProgressCommandParser#parse` detects that invalid input has been supplied, the command will fail 
+its execution and `ParseException` will be thrown.
+</div>
+
+4. Lastly, the `AddProgressCommand#execute()` is called upon to add the progress with description `Did Homework`
+   into the student at the specified index `2` in TutorAid, which returns a `CommandResult` object to notify the
+   user that the progress has been successfully added.
+   The student details stored in `tutoraid.json` are updated with regard to this change.
+
+![AddProgress](images/AddProgressSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to keep track of all the progress (maximum 10) of a student:**
+
+* **Alternative 1 (current choice):** Implements a ProgressList class.
+    * Pros: Abstracts away the management of progress from the Student class.
+    * Cons: Potentially more dependency.
+
+* **Alternative 2:** Implements an ArrayList of type Progress in the Student class.
+    * Pros: Easier to implement.
+    * Cons: Student class may have too many responsibilities.
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
