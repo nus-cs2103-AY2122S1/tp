@@ -101,8 +101,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Language updatedLanguage = editPersonDescriptor.getLanguage().orElse(personToEdit.getLanguage());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        // edit command does not allow editing last visits
-        Optional<LastVisit> updatedLastVisit = personToEdit.getLastVisit();
+        LastVisit lastVisit = editPersonDescriptor.getLastVisit().orElse(personToEdit.getLastVisit().get());
+        Optional<LastVisit> updatedLastVisit = Optional.ofNullable(lastVisit);
         // edit command does not allow editing visits
         Optional<Visit> updatedVisit = personToEdit.getVisit();
         // edit command does not allow editing frequency
@@ -144,6 +144,7 @@ public class EditCommand extends Command {
         private Language language;
         private Address address;
         private Set<HealthCondition> healthConditions;
+        private LastVisit lastVisit;
 
         public EditPersonDescriptor() {}
 
@@ -157,13 +158,14 @@ public class EditCommand extends Command {
             setLanguage(toCopy.language);
             setAddress(toCopy.address);
             setHealthConditions(toCopy.healthConditions);
+            setLastVisit(toCopy.lastVisit);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, language, address, healthConditions);
+            return CollectionUtil.isAnyNonNull(name, phone, language, address, healthConditions, lastVisit);
         }
 
         public void setName(Name name) {
@@ -196,6 +198,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setLastVisit(LastVisit lastVisit) {
+            this.lastVisit = lastVisit;
+        }
+
+        public Optional<LastVisit> getLastVisit() {
+            return Optional.ofNullable(lastVisit);
         }
 
         /**
@@ -235,7 +245,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getLanguage().equals(e.getLanguage())
                     && getAddress().equals(e.getAddress())
-                    && getHealthConditions().equals(e.getHealthConditions());
+                    && getHealthConditions().equals(e.getHealthConditions())
+                    && getLastVisit().equals(e.getLastVisit());
         }
     }
 }
