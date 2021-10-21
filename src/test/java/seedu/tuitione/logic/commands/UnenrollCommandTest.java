@@ -40,7 +40,7 @@ public class UnenrollCommandTest {
         Student studentToUnenroll = expectedModel.getFilteredStudentList().get(INDEX_SECOND_STUDENT.getZeroBased());
 
         Lesson testLesson = expectedModel.getFilteredLessonList().get(INDEX_SECOND_LESSON.getZeroBased());
-        testLesson.removeStudent(studentToUnenroll);
+        testLesson.unenrollStudent(studentToUnenroll);
         String expectedMessage = String.format(UnenrollCommand.MESSAGE_UNENROLL_STUDENT_SUCCESS,
                 studentToUnenroll.getName(),
                 testLesson);

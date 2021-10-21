@@ -40,7 +40,7 @@ public class EnrollCommandTest {
         Student studentToEnroll = expectedModel.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         Lesson testLesson = expectedModel.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
-        testLesson.addStudent(studentToEnroll);
+        testLesson.enrollStudent(studentToEnroll);
         String expectedMessage = String.format(EnrollCommand.MESSAGE_SUCCESS, studentToEnroll.getName(), testLesson);
 
         assertCommandSuccess(enrollCommand, model, expectedMessage, expectedModel);

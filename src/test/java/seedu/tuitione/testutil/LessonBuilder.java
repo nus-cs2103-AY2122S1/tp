@@ -133,7 +133,7 @@ public class LessonBuilder {
     public Lesson build() {
         Lesson lesson = new Lesson(subject, grade, lessonTime, price);
         for (Student student : students) {
-            lesson.addStudent(student);
+            lesson.enrollStudent(student);
         }
         return lesson;
     }
