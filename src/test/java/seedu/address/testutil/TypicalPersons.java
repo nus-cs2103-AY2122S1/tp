@@ -50,6 +50,7 @@ public class TypicalPersons {
             .withAddress("23, Coleman Street, #05-30")
             .withTags("cousin")
             .withTasks("work", "play", "sleep")
+            .withDescription("Absolute bot")
             .build();
     public static final Person CARL = new PersonBuilder()
             .withName("Carl Kurz")

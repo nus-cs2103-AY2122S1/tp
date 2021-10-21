@@ -22,7 +22,8 @@
     "email" : "benwe@example.com",
     "address" : "23, Coleman Street, #05-30",
     "tagged" : [ "cousin" ],
-    "tasks" : [ "work", "play", "sleep" ]
+    "tasks" : [ "work", "play", "sleep" ],
+    "description" : "Absolute bot"
   },{
     "name" : "Carl Kurz",
     "phone" : "95352563",
