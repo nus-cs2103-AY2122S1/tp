@@ -3,28 +3,33 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Introduction
 
-Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles scaffolding Notor are as follows.
+Thank you for your interest in the developing of Notor! This is an open-source project aimed at helping mentors take
+quick, efficient notes to facillitate effective and efficient mentoring of many mentees. The design principles
+scaffolding Notor are as follows.
 
-1. **Efficient UX for the User:** 
-   - You shouldn't have to wait for Notor; it should simply run -- quickly and without hassle.
-   - Look for how you can make the process faster, more streamlined, or more effective for our clients: mentors.
+1. **Efficient UX for the User:**
+    - You shouldn't have to wait for Notor; it should simply run -- quickly and without hassle.
+    - Look for how you can make the process faster, more streamlined, or more effective for our clients: mentors.
 2. **CLI-first**
-   - We target fast-typers who are comfortable taking notes on their computer.
+    - We target fast-typers who are comfortable taking notes on their computer.
 
-In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely to personally know or even contact often outside of the mentor relationship. Key features of Notor which scaffold this are:
+In particular, we tackle the needs of mentor professors, who tend to be busy and are assigned mentees they are unlikely
+to personally know or even contact often outside of the mentor relationship. Key features of Notor which scaffold this
+are:
 
 1. Powerful Organisation which is up to the user
-   - useful for managing many mentees
+    - useful for managing many mentees
 2. A clean note-taking system
-   - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
+    - designed so that they can take notes concurrently with meeting the mentee so no information is forgotten
 3. A last-contact / next-contact model
-   - helps them contact the mentee regularly
+    - helps them contact the mentee regularly
 
 ### **Acknowledgements**
 
@@ -66,6 +71,35 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 The **Architecture** of our iteration is built upon AB-3. Please refer to the AB-3 **Architecture**
 section for the general Architectural design of the app. Only changes will be listed here.
+
+### Logic Changes
+
+#### Command Changes
+
+![CommandClassDiagram](images/ParserClasses.png)
+Due to the addition of many new commands and refactoring of the command structure, we have had to create a better class
+system to handle them.
+
+* `Parser` now takes in generic `T extends Command` since we have multiple types of commands, each with their own unique
+  parser
+* `Executor` instances are created by each `Command` class, which then handle the actual execution of commands and
+  returning of `CommandResult`
+* Commands now come in 3 general types, `PersonCommand`, `GroupCommand` and `Command`
+    * `PersonCommand` operates on `Person` objects
+    * `GroupCommand` operates on `Group` objects
+    * `Command` operates without either a `Person` or `Group` object
+* `Parser` and `Executor` classes come in the same 3 categories as `Command` classes
+* `NotorParser` now parses both the `commandWord` and `subCommandWord` for user commands
+    * `commandWord` refers to either `Person`, `Group` or one of the object agnostic commands
+    * `subCommandWord` refers to an operation that can be carried out on a `Person` or `Group`
+
+New Workflow for Adding Commands:
+
+1. Create a `XYZCommand` class that extends either `PersonCommand`, `GroupCommand` or simply `implements Command`.
+2. Create a `XYZCommandParser` class that extends the same type of `Parser` as the `Command` above is.
+3. Add the new `XYZCommandParser` to the `parse()` method in `NotorParser`.
+4. Create a `XYZCommandExecutor` class that extends the same type of `Executor` as the `Command` from step 1.
+5. Implement all required methods and ensure all fields used by the methods are present.
 
 ### Model Changes
 
@@ -238,6 +272,7 @@ _{Explain here how the data archiving feature will be implemented}_
 ### Product scope
 
 **Target user profile**: mentor professors
+
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
 * can type fast
