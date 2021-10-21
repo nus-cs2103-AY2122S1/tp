@@ -220,6 +220,50 @@ user choice.
     * Cons: Not very scalable in case more tabs are needed in the future, hard to implement multiple segments
             within a tab.
 
+### \[Implemented\] Assigning People to Tasks (Zen)
+
+We integrated the existing address book system of storing contacts with our new task list system by adding the ability
+to assign people from your address book to tasks in your task list.   
+Possible use cases:
+- Assigning group members to group tasks to keep track of who to contact.
+- Assigning people who have RSVPed to a gathering to keep track of who is attending.
+- Assigning which prof to email after completing a piece of work.
+
+#### Implementation
+In the `Task.java` class, `people` is a Set of `Person` objects that represents a task being assigned people, similar to
+`tags`. A user can assign people to a task in 2 ways:
+- The `assign` command, which adds more `Person` objects to the existing `people` set.
+- The `edit` command, which replaces the existing `people` set with a new one. 
+
+The `Person` objects are assigned to a task using the relevant index currently being displayed on the filtered person 
+list. All indices that represent people are preceded with the `p/` prefix. We added the side panel on the tasks tab 
+so that it would be easier to see the list of contacts to assign people to tasks, instead of needing to switch tabs 
+back and forth when assigning people.
+Example usage of either command is as follows:
+- `assign 2 p/1 p/3` - Assigns persons 1 and 3 to task 2.
+- `edit 2 p/1 p/3` - Replaces task 2's set of people with a set consisting of persons 1 and 3.
+
+A sequence diagram is provided below:
+
+![TabSystemSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
+
+#### Challenges  
+
+This was the first set of commands that required access to the address book, so implementing the parser for the 
+commands simply by implementing the `Parser` interface was not sufficient. An extension to the `Parser`
+interface, `ParserRequiringPersonList` was created for these commands specifically, and an alternative parse function
+was created which took in the person list from the command parser `TaskTabParser`.
+
+#### Alternatives Considered  
+
+- Assigning people using their names instead of index
+
+Pros: No need to remember indices  
+Cons: Too much of a hassle with long names, and using only parts of a name was not feasible due to
+the possibility of multiple people with the same first name, etc. The side panel was implemented to circumvent
+this problem
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

@@ -1,0 +1,53 @@
+@startuml
+participant ":MainWindow" as MainWindow
+participant ":LogicManager" as LogicManager
+participant ":TaskTabParser" as TaskTabParser
+participant ":AssignPeopleCommandParser" as AssignPeopleCommandParser
+participant "command:AssignPeopleCommand" as AssignPeopleCommand
+participant "commandResult:CommandResult" as CommandResult
+
+activate MainWindow
+MainWindow -> LogicManager: execute("assign 2 p/1 p/3")
+activate LogicManager
+
+LogicManager -> TaskTabParser: parseCommand(...)
+activate TaskTabParser
+
+create AssignPeopleCommandParser
+TaskTabParser -> AssignPeopleCommandParser
+activate AssignPeopleCommandParser
+AssignPeopleCommandParser --> TaskTabParser
+deactivate AssignPeopleCommandParser
+
+TaskTabParser -> AssignPeopleCommandParser: parse(...)
+activate AssignPeopleCommandParser
+
+create AssignPeopleCommand
+AssignPeopleCommandParser -> AssignPeopleCommand:
+activate AssignPeopleCommand
+
+AssignPeopleCommand --> AssignPeopleCommandParser: command
+deactivate AssignPeopleCommand
+
+AssignPeopleCommandParser --> TaskTabParser: command
+deactivate AssignPeopleCommandParser
+
+TaskTabParser --> LogicManager: command
+deactivate TaskTabParser
+
+LogicManager -> AssignPeopleCommand: execute(model)
+activate AssignPeopleCommand
+
+create CommandResult
+AssignPeopleCommand -> CommandResult
+activate CommandResult
+CommandResult --> AssignPeopleCommand: commandResult
+deactivate CommandResult
+
+AssignPeopleCommand --> LogicManager: commandResult
+deactivate AssignPeopleCommand
+
+LogicManager --> MainWindow: commandResult
+deactivate LogicManager
+
+@enduml

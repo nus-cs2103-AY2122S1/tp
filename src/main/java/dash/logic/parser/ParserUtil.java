@@ -14,6 +14,7 @@ import dash.model.person.Email;
 import dash.model.person.Name;
 import dash.model.person.Phone;
 import dash.model.tag.Tag;
+import dash.model.task.CompletionStatus;
 import dash.model.task.TaskDate;
 import dash.model.task.TaskDescription;
 
@@ -141,6 +142,27 @@ public class ParserUtil {
             throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
         }
         return new TaskDate(trimmedTaskDate);
+    }
+
+    /**
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDate} is invalid.
+     */
+    public static CompletionStatus parseCompletionStatus(String completionStatus) throws ParseException {
+        requireNonNull(completionStatus);
+        String trimmedCompletionStatus = completionStatus.trim();
+        int validStatus = CompletionStatus.isValidCompletionStatus(trimmedCompletionStatus);
+        if (validStatus < 0) {
+            throw new ParseException(CompletionStatus.MESSAGE_CONSTRAINTS);
+        } else if (validStatus == 0) {
+            return new CompletionStatus(true);
+        } else if (validStatus == 1) {
+            return new CompletionStatus(false);
+        } else {
+            return new CompletionStatus(false);
+        }
     }
 
     /**

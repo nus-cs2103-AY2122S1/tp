@@ -1,0 +1,11 @@
+@startuml
+start
+:User launches Dash;
+:User types in "tasks";
+if ( ) is (User is on Tasks tab) then
+	:Print message "You are already on the contacts tab";
+else (User is not on Tasks tab)
+	:Switch to the tasks tab;
+endif
+stop
+@enduml
