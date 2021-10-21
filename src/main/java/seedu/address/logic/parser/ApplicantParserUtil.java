@@ -11,7 +11,6 @@ import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Description;
-import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
