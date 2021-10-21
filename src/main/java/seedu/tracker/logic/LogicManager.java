@@ -14,6 +14,7 @@ import seedu.tracker.logic.parser.ModuleTrackerParser;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.Storage;
 
@@ -44,6 +45,8 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = moduleTrackerParser.parseCommand(commandText);
         commandResult = command.execute(model);
+        //update completed mcs ->
+        model.updateCompletedMcs();
 
         try {
             storage.saveModuleTracker(model.getModuleTracker());
@@ -57,6 +60,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyModuleTracker getModuleTracker() {
         return model.getModuleTracker();
+    }
+
+    @Override
+    public ObservableList<Mc> getCompletedMcList() {
+        return model.getCompletedMcList();
     }
 
     @Override

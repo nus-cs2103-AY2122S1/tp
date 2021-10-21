@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
+import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.UniqueModuleList;
@@ -21,6 +22,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     private final UniqueModuleList modules;
     private AcademicCalendar currentSemester;
     private Mc mcGoal;
+    private CompletedMcList completedMcList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,9 +33,10 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
      */
     {
         AcademicYear defaultAcademicYear = new AcademicYear(1);
-        Semester defaultSemester = new Semester(1);
+        Semester defaultSemester = new Semester(2);
         currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
+        completedMcList = new CompletedMcList(modules.asUnmodifiableObservableList(), currentSemester);
         mcGoal = new Mc(160);
     }
 
@@ -45,6 +48,14 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public ModuleTracker(ReadOnlyModuleTracker toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    public ObservableList<Mc> getCompletedMcList() {
+        return completedMcList.getCompletedMcList();
+    }
+
+    public void updateCompletedMcList() {
+        this.completedMcList.update(this.modules.asUnmodifiableObservableList(), currentSemester);
     }
 
     //// list overwrite operations
@@ -78,8 +89,8 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
      */
     public void resetData(ReadOnlyModuleTracker newData) {
         requireNonNull(newData);
-
         setModules(newData.getModuleList());
+        completedMcList.update(newData.getModuleList(), currentSemester);
     }
 
     //// module-level operations

@@ -43,6 +43,16 @@ public class ModelManager implements Model {
         this(new ModuleTracker(), new UserPrefs());
     }
 
+    @Override
+    public ObservableList<Mc> getCompletedMcList() {
+        return moduleTracker.getCompletedMcList();
+    }
+
+    @Override
+    public void updateCompletedMcs() {
+        moduleTracker.updateCompletedMcList();
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override

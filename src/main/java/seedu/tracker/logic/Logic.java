@@ -9,6 +9,7 @@ import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -33,6 +34,13 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of modules */
     ObservableList<Module> getFilteredModuleList();
+
+    /**
+     * Returns the list of completed Mcs.
+     *
+     * @see Model#getCompletedMcList()
+     */
+    ObservableList<Mc> getCompletedMcList();
 
     /**
      * Returns the user prefs' module tracker file path.

@@ -62,6 +62,9 @@ public interface Model {
 
     Mc getMcGoal();
 
+    ObservableList<Mc> getCompletedMcList();
+
+    void updateCompletedMcs();
     /**
      * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.
      */
