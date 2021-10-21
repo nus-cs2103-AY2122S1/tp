@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TuitioneParser" as TuitioneParser LOGIC_COLOR
 participant ":EnrollCommandParser" as EnrollCommandParser LOGIC_COLOR
-participant "el:EnrollLessonCommand" as EnrollLessonCommand LOGIC_COLOR
+participant "e:EnrollLessonCommand" as EnrollLessonCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -36,16 +36,16 @@ create EnrollLessonCommand
 EnrollCommandParser -> EnrollLessonCommand :
 activate EnrollLessonCommand
 
-EnrollLessonCommand --> EnrollCommandParser : dl
+EnrollLessonCommand --> EnrollCommandParser : e
 deactivate EnrollLessonCommand
 
-EnrollCommandParser --> TuitioneParser : dl
+EnrollCommandParser --> TuitioneParser : e
 deactivate EnrollCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 EnrollCommandParser -[hidden]-> TuitioneParser
 destroy EnrollCommandParser
 
-TuitioneParser --> LogicManager  : dl
+TuitioneParser --> LogicManager  : e
 deactivate TuitioneParser
 
 LogicManager -> EnrollLessonCommand : execute()
