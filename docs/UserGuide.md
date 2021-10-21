@@ -223,7 +223,7 @@ Shows a list of all students in TAB.
 Format: `list`
 
 ### Finding Students
-This section guides you on how to find students of your choice in TAB.
+This section guides you on how to find or filter students of your choice in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
