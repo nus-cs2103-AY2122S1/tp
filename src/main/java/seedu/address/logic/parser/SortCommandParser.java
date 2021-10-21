@@ -1,0 +1,67 @@
+package seedu.address.logic.parser;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.*;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
+import seedu.address.model.sorter.*;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.function.Predicate;
+
+/**
+ * Parses input arguments and creates a new SortCommand object
+ */
+public class SortCommandParser implements Parser<SortCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public SortCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(
+                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NATIONALITY,
+                        PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_GENDER, PREFIX_REMARK, PREFIX_TAG);
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+            return new SortCommand(new NameComparator());
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            return new SortCommand(new PhoneComparator());
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            return new SortCommand(new EmailComparator());
+        }
+        if (argMultimap.getValue(PREFIX_NATIONALITY).isPresent()) {
+            return new SortCommand(new NationalityComparator());
+        }
+        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
+            return new SortCommand(new TutorialGroupComparator());
+        }
+        if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isPresent()) {
+            return new SortCommand(new SocialHandleComparator());
+        }
+        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+            return new SortCommand(new GenderComparator());
+        }
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            return new SortCommand(new RemarkComparator());
+        }
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            return new SortCommand(new NameComparator());
+        }
+
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+    }
+}
