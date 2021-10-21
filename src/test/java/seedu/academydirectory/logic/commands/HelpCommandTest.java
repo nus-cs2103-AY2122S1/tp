@@ -44,8 +44,5 @@ public class HelpCommandTest {
         CommandResult commandResult3 = new CommandResult(String.format(HelpCommand.MESSAGE_HELP_SUCCESS_SPECIFIC,
                 "exit"), ExitCommand.HELP_MESSAGE);
         assertCommandSuccess(helpCommand3, model, commandResult3, model);
-
-        HelpCommand helpCommand4 = new HelpCommand(null, DeleteCommand.HELP_MESSAGE);
-        assertThrows(CommandException.class, () -> helpCommand4.execute(model));
     }
 }
