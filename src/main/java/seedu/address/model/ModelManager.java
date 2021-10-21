@@ -219,9 +219,9 @@ public class ModelManager implements Model {
     @Override
     public void addToOrder(Item item) {
         requireNonNull(item);
-        assert hasUnclosedOrder();
+        assert(hasUnclosedOrder());
 
-        optionalOrder.get().addItem(item);
+        optionalOrder.ifPresent(order -> order.addItem(item));
     }
 
     /**

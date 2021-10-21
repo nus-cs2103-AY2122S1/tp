@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.UniqueItemList;
 
 /**
@@ -35,9 +36,16 @@ public class Order {
      * Add an {@code Item} to the order.
      */
     public void addItem(Item newItem) {
-        // TODO: Implement count increasing to duplicate item adding.
         requireNonNull(newItem);
-        items.add(newItem);
+
+        if (!items.contains(newItem)) {
+            items.add(newItem);
+        }
+
+        Item existingItem = items.get(new ItemDescriptor(newItem)).get(0);
+
+        int newCount = existingItem.getCount() + newItem.getCount();
+        items.setItem(existingItem, existingItem.updateCount(newCount));
     }
 
     /**
