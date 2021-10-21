@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
@@ -19,6 +20,12 @@ import seedu.address.model.tag.Tag;
 public class ShowCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_nullPrefix_nullPointerExceptionThrown() {
+
+        assertThrows(NullPointerException.class, () -> new ShowCommand(null));
+    }
 
     @Test
     public void execute_namePrefix_namesListed() {

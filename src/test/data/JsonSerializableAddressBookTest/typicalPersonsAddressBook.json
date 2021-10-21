@@ -10,7 +10,8 @@
     "levelOfEducation" : "PhD",
     "experience" : "0",
     "tagged" : [ "friends" ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -21,8 +22,8 @@
     "levelOfEducation" : "Masters",
     "experience" : "1",
     "tagged" : [ "owesMoney", "friends" ],
-    "interview" : "2021-10-22, 10:00"
-
+    "interview" : "2021-10-22, 10:00",
+    "done" : "Not Done"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -33,7 +34,8 @@
     "levelOfEducation" : "Elementary",
     "experience" : "2",
     "tagged" : [ ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -44,7 +46,8 @@
     "levelOfEducation" : "Middle School",
     "experience" : "3",
     "tagged" : [ "friends" ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -55,7 +58,8 @@
     "levelOfEducation" : "Bachelors",
     "experience" : "4",
     "tagged" : [ "old" ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -66,7 +70,8 @@
     "levelOfEducation" : "High School",
     "experience" : "5",
     "tagged" : [ ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -77,6 +82,7 @@
     "levelOfEducation" : "University",
     "experience" : "6",
     "tagged" : [ ],
-    "interview" : "-"
+    "interview" : "-",
+    "done" : "Not Done"
   } ]
 }

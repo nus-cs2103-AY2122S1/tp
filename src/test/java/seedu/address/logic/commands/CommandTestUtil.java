@@ -21,6 +21,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -30,6 +31,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_DONE_AMY = Done.STATUS_UNDONE;
+    public static final String VALID_DONE_BOB = Done.STATUS_UNDONE;
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -100,7 +103,8 @@ public class CommandTestUtil {
                 .withExpectedSalary(VALID_EXPECTED_SALARY_AMY)
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
                 .withExperience(VALID_EXPERIENCE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_FRIEND)
+                .withDone(VALID_DONE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withRole(VALID_ROLE_BOB)
@@ -108,7 +112,8 @@ public class CommandTestUtil {
                 .withExpectedSalary(VALID_EXPECTED_SALARY_BOB)
                 .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
                 .withExperience(VALID_EXPERIENCE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withDone(VALID_DONE_BOB).build();
     }
 
     /**

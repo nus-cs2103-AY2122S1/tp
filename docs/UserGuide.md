@@ -34,6 +34,8 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
     * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
+    * **`show`**`n/` : Displays a list of all unique applicant names.
+
     * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -263,6 +265,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd applicant listed in RecruitIn.
 * `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 
+### Showing search terms : `show`
+
+Shows unique search terms available for a specific prefix.
+
+Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
+
+* Finds and displays a list of unique search terms available for a specific prefix.
+* **At least 1** prefix must be given.
+* Unique search terms will only be found for the **first** prefix input.
+
+Examples:
+
+**Note**: Suppose the applicant data includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
+* `show n/` will display a list consisting of `John` and `Mary`.
+* `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -319,4 +337,5 @@ Action | Format, Examples
 **List** | `list`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG]`<br> e.g., `find n/John Mary`
+**Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Help** | `help`
