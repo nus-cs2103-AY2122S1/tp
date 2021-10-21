@@ -21,7 +21,7 @@ import seedu.address.model.friend.FriendNameContainsKeywordsPredicate;
 
 public class FriendsListParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final MainParser parser = new MainParser();
 
     @Test
     public void parseCommand_addFriend() throws Exception {
