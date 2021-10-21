@@ -162,9 +162,9 @@ The add student feature adds a student with the provided name and NUSNET ID into
 ####Implementation
 
 ####AddCommand class
-The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation, 
-the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database. 
-If this `Student` is already existing, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If 
+The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
+the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
+If this `Student` is already existing, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
 the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
 
 ####AddCommandParser class
@@ -293,8 +293,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* targets professors of CS1101S 
-* has a need to manage a significant number of students 
+* targets professors of CS1101S
+* has a need to manage a significant number of students
 * has a need to analyse students' performance
 * prefer desktop apps over other types
 * can type fast
@@ -387,7 +387,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
-   
 * 1b. There are multiple students that match any of the specified student names.
 
     * 1b1. Source Control shows an error message with the different Student IDs.
