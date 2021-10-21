@@ -8,12 +8,10 @@ import seedu.programmer.commons.core.LogsCenter;
 
 public class CommandHistory {
     static final String DEFAULT_COMMAND = "";
-    private static final int INITIAL_LIST_SIZE = 0;
     private static final int INITIAL_COUNTER_VALUE = -1;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     private List<String> commandHistory;
-    private int size;
     private int counter;
 
     /**
@@ -21,7 +19,6 @@ public class CommandHistory {
      */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
-        size = INITIAL_LIST_SIZE;
         counter = INITIAL_COUNTER_VALUE;
     }
 
@@ -87,30 +84,24 @@ public class CommandHistory {
         // state check
         CommandHistory e = (CommandHistory) other;
         return commandHistory.equals(e.commandHistory)
-                && size == e.size
                 && counter == e.counter;
     }
 
     private boolean isCommandHistoryEmpty() {
-        return size == INITIAL_LIST_SIZE;
-    }
-
-    private void increaseSizeByOne() {
-        size++;
+        return commandHistory.size() == 0;
     }
 
     private void resetCounterToLast() {
-        counter = size - 1;
+        counter = commandHistory.size() - 1;
     }
 
     private void addCommandToHistory(String command) {
         commandHistory.add(command);
-        increaseSizeByOne();
         resetCounterToLast();
     }
 
     private boolean isCounterAtLast() {
-        return counter == size - 1;
+        return counter == commandHistory.size() - 1;
     }
 
     private boolean isCounterAtFirst() {
