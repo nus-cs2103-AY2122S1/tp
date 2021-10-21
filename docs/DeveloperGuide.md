@@ -467,6 +467,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. BogoBogo notifies user that user can only sort by either name or count, not both.
 
       Use case ends.
+
+**UC06 - Help **
+
+**MSS**
+
+1. User requests to know what are the commands available to the user.
+2. BogoBogo shows the commands available to the user.
+
+   Use case ends.
+   
+ **Extensions**
+
+* 1a. User specifies which command exactly he wants to know how to use.
+    * 1a1. BogoBogo notifies the user what that exact command does.
+
+      Use case ends.
       
 ### Non-Functional Requirements
 
