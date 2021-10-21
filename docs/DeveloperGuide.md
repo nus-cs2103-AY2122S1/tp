@@ -220,7 +220,40 @@ The following sequence diagram shows how add lesson operation works:
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>
+* Command Word Style
+  * (**Current Choice**) Option 1: `add-l`
+    * Pros:
+      * Non-space-separated word allows easier parsing of command word
+      * Unique command word allows command keys to be easily distinguished
+    * Cons:
+      * Redundant creation of a new command word, when there is an existing `add` command word.
+      * Might not be as intuitive as there are now 2 add commands with different keywords.
+  * Option 2: `add -l`
+    * Pros:
+      * More intuitive, `-l` flag can be used to determine that a lesson is to be added, while omitting it means a student is to be added.
+    * Cons:
+      * Harder to parse, as the `-l` flag is space separated from the command keyword.
+      * CSO might forget to include the `-l` flag, accidentally adding a student instead.
+    
+* Command Informational Field Style
+  * Option 1: `LESSON_CODE`
+    * Pros:
+      * Only one continuous line of code is required to be entered.
+    * Cons:
+      * One long string will be to be entered, which the team would then be required to come up with another implementation of parser to parse this piece of information. This would be redundant since we can make use of the existing parser using the CliSyntax.
+      * CSO would have to key in the string in a predetermined order, which the CSO could get easily confused.
+  * (**Current Choice**) Command Information Field Option 2: `s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`
+    * Pros:
+      * Different fields can be placed in any order. Hence, making it easier for CSO to enter the relevant fields.
+      * Informational fields are now more distinct. Hence, it is easier for the CSO to follow through.
+    * Cons:
+      * More `spacebar` and CliSyntax would have to be pressed to cater for each individual fields.
+
+<ins>Decision</ins>
+
+Command Word Style: Option 1 (`add-l`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, there is not much significance in having an especially pretty command syntax as efficiency(i.e. entering commands fast and correctly) is desired. At the same time, the accidental addition of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`add -l`) should only be implemented once an undo/redo feature is implemented.
+Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the CSO to pick up the command syntax easier since there are lesser things to remember. 
 
 ### Delete Lesson feature
 
@@ -471,10 +504,10 @@ The following activity diagram summarizes what happens when a user executes the 
 #### Design considerations:
 
 **Aspect: How to implement filter**
-* **Alternative 1 (current choice)**: one filter command that handles both grade and subject filtering
+* **Option 1 (current choice)**: one filter command that handles both grade and subject filtering
     * Pros: Less commands to remember, user will not feel overwhelmed.
     * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
-* **Alternative 2**: 3 separate filter commands, one for each scenario stated above
+* **Option 2**: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
     
@@ -551,11 +584,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <ins> Aspect: How undo & redo executes:</ins>
 
-* **Alternative 1 (current choice):** Saves the entire tuitione.
+* **Option 1 (current choice):** Saves the entire tuitione.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Option 2:** Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
