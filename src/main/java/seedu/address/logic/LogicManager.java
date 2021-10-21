@@ -51,11 +51,7 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
 
         commandResult = command.execute(model);
-        try {
-            storage.saveAddressBook(model.getAddressBook());
-        } catch (IOException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        }
+        saveAddressBook();
 
         return commandResult;
     }
@@ -116,11 +112,24 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void createAddressBook() {
+    public void createAddressBook() throws CommandException {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(getAddressBookFilePath());
         ReadOnlyAddressBook addressBook = new AddressBook();
 
         this.storage.switchAddressBook(addressBookStorage);
         this.model.setAddressBook(addressBook);
+        saveAddressBook();
+    }
+
+
+    /**
+     * Saves the current Address Book.
+     */
+    private void saveAddressBook() throws CommandException {
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
     }
 }

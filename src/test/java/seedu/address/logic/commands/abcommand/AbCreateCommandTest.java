@@ -13,11 +13,13 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -37,6 +39,9 @@ public class AbCreateCommandTest {
             Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
     private static final Path addressBookFilePath = TEST_DATA_FOLDER.resolve(
             Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
+
+    @TempDir
+    public Path testFolder;
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -75,11 +80,10 @@ public class AbCreateCommandTest {
         assertFalse(abCreateCommand1.equals(abCreateCommand2));
     }
 
-
     @Test
-    public void execute_success() {
+    public void execute_success() throws CommandException {
         String newFilePathName = "testingfile";
-        Path newFilePath = TEST_DATA_FOLDER.resolve(newFilePathName + ".json");
+        Path newFilePath = testFolder.resolve(newFilePathName + ".json");
         AbCreateCommand abCreateCommand1 = new AbCreateCommand(newFilePathName, newFilePath);
         expectedModel.setAddressBookFilePath(newFilePath);
         CommandResult result = new CommandResult(

@@ -180,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Create a new Address Book.
      */
-    private void handleCreateAddressBook() {
+    private void handleCreateAddressBook() throws CommandException {
         this.logic.createAddressBook();
     }
 

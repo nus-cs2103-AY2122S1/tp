@@ -63,5 +63,5 @@ public interface Logic {
      */
     void switchAddressBook();
 
-    void createAddressBook();
+    void createAddressBook() throws CommandException;
 }
