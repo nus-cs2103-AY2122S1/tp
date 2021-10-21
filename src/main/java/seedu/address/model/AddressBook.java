@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
-import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
@@ -214,12 +214,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public List<Lesson> getSortedLessons() {
-        List<Lesson> lessons = new ArrayList<>();
+    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        List<LessonWithAttendees> lessons = new ArrayList<>();
         for (Person p : persons) {
-            lessons.addAll(p.getLessonsList().getLessons());
+            lessons.addAll(p.getLessonsWithAttendees());
         }
-        Collections.sort(lessons);
+        Collections.sort(lessons, new LessonWithAttendees.SortByLesson());
         return lessons;
     }
 
