@@ -83,7 +83,7 @@ This section highlights the things to note about the command format TAB uses.
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
-* There are constraints in place to determine whether the value you provide for a field is valid. 
+* There are constraints in place to determine whether the value you provided for a field is valid. 
   TAB will inform you if you gave an invalid input for a field.
 
 </div>
