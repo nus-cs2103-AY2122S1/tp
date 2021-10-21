@@ -165,7 +165,44 @@ This section describes some noteworthy details on how certain features are imple
 7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
+### Edit Module
+
+1. When the `Logic` is called upon to execute `edit module m/CS2103 n/CS2105`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to a `EditCommandParser`.
+3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Module` object as indicated by `module`.
+4. The `EditModuleCommandParser` will parse the tokens `m/<old module name>` and `n/<new module name>` and create a `EditModuleDescriptor`
+   (defined in EditModuleCommand) with the new module name.
+5. `EditModuleCommandParser` will also create a `EditModuleCommand` with the `EditModuleDescriptor` and the module to edit, which is executed by the `LogicManager`
+6. The `EditModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified name and edit the name.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+### Add Module
+
+1. When the `Logic` is called upon to execute `add module m/CS2103`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to a `AddCommandParser`.
+3. The `AddCommandParser` then figures out the type of object to add, in this case a `Module` object as indicated by `module`.
+4. The `AddModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `AddModuleCommand`.
+5. This results in a `AddModuleCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic Manager`.
+6. The `AddModuleCommand` communicates with the `Model` when it is executed.
+7. The `Model` will add a new `Module` with the new `ModuleName`. 
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteModuleSequenceDiagram.png)
+
+### Delete Student
+
+1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
+3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Student` object as indicated by `student`.
+4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the student ID in a `StudentId` object and pass them into a `DeleteStudentCommand`.
+5. This results in a `DeleteStudentCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
+6. The `DeleteStudentCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName`.
+8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
+9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+![Interactions Inside the Logic Component for the `delete student` Command](images/DeleteStudentSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

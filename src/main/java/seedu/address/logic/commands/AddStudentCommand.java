@@ -15,6 +15,8 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Adds a student to the address book.
@@ -70,12 +72,26 @@ public class AddStudentCommand extends AddCommand {
                 }
 
                 module.addStudent(studentToAdd);
-                // upon adding student to the module, set student's tasks to be the module's task
-                studentToAdd.setTaskList(module.getTaskList());
+
+                // for each task in this module's taskList, add it to a new UniqueTaskList
+                // give the new UniqueTaskList to student after all tasks have been added
+                UniqueTaskList thisModuleTaskList = module.getTaskList();
+                UniqueTaskList newStudentTaskList = new UniqueTaskList();
+                for (Task task : thisModuleTaskList) {
+
+                    ModuleName moduleName = task.getModuleName();
+                    String taskName = task.getName();
+                    String taskDeadline = task.getDeadline();
+
+                    Task taskToAdd = new Task(moduleName, taskName, taskDeadline);
+
+                    newStudentTaskList.add(taskToAdd);
+                }
+                studentToAdd.setTaskList(newStudentTaskList);
                 return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     @Override

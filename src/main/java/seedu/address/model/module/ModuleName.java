@@ -18,7 +18,7 @@ public class ModuleName {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String moduleName;
+    private final String moduleName;
 
     /**
      * Constructs a {@code Name}.
@@ -36,6 +36,10 @@ public class ModuleName {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public String getModuleName() {
+        return this.moduleName;
     }
 
 
