@@ -35,6 +35,7 @@ public class DeleteMarkedCommand extends Command {
             result.append(personToDelete);
             model.deletePerson(personToDelete);
         }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
                 result.toString().isEmpty() ? MESSAGE_NONE_DELETED : result));
