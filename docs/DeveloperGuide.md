@@ -154,6 +154,26 @@ Classes used by multiple components are in the `seedu.academydirectory.commons` 
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### HelpCommand
+
+This command serves to guide new users on using the application, which syntax to use and when to use them. Users can view a summary of all commands' syntax,
+or a specific guide on how to use a particular command.
+
+#### Implementation
+
+`HelpCommand` will extend the `Command` class, and consequently `@Override` the `Command#execute()` method to serve its initial purposes.
+
+The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). This help command will
+be displayed to the user on a separate window later on.
+
+![HelpCommandSequenceDiagram](images/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
+
+As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the optional condition is met, a `CommandException` is thrown to let
+users know that the input is invalid. 
+
+Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
+will be created. If it is a specific help, then a specific help command associated with a command will be created.
+
 ### AttendanceCommand
 
 This command serves to update the attendance status of students. A student's `Attendance` can be either attended or unattended.
