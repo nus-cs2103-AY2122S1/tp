@@ -35,6 +35,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
+        assert(predicate.toString() != "");
         return new CommandResult("Showing results for: " + '\n' + predicate + '\n'
                 + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
