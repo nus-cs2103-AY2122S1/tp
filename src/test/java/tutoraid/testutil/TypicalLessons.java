@@ -29,7 +29,7 @@ public class TypicalLessons {
             .withStudentPhone("94351234")
             .withParentName("Mrs Tan")
             .withParentPhone("94351253")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
 

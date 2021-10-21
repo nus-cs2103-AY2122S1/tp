@@ -12,7 +12,7 @@ import tutoraid.logic.parser.exceptions.ParseException;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
@@ -48,10 +48,11 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
                 argMultimap.getValue(PREFIX_PARENT_NAME).orElse(""));
         Phone parentPhone = ParserUtil.parsePhone(
                 argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
-        Progress progress = new Progress("No Progress");
+        ProgressList progressList = new ProgressList();
         PaymentStatus paymentStatus = new PaymentStatus(false);
 
-        Student student = new Student(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
+        Student student = new Student(studentName, studentPhone, parentName, parentPhone,
+                progressList, paymentStatus);
 
         return new AddStudentCommand(student);
     }
