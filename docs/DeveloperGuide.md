@@ -21,9 +21,9 @@ environment locally to support further developing of the app.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** Here are the interpretations of symbols and formatting used in this document: 
 
-* `code`: the use of highlight on a word indicates that it is code.
-* <div markdown="span">:information_source: </div>: indicates additional information
-* <div markdown="span">:bulb: </div>: indicates tips
+* `code` the use of highlight on a word indicates that it is code.
+* information_source: indicates additional information
+* :bulb: indicates tips
 
 </div>
 
