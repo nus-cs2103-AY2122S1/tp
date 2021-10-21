@@ -30,7 +30,8 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
 public class ParserUtil {
-    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HHmm";
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_PATTERN);
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
 
@@ -38,7 +39,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_NUMBER_OF_PEOPLE =
             "Number of people is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DATE_TIME_FORMAT =
-            "Date time should be in the format of " + DATE_TIME_FORMATTER.toString();
+            "Date time should be in the format of " + DATE_TIME_PATTERN;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.model.person.Phone;
+import seedu.address.model.table.Table;
 
 /**
  * Represents a reservation
@@ -14,15 +15,17 @@ public class Reservation {
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime dateTime;
+    private Table table;
 
     /**
      * Creates a reservation
      */
-    public Reservation(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
+    public Reservation(Phone phone, int numberOfPeople, LocalDateTime dateTime, Table table) {
         requireAllNonNull(phone, numberOfPeople, dateTime);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
         this.dateTime = dateTime;
+        this.table = table;
     }
 
     public Phone getPhone() {
@@ -35,6 +38,10 @@ public class Reservation {
 
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public int getTableId() {
+        return table.getTableId();
     }
 
     /**
@@ -52,7 +59,8 @@ public class Reservation {
         Reservation that = (Reservation) o;
         return numberOfPeople == that.numberOfPeople
                 && phone.equals(that.phone)
-                && dateTime.equals(that.dateTime);
+                && dateTime.equals(that.dateTime)
+                && table.equals(that.table);
     }
 
     /**
@@ -60,7 +68,7 @@ public class Reservation {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(phone, numberOfPeople, dateTime);
+        return Objects.hash(phone, numberOfPeople, dateTime, table);
     }
 
     /**
@@ -68,6 +76,7 @@ public class Reservation {
      */
     @Override
     public String toString() {
-        return String.format("phone=%s; numberOfPeople=%s; time=%s", phone, numberOfPeople, dateTime);
+        return String.format("phone: %s, numberOfPeople: %s, time: %s, table: %s",
+                phone, numberOfPeople, dateTime, table);
     }
 }

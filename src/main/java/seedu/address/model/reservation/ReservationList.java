@@ -32,7 +32,6 @@ public class ReservationList implements Iterable<Reservation> {
      */
     public void add(Reservation toAdd) {
         requireNonNull(toAdd);
-        // TODO: Check the time to see if can add or not
         internalList.add(toAdd);
     }
 
@@ -71,6 +70,13 @@ public class ReservationList implements Iterable<Reservation> {
     public void setReservations(List<Reservation> reservations) {
         requireNonNull(reservations);
         internalList.setAll(reservations);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code reservations}
+     */
+    public void resetReservations() {
+        setReservations(new ReservationList());
     }
 
     /**

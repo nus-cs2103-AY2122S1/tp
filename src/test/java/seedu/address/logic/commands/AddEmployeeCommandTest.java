@@ -20,10 +20,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.table.TableManager;
 import seedu.address.testutil.EmployeeBuilder;
 
 public class AddEmployeeCommandTest {
@@ -134,6 +137,11 @@ public class AddEmployeeCommandTest {
         }
 
         @Override
+        public boolean hasCustomerWithPhone(Phone phone) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteCustomer(Customer target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,6 +208,17 @@ public class AddEmployeeCommandTest {
 
         @Override
         public ObservableList<Reservation> getFilteredReservationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReservationsManager getReservationsManager() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public TableManager getTableManager() {
             throw new AssertionError("This method should not be called.");
         }
 

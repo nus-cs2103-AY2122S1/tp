@@ -15,6 +15,7 @@ import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -30,6 +31,7 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedEmployee> employees = new ArrayList<>();
     private final List<JsonAdaptedSupplier> suppliers = new ArrayList<>();
     private final List<JsonAdaptedReservation> reservations = new ArrayList<>();
+    private final List<JsonAdaptedTable> tables = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons and employees.
@@ -38,11 +40,13 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("customers") List<JsonAdaptedCustomer> customers,
         @JsonProperty("employees") List<JsonAdaptedEmployee> employees,
         @JsonProperty("suppliers") List<JsonAdaptedSupplier> suppliers,
-        @JsonProperty("reservations") List<JsonAdaptedReservation> reservations) {
+        @JsonProperty("reservations") List<JsonAdaptedReservation> reservations,
+        @JsonProperty("tables") List<JsonAdaptedTable> tables) {
         this.customers.addAll(customers);
         this.employees.addAll(employees);
         this.suppliers.addAll(suppliers);
         this.reservations.addAll(reservations);
+        this.tables.addAll(tables);
     }
 
     /**
@@ -56,6 +60,7 @@ class JsonSerializableAddressBook {
         suppliers.addAll(source.getSupplierList().stream().map(JsonAdaptedSupplier::new).collect(Collectors.toList()));
         reservations.addAll(
                 source.getReservationList().stream().map(JsonAdaptedReservation::new).collect(Collectors.toList()));
+        tables.addAll(source.getTableList().stream().map(JsonAdaptedTable::new).collect(Collectors.toList()));
     }
 
     /**
@@ -90,6 +95,10 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedReservation jsonAdaptedReservation : reservations) {
             Reservation reservation = jsonAdaptedReservation.toModelType();
             addressBook.addReservation(reservation);
+        }
+        for (JsonAdaptedTable jsonAdaptedTable : tables) {
+            Table table = jsonAdaptedTable.toModelType();
+            addressBook.addTable(table);
         }
         return addressBook;
     }

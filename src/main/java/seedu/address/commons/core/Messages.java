@@ -14,6 +14,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX = "The supplier index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_CUSTOMERS_LISTED_OVERVIEW = "%1$d customers listed!";
+    public static final String MESSAGE_DATETIME_PRINT_FORMAT = "%1$te %1$th %1$tY, %1$tl:%1$tM %1$tp";
     public static final String MESSAGE_RESERVATIONS_LISTED_DATETIME =
             "%1$d person(s) have reservations on %2$te %2$th %2$tY, %2$tl:%2$tM %2$tp";
     public static final String MESSAGE_RESERVATIONS_LISTED_DATE_ONLY =
