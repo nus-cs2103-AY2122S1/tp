@@ -278,7 +278,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
-| `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |             
+| `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
 | `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |

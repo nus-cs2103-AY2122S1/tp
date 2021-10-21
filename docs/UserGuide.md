@@ -42,7 +42,7 @@ Through an address book, this product aims to store information such as faculty,
 
 ## Features
 
-### Data fields of a Person: 
+### Data fields of a Person:
 Personal data fields
 * n/: name
 * e/: email
@@ -69,7 +69,7 @@ Adds a Person to the address book.
 
 Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
 
-* A Person must have one and only one name, email, faculty and major.  
+* A Person must have one and only one name, email, faculty and major.
 * A Person may have any number of skills, languages, frameworks and tags (including 0).
 
 Examples:
@@ -104,7 +104,7 @@ Removes an element from a data field at a specified index.
 
 Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
 
-* The index refers to the index of the specific element in the non-single data field. 
+* The index refers to the index of the specific element in the non-single data field.
 * Applicable to skill and miscellaneous data fields.
 
 ### Listing all contacts : `list`
@@ -160,8 +160,7 @@ Adds an organisation to the address book.
 Format: `add org n/NAME e/EMAIL p/PERSON`
 
 AAn organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
-These are organisations whose contact the user wished to remember. 
-
+These are organisations whose contact the user wished to remember.
 
 Examples:
 
