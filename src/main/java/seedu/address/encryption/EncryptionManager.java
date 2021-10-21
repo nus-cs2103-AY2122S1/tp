@@ -1,5 +1,7 @@
 package seedu.address.encryption;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -47,8 +49,8 @@ public class EncryptionManager implements Encryption {
 
     @Override
     public void encrypt(Path sourceFilePath, Path destinationFilePath) throws InvalidKeyException, IOException {
-        assert sourceFilePath != null;
-        assert destinationFilePath != null;
+        requireNonNull(sourceFilePath);
+        requireNonNull(destinationFilePath);
 
         if (isIllegalFileFormat(destinationFilePath)) { // Guard clause
             throw new IOException();
@@ -66,7 +68,7 @@ public class EncryptionManager implements Encryption {
      * @throws InvalidKeyException If the supplied secret key is not valid.
      */
     private void encrypt(String content, Path destinationFilePath) throws InvalidKeyException {
-        assert content != null;
+        requireNonNull(content);
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] iv = cipher.getIV();
@@ -119,7 +121,7 @@ public class EncryptionManager implements Encryption {
      * Checks if the file is in an illegal format.
      */
     private boolean isIllegalFileFormat(Path filePath) {
-        assert filePath != null;
+        requireNonNull(filePath);
         return !filePath.toString().endsWith(LEGAL_FILE_FORMAT_EXTENSION);
     }
 }
