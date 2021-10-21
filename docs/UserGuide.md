@@ -367,7 +367,7 @@ Action | Format, Examples
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 **Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
-**Help** | `help`
+**Help** | `help [COMMAND]` <br> e.g. `help add`
 **Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **List** | `list`
 **Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
