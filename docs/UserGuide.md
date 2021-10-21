@@ -65,7 +65,8 @@ Format: `help`
 
 ### Tag legend
 
-####Tags for Specific Fields
+#### Tags for Specific Fields
+
 |Tag|Description|
 |---|-----------|
 |n/|Name|
@@ -78,6 +79,7 @@ Format: `help`
 |t/|Extra tags|
 
 #### Tags for Lookup
+
 |Tag|Name|
 |---|----|
 |-n|Name|
@@ -339,19 +341,19 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
-**View** | `view -n name` <br> `view -i index`
+-------|------------------
+**View** | `view -n NAME` <br> `view -i INDEX`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Delete** | `delete n/name` <br> `delete i/index` <br> ` delete r/role` <br> `delete s/status`
+**Delete** | `delete n/NAME` <br> `delete i/INDEX` <br> `delete r/role` <br> `delete s/STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedlue -n name` <br> `viewSchedlue -i index`
-**Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
-**Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
-**Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
+**View staff schedule** | `viewSchedlue -n NAME` <br> `viewSchedlue -i INDEX`
+**Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/INDEX d/fullDayName-shiftNumber`
+**Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
+**Delete staff shift** | `deleteShift n/NAME d/fullDayName-shiftNumber` <br> `deleteShift i/INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
-**Mark absent** | `mark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
-**Remove mark** | `unmark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
+**Mark absent** | `mark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
+**Remove mark** | `unmark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
