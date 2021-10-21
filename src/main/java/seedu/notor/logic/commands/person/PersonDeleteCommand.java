@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -12,8 +15,8 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  * Deletes a person identified using it's displayed index from the address book.
  */
 public class PersonDeleteCommand extends PersonCommand {
-
     public static final String COMMAND_WORD = "delete";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("delete", "d");
 
     private static final String COMMAND_DESCRIPTION =
             ": Deletes the person identified by the index number used in the displayed person list.\n";

@@ -1,6 +1,6 @@
 package seedu.notor.model.person;
 
-import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ public class Person implements Unique<Person> {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+        requireNonNull(name);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,7 +49,7 @@ public class Person implements Unique<Person> {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+        requireNonNull(name);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,8 +61,8 @@ public class Person implements Unique<Person> {
      * Creates a person with groups and subgroups.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags,
-                  HashSet<String> displaySuperGroups, HashSet<String> displaySubGroups) {
-        requireAllNonNull(name, phone, email, tags);
+            HashSet<String> displaySuperGroups, HashSet<String> displaySubGroups) {
+        requireNonNull(name);
         this.name = name;
         this.phone = phone;
         this.email = email;
