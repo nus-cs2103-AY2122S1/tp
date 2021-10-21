@@ -123,5 +123,7 @@ public interface Model {
 
     void addModule(Module module);
 
-    //todo later versions: deleteModule and setModule
+    void setModule(Module target, Module moduleToEdit);
+
+    //todo later versions: deleteModule
 }
