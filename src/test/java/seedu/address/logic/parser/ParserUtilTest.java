@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
@@ -25,16 +26,18 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_GENDER = "N";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
     private static final String INVALID_SOCIAL_HANDLE = "rachel walker";
     private static final String INVALID_TAG = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_GENDER = "M";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_NATIONALITY = "Vietnam";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TUTORIAL_GROUP = "09";
+    private static final String VALID_TUTORIAL_GROUP = "T09";
     private static final String VALID_SOCIAL_HANDLE = "@rachelw";
     private static final String VALID_REMARK = "she likes singing";
     private static final String VALID_TAG_1 = "friend";
@@ -193,6 +196,29 @@ public class ParserUtilTest {
         String socialHandleWithWhitespace = WHITESPACE + VALID_SOCIAL_HANDLE + WHITESPACE;
         SocialHandle expectedSocialHandle = new SocialHandle(VALID_SOCIAL_HANDLE);
         assertEquals(expectedSocialHandle, ParserUtil.parseSocialHandle(socialHandleWithWhitespace));
+    }
+
+    @Test
+    public void parseGender_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGender((String) null));
+    }
+
+    @Test
+    public void parseGender_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseGender(INVALID_GENDER));
+    }
+
+    @Test
+    public void parseGender_validValueWithoutWhitespace_returnsGender() throws Exception {
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(VALID_GENDER));
+    }
+
+    @Test
+    public void parseGender_validValueWithWhitespace_returnsTrimmedGender() throws Exception {
+        String genderWithWhitespace = WHITESPACE + VALID_GENDER + WHITESPACE;
+        Gender expectedGender = new Gender(VALID_GENDER);
+        assertEquals(expectedGender, ParserUtil.parseGender(genderWithWhitespace));
     }
 
     @Test

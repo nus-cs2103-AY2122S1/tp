@@ -2,64 +2,71 @@
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
+    "gender": "F",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "nationality": "Singapore ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@alicep",
     "remark" : "She likes aardvarks.",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
+    "gender": "M",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "nationality": "China ",
-    "tutorialGroup": "08",
+    "tutorialGroup": "W08",
     "socialHandle": "@bensonm",
     "remark" : "He can't take beer!",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
+    "gender": "M",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "nationality": "Malaysia ",
-    "tutorialGroup": "05",
+    "tutorialGroup": "T05",
     "socialHandle": "@carlk",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
+    "gender": "M",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "nationality": "Thailand ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@danielm",
     "remark" : "She likes aardvarks.",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
+    "gender": "F",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "nationality": "USA ",
-    "tutorialGroup": "29",
+    "tutorialGroup": "T29",
     "socialHandle": "@ellem",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
+    "gender": "F",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "nationality": "Australia ",
-    "tutorialGroup": "19",
+    "tutorialGroup": "T19",
     "socialHandle": "@fionak",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
+    "gender": "M",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "nationality": "Vietnam ",
-    "tutorialGroup": "28",
+    "tutorialGroup": "T28",
     "socialHandle": "@georgeb",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]

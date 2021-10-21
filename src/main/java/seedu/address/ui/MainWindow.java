@@ -63,6 +63,8 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
+        setTitleBar("Socius");
+
         setAccelerators();
 
         helpWindow = new HelpWindow();
@@ -133,6 +135,14 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets the name on title bar.
+     */
+    private void setTitleBar(String title) {
+        //primaryStage.getIcons().add(iconImage);
+        primaryStage.setTitle(title);
     }
 
     /**

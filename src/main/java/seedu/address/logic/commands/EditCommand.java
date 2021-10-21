@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -23,6 +24,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -44,6 +46,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_NATIONALITY + "NATIONALITY] "
@@ -110,11 +113,13 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getTutorialGroup());
         SocialHandle updatedSocialHandle = editPersonDescriptor.getSocialHandle()
                 .orElse(personToEdit.getSocialHandle());
+        Gender updatedGender = editPersonDescriptor.getGender()
+                .orElse(personToEdit.getGender());
         Remark updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedNationality,
-                updatedTutorialGroup, updatedSocialHandle, updatedRemark, updatedTags);
+                updatedTutorialGroup, updatedSocialHandle, updatedGender, updatedRemark, updatedTags);
     }
 
     @Override
@@ -146,6 +151,7 @@ public class EditCommand extends Command {
         private Nationality nationality;
         private TutorialGroup tutorialGroup;
         private SocialHandle socialHandle;
+        private Gender gender;
         private Remark remark;
         private Set<Tag> tags;
 
@@ -162,6 +168,7 @@ public class EditCommand extends Command {
             setNationality(toCopy.nationality);
             setTutorialGroup(toCopy.tutorialGroup);
             setSocialHandle(toCopy.socialHandle);
+            setGender(toCopy.gender);
             setRemark(toCopy.remark);
             setTags(toCopy.tags);
         }
@@ -171,7 +178,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, nationality, tutorialGroup, socialHandle,
-                    remark, tags);
+                    gender, remark, tags);
         }
 
         public void setName(Name name) {
@@ -222,6 +229,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(socialHandle);
         }
 
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
         public void setRemark(Remark remark) {
             this.remark = remark;
         }
@@ -268,6 +283,7 @@ public class EditCommand extends Command {
                     && getNationality().equals(e.getNationality())
                     && getTutorialGroup().equals(e.getTutorialGroup())
                     && getSocialHandle().equals(e.getSocialHandle())
+                    && getGender().equals(e.getGender())
                     && getRemark().equals(e.getRemark())
                     && getTags().equals(e.getTags());
         }

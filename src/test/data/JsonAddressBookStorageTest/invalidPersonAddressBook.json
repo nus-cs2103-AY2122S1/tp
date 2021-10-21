@@ -1,10 +1,11 @@
 {
   "persons": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
+    "gender": "M",
     "phone": "9482424",
     "email": "hans@example.com",
     "nationality": "Singapore ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@valid",
     "remark": "likes coding"
   } ]

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
@@ -20,14 +21,16 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NATIONALITY = "Singapore";
-    public static final String DEFAULT_TUTORIAL_GROUP = "01";
+    public static final String DEFAULT_TUTORIAL_GROUP = "T01";
     public static final String DEFAULT_SOCIAL_HANDLE = "@amybee";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
 
     private Name name;
+    private Gender gender;
     private Phone phone;
     private Email email;
     private Nationality nationality;
@@ -41,6 +44,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
+        gender = new Gender(DEFAULT_GENDER);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         nationality = new Nationality(DEFAULT_NATIONALITY);
@@ -55,6 +59,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
+        gender = personToCopy.getGender();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         nationality = personToCopy.getNationality();
@@ -122,6 +127,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Gender} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
+        return this;
+    }
+
+    /**
      * Sets the {@code Remark} of the {@code Person} that we are building.
      */
     public PersonBuilder withRemark(String remark) {
@@ -134,7 +147,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, phone, email, nationality, tutorialGroup,
-                socialHandle, remark, tags);
+                socialHandle, gender, remark, tags);
     }
 
 }
