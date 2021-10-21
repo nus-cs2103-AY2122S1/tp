@@ -26,6 +26,16 @@ public class AcademicCalendar {
     }
 
     /**
+     * Returns true if this academic calendar is chronologically before the other.
+     * @param other academic calendar to be compared to.
+     * @return true if this academic calendar is chronologically before the other
+     */
+    public boolean isBefore(AcademicCalendar other) {
+        return getAcademicYear().value <= other.getAcademicYear().value
+                && getSemester().value < other.getSemester().value;
+    }
+
+    /**
      * Returns true if both academic calendar have the same year and semester.
      */
     @Override
