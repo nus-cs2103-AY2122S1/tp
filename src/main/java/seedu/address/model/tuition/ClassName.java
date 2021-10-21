@@ -26,9 +26,13 @@ public class ClassName {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ClassLimit // instanceof handles nulls
-                && name == ((ClassName) other).name); // state check
+        if (other == this) {
+            return true;
+        }
+        if (other instanceof ClassName) {
+            return name.equals(((ClassName) other).name);
+        }
+        return false;
     }
 
     public String getName() {
