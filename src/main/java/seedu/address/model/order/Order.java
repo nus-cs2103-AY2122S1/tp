@@ -52,7 +52,7 @@ public class Order {
         return product.hasEnoughStock(quantity);
     }
 
-    public static boolean isPositiveQuantity(Quantity quantity) {
+    public boolean isValidOrder() {
         return quantity.moreThan(QUANTITY_ZERO);
     }
 
@@ -67,14 +67,18 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return id.equals(otherOrder.id)
-                       && quantity.equals(otherOrder.quantity)
-                       && time.equals(otherOrder.time);
+        return id.equals(otherOrder.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return "[ Product ID: " + id + ", Quantity: " + quantity + ", Time " + time + "]";
     }
