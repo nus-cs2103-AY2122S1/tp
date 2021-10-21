@@ -133,6 +133,12 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    @Test
+    public void hashCodeTest() throws DataConversionException {
+        AddressBook addressBook1 = getTypicalAddressBook();
+        AddressBook addressBook2 = getTypicalAddressBook();
+        assertTrue(addressBook1.hashCode() == addressBook1.hashCode());
+    }
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
@@ -148,5 +154,4 @@ public class AddressBookTest {
             return persons;
         }
     }
-
 }

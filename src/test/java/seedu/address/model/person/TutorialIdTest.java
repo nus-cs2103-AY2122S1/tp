@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +48,10 @@ public class TutorialIdTest {
         TutorialId tutorialId = new TutorialId("16");
         TutorialId differentTutorialId = new TutorialId("00");
         TutorialId sameTutorialId = new TutorialId("16");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(tutorialId.equals(person));
 
         // Different TutorialId
         assertFalse(tutorialId.equals(differentTutorialId));

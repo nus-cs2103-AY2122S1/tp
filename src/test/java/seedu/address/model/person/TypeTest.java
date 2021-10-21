@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +51,10 @@ public class TypeTest {
         Type type = new Type("student");
         Type differentType = new Type("tutor");
         Type sameType = new Type("student");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(type.equals(person));
 
         // Different Type
         assertFalse(type.equals(differentType));
