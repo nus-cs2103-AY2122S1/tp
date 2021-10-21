@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -31,7 +30,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
-    private final SortedList<NextMeeting> filteredNextMeetings;
+    private final SortedList<NextMeeting> sortedNextMeetings;
     private final FilteredList<Person> personToView;
     private final FilteredList<Tag> filteredTags;
 
@@ -48,7 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
-        filteredNextMeetings = new SortedList<>(checkAllNextMeetings(filteredPersons));
+        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         personToView = new FilteredList<>(this.addressBook.getPersonList());
     }
@@ -117,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteMeetingsByPersons(List<Person> toDelete) {
+        addressBook.deleteMeetingsByPersons(toDelete);
+    }
+
+    @Override
     public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
         return addressBook.deletePersonByClientIds(clientIds);
     }
@@ -125,6 +129,11 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void addNextMeeting(NextMeeting nextMeeting) {
+        addressBook.addNextMeeting(nextMeeting);
     }
 
     @Override
@@ -176,31 +185,9 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
-    public ObservableList<NextMeeting> getFilteredNextMeetingList() {
-        return filteredNextMeetings;
-    }
-
-    private SortedList<NextMeeting> checkAllNextMeetings(FilteredList<Person> filteredPersons) {
-
-        ObservableList<NextMeeting> nextMeetings = FXCollections.observableArrayList();
-
-        filteredPersons.stream().forEach((person) -> {
-            if (!person.getNextMeeting().equals(NextMeeting.NULL_MEETING)) {
-                nextMeetings.add(person.getNextMeeting());
-            }
-        });
-
-        SortedList<NextMeeting> sortedMeetings = new SortedList<>(nextMeetings);
-        //Create comparator for next meeting
-
-        sortedMeetings.setComparator((currentMeeting, nextMeeting) -> {
-            return currentMeeting.date.compareTo(nextMeeting.date) != 0
-                ? currentMeeting.date.compareTo(nextMeeting.date)
-                    : (currentMeeting.startTime.compareTo(nextMeeting.startTime) != 0
-                        ? currentMeeting.startTime.compareTo(nextMeeting.startTime)
-                            : (currentMeeting.endTime.compareTo(nextMeeting.endTime)));
-        });
-        return sortedMeetings;
+    @Override
+    public ObservableList<NextMeeting> getSortedNextMeetingList() {
+        return sortedNextMeetings;
     }
 
     @Override

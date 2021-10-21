@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered meetings */
-    ObservableList<NextMeeting> getFilteredNextMeetingList();
+    ObservableList<NextMeeting> getSortedNextMeetingList();
 
     /** Returns an unmodifiable view of the person to view */
     ObservableList<Person> getPersonToView();
