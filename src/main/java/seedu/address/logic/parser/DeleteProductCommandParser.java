@@ -2,14 +2,19 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Parses input arguments and creates a new DeleteProductCommand object
  */
 public class DeleteProductCommandParser implements Parser<DeleteProductCommand> {
+    private static final Logger logger = LogsCenter.getLogger("DeleteProductParserLogger");
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteProductCommand
@@ -20,6 +25,7 @@ public class DeleteProductCommandParser implements Parser<DeleteProductCommand> 
     public DeleteProductCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
+            logger.log(Level.INFO, String.format("Deleting product %1$s", index.toString()));
             return new DeleteProductCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
