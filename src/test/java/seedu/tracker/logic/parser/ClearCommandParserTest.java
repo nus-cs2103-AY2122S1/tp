@@ -18,7 +18,6 @@ import seedu.tracker.logic.commands.ClearCommand;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
-import seedu.tracker.model.module.ModuleInSpecificSemesterPredicate;
 
 class ClearCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =

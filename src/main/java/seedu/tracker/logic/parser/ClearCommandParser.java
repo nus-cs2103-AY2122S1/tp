@@ -1,19 +1,19 @@
 package seedu.tracker.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
+
+import java.util.stream.Stream;
+
 import seedu.tracker.logic.commands.ClearCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 
-import java.util.stream.Stream;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
-import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
-
-public class ClearCommandParser implements Parser<ClearCommand>{
+public class ClearCommandParser implements Parser<ClearCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ViewCommand
      * and returns an ViewCommand object for execution.

@@ -1,20 +1,16 @@
 package seedu.tracker.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.tracker.testutil.Assert.assertThrows;
-import static seedu.tracker.testutil.TypicalModules.CS1231S;
-import static seedu.tracker.testutil.TypicalModules.CS2030S;
-import static seedu.tracker.testutil.TypicalModules.MA1521;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.UserPrefs;
@@ -74,14 +70,13 @@ class ClearCommandTest {
         Semester semester = new Semester(1);
         AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
 
-        Module module1 = expectedModel.getFilteredModuleList().get(3);
-        Module module2 = expectedModel.getFilteredModuleList().get(4);
+        model.updateFilteredModuleList(preparePredicate(1, 1));
+        ObservableList<Module> filteredList = model.getFilteredModuleList();
+        model.updateFilteredModuleList(x->true);
 
-        Module expectedModule1 = createUnscheduledModule(module1);
-        Module expectedModule2 = createUnscheduledModule(module2);
-
-        expectedModel.setModule(module1, expectedModule1);
-        expectedModel.setModule(module2, expectedModule2);
+        for (Module module : filteredList) {
+            expectedModel.setModule(module, createUnscheduledModule(module));
+        }
 
         String expectedMessage = String.format(ClearCommand.MESSAGE_SUCCESS, academicCalendar);
 
@@ -102,5 +97,12 @@ class ClearCommandTest {
         Mc mc = module.getMc();
         Set<Tag> tag = module.getTags();
         return new Module(code, title, desc, mc, tag);
+    }
+
+    private ModuleInSpecificSemesterPredicate preparePredicate(int year, int sem) {
+        AcademicYear academicYear = new AcademicYear(year);
+        Semester semester = new Semester(sem);
+        AcademicCalendar academicCalendar = new AcademicCalendar(academicYear, semester);
+        return new ModuleInSpecificSemesterPredicate(academicCalendar);
     }
 }

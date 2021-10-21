@@ -4,9 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
 import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
 
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.tracker.model.Model;
-import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
@@ -15,10 +16,6 @@ import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.ModuleInSpecificSemesterPredicate;
 import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
-
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Clears the module Tracker.
@@ -53,7 +50,7 @@ public class ClearCommand extends Command {
         model.updateFilteredModuleList(predicate);
         ObservableList<Module> filteredList = model.getFilteredModuleList();
         model.updateFilteredModuleList(x->true);
-        for(Module module : filteredList) {
+        for (Module module : filteredList) {
             assert module != null;
 
             Code currCode = module.getCode();
