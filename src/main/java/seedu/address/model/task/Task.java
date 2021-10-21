@@ -7,7 +7,8 @@ import seedu.address.model.Date;
 import seedu.address.model.tag.TaskTag;
 
 /**
- * Basic Task class for v1.2 implementation
+ * Represents a Task in the SalesNote.
+ * Guarantees: details are present and not null, field values are validated.
  */
 public class Task {
     private Label label;
