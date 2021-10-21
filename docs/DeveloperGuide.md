@@ -356,6 +356,109 @@ Notes:
     * Pros: Save time for users.
     * Cons: User need to specify the group of staffs before adding shift to their schedules.
 
+
+--------------------------------------------------------------------------------------------------------------------
+### Find Staff
+
+#### Implementation
+
+`Find` is a command for the app to search for staff by a specific index or name. When the command is called,
+whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i`.
+
+The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
+
+- `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
+- `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
+
+Also, `FindCommandParser` was created to achieve this functionality.
+
+![FindCommand](images/findCommand/FindClassDiagram.png)
+
+The way of implementing `find` functionality follows the architecture of the app. Given below is an example usage
+scenarios and the workflow of the `find` command.
+
+Step 1. The user executes command `find -n John`.
+`Ui` component reads the command as a string from user's input. After that, `MainWindow`
+passes the string to `LogicManager` to manipulate the command.
+
+Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
+with `find`, a new `FindCommandParser` is created to parse the command further.
+
+Step 3. `FindCommandParser` determines that the search is by name, due to the `-n` tag. Hence, `FindCommand` is created with the information. In this case, the name of staff to search is "John".
+
+Step 4. `FindCommand` creates a NameContainsKeywordsPredicates object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+for staff whose names match the keywords.
+
+Step 5. Following this, the displayed staff list will display the updated filtered list. 
+
+The activity diagram of this `Find` command is shown below:
+
+![Find Command Sequence Diagram](images/findCommand/findSequenceDiagram.png)
+
+Notes:
+
+1. The process is similar for a search by index, but with `NameContainsKeywordsPredicate` replaced with `StaffHasCorrectIndexPredicate`
+2. A command is considered as a valid `Find` command if it follows these formats:
+
+- `find -n keywords`
+- `find -i index`
+
+3. The keywords are not case-sensitive.
+4. Index search operates on the filtered list, which is the displayed staff list, and not the overall staff list.
+
+
+--------------------------------------------------------------------------------------------------------------------
+### ViewShift
+
+#### Implementation
+
+`viewShift` is a command for the app to search for the staff working at a specific day and shift. The search is either conducted
+by a specific time or by the slot number. When the command is used, whether it is a search by slot number or search by time
+should be indicated with the respective tags `-d` and `-t`.
+
+The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
+
+- `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
+- `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
+-
+Also, `FindCommandParser` was created to achieve this functionality.
+
+![ViewShiftCommand](images/viewShiftCommand/ViewShiftClassDiagram.png)
+
+The way of implementing `viewShift` follows the architecture of the app. Given below is an example usage scenarios and the 
+workflow of the `find` command.
+
+Step 1. The user executes command `viewShift -t monday-17:00`.
+`Ui` component reads the command as a string from user's input. After that, `MainWindow`
+passes the string to `LogicManager` to manipulate the command.
+
+Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
+with `viewShift`, a new `viewShiftCommand` object is created to parse the command further.
+
+Step 3. `ViewShiftCommandParser` determines that the search is by time, due to the `-t` tag. 
+Hence, `viewShift` is created with the information. In this case, the day of the week is `MONDAY` and the time is `17:00`.
+
+Step 4. `viewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+for staff who are working at that particular timing.
+
+Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
+also be outputted on the left of the GUI.
+
+The activity diagram of this `Find` command is shown below:
+
+![ViewShift Command Sequence Diagram](images/viewShiftCommand/viewShiftSequenceDiagram.png)
+
+Notes:
+
+1. The process is similar for a search by slot number.
+2. A command is considered as a valid `viewShift` command if it follows these formats:
+- `viewShift -d dayofweek-slotnumber`
+- `viewShift -t dayofweek-time`
+
+3. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
+4. The viewShift Command operates on the overall staff list and not just the displayed list.
+5. Inputting `viewShift` alone also outputs the staff currently working.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

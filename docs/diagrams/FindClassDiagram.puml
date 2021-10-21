@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+
+Interface Parser <<Interface>>
+abstract class Command
+Parser <|.. FindCommandParser
+Command <|-- FindCommand
+
+
+Class FindCommandParser {
+    NameContainsKeywordsPredicate  namePredicate
+    int index
+    StaffHasCorrectIndexPredicate indexPredicate
+    execute()
+    executeNameSearch()
+    executeIndexSearch()
+}
+
+@end
