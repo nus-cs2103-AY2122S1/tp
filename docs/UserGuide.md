@@ -123,18 +123,18 @@ Command aliases: `ls`
 
 ### Find contacts by name / tag: `find` <a name="find"></a>
 
-Finds a name / tag.
+Finds a name / module code.
 * The search is case-insensitive. eg hans will match Hans
 * The order of the keywords does not matter. eg. Hans Bo will match Bo Hans
-* Only the name/tag is searched.
-* Only full words will be matched eg. Han will not match Hans
-* Persons matching at least one name/tag will be returned.
+* Can only search by name or module code, and not both at once.
+* Partial words will also be matched eg. Han will match Hans
+* Persons must match all name/module code to be returned.
 
-Format: `find {NAME}`/`find {TAG}`
+Format: `find n/{NAME}`/`find m/{MODULE_CODE}`
 
 Examples:
-* `find Ben`
-* `find CS2103T`
+* `find n/Ben`
+* `find m/CS2103T CS2100`
 
 ***
 
