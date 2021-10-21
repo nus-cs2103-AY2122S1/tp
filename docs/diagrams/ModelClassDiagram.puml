@@ -26,6 +26,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Period
 Class Tag
 
 }
@@ -51,6 +52,7 @@ Person *--> "1" Schedule
 Person *--> "1" Status
 Person *--> "1" Salary
 Person *--> "1" Address
+Person *--> "1" Period
 Person *--> "*" Tag
 Person *--> "*" Role
 
