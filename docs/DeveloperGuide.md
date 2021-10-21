@@ -351,8 +351,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to delete a specific applicant in the displayed list.
-4.  RecruitIn deletes the applicant.
+3.  User requests to delete applicant(s) in the displayed list.
+4.  RecruitIn deletes the applicant(s).
 
     Use case ends.
 
@@ -413,40 +413,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
       
-**Use case: UC07 - Delete multiple applicants**
+**Use case: UC09 - Delete marked applicants**
 
 **MSS**
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to delete multiple applicants in the displayed list.
-4.  RecruitIn deletes the specified applicants.
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User requests to <u>find applicant (UC05)</u>.
-
-  Use case resumes at step 2.
-
-* 2a. The list of applicants is empty.
-
-  Use case ends.
-
-* 3a. The delete command is invalid.
-    * 3a1. RecruitIn shows an error message.
-
-      Use case resumes at step 2.
-      
-**Use case: UC08 - Delete marked applicants**
-
-**MSS**
-
-1.  User requests to <u>list applicants (UC01)</u>.
-2.  RecruitIn displays a list of applicants.
-3.  User requests to delete all applicants marked as done.
-4.  RecruitIn deletes all applicants marked as done.
+3.  User requests to delete all applicants marked as "Done".
+4.  RecruitIn deletes all applicants marked as "Done".
 
     Use case ends.
 
@@ -465,8 +439,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
     
-* 3b. There are no applicants marked as done.
-    * 3b1. RecruitIn informs the user that no applicants were marked as done, and thus no applicants were deleted.
+* 3b. There are no applicants marked as "Done".
+    * 3b1. RecruitIn informs the user that no applicants were marked as "Done", and thus no applicants were deleted.
     
     Use case ends.
 
