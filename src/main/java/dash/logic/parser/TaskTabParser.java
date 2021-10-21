@@ -19,6 +19,7 @@ import dash.logic.commands.taskcommand.EditTaskCommand;
 import dash.logic.commands.taskcommand.FindTaskCommand;
 import dash.logic.commands.taskcommand.ListTaskCommand;
 import dash.logic.commands.taskcommand.TagTaskCommand;
+import dash.logic.commands.taskcommand.UpcomingTaskCommand;
 import dash.logic.parser.exceptions.ParseException;
 import dash.logic.parser.taskcommand.AddTaskCommandParser;
 import dash.logic.parser.taskcommand.AssignPeopleCommandParser;
@@ -86,6 +87,9 @@ public class TaskTabParser {
 
         case CompleteTaskCommand.COMMAND_WORD:
             return new CompleteTaskCommandParser().parse(arguments);
+
+        case UpcomingTaskCommand.COMMAND_WORD:
+            return new UpcomingTaskCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
             return new SwitchTabContactsCommand(1);
