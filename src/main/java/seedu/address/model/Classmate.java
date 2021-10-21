@@ -98,7 +98,6 @@ public class Classmate implements ReadOnlyClassmate {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 
@@ -113,7 +112,11 @@ public class Classmate implements ReadOnlyClassmate {
     //// tutorialclass-level operations
 
     /**
+<<<<<<< HEAD
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
+=======
      * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the ClassMATE.
+>>>>>>> deefb051573a6565de028a4fe2bbb6e7bc6cb9d5
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -121,8 +124,13 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
+<<<<<<< HEAD
+     * Adds a tutorialClass to the address book.
+     * The tutorialClass must not already exist in the address book.
+=======
      * Adds a tutorialClass to the ClassMATE.
      * The tutorialClass must not already exist in the ClassMATE.
+>>>>>>> deefb051573a6565de028a4fe2bbb6e7bc6cb9d5
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
