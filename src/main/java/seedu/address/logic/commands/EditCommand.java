@@ -314,6 +314,7 @@ public class EditCommand extends Command {
                     && getExperience().equals(e.getExperience())
                     && getInterview().equals(e.getInterview())
                     && getTags().equals(e.getTags())
+
                     && getDone().equals(e.getDone());
         }
     }
