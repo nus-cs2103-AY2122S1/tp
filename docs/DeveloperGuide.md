@@ -201,6 +201,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Client/Product Feature
+
+The add feature allows the users to add a new `Client` or `Product` with details into the application. The commands are
+composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
+
+The user inputs the command through `MainWindow` of the UI component, which will pass the input string to
+`LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
+command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
+The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
+execution, data added will be saved to storage.
+
+For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is
+valid.
+
+The flow of the sequence diagram would be the same for adding `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `add -c Ben -pn 98765432` Command](images/AddClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `add` may be executed**
+
+* **Alternative 1 (current choice)** : User can add either a client or a product at a time
+    * Pros : Allows the user to focus on adding a client or product
+    * Cons : Might be slow if there are a lot of clients/products to add
+* **Alternative 2** : User can add multiple clients or products
+    * Pros : Allows the user to add multiple clients or products in one command
+    * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
+      be done through the`edit` command (requires the user to memorise the IDs)
+
 ### Edit Client/Product Feature
 
 This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
