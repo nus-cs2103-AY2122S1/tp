@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ListApplicantCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListPositionCommand;
 import seedu.address.logic.commands.RejectionRateCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

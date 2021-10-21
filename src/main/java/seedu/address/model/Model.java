@@ -172,4 +172,8 @@ public interface Model {
     Path getApplicantBookFilePath();
 
     float calculateRejectionRate(Position p);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master

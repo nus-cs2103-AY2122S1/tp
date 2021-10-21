@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.model.Calculator.INVALID_REJECTION_RATE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Calculator;
@@ -14,7 +15,7 @@ import seedu.address.model.position.Title;
  */
 public class RejectionRateCommand extends Command {
 
-    public static final String COMMAND_WORD = "rate";
+    public static final String COMMAND_WORD = "rate-position";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Returns the rejection rate of position specified.\n"
