@@ -117,6 +117,8 @@ public class TypicalItems {
                 .withName(StringUtil.generateRandomString())
                 .withId("157325")
                 .withCount("999")
+                .withSalesPrice("2.0")
+                .withCostPrice("1.0")
                 .build();
     }
 }

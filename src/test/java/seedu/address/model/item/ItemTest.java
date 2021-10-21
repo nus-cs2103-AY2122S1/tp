@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
@@ -84,5 +85,11 @@ public class ItemTest {
         // different tags -> returns false
         editedPie = new ItemBuilder(APPLE_PIE).withTags(VALID_TAG_POPULAR).build();
         assertFalse(APPLE_PIE.equals(editedPie));
+
+        // different tags -> returns false
+        editedPie = new ItemBuilder(APPLE_PIE).withSalesPrice(VALID_SALESPRICE_BAGEL).build();
+        assertFalse(APPLE_PIE.equals(editedPie));
+
+
     }
 }
