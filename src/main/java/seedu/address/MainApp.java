@@ -112,10 +112,8 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         } catch (InvalidAlgorithmParameterException | InvalidKeyException e) {
-            /*
-              These exceptions will never be thrown unless an invalid cipher or bad key (does not comply to the cipher)
-              is supplied, which will not be the user's fault.
-             */
+            // These exceptions will never be thrown unless an invalid cipher or bad key (does not comply to the cipher)
+            // is supplied, which will not be the user's fault.
             logger.warning("Encryption error. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
