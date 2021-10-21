@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ComputingConnection is for computer science university students who prefer to use CLI over GUI, and want to keep track of the large amounts of friends and staff they have encountered in university.
+ComputingConnection is for entrepreneurial students in NUS Computing who want to keep track of other students’ skill sets so that they can easily look for suitable people to work with on future projects. The users should prefer to use the Command Line Interface (CLI) over a Graphical User Interface (GUI) for efficiency with a keyboard.
 
-Through an address book, this product aims to store information, such as faculty, course, frequency of meeting, phone numbers, etc, of friends or staff, so that the student will be able to remember and refer when needed.
+Through an address book, this product aims to store information such as faculty, major, programming languages, interests, past projects, remarks of peers that the user has encountered throughout university. ComputingConnection will help the student remember and document his/her network of students encountered in NUS for easy reference in the future.
 
 * Table of Contents
 {:toc}
@@ -28,7 +28,7 @@ Through an address book, this product aims to store information, such as faculty
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the address book.
+   * **`add`**`n/John Doe e/johnd@example.com f/computing m/computer science` : Adds a contact named `John Doe` to the address book, with the respective email, faculty and major fields.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -41,6 +41,7 @@ Through an address book, this product aims to store information, such as faculty
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+
 
 ### Viewing help: `help`
 Shows a message explaining how to access the help page.
@@ -81,23 +82,32 @@ Search for contacts with specified keyword.
 Format: `search KEYWORD`
 Examples:
 
-* `search John` returns `john` and `John Doe`
-* `search alex` returns `Alex Yeoh`
+Skill data fields
+* s/: skill
+* l/: programming language
+* fr/: framework
 
-### List view of contacts : `list`
+Miscellaneous data fields
+* t/: tags
+* r/: remarks
 
-Shows a list of all contacts in the address book.
+### Viewing help: `help`
+Shows a message explaining how to access the help page.
+Format: `help`
 
-Format: `list`
+### Adding a Person to ComputingConnection: `add`
+Adds a Person to the address book.
 
-### Sort contacts : `sort`
+Format: `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
 
-Sorts contacts and shows the list of contacts in alphabetical order.
+* A Person must have one and only one name, email, faculty and major.
+* A Person may have any number of skills, languages, frameworks and tags (including 0).
 
-Format: `sort`
+Examples:
+* `add n/John Doe e/johnd@nus.edu.sg f/computing m/computer science`
+* `add n/Seth e/seth@nus.edu.sg f/computing m/computer science s/frontend l/javascript t/friend`
 
 ### Editing a contact : `edit`
-
 Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] [a/ADDRESS] [t/TAG]…​`
@@ -107,9 +117,39 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [r/ROLE] [f/FACULTY] [m/MAJOR] 
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the contact will be removed i.e adding of tags is not cumulative.
 * You can remove all the contact’s tags by typing `t/` without
-    specifying any tags after it.
+  specifying any tags after it.
 
-### Detailed View of Contacts : view
+### Appending multiple data fields: `append`
+Appends a new element to data fields that support multiple elements.
+
+Format: `append 1 [s/SKILL] [l/PROGRAMMING LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
+
+* The index refers to the index number shown in the displayed contact list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `append 3 s/webdev l/python t/classmate` Appends 'webdev' to the skill data field, 'python' to the language data field, and 'classmate' to the tag data field of the Person at index 3 in the list.
+
+### Removing data fields: `remove`
+Removes an element from a data field at a specified index.
+
+Format: `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
+
+* The index refers to the index of the specific element in the non-single data field.
+* Applicable to skill and miscellaneous data fields.
+
+### Listing all contacts : `list`
+Shows a list of all contacts in the address book.
+
+Format: `list`
+
+### Sorting contacts : `sort`
+Sorts contacts and shows the list of contacts in alphabetical order.
+
+Format: `sort`
+![result for 'sort'](images/sortscreenshot.png)
+
+### Viewing a specific contact in detail : `view`
 Get a detailed view of specific contact(s).
 Format: `view n/NAME`
 Examples:
@@ -118,7 +158,6 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd contact to be `Betsy Crower` and clears all existing tags.
 
 ### Locating contacts by name: `find`
-
 Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -135,8 +174,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Filter a contact : `filter`
-
+### Filtering contacts : `filter`
 Filters the contacts by tags.
 
 Format: `filter f/FACULTY [t/TAG]`
@@ -145,9 +183,30 @@ Format: `filter f/FACULTY [t/TAG]`
 Examples:
 * `filter f/computing` returns all users who have been assigned the f/computing tag.
 * `filter t/staff f/computing` returns all users who have been assigned the t/staff tag and f/computing tag .
+  ![result for 'filter f/computing'](images/filterscreenshot.png)
+
+### Adding an organisation: `add org`
+Adds an organisation to the address book.
+
+Format: `add org n/NAME e/EMAIL p/PERSON`
+
+AAn organisation can have any number of  persons within it(including 0). However, an organisation must have a name.
+These are organisations whose contact the user wished to remember.
+
+Examples:
+
+* `add org n/Shopee e/EMAIL p/[n/John doe]`
+* `add org n/SoC e/EMAIL p/[n/Seth e/EMAIL f/computing m/computer science]`
+* `add org n/NUS e/EMAIL p/[n/Damith e/EMAIL f/computing m/computer science] p/[n/Danny e/EMAIL f/computing m/computer science]`
+
+List of personal detail tags:
+* n/: name
+* e/: email
+
+List of members:
+* p/: persons in the organisation
 
 ### Deleting a contact : `delete`
-
 Deletes the specified contact from the address book.
 
 Format: `delete INDEX`
@@ -182,12 +241,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
-
-
+**Add** | `add n/NAME e/EMAIL f/FACULTY m/MAJOR [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]…​` <br> e.g., `add n/James Ho e/jamesho@example.com s/marketing t/colleague`
+**Edit** | `edit INDEX n/NAME e/EMAIL f/FACULTY [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Append** | `append INDEX [s/SKILL] [l/LANGUAGE] [fr/FRAMEWORK] [t/TAG]...`
+**Remove** | `remove 1 [s/INDEX] [l/INDEX] [fr/INDEX] [t/INDEX]...`
+**List** | `list`
+**Sort** | details coming soon
+**View** | details coming soon
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | details coming soon
+**Add Org** | `add org n/NAME e/EMAIL p/PERSON`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Clear** | `clear`
