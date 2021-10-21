@@ -298,19 +298,19 @@ A lesson can be categorised into 2 types:
 2. A one-off makeup lesson.
 
 The essential fields for a lesson are:
-* date
-* time range
-* subject
-* rate
+* Date
+* Time range
+* Subject
+* Rate
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Notes about `rate`**<br>
+**:information_source: Notes about rate**<br>
 The lesson's rate refers to the fee of the lesson per hour.
 This rate will be used in the calculation of fees due after each lesson.
 </div>
 
 An optional field for a lesson is:
-* homework
+* Homework
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
