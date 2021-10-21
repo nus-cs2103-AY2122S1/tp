@@ -100,26 +100,25 @@ Format: `help`
 
 ### Managing Students
 The following section will guide you on how to use the commands relating to the operations for managing students in TAB.
-A student _**must**_ have the following fields: a `name`, an `address` and _**at least 1**_ contact field.
 
-The essential fields for a student are:
-* `name`
-* `address`
+A student must have the following essential fields:
+* Name
+* Address
 
-The contact fields for a student are:
-* `phone number`
-* `parent phone number`
-* `email`
-* `parent email`
+A student must have **at least 1** of these contact fields:
+* Phone number
+* Parent phone number
+* Email
+* Parent email
 
 Other available optional fields for a student are:
-* `academic Level`
-* `academic stream`
-* `school`
-* `outstanding fees`
-* `remark`
-* `tag`
-* `lesson`
+* Academic level
+* Academic stream
+* School
+* Outstanding fees
+* Remarks
+* Tags
+* Lessons
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple tags and lessons to a student in TAB.
@@ -287,17 +286,17 @@ Examples:
 ### Managing Lessons
 
 The following section will guide you on how to use the commands relating to the operations for managing lessons of students in TAB.
-A `Lesson` _**must**_ have the following fields: a start `date`, a `time range` and a `subject`.
+A `Lesson` **must** have the following fields: a start date, a time range and a subject.
 
 A `Lesson` can be categorised into 2 types: 
-1. A _**weekly**_ recurring lesson
+1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
 
 The essential fields for a lesson are:
-* `date`
-* `time range`
-* `subject`
-* `rate`
+* date
+* time range
+* subject
+* rate
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about `rate`**<br>
@@ -306,10 +305,10 @@ This rate will be used in the calculation of fees due after each lesson.
 </div>
 
 An optional field for a lesson is:
-* `homework`
+* homework 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can add multiple homework pieces to a lesson in TAB.
+You can add multiple pieces of homework to a lesson in TAB.
 </div>
 <br>
 
