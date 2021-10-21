@@ -39,19 +39,6 @@ public class Item {
     }
 
     /**
-     * Old constructor
-     */
-    public Item(Name name, String id, Integer count, Set<Tag> tags) {
-        requireAllNonNull(name, id, count, tags);
-        this.count = count;
-        this.name = name;
-        this.id = id;
-        this.tags.addAll(tags);
-        this.costPrice = 1.0;
-        this.salesPrice = 1.0;
-    }
-
-    /**
      * Every field must be present and not null.
      */
     public Item(Item other, Integer count) {

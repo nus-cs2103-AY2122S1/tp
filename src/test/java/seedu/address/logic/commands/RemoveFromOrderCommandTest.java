@@ -41,7 +41,7 @@ public class RemoveFromOrderCommandTest {
     public void execute_removeWithOnlyNameMatch_itemRemoved() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         modelStub.setOrder(new Order());
-        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>());
+        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
         Item toRemove = new Item(new Name("milk"), UUID.randomUUID().toString(), 12, new HashSet<>(), 1.1, 2.2);
         modelStub.addToOrder(item);
         Order expectedOrder = new Order();
