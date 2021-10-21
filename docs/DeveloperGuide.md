@@ -279,7 +279,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
 | `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
 | `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.      
-| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall email)| so that I can identify and track their progress separately.
+| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
 | `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.   
 | `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.                                      
