@@ -15,7 +15,7 @@ public class PhoneNumber {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String phoneNumber;
+    public final String value;
 
     /**
      * Constructs a {@code PhoneNumber}.
@@ -25,7 +25,7 @@ public class PhoneNumber {
     public PhoneNumber(String phoneNumber) {
         requireNonNull(phoneNumber);
         checkArgument(isValidPhoneNumber(phoneNumber), MESSAGE_CONSTRAINTS);
-        this.phoneNumber = phoneNumber;
+        value = phoneNumber;
     }
 
     /**
@@ -39,18 +39,18 @@ public class PhoneNumber {
 
     @Override
     public String toString() {
-        return phoneNumber;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PhoneNumber // instanceof handles nulls
-                && phoneNumber.equals(((PhoneNumber) other).phoneNumber)); // state check
+                && value.equals(((PhoneNumber) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return phoneNumber.hashCode();
+        return value.hashCode();
     }
 }

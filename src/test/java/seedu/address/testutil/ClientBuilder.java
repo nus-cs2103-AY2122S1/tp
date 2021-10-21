@@ -1,10 +1,14 @@
 package seedu.address.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 /**
  * A utility class to help with building Client objects.
@@ -20,6 +24,7 @@ public class ClientBuilder {
     private PhoneNumber phoneNumber;
     private Email email;
     private Address address;
+    private Set<Order> orders;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -30,6 +35,7 @@ public class ClientBuilder {
         phoneNumber = new PhoneNumber(DEFAULT_PHONE_NUMBER);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        orders = new HashSet<>();
     }
 
     /**
@@ -41,6 +47,7 @@ public class ClientBuilder {
         phoneNumber = clientToCopy.getPhoneNumber();
         email = clientToCopy.getEmail();
         address = clientToCopy.getAddress();
+        orders = clientToCopy.getOrders();
     }
 
     /**
@@ -88,7 +95,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return client == null
-               ? new Client(name, phoneNumber, email, address)
-               : Client.updateClient(client, name, phoneNumber, email, address);
+               ? new Client(name, phoneNumber, email, address, orders)
+               : Client.updateClient(client, name, phoneNumber, email, address, orders);
     }
 }

@@ -18,7 +18,7 @@ import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 
 public class AddClientCommandParserTest {
-    private final AddClientCommandParser parser = new AddClientCommandParser();
+    private final AddClientCommandParser parser = new AddClientCommandParser(new ModelStub());
 
     @Test
     public void parse_nullArgs_throwsNullPointerException() {

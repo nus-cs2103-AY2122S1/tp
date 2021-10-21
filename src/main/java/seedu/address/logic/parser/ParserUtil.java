@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,10 +12,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
 import seedu.address.model.tag.Tag;
@@ -169,5 +174,48 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String order} into a {@code Order}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code order} is invalid.
+     */
+    public static Order parseOrder(String order, Model model) throws ParseException {
+        requireNonNull(order);
+        String trimmedOrder = order.trim();
+        if (!trimmedOrder.matches(Order.REGEX)) {
+            throw new ParseException(Order.MESSAGE_CONSTRAINTS);
+        }
+        String[] args = trimmedOrder.split(" ");
+        int productId = Integer.parseInt(args[0]);
+        Quantity quantity = new Quantity(args[1]);
+        String timeStr = args[2];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        if (timeStr.length() == 5) {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            timeStr = String.format("%d/%s", year, timeStr);
+        }
+        LocalDate time = LocalDate.parse(timeStr, formatter);
+        Order orderToAdd;
+        try {
+            orderToAdd = new Order(time, productId, quantity, model);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+        return orderToAdd;
+    }
+
+    /**
+     * Parses {@code Collection<String> orders} into a {@code Set<Order>}.
+     */
+    public static Set<Order> parseOrders(Collection<String> orders, Model model) throws ParseException {
+        requireNonNull(orders);
+        final Set<Order> orderSet = new HashSet<>();
+        for (String order : orders) {
+            orderSet.add(parseOrder(order, model));
+        }
+        return orderSet;
     }
 }

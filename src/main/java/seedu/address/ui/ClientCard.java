@@ -50,7 +50,7 @@ public class ClientCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
         if (client.getPhoneNumber() != null) {
-            phone.setText("Phone: " + client.getPhoneNumber().phoneNumber);
+            phone.setText("Phone: " + client.getPhoneNumber().value);
         }
 //        if (client.getEmail() != null) {
 //            email.setText("Email: " + client.getEmail().value);

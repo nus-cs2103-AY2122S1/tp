@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Product's quantity in Sellah.
  */
-public class Quantity {
+public class Quantity implements Comparable<Quantity> {
     public static final String MESSAGE_CONSTRAINTS =
             "Unit prices should only contain numbers and it should not be blank";
 
@@ -15,7 +15,7 @@ public class Quantity {
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String quantity;
+    public final String value;
 
     /**
      * Constructs a {@code Quantity}.
@@ -25,7 +25,7 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        this.quantity = quantity;
+        value = quantity;
     }
 
     /**
@@ -39,18 +39,34 @@ public class Quantity {
 
     @Override
     public String toString() {
-        return quantity;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Quantity // instanceof handles nulls
-                && quantity.equals(((Quantity) other).quantity)); // state check
+                && value.equals(((Quantity) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return quantity.hashCode();
+        return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Quantity quantity) {
+        if (quantity == null) {
+            return 0;
+        }
+        int thisVal = Integer.parseInt(this.value);
+        int otherVal = Integer.parseInt(quantity.value);
+        if (thisVal < otherVal) {
+            return -1;
+        } else if (thisVal > otherVal) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }

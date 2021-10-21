@@ -6,10 +6,12 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
@@ -46,14 +48,37 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-
-        <VBox fx:id="List" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+        <HBox VBox.vgrow="ALWAYS">
+          <TabPane fx:id = "tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="pane-with-border" HBox.hgrow="ALWAYS"
+                   VBox.vgrow="ALWAYS" >
+            <Tab fx:id = "Clients" text="Clients">
+              <VBox fx:id="ClientList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                    HBox.hgrow="ALWAYS">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </Tab>
+            <Tab fx:id = "Products" text = "Products">
+              <VBox fx:id="ProductList" styleClass="pane-with-border" minWidth="340" prefWidth="340"
+                    HBox.hgrow="ALWAYS">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10" />
+                </padding>
+                <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </Tab>
+          </TabPane>
+          <!-- replace with help message and statistics -->
+          <VBox fx:id="HelpStatsViewPanel" styleClass="pane-with-border" minWidth="340" prefWidth="340" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="secondPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+          <!-- replace with help message and statistics -->
+        </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

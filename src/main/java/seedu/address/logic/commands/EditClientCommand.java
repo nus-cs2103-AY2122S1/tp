@@ -5,11 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -21,6 +23,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -36,12 +39,15 @@ public class EditClientCommand extends Command {
                     + "[" + PREFIX_NAME + "NAME] "
                     + "[" + PREFIX_PHONE_NUMBER + "PHONE_NUMBER] "
                     + "[" + PREFIX_EMAIL + "EMAIL] "
-                    + "[" + PREFIX_ADDRESS + "ADDRESS]\n"
+                    + "[" + PREFIX_ADDRESS + "ADDRESS] "
+                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME ... ] \n"
                     + "Example: " + COMMAND_WORD + " 1 "
                     + PREFIX_NAME + "Ben "
                     + PREFIX_PHONE_NUMBER + "12345678 "
                     + PREFIX_EMAIL + "ben@gmail.com "
-                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473";
+                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473"
+                    + PREFIX_ORDER + "0 100 2021/10/20"
+                    + PREFIX_ORDER + "15 10 10/20";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -93,8 +99,10 @@ public class EditClientCommand extends Command {
         PhoneNumber updatedPhoneNumber = editClientDescriptor.getPhoneNumber().orElse(clientToEdit.getPhoneNumber());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
+        Set<Order> updatedOrders = editClientDescriptor.getOrders().orElse(clientToEdit.getOrders());
 
-        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress);
+        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail,
+                updatedAddress, updatedOrders);
     }
 
     @Override
@@ -123,6 +131,7 @@ public class EditClientCommand extends Command {
         private PhoneNumber phoneNumber;
         private Email email;
         private Address address;
+        private Set<Order> orders;
 
         public EditClientDescriptor() {}
 
@@ -134,13 +143,14 @@ public class EditClientCommand extends Command {
             setPhoneNumber(toCopy.phoneNumber);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setOrders(toCopy.orders);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phoneNumber, email, address);
+            return CollectionUtil.isAnyNonNull(name, phoneNumber, email, address, orders);
         }
 
         public void setName(Name name) {
@@ -175,6 +185,14 @@ public class EditClientCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setOrders(Set<Order> orders) {
+            this.orders = orders;
+        }
+
+        public Optional<Set<Order>> getOrders() {
+            return Optional.ofNullable(orders);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -193,7 +211,9 @@ public class EditClientCommand extends Command {
             return getName().equals(e.getName())
                            && getPhoneNumber().equals(e.getPhoneNumber())
                            && getEmail().equals(e.getEmail())
-                           && getAddress().equals(e.getAddress());
+                           && getAddress().equals(e.getAddress())
+                           && getOrders().get().containsAll(e.getOrders().get())
+                           && e.getOrders().get().containsAll(getOrders().get());
         }
     }
 }
