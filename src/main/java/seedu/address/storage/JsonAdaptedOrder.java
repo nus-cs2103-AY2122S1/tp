@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -8,51 +9,42 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.order.Order;
 import seedu.address.model.product.Quantity;
-import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedOrder {
-    private final LocalDate time;
-    private final int productId;
-    private final Quantity quantity;
+    private final ArrayList<Object> orderProperties = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given {@code time}, {@code productId} and {@code quantity}.
      */
     @JsonCreator
     public JsonAdaptedOrder(LocalDate time, int productId, Quantity quantity) {
-        this.time = time;
-        this.productId = productId;
-        this.quantity = quantity;
+        orderProperties.add(productId);
+        orderProperties.add(quantity.value);
+        orderProperties.add(time);
     }
 
     /**
      * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
-        time = source.time;
-        productId = source.productId;
-        quantity = source.quantity;
+        orderProperties.add(source.productId);
+        orderProperties.add(source.quantity.value);
+        orderProperties.add(source.time);
     }
 
     @JsonValue
-    public LocalDate getTime() {
-        return time;
-    }
-
-    @JsonValue
-    public int getProductId() {
-        return productId;
-    }
-
-    @JsonValue
-    public Quantity getQuantity() {
-        return quantity;
+    public ArrayList<Object> getOrderProperties() {
+        return orderProperties;
     }
 
     /**
      * Converts this Jackson-friendly adapted order object into the model's {@code Order} object.
      */
     public Order toModelType() throws IllegalValueException {
+        int productId = (Integer) orderProperties.get(0);
+        String quantityVal = (String) orderProperties.get(1);
+        LocalDate time = (LocalDate) orderProperties.get(2);
+        Quantity quantity = new Quantity(quantityVal);
         return new Order(time, productId, quantity);
     }
 }

@@ -57,9 +57,6 @@ class JsonAdaptedClient {
         ordered.addAll(source.getOrders().stream()
                 .map(JsonAdaptedOrder::new)
                 .collect(Collectors.toList()));
-        for (int i = 0; i < ordered.size(); i++) {
-            System.out.println(ordered.get(i));
-        }
     }
 
     private <T> boolean isNull(T obj) {
