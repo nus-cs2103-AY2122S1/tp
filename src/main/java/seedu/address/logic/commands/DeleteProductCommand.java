@@ -45,8 +45,10 @@ public class DeleteProductCommand extends Command {
         }
 
         Product productToDelete = lastShownList.get(targetIndex.getZeroBased());
-        logger.log(Level.INFO, "deleting product now");
         model.deleteProduct(productToDelete);
+
+        logger.log(Level.INFO, String.format("Deleted product %1$s", productToDelete.getId()));
+
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete));
     }
 
