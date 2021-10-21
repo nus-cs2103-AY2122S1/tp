@@ -57,7 +57,7 @@ public class AddTaskCommandTest {
         tasks.addAll(newTasks);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks);
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
         AddTaskCommand addTaskCommand = new AddTaskCommand(INDEX_FIRST_PERSON, newTasks);
 
         String expectedMessage = String.format(

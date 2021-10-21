@@ -38,7 +38,7 @@ public class EditTaskCommandTest {
         tasks.set(0, newTask);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks);
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_PERSON, INDEX_FIRST_TASK, newTask);
 
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, newTask.taskName);
