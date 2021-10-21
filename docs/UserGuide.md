@@ -92,9 +92,14 @@ to help you with the installation. Follow the guide for your operation system fo
 
 Shows a command summary table as well as a link to access this user guide page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+- You may select a cell and press `CONTROL` + `C` or `COMMAND` + `C` on your keyboard to copy the selected cell value.
+- You may click `Copy URL` to copy the link to this user guide.
+- You may click the right end to each column to sort the rows alphabetically.
+
+![help message](images/helpMessage.png)
+<div style="text-align:center"><i>Help window interface.</i></div>
 
 ### Managing Students
 
@@ -117,7 +122,7 @@ A student can have any number of tags (including 0).
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
   included in the add command.
-* To ensure conciseness of data storage, `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
+* `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
 </div>
 
@@ -397,9 +402,11 @@ Format: `clear`
 
 Shows all the tags that you have created together with the number of students labelled with each tag.
 
-![taglist](images/taglist.png)
-
 Format: `tag`
+
+![taglist](images/taglist.png)
+<div style="text-align:center"><i>The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</i></div>
+
 
 #### Undoing previous command: `undo`
 
@@ -423,12 +430,15 @@ Format: `exit`
 
 ## FAQ
 
-**Q:** How do I transfer my data to another Computer?<br>
-**A:** Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q:** I am using a Mac and when I tried to open `Tab.jar`, Mac shows “`TAB.jar` cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
-**A:** Go to `System Preferences` → `Security & Privacy` → `General` and click `Open Anyway` at the bottom as shown in the following screenshot.
+**Q**: I am using a Mac and when I tried to open `Tab.jar`, Mac shows “`TAB.jar` cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
+**A**: Go to `System Preferences` → `Security & Privacy` → `General` and click `Open Anyway` at the bottom as shown in the following screenshot.
+
 ![macSecurity](images/macSecurity.png)
+<div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
+
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
