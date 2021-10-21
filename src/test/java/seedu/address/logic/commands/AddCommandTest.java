@@ -4,15 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COSTPRICE_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SALESPRICE_BAGEL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_BAKED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
@@ -80,6 +73,34 @@ public class AddCommandTest {
     public void execute_newItemNoName_incompleteInfofailure() {
         ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_BAGEL)
+                .build();
+
+        AddCommand addCommand = new AddCommand(validDescriptor);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INCOMPLETE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_newItemNoCostPrice_incompleteInfofailure() {
+        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL)
+                .withSalesPrice(VALID_SALESPRICE_BAGEL)
+                .build();
+
+        AddCommand addCommand = new AddCommand(validDescriptor);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INCOMPLETE_INFO, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_newItemNoSalesPrice_incompleteInfofailure() {
+        ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL)
+                .withId(VALID_ID_BAGEL)
+                .withCount(VALID_COUNT_BAGEL)
+                .withCostPrice(VALID_COSTPRICE_BAGEL)
                 .build();
 
         AddCommand addCommand = new AddCommand(validDescriptor);
