@@ -10,16 +10,16 @@ participant ":AddProgressCommand" as AddProgressCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-[-> LogicManager : execute("add -p 2 Did Homework...")
+[-> LogicManager : execute("add -p 2 Did Homework")
 activate LogicManager
 
-LogicManager -> TutorAidParser : parseCommand("-p 2 Did Homework...")
+LogicManager -> TutorAidParser : parseCommand("-p 2 Did Homework")
 activate TutorAidParser
 
-TutorAidParser -> AddCommandParser : parse("-p 2 Did Homework...")
+TutorAidParser -> AddCommandParser : parse("-p 2 Did Homework")
 activate AddCommandParser
 
-AddCommandParser -> AddProgressCommandParser : parse("2 Did Homework...")
+AddCommandParser -> AddProgressCommandParser : parse("2 Did Homework")
 activate AddProgressCommandParser
 
 create AddProgressCommand
@@ -27,22 +27,29 @@ AddProgressCommandParser -> AddProgressCommand : AddProgressCommand(index, progr
 activate AddProgressCommand
 AddProgressCommandParser <-- AddProgressCommand
 deactivate AddProgressCommand
+
 AddCommandParser <-- AddProgressCommandParser
 deactivate AddProgressCommandParser
+
 TutorAidParser <-- AddCommandParser
 deactivate AddCommandParser
+
 LogicManager <-- TutorAidParser : AddProgressCommand
 deactivate TutorAidParser
+
 LogicManager -> AddProgressCommand : execute(model)
 activate AddProgressCommand
 
 create CommandResult
 AddProgressCommand -> CommandResult : new CommandResult(message)
+
 activate CommandResult
 AddProgressCommand <-- CommandResult
 deactivate CommandResult
+
 LogicManager <-- AddProgressCommand
 deactivate AddProgressCommand
+
 <-- LogicManager : CommandResult
 deactivate LogicManager
 @enduml

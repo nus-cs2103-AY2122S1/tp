@@ -9,5 +9,6 @@ Class ProgressList
 Class Progress
 
 Student *--> ProgressList
+
 ProgressList ..> "0...10" Progress
 @enduml

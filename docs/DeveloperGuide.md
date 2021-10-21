@@ -202,16 +202,16 @@ as a field in `Student`.
 Given below is an example of what happens when the user attempts to add a progress to a student in TutorAid by entering
 a command:
 
-`add -p 2 Did Homework …​`
+`add -p 2 Did Homework​`
 
 1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command.
-   Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework …​`)
+   Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework​`)
    are then passed into `AddCommandParser#parse`.
 
 2. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
-   of a progress. Thus, the remaining (`2 Did Homework …​`) is then passed into `AddProgressCommandParser#parse`.
+   of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse`.
 
-3. The remaining (`2 Did Homework …​`) is then parsed into index `2` and progress description `Did Homework`
+3. The remaining (`2 Did Homework​`) is then parsed into index `2` and progress description `Did Homework`
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if `AddProgressCommandParser#parse` detects that invalid input has been supplied, the command will fail 
