@@ -114,10 +114,9 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T11-3/tp/blob/master/src/main/java/seedu/plannermd/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -126,13 +125,6 @@ The `Model` component,
 * stores the currently 'selected' `Patient` or `Doctor`  objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as unmodifiable `ObservableList<Patient>` and `ObservableList<Doctor>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -241,24 +233,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ---
 ### Stateful PlannerMd
-With the introduction of two types of `Person` (`Patient` and `Doctor`), commands needs to be sensitive to be "active"
-list it is interacting with.
+With the introduction of two types of `Person` (`Patient` and `Doctor`) and their respective lists,
+a state is used to determine which list should be interacted with.
 
-### Remark
-
-#### Remark field
-A field added for `Person` and thus applies to both `Patient` and `Doctor`. Remark are miscellaneous information
-stored as a String.
-* No restrictions, `Remark` can be any `String`, including empty.
-* `Remark` is an empty String by default.
-
-#### Remark command
-Command used to edit the `Remark` field of a Person.
-* No input restrictions, input can be any `String`, including empty.
-  * empty input effectively deletes the current `Remark`
-* `Remark` is an empty String by default.
-
+The state is maintained in `ModelManager`
+ * Two possible states (`State.PATIENT` and `State.Doctor`)      
+ * `ModelManager::toggleState` is used to switch between states
+ * The UI displays the list according to the state. (eg. if the state is `State.PATIENT`, UI displays the filtered list of patients)
+ * Commands are parsed based on the state. (eg. if a valid 'add' command is parsed and the state is `State.PATIENT`, an `AddPatientCommand` is executed)
+ 
 ### \[Upcoming\] Propagating Person Changes to Appointment List
+Since specific patients and doctors within the records are directly referenced in appointments, 
+changes in patients and doctors through user command or otherwise needs to be propagated through the Appointment list.
+ * When patients or doctor details are changed, these changes will be reflected in appointments they are a part of.
+ * When patients or doctor deleted, appointments they are a part of will be deleted as well.
+ 
+The Sequence Diagram below illustrates the interactions within the Model component for the deletePatient(target) API call.
+
+<img src="images/PropagateChangesDiagram.png" width="450" />
 
 --------------------------------------------------------------------------------------------------------------------
 
