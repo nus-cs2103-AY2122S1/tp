@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -27,10 +27,10 @@ public class EditTaskCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_TASK_INDEX + "TASK_INDEX "
-            + "[" + PREFIX_TASK + "TASKNAME]...\n"
+            + "[" + PREFIX_TASK_DESCRIPTION + "TASKNAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_INDEX + "2 "
-            + PREFIX_TASK + "Assignment Discussion";
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
 
     public static final String DESCRIPTION = "Edits the details of the task identified";
 

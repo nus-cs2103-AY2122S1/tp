@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
+
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -44,6 +46,12 @@ public class TaskCard extends UiPart<Region> {
                 lc.widthProperty(), lc.paddingProperty()));
 
         id.setText(displayedIndex + ". ");
-        taskName.setText(task.getDescription().description);
+        String name = task.getTaskName().taskName;
+        String taskDate = task.getDate() == null ? "" : task.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+        String taskTime = task.getTime() == null ? "" : task.getTime().format(DateTimeFormatter.ISO_LOCAL_TIME);
+        String taskVenue = task.getVenue() == null ? "" : task.getVenue().venue;
+        String taskString = "Task: " + name
+                + "\nDate: " + taskDate + "; Time: " + taskTime + "; Venue: " + taskVenue;
+        taskName.setText(taskString);
     }
 }

@@ -25,14 +25,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
      */
     public Venue(String venue) {
         requireNonNull(venue);
-        checkArgument(isValidDescription(venue), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidVenue(venue), MESSAGE_CONSTRAINTS);
         this.venue = venue;
     }
 
     /**
-     * Returns true if a given string is a valid description.
+     * Returns true if a given string is a valid Venue.
      */
-    public static boolean isValidDescription(String test) {
+    public static boolean isValidVenue(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

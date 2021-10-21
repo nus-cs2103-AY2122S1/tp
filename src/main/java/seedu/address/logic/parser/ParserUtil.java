@@ -1,7 +1,14 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,8 +25,9 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.Venue;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -136,11 +144,49 @@ public class ParserUtil {
      */
     public static Task parseTask(String task) throws ParseException {
         requireNonNull(task);
-        String trimmedTask = task.trim();
-        if (!Description.isValidDescription(trimmedTask)) {
-            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(task, PREFIX_TASK_DESCRIPTION,
+                PREFIX_TASK_DATE, PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
+
+        TaskName taskName;
+        LocalDate date = null;
+        LocalTime time = null;
+        Venue venue = null;
+
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
+            String taskNameString = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get().trim();
+            if (!TaskName.isValidTaskName(taskNameString)) {
+                throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
+            }
+            taskName = new TaskName(taskNameString);
+        } else {
+            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
         }
-        return new Task(new Description(task));
+
+        if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
+            try {
+                date = LocalDate.parse(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            } catch (DateTimeParseException e) {
+                throw new ParseException("Task date should be in the format YYYY-MM-DD");
+            }
+        }
+
+        if (argMultimap.getValue(PREFIX_TASK_TIME).isPresent()) {
+            try {
+                time = LocalTime.parse(argMultimap.getValue(PREFIX_TASK_TIME).get());
+            } catch (DateTimeParseException e) {
+                throw new ParseException("Task time should be in the format HH:MM");
+            }
+        }
+
+        if (argMultimap.getValue(PREFIX_TASK_VENUE).isPresent()) {
+            String venueString = argMultimap.getValue(PREFIX_TASK_VENUE).get().trim();
+            if (!Venue.isValidVenue(venueString)) {
+                throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+            }
+            venue = new Venue(venueString);
+        }
+
+        return new Task(taskName, date, time, venue);
     }
 
     /**
@@ -149,8 +195,8 @@ public class ParserUtil {
     public static List<Task> parseTasks(Collection<String> tasks) throws ParseException {
         requireNonNull(tasks);
         final List<Task> taskList = new ArrayList<>();
-        for (String taskName : tasks) {
-            taskList.add(parseTask(taskName));
+        for (String taskString : tasks) {
+            taskList.add(parseTask(" " + PREFIX_TASK_DESCRIPTION + " " + taskString));
         }
         return taskList;
     }

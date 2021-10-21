@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand;
@@ -21,7 +24,8 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     public EditTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX, PREFIX_TASK);
+                ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_DATE,
+                        PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
 
         Index index;
         Index taskIndex;
@@ -39,8 +43,8 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_TASK).isPresent()) {
-            editedTask = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
+            editedTask = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
         } else {
             throw new ParseException(EditTaskCommand.MESSAGE_TASK_NOT_EDITED);
         }

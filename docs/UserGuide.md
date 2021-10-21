@@ -72,7 +72,7 @@ Format: help [“command-name”]
 
 * If no command-name is entered, the user will see the list of all the keywords for each command
 
-* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and description of the command.
+* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and taskName of the command.
 
 Sample outcome (User typed “help sort”):
 
@@ -189,7 +189,7 @@ Format: `edittask INDEX ti/TASK_INDEX [task/TASKNAME]`
 * At least one of the optional fields must be provided.
 
 Examples:
-* `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
+* `edittask 3 ti/2 task/Group Project Meeting` Changes the taskName of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
 
 ### Clearing all entries : `clear`
 

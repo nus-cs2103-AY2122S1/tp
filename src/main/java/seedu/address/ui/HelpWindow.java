@@ -45,8 +45,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 
 public class HelpWindow extends AnchorPane {
@@ -221,7 +221,8 @@ public class HelpWindow extends AnchorPane {
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
                 new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0)),
-                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), new Task(new Description("sample")))
+                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0),
+                        new Task(new TaskName("sample"), null, null, null))
         );
 
         tableView.setItems(data);

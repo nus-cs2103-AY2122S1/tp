@@ -6,7 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Task {
-    public final Description description;
+
+    public static final String MESSAGE_CONSTRAINTS =
+            "Task should contain at least the task name.";
+
+    public final TaskName taskName;
     public final LocalDate date;
     public final LocalTime time;
     public final Venue venue;
@@ -14,16 +18,16 @@ public class Task {
     /**
      * Constructor for task. Creates a new task with the given a String name.
      */
-    public Task (Description description, LocalDate date, LocalTime time, Venue venue) {
-        requireNonNull(description);
-        this.description = description;
+    public Task (TaskName taskName, LocalDate date, LocalTime time, Venue venue) {
+        requireNonNull(taskName);
+        this.taskName = taskName;
         this.date = date;
         this.time = time;
         this.venue = venue;
     }
 
-    public Description getDescription() {
-        return description;
+    public TaskName getTaskName() {
+        return taskName;
     }
 
     public LocalDate getDate() {
@@ -58,7 +62,7 @@ public class Task {
         boolean sameVenue = otherTask.getVenue() == null
                 ? venue == null
                 : otherTask.getVenue().equals(venue);
-        return otherTask.getDescription().equals(description)
+        return otherTask.getTaskName().equals(taskName)
                 && sameDate
                 && sameTime
                 && sameVenue;
@@ -67,7 +71,7 @@ public class Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getDescription())
+        builder.append(getTaskName())
                 .append("; Date: ")
                 .append(date == null ? "" : date)
                 .append("; Time: ")
