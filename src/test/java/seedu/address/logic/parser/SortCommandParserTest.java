@@ -37,5 +37,13 @@ public class SortCommandParserTest {
         // repeated comparator
         assertParseFailure(parser, " n/ n/ ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        // correct first comparator followed by wrong comparator
+        assertParseFailure(parser, " n/   ab/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        // wrong first comparator followed by correct comparator
+        assertParseFailure(parser, " ab/  t/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 }

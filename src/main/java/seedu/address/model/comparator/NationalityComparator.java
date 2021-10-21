@@ -1,8 +1,8 @@
 package seedu.address.model.comparator;
+import java.util.Comparator;
 
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
 
 public class NationalityComparator implements Comparator<Person> {
     private final String comparator = "nationality";

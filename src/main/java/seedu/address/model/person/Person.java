@@ -87,7 +87,9 @@ public class Person {
     }
 
     public Tag getFirstTag() {
-        if (!tags.isEmpty()) { return tags.iterator().next(); }
+        if (!tags.isEmpty()) {
+            return tags.iterator().next();
+        }
         return null;
     }
 

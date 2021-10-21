@@ -1,7 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Comparator;
@@ -18,7 +26,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts the contacts by the person property in descending order.\n"
+            + ": Sorts the contacts by a single chosen property in ascending order.\n"
             + "Parameters: - \n"
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_GENDER + "] "
@@ -29,9 +37,9 @@ public class SortCommand extends Command {
             + "[" + PREFIX_SOCIAL_HANDLE + "] "
             + "[" + PREFIX_REMARK + "] "
             + "[" + PREFIX_TAG + "]\n"
-            + "Example: " + COMMAND_WORD + PREFIX_NAME;
+            + "Example: " + COMMAND_WORD + " n/";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons by %s in descending order";
+    public static final String MESSAGE_SUCCESS = "Sorted all persons by %s in ascending order";
 
     private final Comparator<Person> comparator;
 

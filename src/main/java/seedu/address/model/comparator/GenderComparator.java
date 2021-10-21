@@ -1,9 +1,8 @@
 package seedu.address.model.comparator;
+import java.util.Comparator;
 
-import seedu.address.model.person.GenderContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
 
 public class GenderComparator implements Comparator<Person> {
     private final String comparator = "gender";
