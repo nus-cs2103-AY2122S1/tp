@@ -1,0 +1,27 @@
+@startuml
+start
+:findPerson(information) method gets called;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([valid Room])
+    :Find a person whose room match information;
+    if () then ([Found])
+        :Return person;
+    else ([Not Found])
+        :Return Empty;
+    endif
+else([invalid Room])
+if () then ([valid Name])
+    :Find a person whose name match information;
+    if () then ([Found])
+        :Return person;
+    else ([Not Found])
+        :Return Empty;
+    endif
+else ([invalid Name])
+endif
+endif
+stop
+@enduml
