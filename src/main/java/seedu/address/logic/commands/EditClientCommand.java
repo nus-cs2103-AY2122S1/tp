@@ -101,8 +101,8 @@ public class EditClientCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Set<Order> updatedOrders = editClientDescriptor.getOrders().orElse(clientToEdit.getOrders());
 
-        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail,
-                updatedAddress, updatedOrders);
+        return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress,
+                updatedOrders);
     }
 
     @Override
